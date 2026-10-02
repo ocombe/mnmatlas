@@ -420,6 +420,16 @@
   "minZoom": 3
  },
  {
+  "id": "crocodiles-8-12-1",
+  "name": "Crocodiles (levels 8–12)",
+  "category": "Mob camp",
+  "x": 5947,
+  "y": 4824,
+  "approximate": true,
+  "note": "On the beach below the east cliff, north of the levels 6–10 crocodiles. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
   "id": "tunnels-bugs",
   "name": "Bugs in the tunnels (levels 15–20)",
   "category": "Mob camp",
