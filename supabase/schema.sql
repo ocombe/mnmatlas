@@ -110,6 +110,18 @@ begin
 end;
 $$;
 revoke all on function public.clean_suggestion() from public,anon,authenticated;
+
+-- A signed-in visitor can delete their own account; suggestions, reports, votes and synced notes go with it (on delete cascade).
+create or replace function public.delete_my_account()
+returns void language plpgsql security definer set search_path = '' as $$
+declare uid uuid:=auth.uid();
+begin
+ if uid is null then raise exception 'Not signed in'; end if;
+ delete from auth.users where id=uid;
+end;
+$$;
+revoke all on function public.delete_my_account() from public,anon,authenticated;
+grant execute on function public.delete_my_account() to authenticated;
 drop trigger if exists suggestions_clean_text on public.suggestions;
 create trigger suggestions_clean_text before insert on public.suggestions for each row execute function public.clean_suggestion();
 

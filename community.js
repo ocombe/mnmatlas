@@ -41,8 +41,9 @@
   }
   else account.append(button('Sign in with Discord',signIn));
   account.append(text('p','Signing in lets you report problems, suggest fixes and keep your notes on every device.'),syncLine,reviewButton);reviewButton.hidden=!admin;
+  if(user)account.append(button('Delete my account',deleteDialog,'community-delete'));
  }
- $('about-community').textContent='Optional Discord sign-in stores your Discord name and id, your suggestions and reports and, if you sign in, your notes, so they follow you between devices.';$('about-community').hidden=false;
+ $('about-community').textContent='Optional Discord sign-in stores your Discord name and id, your suggestions and reports and, if you sign in, your notes, so they follow you between devices. Delete my account removes all of it.';$('about-community').hidden=false;
  const localNoteLine=document.querySelector('.journal-bottom>.backup').previousElementSibling;localNoteLine.textContent='Notes stay in this browser; sign in to sync them.';
  $('editor').querySelector('.form-hint').textContent='Saved on this device. Sign in to sync notes, and export a backup.';
  async function signIn(){
@@ -50,6 +51,18 @@
   catch{status('Discord sign-in could not start. Please try again.');}
  }
  async function signOut(){try{await pushJobs();const {error}=await client.auth.signOut();if(error)throw error;}catch{status('Sign-out could not finish. Please try again.');}}
+ // Deletes the sign-in and everything stored with it on the server; notes saved in this browser stay here.
+ function deleteDialog(){
+  const d=showDialog('Delete your account?');
+  d.append(text('p','This permanently deletes your sign-in and everything stored with it: your synced notes, your suggestions and reports, including ones not reviewed yet.'),text('p','Notes saved in this browser stay here until you delete them. Markers already added to the atlas from your suggestions stay, without your name.','form-hint'));
+  const actions=text('div','','dialog-actions'),go=button('Delete my account',async()=>{
+   go.disabled=true;clearTimeout(syncTimer);syncJobs.clear();syncReady='';
+   try{const {error}=await client.rpc('delete_my_account');if(error)throw error;}
+   catch{go.disabled=false;status('Your account could not be deleted. Please try again.');return;}
+   d.close();try{await client.auth.signOut({scope:'local'});}catch{}authChanged(null);status('Your account and its data have been deleted.');event('account-deleted');
+  },'danger');
+  actions.append(button('Cancel',()=>d.close()),go);d.append(actions);
+ }
  function showDialog(title){dialog.replaceChildren();const heading=text('h2',title);heading.id='community-title';dialog.append(heading);if(!dialog.open)dialog.showModal();return dialog;}
  function signInDialog(){const d=showDialog('Sign in to contribute');d.append(text('p','Sign in with Discord to report problems or send suggestions for review. Your positions and notes remain saved in this browser.'));const actions=text('div','','dialog-actions');actions.append(button('Close',()=>d.close()),button('Sign in with Discord',signIn,'primary'));d.append(actions);}
  function freshPopup(){if(!map||loading)return;for(const m of allMarkers()){const pin=pins.get(m.id);if(pin)pin.setPopupContent(popup(m));}}
