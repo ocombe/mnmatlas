@@ -9,7 +9,7 @@
  if(counting){
   window.goatcounter={no_onload:true,allow_frame:true};
   const script=document.createElement('script');script.async=true;script.src='https://gc.zgo.at/count.js';script.referrerPolicy='no-referrer';script.dataset.goatcounter='https://'+settings.goatcounter+'.goatcounter.com/count';
-  script.onload=()=>{countReady=typeof window.goatcounter.count==='function';countFailed=!countReady;if(countReady)for(const row of countQueue){try{window.goatcounter.count(row);}catch{}}countQueue=[];};script.onerror=()=>{countFailed=true;countQueue=[];status('Visit counts could not load. The map is still available.');};document.head.append(script);
+  script.onload=()=>{countReady=typeof window.goatcounter.count==='function';countFailed=!countReady;if(countReady)for(const row of countQueue){try{window.goatcounter.count(row);}catch{}}countQueue=[];};script.onerror=()=>{countFailed=true;countQueue=[];};document.head.append(script);
   $('about-counts').textContent='Visit counts are anonymous and use no cookies.';$('about-counts').hidden=false;
   $('search').addEventListener('input',()=>{clearTimeout(searchTimer);if($('search').value.trim())searchTimer=setTimeout(()=>event('search'),650);});
   window.addEventListener('atlas:loaded',()=>{clearTimeout(searchTimer);pageview();});
