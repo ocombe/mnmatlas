@@ -2,7 +2,7 @@
 
 An illustrated community atlas of Monsters & Memories, with Night Harbor and a local preview of Underdocks.
 
-**[Browse the atlas](https://mnmatlas.com/)**
+**[Browse the atlas](https://www.mnmatlas.com/)**
 
 Drag to pan, scroll or pinch to zoom, and search the field guide for places, trainers and tradeskills. Select a result to visit it. Toggle place names or hidden areas independently; tap a dashed area or use the level buttons to bring a room or passage forward. Hidden outlines and guild locations are approximate.
 

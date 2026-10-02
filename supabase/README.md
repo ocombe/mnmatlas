@@ -2,7 +2,7 @@
 
 1. Create a Supabase project. Paste `schema.sql` into its SQL editor and run it. It can be run again safely.
 2. Create a Discord application in the [Discord developer portal](https://discord.com/developers/applications). Add the callback URL shown in Supabase Authentication → Providers → Discord (usually `https://<project-ref>.supabase.co/auth/v1/callback`) to the application's OAuth2 redirects. Enable Discord in Supabase with that application's client ID and secret. Keep the secret in Supabase, never in this site.
-3. In Authentication → URL Configuration, set Site URL to `https://mnmatlas.com/`. Allow `https://mnmatlas.com/**` as a redirect URL so map and level query strings return to the same view. Add your local preview origin separately if needed.
+3. In Authentication → URL Configuration, set Site URL to `https://www.mnmatlas.com/`. Allow `https://www.mnmatlas.com/**` as a redirect URL so map and level query strings return to the same view. Add your local preview origin separately if needed.
 4. Fill `supabaseUrl` and `supabaseKey` in `config.js` with the project URL and **publishable** key. Never put a service key in a site file. Leaving either value empty disables accounts and all community requests.
 5. Sign in once. In the SQL editor, run one of the commented admin inserts at the end of `schema.sql`, matching your Discord name or email. Sign out and back in to refresh access. Remove the row in the dashboard to revoke review access.
 6. Complete the checks below, then use **Review suggestions** in the field guide. Approval queues a change for the local [publishing script](../scripts/README.md); it does not change the map immediately.
