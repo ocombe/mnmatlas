@@ -31,6 +31,8 @@ Optional accounts and contributions
 
 When accounts are enabled, **Sign in with Discord** lets you **Report a problem** with a published marker (what is wrong, plus optional details), suggest moved positions after **Done**, and **Share with everyone** from a personal note popup. Reports and suggestions wait for review; reports close as fixed or dismissed, and approved suggestions arrive in a later atlas update. Signed-in notes merge with this browser's notes and sync between devices; local notes remain available if the service is down. Optional sign-in stores your Discord name and id, suggestions, reports and synced notes. **Delete my account** in the field guide removes the sign-in and all of that data.
 
+Each map also has a short address, such as `mnmatlas.com/night-harbor/`, which **Copy link** hands out. That page carries the map's own link preview card (`assets/cards/<map-id>.jpg`, 1200×630) and forwards to the atlas with the same view. After adding a map, add its card and run `node scripts/make-share-pages.mjs`.
+
 Public settings live in `config.js`; empty values disable their features. See [Supabase setup and access checks](supabase/README.md) and [publishing approved suggestions](scripts/README.md). To enable visit stats, set `goatcounter` to your GoatCounter site code (just the code, not a URL). Counts are anonymous, use no cookies, and record map/level visits and named actions without search text, note text or coordinates. Localhost visits are skipped. Only the optional counter script is loaded remotely, from `gc.zgo.at`; it uses [GoatCounter's manual count API](https://www.goatcounter.com/help/js).
 
 Credits and licences

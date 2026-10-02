@@ -219,8 +219,10 @@ async function copyLink(place){
  if(place){url.searchParams.set('x',String(place.x));url.searchParams.set('y',String(place.y));url.searchParams.set('z',String(Math.max(map.getZoom(),config.defaultView.placeZoom)));}
  // Alignment drafts are local editing state, not part of a shared destination.
  url.searchParams.delete('align');
- try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText(url.href);status('Link copied. Personal notes are not included.');}
- catch{$('link-value').value=url.href;$('link-dialog').showModal();$('link-value').select();}
+ // Each map has a small page (map-id/) whose link preview shows that map; it forwards here with the same view.
+ const share=new URL(config.id+'/',new URL('./',url));for(const [k,v] of url.searchParams)if(k!=='map')share.searchParams.set(k,v);
+ try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText(share.href);status('Link copied. Personal notes are not included.');}
+ catch{$('link-value').value=share.href;$('link-dialog').showModal();$('link-value').select();}
 }
 function applyLocation(url){
  applyingView=true;activePlace=null;sharedPin?.remove();sharedPin=null;map.closePopup();
