@@ -1,0 +1,140 @@
+{
+ "map": "shaded-dunes",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "crypt-ruins",
+   "name": "Crypt Ruins",
+   "x": 4890,
+   "y": 1909,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2
+  },
+  {
+   "id": "oasis-island",
+   "name": "Oasis Island",
+   "x": 3717,
+   "y": 3172,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2.5
+  },
+  {
+   "id": "undead-ruins",
+   "name": "Undead Ruins",
+   "x": 4546,
+   "y": 2945,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "mercenary-camp",
+   "name": "Mercenary Camp",
+   "x": 6196,
+   "y": 2673,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "ashira-oasis-camp",
+   "name": "Ashira Oasis Camp",
+   "x": 5542,
+   "y": 3292,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "smugglers-camp",
+   "name": "Smugglers Camp",
+   "x": 2073,
+   "y": 4090,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "dock",
+   "name": "Dock",
+   "x": 6683,
+   "y": 3848,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 3
+  },
+  {
+   "id": "to-tel-ekir",
+   "name": "to Tel Ekir",
+   "x": 1716,
+   "y": 560,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "north"
+  },
+  {
+   "id": "to-fallen-pass",
+   "name": "to Fallen Pass",
+   "x": 420,
+   "y": 2120,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "west"
+  },
+  {
+   "id": "to-night-harbor",
+   "name": "to Night Harbor",
+   "x": 6760,
+   "y": 2000,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "east"
+  },
+  {
+   "id": "to-ancient-crypt",
+   "name": "to Ancient Crypt",
+   "x": 4951,
+   "y": 1111,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "north"
+  },
+  {
+   "id": "to-caves-of-irem",
+   "name": "to Caves of Irem",
+   "x": 2214,
+   "y": 2650,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 2,
+   "arrow": "north"
+  },
+  {
+   "id": "to-infested-crypt",
+   "name": "to Infested Crypt",
+   "x": 2863,
+   "y": 3104,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 2,
+   "arrow": "east"
+  },
+  {
+   "id": "shaded-dunes",
+   "name": "Shaded Dunes",
+   "x": 3300,
+   "y": 2050,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  }
+ ],
+ "trainers": []
+}

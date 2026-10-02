@@ -1,0 +1,272 @@
+[
+ {
+  "id": "ashira-6-10-1",
+  "name": "Ashira (levels 6–10)",
+  "category": "Mob camp",
+  "x": 1708,
+  "y": 919,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-6-10-2",
+  "name": "Ashira (levels 6–10)",
+  "category": "Mob camp",
+  "x": 2165,
+  "y": 1514,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "undead-night-1",
+  "name": "Undead at night (levels 10–15)",
+  "category": "Mob camp",
+  "x": 4527,
+  "y": 1348,
+  "approximate": true,
+  "note": "At the Crypt Ruins at night; friendly NPCs are there by day. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-night-1",
+  "name": "Humanoids at night (levels 10–15)",
+  "category": "Mob camp",
+  "x": 4730,
+  "y": 1350,
+  "approximate": true,
+  "note": "At the Crypt Ruins at night; friendly NPCs are there by day. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-1",
+  "name": "Friendly NPCs by day",
+  "category": "Notable NPC",
+  "x": 4553,
+  "y": 1530,
+  "approximate": true,
+  "note": "At the Crypt Ruins by day; undead and humanoids take their place at night. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-10-15-1",
+  "name": "Creatures (levels 10–15)",
+  "category": "Mob camp",
+  "x": 3688,
+  "y": 2261,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-1",
+  "name": "Creatures (levels 6–10)",
+  "category": "Mob camp",
+  "x": 4917,
+  "y": 2227,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-1-5-1",
+  "name": "Ashira (levels 1–5)",
+  "category": "Mob camp",
+  "x": 6114,
+  "y": 1208,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-1-5-2",
+  "name": "Ashira (levels 1–5)",
+  "category": "Mob camp",
+  "x": 6526,
+  "y": 1220,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-1-5-1",
+  "name": "Creatures (levels 1–5)",
+  "category": "Mob camp",
+  "x": 6581,
+  "y": 1566,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-1-5-2",
+  "name": "Creatures (levels 1–5)",
+  "category": "Mob camp",
+  "x": 6488,
+  "y": 2154,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-2",
+  "name": "Notable NPC",
+  "category": "Notable NPC",
+  "x": 2801,
+  "y": 2414,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "undead-6-10-1",
+  "name": "Undead (levels 6–10)",
+  "category": "Mob camp",
+  "x": 1542,
+  "y": 3367,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-6-10-1",
+  "name": "Humanoids (levels 6–10)",
+  "category": "Mob camp",
+  "x": 2098,
+  "y": 3977,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-2",
+  "name": "Creatures (levels 6–10)",
+  "category": "Mob camp",
+  "x": 2667,
+  "y": 3669,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-3",
+  "name": "Notable NPC",
+  "category": "Notable NPC",
+  "x": 3289,
+  "y": 3394,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "undead-10-15-1",
+  "name": "Undead (levels 10–15)",
+  "category": "Mob camp",
+  "x": 3674,
+  "y": 2909,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "undead-6-10-2",
+  "name": "Undead (levels 6–10)",
+  "category": "Mob camp",
+  "x": 4627,
+  "y": 3147,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-4",
+  "name": "Notable NPC — Wizard Spells",
+  "category": "Notable NPC",
+  "x": 4591,
+  "y": 3326,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "giant-15plus-1",
+  "name": "Wandering giant (level 15+)",
+  "category": "Mob camp",
+  "x": 4201,
+  "y": 3492,
+  "approximate": true,
+  "note": "Roams the dunes. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-3",
+  "name": "Creatures (levels 6–10)",
+  "category": "Mob camp",
+  "x": 3762,
+  "y": 3866,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-6-10-3",
+  "name": "Ashira (levels 6–10)",
+  "category": "Mob camp",
+  "x": 5654,
+  "y": 3060,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-10-15-1",
+  "name": "Humanoids (levels 10–15)",
+  "category": "Mob camp",
+  "x": 6132,
+  "y": 3023,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-10-15-2",
+  "name": "Humanoids (levels 10–15)",
+  "category": "Mob camp",
+  "x": 6278,
+  "y": 2912,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-1-5-3",
+  "name": "Creatures (levels 1–5)",
+  "category": "Mob camp",
+  "x": 6690,
+  "y": 3161,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-5",
+  "name": "Notable NPC — Dock",
+  "category": "Notable NPC",
+  "x": 6548,
+  "y": 3802,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-4",
+  "name": "Creatures (levels 6–10)",
+  "category": "Mob camp",
+  "x": 5429,
+  "y": 3890,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game.",
+  "minZoom": 3
+ }
+]

@@ -309,6 +309,48 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "shaded-dunes",
+      "title": "Shaded Dunes",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The desert south of Night Harbor",
+      "breadcrumb": "Monsters & Memories / Shaded Dunes",
+      "description": "An illustrated fan atlas of Shaded Dunes: the crypt ruins, the oases, the dunes and the coast, with place names and personal field notes.",
+      "width": 7082,
+      "height": 5582,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/shaded-dunes/{z}/{x}/{y}.webp",
+      "markersFile": "data/shaded-dunes/markers.json",
+      "labelsFile": "data/shaded-dunes/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Maggot's Shaded Dunes map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Shaded Dunes wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Shaded_Dunes_Map.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, creature camps and notable NPC locations adapted from Maggot's Shaded Dunes map; positions adjusted to this illustration and approximate; level bands and creature types follow his legend."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }
