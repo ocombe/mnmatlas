@@ -267,6 +267,48 @@
         }
       ],
       "alignmentGroup": "platforms"
+    },
+    {
+      "id": "sungreet-strand",
+      "title": "Sungreet Strand",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The river valley",
+      "breadcrumb": "Monsters & Memories / Sungreet Strand",
+      "description": "An illustrated fan atlas of Sungreet Strand: the quarry, the palm groves, the river and its camps, with place names and personal field notes.",
+      "width": 6812,
+      "height": 9362,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/sungreet-strand/{z}/{x}/{y}.webp",
+      "markersFile": "data/sungreet-strand/markers.json",
+      "labelsFile": "data/sungreet-strand/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Maggot's Sungreet Strand map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Sungreet Strand wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Sungreet_Strand_v4.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, creature camps and notable NPC locations adapted from Maggot's Sungreet Strand map; positions adjusted to this illustration and approximate; level bands and creature types follow his legend."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

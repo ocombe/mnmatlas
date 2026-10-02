@@ -1,0 +1,101 @@
+{
+ "map": "sungreet-strand",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "quarry",
+   "name": "Quarry",
+   "x": 2699,
+   "y": 4264,
+   "kind": "district",
+   "priority": 90,
+   "minZoom": 2
+  },
+  {
+   "id": "skintakers-camp",
+   "name": "Skintakers Camp",
+   "x": 2786,
+   "y": 5128,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "researchers",
+   "name": "Researchers",
+   "x": 2369,
+   "y": 5968,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 3
+  },
+  {
+   "id": "druids",
+   "name": "Druids",
+   "x": 3487,
+   "y": 3069,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "river-pirate-tavern",
+   "name": "River Pirate Tavern",
+   "x": 4378,
+   "y": 3853,
+   "kind": "building",
+   "priority": 80,
+   "minZoom": 2.5
+  },
+  {
+   "id": "tunnels",
+   "name": "Tunnels",
+   "x": 1262,
+   "y": 4318,
+   "kind": "district",
+   "priority": 60,
+   "minZoom": 2.75
+  },
+  {
+   "id": "to-night-harbor",
+   "name": "to Night Harbor",
+   "x": 3813,
+   "y": 8822,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "south"
+  },
+  {
+   "id": "to-tel-ekir",
+   "name": "to Tel Ekir",
+   "x": 848,
+   "y": 2658,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "west"
+  },
+  {
+   "id": "to-glass-flats",
+   "name": "to Glass Flats",
+   "x": 3189,
+   "y": 647,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "north"
+  },
+  {
+   "id": "sungreet-strand",
+   "name": "Sungreet Strand",
+   "x": 3700,
+   "y": 5200,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  }
+ ],
+ "trainers": []
+}
