@@ -17,7 +17,15 @@ function setupPlaceLabels(data){
  try{toggle.checked=localStorage.getItem(key)!=='false';}catch{toggle.checked=true;}
  const pane=map.getPane('placeNames')||map.createPane('placeNames');pane.style.zIndex=alignmentMode?'650':'450';pane.style.pointerEvents='none';
  const entries=data.labels.filter(atLevel).sort((a,b)=>b.priority-a.priority).map(row=>{
-  const face=text('span',(row.kind==='exit'?exitArrows[row.arrow]+' ':'')+row.name,'place-name '+row.kind);
+  const target=row.kind==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
+  const face=text(target?'a':'span',(row.kind==='exit'?exitArrows[row.arrow]+' ':'')+row.name,'place-name '+row.kind+(target?' linked':''));
+  // Exit names that lead to another published map open it, at the matching exit when given.
+  if(target){
+   const url=new URL(location.href),embed=url.searchParams.get('embed');url.search='';url.hash='';if(embed!==null)url.searchParams.set('embed',embed);url.searchParams.set('map',target.id);if(row.toPlace)url.searchParams.set('place',row.toPlace);
+   face.href=url.href;face.title='Open the '+target.title+' map';
+   L.DomEvent.disableClickPropagation(face);
+   face.addEventListener('click',e=>{if(e.button||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState({map:target.id},'',url);ownView=true;loadMap(target.id,new URL(url));});
+  }
   const icon=L.divIcon({className:'place-name-anchor',html:face,iconSize:[0,0],iconAnchor:[0,0]});
   const marker=L.marker(locationOf(row),{icon,pane:'placeNames',alt:row.name,interactive:alignmentMode,keyboard:alignmentMode,draggable:alignmentMode,bubblingMouseEvents:false});
   if(alignmentMode){

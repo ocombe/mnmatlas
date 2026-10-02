@@ -350,7 +350,9 @@
       "x": 1883,
       "y": 571,
       "arrow": "north",
-      "tier": "exit"
+      "tier": "exit",
+      "toMap": "sungreet-strand",
+      "toPlace": "to-night-harbor"
     },
     {
       "id": "place-34",
@@ -398,7 +400,9 @@
       "arrow": "north",
       "linkedArea": "underdocks-entrance",
       "alignmentHelper": true,
-      "tier": "exit"
+      "tier": "exit",
+      "toMap": "underdocks",
+      "toPlace": "upper-to-night-harbor"
     }
   ],
   "trainers": [

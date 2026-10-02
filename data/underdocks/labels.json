@@ -101,7 +101,8 @@
       "tier": "exit",
       "priority": 75,
       "minZoom": 3.75,
-      "arrow": "northwest"
+      "arrow": "northwest",
+      "toMap": "ail-vorith"
     },
     {
       "id": "wiki-bath-house",
@@ -205,7 +206,9 @@
       "tier": "exit",
       "priority": 75,
       "minZoom": 3.75,
-      "arrow": "east"
+      "arrow": "east",
+      "toMap": "night-harbor",
+      "toPlace": "place-37"
     }
   ],
   "trainers": [
