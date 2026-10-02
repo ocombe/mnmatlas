@@ -1,6 +1,6 @@
 {
- "name": "MnMaps",
- "short_name": "MnMaps",
+ "name": "MnM Atlas",
+ "short_name": "MnM Atlas",
  "description": "An illustrated community atlas of Monsters & Memories.",
  "start_url": "./",
  "display": "standalone",

@@ -251,7 +251,7 @@ function appendAttributionLinks(parent,a){
  for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;const link=text('a',title);link.href=href;link.target='_blank';link.rel='noopener';parent.append(link,text('span',' · '));}
 }
 function updateTitles(){
- document.title=config.title+' · MnMaps';document.querySelector('meta[name="description"]').content=config.description;
+ document.title=config.title+' · MnM Atlas';document.querySelector('meta[name="description"]').content=config.description;
  document.querySelector('meta[property="og:title"]').content=document.title;document.querySelector('meta[property="og:description"]').content=config.description;
  $('breadcrumb').textContent=config.breadcrumb;$('cartouche-kicker').textContent=config.cartoucheKicker;$('map-name').textContent=config.title;$('map-subtitle').textContent=config.levelSubtitle||config.levelTitle||config.subtitle;
  document.body.classList.toggle('has-view-note',!!config.viewNote);

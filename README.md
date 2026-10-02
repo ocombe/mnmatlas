@@ -1,4 +1,4 @@
-# MnMaps
+# MnM Atlas
 
 An illustrated community atlas of Monsters & Memories, with Night Harbor and a local preview of Underdocks.
 
@@ -71,4 +71,4 @@ Map controls use [Leaflet](https://leafletjs.com/), included under its [BSD-2-Cl
 
 Optional accounts use the locally bundled [Supabase client](https://supabase.com/), under its [MIT licence](assets/vendor/SUPABASE-LICENSE.txt).
 
-MnMaps is an unofficial fan project and is not affiliated with the creators of Monsters & Memories.
+MnM Atlas is an unofficial fan project and is not affiliated with the creators of Monsters & Memories.
