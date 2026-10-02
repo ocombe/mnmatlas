@@ -168,7 +168,7 @@
   clearPreview();const serial=++reviewSerial,content=$('review-content');content.replaceChildren();
   const toggle=text('label','','community-check'),check=document.createElement('input');check.type='checkbox';check.checked=all;check.onchange=()=>pendingTab(check.checked);toggle.append(check,text('span','All maps'));content.append(toggle,text('p','Loading suggestions…','form-hint'));
   try{let request=client.from('suggestions').select('*').eq('status','pending').order('created_at',{ascending:false}).order('id',{ascending:false});if(!all)request=request.eq('map',config.id);const {data,error}=await request.range(offset,offset+199);if(error)throw error;if(serial!==reviewSerial||!admin)return;content.lastChild.remove();
-   if(!data.length)content.append(text('p','No pending suggestions.','form-hint'));
+   if(!data.length)content.append(text('p','No pending suggestions. Suggestions come from Edit positions and Share with everyone; Looks wrong reports are under Most reported.','form-hint'));
    for(const row of data){const card=text('article','','review-card');card.append(text('strong',row.payload.name),text('p',row.kind+' · '+row.map+(row.level?' / '+row.level:'')+' · '+(row.author_name||'Discord member')+' · '+new Date(row.created_at).toLocaleString(),'form-hint'));if(row.comment)card.append(text('p',row.comment));
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType||row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
