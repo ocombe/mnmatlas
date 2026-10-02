@@ -27,4 +27,4 @@ Review the resulting data diff and preview the atlas before committing and publi
 
 Run `node scripts/test-apply-approved.mjs` for local publisher checks against a mock service; it uses disposable fixture files inside this folder and leaves map data unchanged.
 
-Run `node scripts/test-community.mjs` for client checks with a local service stub, including disabled configuration, counters, votes, suggestions and note sync. These do not replace the live access checks in the Supabase setup guide.
+Run `node scripts/test-community.mjs` for client checks with a local service stub, including disabled configuration, counters, problem reports, suggestions and note sync. These do not replace the live access checks in the Supabase setup guide.

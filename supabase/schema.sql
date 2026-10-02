@@ -10,31 +10,13 @@ create table if not exists public.suggestions (
  author_name text check (char_length(author_name)<=80),
  map text not null check (map ~ '^[a-z0-9-]{1,80}$'),
  level text check (level ~ '^[a-z0-9-]{1,80}$'),
- kind text not null check (kind in ('move-marker','move-label','new-marker')),
+ kind text not null,
  target_id text check (char_length(target_id) between 1 and 160),
  payload jsonb not null check (octet_length(payload::text)<4096),
  comment text check (char_length(comment)<=500),
- status text not null default 'pending' check (status in ('pending','approved','rejected','published')),
+ status text not null default 'pending',
  reviewed_at timestamptz,
- review_note text check (char_length(review_note)<=500),
- constraint suggestion_payload check (coalesce(
-  jsonb_typeof(payload)='object' and jsonb_typeof(payload->'name')='string'
-  and char_length(payload->>'name') between 1 and 100
-  and (not payload ? 'note' or (jsonb_typeof(payload->'note')='string' and char_length(payload->>'note')<=2000))
-  and case when kind in ('move-marker','move-label') then
-   target_id is not null and jsonb_typeof(payload->'from')='array' and jsonb_typeof(payload->'to')='array'
-   and jsonb_array_length(payload->'from')=2 and jsonb_array_length(payload->'to')=2
-   and jsonb_typeof(payload->'from'->0)='number' and jsonb_typeof(payload->'from'->1)='number'
-   and jsonb_typeof(payload->'to'->0)='number' and jsonb_typeof(payload->'to'->1)='number'
-  else
-   target_id is null and jsonb_typeof(payload->'x')='number' and jsonb_typeof(payload->'y')='number'
-   and jsonb_typeof(payload->'category')='string' and char_length(payload->>'category') between 1 and 80
-   and (not payload ? 'note' or (jsonb_typeof(payload->'note')='string' and char_length(payload->>'note')<=2000))
-   and (not payload ? 'noteType' or payload->>'noteType' in ('marker','label','exit'))
-   and (not payload ? 'arrow' or payload->>'arrow' in ('north','northeast','east','southeast','south','southwest','west','northwest'))
-   and (not payload ? 'trade' or (jsonb_typeof(payload->'trade')='string' and char_length(payload->>'trade')<=80))
-   and (not payload ? 'color' or payload->>'color' in ('#a04438','#b5861f','#4f7a3a','#385f60','#2f6f9a','#6a4a7a','#6b4f2e','#4d5560'))
-  end,false))
+ review_note text check (char_length(review_note)<=500)
 );
 create table if not exists public.votes (
  user_id uuid not null default auth.uid() references auth.users on delete cascade,
@@ -54,6 +36,33 @@ create table if not exists public.user_notes (
 -- A "looks wrong" vote carries what is wrong and optional details.
 alter table public.votes add column if not exists reason text check (reason in ('position','name','type','missing','other'));
 alter table public.votes add column if not exists comment text check (char_length(comment)<=300);
+-- Kind, status and payload rules live here so re-running this file updates an existing table.
+-- A report says what is wrong with a published marker; it closes as resolved (fixed) or rejected (dismissed).
+alter table public.suggestions drop constraint if exists suggestions_kind_check;
+alter table public.suggestions add constraint suggestions_kind_check check (kind in ('move-marker','move-label','new-marker','report'));
+alter table public.suggestions drop constraint if exists suggestions_status_check;
+alter table public.suggestions add constraint suggestions_status_check check (status in ('pending','approved','rejected','published','resolved'));
+alter table public.suggestions drop constraint if exists suggestion_payload;
+alter table public.suggestions add constraint suggestion_payload check (coalesce(
+ jsonb_typeof(payload)='object' and jsonb_typeof(payload->'name')='string'
+ and char_length(payload->>'name') between 1 and 100
+ and (not payload ? 'note' or (jsonb_typeof(payload->'note')='string' and char_length(payload->>'note')<=2000))
+ and case when kind in ('move-marker','move-label') then
+  target_id is not null and jsonb_typeof(payload->'from')='array' and jsonb_typeof(payload->'to')='array'
+  and jsonb_array_length(payload->'from')=2 and jsonb_array_length(payload->'to')=2
+  and jsonb_typeof(payload->'from'->0)='number' and jsonb_typeof(payload->'from'->1)='number'
+  and jsonb_typeof(payload->'to'->0)='number' and jsonb_typeof(payload->'to'->1)='number'
+ when kind='report' then
+  target_id is not null and payload->>'reason' in ('position','name','type','missing','other')
+  and jsonb_typeof(payload->'x')='number' and jsonb_typeof(payload->'y')='number'
+ else
+  target_id is null and jsonb_typeof(payload->'x')='number' and jsonb_typeof(payload->'y')='number'
+  and jsonb_typeof(payload->'category')='string' and char_length(payload->>'category') between 1 and 80
+  and (not payload ? 'noteType' or payload->>'noteType' in ('marker','label','exit'))
+  and (not payload ? 'arrow' or payload->>'arrow' in ('north','northeast','east','southeast','south','southwest','west','northwest'))
+  and (not payload ? 'trade' or (jsonb_typeof(payload->'trade')='string' and char_length(payload->>'trade')<=80))
+  and (not payload ? 'color' or payload->>'color' in ('#a04438','#b5861f','#4f7a3a','#385f60','#2f6f9a','#6a4a7a','#6b4f2e','#4d5560'))
+ end,false));
 create index if not exists suggestions_user_created on public.suggestions(user_id,created_at);
 create index if not exists suggestions_status_map on public.suggestions(status,map,created_at desc);
 create index if not exists votes_map_target on public.votes(map,target_id);
