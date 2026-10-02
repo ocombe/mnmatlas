@@ -62,15 +62,29 @@
   try{const {data,error}=await client.from('votes').select('target_id,value').eq('map',id).eq('user_id',uid);if(error)throw error;if(serial!==mapSerial||user?.id!==uid)return;myVotes=new Map((data||[]).map(r=>[r.target_id,r.value]));votesReady=true;freshPopup();}
   catch{status('Your votes could not load. Please try again.');}
  }
- async function vote(m,value){
-  if(!user){signInDialog();return;}const id=currentMap,uid=user.id,serial=mapSerial,key=id+':'+m.id;if(voteBusy.has(key))return;
+ // A "looks wrong" vote asks what is wrong, so the report can be acted on.
+ const reasons={position:'Wrong position',name:'Wrong name',type:'Wrong type or icon',missing:'Not there in the game',other:'Something else'};
+ function reasonDialog(m){
+  const d=showDialog('What looks wrong?');d.append(text('p',m.name,'form-hint'));
+  const list=text('div','','community-choices'),radios=[];
+  for(const [key,label] of Object.entries(reasons)){const row=text('label',''),r=document.createElement('input');r.type='radio';r.name='vote-reason';r.value=key;row.append(r,text('span',label));list.append(row);radios.push(r);}
+  d.append(list);
+  const hint=text('p','Tip: in ✎ Edit positions you can drag the marker to the right spot and send it for review.','form-hint');hint.hidden=true;d.append(hint);
+  for(const r of radios)r.onchange=()=>{hint.hidden=r.value!=='position'||!r.checked;};
+  const label=text('label','Details (optional)');label.htmlFor='vote-comment';const comment=document.createElement('textarea');comment.id='vote-comment';comment.maxLength=300;comment.rows=3;comment.placeholder='For example: it is on the other side of the bridge.';d.append(label,comment);
+  const actions=text('div','','dialog-actions'),send=button('Send report',()=>{const picked=radios.find(r=>r.checked);if(!picked){status('Choose what looks wrong.');return;}d.close();vote(m,-1,{reason:picked.value,comment:comment.value.trim()||null});},'primary');
+  actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
+ }
+ async function vote(m,value,details=null){
+  if(!user){signInDialog();return;}
+  if(value===-1&&!details&&myVotes.get(m.id)!==-1){reasonDialog(m);return;}const id=currentMap,uid=user.id,serial=mapSerial,key=id+':'+m.id;if(voteBusy.has(key))return;
   if(!votesReady){await loadVotes(id,mapSerial,uid);if(!votesReady||currentMap!==id||user?.id!==uid)return;}
   if(voteBusy.has(key))return;
   voteBusy.add(key);
   const previous=myVotes.get(m.id)||0,next=previous===value?0:value,before={...(totals.get(m.id)||{up:0,down:0})},after={...before};
   if(previous)after[previous===1?'up':'down']=Math.max(0,after[previous===1?'up':'down']-1);if(next)after[next===1?'up':'down']++;
   totals.set(m.id,after);if(next)myVotes.set(m.id,next);else myVotes.delete(m.id);freshPopup();
-  try{let request=client.from('votes');request=next?request.upsert({user_id:uid,map:id,target_id:m.id,value:next},{onConflict:'user_id,map,target_id'}):request.delete().eq('user_id',uid).eq('map',id).eq('target_id',m.id);const {error}=await request;if(error)throw error;event('vote');}
+  try{let request=client.from('votes');request=next?request.upsert({user_id:uid,map:id,target_id:m.id,value:next,reason:next===-1?details?.reason||'other':null,comment:next===-1?details?.comment||null:null},{onConflict:'user_id,map,target_id'}):request.delete().eq('user_id',uid).eq('map',id).eq('target_id',m.id);const {error}=await request;if(error)throw error;event('vote');}
   catch{if(serial===mapSerial&&currentMap===id&&user?.id===uid){totals.set(m.id,before);if(previous)myVotes.set(m.id,previous);else myVotes.delete(m.id);freshPopup();}status('Vote could not be saved. Please try again.');}
   finally{voteBusy.delete(key);freshPopup();}
  }
@@ -184,7 +198,11 @@
  async function reportedTab(){
   clearPreview();const serial=++reviewSerial,content=$('review-content');content.replaceChildren(text('p','Loading reports…','form-hint'));
   try{const rows=await loadTotals(config.id,true);if(serial!==reviewSerial)return;totals=rows;freshPopup();content.replaceChildren();const markers=originals.filter(m=>rows.has(m.id)).sort((a,b)=>rows.get(b.id).down-rows.get(a.id).down||rows.get(b.id).up-rows.get(a.id).up);
-   if(!markers.length)content.append(text('p','No marker votes yet.','form-hint'));for(const m of markers){const counts=rows.get(m.id);content.append(button(m.name+' · ✗ '+counts.down+' · ✓ '+counts.up,()=>{review.close();choose(m);},'reported-marker'));}
+   if(!markers.length)content.append(text('p','No marker votes yet.','form-hint'));
+   // Reasons and details of "looks wrong" votes; only admins can read them.
+   const {data:reports,error}=await client.from('votes').select('target_id,reason,comment,created_at').eq('map',config.id).eq('value',-1).order('created_at',{ascending:false});if(error)throw error;if(serial!==reviewSerial)return;
+   for(const m of markers){const counts=rows.get(m.id),card=text('div','','reported-card');card.append(button(m.name+' · ✗ '+counts.down+' · ✓ '+counts.up,()=>{review.close();choose(m);},'reported-marker'));
+    for(const r of (reports||[]).filter(r=>r.target_id===m.id))card.append(text('p',(reasons[r.reason]||'No reason given')+(r.comment?' · '+r.comment:''),'reported-reason'));content.append(card);}
   }catch{status('Reports could not load. Please try again.');}
  }
  accountUI();client.auth.onAuthStateChange((eventName,session)=>{setTimeout(()=>authChanged(session).catch(()=>status('Account could not refresh. Your local notes are safe.')),0);});

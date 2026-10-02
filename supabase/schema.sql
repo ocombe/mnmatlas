@@ -51,6 +51,9 @@ create table if not exists public.user_notes (
  updated_at timestamptz not null default now(),
  primary key (user_id,map)
 );
+-- A "looks wrong" vote carries what is wrong and optional details.
+alter table public.votes add column if not exists reason text check (reason in ('position','name','type','missing','other'));
+alter table public.votes add column if not exists comment text check (char_length(comment)<=300);
 create index if not exists suggestions_user_created on public.suggestions(user_id,created_at);
 create index if not exists suggestions_status_map on public.suggestions(status,map,created_at desc);
 create index if not exists votes_map_target on public.votes(map,target_id);
@@ -98,6 +101,8 @@ create policy suggestions_delete on public.suggestions for delete to authenticat
  using (exists (select 1 from public.admins where user_id=auth.uid()));
 drop policy if exists votes_read on public.votes;
 create policy votes_read on public.votes for select to authenticated using (user_id=auth.uid());
+drop policy if exists votes_admin_read on public.votes;
+create policy votes_admin_read on public.votes for select to authenticated using (exists (select 1 from public.admins where user_id=auth.uid()));
 drop policy if exists votes_insert on public.votes;
 create policy votes_insert on public.votes for insert to authenticated with check (user_id=auth.uid());
 drop policy if exists votes_update on public.votes;
