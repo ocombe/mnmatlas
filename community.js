@@ -32,7 +32,12 @@
  function quiet(message){syncLine.textContent=message;if(message)status(message);}
  function accountUI(){
   account.replaceChildren(text('strong','Account'));
-  if(user){account.append(text('p','Signed in as '+displayName(user)+' ·'),button('Sign out',signOut));}
+  if(user){
+   // Discord's own avatar, only from its image host.
+   const who=text('p','','community-who'),src=String(user.user_metadata?.avatar_url||'');
+   if(/^https:\/\/cdn\.discordapp\.com\/[a-zA-Z0-9_./-]+$/.test(src)){const img=document.createElement('img');img.src=src;img.alt='';img.width=img.height=28;img.referrerPolicy='no-referrer';img.onerror=()=>img.remove();who.append(img);}
+   who.append(text('span','Signed in as '+displayName(user)));account.append(who,button('Sign out',signOut));
+  }
   else account.append(button('Sign in with Discord',signIn));
   account.append(text('p','Signing in lets you vote, suggest fixes and keep your notes on every device.'),syncLine,reviewButton);reviewButton.hidden=!admin;
  }
