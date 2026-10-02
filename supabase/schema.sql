@@ -36,6 +36,12 @@ create table if not exists public.user_notes (
 -- A "looks wrong" vote carries what is wrong and optional details.
 alter table public.votes add column if not exists reason text check (reason in ('position','name','type','missing','other'));
 alter table public.votes add column if not exists comment text check (char_length(comment)<=300);
+-- Accounts an admin has stopped from sending suggestions and reports; they can still use the atlas and sync notes.
+create table if not exists public.banned (
+ user_id uuid primary key references auth.users on delete cascade,
+ author_name text check (char_length(author_name)<=80),
+ banned_at timestamptz not null default now()
+);
 -- Kind, status and payload rules live here so re-running this file updates an existing table.
 -- A report says what is wrong with a published marker; it closes as resolved (fixed) or rejected (dismissed).
 alter table public.suggestions drop constraint if exists suggestions_kind_check;
@@ -73,6 +79,9 @@ returns trigger language plpgsql security definer set search_path = public as $$
 begin
  if auth.uid() is not null then
   perform pg_advisory_xact_lock(hashtextextended(auth.uid()::text,0));
+  if exists (select 1 from public.banned where user_id=auth.uid()) then
+   raise exception 'Suggestions are turned off for this account';
+  end if;
   if (select count(*) from public.suggestions where user_id=auth.uid() and created_at>now()-interval '24 hours')>=50 then
    raise exception 'Daily suggestion limit reached';
   end if;
@@ -129,6 +138,7 @@ alter table public.admins enable row level security;
 alter table public.suggestions enable row level security;
 alter table public.votes enable row level security;
 alter table public.user_notes enable row level security;
+alter table public.banned enable row level security;
 
 drop policy if exists admins_self on public.admins;
 create policy admins_self on public.admins for select to authenticated using (user_id=auth.uid());
@@ -158,6 +168,11 @@ drop policy if exists votes_update on public.votes;
 create policy votes_update on public.votes for update to authenticated using (user_id=auth.uid()) with check (user_id=auth.uid());
 drop policy if exists votes_delete on public.votes;
 create policy votes_delete on public.votes for delete to authenticated using (user_id=auth.uid());
+-- Only admins see or change the banned list, and an admin cannot ban themselves.
+drop policy if exists banned_admin on public.banned;
+create policy banned_admin on public.banned for all to authenticated
+ using (exists (select 1 from public.admins where user_id=auth.uid()))
+ with check (exists (select 1 from public.admins where user_id=auth.uid()) and user_id<>auth.uid());
 drop policy if exists notes_owner on public.user_notes;
 create policy notes_owner on public.user_notes for all to authenticated using (user_id=auth.uid()) with check (user_id=auth.uid());
 
@@ -182,6 +197,9 @@ grant usage on sequence public.suggestions_id_seq to authenticated;
 grant select,insert,update,delete on public.votes,public.user_notes to authenticated;
 grant all on public.admins,public.suggestions,public.votes,public.user_notes to service_role;
 grant all on sequence public.suggestions_id_seq to service_role;
+revoke all on public.banned from public,anon,authenticated;
+grant select,insert,delete on public.banned to authenticated;
+grant all on public.banned to service_role;
 
 commit;
 

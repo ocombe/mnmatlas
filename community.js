@@ -68,6 +68,7 @@
  function freshPopup(){if(!map||loading)return;for(const m of allMarkers()){const pin=pins.get(m.id);if(pin)pin.setPopupContent(popup(m));}}
  // A report says what is wrong, so it can be acted on; it waits in review until fixed or dismissed.
  const reasons={position:'Wrong position',name:'Wrong name',type:'Wrong type or icon',missing:'Not there in the game',other:'Something else'};
+ const turnedOff=e=>String(e?.message||'').includes('turned off for this account');
  const reportToken=m=>config.id+':'+m.id;
  function reportDialog(m){
   if(!user){signInDialog();return;}
@@ -83,7 +84,7 @@
    send.disabled=true;const [x,y]=publishedPositions.get(m.id)||[m.x,m.y];
    try{const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,kind:'report',target_id:m.id,payload:{name:m.name,reason:picked.value,x,y},comment:comment.value.trim()||null});if(error)throw error;
     reportedNow.add(reportToken(m));d.close();freshPopup();status('Thanks! Your report is waiting for review.');event('report-sent');}
-   catch{status('The report could not be sent. Please try again.');}
+   catch(e){status(turnedOff(e)?'Your account can no longer send reports.':'The report could not be sent. Please try again.');}
    finally{send.disabled=false;}
   },'primary');
   actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
@@ -118,7 +119,7 @@
     // Separate inserts let the daily limit apply to every row; partial success is remembered.
     for(const row of selected){const {token,name,...suggestion}=row;const {error}=await client.from('suggestions').insert({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null});if(error)throw error;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
     if(done){freshPopup();d.close();status('Thanks! Your suggestion is waiting for review.');}
-   }catch{status('Some suggestions could not be sent. Unsent items remain selected; your local notes and positions are safe.');freshPopup();}
+   }catch(e){if(turnedOff(e)){status('Your account can no longer send suggestions. Your local notes and positions are safe.');freshPopup();return;}status('Some suggestions could not be sent. Unsent items remain selected; your local notes and positions are safe.');freshPopup();}
    finally{if(done)event('suggestion-sent');send.disabled=false;}
   },'primary');actions.append(button('Not now',()=>d.close()),send);d.append(actions);
  }
@@ -166,14 +167,35 @@
   const toggle=text('label','','community-check'),check=document.createElement('input');check.type='checkbox';check.checked=all;check.onchange=()=>pendingTab(check.checked);toggle.append(check,text('span','All maps'));content.append(toggle,text('p','Loading…','form-hint'));
   try{let request=client.from('suggestions').select('*').eq('status','pending').order('created_at',{ascending:false}).order('id',{ascending:false});if(!all)request=request.eq('map',config.id);const {data,error}=await request.range(offset,offset+199);if(error)throw error;if(serial!==reviewSerial||!admin)return;content.lastChild.remove();
    if(!data.length)content.append(text('p','Nothing to review. Reports come from Report a problem on a marker; suggestions from Edit positions and Share with everyone.','form-hint'));
-   for(const row of data){const card=text('article','','review-card');card.append(text('strong',row.payload.name),text('p',(kinds[row.kind]||row.kind)+' · '+row.map+(row.level?' / '+row.level:'')+' · '+(row.author_name||'Discord member')+' · '+new Date(row.created_at).toLocaleString(),'form-hint'));if(row.comment)card.append(text('p',row.comment));
+   const perAuthor=new Map();for(const row of data)perAuthor.set(row.user_id,(perAuthor.get(row.user_id)||0)+1);
+   for(const row of data){const card=text('article','','review-card'),count=perAuthor.get(row.user_id);card.append(text('strong',row.payload.name),text('p','By '+(row.author_name||'Discord member')+(count>1?' ('+count+' waiting)':''),'review-author'),text('p',(kinds[row.kind]||row.kind)+' · '+row.map+(row.level?' / '+row.level:'')+' · '+new Date(row.created_at).toLocaleString(),'form-hint'));if(row.comment)card.append(text('p',row.comment));
     if(row.kind==='report')card.append(text('p',reasons[row.payload.reason]||'Something else','reported-reason'));
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType||row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
-    const actions=text('div','','dialog-actions');actions.append(button('Show on map',()=>preview(row)),...decisions(row,()=>note.value,card));card.append(actions);content.append(card);
+    const actions=text('div','','dialog-actions');if(row.user_id!==user?.id)actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button('Show on map',()=>preview(row)),...decisions(row,()=>note.value,card));card.append(actions);content.append(card);
    }
    const pages=text('div','','dialog-actions');if(offset)pages.append(button('Newer',()=>pendingTab(all,Math.max(0,offset-200))));if(data.length===200)pages.append(button('Older',()=>pendingTab(all,offset+200)));content.append(pages);
+   await bannedList(content,serial,all);
   }catch{if(serial===reviewSerial){content.lastChild?.remove();content.append(text('p','Suggestions could not load. Try again.','form-hint'));}status('Suggestions could not load. Please try again.');}
+ }
+ // A banned account can still use the atlas and its notes, but cannot send suggestions or reports.
+ function banDialog(row,all){
+  const name=row.author_name||'Discord member',d=showDialog('Ban '+name+' from suggestions?');
+  d.append(text('p','They can still use the atlas and their notes, but can no longer send suggestions or reports. All their suggestions waiting for review are dismissed.'),text('p','You can lift the ban later under Banned authors.','form-hint'));
+  const actions=text('div','','dialog-actions'),go=button('Ban and dismiss',async()=>{
+   go.disabled=true;
+   try{let {error}=await client.from('banned').insert({user_id:row.user_id,author_name:name});if(error&&error.code!=='23505')throw error;
+    ({error}=await client.from('suggestions').update({status:'rejected',reviewed_at:new Date().toISOString(),review_note:'Author banned'}).eq('user_id',row.user_id).eq('status','pending'));if(error)throw error;
+    d.close();status(name+' is banned; their waiting suggestions were dismissed.');pendingTab(all);}
+   catch{go.disabled=false;status('The ban could not be saved. Please try again.');}
+  },'danger');
+  actions.append(button('Cancel',()=>d.close()),go);d.append(actions);
+ }
+ async function bannedList(content,serial,all){
+  const {data,error}=await client.from('banned').select('user_id,author_name,banned_at').order('banned_at',{ascending:false});if(error)throw error;if(serial!==reviewSerial||!data.length)return;
+  const section=text('section','','review-banned');section.append(text('h3','Banned authors'));
+  for(const row of data){const line=text('div','','review-banned-row');line.append(text('span',(row.author_name||'Discord member')+' · since '+new Date(row.banned_at).toLocaleDateString()),button('Lift ban',async()=>{const {error}=await client.from('banned').delete().eq('user_id',row.user_id);if(error){status('The ban could not be lifted. Please try again.');return;}status((row.author_name||'This account')+' can send suggestions again.');pendingTab(all);}));section.append(line);}
+  content.append(section);
  }
  // Reports close as fixed or dismissed; other suggestions are approved for publishing or rejected.
  const kinds={'move-marker':'Moved marker','move-label':'Moved label','new-marker':'New marker',report:'Problem report'};

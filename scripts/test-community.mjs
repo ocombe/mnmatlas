@@ -20,7 +20,7 @@ function environment(settings={},hostname='atlas.example',session=null){
  const elements=new Map(),head=new Node('head'),body=new Node('body'),bottom=new Node('div'),formHint=new Node('p'),noteLine=new Node('p');let creations=0,timerId=0;
  for(const id of ['about-counts','search','about-community','editor','map-frame'])elements.set(id,new Node('div'));elements.get('editor').querySelector=()=>formHint;
  const timers=new Map(),listeners=new Map(),saved=new Map(),calls=[],counts=[],statuses=[],remote=[{id:'personal-remote',name:'Remote',category:'Personal',note:'',x:40,y:50},{id:'personal-local',name:'Older remote',category:'Personal',note:'',x:1,y:2}];
- const user=session?.user,suggestions=[],layers=[];let authHandler,failNotes=false,failSuggestions=false;
+ const user=session?.user,suggestions=[],layers=[],banned=[];let authHandler,failNotes=false,failSuggestions=false;
  function result(table,request){
   calls.push({table,...request});
   if(table==='admins')return {data:user?.admin?{user_id:user.id}:null};
@@ -28,6 +28,8 @@ function environment(settings={},hostname='atlas.example',session=null){
    if(request.op==='select')return {data:{notes:structuredClone(remote)}};
    if(failNotes)return {error:Error('offline')};remote.splice(0,remote.length,...request.payload.notes);return {data:null};
   }
+  if(table==='banned'){if(request.op==='insert'){banned.push(request.payload);return {data:null};}if(request.op==='delete'){banned.splice(banned.findIndex(r=>r.user_id===request.filters.user_id),1);return {data:null};}return {data:banned.map(r=>({...r,banned_at:new Date().toISOString()}))};}
+  if(table==='suggestions'&&request.op==='update'&&request.filters.user_id){for(const row of suggestions)if(row.user_id===request.filters.user_id&&row.status===request.filters.status)Object.assign(row,request.payload);return {data:null};}
   if(table==='suggestions'){if(failSuggestions)return {error:Error('offline')};if(request.op==='insert')return {data:null};if(request.op==='update'){const row=suggestions.find(r=>r.id===request.filters.id);if(row)Object.assign(row,request.payload);return {data:[{id:request.filters.id}]};}return {data:request.op==='select'?suggestions.filter(r=>r.status==='pending'):[]};}
  }
  const client={rpc:async(name)=>{calls.push({rpc:name});return {error:null};},from(table){
@@ -41,7 +43,7 @@ function environment(settings={},hostname='atlas.example',session=null){
  context.allMarkers=()=>[...context.originals,...context.personal];context.popup=m=>{const n=new Node('div');context.window.atlasCommunity?.popup(m,n);return n;};context.drawMarkers=()=>{for(const m of context.allMarkers())context.pins.set(m.id,{setPopupContent(){}});};
  context.persist=next=>{saved.set('notes',JSON.stringify(next));context.personal=next;context.window.dispatchEvent({type:'atlas:notes'});return true;};
  vm.runInNewContext(source,context,{filename:'community.js'});
- return {context,elements,head,body,bottom,calls,counts,statuses,remote,saved,suggestions,layers,get creations(){return creations;},set failNotes(v){failNotes=v;},set failSuggestions(v){failSuggestions=v;},emit:type=>context.window.dispatchEvent({type}),async tick(ms){const jobs=[...timers].filter(([,t])=>t.ms===ms);for(const [id,t] of jobs){timers.delete(id);t.fn();}await settle();}};
+ return {context,elements,head,body,bottom,calls,counts,statuses,remote,saved,suggestions,layers,banned,get creations(){return creations;},set failNotes(v){failNotes=v;},set failSuggestions(v){failSuggestions=v;},emit:type=>context.window.dispatchEvent({type}),async tick(ms){const jobs=[...timers].filter(([,t])=>t.ms===ms);for(const [id,t] of jobs){timers.delete(id);t.fn();}await settle();}};
 }
 for(const settings of [{},{supabaseUrl:'https://project.example'},{supabaseKey:'public-key'}]){const e=environment(settings);assert.equal(e.calls.length,0);assert.equal(e.creations,0);assert.equal(e.head.children.length,0);assert.equal(e.bottom.children.length,0);}
 for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounter:'counter'},hostname);assert.equal(e.head.children.length,0);}
@@ -72,9 +74,15 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  const preview=e.context.$('community-preview');assert(preview);await preview.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();assert.equal(e.suggestions[0].status,'approved');assert(e.suggestions[0].reviewed_at);assert(e.layers.at(-1).removed);
  e.suggestions.push({id:10,status:'pending',map:'test-map',level:'lower',kind:'report',target_id:'published',payload:{name:'Bank',reason:'position',x:10,y:20},comment:'Across the bridge',author_name:'Member',created_at:new Date().toISOString()});
  reviewButton.onclick();await settle();assert(review.querySelectorAll('p').some(n=>n.textContent==='Wrong position'));assert(!review.querySelectorAll('button').some(n=>n.textContent==='Approve'));await review.querySelectorAll('button').find(n=>n.textContent==='Fixed').onclick();assert.equal(e.suggestions[1].status,'resolved');
+ // Banning an author dismisses everything they have waiting and lists them for a later unban.
+ for(const id of [11,12])e.suggestions.push({id,user_id:'spammer',status:'pending',map:'test-map',level:'lower',kind:'report',target_id:'published',payload:{name:'Spam '+id,reason:'other',x:1,y:1},author_name:'Spammer',created_at:new Date().toISOString()});
+ reviewButton.onclick();await settle();assert(review.querySelectorAll('p').some(n=>n.textContent==='By Spammer (2 waiting)'));review.querySelectorAll('button').find(n=>n.textContent==='Ban author').onclick();
+ const ban=e.body.children.find(n=>n.id==='community-dialog');assert(ban.open);await ban.querySelectorAll('button').find(n=>n.textContent==='Ban and dismiss').onclick();await settle();
+ assert.equal(e.banned.length,1);assert.equal(e.banned[0].user_id,'spammer');assert(e.suggestions.filter(r=>r.user_id==='spammer').every(r=>r.status==='rejected'&&r.review_note==='Author banned'));
+ const lift=review.querySelectorAll('button').find(n=>n.textContent==='Lift ban');assert(lift);await lift.onclick();await settle();assert.equal(e.banned.length,0);
  // Deleting the account calls the server once, signs out locally and drops pending note syncs.
  e.context.personal[0].note='Not synced';e.emit('atlas:notes');const del=e.bottom.children[0].querySelectorAll('button').find(n=>n.textContent==='Delete my account');del.onclick();const confirm=e.body.children.find(n=>n.id==='community-dialog');assert(confirm.open);
  await confirm.querySelectorAll('button').find(n=>n.textContent==='Delete my account'&&n.className==='danger').onclick();await settle();assert.equal(e.calls.filter(r=>r.rpc==='delete_my_account').length,1);assert.equal(e.calls.find(r=>r.signOut).signOut.scope,'local');
  assert(!e.bottom.children[0].querySelectorAll('button').some(n=>n.textContent==='Delete my account'));const writes=e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length;await e.tick(2000);assert.equal(e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length,writes,'No sync after deletion');
 }
-console.log('Client checks passed: account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');
+console.log('Client checks passed: banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');
