@@ -290,13 +290,13 @@
   "minZoom": 3
  },
  {
-  "id": "generic-6-10-7",
-  "name": "Creatures (levels 6–10)",
+  "id": "crocodiles-6-10-1",
+  "name": "Crocodiles (levels 6–10)",
   "category": "Mob camp",
-  "x": 5573,
-  "y": 5745,
+  "x": 5944,
+  "y": 5770,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "On the beach below the east cliff. Approximate location; to confirm in game.",
   "minZoom": 3
  },
  {
@@ -350,7 +350,7 @@
   "minZoom": 3
  },
  {
-  "id": "generic-6-10-8",
+  "id": "generic-6-10-7",
   "name": "Creatures (levels 6–10)",
   "category": "Mob camp",
   "x": 3426,
@@ -360,7 +360,7 @@
   "minZoom": 3
  },
  {
-  "id": "generic-6-10-9",
+  "id": "generic-6-10-8",
   "name": "Creatures (levels 6–10)",
   "category": "Mob camp",
   "x": 5077,
@@ -380,7 +380,7 @@
   "minZoom": 3
  },
  {
-  "id": "generic-6-10-10",
+  "id": "generic-6-10-9",
   "name": "Creatures (levels 6–10)",
   "category": "Mob camp",
   "x": 4739,
@@ -400,13 +400,13 @@
   "minZoom": 3
  },
  {
-  "id": "generic-1-5-2",
-  "name": "Creatures (levels 1–5)",
+  "id": "crocodiles-1-5-1",
+  "name": "Crocodiles (levels 1–5)",
   "category": "Mob camp",
-  "x": 5620,
-  "y": 8304,
+  "x": 5771,
+  "y": 8370,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "On the beach below the east cliff. Approximate location; to confirm in game.",
   "minZoom": 3
  },
  {
