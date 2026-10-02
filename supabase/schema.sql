@@ -86,8 +86,8 @@ create policy suggestions_read on public.suggestions for select to authenticated
 );
 drop policy if exists suggestions_insert on public.suggestions;
 create policy suggestions_insert on public.suggestions for insert to authenticated with check (
+ -- The daily limit lives in the suggestions_daily_limit trigger; a policy reading this table would recurse.
  user_id=auth.uid() and status='pending' and reviewed_at is null and review_note is null
- and (select count(*) from public.suggestions where user_id=auth.uid() and created_at>now()-interval '24 hours')<50
 );
 drop policy if exists suggestions_update on public.suggestions;
 create policy suggestions_update on public.suggestions for update to authenticated
