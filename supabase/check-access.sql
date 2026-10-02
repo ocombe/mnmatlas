@@ -5,7 +5,7 @@ create temp table if not exists access_checks(n serial, check_name text, passed 
 truncate access_checks;
 do $$
 declare
- a uuid; b uuid := '00000000-0000-4000-8000-00000000b0b0'; b_suggestion bigint; a_suggestion bigint;
+ a uuid; b uuid := '00000000-0000-4000-8000-00000000b0b0'; b_suggestion bigint; a_suggestion bigint; a_report bigint;
  rows int; ok boolean; detail text:=''; results text[] := '{}'; passes boolean[] := '{}';
 begin
  select id into a from auth.users where id not in (select user_id from public.admins) and id<>b order by created_at limit 1;
@@ -44,8 +44,12 @@ begin
  results:=results||'cannot read another account''s notes'::text;passes:=passes||(rows=0);
  begin insert into public.admins(user_id) values (a);ok:=false;exception when others then ok:=true;end;
  results:=results||'cannot make itself admin'::text;passes:=passes||ok;
- select count(*) into rows from public.vote_totals('night-harbor');
- results:=results||'public vote counts still work'::text;passes:=passes||(rows>=1);
+ begin perform count(*) from public.vote_totals('night-harbor');ok:=false;exception when others then ok:=true;end;
+ results:=results||'old vote counts are no longer public'::text;passes:=passes||ok;
+ begin insert into public.suggestions(map,kind,target_id,payload,comment,author_name) values ('night-harbor','report','access-check',jsonb_build_object('name','Bank <b>'||chr(8238),'reason','name','x',1,'y',1),'see <script>x</script>'||chr(7),'Fake admin')
+  returning id into a_report;ok:=true;exception when others then ok:=false;end;
+ select count(*) into rows from public.suggestions where id=a_report and payload->>'name'='Bank b' and comment='see scriptx/script' and author_name<>'Fake admin';
+ results:=results||'sent text is cleaned and the author name comes from Discord'::text;passes:=passes||(ok and rows=1);
 
  -- Anonymous visitors.
  execute 'reset role';
@@ -59,7 +63,7 @@ begin
  execute 'reset role';
 
  -- Clean up.
- delete from public.suggestions where user_id=b or id=a_suggestion;
+ delete from public.suggestions where user_id=b or id in (a_suggestion,a_report);
  delete from public.votes where user_id=b;delete from public.user_notes where user_id=b;delete from auth.users where id=b;
  for i in 1..array_length(results,1) loop insert into access_checks(check_name,passed) values (results[i],passes[i]); end loop;
 end $$;

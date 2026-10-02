@@ -85,6 +85,34 @@ revoke all on function public.limit_suggestions() from public,anon,authenticated
 drop trigger if exists suggestions_daily_limit on public.suggestions;
 create trigger suggestions_daily_limit before insert on public.suggestions for each row execute function public.limit_suggestions();
 
+-- Sent text is stored clean: no control, invisible or direction-changing characters, no angle brackets.
+-- The site shows it as plain text anyway; this keeps the stored copy safe wherever it is used later.
+create or replace function public.clean_text(t text,multiline boolean default false)
+returns text language sql immutable set search_path = '' as $$
+ select case when multiline
+  then btrim(regexp_replace(regexp_replace(v,'[ \t]+\n',E'\n','g'),'\n{3,}',E'\n\n','g'),E' \t\n')
+  else btrim(regexp_replace(v,'\s+',' ','g')) end
+ from (select regexp_replace(replace(replace(normalize(t,NFC),E'\r\n',E'\n'),E'\r',E'\n'),
+  '[\x01-\x08\x0b-\x1f\x7f-\x9f\xad\x61c\x180e\x200b-\x200f\x202a-\x202e\x2060-\x2069\xfeff<>]','','g') v) s;
+$$;
+-- The author name comes from the Discord sign-in itself, not from what the browser sends.
+create or replace function public.clean_suggestion()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+ if auth.uid() is not null then
+  new.author_name=left(coalesce(public.clean_text((select coalesce(i.identity_data->>'full_name',i.identity_data->>'name')
+   from auth.identities i where i.user_id=auth.uid() and i.provider='discord' limit 1)),'Discord member'),80);
+ end if;
+ new.comment=nullif(public.clean_text(new.comment,true),'');
+ if jsonb_typeof(new.payload->'name')='string' then new.payload=jsonb_set(new.payload,'{name}',to_jsonb(public.clean_text(new.payload->>'name')));end if;
+ if jsonb_typeof(new.payload->'note')='string' then new.payload=jsonb_set(new.payload,'{note}',to_jsonb(public.clean_text(new.payload->>'note',true)));end if;
+ return new;
+end;
+$$;
+revoke all on function public.clean_suggestion() from public,anon,authenticated;
+drop trigger if exists suggestions_clean_text on public.suggestions;
+create trigger suggestions_clean_text before insert on public.suggestions for each row execute function public.clean_suggestion();
+
 alter table public.admins enable row level security;
 alter table public.suggestions enable row level security;
 alter table public.votes enable row level security;
@@ -129,7 +157,8 @@ language sql stable security definer set search_path = public as $$
  from public.votes v where v.map=p_map group by v.map,v.target_id;
 $$;
 revoke all on function public.vote_totals(text) from public,anon,authenticated;
-grant execute on function public.vote_totals(text) to anon,authenticated,service_role;
+-- No longer used by the site; kept callable only by the service role.
+grant execute on function public.vote_totals(text) to service_role;
 
 revoke all on public.admins,public.suggestions,public.votes,public.user_notes from public,anon,authenticated;
 revoke all on sequence public.suggestions_id_seq from public,anon,authenticated;

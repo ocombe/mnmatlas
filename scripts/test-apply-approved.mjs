@@ -13,7 +13,7 @@ async function run(dry=false){return new Promise((resolve,reject)=>{const child=
 try{
  await mkdir(fixture+'/scripts');await mkdir(fixture+'/data');
  for(const name of ['app.js','icons.js','scripts/apply-approved.mjs'])await copyFile(root+'/'+name,fixture+'/'+name);
- const maps={maps:[{id:'test-map',width:100,height:100,markersFile:'data/markers.json',labelsFile:'data/labels.json',levels:[{id:'lower'},{id:'upper',labelsFile:'data/upper-labels.json'}]}]};
+ const maps={maps:[{id:'other-map',width:100,height:100,markersFile:'data/other.json',extraCategories:{Dock:['D','#385f60']}},{id:'test-map',width:100,height:100,markersFile:'data/markers.json',labelsFile:'data/labels.json',levels:[{id:'lower'},{id:'upper',labelsFile:'data/upper-labels.json'}]}]};
  await writeFile(fixture+'/data/maps.json',JSON.stringify(maps));
  const markers=[{id:'published',name:'Bank',category:'Bank',x:10,y:20,level:'lower',note:''}],labels={labels:[],trainers:[{id:'published',x:10,y:20}]},upper={labels:[{id:'place',name:'Hall',kind:'building',x:20,y:30,level:'upper'}],trainers:[]};
  const format=data=>JSON.stringify(data,null,2).replace(/\n/g,'\r\n')+'\r\n';
@@ -31,7 +31,13 @@ try{
  const again=await run();assert.equal(again.code,0,again.output);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);
  approved=[{id:5,map:'test-map',level:'lower',kind:'new-marker',payload:{x:10,y:20,name:'New bank',category:'Bank'}},{id:6,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[1,2],to:[50,60],name:'Bank'}}];
  const patchCount=patches.length,invalid=await run();assert.equal(invalid.code,1);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);assert.equal(patches.length,patchCount);
- console.log('Publisher checks passed: dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
+ // Text is cleaned of invisible and markup characters; a category from another map is refused.
+ const ch=String.fromCharCode,sneaky='Ore'+ch(0x202E)+ch(0x200B)+' <script>x</script>  ',note='Line one'+ch(0x7)+'\r\n\n\n\nLine <b>two</b>  ';
+ approved=[{id:7,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:sneaky,category:'Ore',note}}];const cleaned=await run();assert.equal(cleaned.code,0,cleaned.output);
+ const added=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).find(m=>m.id==='community-7');assert.equal(added.name,'Ore scriptx/script');assert.equal(added.note,'Line one\n\nLine btwo/b');
+ approved=[{id:8,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:'Pier',category:'Dock'}}];const foreign=await run();assert.equal(foreign.code,1);assert(foreign.output.includes('Unsupported marker fields'));
+ approved=[{id:9,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:ch(0x200B)+' ',category:'Ore'}}];assert.equal((await run()).code,1,'A name made only of invisible characters is refused');
+ console.log('Publisher checks passed: text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});
 }
