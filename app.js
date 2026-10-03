@@ -250,7 +250,8 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
  if(place)url.searchParams.set('place',place.id);else url.searchParams.delete('place');
  history.pushState({map:config.id,level:id},'',url);ownView=true;await loadMap(config.id,url);
 }
-function mapBounds(){return L.latLngBounds(map.unproject([0,config.height],config.coordinateZoom),map.unproject([config.width,0],config.coordinateZoom));}
+// An optional frame trims the drawn area inside the pixel grid; coordinates stay the same.
+function mapBounds(){const f=config.frame||{x:0,y:0,width:config.width,height:config.height};return L.latLngBounds(map.unproject([f.x,f.y+f.height],config.coordinateZoom),map.unproject([f.x+f.width,f.y],config.coordinateZoom));}
 function appendAttributionLinks(parent,a){
  for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;const link=text('a',title);link.href=href;link.target='_blank';link.rel='noopener';parent.append(link,text('span',' · '));}
 }

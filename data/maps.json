@@ -11,6 +11,12 @@
       "description": "An illustrated atlas of Night Harbor. Explore landmarks, find class trainers, and keep your own field notes.",
       "width": 3072,
       "height": 2688,
+      "frame": {
+        "x": 192,
+        "y": 352,
+        "width": 2880,
+        "height": 2336
+      },
       "minZoom": 0,
       "maxNativeZoom": 5,
       "tileSize": 256,
