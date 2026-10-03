@@ -367,7 +367,9 @@
       "arrow": "northwest",
       "linkedArea": "wyrmsbane-entrance",
       "alignmentHelper": true,
-      "tier": "exit"
+      "tier": "exit",
+      "toMap": "wyrmsbane-tomb",
+      "toPlace": "exit-night-harbor"
     },
     {
       "id": "place-35",

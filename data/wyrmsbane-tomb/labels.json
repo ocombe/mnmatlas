@@ -1,0 +1,220 @@
+{
+  "map": "wyrmsbane-tomb",
+  "tileRevision": "v1",
+  "coordinateZoom": 5,
+  "labels": [
+    {
+      "id": "fork-room",
+      "name": "Fork Room",
+      "level": "floor-1",
+      "x": 1735.37,
+      "y": 2211.06,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "quartermaster-room",
+      "name": "Quartermaster's Room",
+      "level": "floor-1",
+      "x": 1563.79,
+      "y": 2964.64,
+      "kind": "district",
+      "priority": 60,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "entrance-wing",
+      "name": "Entrance Wing",
+      "level": "floor-1",
+      "x": 1603.49,
+      "y": 3275.68,
+      "kind": "district",
+      "priority": 70,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "chapel-loft",
+      "name": "Chapel loft",
+      "level": "floor-1",
+      "x": 1104.66,
+      "y": 2212.96,
+      "kind": "district",
+      "priority": 65,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "chapel",
+      "name": "Chapel",
+      "level": "floor-2",
+      "x": 839.05,
+      "y": 2200.0,
+      "kind": "district",
+      "priority": 90,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "bone-construct-room",
+      "name": "Bone Construct room",
+      "level": "floor-3",
+      "x": 1480.4,
+      "y": 1461.28,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "archer-hall",
+      "name": "Archer Hall",
+      "level": "floor-3",
+      "x": 2161.93,
+      "y": 1746.4,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "ossuary",
+      "name": "Ossuary",
+      "level": "floor-3",
+      "x": 1357.32,
+      "y": 2686.0,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "arena-wing",
+      "name": "Arena Wing",
+      "level": "floor-3",
+      "x": 1696.26,
+      "y": 2550.08,
+      "kind": "district",
+      "priority": 70,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "dario-wing",
+      "name": "Dario's Wing",
+      "level": "floor-3",
+      "x": 2782.55,
+      "y": 2601.76,
+      "kind": "district",
+      "priority": 65,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "dragon-skull-room",
+      "name": "Dragon Skull Room",
+      "level": "floor-4",
+      "x": 1331.4,
+      "y": 1733.44,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "elite-tombs",
+      "name": "Elite tombs",
+      "level": "floor-4",
+      "x": 1922.23,
+      "y": 1681.6,
+      "kind": "district",
+      "priority": 90,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "deep-caverns",
+      "name": "Deep caverns",
+      "level": "floor-5",
+      "x": 2380.89,
+      "y": 2562.88,
+      "kind": "district",
+      "priority": 90,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "exit-night-harbor",
+      "name": "to Night Harbor",
+      "x": 1441.54,
+      "y": 3845.91,
+      "kind": "exit",
+      "level": "floor-1",
+      "priority": 95,
+      "minZoom": 2,
+      "arrow": "south",
+      "approximate": true,
+      "note": "Approximate exit location; confirm in game.",
+      "toMap": "night-harbor",
+      "toPlace": "place-34"
+    },
+    {
+      "id": "exit-ancient-crypt",
+      "name": "to Ancient Crypt",
+      "x": 1085.23,
+      "y": 3064.43,
+      "kind": "exit",
+      "level": "floor-1",
+      "priority": 95,
+      "minZoom": 2,
+      "arrow": "west",
+      "approximate": true,
+      "note": "Approximate exit location; confirm in game."
+    }
+  ],
+  "trainers": [],
+  "attribution": {
+    "scope": "Names and positions only",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "sources": [
+      {
+        "sourceTitle": "Map by Walabus",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:WyrmsbaneCombined_v0.91.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "scope": "Names and positions only"
+      },
+      {
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:TombOfTheLastWyrmsbaneIsometric.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "scope": "Names and positions only"
+      },
+      {
+        "sourceTitle": "Map by Hogs",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Wyrmsbane_Tomb.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "scope": "Names and positions only"
+      }
+    ]
+  }
+}
