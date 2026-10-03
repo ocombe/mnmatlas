@@ -8,7 +8,7 @@ import {fileURLToPath} from 'node:url';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),site='https://www.mnmatlas.com/';
 const html=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 // Bump a map's card version after redrawing its card so link previews refresh.
-const cardVersions={'sungreet-strand':2,'night-harbor':2,'faelindral':2};
+const cardVersions={'world':2,'sungreet-strand':2,'night-harbor':2,'faelindral':2};
 const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
 const template=await readFile(resolve(root,'index.html'),'utf8');
 const swap=(page,pattern,replacement)=>{
