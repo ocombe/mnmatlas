@@ -438,6 +438,110 @@
       ],
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "wyrmsbane-tomb",
+      "title": "Tomb of the Last Wyrmsbane",
+      "subtitle": "Five floors beneath Night Harbor",
+      "cartoucheKicker": "The last resting place",
+      "breadcrumb": "Monsters & Memories / Tomb of the Last Wyrmsbane",
+      "description": "An illustrated fan atlas of the Tomb of the Last Wyrmsbane. Explore five floors, find the chapel, ossuary and elite tombs, and keep your own field notes.",
+      "width": 4416,
+      "height": 5664,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/wyrmsbane-tomb/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/wyrmsbane-tomb/markers.json",
+      "labelsFile": "data/wyrmsbane-tomb/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "point",
+        "x": 2150,
+        "y": 2700,
+        "z": 2.5,
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Entrance halls",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Fork halls and chapel",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Ossuary and bone construct",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Elite tombs",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-4/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-5",
+          "title": "Deep caverns",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-5/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Pit trap": [
+          "▼",
+          "#a04438"
+        ],
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Walabus, Map by chazsolo and Map by Hogs (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Walabus",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:WyrmsbaneCombined_v0.91.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Walabus, Map by chazsolo and Map by Hogs; positions adjusted to this illustration and names expanded. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Walabus",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:WyrmsbaneCombined_v0.91.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:TombOfTheLastWyrmsbaneIsometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by Hogs",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Wyrmsbane_Tomb.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }
