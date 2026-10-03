@@ -266,8 +266,11 @@ function updateTitles(){
  }
  // A page cached from before levels existed lacks this container; create it rather than failing to load.
  let controls=$('level-controls');if(!controls){controls=document.createElement('div');controls.id='level-controls';controls.className='level-controls';controls.setAttribute('role','group');controls.setAttribute('aria-label','Map level');$('map-frame').append(controls);}
- controls.replaceChildren();controls.hidden=!config.levels;document.body.classList.toggle('has-levels',!!config.levels);
+ // Separate maps of one place stacked vertically (Evershade Weald under Faelindral) get the same quick switch as levels.
+ const linked=!config.levels&&Array.isArray(config.linkedMaps)?config.linkedMaps.filter(l=>registry.maps.some(c=>c.id===l.map)):[];
+ controls.replaceChildren();controls.hidden=!config.levels&&!linked.length;document.body.classList.toggle('has-levels',!!config.levels||!!linked.length);
  for(const level of config.levels||[]){const b=text('button',level.title);b.type='button';b.dataset.level=level.id;b.setAttribute('aria-pressed',String(level.id===config.levelId));b.onclick=()=>changeLevel(level.id);controls.append(b);}
+ for(const l of linked){const b=text('button',l.title);b.type='button';b.dataset.map=l.map;b.setAttribute('aria-pressed',String(l.map===config.id));b.onclick=()=>{if(l.map===config.id)return;const url=mapAddress(l.map),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);history.pushState({map:l.map},'',url);ownView=true;loadMap(l.map,new URL(url));};controls.append(b);}
  $('map-frame').setAttribute('aria-label',config.title+' illustrated map');
  for(const s of document.querySelectorAll('.map-select'))s.value=config.id;
  const a=config.attribution,footer=$('map-attribution');footer.replaceChildren(text('span',a.text+' '));

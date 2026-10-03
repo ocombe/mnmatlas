@@ -237,7 +237,17 @@
       ],
       "alignmentGroup": "platforms",
       "levelSubtitle": "Simplified view",
-      "viewNote": "Simplified view: platform layout, distances and heights are approximate."
+      "viewNote": "Simplified view: platform layout, distances and heights are approximate.",
+      "linkedMaps": [
+        {
+          "map": "evershade-weald",
+          "title": "Ground"
+        },
+        {
+          "map": "faelindral",
+          "title": "Platforms (simplified)"
+        }
+      ]
     },
     {
       "id": "evershade-weald",
@@ -283,7 +293,17 @@
         "changes": "Place names, caves, creature camps and exits adapted from Nindaan's Evershade Weald map; positions adjusted to this illustration and approximate; level bands from the community wiki's creature listings."
       },
       "hiddenPrimaryStack": null,
-      "legacyStorage": {}
+      "legacyStorage": {},
+      "linkedMaps": [
+        {
+          "map": "evershade-weald",
+          "title": "Ground"
+        },
+        {
+          "map": "faelindral",
+          "title": "Platforms (simplified)"
+        }
+      ]
     },
     {
       "id": "sungreet-strand",
