@@ -1,0 +1,282 @@
+[
+ {
+  "id": "goblins-17-22-1",
+  "name": "Muggrah goblins (levels 17–22)",
+  "category": "Mob camp",
+  "x": 7026,
+  "y": 7429,
+  "approximate": true,
+  "note": "Goblin camp along the south wall, near the road to Sungreet Strand. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "baron-bigtent",
+  "name": "Baron Bigtent (level 20)",
+  "category": "Named mob",
+  "x": 7116,
+  "y": 7369,
+  "approximate": true,
+  "note": "In the goblin camp, near the wall path. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "pyrmos-30-1",
+  "name": "Pyrmos mercenaries and salt gatherers (level 30)",
+  "category": "Mob camp",
+  "x": 6056,
+  "y": 6767,
+  "approximate": true,
+  "note": "Camp on the corner of the main salt flat; Layla Faraj, Nadia Al-Hakim, Sami Hassoun and Tarek Mansur are here. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "salt-elementals-30-36-1",
+  "name": "Salt elementals (levels 30–36)",
+  "category": "Mob camp",
+  "x": 6456,
+  "y": 5450,
+  "approximate": true,
+  "note": "On the salt flats. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "wildlife-20-31-1",
+  "name": "Desert creatures (levels 20–31)",
+  "category": "Mob camp",
+  "x": 5406,
+  "y": 1784,
+  "approximate": true,
+  "note": "Jackals, vipers, asps, sand striders, scarabs, sand ticks and basilisks roam the open sand. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "crystallized-35-39-1",
+  "name": "Crystallized skeletons (levels 35–39)",
+  "category": "Mob camp",
+  "x": 6758,
+  "y": 2054,
+  "approximate": true,
+  "note": "Giant crystallized skeletons among the crystals. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "crystallized-35-39-2",
+  "name": "Crystallized skeletons (levels 35–39)",
+  "category": "Mob camp",
+  "x": 7568,
+  "y": 4714,
+  "approximate": true,
+  "note": "Crystallized skeleton area by the crystal canyon. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "yealaroth",
+  "name": "Yealaroth the Consumed (level 40)",
+  "category": "Named mob",
+  "x": 9190,
+  "y": 5055,
+  "approximate": true,
+  "note": "Inside the dark crystals. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "shard-bats-33-35-1",
+  "name": "Shard bats (levels 33–35)",
+  "category": "Mob camp",
+  "x": 7976,
+  "y": 4305,
+  "approximate": true,
+  "note": "In the crystal canyon and caves. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "shattershriek",
+  "name": "Shattershriek (level 35)",
+  "category": "Named mob",
+  "x": 8086,
+  "y": 4235,
+  "approximate": true,
+  "note": "At the very back of the crystal caves. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "highwaymen-36-44-1",
+  "name": "Highwaymen (levels 36–44)",
+  "category": "Mob camp",
+  "x": 3030,
+  "y": 6423,
+  "approximate": true,
+  "note": "Highwaymen camp and caves. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "tarakhan",
+  "name": "Tarakhan the Boulder (levels 40–41)",
+  "category": "Named mob",
+  "x": 3140,
+  "y": 6343,
+  "approximate": true,
+  "note": "Up on a ledge of the highwaymen camp. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "soraya",
+  "name": "Soraya the Mirage (levels 40–41)",
+  "category": "Named mob",
+  "x": 2920,
+  "y": 6343,
+  "approximate": true,
+  "note": "In the highwaymen caves. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "malik",
+  "name": "Malik the Glass Viper (level 44)",
+  "category": "Named mob",
+  "x": 3030,
+  "y": 6533,
+  "approximate": true,
+  "note": "In the highwaymen caves: first cave, first hallway on the left, room with a blue bed. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "undead-45-53-1",
+  "name": "Undead (levels 45–53)",
+  "category": "Mob camp",
+  "x": 3256,
+  "y": 4904,
+  "approximate": true,
+  "note": "The undead keep and its tower hill. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "guillome",
+  "name": "Guillome the Accursed (level 60, raid)",
+  "category": "Named mob",
+  "x": 3256,
+  "y": 4784,
+  "approximate": true,
+  "note": "Top of the blue-flamed undead tower. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "selene",
+  "name": "Selene Brightmantle (level 45)",
+  "category": "Named mob",
+  "x": 3376,
+  "y": 4844,
+  "approximate": true,
+  "note": "Inside the undead tower. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "bishop-aybram",
+  "name": "Bishop Aybram (level 50)",
+  "category": "Named mob",
+  "x": 3366,
+  "y": 4994,
+  "approximate": true,
+  "note": "Door at the top of the ramp on the south side of the tower hill, room on the right. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "seneschal-kazmer",
+  "name": "Seneschal Kazmer (level 45)",
+  "category": "Named mob",
+  "x": 3136,
+  "y": 4994,
+  "approximate": true,
+  "note": "Ground floor of the keep: through the large opening in the hillside, up the stairs, second hall on the left. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "quartermaster-girault",
+  "name": "Quartermaster Girault (level 50)",
+  "category": "Named mob",
+  "x": 3126,
+  "y": 4864,
+  "approximate": true,
+  "note": "In the undead fort, before Seneschal Kazmer. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "hovarth-ezzadel",
+  "name": "Hovarth Ezzadel (level 51)",
+  "category": "Named mob",
+  "x": 3256,
+  "y": 5074,
+  "approximate": true,
+  "note": "Door near the charred druid ring on the tower hill, first hall, alcove on the left. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "stormcaller-tabigan",
+  "name": "Stormcaller Tabigan (levels 51–52)",
+  "category": "Named mob",
+  "x": 3260,
+  "y": 5254,
+  "approximate": true,
+  "note": "At the gazebo on the undead tower hill. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "charred-45-48-1",
+  "name": "Charred grovekeepers and rangers (levels 45–48)",
+  "category": "Mob camp",
+  "x": 3120,
+  "y": 5274,
+  "approximate": true,
+  "note": "Among the burnt trees of the tower hill. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "fenrix-lightfoot",
+  "name": "Fenrix Lightfoot (level 50)",
+  "category": "Named mob",
+  "x": 3030,
+  "y": 5194,
+  "approximate": true,
+  "note": "Ground level of the broken tower in the undead area; placeholder is a charred tracker. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "chaim-nephidna",
+  "name": "Chaim the Herald and Mistress Nephidna (levels 55–56)",
+  "category": "Named mob",
+  "x": 3408,
+  "y": 5420,
+  "approximate": true,
+  "note": "With the spiders. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "cultists-43-53-1",
+  "name": "Cultists (levels 43–53)",
+  "category": "Mob camp",
+  "x": 1122,
+  "y": 5665,
+  "approximate": true,
+  "note": "The cultist temple under the western rock. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "cult-leaders",
+  "name": "Ebon Scholar Myrddin, High Wyrmseer Valthrun, Emissary Irina (levels 51–53)",
+  "category": "Named mob",
+  "x": 1232,
+  "y": 5595,
+  "approximate": true,
+  "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "esaneq",
+  "name": "Esaneq (levels 51–52)",
+  "category": "Named mob",
+  "x": 816,
+  "y": 4208,
+  "approximate": true,
+  "note": "A giant near the Vale of Zintar zone line. Approximate location; to confirm in game.",
+  "minZoom": 3
+ }
+]

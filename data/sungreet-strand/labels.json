@@ -87,7 +87,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
-   "arrow": "north"
+   "arrow": "north",
+   "toMap": "glass-flats",
+   "toPlace": "to-sungreet-strand"
   },
   {
    "id": "sungreet-strand",

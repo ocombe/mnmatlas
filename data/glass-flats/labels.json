@@ -1,0 +1,93 @@
+{
+ "map": "glass-flats",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "glass-flats",
+   "name": "Glass Flats",
+   "x": 6217,
+   "y": 4433,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  },
+  {
+   "id": "undead-keep",
+   "name": "Undead Keep",
+   "x": 3256,
+   "y": 4644,
+   "kind": "district",
+   "priority": 85,
+   "minZoom": 1.5
+  },
+  {
+   "id": "highwaymen-camp",
+   "name": "Highwaymen Camp",
+   "x": 3030,
+   "y": 6223,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "goblin-camp",
+   "name": "Goblin Camp",
+   "x": 7026,
+   "y": 7249,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "salt-camp",
+   "name": "Salt Camp",
+   "x": 6056,
+   "y": 6617,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "crystal-caves",
+   "name": "Crystal Caves",
+   "x": 7976,
+   "y": 4105,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "cultist-temple",
+   "name": "Cultist Temple",
+   "x": 1122,
+   "y": 5505,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "to-sungreet-strand",
+   "name": "to Sungreet Strand",
+   "x": 8836,
+   "y": 8570,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "south",
+   "toMap": "sungreet-strand",
+   "toPlace": "to-glass-flats"
+  },
+  {
+   "id": "to-vale-of-zintar",
+   "name": "to Vale of Zintar",
+   "x": 696,
+   "y": 4148,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "west"
+  }
+ ],
+ "trainers": []
+}

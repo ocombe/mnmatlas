@@ -608,6 +608,48 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "glass-flats",
+      "title": "Glass Flats",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The salt flats north of Sungreet Strand",
+      "breadcrumb": "Monsters & Memories / Glass Flats",
+      "description": "An illustrated fan atlas of Glass Flats: the salt flats, the crystal fields, the undead keep and the camps, with place names and personal field notes.",
+      "width": 10812,
+      "height": 9272,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/glass-flats/{z}/{x}/{y}.webp",
+      "markersFile": "data/glass-flats/markers.json",
+      "labelsFile": "data/glass-flats/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Landmarks and exits after ElusiveGarden's Glass Flats map (CC BY-SA 4.0)",
+        "sourceTitle": "ElusiveGarden's Glass Flats wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Glass_Flats_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Landmarks and exits checked against ElusiveGarden's Glass Flats map; creature camps and named creatures placed from the community wiki's location notes; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

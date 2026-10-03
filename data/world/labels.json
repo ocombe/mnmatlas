@@ -42,7 +42,8 @@
    "x": 2087,
    "y": 1127,
    "kind": "zone",
-   "priority": 60
+   "priority": 60,
+   "toMap": "glass-flats"
   },
   {
    "id": "zone-vale-of-zintar",
