@@ -33,7 +33,8 @@
    "x": 1613,
    "y": 2267,
    "kind": "zone",
-   "priority": 60
+   "priority": 100,
+   "toMap": "fallen-pass"
   },
   {
    "id": "zone-glass-flats",
@@ -73,7 +74,8 @@
    "x": 1350,
    "y": 329,
    "kind": "zone",
-   "priority": 60
+   "priority": 100,
+   "toMap": "evershade-weald"
   },
   {
    "id": "zone-glinting-hollow",
