@@ -10,6 +10,10 @@ const mobileLayout=matchMedia('(max-width: 760px)');
 let embedded=false;try{embedded=window.self!==window.top;}catch{embedded=true;}
 const isEmbed=embedded||new URLSearchParams(location.search).get('embed')==='1';
 document.body.classList.toggle('embed',isEmbed);
+// Each map lives at its own address (<site>/<map-id>/); older ?map= links still open and are rewritten.
+const siteRoot=new URL('./',document.currentScript?.src||document.baseURI);
+function mapAddress(id){return new URL(encodeURIComponent(id)+'/',siteRoot);}
+function mapIdOf(url){const first=url.pathname.startsWith(siteRoot.pathname)?url.pathname.slice(siteRoot.pathname.length).split('/')[0].toLowerCase():'';return registry.maps.some(c=>c.id===first)?first:url.searchParams.get('map')||registry.defaultMap;}
 const compact=()=>isEmbed||mobileLayout.matches;
 let registry,map,config,originals=[],personal=[],pins=new Map(),placeIndex=[],hiddenController;
 let enabled=new Set(Object.keys(categories)),showPins=true,draftPin=null,draft=null,statusTimer;
@@ -206,7 +210,7 @@ function buildPlaceIndex(){
 }
 function findPlace(value){buildPlaceIndex();const p=placeIndex.find(p=>p.id===value)||placeIndex.find(p=>p.slug===value||slug(p.name)===value);return p?.labelId?placeIndex.find(row=>row.id===p.labelId)||p:p;}
 function viewUrl(place=activePlace){
- const url=new URL(location.href),c=map.project(map.getCenter(),config.coordinateZoom);url.href=url.href.split('#')[0];url.searchParams.set('map',config.id);url.searchParams.delete('align');
+ const url=mapAddress(config.id),c=map.project(map.getCenter(),config.coordinateZoom);url.search=location.search;url.searchParams.delete('map');url.searchParams.delete('align');
  if(config.levels)url.searchParams.set('level',config.levelId);else url.searchParams.delete('level');
  url.searchParams.set('x',String(Math.round(Math.max(0,Math.min(config.width,c.x))*100)/100));url.searchParams.set('y',String(Math.round(Math.max(0,Math.min(config.height,c.y))*100)/100));url.searchParams.set('z',String(map.getZoom()));
  if(place&&!place.id.startsWith('personal-'))url.searchParams.set('place',place.id);else url.searchParams.delete('place');
@@ -219,10 +223,8 @@ async function copyLink(place){
  if(place){url.searchParams.set('x',String(place.x));url.searchParams.set('y',String(place.y));url.searchParams.set('z',String(Math.max(map.getZoom(),config.defaultView.placeZoom)));}
  // Alignment drafts are local editing state, not part of a shared destination.
  url.searchParams.delete('align');
- // Each map has a small page (map-id/) whose link preview shows that map; it forwards here with the same view.
- const share=new URL(config.id+'/',new URL('./',url));for(const [k,v] of url.searchParams)if(k!=='map')share.searchParams.set(k,v);
- try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText(share.href);status('Link copied. Personal notes are not included.');}
- catch{$('link-value').value=share.href;$('link-dialog').showModal();$('link-value').select();}
+ try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText(url.href);status('Link copied. Personal notes are not included.');}
+ catch{$('link-value').value=url.href;$('link-dialog').showModal();$('link-value').select();}
 }
 function applyLocation(url){
  applyingView=true;activePlace=null;sharedPin?.remove();sharedPin=null;map.closePopup();
@@ -318,7 +320,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});
   map.on('popupclose',()=>{if(!applyingView){activePlace=null;scheduleUrl();}});
-  if(push){url.searchParams.set('map',config.id);for(const k of ['place','x','y','z','level'])url.searchParams.delete(k);url.href=url.href.split('#')[0];history.pushState({map:config.id},'',url);}
+  if(push){const next=mapAddress(config.id);next.search=url.search;for(const k of ['map','place','x','y','z','level'])next.searchParams.delete(k);url=next;history.pushState({map:config.id},'',url);}
   applyLocation(url);ownView=false;updateZoom();if(keepEditing)enterEdit();loading=false;document.body.dataset.ready='true';syncUrl();
   window.dispatchEvent(new CustomEvent('atlas:loaded'));
   if(!requested&&id)status('Unknown map; showing '+config.title+'.');
@@ -410,7 +412,7 @@ function setupControls(){
  $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{status('Fullscreen is unavailable. Open the atlas in its own tab, or allow fullscreen on the iframe.');}};
  document.addEventListener('fullscreenchange',()=>{$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');$('fullscreen').title=document.fullscreenElement?'Exit fullscreen':'Enter fullscreen';map?.invalidateSize({pan:true,animate:false});});
  for(const s of document.querySelectorAll('.map-select')){for(const c of registry.maps){const option=text('option',c.title);option.value=c.id;s.append(option);}s.onchange=()=>loadMap(s.value,new URL(location.href),true);}
- window.addEventListener('popstate',()=>{const url=new URL(location.href);ownView=true;loadMap(url.searchParams.get('map')||registry.defaultMap,url);});
+ window.addEventListener('popstate',()=>{const url=new URL(location.href);ownView=true;loadMap(mapIdOf(url),url);});
 }
 // Every publish refreshes each file's Last-Modified, so one small HEAD request spots a newer edition.
 const updateInterval=15*60*1000;let updateStamp=null,updateCheckedAt=0;
@@ -423,5 +425,5 @@ function watchForUpdates(){
  const due=()=>Date.now()-updateCheckedAt>=updateInterval&&checkForUpdate();
  checkForUpdate();setInterval(due,60000);document.addEventListener('visibilitychange',due);
 }
-async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();await loadMap(new URLSearchParams(location.search).get('map')||registry.defaultMap);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
+async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();await loadMap(mapIdOf(new URL(location.href)));watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
 document.addEventListener('DOMContentLoaded',init,{once:true});

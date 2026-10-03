@@ -10,14 +10,14 @@ Add personal notes to keep your own field guide: drag a new note into place, the
 
 Use **Copy link** in a popup or **Share this view** in the map toolbar. Links share a place or view without personal note text. The atlas also supports a compact layout in an iframe and a fullscreen button when permitted by the host page.
 
-For example, link to `?map=night-harbor&place=wiki-4` or a view with `?map=night-harbor&x=1640&y=1015&z=5`.
+Each map has its own address, such as `mnmatlas.com/night-harbor/`. For example, link to `/night-harbor/?place=wiki-4` or a view with `/night-harbor/?x=1640&y=1015&z=5`. Choosing another map, following an exit or switching levels updates the address, and **Back** returns to the previous one. Older `?map=night-harbor` links still open and switch to the new address.
 
 Underdocks has **Lower docks** and **Upper city** levels. Use the level buttons to
 keep the same view while switching. Lift popups offer **Go up** or **Go down**;
 their positions and connections are approximate, to confirm in game. Personal
 notes belong to the level where they were placed. Try
-`?map=underdocks&level=lower`, `?map=underdocks&level=upper`, or
-`?map=underdocks&level=lower&place=wiki-west-bank`.
+`/underdocks/?level=lower`, `/underdocks/?level=upper`, or
+`/underdocks/?level=lower&place=wiki-west-bank`.
 
 Underdocks edition **v2** adds a parchment margin. Saved **v1** notes and alignment
 drafts use the earlier positions and do not apply to v2; their browser storage is
@@ -31,7 +31,7 @@ Optional accounts and contributions
 
 When accounts are enabled, **Sign in with Discord** lets you **Report a problem** with a published marker (what is wrong, plus optional details), suggest moved positions after **Done**, and **Share with everyone** from a personal note popup. Reports and suggestions wait for review; reports close as fixed or dismissed, and approved suggestions arrive in a later atlas update. Signed-in notes merge with this browser's notes and sync between devices; local notes remain available if the service is down. Optional sign-in stores your Discord name and id, suggestions, reports and synced notes. **Delete my account** in the field guide removes the sign-in and all of that data.
 
-Each map also has a short address, such as `mnmatlas.com/night-harbor/`, which **Copy link** hands out. That page carries the map's own link preview card (`assets/cards/<map-id>.jpg`, 1200×630) and forwards to the atlas with the same view. After adding a map, add its card and run `node scripts/make-share-pages.mjs`.
+**Copy link** and **Share this view** hand out the map's own address. Each `<map-id>/index.html` is the full atlas page with that map's title and link preview card (`assets/cards/<map-id>.jpg`, 1200×630); it is generated from `index.html`. After changing `index.html` or adding a map (with its card), run `node scripts/make-share-pages.mjs`, which also rewrites `404.html` so a map name typed in another case still opens that map.
 
 Public settings live in `config.js`; empty values disable their features. See [Supabase setup and access checks](supabase/README.md) and [publishing approved suggestions](scripts/README.md). To enable visit stats, set `goatcounter` to your GoatCounter site code (just the code, not a URL). Counts are anonymous, use no cookies, and record map/level visits and named actions without search text, note text or coordinates. Localhost visits are skipped. Only the optional counter script is loaded remotely, from `gc.zgo.at`; it uses [GoatCounter's manual count API](https://www.goatcounter.com/help/js).
 
