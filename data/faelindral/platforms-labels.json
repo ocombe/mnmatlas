@@ -210,6 +210,58 @@
       "minZoom": 0,
       "approximate": true,
       "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+    },
+    {
+      "id": "weald-travelers-lift",
+      "name": "down to Evershade Weald",
+      "level": "platforms",
+      "x": 1034,
+      "y": 2010,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "travelers-lift"
+    },
+    {
+      "id": "weald-keepers-lift",
+      "name": "down to Evershade Weald",
+      "level": "platforms",
+      "x": 2020,
+      "y": 932,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "keepers-lift"
+    },
+    {
+      "id": "weald-pixie-lift",
+      "name": "down to Evershade Weald",
+      "level": "platforms",
+      "x": 552,
+      "y": 898,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "pixie-lift"
+    },
+    {
+      "id": "weald-south-stairway",
+      "name": "down to Evershade Weald",
+      "level": "platforms",
+      "x": 1298,
+      "y": 2706,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "south-stairway"
     }
   ],
   "trainers": [
