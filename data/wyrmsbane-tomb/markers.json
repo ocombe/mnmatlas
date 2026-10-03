@@ -128,34 +128,6 @@
     "toMarker": "nav-3256-from"
   },
   {
-    "id": "ramp-1-2-0-from",
-    "level": "floor-1",
-    "x": 1881.12,
-    "y": 3673.17,
-    "category": "Stairs",
-    "approximate": true,
-    "note": "Approximate; confirm in game.",
-    "toLevel": "floor-2",
-    "toMarker": "ramp-1-2-0-to",
-    "direction": "down",
-    "name": "Passage down to the fork halls and chapel (entrance recovery)",
-    "switchOnClick": true
-  },
-  {
-    "id": "ramp-1-2-0-to",
-    "level": "floor-2",
-    "x": 1881.12,
-    "y": 3710.66,
-    "category": "Stairs",
-    "approximate": true,
-    "note": "Approximate; confirm in game.",
-    "toLevel": "floor-1",
-    "toMarker": "ramp-1-2-0-from",
-    "direction": "up",
-    "name": "Passage up to the entrance halls (entrance recovery)",
-    "switchOnClick": true
-  },
-  {
     "id": "ramp-1-2-1-from",
     "level": "floor-1",
     "x": 1735.13,
@@ -265,34 +237,6 @@
     "toMarker": "ramp-2-3-1-from",
     "direction": "up",
     "name": "Passage up to the fork halls and chapel",
-    "switchOnClick": true
-  },
-  {
-    "id": "ramp-4-5-0-from",
-    "level": "floor-4",
-    "x": 2739.92,
-    "y": 2210.84,
-    "category": "Stairs",
-    "approximate": true,
-    "note": "Approximate; confirm in game.",
-    "toLevel": "floor-5",
-    "toMarker": "ramp-4-5-0-to",
-    "direction": "down",
-    "name": "Passage down to the deep caverns",
-    "switchOnClick": true
-  },
-  {
-    "id": "ramp-4-5-0-to",
-    "level": "floor-5",
-    "x": 2739.92,
-    "y": 2189.33,
-    "category": "Stairs",
-    "approximate": true,
-    "note": "Approximate; confirm in game.",
-    "toLevel": "floor-4",
-    "toMarker": "ramp-4-5-0-from",
-    "direction": "up",
-    "name": "Passage up to the elite tombs",
     "switchOnClick": true
   },
   {
@@ -442,5 +386,61 @@
     "level": "floor-1",
     "approximate": true,
     "note": "Approximate room location; confirm in game."
+  },
+  {
+    "id": "cave-slope-3-4-0-from",
+    "level": "floor-3",
+    "x": 2760,
+    "y": 3710,
+    "category": "Stairs",
+    "name": "Cave slope down to the elite tombs caves",
+    "approximate": true,
+    "note": "Approximate; confirm in game.",
+    "toLevel": "floor-4",
+    "toMarker": "cave-slope-3-4-0-to",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "cave-slope-3-4-0-to",
+    "level": "floor-4",
+    "x": 2790,
+    "y": 3690,
+    "category": "Stairs",
+    "name": "Cave slope up to the ossuary caves",
+    "approximate": true,
+    "note": "Approximate; confirm in game.",
+    "toLevel": "floor-3",
+    "toMarker": "cave-slope-3-4-0-from",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "cave-slope-4-5-0-from",
+    "level": "floor-4",
+    "x": 3128,
+    "y": 3190,
+    "category": "Stairs",
+    "name": "Cave slope down to the deep caverns",
+    "approximate": true,
+    "note": "Approximate; confirm in game.",
+    "toLevel": "floor-5",
+    "toMarker": "cave-slope-4-5-0-to",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "cave-slope-4-5-0-to",
+    "level": "floor-5",
+    "x": 3030,
+    "y": 3190,
+    "category": "Stairs",
+    "name": "Cave slope up to the elite tombs caves",
+    "approximate": true,
+    "note": "Approximate; confirm in game.",
+    "toLevel": "floor-4",
+    "toMarker": "cave-slope-4-5-0-from",
+    "direction": "up",
+    "switchOnClick": true
   }
 ]
