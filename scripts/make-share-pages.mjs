@@ -1,5 +1,6 @@
 // Writes the atlas page for each map (<map-id>/index.html) from index.html, with that map's title and link preview card,
-// and 404.html, which sends mistyped map addresses to the right map. Run again after changing index.html or adding a map.
+// and 404.html, which sends mistyped map addresses to the right map. GitHub runs this on every publish (.github/workflows/pages.yml);
+// run it locally to preview. The built pages are not kept in the repo.
 import {readFile,writeFile,mkdir,access} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
@@ -35,7 +36,7 @@ for(const m of registry.maps){
   [meta('name','twitter:description'),`<meta name="twitter:description" content="${description}">`],
   [meta('name','twitter:image'),`<meta name="twitter:image" content="${image}">`],
  ])page=swap(page,pattern,replacement);
- page=page.replace('<!doctype html>\n','<!doctype html>\n<!-- Generated from index.html by scripts/make-share-pages.mjs; edit index.html and run it again. -->\n');
+ page=page.replace('<!doctype html>\n','<!doctype html>\n<!-- Generated from index.html by scripts/make-share-pages.mjs; edit index.html instead. -->\n');
  await mkdir(resolve(root,m.id),{recursive:true});await writeFile(resolve(root,m.id,'index.html'),page,'utf8');console.log('Wrote '+m.id+'/index.html');
 }
 // GitHub Pages serves 404.html for any unknown address; a map name in another case or spelling opens that map.
