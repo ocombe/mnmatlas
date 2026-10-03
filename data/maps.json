@@ -173,7 +173,7 @@
       "subtitle": "The city in the trees",
       "cartoucheKicker": "Among the branches",
       "breadcrumb": "Monsters & Memories / Faelindral",
-      "description": "An illustrated fan atlas of Faelindral. Follow paths through the forest and explore the platforms above, with place names and personal field notes.",
+      "description": "An illustrated fan atlas of Faelindral, the city in the trees: its platforms, lifts and guild halls, with place names and personal field notes. The forest floor below is the Evershade Weald map.",
       "width": 2920,
       "height": 2860,
       "minZoom": 0,
@@ -191,43 +191,6 @@
         "padding": 18,
         "placeZoom": 4
       },
-      "defaultLevel": "platforms",
-      "levels": [
-        {
-          "id": "ground",
-          "title": "Ground",
-          "alignmentGroup": "ground",
-          "width": 2048,
-          "height": 1722,
-          "coordinateZoom": 3,
-          "maxNativeZoom": 3,
-          "maxZoom": 5,
-          "tileRevision": "v1",
-          "tilePath": "assets/tiles/faelindral/ground/{z}/{x}/{y}.webp",
-          "labelsFile": "data/faelindral/labels.json",
-          "attribution": {
-            "map": "Illustrated fan atlas · Not an official game map",
-            "text": "Place names, guilds & amenities adapted from Maggot's Faelindral wiki map · approximate",
-            "sourceTitle": "Maggot's Faelindral wiki map",
-            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Faelindral_V2.jpg",
-            "license": "CC BY-SA 4.0",
-            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-            "changes": "Place names, guilds, amenities and tradeskill locations adapted from Maggot's Faelindral wiki map (CC BY-SA 4.0). Positions adjusted to this atlas and approximate. ARC/FTR updated to ARC/WAR."
-          },
-          "defaultView": {
-            "mode": "fit",
-            "padding": 18,
-            "placeZoom": 3.5
-          }
-        },
-        {
-          "id": "platforms",
-          "title": "Platforms (simplified)",
-          "levelSubtitle": "Simplified view",
-          "viewNote": "Simplified view: platform layout, distances and heights are approximate.",
-          "tilePath": "assets/tiles/faelindral/platforms/{z}/{x}/{y}.webp"
-        }
-      ],
       "extraCategories": {
         "Lift": [
           "↕",
@@ -272,7 +235,9 @@
           "changes": "Platforms artwork, markers and place names adapted from Maggot's Faelindral map. Artwork licensed CC BY-SA 4.0; raised deck restored and ground bridge omitted. Locations approximate; ARC/FTR shown as ARC/WAR. Other artwork and site licences unchanged."
         }
       ],
-      "alignmentGroup": "platforms"
+      "alignmentGroup": "platforms",
+      "levelSubtitle": "Simplified view",
+      "viewNote": "Simplified view: platform layout, distances and heights are approximate."
     },
     {
       "id": "evershade-weald",

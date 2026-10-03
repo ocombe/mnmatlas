@@ -152,6 +152,66 @@
    "arrow": "north",
    "toMap": "faelindral",
    "toPlace": "ramp-01-down"
+  },
+  {
+   "id": "eastern-cliff-bridge",
+   "name": "Eastern cliff bridge to Faelindral",
+   "x": 2510,
+   "y": 2118,
+   "kind": "exit",
+   "priority": 70,
+   "minZoom": 3,
+   "arrow": "north",
+   "toMap": "faelindral",
+   "toPlace": "ramp-02-down"
+  },
+  {
+   "id": "north-cliff-stairway",
+   "name": "North cliff stairway to Faelindral",
+   "x": 2728,
+   "y": 1165,
+   "kind": "exit",
+   "priority": 70,
+   "minZoom": 3,
+   "arrow": "north",
+   "toMap": "faelindral",
+   "toPlace": "ramp-03-down"
+  },
+  {
+   "id": "southeast-cliff-bridge",
+   "name": "Southeast cliff bridge to Faelindral",
+   "x": 2966,
+   "y": 2733,
+   "kind": "exit",
+   "priority": 70,
+   "minZoom": 3,
+   "arrow": "north",
+   "toMap": "faelindral",
+   "toPlace": "ramp-04-down"
+  },
+  {
+   "id": "river-bridge-west",
+   "name": "River bridge to Faelindral (west)",
+   "x": 2921,
+   "y": 2034,
+   "kind": "exit",
+   "priority": 70,
+   "minZoom": 3,
+   "arrow": "north",
+   "toMap": "faelindral",
+   "toPlace": "ramp-05-down"
+  },
+  {
+   "id": "river-bridge-east",
+   "name": "River bridge to Faelindral (east)",
+   "x": 3681,
+   "y": 2123,
+   "kind": "exit",
+   "priority": 70,
+   "minZoom": 3,
+   "arrow": "north",
+   "toMap": "faelindral",
+   "toPlace": "ramp-06-down"
   }
  ],
  "trainers": []

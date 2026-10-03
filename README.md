@@ -38,15 +38,10 @@ Public settings live in `config.js`; empty values disable their features. See [S
 Credits and licences
 --------------------
 
-Faelindral opens on Platforms, with Ground available from the level buttons.
-Simplified view: platform layout, distances and heights are approximate.
-The Platforms button, map subtitle, parchment note, field guide and About
-identify this simplified view. Ground retains its existing presentation.
-The two charts use different layouts: switching views fits the destination;
-landing arrows open the matching landing. Platforms includes community place
-names, guild badges, amenities, tradeskills, notable NPCs and district vendor
-lists. Temple Lift's upper landing is unconfirmed, so it has no switch arrow.
-There are no platform hover outlines or dotted cutouts.
+Faelindral shows the city's platforms in a simplified view: platform layout,
+distances and heights are approximate. Its forest floor is the Evershade Weald
+map: every lift and stairway on either map links to the matching landing on the
+other. Temple Lift's lower landing is unconfirmed, so it has no link.
 
 The Platforms artwork is adapted from
 [Maggot's Faelindral map](https://monstersandmemories.miraheze.org/wiki/File:Faelindral_V2.jpg)
@@ -58,8 +53,12 @@ Faelindral place names, guilds, amenities and tradeskill locations are adapted
 from [Maggot's Faelindral wiki map](https://monstersandmemories.miraheze.org/wiki/File:Faelindral_V2.jpg)
 under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 The adapted datasets carry the same licence. Locations and platform names are
-approximate; ARC/FTR is shown as ARC/WAR. Marker and label positions can be
-adjusted with `?align=1` and exported for review.
+approximate; ARC/FTR is shown as ARC/WAR.
+
+Evershade Weald place names, caves, creature camps and exits are adapted from
+[Nindaan's Evershade Weald wiki map](https://monstersandmemories.miraheze.org/wiki/File:Evershade_Weald_june_26.jpg)
+under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/); the adapted
+dataset carries the same licence. Locations are approximate.
 
 Underdocks place names and locations are adapted from [Keirvan's bottom floor wiki map](https://monstersandmemories.miraheze.org/wiki/File:UnderdocksBottomFloorCity.png)
 under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).

@@ -1,728 +1,470 @@
 [
-  {
-    "id": "wiki-10",
-    "name": "Stable",
-    "category": "Stable",
-    "x": 569.49,
-    "y": 841.61,
-    "level": "ground",
-    "approximate": true,
-    "note": "Approximate location; to confirm in game.",
-    "minZoom": 2.75
-  },
-  {
-    "id": "wiki-11",
-    "name": "Shady merchant — west",
-    "category": "Shady merchant",
-    "x": 565,
-    "y": 938,
-    "level": "ground",
-    "approximate": true,
-    "note": "Approximate location; to confirm in game.",
-    "minZoom": 2.75
-  },
-  {
-    "id": "wiki-12",
-    "name": "Shady merchant — east",
-    "category": "Shady merchant",
-    "x": 911.33,
-    "y": 792.33,
-    "level": "ground",
-    "approximate": true,
-    "note": "Approximate location; to confirm in game.",
-    "minZoom": 2.75
-  },
-  {
-    "id": "wiki-13",
-    "name": "Respawn point",
-    "category": "Respawn point",
-    "x": 560,
-    "y": 931,
-    "level": "ground",
-    "approximate": true,
-    "note": "Approximate location; to confirm in game.",
-    "minZoom": 2.75
-  },
-  {
-    "id": "lift-traveler-s-up",
-    "name": "Traveler's Lift",
-    "category": "Lift",
-    "level": "ground",
-    "x": 595.13,
-    "y": 892.57,
-    "toLevel": "platforms",
-    "toMarker": "lift-traveler-s-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "lift-keeper-s-up",
-    "name": "Keeper's Lift",
-    "category": "Lift",
-    "level": "ground",
-    "x": 860.77,
-    "y": 705.0,
-    "toLevel": "platforms",
-    "toMarker": "lift-keeper-s-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "lift-pixie-up",
-    "name": "Pixie Lift",
-    "category": "Lift",
-    "level": "ground",
-    "x": 511.24,
-    "y": 725.89,
-    "toLevel": "platforms",
-    "toMarker": "lift-pixie-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "ramp-01-up",
-    "name": "South stairway",
-    "category": "Level connection",
-    "level": "ground",
-    "x": 679.37,
-    "y": 1114.04,
-    "toLevel": "platforms",
-    "toMarker": "ramp-01-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "ramp-02-up",
-    "name": "Eastern cliff bridge",
-    "category": "Level connection",
-    "level": "ground",
-    "x": 836.72,
-    "y": 759.37,
-    "toLevel": "platforms",
-    "toMarker": "ramp-02-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "ramp-03-up",
-    "name": "North cliff stairway",
-    "category": "Level connection",
-    "level": "ground",
-    "x": 910.42,
-    "y": 437.19,
-    "toLevel": "platforms",
-    "toMarker": "ramp-03-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "ramp-04-up",
-    "name": "Southeast cliff bridge",
-    "category": "Level connection",
-    "level": "ground",
-    "x": 990.96,
-    "y": 967.19,
-    "toLevel": "platforms",
-    "toMarker": "ramp-04-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "ramp-05-up",
-    "name": "River bridge — west",
-    "category": "Level connection",
-    "level": "ground",
-    "x": 975.78,
-    "y": 731.14,
-    "toLevel": "platforms",
-    "toMarker": "ramp-05-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "ramp-06-up",
-    "name": "River bridge — east",
-    "category": "Level connection",
-    "level": "ground",
-    "x": 1232.56,
-    "y": 760.94,
-    "toLevel": "platforms",
-    "toMarker": "ramp-06-down",
-    "direction": "up",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Click the arrow to switch views at this landing. Approximate connection; to confirm in game."
-  },
-  {
-    "id": "wiki-1",
-    "name": "Druid — Wayguard Garrison",
-    "category": "Class trainer",
-    "x": 1454,
-    "y": 730,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-2",
-    "name": "Archer · Warrior — Wayguard Garrison",
-    "category": "Class trainer",
-    "x": 1126,
-    "y": 870,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-3",
-    "name": "Ranger — Ranger's Rest",
-    "category": "Class trainer",
-    "x": 1808,
-    "y": 1176,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-4",
-    "name": "Beastlord — Quite Den",
-    "category": "Class trainer",
-    "x": 2124,
-    "y": 1112,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-5",
-    "name": "Shaman — The Balanced Branch",
-    "category": "Class trainer",
-    "x": 1860,
-    "y": 1654,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-6",
-    "name": "Bard · Rogue — Lambent Lantern",
-    "category": "Class trainer",
-    "x": 1462,
-    "y": 1790,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-7",
-    "name": "Bank — Heartwood Archives",
-    "category": "Bank",
-    "x": 1400,
-    "y": 1980,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-8",
-    "name": "Wayward Branch Inn",
-    "category": "Inn",
-    "x": 1204,
-    "y": 1672,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode. The Lower Tier vendor list also names a cook at the inn."
-  },
-  {
-    "id": "wiki-9",
-    "name": "Inn — Willows Whisper",
-    "category": "Inn",
-    "x": 1610,
-    "y": 1454,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-24",
-    "name": "Spinning — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1474.97,
-    "y": 990.57,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-25",
-    "name": "Tailoring — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1443.22,
-    "y": 1012.34,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-26",
-    "name": "Carpentry / Woodworking — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1475.87,
-    "y": 1025.03,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-27",
-    "name": "Carpentry / Woodworking — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1427.8,
-    "y": 1064.04,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-28",
-    "name": "Blacksmithing / Smelting — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1453.2,
-    "y": 1090.34,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-29",
-    "name": "Leatherworking — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1383.36,
-    "y": 1146.58,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-30",
-    "name": "Skinning / Tanning — Trader's Terrace",
-    "category": "Tradeskill",
-    "x": 1417.82,
-    "y": 1150.2,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-31",
-    "name": "Alchemy — Well of Order",
-    "category": "Tradeskill",
-    "x": 1329.84,
-    "y": 1416.87,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-32",
-    "name": "Herbalism — Well of Order",
-    "category": "Tradeskill",
-    "x": 1270.88,
-    "y": 1435.92,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-33",
-    "name": "First Aid — Well of Order",
-    "category": "Tradeskill",
-    "x": 1348.89,
-    "y": 1485.8,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-34",
-    "name": "(Dis)Enchanting — Wayward Branch Inn",
-    "category": "Tradeskill",
-    "x": 1154.78,
-    "y": 1538.41,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-35",
-    "name": "Jewelcrafting — Wayward Branch Inn",
-    "category": "Tradeskill",
-    "x": 1187.44,
-    "y": 1553.83,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-36",
-    "name": "Cooking — Wayward Branch Inn",
-    "category": "Tradeskill",
-    "x": 1278.14,
-    "y": 1615.51,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-37",
-    "name": "Brewing / Fermenting — Willows Whisper",
-    "category": "Tradeskill",
-    "x": 1649.12,
-    "y": 1444.08,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-38",
-    "name": "Fletching — Ranger's Rest",
-    "category": "Tradeskill",
-    "x": 1842.31,
-    "y": 1098.5,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-39",
-    "name": "Survival — Ranger's Rest",
-    "category": "Tradeskill",
-    "x": 1888.57,
-    "y": 1264.49,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-40",
-    "name": "Farming — Ranger's Rest",
-    "category": "Tradeskill",
-    "x": 1997.42,
-    "y": 1249.98,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-41",
-    "name": "Mining — Ranger's Rest",
-    "category": "Tradeskill",
-    "x": 1957.51,
-    "y": 1318.0,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-42",
-    "name": "Stone Cutting — Ranger's Rest",
-    "category": "Tradeskill",
-    "x": 1994.69,
-    "y": 1332.52,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-43",
-    "name": "Animal Taming — Quite Den",
-    "category": "Tradeskill",
-    "x": 2023.72,
-    "y": 1154.74,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-44",
-    "name": "Wilderness — Quite Den",
-    "category": "Tradeskill",
-    "x": 2188.8,
-    "y": 1173.79,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "wiki-45",
-    "name": "Lumberjacking — Quite Den",
-    "category": "Tradeskill",
-    "x": 2300.36,
-    "y": 1111.2,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
-  },
-  {
-    "id": "maggot-npc-01",
-    "name": "Notable NPC — Temple upper platform",
-    "category": "Notable NPC",
-    "x": 1718.02,
-    "y": 629.28,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-02",
-    "name": "Notable NPC — Pixie platform",
-    "category": "Notable NPC",
-    "x": 711.22,
-    "y": 812.44,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-03",
-    "name": "Notable NPC — Wayguard Garrison",
-    "category": "Notable NPC",
-    "x": 1300.72,
-    "y": 883.4,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-04",
-    "name": "Notable NPC — Quite Den court",
-    "category": "Notable NPC",
-    "x": 2193.96,
-    "y": 945.5,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-05",
-    "name": "Notable NPC — Willows Whisper",
-    "category": "Notable NPC",
-    "x": 1483.68,
-    "y": 1450.96,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-06",
-    "name": "Notable NPC — The Balanced Branch",
-    "category": "Notable NPC",
-    "x": 1843.8,
-    "y": 1594.96,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-07",
-    "name": "Notable NPC — Wayward Branch Inn",
-    "category": "Notable NPC",
-    "x": 1227.0,
-    "y": 1625.24,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-08",
-    "name": "Notable NPC — Heartwood Archives",
-    "category": "Notable NPC",
-    "x": 1433.8,
-    "y": 1961.66,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "maggot-npc-09",
-    "name": "Notable NPC — Lower Tier south platform",
-    "category": "Notable NPC",
-    "x": 1282.32,
-    "y": 2494.88,
-    "level": "platforms",
-    "approximate": true,
-    "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
-  },
-  {
-    "id": "vendors-traders-terrace",
-    "name": "Vendors — Trader's Terrace",
-    "category": "Vendor",
-    "level": "platforms",
-    "x": 1520,
-    "y": 1268,
-    "approximate": true,
-    "note": "Bags and packs; cloth armour; adventurer gear; used weapons; used armour. Listed for this district on Maggot's map; individual stall positions are not marked."
-  },
-  {
-    "id": "vendors-lower-tier",
-    "name": "Vendors — Lower Tier",
-    "category": "Vendor",
-    "level": "platforms",
-    "x": 1360,
-    "y": 2188,
-    "approximate": true,
-    "note": "Grocer; butcher; scrap metal; cook (at inn); barkeep (by stage). Listed for this district on Maggot's map; individual stall positions are not marked."
-  },
-  {
-    "id": "lift-traveler-s-down",
-    "name": "Traveler's Lift",
-    "category": "Lift",
-    "level": "platforms",
-    "x": 1034,
-    "y": 1964,
-    "toLevel": "ground",
-    "toMarker": "lift-traveler-s-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "lift-keeper-s-down",
-    "name": "Keeper's Lift",
-    "category": "Lift",
-    "level": "platforms",
-    "x": 2020,
-    "y": 886,
-    "toLevel": "ground",
-    "toMarker": "lift-keeper-s-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "lift-pixie-down",
-    "name": "Pixie Lift",
-    "category": "Lift",
-    "level": "platforms",
-    "x": 552,
-    "y": 852,
-    "toLevel": "ground",
-    "toMarker": "lift-pixie-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "ramp-01-down",
-    "name": "South stairway",
-    "category": "Level connection",
-    "level": "platforms",
-    "x": 1298,
-    "y": 2660,
-    "toLevel": "ground",
-    "toMarker": "ramp-01-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "ramp-02-down",
-    "name": "Eastern cliff bridge",
-    "category": "Level connection",
-    "level": "platforms",
-    "x": 2216,
-    "y": 1592,
-    "toLevel": "ground",
-    "toMarker": "ramp-02-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "ramp-03-down",
-    "name": "North cliff stairway",
-    "category": "Level connection",
-    "level": "platforms",
-    "x": 1720,
-    "y": 134,
-    "toLevel": "ground",
-    "toMarker": "ramp-03-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "ramp-04-down",
-    "name": "Southeast cliff bridge",
-    "category": "Level connection",
-    "level": "platforms",
-    "x": 2490,
-    "y": 1676,
-    "toLevel": "ground",
-    "toMarker": "ramp-04-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "ramp-05-down",
-    "name": "River bridge — west",
-    "category": "Level connection",
-    "level": "platforms",
-    "x": 2482,
-    "y": 924,
-    "toLevel": "ground",
-    "toMarker": "ramp-05-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "ramp-06-down",
-    "name": "River bridge — east",
-    "category": "Level connection",
-    "level": "platforms",
-    "x": 2712,
-    "y": 920,
-    "toLevel": "ground",
-    "toMarker": "ramp-06-up",
-    "direction": "down",
-    "switchOnClick": true,
-    "approximate": true,
-    "note": "Switch to the matching Ground landing. Approximate landing on this map; adjustable in alignment mode."
-  },
-  {
-    "id": "temple-lift",
-    "name": "Temple Lift",
-    "category": "Lift",
-    "level": "platforms",
-    "x": 1542,
-    "y": 942,
-    "approximate": true,
-    "note": "Named lift on Maggot's map. Upper landing unconfirmed; no view-switch arrow."
-  }
+ {
+  "id": "wiki-1",
+  "name": "Druid — Wayguard Garrison",
+  "category": "Class trainer",
+  "x": 1454,
+  "y": 730,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-2",
+  "name": "Archer · Warrior — Wayguard Garrison",
+  "category": "Class trainer",
+  "x": 1126,
+  "y": 870,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-3",
+  "name": "Ranger — Ranger's Rest",
+  "category": "Class trainer",
+  "x": 1808,
+  "y": 1176,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-4",
+  "name": "Beastlord — Quite Den",
+  "category": "Class trainer",
+  "x": 2124,
+  "y": 1112,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-5",
+  "name": "Shaman — The Balanced Branch",
+  "category": "Class trainer",
+  "x": 1860,
+  "y": 1654,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-6",
+  "name": "Bard · Rogue — Lambent Lantern",
+  "category": "Class trainer",
+  "x": 1462,
+  "y": 1790,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-7",
+  "name": "Bank — Heartwood Archives",
+  "category": "Bank",
+  "x": 1400,
+  "y": 1980,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-8",
+  "name": "Wayward Branch Inn",
+  "category": "Inn",
+  "x": 1204,
+  "y": 1672,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode. The Lower Tier vendor list also names a cook at the inn."
+ },
+ {
+  "id": "wiki-9",
+  "name": "Inn — Willows Whisper",
+  "category": "Inn",
+  "x": 1610,
+  "y": 1454,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-24",
+  "name": "Spinning — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1474.97,
+  "y": 990.57,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-25",
+  "name": "Tailoring — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1443.22,
+  "y": 1012.34,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-26",
+  "name": "Carpentry / Woodworking — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1475.87,
+  "y": 1025.03,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-27",
+  "name": "Carpentry / Woodworking — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1427.8,
+  "y": 1064.04,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-28",
+  "name": "Blacksmithing / Smelting — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1453.2,
+  "y": 1090.34,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-29",
+  "name": "Leatherworking — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1383.36,
+  "y": 1146.58,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-30",
+  "name": "Skinning / Tanning — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1417.82,
+  "y": 1150.2,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-31",
+  "name": "Alchemy — Well of Order",
+  "category": "Tradeskill",
+  "x": 1329.84,
+  "y": 1416.87,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-32",
+  "name": "Herbalism — Well of Order",
+  "category": "Tradeskill",
+  "x": 1270.88,
+  "y": 1435.92,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-33",
+  "name": "First Aid — Well of Order",
+  "category": "Tradeskill",
+  "x": 1348.89,
+  "y": 1485.8,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-34",
+  "name": "(Dis)Enchanting — Wayward Branch Inn",
+  "category": "Tradeskill",
+  "x": 1154.78,
+  "y": 1538.41,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-35",
+  "name": "Jewelcrafting — Wayward Branch Inn",
+  "category": "Tradeskill",
+  "x": 1187.44,
+  "y": 1553.83,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-36",
+  "name": "Cooking — Wayward Branch Inn",
+  "category": "Tradeskill",
+  "x": 1278.14,
+  "y": 1615.51,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-37",
+  "name": "Brewing / Fermenting — Willows Whisper",
+  "category": "Tradeskill",
+  "x": 1649.12,
+  "y": 1444.08,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-38",
+  "name": "Fletching — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1842.31,
+  "y": 1098.5,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-39",
+  "name": "Survival — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1888.57,
+  "y": 1264.49,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-40",
+  "name": "Farming — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1997.42,
+  "y": 1249.98,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-41",
+  "name": "Mining — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1957.51,
+  "y": 1318.0,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-42",
+  "name": "Stone Cutting — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1994.69,
+  "y": 1332.52,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-43",
+  "name": "Animal Taming — Quite Den",
+  "category": "Tradeskill",
+  "x": 2023.72,
+  "y": 1154.74,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-44",
+  "name": "Wilderness — Quite Den",
+  "category": "Tradeskill",
+  "x": 2188.8,
+  "y": 1173.79,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "wiki-45",
+  "name": "Lumberjacking — Quite Den",
+  "category": "Tradeskill",
+  "x": 2300.36,
+  "y": 1111.2,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+ },
+ {
+  "id": "maggot-npc-01",
+  "name": "Notable NPC — Temple upper platform",
+  "category": "Notable NPC",
+  "x": 1718.02,
+  "y": 629.28,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-02",
+  "name": "Notable NPC — Pixie platform",
+  "category": "Notable NPC",
+  "x": 711.22,
+  "y": 812.44,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-03",
+  "name": "Notable NPC — Wayguard Garrison",
+  "category": "Notable NPC",
+  "x": 1300.72,
+  "y": 883.4,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-04",
+  "name": "Notable NPC — Quite Den court",
+  "category": "Notable NPC",
+  "x": 2193.96,
+  "y": 945.5,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-05",
+  "name": "Notable NPC — Willows Whisper",
+  "category": "Notable NPC",
+  "x": 1483.68,
+  "y": 1450.96,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-06",
+  "name": "Notable NPC — The Balanced Branch",
+  "category": "Notable NPC",
+  "x": 1843.8,
+  "y": 1594.96,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-07",
+  "name": "Notable NPC — Wayward Branch Inn",
+  "category": "Notable NPC",
+  "x": 1227.0,
+  "y": 1625.24,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-08",
+  "name": "Notable NPC — Heartwood Archives",
+  "category": "Notable NPC",
+  "x": 1433.8,
+  "y": 1961.66,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-09",
+  "name": "Notable NPC — Lower Tier south platform",
+  "category": "Notable NPC",
+  "x": 1282.32,
+  "y": 2494.88,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "vendors-traders-terrace",
+  "name": "Vendors — Trader's Terrace",
+  "category": "Vendor",
+  "x": 1520,
+  "y": 1268,
+  "approximate": true,
+  "note": "Bags and packs; cloth armour; adventurer gear; used weapons; used armour. Listed for this district on Maggot's map; individual stall positions are not marked."
+ },
+ {
+  "id": "vendors-lower-tier",
+  "name": "Vendors — Lower Tier",
+  "category": "Vendor",
+  "x": 1360,
+  "y": 2188,
+  "approximate": true,
+  "note": "Grocer; butcher; scrap metal; cook (at inn); barkeep (by stage). Listed for this district on Maggot's map; individual stall positions are not marked."
+ },
+ {
+  "id": "lift-traveler-s-down",
+  "name": "Traveler's Lift",
+  "category": "Lift",
+  "x": 1034,
+  "y": 1964,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "lift-keeper-s-down",
+  "name": "Keeper's Lift",
+  "category": "Lift",
+  "x": 2020,
+  "y": 886,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "lift-pixie-down",
+  "name": "Pixie Lift",
+  "category": "Lift",
+  "x": 552,
+  "y": 852,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "ramp-01-down",
+  "name": "South stairway",
+  "category": "Level connection",
+  "x": 1298,
+  "y": 2660,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "ramp-02-down",
+  "name": "Eastern cliff bridge",
+  "category": "Level connection",
+  "x": 2216,
+  "y": 1592,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "ramp-03-down",
+  "name": "North cliff stairway",
+  "category": "Level connection",
+  "x": 1720,
+  "y": 134,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "ramp-04-down",
+  "name": "Southeast cliff bridge",
+  "category": "Level connection",
+  "x": 2490,
+  "y": 1676,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "ramp-05-down",
+  "name": "River bridge — west",
+  "category": "Level connection",
+  "x": 2482,
+  "y": 924,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "ramp-06-down",
+  "name": "River bridge — east",
+  "category": "Level connection",
+  "x": 2712,
+  "y": 920,
+  "approximate": true,
+  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+ },
+ {
+  "id": "temple-lift",
+  "name": "Temple Lift",
+  "category": "Lift",
+  "x": 1542,
+  "y": 942,
+  "approximate": true,
+  "note": "Named lift on Maggot's map. Upper landing unconfirmed; no view-switch arrow."
+ }
 ]

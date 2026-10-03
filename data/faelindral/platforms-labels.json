@@ -6,7 +6,6 @@
     {
       "id": "sentinel-s-terrace",
       "name": "Sentinel's Terrace",
-      "level": "platforms",
       "x": 1254,
       "y": 572,
       "kind": "building",
@@ -19,7 +18,6 @@
     {
       "id": "wayguard-garrison",
       "name": "Wayguard Garrison",
-      "level": "platforms",
       "x": 1146,
       "y": 682,
       "kind": "building",
@@ -32,7 +30,6 @@
     {
       "id": "pixie-lift",
       "name": "Pixie Lift",
-      "level": "platforms",
       "x": 506,
       "y": 824,
       "kind": "building",
@@ -45,7 +42,6 @@
     {
       "id": "temple-lift",
       "name": "Temple Lift",
-      "level": "platforms",
       "x": 1540,
       "y": 916,
       "kind": "building",
@@ -58,7 +54,6 @@
     {
       "id": "keeper-s-lift",
       "name": "Keeper's Lift",
-      "level": "platforms",
       "x": 2020,
       "y": 822,
       "kind": "building",
@@ -71,7 +66,6 @@
     {
       "id": "traveler-s-lift",
       "name": "Traveler's Lift",
-      "level": "platforms",
       "x": 958,
       "y": 1858,
       "kind": "building",
@@ -84,7 +78,6 @@
     {
       "id": "trader-s-terrace",
       "name": "Trader's Terrace",
-      "level": "platforms",
       "x": 1514,
       "y": 1266,
       "kind": "building",
@@ -97,7 +90,6 @@
     {
       "id": "ranger-s-rest",
       "name": "Ranger's Rest",
-      "level": "platforms",
       "x": 1804,
       "y": 1144,
       "kind": "building",
@@ -110,7 +102,6 @@
     {
       "id": "quite-den",
       "name": "Quite Den",
-      "level": "platforms",
       "x": 2144,
       "y": 1062,
       "kind": "building",
@@ -123,7 +114,6 @@
     {
       "id": "well-of-order",
       "name": "Well of Order",
-      "level": "platforms",
       "x": 1222,
       "y": 1392,
       "kind": "building",
@@ -136,7 +126,6 @@
     {
       "id": "willows-whisper",
       "name": "Willows Whisper",
-      "level": "platforms",
       "x": 1600,
       "y": 1396,
       "kind": "building",
@@ -149,7 +138,6 @@
     {
       "id": "wayward-branch-inn",
       "name": "Wayward Branch Inn",
-      "level": "platforms",
       "x": 1064,
       "y": 1684,
       "kind": "building",
@@ -162,7 +150,6 @@
     {
       "id": "the-balanced-branch",
       "name": "The Balanced Branch",
-      "level": "platforms",
       "x": 1826,
       "y": 1640,
       "kind": "building",
@@ -175,7 +162,6 @@
     {
       "id": "lambent-lantern",
       "name": "Lambent Lantern",
-      "level": "platforms",
       "x": 1760,
       "y": 1748,
       "kind": "building",
@@ -188,7 +174,6 @@
     {
       "id": "heartwood-archives",
       "name": "Heartwood Archives",
-      "level": "platforms",
       "x": 1638,
       "y": 2000,
       "kind": "building",
@@ -201,7 +186,6 @@
     {
       "id": "lower-tier",
       "name": "Lower Tier",
-      "level": "platforms",
       "x": 1352,
       "y": 2190,
       "kind": "building",
@@ -214,7 +198,6 @@
     {
       "id": "weald-travelers-lift",
       "name": "down to Evershade Weald",
-      "level": "platforms",
       "x": 1034,
       "y": 2010,
       "kind": "exit",
@@ -227,7 +210,6 @@
     {
       "id": "weald-keepers-lift",
       "name": "down to Evershade Weald",
-      "level": "platforms",
       "x": 2020,
       "y": 932,
       "kind": "exit",
@@ -240,7 +222,6 @@
     {
       "id": "weald-pixie-lift",
       "name": "down to Evershade Weald",
-      "level": "platforms",
       "x": 552,
       "y": 898,
       "kind": "exit",
@@ -253,7 +234,6 @@
     {
       "id": "weald-south-stairway",
       "name": "down to Evershade Weald",
-      "level": "platforms",
       "x": 1298,
       "y": 2706,
       "kind": "exit",
@@ -262,6 +242,66 @@
       "arrow": "south",
       "toMap": "evershade-weald",
       "toPlace": "south-stairway"
+    },
+    {
+      "id": "weald-eastern-cliff-bridge",
+      "name": "down to Evershade Weald",
+      "x": 2216,
+      "y": 1638,
+      "kind": "exit",
+      "priority": 70,
+      "minZoom": 2.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "eastern-cliff-bridge"
+    },
+    {
+      "id": "weald-north-cliff-stairway",
+      "name": "down to Evershade Weald",
+      "x": 1720,
+      "y": 180,
+      "kind": "exit",
+      "priority": 70,
+      "minZoom": 2.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "north-cliff-stairway"
+    },
+    {
+      "id": "weald-southeast-cliff-bridge",
+      "name": "down to Evershade Weald",
+      "x": 2490,
+      "y": 1722,
+      "kind": "exit",
+      "priority": 70,
+      "minZoom": 2.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "southeast-cliff-bridge"
+    },
+    {
+      "id": "weald-river-bridge-west",
+      "name": "down to Evershade Weald",
+      "x": 2482,
+      "y": 970,
+      "kind": "exit",
+      "priority": 70,
+      "minZoom": 2.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "river-bridge-west"
+    },
+    {
+      "id": "weald-river-bridge-east",
+      "name": "down to Evershade Weald",
+      "x": 2712,
+      "y": 966,
+      "kind": "exit",
+      "priority": 70,
+      "minZoom": 2.5,
+      "arrow": "south",
+      "toMap": "evershade-weald",
+      "toPlace": "river-bridge-east"
     }
   ],
   "trainers": [
@@ -275,8 +315,7 @@
       "building": "Wayguard Garrison",
       "id": "wiki-1",
       "x": 1454,
-      "y": 730,
-      "level": "platforms"
+      "y": 730
     },
     {
       "abbreviations": [
@@ -290,8 +329,7 @@
       "building": "Wayguard Garrison",
       "id": "wiki-2",
       "x": 1126,
-      "y": 870,
-      "level": "platforms"
+      "y": 870
     },
     {
       "abbreviations": [
@@ -303,8 +341,7 @@
       "building": "Ranger's Rest",
       "id": "wiki-3",
       "x": 1808,
-      "y": 1176,
-      "level": "platforms"
+      "y": 1176
     },
     {
       "abbreviations": [
@@ -316,8 +353,7 @@
       "building": "Quite Den",
       "id": "wiki-4",
       "x": 2124,
-      "y": 1112,
-      "level": "platforms"
+      "y": 1112
     },
     {
       "abbreviations": [
@@ -329,8 +365,7 @@
       "building": "The Balanced Branch",
       "id": "wiki-5",
       "x": 1860,
-      "y": 1654,
-      "level": "platforms"
+      "y": 1654
     },
     {
       "abbreviations": [
@@ -344,8 +379,7 @@
       "building": "Lambent Lantern",
       "id": "wiki-6",
       "x": 1462,
-      "y": 1790,
-      "level": "platforms"
+      "y": 1790
     }
   ]
 }
