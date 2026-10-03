@@ -339,7 +339,9 @@
       "x": 424,
       "y": 1463,
       "arrow": "west",
-      "tier": "exit"
+      "tier": "exit",
+      "toMap": "shaded-dunes",
+      "toPlace": "to-night-harbor"
     },
     {
       "id": "place-33",
