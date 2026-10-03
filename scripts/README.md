@@ -1,5 +1,11 @@
 # Publish approved suggestions
 
+## On GitHub
+
+The **Apply approved suggestions** workflow (`.github/workflows/apply-suggestions.yml`) does this for you: it applies every approved suggestion, saves the data changes to `main` and publishes the site. It runs once a day and whenever you choose **Run workflow** in the repository's Actions tab; tick the dry-run box to only check the approved suggestions. It needs the service key as the `SUPABASE_SERVICE_KEY` repository secret (Settings → Secrets and variables → Actions). If a run fails after writing data, the written data is still saved, and running it again finishes the batch. Do not run the local publisher at the same time.
+
+## Locally
+
 Requires Node 18 or newer, with no dependencies. Run from any directory; data paths are resolved from the script's atlas folder. First review suggestions in the atlas, then supply the project URL and service key **only in your local environment**. Never save the service key in `config.js`, a site file, or git.
 
 PowerShell:
@@ -23,7 +29,7 @@ The dry run validates every approved row and prints the proposed summary without
 
 The script preserves each JSON file's indentation, line endings and trailing newline. It validates the complete batch before writing, then sets applied suggestions to `published`. Re-running after a failed status update recognizes existing IDs and positions. A move whose published starting point has changed stops the run: review that suggestion again before applying it. Two different approved moves for the same target may therefore require another review. Do not run two publishers concurrently.
 
-Review the resulting data diff and preview the atlas before committing and publishing through the usual GitHub Pages workflow. The script does not commit or deploy, and never prints the service key. If files were written but a backend update failed, keep those files and rerun before accepting newer suggestions.
+Review the resulting data diff and preview the atlas before committing and pushing to `main`, which publishes the site. The script does not commit or deploy, and never prints the service key. If files were written but a backend update failed, keep those files and rerun before accepting newer suggestions.
 
 Run `node scripts/test-apply-approved.mjs` for local publisher checks against a mock service; it uses disposable fixture files inside this folder and leaves map data unchanged.
 
