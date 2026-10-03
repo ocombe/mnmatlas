@@ -6,12 +6,14 @@ import {fileURLToPath} from 'node:url';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),site='https://www.mnmatlas.com/';
 const html=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
+// Bump a map's card version after redrawing its card so link previews refresh.
+const cardVersions={'sungreet-strand':2};
 const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
 for(const m of registry.maps){
  if(!/^[a-z0-9-]{1,80}$/.test(m.id))throw new Error('Unexpected map id '+m.id);
  const card='assets/cards/'+m.id+'.jpg';
  try{await access(resolve(root,card));}catch{throw new Error('Missing '+card+'; run make_cards.py first.');}
- const title=html(m.title+' · MnM Atlas'),description=html(m.description),image=site+card+'?v=1',target='../?map='+m.id;
+ const title=html(m.title+' · MnM Atlas'),description=html(m.description),image=site+card+'?v='+(cardVersions[m.id]||1),target='../?map='+m.id;
  const page=`<!doctype html>
 <html lang="en">
 <head>
