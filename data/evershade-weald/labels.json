@@ -6,8 +6,8 @@
   {
    "id": "evershade-weald",
    "name": "Evershade Weald",
-   "x": 3078,
-   "y": 2665,
+   "x": 2993,
+   "y": 2416,
    "kind": "district",
    "priority": 100,
    "minZoom": 0.5
@@ -15,8 +15,8 @@
   {
    "id": "lookout-cave",
    "name": "Lookout Cave",
-   "x": 1061,
-   "y": 1990,
+   "x": 976,
+   "y": 1741,
    "kind": "district",
    "priority": 70,
    "minZoom": 2.5
@@ -24,8 +24,8 @@
   {
    "id": "druid-ring",
    "name": "Druid Ring",
-   "x": 1327,
-   "y": 2345,
+   "x": 1242,
+   "y": 2096,
    "kind": "building",
    "priority": 70,
    "minZoom": 2.5
@@ -33,8 +33,8 @@
   {
    "id": "mushroom-cave",
    "name": "Mushroom cave",
-   "x": 2309,
-   "y": 2286,
+   "x": 2224,
+   "y": 2037,
    "kind": "district",
    "priority": 70,
    "minZoom": 2.5
@@ -42,8 +42,8 @@
   {
    "id": "wolf-cave",
    "name": "Wolf Cave",
-   "x": 582,
-   "y": 3374,
+   "x": 497,
+   "y": 3125,
    "kind": "district",
    "priority": 70,
    "minZoom": 2.5
@@ -51,8 +51,8 @@
   {
    "id": "orc-cave",
    "name": "Orc Cave",
-   "x": 3439,
-   "y": 3292,
+   "x": 3354,
+   "y": 3043,
    "kind": "district",
    "priority": 70,
    "minZoom": 2.5
@@ -60,8 +60,8 @@
   {
    "id": "waterfall-cave",
    "name": "Cave behind the waterfall",
-   "x": 4134,
-   "y": 2162,
+   "x": 4049,
+   "y": 1913,
    "kind": "district",
    "priority": 70,
    "minZoom": 2.5
@@ -69,35 +69,17 @@
   {
    "id": "fake-cave-wall",
    "name": "Fake cave wall",
-   "x": 4069,
-   "y": 3715,
+   "x": 3984,
+   "y": 3466,
    "kind": "building",
    "priority": 50,
    "minZoom": 3.5
   },
   {
-   "id": "dead-end-north-east",
-   "name": "Dead end",
-   "x": 5710,
-   "y": 816,
-   "kind": "building",
-   "priority": 40,
-   "minZoom": 3.5
-  },
-  {
-   "id": "dead-end-south-west",
-   "name": "Dead end",
-   "x": 1008,
-   "y": 4350,
-   "kind": "building",
-   "priority": 40,
-   "minZoom": 3.5
-  },
-  {
    "id": "to-glinting-hollow",
    "name": "to Glinting Hollow",
-   "x": 816,
-   "y": 1733,
+   "x": 731,
+   "y": 1484,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
@@ -106,8 +88,8 @@
   {
    "id": "to-keepers-bight",
    "name": "to Keeper's Bight",
-   "x": 2501,
-   "y": 4454,
+   "x": 2475,
+   "y": 3811,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
@@ -116,8 +98,8 @@
   {
    "id": "to-blacktide-bay",
    "name": "Lift to Blacktide Bay",
-   "x": 4231,
-   "y": 3626,
+   "x": 4146,
+   "y": 3377,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
@@ -126,8 +108,8 @@
   {
    "id": "travelers-lift",
    "name": "Traveler's Lift to Faelindral",
-   "x": 1880,
-   "y": 2762,
+   "x": 1795,
+   "y": 2513,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
@@ -138,8 +120,8 @@
   {
    "id": "keepers-lift",
    "name": "Keeper's Lift to Faelindral",
-   "x": 2667,
-   "y": 2206,
+   "x": 2582,
+   "y": 1957,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
@@ -150,8 +132,8 @@
   {
    "id": "pixie-lift",
    "name": "Pixie Lift to Faelindral",
-   "x": 1632,
-   "y": 2268,
+   "x": 1547,
+   "y": 2019,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
@@ -162,8 +144,8 @@
   {
    "id": "south-stairway",
    "name": "Stairway to Faelindral",
-   "x": 2129,
-   "y": 3416,
+   "x": 2044,
+   "y": 3167,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
