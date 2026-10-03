@@ -324,34 +324,6 @@
     "switchOnClick": true
   },
   {
-    "id": "chapel-secret-from",
-    "level": "floor-2",
-    "x": 1161.76,
-    "y": 2222.96,
-    "category": "Stairs",
-    "approximate": true,
-    "note": "Approximate; confirm in game.",
-    "toLevel": "floor-3",
-    "toMarker": "chapel-secret-to",
-    "direction": "down",
-    "name": "Passage down to the ossuary and Bone Construct room",
-    "switchOnClick": true
-  },
-  {
-    "id": "chapel-secret-to",
-    "level": "floor-3",
-    "x": 1184.64,
-    "y": 2323.07,
-    "category": "Stairs",
-    "approximate": true,
-    "note": "Approximate; confirm in game.",
-    "toLevel": "floor-2",
-    "toMarker": "chapel-secret-from",
-    "direction": "up",
-    "name": "Passage up to the fork halls and chapel",
-    "switchOnClick": true
-  },
-  {
     "id": "quartermaster-boothroy",
     "name": "Quartermaster Boothroy",
     "category": "Notable NPC",
