@@ -1,7 +1,73 @@
 {
   "version": 1,
-  "defaultMap": "night-harbor",
+  "defaultMap": "world",
   "maps": [
+    {
+      "id": "world",
+      "title": "World map",
+      "subtitle": "The known lands",
+      "cartoucheKicker": "Monsters & Memories",
+      "breadcrumb": "Monsters & Memories / World map",
+      "description": "The world of Monsters & Memories in one hand-drawn map: hover a zone to see it, click a charted zone to open its map.",
+      "width": 2672,
+      "height": 2512,
+      "minZoom": 0,
+      "maxNativeZoom": 4,
+      "maxZoom": 5,
+      "coordinateZoom": 4,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/world/{z}/{x}/{y}.webp",
+      "markersFile": "data/world/markers.json",
+      "labelsFile": "data/world/labels.json",
+      "hiddenAreasFile": null,
+      "zonesFile": "data/world/zones.json",
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 2
+      },
+      "extraCategories": {
+        "Dungeon": [
+          "⛫",
+          "#5a3b1e"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Zone connections after the Monsters and Memories Wiki · zone shapes and lines approximate",
+        "sourceTitle": "Monsters and Memories Wiki: Zones & World Map",
+        "sourceUrl": "https://monstersandmemories.wiki/zones",
+        "license": "Used with the wiki's permission",
+        "licenseUrl": "https://monstersandmemories.wiki/zones",
+        "changes": "Which zones connect follows the wiki's zone list; shapes, positions and lines are drawn for this atlas and approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {},
+      "colourTilePath": "assets/tiles/world-colour/{z}/{x}/{y}.webp",
+      "entry": true,
+      "defaultLevel": "surface",
+      "levels": [
+        {
+          "id": "surface",
+          "title": "Surface",
+          "tilePath": "assets/tiles/world/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "deep",
+          "title": "The Deep",
+          "levelSubtitle": "Beneath the known lands",
+          "width": 2560,
+          "height": 2944,
+          "tileRevision": "v1",
+          "tilePath": "assets/tiles/world-deep/{z}/{x}/{y}.webp",
+          "colourTilePath": "assets/tiles/world-deep-colour/{z}/{x}/{y}.webp",
+          "zonesFile": "data/world/deep-zones.json",
+          "labelsFile": "data/world/deep-labels.json",
+          "markersFile": "data/world/deep-markers.json"
+        }
+      ]
+    },
     {
       "id": "night-harbor",
       "title": "Night Harbor",

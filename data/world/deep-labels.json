@@ -1,0 +1,47 @@
+{
+ "labels": [
+  {
+   "id": "zone-underdocks",
+   "name": "Underdocks",
+   "x": 1848,
+   "y": 1828,
+   "kind": "zone",
+   "priority": 100,
+   "toMap": "underdocks"
+  },
+  {
+   "id": "zone-caves-of-irem",
+   "name": "Caves of Irem",
+   "x": 988,
+   "y": 1908,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-great-cavern-sea",
+   "name": "Great Cavern Sea",
+   "x": 1168,
+   "y": 948,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-ail-vorith",
+   "name": "Ail'Vorith",
+   "x": 1888,
+   "y": 548,
+   "kind": "zone",
+   "priority": 100,
+   "toMap": "ail-vorith"
+  },
+  {
+   "id": "zone-rothold",
+   "name": "Rothold",
+   "x": 568,
+   "y": 2268,
+   "kind": "zone",
+   "priority": 60
+  }
+ ],
+ "trainers": []
+}

@@ -12,9 +12,11 @@ const isEmbed=embedded||new URLSearchParams(location.search).get('embed')==='1';
 document.body.classList.toggle('embed',isEmbed);
 // Each map lives at its own address (<site>/<map-id>/); older ?map= links still open and are rewritten.
 const siteRoot=new URL('./',document.currentScript?.src||document.baseURI);
-function mapAddress(id){return new URL(encodeURIComponent(id)+'/',siteRoot);}
+// The entry view (the world map) lives at the site root; every other map at /<map-id>/.
+function mapAddress(id){return registry?.maps.find(c=>c.id===id)?.entry?new URL(siteRoot.href):new URL(encodeURIComponent(id)+'/',siteRoot);}
 function mapIdOf(url){const first=url.pathname.startsWith(siteRoot.pathname)?url.pathname.slice(siteRoot.pathname.length).split('/')[0].toLowerCase():'';return registry.maps.some(c=>c.id===first)?first:url.searchParams.get('map')||registry.defaultMap;}
 const compact=()=>isEmbed||mobileLayout.matches;
+let disposeZones=()=>{};
 let registry,map,config,originals=[],personal=[],pins=new Map(),placeIndex=[],hiddenController;
 let enabled=new Set(Object.keys(categories)),showPins=true,draftPin=null,draft=null,statusTimer;
 let alignmentMode=false,editSnapshot=null,selectedAlignmentId=null,selectedAlignmentKind='marker',alignmentPositions={},alignmentLabelPositions={},publishedPositions=new Map(),publishedLabelPositions=new Map();
@@ -88,6 +90,7 @@ function pinIcon(m){
  const face=text('span','');face.style.setProperty('--pin',m.color||categories[m.category][1]);face.append(markerSymbol(m));
  return L.divIcon({className:'pin',html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
 }
+function openMap(id){const url=mapAddress(id),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);history.pushState({map:id},'',url);ownView=true;loadMap(id,new URL(url));}
 function drawMarkers(){
  for(const pin of pins.values())pin.remove();pins.clear();const list=$('results');list.replaceChildren();
  const matches=visibleMarkers();$('count').textContent=matches.length+' places';
@@ -97,10 +100,12 @@ function drawMarkers(){
   pin.atlasMinZoom=m.minZoom;
   // The hover tooltip shows the name; an aria-label (not a title) keeps it accessible without a second browser tooltip.
   pin.on('add',()=>pin.getElement()?.setAttribute('aria-label',m.name));
-  pin.on('click',()=>m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
+  // A marker that stands for another published map (a dungeon entrance on the world map) opens that map.
+  const opens=!alignmentMode&&typeof m.toMap==='string'&&registry.maps.find(c=>c.id===m.toMap);
+  pin.on('click',()=>opens?openMap(opens.id):m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(opens)pin.unbindPopup();if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
   if(!m.noteType)pin.bindTooltip(()=>text('span',m.name),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
   const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);
-  const label=text('span','');label.append(text('strong',m.name),text('small',noteKind(m)+(m.id.startsWith('personal-')?' · Personal note':'')));b.append(label);b.onclick=()=>choose(m);list.append(b);
+  const label=text('span','');label.append(text('strong',m.name),text('small',noteKind(m)+(m.id.startsWith('personal-')?' · Personal note':'')));b.append(label);b.onclick=()=>opens?openMap(opens.id):choose(m);list.append(b);
  }
  // Place names and hidden areas can be found even when their visual layer hides.
  const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
@@ -291,7 +296,7 @@ const levelsAligned=(a,b)=>a.width===b.width&&a.height===b.height&&a.coordinateZ
 async function fetchData(path,empty){if(path===null)return empty;if(!localPath(path))throw Error('Invalid local data path');const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw Error('Map data unavailable: '+path);return r.json();}
 function validateRegistry(data){
  if(data.version!==1||!Array.isArray(data.maps)||!data.maps.length||!data.maps.some(m=>m.id===data.defaultMap)||new Set(data.maps.map(m=>m.id)).size!==data.maps.length)throw Error('Invalid map registry');
- for(const c of data.maps){if(!/^[a-z0-9-]+$/.test(c.id)||!c.title||!c.description||![c.width,c.height,c.coordinateZoom,c.minZoom,c.maxZoom,c.maxNativeZoom,c.tileSize].every(Number.isFinite)||c.width<=0||c.height<=0||c.maxZoom<c.minZoom||!localPath(c.tilePath)||!localPath(c.markersFile)||!c.defaultView)throw Error('Invalid map configuration');}
+ for(const c of data.maps){if(!/^[a-z0-9-]+$/.test(c.id)||!c.title||!c.description||![c.width,c.height,c.coordinateZoom,c.minZoom,c.maxZoom,c.maxNativeZoom,c.tileSize].every(Number.isFinite)||c.width<=0||c.height<=0||c.maxZoom<c.minZoom||!localPath(c.tilePath)||!localPath(c.markersFile)||(c.zonesFile!=null&&!localPath(c.zonesFile))||(c.colourTilePath!=null&&!localPath(c.colourTilePath))||!c.defaultView)throw Error('Invalid map configuration');}
  for(const c of data.maps)if(c.levels){if(!Array.isArray(c.levels)||!c.levels.length||new Set(c.levels.map(l=>l.id)).size!==c.levels.length||!c.levels.some(l=>l.id===c.defaultLevel)||!c.levels.every(l=>/^[a-z0-9-]+$/.test(l.id)&&l.title&&localPath(l.tilePath)))throw Error('Invalid map levels');}
  for(const base of data.maps)for(const level of base.levels||[]){const c=levelConfig(base,level);if(![c.width,c.height,c.coordinateZoom,c.minZoom,c.maxZoom,c.maxNativeZoom,c.tileSize].every(Number.isFinite)||c.width<=0||c.height<=0||c.minZoom>c.maxNativeZoom||c.maxNativeZoom>c.maxZoom||!['markersFile','labelsFile','hiddenAreasFile'].every(k=>c[k]==null||localPath(c[k])))throw Error('Invalid level configuration');}
  return data;
@@ -313,8 +318,10 @@ async function loadMap(id,url=new URL(location.href),push=false){
    next.hiddenAreasFile===base.hiddenAreasFile?hidden:fetchData(next.hiddenAreasFile,{areas:[],routes:[]})]);
   if(serial!==loadSerial)return;
   if(!Array.isArray(markers)||!Array.isArray(labels.labels)||!Array.isArray(labels.trainers)||!Array.isArray(hidden.areas))throw Error('Invalid map feature data');
+  const zonesData=next.zonesFile?await fetchData(next.zonesFile,{zones:[],borders:[]}):null;
+  if(serial!==loadSerial)return;
   const keepEditing=alignmentMode||(!map&&url.searchParams.has('align'));if(alignmentMode)saveEdits();alignmentMode=false;editSnapshot=null;
-  disposeLabels();hiddenController?.dispose();map?.remove();pins.clear();map=null;
+  disposeLabels();hiddenController?.dispose();disposeZones();disposeZones=()=>{};map?.remove();pins.clear();map=null;
   config=next;categories={...allCategories,...(config.extraCategories||{})};originals=markers;labelData=labels;hiddenData=hidden;publishedPositions=new Map(originals.map(m=>[m.id,[m.x,m.y]]));publishedLabelPositions=new Map(labels.labels.map(r=>[r.id,[r.x,r.y]]));
   activePlace=null;sharedPin=null;cancelPlacement();if($('editor').open)closeEditor();$('search').value='';enabled=new Set(Object.keys(categories));showPins=true;updateCategoryButtons();
   document.body.classList.remove('aligning');$('edit-bar').hidden=true;restoreStorage();setupCategoryControls();updateTitles();
@@ -322,8 +329,8 @@ async function loadMap(id,url=new URL(location.href),push=false){
   const bounds=mapBounds();map.setMaxBounds(bounds);
   L.tileLayer(config.tilePath+'?v='+encodeURIComponent(config.tileRevision),{tileSize:config.tileSize,minZoom:config.minZoom,maxZoom:config.maxZoom,maxNativeZoom:config.maxNativeZoom,noWrap:true,bounds,keepBuffer:1,attribution:text('span',config.attribution.map).outerHTML}).on('tileerror',()=>status('A map tile could not load. Please reload.')).addTo(map);
   const currentHidden={...hiddenData};for(const key of ['areas','additionalAreas','routes','connections','destinations','levelStacks'])if(Array.isArray(hiddenData[key]))currentHidden[key]=hiddenData[key].filter(atLevel);
-  fitMap();disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);
-  buildPlaceIndex();refreshSearch();setPanel(!compact()&&desktopPanelOpen);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=false;$('edit-positions').hidden=false;updateAlignmentStatus();
+  fitMap();disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
+  buildPlaceIndex();refreshSearch();setPanel(!compact()&&desktopPanelOpen&&!config.entry);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=false;$('edit-positions').hidden=false;updateAlignmentStatus();
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});
   map.on('popupclose',()=>{if(!applyingView){activePlace=null;scheduleUrl();}});
@@ -418,7 +425,8 @@ function setupControls(){
  $('share').onclick=()=>copyLink();$('close-link').onclick=()=>$('link-dialog').close();
  $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{status('Fullscreen is unavailable. Open the atlas in its own tab, or allow fullscreen on the iframe.');}};
  document.addEventListener('fullscreenchange',()=>{$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');$('fullscreen').title=document.fullscreenElement?'Exit fullscreen':'Enter fullscreen';map?.invalidateSize({pan:true,animate:false});});
- for(const s of document.querySelectorAll('.map-select')){for(const c of registry.maps){const option=text('option',c.title);option.value=c.id;s.append(option);}s.onchange=()=>loadMap(s.value,new URL(location.href),true);}
+ // The world map is the entry view: listed first, then the zone maps as a group.
+ for(const s of document.querySelectorAll('.map-select')){const group=document.createElement('optgroup');group.label='Zone maps';for(const c of registry.maps){const option=text('option',c.title);option.value=c.id;(c.entry?s:group).append(option);}s.append(group);s.onchange=()=>loadMap(s.value,new URL(location.href),true);}
  window.addEventListener('popstate',()=>{const url=new URL(location.href);ownView=true;loadMap(mapIdOf(url),url);});
 }
 // Every publish refreshes each file's Last-Modified, so one small HEAD request spots a newer edition.

@@ -1,0 +1,110 @@
+[
+ {
+  "id": "dungeon-fallen-watch",
+  "name": "Fallen Watch",
+  "category": "Dungeon",
+  "x": 1706,
+  "y": 2381,
+  "note": "Dungeon entrance.",
+  "minZoom": 2.75
+ },
+ {
+  "id": "dungeon-ancient-crypt",
+  "name": "Ancient Crypt",
+  "category": "Dungeon",
+  "x": 1819,
+  "y": 2232,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ },
+ {
+  "id": "dungeon-wyrmsbane-tomb",
+  "name": "Wyrmsbane Tomb",
+  "category": "Dungeon",
+  "x": 2135,
+  "y": 2128,
+  "note": "Dungeon entrance.",
+  "minZoom": 2.75,
+  "toMap": "wyrmsbane-tomb"
+ },
+ {
+  "id": "dungeon-underdocks",
+  "name": "Underdocks",
+  "category": "Dungeon",
+  "x": 2327,
+  "y": 2203,
+  "note": "Dungeon entrance.",
+  "minZoom": 2.75,
+  "toMap": "underdocks"
+ },
+ {
+  "id": "dungeon-sewers",
+  "name": "Sewers",
+  "category": "Dungeon",
+  "x": 2266,
+  "y": 2247,
+  "note": "Dungeon entrance.",
+  "minZoom": 2.75
+ },
+ {
+  "id": "dungeon-infested-crypt",
+  "name": "Infested Crypt",
+  "category": "Dungeon",
+  "x": 1959,
+  "y": 2332,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ },
+ {
+  "id": "dungeon-grain-cellar",
+  "name": "Grain Cellar",
+  "category": "Dungeon",
+  "x": 2399,
+  "y": 1992,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ },
+ {
+  "id": "dungeon-blacktide-bay",
+  "name": "Blacktide Bay",
+  "category": "Dungeon",
+  "x": 1399,
+  "y": 542,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ },
+ {
+  "id": "dungeon-sunken-resort",
+  "name": "Sunken Resort",
+  "category": "Dungeon",
+  "x": 1959,
+  "y": 512,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ },
+ {
+  "id": "dungeon-grimtide-sanctum",
+  "name": "Grimtide Sanctum",
+  "category": "Dungeon",
+  "x": 359,
+  "y": 1252,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ },
+ {
+  "id": "dungeon-surukla",
+  "name": "Suruk'La",
+  "category": "Dungeon",
+  "x": 2079,
+  "y": 1792,
+  "note": "Dungeon entrance (approximate position).",
+  "minZoom": 2.75,
+  "approximate": true
+ }
+]

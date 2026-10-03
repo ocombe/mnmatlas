@@ -1,0 +1,129 @@
+{
+ "labels": [
+  {
+   "id": "zone-night-harbor",
+   "name": "Night Harbor",
+   "x": 2250,
+   "y": 2122,
+   "kind": "zone",
+   "priority": 100,
+   "toMap": "night-harbor"
+  },
+  {
+   "id": "zone-shaded-dunes",
+   "name": "Shaded Dunes",
+   "x": 1855,
+   "y": 2193,
+   "kind": "zone",
+   "priority": 100,
+   "toMap": "shaded-dunes"
+  },
+  {
+   "id": "zone-sungreet-strand",
+   "name": "Sungreet Strand",
+   "x": 2291,
+   "y": 1871,
+   "kind": "zone",
+   "priority": 100,
+   "toMap": "sungreet-strand"
+  },
+  {
+   "id": "zone-fallen-pass",
+   "name": "Fallen Pass",
+   "x": 1613,
+   "y": 2267,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-glass-flats",
+   "name": "Glass Flats",
+   "x": 2087,
+   "y": 1127,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-vale-of-zintar",
+   "name": "Vale of Zintar",
+   "x": 1106,
+   "y": 1572,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-shallow-shoals",
+   "name": "Shallow Shoals",
+   "x": 509,
+   "y": 1133,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-keepers-bight",
+   "name": "Keeper's Bight",
+   "x": 1270,
+   "y": 813,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-evershade-weald",
+   "name": "Evershade Weald",
+   "x": 1350,
+   "y": 329,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-glinting-hollow",
+   "name": "Glinting Hollow",
+   "x": 1750,
+   "y": 299,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-scarwood",
+   "name": "Scarwood",
+   "x": 2171,
+   "y": 583,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "zone-tel-ekir",
+   "name": "Tel Ekir",
+   "x": 1819,
+   "y": 1832,
+   "kind": "zone",
+   "priority": 60
+  },
+  {
+   "id": "city-faelindral",
+   "name": "Faelindral",
+   "x": 1419,
+   "y": 282,
+   "kind": "zone",
+   "priority": 90,
+   "toMap": "faelindral"
+  },
+  {
+   "id": "region-szuur",
+   "name": "Szuur",
+   "x": 1159,
+   "y": 2392,
+   "kind": "region",
+   "priority": 40
+  },
+  {
+   "id": "region-calafrey",
+   "name": "Calafrey",
+   "x": 1539,
+   "y": 152,
+   "kind": "region",
+   "priority": 40
+  }
+ ],
+ "trainers": []
+}

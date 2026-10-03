@@ -17,7 +17,7 @@ function setupPlaceLabels(data){
  try{toggle.checked=localStorage.getItem(key)!=='false';}catch{toggle.checked=true;}
  const pane=map.getPane('placeNames')||map.createPane('placeNames');pane.style.zIndex=alignmentMode?'650':'450';pane.style.pointerEvents='none';
  const entries=data.labels.filter(atLevel).sort((a,b)=>b.priority-a.priority).map(row=>{
-  const target=row.kind==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
+  const target=(row.kind==='exit'||row.kind==='zone')&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
   const face=text(target?'a':'span',(row.kind==='exit'?exitArrows[row.arrow]+' ':'')+row.name,'place-name '+row.kind+(target?' linked':''));
   // Exit names that lead to another published map open it, at the matching exit when given.
   if(target){
@@ -77,7 +77,7 @@ function setupPlaceLabels(data){
    const p=map.latLngToContainerPoint(locationOf(row));
    if(p.x<0||p.y<0||p.x>view.width||p.y>view.height){marker.remove();continue;}
    if(!map.hasLayer(marker))marker.addTo(map);
-   face.style.fontSize=(row.kind==='district'?Math.min(21,15+Math.max(0,zoom-2)*1.5):row.kind==='exit'?13:12)+'px';
+   face.style.fontSize=(row.kind==='zone'?Math.min(30,16+Math.max(0,zoom-1)*4):row.kind==='region'?Math.min(40,22+Math.max(0,zoom-1)*5):row.kind==='district'?Math.min(21,15+Math.max(0,zoom-2)*1.5):row.kind==='exit'?13:12)+'px';
    const selected=alignmentMode&&selectedAlignmentKind==='label'&&selectedAlignmentId===row.id;
    face.classList.toggle('selected',selected);marker.setZIndexOffset(selected?1000:0);
    face.style.visibility='hidden';
