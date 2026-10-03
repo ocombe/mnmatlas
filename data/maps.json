@@ -388,6 +388,56 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "fallen-pass",
+      "title": "Fallen Pass",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The canyons west of Shaded Dunes",
+      "breadcrumb": "Monsters & Memories / Fallen Pass",
+      "description": "An illustrated fan atlas of Fallen Pass: the red canyons, the green lake, Fallen Watch and the coast, with place names and personal field notes.",
+      "width": 4320,
+      "height": 3968,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/fallen-pass/{z}/{x}/{y}.webp",
+      "markersFile": "data/fallen-pass/markers.json",
+      "labelsFile": "data/fallen-pass/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Maggot's Fallen Pass map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Fallen Pass wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Fallen_pass_v1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, creature camps and notable NPC locations adapted from Maggot's Fallen Pass map; positions adjusted to this illustration and approximate; level bands and creature types follow his legend."
+      },
+      "artworkCredits": [
+        {
+          "map": "Illustrated fan atlas · Not an official game map",
+          "text": "Exits and place names also checked against the Monsters and Memories Wiki's Fallen Pass map, with the author's permission.",
+          "sourceTitle": "Monsters and Memories Wiki: Fallen Pass",
+          "sourceUrl": "https://monstersandmemories.wiki/zones/z-fallen-pass"
+        }
+      ],
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

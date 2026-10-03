@@ -84,7 +84,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
-   "arrow": "west"
+   "arrow": "west",
+   "toMap": "fallen-pass",
+   "toPlace": "to-shaded-dunes"
   },
   {
    "id": "to-night-harbor",

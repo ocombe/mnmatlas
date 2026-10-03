@@ -1,0 +1,94 @@
+{
+ "map": "fallen-pass",
+ "tileRevision": "v1",
+ "coordinateZoom": 5,
+ "labels": [
+  {
+   "id": "red-mantle-camp",
+   "name": "Red Mantle Camp",
+   "x": 1890,
+   "y": 897,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2
+  },
+  {
+   "id": "rat-caves",
+   "name": "Rat Caves",
+   "x": 2326,
+   "y": 1141,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "smugglers-caves",
+   "name": "Smugglers Caves",
+   "x": 2176,
+   "y": 2957,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "hidden-pass",
+   "name": "Hidden Pass",
+   "x": 1126,
+   "y": 558,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "fallen-watch-keep",
+   "name": "Fallen Watch",
+   "x": 3840,
+   "y": 2716,
+   "kind": "district",
+   "priority": 85,
+   "minZoom": 1.5
+  },
+  {
+   "id": "to-shaded-dunes",
+   "name": "to Shaded Dunes",
+   "x": 3869,
+   "y": 411,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "east",
+   "toMap": "shaded-dunes",
+   "toPlace": "to-fallen-pass"
+  },
+  {
+   "id": "to-vale-of-zintar",
+   "name": "to Vale of Zintar",
+   "x": 2116,
+   "y": 106,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "north"
+  },
+  {
+   "id": "to-fallen-watch",
+   "name": "to Fallen Watch",
+   "x": 3832,
+   "y": 1898,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "south"
+  },
+  {
+   "id": "fallen-pass",
+   "name": "Fallen Pass",
+   "x": 2300,
+   "y": 1466,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  }
+ ],
+ "trainers": []
+}
