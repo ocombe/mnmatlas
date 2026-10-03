@@ -275,6 +275,52 @@
       "alignmentGroup": "platforms"
     },
     {
+      "id": "evershade-weald",
+      "title": "Evershade Weald",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The forest beneath Faelindral",
+      "breadcrumb": "Monsters & Memories / Evershade Weald",
+      "description": "An illustrated fan atlas of Evershade Weald: the shaded valley under Faelindral, its river, caves and camps, with place names and personal field notes.",
+      "width": 2048,
+      "height": 1722,
+      "minZoom": 0,
+      "maxNativeZoom": 3,
+      "maxZoom": 5,
+      "coordinateZoom": 3,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/faelindral/ground/{z}/{x}/{y}.webp",
+      "markersFile": "data/evershade-weald/markers.json",
+      "labelsFile": "data/evershade-weald/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 3.5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ],
+        "Respawn point": [
+          "★",
+          "#614b32"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Nindaan's Evershade Weald map (CC BY-SA 4.0)",
+        "sourceTitle": "Nindaan's Evershade Weald wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Evershade_Weald_june_26.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, caves, creature camps and exits adapted from Nindaan's Evershade Weald map; positions adjusted to this illustration and approximate; level bands from the community wiki's creature listings. The artwork is the Ground level of the Faelindral map."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
       "id": "sungreet-strand",
       "title": "Sungreet Strand",
       "subtitle": "A traveller’s chart",
