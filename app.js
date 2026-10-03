@@ -104,7 +104,10 @@ function drawMarkers(){
  }
  // Place names and hidden areas can be found even when their visual layer hides.
  const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
- if(terms.length){for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t)))){const b=text('button','','place');const label=text('span','');label.append(text('strong',p.name),text('small',p.kind==='hidden'?'Hidden area':'Place name'));b.append(label);b.onclick=()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0));list.append(b);}}
+ // A search also lists matching markers from the other levels; choosing one opens its level at the marker.
+ const otherLevel=p=>config.levels&&p.level&&!atLevel(p)?' · '+(config.levels.find(l=>l.id===p.level)?.title||p.level):'';
+ if(terms.length&&config.levels){for(const m of allMarkers().filter(m=>!atLevel(m)&&enabled.has(m.category)&&terms.every(t=>(m.name+' '+m.category+' '+m.note).toLocaleLowerCase().includes(t)))){const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);const label=text('span','');label.append(text('strong',m.name),text('small',noteKind(m)+otherLevel(m)));b.append(label);b.onclick=()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));list.append(b);}}
+ if(terms.length){for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t)))){const b=text('button','','place');const label=text('span','');label.append(text('strong',p.name),text('small',(p.kind==='hidden'?'Hidden area':'Place name')+otherLevel(p)));b.append(label);b.onclick=()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0));list.append(b);}}
  $('count').textContent=list.childElementCount+' places';
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
  schedulePlaceLabels();
