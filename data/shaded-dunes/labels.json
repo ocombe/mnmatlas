@@ -94,7 +94,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
-   "arrow": "east"
+   "arrow": "east",
+   "toMap": "night-harbor",
+   "toPlace": "place-32"
   },
   {
    "id": "to-ancient-crypt",
