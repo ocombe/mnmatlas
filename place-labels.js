@@ -37,9 +37,11 @@ function setupPlaceLabels(data){
   return {row,face,marker};
  });
  const visibleElement=el=>el.getClientRects().length&&el.style.opacity!=='0';
- let frame;
+ let frame,disposed=false;
  const intersects=(a,b)=>a.left<b.right+4&&a.right>b.left-4&&a.top<b.bottom+3&&a.bottom>b.top-3;
  function layout(){
+  // A late callback from a replaced map (level or map switch) must not add its names to the new map.
+  if(disposed)return;
   frame=null;
   const view=$('map').getBoundingClientRect(),zoom=map.getZoom();
   const trainersVisible=zoom>=3.25||(enabled.size===1&&enabled.has('Class trainer'));
@@ -99,5 +101,5 @@ function setupPlaceLabels(data){
  schedulePlaceLabels();
  document.fonts.ready.then(schedulePlaceLabels);
  const currentMap=map,handler=schedulePlaceLabels;
- return ()=>{cancelAnimationFrame(frame);for(const e of entries)e.marker.remove();currentMap.off('zoomend moveend resize',handler);currentMap.off('layeradd layerremove',onLayer);schedulePlaceLabels=()=>{};};
+ return ()=>{disposed=true;cancelAnimationFrame(frame);for(const e of entries)e.marker.remove();currentMap.off('zoomend moveend resize',handler);currentMap.off('layeradd layerremove',onLayer);schedulePlaceLabels=()=>{};};
 }
