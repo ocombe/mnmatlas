@@ -1,58 +1,97 @@
-/* Worn sheet edge: every map drawn as one sheet of used parchment, with a ragged, darkened rim
-   and the same surround past it, whatever the colours at the edge of its art. Painted on canvas
-   tiles in map coordinates, so the rim keeps its shape while panning and zooming. */
+/* Every map drawn as one sheet of old parchment lying on the desk: a ragged, burnt rim cut just
+   inside the art, the page's dark colour past it, and the wear of a well-used map (stains, rings,
+   foxing, darkened edges, paper grain) multiplied over the art. Both layers are drawn in map
+   coordinates, so they keep their place while panning and zooming. */
 'use strict';
-const SHEET_STYLES={
- // The rim cuts just inside the art; past it, the brown of the world map's surround.
- worn:{margin:0,inset:.004,ragged:.005,burn:.016,age:.06,fade:0,outside:'brown'},
- // The art fades into a band of plain parchment, which then gets the worn rim.
- margin:{margin:.03,inset:0,ragged:.006,burn:.018,age:.06,fade:.02,outside:'brown'},
- // The worn rim, then the page's own dark colour, as if the sheet lay on the desk.
- desk:{margin:0,inset:.004,ragged:.005,burn:.016,age:.06,fade:0,outside:'desk'}
-};
-function sheetStyle(){const p=new URLSearchParams(location.search).get('edge');return SHEET_STYLES[p]?p:null;}
+const SHEET={inset:.004,ragged:.005,burn:.016,desk:[30,24,18],burnt:[74,44,22]};
 // Value noise with smooth steps; fbm sums octaves while they stay larger than about two screen pixels.
 const sheetHash=(x,y,s)=>{let h=Math.imul(x,374761393)^Math.imul(y,668265263)^Math.imul(s,1442695041);h=Math.imul(h^(h>>>13),1274126177);return ((h^(h>>>16))>>>0)/4294967296;};
-function sheetNoise(x,y,s){const ix=Math.floor(x),iy=Math.floor(y),fx=x-ix,fy=y-iy,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
- const a=sheetHash(ix,iy,s),b=sheetHash(ix+1,iy,s),c=sheetHash(ix,iy+1,s),d=sheetHash(ix+1,iy+1,s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v;}
-function sheetFbm(x,y,s,oct){let t=0,amp=.5,f=1,n=0;for(let o=0;o<oct;o++){t+=amp*sheetNoise(x*f,y*f,s+o*31);n+=amp;amp*=.5;f*=2;}return t/n;}
-function setupSheetEdge(map,config,frame,name){
- const st=SHEET_STYLES[name],cz=config.coordinateZoom,S=Math.max(frame.width,frame.height);
- const m=st.margin*S,sheet={x:frame.x-m,y:frame.y-m,width:frame.width+2*m,height:frame.height+2*m};
- const box=map.getContainer(),desk=[30,24,18],brown=[118,86,56],brownFar=[58,41,26],paper=[214,186,140],burnt=[74,44,22];
- box.style.backgroundColor=`rgb(${(st.outside==='desk'?desk:brownFar).join(',')})`;box.style.backgroundImage='none';box.classList.add('sheet-'+name);
+function sheetNoise(x,y,s,p=0){let ix=Math.floor(x),iy=Math.floor(y);const fx=x-ix,fy=y-iy,u=fx*fx*(3-2*fx),v=fy*fy*(3-2*fy);
+ const w=n=>p?((n%p)+p)%p:n,a=sheetHash(w(ix),w(iy),s),b=sheetHash(w(ix+1),w(iy),s),c=sheetHash(w(ix),w(iy+1),s),d=sheetHash(w(ix+1),w(iy+1),s);return a+(b-a)*u+(c-a)*v+(a-b-c+d)*u*v;}
+function sheetFbm(x,y,s,oct,p=0){let t=0,amp=.5,f=1,n=0;for(let o=0;o<oct;o++){t+=amp*sheetNoise(x*f,y*f,s+o*31,p*f);n+=amp;amp*=.5;f*=2;}return t/n;}
+const sheetSeed=text=>[...text].reduce((h,ch)=>Math.imul(h^ch.charCodeAt(0),16777619)>>>0,2166136261)%100000;
+// Whether this map gets the wear pass: off for art that already carries it, and for ?worn=0 previews.
+function sheetWorn(config){return config.worn!==false&&new URLSearchParams(location.search).get('worn')!=='0';}
+
+// The wear of the whole sheet as one small picture in multiply colours (white leaves the art as it is).
+function sheetWear(frame,seed){
+ const strength=+(new URLSearchParams(location.search).get('wear')||1.8);
+ const S=Math.max(frame.width,frame.height),L=640,sc=L/S,W=Math.max(2,Math.round(frame.width*sc)),H=Math.max(2,Math.round(frame.height*sc));
+ const cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d'),img=g.createImageData(W,H),d=img.data;
+ const rnd=i=>sheetHash(i,seed,9);
+ // A few cup rings and water marks, mostly towards the edges and corners.
+ const rings=[];const nr=2+Math.floor(rnd(1)*2);
+ for(let i=0;i<nr;i++){const side=rnd(10+i),along=.08+.84*rnd(20+i),off=.03+.12*rnd(30+i),w=frame.width/S,h=frame.height/S;
+  const [cx,cy]=side<.25?[along*w,off]:side<.5?[along*w,h-off]:side<.75?[off,along*h]:[w-off,along*h];rings.push({cx,cy,r:.025+.035*rnd(40+i),open:rnd(50+i)});}
+ const spots=[];for(let i=0;i<70;i++){const e=rnd(100+i)**2*.14,side=rnd(200+i),a=rnd(300+i),w=frame.width/S,h=frame.height/S;
+  spots.push({x:side<.25?a*w:side<.5?a*w:side<.75?e:w-e,y:side<.25?e:side<.5?h-e:side<.75?a*h:a*h,r:.0012+.004*rnd(400+i)**2});}
+ for(let j=0;j<H;j++)for(let i=0;i<W;i++){
+  const u=(i+.5)/sc/S,v=(j+.5)/sc/S,w=frame.width/S,h=frame.height/S,D=Math.min(u,v,w-u,h-v),q=(j*W+i)*4;
+  const n1=sheetFbm(u*5,v*5,seed,4),n2=sheetFbm(u*16,v*16,seed+7,4);
+  // Warm base and a soft all-over mottle, stronger towards the rim.
+  let r=252,gg=245,b=232;const mul=(c,a)=>{a=Math.min(1,a*strength);r*=1-a*(1-c[0]/255);gg*=1-a*(1-c[1]/255);b*=1-a*(1-c[2]/255);};
+  const edge=Math.max(0,1-D/(.11*(.6+.8*n1)));mul([204,160,108],.6*edge*edge);
+  const cd=Math.min(Math.hypot(u,v),Math.hypot(w-u,v),Math.hypot(u,h-v),Math.hypot(w-u,h-v)),corner=Math.max(0,1-cd/.2);mul([190,140,90],.35*corner*corner);
+  mul([226,204,170],Math.max(0,(n1-.42)*.9)*(.45+.55*Math.min(1,edge*2)));
+  // Water stains: pale blotches with a darker tide line where they dried.
+  const s=n2+.25*(n1-.5);if(s>.6){const tide=Math.max(0,1-Math.abs(s-.61)/.012);mul([222,190,145],.45*Math.min(1,(s-.6)*8)*(.35+.65*Math.min(1,edge*1.5)));mul([175,125,75],.35*tide*(.3+.7*Math.min(1,edge*1.5)));}
+  for(const ring of rings){const rr=Math.hypot(u-ring.cx,v-ring.cy)/ring.r,wob=.03*(sheetFbm(u*60,v*60,seed+3,3)-.5);
+   const band=Math.max(0,1-Math.abs(rr-1+wob)/.045),ang=(Math.atan2(v-ring.cy,u-ring.cx)/Math.PI+1)/2,gap=Math.abs(ang-ring.open)<.12?.25:1;
+   mul([168,118,68],.5*band*gap);if(rr<1)mul([230,205,165],.18);}
+  for(const p of spots){const k=Math.max(0,1-Math.hypot(u-p.x,v-p.y)/p.r);if(k)mul([172,122,72],.55*k*k);}
+  d[q]=r;d[q+1]=gg;d[q+2]=b;d[q+3]=255;
+ }
+ g.putImageData(img,0,0);return cv;
+}
+// Fine paper fibre at screen scale, seamless over one tile.
+let sheetGrainCanvas=null;
+function sheetGrain(){
+ if(sheetGrainCanvas)return sheetGrainCanvas;const N=256,cv=document.createElement('canvas');cv.width=cv.height=N;const g=cv.getContext('2d'),img=g.createImageData(N,N),d=img.data;
+ for(let j=0;j<N;j++)for(let i=0;i<N;i++){const f=sheetFbm(i/16,j/16,5,3,16)*.6+sheetFbm(i/32,j/32,6,3,8)*.4,h=sheetHash(i,j,77),v=255-26*Math.max(0,f-.35)-10*h,q=(j*N+i)*4;d[q]=v;d[q+1]=v*.985;d[q+2]=v*.96;d[q+3]=255;}
+ g.putImageData(img,0,0);return sheetGrainCanvas=cv;
+}
+
+function setupSheetEdge(map,config,frame){
+ const cz=config.coordinateZoom,S=Math.max(frame.width,frame.height),sheet=frame,{desk,burnt}=SHEET,box=map.getContainer();
+ box.style.backgroundColor=`rgb(${desk.join(',')})`;box.style.backgroundImage='none';
  const pane=map.getPane('sheet')||map.createPane('sheet');pane.style.zIndex='260';pane.style.pointerEvents='none';
- const Layer=L.GridLayer.extend({createTile(c){
-  const t=document.createElement('canvas'),N=256;t.width=t.height=N;t.className='sheet-tile';
+ const layers=[];
+ if(sheetWorn(config)){
+  // The wear pass multiplies over the art, below the rim and every marker or label.
+  const wearPane=map.getPane('sheet-wear')||map.createPane('sheet-wear');wearPane.style.zIndex='255';wearPane.style.pointerEvents='none';wearPane.style.mixBlendMode='multiply';
+  const wear=sheetWear(frame,sheetSeed(config.id+'/'+(config.levelId||''))),ws=wear.width/frame.width,grain=sheetGrain();
+  const Wear=L.GridLayer.extend({createTile(c){
+   const t=document.createElement('canvas'),N=256;t.width=t.height=N;const g=t.getContext('2d'),k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k;
+   g.fillStyle='#fff';g.fillRect(0,0,N,N);g.imageSmoothingQuality='high';
+   g.drawImage(wear,(X0-frame.x)*ws,(Y0-frame.y)*ws,N*k*ws,N*k*ws,0,0,N,N);
+   g.globalCompositeOperation='multiply';g.globalAlpha=.75;g.drawImage(grain,0,0);return t;
+  }});
+  layers.push(new Wear({pane:'sheet-wear',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,keepBuffer:1}));
+ }
+ const Edge=L.GridLayer.extend({createTile(c){
+  const t=document.createElement('canvas'),N=256;t.width=t.height=N;
   const k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k,px=k/S;
   // Distance from the sheet's edge, in sheet lengths (positive inside); tiles deep inside stay empty.
   const dist=(X,Y)=>{const u=(X-sheet.x)/S,v=(Y-sheet.y)/S,w=sheet.width/S,h=sheet.height/S,ox=Math.max(-u,u-w,0),oy=Math.max(-v,v-h,0);return ox||oy?-Math.hypot(ox,oy):Math.min(u,v,w-u,h-v);};
-  const reach=st.inset+st.ragged+Math.max(st.burn*1.6,st.age*1.8)+st.fade+st.margin+.002,inner=Math.min(X0-sheet.x,Y0-sheet.y,sheet.x+sheet.width-(X0+N*k),sheet.y+sheet.height-(Y0+N*k))/S;
+  const reach=SHEET.inset+SHEET.ragged+SHEET.burn*1.6+.002,inner=Math.min(X0-sheet.x,Y0-sheet.y,sheet.x+sheet.width-(X0+N*k),sheet.y+sheet.height-(Y0+N*k))/S;
   if(inner>reach)return t;
   const g=t.getContext('2d'),img=g.createImageData(N,N),d=img.data;
   let oct=1;while(oct<9&&1/(28*2**oct)>2*px)oct++;
   for(let j=0;j<N;j++)for(let i=0;i<N;i++){
    const X=X0+(i+.5)*k,Y=Y0+(j+.5)*k,u=(X-sheet.x)/S,v=(Y-sheet.y)/S,D=dist(X,Y),q=(j*N+i)*4;
    if(D>reach)continue;
-   const line=st.inset+st.ragged*(sheetFbm(u*28,v*28,7,oct)*2-1)+(st.ragged*.6)*(sheetFbm(u*140,v*140,9,Math.max(1,oct-2))-.5),e=D-line;
-   const grain=(sheetHash(c.x*N+i,c.y*N+j,c.z)-.5)*10,mot=sheetFbm(u*9,v*9,3,oct)-.5,stain=sheetFbm(u*40,v*40,5,oct);
+   const line=SHEET.inset+SHEET.ragged*(sheetFbm(u*28,v*28,7,oct)*2-1)+(SHEET.ragged*.6)*(sheetFbm(u*140,v*140,9,Math.max(1,oct-2))-.5),e=D-line;
+   const grain=(sheetHash(c.x*N+i,c.y*N+j,c.z)-.5)*10,stain=sheetFbm(u*40,v*40,5,oct);
    let r,gr,b,a;
    if(e<0){
-    // Past the sheet: the surround, mottled like old leather or the world map's margin, darkening outwards.
-    if(st.outside==='desk'){const sh=Math.max(0,1-(-e)/.012);r=desk[0]-12*sh;gr=desk[1]-10*sh;b=desk[2]-8*sh;a=255;}
-    else{const far=Math.min(1,-e/.08),f=far*far*(3-2*far);r=brown[0]+(brownFar[0]-brown[0])*f;gr=brown[1]+(brownFar[1]-brown[1])*f;b=brown[2]+(brownFar[2]-brown[2])*f;const mm=1+mot*.35;r*=mm;gr*=mm;b*=mm;a=255;}
-    // A thin dark lip right at the torn edge.
-    const lip=Math.max(0,1-(-e)/(1.5*px+.0008));r+=(burnt[0]*.6-r)*lip;gr+=(burnt[1]*.6-gr)*lip;b+=(burnt[2]*.6-b)*lip;
+    // Past the sheet: the desk, a little darker in the sheet's shadow, with a thin dark lip at the torn edge.
+    const sh=Math.max(0,1-(-e)/.012),lip=Math.max(0,1-(-e)/(1.5*px+.0008));
+    r=desk[0]-12*sh;gr=desk[1]-10*sh;b=desk[2]-8*sh;r+=(burnt[0]*.6-r)*lip;gr+=(burnt[1]*.6-gr)*lip;b+=(burnt[2]*.6-b)*lip;a=255;
    }else{
-    // Layers over the art, composited in order: plain parchment (margin style), a broad age stain,
-    // the burnt rim, foxing spots and the dark lip of the torn edge.
+    // The burnt rim, patchy as it fades inwards, then the dark lip of the torn edge.
     r=0;gr=0;b=0;a=0;
     const over=(cr,cg,cb,ca)=>{if(ca<=0)return;const na=ca+a*(1-ca);r=(cr*ca+r*a*(1-ca))/na;gr=(cg*ca+gr*a*(1-ca))/na;b=(cb*ca+b*a*(1-ca))/na;a=na;};
-    if(st.margin){const into=D-st.margin+st.fade*.6*(sheetFbm(u*70,v*70,11,oct)-.5),fz=st.fade*(.5+.8*stain);let pa=into<=0?1:Math.max(0,1-into/fz);pa=pa*pa*(3-2*pa);
-     const fib=sheetFbm(u*400,v*400,13,Math.max(1,oct-3))-.5,tone=1+mot*.3+fib*.08;over(paper[0]*tone,paper[1]*tone,paper[2]*tone,pa);}
-    const age=Math.max(0,1-e/(st.age*(.6+.8*mot+.4)));over(120,78,40,.32*age*age*(.5+stain));
-    const bw=st.burn*(.4+1.2*stain),bt=Math.max(0,1-e/bw);over(burnt[0],burnt[1],burnt[2],Math.min(.85,bt*bt*bt*(.6+.7*stain)));
-    const fox=sheetFbm(u*90,v*90,17,Math.max(1,oct-1));if(fox>.68&&e<st.age)over(110,70,36,Math.min(.45,(fox-.68)*4)*(1-e/st.age));
+    const bw=SHEET.burn*(.4+1.2*stain),bt=Math.max(0,1-e/bw);over(burnt[0],burnt[1],burnt[2],Math.min(.85,bt*bt*bt*(.6+.7*stain)));
     if(e<1.2*px+.0005)over(burnt[0]*.7,burnt[1]*.7,burnt[2]*.7,.45);
     if(a<=.003)continue;a*=255;
    }
@@ -60,8 +99,7 @@ function setupSheetEdge(map,config,frame,name){
   }
   g.putImageData(img,0,0);return t;
  }});
- const layer=new Layer({pane:'sheet',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,updateWhenZooming:false,keepBuffer:1}).addTo(map);
- return ()=>{layer.remove();box.classList.remove('sheet-'+name);box.style.removeProperty('background-color');box.style.removeProperty('background-image');};
+ layers.push(new Edge({pane:'sheet',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,updateWhenZooming:false,keepBuffer:1}));
+ for(const l of layers)l.addTo(map);
+ return ()=>{for(const l of layers)l.remove();box.style.removeProperty('background-color');box.style.removeProperty('background-image');};
 }
-// The view's limits and fit cover the whole sheet, margin included.
-function sheetFrame(config,name){const f=config.frame||{x:0,y:0,width:config.width,height:config.height},st=SHEET_STYLES[name];if(!st||!st.margin)return f;const m=st.margin*Math.max(f.width,f.height);return {x:f.x-m,y:f.y-m,width:f.width+2*m,height:f.height+2*m};}
