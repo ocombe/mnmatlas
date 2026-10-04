@@ -92,7 +92,8 @@
    "x": 2171,
    "y": 583,
    "kind": "zone",
-   "priority": 60
+   "priority": 60,
+   "toMap": "scarwood"
   },
   {
    "id": "zone-tel-ekir",

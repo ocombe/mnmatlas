@@ -1,0 +1,112 @@
+{
+ "map": "scarwood",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "scarwood",
+   "name": "Scarwood",
+   "x": 7256,
+   "y": 2568,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  },
+  {
+   "id": "bandit-camp",
+   "name": "Bandit Camp",
+   "x": 5148,
+   "y": 3134,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "hunting-lodge",
+   "name": "Hunting Lodge",
+   "x": 2001,
+   "y": 420,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "giant-camp",
+   "name": "Corrupted Giant Camp",
+   "x": 5188,
+   "y": 1263,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "giants-road",
+   "name": "Giants’ Road",
+   "x": 6256,
+   "y": 1341,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2.5
+  },
+  {
+   "id": "sojourner-camp",
+   "name": "Sojourner Camp",
+   "x": 5938,
+   "y": 5349,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "elven-ruins",
+   "name": "Elven Ruins",
+   "x": 3498,
+   "y": 4632,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2.5
+  },
+  {
+   "id": "hill-giant-cave",
+   "name": "Hill Giant Cave",
+   "x": 1681,
+   "y": 5991,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "to-keepers-bight",
+   "name": "to Keeper’s Bight",
+   "x": 906,
+   "y": 3630,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "west",
+   "toMap": "keepers-bight"
+  },
+  {
+   "id": "to-fields-of-the-lost",
+   "name": "to Fields of the Lost",
+   "x": 10001,
+   "y": 1090,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "east"
+  },
+  {
+   "id": "to-sunken-resort",
+   "name": "to Sunken Resort",
+   "x": 4149,
+   "y": 5764,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "down",
+   "toMap": "sunken-resort"
+  }
+ ],
+ "trainers": []
+}

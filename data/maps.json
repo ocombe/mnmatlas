@@ -727,6 +727,48 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "scarwood",
+      "title": "Scarwood",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The scarred forest between Keeper’s Bight and the Fields of the Lost",
+      "breadcrumb": "Monsters & Memories / Scarwood",
+      "description": "An illustrated fan atlas of Scarwood: the scarred forest, the giants’ road, the lake over the Sunken Resort and the camps, with place names and personal field notes.",
+      "width": 10880,
+      "height": 6464,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/scarwood/{z}/{x}/{y}.webp",
+      "markersFile": "data/scarwood/markers.json",
+      "labelsFile": "data/scarwood/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Landmarks and exits after ElusiveGarden's Scarwood map (CC BY-SA 4.0)",
+        "sourceTitle": "ElusiveGarden's Scarwood wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Scarwood.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Landmarks and exits checked against ElusiveGarden's Scarwood map; camps and named creatures placed from the community wiki's location notes; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }
