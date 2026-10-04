@@ -130,7 +130,7 @@
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
  function shareNote(m){
-  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color'])if(m[key])payload[key]=m[key];
+  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap'])if(m[key])payload[key]=m[key];
   sendDialog('Share a personal note',[{token:sharedToken(m),name:m.name,map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload}],true);
  }
  function sendDialog(title,rows,sharing){
@@ -149,6 +149,10 @@
    finally{if(done)event('suggestion-sent');send.disabled=false;}
   },'primary');actions.append(button('Not now',()=>d.close()),send);d.append(actions);
  }
+ // Ids present at the last successful sync tell a deleted note from a new one on the other side.
+ const baseKey=(uid,key)=>'mnmaps-community-synced-'+uid+'-'+key;
+ function readBase(uid,key){try{const ids=JSON.parse(localStorage.getItem(baseKey(uid,key))||'null');return Array.isArray(ids)?new Set(ids):null;}catch{return null;}}
+ function writeBase(uid,key,notes){try{localStorage.setItem(baseKey(uid,key),JSON.stringify(notes.map(m=>m.id)));}catch{}}
  function syncIdentity(){return user?user.id+':'+scope():'';}
  function scheduleSync(){
   if(syncing||!user||!config||syncReady!==syncIdentity())return;
@@ -158,7 +162,7 @@
  async function pushJobs(){
   if(pushing)return;pushing=true;let failed=false;
   try{for(const [key,job] of syncJobs){if(user?.id!==job.uid){syncJobs.delete(key);continue;}
-   try{const {error}=await client.from('user_notes').upsert({user_id:job.uid,map:job.map,notes:job.notes,updated_at:new Date().toISOString()},{onConflict:'user_id,map'});if(error)throw error;if(syncJobs.get(key)===job)syncJobs.delete(key);quiet('Notes synced.');}
+   try{const {error}=await client.from('user_notes').upsert({user_id:job.uid,map:job.map,notes:job.notes,updated_at:new Date().toISOString()},{onConflict:'user_id,map'});if(error)throw error;writeBase(job.uid,job.map,job.notes);if(syncJobs.get(key)===job)syncJobs.delete(key);quiet('Notes synced.');}
    catch{failed=true;quiet('Notes could not sync. Your local notes are safe.');}
   }}finally{pushing=false;if(!failed&&syncJobs.size){clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}}
  }
@@ -166,7 +170,11 @@
   if(!user||!map||loading||alignmentMode)return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
   try{const {data,error}=await client.from('user_notes').select('notes').eq('user_id',uid).eq('map',key).maybeSingle();if(error)throw error;if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
    const remote=data?.notes||[];if(!Array.isArray(remote)||remote.length>2000||!remote.every(valid))throw Error();
-   const merged=new Map(remote.map(m=>[m.id,m]));for(const m of personal)merged.set(m.id,m);if(merged.size>2000)throw Error();
+   // A note on one side only was either added there (keep it) or deleted on the other side since the last sync (drop it).
+   const base=readBase(uid,key),localIds=new Set(personal.map(m=>m.id)),remoteIds=new Set(remote.map(m=>m.id)),merged=new Map();
+   for(const m of remote)if(localIds.has(m.id)||!base?.has(m.id))merged.set(m.id,m);
+   for(const m of personal)if(remoteIds.has(m.id)||!base?.has(m.id))merged.set(m.id,m);
+   if(merged.size>2000)throw Error();
    syncing=true;const saved=persist([...merged.values()]);syncing=false;if(!saved)return;
    syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();scheduleSync();await pushJobs();
   }catch{syncing=false;quiet('Notes could not sync. Your local notes are safe.');}

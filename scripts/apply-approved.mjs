@@ -59,7 +59,7 @@ async function apply(row){
   if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
   if(rows.some(m=>m.id===id))return 'already present';
   const m={id,name:clean(p.name),...(label?{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
-  if(label&&p.noteType==='exit')m.arrow=p.arrow||'east';
+  if(label&&p.noteType==='exit'){m.arrow=p.arrow||'east';if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
   if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;}
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
  }
