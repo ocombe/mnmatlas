@@ -256,7 +256,7 @@ function applyLocation(url){
 }
 function fitMap(){activePlace=null;map.invalidateSize({pan:false});limitZoomOut();const d=config.defaultView;if(d.mode==='point')map.setView(locationOf(d),d.z,{animate:false});else map.setView(mapBounds().getCenter(),fitZoom(),{animate:false});}
 // The whole map fits the view at this zoom (unsnapped, so it fills the view exactly); zooming out stops there.
-function fitZoom(){const f=config.frame||{width:config.width,height:config.height},pad=2*(config.defaultView.padding||0),size=map.getSize();if(!size.x||!size.y)return config.minZoom;return Math.min(config.maxZoom,Math.max(config.minZoom,map.getScaleZoom(Math.min((size.x-pad)/f.width,(size.y-pad)/f.height),config.coordinateZoom)));}
+function fitZoom(){const f=sheetFrame(config,edgeStyle),pad=2*(config.defaultView.padding||0),size=map.getSize();if(!size.x||!size.y)return config.minZoom;return Math.min(config.maxZoom,Math.max(config.minZoom,map.getScaleZoom(Math.min((size.x-pad)/f.width,(size.y-pad)/f.height),config.coordinateZoom)));}
 function limitZoomOut(){const atFit=map.getZoom()<=map.getMinZoom()+.01;map.setMinZoom(fitZoom());if(atFit&&map.getZoom()>map.getMinZoom())map.setView(mapBounds().getCenter(),map.getMinZoom(),{animate:false});}
 // A shared x/y link gets a small spot marker, but not when the view comes from this page itself (level switch, reload, back/forward).
 let ownView=['reload','back_forward'].includes(performance.getEntriesByType?.('navigation')[0]?.type);
@@ -268,8 +268,10 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
  if(place)url.searchParams.set('place',place.id);else url.searchParams.delete('place');
  history.pushState({map:config.id,level:id},'',url);ownView=true;await loadMap(config.id,url);
 }
+// Border preview: ?edge=worn|margin|desk swaps the edge-colour backdrop for a worn sheet edge.
+const edgeStyle=sheetStyle();
 // An optional frame trims the drawn area inside the pixel grid; coordinates stay the same.
-function mapBounds(){const f=config.frame||{x:0,y:0,width:config.width,height:config.height};return L.latLngBounds(map.unproject([f.x,f.y+f.height],config.coordinateZoom),map.unproject([f.x+f.width,f.y],config.coordinateZoom));}
+function mapBounds(f=sheetFrame(config,edgeStyle)){return L.latLngBounds(map.unproject([f.x,f.y+f.height],config.coordinateZoom),map.unproject([f.x+f.width,f.y],config.coordinateZoom));}
 function appendAttributionLinks(parent,a){
  for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;const link=text('a',title);link.href=href;link.target='_blank';link.rel='noopener';parent.append(link,text('span',' · '));}
 }
@@ -336,10 +338,10 @@ async function loadMap(id,url=new URL(location.href),push=false){
   activePlace=null;sharedPin=null;cancelPlacement();if($('editor').open)closeEditor();$('search').value='';enabled=new Set(Object.keys(categories));showPins=true;updateCategoryButtons();
   document.body.classList.remove('aligning');$('edit-bar').hidden=true;restoreStorage();setupCategoryControls();updateTitles();
   map=L.map('map',{crs:L.CRS.Simple,minZoom:config.minZoom,maxZoom:config.maxZoom,zoomSnap:0,zoomDelta:.5,zoomControl:false,attributionControl:true,maxBoundsViscosity:1});
-  const bounds=mapBounds();map.setMaxBounds(bounds);
+  const bounds=mapBounds(config.frame||{x:0,y:0,width:config.width,height:config.height});map.setMaxBounds(mapBounds());
   L.tileLayer(config.tilePath+'?v='+encodeURIComponent(config.tileRevision),{tileSize:config.tileSize,minZoom:config.minZoom,maxZoom:config.maxZoom,maxNativeZoom:config.maxNativeZoom,noWrap:true,bounds,keepBuffer:1,attribution:text('span',config.attribution.map).outerHTML}).on('tileerror',()=>status('A map tile could not load. Please reload.')).addTo(map);
   const currentHidden={...hiddenData};for(const key of ['areas','additionalAreas','routes','connections','destinations','levelStacks'])if(Array.isArray(hiddenData[key]))currentHidden[key]=hiddenData[key].filter(atLevel);
-  fitMap();map.on('resize',()=>{limitZoomOut();updateZoom();});disposeBackdrop=setupMapBackdrop(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
+  fitMap();map.on('resize',()=>{limitZoomOut();updateZoom();});disposeBackdrop=edgeStyle?setupSheetEdge(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height},edgeStyle):setupMapBackdrop(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
   buildPlaceIndex();refreshSearch();setPanel(!compact()&&desktopPanelOpen&&!config.entry);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=false;$('edit-positions').hidden=false;updateAlignmentStatus();
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});
