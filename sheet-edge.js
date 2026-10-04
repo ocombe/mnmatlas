@@ -39,15 +39,18 @@ function sheetWear(frame,seed){
    const band=Math.max(0,1-Math.abs(rr-1+wob)/.045),ang=(Math.atan2(v-ring.cy,u-ring.cx)/Math.PI+1)/2,gap=Math.abs(ang-ring.open)<.12?.25:1;
    mul([168,118,68],.5*band*gap);if(rr<1)mul([230,205,165],.18);}
   for(const p of spots){const k=Math.max(0,1-Math.hypot(u-p.x,v-p.y)/p.r);if(k)mul([172,122,72],.55*k*k);}
-  d[q]=r;d[q+1]=gg;d[q+2]=b;d[q+3]=255;
+  // Plain alpha instead of a multiply blend (blending a whole pane makes zooming slow): matches multiply
+  // exactly over the parchment tone, and darkens other colours a little less.
+  const P=[222,192,148],al=Math.min(.85,(1-(r+gg+b)/(3*255))*1.35);
+  if(al>.004){d[q]=P[0]-P[0]*(1-r/255)/al;d[q+1]=P[1]-P[1]*(1-gg/255)/al;d[q+2]=P[2]-P[2]*(1-b/255)/al;d[q+3]=al*255;}
  }
  g.putImageData(img,0,0);return cv;
 }
-// Fine paper fibre at screen scale, seamless over one tile.
+// Fine paper fibre at screen scale, seamless over one tile (dark specks on transparent).
 let sheetGrainCanvas=null;
 function sheetGrain(){
  if(sheetGrainCanvas)return sheetGrainCanvas;const N=256,cv=document.createElement('canvas');cv.width=cv.height=N;const g=cv.getContext('2d'),img=g.createImageData(N,N),d=img.data;
- for(let j=0;j<N;j++)for(let i=0;i<N;i++){const f=sheetFbm(i/16,j/16,5,3,16)*.6+sheetFbm(i/32,j/32,6,3,8)*.4,h=sheetHash(i,j,77),v=255-26*Math.max(0,f-.35)-10*h,q=(j*N+i)*4;d[q]=v;d[q+1]=v*.985;d[q+2]=v*.96;d[q+3]=255;}
+ for(let j=0;j<N;j++)for(let i=0;i<N;i++){const f=sheetFbm(i/16,j/16,5,3,16)*.6+sheetFbm(i/32,j/32,6,3,8)*.4,h=sheetHash(i,j,77),v=26*Math.max(0,f-.35)+10*h,q=(j*N+i)*4;d[q]=70;d[q+1]=48;d[q+2]=26;d[q+3]=v*1.6;}
  g.putImageData(img,0,0);return sheetGrainCanvas=cv;
 }
 
@@ -57,31 +60,39 @@ function setupSheetEdge(map,config,frame){
  const pane=map.getPane('sheet')||map.createPane('sheet');pane.style.zIndex='260';pane.style.pointerEvents='none';
  const layers=[];
  if(sheetWorn(config)){
-  // The wear pass multiplies over the art, below the rim and every marker or label.
-  const wearPane=map.getPane('sheet-wear')||map.createPane('sheet-wear');wearPane.style.zIndex='255';wearPane.style.pointerEvents='none';wearPane.style.mixBlendMode='multiply';
+  // The wear pass lies over the art, below the rim and every marker or label.
+  const wearPane=map.getPane('sheet-wear')||map.createPane('sheet-wear');wearPane.style.zIndex='255';wearPane.style.pointerEvents='none';
   const wear=sheetWear(frame,sheetSeed(config.id+'/'+(config.levelId||''))),ws=wear.width/frame.width,grain=sheetGrain();
   const Wear=L.GridLayer.extend({createTile(c){
    const t=document.createElement('canvas'),N=256;t.width=t.height=N;const g=t.getContext('2d'),k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k;
-   g.fillStyle='#fff';g.fillRect(0,0,N,N);g.imageSmoothingQuality='high';
+   g.imageSmoothingQuality='high';
    g.drawImage(wear,(X0-frame.x)*ws,(Y0-frame.y)*ws,N*k*ws,N*k*ws,0,0,N,N);
-   g.globalCompositeOperation='multiply';g.globalAlpha=.75;g.drawImage(grain,0,0);return t;
+   g.globalAlpha=.75;g.drawImage(grain,0,0);return t;
   }});
-  layers.push(new Wear({pane:'sheet-wear',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,keepBuffer:1}));
+  layers.push(new Wear({pane:'sheet-wear',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,updateWhenZooming:false,keepBuffer:1}));
  }
- const Edge=L.GridLayer.extend({createTile(c){
-  const t=document.createElement('canvas'),N=256;t.width=t.height=N;
-  const k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k,px=k/S;
+ // Rim tiles are painted a few at a time between frames, so zooming never waits on them.
+ const queue=[];let timer=0;
+ const work=()=>{timer=0;const end=performance.now()+6;while(queue.length&&performance.now()<end){const job=queue.shift();if(job.t.isConnected)job.run();}if(queue.length)timer=setTimeout(work,0);};
+ const Edge=L.GridLayer.extend({createTile(c,done){
+  const t=document.createElement('canvas');t.width=t.height=256;
+  queue.push({t,run(){paintEdge(t,c);done(null,t);}});if(!timer)timer=setTimeout(work,0);return t;
+ }});
+ function paintEdge(t,c){
+  const N=256,k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k,px=k/S;
   // Distance from the sheet's edge, in sheet lengths (positive inside); tiles deep inside stay empty.
   const dist=(X,Y)=>{const u=(X-sheet.x)/S,v=(Y-sheet.y)/S,w=sheet.width/S,h=sheet.height/S,ox=Math.max(-u,u-w,0),oy=Math.max(-v,v-h,0);return ox||oy?-Math.hypot(ox,oy):Math.min(u,v,w-u,h-v);};
   const reach=SHEET.inset+SHEET.ragged+SHEET.burn*1.6+.002,inner=Math.min(X0-sheet.x,Y0-sheet.y,sheet.x+sheet.width-(X0+N*k),sheet.y+sheet.height-(Y0+N*k))/S;
-  if(inner>reach)return t;
+  // Past the rim's shadow the desk colour is the map's own background: nothing to paint.
+  const far=SHEET.ragged*1.7+SHEET.inset+.014,outer=Math.max(sheet.x-(X0+N*k),sheet.y-(Y0+N*k),X0-(sheet.x+sheet.width),Y0-(sheet.y+sheet.height))/S;
+  if(inner>reach||outer>far)return;
   const g=t.getContext('2d'),img=g.createImageData(N,N),d=img.data;
-  let oct=1;while(oct<9&&1/(28*2**oct)>2*px)oct++;
+  let oct=1;while(oct<7&&1/(28*2**oct)>2*px)oct++;
   for(let j=0;j<N;j++)for(let i=0;i<N;i++){
    const X=X0+(i+.5)*k,Y=Y0+(j+.5)*k,u=(X-sheet.x)/S,v=(Y-sheet.y)/S,D=dist(X,Y),q=(j*N+i)*4;
-   if(D>reach)continue;
+   if(D>reach||D<-far)continue;
    const line=SHEET.inset+SHEET.ragged*(sheetFbm(u*28,v*28,7,oct)*2-1)+(SHEET.ragged*.6)*(sheetFbm(u*140,v*140,9,Math.max(1,oct-2))-.5),e=D-line;
-   const grain=(sheetHash(c.x*N+i,c.y*N+j,c.z)-.5)*10,stain=sheetFbm(u*40,v*40,5,oct);
+   const grain=(sheetHash(c.x*N+i,c.y*N+j,c.z)-.5)*10,stain=e>=0&&e<SHEET.burn*1.6?sheetFbm(u*40,v*40,5,Math.min(oct,5)):0;
    let r,gr,b,a;
    if(e<0){
     // Past the sheet: the desk, a little darker in the sheet's shadow, with a thin dark lip at the torn edge.
@@ -97,9 +108,9 @@ function setupSheetEdge(map,config,frame){
    }
    d[q]=r+grain;d[q+1]=gr+grain;d[q+2]=b+grain;d[q+3]=a;
   }
-  g.putImageData(img,0,0);return t;
- }});
+  g.putImageData(img,0,0);
+ }
  layers.push(new Edge({pane:'sheet',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,updateWhenZooming:false,keepBuffer:1}));
  for(const l of layers)l.addTo(map);
- return ()=>{for(const l of layers)l.remove();box.style.removeProperty('background-color');box.style.removeProperty('background-image');};
+ return ()=>{queue.length=0;clearTimeout(timer);for(const l of layers)l.remove();box.style.removeProperty('background-color');box.style.removeProperty('background-image');};
 }
