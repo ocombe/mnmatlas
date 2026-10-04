@@ -16,7 +16,8 @@
   "y": 2232,
   "note": "Dungeon entrance (approximate position).",
   "minZoom": 2.75,
-  "approximate": true
+  "approximate": true,
+  "toMap": "ancient-crypt"
  },
  {
   "id": "dungeon-wyrmsbane-tomb",

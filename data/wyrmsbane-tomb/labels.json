@@ -185,7 +185,9 @@
       "minZoom": 2,
       "arrow": "west",
       "approximate": true,
-      "note": "Approximate exit location; confirm in game."
+      "note": "Approximate exit location; confirm in game.",
+      "toMap": "ancient-crypt",
+      "toPlace": "exit-wyrmsbane-tomb"
     }
   ],
   "trainers": [],

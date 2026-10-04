@@ -650,6 +650,83 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "ancient-crypt",
+      "title": "Ancient Crypt",
+      "subtitle": "Three sheets beneath Shaded Dunes",
+      "cartoucheKicker": "Halls of the forgotten",
+      "breadcrumb": "Monsters & Memories / Ancient Crypt",
+      "description": "An illustrated fan atlas of Ancient Crypt. Explore the main halls, library loft, chapel and lower passages, and keep your own field notes.",
+      "width": 4256,
+      "height": 4672,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/ancient-crypt/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/ancient-crypt/markers.json",
+      "labelsFile": "data/ancient-crypt/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Main halls",
+          "tilePath": "assets/tiles/ancient-crypt/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Library loft and chapel nave",
+          "tilePath": "assets/tiles/ancient-crypt/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Lower passages",
+          "tilePath": "assets/tiles/ancient-crypt/floor-3/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ],
+        "Passage": [
+          "↕",
+          "#64795b"
+        ],
+        "Pit trap": [
+          "▼",
+          "#a04438"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Doola (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Doola",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Ancient_Crypt_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Doola; positions adjusted to this illustration and names expanded. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Doola",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Ancient_Crypt_Map.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

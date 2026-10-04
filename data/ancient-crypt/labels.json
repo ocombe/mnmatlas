@@ -1,0 +1,137 @@
+{
+  "map": "ancient-crypt",
+  "tileRevision": "v1",
+  "coordinateZoom": 5,
+  "labels": [
+    {
+      "id": "library",
+      "name": "Library",
+      "level": "floor-1",
+      "x": 1880.0,
+      "y": 1800.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "library-loft",
+      "name": "Library loft",
+      "level": "floor-2",
+      "x": 1820.0,
+      "y": 1820.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "chapel-gallery",
+      "name": "Chapel gallery",
+      "level": "floor-1",
+      "x": 2500.0,
+      "y": 985.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "chapel-nave",
+      "name": "Chapel nave",
+      "level": "floor-2",
+      "x": 2500.0,
+      "y": 945.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "west-hall",
+      "name": "West hall",
+      "level": "floor-1",
+      "x": 590.0,
+      "y": 3540.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "lower-passages",
+      "name": "Lower passages",
+      "level": "floor-3",
+      "x": 3290.0,
+      "y": 3620.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "exit-wyrmsbane-tomb",
+      "name": "to Wyrmsbane Tomb",
+      "level": "floor-1",
+      "x": 2920.0,
+      "y": 810.0,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 2,
+      "approximate": true,
+      "note": "Approximate exit location; confirm in game.",
+      "arrow": "east",
+      "toMap": "wyrmsbane-tomb",
+      "toPlace": "exit-ancient-crypt"
+    },
+    {
+      "id": "exit-shaded-dunes",
+      "name": "to Shaded Dunes",
+      "level": "floor-1",
+      "x": 3100.0,
+      "y": 3180.0,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 2,
+      "approximate": true,
+      "note": "Approximate exit location; confirm in game.",
+      "arrow": "south",
+      "toMap": "shaded-dunes",
+      "toPlace": "to-ancient-crypt"
+    },
+    {
+      "id": "exit-caves-of-irem",
+      "name": "to Caves of Irem",
+      "level": "floor-1",
+      "x": 1627.06,
+      "y": 2104.69,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 2,
+      "approximate": true,
+      "note": "Approximate exit location; confirm in game.",
+      "arrow": "west"
+    }
+  ],
+  "trainers": [],
+  "attribution": {
+    "scope": "Names and positions only",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "sources": [
+      {
+        "sourceTitle": "Map by Doola",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Ancient_Crypt_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "scope": "Names and positions only"
+      }
+    ]
+  }
+}
