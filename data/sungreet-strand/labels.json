@@ -99,6 +99,19 @@
    "kind": "district",
    "priority": 100,
    "minZoom": 0.5
+  },
+  {
+   "id": "to-grain-cellar",
+   "name": "to Grain Cellar",
+   "x": 4528,
+   "y": 4882,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 3,
+   "arrow": "west",
+   "note": "Secret door in the farm courtyard by the river.",
+   "toMap": "grain-cellar",
+   "toPlace": "exit-sungreet-strand"
   }
  ],
  "trainers": []

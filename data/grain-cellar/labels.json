@@ -1,0 +1,98 @@
+{
+  "map": "grain-cellar",
+  "tileRevision": "v1",
+  "coordinateZoom": 5,
+  "labels": [
+    {
+      "id": "grain-bins",
+      "name": "Grain bins",
+      "x": 2444.0,
+      "y": 1388.3,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "central-hall",
+      "name": "Octagonal hall",
+      "x": 1900.0,
+      "y": 2474.6,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "east-cells",
+      "name": "North-east stores",
+      "x": 3468.0,
+      "y": 2464.5,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "south-stores",
+      "name": "South-east stores",
+      "x": 3212.0,
+      "y": 3504.5,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "altar",
+      "name": "Crocodile altar",
+      "x": 1260.0,
+      "y": 2651.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "cave",
+      "name": "Cave tunnel",
+      "x": 2508.0,
+      "y": 3261.7,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3,
+      "approximate": true,
+      "note": "Approximate room location; confirm in game."
+    },
+    {
+      "id": "exit-sungreet-strand",
+      "name": "to Sungreet Strand",
+      "x": 432.0,
+      "y": 627.0,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 2,
+      "arrow": "west",
+      "approximate": true,
+      "note": "Top of the entrance stair (drawn in the inset); the secret granary door leads out to Sungreet Strand.",
+      "toMap": "sungreet-strand",
+      "toPlace": "to-grain-cellar"
+    },
+    {
+      "id": "entrance-stair",
+      "name": "Entrance stair",
+      "x": 680.0,
+      "y": 1400.0,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 2.5,
+      "note": "The whole stair is drawn in the inset; it starts beside the altar."
+    }
+  ],
+  "trainers": []
+}

@@ -1,0 +1,73 @@
+[
+  {
+    "id": "a-sneaky-rat",
+    "name": "a sneaky rat",
+    "category": "Named mob",
+    "x": 2444.0,
+    "y": 1488.3,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "rais-muzari",
+    "name": "Rais Muzari",
+    "category": "Named mob",
+    "x": 3468.0,
+    "y": 2564.5,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "zakariah-shriki",
+    "name": "Zakariah Shriki",
+    "category": "Named mob",
+    "x": 3212.0,
+    "y": 3604.5,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "leila-al-bahri",
+    "name": "Leila al-Bahri",
+    "category": "Named mob",
+    "x": 1220.0,
+    "y": 2691.0,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "khalid-al-bahri",
+    "name": "Khalid al-Bahri",
+    "category": "Named mob",
+    "x": 1300.0,
+    "y": 2691.0,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "fariha-bint-nizar",
+    "name": "Fariha bint Nizar",
+    "category": "Named mob",
+    "x": 1220.0,
+    "y": 2811.0,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "priestess-of-kravvin",
+    "name": "a priestess of Kravvin",
+    "category": "Named mob",
+    "x": 1300.0,
+    "y": 2811.0,
+    "approximate": true,
+    "note": "Approximate room location after the community maps; confirm in game."
+  },
+  {
+    "id": "stair-foot",
+    "name": "Foot of the entrance stair",
+    "category": "Stairs",
+    "x": 1680.0,
+    "y": 2558.2,
+    "note": "The stair climbs to the granary door; see the inset in the north-west corner."
+  }
+]

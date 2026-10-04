@@ -812,6 +812,64 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "grain-cellar",
+      "title": "Grain Cellar",
+      "subtitle": "Beneath a Sungreet Strand granary",
+      "cartoucheKicker": "The cult below the farm",
+      "breadcrumb": "Monsters & Memories / Grain Cellar",
+      "description": "An illustrated fan atlas of the Grain Cellar. Find the grain bins, the cells, the cave tunnel and the crocodile altar, and keep your own field notes.",
+      "width": 4640,
+      "height": 4512,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/grain-cellar/{z}/{x}/{y}.webp",
+      "markersFile": "data/grain-cellar/markers.json",
+      "labelsFile": "data/grain-cellar/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by chazsolo and Map by Itsjustprax (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Grain_Cellar_Isometric.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by chazsolo and Map by Itsjustprax; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Grain_Cellar_Isometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by Itsjustprax",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Graincellar.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }
