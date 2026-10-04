@@ -76,7 +76,7 @@
   const list=text('div','','community-choices'),radios=[];
   for(const [key,label] of Object.entries(reasons)){const row=text('label',''),r=document.createElement('input');r.type='radio';r.name='report-reason';r.value=key;row.append(r,text('span',label));list.append(row);radios.push(r);}
   d.append(list);
-  const hint=text('p','Tip: in ✎ Edit positions you can drag the marker to the right spot and send it for review.','form-hint');hint.hidden=true;d.append(hint);
+  const hint=text('p','Tip: in ✎ Edit you can drag the marker to the right spot and send it for review.','form-hint');hint.hidden=true;d.append(hint);
   for(const r of radios)r.onchange=()=>{hint.hidden=r.value!=='position'||!r.checked;};
   const label=text('label','Details (optional)');label.htmlFor='report-comment';const comment=document.createElement('textarea');comment.id='report-comment';comment.maxLength=500;comment.rows=3;comment.placeholder='For example: it is on the other side of the bridge.';d.append(label,comment);
   const actions=text('div','','dialog-actions'),send=button('Send report',async()=>{
@@ -200,7 +200,7 @@
   clearPreview();const serial=++reviewSerial,content=$('review-content');content.replaceChildren();
   const toggle=text('label','','community-check'),check=document.createElement('input');check.type='checkbox';check.checked=all;check.onchange=()=>pendingTab(check.checked);toggle.append(check,text('span','All maps'));content.append(toggle,text('p','Loading…','form-hint'));
   try{let request=client.from('suggestions').select('*').eq('status','pending').order('created_at',{ascending:false}).order('id',{ascending:false});if(!all)request=request.eq('map',config.id);const {data,error}=await request.range(offset,offset+199);if(error)throw error;if(serial!==reviewSerial||!admin)return;content.lastChild.remove();
-   if(!data.length)content.append(text('p','Nothing to review. Reports come from Report a problem on a marker; suggestions from Edit positions and Share with everyone.','form-hint'));
+   if(!data.length)content.append(text('p','Nothing to review. Reports come from Report a problem on a marker; suggestions from Edit, Suggest an edit and Share with everyone.','form-hint'));
    const perAuthor=new Map();for(const row of data)perAuthor.set(row.user_id,(perAuthor.get(row.user_id)||0)+1);
    for(const row of data){const card=text('article','','review-card'),count=perAuthor.get(row.user_id);card.append(text('strong',row.payload.name),text('p','By '+(row.author_name||'Discord member')+(count>1?' ('+count+' waiting)':''),'review-author'),text('p',(kinds[row.kind]||row.kind)+' · '+row.map+(row.level?' / '+row.level:'')+' · '+new Date(row.created_at).toLocaleString(),'form-hint'));if(row.comment)card.append(text('p',row.comment));
     if(row.kind==='report')card.append(text('p',reasons[row.payload.reason]||'Something else','reported-reason'));

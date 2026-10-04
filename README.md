@@ -24,7 +24,7 @@ drafts use the earlier positions and do not apply to v2; their browser storage i
 retained, but they are not loaded on this edition. The supplied places already
 use the updated positions.
 
-Use **Edit positions** (✎) to drag markers, your notes and place names. **Done** saves the new positions in this browser and **Cancel** puts everything back; a moved marker or name can be reset to its published position. **Export moved positions** downloads them as a file.
+Use **Edit** (✎) to drag markers, your notes and place names, and to change their names and descriptions (your notes at once, published ones through **Suggest an edit**). **Done** saves the new positions in this browser and **Cancel** puts everything back; a moved marker or name can be reset to its published position. **Export moved positions** downloads them as a file.
 
 Optional accounts and contributions
 -----------------------------------

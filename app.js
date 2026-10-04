@@ -60,7 +60,7 @@ function copyButton(place){const b=text('button','Copy link','copy-place');b.typ
 function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker'});}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;
 function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',m.name));if(m.note)n.append(text('p',m.note));n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
- if(m.id.startsWith('personal-')&&!alignmentMode){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);n.append(edit);}
+ if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);n.append(edit);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  window.atlasCommunity?.popup(m,n);return n;}
 function labelEditPopup(row){
@@ -146,7 +146,7 @@ function applyOverrides(){
 function setEditing(on){
  alignmentMode=on;selectedAlignmentId=null;selectedAlignmentKind='marker';document.body.classList.toggle('aligning',on);
  $('edit-bar').hidden=!on;$('alignment-tools').hidden=!on;$('add').hidden=on;$('edit-positions').hidden=on;
- const toggle=$('edit-toggle');toggle.title=on?'Finish editing positions':'Edit positions';toggle.setAttribute('aria-label',toggle.title);toggle.classList.toggle('active',on);
+ const toggle=$('edit-toggle');toggle.title=on?'Finish editing':'Edit';toggle.setAttribute('aria-label',toggle.title);toggle.classList.toggle('active',on);
  map.closePopup();disposeLabels();disposeLabels=setupPlaceLabels(labelData);drawMarkers();updateAlignmentStatus();
 }
 function enterEdit(){
@@ -159,11 +159,13 @@ function saveEdits(){
  catch{status('Your browser could not save these positions. Free some storage and try again.',true);return false;}
  return persist(personal);
 }
+// A note's text saved while editing survives Cancel; only its unsaved move is undone.
+function keepInSnapshot(m){if(!editSnapshot)return;const before=editSnapshot.personal.find(p=>p.id===m.id);editSnapshot.personal=[...editSnapshot.personal.filter(p=>p.id!==m.id),before?{...m,x:before.x,y:before.y}:m];}
 function finishEdit(save){
  if(!alignmentMode)return;
  if(save){if(!saveEdits())return;}
- else{alignmentPositions=editSnapshot.positions;alignmentLabelPositions=editSnapshot.labels;personal=editSnapshot.personal;applyOverrides();}
- editSnapshot=null;buildPlaceIndex();setEditing(false);status(save?'Positions saved in this browser.':'Changes cancelled.');
+ else{alignmentPositions=editSnapshot.positions;alignmentLabelPositions=editSnapshot.labels;applyOverrides();persist(editSnapshot.personal);}
+ editSnapshot=null;buildPlaceIndex();setEditing(false);status(save?'Changes saved in this browser.':'Changes cancelled.');
  if(save)window.dispatchEvent(new CustomEvent('atlas:positions'));
  window.dispatchEvent(new CustomEvent('atlas:edit-ended'));
 }
@@ -426,8 +428,8 @@ function setupControls(){
   delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;
   if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
   const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&m.category!=='Class trainer')m.color=colour;
-  if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));}};
- $('delete').onclick=()=>{if(draft&&persist(personal.filter(p=>p.id!==draft.id))){closeEditor();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');}};
+  if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));}};
+ $('delete').onclick=()=>{if(draft&&persist(personal.filter(p=>p.id!==draft.id))){if(editSnapshot)editSnapshot.personal=editSnapshot.personal.filter(p=>p.id!==draft.id);closeEditor();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');}};
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};
  $('share').onclick=()=>copyLink();$('close-link').onclick=()=>$('link-dialog').close();
