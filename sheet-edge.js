@@ -39,38 +39,40 @@ function sheetWear(frame,seed){
    const band=Math.max(0,1-Math.abs(rr-1+wob)/.045),ang=(Math.atan2(v-ring.cy,u-ring.cx)/Math.PI+1)/2,gap=Math.abs(ang-ring.open)<.12?.25:1;
    mul([168,118,68],.5*band*gap);if(rr<1)mul([230,205,165],.18);}
   for(const p of spots){const k=Math.max(0,1-Math.hypot(u-p.x,v-p.y)/p.r);if(k)mul([172,122,72],.55*k*k);}
-  // Plain alpha instead of a multiply blend (blending a whole pane makes zooming slow): matches multiply
-  // exactly over the parchment tone, and darkens other colours a little less.
-  const P=[222,192,148],al=Math.min(.85,(1-(r+gg+b)/(3*255))*1.35);
-  if(al>.004){d[q]=P[0]-P[0]*(1-r/255)/al;d[q+1]=P[1]-P[1]*(1-gg/255)/al;d[q+2]=P[2]-P[2]*(1-b/255)/al;d[q+3]=al*255;}
+  d[q]=r;d[q+1]=gg;d[q+2]=b;d[q+3]=255;
  }
  g.putImageData(img,0,0);return cv;
 }
-// Fine paper fibre at screen scale, seamless over one tile (dark specks on transparent).
+// Fine paper fibre at screen scale, seamless over one tile, in multiply colours.
 let sheetGrainCanvas=null;
 function sheetGrain(){
  if(sheetGrainCanvas)return sheetGrainCanvas;const N=256,cv=document.createElement('canvas');cv.width=cv.height=N;const g=cv.getContext('2d'),img=g.createImageData(N,N),d=img.data;
- for(let j=0;j<N;j++)for(let i=0;i<N;i++){const f=sheetFbm(i/16,j/16,5,3,16)*.6+sheetFbm(i/32,j/32,6,3,8)*.4,h=sheetHash(i,j,77),v=26*Math.max(0,f-.35)+10*h,q=(j*N+i)*4;d[q]=70;d[q+1]=48;d[q+2]=26;d[q+3]=v*1.6;}
+ for(let j=0;j<N;j++)for(let i=0;i<N;i++){const f=sheetFbm(i/16,j/16,5,3,16)*.6+sheetFbm(i/32,j/32,6,3,8)*.4,h=sheetHash(i,j,77),v=255-26*Math.max(0,f-.35)-10*h,q=(j*N+i)*4;d[q]=v;d[q+1]=v*.985;d[q+2]=v*.96;d[q+3]=255;}
  g.putImageData(img,0,0);return sheetGrainCanvas=cv;
 }
 
+// The map's own tiles with the wear multiplied in on canvas: still one opaque layer, so no extra seams at
+// fractional zoom and no page-level blending while zooming.
+function sheetTileLayer(config,frame,url,options){
+ if(!sheetWorn(config))return L.tileLayer(url,options);
+ const cz=config.coordinateZoom,wear=sheetWear(frame,sheetSeed(config.id+'/'+(config.levelId||''))),ws=wear.width/frame.width,grain=sheetGrain();
+ const Art=L.GridLayer.extend({createTile(c,done){
+  const t=document.createElement('canvas'),N=256;t.width=t.height=N;t.className='art-tile';
+  const img=new Image();
+  img.onload=()=>{const g=t.getContext('2d'),k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k;g.drawImage(img,0,0);
+   g.globalCompositeOperation='multiply';g.imageSmoothingQuality='high';g.drawImage(wear,(X0-frame.x)*ws,(Y0-frame.y)*ws,N*k*ws,N*k*ws,0,0,N,N);
+   g.globalAlpha=.75;g.drawImage(grain,0,0);
+   // Keep the tile's own transparency (partial tiles at the edge of the art).
+   g.globalAlpha=1;g.globalCompositeOperation='destination-in';g.drawImage(img,0,0);done(null,t);};
+  img.onerror=e=>done(e,t);img.src=L.Util.template(url,{x:c.x,y:c.y,z:c.z});return t;
+ }});
+ return new Art(options);
+}
 function setupSheetEdge(map,config,frame){
  const cz=config.coordinateZoom,S=Math.max(frame.width,frame.height),sheet=frame,{desk,burnt}=SHEET,box=map.getContainer();
  box.style.backgroundColor=`rgb(${desk.join(',')})`;box.style.backgroundImage='none';
  const pane=map.getPane('sheet')||map.createPane('sheet');pane.style.zIndex='260';pane.style.pointerEvents='none';
  const layers=[];
- if(sheetWorn(config)){
-  // The wear pass lies over the art, below the rim and every marker or label.
-  const wearPane=map.getPane('sheet-wear')||map.createPane('sheet-wear');wearPane.style.zIndex='255';wearPane.style.pointerEvents='none';
-  const wear=sheetWear(frame,sheetSeed(config.id+'/'+(config.levelId||''))),ws=wear.width/frame.width,grain=sheetGrain();
-  const Wear=L.GridLayer.extend({createTile(c){
-   const t=document.createElement('canvas'),N=256;t.width=t.height=N;const g=t.getContext('2d'),k=2**(cz-c.z),X0=c.x*N*k,Y0=c.y*N*k;
-   g.imageSmoothingQuality='high';
-   g.drawImage(wear,(X0-frame.x)*ws,(Y0-frame.y)*ws,N*k*ws,N*k*ws,0,0,N,N);
-   g.globalAlpha=.75;g.drawImage(grain,0,0);return t;
-  }});
-  layers.push(new Wear({pane:'sheet-wear',tileSize:256,minZoom:config.minZoom,maxZoom:config.maxZoom,noWrap:true,updateWhenZooming:false,keepBuffer:1}));
- }
  // Rim tiles are painted a few at a time between frames, so zooming never waits on them.
  const queue=[];let timer=0;
  const work=()=>{timer=0;const end=performance.now()+6;while(queue.length&&performance.now()<end){const job=queue.shift();if(job.t.isConnected)job.run();}if(queue.length)timer=setTimeout(work,0);};
