@@ -89,10 +89,36 @@
   },'primary');
   actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
  }
+ // A published marker's or place name's text can be corrected; the change waits in review like any suggestion.
+ const editedNow=new Set(),editToken=(kind,id)=>config.id+':'+kind+':'+id;
+ function editDialog(target,kind){
+  if(!user){signInDialog();return;}
+  const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
+  d.append(text('p','Fix the name or the description. Your change waits for review before it appears on the map.','form-hint'));
+  const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
+  const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
+  const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
+  const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';
+  const actions=text('div','','dialog-actions'),send=button('Send for review',async()=>{
+   const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim();
+   if(!newName){status('Give it a name.');name.focus?.();return;}
+   if(newName===target.name&&newNote===oldNote){status('Change the name or the description first.');return;}
+   if(!user){signInDialog();return;}send.disabled=true;
+   try{const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,from:{name:target.name,note:target.note||''}},comment:why.value.trim()||null});if(error)throw error;
+    editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status('Thanks! Your edit is waiting for review.');event('edit-sent');}
+   catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The edit could not be sent. Please try again.');}
+   finally{send.disabled=false;}
+  },'primary');
+  actions.append(button('Cancel',()=>d.close()),send);d.append(actions);name.focus?.();
+ }
+ const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit');
  const sharedToken=m=>scope()+':'+m.id;
  window.atlasCommunity={popup(m,n){
   if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m)));return;}
-  n.append(reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report'));
+  const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report'));n.append(row);
+ },placePopup(p,n){
+  if(p.kind!=='label'||!labelData.labels.some(l=>l.id===p.id))return;
+  n.append(editButton(labelData.labels.find(l=>l.id===p.id),'edit-label'));
  }};
  function movedItems(){
   const sent=readSet(sentKey),rows=[];
@@ -170,6 +196,7 @@
    const perAuthor=new Map();for(const row of data)perAuthor.set(row.user_id,(perAuthor.get(row.user_id)||0)+1);
    for(const row of data){const card=text('article','','review-card'),count=perAuthor.get(row.user_id);card.append(text('strong',row.payload.name),text('p','By '+(row.author_name||'Discord member')+(count>1?' ('+count+' waiting)':''),'review-author'),text('p',(kinds[row.kind]||row.kind)+' · '+row.map+(row.level?' / '+row.level:'')+' · '+new Date(row.created_at).toLocaleString(),'form-hint'));if(row.comment)card.append(text('p',row.comment));
     if(row.kind==='report')card.append(text('p',reasons[row.payload.reason]||'Something else','reported-reason'));
+    if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));}
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType||row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
     const actions=text('div','','dialog-actions');if(row.user_id!==user?.id)actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button('Show on map',()=>preview(row)),...decisions(row,()=>note.value,card));card.append(actions);content.append(card);
@@ -198,7 +225,7 @@
   content.append(section);
  }
  // Reports close as fixed or dismissed; other suggestions are approved for publishing or rejected.
- const kinds={'move-marker':'Moved marker','move-label':'Moved label','new-marker':'New marker',report:'Problem report'};
+ const kinds={'move-marker':'Moved marker','move-label':'Moved label','new-marker':'New marker','edit-marker':'Edited marker','edit-label':'Edited place name',report:'Problem report'};
  function decisions(row,note,card){const report=row.kind==='report';return [button(report?'Dismiss':'Reject',()=>reviewAction(row,'rejected',note(),card)),button(report?'Fixed':'Approve',()=>reviewAction(row,report?'resolved':'approved',note(),card),'primary')];}
  async function reviewAction(row,state,note,card){
   for(const b of card.querySelectorAll('button'))b.disabled=true;
@@ -210,12 +237,12 @@
    review.close();const url=new URL(location.href);url.searchParams.set('map',row.map);for(const k of ['place','x','y','z'])url.searchParams.delete(k);if(row.level)url.searchParams.set('level',row.level);else url.searchParams.delete('level');
    if(config.id!==row.map||(row.level&&config.levelId!==row.level))await loadMap(row.map,url);
    if(config.id!==row.map||(row.level&&config.levelId!==row.level)||loading)throw Error();
-   clearPreview();reviewLayer=L.layerGroup().addTo(map);const p=row.payload,points=row.kind==='new-marker'||row.kind==='report'?[[p.x,p.y]]:[p.from,p.to];
+   clearPreview();reviewLayer=L.layerGroup().addTo(map);const p=row.payload,edit=row.kind==='edit-marker'||row.kind==='edit-label',points=edit?[(row.kind==='edit-label'?publishedLabelPositions:publishedPositions).get(row.target_id)]:row.kind==='new-marker'||row.kind==='report'?[[p.x,p.y]]:[p.from,p.to];
    const locations=points.map(xy=>{if(!Array.isArray(xy)||xy.length!==2||!bounded(...xy,config.minZoom))throw Error();return locationOf({x:xy[0],y:xy[1]});});
-   locations.forEach((where,i)=>{const suggested=points.length===1||i,label=points.length===1?(row.kind==='report'?'Reported marker':'Suggested marker'):i?'Suggested position':'Published position';const marker=L.circleMarker(where,{radius:suggested?9:6,color:suggested?'#b5861f':'#2f6f9a',fillColor:suggested?'#b5861f':'#2f6f9a',fillOpacity:.75,weight:3}).bindTooltip(()=>text('span',label+' · '+p.name),{permanent:true,direction:suggested?'bottom':'top'});reviewLayer.addLayer(marker);});
+   locations.forEach((where,i)=>{const suggested=points.length===1||i,label=points.length===1?(row.kind==='report'?'Reported marker':edit?'Edited':'Suggested marker'):i?'Suggested position':'Published position';const marker=L.circleMarker(where,{radius:suggested?9:6,color:suggested?'#b5861f':'#2f6f9a',fillColor:suggested?'#b5861f':'#2f6f9a',fillOpacity:.75,weight:3}).bindTooltip(()=>text('span',label+' · '+p.name),{permanent:true,direction:suggested?'bottom':'top'});reviewLayer.addLayer(marker);});
    if(locations.length===2)reviewLayer.addLayer(L.polyline(locations,{color:'#b5861f',weight:2,dashArray:'6 6'}));
    const bar=text('section','','community-preview');bar.id='community-preview';bar.setAttribute('aria-label','Review selected suggestion');bar.append(text('strong',p.name));const note=document.createElement('input');note.placeholder='Optional review note';note.setAttribute('aria-label','Optional review note');note.maxLength=500;bar.append(note);const actions=text('div','','dialog-actions');actions.append(button('Close',clearPreview),...decisions(row,()=>note.value,bar));bar.append(actions);$('map-frame').append(bar);
-   if(locations.length===2)map.fitBounds(L.latLngBounds(locations),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else map.setView(locations[0],config.defaultView.placeZoom);if(compact())setPanel(false);status(locations.length===2?'Blue: published position. Amber: suggested position.':row.kind==='report'?'Amber: reported marker.':'Amber: suggested marker.');
+   if(locations.length===2)map.fitBounds(L.latLngBounds(locations),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else map.setView(locations[0],config.defaultView.placeZoom);if(compact())setPanel(false);status(locations.length===2?'Blue: published position. Amber: suggested position.':row.kind==='report'?'Amber: reported marker.':edit?'Amber: the marker or name being edited.':'Amber: suggested marker.');
   }catch{clearPreview();status('This suggestion could not be shown on the map.');}
  }
  accountUI();client.auth.onAuthStateChange((eventName,session)=>{setTimeout(()=>authChanged(session).catch(()=>status('Account could not refresh. Your local notes are safe.')),0);});

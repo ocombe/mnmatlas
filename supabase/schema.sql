@@ -45,7 +45,7 @@ create table if not exists public.banned (
 -- Kind, status and payload rules live here so re-running this file updates an existing table.
 -- A report says what is wrong with a published marker; it closes as resolved (fixed) or rejected (dismissed).
 alter table public.suggestions drop constraint if exists suggestions_kind_check;
-alter table public.suggestions add constraint suggestions_kind_check check (kind in ('move-marker','move-label','new-marker','report'));
+alter table public.suggestions add constraint suggestions_kind_check check (kind in ('move-marker','move-label','new-marker','edit-marker','edit-label','report'));
 alter table public.suggestions drop constraint if exists suggestions_status_check;
 alter table public.suggestions add constraint suggestions_status_check check (status in ('pending','approved','rejected','published','resolved'));
 alter table public.suggestions drop constraint if exists suggestion_payload;
@@ -58,6 +58,10 @@ alter table public.suggestions add constraint suggestion_payload check (coalesce
   and jsonb_array_length(payload->'from')=2 and jsonb_array_length(payload->'to')=2
   and jsonb_typeof(payload->'from'->0)='number' and jsonb_typeof(payload->'from'->1)='number'
   and jsonb_typeof(payload->'to'->0)='number' and jsonb_typeof(payload->'to'->1)='number'
+ when kind in ('edit-marker','edit-label') then
+  target_id is not null and jsonb_typeof(payload->'from')='object' and jsonb_typeof(payload->'from'->'name')='string'
+  and char_length(payload->'from'->>'name')<=100
+  and (not payload->'from' ? 'note' or (jsonb_typeof(payload->'from'->'note')='string' and char_length(payload->'from'->>'note')<=2000))
  when kind='report' then
   target_id is not null and payload->>'reason' in ('position','name','type','missing','other')
   and jsonb_typeof(payload->'x')='number' and jsonb_typeof(payload->'y')='number'

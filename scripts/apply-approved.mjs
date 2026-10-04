@@ -44,7 +44,8 @@ function mapCategories(c){const extra=registry.maps.find(m=>m.id===c.id)?.extraC
 function point(p,c,id){if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<0||p[1]<0||p[0]>c.width||p[1]>c.height)fail('Invalid position for suggestion '+id+'.');return p.map(Math.round);}
 function validatePayload(row,c){
  const p=row.payload;if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
- if(!['move-marker','move-label','new-marker'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
+ if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
+ if((row.kind==='edit-marker'||row.kind==='edit-label')&&(!p.from||typeof p.from!=='object'||typeof p.from.name!=='string'||typeof (p.note??'')!=='string'||(p.note||'').length>2000))fail('Invalid edit for suggestion '+row.id+'.');
  if(row.kind==='new-marker'){
   // Only categories this map can draw; an unknown one would break the map for every visitor.
   if(!(p.noteType==='label'||p.noteType==='exit')&&!mapCategories(c).has(p.category)||!supported.categories.includes(p.category)||typeof (p.note??'')!=='string'||(p.note||'').length>2000||![undefined,'marker','label','exit'].includes(p.noteType)||p.trade!==undefined&&!supported.trades.includes(p.trade)||p.color!==undefined&&!supported.colours.includes(p.color)||p.arrow!==undefined&&!supported.arrows.includes(p.arrow))fail('Unsupported marker fields for suggestion '+row.id+'.');
@@ -61,6 +62,16 @@ async function apply(row){
   if(label&&p.noteType==='exit')m.arrow=p.arrow||'east';
   if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;}
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
+ }
+ // Text edits only apply while the published text is still what the visitor saw.
+ if(row.kind==='edit-marker'||row.kind==='edit-label'){
+  const label=row.kind==='edit-label',f=await file(label?c.labelsFile:c.markersFile),rows=label?f.data?.labels:f.data;
+  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
+  const m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId));if(!m)fail('Target missing for suggestion '+row.id+'.');
+  const name=clean(p.name),note=clean(p.note||'',true);
+  if(clean(m.name)===name&&clean(m.note||'',true)===note)return 'already edited';
+  if(clean(m.name)!==clean(p.from.name)||clean(m.note||'',true)!==clean(p.from.note||'',true))fail('Published text has changed for suggestion '+row.id+'; review it again.');
+  m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;f.changed=true;return label?'place name edited':'marker edited';
  }
  const path=row.kind==='move-label'?c.labelsFile:c.markersFile,f=await file(path),rows=row.kind==='move-label'?f.data.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');

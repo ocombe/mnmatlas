@@ -22,12 +22,14 @@ try{
   {id:1,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[10,20],to:[30.6,40.2],name:'Bank'}},
   {id:2,map:'test-map',level:'upper',kind:'move-label',target_id:'place',payload:{from:[20,30],to:[40,50],name:'Hall'}},
   {id:3,map:'test-map',level:'lower',kind:'new-marker',payload:{x:12.6,y:17.1,name:'Ore',category:'Tradeskill',note:'A note',trade:'Mining',color:'#a04438',extra:'discard'}},
-  {id:4,map:'test-map',level:'upper',kind:'new-marker',payload:{x:15,y:16,name:'Way out',category:'Personal',note:'Exit',noteType:'exit',arrow:'north'}}
+  {id:4,map:'test-map',level:'upper',kind:'new-marker',payload:{x:15,y:16,name:'Way out',category:'Personal',note:'Exit',noteType:'exit',arrow:'north'}},
+  {id:10,map:'test-map',level:'upper',kind:'edit-label',target_id:'place',payload:{name:'Great Hall',note:'Big room',from:{name:'Hall',note:''}}},
+  {id:11,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{name:'Bank of the Bay',note:'Open late',from:{name:'Bank',note:''}}}
  ];
  const before=await readFile(fixture+'/data/markers.json','utf8'),dry=await run(true);assert.equal(dry.code,0,dry.output);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),before);assert.equal(patches.length,0);assert(!dry.output.includes('test-secret'));
  const result=await run();assert.equal(result.code,0,result.output);assert.equal(patches.length,1);assert.equal(patches[0].status,'published');
  const written=await readFile(fixture+'/data/markers.json','utf8'),rows=JSON.parse(written);assert.deepEqual([rows[0].x,rows[0].y],[31,40]);assert.equal(rows[1].id,'community-3');assert.equal(rows[1].trade,'Mining');assert.equal(rows[1].color,'#a04438');assert(!Object.hasOwn(rows[1],'extra'));assert(!Object.hasOwn(rows[1],'noteType'));assert(written.endsWith('\r\n'));assert(!/(?<!\r)\n/.test(written));
- const names=JSON.parse(await readFile(fixture+'/data/upper-labels.json','utf8'));assert.equal(names.labels[0].x,40);assert.equal(names.labels[1].kind,'exit');assert.equal(names.labels[1].arrow,'north');assert.equal(names.labels[1].level,'upper');assert.equal(JSON.parse(await readFile(fixture+'/data/labels.json','utf8')).trainers[0].x,31);
+ const names=JSON.parse(await readFile(fixture+'/data/upper-labels.json','utf8'));assert.equal(names.labels[0].name,'Great Hall');assert.equal(names.labels[0].note,'Big room');assert.equal(rows[0].name,'Bank of the Bay');assert.equal(rows[0].note,'Open late');assert.equal(names.labels[0].x,40);assert.equal(names.labels[1].kind,'exit');assert.equal(names.labels[1].arrow,'north');assert.equal(names.labels[1].level,'upper');assert.equal(JSON.parse(await readFile(fixture+'/data/labels.json','utf8')).trainers[0].x,31);
  const again=await run();assert.equal(again.code,0,again.output);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);
  approved=[{id:5,map:'test-map',level:'lower',kind:'new-marker',payload:{x:10,y:20,name:'New bank',category:'Bank'}},{id:6,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[1,2],to:[50,60],name:'Bank'}}];
  const patchCount=patches.length,invalid=await run();assert.equal(invalid.code,1);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);assert.equal(patches.length,patchCount);

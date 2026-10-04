@@ -146,3 +146,5 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 @media(max-width:760px){.community-dialog,.community-review{padding:18px}.community-dialog button,.community-review button,.community-account button,.community-report{min-height:44px}}
 .community-who{display:flex;align-items:center;gap:9px}.community-who img{width:28px;height:28px;border-radius:50%;flex:none;border:1px solid var(--border)}
 .reported-reason{margin:2px 0 6px 10px;font-size:12px;color:var(--muted-foreground);white-space:pre-wrap;overflow-wrap:anywhere}
+/* Suggest an edit sits beside Report a problem; reviewers see the text before and after. */
+.community-actions{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.review-change{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;margin:4px 0;padding:6px 8px;border-left:2px solid var(--primary);background:var(--muted)}
