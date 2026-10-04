@@ -19,25 +19,19 @@ function sheetWear(frame,seed){
  const S=Math.max(frame.width,frame.height),L=640,sc=L/S,W=Math.max(2,Math.round(frame.width*sc)),H=Math.max(2,Math.round(frame.height*sc));
  const cv=document.createElement('canvas');cv.width=W;cv.height=H;const g=cv.getContext('2d'),img=g.createImageData(W,H),d=img.data;
  const rnd=i=>sheetHash(i,seed,9);
- // A few cup rings and water marks, mostly towards the edges and corners.
- const rings=[];const nr=2+Math.floor(rnd(1)*2);
- for(let i=0;i<nr;i++){const side=rnd(10+i),along=.08+.84*rnd(20+i),off=.03+.12*rnd(30+i),w=frame.width/S,h=frame.height/S;
-  const [cx,cy]=side<.25?[along*w,off]:side<.5?[along*w,h-off]:side<.75?[off,along*h]:[w-off,along*h];rings.push({cx,cy,r:.025+.035*rnd(40+i),open:rnd(50+i)});}
- const spots=[];for(let i=0;i<70;i++){const e=rnd(100+i)**2*.14,side=rnd(200+i),a=rnd(300+i),w=frame.width/S,h=frame.height/S;
+ // Foxing spots near the edges; all wear stays in a band along the rim so the map itself stays clear.
+ const spots=[];for(let i=0;i<70;i++){const e=rnd(100+i)**2*.07,side=rnd(200+i),a=rnd(300+i),w=frame.width/S,h=frame.height/S;
   spots.push({x:side<.25?a*w:side<.5?a*w:side<.75?e:w-e,y:side<.25?e:side<.5?h-e:side<.75?a*h:a*h,r:.0012+.004*rnd(400+i)**2});}
  for(let j=0;j<H;j++)for(let i=0;i<W;i++){
   const u=(i+.5)/sc/S,v=(j+.5)/sc/S,w=frame.width/S,h=frame.height/S,D=Math.min(u,v,w-u,h-v),q=(j*W+i)*4;
   const n1=sheetFbm(u*5,v*5,seed,4),n2=sheetFbm(u*16,v*16,seed+7,4);
-  // Warm base and a soft all-over mottle, stronger towards the rim.
+  // Warm base, then darkening and a soft mottle along the rim and in the corners.
   let r=252,gg=245,b=232;const mul=(c,a)=>{a=Math.min(1,a*strength);r*=1-a*(1-c[0]/255);gg*=1-a*(1-c[1]/255);b*=1-a*(1-c[2]/255);};
-  const edge=Math.max(0,1-D/(.11*(.6+.8*n1)));mul([204,160,108],.6*edge*edge);
-  const cd=Math.min(Math.hypot(u,v),Math.hypot(w-u,v),Math.hypot(u,h-v),Math.hypot(w-u,h-v)),corner=Math.max(0,1-cd/.2);mul([190,140,90],.35*corner*corner);
-  mul([226,204,170],Math.max(0,(n1-.42)*.9)*(.45+.55*Math.min(1,edge*2)));
-  // Water stains: pale blotches with a darker tide line where they dried.
-  const s=n2+.25*(n1-.5);if(s>.6){const tide=Math.max(0,1-Math.abs(s-.61)/.012);mul([222,190,145],.45*Math.min(1,(s-.6)*8)*(.35+.65*Math.min(1,edge*1.5)));mul([175,125,75],.35*tide*(.3+.7*Math.min(1,edge*1.5)));}
-  for(const ring of rings){const rr=Math.hypot(u-ring.cx,v-ring.cy)/ring.r,wob=.03*(sheetFbm(u*60,v*60,seed+3,3)-.5);
-   const band=Math.max(0,1-Math.abs(rr-1+wob)/.045),ang=(Math.atan2(v-ring.cy,u-ring.cx)/Math.PI+1)/2,gap=Math.abs(ang-ring.open)<.12?.25:1;
-   mul([168,118,68],.5*band*gap);if(rr<1)mul([230,205,165],.18);}
+  const edge=Math.max(0,1-D/(.045*(.6+.8*n1)));mul([204,160,108],.5*edge*edge);
+  const cd=Math.min(Math.hypot(u,v),Math.hypot(w-u,v),Math.hypot(u,h-v),Math.hypot(w-u,h-v)),corner=Math.max(0,1-cd/.09);mul([190,140,90],.3*corner*corner);
+  const near=Math.max(0,1-D/.08);mul([226,204,170],Math.max(0,(n1-.42)*.9)*near);
+  // Small water stains along the rim: pale blotches with a darker tide line where they dried.
+  const s=n2+.25*(n1-.5);if(s>.6&&near>0){const tide=Math.max(0,1-Math.abs(s-.61)/.012);mul([222,190,145],.4*Math.min(1,(s-.6)*8)*near*near);mul([175,125,75],.3*tide*near*near);}
   for(const p of spots){const k=Math.max(0,1-Math.hypot(u-p.x,v-p.y)/p.r);if(k)mul([172,122,72],.55*k*k);}
   d[q]=r;d[q+1]=gg;d[q+2]=b;d[q+3]=255;
  }
