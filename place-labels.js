@@ -1,6 +1,9 @@
 /* Community place names. Text only, no HTML input. */
 'use strict';
 let atlasLabels,trainerDetails=new Map(),labelPins=new Map(),schedulePlaceLabels=()=>{};
+// Exit sign style preview: ?exits=a|b|c|d (no value keeps the current lettering).
+let exitStyle=(new URLSearchParams(location.search).get('exits')||'').toLowerCase();
+if(!/^[a-d]$/.test(exitStyle))exitStyle='';else document.documentElement.classList.add('exits-'+exitStyle);
 function trainerIcon(m){
  const detail=trainerDetails.get(m.id);
  const face=text('span',detail?detail.abbreviations.join(' · '):'CLASS','trainer-badge');
@@ -18,7 +21,13 @@ function setupPlaceLabels(data){
  const pane=map.getPane('placeNames')||map.createPane('placeNames');pane.style.zIndex=alignmentMode?'650':'450';pane.style.pointerEvents='none';
  const entries=data.labels.filter(atLevel).sort((a,b)=>b.priority-a.priority).map(row=>{
   const target=(row.kind==='exit'||row.kind==='zone')&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
-  const face=text(target?'a':'span',(row.kind==='exit'?exitArrows[row.arrow]+' ':'')+row.name,'place-name '+row.kind+(target?' linked':''));
+  const face=text(target?'a':'span',row.kind==='exit'?'':row.name,'place-name '+row.kind+(target?' linked':''));
+  if(row.kind==='exit'){
+   const side=/west/.test(row.arrow)?'west':/east/.test(row.arrow)?'east':row.arrow==='south'?'south':'north';
+   face.classList.add('to-'+side);if(!target&&!alignmentMode)face.classList.add('unmapped');
+   face.append(text('b',exitArrows[row.arrow]||'→','exit-arrow'),text('span',' '+row.name,'exit-name'));
+   if(!target&&!alignmentMode)face.append(text('small','not mapped yet','exit-soon'));
+  }
   // Exit names that lead to another published map open it, at the matching exit when given.
   if(target){
    const url=mapAddress(target.id),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);if(row.toPlace)url.searchParams.set('place',row.toPlace);
@@ -38,6 +47,8 @@ function setupPlaceLabels(data){
  });
  const visibleElement=el=>el.getClientRects().length&&el.style.opacity!=='0';
  let frame,disposed=false;
+ // Exit signs matter more than names, so they try a wider ring before hiding.
+ const exitOffsets=[[0,0],[0,26],[0,-30],[40,0],[-40,0],[34,24],[-34,24],[34,-26],[-34,-26],[0,52],[0,-56],[70,0],[-70,0]];
  const intersects=(a,b)=>a.left<b.right+4&&a.right>b.left-4&&a.top<b.bottom+3&&a.bottom>b.top-3;
  function layout(){
   // A late callback from a replaced map (level or map switch) must not add its names to the new map.
@@ -77,16 +88,21 @@ function setupPlaceLabels(data){
    const p=map.latLngToContainerPoint(locationOf(row));
    if(p.x<0||p.y<0||p.x>view.width||p.y>view.height){marker.remove();continue;}
    if(!map.hasLayer(marker))marker.addTo(map);
-   face.style.fontSize=(row.kind==='zone'?Math.min(30,16+Math.max(0,zoom-1)*4):row.kind==='region'?Math.min(40,22+Math.max(0,zoom-1)*5):row.kind==='district'?Math.min(21,15+Math.max(0,zoom-2)*1.5):row.kind==='exit'?13:12)+'px';
+   face.style.fontSize=(row.kind==='zone'?Math.min(30,16+Math.max(0,zoom-1)*4):row.kind==='region'?Math.min(40,22+Math.max(0,zoom-1)*5):row.kind==='district'?Math.min(21,15+Math.max(0,zoom-2)*1.5):row.kind==='exit'?(exitStyle?Math.min(16,Math.max(13,12+(zoom-2)*.8)):13):12)+'px';
    const selected=alignmentMode&&selectedAlignmentKind==='label'&&selectedAlignmentId===row.id;
    face.classList.toggle('selected',selected);marker.setZIndexOffset(selected?1000:0);
    face.style.visibility='hidden';
    let accepted=false;
    // Small offsets keep names close to their anchors; lower priority names hide
    // if none fits. Screen-space rectangles include actual text and marker sizes.
-   for(const [dx,dy] of (alignmentMode?[[0,0]]:[[0,0],[0,23],[0,-29],[26,17],[-26,17]])){
+   for(const [dx,dy] of (alignmentMode?[[0,0]]:row.kind==='exit'&&exitStyle?exitOffsets:[[0,0],[0,23],[0,-29],[26,17],[-26,17]])){
     face.style.transform=`translate(calc(-50% + ${dx}px),calc(-50% + ${dy}px))`;
-    const rect=face.getBoundingClientRect();
+    let rect=face.getBoundingClientRect();
+    // Exit signs near the frame slide back inside the view instead of hiding.
+    if(row.kind==='exit'&&exitStyle&&!alignmentMode){
+     const sx=Math.max(0,view.left+16-rect.left)-Math.max(0,rect.right-(view.right-16)),sy=Math.max(0,view.top+16-rect.top)-Math.max(0,rect.bottom-(view.bottom-30));
+     if((sx||sy)&&Math.abs(sx)<rect.width&&Math.abs(sy)<rect.height*2){face.style.transform=`translate(calc(-50% + ${dx+sx}px),calc(-50% + ${dy+sy}px))`;rect=face.getBoundingClientRect();}
+    }
     if(rect.left<view.left+16||rect.right>view.right-16||rect.top<view.top+16||rect.bottom>view.bottom-30||(selected?chromeRects:occupied).some(r=>intersects(rect,r)))continue;
     occupied.push(rect);accepted=true;break;
    }

@@ -148,3 +148,46 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .reported-reason{margin:2px 0 6px 10px;font-size:12px;color:var(--muted-foreground);white-space:pre-wrap;overflow-wrap:anywhere}
 /* Suggest an edit sits beside Report a problem; reviewers see the text before and after. */
 .community-actions{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.review-change{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;margin:4px 0;padding:6px 8px;border-left:2px solid var(--primary);background:var(--muted)}
+
+/* Exit signs. Default keeps the inked italic lettering; ?exits=a-d previews sign styles. */
+.place-name.exit .exit-arrow{font-weight:inherit}.place-name.exit .exit-soon{display:none}
+[class*="exits-"] .place-name.exit{font-style:normal;text-decoration:none;max-width:220px;white-space:nowrap;letter-spacing:.3px}
+[class*="exits-"] .place-name.exit .exit-name{font-family:var(--small-caps)}
+[class*="exits-"] .place-name.exit .exit-soon{display:block;font:italic 600 .62em/1.2 var(--body);letter-spacing:.4px;margin-top:2px;text-transform:none}
+/* A: dark signboard, amber rim. */
+.exits-a .place-name.exit{padding:4px 10px 5px;border:1.5px solid #d29a48;border-radius:6px;background:#2a1f15f2;color:#f6e9cc;text-shadow:none;box-shadow:0 2px 6px #0008,0 0 0 1px #0006}
+.exits-a .place-name.exit .exit-arrow{color:#f0b65c;margin-right:2px}
+.exits-a .place-name.exit.linked:hover,.exits-a .place-name.exit.linked:focus-visible{background:#3d2c1b;border-color:#f0b65c;color:#fff4dc}
+.exits-a .place-name.exit.unmapped{border:1.5px dashed #9b8a72;background:#2a1f15c4;color:#d9cbb2}
+.exits-a .place-name.exit.unmapped .exit-arrow{color:#a8977d}.exits-a .place-name.exit.unmapped .exit-soon{color:#b8a88f}
+/* B: parchment tag with a rust arrow seal. */
+.exits-b .place-name.exit{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:6px;padding:3px 10px 3px 3px;border:1.5px solid #8b3a1e;border-radius:999px;background:#f6ead0;color:#3a2414;text-shadow:none;box-shadow:0 2px 5px #2a1a0c99}
+.exits-b .place-name.exit .exit-arrow{display:grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#8b3a1e;color:#fff1d6;font:700 .9em/1 var(--body)}
+.exits-b .place-name.exit .exit-name{font-weight:normal}
+.exits-b .place-name.exit .exit-arrow{grid-row:span 2}.exits-b .place-name.exit .exit-soon{grid-column:2;margin:-2px 0 1px;color:#7a6a55}
+.exits-b .place-name.exit.linked:hover,.exits-b .place-name.exit.linked:focus-visible{background:#fff6e2;border-color:#b0481f}
+.exits-b .place-name.exit.unmapped{border:1.5px dashed #8d7b62;background:#efe4cdd9;color:#5d4d3a}
+.exits-b .place-name.exit.unmapped .exit-arrow{background:none;border:1.5px dashed #8d7b62;color:#6d5c47}
+/* C: no box; big arrow badge and heavier lettering. */
+.exits-c .place-name.exit{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:6px;font-size:inherit;color:#5b1d10;text-shadow:-1.5px -1.5px 1px #fff3d7,1.5px -1.5px 1px #fff3d7,-1.5px 1.5px 1px #fff3d7,1.5px 1.5px 1px #fff3d7,0 0 5px #fff3d7,0 0 9px #fff3d7,0 0 13px #fff3d7}
+.exits-c .place-name.exit .exit-arrow{display:grid;place-items:center;width:1.75em;height:1.75em;border-radius:50%;background:#5b1d10;border:2px solid #f0b65c;color:#fff1d6;font:700 .95em/1 var(--body);text-shadow:none;box-shadow:0 0 0 2px #fff3d7,0 2px 5px #0007}
+.exits-c .place-name.exit .exit-name{font-size:1.12em;letter-spacing:.5px}
+.exits-c .place-name.exit .exit-arrow{grid-row:span 2}.exits-c .place-name.exit .exit-soon{grid-column:2;margin:-3px 0 0;color:#4b4036}
+.exits-c .place-name.exit.linked:hover .exit-name,.exits-c .place-name.exit.linked:focus-visible .exit-name{text-decoration:underline;text-underline-offset:3px}
+.exits-c .place-name.exit.unmapped{color:#4b4036}
+.exits-c .place-name.exit.unmapped .exit-arrow{background:#fff3d7;border:2px dashed #6f6152;color:#4b4036}
+/* D: wooden signpost board pointing the way out. */
+.exits-d .place-name.exit{isolation:isolate;padding:5px 12px 6px;color:#fbefd3;text-shadow:0 1px 1px #0009;filter:drop-shadow(0 2px 3px #000a)}
+.exits-d .place-name.exit::before,.exits-d .place-name.exit::after{content:'';position:absolute;z-index:-1;inset:0;background:#e1a95a;clip-path:var(--sign)}
+.exits-d .place-name.exit::after{inset:2px;background:linear-gradient(#7a5130,#5e3d22 55%,#523419);clip-path:var(--sign)}
+.exits-d .place-name.exit.to-east{--sign:polygon(0 0,calc(100% - .9em) 0,100% 50%,calc(100% - .9em) 100%,0 100%);padding-right:1.4em}
+.exits-d .place-name.exit.to-west{--sign:polygon(.9em 0,100% 0,100% 100%,.9em 100%,0 50%);padding-left:1.4em}
+.exits-d .place-name.exit.to-north{--sign:polygon(0 .6em,calc(50% - .8em) .6em,50% 0,calc(50% + .8em) .6em,100% .6em,100% 100%,0 100%);padding-top:.75em}
+.exits-d .place-name.exit.to-south{--sign:polygon(0 0,100% 0,100% calc(100% - .6em),calc(50% + .8em) calc(100% - .6em),50% 100%,calc(50% - .8em) calc(100% - .6em),0 calc(100% - .6em));padding-bottom:.85em}
+.exits-d .place-name.exit .exit-arrow{color:#ffd28a;margin-right:2px}
+.exits-d .place-name.exit .exit-soon{color:#e6d6b8}
+.exits-d .place-name.exit.linked:hover,.exits-d .place-name.exit.linked:focus-visible{color:#fff6e0}
+.exits-d .place-name.exit.linked:hover::after,.exits-d .place-name.exit.linked:focus-visible::after{background:linear-gradient(#8d5f39,#6d4728 55%,#5e3c1e)}
+.exits-d .place-name.exit.unmapped{color:#e7dcc8;filter:drop-shadow(0 2px 3px #0008) saturate(.25)}
+.exits-d .place-name.exit.unmapped::before{background:#a5998a}
+.exits-d .place-name.exit.unmapped::after{background:linear-gradient(#6c6155,#574d43)}
