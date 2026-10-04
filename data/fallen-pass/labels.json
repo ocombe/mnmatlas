@@ -68,7 +68,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1,
-   "arrow": "north"
+   "arrow": "north",
+   "toMap": "vale-of-zintar",
+   "toPlace": "to-fallen-pass"
   },
   {
    "id": "to-fallen-watch",

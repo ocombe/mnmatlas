@@ -770,6 +770,48 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "vale-of-zintar",
+      "title": "Vale of Zintar",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The giants' vale north of Fallen Pass",
+      "breadcrumb": "Monsters & Memories / Vale of Zintar",
+      "description": "An illustrated fan atlas of the Vale of Zintar: the Sand Giant City, the lake camp, the Copper Mine, the Putrid Oasis and the coast, with place names and personal field notes.",
+      "width": 8640,
+      "height": 10368,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/vale-of-zintar/{z}/{x}/{y}.webp",
+      "markersFile": "data/vale-of-zintar/markers.json",
+      "labelsFile": "data/vale-of-zintar/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names, camps and exits after Ganderdot's Vale of Zintar map (CC BY-SA 4.0)",
+        "sourceTitle": "Ganderdot's Vale of Zintar wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Vale_of_Zintar_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, camps, named creatures and exits adapted from Ganderdot's Vale of Zintar map; positions placed on this illustration and approximate; entries he marked 'verify' are flagged."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

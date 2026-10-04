@@ -51,7 +51,8 @@
    "x": 1106,
    "y": 1572,
    "kind": "zone",
-   "priority": 60
+   "priority": 60,
+   "toMap": "vale-of-zintar"
   },
   {
    "id": "zone-shallow-shoals",

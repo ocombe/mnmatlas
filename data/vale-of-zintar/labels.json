@@ -1,0 +1,205 @@
+{
+ "map": "vale-of-zintar",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "vale-of-zintar",
+   "name": "Vale of Zintar",
+   "x": 3556,
+   "y": 4956,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  },
+  {
+   "id": "sand-giant-city",
+   "name": "Sand Giant City",
+   "x": 4550,
+   "y": 1857,
+   "kind": "district",
+   "priority": 90,
+   "minZoom": 1.5
+  },
+  {
+   "id": "lake-camp",
+   "name": "Lake Camp",
+   "x": 2892,
+   "y": 5131,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "copper-mine",
+   "name": "Copper Mine",
+   "x": 2638,
+   "y": 6160,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "putrid-oasis",
+   "name": "Putrid Oasis",
+   "x": 5266,
+   "y": 6934,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2
+  },
+  {
+   "id": "fisher-rock",
+   "name": "Fisher Rock",
+   "x": 1376,
+   "y": 3611,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "termite-mounds",
+   "name": "Termite Mounds",
+   "x": 2280,
+   "y": 7585,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2.5
+  },
+  {
+   "id": "snake-den",
+   "name": "Snake Den",
+   "x": 4602,
+   "y": 7933,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2.5
+  },
+  {
+   "id": "bat-cave",
+   "name": "Bat Cave",
+   "x": 4962,
+   "y": 5566,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2.5
+  },
+  {
+   "id": "pyramid-chamber",
+   "name": "Wizard Pyramid Chamber",
+   "x": 2970,
+   "y": 5787,
+   "kind": "district",
+   "priority": 60,
+   "minZoom": 3
+  },
+  {
+   "id": "mercenary-tower",
+   "name": "Pyrmos Mercenary Tower",
+   "x": 2922,
+   "y": 8635,
+   "kind": "district",
+   "priority": 60,
+   "minZoom": 3
+  },
+  {
+   "id": "giant-forge",
+   "name": "Giant Forge",
+   "x": 4008,
+   "y": 2340,
+   "kind": "district",
+   "priority": 55,
+   "minZoom": 3.5
+  },
+  {
+   "id": "giant-statues",
+   "name": "Giant Statues",
+   "x": 2446,
+   "y": 5295,
+   "kind": "district",
+   "priority": 55,
+   "minZoom": 3
+  },
+  {
+   "id": "ruined-tower",
+   "name": "Ruined Tower",
+   "x": 6244,
+   "y": 2613,
+   "kind": "district",
+   "priority": 55,
+   "minZoom": 3
+  },
+  {
+   "id": "watchtower",
+   "name": "Wooden Watchtower",
+   "x": 3310,
+   "y": 6705,
+   "kind": "district",
+   "priority": 50,
+   "minZoom": 3.5
+  },
+  {
+   "id": "caravel",
+   "name": "Caravel",
+   "x": 954,
+   "y": 8966,
+   "kind": "district",
+   "priority": 50,
+   "minZoom": 3
+  },
+  {
+   "id": "dhow",
+   "name": "Fishing Dhow",
+   "x": 1222,
+   "y": 3964,
+   "kind": "district",
+   "priority": 50,
+   "minZoom": 3.5
+  },
+  {
+   "id": "to-fallen-pass",
+   "name": "to Fallen Pass",
+   "x": 2986,
+   "y": 9399,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "south",
+   "toMap": "fallen-pass",
+   "toPlace": "to-vale-of-zintar"
+  },
+  {
+   "id": "to-glass-flats",
+   "name": "to Glass Flats",
+   "x": 7550,
+   "y": 2460,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "east",
+   "toMap": "glass-flats",
+   "toPlace": "to-vale-of-zintar"
+  },
+  {
+   "id": "to-keepers-bight",
+   "name": "to Keeper's Bight",
+   "x": 6718,
+   "y": 806,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "north"
+  },
+  {
+   "id": "to-shallow-shoals",
+   "name": "to Shallow Shoals",
+   "x": 698,
+   "y": 5760,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1,
+   "arrow": "west"
+  }
+ ],
+ "trainers": []
+}

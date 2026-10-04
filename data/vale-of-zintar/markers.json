@@ -1,0 +1,172 @@
+[
+ {
+  "id": "sand-giants-1",
+  "name": "Sand giants",
+  "category": "Mob camp",
+  "x": 4550,
+  "y": 2277,
+  "approximate": true,
+  "note": "The Sand Giant City at the head of the vale. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "city-notables",
+  "name": "Grand Vizier Al'Kithar, Old Scar, Khal'Baar the Growler",
+  "category": "Named mob",
+  "x": 4660,
+  "y": 2187,
+  "approximate": true,
+  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "city-notables-2",
+  "name": "Spicy Raziq, Zubair Goldtongue, Sutarfaan the Flamekeeper",
+  "category": "Named mob",
+  "x": 4440,
+  "y": 2187,
+  "approximate": true,
+  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "giant-fishers-1",
+  "name": "Giant fishing camp",
+  "category": "Mob camp",
+  "x": 1376,
+  "y": 3811,
+  "approximate": true,
+  "note": "On Fisher Rock, off the west coast. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "hadir",
+  "name": "Hadir the Shipbreaker",
+  "category": "Named mob",
+  "x": 1476,
+  "y": 3731,
+  "approximate": true,
+  "note": "At the giant fishing camp on Fisher Rock. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "beach-giants-1",
+  "name": "Beach giants",
+  "category": "Mob camp",
+  "x": 1508,
+  "y": 4764,
+  "approximate": true,
+  "note": "Along the west beach. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "beach-hunters",
+  "name": "Hemalmula the Hunter, Rami Al-Qawwaasr",
+  "category": "Named mob",
+  "x": 1608,
+  "y": 4684,
+  "approximate": true,
+  "note": "With the beach giants. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "pyrmos-sojourners-1",
+  "name": "Pyrmos and Sojourner camp",
+  "category": "Mob camp",
+  "x": 2892,
+  "y": 5391,
+  "approximate": true,
+  "note": "The camp at the lake. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "lake-notables",
+  "name": "Mhirunne of Whispers, Najarica",
+  "category": "Named mob",
+  "x": 2992,
+  "y": 5311,
+  "approximate": true,
+  "note": "At the lake camp. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "orcs-1",
+  "name": "Orc camps",
+  "category": "Mob camp",
+  "x": 2638,
+  "y": 6360,
+  "approximate": true,
+  "note": "Orc camps around the Copper Mine and its cave. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "mine-notables",
+  "name": "Servator Vakraar, a Dustrend kennel master",
+  "category": "Named mob",
+  "x": 2738,
+  "y": 6280,
+  "approximate": true,
+  "note": "At the orc camps and cave of the Copper Mine. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "corrupted-ashira-1",
+  "name": "Corrupted Ashira camp",
+  "category": "Mob camp",
+  "x": 5566,
+  "y": 7354,
+  "approximate": true,
+  "note": "At the Putrid Oasis. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "oasis-notables",
+  "name": "Onis the Elder, Fernic the Cur, Seshena the Lost",
+  "category": "Named mob",
+  "x": 5666,
+  "y": 7274,
+  "approximate": true,
+  "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "tomb-burrowers-1",
+  "name": "Tomb burrowers",
+  "category": "Mob camp",
+  "x": 2280,
+  "y": 7745,
+  "approximate": true,
+  "note": "Among the termite mounds. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "devourers",
+  "name": "A gold devourer, a silver devourer",
+  "category": "Named mob",
+  "x": 2380,
+  "y": 7665,
+  "approximate": true,
+  "note": "Among the termite mounds. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "bloodfang",
+  "name": "Bloodfang",
+  "category": "Named mob",
+  "x": 4602,
+  "y": 8073,
+  "approximate": true,
+  "note": "In the Snake Den. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "merchant-traveler",
+  "name": "A merchant traveler",
+  "category": "Notable NPC",
+  "x": 2922,
+  "y": 8775,
+  "approximate": true,
+  "note": "At the Pyrmos mercenary tower near the road to Fallen Pass. Approximate location; to confirm in game.",
+  "minZoom": 3
+ }
+]
