@@ -23,9 +23,11 @@ function setupPlaceLabels(data){
   const target=(row.kind==='exit'||row.kind==='zone')&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
   const face=text(target?'a':'span',row.kind==='exit'?'':row.name,'place-name '+row.kind+(target?' linked':''));
   if(row.kind==='exit'){
-   const side=/west/.test(row.arrow)?'west':/east/.test(row.arrow)?'east':row.arrow==='south'?'south':'north';
+   // Published exits may also go up or down (ladders, roof cracks); unknown arrows fall back to a plain one.
+   const glyph=exitArrows[row.arrow]||{up:'⤒',down:'⤓'}[row.arrow]||'→';
+   const side=/west/.test(row.arrow)?'west':/east/.test(row.arrow)?'east':['south','down'].includes(row.arrow)?'south':'north';
    face.classList.add('to-'+side);if(!target&&!alignmentMode)face.classList.add('unmapped');
-   face.append(text('b',exitArrows[row.arrow]||'→','exit-arrow'),text('span',' '+row.name,'exit-name'));
+   face.append(text('b',glyph,'exit-arrow'),text('span',' '+row.name,'exit-name'));
    if(!target&&!alignmentMode)face.append(text('small','not mapped yet','exit-soon'));
   }
   // Exit names that lead to another published map open it, at the matching exit when given.
