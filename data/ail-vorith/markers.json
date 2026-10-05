@@ -291,16 +291,18 @@
     "id": "toilmaster-vorith",
     "name": "Toilmaster Vorith",
     "category": "Personal",
-    "x": 4740,
-    "y": 4010,
-    "note": "Approximate position; to confirm in game. At the bridge. Starter quest."
+    "x": 5096,
+    "y": 3911,
+    "note": "Approximate position; to confirm in game. At the bridge. Starter quest.",
+    "community": true
   },
   {
     "id": "toilmistress-rallvessa",
     "name": "Toilmistress Rallvessa",
     "category": "Personal",
-    "x": 4780,
-    "y": 3990,
-    "note": "Approximate position; to confirm in game. At the bridge."
+    "x": 5065,
+    "y": 3785,
+    "note": "Approximate position; to confirm in game. At the bridge.",
+    "community": true
   }
 ]

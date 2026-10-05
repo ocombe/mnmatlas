@@ -268,12 +268,13 @@
   {
     "id": "wiki-east-bank",
     "name": "Bank — north-east quay",
-    "x": 4861,
-    "y": 4425,
+    "x": 4825,
+    "y": 3991,
     "level": "lower",
     "approximate": true,
     "note": "Approximate; to confirm in game. Southern end of the eastern shore; exact building to confirm.",
-    "category": "Bank"
+    "category": "Bank",
+    "community": true
   },
   {
     "id": "class-necromancer-cleric-shadowknight",
@@ -325,10 +326,11 @@
     "id": "trade-blacksmithing",
     "name": "Blacksmithing / Smelting — harbour island",
     "category": "Tradeskill",
-    "x": 3623,
-    "y": 4423,
+    "x": 3466,
+    "y": 4487,
     "level": "lower",
-    "note": ""
+    "note": "",
+    "community": true
   },
   {
     "id": "trade-cooking",

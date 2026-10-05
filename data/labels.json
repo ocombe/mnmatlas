@@ -174,7 +174,7 @@
       "kind": "building",
       "priority": 40,
       "minZoom": 4,
-      "x": 940.0,
+      "x": 940,
       "y": 1606.02,
       "tier": "building"
     },
@@ -384,14 +384,15 @@
     },
     {
       "id": "place-36",
-      "name": "Boat to Keeper's Bight",
+      "name": "Boat to Keeper's Bight (Faelindral)",
       "kind": "exit",
       "priority": 60,
       "minZoom": 3.25,
-      "x": 1484,
-      "y": 2052,
+      "x": 1730,
+      "y": 2066,
       "arrow": "south",
-      "tier": "exit"
+      "tier": "exit",
+      "community": true
     },
     {
       "id": "place-37",
@@ -434,7 +435,7 @@
       ],
       "building": "Bard guild",
       "x": 1024.06,
-      "y": 1550.0
+      "y": 1550
     },
     {
       "id": "class-3",
@@ -501,7 +502,7 @@
         "Monk"
       ],
       "building": "Little Half Town temple",
-      "x": 1506.0,
+      "x": 1506,
       "y": 1698.02
     },
     {
