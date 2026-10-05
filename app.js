@@ -472,7 +472,7 @@ function setupControls(){
  $('search').oninput=refreshSearch;$('clear-search').onclick=()=>{$('search').value='';refreshSearch();$('search').focus();};
  $('zoom-in').onclick=()=>map.zoomIn();$('zoom-out').onclick=()=>map.zoomOut();$('fit').onclick=fitMap;
  $('hide-pins').onclick=()=>{showPins=!showPins;updateCategoryButtons();drawMarkers();};
- for(const id of ['toggle-panel','embed-guide'])$(id).onclick=()=>setPanel($('journal').classList.contains('closed'));
+ for(const id of ['toggle-panel','embed-guide'])$(id).onclick=()=>{const open=$('journal').classList.contains('closed');setPanel(open);if(open&&isEmbed)$('close-guide').focus();};
  $('close-guide').onclick=()=>{setPanel(false);$(isEmbed?'embed-guide':'toggle-panel').focus();};
  mobileLayout.addEventListener('change',()=>setPanel(compact()?false:desktopPanelOpen));
  $('alignment-export').onclick=exportAlignment;
