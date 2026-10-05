@@ -156,6 +156,34 @@
     "direction": "down"
   },
   {
+    "id": "stairs-sw-lower",
+    "name": "Stairs to Upper city",
+    "category": "Stairs",
+    "x": 2966.0,
+    "y": 5500.0,
+    "note": "Stairs from this landing climb a tower to a high bridge over the water, then a second tower up to the Upper city square. Approximate; to confirm in game.",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "stairs-sw-upper",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "stairs-sw-upper",
+    "name": "Stairs to Lower docks",
+    "category": "Stairs",
+    "x": 3594.0,
+    "y": 5080.0,
+    "note": "Stairs down a tower to a high bridge over the water, then a second tower down to a landing on the south-west quay. Approximate; to confirm in game.",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "stairs-sw-lower",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
     "id": "wiki-alchemist",
     "name": "Alchemy — south-west quay",
     "x": 2673,
