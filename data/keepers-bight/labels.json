@@ -1,0 +1,208 @@
+{
+ "map": "keepers-bight",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "keepers-bight",
+   "name": "Keeper’s Bight",
+   "x": 4235,
+   "y": 3561,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  },
+  {
+   "id": "penshaw",
+   "name": "Penshaw",
+   "x": 2800,
+   "y": 2372,
+   "kind": "district",
+   "priority": 90,
+   "minZoom": 1.5
+  },
+  {
+   "id": "docks-of-penshaw",
+   "name": "Docks of Penshaw",
+   "x": 1873,
+   "y": 2823,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "temple",
+   "name": "Temple",
+   "x": 2188,
+   "y": 4025,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "farms",
+   "name": "Farms",
+   "x": 2695,
+   "y": 3534,
+   "kind": "district",
+   "priority": 60,
+   "minZoom": 2.5
+  },
+  {
+   "id": "hanging-garden-inn",
+   "name": "Hanging Garden Inn",
+   "x": 4848,
+   "y": 5283,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "hunting-lodge",
+   "name": "Poacher Camp",
+   "x": 5474,
+   "y": 3923,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2
+  },
+  {
+   "id": "bear-cave",
+   "name": "Bear Cave",
+   "x": 3832,
+   "y": 4422,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2
+  },
+  {
+   "id": "blacktide-bay",
+   "name": "Blacktide Bay",
+   "x": 1365,
+   "y": 6765,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 1.5
+  },
+  {
+   "id": "elven-ruins",
+   "name": "Elven Ruins",
+   "x": 718,
+   "y": 2050,
+   "kind": "district",
+   "priority": 55,
+   "minZoom": 2.5
+  },
+  {
+   "id": "spider-log",
+   "name": "Spider Log",
+   "x": 2345,
+   "y": 1132,
+   "kind": "district",
+   "priority": 55,
+   "minZoom": 2.5
+  },
+  {
+   "id": "giant-stump",
+   "name": "Giant Stump",
+   "x": 4718,
+   "y": 2622,
+   "kind": "district",
+   "priority": 60,
+   "minZoom": 2.5
+  },
+  {
+   "id": "to-evershade-weald",
+   "name": "to Evershade Weald",
+   "x": 5215,
+   "y": 836,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "north",
+   "toMap": "evershade-weald",
+   "toPlace": "to-keepers-bight"
+  },
+  {
+   "id": "to-scarwood",
+   "name": "to Scarwood",
+   "x": 6128,
+   "y": 2166,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "east",
+   "toMap": "scarwood",
+   "toPlace": "to-keepers-bight"
+  },
+  {
+   "id": "to-vale-of-zintar",
+   "name": "to Vale of Zintar",
+   "x": 3290,
+   "y": 7721,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "south",
+   "toMap": "vale-of-zintar",
+   "toPlace": "to-keepers-bight"
+  },
+  {
+   "id": "to-vale-of-zintar-coast",
+   "name": "to Vale of Zintar (coast)",
+   "x": 1085,
+   "y": 7553,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "south",
+   "toMap": "vale-of-zintar",
+   "toPlace": "to-keepers-bight"
+  },
+  {
+   "id": "to-shallow-shoals",
+   "name": "to Shallow Shoals (by boat)",
+   "x": 35,
+   "y": 3114,
+   "kind": "exit",
+   "priority": 85,
+   "minZoom": 1.5,
+   "arrow": "west",
+   "toMap": "shallow-shoals"
+  },
+  {
+   "id": "boat-night-harbor",
+   "name": "Boat to Night Harbor",
+   "x": 1833,
+   "y": 3143,
+   "kind": "exit",
+   "priority": 85,
+   "minZoom": 1.5,
+   "arrow": "west",
+   "toMap": "night-harbor",
+   "toPlace": "place-36"
+  },
+  {
+   "id": "to-blacktide-bay-dungeon",
+   "name": "Lift to Blacktide Bay (dungeon)",
+   "x": 3059,
+   "y": 5876,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "down",
+   "toMap": "blacktide-bay"
+  },
+  {
+   "id": "orc-cave",
+   "name": "Orc Cave",
+   "x": 2706,
+   "y": 6454,
+   "kind": "exit",
+   "priority": 80,
+   "minZoom": 2,
+   "arrow": "down"
+  }
+ ],
+ "trainers": []
+}

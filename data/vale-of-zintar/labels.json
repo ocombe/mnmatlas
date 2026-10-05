@@ -188,7 +188,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1,
-   "arrow": "north"
+   "arrow": "north",
+   "toMap": "keepers-bight",
+   "toPlace": "to-vale-of-zintar"
   },
   {
    "id": "to-shallow-shoals",

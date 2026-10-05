@@ -392,7 +392,9 @@
       "y": 2066,
       "arrow": "south",
       "tier": "exit",
-      "community": true
+      "community": true,
+      "toMap": "keepers-bight",
+      "toPlace": "boat-night-harbor"
     },
     {
       "id": "place-37",

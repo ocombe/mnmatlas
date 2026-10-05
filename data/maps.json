@@ -979,6 +979,48 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "keepers-bight",
+      "title": "Keeper’s Bight",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The coast of Penshaw between Evershade Weald and the Vale of Zintar",
+      "breadcrumb": "Monsters & Memories / Keeper’s Bight",
+      "description": "An illustrated fan atlas of Keeper’s Bight: the town of Penshaw and its docks, the temple and farms, the forest with the Hanging Garden Inn, and Blacktide Bay, with place names and personal field notes.",
+      "width": 6528,
+      "height": 8064,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/keepers-bight/{z}/{x}/{y}.webp",
+      "markersFile": "data/keepers-bight/markers.json",
+      "labelsFile": "data/keepers-bight/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Landmarks and exits after ElusiveGarden's Keeper's Bight map (CC BY-SA 4.0)",
+        "sourceTitle": "ElusiveGarden's Keeper's Bight wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Keepersbighteg.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Landmarks and exits checked against ElusiveGarden's Keeper's Bight map; camps and named creatures placed from the community wiki's location notes; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

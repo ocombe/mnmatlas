@@ -1,0 +1,212 @@
+[
+ {
+  "id": "penshaw-red-mantle",
+  "name": "Detective Brunsworth, Reeve Thurston Winter",
+  "category": "Notable NPC",
+  "x": 2702,
+  "y": 2884,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the tan stone building with a minaret and Red Mantle banners, in the middle of Penshaw. Approximate location; to confirm in game."
+ },
+ {
+  "id": "krelvya-drynn",
+  "name": "Krelvya Drynn (level 60+)",
+  "category": "Notable NPC",
+  "x": 2380,
+  "y": 3044,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the top of the Red Mantle tower in the south-west of Penshaw. Approximate location; to confirm in game."
+ },
+ {
+  "id": "dubar-falshim",
+  "name": "Dubar Falshim (level 42)",
+  "category": "Notable NPC",
+  "x": 2800,
+  "y": 2752,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In Penshaw. Approximate location; to confirm in game."
+ },
+ {
+  "id": "wheelhouse-tavern",
+  "name": "Wheelhouse Tavern (Tracker Baumery at the bar)",
+  "category": "Inn",
+  "x": 2916,
+  "y": 2801,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Tavern in Penshaw. Approximate location; to confirm in game."
+ },
+ {
+  "id": "harbor-office",
+  "name": "Harbormaster Greywake, Customs Agent Priorton",
+  "category": "Notable NPC",
+  "x": 2093,
+  "y": 3023,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the last building on the docks, farthest from the lifts. Approximate location; to confirm in game."
+ },
+ {
+  "id": "dock-lift",
+  "name": "Lift between the docks and Penshaw",
+  "category": "Lift",
+  "x": 2275,
+  "y": 2705,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Approximate location; to confirm in game."
+ },
+ {
+  "id": "farmers",
+  "name": "Farmers: the McMillers, the Harlows, Hazel and Heather",
+  "category": "Notable NPC",
+  "x": 2695,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game."
+ },
+ {
+  "id": "thoren-blackwood",
+  "name": "Thoren Blackwood (level 25)",
+  "category": "Named mob",
+  "x": 2009,
+  "y": 5307,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the shady farm. Approximate location; to confirm in game."
+ },
+ {
+  "id": "hanging-garden-inn",
+  "name": "Hanging Garden Inn",
+  "category": "Inn",
+  "x": 4848,
+  "y": 5523,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Tree house inn. Skree and Felgin Ironwhisker at the bar, Ranger Rylin at the top. Approximate location; to confirm in game."
+ },
+ {
+  "id": "timberfang",
+  "name": "Timberfang",
+  "category": "Named mob",
+  "x": 4588,
+  "y": 5563,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Near the western cliffs by the tree house. Approximate location; to confirm in game."
+ },
+ {
+  "id": "poachers-28-30-1",
+  "name": "Poachers (levels 28–30)",
+  "category": "Mob camp",
+  "x": 5474,
+  "y": 4123,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Poacher camp at the hunting lodge: bruisers, herbalists, pathfinders. Approximate location; to confirm in game."
+ },
+ {
+  "id": "poacher-named",
+  "name": "Poacher Garrus, Poacher Tolan",
+  "category": "Named mob",
+  "x": 5604,
+  "y": 4043,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the poacher camp. Approximate location; to confirm in game."
+ },
+ {
+  "id": "redpaw",
+  "name": "Redpaw (level 25)",
+  "category": "Named mob",
+  "x": 3832,
+  "y": 4592,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Bear Cave. Approximate location; to confirm in game."
+ },
+ {
+  "id": "bear-cave-npcs",
+  "name": "Poacher Wilna, Fendris the Forsaken",
+  "category": "Notable NPC",
+  "x": 3972,
+  "y": 4512,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Bear Cave. Approximate location; to confirm in game."
+ },
+ {
+  "id": "lumberjacks",
+  "name": "Brother Gurrom, Brother Juro",
+  "category": "Notable NPC",
+  "x": 3745,
+  "y": 2693,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the lumberjack camp. Approximate location; to confirm in game."
+ },
+ {
+  "id": "wood-elves",
+  "name": "Wood elf camp: Ranger Valegazer, scouts and bridge guards",
+  "category": "Notable NPC",
+  "x": 3678,
+  "y": 613,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Wood elf camp on the way to Evershade Weald; guards Irilis and Velbloom stand at the entrance to Evershade Weald. Approximate location; to confirm in game."
+ },
+ {
+  "id": "widow-vethra",
+  "name": "Widow Vethra (level 16)",
+  "category": "Named mob",
+  "x": 2345,
+  "y": 1302,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the spider log. Approximate location; to confirm in game."
+ },
+ {
+  "id": "blacktide-23-25-1",
+  "name": "Blacktide crew and slavers (levels 23–25)",
+  "category": "Mob camp",
+  "x": 2135,
+  "y": 6483,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Around Blacktide Bay: acolytes, bowmen, brutes, guards, raiders, seers, slavers, trackers and warmages, with enslaved dwarves, gnomes and humans and a Bloodchain overseer. Approximate location; to confirm in game."
+ },
+ {
+  "id": "brakzul",
+  "name": "Brak’zul Bonecarver (level 28)",
+  "category": "Named mob",
+  "x": 2374,
+  "y": 6358,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In a tent in the enslaved elf pens. Approximate location; to confirm in game."
+ },
+ {
+  "id": "orc-cave-named",
+  "name": "Belthakar Dunecaller, Rarthan Wartide (level 26)",
+  "category": "Named mob",
+  "x": 2706,
+  "y": 6574,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Orc Cave. Approximate location; to confirm in game."
+ },
+ {
+  "id": "brukk-goldgut",
+  "name": "Brukk Goldgut (level 46), hill giant bandits (level 45)",
+  "category": "Named mob",
+  "x": 3605,
+  "y": 7333,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the giants’ fire near the road to the Vale of Zintar. Approximate location; to confirm in game."
+ }
+]

@@ -93,7 +93,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
-   "arrow": "south"
+   "arrow": "south",
+   "toMap": "keepers-bight",
+   "toPlace": "to-evershade-weald"
   },
   {
    "id": "to-blacktide-bay",

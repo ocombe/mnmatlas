@@ -68,7 +68,8 @@
    "x": 1270,
    "y": 813,
    "kind": "zone",
-   "priority": 60
+   "priority": 60,
+   "toMap": "keepers-bight"
   },
   {
    "id": "zone-evershade-weald",
