@@ -70,9 +70,9 @@ function setupHiddenAreas(map,config,data){
    const line=L.polyline(connection.path.map(position),{pane:'paths',color:connection.color||'#62432a',weight:connection.width||2,dashArray:connection.dashed===false?null:'4 5',opacity:connection.dashed===false?.55:.85,interactive:!!connection.name,className:'area-path'});if(connection.name)line.bindTooltip(()=>label(connection.name),{sticky:true});group.addLayer(line);
   }
   for(const destination of data.destinations||[]){
-   const icon=L.divIcon({className:'hidden-route',html:label('↪'),iconSize:[24,24],iconAnchor:[12,12]});
-   // Destination text belongs to the place-name layer; connectors have hover text only.
-   group.addLayer(L.marker(position(destination.xy),{icon,alt:destination.name}).bindTooltip(()=>label(destination.name),{direction:'right',offset:[10,0]}));
+   // The exit sign at this spot carries the arrow; the connector only ends in a small dot drawn beneath it.
+   const icon=L.divIcon({className:'hidden-end',iconSize:[9,9],iconAnchor:[4.5,4.5]});
+   group.addLayer(L.marker(position(destination.xy),{icon,pane:'paths',alt:destination.name}).bindTooltip(()=>label(destination.name),{direction:'right',offset:[8,0]}));
   }
  }
  function update(){
