@@ -47,9 +47,33 @@
  const localNoteLine=document.querySelector('.journal-bottom>.backup').previousElementSibling;localNoteLine.textContent='Notes stay in this browser; sign in to sync them.';
  $('editor').querySelector('.form-hint').textContent='Saved on this device. Sign in to sync notes, and export a backup.';
  async function signIn(){
+  if(embedded){popupSignIn();return;}
   try{const url=new URL(location.href);url.hash='';event('sign-in');const {error}=await client.auth.signInWithOAuth({provider:'discord',options:{redirectTo:url.href}});if(error)throw error;}
   catch{status('Discord sign-in could not start. Please try again.');}
  }
+ // Inside another site's frame Discord refuses to load, so sign-in runs in a small window (signin.html) that posts the session back here.
+ let signInWindow=null,signInWatch;
+ function fullAtlasHint(message){
+  account.querySelector('.community-fallback')?.remove();
+  const url=new URL(location.href);url.searchParams.delete('embed');url.hash='';
+  const line=text('p',message+' ','community-fallback form-hint'),link=text('a','Open the full atlas');link.href=url.href;link.target='_blank';link.rel='noopener';
+  line.append(link,text('span',' to sign in there.'));account.querySelector('button')?.after(line);
+ }
+ function popupSignIn(){
+  event('sign-in');account.querySelector('.community-fallback')?.remove();
+  const w=520,h=720,left=Math.max(0,(screen.availWidth-w)/2),top=Math.max(0,(screen.availHeight-h)/2);
+  signInWindow=window.open(location.origin+'/signin.html','mnmaps-signin',`popup,width=${w},height=${h},left=${left},top=${top}`);
+  if(!signInWindow){fullAtlasHint('Your browser blocked the sign-in window.');return;}
+  clearInterval(signInWatch);
+  signInWatch=setInterval(()=>{if(!signInWindow||!signInWindow.closed)return;clearInterval(signInWatch);signInWindow=null;if(!user)fullAtlasHint('Sign-in did not reach this map.');},700);
+ }
+ window.addEventListener('message',async e=>{
+  if(e.origin!==location.origin||!signInWindow||e.source!==signInWindow)return;
+  const d=e.data;if(!d||d.type!=='mnmaps-session'||typeof d.access_token!=='string'||typeof d.refresh_token!=='string')return;
+  clearInterval(signInWatch);signInWindow=null;
+  try{const {error}=await client.auth.setSession({access_token:d.access_token,refresh_token:d.refresh_token});if(error)throw error;}
+  catch{fullAtlasHint('Sign-in could not finish in this map.');}
+ });
  async function signOut(){try{await pushJobs();const {error}=await client.auth.signOut();if(error)throw error;}catch{status('Sign-out could not finish. Please try again.');}}
  // Deletes the sign-in and everything stored with it on the server; notes saved in this browser stay here.
  function deleteDialog(){
