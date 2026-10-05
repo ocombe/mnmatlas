@@ -39,13 +39,18 @@ try{
  // A deleted account keeps its count under Anonymous.
  for(const r of creditRows)r.user_id=null;const later=await run();assert.equal(later.code,0,later.output);assert.deepEqual((await credits()).contributors,[{name:'Anonymous',count:2}]);
  approved=[{id:5,map:'test-map',level:'lower',kind:'new-marker',payload:{x:10,y:20,name:'New bank',category:'Bank'}},{id:6,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[1,2],to:[50,60],name:'Bank'}}];
- const patchCount=patches.length,invalid=await run();assert.equal(invalid.code,1);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);assert.equal(patches.length,patchCount);
+ // A conflicting suggestion goes back to review with its reason; the valid one in the same run still publishes.
+ const patchCount=patches.length,invalid=await run();assert.equal(invalid.code,0,invalid.output);assert(JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).some(m=>m.id==='community-5'));
+ const back=patches.slice(patchCount).find(p=>p.status==='pending');assert(back&&back.review_note.includes('position changed'));assert(patches.slice(patchCount).some(p=>p.status==='published'));
+ // Two approved moves of one marker in the same run apply in order.
+ approved=[{id:20,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[31,40],to:[60,70],name:'Bank'}},{id:21,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[31,40],to:[62,71],name:'Bank'}}];
+ const chained=await run();assert.equal(chained.code,0,chained.output);assert.deepEqual((({x,y})=>[x,y])(JSON.parse(await readFile(fixture+'/data/markers.json','utf8'))[0]),[62,71]);
  // Text is cleaned of invisible and markup characters; a category from another map is refused.
  const ch=String.fromCharCode,sneaky='Ore'+ch(0x202E)+ch(0x200B)+' <script>x</script>  ',note='Line one'+ch(0x7)+'\r\n\n\n\nLine <b>two</b>  ';
  approved=[{id:7,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:sneaky,category:'Ore',note}}];const cleaned=await run();assert.equal(cleaned.code,0,cleaned.output);
  const added=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).find(m=>m.id==='community-7');assert.equal(added.name,'Ore scriptx/script');assert.equal(added.note,'Line one\n\nLine btwo/b');
- approved=[{id:8,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:'Pier',category:'Dock'}}];const foreign=await run();assert.equal(foreign.code,1);assert(foreign.output.includes('Unsupported marker fields'));
- approved=[{id:9,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:ch(0x200B)+' ',category:'Ore'}}];assert.equal((await run()).code,1,'A name made only of invisible characters is refused');
+ approved=[{id:8,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:'Pier',category:'Dock'}}];const foreign=await run();assert.equal(foreign.code,0);assert(foreign.output.includes('Unsupported marker fields'));assert.equal(patches.at(-1).status,'pending');
+ approved=[{id:9,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:ch(0x200B)+' ',category:'Ore'}}];const blank=await run();assert(blank.output.includes('back to review'),'A name made only of invisible characters is refused');assert.equal(patches.at(-1).status,'pending');
  console.log('Publisher checks passed: text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});

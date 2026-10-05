@@ -52,6 +52,9 @@ function validatePayload(row,c){
  }else if(typeof row.target_id!=='string'||!row.target_id)fail('Missing target for suggestion '+row.id+'.');
  return p;
 }
+// Published state before this run touched a marker: several approved changes to one marker apply in order.
+const original=new Map();
+function before(path,m){const key=path+'#'+m.id;if(!original.has(key))original.set(key,{x:Math.round(m.x),y:Math.round(m.y),name:clean(m.name),note:clean(m.note||'',true)});return original.get(key);}
 async function apply(row){
  const c=configuration(row),p=validatePayload(row,c),id='community-'+row.id;
  if(row.kind==='new-marker'){
@@ -68,17 +71,17 @@ async function apply(row){
   const label=row.kind==='edit-label',f=await file(label?c.labelsFile:c.markersFile),rows=label?f.data?.labels:f.data;
   if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
   const m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId));if(!m)fail('Target missing for suggestion '+row.id+'.');
-  const name=clean(p.name),note=clean(p.note||'',true);
+  const name=clean(p.name),note=clean(p.note||'',true),was=before(label?c.labelsFile:c.markersFile,m),seen={name:clean(p.from.name),note:clean(p.from.note||'',true)};
   if(clean(m.name)===name&&clean(m.note||'',true)===note)return 'already edited';
-  if(clean(m.name)!==clean(p.from.name)||clean(m.note||'',true)!==clean(p.from.note||'',true))fail('Published text has changed for suggestion '+row.id+'; review it again.');
+  if(!(clean(m.name)===seen.name&&clean(m.note||'',true)===seen.note)&&!(was.name===seen.name&&was.note===seen.note))fail('The published text changed after this was sent; check it again.');
   m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;m.community=true;f.changed=true;return label?'place name edited':'marker edited';
  }
  const path=row.kind==='move-label'?c.labelsFile:c.markersFile,f=await file(path),rows=row.kind==='move-label'?f.data.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
  const m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId));if(!m)fail('Target missing for suggestion '+row.id+'.');
- const [x,y]=point(p.to,c,row.id),from=point(p.from,c,row.id);
+ const [x,y]=point(p.to,c,row.id),from=point(p.from,c,row.id),was=before(path,m);
  if(Math.round(m.x)===x&&Math.round(m.y)===y)return 'already positioned';
- if(Math.round(m.x)!==from[0]||Math.round(m.y)!==from[1])fail('Published position has changed for suggestion '+row.id+'; review it again.');
+ if(!(Math.round(m.x)===from[0]&&Math.round(m.y)===from[1])&&!(was.x===from[0]&&was.y===from[1]))fail('The published position changed after this was sent; check it again.');
  m.x=x;m.y=y;m.community=true;f.changed=true;
  if(row.kind==='move-marker'&&c.labelsFile){const labels=await file(c.labelsFile),trainer=labels.data.trainers?.find(t=>t.id===m.id);if(trainer){trainer.x=x;trainer.y=y;labels.changed=true;}}
  return 'position moved';
@@ -102,16 +105,20 @@ async function main(){
  const rows=[];let after='0';
  while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch);if(batch.length<1000)break;after=batch.at(-1).id;}
  if(!rows.length)console.log('No approved suggestions.');
- const applied=[],credited=[];
- for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');const result=await apply(row);applied.push(row.id);console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
+ // A suggestion that cannot apply goes back to the review queue with the reason; the others still publish.
+ const applied=[],credited=[],held=[];
+ for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');let result;
+  try{result=await apply(row);}catch(e){held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480)});console.log((process.env.GITHUB_ACTIONS?'::warning::':'')+'Suggestion '+row.id+' goes back to review: '+e.message);continue;}
+  applied.push(row.id);console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
   // Credits count published changes from people who ticked "Credit me as a contributor".
   const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&row.user_id&&!result.startsWith('already'))credited.push({suggestion_id:row.id,user_id:row.user_id,name:who});}
  await updateContributors(credited);
  const changed=[...files].filter(([,f])=>f.changed);
  if(!dryRun){
   for(const [path,f] of changed){let content=JSON.stringify(f.data,null,f.indent).replace(/\n/g,f.newline);if(f.trailing)content+=f.newline;const target=dataPath(path),temporary=target+'.tmp';await writeFile(temporary,content,'utf8');await rename(temporary,target);}
+  for(const h of held)await request('suggestions?status=eq.approved&id=eq.'+h.id,{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status:'pending',review_note:h.note})});
   for(let offset=0;offset<applied.length;offset+=100){const ids=applied.slice(offset,offset+100).join(',');await request('suggestions?status=eq.approved&id=in.('+ids+')',{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({status:'published'})});}
  }
- console.log((dryRun?'Dry run: ':'Complete: ')+applied.length+' suggestions, '+changed.length+' data files'+(dryRun?' would change.':' changed.'));
+ console.log((dryRun?'Dry run: ':'Complete: ')+applied.length+' suggestions, '+(held.length?held.length+' back to review, ':'')+changed.length+' data files'+(dryRun?' would change.':' changed.'));
 }
 main().catch(e=>{console.error(e.message==='fetch failed'?'Backend could not be reached.':e.message);process.exitCode=1;});
