@@ -103,11 +103,12 @@
   "id": "npc-2",
   "name": "Druids",
   "category": "Notable NPC",
-  "x": 3570,
-  "y": 2874,
+  "x": 3842,
+  "y": 3012,
   "approximate": true,
   "note": "Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "generic-6-10-2",

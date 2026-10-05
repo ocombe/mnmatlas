@@ -78,15 +78,16 @@
   {
    "id": "to-caves-of-irem",
    "name": "to Caves of Irem",
-   "x": 3856,
-   "y": 9152,
+   "x": 3544,
+   "y": 9851,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1,
    "arrow": "south",
    "approximate": true,
    "note": "The way to the Caves of Irem, and on to the Underdocks by the river. Approximate location; to confirm in game.",
-   "toMap": "caves-of-irem"
+   "toMap": "caves-of-irem",
+   "community": true
   },
   {
    "id": "to-ail-vorith",
