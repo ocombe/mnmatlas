@@ -158,3 +158,4 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .place-name.exit.linked:hover .exit-arrow,.place-name.exit.linked:focus-visible .exit-arrow{background:#a8461f}
 .place-name.exit.unmapped{border:1.5px dashed #9b8a72;background:#2a1f15c4;color:#d9cbb2}
 .place-name.exit.unmapped .exit-arrow{background:none;box-shadow:none;border:1.5px dashed #a8977d;color:#cbbda4}
+.level-pin span{width:26px;height:26px;border-radius:50%;transform:none;border:2px solid #f5e2b4;box-shadow:0 0 0 1.5px #d29a48,0 2px 5px #000a}.level-pin b,.level-pin svg{transform:none}.level-pin b{font:700 14px/1 var(--body)}
