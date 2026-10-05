@@ -87,7 +87,12 @@ function openPlace(p,zoom=config.defaultView.placeZoom){
 }
 function pinIcon(m){
  // Personal area labels and zone exits are lettering, drawn like the map's own names.
- if(m.noteType)return L.divIcon({className:'personal-label-anchor',html:text('span',(m.noteType==='exit'?(exitArrows[m.arrow]||'→')+' ':'')+m.name,'personal-label '+(m.noteType==='exit'?'exit':'district')),iconSize:[0,0],iconAnchor:[0,0],popupAnchor:[0,-12]});
+ if(m.noteType){
+  // Personal zone exits are the same signboard as the map's own exits.
+  const face=text('span',m.noteType==='exit'?'':m.name,'personal-label '+(m.noteType==='exit'?'exit':'district'));
+  if(m.noteType==='exit')face.append(text('b',exitArrows[m.arrow]||'→','exit-arrow'),text('span',' '+m.name,'exit-name'));
+  return L.divIcon({className:'personal-label-anchor',html:face,iconSize:[0,0],iconAnchor:[0,0],popupAnchor:[0,-14]});
+ }
  if(m.category==='Class trainer')return trainerIcon(m);
  const face=text('span','');face.style.setProperty('--pin',m.color||categories[m.category][1]);face.append(markerSymbol(m));
  // Ways up and down (ladders, stairs, lifts, passages) are round seals centred on the spot, like the exit signs' arrows.
