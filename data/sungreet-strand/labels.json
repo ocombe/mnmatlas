@@ -77,7 +77,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
-   "arrow": "west"
+   "arrow": "west",
+   "toMap": "tel-ekir",
+   "toPlace": "to-sungreet-strand"
   },
   {
    "id": "to-glass-flats",

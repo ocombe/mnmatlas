@@ -905,6 +905,80 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "tel-ekir",
+      "title": "Tel Ekir",
+      "subtitle": "The hidden canyon sanctuary",
+      "cartoucheKicker": "Beneath the Life Font",
+      "breadcrumb": "Monsters & Memories / Tel Ekir",
+      "description": "An illustrated fan atlas of Tel Ekir. Explore the canyon, the Life Font, the Ashira and Bloodynose camps and the tunnels of Hin Adaru across four floors, and keep your own field notes.",
+      "width": 4800,
+      "height": 4512,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/tel-ekir/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/tel-ekir/markers.json",
+      "labelsFile": "data/tel-ekir/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Canyon",
+          "tilePath": "assets/tiles/tel-ekir/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Tunnels",
+          "tilePath": "assets/tiles/tel-ekir/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Hidden rooms",
+          "tilePath": "assets/tiles/tel-ekir/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Hin Adaru inner rooms",
+          "tilePath": "assets/tiles/tel-ekir/floor-4/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by chazsolo (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Tel-ekir-isometric.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by chazsolo; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Tel-ekir-isometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

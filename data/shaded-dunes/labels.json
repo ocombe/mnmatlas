@@ -74,7 +74,9 @@
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
-   "arrow": "north"
+   "arrow": "north",
+   "toMap": "tel-ekir",
+   "toPlace": "to-shaded-dunes"
   },
   {
    "id": "to-fallen-pass",
