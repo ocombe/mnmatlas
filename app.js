@@ -8,12 +8,18 @@ const noteCategories={'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Name
 let categories={...baseCategories},allCategories={...baseCategories,...noteCategories};
 const mobileLayout=matchMedia('(max-width: 760px)');
 let embedded=false;try{embedded=window.self!==window.top;}catch{embedded=true;}
-const isEmbed=embedded||new URLSearchParams(location.search).get('embed')==='1';
-document.body.classList.toggle('embed',isEmbed);
+const embedParam=new URLSearchParams(location.search).get('embed');
+const isEmbed=embedded||embedParam==='1'||embedParam==='map';
+// ?embed=map shows one map on its own (for wiki pages): no map picker, field guide or editing; other maps open the full atlas in a new tab.
+const singleMap=isEmbed&&embedParam==='map';
+document.body.classList.toggle('embed',isEmbed);document.body.classList.toggle('single-map',singleMap);
 // Each map lives at its own address (<site>/<map-id>/); older ?map= links still open and are rewritten.
 const siteRoot=new URL('./',document.currentScript?.src||document.baseURI);
 // The entry view (the world map) lives at the site root; every other map at /<map-id>/.
 function mapAddress(id){return registry?.maps.find(c=>c.id===id)?.entry?new URL(siteRoot.href):new URL(encodeURIComponent(id)+'/',siteRoot);}
+// The address another map opens at from this page: inside the same embed, or the full atlas from a single-map embed.
+function mapLink(id){const url=mapAddress(id);if(embedParam!==null&&!singleMap)url.searchParams.set('embed',embedParam);return url;}
+function goToMap(id,url=mapLink(id)){if(singleMap){window.open(url.href,'_blank','noopener');return;}history.pushState({map:id},'',url);ownView=true;loadMap(id,new URL(url));}
 function mapIdOf(url){const first=url.pathname.startsWith(siteRoot.pathname)?url.pathname.slice(siteRoot.pathname.length).split('/')[0].toLowerCase():'';return registry.maps.some(c=>c.id===first)?first:url.searchParams.get('map')||registry.defaultMap;}
 const compact=()=>isEmbed||mobileLayout.matches;
 let disposeZones=()=>{},disposeBackdrop=()=>{};
@@ -63,14 +69,14 @@ function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.s
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);n.append(edit);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
- window.atlasCommunity?.popup(m,n);return n;}
+ if(!singleMap)window.atlasCommunity?.popup(m,n);return n;}
 function labelEditPopup(row){
  const n=text('div','');n.append(text('div','Place name','tag'),text('h3',row.name));
  if(alignmentLabelPositions[row.id]){n.append(text('p','Position moved in this browser.','moved-note'));const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetLabel(row.id);n.append(reset);}
  window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
  L.popup({autoPan:false,offset:[0,-8]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
 }
-function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));window.atlasCommunity?.placePopup?.(p,n);return n;}
+function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));if(!singleMap)window.atlasCommunity?.placePopup?.(p,n);return n;}
 function choose(m){
  if(alignmentMode&&!m.id.startsWith('personal-'))selectAlignment(m,'marker');
  if(!enabled.has(m.category)||!pins.has(m.id)||!showPins){enabled.add(m.category);showPins=true;$('search').value='';updateCategoryButtons();drawMarkers();}
@@ -100,7 +106,7 @@ function pinIcon(m){
  if(m.toLevel||['Ladder','Stairs','Lift','Passage','Level connection'].includes(m.category))return L.divIcon({className:'pin level-pin',html:face,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
  return L.divIcon({className:'pin',html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
 }
-function openMap(id){const url=mapAddress(id),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);history.pushState({map:id},'',url);ownView=true;loadMap(id,new URL(url));}
+function openMap(id){goToMap(id);}
 function drawMarkers(){
  for(const pin of pins.values())pin.remove();pins.clear();const list=$('results');list.replaceChildren();
  const matches=visibleMarkers();$('count').textContent=matches.length+' places';
@@ -158,7 +164,7 @@ function setEditing(on){
  map.closePopup();disposeLabels();disposeLabels=setupPlaceLabels(labelData);drawMarkers();updateAlignmentStatus();
 }
 function enterEdit(){
- if(alignmentMode||!map)return;cancelPlacement();
+ if(alignmentMode||!map||singleMap)return;cancelPlacement();
  editSnapshot={positions:{...alignmentPositions},labels:{...alignmentLabelPositions},personal:personal.map(p=>({...p}))};
  setEditing(true);if(compact())setPanel(false);
 }
@@ -244,10 +250,43 @@ function scheduleUrl(){clearTimeout(urlTimer);if(!loading)urlTimer=setTimeout(sy
 async function copyLink(place){
  const url=viewUrl(place===undefined?activePlace:place);
  if(place){url.searchParams.set('x',String(place.x));url.searchParams.set('y',String(place.y));url.searchParams.set('z',String(Math.max(map.getZoom(),config.defaultView.placeZoom)));}
- // Alignment drafts are local editing state, not part of a shared destination.
- url.searchParams.delete('align');
+ // Alignment drafts are local editing state, not part of a shared destination; a single-map embed shares the full atlas.
+ url.searchParams.delete('align');if(singleMap)url.searchParams.delete('embed');
  try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText(url.href);status('Link copied. Personal notes are not included.');}
  catch{$('link-value').value=url.href;$('link-dialog').showModal();$('link-value').select();}
+}
+// A single-map embed links back to the same view in the full atlas, in a new tab.
+function openInAtlas(){const url=viewUrl();url.searchParams.delete('embed');window.open(url.href,'_blank','noopener');}
+// The Embed dialog writes an iframe that shows this map on its own, at the current level and selected place when ticked.
+let embedPlace=null;
+// Ampersands stay plain so the address reads (and pastes into wiki templates) as it is.
+const htmlAttr=value=>String(value).replace(/"/g,'&quot;').replace(/</g,'&lt;').replace(/>/g,'&gt;');
+function embedAddress(){
+ const url=mapAddress(config.id);url.searchParams.set('embed','map');
+ if(config.levels&&$('embed-level').checked)url.searchParams.set('level',config.levelId);
+ if(embedPlace&&$('embed-place').checked)url.searchParams.set('place',embedPlace.id);
+ return url;
+}
+function updateEmbed(){
+ const url=embedAddress();$('embed-address').value=url.href;$('embed-preview').href=url.href;
+ $('embed-code').value=`<iframe src="${htmlAttr(url.href)}" title="${htmlAttr(config.title+' · MnM Atlas')}" width="100%" height="${$('embed-height').value}" style="border:0" loading="lazy" allow="fullscreen; clipboard-write" allowfullscreen></iframe>`;
+}
+function openEmbed(){
+ embedPlace=activePlace&&!activePlace.id.startsWith('personal-')?activePlace:null;
+ $('embed-map-name').textContent=config.title;
+ $('embed-level-row').hidden=!config.levels;$('embed-level-name').textContent=config.levelTitle||'';$('embed-level').checked=true;
+ $('embed-place-row').hidden=!embedPlace;$('embed-place-name').textContent=embedPlace?.name||'';$('embed-place').checked=true;
+ updateEmbed();$('embed-dialog').showModal();$('embed-code').select();
+}
+async function copyEmbed(field){
+ try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText($(field).value);status(field==='embed-code'?'Embed code copied.':'Map address copied.');}
+ catch{$(field).focus();$(field).select();status('Press Ctrl+C (or ⌘C) to copy.');}
+}
+// In a single-map embed the scroll wheel scrolls the page until the map is clicked, and again once the pointer leaves it.
+function wheelAfterClick(){
+ if(!singleMap)return;map.scrollWheelZoom.disable();let hinted=false;const box=map.getContainer();
+ box.addEventListener('pointerdown',()=>map.scrollWheelZoom.enable());box.addEventListener('pointerleave',()=>map.scrollWheelZoom.disable());
+ box.addEventListener('wheel',()=>{if(!map.scrollWheelZoom.enabled()&&!hinted){hinted=true;status('Click the map, then scroll to zoom.');}},{passive:true});
 }
 function applyLocation(url){
  applyingView=true;activePlace=null;sharedPin?.remove();sharedPin=null;map.closePopup();
@@ -293,10 +332,10 @@ function updateTitles(){
  // A page cached from before levels existed lacks this container; create it rather than failing to load.
  let controls=$('level-controls');if(!controls){controls=document.createElement('div');controls.id='level-controls';controls.className='level-controls';controls.setAttribute('role','group');controls.setAttribute('aria-label','Map level');$('map-frame').append(controls);}
  // Separate maps of one place stacked vertically (Evershade Weald under Faelindral) get the same quick switch as levels.
- const linked=!config.levels&&Array.isArray(config.linkedMaps)?config.linkedMaps.filter(l=>registry.maps.some(c=>c.id===l.map)):[];
+ const linked=!singleMap&&!config.levels&&Array.isArray(config.linkedMaps)?config.linkedMaps.filter(l=>registry.maps.some(c=>c.id===l.map)):[];
  controls.replaceChildren();controls.hidden=!config.levels&&!linked.length;document.body.classList.toggle('has-levels',!!config.levels||!!linked.length);
  for(const level of config.levels||[]){const b=text('button',level.title);b.type='button';b.dataset.level=level.id;b.setAttribute('aria-pressed',String(level.id===config.levelId));b.onclick=()=>changeLevel(level.id);controls.append(b);}
- for(const l of linked){const b=text('button',l.title);b.type='button';b.dataset.map=l.map;b.setAttribute('aria-pressed',String(l.map===config.id));b.onclick=()=>{if(l.map===config.id)return;const url=mapAddress(l.map),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);history.pushState({map:l.map},'',url);ownView=true;loadMap(l.map,new URL(url));};controls.append(b);}
+ for(const l of linked){const b=text('button',l.title);b.type='button';b.dataset.map=l.map;b.setAttribute('aria-pressed',String(l.map===config.id));b.onclick=()=>{if(l.map!==config.id)goToMap(l.map);};controls.append(b);}
  $('map-frame').setAttribute('aria-label',config.title+' illustrated map');
  for(const s of document.querySelectorAll('.map-select'))s.value=config.id;
  const a=config.attribution,footer=$('map-attribution');footer.replaceChildren(text('span',a.text+' '));
@@ -347,7 +386,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
   const bounds=mapBounds();map.setMaxBounds(bounds);
   sheetTileLayer(config,config.frame||{x:0,y:0,width:config.width,height:config.height},config.tilePath+'?v='+encodeURIComponent(config.tileRevision),{tileSize:config.tileSize,minZoom:config.minZoom,maxZoom:config.maxZoom,maxNativeZoom:config.maxNativeZoom,noWrap:true,bounds,keepBuffer:1,attribution:text('span',config.attribution.map).outerHTML}).on('tileerror',()=>status('A map tile could not load. Please reload.')).addTo(map);
   const currentHidden={...hiddenData};for(const key of ['areas','additionalAreas','routes','connections','destinations','levelStacks'])if(Array.isArray(hiddenData[key]))currentHidden[key]=hiddenData[key].filter(atLevel);
-  fitMap();map.on('resize',()=>{limitZoomOut();updateZoom();});disposeBackdrop=setupSheetEdge(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
+  fitMap();wheelAfterClick();map.on('resize',()=>{limitZoomOut();updateZoom();});disposeBackdrop=setupSheetEdge(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
   buildPlaceIndex();refreshSearch();setPanel(!compact()&&desktopPanelOpen&&!config.entry);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=false;$('edit-positions').hidden=false;updateAlignmentStatus();
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});
@@ -446,7 +485,11 @@ function setupControls(){
  $('delete').onclick=()=>{if(draft&&persist(personal.filter(p=>p.id!==draft.id))){if(editSnapshot)editSnapshot.personal=editSnapshot.personal.filter(p=>p.id!==draft.id);closeEditor();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');}};
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};
- $('share').onclick=()=>copyLink();$('close-link').onclick=()=>$('link-dialog').close();
+ $('share').onclick=()=>singleMap?openInAtlas():copyLink();$('close-link').onclick=()=>$('link-dialog').close();
+ if(singleMap){$('share').title='Open in MnM Atlas';$('share').setAttribute('aria-label','Open this view in MnM Atlas');}
+ $('embed').onclick=openEmbed;$('close-embed').onclick=()=>$('embed-dialog').close();
+ for(const id of ['embed-level','embed-place','embed-height'])$(id).onchange=updateEmbed;
+ $('copy-embed').onclick=()=>copyEmbed('embed-code');$('copy-embed-address').onclick=()=>copyEmbed('embed-address');
  $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{status('Fullscreen is unavailable. Open the atlas in its own tab, or allow fullscreen on the iframe.');}};
  document.addEventListener('fullscreenchange',()=>{$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');$('fullscreen').title=document.fullscreenElement?'Exit fullscreen':'Enter fullscreen';map?.invalidateSize({pan:true,animate:false});});
  // The world map is the entry view: listed first, then the zone maps as a group.

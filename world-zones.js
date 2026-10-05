@@ -24,8 +24,7 @@ function setupWorldZones(map,config,data){
   areas.push(area);
   area.on('click',()=>{
    if(!target){show(area);return;}
-   const url=mapAddress(target.id),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);
-   history.pushState({map:target.id},'',url);ownView=true;loadMap(target.id,new URL(url));
+   goToMap(target.id);
   });
  }
  // Follow the pointer over the map (also over zone names, which sit above the areas) and colour the zone under it.

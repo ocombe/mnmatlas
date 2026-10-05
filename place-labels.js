@@ -29,10 +29,10 @@ function setupPlaceLabels(data){
   }
   // Exit names that lead to another published map open it, at the matching exit when given.
   if(target){
-   const url=mapAddress(target.id),embed=new URLSearchParams(location.search).get('embed');if(embed!==null)url.searchParams.set('embed',embed);if(row.toPlace)url.searchParams.set('place',row.toPlace);
-   face.href=url.href;face.title='Open the '+target.title+' map';
+   const url=mapLink(target.id);if(row.toPlace)url.searchParams.set('place',row.toPlace);
+   face.href=url.href;face.title='Open the '+target.title+' map';if(singleMap){face.target='_blank';face.rel='noopener';face.title+=' in MnM Atlas';}
    L.DomEvent.disableClickPropagation(face);
-   face.addEventListener('click',e=>{if(e.button||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();history.pushState({map:target.id},'',url);ownView=true;loadMap(target.id,new URL(url));});
+   face.addEventListener('click',e=>{if(singleMap||e.button||e.ctrlKey||e.metaKey||e.shiftKey||e.altKey)return;e.preventDefault();goToMap(target.id,url);});
   }
   const icon=L.divIcon({className:'place-name-anchor',html:face,iconSize:[0,0],iconAnchor:[0,0]});
   const marker=L.marker(locationOf(row),{icon,pane:'placeNames',alt:row.name,interactive:alignmentMode,keyboard:alignmentMode,draggable:alignmentMode,bubblingMouseEvents:false});
