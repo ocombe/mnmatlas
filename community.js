@@ -54,7 +54,7 @@
  // Deletes the sign-in and everything stored with it on the server; notes saved in this browser stay here.
  function deleteDialog(){
   const d=showDialog('Delete your account?');
-  d.append(text('p','This permanently deletes your sign-in and everything stored with it: your synced notes, your suggestions and reports, including ones not reviewed yet.'),text('p','Notes saved in this browser stay here until you delete them. Markers already added to the atlas from your suggestions stay, without your name.','form-hint'));
+  d.append(text('p','This permanently deletes your sign-in and everything stored with it: your synced notes, your suggestions and reports, including ones not reviewed yet.'),text('p','Notes saved in this browser stay here until you delete them. Markers already added to the atlas from your suggestions stay. If you asked to be credited, your name stays in the contributors list until you ask on GitHub to remove it.','form-hint'));
   const actions=text('div','','dialog-actions'),go=button('Delete my account',async()=>{
    go.disabled=true;clearTimeout(syncTimer);syncJobs.clear();syncReady='';
    try{const {error}=await client.rpc('delete_my_account');if(error)throw error;}
@@ -98,13 +98,13 @@
   const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
-  const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';
+  const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button('Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim();
    if(!newName){status('Give it a name.');name.focus?.();return;}
    if(newName===target.name&&newNote===oldNote){status('Change the name or the description first.');return;}
    if(!user){signInDialog();return;}send.disabled=true;
-   try{const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,from:{name:target.name,note:target.note||''}},comment:why.value.trim()||null});if(error)throw error;
+   try{const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,from:{name:target.name,note:target.note||''}},comment:why.value.trim()||null,credit:credit.checked});if(error)throw error;
     editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status('Thanks! Your edit is waiting for review.');event('edit-sent');}
    catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The edit could not be sent. Please try again.');}
    finally{send.disabled=false;}
@@ -133,17 +133,25 @@
   const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap'])if(m[key])payload[key]=m[key];
   sendDialog('Share a personal note',[{token:sharedToken(m),name:m.name,map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload}],true);
  }
+ // Being credited is opt-in: the Discord name goes into the public contributors list once a suggestion is published.
+ const creditKey='mnmaps-community-credit';
+ function creditBox(d){
+  const row=text('label','','community-check'),box=document.createElement('input');box.type='checkbox';
+  try{box.checked=localStorage.getItem(creditKey)==='true';}catch{box.checked=false;}
+  box.onchange=()=>{try{localStorage.setItem(creditKey,String(box.checked));}catch{}};
+  row.append(box,text('span','Credit me as a contributor'));d.append(row,text('p','Your Discord name is then listed publicly in About once a suggestion is published.','form-hint'));return box;
+ }
  function sendDialog(title,rows,sharing){
   const d=showDialog(title);d.append(text('p',sharing?'Send this note for review before it appears in the community atlas.':'Your positions are saved locally. Choose the changes to send for review.'));
   const list=text('div','','community-choices'),checks=[];
   for(const row of rows){const label=text('label',''),check=document.createElement('input');check.type='checkbox';check.checked=true;label.append(check,text('span',row.name));list.append(label);checks.push(check);}d.append(list);
-  const label=text('label','Optional comment');label.htmlFor='suggestion-comment';const comment=document.createElement('textarea');comment.id='suggestion-comment';comment.maxLength=500;comment.rows=3;d.append(label,comment);
+  const label=text('label','Optional comment');label.htmlFor='suggestion-comment';const comment=document.createElement('textarea');comment.id='suggestion-comment';comment.maxLength=500;comment.rows=3;d.append(label,comment);const credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button(user?'Send for review':'Sign in with Discord',async()=>{
    if(!user){await signIn();return;}const selected=rows.filter((_,i)=>checks[i].checked&&!checks[i].disabled);if(!selected.length){status('Choose at least one item.');return;}
    send.disabled=true;let done=0;
    try{
     // Separate inserts let the daily limit apply to every row; partial success is remembered.
-    for(const row of selected){const {token,name,...suggestion}=row;const {error}=await client.from('suggestions').insert({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null});if(error)throw error;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
+    for(const row of selected){const {token,name,...suggestion}=row;const {error}=await client.from('suggestions').insert({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null,credit:credit.checked});if(error)throw error;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
     if(done){freshPopup();d.close();status('Thanks! Your suggestion is waiting for review.');}
    }catch(e){if(turnedOff(e)){status('Your account can no longer send suggestions. Your local notes and positions are safe.');freshPopup();return;}status('Some suggestions could not be sent. Unsent items remain selected; your local notes and positions are safe.');freshPopup();}
    finally{if(done)event('suggestion-sent');send.disabled=false;}

@@ -62,6 +62,7 @@ const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone ex
 function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',m.name));if(m.note)n.append(text('p',m.note));n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);n.append(edit);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
+ if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
  window.atlasCommunity?.popup(m,n);return n;}
 function labelEditPopup(row){
  const n=text('div','');n.append(text('div','Place name','tag'),text('h3',row.name));
@@ -69,7 +70,7 @@ function labelEditPopup(row){
  window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
  L.popup({autoPan:false,offset:[0,-8]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
 }
-function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));n.append(copyButton(p));window.atlasCommunity?.placePopup?.(p,n);return n;}
+function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));window.atlasCommunity?.placePopup?.(p,n);return n;}
 function choose(m){
  if(alignmentMode&&!m.id.startsWith('personal-'))selectAlignment(m,'marker');
  if(!enabled.has(m.category)||!pins.has(m.id)||!showPins){enabled.add(m.category);showPins=true;$('search').value='';updateCategoryButtons();drawMarkers();}
@@ -413,8 +414,14 @@ function setupCategoryControls(){
  for(const kind of ['Personal',...Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))]){const option=text('option',kind);option.value=kind;select.append(option);}
  if(current)select.value=current;
 }
+// People who asked to be credited for published suggestions, kept in the site data by the publishing job.
+async function showContributors(){
+ try{const data=await fetchData('data/contributors.json',{contributors:[]}),rows=Array.isArray(data.contributors)?data.contributors.filter(r=>typeof r?.name==='string'&&r.name.trim()):[];
+  $('about-contributors').textContent=rows.length?'Community contributors: '+rows.map(r=>r.name+(r.count>1?' ('+r.count+')':'')).join(', ')+'.':'';$('about-contributors').hidden=!rows.length;}
+ catch{$('about-contributors').hidden=true;}
+}
 function setupControls(){
- $('about').onclick=()=>$('about-dialog').showModal();$('close-about').onclick=()=>$('about-dialog').close();
+ $('about').onclick=()=>{$('about-dialog').showModal();showContributors();};$('close-about').onclick=()=>$('about-dialog').close();
 
  $('all-categories').onclick=()=>{enabled=new Set(Object.keys(categories));updateCategoryButtons();drawMarkers();};
  $('search').oninput=refreshSearch;$('clear-search').onclick=()=>{$('search').value='';refreshSearch();$('search').focus();};

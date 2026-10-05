@@ -196,7 +196,9 @@ revoke all on sequence public.suggestions_id_seq from public,anon,authenticated;
 grant select on public.admins to authenticated;
 grant select,update,delete on public.suggestions to authenticated;
 -- The creation timestamp cannot be supplied by a browser to evade the daily limit.
-grant insert (user_id,author_name,map,level,kind,target_id,payload,comment,status,reviewed_at,review_note) on public.suggestions to authenticated;
+-- Opt-in credit: the publishing job lists the author's name as a contributor once the suggestion is published.
+alter table public.suggestions add column if not exists credit boolean not null default false;
+grant insert (user_id,author_name,map,level,kind,target_id,payload,comment,status,reviewed_at,review_note,credit) on public.suggestions to authenticated;
 grant usage on sequence public.suggestions_id_seq to authenticated;
 grant select,insert,update,delete on public.votes,public.user_notes to authenticated;
 grant all on public.admins,public.suggestions,public.votes,public.user_notes to service_role;

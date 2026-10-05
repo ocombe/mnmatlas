@@ -20,8 +20,8 @@ function dataPath(path){
  if(typeof path!=='string'||!/^data\/[a-zA-Z0-9_./-]+\.json$/.test(path)||path.split('/').includes('..')||path.split('/').includes('tiles'))fail('Invalid data file in map registry.');
  const absolute=resolve(root,path),local=relative(root,absolute);if(local.startsWith('..'+sep)||local==='..')fail('Data file is outside the atlas.');return absolute;
 }
-async function file(path){
- if(!files.has(path)){const original=await readFile(dataPath(path),'utf8');const spacing=original.match(/\r?\n([ \t]+)\S/);files.set(path,{data:JSON.parse(original),original,indent:spacing?spacing[1]:2,newline:original.includes('\r\n')?'\r\n':'\n',trailing:/\r?\n$/.test(original),changed:false});}
+async function file(path,empty){
+ if(!files.has(path)){let original;try{original=await readFile(dataPath(path),'utf8');}catch(e){if(empty===undefined||e.code!=='ENOENT')throw e;original=JSON.stringify(empty,null,2)+'\n';}const spacing=original.match(/\r?\n([ \t]+)\S/);files.set(path,{data:JSON.parse(original),original,indent:spacing?spacing[1]:2,newline:original.includes('\r\n')?'\r\n':'\n',trailing:/\r?\n$/.test(original),changed:false});}
  return files.get(path);
 }
 const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
@@ -58,7 +58,7 @@ async function apply(row){
   const [x,y]=point([p.x,p.y],c,row.id),label=p.noteType==='label'||p.noteType==='exit',path=label?c.labelsFile:c.markersFile,f=await file(path),rows=label?f.data.labels:f.data;
   if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
   if(rows.some(m=>m.id===id))return 'already present';
-  const m={id,name:clean(p.name),...(label?{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
+  const m={id,community:true,name:clean(p.name),...(label?{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
   if(label&&p.noteType==='exit'){m.arrow=p.arrow||'east';if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
   if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;}
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
@@ -71,7 +71,7 @@ async function apply(row){
   const name=clean(p.name),note=clean(p.note||'',true);
   if(clean(m.name)===name&&clean(m.note||'',true)===note)return 'already edited';
   if(clean(m.name)!==clean(p.from.name)||clean(m.note||'',true)!==clean(p.from.note||'',true))fail('Published text has changed for suggestion '+row.id+'; review it again.');
-  m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;f.changed=true;return label?'place name edited':'marker edited';
+  m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;m.community=true;f.changed=true;return label?'place name edited':'marker edited';
  }
  const path=row.kind==='move-label'?c.labelsFile:c.markersFile,f=await file(path),rows=row.kind==='move-label'?f.data.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
@@ -79,7 +79,7 @@ async function apply(row){
  const [x,y]=point(p.to,c,row.id),from=point(p.from,c,row.id);
  if(Math.round(m.x)===x&&Math.round(m.y)===y)return 'already positioned';
  if(Math.round(m.x)!==from[0]||Math.round(m.y)!==from[1])fail('Published position has changed for suggestion '+row.id+'; review it again.');
- m.x=x;m.y=y;f.changed=true;
+ m.x=x;m.y=y;m.community=true;f.changed=true;
  if(row.kind==='move-marker'&&c.labelsFile){const labels=await file(c.labelsFile),trainer=labels.data.trainers?.find(t=>t.id===m.id);if(trainer){trainer.x=x;trainer.y=y;labels.changed=true;}}
  return 'position moved';
 }
@@ -88,7 +88,13 @@ async function main(){
  while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch);if(batch.length<1000)break;after=batch.at(-1).id;}
  if(!rows.length){console.log('No approved suggestions.');return;}
  const applied=[];
- for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');const result=await apply(row);applied.push(row.id);console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');}
+ // Credits count published changes from people who ticked "Credit me as a contributor".
+ const credits=new Map();
+ for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');const result=await apply(row);applied.push(row.id);console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
+  const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&!result.startsWith('already'))credits.set(who,(credits.get(who)||0)+1);}
+ if(credits.size){const f=await file('data/contributors.json',{contributors:[]}),list=Array.isArray(f.data.contributors)?f.data.contributors:(f.data.contributors=[]);
+  for(const [name,count] of credits){const row=list.find(r=>r.name===name);if(row)row.count=(row.count||0)+count;else list.push({name,count});}
+  list.sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));f.changed=true;}
  const changed=[...files].filter(([,f])=>f.changed);
  if(!dryRun){
   for(const [path,f] of changed){let content=JSON.stringify(f.data,null,f.indent).replace(/\n/g,f.newline);if(f.trailing)content+=f.newline;const target=dataPath(path),temporary=target+'.tmp';await writeFile(temporary,content,'utf8');await rename(temporary,target);}
