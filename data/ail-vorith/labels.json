@@ -1,197 +1,210 @@
 {
-  "map": "ail-vorith",
-  "tileRevision": "v1",
-  "coordinateZoom": 5,
-  "labels": [
-    {
-      "id": "foreign-quarter",
-      "name": "Foreign Quarter",
-      "x": 4520,
-      "y": 4290,
-      "kind": "district",
-      "priority": 90,
-      "minZoom": 2.5
-    },
-    {
-      "id": "main-city",
-      "name": "Ail'Vorith",
-      "x": 3750,
-      "y": 2700,
-      "kind": "district",
-      "priority": 100,
-      "minZoom": 2
-    },
-    {
-      "id": "cavern-lake",
-      "name": "Cavern Lake",
-      "x": 3040,
-      "y": 3860,
-      "kind": "district",
-      "priority": 70,
-      "minZoom": 2.75
-    },
-    {
-      "id": "southern-cave",
-      "name": "Southern Cave",
-      "x": 3080,
-      "y": 6620,
-      "kind": "district",
-      "priority": 75,
-      "minZoom": 2.5
-    },
-    {
-      "id": "foreign-traders-market",
-      "name": "Foreign Trader's Market",
-      "x": 4670,
-      "y": 4430,
-      "kind": "building",
-      "priority": 45,
-      "minZoom": 4.5,
-      "note": "Approximate location; to confirm in game."
-    },
-    {
-      "id": "obsidian-academy",
-      "name": "Obsidian Academy",
-      "x": 4405,
-      "y": 4070,
-      "kind": "building",
-      "priority": 50,
-      "minZoom": 4.5,
-      "note": "Approximate location; to confirm in game."
-    }
-  ],
-  "trainers": [
-    {
-      "id": "nurvol-cereveth",
-      "abbreviations": [
-        "INQ"
-      ],
-      "classes": [
-        "Inquisitor"
-      ],
-      "x": 4542,
-      "y": 4376
-    },
-    {
-      "id": "klavel-sul",
-      "abbreviations": [
-        "MNK"
-      ],
-      "classes": [
-        "Monk"
-      ],
-      "x": 4457,
-      "y": 4293
-    },
-    {
-      "id": "tharkan-inathar",
-      "abbreviations": [
-        "WAR"
-      ],
-      "classes": [
-        "Warrior"
-      ],
-      "x": 4444,
-      "y": 4257
-    },
-    {
-      "id": "lurithos-kest",
-      "abbreviations": [
-        "ARC"
-      ],
-      "classes": [
-        "Archer"
-      ],
-      "x": 4355,
-      "y": 4218
-    },
-    {
-      "id": "laren-drin-dar",
-      "abbreviations": [
-        "RNG"
-      ],
-      "classes": [
-        "Ranger"
-      ],
-      "x": 4405,
-      "y": 4236
-    },
-    {
-      "id": "ilnara-hal-kareth",
-      "abbreviations": [
-        "SPB"
-      ],
-      "classes": [
-        "Spellblade"
-      ],
-      "x": 4404,
-      "y": 4314
-    },
-    {
-      "id": "mentvar-drezzorith",
-      "abbreviations": [
-        "PAL"
-      ],
-      "classes": [
-        "Paladin"
-      ],
-      "x": 4401,
-      "y": 4286
-    },
-    {
-      "id": "zalethra-drezzorith",
-      "abbreviations": [
-        "CLR"
-      ],
-      "classes": [
-        "Cleric"
-      ],
-      "x": 4292,
-      "y": 4123
-    },
-    {
-      "id": "lothur-varros",
-      "abbreviations": [
-        "ELE"
-      ],
-      "classes": [
-        "Elementalist"
-      ],
-      "x": 4329,
-      "y": 4131
-    },
-    {
-      "id": "vhasilla-hal-kareth",
-      "abbreviations": [
-        "WIZ"
-      ],
-      "classes": [
-        "Wizard"
-      ],
-      "x": 4357,
-      "y": 4125
-    },
-    {
-      "id": "vaslir-naiyth",
-      "abbreviations": [
-        "NEC"
-      ],
-      "classes": [
-        "Necromancer"
-      ],
-      "x": 4377,
-      "y": 4035
-    },
-    {
-      "id": "amarah-ith-vayen",
-      "abbreviations": [
-        "ENC"
-      ],
-      "classes": [
-        "Enchanter"
-      ],
-      "x": 4467,
-      "y": 4084
-    }
-  ]
+ "map": "ail-vorith",
+ "tileRevision": "v1",
+ "coordinateZoom": 5,
+ "labels": [
+  {
+   "id": "foreign-quarter",
+   "name": "Foreign Quarter",
+   "x": 4520,
+   "y": 4290,
+   "kind": "district",
+   "priority": 90,
+   "minZoom": 2.5
+  },
+  {
+   "id": "main-city",
+   "name": "Ail'Vorith",
+   "x": 3750,
+   "y": 2700,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 2
+  },
+  {
+   "id": "cavern-lake",
+   "name": "Cavern Lake",
+   "x": 3040,
+   "y": 3860,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.75
+  },
+  {
+   "id": "southern-cave",
+   "name": "Southern Cave",
+   "x": 3080,
+   "y": 6620,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2.5
+  },
+  {
+   "id": "foreign-traders-market",
+   "name": "Foreign Trader's Market",
+   "x": 4670,
+   "y": 4430,
+   "kind": "building",
+   "priority": 45,
+   "minZoom": 4.5,
+   "note": "Approximate location; to confirm in game."
+  },
+  {
+   "id": "obsidian-academy",
+   "name": "Obsidian Academy",
+   "x": 4405,
+   "y": 4070,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 4.5,
+   "note": "Approximate location; to confirm in game."
+  },
+  {
+   "id": "to-great-cavern-sea",
+   "name": "to Great Cavern Sea",
+   "x": 1480,
+   "y": 2760,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "west",
+   "toMap": "great-cavern-sea",
+   "approximate": true,
+   "note": "The boat route west toward the Great Cavern Sea. Approximate location; to confirm in game."
+  }
+ ],
+ "trainers": [
+  {
+   "id": "nurvol-cereveth",
+   "abbreviations": [
+    "INQ"
+   ],
+   "classes": [
+    "Inquisitor"
+   ],
+   "x": 4542,
+   "y": 4376
+  },
+  {
+   "id": "klavel-sul",
+   "abbreviations": [
+    "MNK"
+   ],
+   "classes": [
+    "Monk"
+   ],
+   "x": 4457,
+   "y": 4293
+  },
+  {
+   "id": "tharkan-inathar",
+   "abbreviations": [
+    "WAR"
+   ],
+   "classes": [
+    "Warrior"
+   ],
+   "x": 4444,
+   "y": 4257
+  },
+  {
+   "id": "lurithos-kest",
+   "abbreviations": [
+    "ARC"
+   ],
+   "classes": [
+    "Archer"
+   ],
+   "x": 4355,
+   "y": 4218
+  },
+  {
+   "id": "laren-drin-dar",
+   "abbreviations": [
+    "RNG"
+   ],
+   "classes": [
+    "Ranger"
+   ],
+   "x": 4405,
+   "y": 4236
+  },
+  {
+   "id": "ilnara-hal-kareth",
+   "abbreviations": [
+    "SPB"
+   ],
+   "classes": [
+    "Spellblade"
+   ],
+   "x": 4404,
+   "y": 4314
+  },
+  {
+   "id": "mentvar-drezzorith",
+   "abbreviations": [
+    "PAL"
+   ],
+   "classes": [
+    "Paladin"
+   ],
+   "x": 4401,
+   "y": 4286
+  },
+  {
+   "id": "zalethra-drezzorith",
+   "abbreviations": [
+    "CLR"
+   ],
+   "classes": [
+    "Cleric"
+   ],
+   "x": 4292,
+   "y": 4123
+  },
+  {
+   "id": "lothur-varros",
+   "abbreviations": [
+    "ELE"
+   ],
+   "classes": [
+    "Elementalist"
+   ],
+   "x": 4329,
+   "y": 4131
+  },
+  {
+   "id": "vhasilla-hal-kareth",
+   "abbreviations": [
+    "WIZ"
+   ],
+   "classes": [
+    "Wizard"
+   ],
+   "x": 4357,
+   "y": 4125
+  },
+  {
+   "id": "vaslir-naiyth",
+   "abbreviations": [
+    "NEC"
+   ],
+   "classes": [
+    "Necromancer"
+   ],
+   "x": 4377,
+   "y": 4035
+  },
+  {
+   "id": "amarah-ith-vayen",
+   "abbreviations": [
+    "ENC"
+   ],
+   "classes": [
+    "Enchanter"
+   ],
+   "x": 4467,
+   "y": 4084
+  }
+ ]
 }

@@ -1,0 +1,131 @@
+{
+ "map": "great-cavern-sea",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "great-cavern-sea",
+   "name": "Great Cavern Sea",
+   "x": 3631,
+   "y": 5166,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  },
+  {
+   "id": "myconid-village",
+   "name": "Myconid Village",
+   "x": 1334,
+   "y": 5394,
+   "kind": "district",
+   "priority": 75,
+   "minZoom": 2
+  },
+  {
+   "id": "orc-camp",
+   "name": "Orc Camp",
+   "x": 1012,
+   "y": 3319,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "rat-island",
+   "name": "Rat Island",
+   "x": 2776,
+   "y": 4454,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "wizard-tower",
+   "name": "Wizard Tower",
+   "x": 5095,
+   "y": 4247,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "underwater-ruins",
+   "name": "Underwater Ruins",
+   "x": 4546,
+   "y": 3112,
+   "kind": "district",
+   "priority": 60,
+   "minZoom": 2.5
+  },
+  {
+   "id": "ail-vorith-gate",
+   "name": "Ail'Vorith Gate",
+   "x": 6127,
+   "y": 2896,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2
+  },
+  {
+   "id": "spider-caves",
+   "name": "Spider Caves",
+   "x": 1381,
+   "y": 6892,
+   "kind": "district",
+   "priority": 65,
+   "minZoom": 2.5
+  },
+  {
+   "id": "to-caves-of-irem",
+   "name": "to Caves of Irem",
+   "x": 3856,
+   "y": 9152,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "south",
+   "approximate": true,
+   "note": "The way to the Caves of Irem, and on to the Underdocks by the river. Approximate location; to confirm in game.",
+   "toMap": "caves-of-irem"
+  },
+  {
+   "id": "to-ail-vorith",
+   "name": "to Ail'Vorith",
+   "x": 6826,
+   "y": 3031,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "east",
+   "approximate": true,
+   "note": "Approximate location; to confirm in game.",
+   "toMap": "ail-vorith"
+  },
+  {
+   "id": "to-rothold",
+   "name": "to Rothold",
+   "x": 4366,
+   "y": 848,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1,
+   "arrow": "north",
+   "approximate": true,
+   "note": "Docks and a broken lift at the end of the northern gorge. Approximate location; to confirm in game.",
+   "toMap": "rothold"
+  },
+  {
+   "id": "to-blind-midden",
+   "name": "to Blind Midden",
+   "x": 5595,
+   "y": 4346,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "east",
+   "approximate": true,
+   "note": "Approximate location; to confirm in game."
+  }
+ ],
+ "trainers": []
+}

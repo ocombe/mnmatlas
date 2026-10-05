@@ -870,6 +870,41 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "great-cavern-sea",
+      "title": "Great Cavern Sea",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The underground sea of the Deep, between the Caves of Irem and Ail'Vorith",
+      "breadcrumb": "Monsters & Memories / Great Cavern Sea",
+      "description": "An illustrated fan atlas of the Great Cavern Sea: the vast underground sea of the Deep, its islands, the myconid village, the orc camp, the rat island and the roads to Ail'Vorith, the Caves of Irem and Rothold, with place names and personal field notes.",
+      "width": 7744,
+      "height": 10368,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/great-cavern-sea/{z}/{x}/{y}.webp",
+      "markersFile": "data/great-cavern-sea/markers.json",
+      "labelsFile": "data/great-cavern-sea/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4.5
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Illustrated fan map; positions approximate.",
+        "sourceTitle": "",
+        "sourceUrl": "",
+        "license": "",
+        "licenseUrl": ""
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }
