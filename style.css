@@ -169,3 +169,7 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 @media(max-width:760px){.masthead>#embed{margin-left:auto}.masthead>#embed~#toggle-panel{margin-left:0}.masthead>#embed span{display:none}.single-map .map-title h2{font-size:20px}.single-map .level-controls{top:auto;bottom:34px;left:12px;max-width:calc(100% - 84px);overflow-x:auto}}
 #embed-dialog{width:min(540px,calc(100% - 28px))}#embed-dialog p{font-size:13px;line-height:1.5}#embed-dialog label.embed-option{display:flex;align-items:center;gap:9px;margin:8px 0;font-size:13px;color:var(--foreground)}#embed-dialog .embed-option[hidden]{display:none}#embed-dialog .embed-option input{width:17px;height:17px;padding:0;flex:none;accent-color:var(--primary)}
 #embed-code,#embed-address{font:11px/1.5 ui-monospace,Consolas,monospace}.embed-address{display:flex;gap:8px}.embed-address button{flex:none;font-size:12px}#embed-preview{margin-right:auto;align-self:center;font-size:12px}
+/* Exit signs keep their dark board while editing; selection adds an amber ring instead of the cream highlight. */
+.aligning .place-name.exit{padding:3px 11px 4px 4px;border:1.5px dashed #f0b65c;border-radius:7px;background:#2a1f15f2}
+.aligning .place-name.exit.selected{background:#3d2c1b;border-style:solid;outline:3px solid #d0852f}
+.aligning .place-name.exit::after{background:#f0b65c;box-shadow:0 0 0 1px #2a1f15}
