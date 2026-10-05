@@ -152,6 +152,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .place-name.exit{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:7px;padding:3px 11px 4px 4px;border:1.5px solid #d29a48;border-radius:7px;background:#2a1f15f2;color:#f6e9cc;font-style:normal;text-decoration:none;text-shadow:none;white-space:nowrap;letter-spacing:.3px;max-width:240px;box-shadow:0 2px 6px #0008,0 0 0 1px #0006}
 .place-name.exit .exit-arrow{grid-row:span 2;display:grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#8b3a1e;box-shadow:0 0 0 1.5px #f0b65c;color:#fff1d6;font:700 .9em/1 var(--body)}
 .place-name.exit .exit-name{font-family:var(--small-caps)}
+/* IM Fell's line box leaves extra room under the baseline; nudge a lone name down so it sits on the seal's centre line. */
+.place-name.exit:not(.unmapped) .exit-name{position:relative;top:.14em}
 .place-name.exit .exit-soon{grid-column:2;margin:-1px 0 1px;font:italic 600 .62em/1.2 var(--body);letter-spacing:.4px;color:#b8a88f}
 .place-name.exit.linked{text-decoration:none}
 .place-name.exit.linked:hover,.place-name.exit.linked:focus-visible{background:#3d2c1b;border-color:#f0b65c;color:#fff4dc}
