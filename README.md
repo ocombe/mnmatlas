@@ -10,7 +10,7 @@ Add personal notes to keep your own field guide: drag a new note into place, the
 
 Use **Copy link** in a popup or **Share this view** in the map toolbar. Links share a place or view without personal note text. The atlas also supports a compact layout in an iframe and a fullscreen button when permitted by the host page.
 
-To put one map on a wiki page or website, use **Embed this map** (`</>` in the map toolbar): it writes an iframe for `/<map-id>/?embed=map`, optionally at the current level and selected place. That view shows the one map with its levels, without the map picker, field guide or editing; exits and the **Open in MnM Atlas** button open the full atlas in a new tab, and the scroll wheel only zooms after the map is clicked. `?embed=1` keeps the compact full atlas with its map picker.
+To put one map on a wiki page or website, use **Embed** in the header: it writes an iframe for `/<map-id>/?embed=map`, optionally at the current level and selected place. That view shows the one map with its levels, without the map picker, field guide or editing; exits and the **Open in MnM Atlas** button open the full atlas in a new tab, and the scroll wheel only zooms after the map is clicked. `?embed=1` keeps the compact full atlas with its map picker.
 
 Each map has its own address, such as `mnmatlas.com/night-harbor/`. For example, link to `/night-harbor/?place=wiki-4` or a view with `/night-harbor/?x=1640&y=1015&z=5`. Choosing another map, following an exit or switching levels updates the address, and **Back** returns to the previous one. Older `?map=night-harbor` links still open and switch to the new address.
 
