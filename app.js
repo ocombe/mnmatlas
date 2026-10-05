@@ -486,7 +486,7 @@ function setupControls(){
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};
  $('share').onclick=()=>singleMap?openInAtlas():copyLink();$('close-link').onclick=()=>$('link-dialog').close();
- if(singleMap){$('share').title='Open in MnM Atlas';$('share').setAttribute('aria-label','Open this view in MnM Atlas');}
+ if(singleMap){const share=$('share'),icon=document.createElement('img');icon.src='assets/icons/brand.png';icon.alt='';icon.width=icon.height=24;share.replaceChildren(icon);share.classList.add('open-atlas');share.title='Open in MnM Atlas';share.setAttribute('aria-label','Open this view in MnM Atlas');}
  $('embed').onclick=openEmbed;$('close-embed').onclick=()=>$('embed-dialog').close();
  for(const id of ['embed-level','embed-place','embed-height'])$(id).onchange=updateEmbed;
  $('copy-embed').onclick=()=>copyEmbed('embed-code');$('copy-embed-address').onclick=()=>copyEmbed('embed-address');

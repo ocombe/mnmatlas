@@ -165,7 +165,7 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .leaflet-popup-content .community-note{font-size:11px;font-style:italic;color:var(--primary);margin:6px 0 2px}
 /* Single-map embed (?embed=map), for wiki pages: one map, no picker, field guide or editing. */
 .masthead>#embed{font-size:12px}.masthead>#embed b{font-weight:600;letter-spacing:-.5px}.embed #embed,.single-map #edit-toggle,.single-map .embed-toolbar,.single-map .journal{display:none}
-.single-map .map-title{top:10px}.single-map .map-tools{top:10px}.single-map .level-controls{top:87px}
+.map-tools .open-atlas{display:grid;place-items:center}.map-tools .open-atlas img{display:block;width:24px;height:24px}.single-map .map-title{top:10px}.single-map .map-tools{top:10px}.single-map .level-controls{top:87px}
 @media(max-width:760px){.masthead>#embed{margin-left:auto}.masthead>#embed~#toggle-panel{margin-left:0}.masthead>#embed span{display:none}.single-map .map-title h2{font-size:20px}.single-map .level-controls{top:auto;bottom:34px;left:12px;max-width:calc(100% - 84px);overflow-x:auto}}
 #embed-dialog{width:min(540px,calc(100% - 28px))}#embed-dialog p{font-size:13px;line-height:1.5}#embed-dialog label.embed-option{display:flex;align-items:center;gap:9px;margin:8px 0;font-size:13px;color:var(--foreground)}#embed-dialog .embed-option[hidden]{display:none}#embed-dialog .embed-option input{width:17px;height:17px;padding:0;flex:none;accent-color:var(--primary)}
 #embed-code,#embed-address{font:11px/1.5 ui-monospace,Consolas,monospace}.embed-address{display:flex;gap:8px}.embed-address button{flex:none;font-size:12px}#embed-preview{margin-right:auto;align-self:center;font-size:12px}
