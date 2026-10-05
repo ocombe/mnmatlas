@@ -364,7 +364,7 @@
       "minZoom": 3.25,
       "x": 625,
       "y": 920,
-      "arrow": "west",
+      "arrow": "east",
       "linkedArea": "wyrmsbane-entrance",
       "alignmentHelper": true,
       "tier": "exit",
