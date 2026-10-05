@@ -1021,6 +1021,102 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "fallen-watch",
+      "title": "Fallen Watch",
+      "subtitle": "Seven floors of the ruined keep",
+      "cartoucheKicker": "The ruined keep",
+      "breadcrumb": "Monsters & Memories / Fallen Watch",
+      "description": "An illustrated fan atlas of Fallen Watch. Explore seven floors, from the ravine and lower caves to the keep grounds and upper towers, and keep your own field notes.",
+      "width": 4832,
+      "height": 4960,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/fallen-watch/floor-6/{z}/{x}/{y}.webp",
+      "markersFile": "data/fallen-watch/markers.json",
+      "labelsFile": "data/fallen-watch/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "point",
+        "x": 2110,
+        "y": 2360,
+        "z": 3,
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-6",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Ravine",
+          "tilePath": "assets/tiles/fallen-watch/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Lower caves",
+          "tilePath": "assets/tiles/fallen-watch/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Lvl 1 - Entrance halls",
+          "tilePath": "assets/tiles/fallen-watch/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Lvl 2 - Barracks",
+          "tilePath": "assets/tiles/fallen-watch/floor-4/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-5",
+          "title": "Lvl 3 - Dining hall",
+          "tilePath": "assets/tiles/fallen-watch/floor-5/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-6",
+          "title": "Keep grounds",
+          "tilePath": "assets/tiles/fallen-watch/floor-6/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-7",
+          "title": "Upper towers",
+          "tilePath": "assets/tiles/fallen-watch/floor-7/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Lift": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Skoop (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Skoop",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Fallen_watch_map_by_skoop.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Skoop; positions adjusted to this illustration and names expanded. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Skoop",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Fallen_watch_map_by_skoop.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

@@ -80,7 +80,9 @@
    "kind": "exit",
    "priority": 90,
    "minZoom": 1.5,
-   "arrow": "south"
+   "arrow": "south",
+   "toMap": "fallen-watch",
+   "toPlace": "exit-fallen-pass"
   },
   {
    "id": "fallen-pass",

@@ -6,7 +6,8 @@
   "x": 1706,
   "y": 2381,
   "note": "Dungeon entrance.",
-  "minZoom": 2.75
+  "minZoom": 2.75,
+  "toMap": "fallen-watch"
  },
  {
   "id": "dungeon-ancient-crypt",
