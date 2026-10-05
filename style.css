@@ -149,9 +149,9 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .community-actions{display:flex;flex-wrap:wrap;gap:4px;align-items:center}.review-change{white-space:pre-wrap;overflow-wrap:anywhere;font-size:12px;margin:4px 0;padding:6px 8px;border-left:2px solid var(--primary);background:var(--muted)}
 
 /* Exit signs: a dark signboard with an amber rim and a round arrow seal. Exits whose map isn't live yet are dashed and say so. */
-:is(.place-name,.personal-label).exit{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:7px;padding:3px 11px 4px 4px;border:1.5px solid #d29a48;border-radius:7px;background:#2a1f15f2;color:#f6e9cc;font-style:normal;text-decoration:none;text-shadow:none;white-space:nowrap;letter-spacing:.3px;max-width:240px;box-shadow:0 2px 6px #0008,0 0 0 1px #0006}
+:is(.place-name,.personal-label).exit{display:grid;grid-template-columns:auto auto;align-items:center;column-gap:7px;padding:3px 11px 4px 4px;border:1.5px solid #d29a48;border-radius:7px;background:#2a1f15f2;color:#f6e9cc;font-style:normal;text-decoration:none;text-shadow:none;white-space:normal;letter-spacing:.3px;max-width:250px;box-shadow:0 2px 6px #0008,0 0 0 1px #0006}
 :is(.place-name,.personal-label).exit .exit-arrow{grid-row:span 2;display:grid;place-items:center;width:1.6em;height:1.6em;border-radius:50%;background:#8b3a1e;box-shadow:0 0 0 1.5px #f0b65c;color:#fff1d6;font:700 .9em/1 var(--body)}
-:is(.place-name,.personal-label).exit .exit-name{font-family:var(--small-caps)}
+:is(.place-name,.personal-label).exit .exit-name{min-width:0;font-family:var(--small-caps);line-height:1.1;text-wrap:balance}
 /* IM Fell's line box leaves extra room under the baseline; nudge a lone name down so it sits on the seal's centre line. */
 :is(.place-name,.personal-label).exit:not(.unmapped) .exit-name{position:relative;top:.14em}
 :is(.place-name,.personal-label).exit .exit-soon{grid-column:2;margin:-1px 0 1px;font:italic 600 .62em/1.2 var(--body);letter-spacing:.4px;color:#b8a88f}
