@@ -54,7 +54,7 @@
  // Deletes the sign-in and everything stored with it on the server; notes saved in this browser stay here.
  function deleteDialog(){
   const d=showDialog('Delete your account?');
-  d.append(text('p','This permanently deletes your sign-in and everything stored with it: your synced notes, your suggestions and reports, including ones not reviewed yet.'),text('p','Notes saved in this browser stay here until you delete them. Markers already added to the atlas from your suggestions stay. If you asked to be credited, your name stays in the contributors list until you ask on GitHub to remove it.','form-hint'));
+  d.append(text('p','This permanently deletes your sign-in and everything stored with it: your synced notes, your suggestions and reports, including ones not reviewed yet.'),text('p','Notes saved in this browser stay here until you delete them. Markers already added to the atlas from your suggestions stay. If you asked to be credited, your name in the contributors list becomes Anonymous at the next update.','form-hint'));
   const actions=text('div','','dialog-actions'),go=button('Delete my account',async()=>{
    go.disabled=true;clearTimeout(syncTimer);syncJobs.clear();syncReady='';
    try{const {error}=await client.rpc('delete_my_account');if(error)throw error;}

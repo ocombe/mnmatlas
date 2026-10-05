@@ -6,8 +6,10 @@ import {createServer} from 'node:http';
 import {spawn} from 'node:child_process';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),fixture=await mkdtemp(resolve(root,'scripts/.publish-test-'));
-let approved=[],patches=[];
-const server=createServer(async(req,res)=>{let body='';for await(const chunk of req)body+=chunk;if(req.method==='PATCH'){patches.push(JSON.parse(body));res.end('[]');}else res.end(JSON.stringify(approved));});
+let approved=[],patches=[],creditRows=[];
+const server=createServer(async(req,res)=>{let body='';for await(const chunk of req)body+=chunk;
+ if(req.url.startsWith('/rest/v1/credits')){if(req.method==='POST'){for(const c of JSON.parse(body))if(!creditRows.some(r=>r.suggestion_id===c.suggestion_id))creditRows.push(c);res.statusCode=201;res.end();}else res.end(JSON.stringify(creditRows));return;}
+ if(req.method==='PATCH'){patches.push(JSON.parse(body));res.end('[]');}else res.end(JSON.stringify(approved));});
 await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 async function run(dry=false){return new Promise((resolve,reject)=>{const child=spawn(process.execPath,[fixture+'/scripts/apply-approved.mjs',...(dry?['--dry-run']:[])],{env:{...process.env,SUPABASE_URL:'http://127.0.0.1:'+server.address().port,SUPABASE_SERVICE_KEY:'test-secret'}});let output='';child.stdout.on('data',d=>output+=d);child.stderr.on('data',d=>output+=d);child.on('error',reject);child.on('exit',code=>resolve({code,output}));});}
 try{
@@ -19,12 +21,12 @@ try{
  const format=data=>JSON.stringify(data,null,2).replace(/\n/g,'\r\n')+'\r\n';
  await writeFile(fixture+'/data/markers.json',format(markers));await writeFile(fixture+'/data/labels.json',format(labels));await writeFile(fixture+'/data/upper-labels.json',format(upper));
  approved=[
-  {id:1,credit:true,author_name:'Ana',map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[10,20],to:[30.6,40.2],name:'Bank'}},
+  {id:1,credit:true,author_name:'Ana',user_id:'u-ana',map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[10,20],to:[30.6,40.2],name:'Bank'}},
   {id:2,map:'test-map',level:'upper',kind:'move-label',target_id:'place',payload:{from:[20,30],to:[40,50],name:'Hall'}},
-  {id:3,credit:true,author_name:'Ana',map:'test-map',level:'lower',kind:'new-marker',payload:{x:12.6,y:17.1,name:'Ore',category:'Tradeskill',note:'A note',trade:'Mining',color:'#a04438',extra:'discard'}},
+  {id:3,credit:true,author_name:'Ana',user_id:'u-ana',map:'test-map',level:'lower',kind:'new-marker',payload:{x:12.6,y:17.1,name:'Ore',category:'Tradeskill',note:'A note',trade:'Mining',color:'#a04438',extra:'discard'}},
   {id:4,map:'test-map',level:'upper',kind:'new-marker',payload:{x:15,y:16,name:'Way out',category:'Personal',note:'Exit',noteType:'exit',arrow:'north'}},
   {id:10,map:'test-map',level:'upper',kind:'edit-label',target_id:'place',payload:{name:'Great Hall',note:'Big room',from:{name:'Hall',note:''}}},
-  {id:11,credit:false,author_name:'Bo',map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{name:'Bank of the Bay',note:'Open late',from:{name:'Bank',note:''}}}
+  {id:11,credit:false,author_name:'Bo',user_id:'u-bo',map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{name:'Bank of the Bay',note:'Open late',from:{name:'Bank',note:''}}}
  ];
  const before=await readFile(fixture+'/data/markers.json','utf8'),dry=await run(true);assert.equal(dry.code,0,dry.output);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),before);assert.equal(patches.length,0);assert(!dry.output.includes('test-secret'));
  const result=await run();assert.equal(result.code,0,result.output);assert.equal(patches.length,1);assert.equal(patches[0].status,'published');
@@ -34,6 +36,8 @@ try{
  // Only people who asked to be credited are listed, once per published change.
  const credits=()=>readFile(fixture+'/data/contributors.json','utf8').then(JSON.parse);assert.deepEqual((await credits()).contributors,[{name:'Ana',count:2}]);
  const again=await run();assert.equal(again.code,0,again.output);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);assert.deepEqual((await credits()).contributors,[{name:'Ana',count:2}],'Re-running does not count twice');
+ // A deleted account keeps its count under Anonymous.
+ for(const r of creditRows)r.user_id=null;const later=await run();assert.equal(later.code,0,later.output);assert.deepEqual((await credits()).contributors,[{name:'Anonymous',count:2}]);
  approved=[{id:5,map:'test-map',level:'lower',kind:'new-marker',payload:{x:10,y:20,name:'New bank',category:'Bank'}},{id:6,map:'test-map',level:'lower',kind:'move-marker',target_id:'published',payload:{from:[1,2],to:[50,60],name:'Bank'}}];
  const patchCount=patches.length,invalid=await run();assert.equal(invalid.code,1);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),written);assert.equal(patches.length,patchCount);
  // Text is cleaned of invisible and markup characters; a category from another map is refused.

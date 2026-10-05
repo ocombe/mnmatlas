@@ -13,7 +13,7 @@ const headers={apikey:key,Authorization:'Bearer '+key,'Content-Type':'applicatio
 async function request(path,options={}){
  const response=await fetch(new URL('rest/v1/'+path,endpoint.href.replace(/\/$/,'')+'/'),{...options,headers:{...headers,...options.headers}});
  if(!response.ok)fail('Backend request failed (HTTP '+response.status+').');
- return response.status===204?null:response.json();
+ const body=await response.text();return body?JSON.parse(body):null;
 }
 const files=new Map();
 function dataPath(path){
@@ -83,18 +83,30 @@ async function apply(row){
  if(row.kind==='move-marker'&&c.labelsFile){const labels=await file(c.labelsFile),trainer=labels.data.trainers?.find(t=>t.id===m.id);if(trainer){trainer.x=x;trainer.y=y;labels.changed=true;}}
  return 'position moved';
 }
+// Credits are kept in the database so a deleted account's rows lose their user and show as Anonymous;
+// the public list is rebuilt from them on every run, also when nothing new was approved.
+async function updateContributors(credited){
+ let log=[];
+ try{
+  if(!dryRun&&credited.length)await request('credits?on_conflict=suggestion_id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(credited)});
+  for(let offset=0;;offset+=1000){const page=await request('credits?select=suggestion_id,user_id,name&order=suggestion_id.asc&limit=1000&offset='+offset);if(!Array.isArray(page))fail('Invalid credits response.');log.push(...page);if(page.length<1000)break;}
+ }catch(e){console.warn('Contributors not updated: '+e.message);return;}
+ if(dryRun)for(const c of credited)if(!log.some(r=>r.suggestion_id===c.suggestion_id))log.push(c);
+ const people=new Map();
+ for(const r of log){const key=r.user_id||'anonymous',p=people.get(key)||{name:'',count:0};p.count++;if(r.user_id)p.name=clean(r.name||'').slice(0,80)||p.name;people.set(key,p);}
+ const list=[...people].map(([key,p])=>({name:key==='anonymous'||!p.name?'Anonymous':p.name,count:p.count})).reduce((all,p)=>{const same=p.name==='Anonymous'&&all.find(r=>r.name==='Anonymous');if(same)same.count+=p.count;else all.push(p);return all;},[]).sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));
+ const f=await file('data/contributors.json',{contributors:[]});
+ if(JSON.stringify(f.data.contributors||[])!==JSON.stringify(list)){f.data={contributors:list};f.changed=true;console.log((dryRun?'Would list ':'Listing ')+list.length+' contributors.');}
+}
 async function main(){
  const rows=[];let after='0';
  while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch);if(batch.length<1000)break;after=batch.at(-1).id;}
- if(!rows.length){console.log('No approved suggestions.');return;}
- const applied=[];
- // Credits count published changes from people who ticked "Credit me as a contributor".
- const credits=new Map();
+ if(!rows.length)console.log('No approved suggestions.');
+ const applied=[],credited=[];
  for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');const result=await apply(row);applied.push(row.id);console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
-  const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&!result.startsWith('already'))credits.set(who,(credits.get(who)||0)+1);}
- if(credits.size){const f=await file('data/contributors.json',{contributors:[]}),list=Array.isArray(f.data.contributors)?f.data.contributors:(f.data.contributors=[]);
-  for(const [name,count] of credits){const row=list.find(r=>r.name===name);if(row)row.count=(row.count||0)+count;else list.push({name,count});}
-  list.sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));f.changed=true;}
+  // Credits count published changes from people who ticked "Credit me as a contributor".
+  const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&row.user_id&&!result.startsWith('already'))credited.push({suggestion_id:row.id,user_id:row.user_id,name:who});}
+ await updateContributors(credited);
  const changed=[...files].filter(([,f])=>f.changed);
  if(!dryRun){
   for(const [path,f] of changed){let content=JSON.stringify(f.data,null,f.indent).replace(/\n/g,f.newline);if(f.trailing)content+=f.newline;const target=dataPath(path),temporary=target+'.tmp';await writeFile(temporary,content,'utf8');await rename(temporary,target);}

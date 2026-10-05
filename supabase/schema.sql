@@ -196,6 +196,17 @@ revoke all on sequence public.suggestions_id_seq from public,anon,authenticated;
 grant select on public.admins to authenticated;
 grant select,update,delete on public.suggestions to authenticated;
 -- The creation timestamp cannot be supplied by a browser to evade the daily limit.
+-- Credits for published suggestions, written by the publishing job only. Deleting an account clears user_id,
+-- so its entries show as Anonymous in the public contributors list.
+create table if not exists public.credits (
+ suggestion_id bigint primary key,
+ user_id uuid references auth.users on delete set null,
+ name text not null check (char_length(name) between 1 and 80),
+ credited_at timestamptz not null default now()
+);
+alter table public.credits enable row level security;
+revoke all on public.credits from public,anon,authenticated;
+grant all on public.credits to service_role;
 -- Opt-in credit: the publishing job lists the author's name as a contributor once the suggestion is published.
 alter table public.suggestions add column if not exists credit boolean not null default false;
 grant insert (user_id,author_name,map,level,kind,target_id,payload,comment,status,reviewed_at,review_note,credit) on public.suggestions to authenticated;
