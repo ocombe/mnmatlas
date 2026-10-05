@@ -1,5 +1,5 @@
 # Applies suggestions approved in the atlas, saves the data changes to main and publishes the site.
-# Start it from the Actions tab (Run workflow); it also runs after every publish of the site and once a day.
+# Start it from the Actions tab (Run workflow); it also runs after every publish of the site and every hour.
 # Its own data commit is pushed with the job token, which does not start this workflow again.
 # Needs the SUPABASE_SERVICE_KEY repository secret; the key stays in GitHub and is never printed.
 name: Apply approved suggestions
@@ -14,7 +14,7 @@ on:
         type: boolean
         default: false
   schedule:
-    - cron: '17 6 * * *'
+    - cron: '17 * * * *'
 
 permissions:
   contents: write

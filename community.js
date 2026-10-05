@@ -99,13 +99,13 @@
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
   const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
-  const actions=text('div','','dialog-actions'),send=button('Send for review',async()=>{
+  const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim();
    if(!newName){status('Give it a name.');name.focus?.();return;}
    if(newName===target.name&&newNote===oldNote){status('Change the name or the description first.');return;}
    if(!user){signInDialog();return;}send.disabled=true;
-   try{const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,from:{name:target.name,note:target.note||''}},comment:why.value.trim()||null,credit:credit.checked});if(error)throw error;
-    editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status('Thanks! Your edit is waiting for review.');event('edit-sent');}
+   try{const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,from:{name:target.name,note:target.note||''}},comment:why.value.trim()||null,credit:credit.checked});
+    editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your edit is waiting for review.');event('edit-sent');}
    catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The edit could not be sent. Please try again.');}
    finally{send.disabled=false;}
   },'primary');
@@ -141,18 +141,28 @@
   box.onchange=()=>{try{localStorage.setItem(creditKey,String(box.checked));}catch{}};
   row.append(box,text('span','Credit me as a contributor'));d.append(row,text('p','Your Discord name is then listed publicly in About once a suggestion is published.','form-hint'));return box;
  }
+ // An admin's own suggestion is approved as soon as it is saved. It is still an ordinary pending insert followed by
+ // the same approval the review page does, so the database rules decide: only an account in admins can approve.
+ async function submit(row){
+  const {data,error}=await client.from('suggestions').insert(row).select('id').single();if(error)throw error;
+  if(!admin||data?.id==null)return false;
+  const {data:done,error:fail}=await client.from('suggestions').update({status:'approved',reviewed_at:new Date().toISOString(),review_note:'Approved on sending (admin)'}).eq('id',data.id).eq('status','pending').select('id');
+  if(fail||!done?.length){status('Saved, but it could not be approved here; approve it in Review suggestions.');return false;}
+  return true;
+ }
+ const sentLine=published=>published?'Approved: it goes live with the next publishing run.':null;
  function sendDialog(title,rows,sharing){
   const d=showDialog(title);d.append(text('p',sharing?'Send this note for review before it appears in the community atlas.':'Your positions are saved locally. Choose the changes to send for review.'));
   const list=text('div','','community-choices'),checks=[];
   for(const row of rows){const label=text('label',''),check=document.createElement('input');check.type='checkbox';check.checked=true;label.append(check,text('span',row.name));list.append(label);checks.push(check);}d.append(list);
   const label=text('label','Optional comment');label.htmlFor='suggestion-comment';const comment=document.createElement('textarea');comment.id='suggestion-comment';comment.maxLength=500;comment.rows=3;d.append(label,comment);const credit=creditBox(d);
-  const actions=text('div','','dialog-actions'),send=button(user?'Send for review':'Sign in with Discord',async()=>{
+  const actions=text('div','','dialog-actions'),send=button(user?(admin?'Publish':'Send for review'):'Sign in with Discord',async()=>{
    if(!user){await signIn();return;}const selected=rows.filter((_,i)=>checks[i].checked&&!checks[i].disabled);if(!selected.length){status('Choose at least one item.');return;}
    send.disabled=true;let done=0;
    try{
     // Separate inserts let the daily limit apply to every row; partial success is remembered.
-    for(const row of selected){const {token,name,...suggestion}=row;const {error}=await client.from('suggestions').insert({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null,credit:credit.checked});if(error)throw error;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
-    if(done){freshPopup();d.close();status('Thanks! Your suggestion is waiting for review.');}
+    let published=0;for(const row of selected){const {token,name,...suggestion}=row;if(await submit({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null,credit:credit.checked}))published++;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
+    if(done){freshPopup();d.close();status(sentLine(published===done)||'Thanks! Your suggestion is waiting for review.');}
    }catch(e){if(turnedOff(e)){status('Your account can no longer send suggestions. Your local notes and positions are safe.');freshPopup();return;}status('Some suggestions could not be sent. Unsent items remain selected; your local notes and positions are safe.');freshPopup();}
    finally{if(done)event('suggestion-sent');send.disabled=false;}
   },'primary');actions.append(button('Not now',()=>d.close()),send);d.append(actions);
