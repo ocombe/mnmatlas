@@ -63,7 +63,9 @@ function allMarkers(){return [...originals,...personal];}
 function visibleMarkers(){const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);return allMarkers().filter(m=>atLevel(m)&&enabled.has(m.category)&&terms.every(t=>(m.name+' '+m.category+' '+m.note).toLocaleLowerCase().includes(t)));}
 function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers();}
 function copyButton(place){const b=text('button','Copy link','copy-place');b.type='button';b.onclick=()=>copyLink(place);return b;}
-function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker'});}
+function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker',quiet:m.switchOnClick&&!alignmentMode});}
+// Arriving through a floor link: no popup, just a short glow on the landing marker.
+function flashPin(id){const el=pins.get(id)?.getElement();if(!el)return;el.classList.remove('just-arrived');void el.offsetWidth;el.classList.add('just-arrived');setTimeout(()=>el.classList.remove('just-arrived'),1700);}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;
 function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',m.name));if(m.note)n.append(text('p',m.note));n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);n.append(edit);}
@@ -119,7 +121,10 @@ function drawMarkers(){
   // A marker that stands for another published map (a dungeon entrance on the world map) opens that map.
   // Personal zone exits keep their popup (Go to, Edit note) instead.
   const opens=!own&&!alignmentMode&&typeof m.toMap==='string'&&registry.maps.find(c=>c.id===m.toMap);
-  pin.on('click',()=>opens?openMap(opens.id):m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(opens)pin.unbindPopup();if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
+  pin.on('click',()=>opens?openMap(opens.id):m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(opens)pin.unbindPopup();
+  // A floor link switches floor straight away; its details stay in the field guide list.
+  if(m.switchOnClick&&!alignmentMode)pin.unbindPopup();
+  if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
   if(!m.noteType)pin.bindTooltip(()=>text('span',m.name),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
   const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);
   const label=text('span','');label.append(text('strong',m.name),text('small',noteKind(m)+(m.id.startsWith('personal-')?' · Personal note':'')));b.append(label);b.onclick=()=>opens?openMap(opens.id):choose(m);list.append(b);
@@ -312,8 +317,9 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
  const base=registry.maps.find(c=>c.id===config.id),target=levelConfig(base,base.levels.find(l=>l.id===id));
  const url=viewUrl(null),center=place?[place.x,place.y]:pixelsOf(map.getCenter());url.searchParams.set('level',id);url.searchParams.set('x',String(center[0]));url.searchParams.set('y',String(center[1]));url.searchParams.set('z',String(zoom));
  if(!levelsAligned(target,config))for(const k of ['x','y','z'])url.searchParams.delete(k);
- if(place)url.searchParams.set('place',place.id);else url.searchParams.delete('place');
+ if(place&&!place.quiet)url.searchParams.set('place',place.id);else url.searchParams.delete('place');
  history.pushState({map:config.id,level:id},'',url);ownView=true;await loadMap(config.id,url);
+ if(place?.quiet)flashPin(place.id);
 }
 // An optional frame trims the drawn area inside the pixel grid; coordinates stay the same.
 function mapBounds(){const f=config.frame||{x:0,y:0,width:config.width,height:config.height};return L.latLngBounds(map.unproject([f.x,f.y+f.height],config.coordinateZoom),map.unproject([f.x+f.width,f.y],config.coordinateZoom));}

@@ -173,3 +173,7 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .aligning .place-name.exit{padding:3px 11px 4px 4px;border:1.5px dashed #f0b65c;border-radius:7px;background:#2a1f15f2}
 .aligning .place-name.exit.selected{background:#3d2c1b;border-style:solid;outline:3px solid #d0852f}
 .aligning .place-name.exit::after{background:#f0b65c;box-shadow:0 0 0 1px #2a1f15}
+
+/* Landing marker after following a floor link */
+.leaflet-marker-icon.just-arrived{animation:arrive-glow .8s ease-out 2}
+@keyframes arrive-glow{0%{filter:drop-shadow(0 0 0 rgba(240,190,90,0))}40%{filter:drop-shadow(0 0 10px rgba(240,190,90,.95))}100%{filter:drop-shadow(0 0 0 rgba(240,190,90,0))}}
