@@ -486,7 +486,7 @@ function setupControls(){
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};
  $('share').onclick=()=>singleMap?openInAtlas():copyLink();$('close-link').onclick=()=>$('link-dialog').close();
- if(singleMap){const share=$('share');share.innerHTML='<svg viewBox="0 0 24 24" width="19" height="19" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"><path d="M11 4H6.5A2.5 2.5 0 0 0 4 6.5v11A2.5 2.5 0 0 0 6.5 20h11a2.5 2.5 0 0 0 2.5-2.5V13"/><path d="M14 4h6v6M20 4l-9 9"/></svg>';share.classList.add('open-atlas');share.title='Open in MnM Atlas';share.setAttribute('aria-label','Open this view in MnM Atlas');}
+ if(singleMap){const share=$('share');share.title='Open in MnM Atlas';share.setAttribute('aria-label','Open this view in MnM Atlas');}
  $('embed').onclick=openEmbed;$('close-embed').onclick=()=>$('embed-dialog').close();
  for(const id of ['embed-level','embed-place','embed-height'])$(id).onchange=updateEmbed;
  $('copy-embed').onclick=()=>copyEmbed('embed-code');$('copy-embed-address').onclick=()=>copyEmbed('embed-address');
