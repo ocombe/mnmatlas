@@ -159,8 +159,8 @@
     "id": "stairs-sw-lower",
     "name": "Stairs to Upper city",
     "category": "Stairs",
-    "x": 2966.0,
-    "y": 5500.0,
+    "x": 2966,
+    "y": 5500,
     "note": "Stairs from this landing climb a tower to a high bridge over the water, then a second tower up to the Upper city square. Approximate; to confirm in game.",
     "level": "lower",
     "approximate": true,
@@ -173,8 +173,8 @@
     "id": "stairs-sw-upper",
     "name": "Stairs to Lower docks",
     "category": "Stairs",
-    "x": 3594.0,
-    "y": 5080.0,
+    "x": 3594,
+    "y": 5080,
     "note": "Stairs down a tower to a high bridge over the water, then a second tower down to a landing on the south-west quay. Approximate; to confirm in game.",
     "level": "upper",
     "approximate": true,
@@ -306,13 +306,14 @@
   },
   {
     "id": "class-necromancer-cleric-shadowknight",
-    "name": "Necromancer / Cleric / Shadowknight trainers",
+    "name": "Cleric / Shadowknight trainers",
     "x": 4627,
     "y": 5909,
     "level": "lower",
     "approximate": true,
     "note": "In the cave beneath the south-east rock; to confirm in game.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "community": true
   },
   {
     "id": "upper-stable",
@@ -373,9 +374,20 @@
     "id": "trade-lumberjacking",
     "name": "Lumberjacking — north-east quay",
     "category": "Tradeskill",
-    "x": 4869,
-    "y": 4566,
+    "x": 4798,
+    "y": 4210,
     "level": "lower",
-    "note": ""
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "community-30",
+    "community": true,
+    "name": "NEC",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4880,
+    "y": 4552,
+    "level": "lower"
   }
 ]

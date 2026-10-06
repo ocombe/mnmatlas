@@ -172,15 +172,16 @@
     {
       "id": "wiki-quartermaster",
       "name": "Quartermaster",
-      "x": 4526,
-      "y": 3862,
+      "x": 4544,
+      "y": 3803,
       "level": "lower",
       "approximate": true,
       "note": "Approximate; to confirm in game. Buy / sell weapons and armour.",
       "kind": "building",
       "tier": "building",
       "priority": 40,
-      "minZoom": 4.5
+      "minZoom": 4.5,
+      "community": true
     },
     {
       "id": "wiki-northern-gates",
