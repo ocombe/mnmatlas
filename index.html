@@ -7,14 +7,14 @@
  <meta property="og:image" content="https://www.mnmatlas.com/assets/og-card.jpg?v=5"><meta property="og:image:type" content="image/jpeg"><meta property="og:image:width" content="1200"><meta property="og:image:height" content="630"><meta property="og:image:alt" content="MnM Atlas, illustrated maps of Monsters & Memories, beside a watercolour chart of a harbour city.">
  <meta name="twitter:card" content="summary_large_image"><meta name="twitter:title" content="MnM Atlas"><meta name="twitter:description" content="An illustrated community atlas of Monsters & Memories."><meta name="twitter:image" content="https://www.mnmatlas.com/assets/og-card.jpg?v=5">
  <link rel="icon" href="favicon.ico" sizes="48x48"><link rel="icon" href="assets/icons/icon-32.png" type="image/png" sizes="32x32"><link rel="icon" href="assets/icons/icon-16.png" type="image/png" sizes="16x16"><link rel="apple-touch-icon" href="assets/icons/apple-touch-icon.png"><link rel="manifest" href="site.webmanifest"><title>MnM Atlas</title>
- <link rel="stylesheet" href="assets/vendor/leaflet.css"><link rel="stylesheet" href="style.css?v=atlas-42">
- <script defer src="assets/vendor/leaflet.js"></script><script defer src="icons.js?v=atlas-18"></script><script defer src="hidden-areas.js?v=atlas-11"></script><script defer src="place-labels.js?v=atlas-22"></script><script defer src="world-zones.js?v=atlas-5"></script><script defer src="sheet-edge.js?v=atlas-4"></script><script defer src="config.js"></script><script defer src="assets/vendor/supabase.js"></script><script defer src="app.js?v=atlas-47"></script><script defer src="community.js?v=atlas-11"></script>
+ <link rel="stylesheet" href="assets/vendor/leaflet.css"><link rel="stylesheet" href="style.css?v=atlas-43">
+ <script defer src="assets/vendor/leaflet.js"></script><script defer src="icons.js?v=atlas-18"></script><script defer src="hidden-areas.js?v=atlas-11"></script><script defer src="place-labels.js?v=atlas-22"></script><script defer src="world-zones.js?v=atlas-5"></script><script defer src="sheet-edge.js?v=atlas-4"></script><script defer src="config.js"></script><script defer src="assets/vendor/supabase.js"></script><script defer src="app.js?v=atlas-48"></script><script defer src="community.js?v=atlas-11"></script>
 </head>
 <body>
  <header class="masthead">
   <a class="brand" href="./" aria-label="MnM Atlas home"><img class="brand-star" src="assets/icons/brand.png" alt="" width="34" height="34"> MnM Atlas <span class="brand-sub">COMMUNITY MAPS</span></a>
   <span id="breadcrumb" class="edition">Monsters &amp; Memories</span>
-  <label class="map-picker"><span>Map</span><select id="map-select" class="map-select" aria-label="Choose map"></select></label>
+  <div class="map-picker"><span aria-hidden="true">Map</span><div id="map-select" class="map-combo"></div></div>
   <button id="embed" type="button" title="Embed this map on a wiki or website" aria-label="Embed this map" aria-haspopup="dialog"><b aria-hidden="true">&lt;/&gt;</b> <span>Embed</span></button>
   <button id="toggle-panel" aria-controls="journal" aria-expanded="true">☷ <span>Field guide</span></button>
  </header>
@@ -36,7 +36,7 @@
   </aside>
   <section id="map-frame" class="map-frame" aria-label="Illustrated map">
    <div id="map" tabindex="0" aria-label="Map. Drag to pan, scroll to zoom. Arrow keys to pan, plus and minus to zoom."></div>
-   <div class="embed-toolbar"><select id="embed-map-select" class="map-select" aria-label="Choose map"></select><button id="embed-guide" aria-controls="journal" aria-expanded="false">☷ Field guide</button></div>
+   <div class="embed-toolbar"><div id="embed-map-select" class="map-combo"></div><button id="embed-guide" aria-controls="journal" aria-expanded="false">☷ Field guide</button></div>
    <div class="frame-border" aria-hidden="true"></div>
    <div class="map-title"><span id="cartouche-kicker"></span><h2 id="map-name"></h2><small id="map-subtitle"></small></div>
    <div id="level-controls" class="level-controls" role="group" aria-label="Map level" hidden></div>

@@ -369,7 +369,7 @@ function updateTitles(){
  for(const level of config.levels||[]){const b=text('button',level.title);b.type='button';b.dataset.level=level.id;b.setAttribute('aria-pressed',String(level.id===config.levelId));b.onclick=()=>changeLevel(level.id);controls.append(b);}
  for(const l of linked){const b=text('button',l.title);b.type='button';b.dataset.map=l.map;b.setAttribute('aria-pressed',String(l.map===config.id));b.onclick=()=>{if(l.map!==config.id)goToMap(l.map);};controls.append(b);}
  $('map-frame').setAttribute('aria-label',config.title+' illustrated map');
- for(const s of document.querySelectorAll('.map-select'))s.value=config.id;
+ setPickerMap(config.id);
  const a=config.attribution,footer=$('map-attribution');footer.replaceChildren(text('span',a.text+' '));
  appendAttributionLinks(footer,a);
  $('about-attribution').textContent=a.changes||a.text;
@@ -394,7 +394,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
  const serial=++loadSerial;clearTimeout(urlTimer);loading=true;document.body.dataset.ready='false';
  const requested=registry.maps.find(c=>c.id===id),base=requested||registry.maps.find(c=>c.id===registry.defaultMap);let next=base;
  if(push)url.searchParams.delete('level');
- for(const s of document.querySelectorAll('.map-select'))s.disabled=true;
+ for(const p of pickers)p.busy(true);
  try{
   let [markers,labels,hidden]=await Promise.all([fetchData(next.markersFile,[]),fetchData(next.labelsFile,{labels:[],trainers:[]}),fetchData(next.hiddenAreasFile,{areas:[],routes:[]})]);
   if(serial!==loadSerial)return;
@@ -428,7 +428,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
   window.dispatchEvent(new CustomEvent('atlas:loaded'));
   if(!requested&&id)status('Unknown map; showing '+config.title+'.');
  }catch(e){if(serial!==loadSerial)return;loading=false;document.body.dataset.ready=map?'true':'false';status('The atlas could not load. '+e.message,true);if(map)syncUrl();}
- finally{if(serial===loadSerial)for(const s of document.querySelectorAll('.map-select')){s.disabled=false;if(config)s.value=config.id;}}
+ finally{if(serial===loadSerial){for(const p of pickers)p.busy(false);if(config)setPickerMap(config.id);}}
 }
 function updateZoom(){$('zoom-label').textContent=Math.round(2**(map.getZoom()-config.coordinateZoom)*100)+'% · '+config.title;$('zoom-in').disabled=map.getZoom()>=config.maxZoom;$('zoom-out').disabled=map.getZoom()<=map.getMinZoom()+.01;}
 // Saved data handed over from the atlas's previous address, by its moved page or as a downloaded file.
@@ -497,6 +497,47 @@ function instantTips(){
  const watch=new MutationObserver(list=>{for(const m of list)sync(m.target);});
  for(const b of document.querySelectorAll('.map-tools button')){sync(b);watch.observe(b,{attributes:true,attributeFilter:['title']});}
 }
+// Map picker: the world map first, then the zone maps A to Z, with a type-to-filter box (no letter shortcuts, so any keyboard layout works).
+const pickers=[],mapOrder=new Intl.Collator('en',{sensitivity:'base',ignorePunctuation:true});
+const foldName=v=>v.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’'`]/g,'').toLowerCase();
+function setPickerMap(id){for(const p of pickers)p.set(id);}
+function buildMapPicker(host){
+ const uid=host.id,button=document.createElement('button'),value=text('span','','map-select-value'),menu=document.createElement('div'),box=document.createElement('div'),input=document.createElement('input'),list=document.createElement('div'),empty=text('p','','map-menu-empty');
+ button.type='button';button.className='map-select';button.setAttribute('aria-haspopup','listbox');button.setAttribute('aria-expanded','false');button.setAttribute('aria-controls',uid+'-menu');
+ button.append(value);button.insertAdjacentHTML('beforeend','<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5 6 7.5 9 4.5"/></svg>');
+ menu.className='map-menu';menu.id=uid+'-menu';menu.hidden=true;box.className='search-box';box.append(text('span','⌕'));box.firstChild.setAttribute('aria-hidden','true');
+ input.type='search';input.placeholder='Search maps…';input.autocomplete='off';input.spellcheck=false;input.setAttribute('aria-label','Search maps');input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','true');input.setAttribute('aria-controls',uid+'-list');
+ list.className='map-menu-list';list.id=uid+'-list';list.setAttribute('role','listbox');list.setAttribute('aria-label','Maps');empty.hidden=true;
+ const options=[],group=document.createElement('div'),heading=text('div','Zone maps','map-menu-group');heading.id=uid+'-zones';group.setAttribute('role','group');group.setAttribute('aria-labelledby',heading.id);group.append(heading);
+ let current=null,active=null,shown=[],loadingMap=false;
+ const option=c=>{const o=text('div',c.title,'map-option');o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
+  o.onmousedown=e=>e.preventDefault();o.onclick=()=>choose(c.id);o.onpointermove=()=>{if(active!==o)setActive(o,false);};options.push(o);return o;};
+ for(const c of registry.maps.filter(c=>c.entry))list.append(option(c));
+ for(const c of registry.maps.filter(c=>!c.entry).sort((a,b)=>mapOrder.compare(a.title,b.title)))group.append(option(c));
+ list.append(group);box.append(input);menu.append(box,list,empty);host.replaceChildren(button,menu);
+ function setActive(o,scroll=true){active?.classList.remove('active');active=o;if(o){o.classList.add('active');input.setAttribute('aria-activedescendant',o.id);if(scroll)o.scrollIntoView({block:'nearest'});}else input.removeAttribute('aria-activedescendant');}
+ function filter(){const words=foldName(input.value).split(/\s+/).filter(Boolean);shown=[];
+  for(const o of options){const hit=words.every(w=>o.dataset.key.includes(w));o.hidden=!hit;if(hit)shown.push(o);}
+  heading.hidden=!shown.some(o=>group.contains(o));empty.hidden=shown.length>0;if(!shown.length)empty.textContent='No map matches “'+input.value.trim()+'”.';
+  setActive((!words.length&&shown.find(o=>o.dataset.map===current))||shown[0]||null);}
+ function open(focus){if(!menu.hidden||loadingMap)return;menu.hidden=false;host.classList.add('open');button.setAttribute('aria-expanded','true');input.value='';filter();if(focus)input.focus({preventScroll:true});}
+ function close(refocus){if(menu.hidden)return;menu.hidden=true;host.classList.remove('open');button.setAttribute('aria-expanded','false');if(refocus)button.focus({preventScroll:true});}
+ function choose(id){close(true);if(id!==current&&!loadingMap)loadMap(id,new URL(location.href),true);}
+ function move(step){if(!shown.length)return;const i=shown.indexOf(active);setActive(shown[i<0?0:Math.abs(step)>1?Math.max(0,Math.min(shown.length-1,i+step)):(i+step+shown.length)%shown.length]);}
+ button.onclick=e=>menu.hidden?open(e.pointerType!=='touch'):close(false);
+ button.onkeydown=e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open(true);}else if(e.key.length===1&&e.key!==' '&&!e.ctrlKey&&!e.metaKey){e.preventDefault();open(true);input.value=e.key;filter();}else if(e.key==='Escape'&&!menu.hidden){e.stopPropagation();close(true);}};
+ input.oninput=filter;
+ input.onkeydown=e=>{const k=e.key;
+  if(k==='ArrowDown'||k==='ArrowUp'){e.preventDefault();move(k==='ArrowDown'?1:-1);}
+  else if(k==='PageDown'||k==='PageUp'){e.preventDefault();move(k==='PageDown'?6:-6);}
+  else if(k==='Enter'){e.preventDefault();if(active)choose(active.dataset.map);}
+  else if(k==='Escape'){e.preventDefault();e.stopPropagation();if(input.value){input.value='';filter();}else close(true);}
+  else if(k==='Tab')close(false);};
+ host.addEventListener('focusout',e=>{if(e.relatedTarget&&!host.contains(e.relatedTarget))close(false);});
+ document.addEventListener('pointerdown',e=>{if(!host.contains(e.target))close(false);});
+ // While a map loads the button stays focusable (aria-disabled), so keyboard users keep their place.
+ return {busy(on){loadingMap=on;button.setAttribute('aria-disabled',String(on));if(on)close(false);},set(id){current=id;const c=registry.maps.find(m=>m.id===id);value.textContent=c?c.title:'';button.setAttribute('aria-label','Choose map: '+(c?c.title:''));for(const o of options)o.setAttribute('aria-selected',String(o.dataset.map===id));}};
+}
 function setupControls(){
  instantTips();
  $('about').onclick=()=>{$('about-dialog').showModal();showContributors();};$('close-about').onclick=()=>$('about-dialog').close();
@@ -531,8 +572,7 @@ function setupControls(){
  $('copy-embed').onclick=()=>copyEmbed('embed-code');$('copy-embed-address').onclick=()=>copyEmbed('embed-address');
  $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{status('Fullscreen is unavailable. Open the atlas in its own tab, or allow fullscreen on the iframe.');}};
  document.addEventListener('fullscreenchange',()=>{$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');$('fullscreen').title=document.fullscreenElement?'Exit fullscreen':'Enter fullscreen';map?.invalidateSize({pan:true,animate:false});});
- // The world map is the entry view: listed first, then the zone maps as a group.
- for(const s of document.querySelectorAll('.map-select')){const group=document.createElement('optgroup');group.label='Zone maps';for(const c of registry.maps){const option=text('option',c.title);option.value=c.id;(c.entry?s:group).append(option);}s.append(group);s.onchange=()=>loadMap(s.value,new URL(location.href),true);}
+ for(const host of document.querySelectorAll('.map-combo'))pickers.push(buildMapPicker(host));
  window.addEventListener('popstate',()=>{const url=new URL(location.href);ownView=true;loadMap(mapIdOf(url),url);});
 }
 // Every publish refreshes each file's Last-Modified, so one small HEAD request spots a newer edition.
