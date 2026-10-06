@@ -3,11 +3,17 @@ import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 const source=await readFile(new URL('../community.js',import.meta.url),'utf8');
 class Node {
- constructor(tag,value='',cls=''){this.tagName=tag;this.textContent=value;this.className=cls;this.children=[];this.listeners={};this.hidden=false;this.value='';this.open=false;this.style={setProperty(){}};}
+ constructor(tag,value='',cls=''){this.tagName=tag;this.textContent=value;this.className=cls;this.children=[];this.listeners={};this.hidden=false;this.value='';this.open=false;this.style={setProperty(){}};this.classList={add(){},remove(){}};}
  append(...nodes){for(const n of nodes){if(n.parentElement)n.remove();n.parentElement=this;this.children.push(n);}}
  replaceChildren(...nodes){this.children=[];this.append(...nodes);}
  get lastChild(){return this.children.at(-1);}
  setAttribute(k,v){this[k]=v;}
+ removeAttribute(k){delete this[k];}
+ after(...nodes){const parent=this.parentElement;for(const n of nodes){if(n.parentElement)n.remove();n.parentElement=parent;parent.children.splice(parent.children.indexOf(this)+1,0,n);}}
+ insertAdjacentHTML(){}
+ focus(){}
+ contains(n){for(;n;n=n.parentElement)if(n===this)return true;return false;}
+ querySelector(tag){return this.querySelectorAll(tag)[0]||null;}
  addEventListener(k,fn){(this.listeners[k]??=[]).push(fn);}
  fire(k){for(const fn of this.listeners[k]||[])fn({target:this});}
  remove(){if(this.parentElement)this.parentElement.children=this.parentElement.children.filter(n=>n!==this);}
@@ -17,8 +23,9 @@ class Node {
 }
 const settle=async()=>{for(let i=0;i<8;i++)await new Promise(resolve=>setImmediate(resolve));};
 function environment(settings={},hostname='atlas.example',session=null){
- const elements=new Map(),head=new Node('head'),body=new Node('body'),bottom=new Node('div'),formHint=new Node('p'),noteLine=new Node('p');let creations=0,timerId=0;
+ const elements=new Map(),head=new Node('head'),body=new Node('body'),bottom=new Node('div'),bar=new Node('header'),formHint=new Node('p'),noteLine=new Node('p');let creations=0,timerId=0;
  for(const id of ['about-counts','search','about-community','editor','map-frame'])elements.set(id,new Node('div'));elements.get('editor').querySelector=()=>formHint;
+ const panelButton=new Node('button','Search menu');bar.append(panelButton);elements.set('toggle-panel',panelButton);
  const timers=new Map(),listeners=new Map(),saved=new Map(),calls=[],counts=[],statuses=[],remote=[{id:'personal-remote',name:'Remote',category:'Personal',note:'',x:40,y:50},{id:'personal-local',name:'Older remote',category:'Personal',note:'',x:1,y:2}];
  const user=session?.user,suggestions=[],layers=[],banned=[];let authHandler,failNotes=false,failSuggestions=false;
  function result(table,request){
@@ -43,9 +50,9 @@ function environment(settings={},hostname='atlas.example',session=null){
  context.allMarkers=()=>[...context.originals,...context.personal];context.popup=m=>{const n=new Node('div');context.window.atlasCommunity?.popup(m,n);return n;};context.drawMarkers=()=>{for(const m of context.allMarkers())context.pins.set(m.id,{setPopupContent(){}});};
  context.persist=next=>{saved.set('notes',JSON.stringify(next));context.personal=next;context.window.dispatchEvent({type:'atlas:notes'});return true;};
  vm.runInNewContext(source,context,{filename:'community.js'});
- return {context,elements,head,body,bottom,calls,counts,statuses,remote,saved,suggestions,layers,banned,get creations(){return creations;},set failNotes(v){failNotes=v;},set failSuggestions(v){failSuggestions=v;},emit:type=>context.window.dispatchEvent({type}),async tick(ms){const jobs=[...timers].filter(([,t])=>t.ms===ms);for(const [id,t] of jobs){timers.delete(id);t.fn();}await settle();}};
+ return {context,elements,head,body,bottom,bar,calls,counts,statuses,remote,saved,suggestions,layers,banned,get creations(){return creations;},set failNotes(v){failNotes=v;},set failSuggestions(v){failSuggestions=v;},emit:type=>context.window.dispatchEvent({type}),async tick(ms){const jobs=[...timers].filter(([,t])=>t.ms===ms);for(const [id,t] of jobs){timers.delete(id);t.fn();}await settle();}};
 }
-for(const settings of [{},{supabaseUrl:'https://project.example'},{supabaseKey:'public-key'}]){const e=environment(settings);assert.equal(e.calls.length,0);assert.equal(e.creations,0);assert.equal(e.head.children.length,0);assert.equal(e.bottom.children.length,0);}
+for(const settings of [{},{supabaseUrl:'https://project.example'},{supabaseKey:'public-key'}]){const e=environment(settings);assert.equal(e.calls.length,0);assert.equal(e.creations,0);assert.equal(e.head.children.length,0);assert.equal(e.bottom.children.length,0);assert.equal(e.bar.children.length,1);}
 for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounter:'counter'},hostname);assert.equal(e.head.children.length,0);}
 {
  const e=environment({goatcounter:'counter'}),script=e.head.children[0];assert.equal(script.src,'https://gc.zgo.at/count.js');assert.equal(script.dataset.goatcounter,'https://counter.goatcounter.com/count');assert.equal(e.context.window.goatcounter.no_onload,true);
@@ -54,15 +61,15 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  e.elements.get('search').value='private query';e.elements.get('search').fire('input');e.elements.get('search').fire('input');await e.tick(650);assert.equal(e.counts.filter(r=>r.path==='search').length,1);e.emit('atlas:note-added');e.emit('atlas:positions');assert(!JSON.stringify(e.counts).includes('private'));
 }
 {
- const e=environment({supabaseUrl:'https://project.example',supabaseKey:'public-key'});await settle();assert.equal(e.bottom.children.length,1);
+ const e=environment({supabaseUrl:'https://project.example',supabaseKey:'public-key'});await settle();assert.equal(e.bar.children.length,2);assert.equal(e.bar.children[1].className,'account');assert.equal(e.bar.children[1].children[0].children[0].textContent,'Sign in');
  const popup=e.context.popup(e.context.originals[0]),report=popup.children[0].children[1];assert.equal(report.textContent,'Report a problem');assert.equal(popup.children[0].children[0].textContent,'Suggest an edit');await report.onclick();assert(e.body.children.find(n=>n.id==='community-dialog').open);assert.equal(e.calls.filter(r=>r.table==='suggestions').length,0);
  const d=e.body.children.find(n=>n.id==='community-dialog'),sign=d.querySelectorAll('button').find(n=>n.textContent==='Sign in with Discord');await sign.onclick();assert.equal(e.calls.find(r=>r.oauth).oauth.options.redirectTo,'https://atlas.example/?map=test-map');
 }
 {
  const session={user:{id:'user-a',user_metadata:{full_name:'Atlas member'},admin:true}},e=environment({supabaseUrl:'https://project.example',supabaseKey:'public-key'},'atlas.example',session);await settle();
- assert.equal(e.context.personal.length,2);assert.equal(e.context.personal.find(m=>m.id==='personal-local').name,'Local wins');assert.equal(e.remote.find(m=>m.id==='personal-local').name,'Local wins');assert(e.bottom.children[0].querySelectorAll('button').some(n=>n.textContent==='Review suggestions'&&!n.hidden));
+ assert.equal(e.context.personal.length,2);assert.equal(e.context.personal.find(m=>m.id==='personal-local').name,'Local wins');assert.equal(e.remote.find(m=>m.id==='personal-local').name,'Local wins');const menu=e.bar.children[1].children[1];assert(menu.hidden,'The account menu starts closed');e.bar.children[1].children[0].onclick();assert(!menu.hidden);assert.equal(menu.children[0].children[1].children[0].textContent,'Atlas member');assert(menu.querySelectorAll('button').some(n=>n.textContent==='Review suggestions'&&!n.hidden));
  const d=e.body.children.find(n=>n.id==='community-dialog');let p=e.context.popup(e.context.originals[0]);p.children[0].children[1].onclick();assert(d.open);const send=()=>d.querySelectorAll('button').find(n=>n.textContent==='Send report').onclick();
- await send();assert(d.open,'A reason is required');assert.equal(e.calls.filter(r=>r.table==='suggestions').length,0);
+ await send();assert(d.open,'A reason is required');assert.equal(e.calls.filter(r=>r.table==='suggestions'&&r.op!=='select').length,0,'Only the waiting count was read');
  e.failSuggestions=true;d.querySelectorAll('input').find(n=>n.value==='name').checked=true;await send();assert(d.open,'A failed report keeps the dialog open');e.failSuggestions=false;
  await send();assert(!d.open);let sent=e.calls.filter(r=>r.table==='suggestions'&&r.op==='insert').at(-1).payload;assert.equal(sent.kind,'report');assert.equal(sent.target_id,'published');assert.equal(JSON.stringify(sent.payload),JSON.stringify({name:'Bank',reason:'name',x:10,y:20}),'Reports use the published position');assert.equal(e.context.popup(e.context.originals[0]).children[0].children[1].textContent,'Reported, thanks');
  // A name or description edit keeps what the visitor saw, so a stale edit cannot overwrite a newer text.
@@ -78,7 +85,7 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  e.remote.push({id:'personal-elsewhere',name:'Elsewhere',category:'Personal',note:'',x:3,y:4});e.emit('atlas:loaded');await settle();await e.tick(2000);
  assert(!e.context.personal.some(m=>m.id==='personal-remote'),'A deleted note does not come back');assert(e.context.personal.some(m=>m.id==='personal-elsewhere'),'A note from another device arrives');assert(!e.remote.some(m=>m.id==='personal-remote'));
  e.suggestions.push({id:9,status:'pending',map:'test-map',level:'lower',kind:'move-marker',payload:{name:'Bank',from:[10,20],to:[30,40]},author_name:'Member',created_at:new Date().toISOString()});
- const reviewButton=e.bottom.children[0].querySelectorAll('button').find(n=>n.textContent==='Review suggestions');reviewButton.onclick();await settle();const review=e.body.children.find(n=>n.id==='community-review');assert(review.open);await review.querySelectorAll('button').find(n=>['Show on map','Review on map'].includes(n.textContent)).onclick();await settle();assert(!review.open);assert.equal(e.layers.at(-1).items.length,3);assert(!e.layers.at(-1).removed,'Closing the dialog must keep the new preview');
+ const reviewButton=menu.querySelectorAll('button').find(n=>n.textContent==='Review suggestions');reviewButton.onclick();await settle();const review=e.body.children.find(n=>n.id==='community-review');assert(review.open);await review.querySelectorAll('button').find(n=>['Show on map','Review on map'].includes(n.textContent)).onclick();await settle();assert(!review.open);assert.equal(e.layers.at(-1).items.length,3);assert(!e.layers.at(-1).removed,'Closing the dialog must keep the new preview');
  const preview=e.context.$('community-preview');assert(preview);await preview.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();assert.equal(e.suggestions[0].status,'approved');assert(e.suggestions[0].reviewed_at);assert(e.layers.at(-1).removed);
  e.suggestions.push({id:10,status:'pending',map:'test-map',level:'lower',kind:'report',target_id:'published',payload:{name:'Bank',reason:'position',x:10,y:20},comment:'Across the bridge',author_name:'Member',created_at:new Date().toISOString()});
  reviewButton.onclick();await settle();assert(review.querySelectorAll('p').some(n=>n.textContent==='Wrong position'));assert(!review.querySelectorAll('button').some(n=>n.textContent==='Approve'));await review.querySelectorAll('button').find(n=>n.textContent==='Fixed').onclick();assert.equal(e.suggestions[1].status,'resolved');
@@ -94,8 +101,8 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  assert.equal(e.banned.length,1);assert.equal(e.banned[0].user_id,'spammer');assert(e.suggestions.filter(r=>r.user_id==='spammer').every(r=>r.status==='rejected'&&r.review_note==='Author banned'));
  const lift=review.querySelectorAll('button').find(n=>n.textContent==='Lift ban');assert(lift);await lift.onclick();await settle();assert.equal(e.banned.length,0);
  // Deleting the account calls the server once, signs out locally and drops pending note syncs.
- e.context.personal[0].note='Not synced';e.emit('atlas:notes');const del=e.bottom.children[0].querySelectorAll('button').find(n=>n.textContent==='Delete my account');del.onclick();const confirm=e.body.children.find(n=>n.id==='community-dialog');assert(confirm.open);
+ e.context.personal[0].note='Not synced';e.emit('atlas:notes');const del=menu.querySelectorAll('button').find(n=>n.textContent==='Delete my account…');del.onclick();const confirm=e.body.children.find(n=>n.id==='community-dialog');assert(confirm.open);
  await confirm.querySelectorAll('button').find(n=>n.textContent==='Delete my account'&&n.className==='danger').onclick();await settle();assert.equal(e.calls.filter(r=>r.rpc==='delete_my_account').length,1);assert.equal(e.calls.find(r=>r.signOut).signOut.scope,'local');
- assert(!e.bottom.children[0].querySelectorAll('button').some(n=>n.textContent==='Delete my account'));const writes=e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length;await e.tick(2000);assert.equal(e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length,writes,'No sync after deletion');
+ assert(!menu.querySelectorAll('button').some(n=>n.textContent==='Delete my account…'));assert(menu.hidden,'The menu closes for the confirm dialog');const writes=e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length;await e.tick(2000);assert.equal(e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length,writes,'No sync after deletion');
 }
-console.log('Client checks passed: banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');
+console.log('Client checks passed: top-bar account menu, banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');
