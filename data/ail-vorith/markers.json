@@ -343,5 +343,14 @@
     "x": 4522,
     "y": 2625,
     "trade": "Jewelcrafting"
+  },
+  {
+    "id": "community-28",
+    "community": true,
+    "name": "INQ",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4593,
+    "y": 3048
   }
 ]
