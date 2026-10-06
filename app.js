@@ -141,7 +141,7 @@ function drawMarkers(){
 }
 function setPanel(open){if(!compact())desktopPanelOpen=open;$('journal').classList.toggle('closed',!open);for(const id of ['toggle-panel','embed-guide'])$(id).setAttribute('aria-expanded',String(open));map?.invalidateSize({pan:true,animate:false});}
 function updateCategoryButtons(){for(const b of $('categories').children)b.setAttribute('aria-pressed',String(enabled.has(b.dataset.category)));$('hide-pins').setAttribute('aria-pressed',String(showPins));}
-function cancelPlacement(){draftPin?.remove();draftPin=null;document.body.classList.remove('placing');$('cancel-place').hidden=true;}
+function cancelPlacement(){if(draftPin)$('status').hidden=true;draftPin?.remove();draftPin=null;document.body.classList.remove('placing');$('cancel-place').hidden=true;}
 // New notes start at the centre of the view; dropping the pin opens the editor there.
 function startPlacement(){
  map.closePopup();cancelPlacement();
@@ -164,7 +164,7 @@ function applyOverrides(){
 }
 function setEditing(on){
  alignmentMode=on;selectedAlignmentId=null;selectedAlignmentKind='marker';document.body.classList.toggle('aligning',on);
- $('edit-bar').hidden=!on;$('alignment-tools').hidden=!on;$('add').hidden=on;$('edit-positions').hidden=on;
+ $('edit-bar').hidden=!on;$('alignment-tools').hidden=!on;$('add').hidden=on;if($('add-note'))$('add-note').hidden=on;$('edit-positions').hidden=on;
  const toggle=$('edit-toggle');toggle.title=on?'Finish editing':'Edit';toggle.setAttribute('aria-label',toggle.title);toggle.classList.toggle('active',on);
  map.closePopup();disposeLabels();disposeLabels=setupPlaceLabels(labelData);drawMarkers();updateAlignmentStatus();
 }
@@ -180,6 +180,19 @@ function saveEdits(){
 }
 // A note's text saved while editing survives Cancel; only its unsaved move is undone.
 function keepInSnapshot(m){if(!editSnapshot)return;const before=editSnapshot.personal.find(p=>p.id===m.id);editSnapshot.personal=[...editSnapshot.personal.filter(p=>p.id!==m.id),before?{...m,x:before.x,y:before.y}:m];}
+// Leaving Edit with the pen asks before saving moves, rather than saving them silently.
+function editChanged(){
+ if(!editSnapshot)return false;const spots=list=>JSON.stringify(list.map(p=>[p.id,p.x,p.y]).sort());
+ return JSON.stringify(alignmentPositions)!==JSON.stringify(editSnapshot.positions)||JSON.stringify(alignmentLabelPositions)!==JSON.stringify(editSnapshot.labels)||spots(personal)!==spots(editSnapshot.personal);
+}
+function askFinishEdit(){
+ if(!editChanged()){finishEdit(true);return;}
+ let d=$('edit-confirm');if(!d){d=document.createElement('dialog');d.id='edit-confirm';d.setAttribute('aria-labelledby','edit-confirm-title');document.body.append(d);}
+ const title=text('h2','Save your changes?');title.id='edit-confirm-title';const actions=text('div','','dialog-actions');
+ const act=(label,fn,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=()=>{d.close();fn();};return b;};
+ actions.append(act('Keep editing',()=>{}),act('Discard',()=>finishEdit(false)),act('Save',()=>finishEdit(true),'primary'));
+ d.replaceChildren(title,text('p','You moved markers or names while editing. Save keeps the new positions in this browser; Discard puts everything back.'),actions);d.showModal();
+}
 function finishEdit(save){
  if(!alignmentMode)return;
  if(save){if(!saveEdits())return;}
@@ -476,8 +489,8 @@ function setupControls(){
  $('close-guide').onclick=()=>{setPanel(false);$(isEmbed?'embed-guide':'toggle-panel').focus();};
  mobileLayout.addEventListener('change',()=>setPanel(compact()?false:desktopPanelOpen));
  $('alignment-export').onclick=exportAlignment;
- $('edit-toggle').onclick=()=>alignmentMode?finishEdit(true):enterEdit();$('edit-positions').onclick=enterEdit;$('edit-done').onclick=()=>finishEdit(true);$('edit-cancel').onclick=()=>finishEdit(false);
- $('add').onclick=startPlacement;
+ $('edit-toggle').onclick=()=>alignmentMode?askFinishEdit():enterEdit();$('edit-positions').onclick=enterEdit;$('edit-done').onclick=()=>finishEdit(true);$('edit-cancel').onclick=()=>finishEdit(false);
+ $('add').onclick=startPlacement;if($('add-note'))$('add-note').onclick=startPlacement;
  for(const [name,hex] of Object.entries(pinColours)){const label=text('label','');label.title=name;const input=text('input','');input.type='radio';input.name='pin-colour';input.value=hex;input.setAttribute('aria-label',name);const swatch=text('span','');swatch.style.setProperty('--swatch',hex);label.append(input,swatch);$('colour-swatches').append(label);}
  for(const tradeName of Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b))){const option=text('option',tradeName);option.value=tradeName;$('trade').append(option);}
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
