@@ -26,10 +26,12 @@ async function file(path,empty){
 }
 const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
 // Reuse the site's supported categories, trades, arrows and colour palette.
-const context=vm.createContext({});
-const app=await readFile(resolve(root,'app.js'),'utf8'),icons=await readFile(resolve(root,'icons.js'),'utf8');
+const context=vm.createContext({URL});
+const app=await readFile(resolve(root,'app.js'),'utf8'),icons=await readFile(resolve(root,'icons.js'),'utf8'),wikiLinks=await readFile(resolve(root,'wiki-links.js'),'utf8');
 vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),context);
 vm.runInContext(icons,context);
+// Wiki links: only pages on the sites the atlas knows, in the same stored form the site writes.
+vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context);
 const base=vm.runInContext('Object.keys(allCategories)',context),supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
 function configuration(row){
@@ -42,6 +44,7 @@ const hidden=new RegExp('['+[[0x0,0x8],[0xB,0x1F],[0x7F,0x9F],[0xAD],[0x61C],[0x
 function clean(value,multiline){const t=String(value).normalize('NFC').replace(/\r\n?/g,'\n').replace(hidden,'').replace(/[<>]/g,'');return multiline?t.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():t.replace(/\s+/g,' ').trim();}
 function mapCategories(c){const extra=registry.maps.find(m=>m.id===c.id)?.extraCategories||{};return new Set([...base,...Object.keys(extra),...Object.keys(c.extraCategories||{})]);}
 function point(p,c,id){if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<0||p[1]<0||p[0]>c.width||p[1]>c.height)fail('Invalid position for suggestion '+id+'.');return p.map(Math.round);}
+function wikiOf(value,id){const link=wikiAddress(value);if(link===null)fail('Unsupported wiki link for suggestion '+id+'.');return link;}
 function validatePayload(row,c){
  const p=row.payload;if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
  if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
@@ -54,7 +57,7 @@ function validatePayload(row,c){
 }
 // Published state before this run touched a marker: several approved changes to one marker apply in order.
 const original=new Map();
-function before(path,m){const key=path+'#'+m.id;if(!original.has(key))original.set(key,{x:Math.round(m.x),y:Math.round(m.y),name:clean(m.name),note:clean(m.note||'',true)});return original.get(key);}
+function before(path,m){const key=path+'#'+m.id;if(!original.has(key))original.set(key,{x:Math.round(m.x),y:Math.round(m.y),name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||''});return original.get(key);}
 async function apply(row){
  const c=configuration(row),p=validatePayload(row,c),id='community-'+row.id;
  if(row.kind==='new-marker'){
@@ -63,7 +66,7 @@ async function apply(row){
   if(rows.some(m=>m.id===id))return 'already present';
   const m={id,community:true,name:clean(p.name),...(label?{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
   if(label&&p.noteType==='exit'){m.arrow=p.arrow||'east';if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
-  if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;}
+  if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;const wiki=wikiOf(p.wiki,row.id);if(wiki)m.wiki=wiki;}
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
  }
  // Text edits only apply while the published text is still what the visitor saw.
@@ -71,10 +74,13 @@ async function apply(row){
   const label=row.kind==='edit-label',f=await file(label?c.labelsFile:c.markersFile),rows=label?f.data?.labels:f.data;
   if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
   const m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId));if(!m)fail('Target missing for suggestion '+row.id+'.');
+  // A marker edit may also set or clear the wiki link; older edits without one leave it as it is.
+  const linked=!label&&p.wiki!==undefined,wiki=linked?wikiOf(p.wiki,row.id):'',seenWiki=linked?wikiOf(p.from.wiki,row.id):'';
   const name=clean(p.name),note=clean(p.note||'',true),was=before(label?c.labelsFile:c.markersFile,m),seen={name:clean(p.from.name),note:clean(p.from.note||'',true)};
-  if(clean(m.name)===name&&clean(m.note||'',true)===note)return 'already edited';
-  if(!(clean(m.name)===seen.name&&clean(m.note||'',true)===seen.note)&&!(was.name===seen.name&&was.note===seen.note))fail('The published text changed after this was sent; check it again.');
-  m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;m.community=true;f.changed=true;return label?'place name edited':'marker edited';
+  const now={name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||''},same=(a,b)=>a.name===b.name&&a.note===b.note&&(!linked||a.wiki===b.wiki);
+  if(same(now,{name,note,wiki}))return 'already edited';
+  if(!same(now,{...seen,wiki:seenWiki})&&!same(was,{...seen,wiki:seenWiki}))fail('The published text changed after this was sent; check it again.');
+  m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;if(linked){if(wiki)m.wiki=wiki;else delete m.wiki;}m.community=true;f.changed=true;return label?'place name edited':'marker edited';
  }
  const path=row.kind==='move-label'?c.labelsFile:c.markersFile,f=await file(path),rows=row.kind==='move-label'?f.data.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');

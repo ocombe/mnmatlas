@@ -14,7 +14,7 @@ await new Promise(resolve=>server.listen(0,'127.0.0.1',resolve));
 async function run(dry=false){return new Promise((resolve,reject)=>{const child=spawn(process.execPath,[fixture+'/scripts/apply-approved.mjs',...(dry?['--dry-run']:[])],{env:{...process.env,SUPABASE_URL:'http://127.0.0.1:'+server.address().port,SUPABASE_SERVICE_KEY:'test-secret'}});let output='';child.stdout.on('data',d=>output+=d);child.stderr.on('data',d=>output+=d);child.on('error',reject);child.on('exit',code=>resolve({code,output}));});}
 try{
  await mkdir(fixture+'/scripts');await mkdir(fixture+'/data');
- for(const name of ['app.js','icons.js','scripts/apply-approved.mjs'])await copyFile(root+'/'+name,fixture+'/'+name);
+ for(const name of ['app.js','icons.js','wiki-links.js','scripts/apply-approved.mjs'])await copyFile(root+'/'+name,fixture+'/'+name);
  const maps={maps:[{id:'other-map',width:100,height:100,markersFile:'data/other.json',extraCategories:{Dock:['D','#385f60']}},{id:'test-map',width:100,height:100,markersFile:'data/markers.json',labelsFile:'data/labels.json',levels:[{id:'lower'},{id:'upper',labelsFile:'data/upper-labels.json'}]}]};
  await writeFile(fixture+'/data/maps.json',JSON.stringify(maps));
  const markers=[{id:'published',name:'Bank',category:'Bank',x:10,y:20,level:'lower',note:''}],labels={labels:[],trainers:[{id:'published',x:10,y:20}]},upper={labels:[{id:'place',name:'Hall',kind:'building',x:20,y:30,level:'upper'}],trainers:[]};
@@ -51,7 +51,17 @@ try{
  const added=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).find(m=>m.id==='community-7');assert.equal(added.name,'Ore scriptx/script');assert.equal(added.note,'Line one\n\nLine btwo/b');
  approved=[{id:8,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:'Pier',category:'Dock'}}];const foreign=await run();assert.equal(foreign.code,0);assert(foreign.output.includes('Unsupported marker fields'));assert.equal(patches.at(-1).status,'pending');
  approved=[{id:9,map:'test-map',level:'lower',kind:'new-marker',payload:{x:5,y:5,name:ch(0x200B)+' ',category:'Ore'}}];const blank=await run();assert(blank.output.includes('back to review'),'A name made only of invisible characters is refused');assert.equal(patches.at(-1).status,'pending');
- console.log('Publisher checks passed: text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
+ // Wiki links: a new marker and a marker edit carry one; an edit can clear it; links to other sites go back to review.
+ approved=[{id:30,map:'test-map',level:'lower',kind:'new-marker',payload:{x:6,y:6,name:'Smithy',category:'Tradeskill',wiki:' monstersandmemories.wiki/npcs/smith '}},{id:31,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{name:'Bank of the Bay',note:'Open late',wiki:'https://monme.no/npc/1-banker',from:{name:'Bank of the Bay',note:'Open late',wiki:''}}}];
+ const linked=await run();assert.equal(linked.code,0,linked.output);let all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8'));
+ assert.equal(all.find(m=>m.id==='community-30').wiki,'https://monstersandmemories.wiki/npcs/smith');assert.equal(all[0].wiki,'https://monme.no/npc/1-banker');assert.equal(all[0].name,'Bank of the Bay');
+ approved=[{id:32,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{name:'Bank of the Bay',note:'Open late',wiki:'',from:{name:'Bank of the Bay',note:'Open late',wiki:'https://monme.no/npc/1-banker'}}},{id:33,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-30',payload:{name:'Smithy',note:'',from:{name:'Smithy',note:''}}}];
+ const cleared=await run();assert.equal(cleared.code,0,cleared.output);all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8'));
+ assert(!Object.hasOwn(all[0],'wiki'),'An edit can remove the link');assert.equal(all.find(m=>m.id==='community-30').wiki,'https://monstersandmemories.wiki/npcs/smith','An older edit without a link keeps it');
+ approved=[{id:34,map:'test-map',level:'lower',kind:'new-marker',payload:{x:6,y:6,name:'Elsewhere',category:'Bank',wiki:'https://wiki.example/page'}},{id:35,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-30',payload:{name:'Smithy',note:'',wiki:'javascript:alert(1)',from:{name:'Smithy',note:'',wiki:'https://monstersandmemories.wiki/npcs/smith'}}}];
+ const foreignLinks=await run();assert.equal(foreignLinks.code,0,foreignLinks.output);assert.equal((foreignLinks.output.match(/Unsupported wiki link/g)||[]).length,2);
+ assert(!JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).some(m=>m.id==='community-34'));
+ console.log('Publisher checks passed: wiki links, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});
 }
