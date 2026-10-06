@@ -139,6 +139,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .pin-colours input:checked+span{box-shadow:0 0 0 2px var(--background),0 0 0 4px var(--primary)}.pin-colours input:focus-visible+span{outline:2px solid var(--primary);outline-offset:3px}
 
 /* Account button in the top bar and its menu. */
+/* Small phones: the map name needs the room; Embed is a desktop task and the logo is the first thing to go. */
+@media(max-width:520px){.masthead>#embed{display:none}}@media(max-width:420px){.masthead .brand{display:none}}
 .masthead>button{white-space:nowrap;flex:none}.account{position:relative;flex:none}.account-button{white-space:nowrap}.account-button{display:flex;align-items:center;gap:8px;padding:5px 10px 5px 6px;min-height:36px;font-size:12px;max-width:190px}.account-button .account-name{min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}.account-button svg{flex:none;color:var(--muted-foreground);transition:transform .12s}.account.open .account-button{background:#3c2e20;border-color:#936133}.account.open .account-button svg{transform:rotate(180deg)}
 .account-button:not(:has(.account-avatar)){padding:8px 12px}.account-avatar{width:var(--size);height:var(--size);border-radius:50%;flex:none;object-fit:cover;border:1px solid var(--border);display:grid;place-items:center;background:#5a3b22;color:#fff0cc;font:600 calc(var(--size) * .45) var(--body)}
 .account-menu{position:absolute;top:calc(100% + 8px);right:0;z-index:1200;width:270px;max-width:calc(100vw - 20px);padding:8px;background:var(--popover);border:1px solid var(--amber-border);border-radius:12px;box-shadow:var(--shadow);font-size:12px;overflow-wrap:anywhere}
