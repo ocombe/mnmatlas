@@ -304,5 +304,44 @@
     "y": 3785,
     "note": "Approximate position; to confirm in game. At the bridge.",
     "community": true
+  },
+  {
+    "id": "community-24",
+    "community": true,
+    "name": "Inn",
+    "category": "Inn",
+    "note": "",
+    "x": 4657,
+    "y": 2774
+  },
+  {
+    "id": "community-25",
+    "community": true,
+    "name": "Chef Arzya",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4669,
+    "y": 2745,
+    "trade": "Cooking"
+  },
+  {
+    "id": "community-26",
+    "community": true,
+    "name": "a tailoring trainer",
+    "category": "Tradeskill",
+    "note": "downstairs",
+    "x": 4538,
+    "y": 2655,
+    "trade": "Tailoring"
+  },
+  {
+    "id": "community-27",
+    "community": true,
+    "name": "a jewelcrafting trainer",
+    "category": "Tradeskill",
+    "note": "approximate location",
+    "x": 4522,
+    "y": 2625,
+    "trade": "Jewelcrafting"
   }
 ]
