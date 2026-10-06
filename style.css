@@ -177,3 +177,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 /* Landing marker after following a floor link */
 .leaflet-marker-icon.just-arrived{animation:arrive-glow .8s ease-out 2}
 @keyframes arrive-glow{0%{filter:drop-shadow(0 0 0 rgba(240,190,90,0))}40%{filter:drop-shadow(0 0 10px rgba(240,190,90,.95))}100%{filter:drop-shadow(0 0 0 rgba(240,190,90,0))}}
+/* Review: the suggested icon beside the title, and editable fields on the map preview. */
+.review-title{display:flex;align-items:center;gap:8px}.review-icon{display:grid;place-items:center;width:24px;height:24px;flex:none;color:#fff3cf;background:var(--pin,#365f59);border:2px solid #f5e2b4;border-radius:50% 50% 50% 4px;transform:rotate(-45deg)}.review-icon svg{width:16px;height:16px;transform:rotate(45deg)}.review-icon b{transform:rotate(45deg);font:13px var(--heading)}
+.community-tabs button[aria-pressed=true]{background:#5a3b22;border-color:var(--primary);color:#fff0cc}
+.community-preview .preview-field{display:block;font-size:11px;color:var(--muted-foreground);margin-top:8px}.community-preview .preview-field>input,.community-preview .preview-field>select,.community-preview .preview-field>textarea{display:block;width:100%;margin-top:3px;padding:7px 8px;color:var(--foreground);background:var(--muted);border:1px solid var(--border);border-radius:8px;font:12px var(--body)}
+.community-preview{max-height:calc(100% - 40px);overflow:auto}
