@@ -68,7 +68,7 @@ function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);
 function flashPin(id){const el=pins.get(id)?.getElement();if(!el)return;el.classList.remove('just-arrived');void el.offsetWidth;el.classList.add('just-arrived');setTimeout(()=>el.classList.remove('just-arrived'),1700);}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;
 function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',m.name));if(m.note)n.append(text('p',m.note));n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
- if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);n.append(edit);}
+ if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
  if(!singleMap)window.atlasCommunity?.popup(m,n);return n;}
@@ -164,7 +164,7 @@ function applyOverrides(){
 }
 function setEditing(on){
  alignmentMode=on;selectedAlignmentId=null;selectedAlignmentKind='marker';document.body.classList.toggle('aligning',on);
- $('edit-bar').hidden=!on;$('alignment-tools').hidden=!on;$('add').hidden=on;if($('add-note'))$('add-note').hidden=on;$('edit-positions').hidden=on;
+ $('edit-bar').hidden=!on;$('alignment-tools').hidden=!on;$('edit-positions').hidden=on;
  const toggle=$('edit-toggle');toggle.title=on?'Finish editing':'Edit';toggle.setAttribute('aria-label',toggle.title);toggle.classList.toggle('active',on);
  map.closePopup();disposeLabels();disposeLabels=setupPlaceLabels(labelData);drawMarkers();updateAlignmentStatus();
 }
@@ -184,6 +184,19 @@ function keepInSnapshot(m){if(!editSnapshot)return;const before=editSnapshot.per
 function editChanged(){
  if(!editSnapshot)return false;const spots=list=>JSON.stringify(list.map(p=>[p.id,p.x,p.y]).sort());
  return JSON.stringify(alignmentPositions)!==JSON.stringify(editSnapshot.positions)||JSON.stringify(alignmentLabelPositions)!==JSON.stringify(editSnapshot.labels)||spots(personal)!==spots(editSnapshot.personal);
+}
+function deleteNote(id){
+ if(!persist(personal.filter(p=>p.id!==id)))return false;
+ if(editSnapshot)editSnapshot.personal=editSnapshot.personal.filter(p=>p.id!==id);
+ map.closePopup();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');return true;
+}
+// A note can be deleted straight from its popup, after a small confirmation.
+function confirmDelete(m){
+ let d=$('delete-confirm');if(!d){d=document.createElement('dialog');d.id='delete-confirm';d.setAttribute('aria-labelledby','delete-confirm-title');document.body.append(d);}
+ const title=text('h2','Delete this note?');title.id='delete-confirm-title';const actions=text('div','','dialog-actions');
+ const act=(label,fn,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=()=>{d.close();fn();};return b;};
+ actions.append(act('Cancel',()=>{}),act('Delete',()=>deleteNote(m.id),'danger'));
+ d.replaceChildren(title,text('p','"'+m.name+'" will be removed from your notes'+(document.querySelector('.community-who')?' on every device you sync.':'.')),actions);d.showModal();
 }
 function askFinishEdit(){
  if(!editChanged()){finishEdit(true);return;}
@@ -501,7 +514,7 @@ function setupControls(){
   if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
   const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&m.category!=='Class trainer')m.color=colour;
   if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));}};
- $('delete').onclick=()=>{if(draft&&persist(personal.filter(p=>p.id!==draft.id))){if(editSnapshot)editSnapshot.personal=editSnapshot.personal.filter(p=>p.id!==draft.id);closeEditor();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');}};
+ $('delete').onclick=()=>{if(draft&&deleteNote(draft.id))closeEditor();};
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};
  $('share').onclick=()=>singleMap?openInAtlas():copyLink();$('close-link').onclick=()=>$('link-dialog').close();
