@@ -25,26 +25,47 @@
  function readSet(key){try{const rows=JSON.parse(localStorage.getItem(key)||'[]');return new Set(Array.isArray(rows)?rows.filter(r=>typeof r==='string'):[]);}catch{return new Set();}}
  function remember(key,values){try{const rows=readSet(key);for(const value of values)rows.add(value);localStorage.setItem(key,JSON.stringify([...rows]));}catch{status('Sent successfully, but this browser could not remember it.');}}
  const button=(label,action,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=action;return b;};
- const account=text('section','','community-account');account.setAttribute('aria-label','Account');document.querySelector('.journal-bottom').append(account);
+ // Account lives in the top bar: a Sign in / avatar button that opens a small menu.
+ const accountBox=text('div','','account'),accountButton=text('button','','account-button'),account=text('div','','account-menu');
+ accountButton.type='button';accountButton.setAttribute('aria-haspopup','true');accountButton.setAttribute('aria-expanded','false');account.id='account-menu';account.hidden=true;accountButton.setAttribute('aria-controls',account.id);
+ accountBox.append(accountButton,account);$('toggle-panel').after(accountBox);
+ const notesLine=document.querySelector('.journal-bottom>.backup').previousElementSibling;
  const syncLine=text('p','','community-sync');syncLine.setAttribute('role','status');syncLine.setAttribute('aria-live','polite');
- const reviewButton=button('Review suggestions',()=>openReview());reviewButton.hidden=true;
+ const reviewButton=button('Review suggestions',()=>{closeAccount();openReview();}),reviewCount=text('span','','account-badge');reviewCount.hidden=true;reviewButton.append(reviewCount);
  const dialog=text('dialog','','community-dialog');dialog.id='community-dialog';dialog.setAttribute('aria-labelledby','community-title');document.body.append(dialog);
  const review=text('dialog','','community-review');review.id='community-review';review.setAttribute('aria-labelledby','review-title');document.body.append(review);
  function quiet(message){syncLine.textContent=message;if(message)status(message);}
+ // Discord's own avatar, only from its image host; the first letter of the name otherwise.
+ function avatar(size){
+  const src=String(user?.user_metadata?.avatar_url||''),letter=text('span',displayName(user).trim().charAt(0).toUpperCase()||'?','account-avatar');letter.setAttribute('aria-hidden','true');letter.style.setProperty('--size',size+'px');
+  if(/^https:\/\/cdn\.discordapp\.com\/[a-zA-Z0-9_./-]+$/.test(src)){const img=document.createElement('img');img.src=src;img.alt='';img.width=img.height=size;img.referrerPolicy='no-referrer';img.onerror=()=>img.replaceWith(letter);img.className='account-avatar';img.style.setProperty('--size',size+'px');return img;}
+  return letter;
+ }
  function accountUI(){
-  account.replaceChildren(text('strong','Account'));
+  accountButton.replaceChildren();
+  if(user){accountButton.append(avatar(24),text('span',displayName(user),'account-name'));accountButton.insertAdjacentHTML('beforeend','<svg viewBox="0 0 12 12" width="12" height="12" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 4.5 6 7.5 9 4.5"/></svg>');accountButton.setAttribute('aria-label','Account: '+displayName(user));}
+  else{accountButton.append(text('span','Sign in','account-name'));accountButton.removeAttribute('aria-label');}
+  account.replaceChildren();
   if(user){
-   // Discord's own avatar, only from its image host.
-   const who=text('p','','community-who'),src=String(user.user_metadata?.avatar_url||'');
-   if(/^https:\/\/cdn\.discordapp\.com\/[a-zA-Z0-9_./-]+$/.test(src)){const img=document.createElement('img');img.src=src;img.alt='';img.width=img.height=28;img.referrerPolicy='no-referrer';img.onerror=()=>img.remove();who.append(img);}
-   who.append(text('span','Signed in as '+displayName(user)));account.append(who,button('Sign out',signOut));
+   const head=text('div','','account-head'),who=text('div');who.append(text('strong',displayName(user)),text('small','Signed in with Discord'));head.append(avatar(36),who);
+   account.append(head,syncLine);if(admin)account.append(reviewButton);
+   account.append(button('Sign out',()=>{closeAccount();signOut();}),text('hr'),button('Delete my account…',()=>{closeAccount();deleteDialog();},'account-delete'));
   }
-  else account.append(button('Sign in with Discord',signIn));
-  account.append(text('p','Signing in lets you report problems, suggest fixes and keep your notes on every device.'),syncLine,reviewButton);reviewButton.hidden=!admin;
-  if(user)account.append(button('Delete my account',deleteDialog,'community-delete'));
+  else account.append(text('p','Sign in with Discord to keep your notes on every device, report problems and suggest fixes.'),button('Sign in with Discord',signIn,'primary'));
+  notesLine.textContent=user?'Your notes sync to your account.':'Notes stay in this browser; sign in to sync them.';
+  if(admin&&!account.hidden)countWaiting();
+ }
+ function openAccount(){account.hidden=false;accountBox.classList.add('open');accountButton.setAttribute('aria-expanded','true');if(admin)countWaiting();account.querySelector('button')?.focus({preventScroll:true});}
+ function closeAccount(refocus){if(account.hidden)return;account.hidden=true;accountBox.classList.remove('open');accountButton.setAttribute('aria-expanded','false');if(refocus)accountButton.focus({preventScroll:true});}
+ accountButton.onclick=()=>account.hidden?openAccount():closeAccount(false);
+ account.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();closeAccount(true);}});
+ document.addEventListener('pointerdown',e=>{if(!accountBox.contains(e.target))closeAccount(false);});
+ accountBox.addEventListener('focusout',e=>{if(e.relatedTarget&&!accountBox.contains(e.relatedTarget))closeAccount(false);});
+ // Waiting suggestions on every map, shown beside Review suggestions.
+ async function countWaiting(){
+  try{const {count,error}=await client.from('suggestions').select('id',{count:'exact',head:true}).eq('status','pending');if(error)throw error;reviewCount.textContent=count>99?'99+':String(count||'');reviewCount.hidden=!count;}catch{reviewCount.hidden=true;}
  }
  $('about-community').textContent='Optional Discord sign-in stores your Discord name and id, your suggestions and reports and, if you sign in, your notes, so they follow you between devices. Delete my account removes all of it.';$('about-community').hidden=false;
- const localNoteLine=document.querySelector('.journal-bottom>.backup').previousElementSibling;localNoteLine.textContent='Notes stay in this browser; sign in to sync them.';
  $('editor').querySelector('.form-hint').textContent='Saved on this device. Sign in to sync notes, and export a backup.';
  async function signIn(){
   if(embedded){popupSignIn();return;}
@@ -54,10 +75,10 @@
  // Inside another site's frame Discord refuses to load, so sign-in runs in a small window (signin.html) that posts the session back here.
  let signInWindow=null,signInWatch;
  function fullAtlasHint(message){
-  account.querySelector('.community-fallback')?.remove();
+  account.querySelector('.community-fallback')?.remove();openAccount();
   const url=new URL(location.href);url.searchParams.delete('embed');url.hash='';
   const line=text('p',message+' ','community-fallback form-hint'),link=text('a','Open the full atlas');link.href=url.href;link.target='_blank';link.rel='noopener';
-  line.append(link,text('span',' to sign in there.'));account.querySelector('button')?.after(line);
+  line.append(link,text('span',' to sign in there.'));account.append(line);
  }
  function popupSignIn(){
   event('sign-in');account.querySelector('.community-fallback')?.remove();

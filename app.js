@@ -10,7 +10,7 @@ const mobileLayout=matchMedia('(max-width: 760px)');
 let embedded=false;try{embedded=window.self!==window.top;}catch{embedded=true;}
 const embedParam=new URLSearchParams(location.search).get('embed');
 const isEmbed=embedded||embedParam==='1'||embedParam==='map';
-// ?embed=map shows one map on its own (for wiki pages): no map picker, field guide or editing; other maps open the full atlas in a new tab.
+// ?embed=map shows one map on its own (for wiki pages): no map picker, places panel or editing; other maps open the full atlas in a new tab.
 const singleMap=isEmbed&&embedParam==='map';
 document.body.classList.toggle('embed',isEmbed);document.body.classList.toggle('single-map',singleMap);
 // Each map lives at its own address (<site>/<map-id>/); older ?map= links still open and are rewritten.
@@ -122,7 +122,7 @@ function drawMarkers(){
   // Personal zone exits keep their popup (Go to, Edit note) instead.
   const opens=!own&&!alignmentMode&&typeof m.toMap==='string'&&registry.maps.find(c=>c.id===m.toMap);
   pin.on('click',()=>opens?openMap(opens.id):m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(opens)pin.unbindPopup();
-  // A floor link switches floor straight away; its details stay in the field guide list.
+  // A floor link switches floor straight away; its details stay in the places list.
   if(m.switchOnClick&&!alignmentMode)pin.unbindPopup();
   if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
   if(!m.noteType)pin.bindTooltip(()=>text('span',m.name),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
@@ -139,7 +139,7 @@ function drawMarkers(){
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
  schedulePlaceLabels();
 }
-function setPanel(open){if(!compact())desktopPanelOpen=open;$('journal').classList.toggle('closed',!open);for(const id of ['toggle-panel','embed-guide'])$(id).setAttribute('aria-expanded',String(open));map?.invalidateSize({pan:true,animate:false});}
+function setPanel(open){if(!compact())desktopPanelOpen=open;$('journal').classList.toggle('closed',!open);$('toggle-panel').setAttribute('aria-expanded',String(open));map?.invalidateSize({pan:true,animate:false});}
 function updateCategoryButtons(){for(const b of $('categories').children)b.setAttribute('aria-pressed',String(enabled.has(b.dataset.category)));$('hide-pins').setAttribute('aria-pressed',String(showPins));}
 function cancelPlacement(){if(draftPin)$('status').hidden=true;draftPin?.remove();draftPin=null;document.body.classList.remove('placing');$('cancel-place').hidden=true;}
 // New notes start at the centre of the view; dropping the pin opens the editor there.
@@ -546,8 +546,8 @@ function setupControls(){
  $('search').oninput=refreshSearch;$('clear-search').onclick=()=>{$('search').value='';refreshSearch();$('search').focus();};
  $('zoom-in').onclick=()=>map.zoomIn();$('zoom-out').onclick=()=>map.zoomOut();$('fit').onclick=fitMap;
  $('hide-pins').onclick=()=>{showPins=!showPins;updateCategoryButtons();drawMarkers();};
- for(const id of ['toggle-panel','embed-guide'])$(id).onclick=()=>{const open=$('journal').classList.contains('closed');setPanel(open);if(open&&isEmbed)$('close-guide').focus();};
- $('close-guide').onclick=()=>{setPanel(false);$(isEmbed?'embed-guide':'toggle-panel').focus();};
+ $('toggle-panel').onclick=()=>{const open=$('journal').classList.contains('closed');setPanel(open);if(open&&isEmbed)$('close-guide').focus();};
+ $('close-guide').onclick=()=>{setPanel(false);$('toggle-panel').focus();};
  mobileLayout.addEventListener('change',()=>setPanel(compact()?false:desktopPanelOpen));
  $('alignment-export').onclick=exportAlignment;
  $('edit-toggle').onclick=()=>alignmentMode?askFinishEdit():enterEdit();$('edit-positions').onclick=enterEdit;$('edit-done').onclick=()=>finishEdit(true);$('edit-cancel').onclick=()=>finishEdit(false);
