@@ -10,7 +10,7 @@ const mobileLayout=matchMedia('(max-width: 760px)');
 let embedded=false;try{embedded=window.self!==window.top;}catch{embedded=true;}
 const embedParam=new URLSearchParams(location.search).get('embed');
 const isEmbed=embedded||embedParam==='1'||embedParam==='map';
-// ?embed=map shows one map on its own (for wiki pages): no map picker, places panel or editing; other maps open the full atlas in a new tab.
+// ?embed=map shows one map on its own (for wiki pages): no map picker, search menu or editing; other maps open the full atlas in a new tab.
 const singleMap=isEmbed&&embedParam==='map';
 document.body.classList.toggle('embed',isEmbed);document.body.classList.toggle('single-map',singleMap);
 // Each map lives at its own address (<site>/<map-id>/); older ?map= links still open and are rewritten.
@@ -122,7 +122,7 @@ function drawMarkers(){
   // Personal zone exits keep their popup (Go to, Edit note) instead.
   const opens=!own&&!alignmentMode&&typeof m.toMap==='string'&&registry.maps.find(c=>c.id===m.toMap);
   pin.on('click',()=>opens?openMap(opens.id):m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(opens)pin.unbindPopup();
-  // A floor link switches floor straight away; its details stay in the places list.
+  // A floor link switches floor straight away; its details stay in the search menu list.
   if(m.switchOnClick&&!alignmentMode)pin.unbindPopup();
   if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
   if(!m.noteType)pin.bindTooltip(()=>text('span',m.name),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
