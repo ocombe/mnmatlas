@@ -491,7 +491,14 @@ async function showContributors(){
   $('about-contributors').textContent=rows.length?'Community contributors: '+rows.map(r=>r.name+(r.count>1?' ('+r.count+')':'')).join(', ')+'.':'';$('about-contributors').hidden=!rows.length;}
  catch{$('about-contributors').hidden=true;}
 }
+// Toolbar buttons show their name at once in the atlas's own tooltip, not the browser's delayed one.
+function instantTips(){
+ const sync=b=>{if(b.title){b.dataset.tip=b.title;b.removeAttribute('title');}};
+ const watch=new MutationObserver(list=>{for(const m of list)sync(m.target);});
+ for(const b of document.querySelectorAll('.map-tools button')){sync(b);watch.observe(b,{attributes:true,attributeFilter:['title']});}
+}
 function setupControls(){
+ instantTips();
  $('about').onclick=()=>{$('about-dialog').showModal();showContributors();};$('close-about').onclick=()=>$('about-dialog').close();
 
  $('all-categories').onclick=()=>{enabled=new Set(Object.keys(categories));updateCategoryButtons();drawMarkers();};
