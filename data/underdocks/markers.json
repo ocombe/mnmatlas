@@ -389,5 +389,25 @@
     "x": 4880,
     "y": 4552,
     "level": "lower"
+  },
+  {
+    "id": "community-36",
+    "community": true,
+    "name": "Deepcut bandit camps (10-16)",
+    "category": "Mob camp",
+    "note": "",
+    "x": 4167,
+    "y": 1190,
+    "level": "lower"
+  },
+  {
+    "id": "community-37",
+    "community": true,
+    "name": "Hull Orbel",
+    "category": "Quest",
+    "note": "",
+    "x": 3915,
+    "y": 3937,
+    "level": "upper"
   }
 ]

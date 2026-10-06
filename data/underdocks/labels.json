@@ -146,28 +146,30 @@
     {
       "id": "wiki-marshall-harding",
       "name": "Marshal Harding",
-      "x": 4675,
-      "y": 3611,
+      "x": 4633,
+      "y": 3607,
       "level": "lower",
       "approximate": true,
       "note": "Approximate; to confirm in game. Approximate courtyard position.",
       "kind": "building",
       "tier": "building",
       "priority": 40,
-      "minZoom": 4.5
+      "minZoom": 4.5,
+      "community": true
     },
     {
       "id": "wiki-paymaster-elara-venn",
       "name": "Paymaster Elara Venn",
-      "x": 4590,
-      "y": 3870,
+      "x": 4559,
+      "y": 3800,
       "level": "lower",
       "approximate": true,
       "note": "Approximate; to confirm in game. 1st floor.",
       "kind": "building",
       "tier": "building",
       "priority": 40,
-      "minZoom": 4.5
+      "minZoom": 4.5,
+      "community": true
     },
     {
       "id": "wiki-quartermaster",
