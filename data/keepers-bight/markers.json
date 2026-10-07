@@ -1,13 +1,27 @@
 [
  {
   "id": "penshaw-red-mantle",
-  "name": "Detective Brunsworth, Reeve Thurston Winter",
+  "name": "Detective Brunsworth",
   "category": "Notable NPC",
   "x": 2702,
   "y": 2884,
   "minZoom": 3,
   "approximate": true,
-  "note": "In the tan stone building with a minaret and Red Mantle banners, in the middle of Penshaw. Approximate location; to confirm in game."
+  "note": "In the tan stone building with a minaret and Red Mantle banners, in the middle of Penshaw. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/detective-brunsworth",
+  "wikiId": "npc-detective-brunsworth"
+ },
+ {
+  "id": "penshaw-red-mantle-reeve-thurston-winter",
+  "name": "Reeve Thurston Winter",
+  "category": "Notable NPC",
+  "x": 2724,
+  "y": 2884,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the tan stone building with a minaret and Red Mantle banners, in the middle of Penshaw. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/reeve-thurston-winter",
+  "wikiId": "npc-reeve-thurston-winter"
  },
  {
   "id": "krelvya-drynn",
@@ -45,13 +59,27 @@
  },
  {
   "id": "harbor-office",
-  "name": "Harbormaster Greywake, Customs Agent Priorton",
+  "name": "Harbormaster Greywake",
   "category": "Notable NPC",
   "x": 2093,
   "y": 3023,
   "minZoom": 3,
   "approximate": true,
-  "note": "In the last building on the docks, farthest from the lifts. Approximate location; to confirm in game."
+  "note": "In the last building on the docks, farthest from the lifts. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/harbormaster-greywake",
+  "wikiId": "npc-harbormaster-greywake"
+ },
+ {
+  "id": "harbor-office-customs-agent-priorton",
+  "name": "Customs Agent Priorton",
+  "category": "Notable NPC",
+  "x": 2115,
+  "y": 3023,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the last building on the docks, farthest from the lifts. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/customs-agent-priorton",
+  "wikiId": "npc-customs-agent-priorton"
  },
  {
   "id": "dock-lift",
@@ -65,13 +93,75 @@
  },
  {
   "id": "farmers",
-  "name": "Farmers: the McMillers, the Harlows, Hazel and Heather",
+  "name": "Brenna McMiller",
   "category": "Notable NPC",
   "x": 2695,
   "y": 3694,
   "minZoom": 3,
   "approximate": true,
-  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game."
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brenna-mcmiller",
+  "wikiId": "npc-brenna-mcmiller"
+ },
+ {
+  "id": "farmers-calen-mcmiller",
+  "name": "Calen McMiller",
+  "category": "Notable NPC",
+  "x": 2717,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/calen-mcmiller",
+  "wikiId": "npc-calen-mcmiller"
+ },
+ {
+  "id": "farmers-garrick-harlow",
+  "name": "Garrick Harlow",
+  "category": "Notable NPC",
+  "x": 2739,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/garrick-harlow",
+  "wikiId": "npc-garrick-harlow"
+ },
+ {
+  "id": "farmers-mira-harlow",
+  "name": "Mira Harlow",
+  "category": "Notable NPC",
+  "x": 2761,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/mira-harlow",
+  "wikiId": "npc-mira-harlow"
+ },
+ {
+  "id": "farmers-hazel",
+  "name": "Hazel",
+  "category": "Notable NPC",
+  "x": 2783,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/hazel",
+  "wikiId": "npc-hazel"
+ },
+ {
+  "id": "farmers-heather",
+  "name": "Heather",
+  "category": "Notable NPC",
+  "x": 2805,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/heather",
+  "wikiId": "npc-heather"
  },
  {
   "id": "thoren-blackwood",
@@ -119,13 +209,27 @@
  },
  {
   "id": "poacher-named",
-  "name": "Poacher Garrus, Poacher Tolan",
+  "name": "Poacher Garrus",
   "category": "Named mob",
   "x": 5604,
   "y": 4043,
   "minZoom": 3,
   "approximate": true,
-  "note": "In the poacher camp. Approximate location; to confirm in game."
+  "note": "In the poacher camp. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/poacher-garrus",
+  "wikiId": "npc-poacher-garrus"
+ },
+ {
+  "id": "poacher-named-poacher-tolan",
+  "name": "Poacher Tolan",
+  "category": "Named mob",
+  "x": 5626,
+  "y": 4043,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the poacher camp. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/poacher-tolan",
+  "wikiId": "npc-poacher-tolan"
  },
  {
   "id": "redpaw",
@@ -141,33 +245,63 @@
  },
  {
   "id": "bear-cave-npcs",
-  "name": "Poacher Wilna, Fendris the Forsaken",
+  "name": "Poacher Wilna",
   "category": "Notable NPC",
   "x": 3972,
   "y": 4512,
   "minZoom": 3,
   "approximate": true,
-  "note": "In the Bear Cave. Approximate location; to confirm in game."
+  "note": "In the Bear Cave. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/poacher-wilna",
+  "wikiId": "npc-poacher-wilna"
+ },
+ {
+  "id": "bear-cave-npcs-fendris-the-forsaken",
+  "name": "Fendris the Forsaken",
+  "category": "Notable NPC",
+  "x": 3994,
+  "y": 4512,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Bear Cave. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/fendris-the-forsaken",
+  "wikiId": "npc-fendris-the-forsaken"
  },
  {
   "id": "lumberjacks",
-  "name": "Brother Gurrom, Brother Juro",
+  "name": "Brother Gurrom",
   "category": "Notable NPC",
   "x": 3745,
   "y": 2693,
   "minZoom": 3,
   "approximate": true,
-  "note": "At the lumberjack camp. Approximate location; to confirm in game."
+  "note": "At the lumberjack camp. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brother-gurrom",
+  "wikiId": "npc-brother-gurrom"
+ },
+ {
+  "id": "lumberjacks-brother-juro",
+  "name": "Brother Juro",
+  "category": "Notable NPC",
+  "x": 3767,
+  "y": 2693,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the lumberjack camp. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brother-juro",
+  "wikiId": "npc-brother-juro"
  },
  {
   "id": "wood-elves",
-  "name": "Wood elf camp: Ranger Valegazer, scouts and bridge guards",
+  "name": "Ranger Valegazer",
   "category": "Notable NPC",
   "x": 3678,
   "y": 613,
   "minZoom": 3,
   "approximate": true,
-  "note": "Wood elf camp on the way to Evershade Weald; guards Irilis and Velbloom stand at the entrance to Evershade Weald. Approximate location; to confirm in game."
+  "note": "Wood elf camp (scouts and bridge guards) on the way to Evershade Weald; guards Irilis and Velbloom stand at the entrance to Evershade Weald. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/ranger-valegazer",
+  "wikiId": "npc-ranger-valegazer"
  },
  {
   "id": "widow-vethra",
@@ -205,13 +339,27 @@
  },
  {
   "id": "orc-cave-named",
-  "name": "Belthakar Dunecaller, Rarthan Wartide (level 26)",
+  "name": "Belthakar Dunecaller (level 26)",
   "category": "Named mob",
   "x": 2706,
   "y": 6574,
   "minZoom": 3,
   "approximate": true,
-  "note": "In the Orc Cave. Approximate location; to confirm in game."
+  "note": "In the Orc Cave. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
+  "wikiId": "npc-belthakar-dunecaller"
+ },
+ {
+  "id": "orc-cave-named-rarthan-wartide",
+  "name": "Rarthan Wartide (level 26)",
+  "category": "Named mob",
+  "x": 2728,
+  "y": 6574,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Orc Cave. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/rarthan-wartide",
+  "wikiId": "npc-rarthan-wartide"
  },
  {
   "id": "brukk-goldgut",

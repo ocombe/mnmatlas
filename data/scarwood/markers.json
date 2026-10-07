@@ -21,13 +21,27 @@
  },
  {
   "id": "grinholdt",
-  "name": "Garran and Thorne Grinholdt (level 28)",
+  "name": "Garran Grinholdt (level 28)",
   "category": "Named mob",
   "x": 5258,
   "y": 3234,
   "approximate": true,
   "note": "In the bandit camp. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/garran-grinholdt",
+  "wikiId": "npc-garran-grinholdt"
+ },
+ {
+  "id": "grinholdt-thorne-grinholdt",
+  "name": "Thorne Grinholdt (level 28)",
+  "category": "Named mob",
+  "x": 5280,
+  "y": 3234,
+  "approximate": true,
+  "note": "In the bandit camp. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/thorne-grinholdt",
+  "wikiId": "npc-thorne-grinholdt"
  },
  {
   "id": "poachers-34-35-1",

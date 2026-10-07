@@ -269,13 +269,27 @@
  },
  {
   "id": "chaim-nephidna",
-  "name": "Chaim the Herald and Mistress Nephidna (levels 55–56)",
+  "name": "Chaim the Herald (levels 55–56)",
   "category": "Named mob",
   "x": 3408,
   "y": 5420,
   "approximate": true,
   "note": "With the spiders. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/chaim-the-herald",
+  "wikiId": "npc-chaim-the-herald"
+ },
+ {
+  "id": "chaim-nephidna-mistress-nephidna",
+  "name": "Mistress Nephidna (levels 55–56)",
+  "category": "Named mob",
+  "x": 3430,
+  "y": 5420,
+  "approximate": true,
+  "note": "With the spiders. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/mistress-nephidna",
+  "wikiId": "npc-mistress-nephidna"
  },
  {
   "id": "cultists-43-53-1",
@@ -289,13 +303,39 @@
  },
  {
   "id": "cult-leaders",
-  "name": "Ebon Scholar Myrddin, High Wyrmseer Valthrun, Emissary Irina (levels 51–53)",
+  "name": "Ebon Scholar Myrddin (levels 51–53)",
   "category": "Named mob",
   "x": 1232,
   "y": 5595,
   "approximate": true,
   "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/ebon-scholar-myrddin",
+  "wikiId": "npc-ebon-scholar-myrddin"
+ },
+ {
+  "id": "cult-leaders-high-wyrmseer-valthrun",
+  "name": "High Wyrmseer Valthrun (levels 51–53)",
+  "category": "Named mob",
+  "x": 1254,
+  "y": 5595,
+  "approximate": true,
+  "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/high-wyrmseer-valthrun",
+  "wikiId": "npc-high-wyrmseer-valthrun"
+ },
+ {
+  "id": "cult-leaders-emissary-irina",
+  "name": "Emissary Irina (levels 51–53)",
+  "category": "Named mob",
+  "x": 1276,
+  "y": 5595,
+  "approximate": true,
+  "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/emissary-irina",
+  "wikiId": "npc-emissary-irina"
  },
  {
   "id": "esaneq",

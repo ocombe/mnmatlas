@@ -52,14 +52,14 @@ function settings(){
  const apply=flag('--apply'),dryRun=flag('--dry-run'),out=value('--out')||resolve(root,'..','tools','wiki-reconcile');
  return {apply,dryRun,out,map:args[0]};
 }
-async function key(){
+export async function key(){
  if(process.env.WIKI_API_KEY)return process.env.WIKI_API_KEY.trim();
  const file=process.env.WIKI_KEY_FILE||resolve(root,'..','secrets','wiki-api-key.txt');
  try{return (await readFile(file,'utf8')).trim();}catch{throw Error('No wiki key: set WIKI_API_KEY or save it in '+file+'.');}
 }
 // Answers are kept on disk, and new requests are paced at one a second (the wiki allows 120 a minute for the whole atlas).
 let last=0;
-async function search(q,out,secret){
+export async function search(q,out,secret){
  const id=createHash('sha1').update('npc|'+q.toLowerCase()).digest('hex'),file=resolve(out,'cache',id+'.json');
  try{return JSON.parse(await readFile(file,'utf8')).results;}catch{}
  const wait=last+1000-Date.now();if(wait>0)await new Promise(r=>setTimeout(r,wait));last=Date.now();

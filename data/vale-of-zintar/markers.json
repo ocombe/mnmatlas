@@ -11,19 +11,69 @@
  },
  {
   "id": "city-notables",
-  "name": "Grand Vizier Al'Kithar, Old Scar, Khal'Baar the Growler",
+  "name": "Grand Vizier Al'Kithar",
   "category": "Named mob",
   "x": 4660,
   "y": 2187,
   "approximate": true,
   "note": "In the Sand Giant City. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/grand-vizier-alkithar",
+  "wikiId": "npc-grand-vizier-alkithar"
+ },
+ {
+  "id": "city-notables-old-scar",
+  "name": "Old Scar",
+  "category": "Named mob",
+  "x": 4682,
+  "y": 2187,
+  "approximate": true,
+  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/old-scar",
+  "wikiId": "npc-old-scar"
+ },
+ {
+  "id": "city-notables-khalbaar-the-growler",
+  "name": "Khal'Baar the Growler",
+  "category": "Named mob",
+  "x": 4704,
+  "y": 2187,
+  "approximate": true,
+  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/khalbaar-the-growler",
+  "wikiId": "npc-khalbaar-the-growler"
  },
  {
   "id": "city-notables-2",
-  "name": "Spicy Raziq, Zubair Goldtongue, Sutarfaan the Flamekeeper",
+  "name": "Spicy Raziq",
   "category": "Named mob",
   "x": 4440,
+  "y": 2187,
+  "approximate": true,
+  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/spicy-raziq",
+  "wikiId": "npc-spicy-raziq"
+ },
+ {
+  "id": "city-notables-2-zubair-goldtongue",
+  "name": "Zubair Goldtongue",
+  "category": "Named mob",
+  "x": 4462,
+  "y": 2187,
+  "approximate": true,
+  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/zubair-goldtongue",
+  "wikiId": "npc-zubair-goldtongue"
+ },
+ {
+  "id": "city-notables-2-sutarfaan-the-flamekeeper",
+  "name": "Sutarfaan the Flamekeeper",
+  "category": "Named mob",
+  "x": 4484,
   "y": 2187,
   "approximate": true,
   "note": "In the Sand Giant City. Approximate location; to confirm in game.",
@@ -63,13 +113,27 @@
  },
  {
   "id": "beach-hunters",
-  "name": "Hemalmula the Hunter, Rami Al-Qawwaasr",
+  "name": "Hemalmula the Hunter",
   "category": "Named mob",
   "x": 1608,
   "y": 4684,
   "approximate": true,
   "note": "With the beach giants. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/hemalmula-the-hunter",
+  "wikiId": "npc-hemalmula-the-hunter"
+ },
+ {
+  "id": "beach-hunters-rami-al-qawwaasr",
+  "name": "Rami Al-Qawwaasr",
+  "category": "Named mob",
+  "x": 1630,
+  "y": 4684,
+  "approximate": true,
+  "note": "With the beach giants. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/rami-al-qawwaasr",
+  "wikiId": "npc-rami-al-qawwaasr"
  },
  {
   "id": "pyrmos-sojourners-1",
@@ -83,9 +147,19 @@
  },
  {
   "id": "lake-notables",
-  "name": "Mhirunne of Whispers, Najarica",
+  "name": "Mhirunne of Whispers",
   "category": "Named mob",
   "x": 2992,
+  "y": 5311,
+  "approximate": true,
+  "note": "At the lake camp. Approximate location; to confirm in game.",
+  "minZoom": 3
+ },
+ {
+  "id": "lake-notables-najarica",
+  "name": "Najarica",
+  "category": "Named mob",
+  "x": 3014,
   "y": 5311,
   "approximate": true,
   "note": "At the lake camp. Approximate location; to confirm in game.",
@@ -103,13 +177,25 @@
  },
  {
   "id": "mine-notables",
-  "name": "Servator Vakraar, a Dustrend kennel master",
+  "name": "Servator Vakraar",
   "category": "Named mob",
   "x": 2738,
   "y": 6280,
   "approximate": true,
   "note": "At the orc camps and cave of the Copper Mine. Approximate location; to confirm in game.",
   "minZoom": 3
+ },
+ {
+  "id": "mine-notables-a-dustrend-kennel-master",
+  "name": "A Dustrend kennel master",
+  "category": "Named mob",
+  "x": 2760,
+  "y": 6280,
+  "approximate": true,
+  "note": "At the orc camps and cave of the Copper Mine. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-dustrend-kennel-master",
+  "wikiId": "npc-a-dustrend-kennel-master"
  },
  {
   "id": "corrupted-ashira-1",
@@ -123,13 +209,39 @@
  },
  {
   "id": "oasis-notables",
-  "name": "Onis the Elder, Fernic the Cur, Seshena the Lost",
+  "name": "Onis the Elder",
   "category": "Named mob",
   "x": 5666,
   "y": 7274,
   "approximate": true,
   "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/onis-the-elder",
+  "wikiId": "npc-onis-the-elder"
+ },
+ {
+  "id": "oasis-notables-fernic-the-cur",
+  "name": "Fernic the Cur",
+  "category": "Named mob",
+  "x": 5688,
+  "y": 7274,
+  "approximate": true,
+  "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/fernic-the-cur",
+  "wikiId": "npc-fernic-the-cur"
+ },
+ {
+  "id": "oasis-notables-seshena-the-lost",
+  "name": "Seshena the Lost",
+  "category": "Named mob",
+  "x": 5710,
+  "y": 7274,
+  "approximate": true,
+  "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/seshena-the-lost",
+  "wikiId": "npc-seshena-the-lost"
  },
  {
   "id": "tomb-burrowers-1",
@@ -143,13 +255,27 @@
  },
  {
   "id": "devourers",
-  "name": "A gold devourer, a silver devourer",
+  "name": "A gold devourer",
   "category": "Named mob",
   "x": 2380,
   "y": 7665,
   "approximate": true,
   "note": "Among the termite mounds. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-gold-devourer",
+  "wikiId": "npc-a-gold-devourer"
+ },
+ {
+  "id": "devourers-a-silver-devourer",
+  "name": "A silver devourer",
+  "category": "Named mob",
+  "x": 2402,
+  "y": 7665,
+  "approximate": true,
+  "note": "Among the termite mounds. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-silver-devourer",
+  "wikiId": "npc-a-silver-devourer"
  },
  {
   "id": "bloodfang",
