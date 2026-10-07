@@ -34,3 +34,7 @@ Review the resulting data diff and preview the atlas before committing and pushi
 Run `node scripts/test-apply-approved.mjs` for local publisher checks against a mock service; it uses disposable fixture files inside this folder and leaves map data unchanged.
 
 Run `node scripts/test-community.mjs` for client checks with a local service stub, including disabled configuration, counters, problem reports, suggestions and note sync. These do not replace the live access checks in the Supabase setup guide.
+
+## Wiki reconcile
+
+`node scripts/wiki-reconcile.mjs <map-id>` compares one map's NPC markers (Named mob, Notable NPC, Vendor, Shady merchant, Class trainer, Quest, Mob camp) and place names with the wiki's NPCs in that map's zone (its title, or `wikiZone` in `data/maps.json`), through the wiki's partner API. It writes `<map-id>.md` (to read) and `<map-id>.json` (to approve) to `../tools/wiki-reconcile/`, outside the repository, and keeps answers in a cache there; new lookups are paced at one a second. Exact matches are pre-approved, close and ambiguous ones are not. `node scripts/wiki-reconcile.mjs --apply <map-id> [--dry-run]` then applies the approved rows: the wiki's name, link and id on markers, and approved place names become markers (same id, position, level and note). Only names, ids and page addresses are taken from the wiki. The key is read from `WIKI_API_KEY` or `../secrets/wiki-api-key.txt` and is never printed. `node scripts/test-wiki-reconcile.mjs` checks the matching and applying offline.
