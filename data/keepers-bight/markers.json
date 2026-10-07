@@ -205,7 +205,9 @@
   "y": 4123,
   "minZoom": 3,
   "approximate": true,
-  "note": "Poacher camp at the hunting lodge: bruisers, herbalists, pathfinders. Approximate location; to confirm in game."
+  "note": "Poacher camp at the hunting lodge: bruisers, herbalists, pathfinders. Approximate location; to confirm in game.",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-poacher",
+  "wikiId": "npc-a-poacher"
  },
  {
   "id": "poacher-named",

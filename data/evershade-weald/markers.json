@@ -37,7 +37,9 @@
   "y": 1611,
   "approximate": true,
   "note": "Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian",
+  "wikiId": "npc-a-fae-guardian"
  },
  {
   "id": "wasps-1-4",

@@ -77,7 +77,9 @@
   "y": 2187,
   "approximate": true,
   "note": "In the Sand Giant City. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/sularfaan-the-flamekeeper",
+  "wikiId": "npc-sularfaan-the-flamekeeper"
  },
  {
   "id": "giant-fishers-1",
@@ -183,7 +185,9 @@
   "y": 6280,
   "approximate": true,
   "note": "At the orc camps and cave of the Copper Mine. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/servarator-vakraar",
+  "wikiId": "npc-servarator-vakraar"
  },
  {
   "id": "mine-notables-a-dustrend-kennel-master",
@@ -251,7 +255,9 @@
   "y": 7745,
   "approximate": true,
   "note": "Among the termite mounds. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-tomb-burrower",
+  "wikiId": "npc-a-tomb-burrower"
  },
  {
   "id": "devourers",

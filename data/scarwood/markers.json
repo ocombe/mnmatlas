@@ -17,7 +17,9 @@
   "y": 3304,
   "approximate": true,
   "note": "Bandit camp: bulky bandits, bandit archers and trail bandits. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-bandit",
+  "wikiId": "npc-a-bandit"
  },
  {
   "id": "grinholdt",
@@ -93,7 +95,9 @@
   "y": 1433,
   "approximate": true,
   "note": "Corrupted giant camp by the giants’ road. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-corrupted-hill-giant",
+  "wikiId": "npc-a-corrupted-hill-giant"
  },
  {
   "id": "dregath-warwake",
