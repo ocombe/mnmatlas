@@ -58,7 +58,7 @@ dialog{color:var(--foreground);background:var(--popover);border:1px solid var(--
  .place-name-controls label,.hidden-controls>label{min-height:40px}
 }
 /* Embedded: a compact bar without the site title (the host page has its own), with the map picker, Search menu and the account button. */
-.embed .masthead{height:46px;padding:0 10px;gap:8px}.embed .brand,.embed .edition{display:none}.embed .map-picker{margin-left:0;margin-right:0;flex:0 1 235px;min-width:0}.embed .map-picker>span{display:none}.embed .masthead .map-select{min-width:0;max-width:none;min-height:34px;padding:6px 10px;font-size:12px}.embed .masthead>button,.embed .account-button{min-height:34px;padding:6px 10px;font-size:12px}.embed .atlas{height:calc(100dvh - 46px);padding:0;display:block}.embed .map-frame{height:100%;border-radius:0;border:0}.embed .frame-border{inset:4px;border-radius:0}
+.embed .masthead{height:46px;padding:0 10px;gap:8px}.embed .brand,.embed .edition{display:none}.embed .map-picker{margin-left:0;margin-right:0;flex:0 1 auto;max-width:235px;min-width:0}.embed .map-picker>span{display:none}.embed .masthead .map-select{min-width:0;max-width:none;min-height:34px;padding:6px 10px;font-size:12px}.embed .masthead>button,.embed .account-button{min-height:34px;padding:6px 10px;font-size:12px}.embed .atlas{height:calc(100dvh - 46px);padding:0;display:block}.embed .map-frame{height:100%;border-radius:0;border:0}.embed .frame-border{inset:4px;border-radius:0}
 .embed .journal{position:absolute;z-index:800;right:10px;top:10px;bottom:10px;width:302px;max-width:calc(100% - 20px);min-width:0;border-radius:var(--radius);padding:14px;box-shadow:-8px 0 30px #0009}.embed .journal-heading{margin-bottom:10px}.embed .journal .eyebrow{display:none}.embed .journal h1{font-size:25px}.embed .journal .results{flex:none;min-height:110px;max-height:230px}.embed .journal .categories button{padding:5px 8px}
 .embed .map-title{top:12px;left:13px;padding:8px 15px;max-width:calc(100% - 82px)}.embed .map-title h2{font-size:24px}.embed .map-title span{font-size:8px;letter-spacing:1px}.embed .map-title small{display:none}.embed .map-tools{right:12px;top:12px}.embed .map-tools button{height:32px;width:32px;font-size:22px}.embed .compass{width:48px;right:19px;bottom:36px}.embed .map-caption{bottom:16px;left:14px;right:14px;font-size:9px}.embed .map-caption>span:last-child{display:none}
 @media(max-width:760px){.place-name-controls label,.hidden-controls>label{min-height:44px}}
@@ -369,5 +369,5 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 
 /* In a compact embed every control sits on the left, after the map picker: host pages often lay their own button
    ("Full size", "Open") over a frame's top-right corner, so the right end of the bar stays empty. */
-.embed .masthead{padding-right:max(10px,min(130px,24vw))}
-@media(max-width:480px){.embed .masthead>#toggle-panel span{display:none}}
+.embed .masthead{padding-right:130px}
+@media(max-width:480px){.embed .masthead>#toggle-panel span,.embed .account-button:has(.account-avatar) .account-name{display:none}.embed .masthead{gap:6px}.embed .masthead>button,.embed .account-button{padding:6px 8px}}
