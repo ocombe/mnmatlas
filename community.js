@@ -323,6 +323,16 @@
  // A link to an NPC not on the atlas yet (?find=, ?wiki=, a Wanted poster) opens the board on its notice.
  let wantedFocus=null;
  window.atlasOpenBounty=id=>{if(typeof id!=='string'||!wantedShown())return;wantedFocus=id;openWanted();};
+ // "Search the atlas" also finds the NPCs on this map's Wanted board, from this browser's copy of the list (read once
+ // when a search first needs it). Only where the board shows.
+ let wantedFetching=null;
+ window.atlasWantedMatches=terms=>{
+  if(!config||config.zonesFile||!wantedShown()||!terms.length)return [];
+  const kept=keptWanted(config.id);
+  if(!kept){if(!wantedFetching){const mapId=config.id;wantedFetching=wantedList().catch(()=>null).then(()=>{wantedFetching=null;if(config?.id===mapId&&$('search').value.trim())refreshSearch();});}return [];}
+  const places=originals.map(m=>({n:m.name,w:m.wikiId})),trained=mapTrainerClasses(originals,labelData.trainers),claimed=claimedNow(),keys=terms.map(findKey);
+  return kept.rows.filter(r=>!placedOnMap(r,places)&&!trainerOnMap(r,trained)&&keys.every(k=>findKey(r.name).includes(k))).slice(0,20).map(r=>({id:r.id,name:r.name,kind:bountyKind(r),category:bountyPrefill(r).category,claimed:claimed.has(r.id)}));
+ };
  function openWanted(){if(!config||config.zonesFile||!wantedShown())return;if(!paperTexture){paperTexture=new Image();paperTexture.onload=setPaper;paperTexture.src='assets/bounty/paper.webp';}setPaper();
   $('journal').classList.add('wanted-mode');$('wanted-view').hidden=false;setPanel(true);renderWanted();}
  async function renderWanted(){
@@ -344,12 +354,22 @@
   let chosen;try{chosen=localStorage.getItem(tabKey);}catch{}if(!groups.some(g=>g.key===chosen))chosen=groups[0].key;
   const focus=wantedFocus&&groups.find(g=>g.rows.some(r=>r.id===wantedFocus));if(focus)chosen=focus.key;
   const tabs=text('div','','wanted-tabs'),reward=text('p','','wanted-reward'),list=text('div','','wanted-list');tabs.setAttribute('role','tablist');list.setAttribute('role','tabpanel');
-  const show=key=>{chosen=key;try{localStorage.setItem(tabKey,key);}catch{}const g=groups.find(x=>x.key===key);
+  // A filter over every tab: name, level and kind; each tab counts its matches, an empty tab gives way to one with some.
+  const box=text('div','','search-box wanted-search'),filter=document.createElement('input'),clear=button('×',()=>{filter.value='';filter.dispatchEvent(new Event('input'));filter.focus();},'wanted-clear');
+  filter.type='search';filter.placeholder='Find a bounty: name, level, kind…';filter.autocomplete='off';filter.setAttribute('aria-label','Find a bounty');clear.setAttribute('aria-label','Clear');clear.hidden=true;
+  box.append(text('span','⌕'),filter,clear);box.firstChild.setAttribute('aria-hidden','true');
+  const terms=()=>findKey(filter.value).split(' ').filter(Boolean),matches=(row,t)=>{if(!t.length)return true;const hay=findKey([row.name,row.level?'level '+row.level:'',bountyKind(row),row.role].join(' '));return t.every(x=>hay.includes(x));};
+  const shown=g=>{const t=terms();return g.rows.filter(r=>matches(r,t));};
+  const show=key=>{chosen=key;try{if(!filter.value)localStorage.setItem(tabKey,key);}catch{}const g=groups.find(x=>x.key===key),rows=shown(g);
    for(const t of tabs.children)t.setAttribute('aria-selected',String(t.dataset.key===key));
    reward.textContent='Reward: '+(g.priority?3:2)+' '+rewardWord+' and your name in the atlas credits';
-   list.replaceChildren(...g.rows.map(row=>notice(row,claimed.has(row.id))));list.scrollTop=0;};
+   list.replaceChildren(...rows.map(row=>notice(row,claimed.has(row.id))));
+   if(!rows.length)list.append(text('p','No bounty matches “'+filter.value.trim()+'”.','wanted-empty'));list.scrollTop=0;};
+  const counts=()=>{for(const t of tabs.children){const g=groups.find(x=>x.key===t.dataset.key),n=shown(g).filter(r=>!claimed.has(r.id)).length;t.lastChild.textContent=String(n);}};
+  filter.addEventListener('input',()=>{clear.hidden=!filter.value;counts();const g=groups.find(x=>x.key===chosen);if(!shown(g).length){const other=groups.find(x=>shown(x).length);if(other){show(other.key);return;}}show(chosen);});
+  filter.addEventListener('keydown',e=>{if(e.key==='Escape'&&filter.value){e.preventDefault();e.stopPropagation();clear.onclick();}});
   for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Quest givers','Quests').replace('Named NPCs','Named')),text('small',String(g.rows.filter(r=>!claimed.has(r.id)).length)));tabs.append(t);}
-  view.append(tabs,reward,list);
+  view.append(box,tabs,reward,list);
   const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
   show(chosen);contributeCount(open);
   if(focus){const el=[...list.children].find(n=>n.dataset.bounty===wantedFocus);if(el){el.classList.add('notice-focus');el.scrollIntoView({block:'center'});}}wantedFocus=null;

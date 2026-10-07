@@ -374,3 +374,9 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .notice.notice-focus .notice-paper{filter:drop-shadow(0 0 6px #e8b35a) drop-shadow(0 0 2px #e8b35a)}
 /* In an embed the open Search menu stops left of the map tools, so zoom, fit and the rest stay in reach. */
 .embed .journal{right:60px;max-width:calc(100% - 70px)}
+.wanted-search{margin:12px 0 0;flex-shrink:0}
+.wanted-search input{flex:1;min-width:0;border:0;background:transparent;color:inherit;font-size:13px;padding:7px 6px}
+.wanted-search input:focus{outline:none}
+.wanted-search>span{font-size:19px;color:#6b5236}
+.wanted-search .wanted-clear{flex:none;width:26px;height:26px;padding:0;border:0;background:transparent;color:#6b5236;font-size:18px;line-height:1}
+.wanted-empty{margin:4px 0;padding:10px;text-align:center;font-style:italic;color:#e9d6b0}

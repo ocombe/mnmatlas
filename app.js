@@ -220,6 +220,10 @@ function drawMarkers(){
  if(terms.length&&config.levels){for(const m of allMarkers().filter(m=>!atLevel(m)&&enabled.has(m.category)&&terms.every(t=>markerText(m).includes(t)))){const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);const label=text('span','');label.append(text('strong',markerTitle(m)),text('small',[noteKind(m),markerSubtitle(m)].filter(Boolean).join(' · ')+otherLevel(m)));b.append(label);b.onclick=()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));list.append(b);}}
  if(terms.length){for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t)))){const b=text('button','','place');const label=text('span','');label.append(text('strong',p.name),text('small',(p.kind==='hidden'?'Hidden area':'Place name')+otherLevel(p)));b.append(label);b.onclick=()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0));list.append(b);}}
  $('count').textContent=list.childElementCount+' places';
+ // NPCs on this map's Wanted board (not on the map yet) that match: choosing one opens its notice on the board.
+ const wanted=terms.length&&window.atlasWantedMatches?window.atlasWantedMatches(terms):[];
+ if(wanted.length){list.append(text('p','Wanted: not on the map yet','find-heading'));
+  for(const w of wanted){const b=text('button','','place wanted-result'),glyph=text('span','','symbol');glyph.append(markerSymbol({category:w.category,name:w.name}));b.append(glyph);const label=text('span','');label.append(text('strong',w.name),text('small',['Wanted',w.kind,w.claimed?'claimed, awaiting review':''].filter(Boolean).join(' · ')));b.append(label);b.onclick=()=>window.atlasOpenBounty?.(w.id);list.append(b);}}
  // Matches of a ?find= link on other maps, while its text is still in the search box.
  if(findState&&$('search').value.trim()===findState.text){
   const away=findState.hits.filter(e=>e.m!==config.id);
