@@ -332,7 +332,7 @@ function updateEmbed(){
  $('embed-code').value=`<iframe src="${htmlAttr(url.href)}" title="${htmlAttr(config.title+' · MnM Atlas')}" width="100%" height="${$('embed-height').value}" style="border:0" loading="lazy" allow="fullscreen; clipboard-write" allowfullscreen></iframe>`;
 }
 function openEmbed(){
- embedPlace=activePlace&&!activePlace.id.startsWith('personal-')?activePlace:null;
+ if(!config)return;embedPlace=activePlace&&!activePlace.id.startsWith('personal-')?activePlace:null;
  $('embed-map-name').textContent=config.title;
  $('embed-level-row').hidden=!config.levels;$('embed-level-name').textContent=config.levelTitle||'';$('embed-level').checked=true;
  $('embed-place-row').hidden=!embedPlace;$('embed-place-name').textContent=embedPlace?markerTitle(embedPlace):'';$('embed-place').checked=true;

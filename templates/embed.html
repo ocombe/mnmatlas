@@ -1,0 +1,116 @@
+<!doctype html>
+<html lang="en">
+<head>
+ <meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+ <title>Embed MnM Atlas · every option</title>
+ <meta name="description" content="How to put MnM Atlas maps, places and NPCs on a wiki page or website: map embeds, small map images and links.">
+ <link rel="canonical" href="https://www.mnmatlas.com/embed/"><link rel="icon" href="../favicon.ico"><meta name="theme-color" content="#16120e">
+ <link rel="stylesheet" href="../style.css?v=atlas-52">
+ <style>
+  html,body{height:auto;overflow:auto}
+  .docs-bar{position:sticky;top:0;z-index:5;display:flex;align-items:center;gap:14px;padding:10px 20px;background:hsl(28 24% 9% / .96);border-bottom:1px solid var(--border)}
+  .docs-bar .brand{font-size:23px}.docs-bar .brand img{width:30px;height:30px}
+  .docs-bar a.back{margin-left:auto;color:var(--foreground);text-decoration:none;border:1px solid var(--border);background:var(--muted);border-radius:var(--radius);padding:7px 12px;font-size:13px}
+  .docs-bar a.back:hover{border-color:#936133;background:#3c2e20}
+  main.docs{max-width:860px;margin:0 auto;padding:28px 20px 60px;font-size:15px;line-height:1.65}
+  .docs h1{font:42px/1.1 var(--heading);margin:8px 0 6px}.docs .lede{color:var(--muted-foreground);font-size:16px;margin:0 0 26px}
+  .docs h2{font:28px/1.2 var(--heading);margin:44px 0 10px;padding-top:14px;border-top:1px solid var(--border)}
+  .docs h3{font:20px/1.3 var(--heading);margin:26px 0 6px;color:var(--primary)}
+  .docs a{color:var(--primary)}.docs p{margin:0 0 12px}.docs ul{margin:0 0 14px;padding-left:22px}.docs li{margin:3px 0}
+  .docs code{font:13px ui-monospace,Consolas,monospace;background:var(--muted);border:1px solid var(--border);border-radius:4px;padding:1px 5px}
+  .docs pre{overflow-x:auto;background:hsl(28 24% 9%);border:1px solid var(--border);border-radius:var(--radius);padding:12px 14px;font:13px/1.5 ui-monospace,Consolas,monospace;white-space:pre-wrap;word-break:break-all;margin:0 0 14px}
+  .docs table{width:100%;border-collapse:collapse;margin:0 0 16px;font-size:14px}
+  .docs th,.docs td{text-align:left;vertical-align:top;padding:7px 10px;border-bottom:1px solid var(--border)}
+  .docs th{font-weight:600;color:var(--muted-foreground);font-size:12px;letter-spacing:.06em;text-transform:uppercase}
+  .docs .toc{display:flex;flex-wrap:wrap;gap:8px;margin:0 0 10px;padding:0;list-style:none}
+  .docs .toc a{display:inline-block;text-decoration:none;color:var(--foreground);border:1px solid var(--border);background:var(--card);border-radius:999px;padding:4px 12px;font-size:13px}
+  .docs .example{margin:10px 0 18px;border:1px solid var(--border);border-radius:var(--radius);overflow:hidden;background:var(--card)}
+  .docs .example iframe{display:block;width:100%;height:420px;border:0}
+  .docs .example.mini{display:inline-block;padding:10px}.docs .example.mini img{display:block;border-radius:6px}
+  .docs .note{color:var(--muted-foreground);font-size:13px}
+  @media(max-width:600px){.docs h1{font-size:32px}.docs h2{font-size:24px}.docs-bar .brand-name{display:none}.docs th,.docs td{padding:6px 5px}.docs td code{word-break:break-all}}
+ </style>
+</head>
+<body>
+ <header class="docs-bar"><a class="brand" href="../" aria-label="MnM Atlas home"><img class="brand-star" src="../assets/icons/brand.png" alt=""> <span class="brand-name">MnM Atlas</span></a><a class="back" href="../">← Back to the atlas</a></header>
+ <main class="docs">
+  <h1>Embed MnM Atlas</h1>
+  <p class="lede">Put the illustrated maps of Monsters &amp; Memories on a wiki page or website: a whole map, a small picture of one spot, or a link that opens the atlas on an NPC.</p>
+  <ul class="toc"><li><a href="#map-embed">Map embed</a></li><li><a href="#mini">Mini map image</a></li><li><a href="#links">Links and ?find</a></li><li><a href="#addresses">Address options</a></li><li><a href="#maps">Map list</a></li><li><a href="#inside">Inside an embed</a></li><li><a href="#wiki-links">Wiki links</a></li><li><a href="#credits">Credits</a></li></ul>
+
+  <h2 id="map-embed">Map embed</h2>
+  <p>The quickest way: open a map in the atlas, select a place if you like, and press <b>Embed</b> in the top bar. The dialog writes the code for you. It looks like this:</p>
+<pre>&lt;iframe src="https://www.mnmatlas.com/underdocks/?embed=map&amp;level=lower&amp;place=wiki-marshall-harding" title="Underdocks · MnM Atlas" width="100%" height="550" style="border:0" loading="lazy" allow="fullscreen; clipboard-write" allowfullscreen&gt;&lt;/iframe&gt;</pre>
+  <ul>
+   <li><code>?embed=map</code> shows one map on its own: its levels and markers, with no map picker, search menu or editing. An <b>Open in MnM Atlas</b> button and the map's exits open the full atlas in a new tab.</li>
+   <li>The dialog offers three heights: 400, 550 (the default) and 750 px. Any height works; the map fits itself to the frame.</li>
+   <li>Add <code>level=</code> to open on a level or floor and <code>place=</code> to open on a marker or place name (see <a href="#addresses">address options</a>).</li>
+   <li><code>?embed=1</code> embeds the compact full atlas instead, with its map picker and search menu.</li>
+  </ul>
+  <div class="example"><iframe src="../underdocks/?embed=map&amp;level=lower&amp;place=wiki-marshall-harding" title="Underdocks · MnM Atlas (example)" loading="lazy" allow="fullscreen; clipboard-write" allowfullscreen></iframe></div>
+
+  <h2 id="mini">Mini map image</h2>
+  <p>For a page that should stay light, such as every NPC page of a wiki, use a small still picture of the spot instead of a frame: 320 × 200 pixels, about 10 KB, with no script. It shows the map around the marker, its pin and its name, and links to the atlas.</p>
+<pre>&lt;a href="https://www.mnmatlas.com/?find=npc-marshal-harding"&gt;&lt;img src="https://www.mnmatlas.com/mini/npc-marshal-harding.webp" width="320" height="200" alt="Marshal Harding on MnM Atlas" loading="lazy" style="border:0"&gt;&lt;/a&gt;</pre>
+  <div class="example mini"><a href="../?find=npc-marshal-harding"><img src="../mini/npc-marshal-harding.webp" width="320" height="200" alt="Marshal Harding on MnM Atlas"></a></div>
+  <ul>
+   <li><code>/mini/&lt;wiki id&gt;.webp</code>: for every marker that is linked to its page on the Monsters and Memories Wiki, by the wiki's own id (the id in its NPC data, such as <code>npc-marshal-harding</code>).</li>
+   <li><code>/mini/&lt;map id&gt;/&lt;place id&gt;.webp</code>: for every marker on the atlas, such as <code>/mini/keepers-bight/farmers.webp</code>.</li>
+   <li>In the atlas, select a marker, press <b>Embed</b> and tick <b>Small still image of this spot instead</b> to get the code for it.</li>
+   <li>The pictures are redrawn every time the atlas is updated, so a moved marker or a corrected name shows up on its own. A wiki id the atlas does not mark yet has no picture.</li>
+  </ul>
+
+  <h2 id="links">Links and ?find</h2>
+  <p>Any page can link straight to a place on the atlas, by the wiki's id or by name, without knowing which map it is on:</p>
+  <table>
+   <tr><th>Link</th><th>Opens</th></tr>
+   <tr><td><code>/?find=npc-marshal-harding</code></td><td>The map that marks that wiki id, on that marker, at the right level or floor.</td></tr>
+   <tr><td><code>/?find=Marshal%20Harding</code></td><td>The same, by name. Case, accents and the kind of apostrophe do not matter.</td></tr>
+   <tr><td><code>/?find=enchanter%20trainer</code></td><td>A class trainer also answers to "&lt;class&gt; trainer". When several places match, the search menu opens with the text and lists the matches on every map.</td></tr>
+   <tr><td><code>/?find=bank&amp;map=underdocks</code></td><td>Looks on one map only.</td></tr>
+   <tr><td><code>/?find=npc-marshal-harding&amp;embed=map</code></td><td>Works inside a map embed too.</td></tr>
+  </table>
+  <p>A wiki id comes first, then an exact name, then names that contain the text. If nothing matches, the atlas says so in its search menu. <code>?wiki=&lt;wiki id&gt;</code> works the same way as <code>?find=</code>.</p>
+
+  <h2 id="addresses">Address options</h2>
+  <table>
+   <tr><th>Option</th><th>What it does</th></tr>
+   <tr><td><code>/&lt;map id&gt;/</code></td><td>Each map has its own address, such as <code>/night-harbor/</code>. The world map is the site's front page. Older <code>?map=&lt;map id&gt;</code> links still work.</td></tr>
+   <tr><td><code>place=&lt;id&gt;</code></td><td>Opens on a marker or place name and highlights it. Use <b>Copy link</b> in a popup to get its address.</td></tr>
+   <tr><td><code>level=&lt;level id&gt;</code></td><td>Opens a map with levels or floors on that one (see the <a href="#maps">map list</a>). With <code>place=</code>, the place's own level wins.</td></tr>
+   <tr><td><code>x=</code> <code>y=</code> <code>z=</code></td><td>Opens a view: the centre in map coordinates and the zoom. <b>Share this view</b> in the map toolbar writes them.</td></tr>
+   <tr><td><code>find=</code> <code>wiki=</code></td><td>Opens on a place found by wiki id or name (see <a href="#links">links</a>).</td></tr>
+   <tr><td><code>embed=map</code> · <code>embed=1</code></td><td>One map on its own, or the compact full atlas, for frames on other sites.</td></tr>
+  </table>
+
+  <h2 id="maps">Map list</h2>
+  <p>Map ids and their levels or floors, for addresses and embeds.</p>
+  <table>
+   <tr><th>Map id</th><th>Map</th><th>Levels and floors</th></tr>
+<!-- MAPS -->
+  </table>
+
+  <h2 id="inside">Inside an embed</h2>
+  <ul>
+   <li>Visitors can drag, zoom, switch levels or floors, and open marker popups. Inside a map embed the scroll wheel only zooms after the map has been clicked, so the page around it still scrolls.</li>
+   <li>Exits to other maps and the <b>Open in MnM Atlas</b> button open the full atlas in a new tab.</li>
+   <li>With <code>?embed=1</code> the search menu, the map picker and personal notes are there too. Visitors can sign in with Discord, which opens in a small window so the page stays put, then suggest edits and report problems; suggestions wait for review before they appear.</li>
+   <li>The fullscreen button works when the frame allows it (<code>allow="fullscreen"</code>, as in the code above).</li>
+  </ul>
+
+  <h2 id="wiki-links">Wiki links on your site</h2>
+  <p>Markers can link to their wiki page. When the atlas is shown inside another site, it only shows links to that site's own pages, so it never sends your readers to a different wiki:</p>
+  <ul>
+   <li>On the Monsters and Memories Wiki (monstersandmemories.wiki): links to its own pages only.</li>
+   <li>On the community wiki at monstersandmemories.miraheze.org: links to its own pages only.</li>
+   <li>On Petrichor's database (monme.no): links to its own pages only.</li>
+   <li>On any other site: no wiki links.</li>
+  </ul>
+  <p>If you run a wiki or database and want your pages linked from the atlas, or the atlas linked differently on your site, open an issue on the <a href="https://github.com/ocombe/mnmatlas">atlas's GitHub page</a>.</p>
+
+  <h2 id="credits">Credits</h2>
+  <p>MnM Atlas is an illustrated, unofficial fan atlas, not an official game map. Many maps build on community maps whose authors are credited on each map (the credits line on the map and <b>About</b> in the atlas). When you show the atlas on your site, keep the embed's own credits visible, or for a still image keep its link to the atlas, and credit "MnM Atlas" and the original map authors where you describe it.</p>
+  <p class="note">Map data from the Monsters and Memories Wiki used in the atlas is credited and linked as the wiki asks.</p>
+ </main>
+</body>
+</html>

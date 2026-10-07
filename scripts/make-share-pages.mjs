@@ -58,3 +58,9 @@ await writeFile(resolve(root,'404.html'),`<!doctype html>
 <body style="background:#16120e;color:#e8dcc4;font:16px/1.5 system-ui,sans-serif;padding:24px;max-width:36em"><h1 style="font-size:1.4em">This page is not on the map</h1><p><a style="color:#d0852f" href="/">Open MnM Atlas</a> or choose a map:</p><ul>${links.replace(/<a /g,'<a style="color:#d0852f" ')}</ul></body>
 </html>
 `,'utf8');console.log('Wrote 404.html');
+
+// The embed guide (embed/index.html) from templates/embed.html, with the map list filled in from data/maps.json.
+{const rows=registry.maps.map(m=>{const levels=(m.levels||[]).map(l=>`<code>level=${html(l.id)}</code> ${html(l.title||'')}`).join('<br>');
+  return `   <tr><td><code>${html(m.id)}</code></td><td><a href="../${m.entry?'':m.id+'/'}">${html(m.title)}</a></td><td>${levels||'·'}</td></tr>`;}).join('\n');
+ const page=swap(await readFile(resolve(root,'templates/embed.html'),'utf8'),/<!-- MAPS -->/,rows).replace(/^<!doctype html>(\r?\n)/,'<!doctype html>$1<!-- Generated from templates/embed.html by scripts/make-share-pages.mjs; edit the template instead. -->$1');
+ await mkdir(resolve(root,'embed'),{recursive:true});await writeFile(resolve(root,'embed','index.html'),page,'utf8');console.log('Wrote embed/index.html');}
