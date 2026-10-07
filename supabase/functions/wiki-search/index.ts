@@ -20,6 +20,7 @@ function headers(req:Request){
 const reply=(req:Request,status:number,body:unknown,extra:Record<string,string>={})=>new Response(JSON.stringify(body),{status,headers:{...headers(req),...extra}});
 const text=(v:unknown,max:number)=>typeof v==='string'?v.replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,max):'';
 // Zone names compared loosely: case, accents, apostrophes and a leading "the" do not matter.
+// An entry found in several zones lists them all, comma separated ("Faelindral, Night Harbor"); any of them matches.
 const zoneKey=(v:string)=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^the /,'');
 
 async function signedIn(req:Request){
@@ -57,7 +58,7 @@ Deno.serve(async req=>{
   let page:URL|null=null;try{page=new URL(String(row.url));}catch{}
   if(!page||page.protocol!=='https:'||!/(^|\.)monstersandmemories\.wiki$/.test(page.hostname))return null;
   return {id:text(row.id,160),type:text(row.type,20),name:text(row.name,100),zone:text(row.zone,100),url:page.href};
- }).filter((row:{id:string,name:string,zone:string}|null)=>row&&row.id&&row.name&&(!zone||zoneKey(row.zone)===zone)).slice(0,12);
+ }).filter((row:{id:string,name:string,zone:string}|null)=>row&&row.id&&row.name&&(!zone||row.zone.split(',').some(z=>zoneKey(z)===zone))).slice(0,12);
  cache.delete(id);cache.set(id,{at:now,results});if(cache.size>most)cache.delete(cache.keys().next().value!);
  return reply(req,200,{site,results},{'Cache-Control':'private, max-age=1800'});
 });

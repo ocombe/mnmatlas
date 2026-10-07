@@ -140,15 +140,20 @@
  const editedNow=new Set(),editToken=(kind,id)=>config.id+':'+kind+':'+id;
  // Wiki search (signed-in visitors): look a page up by name and fill the wiki link with it.
  // The search goes through the atlas's own backend function, which holds the wiki's partner key.
- const finders=new Set(),wikiTypes={npc:'NPC',item:'Item',quest:'Quest',zone:'Zone'};
+ // Only what can stand on the map as a marker is searched (NPCs, not items or quests), and only in this map's zone:
+ // the backend keeps the wiki's results from that zone. A map's wiki zone is its title unless maps.json gives wikiZone;
+ // the world map spans every zone.
+ const finders=new Set(),wikiTypes={npc:'NPC'},markerTypes=Object.keys(wikiTypes).join(',');
+ const searchZone=()=>!config||config.zonesFile?'':config.wikiZone||config.title||'';
+ const searchPlaceholder=()=>{const zone=searchZone();return zone?'Search NPCs in '+zone:'Search NPCs in every zone';};
  async function wikiSearch(q){
   // Answers are kept in this browser for a day (and shared ones on the backend), so a repeated search costs the wiki nothing.
-  const key=q.toLowerCase().replace(/\s+/g,' '),saved=readSearches(),hit=saved[key];if(hit&&Date.now()-hit.at<864e5)return hit;
+  const zone=searchZone(),key=q.toLowerCase().replace(/\s+/g,' '),id=markerTypes+'|'+zone.toLowerCase()+'|'+key,saved=readSearches(),hit=saved[id];if(hit&&Date.now()-hit.at<864e5)return hit;
   const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error('sign-in');
-  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}});
+  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key)+'&type='+markerTypes+(zone?'&zone='+encodeURIComponent(zone):''),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}});
   if(!r.ok)throw Error(r.status===429?'busy':'failed');const body=await r.json();
   const answer={at:Date.now(),site:Object.hasOwn(wikiSites,body?.site)?body.site:'mnm-wiki',results:Array.isArray(body?.results)?body.results:[]};
-  saved[key]=answer;const keys=Object.keys(saved).sort((a,b)=>saved[b].at-saved[a].at);for(const old of keys.slice(100))delete saved[old];
+  saved[id]=answer;const keys=Object.keys(saved).sort((a,b)=>saved[b].at-saved[a].at);for(const old of keys.slice(100))delete saved[old];
   try{localStorage.setItem(searchesKey,JSON.stringify(saved));}catch{}return answer;
  }
  const searchesKey='mnmaps-wiki-searches';
@@ -157,23 +162,24 @@
   const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint'),trouble=text('span','','wiki-signin-trouble');
   // Signing in from here keeps the note open: the sign-in window hands the session back to this page.
   signedOut.append(text('span','Paste a page address, or '),button('sign-in',()=>{trouble.textContent='';popupSignIn(message=>{trouble.textContent=' '+message+' You can also sign in from the top bar.';});},'wiki-signin'),text('span',' to search the wiki by name'),trouble);
-  search.type='search';search.maxLength=80;search.placeholder='Search the wiki by name';search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
+  search.type='search';search.maxLength=80;search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
   let timer,serial=0;
   // The credit names and links the wiki the results came from.
   const show=(rows,message,from)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
    for(const row of rows){const b=button('',()=>{input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);search.value='';show([]);input.focus?.();},'wiki-result');
     b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
    const source=wikiSites[from];if(rows.length&&source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';list.append(credit);}};
+  const showFound=(site,results)=>{const rows=results.filter(r=>Object.hasOwn(wikiTypes,r.type)),zone=searchZone();show(rows,rows.length?'':zone?'No NPC in '+zone+' with that name.':'No NPC found with that name.',site);};
   search.addEventListener('input',()=>{clearTimeout(timer);const q=search.value.trim(),mine=++serial;if(q.length<2){show([]);return;}
-   timer=setTimeout(async()=>{show([],'Searching…');try{const {site,results}=await wikiSearch(q);if(mine===serial)show(results,results.length?'':'No wiki page found with that name.',site);}
+   timer=setTimeout(async()=>{show([],'Searching…');try{const {site,results}=await wikiSearch(q);if(mine===serial)showFound(site,results);}
     catch(e){if(mine===serial)show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. You can paste the page address instead.');}},350);});
   box.append(search,list,signedOut);
-  box.update=()=>{search.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){search.value='';show([]);}};
-  box.reset=()=>{clearTimeout(timer);serial++;search.value='';show([]);};
+  box.update=()=>{search.placeholder=searchPlaceholder();search.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){search.value='';show([]);}};
+  box.reset=()=>{clearTimeout(timer);serial++;search.value='';search.placeholder=searchPlaceholder();show([]);};
   finders.add(box);box.update();return box;
  }
- // A picked page names an unnamed note, and a quest makes it a Quest marker; the wiki's own text is never copied in.
- {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{if(!$('name').value.trim())$('name').value=row.name;if(row.type==='quest'&&$('category').value!=='Quest'){$('category').value='Quest';$('category').dispatchEvent(new Event('change'));}});field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+ // A picked page names an unnamed note; the wiki's own text is never copied in.
+ {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{if(!$('name').value.trim())$('name').value=row.name;});field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  function editDialog(target,kind){
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
@@ -408,7 +414,7 @@
  }
  accountUI();client.auth.onAuthStateChange((eventName,session)=>{setTimeout(()=>authChanged(session).catch(()=>status('Account could not refresh. Your local notes are safe.')),0);});
  client.auth.getSession().then(({data,error})=>{if(error)throw error;return authChanged(data.session);}).catch(()=>status('Account could not load. Your local notes are safe.'));
- window.addEventListener('atlas:loaded',()=>onMap().catch(()=>status('Community data could not load.')));
+ window.addEventListener('atlas:loaded',()=>{for(const f of finders)f.reset();onMap().catch(()=>status('Community data could not load.'));});
  window.addEventListener('atlas:notes',scheduleSync);window.addEventListener('atlas:positions',offerPositions);
  window.addEventListener('atlas:edit-ended',()=>{if(user&&syncReady!==syncIdentity())syncNotes(mapSerial);});
  window.addEventListener('online',()=>{pushJobs();if(user&&map&&!loading&&syncReady!==syncIdentity())syncNotes(mapSerial);});
