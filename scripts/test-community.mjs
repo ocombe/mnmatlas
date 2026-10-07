@@ -25,7 +25,7 @@ class Node {
 const settle=async()=>{for(let i=0;i<8;i++)await new Promise(resolve=>setImmediate(resolve));};
 function environment(settings={},hostname='atlas.example',session=null){
  const elements=new Map(),head=new Node('head'),body=new Node('body'),bottom=new Node('div'),bar=new Node('header'),formHint=new Node('p'),noteLine=new Node('p');let creations=0,timerId=0;
- for(const id of ['about-counts','search','about-community','editor','map-frame','wiki-field','wiki','name','category'])elements.set(id,Object.assign(new Node('div'),{dataset:{},value:''}));elements.get('editor').querySelector=()=>formHint;
+ for(const id of ['about-counts','search','about-community','editor','map-frame','wiki-field','wiki','name','category','note'])elements.set(id,Object.assign(new Node('div'),{dataset:{},value:''}));elements.get('category').options=['Personal','Vendor','Quest','Mob camp','Named mob'].map(value=>({value}));elements.get('editor').querySelector=()=>formHint;
  const panelButton=new Node('button','Search menu');bar.append(panelButton);elements.set('toggle-panel',panelButton);
  const timers=new Map(),listeners=new Map(),saved=new Map(),calls=[],counts=[],statuses=[],remote=[{id:'personal-remote',name:'Remote',category:'Personal',note:'',x:40,y:50},{id:'personal-local',name:'Older remote',category:'Personal',note:'',x:1,y:2}];
  const user=session?.user,suggestions=[],layers=[],banned=[];let authHandler,failNotes=false,failSuggestions=false;
@@ -89,6 +89,13 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
   e.context.fetch=async()=>({ok:true,status:200,json:async()=>({results:[{id:'npc-ring-seller',type:'npc',name:'Ring seller',zone:'Test map',url:'https://monstersandmemories.wiki/npcs/ring-seller'}]})});
   $('name').value='My ring';noteSearch.value='ring';noteSearch.fire('input');await e.tick(600);pickFirst();
   assert.equal($('name').value,'My ring');assert.equal($('category').value,'Personal');assert.equal(changed,0);assert.equal($('wiki').value,'https://monstersandmemories.wiki/npcs/ring-seller');
+  // The wiki's role, level and short location line fill a new note's empty fields, and the wiki is credited.
+  e.context.fetch=async()=>({ok:true,status:200,json:async()=>({results:[{id:'npc-a-fishmonger',type:'npc',name:'A fishmonger',zone:'Test map',url:'https://monstersandmemories.wiki/npcs/a-fishmonger',role:'merchant',level:'8-10',location:'Under the east dock'}]})});
+  $('name').value='';$('note').value='';noteSearch.value='fishmonger';noteSearch.fire('input');await e.tick(600);pickFirst();
+  assert.equal($('name').value,'A fishmonger (levels 8–10)');assert.equal($('category').value,'Vendor');assert.equal(changed,1);assert.equal($('note').value,'Under the east dock');
+  assert(finder.querySelectorAll('a').some(a=>a.textContent==='Filled from the wiki · Data from the Monsters and Memories Wiki'),'The filled data is credited');
+  $('category').value='Personal';$('note').value='My own words';noteSearch.value='fishmonger ';noteSearch.value='fish monger';noteSearch.fire('input');await e.tick(600);pickFirst();
+  assert.equal($('note').value,'My own words','A typed note is kept');assert.equal($('name').value,'A fishmonger (levels 8–10)');
   // On the world map the search covers every zone.
   let worldUrl='';e.context.fetch=async url=>{worldUrl=url;return {ok:true,status:200,json:async()=>({results:[]})};};
   e.context.config.zonesFile='data/world/zones.json';e.emit('atlas:loaded');await settle();assert.equal(noteSearch.placeholder,'Search NPCs in every zone');noteSearch.value='smith';noteSearch.fire('input');await e.tick(600);

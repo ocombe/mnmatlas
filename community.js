@@ -156,7 +156,7 @@
   saved[id]=answer;const keys=Object.keys(saved).sort((a,b)=>saved[b].at-saved[a].at);for(const old of keys.slice(100))delete saved[old];
   try{localStorage.setItem(searchesKey,JSON.stringify(saved));}catch{}return answer;
  }
- const searchesKey='mnmaps-wiki-searches';
+ const searchesKey='mnmaps-wiki-searches-2';
  function readSearches(){try{const rows=JSON.parse(localStorage.getItem(searchesKey)||'{}');return rows&&typeof rows==='object'&&!Array.isArray(rows)?rows:{};}catch{return {};}}
  function wikiFinder(input,picked){
   const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint'),trouble=text('span','','wiki-signin-trouble');
@@ -171,9 +171,10 @@
   const stop=()=>{clearTimeout(timer);serial++;asking?.abort();asking=null;busy(false);};
   // The credit names and links the wiki the results came from.
   const show=(rows,message,from)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
-   for(const row of rows){const b=button('',()=>{input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);search.value='';show([]);input.focus?.();},'wiki-result');
+   for(const row of rows){const b=button('',()=>{input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);search.value='';show([]);credit(from,'Filled from the wiki · ');input.focus?.();},'wiki-result');
     b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
-   const source=wikiSites[from];if(rows.length&&source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';list.append(credit);}};
+   if(rows.length)credit(from);};
+  const credit=(from,lead='')=>{const source=wikiSites[from];if(!source)return;const line=text('a',lead+(source.credit||'Data from '+source.name),'wiki-credit');line.href=source.home||'https://'+source.hosts[0]+'/';line.target='_blank';line.rel='noopener';list.append(line);};
   const showFound=(site,results)=>{const rows=results.filter(r=>Object.hasOwn(wikiTypes,r.type)),zone=searchZone();show(rows,rows.length?'':zone?'No NPC in '+zone+' with that name.':'No NPC found with that name.',site);};
   // Typing waits 600 ms for a pause; the same words again (spaces or case aside) do not search twice.
   search.addEventListener('input',()=>{const q=search.value.trim(),key=q.toLowerCase().replace(/\s+/g,' ');if(key===wanted)return;
@@ -186,8 +187,16 @@
   box.reset=()=>{stop();wanted='';search.value='';search.placeholder=searchPlaceholder();show([]);};
   finders.add(box);box.update();return box;
  }
- // A picked page names an unnamed note; the wiki's own text is never copied in.
- {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{if(!$('name').value.trim())$('name').value=row.name;});field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+ // A picked NPC pre-fills a new note as the wiki's terms allow: its name (with its level, as the atlas writes levels),
+ // its type from the wiki's role, and its short location line as the note. Nothing the visitor typed is replaced,
+ // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level.
+ const roleTypes={merchant:'Vendor',quest:'Quest',mob:'Mob camp'};
+ const roleType=row=>roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'');
+ const levelText=level=>level?' ('+(/[-–]/.test(level)?'levels '+level.replace(/\s*[-–]\s*/,'–'):'level '+level)+')':'';
+ const wikiNote=row=>row.location||'';
+ {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{if(!$('name').value.trim())$('name').value=row.name+levelText(row.level);
+  const type=roleType(row);if(type&&$('category').value==='Personal'&&[...$('category').options].some(o=>o.value===type)){$('category').value=type;$('category').dispatchEvent(new Event('change'));}
+  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);});field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  function editDialog(target,kind){
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
