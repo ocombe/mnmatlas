@@ -171,6 +171,25 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 :is(.place-name,.personal-label).exit.unmapped .exit-arrow{background:none;box-shadow:none;border:1.5px dashed #a8977d;color:#cbbda4}
 .level-pin span{width:26px;height:26px;border-radius:50%;transform:none;border:2px solid #f5e2b4;box-shadow:0 0 0 1.5px #d29a48,0 2px 5px #000a}.level-pin b,.level-pin svg{transform:none}.level-pin b{font:700 14px/1 var(--body)}
 .hidden-end{background:#2b2117;border:2px solid #d29a48;border-radius:50%;box-shadow:0 0 0 1px #f5e2b4}
+.leaflet-popup-content .npc-name{color:inherit;text-decoration:none}.leaflet-popup-content .npc-name:hover,.leaflet-popup-content .npc-name:focus-visible{text-decoration:underline;text-underline-offset:3px}
+/* NPC wiki card in a marker popup: the wiki's tag line, a few facts, loot and summary, all linking back to the wiki. */
+.leaflet-popup-content .npc-card{margin:2px 0 8px;padding-top:7px;border-top:1px solid var(--border);font-size:12px;line-height:1.4}
+.leaflet-popup-content .npc-tags{margin:0 0 6px;font:13px/1.2 var(--small-caps);letter-spacing:.05em;color:#d9b77e}
+.leaflet-popup-content .npc-card dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 10px;margin:0 0 7px}
+.leaflet-popup-content .npc-card dt{color:var(--muted-foreground)}
+.leaflet-popup-content .npc-card dd{margin:0;overflow-wrap:anywhere}
+.leaflet-popup-content .npc-heading{margin:0 0 2px;font:13px/1.2 var(--small-caps);letter-spacing:.04em;color:var(--muted-foreground)}
+.leaflet-popup-content .npc-loot ul{list-style:none;margin:0 0 2px;padding:0}
+.leaflet-popup-content .npc-loot li{margin:1px 0}
+.leaflet-popup-content .npc-card a{color:var(--primary);text-decoration:none}.leaflet-popup-content .npc-card a:hover,.leaflet-popup-content .npc-card a:focus-visible{text-decoration:underline}
+.leaflet-popup-content .npc-rate{margin-left:6px;color:var(--muted-foreground);font-size:11px}
+.leaflet-popup-content .npc-more{font-size:11px}
+.leaflet-popup-content .npc-summary{margin:7px 0 6px;font-style:italic;color:var(--muted-foreground)}
+.leaflet-popup-content .npc-summary a{font-style:normal;white-space:nowrap}
+.leaflet-popup-content .npc-card .npc-credit{display:block;font-size:10.5px;color:var(--muted-foreground)}
+.leaflet-popup-content .npc-our-note{margin-top:4px}
+.leaflet-popup-content:has(.npc-card){max-height:min(68vh,560px);overflow-y:auto;scrollbar-width:thin}
+@media(max-width:600px){.leaflet-popup-content:has(.npc-card){max-height:calc(100dvh - 380px)}}
 .leaflet-popup-content .community-note{font-size:11px;font-style:italic;color:var(--primary);margin:6px 0 2px}
 .leaflet-popup-content .wiki-link{display:block;width:max-content;max-width:100%;margin:6px 0 2px;font-weight:600;color:var(--primary);text-decoration:underline;text-underline-offset:2px}.leaflet-popup-content .wiki-link:hover,.leaflet-popup-content .wiki-link:focus-visible{color:var(--foreground)}
 .wiki-finder{margin-top:6px}.wiki-finder input[type=search]{padding:8px 34px 8px 10px}.wiki-search{position:relative}.wiki-search input[type=search]{width:100%;box-sizing:border-box}.wiki-spinner{position:absolute;right:11px;top:50%;width:14px;height:14px;margin-top:-9px;border:2px solid #f3e2c233;border-top-color:var(--primary);border-radius:50%;animation:wiki-spin .7s linear infinite;pointer-events:none}.wiki-spinner[hidden]{display:none}@keyframes wiki-spin{to{transform:rotate(360deg)}}@media(prefers-reduced-motion:reduce){.wiki-spinner{animation-duration:2.4s}}.wiki-finder .form-hint{margin:6px 0 0}.wiki-results{display:grid;gap:4px;margin-top:4px;max-height:232px;overflow:auto}.wiki-results:empty{display:none}.wiki-result{display:flex;flex-direction:column;align-items:flex-start;gap:1px;width:100%;text-align:left;padding:7px 10px;border-radius:var(--radius)}.wiki-result small{font-size:11px;color:var(--muted-foreground)}.wiki-credit{font-size:11px;color:var(--primary);margin:2px 2px 0}.wiki-finder{margin-top:4px}.wiki-searching{display:flex;align-items:center;gap:8px;margin:4px 2px 0;font-size:12px;color:var(--muted-foreground)}.wiki-searching[hidden],.wiki-finder [hidden]{display:none}.wiki-searching .wiki-spinner{position:static;margin:0;flex:none}.wiki-heading{font-size:11px;letter-spacing:.06em;text-transform:uppercase;color:var(--muted-foreground);margin:4px 2px 2px}.wiki-result.active,.wiki-result:focus-visible{border-color:var(--primary);background:#3c2e20}.wiki-signin-hint{margin:6px 0 0;padding:8px 11px;border:1px solid var(--amber-border);border-radius:var(--radius);background:hsl(32 63% 50% / .1);color:var(--foreground);font-size:12px;line-height:1.5}.suggest-on-save{display:grid;gap:0;margin:8px 0 0}.suggest-on-save .community-check{min-height:32px}.suggest-on-save .suggest-credit{margin-left:26px;font-size:12px;color:var(--muted-foreground)}.wiki-tip-label{display:block;margin-bottom:1px;font:15px/1.3 var(--small-caps);letter-spacing:.03em;font-weight:normal;color:var(--primary)}

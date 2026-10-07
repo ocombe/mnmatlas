@@ -77,7 +77,40 @@ function flashPin(id){const el=pins.get(id)?.getElement();if(!el)return;el.class
 // A marker's wiki page opens in a new tab; an embed on another site may hide it (wiki-links.js).
 function wikiButton(m){const link=wikiLinkFor(m);if(!link)return null;const a=text('a','Read on '+link.name+' ↗','wiki-link');a.href=link.href;a.target='_blank';a.rel='noopener';return a;}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;
-function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',markerTitle(m)));{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}if(m.note)n.append(text('p',m.note));const wiki=wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
+// NPC wiki cards (npc-cards/<map>.json, built when publishing): read once per map, when its first wiki-linked NPC pin is
+// drawn; those pins' popups then get their card. Only where this page may link to the wiki (embed rules).
+let npcCards={map:null,cards:null,loading:false};
+function npcCardFor(m){
+ if(typeof m?.wikiId!=='string'||!m.wikiId.startsWith('npc-')||wikiLinkFor(m)?.site!=='mnm-wiki'||!config)return null;
+ if(npcCards.map!==config.id)npcCards={map:config.id,cards:null,loading:false};
+ if(npcCards.cards)return npcCards.cards[m.wikiId]||null;
+ if(!npcCards.loading){npcCards.loading=true;const mapId=config.id;
+  fetch('npc-cards/'+encodeURIComponent(mapId)+'.json').then(r=>r.ok?r.json():null).catch(()=>null).then(body=>{
+   if(npcCards.map!==mapId)return;npcCards.cards=body&&body.cards&&typeof body.cards==='object'?body.cards:{};
+   const byId=new Map(allMarkers().map(x=>[x.id,x]));for(const [id,pin] of pins){const one=byId.get(id);if(one&&npcCards.cards[one.wikiId]){pin.setPopupContent(popup(one));
+    // A card makes a tall popup: it moves the map just enough to show it whole.
+    // The top padding clears the map's title plate, wherever it sits on this screen.
+    const p=pin.getPopup();if(p){Object.assign(p.options,{autoPan:true,autoPanPaddingBottomRight:L.point(16,16)});Object.defineProperty(p.options,'autoPanPaddingTopLeft',{configurable:true,get:()=>{const plate=document.querySelector('.map-title'),box=map.getContainer().getBoundingClientRect(),below=plate&&plate.offsetParent?plate.getBoundingClientRect().bottom-box.top+10:0;return L.point(16,Math.max(16,below));}});}}}});}
+ return null;
+}
+const wikiPage=(label,href,cls='')=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
+// A short card in the wiki's own order: its tag line, level, location, race and class, the first loot items, the start
+// of its summary, each linking back to the wiki, with its credit.
+function npcCard(c){
+ const box=text('div','','npc-card');if(c.tags)box.append(text('p',c.tags,'npc-tags'));
+ const rows=document.createElement('dl'),row=(term,value)=>{if(value)rows.append(text('dt',term),text('dd',value));};
+ row('Level',c.level);row('Location',c.location);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));
+ if(rows.children.length)box.append(rows);
+ if(Array.isArray(c.loot)&&c.loot.length){const loot=text('div','','npc-loot'),list=document.createElement('ul');loot.append(text('p','Notable loot','npc-heading'));
+  for(const i of c.loot){const li=document.createElement('li');li.append(wikiPage(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
+  loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(wikiPage('+'+more+' more on the wiki',c.url,'npc-more'));box.append(loot);}
+ if(c.summary){const p=text('p',c.summary+' ','npc-summary');p.append(wikiPage('Read more on the wiki ↗',c.url));box.append(p);}
+ box.append(wikiPage('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
+ return box;
+}
+function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(markerTitle(m),card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
+ // With a wiki card the wiki comes first; the atlas's own note and actions follow.
+ if(card)n.append(npcCard(card));if(m.note)n.append(text('p',m.note,card?'npc-our-note':''));const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));

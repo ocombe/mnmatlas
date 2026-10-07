@@ -36,6 +36,12 @@ jobs:
         env:
           WIKI_API_KEY: ${{ secrets.WIKI_API_KEY }}
         run: node scripts/make-bounties.mjs
+      # NPC wiki cards for marker popups, from the same key (one wiki request per linked NPC, a second apart).
+      - name: Build NPC wiki cards
+        continue-on-error: true
+        env:
+          WIKI_API_KEY: ${{ secrets.WIKI_API_KEY }}
+        run: node scripts/make-npc-cards.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

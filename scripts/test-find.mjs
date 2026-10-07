@@ -36,3 +36,14 @@ console.log('Find checks passed: wiki ids, exact names, trainer classes, contain
 // Every script the pages load must at least parse (a slip in one stops the whole atlas).
 for(const f of ['app.js','community.js','wiki-links.js','find.js','place-labels.js','icons.js','hidden-areas.js','world-zones.js','sheet-edge.js'])new vm.Script(await readFile(new URL('../'+f,import.meta.url),'utf8'),{filename:f});
 console.log('Script checks passed: every page script parses.');
+
+// An NPC wiki card keeps only the short facts, the wiki's summary and the first loot items with wiki pages (likeliest
+// first), never the description; links must be wiki pages.
+{const {card}=await import('./make-npc-cards.mjs');
+ const c=card({name:'Night Terror',url:'https://monstersandmemories.wiki/npcs/night-terror',tags:'Named · Bat · Fighter',level:'8',race:'Bat',class:'Fighter',location:"'''Directions:''' by the loop",summary:'A bat.',description:'Long text',factions:[],quests:[{name:'Q',url:'https://monstersandmemories.wiki/quests/q'}],
+  loot:[{name:'A',url:'https://monstersandmemories.wiki/items/a',dropRate:null},{name:'B',url:'https://monstersandmemories.wiki/items/b',dropRate:0.25},{name:'Evil',url:'https://evil.example/items/x',dropRate:.9},{name:'C',url:'https://monstersandmemories.wiki/items/c',dropRate:4},
+   ...['d','e','f'].map(x=>({name:x.toUpperCase(),url:'https://monstersandmemories.wiki/items/'+x}))]});
+ assert.equal(c.description,undefined);assert.equal(c.quests,undefined);assert.equal(c.location,'Directions: by the loop');
+ assert.equal(JSON.stringify(c.loot.map(i=>i.name)),'["B","C","A","D","E"]');assert.equal(c.loot[0].dropRate,25);assert.equal(c.loot[1].dropRate,4);assert.equal(c.lootCount,6);
+ assert.equal(card({name:'X',url:'https://evil.example/npcs/x'}),null);
+ console.log('Card checks passed: NPC cards keep short facts and wiki links only.');}
