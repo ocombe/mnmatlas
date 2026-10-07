@@ -105,9 +105,9 @@ def draw():
     d.ellipse([W / 2 - 5, 13, W / 2 + 5, 23], fill=(122, 85, 39), outline=(59, 38, 16))
     d.ellipse([W / 2 - 2.5, 15, W / 2 + 0.5, 18], fill=(227, 194, 127))
     spaced(d, (W / 2, 34), 'WANTED', font('im-fell-english-sc.woff2', 34), RED, 8)
-    d.text((W / 2, 98), 'Not on the atlas yet', font=font('im-fell-english-regular.woff2', 24), fill=INK, anchor='mm')
+    d.text((W / 2, 98), 'Not on the MnM Atlas yet', font=font('im-fell-english-regular.woff2', 22), fill=INK, anchor='mm')
     d.line([W / 2 - 70, 120, W / 2 + 70, 120], fill=(170, 140, 100), width=1)
-    d.text((W / 2, 140), 'Help place it on MnM Atlas', font=font('im-fell-english-italic.woff2', 16), fill=RED, anchor='mm')
+    d.text((W / 2, 140), 'Claim the bounty: place it on the map', font=font('im-fell-english-italic.woff2', 15), fill=RED, anchor='mm')
     small = font('inter-variable.woff2', 9)
     credit = 'mnmatlas.com'
     cw = d.textlength(credit, font=small)
