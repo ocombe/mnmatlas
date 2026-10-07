@@ -308,6 +308,15 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .notice.claimed .notice-name,.notice.claimed .notice-meta,.notice.claimed .notice-foot{opacity:.5}
 .board-credit{display:block;text-align:center;margin-top:8px;flex-shrink:0}
 .journal.wanted-dragging{opacity:0;pointer-events:none}
+/* A bounty's note: the wiki facts as plain text in place of their fields; Notes stays editable. */
+.note-form.bounty-mode .note-type,.note-form.bounty-mode .field:has(>#name),.note-form.bounty-mode #marker-fields,.note-form.bounty-mode #wiki-field,.note-form.bounty-mode #exit-fields,.note-form.bounty-mode #exit-target-field{display:none!important}
+.bounty-facts{display:flex;flex-direction:column;gap:10px}
+.bounty-facts dl{display:grid;grid-template-columns:max-content 1fr;gap:6px 14px;margin:0;font-size:13px}
+.bounty-facts dt{color:var(--muted-foreground);font-size:12px}
+.bounty-facts dd{margin:0;color:var(--foreground);overflow-wrap:anywhere}
+.bounty-facts dd a{color:var(--primary)}
+.bounty-facts .form-hint,.bounty-claim-line{margin:0;font-size:12px;color:var(--muted-foreground)}
+.note-form.bounty-mode .suggest-credit{margin-left:0}
 @media(max-width:520px){.wanted-view .board-lede{display:none}.wanted-title{font-size:30px}}
 @media(prefers-reduced-motion:reduce){.notice,.notice:nth-child(even){transform:none}}
 .drag-ghost{position:fixed;z-index:10000;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:4px;transform:translate(-50%,-30px)}

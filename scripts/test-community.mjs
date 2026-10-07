@@ -164,6 +164,21 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
   ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...note,x:30,y:12,name:'Old lamp post'},moved:true}});await settle();
   const move=inserts().at(-1).payload;assert.equal(move.kind,'move-marker');assert.equal(JSON.stringify(move.payload.from),'[20,12]');assert.equal(JSON.stringify(move.payload.to),'[30,12]');
   e.suggestions.splice(e.suggestions.findIndex(r=>r.id===id),1);check.checked=false;check.fire('change');}
+ // A note placed from a bounty is claimed as it is saved, whatever the suggest box says; the bounty is then marked
+ // claimed on this device. A claim that fails keeps the note private and offers to try again.
+ {const ctx=e.context,inserts=()=>e.calls.filter(c=>c.table==='suggestions'&&c.op==='insert');
+  ctx.localStorage.setItem('mnmaps-bounty-notes',JSON.stringify({'personal-bounty':{bounty:'npc-wanted',priority:true,map:'test-map'},'personal-bounty-2':{bounty:'npc-other',priority:false,map:'test-map'}}));
+  const note={id:'personal-bounty',name:'Wanted man',category:'Vendor',note:'',x:5,y:6,wiki:'https://monstersandmemories.wiki/npcs/wanted-man',wikiId:'npc-wanted'},before=inserts().length;
+  ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note}});await settle();
+  assert.equal(inserts().length,before+1,'Saving a bounty note claims it with the suggest box unticked');const claim=inserts().at(-1).payload;
+  assert.equal(claim.payload.bounty,'npc-wanted');assert.equal(claim.payload.priority,true);
+  assert(JSON.parse(ctx.localStorage.getItem('mnmaps-claimed-bounties'))['test-map']['npc-wanted'],'The bounty is claimed on this device at once');
+  e.failSuggestions=true;const other={...note,id:'personal-bounty-2',name:'Other man',wikiId:'npc-other',wiki:'https://monstersandmemories.wiki/npcs/other-man'};
+  ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:other}});await settle();e.failSuggestions=false;
+  const failed=e.body.children.find(n=>n.id==='community-dialog');assert(failed.open&&failed.querySelectorAll('button').some(n=>n.textContent==='Try again'),'A failed claim offers to try again');
+  assert(!JSON.parse(ctx.localStorage.getItem('mnmaps-claimed-bounties'))['test-map']['npc-other'],'Nothing is marked claimed until the claim is accepted');
+  await failed.querySelectorAll('button').find(n=>n.textContent==='Try again').onclick();await settle();
+  assert.equal(inserts().at(-1).payload.payload.bounty,'npc-other');assert(JSON.parse(ctx.localStorage.getItem('mnmaps-claimed-bounties'))['test-map']['npc-other']);}
  // Banning an author dismisses everything they have waiting and lists them for a later unban.
  for(const id of [11,12])e.suggestions.push({id,user_id:'spammer',status:'pending',map:'test-map',level:'lower',kind:'report',target_id:'published',payload:{name:'Spam '+id,reason:'other',x:1,y:1},author_name:'Spammer',created_at:new Date().toISOString()});
  reviewButton.onclick();await settle();assert(review.querySelectorAll('p').some(n=>n.textContent==='By Spammer (2 waiting)'));review.querySelectorAll('button').find(n=>n.textContent==='Ban author').onclick();

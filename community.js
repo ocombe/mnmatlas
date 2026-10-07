@@ -218,7 +218,7 @@
   if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  // The Wanted board: NPCs the wiki knows in this map's zone that the map does not mark yet, as bounties to take.
  // Trainers and merchants come first as priority bounties. Taking one starts the pin with a note filled from the wiki
- // and "Also suggest this for the public map" ticked. Signed out, the board asks to sign in (the list needs it).
+ // that saving claims (sends for review). Signed out, the note can be kept private and claimed after signing in.
  let bountyNext=null;
  // A note placed from a bounty remembers it, so its suggestion carries the bounty (worth 2 points, 3 for priority).
  const bountyKey='mnmaps-bounty-notes';
@@ -244,8 +244,23 @@
   const trained=mapTrainerClasses(allMarkers(),labelData.trainers);
   return {site:file.site,rows:file.rows.filter(r=>!placedOnMap(r,places)&&!trainerOnMap(r,trained))};
  }
- // Bounties someone already claimed (a suggestion waiting for review or publishing), from the atlas's own database.
- async function claimedBounties(){if(!user)return new Set();try{const {data,error}=await client.rpc('claimed_bounties',{map_id:config.id});if(error)throw error;return new Set((data||[]).map(r=>typeof r==='string'?r:r?.claimed_bounties).filter(Boolean));}catch{return new Set();}}
+ // Bounties claimed (a suggestion waiting for review or publishing): the atlas's own database, plus the claims this
+ // device made or was refused (someone else first), kept per map so the board shows them straight away. The database
+ // wins on the next answer: a claim refused or deleted since is dropped (one sent in the last minute may not show yet).
+ const claimedKey='mnmaps-claimed-bounties';
+ const readClaimed=()=>{try{const v=JSON.parse(localStorage.getItem(claimedKey)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
+ let lastClaimed={map:null,ids:new Set()};
+ function claimedNow(){const ids=new Set(Object.keys(readClaimed()[config?.id]||{}));if(lastClaimed.map===config?.id)for(const id of lastClaimed.ids)ids.add(id);return ids;}
+ function markBountyClaimed(mapId,id){const all=readClaimed();all[mapId]={...(all[mapId]||{}),[id]:Date.now()};try{localStorage.setItem(claimedKey,JSON.stringify(all));}catch{}
+  if(mapId!==config?.id)return;if($('journal')?.classList.contains('wanted-mode'))renderWanted();else contributeCount();}
+ async function claimedBounties(){
+  const mapId=config.id,local=readClaimed()[mapId]||{};if(!user)return new Set(Object.keys(local));
+  try{const {data,error}=await client.rpc('claimed_bounties',{map_id:mapId});if(error)throw error;
+   const ids=new Set((data||[]).map(r=>typeof r==='string'?r:r?.claimed_bounties).filter(Boolean)),all=readClaimed(),mine=all[mapId]||{},now=Date.now();
+   for(const id of Object.keys(mine)){if(ids.has(id)||now-mine[id]<60000)ids.add(id);else delete mine[id];}
+   all[mapId]=mine;try{localStorage.setItem(claimedKey,JSON.stringify(all));}catch{}lastClaimed={map:mapId,ids};return new Set(ids);}
+  catch{return new Set(Object.keys(local));}
+ }
  // What a bounty's note starts with: the wiki's name and level, its type, its page and id, a trainer's classes.
  function bountyPrefill(row){const classes=trainerClasses(row),type=isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Personal');
   return {name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
@@ -253,7 +268,6 @@
 // The reward a bounty earns, in the bounty board's own words (one place to change it).
  const rewardWord='renown';
  async function takeBounty(row,note){
-  if(!user){signInToTake();return;}
   // Checked again on the click: someone may have claimed it since the board opened.
   if((await claimedBounties()).has(row.id)){markClaimed(note,'Someone just claimed this one');return;}
   bountyNext={id:row.id,priority:!!row.priority};window.atlasPlaceNote?.(bountyPrefill(row));
@@ -267,7 +281,6 @@
    const touch=e.pointerType!=='mouse',x0=e.clientX,y0=e.clientY,journal=$('journal');let started=false,timer=null,ghost=null;
    const cleanup=()=>{clearTimeout(timer);window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);window.removeEventListener('keydown',key,true);ghost?.remove();journal.classList.remove('wanted-dragging');};
    const begin=ev=>{if(started)return;started=true;
-    if(!user){cleanup();signInToTake();return;}
     const prefill=bountyPrefill(row),face=text('span','');face.style.setProperty('--pin',categories[prefill.category]?.[1]||'#365f59');face.append(markerSymbol({category:prefill.category,name:prefill.name}));
     ghost=text('span','','drag-ghost');ghost.append(face,text('small',row.name));ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';document.body.append(ghost);
     if(compact())journal.classList.add('wanted-dragging');status('Drop the notice where '+row.name+' stands, or press Escape.',true);};
@@ -314,22 +327,23 @@
   else myPoints().then(p=>{if(p&&serial===renderWanted.serial)count.after(text('p','Your '+rewardWord+': '+p.points,'board-points'));});
   let found;try{found=await wantedList();}catch(e){if(serial===renderWanted.serial)count.textContent=e.message==='none'?'The wanted list for '+zone+' isn’t available yet.':'The wanted list could not be loaded right now. Please try again later.';return;}
   if(serial!==renderWanted.serial)return;
-  const claimed=await claimedBounties(),{site,rows}=found,priority=rows.filter(r=>r.priority).length;
-  if(!rows.length){count.textContent='No bounties here. Every NPC the wiki knows is on the map.';return;}
+  const claimed=await claimedBounties();if(serial!==renderWanted.serial)return;
+  const {site,rows}=found,open=rows.filter(r=>!claimed.has(r.id)),priority=open.filter(r=>r.priority).length;
+  if(!rows.length){count.textContent='No bounties here. Every NPC the wiki knows is on the map.';contributeCount([]);return;}
   // One short line: how many, and how to take one.
-  count.textContent=[rows.length+' open',priority?priority+' priority':'',matchMedia('(pointer: fine)').matches?'drag a notice onto the map':'tap Take the bounty'].filter(Boolean).join(' · ');count.title=rows.length+' bounties open in '+zone;
-  // One tab per kind, with its count; the last one chosen comes back, else the first with bounties (trainers first).
-  const groups=bountyGroups.map(g=>({...g,rows:rows.filter(r=>bountyGroup(r)===g.key).sort((a,b)=>a.name.localeCompare(b.name))})).filter(g=>g.rows.length);
+  count.textContent=[open.length+' open',priority?priority+' priority':'',matchMedia('(pointer: fine)').matches?'drag a notice onto the map':'tap Take the bounty'].filter(Boolean).join(' · ');count.title=open.length+' bounties open in '+zone;
+  // One tab per kind, with its open count; the last one chosen comes back, else the first with bounties (trainers first).
+  const groups=bountyGroups.map(g=>({...g,rows:rows.filter(r=>bountyGroup(r)===g.key).sort((a,b)=>claimed.has(a.id)-claimed.has(b.id)||a.name.localeCompare(b.name))})).filter(g=>g.rows.length);
   let chosen;try{chosen=localStorage.getItem(tabKey);}catch{}if(!groups.some(g=>g.key===chosen))chosen=groups[0].key;
   const tabs=text('div','','wanted-tabs'),reward=text('p','','wanted-reward'),list=text('div','','wanted-list');tabs.setAttribute('role','tablist');list.setAttribute('role','tabpanel');
   const show=key=>{chosen=key;try{localStorage.setItem(tabKey,key);}catch{}const g=groups.find(x=>x.key===key);
    for(const t of tabs.children)t.setAttribute('aria-selected',String(t.dataset.key===key));
    reward.textContent='Reward: '+(g.priority?3:2)+' '+rewardWord+' and your name in the atlas credits';
    list.replaceChildren(...g.rows.map(row=>notice(row,claimed.has(row.id))));list.scrollTop=0;};
-  for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Quest givers','Quests').replace('Named NPCs','Named')),text('small',String(g.rows.length)));tabs.append(t);}
+  for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Quest givers','Quests').replace('Named NPCs','Named')),text('small',String(g.rows.filter(r=>!claimed.has(r.id)).length)));tabs.append(t);}
   view.append(tabs,reward,list);
   const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
-  show(chosen);contributeCount(rows);
+  show(chosen);contributeCount(open);
  }
  renderWanted.serial=0;
  // A compact notice: the name (to its wiki page), level and kind, the wiki link and the bounty button. The whole notice
@@ -345,16 +359,16 @@
  // The Wanted banner shows how many bounties are open once this browser has the list, never fetching it on load.
  function contributeCount(given){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;
   // The same rows as the board leaves open: not already on the map, by name, wiki page or class trainer chip.
-  let rows=given||null;if(!rows&&kept){const markers=allMarkers(),places=markers.map(m=>({n:m.name,w:m.wikiId})),trained=mapTrainerClasses(markers,labelData.trainers);rows=kept.rows.filter(r=>!placedOnMap(r,places)&&!trainerOnMap(r,trained));}
+  let rows=given||null;if(!rows&&kept){const places=originals.map(m=>({n:m.name,w:m.wikiId})),trained=mapTrainerClasses(originals,labelData.trainers),claimed=claimedNow();rows=kept.rows.filter(r=>!placedOnMap(r,places)&&!trainerOnMap(r,trained)&&!claimed.has(r.id));}
   const n=rows?rows.length:-1,p=rows?rows.filter(r=>r.priority).length:0,words=text('span','','wanted-text');
   words.append(text('strong','Wanted'),text('span',n>0?n+(n===1?' bounty':' bounties'):'NPCs this map is missing','wanted-count'));if(n>0&&p)words.append(text('span',p+' priority','wanted-count'));
   open.replaceChildren(words,text('span','View bounties →','wanted-cta'));if(n===0)open.hidden=true;}
  {const open=$('contribute');if(open){open.onclick=()=>openWanted();
   // Not on the world map (no notes there); a map change redraws the open board, or closes it on the world map.
-  const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();if($('journal').classList.contains('wanted-mode')){if(!config||config.zonesFile)closeWanted();else renderWanted();}};show();window.addEventListener('atlas:loaded',show);}}
- // A bounty's note opens with the suggestion ticked, whatever the last choice was.
- window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;if(bountyNext&&m?.wikiId===bountyNext.id){const check=$('suggest-check');if(check){check.checked=true;check.dispatchEvent(new Event('change'));}
-  const all=readBounties();all[m.id]={bounty:bountyNext.id,priority:bountyNext.priority};writeBounties(all);}bountyNext=null;});
+  const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();if(user)offerPrivateBounties();if($('journal').classList.contains('wanted-mode')){if(!config||config.zonesFile)closeWanted();else renderWanted();}};show();window.addEventListener('atlas:loaded',show);}}
+ // A bounty's note remembers its bounty as it opens.
+ window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;if(bountyNext&&m?.wikiId===bountyNext.id){
+  const all=readBounties();all[m.id]={bounty:bountyNext.id,priority:bountyNext.priority,map:config.id};writeBounties(all);}bountyNext=null;});
  // Contribution points (approved suggestions: 1, bounty 2, priority bounty 3), from the database; null when unavailable.
  async function myPoints(){if(!user)return null;try{const {data,error}=await client.rpc('my_contribution_points');if(error)throw error;const row=Array.isArray(data)?data[0]:data;return row&&Number.isFinite(row.points)?row:null;}catch{return null;}}
  function editDialog(target,kind){
@@ -441,9 +455,74 @@
    window.addEventListener('atlas:note-saved',e=>{const m=e.detail?.note;if(!m)return;
     // A note already suggested from here follows its suggestion, whether it was edited or only moved.
     const rec=user&&readFollowed()[followId(m)];if(rec){followNote(m,rec);return;}
+    if(!e.detail.moved&&bountyOf(m)){if(privateSave){privateSave=false;status('Saved as a private note. Sign in to claim the bounty.');}else if(user)claimBounty(m,credit.checked);return;}
     if(e.detail.moved||row.hidden||!check.checked)return;
     if(!user){status('Saved to your field notes. Sign in to suggest it for the public map.');return;}suggestOnSave(m,credit.checked);});
   }}
+ // A note placed from a bounty is always shared: saving claims the bounty. Its wiki facts are shown, not edited (only
+ // Notes, the position and the floor are the finder's own), except the class of a trainer the wiki gives none for.
+ // Signed out, the main button signs in and then claims; "Save as a private note" keeps it on this device.
+ const bountyOf=m=>{const b=m&&readBounties()[m.id];return b&&m.wikiId===b.bounty&&!readSet(sharedKey).has(sharedToken(m))?b:null;};
+ let bountyForm=null,claimAfterSignIn=false,privateSave=false;
+ function setBountyForm(m){
+  const form=$('marker-form'),b=bountyOf(m),save=$('save-note'),keep=$('save-private'),line=$('bounty-claim-line'),check=$('suggest-check'),credit=$('suggest-credit'),row=$('suggest-on-save');
+  bountyForm=b?{note:m,...b}:null;form.classList.toggle('bounty-mode',!!b);$('bounty-facts')?.remove();
+  if(save)save.textContent=b?(user?'Claim the bounty':'Sign in to claim'):'Save note';if(keep)keep.hidden=!b||!!user;if(line)line.hidden=!b;
+  if(check)check.parentElement.hidden=!!b;
+  if(!b){if(credit&&check)credit.parentElement.hidden=!check.checked;return;}
+  row.hidden=false;credit.parentElement.hidden=false;$('editor-title').textContent='Claim a bounty';
+  let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}
+  const facts=text('div','','bounty-facts');facts.id='bounty-facts';const list=document.createElement('dl');
+  const fact=(term,value)=>{list.append(text('dt',term));const dd=document.createElement('dd');dd.append(value);list.append(dd);};
+  const category=$('category').value,page=text('a',$('wiki').value.replace(/^https:\/\//,''),'');page.href=$('wiki').value;page.target='_blank';page.rel='noopener';
+  fact('Name',$('name').value);fact('Show as','Marker');fact('Category',category+(category==='Class trainer'&&classes.length?' · '+classes.join(' / '):''));fact('Wiki page',page);facts.append(list);
+  // A trainer the wiki gives no class for: the finder says which, or the marker could not be placed right.
+  if(category==='Class trainer'&&!classes.length){const field=text('div','','field'),label=text('label','Class'),pick=document.createElement('select');label.htmlFor=pick.id='bounty-class';pick.required=true;
+   pick.append(new Option('Choose the class they teach',''),...atlasClasses.map(c=>new Option(c,c)));pick.onchange=()=>{$('wiki').dataset.wikiClasses=JSON.stringify(pick.value?[pick.value]:[]);};field.append(label,pick);facts.append(field);}
+  facts.append(text('p','From the wiki. Add what you saw in Notes.','form-hint'));form.querySelector('.form-head').after(facts);
+ }
+ window.addEventListener('atlas:editor-open',e=>{claimAfterSignIn=false;privateSave=false;setBountyForm(e.detail?.note);});
+ {const save=$('save-note'),keep=$('save-private');
+  // Signed out, the main button opens the sign-in window and keeps the form; the claim goes once the account is in.
+  save?.addEventListener('click',e=>{if(!bountyForm||user)return;e.preventDefault();if(!$('marker-form').reportValidity())return;claimAfterSignIn=true;popupSignIn(m=>{claimAfterSignIn=false;status(m+' You can also sign in from the top bar.');});});
+  if(keep)keep.onclick=()=>{privateSave=true;$('marker-form').requestSubmit();if($('editor').open)privateSave=false;};}
+ async function claimBounty(m,credited,quiet=false){
+  const b=readBounties()[m.id];if(!b)return 'failed';
+  try{const published=await sendNote(m,credited);remember(sharedKey,[sharedToken(m)]);markBountyClaimed(b.map||config.id,b.bounty);freshPopup();event('suggestion-sent');
+   if(!quiet)status(sentLine(published)||'Bounty claimed: your marker is waiting for review.');return 'claimed';}
+  catch(e){
+   if(e?.code==='23505'){markBountyClaimed(b.map||config.id,b.bounty);if(!quiet)status('Someone claimed this bounty first. Your note stays in your private field notes.',true);return 'taken';}
+   if(!quiet)claimFailed(m,credited,e);return 'failed';}
+ }
+ // A claim that did not go through leaves the note private, says why, and can be tried again.
+ function claimFailed(m,credited,e){
+  const d=showDialog('The bounty was not claimed');
+  d.append(text('p',turnedOff(e)?'Your account can no longer send suggestions. Your note is kept in your private field notes.':'The claim did not go through. Your note is kept in your private field notes; you can try again now or later from its popup.'));
+  const actions=text('div','','dialog-actions');actions.append(button('Keep it private',()=>d.close()));
+  if(!turnedOff(e))actions.append(button('Try again',()=>{d.close();claimBounty(m,credited);},'primary'));d.append(actions);
+ }
+ // After signing in: the claim asked for from the open form goes at once; bounties placed while signed out are offered
+ // once (per note) to claim.
+ function afterSignIn(){
+  if(claimAfterSignIn&&bountyForm&&$('editor').open){claimAfterSignIn=false;setBountyForm(bountyForm.note);$('marker-form').requestSubmit();return;}
+  claimAfterSignIn=false;offerPrivateBounties();
+ }
+ const offeredKey='mnmaps-offered-bounties';
+ async function offerPrivateBounties(){
+  if(!user||!config||config.zonesFile||!map||$('editor').open||offerPrivateBounties.busy)return;
+  const offered=readSet(offeredKey),notes=personal.filter(m=>{const b=bountyOf(m);return b&&(b.map||config.id)===config.id&&!offered.has(sharedToken(m))&&!readFollowed()[followId(m)];});
+  if(!notes.length)return;remember(offeredKey,notes.map(sharedToken));
+  const d=showDialog('Claim your bounties?');d.append(text('p','You placed '+notes.length+(notes.length===1?' bounty':' bounties')+' on '+config.title+' while signed out. Claim '+(notes.length===1?'it':'them')+' now?'));
+  const list=document.createElement('ul');for(const m of notes)list.append(text('li',m.name));d.append(list);const credit=creditBox(d);
+  const actions=text('div','','dialog-actions'),go=button('Claim '+(notes.length===1?'it':'them'),async()=>{
+   go.disabled=true;offerPrivateBounties.busy=true;const taken=[],failed=[];let claimed=0;
+   try{const already=await claimedBounties();
+    for(const m of notes){const b=bountyOf(m);if(!b)continue;if(already.has(b.bounty)){markBountyClaimed(config.id,b.bounty);taken.push(m.name);continue;}
+     const result=await claimBounty(m,credit.checked,true);if(result==='claimed')claimed++;else if(result==='taken')taken.push(m.name);else failed.push(m.name);}}
+   finally{offerPrivateBounties.busy=false;}
+   d.close();status([claimed?'Claimed '+claimed+(claimed===1?' bounty.':' bounties.'):'',taken.length?'Already claimed by someone else (kept as private notes): '+taken.join(', ')+'.':'',failed.length?'Not sent, try again from the note’s popup: '+failed.join(', ')+'.':''].filter(Boolean).join(' '),true);
+  },'primary');actions.append(button('Not now',()=>d.close()),go);d.append(actions);
+ }
  // A note suggested from the form remembers its suggestion, so a later edit or move of the note follows it: while the
  // suggestion waits for review it is updated in place (or, where that is not allowed, sent again); once approved, the
  // change goes as an ordinary move or edit of the marker it becomes. A refused suggestion is no longer followed.
@@ -538,6 +617,7 @@
   const serial=++authSerial;user=next;admin=false;syncReady='';accountUI();for(const f of finders)f.update();if(review.open)review.close();clearPreview();freshPopup();
   if(user){const uid=user.id;try{const {data,error}=await client.from('admins').select('user_id').eq('user_id',uid).maybeSingle();if(error)throw error;if(serial!==authSerial)return;admin=!!data;accountUI();}catch{status('Account permissions could not load. Please try again.');}}
   if(serial===authSerial)await onMap();
+  if(serial===authSerial&&user)afterSignIn();
  }
  function clearPreview(){reviewLayer?.remove();reviewLayer=null;const bar=$('community-preview');bar?.dispatchEvent(new Event('wiki-done'));bar?.remove();}
  review.addEventListener('close',()=>{reviewSerial++;});
