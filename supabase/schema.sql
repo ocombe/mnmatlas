@@ -185,6 +185,10 @@ create policy suggestions_update_own_pending on public.suggestions for update to
 drop policy if exists suggestions_delete on public.suggestions;
 create policy suggestions_delete on public.suggestions for delete to authenticated
  using (exists (select 1 from public.admins where user_id=auth.uid()));
+-- Deleting a note withdraws its suggestion (a bounty claim) while it waits for review, unreviewed.
+drop policy if exists suggestions_delete_own_pending on public.suggestions;
+create policy suggestions_delete_own_pending on public.suggestions for delete to authenticated
+ using (user_id=auth.uid() and status='pending' and reviewed_at is null);
 drop policy if exists votes_read on public.votes;
 create policy votes_read on public.votes for select to authenticated using (user_id=auth.uid());
 drop policy if exists votes_admin_read on public.votes;

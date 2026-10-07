@@ -396,7 +396,28 @@
  }
  const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit');
  const sharedToken=m=>scope()+':'+m.id;
- window.atlasCommunity={popup(m,n){
+ // Deleting a note that carries a suggestion withdraws it: a pending, unreviewed one (the author's right), or an
+ // approved one not live yet when an admin deletes it. Then a bounty is open again. One already accepted for a
+ // normal user, or published, stays (and says so); if withdrawing fails, the claim stays too.
+ const withdrawnLine=b=>b?'This also withdraws your bounty claim.':'This also withdraws your suggestion.';
+ function deleteNotice(m){if(!user||!m||!readFollowed()[followId(m)])return null;return withdrawnLine(readBounties()[m.id]);}
+ function unmarkBountyClaimed(mapId,id){const all=readClaimed();if(all[mapId]){delete all[mapId][id];try{localStorage.setItem(claimedKey,JSON.stringify(all));}catch{}}
+  if(lastClaimed.map===mapId)lastClaimed.ids.delete(id);if(mapId!==config?.id)return;if($('journal')?.classList.contains('wanted-mode'))renderWanted();else contributeCount();}
+ async function withdrawNote(m){
+  if(!user||!m)return;const key=followId(m),rec=readFollowed()[key];if(!rec)return;
+  const b=readBounties()[m.id],what=b?'bounty claim':'suggestion';
+  const forget=()=>{const all=readFollowed();delete all[key];writeFollowed(all);const bs=readBounties();delete bs[m.id];writeBounties(bs);};
+  try{
+   const {data:row,error}=await client.from('suggestions').select('status,reviewed_at').eq('id',rec.id).maybeSingle();if(error)throw error;
+   // Gone already, or refused: nothing to withdraw, and a bounty is open again.
+   if(!row||row.status==='rejected'){forget();if(b)unmarkBountyClaimed(b.map||config.id,b.bounty);return;}
+   if(!(row.status==='pending'&&!row.reviewed_at)&&!(admin&&row.status==='approved')){forget();status(b?'Your claim was already accepted, so the marker stays on the public map.':'Your suggestion was already accepted, so the marker stays on the public map.',true);return;}
+   const {data:done,error:refused}=await client.from('suggestions').delete().eq('id',rec.id).select('id');if(refused)throw refused;if(!done?.length)throw Error('not withdrawn');
+   forget();if(b)unmarkBountyClaimed(b.map||config.id,b.bounty);status('Note deleted, and your '+what+' was withdrawn.');event('suggestion-withdrawn');
+  }catch{status('Note deleted, but your '+what+' could not be withdrawn: it is still waiting for review.',true);}
+ }
+ window.addEventListener('atlas:note-deleted',e=>{withdrawNote(e.detail?.note);});
+ window.atlasCommunity={deleteNotice,popup(m,n){
   if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));if(!config.zonesFile)n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m)));return;}
   const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report'));n.append(row);
  },placePopup(p,n){

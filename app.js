@@ -251,17 +251,20 @@ function editChanged(){
  return JSON.stringify(alignmentPositions)!==JSON.stringify(editSnapshot.positions)||JSON.stringify(alignmentLabelPositions)!==JSON.stringify(editSnapshot.labels)||spots(personal)!==spots(editSnapshot.personal);
 }
 function deleteNote(id){
- if(!persist(personal.filter(p=>p.id!==id)))return false;
+ const gone=personal.find(p=>p.id===id);if(!persist(personal.filter(p=>p.id!==id)))return false;
  if(editSnapshot)editSnapshot.personal=editSnapshot.personal.filter(p=>p.id!==id);
- map.closePopup();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');return true;
+ map.closePopup();setupCategoryControls();buildPlaceIndex();drawMarkers();status('Personal note deleted.');
+ // A note that carries a suggestion (a bounty claim) withdraws it too (community.js).
+ if(gone)window.dispatchEvent(new CustomEvent('atlas:note-deleted',{detail:{note:gone}}));return true;
 }
 // A note can be deleted straight from its popup, after a small confirmation.
 function confirmDelete(m){
+ const also=window.atlasCommunity?.deleteNotice?.(m);
  let d=$('delete-confirm');if(!d){d=document.createElement('dialog');d.id='delete-confirm';d.setAttribute('aria-labelledby','delete-confirm-title');document.body.append(d);}
  const title=text('h2','Delete this note?');title.id='delete-confirm-title';const actions=text('div','','dialog-actions');
  const act=(label,fn,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=()=>{d.close();fn();};return b;};
  actions.append(act('Cancel',()=>{}),act('Delete',()=>deleteNote(m.id),'danger'));
- d.replaceChildren(title,text('p','"'+m.name+'" will be removed from your notes'+(document.querySelector('.community-who')?' on every device you sync.':'.')),actions);d.showModal();
+ d.replaceChildren(title,text('p','"'+m.name+'" will be removed from your notes'+(document.querySelector('.community-who')?' on every device you sync.':'.')+(also?' '+also:'')),actions);d.showModal();
 }
 function askFinishEdit(){
  if(!editChanged()){finishEdit(true);return;}

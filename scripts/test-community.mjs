@@ -38,7 +38,7 @@ function environment(settings={},hostname='atlas.example',session=null){
   }
   if(table==='banned'){if(request.op==='insert'){banned.push(request.payload);return {data:null};}if(request.op==='delete'){banned.splice(banned.findIndex(r=>r.user_id===request.filters.user_id),1);return {data:null};}return {data:banned.map(r=>({...r,banned_at:new Date().toISOString()}))};}
   if(table==='suggestions'&&request.op==='update'&&request.filters.user_id){for(const row of suggestions)if(row.user_id===request.filters.user_id&&row.status===request.filters.status)Object.assign(row,request.payload);return {data:null};}
-  if(table==='suggestions'){if(failSuggestions)return {error:Error('offline')};if(request.op==='insert')return {data:{id:1000+calls.length}};if(request.op==='update'){const row=suggestions.find(r=>r.id===request.filters.id);if(row)Object.assign(row,request.payload);return {data:[{id:request.filters.id}]};}if(request.op==='select'&&request.filters.id!==undefined)return {data:suggestions.find(r=>r.id===request.filters.id)||null};return {data:request.op==='select'?suggestions.filter(r=>r.status==='pending'):[]};}
+  if(table==='suggestions'){if(failSuggestions)return {error:Error('offline')};if(request.op==='insert')return {data:{id:1000+calls.length}};if(request.op==='update'){const row=suggestions.find(r=>r.id===request.filters.id);if(row)Object.assign(row,request.payload);return {data:[{id:request.filters.id}]};}if(request.op==='delete'&&request.filters.id!==undefined){const i=suggestions.findIndex(r=>r.id===request.filters.id);if(i<0)return {data:[]};suggestions.splice(i,1);return {data:[{id:request.filters.id}]};}if(request.op==='select'&&request.filters.id!==undefined)return {data:suggestions.find(r=>r.id===request.filters.id)||null};return {data:request.op==='select'?suggestions.filter(r=>r.status==='pending'):[]};}
  }
  const client={rpc:async(name)=>{calls.push({rpc:name});return {error:null};},from(table){
   const request={op:'select',filters:{}},query={select(){return query;},eq(k,v){request.filters[k]=v;return query;},order(){return query;},range(){return query;},limit(){return query;},maybeSingle(){return query;},single(){return query;},upsert(payload){request.op='upsert';request.payload=payload;return query;},insert(payload){request.op='insert';request.payload=payload;return query;},update(payload){request.op='update';request.payload=payload;return query;},delete(){request.op='delete';return query;},then(done,reject){return Promise.resolve(result(table,request)).then(done,reject);}};return query;
@@ -179,6 +179,23 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
   assert(!JSON.parse(ctx.localStorage.getItem('mnmaps-claimed-bounties'))['test-map']['npc-other'],'Nothing is marked claimed until the claim is accepted');
   await failed.querySelectorAll('button').find(n=>n.textContent==='Try again').onclick();await settle();
   assert.equal(inserts().at(-1).payload.payload.bounty,'npc-other');assert(JSON.parse(ctx.localStorage.getItem('mnmaps-claimed-bounties'))['test-map']['npc-other']);}
+ // Deleting a note withdraws its pending claim (the bounty is open again); an accepted one stays and says so; a
+ // withdrawal that fails keeps the claim.
+ {const ctx=e.context,claims=()=>JSON.parse(ctx.localStorage.getItem('mnmaps-claimed-bounties'))['test-map'],followed=()=>Object.values(JSON.parse(ctx.localStorage.getItem('mnmaps-suggested-notes')));
+  const note={id:'personal-bounty',name:'Wanted man',category:'Vendor',note:'',x:5,y:6,wiki:'https://monstersandmemories.wiki/npcs/wanted-man',wikiId:'npc-wanted'};
+  const other={...note,id:'personal-bounty-2',name:'Other man',wikiId:'npc-other',wiki:'https://monstersandmemories.wiki/npcs/other-man'};
+  assert.equal(ctx.window.atlasCommunity.deleteNotice(note),'This also withdraws your bounty claim.');
+  const first=followed().find(r=>r.sent.bounty==='npc-wanted').id,second=followed().find(r=>r.sent.bounty==='npc-other').id;
+  e.suggestions.push({id:first,status:'pending',reviewed_at:null,user_id:'user-1',kind:'new-marker',map:'test-map',payload:{bounty:'npc-wanted'}},{id:second,status:'published',reviewed_at:new Date().toISOString(),user_id:'user-1',kind:'new-marker',map:'test-map',payload:{bounty:'npc-other'}});
+  ctx.window.dispatchEvent({type:'atlas:note-deleted',detail:{note}});await settle();
+  assert(!e.suggestions.some(r=>r.id===first),'A pending claim is withdrawn');assert(!claims()['npc-wanted'],'and the bounty is open again');assert(!followed().some(r=>r.id===first));
+  ctx.window.dispatchEvent({type:'atlas:note-deleted',detail:{note:other}});await settle();
+  assert(e.suggestions.some(r=>r.id===second),'A published claim stays');assert(claims()['npc-other'],'with its mark');assert(e.statuses.at(-1).includes('already accepted'));
+  e.suggestions.splice(e.suggestions.findIndex(r=>r.id===second),1);
+  const third={...note,id:'personal-bounty-3',name:'Third man',wikiId:'npc-third'};ctx.localStorage.setItem('mnmaps-bounty-notes',JSON.stringify({'personal-bounty-3':{bounty:'npc-third',priority:false,map:'test-map'}}));
+  ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:third}});await settle();assert(claims()['npc-third']);
+  e.failSuggestions=true;ctx.window.dispatchEvent({type:'atlas:note-deleted',detail:{note:third}});await settle();e.failSuggestions=false;
+  assert(claims()['npc-third'],'A withdrawal that fails keeps the claim');assert(e.statuses.at(-1).includes('could not be withdrawn'));}
  // Banning an author dismisses everything they have waiting and lists them for a later unban.
  for(const id of [11,12])e.suggestions.push({id,user_id:'spammer',status:'pending',map:'test-map',level:'lower',kind:'report',target_id:'published',payload:{name:'Spam '+id,reason:'other',x:1,y:1},author_name:'Spammer',created_at:new Date().toISOString()});
  reviewButton.onclick();await settle();assert(review.querySelectorAll('p').some(n=>n.textContent==='By Spammer (2 waiting)'));review.querySelectorAll('button').find(n=>n.textContent==='Ban author').onclick();
