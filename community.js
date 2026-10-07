@@ -334,7 +334,7 @@
  // is the drag handle; a claimed one is stamped.
  function notice(row,isClaimed){
   const note=text('article','','notice'+(row.priority?' priority':'')),paper=text('div','','notice-paper'),name=text('h4','','notice-name');
-  name.append(wikiLink(row,row.name,''));if(row.priority)paper.append(text('span','Priority · 3 '+rewardWord,'notice-seal'));
+  name.append(wikiLink(row,row.name,''));paper.append(text('p',row.priority?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord,'notice-tag'));
   paper.append(name,text('p',[row.level?'Level '+row.level:'',bountyKind(row)].filter(Boolean).join(' · '),'notice-meta'));
   const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Wiki ↗','notice-wiki'));
   if(isClaimed)paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
