@@ -372,3 +372,5 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .embed .masthead{padding-right:130px}
 @media(max-width:480px){.embed .masthead>#toggle-panel span,.embed .account-button:has(.account-avatar) .account-name{display:none}.embed .masthead{gap:6px}.embed .masthead>button,.embed .account-button{padding:6px 8px}}
 .notice.notice-focus .notice-paper{filter:drop-shadow(0 0 6px #e8b35a) drop-shadow(0 0 2px #e8b35a)}
+/* In an embed the open Search menu stops left of the map tools, so zoom, fit and the rest stay in reach. */
+.embed .journal{right:60px;max-width:calc(100% - 70px)}
