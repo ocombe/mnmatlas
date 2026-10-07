@@ -1,3 +1,5 @@
 # Built from index.html by scripts/make-share-pages.mjs (locally for previews, on GitHub when publishing).
 /*/index.html
 /404.html
+# Private test copy, built by scripts/make-preview.mjs for the Cloudflare preview.
+/preview-dist/

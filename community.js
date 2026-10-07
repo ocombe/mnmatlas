@@ -144,7 +144,7 @@
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
   const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
-  const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
+  const actions=text('div','','dialog-actions'),send=button(autoApprove()?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim();
    if(!newName){status('Give it a name.');name.focus?.();return;}
    if(newName===target.name&&newNote===oldNote){status('Change the name or the description first.');return;}
@@ -188,9 +188,11 @@
  }
  // An admin's own suggestion is approved as soon as it is saved. It is still an ordinary pending insert followed by
  // the same approval the review page does, so the database rules decide: only an account in admins can approve.
+ // In the private test copy (atlasConfig.preview) nothing is approved on sending: it waits in Review, where it can be rejected.
+ const autoApprove=()=>admin&&settings.preview!==true;
  async function submit(row){
   const {data,error}=await client.from('suggestions').insert(row).select('id').single();if(error)throw error;
-  if(!admin||data?.id==null)return false;
+  if(!autoApprove()||data?.id==null)return false;
   const {data:done,error:fail}=await client.from('suggestions').update({status:'approved',reviewed_at:new Date().toISOString(),review_note:'Approved on sending (admin)'}).eq('id',data.id).eq('status','pending').select('id');
   if(fail||!done?.length){status('Saved, but it could not be approved here; approve it in Review suggestions.');return false;}
   return true;
@@ -201,7 +203,7 @@
   const list=text('div','','community-choices'),checks=[];
   for(const row of rows){const label=text('label',''),check=document.createElement('input');check.type='checkbox';check.checked=true;label.append(check,text('span',row.name));list.append(label);checks.push(check);}d.append(list);
   const label=text('label','Optional comment');label.htmlFor='suggestion-comment';const comment=document.createElement('textarea');comment.id='suggestion-comment';comment.maxLength=500;comment.rows=3;d.append(label,comment);const credit=creditBox(d);
-  const actions=text('div','','dialog-actions'),send=button(user?(admin?'Publish':'Send for review'):'Sign in with Discord',async()=>{
+  const actions=text('div','','dialog-actions'),send=button(user?(autoApprove()?'Publish':'Send for review'):'Sign in with Discord',async()=>{
    if(!user){await signIn();return;}const selected=rows.filter((_,i)=>checks[i].checked&&!checks[i].disabled);if(!selected.length){status('Choose at least one item.');return;}
    send.disabled=true;let done=0;
    try{

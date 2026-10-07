@@ -105,4 +105,12 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  await confirm.querySelectorAll('button').find(n=>n.textContent==='Delete my account'&&n.className==='danger').onclick();await settle();assert.equal(e.calls.filter(r=>r.rpc==='delete_my_account').length,1);assert.equal(e.calls.find(r=>r.signOut).signOut.scope,'local');
  assert(!menu.querySelectorAll('button').some(n=>n.textContent==='Delete my account…'));assert(menu.hidden,'The menu closes for the confirm dialog');const writes=e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length;await e.tick(2000);assert.equal(e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length,writes,'No sync after deletion');
 }
-console.log('Client checks passed: top-bar account menu, banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');
+// In the private test copy the owner's own suggestions are not approved on sending; they wait in Review.
+{
+ const session={access_token:'header.payload.signature',user:{id:'user-a',user_metadata:{full_name:'Atlas member'},admin:true}},e=environment({supabaseUrl:'https://project.example',supabaseKey:'public-key',preview:true},'atlas.example',session);await settle();
+ const d=e.body.children.find(n=>n.id==='community-dialog');e.context.popup(e.context.originals[0]).children[0].children[0].onclick();assert(d.open);
+ const send=d.querySelectorAll('button').find(n=>n.textContent==='Send for review');assert(send,'The test copy offers Send for review, not Publish');
+ [...d.querySelectorAll('input')].find(n=>n.id==='edit-name').value='Test bank';await send.onclick();assert(!d.open);
+ assert(!e.calls.some(r=>r.table==='suggestions'&&r.op==='update'),'Nothing is approved on sending in the test copy');
+}
+console.log('Client checks passed: top-bar account menu, test copy, banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');

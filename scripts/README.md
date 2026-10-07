@@ -34,3 +34,7 @@ Review the resulting data diff and preview the atlas before committing and pushi
 Run `node scripts/test-apply-approved.mjs` for local publisher checks against a mock service; it uses disposable fixture files inside this folder and leaves map data unchanged.
 
 Run `node scripts/test-community.mjs` for client checks with a local service stub, including disabled configuration, counters, problem reports, suggestions and note sync. These do not replace the live access checks in the Supabase setup guide.
+
+## Private test copy
+
+`node scripts/make-preview.mjs` builds `preview-dist/`, a test copy of the current branch for a Cloudflare Pages project kept behind Cloudflare Access (build command `node scripts/make-preview.mjs`, output folder `preview-dist`). Map tiles are redirected to the live site, except tile folders the branch changes, which are copied in. The copy is not indexed or counted, shows a "Test copy" badge, and the owner's own suggestions there are not approved on sending: they wait in Review. It shares the live sign-in and database, so anything sent from it is real.
