@@ -136,7 +136,8 @@ $$;
 revoke all on function public.delete_my_account() from public,anon,authenticated;
 grant execute on function public.delete_my_account() to authenticated;
 drop trigger if exists suggestions_clean_text on public.suggestions;
-create trigger suggestions_clean_text before insert on public.suggestions for each row execute function public.clean_suggestion();
+-- Also on update, so a pending suggestion its author corrects is cleaned the same way.
+create trigger suggestions_clean_text before insert or update of payload on public.suggestions for each row execute function public.clean_suggestion();
 
 alter table public.admins enable row level security;
 alter table public.suggestions enable row level security;
@@ -159,6 +160,12 @@ drop policy if exists suggestions_update on public.suggestions;
 create policy suggestions_update on public.suggestions for update to authenticated
  using (exists (select 1 from public.admins where user_id=auth.uid()))
  with check (exists (select 1 from public.admins where user_id=auth.uid()));
+-- A note suggested from the note form follows its suggestion: while nobody has reviewed it, its author may update it
+-- (a moved pin, a corrected name). The row stays pending and unreviewed; reviewing stays with admins.
+drop policy if exists suggestions_update_own_pending on public.suggestions;
+create policy suggestions_update_own_pending on public.suggestions for update to authenticated
+ using (user_id=auth.uid() and status='pending' and reviewed_at is null)
+ with check (user_id=auth.uid() and status='pending' and reviewed_at is null and review_note is null);
 drop policy if exists suggestions_delete on public.suggestions;
 create policy suggestions_delete on public.suggestions for delete to authenticated
  using (exists (select 1 from public.admins where user_id=auth.uid()));

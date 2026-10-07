@@ -228,10 +228,12 @@ function askFinishEdit(){
 }
 function finishEdit(save){
  if(!alignmentMode)return;
+ // Notes moved while editing are announced once saved, so a suggestion sent for one can follow it.
+ const moved=save?personal.filter(p=>{const was=editSnapshot.personal.find(o=>o.id===p.id);return was&&(was.x!==p.x||was.y!==p.y);}):[];
  if(save){if(!saveEdits())return;}
  else{alignmentPositions=editSnapshot.positions;alignmentLabelPositions=editSnapshot.labels;applyOverrides();persist(editSnapshot.personal);}
  editSnapshot=null;buildPlaceIndex();setEditing(false);status(save?'Changes saved in this browser.':'Changes cancelled.');
- if(save)window.dispatchEvent(new CustomEvent('atlas:positions'));
+ if(save)window.dispatchEvent(new CustomEvent('atlas:positions'));for(const m of moved)window.dispatchEvent(new CustomEvent('atlas:note-saved',{detail:{note:m,moved:true}}));
  window.dispatchEvent(new CustomEvent('atlas:edit-ended'));
 }
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
@@ -241,7 +243,7 @@ function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
  {const target=$('exit-target');target.replaceChildren(Object.assign(text('option','Not set'),{value:''}));for(const c of registry.maps.filter(c=>c.id!==config.id).sort((a,b)=>a.title.localeCompare(b.title))){const o=text('option',c.title);o.value=c.id;target.append(o);}target.value=m.toMap||'';}
-updateEditorFields();$('delete').hidden=!personal.some(p=>p.id===m.id);$('editor').showModal();$('name').focus();}
+updateEditorFields();$('delete').hidden=!personal.some(p=>p.id===m.id);window.dispatchEvent(new CustomEvent('atlas:editor-open',{detail:{note:m}}));$('editor').showModal();$('name').focus();}
 function closeEditor(){draft=null;$('editor').close();cancelPlacement();}
 function selectAlignment(row,kind){selectedAlignmentId=row.id;selectedAlignmentKind=kind;schedulePlaceLabels();}
 function updateAlignmentStatus(){$('alignment-count').textContent=`${Object.keys(alignmentPositions).length} of ${originals.length} markers · ${Object.keys(alignmentLabelPositions).length} of ${labelData.labels.length} place names moved`;}
@@ -595,7 +597,7 @@ function setupControls(){
   if(type==='marker'){const wiki=wikiAddress($('wiki').value);if(wiki===null){status(wikiHint);$('wiki').focus();return;}if(wiki){m.wiki=wiki;const id=wikiIdFor($('wiki'),wiki);if(id)m.wikiId=id;}
    // A trainer picked from the wiki keeps its classes, so it reads class first ("Beastmaster trainer").
    if(m.category==='Class trainer'){let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}if(classes.length&&classesOk(classes))m.classes=classes;}}
-  if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));}};
+  if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));window.dispatchEvent(new CustomEvent('atlas:note-saved',{detail:{note:m}}));}};
  $('delete').onclick=()=>{if(draft&&deleteNote(draft.id))closeEditor();};
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};

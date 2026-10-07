@@ -255,9 +255,12 @@
   }return rows;
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
- function shareNote(m){
+ function notePayload(m){
   const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;if(m.category==='Class trainer'&&classesOk(m.classes))payload.classes=m.classes;
-  sendDialog('Share a personal note',[{token:sharedToken(m),name:m.name,map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload}],true);
+  return payload;
+ }
+ function shareNote(m){
+  sendDialog('Share a personal note',[{token:sharedToken(m),name:m.name,map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload:notePayload(m)}],true);
  }
  // Being credited is opt-in: the Discord name goes into the public contributors list once a suggestion is published.
  const creditKey='mnmaps-community-credit';
@@ -269,14 +272,73 @@
  }
  // An admin's own suggestion is approved as soon as it is saved. It is still an ordinary pending insert followed by
  // the same approval the review page does, so the database rules decide: only an account in admins can approve.
- async function submit(row){
+ async function submit(row){return (await submitRow(row)).published;}
+ async function submitRow(row){
   const {data,error}=await client.from('suggestions').insert(row).select('id').single();if(error)throw error;
-  if(!admin||data?.id==null)return false;
+  const id=data?.id??null;if(!admin||id==null)return {id,published:false};
   const {data:done,error:fail}=await client.from('suggestions').update({status:'approved',reviewed_at:new Date().toISOString(),review_note:'Approved on sending (admin)'}).eq('id',data.id).eq('status','pending').select('id');
-  if(fail||!done?.length){status('Saved, but it could not be approved here; approve it in Review suggestions.');return false;}
-  return true;
+  if(fail||!done?.length){status('Saved, but it could not be approved here; approve it in Review suggestions.');return {id,published:false};}
+  return {id,published:true};
  }
  const sentLine=published=>published?'Approved: it goes live with the next publishing run.':null;
+ // The note form can suggest a note for the public map as it is saved, through the same path as Share with everyone:
+ // the same suggestion, the visitor's usual credit choice, the same limits. The note is saved whatever happens.
+ const suggestKey='mnmaps-suggest-on-save';
+ {const row=$('suggest-on-save'),check=$('suggest-check'),credit=$('suggest-credit');
+  if(row&&check&&credit){row.hidden=false;
+   try{check.checked=localStorage.getItem(suggestKey)==='true';credit.checked=localStorage.getItem(creditKey)==='true';}catch{}
+   const showCredit=()=>{credit.parentElement.hidden=!check.checked;};showCredit();
+   check.addEventListener('change',()=>{try{localStorage.setItem(suggestKey,String(check.checked));}catch{}showCredit();
+    // Signed out, ticking it opens the sign-in window; the form stays open.
+    if(check.checked&&!user)popupSignIn(message=>status(message+' You can also sign in from the top bar.'));});
+   credit.addEventListener('change',()=>{try{localStorage.setItem(creditKey,String(credit.checked));}catch{}});
+   // Hidden for notes already shared; shown again for the next one.
+   window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;row.hidden=!!m&&readSet(sharedKey).has(sharedToken(m));});
+   window.addEventListener('atlas:note-saved',e=>{const m=e.detail?.note;if(!m)return;
+    // A note already suggested from here follows its suggestion, whether it was edited or only moved.
+    const rec=user&&readFollowed()[followId(m)];if(rec){followNote(m,rec);return;}
+    if(e.detail.moved||row.hidden||!check.checked)return;
+    if(!user){status('Saved to your field notes. Sign in to suggest it for the public map.');return;}suggestOnSave(m,credit.checked);});
+  }}
+ // A note suggested from the form remembers its suggestion, so a later edit or move of the note follows it: while the
+ // suggestion waits for review it is updated in place (or, where that is not allowed, sent again); once approved, the
+ // change goes as an ordinary move or edit of the marker it becomes. A refused suggestion is no longer followed.
+ const followKey='mnmaps-suggested-notes';
+ const readFollowed=()=>{try{const v=JSON.parse(localStorage.getItem(followKey)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
+ const writeFollowed=v=>{try{localStorage.setItem(followKey,JSON.stringify(v));}catch{}};
+ const followId=m=>user.id+':'+scope()+':'+m.id;
+ async function sendNote(m,credited){
+  const payload=notePayload(m),{id,published}=await submitRow({map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload,user_id:user.id,author_name:displayName(user),comment:null,credit:credited});
+  if(id!=null){const all=readFollowed();all[followId(m)]={id,sent:payload,credit:credited};writeFollowed(all);}
+  return published;
+ }
+ async function suggestOnSave(m,credited){
+  if(readSet(sharedKey).has(sharedToken(m)))return;
+  try{const published=await sendNote(m,credited);remember(sharedKey,[sharedToken(m)]);freshPopup();status(sentLine(published)||'Saved, and suggested for the public map: it is waiting for review.');event('suggestion-sent');}
+  catch(e){status(turnedOff(e)?'Saved to your field notes. Your account can no longer send suggestions.':'Saved to your field notes, but the suggestion did not go through. You can send it from the note’s popup with Share with everyone.');}
+ }
+ async function followNote(m,rec){
+  const payload=notePayload(m),key=followId(m),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(same(payload,rec.sent))return;
+  const keep=sent=>{const all=readFollowed();all[key]={...rec,...sent};writeFollowed(all);};
+  try{
+   const {data:row,error}=await client.from('suggestions').select('status').eq('id',rec.id).maybeSingle();if(error)throw error;
+   if(row?.status==='pending'){
+    const {data:done,error:refused}=await client.from('suggestions').update({payload}).eq('id',rec.id).eq('status','pending').select('id');
+    if(!refused&&done?.length){keep({sent:payload});status('Saved, and your suggestion was updated.');return;}
+    await sendNote(m,!!rec.credit);status('Saved, and your suggestion was sent again with the change.');return;
+   }
+   if(row?.status==='approved'||row?.status==='published'){
+    // The marker it becomes is community-<suggestion id>; place names and exits live with the labels.
+    const old=rec.sent,label=payload.noteType==='label'||payload.noteType==='exit',target='community-'+rec.id,base={user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,target_id:target,comment:null,credit:!!rec.credit};
+    if(old.x!==payload.x||old.y!==payload.y)await submit({...base,kind:label?'move-label':'move-marker',payload:{name:payload.name,from:[old.x,old.y],to:[payload.x,payload.y]}});
+    const wikiOf=p=>label?{}:{wiki:p.wiki||'',...(p.wiki&&p.wikiId?{wikiId:p.wikiId}:{})};
+    if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||'')))
+     await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:old.name,note:old.note||'',...(label?{}:{wiki:old.wiki||''})}}});
+    keep({sent:payload});status('Saved, and the change was sent for review.');return;
+   }
+   const all=readFollowed();delete all[key];writeFollowed(all);
+  }catch(e){status('Saved to your field notes, but your suggestion could not be updated. You can share the note again from its popup.');}
+ }
  function sendDialog(title,rows,sharing){
   const d=showDialog(title);d.append(text('p',sharing?'Send this note for review before it appears in the community atlas.':'Your positions are saved locally. Choose the changes to send for review.'));
   const list=text('div','','community-choices'),checks=[];
