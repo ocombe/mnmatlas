@@ -24,12 +24,13 @@ export const query=name=>String(name).split(/\s+[—–-]\s+|\s*\/\s*|\s*\(/)[0]
 function distance(a,b){const row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){const next=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=next;}}return row[b.length];}
 // One of a kind: "Crystallized skeletons" (a camp) is the wiki's "A crystallized skeleton".
 const singular=v=>v.split(' ').map(w=>w.length<4?w:w.replace(/ies$/,'y').replace(/(s|x|ch|sh)es$/,'$1').replace(/([^s])s$/,'$1')).join(' ');
-// exact: the same name; close: a near spelling (a letter or two) or the plural of the wiki's name; none otherwise.
+// exact: the same name; close: a near spelling (a letter or two), the plural of the wiki's name, or the wiki's name
+// after a title ("Paymaster Elara Venn" is the wiki's "Elara Venn"); none otherwise.
 // Several equally good answers make the row ambiguous: it is listed for a choice, never applied on its own.
 export function match(name,results){
  const ours=nameKey(query(name));if(!ours)return {kind:'none',candidates:[]};
- const scored=results.map(r=>{const theirs=nameKey(r.name),d=distance(ours,theirs),near=d<=Math.max(1,Math.floor(Math.min(ours.length,theirs.length)/8)),plural=theirs!==ours&&singular(ours)===singular(theirs);
-  return {r,kind:theirs===ours?'exact':near||plural?'close':'none',d,plural};});
+ const scored=results.map(r=>{const theirs=nameKey(r.name),d=distance(ours,theirs),near=d<=Math.max(1,Math.floor(Math.min(ours.length,theirs.length)/8)),plural=theirs!==ours&&singular(ours)===singular(theirs),titled=theirs.includes(' ')&&ours.endsWith(' '+theirs);
+  return {r,kind:theirs===ours?'exact':near||plural||titled?'close':'none',d,plural};});
  for(const kind of ['exact','close']){const found=scored.filter(s=>s.kind===kind).sort((a,b)=>a.d-b.d);if(found.length)return {kind:found.length>1&&found[0].d===found[1].d?'ambiguous':kind,best:found[0].r,plural:found[0].plural,candidates:found.map(s=>s.r)};}
  return {kind:'none',candidates:[]};
 }
@@ -59,6 +60,16 @@ export async function key(){
 }
 // Answers are kept on disk, and new requests are paced at one a second (the wiki allows 120 a minute for the whole atlas).
 let last=0;
+// Every NPC the wiki files under a zone, in one request (kept on disk like the searches).
+export const zoneSlug=name=>zoneKey(name).replace(/ /g,'-');
+export async function zoneNpcs(zone,out,secret){
+ const file=resolve(out,'cache','zone-'+zoneSlug(zone)+'.json');
+ try{return JSON.parse(await readFile(file,'utf8')).npcs;}catch{}
+ const r=await fetch(api+'zone/'+encodeURIComponent(zoneSlug(zone)),{headers:{Authorization:'Bearer '+secret,Accept:'application/json'}});
+ if(r.status===404)return null;if(!r.ok)throw Error('Wiki zone list failed ('+r.status+') for '+zone+'.');
+ const data=await r.json(),npcs=(Array.isArray(data?.npcs)?data.npcs:[]).filter(x=>x&&typeof x.id==='string'&&typeof x.name==='string'&&/^https:\/\/([a-z0-9-]+\.)*monstersandmemories\.wiki\//.test(String(x.url))).map(x=>({id:x.id,name:x.name,zone:String(x.zone||zone),url:x.url}));
+ await mkdir(dirname(file),{recursive:true});await writeFile(file,JSON.stringify({zone,npcs}));return npcs;
+}
 export async function search(q,out,secret){
  const id=createHash('sha1').update('npc|'+q.toLowerCase()).digest('hex'),file=resolve(out,'cache',id+'.json');
  try{return JSON.parse(await readFile(file,'utf8')).results;}catch{}
@@ -133,8 +144,10 @@ async function main(){
   if(!dryRun)for(const [path,data] of files)await writeJson(path,data);
   console.log((dryRun?'Dry run: ':'')+(done.length?done.join('\n'):'Nothing approved.'));return;
  }
- const secret=await key(),answers=new Map();
- for(const q of queries(c,found))answers.set(q,await search(q,out,secret));
+ // A zone map is compared with the zone's whole NPC list; searches (ten answers at most, across zones) only fill in
+ // the world map and the names the zone list does not have, to show where else the wiki files them.
+ const secret=await key(),answers=new Map(),zone=c.zonesFile?'':c.wikiZone||c.title,listed=zone?await zoneNpcs(zone,out,secret):null;
+ for(const q of queries(c,found)){const own=listed&&match(q,listed).kind!=='none';answers.set(q,own?listed:[...(listed||[]),...await search(q,out,secret)]);}
  const p=plan(c,found,answers);
  await mkdir(out,{recursive:true});await writeFile(resolve(out,map+'.json'),JSON.stringify(p,null,2)+'\n');await writeFile(resolve(out,map+'.md'),report(p));
  console.log('Wrote '+resolve(out,map+'.md')+' ('+p.rows.length+' entries).');

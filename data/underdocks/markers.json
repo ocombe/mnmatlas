@@ -475,7 +475,9 @@
     "note": "Approximate; to confirm in game. 1st floor.",
     "level": "lower",
     "approximate": true,
-    "community": true
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/elara-venn",
+    "wikiId": "npc-1790076525877-7xoj8"
   },
   {
     "id": "wiki-quartermaster",
