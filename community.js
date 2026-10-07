@@ -153,7 +153,7 @@
  }
  const searchesKey='mnmaps-wiki-searches';
  function readSearches(){try{const rows=JSON.parse(localStorage.getItem(searchesKey)||'{}');return rows&&typeof rows==='object'&&!Array.isArray(rows)?rows:{};}catch{return {};}}
- function wikiFinder(input){
+ function wikiFinder(input,picked){
   const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint'),trouble=text('span','','wiki-signin-trouble');
   // Signing in from here keeps the note open: the sign-in window hands the session back to this page.
   signedOut.append(text('span','Paste a page address, or '),button('sign-in',()=>{trouble.textContent='';popupSignIn(message=>{trouble.textContent=' '+message+' You can also sign in from the top bar.';});},'wiki-signin'),text('span',' to search the wiki by name'),trouble);
@@ -161,7 +161,7 @@
   let timer,serial=0;
   // The credit names and links the wiki the results came from.
   const show=(rows,message,from)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
-   for(const row of rows){const b=button('',()=>{input.value=row.url;input.dispatchEvent(new Event('input'));search.value='';show([]);input.focus?.();},'wiki-result');
+   for(const row of rows){const b=button('',()=>{input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);search.value='';show([]);input.focus?.();},'wiki-result');
     b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
    const source=wikiSites[from];if(rows.length&&source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';list.append(credit);}};
   search.addEventListener('input',()=>{clearTimeout(timer);const q=search.value.trim(),mine=++serial;if(q.length<2){show([]);return;}
@@ -172,7 +172,8 @@
   box.reset=()=>{clearTimeout(timer);serial++;search.value='';show([]);};
   finders.add(box);box.update();return box;
  }
- {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'));field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+ // A picked page names an unnamed note, and a quest makes it a Quest marker; the wiki's own text is never copied in.
+ {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{if(!$('name').value.trim())$('name').value=row.name;if(row.type==='quest'&&$('category').value!=='Quest'){$('category').value='Quest';$('category').dispatchEvent(new Event('change'));}});field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  function editDialog(target,kind){
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
@@ -181,7 +182,7 @@
   const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
-  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki);d.append(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
+  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki);d.append(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
   const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim(),newWiki=wiki?wikiAddress(wiki.value):'',oldWiki=target.wiki||'';
@@ -189,7 +190,7 @@
    if(newWiki===null){status(wikiHint);wiki.focus?.();return;}
    if(newName===target.name&&newNote===oldNote&&newWiki===oldWiki){status(marker?'Change the name, the description or the wiki page first.':'Change the name or the description first.');return;}
    if(!user){signInDialog();return;}send.disabled=true;
-   try{const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,...(marker?{wiki:newWiki}:{}),from:{name:target.name,note:target.note||'',...(marker?{wiki:oldWiki}:{})}},comment:why.value.trim()||null,credit:credit.checked});
+   try{const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,...(marker?{wiki:newWiki,...(wikiIdFor(wiki,newWiki)?{wikiId:wikiIdFor(wiki,newWiki)}:{})}:{}),from:{name:target.name,note:target.note||'',...(marker?{wiki:oldWiki}:{})}},comment:why.value.trim()||null,credit:credit.checked});
     editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your edit is waiting for review.');event('edit-sent');}
    catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The edit could not be sent. Please try again.');}
    finally{send.disabled=false;}
@@ -215,7 +216,7 @@
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
  function shareNote(m){
-  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];
+  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;
   sendDialog('Share a personal note',[{token:sharedToken(m),name:m.name,map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload}],true);
  }
  // Being credited is opt-in: the Discord name goes into the public contributors list once a suggestion is published.
@@ -390,6 +391,7 @@
     restyle();if(note)p.note=note.value.trim();
     if(wiki){const link=wikiAddress(wiki.value);if(link===null)throw Error('Wiki link');
      // An older edit without a link only gains one when a page is typed in; the published link it saw is kept for the check.
+     if(link!==(p.wiki||''))delete p.wikiId;
      if(edit&&!Object.hasOwn(p,'wiki')){if(link){p.wiki=link;p.from={...p.from,wiki:target?.wiki||''};}}else if(link||edit)p.wiki=link;else delete p.wiki;}
     if(!report&&!edit){const [x,y]=pixelsOf(pin.getLatLng());if(!bounded(x,y,config.minZoom))throw Error('Outside the map');if(move)p.to=[x,y];else{p.x=x;p.y=y;}}
     if(!p.name)throw Error('Name required');return p;

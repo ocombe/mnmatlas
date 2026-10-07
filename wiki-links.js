@@ -46,3 +46,12 @@ function wikiLinkFor(place,parent=wikiEmbedParent()){
  return adapted&&wikiSiteOf(new URL(adapted).hostname)===rule.site?show(adapted):null;
 }
 const wikiHint='A wiki link must be a page on '+Object.values(wikiSites).map(s=>s.name).join(', ').replace(/, ([^,]*)$/,' or $1')+'.';
+// A link picked from the wiki search also keeps the wiki's id for that entry (the wiki asks partners to store ids,
+// not copies of its text). The id is a short plain string; '' for none, null when it is not accepted.
+function wikiIdOf(value){
+ if(value===undefined||value===null||value==='')return '';
+ return typeof value==='string'&&value.length<=160&&value.trim()===value&&!/[\u0000-\u001f\u007f<>]/.test(value)?value:null;
+}
+// The id rides on the address field with the address it was picked for, so typing another address or clearing it drops the id.
+function setWikiPick(input,href,id){input.dataset.wikiUrl=wikiAddress(href)||'';input.dataset.wikiId=wikiIdOf(id)||'';}
+function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.dataset.wikiId||'':'';}

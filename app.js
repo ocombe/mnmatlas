@@ -56,7 +56,7 @@ function status(message,sticky=false){clearTimeout(statusTimer);$('status').text
 function locationOf(m){return map.unproject([m.x,m.y],config.coordinateZoom);}
 function pixelsOf(latlng){const p=map.project(latlng,config.coordinateZoom);return [Math.round(p.x),Math.round(p.y)];}
 function bounded(x,y,z=map.getZoom()){return Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z)&&x>=0&&y>=0&&x<=config.width&&y<=config.height&&z>=config.minZoom&&z<=config.maxZoom;}
-function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
+function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
 function persist(next){try{localStorage.setItem(storageKey('notes'),JSON.stringify(next));personal=next;window.dispatchEvent(new CustomEvent('atlas:notes'));return true;}catch{status('Your browser could not save this change. Free some storage and try again.',true);return false;}}
 function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=text('a','');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function allMarkers(){return [...originals,...personal];}
@@ -218,7 +218,7 @@ function finishEdit(save){
 }
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
 function updateEditorFields(){const type=noteTypeValue();$('default-colour').style.setProperty('--swatch',categories[$('category').value]?.[1]||'#a04438');$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';}
-function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';
+function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
@@ -473,7 +473,7 @@ async function importNotes(file){
  if(data.type==='mnmaps-browser-data'&&data.version===1){await receiveBrowserData(data.items);return;}
  if(data.tileRevision!==config.tileRevision)throw Error('These notes use another map revision. Keep the backup and reposition them on this edition.');
  if(data.version!==1||data.map!==config.id||!Array.isArray(data.markers)||!data.markers.every(valid))throw Error('Not a valid '+config.title+' field-notes file.');
- const merged=new Map(personal.map(m=>[m.id,m]));for(const m of data.markers)merged.set(m.id,{id:m.id,name:m.name.trim(),category:m.category,note:m.note,x:m.x,y:m.y,...(m.noteType?{noteType:m.noteType}:{}),...(m.arrow?{arrow:m.arrow}:{}),...(m.toMap?{toMap:m.toMap}:{}),...(m.trade?{trade:m.trade}:{}),...(m.color?{color:m.color}:{}),...(m.wiki?{wiki:m.wiki}:{}),...(config.levels?{level:m.level||config.defaultLevel}:{})});
+ const merged=new Map(personal.map(m=>[m.id,m]));for(const m of data.markers)merged.set(m.id,{id:m.id,name:m.name.trim(),category:m.category,note:m.note,x:m.x,y:m.y,...(m.noteType?{noteType:m.noteType}:{}),...(m.arrow?{arrow:m.arrow}:{}),...(m.toMap?{toMap:m.toMap}:{}),...(m.trade?{trade:m.trade}:{}),...(m.color?{color:m.color}:{}),...(m.wiki?{wiki:m.wiki}:{}),...(m.wiki&&m.wikiId?{wikiId:m.wikiId}:{}),...(config.levels?{level:m.level||config.defaultLevel}:{})});
  if(merged.size>2000)throw Error('The combined notes exceed 2,000 markers.');if(persist([...merged.values()])){setupCategoryControls();buildPlaceIndex();drawMarkers();status('Notes imported. Matching IDs updated; other notes kept.');}
 }
 function setupCategoryControls(){
@@ -561,10 +561,10 @@ function setupControls(){
  // Closing the editor without saving also drops a new note's pin; a saved note has already ended placement.
  $('cancel-edit').onclick=closeEditor;$('editor').addEventListener('close',()=>{draft=null;cancelPlacement();});
  $('marker-form').onsubmit=e=>{e.preventDefault();if(!draft)return;const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
-  delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;
+  delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;delete m.wikiId;
   if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
   const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&m.category!=='Class trainer')m.color=colour;
-  if(type==='marker'){const wiki=wikiAddress($('wiki').value);if(wiki===null){status(wikiHint);$('wiki').focus();return;}if(wiki)m.wiki=wiki;}
+  if(type==='marker'){const wiki=wikiAddress($('wiki').value);if(wiki===null){status(wikiHint);$('wiki').focus();return;}if(wiki){m.wiki=wiki;const id=wikiIdFor($('wiki'),wiki);if(id)m.wikiId=id;}}
   if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));}};
  $('delete').onclick=()=>{if(draft&&deleteNote(draft.id))closeEditor();};
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
