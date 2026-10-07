@@ -173,22 +173,34 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .hidden-end{background:#2b2117;border:2px solid #d29a48;border-radius:50%;box-shadow:0 0 0 1px #f5e2b4}
 .leaflet-popup-content .npc-name{color:inherit;text-decoration:none}.leaflet-popup-content .npc-name:hover,.leaflet-popup-content .npc-name:focus-visible{text-decoration:underline;text-underline-offset:3px}
 /* NPC wiki card in a marker popup: the wiki's tag line, a few facts, loot and summary, all linking back to the wiki. */
-.leaflet-popup-content .npc-card{margin:2px 0 8px;padding-top:7px;border-top:1px solid var(--border);font-size:12px;line-height:1.4}
+.leaflet-popup-content .npc-card{margin:4px 0 10px;border:1px solid var(--border);border-radius:var(--radius);background:hsl(30 20% 14%);font-size:12px;line-height:1.4;overflow:hidden}
+.leaflet-popup-content .npc-card>*{margin:0;padding:8px 10px}
+.leaflet-popup-content .npc-card>*+*{border-top:1px solid var(--border)}
 .leaflet-popup-content .npc-tags{margin:0 0 6px;font:13px/1.2 var(--small-caps);letter-spacing:.05em;color:#d9b77e}
-.leaflet-popup-content .npc-card dl{display:grid;grid-template-columns:max-content 1fr;gap:2px 10px;margin:0 0 7px}
+.leaflet-popup-content .npc-tags:last-child{margin:0}
+.leaflet-popup-content .npc-card dl{display:grid;grid-template-columns:max-content 1fr;gap:3px 10px;margin:0}
 .leaflet-popup-content .npc-card dt{color:var(--muted-foreground)}
 .leaflet-popup-content .npc-card dd{margin:0;overflow-wrap:anywhere}
-.leaflet-popup-content .npc-heading{margin:0 0 2px;font:13px/1.2 var(--small-caps);letter-spacing:.04em;color:var(--muted-foreground)}
-.leaflet-popup-content .npc-loot ul{list-style:none;margin:0 0 2px;padding:0}
-.leaflet-popup-content .npc-loot li{margin:1px 0}
-.leaflet-popup-content .npc-card a{color:var(--primary);text-decoration:none}.leaflet-popup-content .npc-card a:hover,.leaflet-popup-content .npc-card a:focus-visible{text-decoration:underline}
-.leaflet-popup-content .npc-rate{margin-left:6px;color:var(--muted-foreground);font-size:11px}
-.leaflet-popup-content .npc-more{font-size:11px}
-.leaflet-popup-content .npc-summary{margin:7px 0 6px;font-style:italic;color:var(--muted-foreground)}
+.leaflet-popup-content .npc-heading,.leaflet-popup-content .popup-label{margin:0 0 3px;font:13px/1.2 var(--small-caps);letter-spacing:.04em;color:var(--muted-foreground)}
+.leaflet-popup-content .npc-loot ul{list-style:none;margin:0;padding:0}
+.leaflet-popup-content .npc-loot li{display:flex;justify-content:space-between;gap:8px;margin:2px 0}
+.leaflet-popup-content .npc-card a{color:var(--primary);text-decoration:none}
+.leaflet-popup-content .npc-card a:hover,.leaflet-popup-content .npc-card a:focus-visible{text-decoration:underline}
+.leaflet-popup-content .npc-rate{flex:none;color:var(--muted-foreground);font-size:11px;font-variant-numeric:tabular-nums}
+.leaflet-popup-content .npc-more{display:inline-block;margin-top:3px;font-size:11px}
+.leaflet-popup-content .npc-summary{font-style:italic;color:var(--muted-foreground);white-space:normal}
 .leaflet-popup-content .npc-summary a{font-style:normal;white-space:nowrap}
-.leaflet-popup-content .npc-card .npc-credit{display:block;font-size:10.5px;color:var(--muted-foreground)}
-.leaflet-popup-content .npc-our-note{margin-top:4px}
-.leaflet-popup-content:has(.npc-card){max-height:min(68vh,560px);overflow-y:auto;scrollbar-width:thin}
+.leaflet-popup-content .npc-card .npc-credit{display:block;padding:5px 10px;background:hsl(28 24% 10%);font-size:10.5px;color:var(--muted-foreground)}
+.leaflet-popup-content .popup-label{margin-top:10px}
+.leaflet-popup-content .npc-our-note{margin:0}
+/* The popup's own actions: one list at the foot, under a rule. */
+.leaflet-popup-content .popup-actions{display:flex;flex-direction:column;gap:1px;margin:10px 0 0;padding-top:6px;border-top:1px solid var(--border)}
+.leaflet-popup-content .popup-actions>*{margin:0}
+.leaflet-popup-content .popup-actions button{margin:0;width:100%;min-height:32px;padding:5px 8px;border:0;background:transparent;text-align:left;font-size:12px;color:var(--foreground)}
+.leaflet-popup-content .popup-actions button:hover,.leaflet-popup-content .popup-actions button:focus-visible{background:var(--muted)}
+.leaflet-popup-content .popup-actions .popup-delete{color:#f29579}
+.leaflet-popup-content .popup-actions p{margin:3px 8px;font-size:11px}
+.leaflet-popup-content:has(.npc-card){max-height:min(74vh,660px);overflow-x:hidden;overflow-y:auto;scrollbar-width:thin}
 @media(max-width:600px){.leaflet-popup-content:has(.npc-card){max-height:calc(100dvh - 380px)}}
 .leaflet-popup-content .community-note{font-size:11px;font-style:italic;color:var(--primary);margin:6px 0 2px}
 .leaflet-popup-content .wiki-link{display:block;width:max-content;max-width:100%;margin:6px 0 2px;font-weight:600;color:var(--primary);text-decoration:underline;text-underline-offset:2px}.leaflet-popup-content .wiki-link:hover,.leaflet-popup-content .wiki-link:focus-visible{color:var(--foreground)}

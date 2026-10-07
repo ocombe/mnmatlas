@@ -100,17 +100,24 @@ function fitCardPopup(){
  const box=map.getContainer().getBoundingClientRect(),plate=document.querySelector('.map-title'),top=Math.max(box.top+16,plate&&plate.offsetParent?plate.getBoundingClientRect().bottom+10:0),dy=top-el.getBoundingClientRect().top;
  if(dy>1)map.panBy([0,-dy],{animate:false});
 }
+// A popup's own buttons (copy, edit, delete, share, suggest, report) end it as one tidy list; ways to move on (a floor,
+// another map) stay in the body.
+function tidyActions(n){
+ const actions=text('div','','popup-actions');
+ for(const el of [...n.children]){if(el.matches('button:not(.level-link)'))actions.append(el);else if(el.matches('.community-actions')){actions.append(...el.children);el.remove();}}
+ if(actions.children.length)n.append(actions);return n;
+}
 const wikiPage=(label,href,cls='')=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
 // A short card in the wiki's own order: its tag line, level, location, race and class, the first loot items, the start
 // of its summary, each linking back to the wiki, with its credit.
 function npcCard(c,m){
  // The tag line keeps what the rows below do not already say ("Named · Human · Wizard" over a Human · Wizard row).
  const shown=[c.race,c.class].filter(Boolean).map(v=>v.toLowerCase()),tags=String(c.tags||'').split(' · ').filter(t=>t&&!shown.includes(t.toLowerCase())).join(' · ');
- const box=text('div','','npc-card');if(tags)box.append(text('p',tags,'npc-tags'));
+ const box=text('div','','npc-card'),facts=text('div','','npc-facts');if(tags)facts.append(text('p',tags,'npc-tags'));
  const rows=document.createElement('dl'),row=(term,value)=>{if(value)rows.append(text('dt',term),text('dd',value));};
  // Our title may already give a level ("levels 51–53"): then the wiki's is left out rather than shown beside it.
  if(!/\blevels?\b/i.test(markerTitle(m)))row('Level',c.level);row('Location',c.location);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));
- if(rows.children.length)box.append(rows);
+ if(rows.children.length)facts.append(rows);if(facts.children.length)box.append(facts);
  if(Array.isArray(c.loot)&&c.loot.length){const loot=text('div','','npc-loot'),list=document.createElement('ul');loot.append(text('p','Notable loot','npc-heading'));
   for(const i of c.loot){const li=document.createElement('li');li.append(wikiPage(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
   loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(wikiPage('+'+more+' more on the wiki',c.url,'npc-more'));box.append(loot);}
@@ -120,18 +127,18 @@ function npcCard(c,m){
 }
 function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(markerTitle(m),card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
- if(card)n.append(npcCard(card,m));if(m.note)n.append(text('p',m.note,card?'npc-our-note':''));const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
+ if(card)n.append(npcCard(card,m));if(m.note){if(card)n.append(text('p','Atlas note','popup-label'));n.append(text('p',m.note,card?'npc-our-note':''));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
- if(!singleMap)window.atlasCommunity?.popup(m,n);return n;}
+ if(!singleMap)window.atlasCommunity?.popup(m,n);return tidyActions(n);}
 function labelEditPopup(row){
  const n=text('div','');n.append(text('div','Place name','tag'),text('h3',row.name));
  if(alignmentLabelPositions[row.id]){n.append(text('p','Position moved in this browser.','moved-note'));const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetLabel(row.id);n.append(reset);}
  window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
  L.popup({autoPan:false,offset:[0,-8]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
 }
-function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));const wiki=wikiButton(p);if(wiki)n.append(wiki);if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));if(!singleMap)window.atlasCommunity?.placePopup?.(p,n);return n;}
+function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));const wiki=wikiButton(p);if(wiki)n.append(wiki);if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));if(!singleMap)window.atlasCommunity?.placePopup?.(p,n);return tidyActions(n);}
 function choose(m){
  if(alignmentMode&&!m.id.startsWith('personal-'))selectAlignment(m,'marker');
  if(!enabled.has(m.category)||!pins.has(m.id)||!showPins){enabled.add(m.category);showPins=true;$('search').value='';updateCategoryButtons();drawMarkers();}
