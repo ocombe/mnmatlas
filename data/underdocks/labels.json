@@ -168,15 +168,15 @@
       "id": "class-archer-warrior-ranger",
       "abbreviations": [
         "ARC",
-        "WAR",
+        "FTR",
         "RNG"
       ],
       "classes": [
         "Archer",
-        "Warrior",
+        "Fighter",
         "Ranger"
       ],
-      "building": "Archer / Warrior / Ranger trainers",
+      "building": "Archer / Fighter / Ranger trainers",
       "x": 4527,
       "y": 3759,
       "level": "lower"

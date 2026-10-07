@@ -293,7 +293,7 @@
   },
   {
     "id": "class-archer-warrior-ranger",
-    "name": "Archer / Warrior / Ranger trainers",
+    "name": "Archer / Fighter / Ranger trainers",
     "x": 4527,
     "y": 3759,
     "level": "lower",
@@ -302,7 +302,7 @@
     "category": "Class trainer",
     "classes": [
       "Archer",
-      "Warrior",
+      "Fighter",
       "Ranger"
     ]
   },

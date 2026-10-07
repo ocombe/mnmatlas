@@ -13,7 +13,7 @@
  },
  {
   "id": "wiki-2",
-  "name": "Archer · Warrior — Wayguard Garrison",
+  "name": "Archer · Fighter — Wayguard Garrison",
   "category": "Class trainer",
   "x": 1126,
   "y": 870,
@@ -21,7 +21,7 @@
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
   "classes": [
    "Archer",
-   "Warrior"
+   "Fighter"
   ]
  },
  {

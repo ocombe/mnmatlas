@@ -443,12 +443,12 @@
       "id": "class-3",
       "abbreviations": [
         "ARC",
-        "WAR",
+        "FTR",
         "RNG"
       ],
       "classes": [
         "Archer",
-        "Warrior",
+        "Fighter",
         "Ranger"
       ],
       "building": "Steel Talon Garrison",

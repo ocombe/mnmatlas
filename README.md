@@ -57,7 +57,7 @@ Faelindral place names, guilds, amenities and tradeskill locations are adapted
 from [Maggot's Faelindral wiki map](https://monstersandmemories.miraheze.org/wiki/File:Faelindral_V2.jpg)
 under [CC BY-SA 4.0](https://creativecommons.org/licenses/by-sa/4.0/).
 The adapted datasets carry the same licence. Locations and platform names are
-approximate; ARC/FTR is shown as ARC/WAR.
+approximate.
 
 Evershade Weald place names, caves, creature camps and exits are adapted from
 [Nindaan's Evershade Weald wiki map](https://monstersandmemories.miraheze.org/wiki/File:Evershade_Weald_june_26.jpg)
