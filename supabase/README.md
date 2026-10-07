@@ -27,3 +27,7 @@ With A's session, confirm these operations fail or return no changed/read rows:
 Then add A to `admins` in the dashboard. Confirm A can read pending suggestions from B and approve/reject them and mark reports fixed or dismissed, while B cannot. Confirm the admin can still only select their own admin row and their own private notes. Remove A's admin row after this check if it is a test account.
 
 Provider and redirect setup follows the [Discord sign-in guide](https://supabase.com/docs/guides/auth/social-login/auth-discord) and [redirect URL guide](https://supabase.com/docs/guides/auth/redirect-urls). Access rules follow [Supabase Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security).
+
+## Wiki search
+
+`functions/wiki-search` lets signed-in visitors look up a Monsters and Memories Wiki page by name from the marker editor. It holds the wiki's partner key as the Edge Function secret `WIKI_API_KEY`, so the key never reaches the site. Deploy it with JWT verification off (it checks the sign-in itself; `?check=1` only reports whether the key is set). It allows the atlas origins and localhost, keeps each account to 20 searches a minute, and returns only each result's id, kind, name, zone and wiki address.

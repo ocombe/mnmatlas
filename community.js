@@ -136,6 +136,32 @@
  }
  // A published marker's or place name's text can be corrected; the change waits in review like any suggestion.
  const editedNow=new Set(),editToken=(kind,id)=>config.id+':'+kind+':'+id;
+ // Wiki search (signed-in visitors): look a page up by name and fill the wiki link with it.
+ // The search goes through the atlas's own backend function, which holds the wiki's partner key.
+ const finders=new Set(),wikiTypes={npc:'NPC',item:'Item',quest:'Quest',zone:'Zone'};
+ async function wikiSearch(q){
+  const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error('sign-in');
+  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(q),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}});
+  if(!r.ok)throw Error(r.status===429?'busy':'failed');const body=await r.json();return Array.isArray(body?.results)?body.results:[];
+ }
+ function wikiFinder(input){
+  const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','Sign in to search the wiki by name, or paste a page address.','form-hint');
+  search.type='search';search.maxLength=80;search.placeholder='Search the wiki by name';search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
+  const credit=text('a','Data from the Monsters and Memories Wiki','wiki-credit');credit.href='https://monstersandmemories.wiki/';credit.target='_blank';credit.rel='noopener';
+  let timer,serial=0;
+  const show=(rows,message)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
+   for(const row of rows){const b=button('',()=>{input.value=row.url;input.dispatchEvent(new Event('input'));search.value='';show([]);input.focus?.();},'wiki-result');
+    b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
+   if(rows.length)list.append(credit);};
+  search.addEventListener('input',()=>{clearTimeout(timer);const q=search.value.trim(),mine=++serial;if(q.length<2){show([]);return;}
+   timer=setTimeout(async()=>{show([],'Searching…');try{const rows=await wikiSearch(q);if(mine===serial)show(rows,rows.length?'':'No wiki page found with that name.');}
+    catch(e){if(mine===serial)show([],e.message==='busy'?'The wiki is busy. Try again in a moment.':'The wiki could not be searched right now. You can paste the page address instead.');}},350);});
+  box.append(search,list,signedOut);
+  box.update=()=>{search.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){search.value='';show([]);}};
+  box.reset=()=>{clearTimeout(timer);serial++;search.value='';show([]);};
+  finders.add(box);box.update();return box;
+ }
+ {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'));field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  function editDialog(target,kind){
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
@@ -144,7 +170,7 @@
   const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
-  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';wiki.placeholder='https://monstersandmemories.wiki/…';}
+  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki);d.append(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
   const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim(),newWiki=wiki?wikiAddress(wiki.value):'',oldWiki=target.wiki||'';
@@ -251,7 +277,7 @@
  }
  async function authChanged(session){
   const next=session?.user||null;if(next?.id===user?.id)return;
-  const serial=++authSerial;user=next;admin=false;syncReady='';accountUI();if(review.open)review.close();clearPreview();freshPopup();
+  const serial=++authSerial;user=next;admin=false;syncReady='';accountUI();for(const f of finders)f.update();if(review.open)review.close();clearPreview();freshPopup();
   if(user){const uid=user.id;try{const {data,error}=await client.from('admins').select('user_id').eq('user_id',uid).maybeSingle();if(error)throw error;if(serial!==authSerial)return;admin=!!data;accountUI();}catch{status('Account permissions could not load. Please try again.');}}
   if(serial===authSerial)await onMap();
  }
