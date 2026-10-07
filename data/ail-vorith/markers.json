@@ -119,7 +119,9 @@
     "category": "Vendor",
     "x": 4774,
     "y": 4385,
-    "note": "Approximate position; to confirm in game. Used weapons."
+    "note": "Approximate position; to confirm in game. Used weapons.",
+    "wiki": "https://monstersandmemories.wiki/npcs/kulzzara",
+    "wikiId": "npc-kulzzara"
   },
   {
     "id": "melzorra",
@@ -150,7 +152,9 @@
     "note": "Approximate position; to confirm in game. Inquisitor trainer.",
     "classes": [
       "Inquisitor"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/nurvol-cereveth",
+    "wikiId": "npc-nurvol-cereveth"
   },
   {
     "id": "klavel-sul",
@@ -174,7 +178,9 @@
     "note": "Approximate position; to confirm in game. Fighter trainer.",
     "classes": [
       "Fighter"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/tharkan-inathar",
+    "wikiId": "npc-tharkan-inathar"
   },
   {
     "id": "lurithos-kest",
@@ -185,7 +191,9 @@
     "note": "Approximate position; to confirm in game. Archer trainer.",
     "classes": [
       "Archer"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/lurithos-kest",
+    "wikiId": "npc-lurithos-kest"
   },
   {
     "id": "laren-drin-dar",
@@ -209,7 +217,9 @@
     "note": "Approximate position; to confirm in game. Upstairs. Spellblade trainer.",
     "classes": [
       "Spellblade"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/ilnara-halkareth",
+    "wikiId": "npc-ilnara-hal-kareth"
   },
   {
     "id": "mentvar-drezzorith",
@@ -220,7 +230,9 @@
     "note": "Approximate position; to confirm in game. Upstairs. Paladin trainer.",
     "classes": [
       "Paladin"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/mentvar-drezzorith",
+    "wikiId": "npc-mentvar-drezzorith"
   },
   {
     "id": "to-upper-platform",
@@ -252,7 +264,9 @@
     "note": "Approximate position; to confirm in game. Elementalist trainer.",
     "classes": [
       "Elementalist"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/lothur-varros",
+    "wikiId": "npc-lothur-varros"
   },
   {
     "id": "vhasilla-hal-kareth",
@@ -263,7 +277,9 @@
     "note": "Approximate position; to confirm in game. Wizard trainer.",
     "classes": [
       "Wizard"
-    ]
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/vhasilla-halkareth",
+    "wikiId": "npc-vhasilla-hal-kareth"
   },
   {
     "id": "m-yal-wehear",

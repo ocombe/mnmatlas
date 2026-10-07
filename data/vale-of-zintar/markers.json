@@ -155,7 +155,9 @@
   "y": 5311,
   "approximate": true,
   "note": "At the lake camp. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/mhirunne-of-whispers",
+  "wikiId": "npc-mhirunne-of-whispers"
  },
  {
   "id": "lake-notables-najarica",
@@ -165,7 +167,9 @@
   "y": 5311,
   "approximate": true,
   "note": "At the lake camp. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/najarica",
+  "wikiId": "npc-najarica"
  },
  {
   "id": "orcs-1",

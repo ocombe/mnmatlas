@@ -327,7 +327,9 @@
     "x": 1955,
     "y": 2385,
     "approximate": true,
-    "note": "Approximate room location after Map by Skoop; confirm in game."
+    "note": "Approximate room location after Map by Skoop; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/marrow",
+    "wikiId": "npc-marrow"
   },
   {
     "id": "splint",
@@ -337,6 +339,8 @@
     "x": 2080,
     "y": 2210,
     "approximate": true,
-    "note": "Approximate room location after Map by Skoop; confirm in game."
+    "note": "Approximate room location after Map by Skoop; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/splint",
+    "wikiId": "npc-splint"
   }
 ]
