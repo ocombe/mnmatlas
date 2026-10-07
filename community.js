@@ -146,11 +146,11 @@
  const finders=new Set(),wikiTypes={npc:'NPC'},markerTypes=Object.keys(wikiTypes).join(',');
  const searchZone=()=>!config||config.zonesFile?'':config.wikiZone||config.title||'';
  const searchPlaceholder=()=>{const zone=searchZone();return zone?'Search NPCs in '+zone:'Search NPCs in every zone';};
- async function wikiSearch(q){
+ async function wikiSearch(q,signal,asking){
   // Answers are kept in this browser for a day (and shared ones on the backend), so a repeated search costs the wiki nothing.
   const zone=searchZone(),key=q.toLowerCase().replace(/\s+/g,' '),id=markerTypes+'|'+zone.toLowerCase()+'|'+key,saved=readSearches(),hit=saved[id];if(hit&&Date.now()-hit.at<864e5)return hit;
-  const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error('sign-in');
-  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key)+'&type='+markerTypes+(zone?'&zone='+encodeURIComponent(zone):''),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}});
+  const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error('sign-in');asking?.();
+  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key)+'&type='+markerTypes+(zone?'&zone='+encodeURIComponent(zone):''),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token},signal});
   if(!r.ok)throw Error(r.status===429?'busy':'failed');const body=await r.json();
   const answer={at:Date.now(),site:Object.hasOwn(wikiSites,body?.site)?body.site:'mnm-wiki',results:Array.isArray(body?.results)?body.results:[]};
   saved[id]=answer;const keys=Object.keys(saved).sort((a,b)=>saved[b].at-saved[a].at);for(const old of keys.slice(100))delete saved[old];
@@ -162,20 +162,28 @@
   const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint'),trouble=text('span','','wiki-signin-trouble');
   // Signing in from here keeps the note open: the sign-in window hands the session back to this page.
   signedOut.append(text('span','Paste a page address, or '),button('sign-in',()=>{trouble.textContent='';popupSignIn(message=>{trouble.textContent=' '+message+' You can also sign in from the top bar.';});},'wiki-signin'),text('span',' to search the wiki by name'),trouble);
+  // A spinner at the end of the search box runs while the wiki is asked; answers kept in this browser show at once without it.
+  const field=text('div','','wiki-search'),spinner=text('span','','wiki-spinner');spinner.hidden=true;spinner.setAttribute('aria-hidden','true');field.append(search,spinner);
   search.type='search';search.maxLength=80;search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
-  let timer,serial=0;
+  let timer,serial=0,wanted='',asking=null;
+  const busy=on=>{spinner.hidden=!on;list.setAttribute('aria-busy',on?'true':'false');};
+  // Only the latest search counts: a new one cancels the wait and the request before it.
+  const stop=()=>{clearTimeout(timer);serial++;asking?.abort();asking=null;busy(false);};
   // The credit names and links the wiki the results came from.
   const show=(rows,message,from)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
    for(const row of rows){const b=button('',()=>{input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);search.value='';show([]);input.focus?.();},'wiki-result');
     b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
    const source=wikiSites[from];if(rows.length&&source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';list.append(credit);}};
   const showFound=(site,results)=>{const rows=results.filter(r=>Object.hasOwn(wikiTypes,r.type)),zone=searchZone();show(rows,rows.length?'':zone?'No NPC in '+zone+' with that name.':'No NPC found with that name.',site);};
-  search.addEventListener('input',()=>{clearTimeout(timer);const q=search.value.trim(),mine=++serial;if(q.length<2){show([]);return;}
-   timer=setTimeout(async()=>{show([],'Searching…');try{const {site,results}=await wikiSearch(q);if(mine===serial)showFound(site,results);}
-    catch(e){if(mine===serial)show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. You can paste the page address instead.');}},350);});
-  box.append(search,list,signedOut);
-  box.update=()=>{search.placeholder=searchPlaceholder();search.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){search.value='';show([]);}};
-  box.reset=()=>{clearTimeout(timer);serial++;search.value='';search.placeholder=searchPlaceholder();show([]);};
+  // Typing waits 600 ms for a pause; the same words again (spaces or case aside) do not search twice.
+  search.addEventListener('input',()=>{const q=search.value.trim(),key=q.toLowerCase().replace(/\s+/g,' ');if(key===wanted)return;
+   stop();wanted=key;const mine=serial;if(q.length<2){show([]);return;}
+   timer=setTimeout(async()=>{const request=new AbortController();asking=request;
+    try{const {site,results}=await wikiSearch(q,request.signal,()=>{if(mine===serial)busy(true);});if(mine===serial){busy(false);asking=null;showFound(site,results);}}
+    catch(e){if(mine!==serial)return;busy(false);asking=null;wanted='';show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. You can paste the page address instead.');}},600);});
+  box.append(field,list,signedOut);
+  box.update=()=>{search.placeholder=searchPlaceholder();field.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';search.value='';show([]);}};
+  box.reset=()=>{stop();wanted='';search.value='';search.placeholder=searchPlaceholder();show([]);};
   finders.add(box);box.update();return box;
  }
  // A picked page names an unnamed note; the wiki's own text is never copied in.
