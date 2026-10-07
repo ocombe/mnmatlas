@@ -184,18 +184,29 @@
     {
       "id": "class-necromancer-cleric-shadowknight",
       "abbreviations": [
-        "NEC",
         "CLR",
         "SHD"
       ],
       "classes": [
-        "Necromancer",
         "Cleric",
         "Shadowknight"
       ],
-      "building": "Necromancer / Cleric / Shadowknight trainers",
+      "building": "Cleric / Shadowknight trainers",
       "x": 5452,
       "y": 4283,
+      "level": "lower"
+    },
+    {
+      "id": "community-30",
+      "abbreviations": [
+        "NEC"
+      ],
+      "classes": [
+        "Necromancer"
+      ],
+      "building": "Necromancer trainer",
+      "x": 4880,
+      "y": 4552,
       "level": "lower"
     },
     {

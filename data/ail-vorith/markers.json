@@ -145,8 +145,8 @@
     "id": "nurvol-cereveth",
     "name": "Nurvol Cereveth",
     "category": "Class trainer",
-    "x": 4542,
-    "y": 4376,
+    "x": 4621,
+    "y": 3108,
     "note": "Approximate position; to confirm in game. Inquisitor trainer.",
     "classes": [
       "Inquisitor"
@@ -397,18 +397,6 @@
     "x": 4522,
     "y": 2625,
     "trade": "Jewelcrafting"
-  },
-  {
-    "id": "community-28",
-    "community": true,
-    "name": "INQ",
-    "category": "Class trainer",
-    "note": "",
-    "x": 4621,
-    "y": 3108,
-    "classes": [
-      "Inquisitor"
-    ]
   },
   {
     "id": "community-40",
