@@ -409,5 +409,50 @@
     "x": 3915,
     "y": 3937,
     "level": "upper"
+  },
+  {
+    "id": "wiki-bag-merchant",
+    "name": "Bag merchant",
+    "category": "Vendor",
+    "x": 3934,
+    "y": 4368,
+    "note": "Approximate; to confirm in game.",
+    "level": "lower",
+    "approximate": true
+  },
+  {
+    "id": "wiki-marshall-harding",
+    "name": "Marshal Harding",
+    "category": "Notable NPC",
+    "x": 4633,
+    "y": 3607,
+    "note": "Approximate; to confirm in game. Approximate courtyard position.",
+    "level": "lower",
+    "approximate": true,
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/marshal-harding",
+    "wikiId": "npc-marshal-harding"
+  },
+  {
+    "id": "wiki-paymaster-elara-venn",
+    "name": "Paymaster Elara Venn",
+    "category": "Notable NPC",
+    "x": 4559,
+    "y": 3800,
+    "note": "Approximate; to confirm in game. 1st floor.",
+    "level": "lower",
+    "approximate": true,
+    "community": true
+  },
+  {
+    "id": "wiki-quartermaster",
+    "name": "Quartermaster",
+    "category": "Vendor",
+    "x": 4544,
+    "y": 3803,
+    "note": "Approximate; to confirm in game. Buy / sell weapons and armour.",
+    "level": "lower",
+    "approximate": true,
+    "community": true
   }
 ]
