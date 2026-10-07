@@ -60,13 +60,24 @@ function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.d
 const classAbbreviations={Archer:'ARC',Bard:'BRD',Beastlord:'BST',Beastmaster:'BST',Cleric:'CLR',Druid:'DRU',Elementalist:'ELE',Enchanter:'ENC',Fighter:'FTR',Inquisitor:'INQ',Monk:'MNK',Necromancer:'NEC',Paladin:'PAL',Ranger:'RNG',Rogue:'ROG','Shadow Knight':'SHD',Shaman:'SHM',Spellblade:'SPB',Wizard:'WIZ'};
 const atlasClasses=Object.keys(classAbbreviations);
 const classesOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=6&&v.every(c=>atlasClasses.includes(c));
-// The wiki files class trainers as merchants, so a trainer is known by its name (or a class its page names): a class with instructor, trainer or
+// The wiki files class trainers as merchants, so a trainer is known by its name or the wiki's trainer role, and its class
+// by the wiki's class or tags, else by its name: a class with instructor, trainer or
 // guildmaster ("A beastmaster instructor" teaches Beastmaster). Only the name counts: plenty of other merchants stand in
 // a guild hall. "Instructor"/"guildmaster" alone, or the wiki's own "trainer" role, still mark a trainer of unknown class.
+// The wiki's own class for an NPC: its class field or a class among its hover-card tags ("Human · Enchanter"). The
+// wiki's Warrior is the atlas's Fighter; a guess ("Shadow Knight?") is left out.
+function wikiClassesOf(row){
+ const parts=[row?.class,...(Array.isArray(row?.tags)?row.tags:[row?.tags])].flatMap(v=>typeof v==='string'?v.split(/\s*[·,\/]\s*/):[]).map(v=>v.trim()).filter(v=>v&&!v.includes('?'));
+ const found=[];for(const p of parts){const c=p.toLowerCase()==='warrior'?'Fighter':atlasClasses.find(x=>x.toLowerCase()===p.toLowerCase());if(c&&!found.includes(c))found.push(c);}
+ return found;
+}
 function trainerClasses(row){
- // A bounty row may carry the classes the wiki's own page gives (see scripts/make-bounties.mjs).
+ // A bounty row may carry the classes the wiki gives (see scripts/make-bounties.mjs).
  if(Array.isArray(row?.classes)){const given=row.classes.filter(c=>atlasClasses.includes(c));if(given.length)return given;}
- const name=String(row?.name??'');if(!/\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b/i.test(name))return [];
+ const name=String(row?.name??''),named=/\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b/i.test(name);
+ // For a trainer, the wiki's own class wins over the one read from the name (any NPC's tags name a class, so only then).
+ if(named||row?.role==='trainer'){const given=wikiClassesOf(row);if(given.length)return given;}
+ if(!named)return [];
  return atlasClasses.filter(c=>new RegExp('\\b'+c.replace(' ','\\s*')+'s?\\b','i').test(name));
 }
 const isClassTrainer=row=>trainerClasses(row).length>0||row?.role==='trainer'||/\b(instructors?|guild\s*masters?|guildmasters?)\b/i.test(String(row?.name??''));

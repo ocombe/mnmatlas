@@ -21,7 +21,18 @@ console.log('Find checks passed: wiki ids, exact names, trainer classes, contain
  for(const f of files){const data=JSON.parse(await readFile(f,'utf8'));
   for(const t of data?.trainers||[])(t.classes||[]).forEach((cl,i)=>{const name=cl==='Shadowknight'?'Shadow Knight':cl;assert(Object.hasOwn(abbr,name),f+': unknown class '+cl);assert.equal(abbr[name],t.abbreviations[i],f+': '+cl);});
   for(const m of Array.isArray(data)?data:[])for(const cl of m.classes||[])assert(Object.hasOwn(abbr,cl),f+': unknown class '+cl);}
- console.log('Class checks passed: every class on the maps has its abbreviation.');}
+ // A trainer's class: the wiki's tags or class field win over the name; other NPCs' tags never make them trainers;
+ // a guess is left out; the wiki's Warrior is Fighter. A trainer covered by a chip is on the map.
+ const [tc,ict,onMap,chipClasses]=vm.runInContext('[trainerClasses,isClassTrainer,trainerOnMap,mapTrainerClasses]',c),list=v=>JSON.stringify(v);
+ assert.equal(list(tc({name:'Master Khaila',role:'trainer',tags:'Human · Enchanter'})),'["Enchanter"]');
+ assert.equal(list(tc({name:'A monk instructor',role:'merchant',tags:'Human · Wizard'})),'["Wizard"]','The tags win over the name');
+ assert.equal(list(tc({name:'A monk instructor',role:'merchant',tags:'Human'})),'["Monk"]','else the name');
+ assert.equal(list(tc({name:'Gorr',role:'named',tags:'Named · Bat · Fighter'})),'[]');assert(!ict({name:'Gorr',role:'named',tags:'Named · Bat · Fighter'}),'A named mob with a class is no trainer');
+ assert.equal(list(tc({name:'Old Brin',role:'trainer',class:'Warrior',tags:'Shadow Knight?'})),'["Fighter"]');
+ assert.equal(list(tc({name:'Chahaya Tam',role:'trainer',tags:null})),'[]');
+ const chips=chipClasses([],[{abbreviations:['BST','SHM']},{classes:['Enchanter']}]);
+ assert(onMap({name:'A beastmaster instructor'},chips)&&onMap({name:'Master Khaila',role:'trainer',tags:'Human · Enchanter'},chips)&&!onMap({name:'A monk instructor'},chips)&&!onMap({name:'Chahaya Tam',role:'trainer'},chips));
+ console.log('Class checks passed: every class on the maps has its abbreviation; trainer classes from tags and chips.');}
 // Every script the pages load must at least parse (a slip in one stops the whole atlas).
 for(const f of ['app.js','community.js','wiki-links.js','find.js','place-labels.js','icons.js','hidden-areas.js','world-zones.js','sheet-edge.js'])new vm.Script(await readFile(new URL('../'+f,import.meta.url),'utf8'),{filename:f});
 console.log('Script checks passed: every page script parses.');
