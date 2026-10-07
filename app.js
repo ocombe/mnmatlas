@@ -224,7 +224,7 @@ function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
  {const target=$('exit-target');target.replaceChildren(Object.assign(text('option','Not set'),{value:''}));for(const c of registry.maps.filter(c=>c.id!==config.id).sort((a,b)=>a.title.localeCompare(b.title))){const o=text('option',c.title);o.value=c.id;target.append(o);}target.value=m.toMap||'';}
 updateEditorFields();$('delete').hidden=!personal.some(p=>p.id===m.id);$('editor').showModal();$('name').focus();}
-function closeEditor(){draft=null;$('editor').close();}
+function closeEditor(){draft=null;$('editor').close();cancelPlacement();}
 function selectAlignment(row,kind){selectedAlignmentId=row.id;selectedAlignmentKind=kind;schedulePlaceLabels();}
 function updateAlignmentStatus(){$('alignment-count').textContent=`${Object.keys(alignmentPositions).length} of ${originals.length} markers · ${Object.keys(alignmentLabelPositions).length} of ${labelData.labels.length} place names moved`;}
 function moveAlignedLabel(id,latlng){
@@ -558,7 +558,8 @@ function setupControls(){
  for(const tradeName of Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b))){const option=text('option',tradeName);option.value=tradeName;$('trade').append(option);}
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
  $('cancel-place').onclick=cancelPlacement;document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelPlacement();if(compact())setPanel(false);}});
- $('cancel-edit').onclick=closeEditor;$('editor').addEventListener('close',()=>draft=null);
+ // Closing the editor without saving also drops a new note's pin; a saved note has already ended placement.
+ $('cancel-edit').onclick=closeEditor;$('editor').addEventListener('close',()=>{draft=null;cancelPlacement();});
  $('marker-form').onsubmit=e=>{e.preventDefault();if(!draft)return;const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
   delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;
   if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
