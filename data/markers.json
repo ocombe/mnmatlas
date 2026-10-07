@@ -243,9 +243,10 @@
     "id": "wiki-31",
     "name": "Cooking — Shaded Bloom Inn",
     "category": "Tradeskill",
-    "x": 949,
-    "y": 1370,
-    "note": ""
+    "x": 958,
+    "y": 1359,
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-32",
@@ -540,5 +541,23 @@
     "classes": [
       "Wizard"
     ]
+  },
+  {
+    "id": "community-55",
+    "community": true,
+    "name": "A bag merchant",
+    "category": "Vendor",
+    "note": "",
+    "x": 1150,
+    "y": 1515
+  },
+  {
+    "id": "community-57",
+    "community": true,
+    "name": "A barkeep",
+    "category": "Vendor",
+    "note": "",
+    "x": 949,
+    "y": 1370
   }
 ]
