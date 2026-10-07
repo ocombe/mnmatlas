@@ -53,8 +53,8 @@
     {
       "id": "wiki-west-raft",
       "name": "Raft — western shore",
-      "x": 3220,
-      "y": 4622,
+      "x": 3411,
+      "y": 4820,
       "level": "lower",
       "approximate": true,
       "note": "Approximate; to confirm in game. Approximate crossing point; service and landing to confirm.",
@@ -66,8 +66,8 @@
     {
       "id": "wiki-east-raft",
       "name": "Raft — eastern shore",
-      "x": 4214,
-      "y": 4082,
+      "x": 4128,
+      "y": 4176,
       "level": "lower",
       "approximate": true,
       "note": "Approximate; to confirm in game. Approximate crossing point; service and landing to confirm.",

@@ -298,7 +298,7 @@
     "y": 3759,
     "level": "lower",
     "approximate": true,
-    "note": "Approximate; to confirm in game.",
+    "note": "",
     "category": "Class trainer",
     "classes": [
       "Archer",
@@ -459,7 +459,7 @@
     "category": "Notable NPC",
     "x": 4633,
     "y": 3607,
-    "note": "Approximate; to confirm in game. Approximate courtyard position.",
+    "note": "",
     "level": "lower",
     "approximate": true,
     "community": true,
@@ -504,7 +504,7 @@
     "category": "Vendor",
     "x": 3673,
     "y": 4120,
-    "note": "Approximate; to confirm in game. Two adjacent shops indicated by the sketch; exact doors to confirm.",
+    "note": "",
     "level": "lower",
     "approximate": true
   }
