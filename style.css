@@ -247,3 +247,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .journal-bottom .notes-meta p{margin:0;font-size:11px}
 .notes-meta .backup{gap:2px;margin-left:-4px}.notes-meta .backup button{font-size:11px;padding:4px}
 .journal>footer{border-top:1px solid var(--border);margin-top:16px;padding-top:12px}
+/* The places list is the Search menu's main content: it keeps room for about five rows, and the panel scrolls
+   as a whole on short screens rather than squeezing it. Credits never break inside a source or licence. */
+.journal .results{min-height:290px}
+.embed .journal .results{flex:1;min-height:230px;max-height:none}
+.credit-item{white-space:nowrap}

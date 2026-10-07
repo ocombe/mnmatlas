@@ -239,7 +239,7 @@ function finishEdit(save){
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
 // Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
 // The dot beside Category shows the colour the pin will have.
-function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';}
+function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';}
 function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
@@ -384,7 +384,8 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
 // An optional frame trims the drawn area inside the pixel grid; coordinates stay the same.
 function mapBounds(){const f=config.frame||{x:0,y:0,width:config.width,height:config.height};return L.latLngBounds(map.unproject([f.x,f.y+f.height],config.coordinateZoom),map.unproject([f.x+f.width,f.y],config.coordinateZoom));}
 function appendAttributionLinks(parent,a){
- for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;const link=text('a',title);link.href=href;link.target='_blank';link.rel='noopener';parent.append(link,text('span',' · '));}
+ // A source or licence never breaks inside ("CC BY-SA 4.0" stays whole); separators go only between items.
+ let first=true;for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;const link=text('a',title,'credit-item');link.href=href;link.target='_blank';link.rel='noopener';if(!first)parent.append(text('span',' · '));parent.append(link);first=false;}
 }
 function updateTitles(){
  document.title=config.title+' · MnM Atlas';document.querySelector('meta[name="description"]').content=config.description;
