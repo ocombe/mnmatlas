@@ -147,7 +147,10 @@
     "category": "Class trainer",
     "x": 4542,
     "y": 4376,
-    "note": "Approximate position; to confirm in game. Inquisitor trainer."
+    "note": "Approximate position; to confirm in game. Inquisitor trainer.",
+    "classes": [
+      "Inquisitor"
+    ]
   },
   {
     "id": "klavel-sul",
@@ -157,7 +160,10 @@
     "y": 4293,
     "note": "Approximate position; to confirm in game. Monk trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/klavel-sul",
-    "wikiId": "npc-klavel-sul"
+    "wikiId": "npc-klavel-sul",
+    "classes": [
+      "Monk"
+    ]
   },
   {
     "id": "tharkan-inathar",
@@ -165,7 +171,10 @@
     "category": "Class trainer",
     "x": 4444,
     "y": 4257,
-    "note": "Approximate position; to confirm in game. Warrior trainer."
+    "note": "Approximate position; to confirm in game. Warrior trainer.",
+    "classes": [
+      "Warrior"
+    ]
   },
   {
     "id": "lurithos-kest",
@@ -173,7 +182,10 @@
     "category": "Class trainer",
     "x": 4355,
     "y": 4218,
-    "note": "Approximate position; to confirm in game. Archer trainer."
+    "note": "Approximate position; to confirm in game. Archer trainer.",
+    "classes": [
+      "Archer"
+    ]
   },
   {
     "id": "laren-drin-dar",
@@ -183,7 +195,10 @@
     "y": 4236,
     "note": "Approximate position; to confirm in game. Ranger trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/laren-drindar",
-    "wikiId": "npc-laren-drindar"
+    "wikiId": "npc-laren-drindar",
+    "classes": [
+      "Ranger"
+    ]
   },
   {
     "id": "ilnara-hal-kareth",
@@ -191,7 +206,10 @@
     "category": "Class trainer",
     "x": 4404,
     "y": 4314,
-    "note": "Approximate position; to confirm in game. Upstairs. Spellblade trainer."
+    "note": "Approximate position; to confirm in game. Upstairs. Spellblade trainer.",
+    "classes": [
+      "Spellblade"
+    ]
   },
   {
     "id": "mentvar-drezzorith",
@@ -199,7 +217,10 @@
     "category": "Class trainer",
     "x": 4401,
     "y": 4286,
-    "note": "Approximate position; to confirm in game. Upstairs. Paladin trainer."
+    "note": "Approximate position; to confirm in game. Upstairs. Paladin trainer.",
+    "classes": [
+      "Paladin"
+    ]
   },
   {
     "id": "to-upper-platform",
@@ -217,7 +238,10 @@
     "y": 4123,
     "note": "Approximate position; to confirm in game. Cleric trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/zalethra-drezzorith",
-    "wikiId": "npc-zalethra-drezzorith"
+    "wikiId": "npc-zalethra-drezzorith",
+    "classes": [
+      "Cleric"
+    ]
   },
   {
     "id": "lothur-varros",
@@ -225,7 +249,10 @@
     "category": "Class trainer",
     "x": 4329,
     "y": 4131,
-    "note": "Approximate position; to confirm in game. Elementalist trainer."
+    "note": "Approximate position; to confirm in game. Elementalist trainer.",
+    "classes": [
+      "Elementalist"
+    ]
   },
   {
     "id": "vhasilla-hal-kareth",
@@ -233,7 +260,10 @@
     "category": "Class trainer",
     "x": 4357,
     "y": 4125,
-    "note": "Approximate position; to confirm in game. Wizard trainer."
+    "note": "Approximate position; to confirm in game. Wizard trainer.",
+    "classes": [
+      "Wizard"
+    ]
   },
   {
     "id": "m-yal-wehear",
@@ -251,7 +281,10 @@
     "y": 4035,
     "note": "Approximate position; to confirm in game. Necromancer trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/vaslir-naiyth",
-    "wikiId": "npc-vaslir-naiyth"
+    "wikiId": "npc-vaslir-naiyth",
+    "classes": [
+      "Necromancer"
+    ]
   },
   {
     "id": "amarah-ith-vayen",
@@ -261,7 +294,10 @@
     "y": 4084,
     "note": "Approximate position; to confirm in game. Enchanter trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/amarah-ithvayen",
-    "wikiId": "npc-amarah-ithvayen"
+    "wikiId": "npc-amarah-ithvayen",
+    "classes": [
+      "Enchanter"
+    ]
   },
   {
     "id": "stablemaster-raxr",
@@ -369,7 +405,10 @@
     "category": "Class trainer",
     "note": "",
     "x": 4621,
-    "y": 3108
+    "y": 3108,
+    "classes": [
+      "Inquisitor"
+    ]
   },
   {
     "id": "community-40",

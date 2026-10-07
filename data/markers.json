@@ -429,7 +429,11 @@
     "category": "Class trainer",
     "x": 823.93,
     "y": 1240.04,
-    "note": "CLR / PAL - Approximate guild location."
+    "note": "CLR / PAL - Approximate guild location.",
+    "classes": [
+      "Cleric",
+      "Paladin"
+    ]
   },
   {
     "id": "class-2",
@@ -437,7 +441,10 @@
     "category": "Class trainer",
     "x": 1024.06,
     "y": 1550.0,
-    "note": "BRD - Approximate guild location."
+    "note": "BRD - Approximate guild location.",
+    "classes": [
+      "Bard"
+    ]
   },
   {
     "id": "class-3",
@@ -445,7 +452,12 @@
     "category": "Class trainer",
     "x": 859,
     "y": 1683,
-    "note": "ARC / WAR / RNG - Approximate guild location."
+    "note": "ARC / WAR / RNG - Approximate guild location.",
+    "classes": [
+      "Archer",
+      "Warrior",
+      "Ranger"
+    ]
   },
   {
     "id": "class-4",
@@ -453,7 +465,10 @@
     "category": "Class trainer",
     "x": 1116.1,
     "y": 1636.88,
-    "note": "ROG - Approximate guild location."
+    "note": "ROG - Approximate guild location.",
+    "classes": [
+      "Rogue"
+    ]
   },
   {
     "id": "class-5",
@@ -461,7 +476,11 @@
     "category": "Class trainer",
     "x": 1646.38,
     "y": 1377.07,
-    "note": "BST / SHM - Approximate guild location."
+    "note": "BST / SHM - Approximate guild location.",
+    "classes": [
+      "Beastmaster",
+      "Shaman"
+    ]
   },
   {
     "id": "class-6",
@@ -469,7 +488,10 @@
     "category": "Class trainer",
     "x": 1654.24,
     "y": 1514.46,
-    "note": "DRU - Approximate guild location."
+    "note": "DRU - Approximate guild location.",
+    "classes": [
+      "Druid"
+    ]
   },
   {
     "id": "class-7",
@@ -477,7 +499,11 @@
     "category": "Class trainer",
     "x": 1506.0,
     "y": 1698.02,
-    "note": "ELE / MNK - Approximate guild location."
+    "note": "ELE / MNK - Approximate guild location.",
+    "classes": [
+      "Elementalist",
+      "Monk"
+    ]
   },
   {
     "id": "class-8",
@@ -485,7 +511,11 @@
     "category": "Class trainer",
     "x": 1474.34,
     "y": 956.87,
-    "note": "NEC / SHD - Approximate guild location."
+    "note": "NEC / SHD - Approximate guild location.",
+    "classes": [
+      "Necromancer",
+      "Shadow Knight"
+    ]
   },
   {
     "id": "class-9",
@@ -493,7 +523,12 @@
     "category": "Class trainer",
     "x": 2229,
     "y": 1001,
-    "note": "ENC / INQ / SPB - Approximate guild location."
+    "note": "ENC / INQ / SPB - Approximate guild location.",
+    "classes": [
+      "Enchanter",
+      "Inquisitor",
+      "Spellblade"
+    ]
   },
   {
     "id": "class-10",
@@ -501,6 +536,9 @@
     "category": "Class trainer",
     "x": 2133.99,
     "y": 1096.22,
-    "note": "WIZ - Approximate guild location."
+    "note": "WIZ - Approximate guild location.",
+    "classes": [
+      "Wizard"
+    ]
   }
 ]

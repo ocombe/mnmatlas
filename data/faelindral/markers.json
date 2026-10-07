@@ -6,7 +6,10 @@
   "x": 1454,
   "y": 730,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "classes": [
+   "Druid"
+  ]
  },
  {
   "id": "wiki-2",
@@ -15,7 +18,11 @@
   "x": 1126,
   "y": 870,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "classes": [
+   "Archer",
+   "Warrior"
+  ]
  },
  {
   "id": "wiki-3",
@@ -24,7 +31,10 @@
   "x": 1808,
   "y": 1176,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "classes": [
+   "Ranger"
+  ]
  },
  {
   "id": "wiki-4",
@@ -33,7 +43,10 @@
   "x": 2124,
   "y": 1112,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "classes": [
+   "Beastlord"
+  ]
  },
  {
   "id": "wiki-5",
@@ -42,7 +55,10 @@
   "x": 1860,
   "y": 1654,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "classes": [
+   "Shaman"
+  ]
  },
  {
   "id": "wiki-6",
@@ -51,7 +67,11 @@
   "x": 1462,
   "y": 1790,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "classes": [
+   "Bard",
+   "Rogue"
+  ]
  },
  {
   "id": "wiki-7",

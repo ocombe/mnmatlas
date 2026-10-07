@@ -271,7 +271,10 @@
     "level": "lower",
     "approximate": true,
     "note": "Approximate; to confirm in game. In a cave under the inn. Name follows the community sketch; class name and access to confirm.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "classes": [
+      "Beastlord"
+    ]
   },
   {
     "id": "class-elementalist-wizard-enchanter",
@@ -281,7 +284,12 @@
     "level": "lower",
     "approximate": true,
     "note": "Approximate; to confirm in game.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "classes": [
+      "Elementalist",
+      "Wizard",
+      "Enchanter"
+    ]
   },
   {
     "id": "class-archer-warrior-ranger",
@@ -291,7 +299,12 @@
     "level": "lower",
     "approximate": true,
     "note": "Approximate; to confirm in game.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "classes": [
+      "Archer",
+      "Warrior",
+      "Ranger"
+    ]
   },
   {
     "id": "wiki-east-bank",
@@ -313,7 +326,11 @@
     "approximate": true,
     "note": "In the cave beneath the south-east rock; to confirm in game.",
     "category": "Class trainer",
-    "community": true
+    "community": true,
+    "classes": [
+      "Cleric",
+      "Shadow Knight"
+    ]
   },
   {
     "id": "upper-stable",
@@ -331,7 +348,10 @@
     "y": 5668,
     "level": "lower",
     "note": "In the cave beneath the southern rock.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "classes": [
+      "Druid"
+    ]
   },
   {
     "id": "class-shaman",
@@ -340,7 +360,10 @@
     "y": 5966,
     "level": "lower",
     "note": "In the cave beneath the southern rock.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "classes": [
+      "Shaman"
+    ]
   },
   {
     "id": "class-rogue",
@@ -349,7 +372,10 @@
     "y": 5074,
     "level": "lower",
     "note": "Somewhere in the rogue back cave; position to confirm in game.",
-    "category": "Class trainer"
+    "category": "Class trainer",
+    "classes": [
+      "Rogue"
+    ]
   },
   {
     "id": "trade-blacksmithing",
@@ -388,7 +414,10 @@
     "note": "",
     "x": 4880,
     "y": 4552,
-    "level": "lower"
+    "level": "lower",
+    "classes": [
+      "Necromancer"
+    ]
   },
   {
     "id": "community-36",

@@ -60,7 +60,15 @@ function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.
 function persist(next){try{localStorage.setItem(storageKey('notes'),JSON.stringify(next));personal=next;window.dispatchEvent(new CustomEvent('atlas:notes'));return true;}catch{status('Your browser could not save this change. Free some storage and try again.',true);return false;}}
 function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=text('a','');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function allMarkers(){return [...originals,...personal];}
-function visibleMarkers(){const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);return allMarkers().filter(m=>atLevel(m)&&enabled.has(m.category)&&terms.every(t=>(m.name+' '+m.category+' '+m.note).toLocaleLowerCase().includes(t)));}
+// A class trainer reads as its class first ("Enchanter trainer"), so the pin says what it is; the trainer's own name,
+// when it names someone, sits underneath. Names that already spell out the classes ("Cleric / Paladin — Hospice") stay.
+const classesOf=m=>m.category==='Class trainer'&&Array.isArray(m.classes)?m.classes.filter(c=>typeof c==='string'&&c.trim()):[];
+const squash=v=>String(v).toLocaleLowerCase().replace(/[^a-z]/g,'');
+function markerTitle(m){const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
+// The name under a class-first title; nothing when the name is only class abbreviations ("NEC").
+function markerSubtitle(m){return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
+const markerText=m=>(m.name+' '+m.category+' '+m.note+' '+classesOf(m).join(' ')).toLocaleLowerCase();
+function visibleMarkers(){const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);return allMarkers().filter(m=>atLevel(m)&&enabled.has(m.category)&&terms.every(t=>markerText(m).includes(t)));}
 function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers();}
 function copyButton(place){const b=text('button','Copy link','copy-place');b.type='button';b.onclick=()=>copyLink(place);return b;}
 function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker',quiet:m.switchOnClick&&!alignmentMode});}
@@ -69,7 +77,7 @@ function flashPin(id){const el=pins.get(id)?.getElement();if(!el)return;el.class
 // A marker's wiki page opens in a new tab; an embed on another site may hide it (wiki-links.js).
 function wikiButton(m){const link=wikiLinkFor(m);if(!link)return null;const a=text('a','Read on '+link.name+' ↗','wiki-link');a.href=link.href;a.target='_blank';a.rel='noopener';return a;}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;
-function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',m.name));if(m.note)n.append(text('p',m.note));const wiki=wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
+function popup(m){const n=text('div','');n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',markerTitle(m)));{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}if(m.note)n.append(text('p',m.note));const wiki=wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
@@ -116,10 +124,10 @@ function drawMarkers(){
  const matches=visibleMarkers();$('count').textContent=matches.length+' places';
  for(const m of matches){
   const own=m.id.startsWith('personal-');
-  const pin=L.marker(locationOf(m),{icon:pinIcon(m),alt:m.name,keyboard:true,riseOnHover:true,draggable:alignmentMode}).bindPopup(popup(m),{autoPan:false});
+  const pin=L.marker(locationOf(m),{icon:pinIcon(m),alt:[markerTitle(m),markerSubtitle(m)].filter(Boolean).join(', '),keyboard:true,riseOnHover:true,draggable:alignmentMode}).bindPopup(popup(m),{autoPan:false});
   pin.atlasMinZoom=m.minZoom;
   // The hover tooltip shows the name; an aria-label (not a title) keeps it accessible without a second browser tooltip.
-  pin.on('add',()=>pin.getElement()?.setAttribute('aria-label',m.name));
+  pin.on('add',()=>pin.getElement()?.setAttribute('aria-label',[markerTitle(m),markerSubtitle(m)].filter(Boolean).join(', ')));
   // A marker that stands for another published map (a dungeon entrance on the world map) opens that map.
   // Personal zone exits keep their popup (Go to, Edit note) instead.
   const opens=!own&&!alignmentMode&&typeof m.toMap==='string'&&registry.maps.find(c=>c.id===m.toMap);
@@ -127,15 +135,15 @@ function drawMarkers(){
   // A floor link switches floor straight away; its details stay in the search menu list.
   if(m.switchOnClick&&!alignmentMode)pin.unbindPopup();
   if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
-  if(!m.noteType)pin.bindTooltip(()=>text('span',m.name),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
+  if(!m.noteType)pin.bindTooltip(()=>text('span',markerTitle(m)),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
   const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);
-  const label=text('span','');label.append(text('strong',m.name),text('small',noteKind(m)+(m.id.startsWith('personal-')?' · Personal note':'')));b.append(label);b.onclick=()=>opens?openMap(opens.id):choose(m);list.append(b);
+  const label=text('span','');label.append(text('strong',markerTitle(m)),text('small',[noteKind(m),markerSubtitle(m)].filter(Boolean).join(' · ')+(m.id.startsWith('personal-')?' · Personal note':'')));b.append(label);b.onclick=()=>opens?openMap(opens.id):choose(m);list.append(b);
  }
  // Place names and hidden areas can be found even when their visual layer hides.
  const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
  // A search also lists matching markers from the other levels; choosing one opens its level at the marker.
  const otherLevel=p=>config.levels&&p.level&&!atLevel(p)?' · '+(config.levels.find(l=>l.id===p.level)?.title||p.level):'';
- if(terms.length&&config.levels){for(const m of allMarkers().filter(m=>!atLevel(m)&&enabled.has(m.category)&&terms.every(t=>(m.name+' '+m.category+' '+m.note).toLocaleLowerCase().includes(t)))){const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);const label=text('span','');label.append(text('strong',m.name),text('small',noteKind(m)+otherLevel(m)));b.append(label);b.onclick=()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));list.append(b);}}
+ if(terms.length&&config.levels){for(const m of allMarkers().filter(m=>!atLevel(m)&&enabled.has(m.category)&&terms.every(t=>markerText(m).includes(t)))){const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);const label=text('span','');label.append(text('strong',markerTitle(m)),text('small',[noteKind(m),markerSubtitle(m)].filter(Boolean).join(' · ')+otherLevel(m)));b.append(label);b.onclick=()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));list.append(b);}}
  if(terms.length){for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t)))){const b=text('button','','place');const label=text('span','');label.append(text('strong',p.name),text('small',(p.kind==='hidden'?'Hidden area':'Place name')+otherLevel(p)));b.append(label);b.onclick=()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0));list.append(b);}}
  $('count').textContent=list.childElementCount+' places';
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
