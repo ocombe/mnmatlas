@@ -60,11 +60,24 @@ function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.d
 const classAbbreviations={Archer:'ARC',Bard:'BRD',Beastlord:'BST',Beastmaster:'BST',Cleric:'CLR',Druid:'DRU',Elementalist:'ELE',Enchanter:'ENC',Fighter:'FTR',Inquisitor:'INQ',Monk:'MNK',Necromancer:'NEC',Paladin:'PAL',Ranger:'RNG',Rogue:'ROG','Shadow Knight':'SHD',Shaman:'SHM',Spellblade:'SPB',Wizard:'WIZ'};
 const atlasClasses=Object.keys(classAbbreviations);
 const classesOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=6&&v.every(c=>atlasClasses.includes(c));
-// The wiki files class trainers as merchants, so a trainer is known by its name: a class with instructor, trainer or
+// The wiki files class trainers as merchants, so a trainer is known by its name (or a class its page names): a class with instructor, trainer or
 // guildmaster ("A beastmaster instructor" teaches Beastmaster). Only the name counts: plenty of other merchants stand in
 // a guild hall. "Instructor"/"guildmaster" alone, or the wiki's own "trainer" role, still mark a trainer of unknown class.
 function trainerClasses(row){
+ // A bounty row may carry the classes the wiki's own page gives (see scripts/make-bounties.mjs).
+ if(Array.isArray(row?.classes)){const given=row.classes.filter(c=>atlasClasses.includes(c));if(given.length)return given;}
  const name=String(row?.name??'');if(!/\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b/i.test(name))return [];
  return atlasClasses.filter(c=>new RegExp('\\b'+c.replace(' ','\\s*')+'s?\\b','i').test(name));
 }
 const isClassTrainer=row=>trainerClasses(row).length>0||row?.role==='trainer'||/\b(instructors?|guild\s*masters?|guildmasters?)\b/i.test(String(row?.name??''));
+// The classes a map already shows trainers for: class trainer markers and trainer chips (older chips only have their
+// abbreviations, BST standing for both Beastlord and Beastmaster). A map keeps one marker or chip per guild, so an
+// instructor whose classes all have one is on the map already, whatever their name.
+function mapTrainerClasses(markers,chips){
+ const found=new Set();
+ for(const m of markers||[])if(m?.category==='Class trainer'&&Array.isArray(m.classes))for(const c of m.classes)if(atlasClasses.includes(c))found.add(c);
+ for(const t of chips||[]){for(const c of Array.isArray(t?.classes)?t.classes:[])if(atlasClasses.includes(c))found.add(c);
+  for(const a of Array.isArray(t?.abbreviations)?t.abbreviations:[])for(const c of atlasClasses)if(classAbbreviations[c]===a)found.add(c);}
+ return found;
+}
+const trainerOnMap=(row,classes)=>{const c=trainerClasses(row);return c.length>0&&c.every(x=>classes.has(x));};

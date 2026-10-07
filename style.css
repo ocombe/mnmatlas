@@ -253,12 +253,19 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .embed .journal .results{flex:1;min-height:230px;max-height:none}
 .credit-item{white-space:nowrap}
 /* Wanted board: parchment notices pinned to a dark wooden board. */
-.wanted-button{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;width:100%;margin:0 0 16px;padding:8px 12px;border:1px solid #c9a46a;border-radius:var(--radius);background:radial-gradient(ellipse at 30% 20%,#f4ead1,#e6d5ae 75%);color:#3a2918;box-shadow:0 2px 6px #0007;flex-shrink:0}
-.wanted-button::before,.wanted-button::after{content:"";position:absolute;top:6px;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e3c27f,#7a5527 55%,#3b2610);box-shadow:0 1px 1px #0009}.wanted-button::before{left:8px}.wanted-button::after{right:8px}
-.wanted-button:active{transform:translateY(1px);box-shadow:0 1px 3px #0007}
-.wanted-button:hover{background:radial-gradient(ellipse at 30% 20%,#fff4dc,#efdfb9 75%);border-color:#e0b76f}
-.wanted-button strong{font:19px/1.1 var(--small-caps);font-weight:normal;letter-spacing:.18em;color:#8b2c1f}
-.wanted-button span{font-size:12px;color:#5a4630}
+/* The Wanted banner: a poster with the counts on the left and a real button on the right; the whole poster opens the
+   board. The button drops under the text, full width, when the panel is narrow. */
+.wanted-button{position:relative;display:flex;flex-wrap:wrap;align-items:center;justify-content:space-between;gap:10px;width:100%;margin:0 0 16px;padding:11px 12px 10px 14px;border:1px solid #c9a46a;border-radius:var(--radius);background:radial-gradient(ellipse at 30% 20%,#f4ead1,#e6d5ae 75%);color:#3a2918;box-shadow:0 2px 6px #0007;flex-shrink:0;cursor:pointer;text-align:left;container-type:inline-size;transition:transform .12s,box-shadow .12s,background .12s}
+.wanted-button::before,.wanted-button::after{content:"";position:absolute;top:4px;width:6px;height:6px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e3c27f,#7a5527 55%,#3b2610);box-shadow:0 1px 1px #0009}.wanted-button::before{left:5px}.wanted-button::after{right:5px}
+.wanted-button:hover{background:radial-gradient(ellipse at 30% 20%,#fff4dc,#efdfb9 75%);border-color:#e0b76f;transform:translateY(-1px);box-shadow:0 5px 12px #0009}
+.wanted-button:active{transform:translateY(0);box-shadow:0 1px 3px #0007}
+.wanted-button:focus-visible{outline:2px solid var(--primary);outline-offset:2px}
+.wanted-text{flex:1 1 90px;display:flex;flex-direction:column;gap:1px;min-width:0}
+.wanted-button strong{font:19px/1.1 var(--small-caps);font-weight:normal;letter-spacing:.14em;color:#8b2c1f}
+.wanted-count{font-size:12px;line-height:1.3;color:#5a4630}
+.wanted-cta{flex:none;padding:7px 10px;border:1px solid var(--primary);border-radius:var(--radius);background:var(--primary);color:#1e140b;font-size:12px;font-weight:600;white-space:nowrap}
+.wanted-button:hover .wanted-cta{background:#e2a052;border-color:#e2a052}
+@container (max-width:215px){.wanted-cta{flex:1 0 100%;text-align:center}}
 /* The Wanted panel takes the Search menu's place (same frame), so the map stays in view for dragging notices onto it. */
 .journal.wanted-mode>:not(#wanted-view){display:none!important}
 .journal.wanted-mode{overflow:hidden}

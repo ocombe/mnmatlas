@@ -240,7 +240,9 @@
    try{localStorage.setItem(wantedKey(config.id),JSON.stringify(file));}catch{}}
   // Markers suggested since the list was built are left out too.
   let places=[];try{const index=await (await fetch('data/find-index.json')).json();places=index.filter(p=>p.m===config.id);}catch{places=allMarkers().map(m=>({n:m.name,w:m.wikiId,m:config.id}));}
-  return {site:file.site,rows:file.rows.filter(r=>!placedOnMap(r,places))};
+  // Instructors whose classes already have a class trainer marker or chip on this map are on it too.
+  const trained=mapTrainerClasses(allMarkers(),labelData.trainers);
+  return {site:file.site,rows:file.rows.filter(r=>!placedOnMap(r,places)&&!trainerOnMap(r,trained))};
  }
  // Bounties someone already claimed (a suggestion waiting for review or publishing), from the atlas's own database.
  async function claimedBounties(){if(!user)return new Set();try{const {data,error}=await client.rpc('claimed_bounties',{map_id:config.id});if(error)throw error;return new Set((data||[]).map(r=>typeof r==='string'?r:r?.claimed_bounties).filter(Boolean));}catch{return new Set();}}
@@ -327,7 +329,7 @@
   for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Quest givers','Quests').replace('Named NPCs','Named')),text('small',String(g.rows.length)));tabs.append(t);}
   view.append(tabs,reward,list);
   const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
-  show(chosen);contributeCount();
+  show(chosen);contributeCount(rows);
  }
  renderWanted.serial=0;
  // A compact notice: the name (to its wiki page), level and kind, the wiki link and the bounty button. The whole notice
@@ -341,8 +343,12 @@
   paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',isClaimed);bountyDrag(note,row);return note;
  }
  // The Wanted banner shows how many bounties are open once this browser has the list, never fetching it on load.
- function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;const n=kept?kept.rows.length:-1,p=kept?kept.rows.filter(r=>r.priority).length:0;
-  open.replaceChildren(text('strong','Wanted'),text('span',n>0?n+(n===1?' bounty':' bounties')+(p?' · '+p+' priority':''):'Help place the NPCs this map is missing'));if(n===0)open.hidden=true;}
+ function contributeCount(given){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;
+  // The same rows as the board leaves open: not already on the map, by name, wiki page or class trainer chip.
+  let rows=given||null;if(!rows&&kept){const markers=allMarkers(),places=markers.map(m=>({n:m.name,w:m.wikiId})),trained=mapTrainerClasses(markers,labelData.trainers);rows=kept.rows.filter(r=>!placedOnMap(r,places)&&!trainerOnMap(r,trained));}
+  const n=rows?rows.length:-1,p=rows?rows.filter(r=>r.priority).length:0,words=text('span','','wanted-text');
+  words.append(text('strong','Wanted'),text('span',n>0?n+(n===1?' bounty':' bounties'):'NPCs this map is missing','wanted-count'));if(n>0&&p)words.append(text('span',p+' priority','wanted-count'));
+  open.replaceChildren(words,text('span','View bounties →','wanted-cta'));if(n===0)open.hidden=true;}
  {const open=$('contribute');if(open){open.onclick=()=>openWanted();
   // Not on the world map (no notes there); a map change redraws the open board, or closes it on the world map.
   const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();if($('journal').classList.contains('wanted-mode')){if(!config||config.zonesFile)closeWanted();else renderWanted();}};show();window.addEventListener('atlas:loaded',show);}}
