@@ -104,14 +104,14 @@ function fitCardPopup(){
 // another map) stay in the body.
 // Each action button gets a small line icon above its label, like the map's own tools.
 const actionPaths={
- link:'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71',
+ copy:'M10 8h9a2 2 0 0 1 2 2v9a2 2 0 0 1-2 2h-9a2 2 0 0 1-2-2v-9a2 2 0 0 1 2-2z M5 16H4a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h9a2 2 0 0 1 2 2v1',
  edit:'M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z M15 5l4 4',
- report:'M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z M4 22v-7',
+ report:'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z M12 9v4 M12 17h.01',
  delete:'M3 6h18 M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6 M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M10 11v6 M14 11v6',
  share:'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13',
  reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5'};
 function actionIcon(button){
- const label=button.textContent,kind=button.classList.contains('copy-place')?'link':button.classList.contains('community-report')?'report':button.classList.contains('popup-delete')?'delete':
+ const label=button.textContent,kind=button.classList.contains('copy-place')?'copy':button.classList.contains('community-report')?'report':button.classList.contains('popup-delete')?'delete':
   /^(suggest|edit)/i.test(label)?'edit':/^share/i.test(label)?'share':/^reset/i.test(label)?'reset':null;
  if(!kind||button.querySelector('svg'))return;
  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
