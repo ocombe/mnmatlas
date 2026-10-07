@@ -243,9 +243,10 @@
     "id": "wiki-31",
     "name": "Cooking — Shaded Bloom Inn",
     "category": "Tradeskill",
-    "x": 949,
-    "y": 1370,
-    "note": ""
+    "x": 958,
+    "y": 1359,
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-32",
@@ -440,7 +441,7 @@
     "name": "Bard — Bard guild",
     "category": "Class trainer",
     "x": 1024.06,
-    "y": 1550.0,
+    "y": 1550,
     "note": "BRD - Approximate guild location.",
     "classes": [
       "Bard"
@@ -497,7 +498,7 @@
     "id": "class-7",
     "name": "Elementalist / Monk — Little Half Town temple",
     "category": "Class trainer",
-    "x": 1506.0,
+    "x": 1506,
     "y": 1698.02,
     "note": "ELE / MNK - Approximate guild location.",
     "classes": [
@@ -540,5 +541,27 @@
     "classes": [
       "Wizard"
     ]
+  },
+  {
+    "id": "community-55",
+    "community": true,
+    "name": "A bag merchant",
+    "category": "Vendor",
+    "note": "",
+    "x": 1150,
+    "y": 1515,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-bag-merchant",
+    "wikiId": "npc-a-bag-merchant"
+  },
+  {
+    "id": "community-57",
+    "community": true,
+    "name": "A barkeep",
+    "category": "Vendor",
+    "note": "",
+    "x": 949,
+    "y": 1370,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-barkeep",
+    "wikiId": "npc-a-barkeep"
   }
 ]
