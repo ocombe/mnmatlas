@@ -110,22 +110,26 @@ function tidyActions(n){
 const wikiPage=(label,href,cls='')=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
 // A short card in the wiki's own order: its tag line, level, location, race and class, the first loot items, the start
 // of its summary, each linking back to the wiki, with its credit.
+// "Ebon Scholar Myrddin (levels 51–53)": the name, and the level our title gives, apart.
+function titleLevel(t){const found=/^(.*?)\s*\((levels?\s[^)]*)\)\s*$/i.exec(t);return found?{name:found[1],level:found[2]}:{name:t,level:''};}
 function npcCard(c,m){
  // The tag line keeps what the rows below do not already say ("Named · Human · Wizard" over a Human · Wizard row).
- const shown=[c.race,c.class].filter(Boolean).map(v=>v.toLowerCase()),tags=String(c.tags||'').split(' · ').filter(t=>t&&!shown.includes(t.toLowerCase())).join(' · ');
+ // A named mob's kind already says Named; our title's level ("(levels 51–53)") leads the line instead of sitting in the name.
+ const shown=[c.race,c.class,/named/i.test(noteKind(m))?'named':''].filter(Boolean).map(v=>v.toLowerCase()),level=titleLevel(markerTitle(m)).level;
+ const tags=[level&&level[0].toUpperCase()+level.slice(1),...String(c.tags||'').split(' · ').filter(t=>t&&!shown.includes(t.toLowerCase()))].filter(Boolean).join(' · ');
  const box=text('div','','npc-card'),facts=text('div','','npc-facts');if(tags)facts.append(text('p',tags,'npc-tags'));
  const rows=document.createElement('dl'),row=(term,value)=>{if(value)rows.append(text('dt',term),text('dd',value));};
  // Our title may already give a level ("levels 51–53"): then the wiki's is left out rather than shown beside it.
  if(!/\blevels?\b/i.test(markerTitle(m)))row('Level',c.level);row('Location',c.location);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));
  if(rows.children.length)facts.append(rows);if(facts.children.length)box.append(facts);
- if(Array.isArray(c.loot)&&c.loot.length){const loot=text('div','','npc-loot'),list=document.createElement('ul');loot.append(text('p','Notable loot','npc-heading'));
+ if(Array.isArray(c.loot)&&c.loot.length){const loot=text('div','','npc-loot'),list=document.createElement('ul');const head=text('p','Notable loot','npc-heading');if(c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));loot.append(head);
   for(const i of c.loot){const li=document.createElement('li');li.append(wikiPage(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
   loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(wikiPage('+'+more+' more on the wiki',c.url,'npc-more'));box.append(loot);}
  if(c.summary){const p=text('p',c.summary+' ','npc-summary');p.append(wikiPage('Read more on the wiki ↗',c.url));box.append(p);}
  box.append(wikiPage('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
  return box;
 }
-function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(markerTitle(m),card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
+function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
  if(card)n.append(npcCard(card,m));if(m.note){if(card)n.append(text('p','Atlas note','popup-label'));n.append(text('p',m.note,card?'npc-our-note':''));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
