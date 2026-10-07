@@ -57,7 +57,15 @@
    <li><code>/mini/&lt;wiki id&gt;.webp</code>: for every marker that is linked to its page on the Monsters and Memories Wiki, by the wiki's own id (the id in its NPC data, such as <code>npc-marshal-harding</code>).</li>
    <li><code>/mini/&lt;map id&gt;/&lt;place id&gt;.webp</code>: for every marker on the atlas, such as <code>/mini/keepers-bight/farmers.webp</code>.</li>
    <li>In the atlas, select a marker, press <b>Embed</b> and tick <b>Small still image of this spot instead</b> to get the code for it.</li>
-   <li>The pictures are redrawn every time the atlas is updated, so a moved marker or a corrected name shows up on its own. An NPC the atlas does not mark yet, but that is on its Wanted board, gets a Wanted poster at the same address, linking to its notice on the board, until someone places it on the map.</li>
+   <li>The pictures are redrawn every time the atlas is updated, so a moved marker or a corrected name shows up on its own.</li>
+  </ul>
+  <h3 id="wanted-poster">When the NPC is not on the atlas yet</h3>
+  <p>You can put the same code on every NPC page, even for NPCs the atlas does not mark yet. When the Monsters and Memories Wiki lists an NPC in a zone the atlas covers but no marker on the atlas is linked to it, <code>/mini/&lt;wiki id&gt;.webp</code> shows this Wanted poster instead of a broken image:</p>
+  <div class="example mini"><a href="../?find=npc-aaliyah"><img src="../assets/bounty/wanted-poster.webp" width="320" height="200" alt="Wanted: not on the MnM Atlas yet. Claim the bounty: place it on the map."></a></div>
+  <ul>
+   <li>The poster's link (<code>?find=&lt;wiki id&gt;</code>) opens the NPC's map on the <b>Wanted</b> board, at its notice, where a reader can place it on the map and claim the bounty.</li>
+   <li>Once someone places the NPC and the marker is published, the next update of the atlas swaps the poster for the real map picture, at the same address: nothing to change on your page.</li>
+   <li>An NPC the wiki does not list in any zone the atlas covers has no picture.</li>
   </ul>
 
   <h2 id="links">Links and ?find</h2>
@@ -70,7 +78,7 @@
    <tr><td><code>/?find=bank&amp;map=underdocks</code></td><td>Looks on one map only.</td></tr>
    <tr><td><code>/?find=npc-marshal-harding&amp;embed=map</code></td><td>Works inside a map embed too.</td></tr>
   </table>
-  <p>A wiki id comes first, then an exact name, then names that contain the text. If nothing matches, the atlas says so in its search menu. <code>?wiki=&lt;wiki id&gt;</code> works the same way as <code>?find=</code>.</p>
+  <p>A wiki id comes first, then an exact name, then names that contain the text. If nothing matches, the atlas says so in its search menu. <code>?wiki=&lt;wiki id&gt;</code> works the same way as <code>?find=</code>. An NPC that is not on the atlas yet but is on a map's Wanted board opens that board at its notice (see <a href="#wanted-poster">the Wanted poster</a>).</p>
 
   <h2 id="addresses">Address options</h2>
   <table>
