@@ -44,6 +44,6 @@ console.log('Script checks passed: every page script parses.');
   loot:[{name:'A',url:'https://monstersandmemories.wiki/items/a',dropRate:null},{name:'B',url:'https://monstersandmemories.wiki/items/b',dropRate:0.25},{name:'Evil',url:'https://evil.example/items/x',dropRate:.9},{name:'C',url:'https://monstersandmemories.wiki/items/c',dropRate:4},
    ...['d','e','f'].map(x=>({name:x.toUpperCase(),url:'https://monstersandmemories.wiki/items/'+x}))]});
  assert.equal(c.description,undefined);assert.equal(c.quests,undefined);assert.equal(c.location,'Directions: by the loop');
- assert.equal(JSON.stringify(c.loot.map(i=>i.name)),'["B","C","A","D","E"]');assert.equal(c.loot[0].dropRate,25);assert.equal(c.loot[1].dropRate,4);assert.equal(c.lootCount,6);
+ assert.equal(JSON.stringify(c.loot.map(i=>i.name)),'["C","B","A","D","E"]');assert.equal(c.loot[0].dropRate,4);assert.equal(c.loot[1].dropRate,0.25,'Rates are percent already');assert.equal(c.lootCount,6);
  assert.equal(card({name:'X',url:'https://evil.example/npcs/x'}),null);
  console.log('Card checks passed: NPC cards keep short facts and wiki links only.');}

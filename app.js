@@ -87,19 +87,29 @@ function npcCardFor(m){
  if(!npcCards.loading){npcCards.loading=true;const mapId=config.id;
   fetch('npc-cards/'+encodeURIComponent(mapId)+'.json').then(r=>r.ok?r.json():null).catch(()=>null).then(body=>{
    if(npcCards.map!==mapId)return;npcCards.cards=body&&body.cards&&typeof body.cards==='object'?body.cards:{};
-   const byId=new Map(allMarkers().map(x=>[x.id,x]));for(const [id,pin] of pins){const one=byId.get(id);if(one&&npcCards.cards[one.wikiId]){pin.setPopupContent(popup(one));
+   const byId=new Map(allMarkers().map(x=>[x.id,x]));for(const [id,pin] of pins){const one=byId.get(id);if(one&&npcCards.cards[one.wikiId]){pin.setPopupContent(popup(one));if(pin.isPopupOpen())requestAnimationFrame(fitCardPopup);
     // A card makes a tall popup: it moves the map just enough to show it whole.
     // The top padding clears the map's title plate, wherever it sits on this screen.
     const p=pin.getPopup();if(p){Object.assign(p.options,{autoPan:true,autoPanPaddingBottomRight:L.point(16,16)});Object.defineProperty(p.options,'autoPanPaddingTopLeft',{configurable:true,get:()=>{const plate=document.querySelector('.map-title'),box=map.getContainer().getBoundingClientRect(),below=plate&&plate.offsetParent?plate.getBoundingClientRect().bottom-box.top+10:0;return L.point(16,Math.max(16,below));}});}}}});}
  return null;
 }
+// A popup with a card is tall: once open (by a click, a search, a shared or ?wiki= link), the map moves just enough that
+// it shows whole, below the map's title plate.
+function fitCardPopup(){
+ const el=map&&document.querySelector('.leaflet-popup');if(!el||!el.querySelector('.npc-card'))return;
+ const box=map.getContainer().getBoundingClientRect(),plate=document.querySelector('.map-title'),top=Math.max(box.top+16,plate&&plate.offsetParent?plate.getBoundingClientRect().bottom+10:0),dy=top-el.getBoundingClientRect().top;
+ if(dy>1)map.panBy([0,-dy],{animate:false});
+}
 const wikiPage=(label,href,cls='')=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
 // A short card in the wiki's own order: its tag line, level, location, race and class, the first loot items, the start
 // of its summary, each linking back to the wiki, with its credit.
-function npcCard(c){
- const box=text('div','','npc-card');if(c.tags)box.append(text('p',c.tags,'npc-tags'));
+function npcCard(c,m){
+ // The tag line keeps what the rows below do not already say ("Named · Human · Wizard" over a Human · Wizard row).
+ const shown=[c.race,c.class].filter(Boolean).map(v=>v.toLowerCase()),tags=String(c.tags||'').split(' · ').filter(t=>t&&!shown.includes(t.toLowerCase())).join(' · ');
+ const box=text('div','','npc-card');if(tags)box.append(text('p',tags,'npc-tags'));
  const rows=document.createElement('dl'),row=(term,value)=>{if(value)rows.append(text('dt',term),text('dd',value));};
- row('Level',c.level);row('Location',c.location);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));
+ // Our title may already give a level ("levels 51–53"): then the wiki's is left out rather than shown beside it.
+ if(!/\blevels?\b/i.test(markerTitle(m)))row('Level',c.level);row('Location',c.location);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));
  if(rows.children.length)box.append(rows);
  if(Array.isArray(c.loot)&&c.loot.length){const loot=text('div','','npc-loot'),list=document.createElement('ul');loot.append(text('p','Notable loot','npc-heading'));
   for(const i of c.loot){const li=document.createElement('li');li.append(wikiPage(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
@@ -110,7 +120,7 @@ function npcCard(c){
 }
 function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(markerTitle(m),card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
- if(card)n.append(npcCard(card));if(m.note)n.append(text('p',m.note,card?'npc-our-note':''));const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
+ if(card)n.append(npcCard(card,m));if(m.note)n.append(text('p',m.note,card?'npc-our-note':''));const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
@@ -498,6 +508,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
   activePlace=null;sharedPin=null;cancelPlacement();if($('editor').open)closeEditor();$('search').value='';enabled=new Set(Object.keys(categories));showPins=true;updateCategoryButtons();
   document.body.classList.remove('aligning');$('edit-bar').hidden=true;restoreStorage();setupCategoryControls();updateTitles();
   map=L.map('map',{crs:L.CRS.Simple,minZoom:config.minZoom,maxZoom:config.maxZoom,zoomSnap:0,zoomDelta:.5,zoomControl:false,attributionControl:true,maxBoundsViscosity:1});
+  map.on('popupopen',()=>requestAnimationFrame(fitCardPopup));
   const bounds=mapBounds();map.setMaxBounds(bounds);
   sheetTileLayer(config,config.frame||{x:0,y:0,width:config.width,height:config.height},config.tilePath+'?v='+encodeURIComponent(config.tileRevision),{tileSize:config.tileSize,minZoom:config.minZoom,maxZoom:config.maxZoom,maxNativeZoom:config.maxNativeZoom,noWrap:true,bounds,keepBuffer:1,attribution:text('span',config.attribution.map).outerHTML}).on('tileerror',()=>status('A map tile could not load. Please reload.')).addTo(map);
   const currentHidden={...hiddenData};for(const key of ['areas','additionalAreas','routes','connections','destinations','levelStacks'])if(Array.isArray(hiddenData[key]))currentHidden[key]=hiddenData[key].filter(atLevel);

@@ -14,7 +14,8 @@ const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),api='https://mo
 // Plain text only: no control characters or angle brackets, the wiki's bold/italic marks dropped, a length limit.
 const text=(v,max)=>{if(typeof v==='number')v=String(v);if(typeof v!=='string')return '';const t=v.replace(/'{2,}/g,'').replace(/[\u0000-\u001f\u007f<>]/g,' ').replace(/\s+/g,' ').trim();return t.length>max?t.slice(0,max-1).replace(/\s+\S*$/,'')+'…':t;};
 const page=(v,kind)=>{try{const u=new URL(String(v));return u.protocol==='https:'&&/(^|\.)monstersandmemories\.wiki$/.test(u.hostname)&&u.pathname.startsWith('/'+kind+'/')?u.href:'';}catch{return '';}};
-const rate=v=>typeof v==='number'&&Number.isFinite(v)&&v>0?Math.round((v<=1?v*100:v)*10)/10:null;
+// The wiki gives drop rates in percent already (0.5 is half a percent).
+const rate=v=>typeof v==='number'&&Number.isFinite(v)&&v>0&&v<=100?Math.round(v*100)/100:null;
 let last=0;
 async function npc(id,secret){
  const wait=last+1000-Date.now();if(wait>0)await new Promise(r=>setTimeout(r,wait));last=Date.now();
