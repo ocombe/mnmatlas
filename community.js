@@ -308,14 +308,14 @@
   const head=text('div','','wanted-head');head.append(button('← Search menu',closeWanted,'wanted-back'),button('×',()=>{closeWanted();setPanel(false);},'wanted-close'));head.lastChild.setAttribute('aria-label','Close');
   const zone=searchZone()||config.title,count=text('p','Reading the notices…','board-count');
   view.append(head,text('h2','Wanted','wanted-title'),text('p','Whereabouts sought by the atlas. Find them in the world, mark them on the map.','board-lede'),count);
-  if(!user){const tip=text('div','','board-signin');tip.append(text('strong','Did you know?','wiki-tip-label'),button('Sign in',signInToTake,'wiki-signin'),text('span',' to take a bounty: place the NPC on the map and earn '+rewardWord+' and your name in the atlas credits.'));view.append(tip);}
+  if(!user){const tip=text('div','','board-signin');tip.append(text('strong','Did you know? ','wiki-tip-label'),button('Sign in',signInToTake,'wiki-signin'),text('span',' to take bounties and earn '+rewardWord+' and a place in the atlas credits.'));view.append(tip);}
   else myPoints().then(p=>{if(p&&serial===renderWanted.serial)count.after(text('p','Your '+rewardWord+': '+p.points,'board-points'));});
   let found;try{found=await wantedList();}catch(e){if(serial===renderWanted.serial)count.textContent=e.message==='none'?'The wanted list for '+zone+' isn’t available yet.':'The wanted list could not be loaded right now. Please try again later.';return;}
   if(serial!==renderWanted.serial)return;
   const claimed=await claimedBounties(),{site,rows}=found,priority=rows.filter(r=>r.priority).length;
   if(!rows.length){count.textContent='No bounties here. Every NPC the wiki knows is on the map.';return;}
-  count.textContent=rows.length+(rows.length===1?' bounty':' bounties')+' open in '+zone+(priority?', '+priority+' priority':'');
-  count.after(text('p',matchMedia('(pointer: fine)').matches?'Drag a notice onto the map, or press Take the bounty.':'Press Take the bounty, then drag the pin to where they stand.','board-hint'));
+  // One short line: how many, and how to take one.
+  count.textContent=[rows.length+' open',priority?priority+' priority':'',matchMedia('(pointer: fine)').matches?'drag a notice onto the map':'tap Take the bounty'].filter(Boolean).join(' · ');count.title=rows.length+' bounties open in '+zone;
   // One tab per kind, with its count; the last one chosen comes back, else the first with bounties (trainers first).
   const groups=bountyGroups.map(g=>({...g,rows:rows.filter(r=>bountyGroup(r)===g.key).sort((a,b)=>a.name.localeCompare(b.name))})).filter(g=>g.rows.length);
   let chosen;try{chosen=localStorage.getItem(tabKey);}catch{}if(!groups.some(g=>g.key===chosen))chosen=groups[0].key;
@@ -324,7 +324,7 @@
    for(const t of tabs.children)t.setAttribute('aria-selected',String(t.dataset.key===key));
    reward.textContent='Reward: '+(g.priority?3:2)+' '+rewardWord+' and your name in the atlas credits';
    list.replaceChildren(...g.rows.map(row=>notice(row,claimed.has(row.id))));list.scrollTop=0;};
-  for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Named NPCs','Named')),text('small',String(g.rows.length)));tabs.append(t);}
+  for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Quest givers','Quests').replace('Named NPCs','Named')),text('small',String(g.rows.length)));tabs.append(t);}
   view.append(tabs,reward,list);
   const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
   show(chosen);contributeCount();
