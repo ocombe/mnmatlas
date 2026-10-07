@@ -158,7 +158,10 @@ function drawMarkers(){
  schedulePlaceLabels();
 }
 function setPanel(open){if(!compact())desktopPanelOpen=open;$('journal').classList.toggle('closed',!open);$('toggle-panel').setAttribute('aria-expanded',String(open));map?.invalidateSize({pan:true,animate:false});}
-function updateCategoryButtons(){for(const b of $('categories').children)b.setAttribute('aria-pressed',String(enabled.has(b.dataset.category)));$('hide-pins').setAttribute('aria-pressed',String(showPins));}
+// The link beside Show on map hides every type when all are shown, and shows them all otherwise.
+const allTypesShown=()=>[...$('categories').children].every(b=>enabled.has(b.dataset.category))&&showPins;
+function updateCategoryButtons(){for(const b of $('categories').children)b.setAttribute('aria-pressed',String(enabled.has(b.dataset.category)));$('hide-pins').setAttribute('aria-pressed',String(showPins));
+ const all=allTypesShown();$('all-categories').textContent=all?'Hide all':'Show all';$('all-categories').setAttribute('aria-label',all?'Hide every marker type':'Show every marker type');}
 function cancelPlacement(){if(draftPin)$('status').hidden=true;draftPin?.remove();draftPin=null;document.body.classList.remove('placing');$('cancel-place').hidden=true;}
 // The world map (the one with zone outlines) takes no new notes: places belong on their zone's map. Notes saved there earlier stay.
 const takesNotes=()=>!config.zonesFile;
@@ -577,7 +580,7 @@ function setupControls(){
  instantTips();
  $('about').onclick=()=>{$('about-dialog').showModal();showContributors();};$('close-about').onclick=()=>$('about-dialog').close();
 
- $('all-categories').onclick=()=>{enabled=new Set(Object.keys(categories));updateCategoryButtons();drawMarkers();};
+ $('all-categories').onclick=()=>{if(allTypesShown())for(const b of $('categories').children)enabled.delete(b.dataset.category);else{enabled=new Set(Object.keys(categories));showPins=true;}updateCategoryButtons();drawMarkers();};
  $('search').oninput=refreshSearch;$('clear-search').onclick=()=>{$('search').value='';refreshSearch();$('search').focus();};
  $('zoom-in').onclick=()=>map.zoomIn();$('zoom-out').onclick=()=>map.zoomOut();$('fit').onclick=fitMap;
  $('hide-pins').onclick=()=>{showPins=!showPins;updateCategoryButtons();drawMarkers();};
