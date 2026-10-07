@@ -36,7 +36,7 @@
  <main class="docs">
   <h1>Embed MnM Atlas</h1>
   <p class="lede">Put the illustrated maps of Monsters &amp; Memories on a wiki page or website: a whole map, a small picture of one spot, or a link that opens the atlas on an NPC.</p>
-  <ul class="toc"><li><a href="#map-embed">Map embed</a></li><li><a href="#mini">Mini map image</a></li><li><a href="#links">Links and ?find</a></li><li><a href="#addresses">Address options</a></li><li><a href="#maps">Map list</a></li><li><a href="#inside">Inside an embed</a></li><li><a href="#wiki-links">Wiki links</a></li><li><a href="#credits">Credits</a></li></ul>
+  <ul class="toc"><li><a href="#map-embed">Map embed</a></li><li><a href="#mini">Mini map image</a></li><li><a href="#links">Links and ?find</a></li><li><a href="#addresses">Address options</a></li><li><a href="#maps">Map list</a></li><li><a href="#inside">Inside an embed</a></li><li><a href="#wiki-links">Wiki links</a></li><li><a href="#wiki-owners">For wiki owners</a></li><li><a href="#credits">Credits</a></li></ul>
 
   <h2 id="map-embed">Map embed</h2>
   <p>The quickest way: open a map in the atlas, select a place if you like, and press <b>Embed</b> in the top bar. The dialog writes the code for you. It looks like this:</p>
@@ -117,6 +117,18 @@
    <li>On any other site: no wiki links.</li>
   </ul>
   <p>If you run a wiki or database and want your pages linked from the atlas, or the atlas linked differently on your site, open an issue on the <a href="https://github.com/ocombe/mnmatlas">atlas's GitHub page</a>.</p>
+
+  <h2 id="wiki-owners">For wiki owners</h2>
+  <p>On the Monsters and Memories Wiki, the atlas does more than link: the note form suggests the wiki's NPCs as people type a name, the <b>Wanted</b> board lists the wiki's NPCs that the atlas does not mark yet, marker popups show a short card for the NPC, and the still images show a Wanted poster for NPCs not placed yet. Another wiki or database can get the same, on the atlas and inside its own pages. Here is what the atlas needs from it:</p>
+  <ul>
+   <li><b>A key and a rate limit.</b> The atlas keeps the key on its own servers, never in the page. It asks the wiki when the atlas is published, not for each visitor; the name suggestions of signed-in people go through the atlas's server, each account limited. Today that is about 100 requests a minute at most.</li>
+   <li><b>Stable ids and page addresses</b> for NPCs (and items). The atlas stores the id and the link with a marker, never the wiki's text.</li>
+   <li><b>NPC search by name, within a zone</b>, returning for each result its id, name, page address, role (merchant, quest giver, named, trainer), level, a short location line and tags (such as "Named · Human · Wizard", with a trainer's class).</li>
+   <li><b>Every NPC of a zone in one request</b>, with the same fields, for the Wanted board. The wiki's zone names should match the atlas's maps, or come with a list that matches them.</li>
+   <li><b>One NPC by id</b>, adding its race and class, a short summary (a couple of sentences) and its loot: each item's name, page address and drop rate when known. This makes the cards in marker popups.</li>
+   <li><b>Permission</b> to show these fields on markers, cards and the Wanted board, each linking back to its page on the wiki, with the wiki credited. The atlas never copies full descriptions or mirrors the wiki.</li>
+  </ul>
+  <p>Inside the wiki's own pages, embeds then show its links, cards and Wanted board, and never another wiki's. To set this up, <a href="https://github.com/ocombe/mnmatlas/issues">open an issue on the atlas's GitHub page</a>.</p>
 
   <h2 id="credits">Credits</h2>
   <p>MnM Atlas is an illustrated, unofficial fan atlas, not an official game map. Many maps build on community maps whose authors are credited on each map (the credits line on the map and <b>About</b> in the atlas). When you show the atlas on your site, keep the embed's own credits visible, or for a still image keep its link to the atlas, and credit "MnM Atlas" and the original map authors where you describe it.</p>
