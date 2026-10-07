@@ -364,3 +364,5 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .drag-ghost small{padding:2px 7px;border-radius:var(--radius);background:var(--popover);border:1px solid var(--amber-border);color:var(--foreground);font-size:11px;white-space:nowrap}
 .notice:not(.claimed) .notice-paper{cursor:grab}
 .leaflet-popup-content .npc-heading small{font:11px var(--body);letter-spacing:0}
+/* Markers shown: an open eye; hidden: the eye struck through. */
+#hide-pins[aria-pressed="true"] .eye-shut,#hide-pins[aria-pressed="false"] .eye-open{display:none}
