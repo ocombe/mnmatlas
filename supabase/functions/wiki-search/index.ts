@@ -38,16 +38,24 @@ Deno.serve(async req=>{
  if(!key)return reply(req,503,{error:'not-configured'});
  const user=await signedIn(req);if(!user)return reply(req,401,{error:'sign-in'});
  const q=text(url.searchParams.get('q'),80).toLowerCase().replace(/\s+/g,' '),wanted=(url.searchParams.get('type')||'npc,item,quest,zone').split(',').filter(t=>types.has(t)).sort();
- // zone: only results from that wiki zone (the map being edited); the wiki's search has no zone filter of its own.
- const zone=zoneKey(text(url.searchParams.get('zone'),80));
+ // zone: only results from that wiki zone (the map being edited). The wiki filters by its zone address ("glass-flats"),
+ // taken from zoneSlug when the site knows it, otherwise made from the name; results are checked against the name too.
+ const zoneName=text(url.searchParams.get('zone'),80),zone=zoneKey(zoneName);
+ const given=text(url.searchParams.get('zoneSlug'),60).toLowerCase(),slug=/^[a-z0-9]+(-[a-z0-9]+)*$/.test(given)?given:zone.replace(/ /g,'-');
  if(q.length<2||!wanted.length)return reply(req,400,{error:'query'});
- const now=Date.now(),id=wanted.join(',')+'|'+zone+'|'+q,hit=cache.get(id);
+ const now=Date.now(),id=wanted.join(',')+'|'+zone+'|'+slug+'|'+q,hit=cache.get(id);
  if(hit&&now-hit.at<keep)return reply(req,200,{site,results:hit.results},{'Cache-Control':'private, max-age=1800'});
  const recent=(perUser.get(user)||[]).filter(t=>now-t<60000);
  if(recent.length>=limit)return reply(req,429,{error:'busy'},{'Retry-After':'30'});
  recent.push(now);perUser.set(user,recent);
+ const ask=(withZone:boolean)=>fetch(api+'search?q='+encodeURIComponent(q)+'&type='+wanted.join(',')+(withZone?'&zone='+encodeURIComponent(slug):'')+'&limit=10',{headers:{Authorization:'Bearer '+key,Accept:'application/json'}});
  let r:Response;
- try{r=await fetch(api+'search?q='+encodeURIComponent(q)+'&type='+wanted.join(','),{headers:{Authorization:'Bearer '+key,Accept:'application/json'}});}
+ try{
+  r=await ask(!!slug);
+  // Nothing under that zone address (or an address the wiki does not know): search everywhere once
+  // and keep that zone's results below, so a zone address that differs from ours does not hide everything.
+  if(slug&&(r.status===400||r.status===404||(r.ok&&!((await r.clone().json().catch(()=>null))?.results?.length)))){recent.push(Date.now());r=await ask(false);}
+ }
  catch{return reply(req,502,{error:'wiki'});}
  if(r.status===429)return reply(req,429,{error:'busy'},{'Retry-After':'30'});
  if(r.status===404)return reply(req,200,{site,results:[]});
