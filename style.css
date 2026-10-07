@@ -308,6 +308,9 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .notice.claimed .notice-name,.notice.claimed .notice-meta,.notice.claimed .notice-foot{opacity:.5}
 .board-credit{display:block;text-align:center;margin-top:8px;flex-shrink:0}
 .journal.wanted-dragging{opacity:0;pointer-events:none}
+/* Dragging a notice never selects text (the name stays a link). */
+.notice{-webkit-user-select:none;user-select:none}
+body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select:none;cursor:grabbing}
 /* A bounty's note: the wiki facts as plain text in place of their fields; Notes stays editable. */
 .note-form.bounty-mode .note-type,.note-form.bounty-mode .field:has(>#name),.note-form.bounty-mode #marker-fields,.note-form.bounty-mode #wiki-field,.note-form.bounty-mode #exit-fields,.note-form.bounty-mode #exit-target-field{display:none!important}
 .bounty-facts{display:flex;flex-direction:column;gap:10px}

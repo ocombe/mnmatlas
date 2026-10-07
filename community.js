@@ -279,11 +279,11 @@
   note.addEventListener('pointerdown',e=>{
    if(e.button!==0||e.target.closest('a,button')||note.classList.contains('claimed'))return;
    const touch=e.pointerType!=='mouse',x0=e.clientX,y0=e.clientY,journal=$('journal');let started=false,timer=null,ghost=null;
-   const cleanup=()=>{clearTimeout(timer);window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);window.removeEventListener('keydown',key,true);ghost?.remove();journal.classList.remove('wanted-dragging');};
+   const cleanup=()=>{clearTimeout(timer);window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);window.removeEventListener('keydown',key,true);ghost?.remove();journal.classList.remove('wanted-dragging');document.body.classList.remove('notice-dragging');};
    const begin=ev=>{if(started)return;started=true;
     const prefill=bountyPrefill(row),face=text('span','');face.style.setProperty('--pin',categories[prefill.category]?.[1]||'#365f59');face.append(markerSymbol({category:prefill.category,name:prefill.name}));
     ghost=text('span','','drag-ghost');ghost.append(face,text('small',row.name));ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';document.body.append(ghost);
-    if(compact())journal.classList.add('wanted-dragging');status('Drop the notice where '+row.name+' stands, or press Escape.',true);};
+    document.body.classList.add('notice-dragging');window.getSelection?.().removeAllRanges();if(compact())journal.classList.add('wanted-dragging');status('Drop the notice where '+row.name+' stands, or press Escape.',true);};
    const move=ev=>{if(!started){if(Math.hypot(ev.clientX-x0,ev.clientY-y0)<(touch?10:6))return;if(touch){cleanup();return;}begin(ev);if(!started)return;}
     if(ghost){ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';}ev.preventDefault();};
    const up=async ev=>{const was=started&&!!ghost;cleanup();if(!was)return;$('status').hidden=true;
