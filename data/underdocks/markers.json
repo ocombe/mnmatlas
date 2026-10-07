@@ -521,5 +521,29 @@
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/hargin-earthcaller",
     "wikiId": "npc-hargin-earthcaller"
+  },
+  {
+    "id": "community-59",
+    "community": true,
+    "name": "Draznax",
+    "category": "Personal",
+    "note": "",
+    "x": 4179,
+    "y": 4938,
+    "level": "upper",
+    "wiki": "https://monstersandmemories.wiki/npcs/draznax",
+    "wikiId": "npc-draznax"
+  },
+  {
+    "id": "community-60",
+    "community": true,
+    "name": "Munk",
+    "category": "Vendor",
+    "note": "",
+    "x": 3645,
+    "y": 4141,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/munk",
+    "wikiId": "npc-munk"
   }
 ]
