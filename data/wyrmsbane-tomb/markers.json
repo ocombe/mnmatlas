@@ -275,7 +275,9 @@
     "y": 2993.64,
     "level": "floor-1",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-boothroy",
+    "wikiId": "npc-quartermaster-boothroy"
   },
   {
     "id": "jakob-gefrey",
@@ -285,7 +287,9 @@
     "y": 2536.96,
     "level": "floor-1",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/jakob-geffrey",
+    "wikiId": "npc-jakob-geffrey"
   },
   {
     "id": "timmon-bell",
@@ -295,7 +299,9 @@
     "y": 2191.75,
     "level": "floor-2",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/timmon-bell",
+    "wikiId": "npc-timmon-bell"
   },
   {
     "id": "bone-construct",
@@ -305,7 +311,9 @@
     "y": 1369.96,
     "level": "floor-3",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/bone-construct",
+    "wikiId": "npc-bone-construct"
   },
   {
     "id": "lieutenant-gregan-snyde",
@@ -315,7 +323,9 @@
     "y": 1437.46,
     "level": "floor-3",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/lieutenant-gregan-snyde",
+    "wikiId": "npc-lieutenant-gregan-snyde"
   },
   {
     "id": "dario-numas",
@@ -325,7 +335,9 @@
     "y": 2292.31,
     "level": "floor-3",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/dario-numas",
+    "wikiId": "npc-dario-numas"
   },
   {
     "id": "ariblast-the-wicked",
@@ -335,7 +347,9 @@
     "y": 2452.11,
     "level": "floor-3",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/ariblast-the-wicked",
+    "wikiId": "npc-ariblast-the-wicked"
   },
   {
     "id": "grandmaster-gildas",
@@ -345,7 +359,9 @@
     "y": 1062.15,
     "level": "floor-4",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/grandmaster-gildas",
+    "wikiId": "npc-grandmaster-gildas"
   },
   {
     "id": "grandmaster-obadiah",
@@ -355,17 +371,21 @@
     "y": 2251.16,
     "level": "floor-4",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/grandmaster-obadiah",
+    "wikiId": "npc-grandmaster-obadiah"
   },
   {
     "id": "high-marshal-fionna-bromm",
     "name": "High Marshal Fionna Bromm",
     "category": "Named mob",
-    "x": 1150.0,
+    "x": 1150,
     "y": 1663.5,
     "level": "floor-4",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/high-marshal-fionna-bromm",
+    "wikiId": "npc-high-marshal-fionna-bromm"
   },
   {
     "id": "gerhardt-graves",
@@ -375,7 +395,9 @@
     "y": 2784.85,
     "level": "floor-3",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/gerhardt-graves",
+    "wikiId": "npc-gerhardt-graves"
   },
   {
     "id": "escaped-minion",
@@ -385,7 +407,9 @@
     "y": 2645.82,
     "level": "floor-1",
     "approximate": true,
-    "note": "Approximate room location; confirm in game."
+    "note": "Approximate room location; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-escaped-minion",
+    "wikiId": "npc-an-escaped-minion"
   },
   {
     "id": "cave-slope-3-4-0-from",

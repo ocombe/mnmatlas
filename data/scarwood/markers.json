@@ -47,7 +47,9 @@
   "y": 510,
   "approximate": true,
   "note": "Follow the left-hand cliff face until you reach the hunting lodge. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/krev-thistlehook",
+  "wikiId": "npc-krev-thistlehook"
  },
  {
   "id": "lake-goblins-34-1",
@@ -87,7 +89,9 @@
   "y": 1363,
   "approximate": true,
   "note": "In the corrupted giant camp. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/dregath-warwake",
+  "wikiId": "npc-dregath-warwake"
  },
  {
   "id": "yurl-rootrender",
@@ -97,7 +101,9 @@
   "y": 1451,
   "approximate": true,
   "note": "Spawns by the last stump at the west end of the giants’ road, near the three-way crossing, and wanders down the road. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/yurl-rootrender",
+  "wikiId": "npc-yurl-rootrender"
  },
  {
   "id": "hill-giants-1",
@@ -117,6 +123,8 @@
   "y": 6071,
   "approximate": true,
   "note": "In the barrel room of the Hill Giant cave, south-west corner of the zone. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/krothun-veincarver",
+  "wikiId": "npc-krothun-veincarver"
  }
 ]

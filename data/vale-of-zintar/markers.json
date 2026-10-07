@@ -47,7 +47,9 @@
   "y": 3731,
   "approximate": true,
   "note": "At the giant fishing camp on Fisher Rock. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/hadir-the-shipbreaker",
+  "wikiId": "npc-hadir-the-shipbreaker"
  },
  {
   "id": "beach-giants-1",
@@ -157,7 +159,9 @@
   "y": 8073,
   "approximate": true,
   "note": "In the Snake Den. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/bloodfang",
+  "wikiId": "npc-bloodfang"
  },
  {
   "id": "merchant-traveler",
@@ -167,6 +171,8 @@
   "y": 8775,
   "approximate": true,
   "note": "At the Pyrmos mercenary tower near the road to Fallen Pass. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-merchant-traveler",
+  "wikiId": "npc-a-merchant-traveler"
  }
 ]

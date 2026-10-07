@@ -22,18 +22,22 @@ export const nameKey=v=>zoneKey(v).replace(/^(a|an) /,'');
 export const query=name=>String(name).split(/\s+[—–-]\s+|\s*\/\s*|\s*\(/)[0].trim();
 
 function distance(a,b){const row=Array.from({length:b.length+1},(_,i)=>i);for(let i=1;i<=a.length;i++){let prev=row[0];row[0]=i;for(let j=1;j<=b.length;j++){const next=row[j];row[j]=Math.min(row[j]+1,row[j-1]+1,prev+(a[i-1]===b[j-1]?0:1));prev=next;}}return row[b.length];}
-// exact: the same name; close: a near spelling (a letter or two) or one name inside the other; none otherwise.
+// One of a kind: "Crystallized skeletons" (a camp) is the wiki's "A crystallized skeleton".
+const singular=v=>v.split(' ').map(w=>w.length<4?w:w.replace(/ies$/,'y').replace(/(s|x|ch|sh)es$/,'$1').replace(/([^s])s$/,'$1')).join(' ');
+// exact: the same name; close: a near spelling (a letter or two) or the plural of the wiki's name; none otherwise.
 // Several equally good answers make the row ambiguous: it is listed for a choice, never applied on its own.
 export function match(name,results){
  const ours=nameKey(query(name));if(!ours)return {kind:'none',candidates:[]};
- const scored=results.map(r=>{const theirs=nameKey(r.name),d=distance(ours,theirs),near=d<=Math.max(1,Math.floor(Math.min(ours.length,theirs.length)/8));
-  return {r,kind:theirs===ours?'exact':near||(ours.length>=5&&theirs.includes(ours))||(theirs.length>=5&&ours.includes(theirs))?'close':'none',d};});
- for(const kind of ['exact','close']){const found=scored.filter(s=>s.kind===kind).sort((a,b)=>a.d-b.d);if(found.length)return {kind:found.length>1&&found[0].d===found[1].d?'ambiguous':kind,best:found[0].r,candidates:found.map(s=>s.r)};}
+ const scored=results.map(r=>{const theirs=nameKey(r.name),d=distance(ours,theirs),near=d<=Math.max(1,Math.floor(Math.min(ours.length,theirs.length)/8)),plural=theirs!==ours&&singular(ours)===singular(theirs);
+  return {r,kind:theirs===ours?'exact':near||plural?'close':'none',d,plural};});
+ for(const kind of ['exact','close']){const found=scored.filter(s=>s.kind===kind).sort((a,b)=>a.d-b.d);if(found.length)return {kind:found.length>1&&found[0].d===found[1].d?'ambiguous':kind,best:found[0].r,plural:found[0].plural,candidates:found.map(s=>s.r)};}
  return {kind:'none',candidates:[]};
 }
 
 async function json(path){return JSON.parse(await readFile(resolve(root,path),'utf8'));}
-async function writeJson(path,data){const file=resolve(root,path),original=await readFile(file,'utf8');const text=JSON.stringify(data,null,2)+'\n';await writeFile(file,original.includes('\r\n')?text.replace(/\n/g,'\r\n'):text);}
+// Written back in the file's own layout (indent, line ends, final newline), and only when something changed.
+export function layout(original,data){const spacing=original.match(/\r?\n([ \t]+)\S/),newline=original.includes('\r\n')?'\r\n':'\n';const text=JSON.stringify(data,null,spacing?spacing[1]:2).replace(/\n/g,newline);return /\r?\n$/.test(original)?text+newline:text;}
+async function writeJson(path,data){const file=resolve(root,path),original=await readFile(file,'utf8');if(JSON.stringify(JSON.parse(original))===JSON.stringify(data))return false;await writeFile(file,layout(original,data));return true;}
 // A map's feature files: the map's own and any a level adds.
 async function features(c){
  const files=(key)=>[...new Set([c[key],...(c.levels||[]).map(l=>l[key])].filter(Boolean))];
@@ -72,9 +76,12 @@ async function search(q,out,secret){
 // One row per NPC marker and per place name that could be someone; labels that match a wiki NPC are proposed as markers.
 export function plan(c,{markers,labels},answers){
  const zone=c.zonesFile?'':c.wikiZone||c.title,rows=[];
- const add=(source,item,kind)=>{const q=query(item.name),all=answers.get(q)||[],results=all.filter(r=>inZone(r,zone)),found=match(item.name,results);
+ const add=(source,item,kind)=>{const q=query(item.name),all=answers.get(q)||[],results=all.filter(r=>inZone(r,zone));let found=match(item.name,results);
+  // A trainer marker named after its class ("Necromancer / Shadow Knight") is not the wiki's "A necromancer": trainers need their own name.
+  if(item.category==='Class trainer'&&found.best&&zoneKey(q)!==zoneKey(found.best.name))found={kind:'none',candidates:[]};
   const row={approve:false,source,path:item.path,id:item.id,kind,category:item.category||null,name:item.name,wiki:item.wiki||'',match:found.kind,candidates:found.candidates.slice(0,5)};
-  if(found.best){row.wikiName=found.best.name;row.wikiUrl=found.best.url;row.wikiId=found.best.id;}
+  // Only the name part takes the wiki's spelling: "Baron Bigtent (level 20)" keeps its level. A camp keeps its own name.
+  if(found.best){row.wikiName=found.best.name;row.wikiUrl=found.best.url;row.wikiId=found.best.id;row.newName=found.plural||item.category==='Mob camp'?item.name:found.best.name+String(item.name).trim().slice(q.length);}
   // The same name filed under another zone only: shown for information, never proposed.
   else{const other=match(item.name,all.filter(r=>!inZone(r,zone)));if(other.kind==='exact'||other.kind==='ambiguous'&&nameKey(other.best.name)===nameKey(query(item.name)))row.elsewhere=other.candidates.slice(0,3).map(r=>({name:r.name,zone:r.zone,url:r.url}));}
   // A clear match is proposed (approve true); close and ambiguous ones wait for a decision.
@@ -92,7 +99,7 @@ function report(p){
  const lines=['# '+p.map+' · wiki zone: '+p.zone,'',`${rows.length} entries: ${count('exact')} exact, ${count('close')} close, ${count('ambiguous')} ambiguous, ${count('none')} not found.`,'','Set "approve": true in '+p.map+'.json for each row to apply (exact matches are pre-approved), then run `node scripts/wiki-reconcile.mjs --apply '+p.map+'`.','',
   '| ok | what | our name | wiki name | match | proposal |','|---|---|---|---|---|---|'];
  for(const r of rows){
-  const proposal=r.wikiName?[r.wikiName!==r.name?'rename':'',r.wiki!==r.wikiUrl?'link':'',r.toCategory?'make a '+r.toCategory+' marker':''].filter(Boolean).join(', ')||'already linked':r.candidates.length?'choose: '+r.candidates.map(x=>x.name).join(' / '):r.elsewhere?'only elsewhere: '+r.elsewhere.map(x=>`[${esc(x.name)}](${x.url}) (${esc(x.zone.replace(/\s+,/g,','))})`).join(', '):'';
+  const proposal=r.wikiName?[r.newName!==r.name?'rename to '+esc(r.newName):'',r.wiki!==r.wikiUrl?'link':'',r.toCategory?'make a '+r.toCategory+' marker':''].filter(Boolean).join(', ')||'already linked':r.candidates.length?'choose: '+r.candidates.map(x=>x.name).join(' / '):r.elsewhere?'only elsewhere: '+r.elsewhere.map(x=>`[${esc(x.name)}](${x.url}) (${esc(x.zone.replace(/\s+,/g,','))})`).join(', '):'';
   lines.push(`| ${r.approve?'✓':''} | ${r.source} ${esc(r.category||'')} | ${esc(r.name)} | ${r.wikiUrl?`[${esc(r.wikiName)}](${r.wikiUrl})`:''} | ${r.match} | ${esc(proposal)} |`);
  }
  return lines.join('\n')+'\n';
@@ -103,11 +110,11 @@ export function applyRows(rows,files){
  const done=[];
  for(const r of rows.filter(r=>r.approve&&r.wikiUrl&&r.wikiId&&r.wikiName)){
   const data=files.get(r.path);if(!data)throw Error('Unknown file '+r.path);
-  if(r.source==='marker'){const m=data.find(m=>m.id===r.id);if(!m)throw Error('Marker '+r.id+' is gone.');m.name=r.wikiName;m.wiki=r.wikiUrl;m.wikiId=r.wikiId;done.push('linked '+r.id);continue;}
+  if(r.source==='marker'){const m=data.find(m=>m.id===r.id);if(!m)throw Error('Marker '+r.id+' is gone.');m.name=r.newName||r.wikiName;m.wiki=r.wikiUrl;m.wikiId=r.wikiId;done.push('linked '+r.id);continue;}
   const i=data.labels.findIndex(l=>l.id===r.id);if(i<0)throw Error('Place name '+r.id+' is gone.');const l=data.labels[i];
   if(!r.toCategory){done.push('skipped '+r.id+' (no marker type)');continue;}
   const target=r.markersPath&&files.get(r.markersPath);if(!target)throw Error('No markers file for '+r.id+'.');if(target.some(m=>m.id===l.id))throw Error('Marker id '+l.id+' already exists.');
-  const m={id:l.id,name:r.wikiName,category:r.toCategory,x:l.x,y:l.y,note:l.note||'',...(l.level?{level:l.level}:{}),...(l.approximate?{approximate:true}:{}),...(l.community?{community:true}:{}),wiki:r.wikiUrl,wikiId:r.wikiId};
+  const m={id:l.id,name:r.newName||r.wikiName,category:r.toCategory,x:l.x,y:l.y,note:l.note||'',...(l.level?{level:l.level}:{}),...(l.approximate?{approximate:true}:{}),...(l.community?{community:true}:{}),wiki:r.wikiUrl,wikiId:r.wikiId};
   target.push(m);data.labels.splice(i,1);done.push('made marker '+r.id);
  }
  return done;

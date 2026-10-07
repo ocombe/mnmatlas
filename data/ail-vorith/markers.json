@@ -109,7 +109,9 @@
     "category": "Vendor",
     "x": 4625,
     "y": 4362,
-    "note": "Approximate position; to confirm in game. Newbie armour; quest rewards."
+    "note": "Approximate position; to confirm in game. Newbie armour; quest rewards.",
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-vex",
+    "wikiId": "npc-leatherworker-vex"
   },
   {
     "id": "kulzzara",
@@ -125,7 +127,9 @@
     "category": "Vendor",
     "x": 4613,
     "y": 4334,
-    "note": "Approximate position; to confirm in game. Bags."
+    "note": "Approximate position; to confirm in game. Bags.",
+    "wiki": "https://monstersandmemories.wiki/npcs/melzorra",
+    "wikiId": "npc-melzorra"
   },
   {
     "id": "supplier-jul",
@@ -133,7 +137,9 @@
     "category": "Vendor",
     "x": 4631,
     "y": 4295,
-    "note": "Approximate position; to confirm in game. General supplies."
+    "note": "Approximate position; to confirm in game. General supplies.",
+    "wiki": "https://monstersandmemories.wiki/npcs/supplier-jul",
+    "wikiId": "npc-supplier-jul"
   },
   {
     "id": "nurvol-cereveth",
@@ -149,7 +155,9 @@
     "category": "Class trainer",
     "x": 4457,
     "y": 4293,
-    "note": "Approximate position; to confirm in game. Monk trainer."
+    "note": "Approximate position; to confirm in game. Monk trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/klavel-sul",
+    "wikiId": "npc-klavel-sul"
   },
   {
     "id": "tharkan-inathar",
@@ -173,7 +181,9 @@
     "category": "Class trainer",
     "x": 4405,
     "y": 4236,
-    "note": "Approximate position; to confirm in game. Ranger trainer."
+    "note": "Approximate position; to confirm in game. Ranger trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/laren-drindar",
+    "wikiId": "npc-laren-drindar"
   },
   {
     "id": "ilnara-hal-kareth",
@@ -205,7 +215,9 @@
     "category": "Class trainer",
     "x": 4292,
     "y": 4123,
-    "note": "Approximate position; to confirm in game. Cleric trainer."
+    "note": "Approximate position; to confirm in game. Cleric trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/zalethra-drezzorith",
+    "wikiId": "npc-zalethra-drezzorith"
   },
   {
     "id": "lothur-varros",
@@ -237,7 +249,9 @@
     "category": "Class trainer",
     "x": 4377,
     "y": 4035,
-    "note": "Approximate position; to confirm in game. Necromancer trainer."
+    "note": "Approximate position; to confirm in game. Necromancer trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/vaslir-naiyth",
+    "wikiId": "npc-vaslir-naiyth"
   },
   {
     "id": "amarah-ith-vayen",
@@ -245,7 +259,9 @@
     "category": "Class trainer",
     "x": 4467,
     "y": 4084,
-    "note": "Approximate position; to confirm in game. Enchanter trainer."
+    "note": "Approximate position; to confirm in game. Enchanter trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/amarah-ithvayen",
+    "wikiId": "npc-amarah-ithvayen"
   },
   {
     "id": "stablemaster-raxr",
@@ -269,7 +285,9 @@
     "category": "Vendor",
     "x": 4461,
     "y": 3916,
-    "note": "Approximate position; to confirm in game. Food and rations."
+    "note": "Approximate position; to confirm in game. Food and rations.",
+    "wiki": "https://monstersandmemories.wiki/npcs/nyxia-akkin",
+    "wikiId": "npc-nyxia-akkin"
   },
   {
     "id": "provost-xan-shorn",

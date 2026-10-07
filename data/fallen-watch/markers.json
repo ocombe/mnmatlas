@@ -315,7 +315,9 @@
     "x": 2340,
     "y": 800,
     "approximate": true,
-    "note": "Approximate room location after Map by Skoop; confirm in game."
+    "note": "Approximate room location after Map by Skoop; confirm in game.",
+    "wiki": "https://monstersandmemories.wiki/npcs/marcus-aden",
+    "wikiId": "npc-marcus-aden"
   },
   {
     "id": "marrow",

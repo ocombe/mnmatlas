@@ -111,13 +111,15 @@
  },
  {
   "id": "beguiled-alpha-wolf",
-  "name": "Beguiled alpha wolf (levels 8–10)",
+  "name": "A beguiled alpha wolf (levels 8–10)",
   "category": "Named mob",
   "x": 480,
   "y": 3273,
   "approximate": true,
   "note": "In the wolf cave. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-beguiled-alpha-wolf",
+  "wikiId": "npc-a-beguiled-alpha-wolf"
  },
  {
   "id": "taeresh-deathcharmer",
@@ -127,7 +129,9 @@
   "y": 2977,
   "approximate": true,
   "note": "In the orc cave. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/taeresh-deathcharmer",
+  "wikiId": "npc-taeresh-deathcharmer"
  },
  {
   "id": "mistress-naelira",
@@ -137,7 +141,9 @@
   "y": 1824,
   "approximate": true,
   "note": "Deep inside the cave behind the waterfall. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/mistress-naelira",
+  "wikiId": "npc-mistress-naelira"
  },
  {
   "id": "sporeweaver-underveil",
@@ -147,7 +153,9 @@
   "y": 1895,
   "approximate": true,
   "note": "Inside the mushroom cave. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/sporeweaver-underveil",
+  "wikiId": "npc-sporeweaver-underveil"
  },
  {
   "id": "stable",

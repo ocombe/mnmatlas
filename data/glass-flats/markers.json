@@ -17,7 +17,9 @@
   "y": 7369,
   "approximate": true,
   "note": "In the goblin camp, near the wall path. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/baron-bigtent",
+  "wikiId": "npc-baron-bigtent"
  },
  {
   "id": "pyrmos-30-1",
@@ -77,7 +79,9 @@
   "y": 5055,
   "approximate": true,
   "note": "Inside the dark crystals. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/yealaroth-the-consumed",
+  "wikiId": "npc-yealaroth-the-consumed"
  },
  {
   "id": "shard-bats-33-35-1",
@@ -97,7 +101,9 @@
   "y": 4235,
   "approximate": true,
   "note": "At the very back of the crystal caves. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/shattershriek",
+  "wikiId": "npc-shattershriek"
  },
  {
   "id": "highwaymen-36-44-1",
@@ -117,7 +123,9 @@
   "y": 6343,
   "approximate": true,
   "note": "Up on a ledge of the highwaymen camp. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/tarakhan-the-boulder",
+  "wikiId": "npc-tarakhan-the-boulder"
  },
  {
   "id": "soraya",
@@ -127,7 +135,9 @@
   "y": 6343,
   "approximate": true,
   "note": "In the highwaymen caves. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/soraya-the-mirage",
+  "wikiId": "npc-soraya-the-mirage"
  },
  {
   "id": "malik",
@@ -137,7 +147,9 @@
   "y": 6533,
   "approximate": true,
   "note": "In the highwaymen caves: first cave, first hallway on the left, room with a blue bed. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/malik-the-glass-viper",
+  "wikiId": "npc-malik-the-glass-viper"
  },
  {
   "id": "undead-45-53-1",
@@ -157,7 +169,9 @@
   "y": 4784,
   "approximate": true,
   "note": "Top of the blue-flamed undead tower. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/guillome-the-accursed",
+  "wikiId": "npc-guillome-the-accursed"
  },
  {
   "id": "selene",
@@ -167,7 +181,9 @@
   "y": 4844,
   "approximate": true,
   "note": "Inside the undead tower. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/selene-brightmantle",
+  "wikiId": "npc-selene-brightmantle"
  },
  {
   "id": "bishop-aybram",
@@ -177,7 +193,9 @@
   "y": 4994,
   "approximate": true,
   "note": "Door at the top of the ramp on the south side of the tower hill, room on the right. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/bishop-aybram",
+  "wikiId": "npc-bishop-aybram"
  },
  {
   "id": "seneschal-kazmer",
@@ -187,7 +205,9 @@
   "y": 4994,
   "approximate": true,
   "note": "Ground floor of the keep: through the large opening in the hillside, up the stairs, second hall on the left. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/seneschal-kazmer",
+  "wikiId": "npc-seneschal-kazmer"
  },
  {
   "id": "quartermaster-girault",
@@ -197,7 +217,9 @@
   "y": 4864,
   "approximate": true,
   "note": "In the undead fort, before Seneschal Kazmer. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-girault",
+  "wikiId": "npc-quartermaster-girault"
  },
  {
   "id": "hovarth-ezzadel",
@@ -207,7 +229,9 @@
   "y": 5074,
   "approximate": true,
   "note": "Door near the charred druid ring on the tower hill, first hall, alcove on the left. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/hovarth-ezzadel",
+  "wikiId": "npc-hovarth-ezzadel"
  },
  {
   "id": "stormcaller-tabigan",
@@ -217,7 +241,9 @@
   "y": 5254,
   "approximate": true,
   "note": "At the gazebo on the undead tower hill. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/stormcaller-tabigan",
+  "wikiId": "npc-stormcaller-tabigan"
  },
  {
   "id": "charred-45-48-1",
@@ -237,7 +263,9 @@
   "y": 5194,
   "approximate": true,
   "note": "Ground level of the broken tower in the undead area; placeholder is a charred tracker. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/fenrix-lightfoot",
+  "wikiId": "npc-fenrix-lightfoot"
  },
  {
   "id": "chaim-nephidna",
@@ -277,6 +305,8 @@
   "y": 4208,
   "approximate": true,
   "note": "A giant near the Vale of Zintar zone line. Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/esaneq",
+  "wikiId": "npc-esaneq"
  }
 ]
