@@ -684,6 +684,12 @@
   try{let request=client.from('suggestions').select('*').eq('status',state).order('created_at',{ascending:false}).order('id',{ascending:false});if(!all)request=request.eq('map',config.id);const {data,error}=await request.range(offset,offset+199);if(error)throw error;if(serial!==reviewSerial||!admin)return;content.lastChild.remove();
    if(!data.length)content.append(text('p',state==='approved'?'Nothing waiting to go live. Approved suggestions are published within the hour.':'Nothing to review. Reports come from Report a problem on a marker; suggestions from Edit, Suggest an edit and Share with everyone.','form-hint'));
    const perAuthor=new Map();for(const row of data)perAuthor.set(row.user_id,(perAuthor.get(row.user_id)||0)+1);
+   // Reviewing on the map goes on to the next suggestion of this list once one is decided; the list comes back after the last.
+   const decided=new Set(),reopen=()=>{if(!review.open)review.showModal();pendingTab(all,offset,state);};
+   const open=row=>preview(row,reopen,after(row),nav(row));
+   const after=row=>()=>{decided.add(row.id);const next=data.slice(data.indexOf(row)+1).find(r=>!decided.has(r.id))||data.find(r=>!decided.has(r.id));if(next)open(next);else{reopen();status('That was the last one: nothing left to review here.');}};
+   // On the map: how many are left, and the one before or after this one without deciding it.
+   const nav=row=>{const left=data.filter(r=>!decided.has(r.id)),i=left.indexOf(row);return {left:left.length,previous:i>0?()=>open(left[i-1]):null,skip:i>=0&&i<left.length-1?()=>open(left[i+1]):null};};
    for(const row of data){const card=text('article','','review-card'),count=perAuthor.get(row.user_id);card.append(reviewTitle(row),text('p','By '+(row.author_name||'Discord member')+(count>1?' ('+count+' waiting)':''),'review-author'),text('p',(kinds[row.kind]||row.kind)+' · '+row.map+(row.level?' / '+row.level:'')+' · '+new Date(row.created_at).toLocaleString(),'form-hint'));if(row.comment)card.append(text('p',row.comment));
     // A suggestion the publishing job could not apply comes back with its reason.
     if(row.review_note)card.append(text('p',row.review_note,'reported-reason'));
@@ -693,7 +699,7 @@
      // A bounty from the Wanted board is worth more points once approved: the badge says which, with its wiki page.
      if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge');badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord));if(row.payload.wiki){const a=text('a',' Wiki page ↗');a.href=row.payload.wiki;a.target='_blank';a.rel='noopener';badge.append(a);}card.append(badge);}}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
-    const actions=text('div','','dialog-actions');if(row.user_id!==user?.id&&state==='pending')actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button(row.kind==='report'?'Show on map':'Review on map',()=>preview(row,()=>pendingTab(all,offset,state))),...decisions(row,()=>note.value,card));card.append(actions);content.append(card);
+    const actions=text('div','','dialog-actions');if(row.user_id!==user?.id&&state==='pending')actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button(row.kind==='report'?'Show on map':'Review on map',()=>open(row)),...decisions(row,()=>note.value,card,()=>null,()=>decided.add(row.id)));card.append(actions);content.append(card);
    }
    const pages=text('div','','dialog-actions');if(offset)pages.append(button('Newer',()=>pendingTab(all,Math.max(0,offset-200),state)));if(data.length===200)pages.append(button('Older',()=>pendingTab(all,offset+200,state)));content.append(pages);
    await bannedList(content,serial,all);
@@ -720,23 +726,23 @@
  }
  // Reports close as fixed or dismissed; other suggestions are approved for publishing or rejected.
  const kinds={'move-marker':'Moved marker','move-label':'Moved label','new-marker':'New marker','edit-marker':'Edited marker','edit-label':'Edited place name',report:'Problem report'};
- function decisions(row,note,card,edits=()=>null){const report=row.kind==='report';
-  if(row.status==='approved')return [button('Reject',()=>reviewAction(row,'rejected',note(),card)),button('Back to waiting',()=>reviewAction(row,'pending',note(),card))];
-  return [button(report?'Dismiss':'Reject',()=>reviewAction(row,'rejected',note(),card)),button(report?'Fixed':'Approve',()=>reviewAction(row,report?'resolved':'approved',note(),card,edits()),'primary')];}
+ function decisions(row,note,card,edits=()=>null,done=()=>{}){const report=row.kind==='report';
+  if(row.status==='approved')return [button('Reject',()=>reviewAction(row,'rejected',note(),card,null,done)),button('Back to waiting',()=>reviewAction(row,'pending',note(),card,null,done))];
+  return [button(report?'Dismiss':'Reject',()=>reviewAction(row,'rejected',note(),card,null,done)),button(report?'Fixed':'Approve',()=>reviewAction(row,report?'resolved':'approved',note(),card,edits(),done),'primary')];}
  // The card title shows the icon the visitor chose (or the marker being moved or edited).
  function reviewTitle(row){
   const title=text('strong','','review-title'),p=row.payload,target=row.kind==='new-marker'?p:originals.find(m=>m.id===row.target_id&&row.map===config.id);
   try{if(target&&!target.noteType&&categories[target.category]){const face=text('span','','review-icon');face.style.setProperty('--pin',target.color||categories[target.category][1]);face.append(markerSymbol(target));title.append(face);}}catch{}
   title.append(text('span',p.name));return title;
  }
- async function reviewAction(row,state,note,card,payload=null){
+ async function reviewAction(row,state,note,card,payload=null,done=()=>{}){
   for(const b of card.querySelectorAll('button'))b.disabled=true;
-  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);}
+  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);done();}
   catch{status('Review could not be saved. Please refresh the list.');for(const b of card.querySelectorAll('button'))b.disabled=false;}
  }
  // On the map, a suggestion can be adjusted before approval (or while approved and not live yet):
  // drag its marker, and change the name, type and description of a new marker or the text of an edit.
- async function preview(row,refresh=()=>{}){
+ async function preview(row,refresh=()=>{},next=refresh,nav=null){
   try{
    review.close();const url=new URL(location.href);url.searchParams.set('map',row.map);for(const k of ['place','x','y','z'])url.searchParams.delete(k);if(row.level)url.searchParams.set('level',row.level);else url.searchParams.delete('level');
    if(config.id!==row.map||(row.level&&config.levelId!==row.level))await loadMap(row.map,url);
@@ -753,7 +759,10 @@
    if(move){const from=L.circleMarker(xy(p.from),{radius:6,color:'#2f6f9a',fillColor:'#2f6f9a',fillOpacity:.75,weight:3}).bindTooltip(()=>text('span','Published position'),{permanent:true,direction:'top'});reviewLayer.addLayer(from);line=L.polyline([xy(p.from),here],{color:'#b5861f',weight:2,dashArray:'6 6'});reviewLayer.addLayer(line);}
    pin.on('drag',()=>line?.setLatLngs([line.getLatLngs()[0],pin.getLatLng()]));
    const bar=text('section','','community-preview');bar.id='community-preview';bar.setAttribute('aria-label','Review selected suggestion');
-   bar.append(text('strong',(kinds[row.kind]||'Suggestion')+(row.status==='approved'?' · approved, not live yet':'')));
+   const head=text('div','','preview-head');head.append(text('strong',(kinds[row.kind]||'Suggestion')+(row.status==='approved'?' · approved, not live yet':'')));
+   if(nav){head.append(text('span',nav.left+' left','preview-left'));const steps=text('span','','preview-steps');
+    const step=(label,go,hint)=>{const b=button(label,go,'preview-step');b.disabled=!go;b.title=hint;steps.append(b);};step('‹ Previous',nav.previous,'The suggestion before this one');step('Skip ›',nav.skip,'The next suggestion, deciding this one later');head.append(steps);}
+   bar.append(head);
    const field=(label,el)=>{const l=text('label',label,'preview-field');l.append(el);bar.append(l);return el;};
    let name,note,category;
    if(row.kind==='new-marker'||edit){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
@@ -777,10 +786,10 @@
     if(!p.name)throw Error('Name required');return p;
    };
    const safe=()=>{try{return edits();}catch(e){status(e.message==='Name required'?'Give it a name.':e.message==='Wiki link'?wikiHint:'Keep the marker inside the map.');throw e;}};
-   const actions=text('div','','dialog-actions');actions.append(button('Close',()=>{clearPreview();refresh();}));
+   const actions=text('div','','dialog-actions');actions.append(button('Back to the list',()=>{clearPreview();refresh();}));
    if(!report)actions.append(button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
     const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length){status('Changes could not be saved. Please refresh the list.');return;}row.payload=structuredClone(payload);status('Changes saved.');}));
-   const wrapped=decisions(row,()=>reviewNote.value,bar,()=>{try{return safe();}catch{return undefined;}});
+   const wrapped=decisions(row,()=>reviewNote.value,bar,()=>{try{return safe();}catch{return undefined;}},next);
    actions.append(...wrapped);bar.append(actions);$('map-frame').append(bar);
    if(move)map.fitBounds(L.latLngBounds([xy(p.from),here]),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else map.setView(here,config.defaultView.placeZoom);if(compact())setPanel(false);
    status(move?'Blue: published position. Drag the suggested marker to adjust it.':report?'The reported marker.':edit?'The marker or name being edited.':'Drag the suggested marker to adjust it.');

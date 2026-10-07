@@ -148,6 +148,14 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  bar.querySelectorAll('button').find(n=>n.className==='wiki-result').onclick();assert.equal(bar.querySelectorAll('input')[0].value,'Chef Arzya the Bold');
  await bar.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();const approved=e.suggestions.find(r=>r.id===14);
  assert.equal(approved.payload.name,'Chef Arzya the Bold');assert.equal(approved.payload.wiki,'https://monstersandmemories.wiki/npcs/chef-arzya');assert.equal(approved.payload.wikiId,'npc-chef-arzya');}
+ // Deciding on the map goes straight on to the next suggestion of the list, with how many are left.
+ for(const id of [31,32])e.suggestions.push({id,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'Next '+id,x:5,y:6,category:'Vendor'},author_name:'Member',created_at:new Date(Date.now()-id*1000).toISOString()});
+ reviewButton.onclick();await settle();{const opened=review.querySelectorAll('button').filter(n=>n.textContent==='Review on map');await opened[0].onclick();await settle();
+  let bar=e.context.$('community-preview');const first=bar.querySelectorAll('input')[0].value,left=Number(bar.querySelectorAll('span').find(n=>n.className==='preview-left').textContent.split(' ')[0]);
+  await bar.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();await settle();
+  bar=e.context.$('community-preview');assert(bar,'The next suggestion opens on the map');assert.notEqual(bar.querySelectorAll('input')[0].value,first);
+  assert.equal(bar.querySelectorAll('span').find(n=>n.className==='preview-left').textContent,(left-1)+' left');}
+ for(const r of e.suggestions)if(r.status==='pending'&&r.kind==='new-marker'&&/^Next /.test(r.payload.name))r.status='approved';
  // Saving a note with "Also suggest this for the public map" ticked sends it at once; the note then follows its
  // suggestion: a move while it is pending updates it, and an edit once approved becomes an edit of the new marker.
  {const ctx=e.context,$=ctx.$,check=$('suggest-check'),credit=$('suggest-credit'),inserts=()=>e.calls.filter(c=>c.table==='suggestions'&&c.op==='insert');
