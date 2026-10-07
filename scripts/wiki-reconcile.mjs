@@ -72,9 +72,11 @@ async function search(q,out,secret){
 // One row per NPC marker and per place name that could be someone; labels that match a wiki NPC are proposed as markers.
 export function plan(c,{markers,labels},answers){
  const zone=c.zonesFile?'':c.wikiZone||c.title,rows=[];
- const add=(source,item,kind)=>{const q=query(item.name),results=(answers.get(q)||[]).filter(r=>inZone(r,zone)),found=match(item.name,results);
+ const add=(source,item,kind)=>{const q=query(item.name),all=answers.get(q)||[],results=all.filter(r=>inZone(r,zone)),found=match(item.name,results);
   const row={approve:false,source,path:item.path,id:item.id,kind,category:item.category||null,name:item.name,wiki:item.wiki||'',match:found.kind,candidates:found.candidates.slice(0,5)};
   if(found.best){row.wikiName=found.best.name;row.wikiUrl=found.best.url;row.wikiId=found.best.id;}
+  // The same name filed under another zone only: shown for information, never proposed.
+  else{const other=match(item.name,all.filter(r=>!inZone(r,zone)));if(other.kind==='exact'||other.kind==='ambiguous'&&nameKey(other.best.name)===nameKey(query(item.name)))row.elsewhere=other.candidates.slice(0,3).map(r=>({name:r.name,zone:r.zone,url:r.url}));}
   // A clear match is proposed (approve true); close and ambiguous ones wait for a decision.
   row.approve=found.kind==='exact'&&!(item.wiki&&item.wiki!==found.best.url);
   if(kind==='label'&&found.best)row.toCategory=c.extraCategories?.['Notable NPC']?'Notable NPC':'Named mob';
@@ -90,7 +92,7 @@ function report(p){
  const lines=['# '+p.map+' · wiki zone: '+p.zone,'',`${rows.length} entries: ${count('exact')} exact, ${count('close')} close, ${count('ambiguous')} ambiguous, ${count('none')} not found.`,'','Set "approve": true in '+p.map+'.json for each row to apply (exact matches are pre-approved), then run `node scripts/wiki-reconcile.mjs --apply '+p.map+'`.','',
   '| ok | what | our name | wiki name | match | proposal |','|---|---|---|---|---|---|'];
  for(const r of rows){
-  const proposal=r.wikiName?[r.wikiName!==r.name?'rename':'',r.wiki!==r.wikiUrl?'link':'',r.toCategory?'make a '+r.toCategory+' marker':''].filter(Boolean).join(', ')||'already linked':r.candidates.length?'choose: '+r.candidates.map(x=>x.name).join(' / '):'';
+  const proposal=r.wikiName?[r.wikiName!==r.name?'rename':'',r.wiki!==r.wikiUrl?'link':'',r.toCategory?'make a '+r.toCategory+' marker':''].filter(Boolean).join(', ')||'already linked':r.candidates.length?'choose: '+r.candidates.map(x=>x.name).join(' / '):r.elsewhere?'only elsewhere: '+r.elsewhere.map(x=>`[${esc(x.name)}](${x.url}) (${esc(x.zone.replace(/\s+,/g,','))})`).join(', '):'';
   lines.push(`| ${r.approve?'✓':''} | ${r.source} ${esc(r.category||'')} | ${esc(r.name)} | ${r.wikiUrl?`[${esc(r.wikiName)}](${r.wikiUrl})`:''} | ${r.match} | ${esc(proposal)} |`);
  }
  return lines.join('\n')+'\n';
