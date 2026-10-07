@@ -1,26 +1,30 @@
-"""Wanted posters as the small still images of NPCs the atlas does not mark yet: mini/<wiki id>.webp, 320 x 200, in
-the Wanted board's look (a pinned paper notice on wood), so a wiki page showing an NPC's mini map gets a poster asking
-for help instead of a missing picture. The poster links (like every mini image) to ?find=<wiki id>, which opens the
-NPC's map on the Wanted board at its notice.
+"""The Wanted poster as the small still image of an NPC the atlas does not mark yet: for every NPC on a Wanted board
+that no marker links to, mini/<wiki id>.webp is a copy of one generic poster (assets/bounty/wanted-poster.webp), so a
+wiki page showing an NPC's mini map gets a poster asking for help instead of a missing picture. The poster links, like
+every mini image, to ?find=<wiki id>, which opens the NPC's map on the Wanted board at its notice.
 
-Run after make-mini-maps.py and make-bounties.mjs (GitHub does it when publishing). It reads bounties/<map id>.json and
-never takes the place of a real mini map: an NPC that a marker links to keeps its map picture, and once someone places
-it, the next publish draws that instead. Without the bounty lists it does nothing. Needs Pillow, fontTools and brotli.
+Run after make-mini-maps.py and make-bounties.mjs (GitHub does it when publishing); it only copies the file. It never
+takes the place of a real mini map: an NPC a marker links to keeps its map picture, and once someone places it the next
+publish draws that instead. Without the bounty lists it does nothing.
+
+`python scripts/make-bounty-posters.py --draw` redraws the poster itself (Pillow, fontTools and brotli), in the Wanted
+board's look: a pinned paper notice on the wood board.
 """
-import io, json, re, sys
+import io, json, re, shutil, sys
 from functools import lru_cache
 from pathlib import Path
-from PIL import Image, ImageDraw, ImageFont
-from fontTools.ttLib import TTFont
 
 ROOT = Path(__file__).resolve().parent.parent
 OUT = ROOT / 'mini'
+POSTER = ROOT / 'assets' / 'bounty' / 'wanted-poster.webp'
 W, H = 320, 200
 INK, RED, MUTED, BURNT = (36, 24, 13), (139, 44, 31), (90, 70, 48), (74, 44, 22)
 
 
 @lru_cache(maxsize=None)
 def font(woff2, size):
+    from fontTools.ttLib import TTFont
+    from PIL import ImageFont
     f = TTFont(str(ROOT / 'assets' / 'fonts' / woff2))
     f.flavor = None
     data = io.BytesIO()
@@ -47,6 +51,7 @@ def fbm(x, y, seed):
 
 
 def tiled(path, size):
+    from PIL import Image
     tile = Image.open(path).convert('RGB')
     out = Image.new('RGB', size)
     for y in range(0, size[1], tile.height):
@@ -56,6 +61,7 @@ def tiled(path, size):
 
 
 def board_and_paper():
+    from PIL import Image, ImageFilter
     """The wood board with a paper notice on it: a ragged cut and a scorched band, as on the board's notices."""
     wood = tiled(ROOT / 'assets' / 'bounty' / 'wood.webp', (512, 512)).resize((W * 2, H * 2)).crop((0, 0, W, H))
     paper = tiled(ROOT / 'assets' / 'bounty' / 'paper.webp', (W, H))
@@ -76,7 +82,6 @@ def board_and_paper():
             r, g, b = px[x, y]
             px[x, y] = (round(r + (BURNT[0] - r) * burn), round(g + (BURNT[1] - g) * burn), round(b + (BURNT[2] - b) * burn))
     # A soft shadow under the notice, offset down a little.
-    from PIL import ImageFilter
     shadow = shadow.filter(ImageFilter.GaussianBlur(4))
     dark = Image.new('RGB', (W, H), (10, 6, 3))
     wood = Image.composite(dark, wood, shadow.transform((W, H), Image.AFFINE, (1, 0, 0, 0, 1, -3)))
@@ -93,82 +98,31 @@ def spaced(draw, xy, text, lettering, fill, spacing):
         x += w + spacing
 
 
-def fit_name(draw, name, width):
-    """The name as large as it fits, on one line, else on two."""
-    for size in (26, 24, 22, 20, 18):
-        f = font('im-fell-english-regular.woff2', size)
-        if draw.textlength(name, font=f) <= width:
-            return f, [name]
-    f = font('im-fell-english-regular.woff2', 18)
-    words, lines = name.split(), ['']
-    for w in words:
-        trial = (lines[-1] + ' ' + w).strip()
-        if draw.textlength(trial, font=f) <= width or not lines[-1]:
-            lines[-1] = trial
-        else:
-            lines.append(w)
-    lines = lines[:2]
-    while draw.textlength(lines[-1], font=f) > width:
-        lines[-1] = lines[-1][:-2].rstrip() + '…'
-    return f, lines
-
-
-def classes_known():
-    text = (ROOT / 'wiki-links.js').read_text(encoding='utf-8')
-    block = re.search(r'const classAbbreviations=\{([^}]*)\}', text).group(1)
-    return [re.sub(r"^'|'$", '', k) for k in re.findall(r"('?[A-Za-z][A-Za-z ]*'?):'[A-Z]{3}'", block)]
-
-
-def kind(row, classes):
-    name = str(row.get('name', ''))
-    given = [c for c in row.get('classes', []) if c in classes] if isinstance(row.get('classes'), list) else []
-    trainer = given or row.get('role') == 'trainer' or re.search(r'\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b', name, re.I)
-    if trainer:
-        if not given and re.search(r'\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b', name, re.I):
-            given = [c for c in classes if re.search(r'\b' + c.replace(' ', r'\s*') + r's?\b', name, re.I)]
-        return 'Class trainer' + (' · ' + ' / '.join(given) if given else '')
-    return {'merchant': 'Merchant', 'quest': 'Quest giver'}.get(row.get('role'), 'Named')
-
-
-def level_text(level):
-    v = str(level or '').strip()
-    return ('Levels ' + re.sub(r'\s*[-–]\s*', '–', v)) if re.search(r'[-–]', v) else ('Level ' + v if v else '')
-
-
-def poster(row, zone, classes, base, fonts):
-    image = base.copy()
-    draw = ImageDraw.Draw(image)
-    sc, meta, italic, small = fonts
-    # The nail.
-    draw.ellipse([W / 2 - 5, 13, W / 2 + 5, 23], fill=(122, 85, 39), outline=(59, 38, 16))
-    draw.ellipse([W / 2 - 2.5, 15, W / 2 + 0.5, 18], fill=(227, 194, 127))
-    spaced(draw, (W / 2, 30), 'WANTED', sc, RED, 5)
-    name_font, lines = fit_name(draw, row['name'], W - 76)
-    # Under WANTED: one line of name, or two a little smaller, then the facts below whichever it is.
-    y = 70 if len(lines) == 1 else 66
-    for i, line in enumerate(lines):
-        draw.text((W / 2, y + i * (name_font.size + 1)), line, font=name_font, fill=INK, anchor='mm')
-    y += (len(lines) - 1) * (name_font.size + 1) + name_font.size / 2 + 11
-    facts = ' · '.join(x for x in [level_text(row.get('level')), kind(row, classes)] if x)
-    while draw.textlength(facts, font=meta) > W - 70:
-        facts = facts[:-2].rstrip() + '…'
-    draw.text((W / 2, y), facts, font=meta, fill=MUTED, anchor='mm')
-    draw.text((W / 2, y + 17), zone, font=italic, fill=MUTED, anchor='mm')
-    draw.line([W / 2 - 60, H - 52, W / 2 + 60, H - 52], fill=(170, 140, 100), width=1)
-    draw.text((W / 2, H - 38), 'Not on the atlas yet. Help place it.', font=italic, fill=RED, anchor='mm')
+def draw():
+    from PIL import ImageDraw
+    image = board_and_paper()
+    d = ImageDraw.Draw(image)
+    d.ellipse([W / 2 - 5, 13, W / 2 + 5, 23], fill=(122, 85, 39), outline=(59, 38, 16))
+    d.ellipse([W / 2 - 2.5, 15, W / 2 + 0.5, 18], fill=(227, 194, 127))
+    spaced(d, (W / 2, 34), 'WANTED', font('im-fell-english-sc.woff2', 34), RED, 8)
+    d.text((W / 2, 98), 'Not on the atlas yet', font=font('im-fell-english-regular.woff2', 24), fill=INK, anchor='mm')
+    d.line([W / 2 - 70, 120, W / 2 + 70, 120], fill=(170, 140, 100), width=1)
+    d.text((W / 2, 140), 'Help place it on MnM Atlas', font=font('im-fell-english-italic.woff2', 16), fill=RED, anchor='mm')
+    small = font('inter-variable.woff2', 9)
     credit = 'mnmatlas.com'
-    cw = draw.textlength(credit, font=small)
-    draw.rounded_rectangle([W - cw - 12, H - 15, W - 4, H - 3], radius=3, fill=(22, 18, 14))
-    draw.text((W - 8, H - 9), credit, font=small, fill=(201, 182, 150), anchor='rm')
-    data = io.BytesIO()
-    image.save(data, 'WEBP', quality=74, method=6)
-    return data.getvalue()
+    cw = d.textlength(credit, font=small)
+    d.rounded_rectangle([W - cw - 12, H - 15, W - 4, H - 3], radius=3, fill=(22, 18, 14))
+    d.text((W - 8, H - 9), credit, font=small, fill=(201, 182, 150), anchor='rm')
+    image.save(POSTER, 'WEBP', quality=80, method=6)
+    print(f'Drew {POSTER.relative_to(ROOT)} ({POSTER.stat().st_size / 1024:.1f} KB)')
 
 
 def main():
-    lists = sorted((ROOT / 'bounties').glob('*.json')) if (ROOT / 'bounties').is_dir() else []
-    lists = [p for p in lists if p.name != 'index.json']
-    if not lists:
+    if '--draw' in sys.argv:
+        draw()
+        return 0
+    lists = sorted(p for p in (ROOT / 'bounties').glob('*.json') if p.name != 'index.json') if (ROOT / 'bounties').is_dir() else []
+    if not lists or not POSTER.is_file():
         print('No bounty lists: no Wanted posters this time.')
         return 0
     registry = json.loads((ROOT / 'data' / 'maps.json').read_text(encoding='utf-8'))
@@ -180,24 +134,15 @@ def main():
                 for m in json.loads((ROOT / f).read_text(encoding='utf-8')):
                     if isinstance(m.get('wikiId'), str):
                         placed.add(m['wikiId'])
-    classes = classes_known()
-    base = board_and_paper()
-    fonts = (font('im-fell-english-sc.woff2', 17), font('inter-variable.woff2', 11), font('im-fell-english-italic.woff2', 13), font('inter-variable.woff2', 9))
-    done, sizes, seen = 0, 0, set()
     OUT.mkdir(exist_ok=True)
+    done = 0
     for path in lists:
-        body = json.loads(path.read_text(encoding='utf-8'))
-        zone = str(body.get('zone') or '')
-        for row in body.get('rows', []):
+        for row in json.loads(path.read_text(encoding='utf-8')).get('rows', []):
             wiki = row.get('id')
-            if not isinstance(wiki, str) or not re.fullmatch(r'[A-Za-z0-9_.:-]{1,160}', wiki) or wiki in placed or wiki in seen or not row.get('name'):
-                continue
-            data = poster(row, zone, classes, base, fonts)
-            (OUT / f'{wiki}.webp').write_bytes(data)
-            seen.add(wiki)
-            done += 1
-            sizes += len(data)
-    print(f'Wrote {done} Wanted posters ({sizes / 1024:.0f} KB) to mini/')
+            if isinstance(wiki, str) and re.fullmatch(r'[A-Za-z0-9_.:-]{1,160}', wiki) and wiki not in placed and not (OUT / f'{wiki}.webp').exists():
+                shutil.copyfile(POSTER, OUT / f'{wiki}.webp')
+                done += 1
+    print(f'Copied the Wanted poster for {done} NPCs not on the atlas yet to mini/')
     return 0
 
 
