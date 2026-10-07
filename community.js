@@ -49,7 +49,7 @@
   if(user){
    const head=text('div','','account-head'),who=text('div');who.append(text('strong',displayName(user)),text('small','Signed in with Discord'));head.append(avatar(36),who);
    // Contribution points: approved suggestions count 1, bounties 2, priority bounties 3.
-   const points=text('p','','account-points');points.hidden=true;myPoints().then(p=>{if(!p)return;points.textContent='Contribution points: '+p.points+(p.bounties+p.priority_bounties?' · '+(p.bounties+p.priority_bounties)+((p.bounties+p.priority_bounties)===1?' bounty':' bounties'):'');points.hidden=false;});
+   const points=text('p','','account-points');points.hidden=true;myPoints().then(p=>{if(!p)return;points.textContent=rewardWord[0].toUpperCase()+rewardWord.slice(1)+': '+p.points+(p.bounties+p.priority_bounties?' · '+(p.bounties+p.priority_bounties)+((p.bounties+p.priority_bounties)===1?' bounty':' bounties'):'');points.hidden=false;});
    account.append(head,points,syncLine);if(admin)account.append(reviewButton);
    account.append(button('Sign out',()=>{closeAccount();signOut();}),text('hr'),button('Delete my account…',()=>{closeAccount();deleteDialog();},'account-delete'));
   }
@@ -248,32 +248,33 @@
  function bountyPrefill(row){const classes=trainerClasses(row),type=isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Personal');
   return {name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
  const signInToTake=()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.'));
+// The reward a bounty earns, in the bounty board's own words (one place to change it).
+ const rewardWord='renown';
  async function takeBounty(row,note){
   if(!user){signInToTake();return;}
   // Checked again on the click: someone may have claimed it since the board opened.
   if((await claimedBounties()).has(row.id)){markClaimed(note,'Someone just claimed this one');return;}
-  bountyNext={id:row.id,priority:!!row.priority};dialog.close();window.atlasPlaceNote?.(bountyPrefill(row));
+  bountyNext={id:row.id,priority:!!row.priority};window.atlasPlaceNote?.(bountyPrefill(row));
  }
- // A notice can also be dragged onto the map (mouse, or a short press on touch so the list still scrolls): the board
- // steps aside, a pin follows the pointer, and dropping it on the map opens the note there. Escape, or a drop off the
- // map, brings the board back.
+ // A notice can also be dragged onto the map (mouse, or a short press on touch so the list still scrolls): a pin with
+ // the NPC's type follows the pointer and dropping it on the map opens the note there. Where the panel covers the map
+ // (phones, embeds) it steps aside while dragging. Escape, or a drop off the map, cancels.
  function bountyDrag(note,row){
   note.addEventListener('pointerdown',e=>{
    if(e.button!==0||e.target.closest('a,button')||note.classList.contains('claimed'))return;
-   const touch=e.pointerType!=='mouse',x0=e.clientX,y0=e.clientY;let started=false,timer=null,ghost=null;
-   const cleanup=()=>{clearTimeout(timer);window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);window.removeEventListener('keydown',key,true);ghost?.remove();};
+   const touch=e.pointerType!=='mouse',x0=e.clientX,y0=e.clientY,journal=$('journal');let started=false,timer=null,ghost=null;
+   const cleanup=()=>{clearTimeout(timer);window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);window.removeEventListener('keydown',key,true);ghost?.remove();journal.classList.remove('wanted-dragging');};
    const begin=ev=>{if(started)return;started=true;
     if(!user){cleanup();signInToTake();return;}
     const prefill=bountyPrefill(row),face=text('span','');face.style.setProperty('--pin',categories[prefill.category]?.[1]||'#365f59');face.append(markerSymbol({category:prefill.category,name:prefill.name}));
     ghost=text('span','','drag-ghost');ghost.append(face,text('small',row.name));ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';document.body.append(ghost);
-    dialog.close();status('Drop the notice where '+row.name+' stands, or press Escape.',true);};
+    if(compact())journal.classList.add('wanted-dragging');status('Drop the notice where '+row.name+' stands, or press Escape.',true);};
    const move=ev=>{if(!started){if(Math.hypot(ev.clientX-x0,ev.clientY-y0)<(touch?10:6))return;if(touch){cleanup();return;}begin(ev);if(!started)return;}
     if(ghost){ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';}ev.preventDefault();};
-   const back=()=>{$('status').hidden=true;bountyBoard();};
    const up=async ev=>{const was=started&&!!ghost;cleanup();if(!was)return;$('status').hidden=true;
-    if((await claimedBounties()).has(row.id)){status('Someone just claimed this one.');bountyBoard();return;}
-    bountyNext={id:row.id,priority:!!row.priority};if(!window.atlasPlaceNoteAt?.(bountyPrefill(row),ev.clientX,ev.clientY)){bountyNext=null;back();}};
-   const cancel=()=>{const was=started;cleanup();if(was)back();};
+    if((await claimedBounties()).has(row.id)){markClaimed(note,'Someone just claimed this one');return;}
+    bountyNext={id:row.id,priority:!!row.priority};if(!window.atlasPlaceNoteAt?.(bountyPrefill(row),ev.clientX,ev.clientY)){bountyNext=null;status('Drop it on the map to place it.');}};
+   const cancel=()=>{const was=started;cleanup();if(was)$('status').hidden=true;};
    const key=ev=>{if(ev.key==='Escape'&&started){ev.preventDefault();ev.stopPropagation();cancel();}};
    if(touch)timer=setTimeout(()=>begin({clientX:x0,clientY:y0}),350);
    window.addEventListener('pointermove',move,{passive:false});window.addEventListener('pointerup',up);window.addEventListener('pointercancel',cancel);window.addEventListener('keydown',key,true);
@@ -281,48 +282,70 @@
  }
  function markClaimed(note,label='Claimed, awaiting review'){note.classList.add('claimed');note.querySelector('.notice-take')?.remove();if(!note.querySelector('.notice-stamp'))note.querySelector('.notice-paper').append(text('span',label,'notice-stamp'));status(label==='Claimed, awaiting review'?label:label+'.');}
  const wikiLink=(row,label,cls)=>{const a=text('a',label,cls);a.href=row.url;a.target='_blank';a.rel='noopener';return a;};
- async function bountyBoard(){
-  const d=showDialog('Wanted');dialog.classList.add('bounty-dialog');dialog.addEventListener('close',()=>dialog.classList.remove('bounty-dialog'),{once:true});
-  d.append(text('p','Whereabouts sought by the atlas. Find them in the world, mark them on the map.','board-lede'));
-  const zone=searchZone()||config.title,count=text('p','Reading the notices…','board-count');d.append(count);
-  if(!user){const tip=text('div','','board-signin');tip.append(text('strong','Did you know?','wiki-tip-label'),button('Sign in',()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.')),'wiki-signin'),text('span',' to take a bounty: place the NPC on the map and earn points and your name in the atlas credits.'));d.append(tip);}
-  else myPoints().then(p=>{if(p&&dialog.open)count.after(text('p','Your points: '+p.points,'board-points'));});
-  let found;try{found=await wantedList();}catch(e){count.textContent=e.message==='none'?'The wanted list for '+zone+' isn’t available yet.':'The wanted list could not be loaded right now. Please try again later.';
-   const actions=text('div','','dialog-actions');actions.append(button('Close',()=>d.close()));d.append(actions);return;}
-  if(!dialog.open)return;
-  const claimed=await claimedBounties(),{site,rows}=found,priority=rows.filter(r=>r.priority).length;
-  if(!rows.length)count.textContent='No bounties here. Every NPC the wiki knows is on the map.';
-  else{count.textContent=rows.length+(rows.length===1?' bounty':' bounties')+' open in '+zone+(priority?', '+priority+' priority':'');
-   count.after(text('p',matchMedia('(pointer: fine)').matches?'Drag a notice onto the map, or press Take the bounty.':'Press Take the bounty, then drag the pin to where they stand.','board-hint'));}
-  const board=text('div','','bounty-board');
-  for(const group of bountyGroups){
-   const mine=rows.filter(r=>bountyGroup(r)===group.key).sort((a,b)=>a.name.localeCompare(b.name));if(!mine.length)continue;
-   board.append(text('h3',group.title+(group.priority?' · priority':''),'board-group'));
-   const grid=text('div','','board-grid');
-   for(const row of mine){
-    const note=text('article','','notice'+(row.priority?' priority':''));
-    const kicker=text('p','Wanted','notice-kicker');if(row.priority)kicker.append(text('span','Priority · 3 points','notice-seal'));
-    const name=text('h4','','notice-name');name.append(wikiLink(row,row.name,''));
-    // The paper carries the torn edge; the notice around it carries the shadow and the nail, which a clip would cut off.
-    const paper=text('div','','notice-paper');
-    paper.append(kicker,name,text('p',[row.level?'Level '+row.level:'',bountyKind(row)].filter(Boolean).join(' · '),'notice-meta'),
-     text('p',(row.priority?'High reward: 3 points':'Reward: 2 points')+' and your name in the atlas credits','notice-reward'));
-    const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Read the wiki page ↗','notice-wiki'));
-    if(claimed.has(row.id))paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
-    paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',claimed.has(row.id));bountyDrag(note,row);grid.append(note);}
-   board.append(grid);}
-  if(rows.length)d.append(board);
-  const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';d.append(credit);}
-  const actions=text('div','','dialog-actions');actions.append(button('Close',()=>d.close()));d.append(actions);
-  contributeCount();
+ // The notices' paper: the paper texture with a rim cut the same way as the map's own parchment edge (sheet-edge.js):
+ // a ragged cut, then a scorched band fading into the paper. Drawn once the texture is in, flat cream until then.
+ let paperTexture=null;
+ function paperFrame(){
+  if(paperFrame.url||typeof sheetFbm!=='function')return paperFrame.url||'';
+  const S=128,c=document.createElement('canvas');c.width=c.height=S;const g=c.getContext('2d'),burnt=SHEET.burnt,ready=!!paperTexture?.complete&&paperTexture.naturalWidth>0;
+  g.fillStyle='#ece0c2';g.fillRect(0,0,S,S);if(ready)g.drawImage(paperTexture,0,0,S,S,0,0,S,S);
+  const img=g.getImageData(0,0,S,S);
+  for(let y=0;y<S;y++)for(let x=0;x<S;x++){
+   const edge=Math.min(x,y,S-1-x,S-1-y),cut=2+sheetFbm(x/6,y/6,71,3)*6,i=(y*S+x)*4;
+   if(edge<cut){img.data[i+3]=0;continue;}
+   const burn=Math.max(0,1-(edge-cut)/(6+sheetFbm(x/9,y/9,29,2)*6))**1.6*.85;
+   for(let k=0;k<3;k++)img.data[i+k]=Math.round(img.data[i+k]+(burnt[k]-img.data[i+k])*burn);}
+  g.putImageData(img,0,0);const url=c.toDataURL('image/png');if(ready)paperFrame.url=url;return url;
  }
- // The Contribute button shows how many bounties are open once this browser has the list, never fetching it on load.
- // Once this browser has the map's list it shows the counts, and hides on a map with nothing left to place.
-function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;const n=kept?kept.rows.length:-1,p=kept?kept.rows.filter(r=>r.priority).length:0;
+ function setPaper(){const frame=paperFrame();if(frame)document.documentElement.style.setProperty('--paper-frame','url('+frame+')');}
+ // The Wanted panel takes the Search menu's place, so the map stays in view for dragging notices onto it.
+ const tabKey='mnmaps-wanted-tab';
+ function closeWanted(){$('journal').classList.remove('wanted-mode');$('wanted-view').hidden=true;}
+ function openWanted(){if(!config||config.zonesFile)return;if(!paperTexture){paperTexture=new Image();paperTexture.onload=setPaper;paperTexture.src='assets/bounty/paper.webp';}setPaper();
+  $('journal').classList.add('wanted-mode');$('wanted-view').hidden=false;setPanel(true);renderWanted();}
+ async function renderWanted(){
+  const view=$('wanted-view'),serial=++renderWanted.serial;view.replaceChildren();
+  const head=text('div','','wanted-head');head.append(button('← Search menu',closeWanted,'wanted-back'),button('×',()=>{closeWanted();setPanel(false);},'wanted-close'));head.lastChild.setAttribute('aria-label','Close');
+  const zone=searchZone()||config.title,count=text('p','Reading the notices…','board-count');
+  view.append(head,text('h2','Wanted','wanted-title'),text('p','Whereabouts sought by the atlas. Find them in the world, mark them on the map.','board-lede'),count);
+  if(!user){const tip=text('div','','board-signin');tip.append(text('strong','Did you know?','wiki-tip-label'),button('Sign in',signInToTake,'wiki-signin'),text('span',' to take a bounty: place the NPC on the map and earn '+rewardWord+' and your name in the atlas credits.'));view.append(tip);}
+  else myPoints().then(p=>{if(p&&serial===renderWanted.serial)count.after(text('p','Your '+rewardWord+': '+p.points,'board-points'));});
+  let found;try{found=await wantedList();}catch(e){if(serial===renderWanted.serial)count.textContent=e.message==='none'?'The wanted list for '+zone+' isn’t available yet.':'The wanted list could not be loaded right now. Please try again later.';return;}
+  if(serial!==renderWanted.serial)return;
+  const claimed=await claimedBounties(),{site,rows}=found,priority=rows.filter(r=>r.priority).length;
+  if(!rows.length){count.textContent='No bounties here. Every NPC the wiki knows is on the map.';return;}
+  count.textContent=rows.length+(rows.length===1?' bounty':' bounties')+' open in '+zone+(priority?', '+priority+' priority':'');
+  count.after(text('p',matchMedia('(pointer: fine)').matches?'Drag a notice onto the map, or press Take the bounty.':'Press Take the bounty, then drag the pin to where they stand.','board-hint'));
+  // One tab per kind, with its count; the last one chosen comes back, else the first with bounties (trainers first).
+  const groups=bountyGroups.map(g=>({...g,rows:rows.filter(r=>bountyGroup(r)===g.key).sort((a,b)=>a.name.localeCompare(b.name))})).filter(g=>g.rows.length);
+  let chosen;try{chosen=localStorage.getItem(tabKey);}catch{}if(!groups.some(g=>g.key===chosen))chosen=groups[0].key;
+  const tabs=text('div','','wanted-tabs'),reward=text('p','','wanted-reward'),list=text('div','','wanted-list');tabs.setAttribute('role','tablist');list.setAttribute('role','tabpanel');
+  const show=key=>{chosen=key;try{localStorage.setItem(tabKey,key);}catch{}const g=groups.find(x=>x.key===key);
+   for(const t of tabs.children)t.setAttribute('aria-selected',String(t.dataset.key===key));
+   reward.textContent='Reward: '+(g.priority?3:2)+' '+rewardWord+' and your name in the atlas credits';
+   list.replaceChildren(...g.rows.map(row=>notice(row,claimed.has(row.id))));list.scrollTop=0;};
+  for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Named NPCs','Named')),text('small',String(g.rows.length)));tabs.append(t);}
+  view.append(tabs,reward,list);
+  const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
+  show(chosen);contributeCount();
+ }
+ renderWanted.serial=0;
+ // A compact notice: the name (to its wiki page), level and kind, the wiki link and the bounty button. The whole notice
+ // is the drag handle; a claimed one is stamped.
+ function notice(row,isClaimed){
+  const note=text('article','','notice'+(row.priority?' priority':'')),paper=text('div','','notice-paper'),name=text('h4','','notice-name');
+  name.append(wikiLink(row,row.name,''));if(row.priority)paper.append(text('span','Priority · 3 '+rewardWord,'notice-seal'));
+  paper.append(name,text('p',[row.level?'Level '+row.level:'',bountyKind(row)].filter(Boolean).join(' · '),'notice-meta'));
+  const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Wiki ↗','notice-wiki'));
+  if(isClaimed)paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
+  paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',isClaimed);bountyDrag(note,row);return note;
+ }
+ // The Wanted banner shows how many bounties are open once this browser has the list, never fetching it on load.
+ function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;const n=kept?kept.rows.length:-1,p=kept?kept.rows.filter(r=>r.priority).length:0;
   open.replaceChildren(text('strong','Wanted'),text('span',n>0?n+(n===1?' bounty':' bounties')+(p?' · '+p+' priority':''):'Help place the NPCs this map is missing'));if(n===0)open.hidden=true;}
- {const open=$('contribute');if(open){open.onclick=()=>bountyBoard();
-  // Not on the world map (no notes there) nor in a single-map embed.
-  const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();};show();window.addEventListener('atlas:loaded',show);}}
+ {const open=$('contribute');if(open){open.onclick=()=>openWanted();
+  // Not on the world map (no notes there); a map change redraws the open board, or closes it on the world map.
+  const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();if($('journal').classList.contains('wanted-mode')){if(!config||config.zonesFile)closeWanted();else renderWanted();}};show();window.addEventListener('atlas:loaded',show);}}
  // A bounty's note opens with the suggestion ticked, whatever the last choice was.
  window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;if(bountyNext&&m?.wikiId===bountyNext.id){const check=$('suggest-check');if(check){check.checked=true;check.dispatchEvent(new Event('change'));}
   const all=readBounties();all[m.id]={bounty:bountyNext.id,priority:bountyNext.priority};writeBounties(all);}bountyNext=null;});
@@ -532,7 +555,7 @@ function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(co
     if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));if(typeof row.payload.wiki==='string'&&(f.wiki||'')!==row.payload.wiki)card.append(text('p','Wiki page: '+was(f.wiki)+'\n→ '+was(row.payload.wiki),'review-change'));}
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType==='label'?'Area label':row.payload.noteType==='exit'?'Zone exit':row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));if(row.payload.wiki)card.append(text('p','Wiki page: '+row.payload.wiki,'review-change'));
      // A bounty from the Wanted board is worth more points once approved: the badge says which, with its wiki page.
-     if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge');badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 points':'Bounty · 2 points'));if(row.payload.wiki){const a=text('a',' Wiki page ↗');a.href=row.payload.wiki;a.target='_blank';a.rel='noopener';badge.append(a);}card.append(badge);}}
+     if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge');badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord));if(row.payload.wiki){const a=text('a',' Wiki page ↗');a.href=row.payload.wiki;a.target='_blank';a.rel='noopener';badge.append(a);}card.append(badge);}}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
     const actions=text('div','','dialog-actions');if(row.user_id!==user?.id&&state==='pending')actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button(row.kind==='report'?'Show on map':'Review on map',()=>preview(row,()=>pendingTab(all,offset,state))),...decisions(row,()=>note.value,card));card.append(actions);content.append(card);
    }
