@@ -62,7 +62,11 @@ try{
  approved=[{id:34,map:'test-map',level:'lower',kind:'new-marker',payload:{x:6,y:6,name:'Elsewhere',category:'Bank',wiki:'https://wiki.example/page'}},{id:35,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-30',payload:{name:'Smithy',note:'',wiki:'javascript:alert(1)',from:{name:'Smithy',note:'',wiki:'https://monstersandmemories.wiki/npcs/smith'}}},{id:36,map:'test-map',level:'lower',kind:'new-marker',payload:{x:6,y:6,name:'Bad id',category:'Bank',wiki:'https://monstersandmemories.wiki/npcs/x',wikiId:'<b>x</b>'}}];
  const foreignLinks=await run();assert.equal(foreignLinks.code,0,foreignLinks.output);assert.equal((foreignLinks.output.match(/Unsupported wiki link/g)||[]).length,2);assert(foreignLinks.output.includes('Invalid wiki id'));
  assert(!JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).some(m=>m.id==='community-34'||m.id==='community-36'));
- console.log('Publisher checks passed: wiki links and ids, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
+ // A shared trainer note keeps its classes from the atlas's list; anything else goes back to review.
+ approved=[{id:40,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'A beastmaster instructor',category:'Class trainer',classes:['Beastmaster']}},{id:41,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Odd trainer',category:'Class trainer',classes:['Warrior']}}];
+ const trained=await run();assert.equal(trained.code,0,trained.output);assert(trained.output.includes('Unsupported classes'));
+ {const all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8'));assert.deepEqual(all.find(m=>m.id==='community-40').classes,['Beastmaster']);assert(!all.some(m=>m.id==='community-41'));}
+ console.log('Publisher checks passed: wiki links and ids, trainer classes, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});
 }

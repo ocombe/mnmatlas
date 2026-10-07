@@ -143,7 +143,7 @@
  // Only what can stand on the map as a marker is searched (NPCs, not items or quests), and only in this map's zone:
  // the backend keeps the wiki's results from that zone. A map's wiki zone is its title unless maps.json gives wikiZone;
  // the world map spans every zone.
- const finders=new Set(),wikiTypes={npc:'NPC'},markerTypes=Object.keys(wikiTypes).join(',');
+ let finderCount=0;const finders=new Set(),wikiTypes={npc:'NPC'},markerTypes=Object.keys(wikiTypes).join(',');
  const searchZone=()=>!config||config.zonesFile?'':config.wikiZone||config.title||'';
  const searchPlaceholder=()=>{const zone=searchZone();return zone?'Search NPCs in '+zone:'Search NPCs in every zone';};
  async function wikiSearch(q,signal,asking){
@@ -158,45 +158,62 @@
  }
  const searchesKey='mnmaps-wiki-searches-2';
  function readSearches(){try{const rows=JSON.parse(localStorage.getItem(searchesKey)||'{}');return rows&&typeof rows==='object'&&!Array.isArray(rows)?rows:{};}catch{return {};}}
- function wikiFinder(input,picked){
-  const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint'),trouble=text('span','','wiki-signin-trouble');
+ // The wiki search lives in the Name field: typing a name lists the wiki's NPCs of this map's zone under it, and picking
+ // one fills the name, the wiki link (input) and whatever else the form takes (picked). Typing on without picking keeps
+ // exactly what was typed. Signed-out visitors get a plain Name field and a link to sign in.
+ function wikiFinder(input,picked,name){
+  const box=text('div','','wiki-finder'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint wiki-signin-hint'),trouble=text('span','','wiki-signin-trouble');
+  list.id='wiki-results-'+(++finderCount);list.setAttribute('role','listbox');list.setAttribute('aria-label','Wiki NPCs');
+  name.setAttribute('aria-controls',list.id);name.setAttribute('aria-autocomplete','list');name.autocomplete='off';
   // Signing in from here keeps the note open: the sign-in window hands the session back to this page.
-  signedOut.append(text('span','Paste a page address, or '),button('sign-in',()=>{trouble.textContent='';popupSignIn(message=>{trouble.textContent=' '+message+' You can also sign in from the top bar.';});},'wiki-signin'),text('span',' to search the wiki by name'),trouble);
-  // A spinner at the end of the search box runs while the wiki is asked; answers kept in this browser show at once without it.
-  const field=text('div','','wiki-search'),spinner=text('span','','wiki-spinner');spinner.hidden=true;spinner.setAttribute('aria-hidden','true');field.append(search,spinner);
-  search.type='search';search.maxLength=80;search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
-  let timer,serial=0,wanted='',asking=null;
+  signedOut.append(button('Sign in',()=>{trouble.textContent='';popupSignIn(message=>{trouble.textContent=' '+message+' You can also sign in from the top bar.';});},'wiki-signin'),text('span',' to search the wiki by name'),trouble);
+  // A spinner runs while the wiki is asked; answers kept in this browser show at once without it.
+  const spinner=text('p','','wiki-searching');spinner.append(text('span','','wiki-spinner'),text('span','Searching the wiki…'));spinner.hidden=true;
+  let timer,serial=0,wanted='',asking=null,active=-1;
   const busy=on=>{spinner.hidden=!on;list.setAttribute('aria-busy',on?'true':'false');};
   // Only the latest search counts: a new one cancels the wait and the request before it.
   const stop=()=>{clearTimeout(timer);serial++;asking?.abort();asking=null;busy(false);};
-  // The credit names and links the wiki the results came from.
-  const show=(rows,message,from)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
-   for(const row of rows){const b=button('',()=>{input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);search.value='';show([]);credit(from,'Filled from the wiki · ');input.focus?.();},'wiki-result');
-    b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
-   if(rows.length)credit(from);};
+  const options=()=>[...list.querySelectorAll('button')].filter(b=>String(b.className).split(' ').includes('wiki-result'));
+  const highlight=i=>{const all=options();active=all.length?(i+all.length)%all.length:-1;all.forEach((b,n)=>{b.className=n===active?'wiki-result active':'wiki-result';b.setAttribute('aria-selected',String(n===active));});if(active>=0){name.setAttribute('aria-activedescendant',all[active].id);all[active].scrollIntoView?.({block:'nearest'});}else name.removeAttribute('aria-activedescendant');};
+  // The credit names and links the wiki the results came from, under the list and again after a pick.
   const credit=(from,lead='')=>{const source=wikiSites[from];if(!source)return;const line=text('a',lead+(source.credit||'Data from '+source.name),'wiki-credit');line.href=source.home||'https://'+source.hosts[0]+'/';line.target='_blank';line.rel='noopener';list.append(line);};
-  const showFound=(site,results)=>{const rows=results.filter(r=>Object.hasOwn(wikiTypes,r.type)),zone=searchZone();show(rows,rows.length?'':zone?'No NPC in '+zone+' with that name.':'No NPC found with that name.',site);};
+  const pick=(row,from)=>{name.value=row.name+levelText(row.level);wanted=name.value.trim().toLowerCase().replace(/\s+/g,' ');
+   input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);
+   stop();show([]);credit(from,'Filled from the wiki · ');name.focus?.();};
+  const show=(rows,message,from,heading)=>{list.replaceChildren();active=-1;name.removeAttribute('aria-activedescendant');name.setAttribute('aria-expanded',String(rows.length>0));
+   if(heading&&rows.length)list.append(text('p',heading,'wiki-heading'));if(message)list.append(text('p',message,'form-hint'));
+   rows.forEach((row,n)=>{const b=button('',()=>pick(row,from),'wiki-result');b.id=list.id+'-'+n;b.setAttribute('role','option');b.tabIndex=-1;
+    b.append(text('strong',row.name),text('small',[isClassTrainer(row)?'Class trainer':wikiTypes[row.type]||row.type,row.level?'level '+row.level:'',row.zone].filter(Boolean).join(' · ')));list.append(b);});
+   if(rows.length)credit(from);};
+  const showFound=(site,results)=>{const rows=results.filter(r=>Object.hasOwn(wikiTypes,r.type)),zone=searchZone();show(rows,rows.length?'':zone?'No wiki NPC in '+zone+' with that name.':'No wiki NPC with that name.',site,zone?'Wiki NPCs in '+zone:'Wiki NPCs');};
   // Typing waits 600 ms for a pause; the same words again (spaces or case aside) do not search twice.
-  search.addEventListener('input',()=>{const q=search.value.trim(),key=q.toLowerCase().replace(/\s+/g,' ');if(key===wanted)return;
+  name.addEventListener('input',()=>{if(!user)return;const q=name.value.trim(),key=q.toLowerCase().replace(/\s+/g,' ');if(key===wanted)return;
    stop();wanted=key;const mine=serial;if(q.length<2){show([]);return;}
    timer=setTimeout(async()=>{const request=new AbortController();asking=request;
     try{const {site,results}=await wikiSearch(q,request.signal,()=>{if(mine===serial)busy(true);});if(mine===serial){busy(false);asking=null;showFound(site,results);}}
-    catch(e){if(mine!==serial)return;busy(false);asking=null;wanted='';show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. You can paste the page address instead.');}},600);});
-  box.append(field,list,signedOut);
-  box.update=()=>{search.placeholder=searchPlaceholder();field.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';search.value='';show([]);}};
-  box.reset=()=>{stop();wanted='';search.value='';search.placeholder=searchPlaceholder();show([]);};
+    catch(e){if(mine!==serial)return;busy(false);asking=null;wanted='';show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. Keep typing the name, or paste the page address below.');}},600);});
+  // Up and down move through the suggestions, Enter picks one, Escape closes them (and only them).
+  name.addEventListener('keydown',e=>{const all=options();if(!all.length)return;
+   if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();highlight(active<0&&e.key==='ArrowUp'?all.length-1:active+(e.key==='ArrowDown'?1:-1));}
+   else if(e.key==='Enter'&&active>=0){e.preventDefault();all[active].onclick();}
+   else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();stop();show([]);}});
+  box.append(spinner,list,signedOut);
+  box.update=()=>{name.placeholder=user?'Type a name to search the wiki, or any name':'Give this place a name';box.hidden=false;list.hidden=spinner.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';show([]);}else busy(false);};
+  box.reset=()=>{stop();wanted='';show([]);};
   finders.add(box);box.update();return box;
  }
  // A picked NPC pre-fills a new note as the wiki's terms allow: its name (with its level, as the atlas writes levels),
  // its type from the wiki's role, and its short location line as the note. Nothing the visitor typed is replaced,
  // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level.
  const roleTypes={merchant:'Vendor',quest:'Quest',mob:'Mob camp'};
- const roleType=row=>roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'');
- const levelText=level=>level?' ('+(/[-–]/.test(level)?'levels '+level.replace(/\s*[-–]\s*/,'–'):'level '+level)+')':'';
+ const roleType=row=>isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'');
+ const levelText=level=>{const v=String(level??'').trim();return v?' ('+(/[-–]/.test(v)?'levels '+v.replace(/\s*[-–]\s*/,'–'):'level '+v)+')':'';};
  const wikiNote=row=>row.location||'';
- {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{if(!$('name').value.trim())$('name').value=row.name+levelText(row.level);
+ {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{
   const type=roleType(row);if(type&&$('category').value==='Personal'&&[...$('category').options].some(o=>o.value===type)){$('category').value=type;$('category').dispatchEvent(new Event('change'));}
-  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);});field.append(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+  // A trainer's classes ride with its wiki link, so the note reads "Beastmaster trainer" first like the atlas's own trainers.
+  $('wiki').dataset.wikiClasses=JSON.stringify(trainerClasses(row));
+  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  function editDialog(target,kind){
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
@@ -205,7 +222,7 @@
   const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
-  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki,row=>{name.value=row.name;});d.append(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
+  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki,null,name);name.after(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
   const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim(),newWiki=wiki?wikiAddress(wiki.value):'',oldWiki=target.wiki||'';
@@ -239,7 +256,7 @@
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
  function shareNote(m){
-  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;
+  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;if(m.category==='Class trainer'&&classesOk(m.classes))payload.classes=m.classes;
   sendDialog('Share a personal note',[{token:sharedToken(m),name:m.name,map:config.id,level:m.level||config.levelId||null,kind:'new-marker',target_id:null,payload}],true);
  }
  // Being credited is opt-in: the Discord name goes into the public contributors list once a suggestion is published.
@@ -406,7 +423,7 @@
    if(row.kind==='new-marker'||edit){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
    let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
-    const finder=wikiFinder(wiki,found=>{if(name){name.value=found.name;restyle();}});bar.append(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
+    const finder=wikiFinder(wiki,()=>restyle(),name);name.after(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
    const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category!=='Tradeskill')delete p.trade;}pin.setIcon(pinIcon(look()));};
    for(const el of [name,category])el?.addEventListener('input',restyle);category?.addEventListener('change',restyle);

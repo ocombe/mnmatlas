@@ -55,3 +55,16 @@ function wikiIdOf(value){
 // The id rides on the address field with the address it was picked for, so typing another address or clearing it drops the id.
 function setWikiPick(input,href,id){input.dataset.wikiUrl=wikiAddress(href)||'';input.dataset.wikiId=wikiIdOf(id)||'';}
 function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.dataset.wikiId||'':'';}
+// The classes the atlas's trainers teach (as on the class chips: ARC, BRD, BST, CLR, DRU, ELE, ENC, FTR, INQ, MNK, NEC,
+// PAL, RNG, ROG, SHD, SHM, SPB, WIZ).
+const classAbbreviations={Archer:'ARC',Bard:'BRD',Beastlord:'BST',Beastmaster:'BST',Cleric:'CLR',Druid:'DRU',Elementalist:'ELE',Enchanter:'ENC',Fighter:'FTR',Inquisitor:'INQ',Monk:'MNK',Necromancer:'NEC',Paladin:'PAL',Ranger:'RNG',Rogue:'ROG','Shadow Knight':'SHD',Shaman:'SHM',Spellblade:'SPB',Wizard:'WIZ'};
+const atlasClasses=Object.keys(classAbbreviations);
+const classesOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=6&&v.every(c=>atlasClasses.includes(c));
+// The wiki files class trainers as merchants, so a trainer is known by its name: a class with instructor, trainer or
+// guildmaster ("A beastmaster instructor" teaches Beastmaster). Only the name counts: plenty of other merchants stand in
+// a guild hall. "Instructor"/"guildmaster" alone, or the wiki's own "trainer" role, still mark a trainer of unknown class.
+function trainerClasses(row){
+ const name=String(row?.name??'');if(!/\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b/i.test(name))return [];
+ return atlasClasses.filter(c=>new RegExp('\\b'+c.replace(' ','\\s*')+'s?\\b','i').test(name));
+}
+const isClassTrainer=row=>trainerClasses(row).length>0||row?.role==='trainer'||/\b(instructors?|guild\s*masters?|guildmasters?)\b/i.test(String(row?.name??''));
