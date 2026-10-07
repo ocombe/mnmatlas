@@ -136,8 +136,24 @@ $$;
 revoke all on function public.delete_my_account() from public,anon,authenticated;
 grant execute on function public.delete_my_account() to authenticated;
 drop trigger if exists suggestions_clean_text on public.suggestions;
--- Also on update, so a pending suggestion its author corrects is cleaned the same way.
-create trigger suggestions_clean_text before insert or update of payload on public.suggestions for each row execute function public.clean_suggestion();
+create trigger suggestions_clean_text before insert on public.suggestions for each row execute function public.clean_suggestion();
+-- An author correcting their own pending suggestion (suggestions_update_own_pending) may change its place, level, text and credit only;
+-- the rest is kept, and the text is cleaned as on insert. Admins are left alone, so reviewing never rewrites the author's name.
+create or replace function public.guard_own_suggestion_update()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+ if auth.uid() is null or exists (select 1 from public.admins where user_id=auth.uid()) then return new; end if;
+ new.id=old.id; new.created_at=old.created_at; new.user_id=old.user_id; new.author_name=old.author_name;
+ new.map=old.map; new.kind=old.kind; new.target_id=old.target_id;
+ new.comment=nullif(public.clean_text(new.comment,true),'');
+ if jsonb_typeof(new.payload->'name')='string' then new.payload=jsonb_set(new.payload,'{name}',to_jsonb(public.clean_text(new.payload->>'name')));end if;
+ if jsonb_typeof(new.payload->'note')='string' then new.payload=jsonb_set(new.payload,'{note}',to_jsonb(public.clean_text(new.payload->>'note',true)));end if;
+ return new;
+end;
+$$;
+revoke all on function public.guard_own_suggestion_update() from public,anon,authenticated;
+drop trigger if exists suggestions_guard_own_update on public.suggestions;
+create trigger suggestions_guard_own_update before update on public.suggestions for each row execute function public.guard_own_suggestion_update();
 
 alter table public.admins enable row level security;
 alter table public.suggestions enable row level security;
