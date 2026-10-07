@@ -454,5 +454,25 @@
     "level": "lower",
     "approximate": true,
     "community": true
+  },
+  {
+    "id": "wiki-apothecary",
+    "name": "Apothecary",
+    "category": "Vendor",
+    "x": 2652,
+    "y": 4874,
+    "note": "Approximate; to confirm in game. Western shore; exact shop entrance to confirm.",
+    "level": "lower",
+    "approximate": true
+  },
+  {
+    "id": "wiki-butchers",
+    "name": "Butchers",
+    "category": "Vendor",
+    "x": 3673,
+    "y": 4120,
+    "note": "Approximate; to confirm in game. Two adjacent shops indicated by the sketch; exact doors to confirm.",
+    "level": "lower",
+    "approximate": true
   }
 ]

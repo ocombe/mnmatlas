@@ -12,19 +12,6 @@
   },
   "labels": [
     {
-      "id": "wiki-apothecary",
-      "name": "Apothecary",
-      "x": 2652,
-      "y": 4874,
-      "level": "lower",
-      "approximate": true,
-      "note": "Approximate; to confirm in game. Western shore; exact shop entrance to confirm.",
-      "kind": "building",
-      "tier": "building",
-      "priority": 40,
-      "minZoom": 4.5
-    },
-    {
       "id": "wiki-rogue-cave",
       "name": "Rogue back cave",
       "x": 2576,
@@ -112,19 +99,6 @@
       "level": "lower",
       "approximate": true,
       "note": "Approximate; to confirm in game. Basement.",
-      "kind": "building",
-      "tier": "building",
-      "priority": 40,
-      "minZoom": 4.5
-    },
-    {
-      "id": "wiki-butchers",
-      "name": "Butchers",
-      "x": 3673,
-      "y": 4120,
-      "level": "lower",
-      "approximate": true,
-      "note": "Approximate; to confirm in game. Two adjacent shops indicated by the sketch; exact doors to confirm.",
       "kind": "building",
       "tier": "building",
       "priority": 40,
