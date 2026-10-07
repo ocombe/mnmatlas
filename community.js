@@ -80,20 +80,22 @@
   const line=text('p',message+' ','community-fallback form-hint'),link=text('a','Open the full atlas');link.href=url.href;link.target='_blank';link.rel='noopener';
   line.append(link,text('span',' to sign in there.'));account.append(line);
  }
- function popupSignIn(){
-  event('sign-in');account.querySelector('.community-fallback')?.remove();
+ // The wiki field also uses this window on the full atlas, so an open note survives the sign-in; trouble is then shown there.
+ let signInTrouble=fullAtlasHint;
+ function popupSignIn(trouble=fullAtlasHint){
+  event('sign-in');account.querySelector('.community-fallback')?.remove();signInTrouble=trouble;
   const w=520,h=720,left=Math.max(0,(screen.availWidth-w)/2),top=Math.max(0,(screen.availHeight-h)/2);
   signInWindow=window.open(location.origin+'/signin.html','mnmaps-signin',`popup,width=${w},height=${h},left=${left},top=${top}`);
-  if(!signInWindow){fullAtlasHint('Your browser blocked the sign-in window.');return;}
+  if(!signInWindow){trouble('Your browser blocked the sign-in window.');return;}
   clearInterval(signInWatch);
-  signInWatch=setInterval(()=>{if(!signInWindow||!signInWindow.closed)return;clearInterval(signInWatch);signInWindow=null;if(!user)fullAtlasHint('Sign-in did not reach this map.');},700);
+  signInWatch=setInterval(()=>{if(!signInWindow||!signInWindow.closed)return;clearInterval(signInWatch);signInWindow=null;if(!user)trouble('Sign-in did not reach this map.');},700);
  }
  window.addEventListener('message',async e=>{
   if(e.origin!==location.origin||!signInWindow||e.source!==signInWindow)return;
   const d=e.data;if(!d||d.type!=='mnmaps-session'||typeof d.access_token!=='string'||typeof d.refresh_token!=='string')return;
   clearInterval(signInWatch);signInWindow=null;
   try{const {error}=await client.auth.setSession({access_token:d.access_token,refresh_token:d.refresh_token});if(error)throw error;}
-  catch{fullAtlasHint('Sign-in could not finish in this map.');}
+  catch{signInTrouble('Sign-in could not finish in this map.');}
  });
  async function signOut(){try{await pushJobs();const {error}=await client.auth.signOut();if(error)throw error;}catch{status('Sign-out could not finish. Please try again.');}}
  // Deletes the sign-in and everything stored with it on the server; notes saved in this browser stay here.
@@ -152,7 +154,9 @@
  const searchesKey='mnmaps-wiki-searches';
  function readSearches(){try{const rows=JSON.parse(localStorage.getItem(searchesKey)||'{}');return rows&&typeof rows==='object'&&!Array.isArray(rows)?rows:{};}catch{return {};}}
  function wikiFinder(input){
-  const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','Sign in to search the wiki by name, or paste a page address.','form-hint');
+  const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint'),trouble=text('span','','wiki-signin-trouble');
+  // Signing in from here keeps the note open: the sign-in window hands the session back to this page.
+  signedOut.append(text('span','Paste a page address, or '),button('sign-in',()=>{trouble.textContent='';popupSignIn(message=>{trouble.textContent=' '+message+' You can also sign in from the top bar.';});},'wiki-signin'),text('span',' to search the wiki by name'),trouble);
   search.type='search';search.maxLength=80;search.placeholder='Search the wiki by name';search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
   let timer,serial=0;
   // The credit names and links the wiki the results came from.
