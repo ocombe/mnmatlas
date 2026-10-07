@@ -26,6 +26,10 @@ jobs:
           node-version: 22
       - name: Build map pages
         run: node scripts/make-share-pages.mjs
+      - name: Build mini map images
+        run: |
+          python3 -m pip install --quiet pillow fonttools brotli
+          python3 scripts/make-mini-maps.py
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

@@ -318,7 +318,16 @@ function embedAddress(){
  if(embedPlace&&$('embed-place').checked)url.searchParams.set('place',embedPlace.id);
  return url;
 }
+// A marker can also be shown as a small still image of its spot (built with the site, see scripts/make-mini-maps.py)
+// that links to the atlas: plain HTML with no iframe or script, light enough for every page of a wiki.
+function miniImage(m){
+ const link=m.wikiId?new URL(siteRoot.href):mapAddress(config.id);if(m.wikiId)link.searchParams.set('find',m.wikiId);else{link.searchParams.set('place',m.id);if(config.levels&&m.level)link.searchParams.set('level',m.level);}
+ return {link,image:new URL(m.wikiId?'mini/'+encodeURIComponent(m.wikiId)+'.webp':'mini/'+encodeURIComponent(config.id)+'/'+encodeURIComponent(m.id)+'.webp',siteRoot)};
+}
 function updateEmbed(){
+ const mini=embedPlace?.kind==='marker'&&$('embed-place').checked&&$('embed-mini').checked;$('embed-height').hidden=$('embed-height-label').hidden=mini;
+ if(mini){const {link,image}=miniImage(embedPlace);$('embed-address').value=image.href;$('embed-preview').href=link.href;
+  $('embed-code').value=`<a href="${htmlAttr(link.href)}" title="Open in MnM Atlas"><img src="${htmlAttr(image.href)}" width="320" height="200" alt="${htmlAttr(markerTitle(embedPlace)+' on MnM Atlas')}" loading="lazy" style="border:0"></a>`;return;}
  const url=embedAddress();$('embed-address').value=url.href;$('embed-preview').href=url.href;
  $('embed-code').value=`<iframe src="${htmlAttr(url.href)}" title="${htmlAttr(config.title+' · MnM Atlas')}" width="100%" height="${$('embed-height').value}" style="border:0" loading="lazy" allow="fullscreen; clipboard-write" allowfullscreen></iframe>`;
 }
@@ -326,7 +335,8 @@ function openEmbed(){
  embedPlace=activePlace&&!activePlace.id.startsWith('personal-')?activePlace:null;
  $('embed-map-name').textContent=config.title;
  $('embed-level-row').hidden=!config.levels;$('embed-level-name').textContent=config.levelTitle||'';$('embed-level').checked=true;
- $('embed-place-row').hidden=!embedPlace;$('embed-place-name').textContent=embedPlace?.name||'';$('embed-place').checked=true;
+ $('embed-place-row').hidden=!embedPlace;$('embed-place-name').textContent=embedPlace?markerTitle(embedPlace):'';$('embed-place').checked=true;
+ $('embed-mini-row').hidden=embedPlace?.kind!=='marker';$('embed-mini').checked=false;
  updateEmbed();$('embed-dialog').showModal();$('embed-code').select();
 }
 async function copyEmbed(field){
@@ -590,7 +600,7 @@ function setupControls(){
  $('share').onclick=()=>singleMap?openInAtlas():copyLink();$('close-link').onclick=()=>$('link-dialog').close();
  if(singleMap){const share=$('share');share.title='Open in MnM Atlas';share.setAttribute('aria-label','Open this view in MnM Atlas');}
  $('embed').onclick=openEmbed;$('close-embed').onclick=()=>$('embed-dialog').close();
- for(const id of ['embed-level','embed-place','embed-height'])$(id).onchange=updateEmbed;
+ for(const id of ['embed-level','embed-place','embed-height','embed-mini'])$(id).onchange=updateEmbed;
  $('copy-embed').onclick=()=>copyEmbed('embed-code');$('copy-embed-address').onclick=()=>copyEmbed('embed-address');
  $('fullscreen').onclick=async()=>{try{if(document.fullscreenElement)await document.exitFullscreen();else await document.documentElement.requestFullscreen();}catch{status('Fullscreen is unavailable. Open the atlas in its own tab, or allow fullscreen on the iframe.');}};
  document.addEventListener('fullscreenchange',()=>{$('fullscreen').setAttribute('aria-label',document.fullscreenElement?'Exit fullscreen':'Enter fullscreen');$('fullscreen').title=document.fullscreenElement?'Exit fullscreen':'Enter fullscreen';map?.invalidateSize({pan:true,animate:false});});

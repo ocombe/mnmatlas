@@ -42,3 +42,7 @@ Run `node scripts/test-community.mjs` for client checks with a local service stu
 ## Find links
 
 `make-share-pages.mjs` also writes `data/find-index.json` (not kept in the repo): every marker and place name of every map with its level, wiki id and trainer classes. `?find=<text>` on any atlas page looks it up (`find.js`): a wiki id first, then the exact name (a class trainer also answers to "<class> trainer"), then names containing the text; `&map=<id>` keeps to one map. One match opens its map on that place; several, or none, open the Search menu with the text and the matches on other maps. `?wiki=<wiki id>` works the same way. Run `node scripts/test-find.mjs` for the matching checks.
+
+## Mini map images
+
+`python scripts/make-mini-maps.py` (after `make-share-pages.mjs`; needs `pip install pillow fonttools brotli`) cuts a 320 × 200 still image of the map around every marker, with its pin or class chip and its name, from the map tiles: `mini/<map id>/<place id>.webp`, and `mini/<wiki id>.webp` for markers with a wiki id. GitHub builds them when publishing (`.github/workflows/pages.yml`); they are not kept in the repository. The Embed dialog offers the HTML for one: an image that links to the atlas, with no iframe or script.
