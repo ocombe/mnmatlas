@@ -253,7 +253,12 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .embed .journal .results{flex:1;min-height:230px;max-height:none}
 .credit-item{white-space:nowrap}
 /* Wanted board: parchment notices pinned to a dark wooden board. */
-#contribute{width:100%;margin-top:8px;font-size:12px}
+.wanted-button{position:relative;display:flex;flex-direction:column;align-items:center;gap:1px;width:100%;margin:0 0 16px;padding:8px 12px;border:1px solid #c9a46a;border-radius:var(--radius);background:radial-gradient(ellipse at 30% 20%,#f4ead1,#e6d5ae 75%);color:#3a2918;box-shadow:0 2px 6px #0007;flex-shrink:0}
+.wanted-button::before,.wanted-button::after{content:"";position:absolute;top:6px;width:7px;height:7px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e3c27f,#7a5527 55%,#3b2610);box-shadow:0 1px 1px #0009}.wanted-button::before{left:8px}.wanted-button::after{right:8px}
+.wanted-button:active{transform:translateY(1px);box-shadow:0 1px 3px #0007}
+.wanted-button:hover{background:radial-gradient(ellipse at 30% 20%,#fff4dc,#efdfb9 75%);border-color:#e0b76f}
+.wanted-button strong{font:19px/1.1 var(--small-caps);font-weight:normal;letter-spacing:.18em;color:#8b2c1f}
+.wanted-button span{font-size:12px;color:#5a4630}
 .community-dialog.bounty-dialog{width:min(780px,calc(100% - 28px))}
 .bounty-dialog>h2{font:36px/1.1 var(--heading);text-align:center;letter-spacing:.08em;margin:4px 0}
 .board-lede{text-align:center;font-style:italic;color:var(--muted-foreground);margin:0 0 8px}

@@ -317,7 +317,9 @@
   contributeCount();
  }
  // The Contribute button shows how many bounties are open once this browser has the list, never fetching it on load.
- function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;const n=kept?kept.rows.length:0;open.textContent=n?'Wanted: '+n+(n===1?' bounty':' bounties'):'Wanted: help place NPCs';}
+ // Once this browser has the map's list it shows the counts, and hides on a map with nothing left to place.
+function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;const n=kept?kept.rows.length:-1,p=kept?kept.rows.filter(r=>r.priority).length:0;
+  open.replaceChildren(text('strong','Wanted'),text('span',n>0?n+(n===1?' bounty':' bounties')+(p?' · '+p+' priority':''):'Help place the NPCs this map is missing'));if(n===0)open.hidden=true;}
  {const open=$('contribute');if(open){open.onclick=()=>bountyBoard();
   // Not on the world map (no notes there) nor in a single-map embed.
   const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();};show();window.addEventListener('atlas:loaded',show);}}
