@@ -287,3 +287,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .board-credit{display:block;text-align:center;margin-top:12px}
 @media(max-width:560px){.board-grid{grid-template-columns:1fr}.bounty-board{padding:8px 10px 12px}}
 @media(prefers-reduced-motion:reduce){.notice,.notice:nth-child(even){transform:none}}
+.drag-ghost{position:fixed;z-index:10000;pointer-events:none;display:flex;flex-direction:column;align-items:center;gap:4px;transform:translate(-50%,-30px)}
+.drag-ghost>span{display:grid;place-items:center;width:25px;height:25px;color:#fff3cf;background:var(--pin);border:2px solid #f5e2b4;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);box-shadow:0 2px 6px #000a}
+.drag-ghost>span>*{transform:rotate(45deg);width:17px;height:17px}
+.drag-ghost small{padding:2px 7px;border-radius:6px;background:var(--popover);border:1px solid var(--amber-border);color:var(--foreground);font-size:11px;white-space:nowrap}
+.notice:not(.claimed) .notice-paper{cursor:grab}

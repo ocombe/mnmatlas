@@ -244,13 +244,40 @@
  }
  // Bounties someone already claimed (a suggestion waiting for review or publishing), from the atlas's own database.
  async function claimedBounties(){if(!user)return new Set();try{const {data,error}=await client.rpc('claimed_bounties',{map_id:config.id});if(error)throw error;return new Set((data||[]).map(r=>typeof r==='string'?r:r?.claimed_bounties).filter(Boolean));}catch{return new Set();}}
+ // What a bounty's note starts with: the wiki's name and level, its type, its page and id, a trainer's classes.
+ function bountyPrefill(row){const classes=trainerClasses(row),type=isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Personal');
+  return {name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
+ const signInToTake=()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.'));
  async function takeBounty(row,note){
-  if(!user){popupSignIn(m=>status(m+' You can also sign in from the top bar.'));return;}
+  if(!user){signInToTake();return;}
   // Checked again on the click: someone may have claimed it since the board opened.
   if((await claimedBounties()).has(row.id)){markClaimed(note,'Someone just claimed this one');return;}
-  const classes=trainerClasses(row),type=isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Personal');
-  bountyNext={id:row.id,priority:!!row.priority};dialog.close();
-  window.atlasPlaceNote?.({name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})});
+  bountyNext={id:row.id,priority:!!row.priority};dialog.close();window.atlasPlaceNote?.(bountyPrefill(row));
+ }
+ // A notice can also be dragged onto the map (mouse, or a short press on touch so the list still scrolls): the board
+ // steps aside, a pin follows the pointer, and dropping it on the map opens the note there. Escape, or a drop off the
+ // map, brings the board back.
+ function bountyDrag(note,row){
+  note.addEventListener('pointerdown',e=>{
+   if(e.button!==0||e.target.closest('a,button')||note.classList.contains('claimed'))return;
+   const touch=e.pointerType!=='mouse',x0=e.clientX,y0=e.clientY;let started=false,timer=null,ghost=null;
+   const cleanup=()=>{clearTimeout(timer);window.removeEventListener('pointermove',move);window.removeEventListener('pointerup',up);window.removeEventListener('pointercancel',cancel);window.removeEventListener('keydown',key,true);ghost?.remove();};
+   const begin=ev=>{if(started)return;started=true;
+    if(!user){cleanup();signInToTake();return;}
+    const prefill=bountyPrefill(row),face=text('span','');face.style.setProperty('--pin',categories[prefill.category]?.[1]||'#365f59');face.append(markerSymbol({category:prefill.category,name:prefill.name}));
+    ghost=text('span','','drag-ghost');ghost.append(face,text('small',row.name));ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';document.body.append(ghost);
+    dialog.close();status('Drop the notice where '+row.name+' stands, or press Escape.',true);};
+   const move=ev=>{if(!started){if(Math.hypot(ev.clientX-x0,ev.clientY-y0)<(touch?10:6))return;if(touch){cleanup();return;}begin(ev);if(!started)return;}
+    if(ghost){ghost.style.left=ev.clientX+'px';ghost.style.top=ev.clientY+'px';}ev.preventDefault();};
+   const back=()=>{$('status').hidden=true;bountyBoard();};
+   const up=async ev=>{const was=started&&!!ghost;cleanup();if(!was)return;$('status').hidden=true;
+    if((await claimedBounties()).has(row.id)){status('Someone just claimed this one.');bountyBoard();return;}
+    bountyNext={id:row.id,priority:!!row.priority};if(!window.atlasPlaceNoteAt?.(bountyPrefill(row),ev.clientX,ev.clientY)){bountyNext=null;back();}};
+   const cancel=()=>{const was=started;cleanup();if(was)back();};
+   const key=ev=>{if(ev.key==='Escape'&&started){ev.preventDefault();ev.stopPropagation();cancel();}};
+   if(touch)timer=setTimeout(()=>begin({clientX:x0,clientY:y0}),350);
+   window.addEventListener('pointermove',move,{passive:false});window.addEventListener('pointerup',up);window.addEventListener('pointercancel',cancel);window.addEventListener('keydown',key,true);
+  });
  }
  function markClaimed(note,label='Claimed, awaiting review'){note.classList.add('claimed');note.querySelector('.notice-take')?.remove();if(!note.querySelector('.notice-stamp'))note.querySelector('.notice-paper').append(text('span',label,'notice-stamp'));status(label==='Claimed, awaiting review'?label:label+'.');}
  const wikiLink=(row,label,cls)=>{const a=text('a',label,cls);a.href=row.url;a.target='_blank';a.rel='noopener';return a;};
@@ -265,7 +292,8 @@
   if(!dialog.open)return;
   const claimed=await claimedBounties(),{site,rows}=found,priority=rows.filter(r=>r.priority).length;
   if(!rows.length)count.textContent='No bounties here. Every NPC the wiki knows is on the map.';
-  else count.textContent=rows.length+(rows.length===1?' bounty':' bounties')+' open in '+zone+(priority?', '+priority+' priority':'');
+  else{count.textContent=rows.length+(rows.length===1?' bounty':' bounties')+' open in '+zone+(priority?', '+priority+' priority':'');
+   count.after(text('p',matchMedia('(pointer: fine)').matches?'Drag a notice onto the map, or press Take the bounty.':'Press Take the bounty, then drag the pin to where they stand.','board-hint'));}
   const board=text('div','','bounty-board');
   for(const group of bountyGroups){
    const mine=rows.filter(r=>bountyGroup(r)===group.key).sort((a,b)=>a.name.localeCompare(b.name));if(!mine.length)continue;
@@ -281,7 +309,7 @@
      text('p',(row.priority?'High reward: 3 points':'Reward: 2 points')+' and your name in the atlas credits','notice-reward'));
     const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Read the wiki page ↗','notice-wiki'));
     if(claimed.has(row.id))paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
-    paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',claimed.has(row.id));grid.append(note);}
+    paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',claimed.has(row.id));bountyDrag(note,row);grid.append(note);}
    board.append(grid);}
   if(rows.length)d.append(board);
   const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';d.append(credit);}

@@ -166,6 +166,12 @@ function cancelPlacement(){if(draftPin)$('status').hidden=true;draftPin?.remove(
 // The world map (the one with zone outlines) takes no new notes: places belong on their zone's map. Notes saved there earlier stay.
 const takesNotes=()=>!config.zonesFile;
 window.atlasPlaceNote=start=>startPlacement(start);
+// A bounty dragged from the Wanted board: the note opens where it was dropped, on the floor in view, if that is on the map.
+window.atlasPlaceNoteAt=(given,clientX,clientY)=>{
+ if(!takesNotes()||!map)return false;const box=map.getContainer().getBoundingClientRect();if(clientX<box.left||clientX>box.right||clientY<box.top||clientY>box.bottom)return false;
+ const spot=map.mouseEventToLatLng({clientX,clientY}),[x,y]=pixelsOf(spot);if(!bounded(x,y))return false;
+ startPlacement(given);if(!draftPin)return false;draftPin.setLatLng(spot);draftPin.fire('click');return true;
+};
 // New notes start at the centre of the view; dropping the pin opens the editor there. A bounty from the Wanted board
 // passes what the note starts with (name, type, wiki link…); a button click passes its event, which is ignored.
 function startPlacement(given){
