@@ -162,7 +162,7 @@
    const source=wikiSites[from];if(rows.length&&source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';list.append(credit);}};
   search.addEventListener('input',()=>{clearTimeout(timer);const q=search.value.trim(),mine=++serial;if(q.length<2){show([]);return;}
    timer=setTimeout(async()=>{show([],'Searching…');try{const {site,results}=await wikiSearch(q);if(mine===serial)show(results,results.length?'':'No wiki page found with that name.',site);}
-    catch(e){if(mine===serial)show([],e.message==='busy'?'The wiki is busy. Try again in a moment.':'The wiki could not be searched right now. You can paste the page address instead.');}},350);});
+    catch(e){if(mine===serial)show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. You can paste the page address instead.');}},350);});
   box.append(search,list,signedOut);
   box.update=()=>{search.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){search.value='';show([]);}};
   box.reset=()=>{clearTimeout(timer);serial++;search.value='';show([]);};
