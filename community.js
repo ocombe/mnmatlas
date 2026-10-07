@@ -29,7 +29,7 @@
  const accountBox=text('div','','account'),accountButton=text('button','','account-button'),account=text('div','','account-menu');
  accountButton.type='button';accountButton.setAttribute('aria-haspopup','true');accountButton.setAttribute('aria-expanded','false');account.id='account-menu';account.hidden=true;accountButton.setAttribute('aria-controls',account.id);
  accountBox.append(accountButton,account);$('toggle-panel').after(accountBox);
- const notesLine=document.querySelector('.journal-bottom>.backup').previousElementSibling;
+ const notesLine=document.querySelector('.journal-bottom .backup').previousElementSibling;
  const syncLine=text('p','','community-sync');syncLine.setAttribute('role','status');syncLine.setAttribute('aria-live','polite');
  const reviewButton=button('Review suggestions',()=>{closeAccount();openReview();}),reviewCount=text('span','','account-badge');reviewCount.hidden=true;reviewButton.append(reviewCount);
  const dialog=text('dialog','','community-dialog');dialog.id='community-dialog';dialog.setAttribute('aria-labelledby','community-title');document.body.append(dialog);
@@ -66,7 +66,7 @@
   try{const {count,error}=await client.from('suggestions').select('id',{count:'exact',head:true}).eq('status','pending');if(error)throw error;reviewCount.textContent=count>99?'99+':String(count||'');reviewCount.hidden=!count;}catch{reviewCount.hidden=true;}
  }
  $('about-community').textContent='Optional Discord sign-in stores your Discord name and id, your suggestions and reports and, if you sign in, your notes, so they follow you between devices. Delete my account removes all of it.';$('about-community').hidden=false;
- $('editor').querySelector('.form-hint').textContent='Saved on this device. Sign in to sync notes, and export a backup.';
+ $('editor').querySelector('.storage-hint').textContent='Saved on this device. Sign in to sync notes, and export a backup.';
  async function signIn(){
   if(embedded){popupSignIn();return;}
   try{const url=new URL(location.href);url.hash='';event('sign-in');const {error}=await client.auth.signInWithOAuth({provider:'discord',options:{redirectTo:url.href}});if(error)throw error;}

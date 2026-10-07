@@ -201,3 +201,49 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .map-tools button[data-tip]::after{content:attr(data-tip);position:absolute;right:calc(100% + 10px);top:50%;transform:translateY(-50%);padding:5px 9px;border:1px solid var(--amber-border);border-radius:6px;background:var(--popover);color:var(--foreground);font:12px/1.3 var(--body);white-space:nowrap;box-shadow:var(--shadow);pointer-events:none;opacity:0;visibility:hidden;z-index:900}
 @media(hover:hover){.map-tools button[data-tip]:hover::after{opacity:1;visibility:visible}}
 .map-tools button[data-tip]:focus-visible::after{opacity:1;visibility:visible}
+/* Note form and Search menu, one system: 4/8/12/16/24 spacing, sentence-case labels, dark inputs, 8px corners,
+   thin dividers between sections. */
+.note-form{display:flex;flex-direction:column;gap:16px}
+.note-form .form-head .eyebrow{margin:0 0 4px}.note-form .form-head h2{margin:0}
+.note-form label,.note-form fieldset{margin:0}
+.note-form .field{display:flex;flex-direction:column;gap:4px}
+.note-form .field>label,.note-form legend,.search-label,.filter-heading>span{display:block;font:12px/1.35 var(--body);letter-spacing:0;text-transform:none;color:var(--muted-foreground);margin:0 0 4px}
+.note-form .optional{font-size:11px;opacity:.7;margin-left:2px}
+.note-form .note-type{display:block}.note-form .segmented{display:flex;width:100%;border:1px solid var(--border);border-radius:var(--radius);background:var(--muted);overflow:hidden}
+.note-form .segmented label{flex:1}
+.note-form .segmented span{border:0;border-radius:0;background:none;padding:7px 6px;white-space:nowrap}
+.note-form .segmented label+label span{border-left:1px solid var(--border)}
+.note-form .segmented input:checked+span{background:#5a3b22;color:#fff0cc}
+#marker-fields{display:flex;flex-direction:column;gap:12px}
+.category-row{display:flex;align-items:center;gap:8px}
+.category-row select{flex:1}
+.pin-preview{flex:none;width:24px;height:24px;border-radius:50%;background:var(--swatch,#a04438);border:2px solid #f5e2b4;box-shadow:0 0 0 1px var(--border)}
+.note-form .pin-colours span{width:24px;height:24px}
+.note-form .form-section{display:flex;flex-direction:column;gap:12px;border-top:1px solid var(--border);padding-top:16px}
+.note-form .form-section h3{font:18px/1.2 var(--heading);margin:0;color:var(--foreground)}
+.note-form .form-footer{display:flex;flex-direction:column;gap:8px;border-top:1px solid var(--border);padding-top:12px}
+.note-form .form-footer .dialog-actions{margin-top:4px}
+.note-form .storage-hint{margin:0;text-align:right;font-size:11px;opacity:.75}
+.note-form .wiki-finder{margin-top:4px}
+.note-form .exit-arrows,.note-form #exit-target-field{margin:0}
+/* Search menu */
+.search-box{background:var(--muted);border-color:var(--border);color:var(--foreground)}
+.search-box>span{color:var(--muted-foreground)}
+.search-box input{color:var(--foreground);font-size:13px}
+.search-box input::placeholder{color:var(--muted-foreground)}
+.search-box #clear-search{color:var(--muted-foreground)}
+.filter-heading{margin:16px 0 4px}
+.filter-heading>span{margin:0}
+.categories button:last-child:nth-child(odd){grid-column:1/-1}
+.display-group{display:flex;flex-direction:column;margin-top:8px}
+.display-group .place-name-controls,.display-group .hidden-controls{margin:0}
+.display-group label{min-height:32px}
+.list-heading{margin-top:12px;padding-top:16px}
+.journal-bottom{text-align:left;padding-top:12px}
+.notes-actions{display:flex;gap:8px}
+.notes-actions #add{flex:1}
+.journal-bottom .notes-actions #edit-positions{width:auto;margin:0;flex:none}
+.notes-meta{display:flex;flex-direction:column;align-items:flex-start;gap:0;margin-top:8px}
+.journal-bottom .notes-meta p{margin:0;font-size:11px}
+.notes-meta .backup{gap:2px;margin-left:-4px}.notes-meta .backup button{font-size:11px;padding:4px}
+.journal>footer{border-top:1px solid var(--border);margin-top:16px;padding-top:12px}

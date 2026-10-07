@@ -237,7 +237,9 @@ function finishEdit(save){
  window.dispatchEvent(new CustomEvent('atlas:edit-ended'));
 }
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
-function updateEditorFields(){const type=noteTypeValue();$('default-colour').style.setProperty('--swatch',categories[$('category').value]?.[1]||'#a04438');$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';}
+// Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
+// The dot beside Category shows the colour the pin will have.
+function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';}
 function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
@@ -586,14 +588,14 @@ function setupControls(){
  $('add').onclick=startPlacement;if($('add-note'))$('add-note').onclick=startPlacement;
  for(const [name,hex] of Object.entries(pinColours)){const label=text('label','');label.title=name;const input=text('input','');input.type='radio';input.name='pin-colour';input.value=hex;input.setAttribute('aria-label',name);const swatch=text('span','');swatch.style.setProperty('--swatch',hex);label.append(input,swatch);$('colour-swatches').append(label);}
  for(const tradeName of Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b))){const option=text('option',tradeName);option.value=tradeName;$('trade').append(option);}
- for(const r of document.querySelectorAll('input[name="note-type"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
+ for(const r of document.querySelectorAll('input[name="note-type"],input[name="pin-colour"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
  $('cancel-place').onclick=cancelPlacement;document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelPlacement();if(compact())setPanel(false);}});
  // Closing the editor without saving also drops a new note's pin; a saved note has already ended placement.
  $('cancel-edit').onclick=closeEditor;$('editor').addEventListener('close',()=>{draft=null;cancelPlacement();});
  $('marker-form').onsubmit=e=>{e.preventDefault();if(!draft)return;const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
   delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;delete m.wikiId;delete m.classes;
   if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
-  const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&m.category!=='Class trainer')m.color=colour;
+  const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&(m.category==='Personal'||colour===draft.color))m.color=colour;
   if(type==='marker'){const wiki=wikiAddress($('wiki').value);if(wiki===null){status(wikiHint);$('wiki').focus();return;}if(wiki){m.wiki=wiki;const id=wikiIdFor($('wiki'),wiki);if(id)m.wikiId=id;}
    // A trainer picked from the wiki keeps its classes, so it reads class first ("Beastmaster trainer").
    if(m.category==='Class trainer'){let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}if(classes.length&&classesOk(classes))m.classes=classes;}}
