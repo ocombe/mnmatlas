@@ -472,5 +472,27 @@
     "x": 3359,
     "y": 2999,
     "trade": "Mining"
+  },
+  {
+    "id": "community-64",
+    "community": true,
+    "name": "A Deepgulp explorer (levels 5–7)",
+    "category": "Mob camp",
+    "note": "",
+    "x": 6264,
+    "y": 1939,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
+    "wikiId": "npc-a-deepgulp-explorer"
+  },
+  {
+    "id": "community-65",
+    "community": true,
+    "name": "An angry cultist",
+    "category": "Mob camp",
+    "note": "",
+    "x": 3926,
+    "y": 6817,
+    "wiki": "https://monstersandmemories.wiki/npcs/an-angry-cultist",
+    "wikiId": "npc-an-angry-cultist"
   }
 ]
