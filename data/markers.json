@@ -11,9 +11,10 @@
     "id": "wiki-2",
     "name": "Bank — Sageside",
     "category": "Bank",
-    "x": 1821.97,
-    "y": 1191.39,
-    "note": ""
+    "x": 1793,
+    "y": 1206,
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-3",
@@ -563,5 +564,16 @@
     "y": 1370,
     "wiki": "https://monstersandmemories.wiki/npcs/a-barkeep",
     "wikiId": "npc-a-barkeep"
+  },
+  {
+    "id": "community-66",
+    "community": true,
+    "name": "Jalwa Noor",
+    "category": "Personal",
+    "note": "",
+    "x": 1021,
+    "y": 1534,
+    "wiki": "https://monstersandmemories.wiki/npcs/jalwa-noor",
+    "wikiId": "npc-jalwa-noor"
   }
 ]

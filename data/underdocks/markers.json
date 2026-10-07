@@ -509,5 +509,17 @@
     "note": "",
     "level": "lower",
     "approximate": true
+  },
+  {
+    "id": "community-61",
+    "community": true,
+    "name": "Hargin Earthcaller",
+    "category": "Vendor",
+    "note": "",
+    "x": 4419,
+    "y": 3632,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/hargin-earthcaller",
+    "wikiId": "npc-hargin-earthcaller"
   }
 ]
