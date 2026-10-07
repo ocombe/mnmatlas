@@ -36,6 +36,10 @@ jobs:
         env:
           WIKI_API_KEY: ${{ secrets.WIKI_API_KEY }}
         run: node scripts/make-bounties.mjs
+      # Wanted posters as the small still images of NPCs the atlas does not mark yet (after the bounty lists).
+      - name: Build Wanted posters
+        continue-on-error: true
+        run: python3 scripts/make-bounty-posters.py
       # NPC wiki cards for marker popups, from the same key (one wiki request per linked NPC, a second apart).
       - name: Build NPC wiki cards
         continue-on-error: true

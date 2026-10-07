@@ -20,7 +20,7 @@ const text=(v,max)=>typeof v==='string'?v.replace(/[\u0000-\u001f\u007f<>]/g,'')
 
 async function main(){
  let secret;try{secret=await key();}catch{console.log('No wiki key: the bounty lists are not built this time.');return;}
- const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));let built=0;
+ const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));let built=0;const index=[];
  await mkdir(resolve(root,'bounties'),{recursive:true});
  for(const c of registry.maps){
   if(c.zonesFile)continue;
@@ -52,9 +52,11 @@ async function main(){
   // Instructors whose classes all have a class trainer marker or chip on the map are on it already.
   const open=rows.filter(n=>!trainerOnMap(n,trained)).map(n=>({...n,priority:isClassTrainer(n)||n.role==='merchant'}));
   await writeFile(resolve(root,'bounties',c.id+'.json'),JSON.stringify({map:c.id,zone,site:'mnm-wiki',built:new Date().toISOString(),rows:open})+'\n');
-  built++;console.log(c.id+': '+open.length+' bounties ('+open.filter(r=>r.priority).length+' priority).');
+  built++;console.log(c.id+': '+open.length+' bounties ('+open.filter(r=>r.priority).length+' priority).');for(const r of open)index.push({w:r.id,n:r.name,m:c.id});
   await new Promise(r=>setTimeout(r,700));
  }
+ // Every bounty by wiki id and name, so ?find= and ?wiki= links (and the Wanted posters' links) reach its notice.
+ if(built)await writeFile(resolve(root,'bounties','index.json'),JSON.stringify(index)+'\n');
  console.log('Wrote '+built+' bounty lists to bounties/.');
 }
 main().catch(e=>{console.log('Bounty lists skipped: '+e.message);});

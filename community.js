@@ -320,6 +320,9 @@
  function closeWanted(){$('journal').classList.remove('wanted-mode');$('wanted-view').hidden=true;}
  // The board is the Monsters and Memories Wiki's own list: only where that wiki may be linked (embed rules).
  const wantedShown=()=>wikiSiteShown('mnm-wiki');
+ // A link to an NPC not on the atlas yet (?find=, ?wiki=, a Wanted poster) opens the board on its notice.
+ let wantedFocus=null;
+ window.atlasOpenBounty=id=>{if(typeof id!=='string'||!wantedShown())return;wantedFocus=id;openWanted();};
  function openWanted(){if(!config||config.zonesFile||!wantedShown())return;if(!paperTexture){paperTexture=new Image();paperTexture.onload=setPaper;paperTexture.src='assets/bounty/paper.webp';}setPaper();
   $('journal').classList.add('wanted-mode');$('wanted-view').hidden=false;setPanel(true);renderWanted();}
  async function renderWanted(){
@@ -339,6 +342,7 @@
   // One tab per kind, with its open count; the last one chosen comes back, else the first with bounties (trainers first).
   const groups=bountyGroups.map(g=>({...g,rows:rows.filter(r=>bountyGroup(r)===g.key).sort((a,b)=>claimed.has(a.id)-claimed.has(b.id)||a.name.localeCompare(b.name))})).filter(g=>g.rows.length);
   let chosen;try{chosen=localStorage.getItem(tabKey);}catch{}if(!groups.some(g=>g.key===chosen))chosen=groups[0].key;
+  const focus=wantedFocus&&groups.find(g=>g.rows.some(r=>r.id===wantedFocus));if(focus)chosen=focus.key;
   const tabs=text('div','','wanted-tabs'),reward=text('p','','wanted-reward'),list=text('div','','wanted-list');tabs.setAttribute('role','tablist');list.setAttribute('role','tabpanel');
   const show=key=>{chosen=key;try{localStorage.setItem(tabKey,key);}catch{}const g=groups.find(x=>x.key===key);
    for(const t of tabs.children)t.setAttribute('aria-selected',String(t.dataset.key===key));
@@ -348,6 +352,7 @@
   view.append(tabs,reward,list);
   const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
   show(chosen);contributeCount(open);
+  if(focus){const el=[...list.children].find(n=>n.dataset.bounty===wantedFocus);if(el){el.classList.add('notice-focus');el.scrollIntoView({block:'center'});}}wantedFocus=null;
  }
  renderWanted.serial=0;
  // A compact notice: the name (to its wiki page), level and kind, the wiki link and the bounty button. The whole notice
@@ -358,7 +363,7 @@
   paper.append(name,text('p',[row.level?'Level '+row.level:'',bountyKind(row)].filter(Boolean).join(' · '),'notice-meta'));
   const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Wiki ↗','notice-wiki'));
   if(isClaimed)paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
-  paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',isClaimed);bountyDrag(note,row);return note;
+  paper.append(foot);note.dataset.bounty=row.id;note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',isClaimed);bountyDrag(note,row);return note;
  }
  // The Wanted banner shows how many bounties are open once this browser has the list, never fetching it on load.
  function contributeCount(given){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;

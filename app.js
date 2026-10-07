@@ -726,8 +726,13 @@ async function findArrival(url){
  const target=maps.length===1?maps[0]:only||registry.defaultMap,next=mapAddress(target);
  for(const [k,v] of url.searchParams)if(!['find','wiki','map','place','level','x','y','z'].includes(k))next.searchParams.set(k,v);
  if(hits.length===1){next.searchParams.set('place',hits[0].p);if(hits[0].l)next.searchParams.set('level',hits[0].l);}
+ // Not on the atlas yet: an NPC on a Wanted board (by wiki id, else exact name) opens its map with the board on its notice.
+ if(!hits.length){let wanted=[];try{wanted=await fetchData('bounties/index.json',[]);}catch{}
+  const rows=(Array.isArray(wanted)?wanted:[]).filter(e=>e&&typeof e.w==='string'&&typeof e.n==='string'&&registry.maps.some(c=>c.id===e.m)&&(!only||e.m===only));
+  const found=rows.filter(e=>e.w===text),named=found.length?found:rows.filter(e=>findKey(e.n)===findKey(text));
+  if(named.length===1){const next2=mapAddress(named[0].m);for(const [k,v] of url.searchParams)if(!['find','wiki','map','place','level','x','y','z'].includes(k))next2.searchParams.set(k,v);history.replaceState({map:named[0].m},'',next2);return {map:named[0].m,url:next2,text,hits:null,bounty:named[0].w};}}
  history.replaceState({map:target},'',next);
  return {map:target,url:next,text,hits:hits.length===1?null:hits};
 }
-async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
+async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
 document.addEventListener('DOMContentLoaded',init,{once:true});

@@ -371,3 +371,4 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
    ("Full size", "Open") over a frame's top-right corner, so the right end of the bar stays empty. */
 .embed .masthead{padding-right:130px}
 @media(max-width:480px){.embed .masthead>#toggle-panel span,.embed .account-button:has(.account-avatar) .account-name{display:none}.embed .masthead{gap:6px}.embed .masthead>button,.embed .account-button{padding:6px 8px}}
+.notice.notice-focus .notice-paper{filter:drop-shadow(0 0 6px #e8b35a) drop-shadow(0 0 2px #e8b35a)}
