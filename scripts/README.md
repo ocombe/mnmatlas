@@ -46,3 +46,12 @@ Run `node scripts/test-community.mjs` for client checks with a local service stu
 ## Mini map images
 
 `python scripts/make-mini-maps.py` (after `make-share-pages.mjs`; needs `pip install pillow fonttools brotli`) cuts a 320 × 200 still image of the map around every marker, with its pin or class chip and its name, from the map tiles: `mini/<map id>/<place id>.webp`, and `mini/<wiki id>.webp` for markers with a wiki id. GitHub builds them when publishing (`.github/workflows/pages.yml`); they are not kept in the repository. The Embed dialog offers the HTML for one: an image that links to the atlas, with no iframe or script.
+
+## Wanted lists and NPC cards
+
+Both are built by GitHub when publishing (`.github/workflows/pages.yml`), with the wiki's partner key as the `WIKI_API_KEY` repository secret; without it, or if the wiki fails, they are skipped and the publish goes on. Locally the key is read from `../secrets/wiki-api-key.txt`. Neither is kept in the repository.
+
+- `node scripts/make-bounties.mjs` writes `bounties/<map-id>.json` for every zone map: the zone's NPCs from the wiki (one request per zone), without plain mobs, kinds of creature ("A Deepcut arsonist"), NPCs the map already marks by wiki id or name, and instructors whose classes all have a class trainer marker or trainer chip on the map. A trainer's class comes from the wiki's class field or tags, else its name; a trainer with none there gets one page lookup. Trainers and merchants are priority bounties. Only ids, names, roles, levels, trainer classes and page addresses are kept.
+- `node scripts/make-npc-cards.mjs` writes `npc-cards/<map-id>.json`: for every marker linked to a wiki NPC, its tags, level, race, class, location line, short summary and first five loot items (likeliest first) with their pages and the loot count, never the full description. One request per linked NPC, a second apart.
+
+`node scripts/test-find.mjs` also checks trainer classes from tags and chips, and what a card keeps.
