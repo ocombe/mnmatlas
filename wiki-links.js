@@ -45,6 +45,14 @@ function wikiLinkFor(place,parent=wikiEmbedParent()){
  const adapted=typeof rule.adapt==='function'?wikiAddress(rule.adapt(href,site,place)):'';
  return adapted&&wikiSiteOf(new URL(adapted).hostname)===rule.site?show(adapted):null;
 }
+// Whether this page may send readers to a wiki site at all: always on the atlas itself; inside another site only when
+// its rule shows every link or that wiki is its own (as wikiLinkFor decides for one link). Features built on a wiki
+// (the Wanted board, the Name field's wiki suggestions) only appear where that wiki may be linked.
+function wikiSiteShown(site,parent=wikiEmbedParent()){
+ if(parent===null)return true;
+ const host=Object.keys(wikiEmbedHosts).find(h=>wikiHostMatches(parent,h)),rule=host&&wikiEmbedHosts[host];
+ return !!rule&&rule.links!=='none'&&(rule.links==='all'||rule.site===site);
+}
 const wikiHint='A wiki link must be a page on '+Object.values(wikiSites).map(s=>s.name).join(', ').replace(/, ([^,]*)$/,' or $1')+'.';
 // A link picked from the wiki search also keeps the wiki's id for that entry (the wiki asks partners to store ids,
 // not copies of its text). The id is a short plain string; '' for none, null when it is not accepted.

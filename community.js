@@ -164,6 +164,8 @@
  // one fills the name, the wiki link (input) and whatever else the form takes (picked). Typing on without picking keeps
  // exactly what was typed. Signed-out visitors get a plain Name field and a link to sign in.
  function wikiFinder(input,picked,name){
+  // Inside a site that may not link to the Monsters and Memories Wiki, the Name field stays a plain field.
+  if(!wikiSiteShown('mnm-wiki')){const off=text('div','','wiki-finder');off.hidden=true;off.update=off.reset=()=>{};return off;}
   const box=text('div','','wiki-finder'),list=text('div','','wiki-results'),signedOut=text('p','','form-hint wiki-signin-hint'),trouble=text('span','','wiki-signin-trouble');
   list.id='wiki-results-'+(++finderCount);list.setAttribute('role','listbox');list.setAttribute('aria-label','Wiki NPCs');
   name.setAttribute('aria-controls',list.id);name.setAttribute('aria-autocomplete','list');name.autocomplete='off';
@@ -316,7 +318,9 @@
  // The Wanted panel takes the Search menu's place, so the map stays in view for dragging notices onto it.
  const tabKey='mnmaps-wanted-tab';
  function closeWanted(){$('journal').classList.remove('wanted-mode');$('wanted-view').hidden=true;}
- function openWanted(){if(!config||config.zonesFile)return;if(!paperTexture){paperTexture=new Image();paperTexture.onload=setPaper;paperTexture.src='assets/bounty/paper.webp';}setPaper();
+ // The board is the Monsters and Memories Wiki's own list: only where that wiki may be linked (embed rules).
+ const wantedShown=()=>wikiSiteShown('mnm-wiki');
+ function openWanted(){if(!config||config.zonesFile||!wantedShown())return;if(!paperTexture){paperTexture=new Image();paperTexture.onload=setPaper;paperTexture.src='assets/bounty/paper.webp';}setPaper();
   $('journal').classList.add('wanted-mode');$('wanted-view').hidden=false;setPanel(true);renderWanted();}
  async function renderWanted(){
   const view=$('wanted-view'),serial=++renderWanted.serial;view.replaceChildren();
@@ -365,7 +369,7 @@
   open.replaceChildren(words,text('span','View bounties →','wanted-cta'));if(n===0)open.hidden=true;}
  {const open=$('contribute');if(open){open.onclick=()=>openWanted();
   // Not on the world map (no notes there); a map change redraws the open board, or closes it on the world map.
-  const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();if(user)offerPrivateBounties();if($('journal').classList.contains('wanted-mode')){if(!config||config.zonesFile)closeWanted();else renderWanted();}};show();window.addEventListener('atlas:loaded',show);}}
+  const show=()=>{open.hidden=!config||!!config.zonesFile||!wantedShown();if(config)contributeCount();if(user)offerPrivateBounties();if($('journal').classList.contains('wanted-mode')){if(!config||config.zonesFile)closeWanted();else renderWanted();}};show();window.addEventListener('atlas:loaded',show);}}
  // A bounty's note remembers its bounty as it opens.
  window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;if(bountyNext&&m?.wikiId===bountyNext.id){
   const all=readBounties();all[m.id]={bounty:bountyNext.id,priority:bountyNext.priority,map:config.id};writeBounties(all);}bountyNext=null;});
@@ -530,7 +534,7 @@
  }
  const offeredKey='mnmaps-offered-bounties';
  async function offerPrivateBounties(){
-  if(!user||!config||config.zonesFile||!map||$('editor').open||offerPrivateBounties.busy)return;
+  if(!user||!config||config.zonesFile||!map||$('editor').open||offerPrivateBounties.busy||!wikiSiteShown('mnm-wiki'))return;
   const offered=readSet(offeredKey),notes=personal.filter(m=>{const b=bountyOf(m);return b&&(b.map||config.id)===config.id&&!offered.has(sharedToken(m))&&!readFollowed()[followId(m)];});
   if(!notes.length)return;remember(offeredKey,notes.map(sharedToken));
   const d=showDialog('Claim your bounties?');d.append(text('p','You placed '+notes.length+(notes.length===1?' bounty':' bounties')+' on '+config.title+' while signed out. Claim '+(notes.length===1?'it':'them')+' now?'));

@@ -37,6 +37,15 @@ console.log('Find checks passed: wiki ids, exact names, trainer classes, contain
 for(const f of ['app.js','community.js','wiki-links.js','find.js','place-labels.js','icons.js','hidden-areas.js','world-zones.js','sheet-edge.js'])new vm.Script(await readFile(new URL('../'+f,import.meta.url),'utf8'),{filename:f});
 console.log('Script checks passed: every page script parses.');
 
+// The wiki-built features show only where the Monsters and Memories Wiki may be linked: on the atlas itself and inside
+// that wiki; not inside the other wikis, nor on unknown sites.
+{const c={window:{},location:{},document:{}};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+ const shown=vm.runInContext('wikiSiteShown',c);
+ assert.equal(shown('mnm-wiki',null),true);assert.equal(shown('mnm-wiki','monstersandmemories.wiki'),true);assert.equal(shown('mnm-wiki','www.monstersandmemories.wiki'),true);
+ assert.equal(shown('mnm-wiki','monstersandmemories.miraheze.org'),false);assert.equal(shown('old-wiki','monstersandmemories.miraheze.org'),true);
+ assert.equal(shown('mnm-wiki','monme.no'),false);assert.equal(shown('mnm-wiki','example.com'),false);assert.equal(shown('mnm-wiki',''),false);
+ console.log('Embed checks passed: wiki features follow the embed link rules.');}
+
 // An NPC wiki card keeps only the short facts, the wiki's summary and the first loot items with wiki pages (likeliest
 // first), never the description; links must be wiki pages.
 {const {card}=await import('./make-npc-cards.mjs');
