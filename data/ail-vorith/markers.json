@@ -350,7 +350,66 @@
     "name": "INQ",
     "category": "Class trainer",
     "note": "",
-    "x": 4593,
-    "y": 3048
+    "x": 4621,
+    "y": 3108
+  },
+  {
+    "id": "community-40",
+    "community": true,
+    "name": "Leatherworker",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4362,
+    "y": 2333,
+    "trade": "Leatherworking"
+  },
+  {
+    "id": "community-41",
+    "community": true,
+    "name": "Herbalism Trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4021,
+    "y": 3368,
+    "trade": "Herbalism"
+  },
+  {
+    "id": "community-43",
+    "community": true,
+    "name": "Bank",
+    "category": "Bank",
+    "note": "",
+    "x": 4480,
+    "y": 2921
+  },
+  {
+    "id": "community-44",
+    "community": true,
+    "name": "Fletching Trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3252,
+    "y": 2690,
+    "trade": "Fletching"
+  },
+  {
+    "id": "community-46",
+    "community": true,
+    "name": "Blacksmith",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3370,
+    "y": 3025,
+    "trade": "Blacksmithing / Smelting"
+  },
+  {
+    "id": "community-47",
+    "community": true,
+    "name": "Mining",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3359,
+    "y": 2999,
+    "trade": "Mining"
   }
 ]
