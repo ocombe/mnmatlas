@@ -146,6 +146,14 @@ function drawMarkers(){
  if(terms.length&&config.levels){for(const m of allMarkers().filter(m=>!atLevel(m)&&enabled.has(m.category)&&terms.every(t=>markerText(m).includes(t)))){const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);const label=text('span','');label.append(text('strong',markerTitle(m)),text('small',[noteKind(m),markerSubtitle(m)].filter(Boolean).join(' · ')+otherLevel(m)));b.append(label);b.onclick=()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));list.append(b);}}
  if(terms.length){for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t)))){const b=text('button','','place');const label=text('span','');label.append(text('strong',p.name),text('small',(p.kind==='hidden'?'Hidden area':'Place name')+otherLevel(p)));b.append(label);b.onclick=()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0));list.append(b);}}
  $('count').textContent=list.childElementCount+' places';
+ // Matches of a ?find= link on other maps, while its text is still in the search box.
+ if(findState&&$('search').value.trim()===findState.text){
+  const away=findState.hits.filter(e=>e.m!==config.id);
+  if(away.length)list.append(text('p','On other maps','find-heading'));
+  for(const e of away){const b=text('button','','place'),label=text('span',''),where=registry.maps.find(c=>c.id===e.m);const as={name:e.n,category:e.k,classes:e.c};label.append(text('strong',markerTitle(as)),text('small',[e.k,markerSubtitle(as),where?.title].filter(Boolean).join(' · ')));b.append(label);
+   b.onclick=()=>{const url=mapLink(e.m);url.searchParams.set('place',e.p);if(e.l)url.searchParams.set('level',e.l);goToMap(e.m,url);};list.append(b);}
+  if(!findState.hits.length)list.append(text('p','Nothing on the atlas matches “'+findState.text+'” yet.','empty'));
+ }
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
  schedulePlaceLabels();
 }
@@ -600,5 +608,19 @@ function watchForUpdates(){
  const due=()=>Date.now()-updateCheckedAt>=updateInterval&&checkForUpdate();
  checkForUpdate();setInterval(due,60000);document.addEventListener('visibilitychange',due);
 }
-async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();await loadMap(mapIdOf(new URL(location.href)));watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
+// ?find=<text> (or ?wiki=<wiki id>), for links from other sites: one match opens its map on that place; several, or none,
+// open the Search menu with the text, listing matches on other maps; &map=<id> looks on that map only. Embed settings are kept.
+let findState=null;
+async function findArrival(url){
+ const text=(url.searchParams.get('find')??url.searchParams.get('wiki')??'').trim().slice(0,100);if(!text)return null;
+ const only=registry.maps.some(c=>c.id===url.searchParams.get('map'))?url.searchParams.get('map'):'';
+ let index=[];try{index=await fetchData('data/find-index.json',[]);}catch{}
+ const hits=findPlaces(index,text,only).filter(e=>registry.maps.some(c=>c.id===e.m)),maps=[...new Set(hits.map(e=>e.m))];
+ const target=maps.length===1?maps[0]:only||registry.defaultMap,next=mapAddress(target);
+ for(const [k,v] of url.searchParams)if(!['find','wiki','map','place','level','x','y','z'].includes(k))next.searchParams.set(k,v);
+ if(hits.length===1){next.searchParams.set('place',hits[0].p);if(hits[0].l)next.searchParams.set('level',hits[0].l);}
+ history.replaceState({map:target},'',next);
+ return {map:target,url:next,text,hits:hits.length===1?null:hits};
+}
+async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
 document.addEventListener('DOMContentLoaded',init,{once:true});

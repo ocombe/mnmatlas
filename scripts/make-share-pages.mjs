@@ -10,6 +10,13 @@ const html=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').repla
 // Bump a map's card version after redrawing its card so link previews refresh.
 const cardVersions={'world':2,'sungreet-strand':2,'night-harbor':2,'faelindral':2};
 const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
+// ?find=<text> looks names up here (find.js): every marker and place name of every map, with its level, wiki id and trainer classes.
+{const index=[],files=(m,key)=>[...new Set([m[key],...(m.levels||[]).map(l=>l[key])].filter(Boolean))];
+ for(const m of registry.maps){
+  for(const file of files(m,'markersFile'))for(const p of JSON.parse(await readFile(resolve(root,file),'utf8')))if(p&&p.id&&p.name)index.push({n:p.name,m:m.id,p:p.id,k:p.category,...(p.level?{l:p.level}:{}),...(p.wikiId?{w:p.wikiId}:{}),...(Array.isArray(p.classes)?{c:p.classes}:{})});
+  for(const file of files(m,'labelsFile'))for(const p of JSON.parse(await readFile(resolve(root,file),'utf8')).labels||[])if(p&&p.id&&p.name&&p.kind!=='exit')index.push({n:p.name,m:m.id,p:p.id,k:'Place name',...(p.level?{l:p.level}:{})});
+ }
+ await writeFile(resolve(root,'data/find-index.json'),JSON.stringify(index)+'\n','utf8');console.log('Wrote data/find-index.json ('+index.length+' places)');}
 const template=await readFile(resolve(root,'index.html'),'utf8');
 const swap=(page,pattern,replacement)=>{
  const found=page.match(new RegExp(pattern.source,'g'))||[];
