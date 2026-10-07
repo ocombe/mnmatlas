@@ -165,13 +165,16 @@ function updateCategoryButtons(){for(const b of $('categories').children)b.setAt
 function cancelPlacement(){if(draftPin)$('status').hidden=true;draftPin?.remove();draftPin=null;document.body.classList.remove('placing');$('cancel-place').hidden=true;}
 // The world map (the one with zone outlines) takes no new notes: places belong on their zone's map. Notes saved there earlier stay.
 const takesNotes=()=>!config.zonesFile;
-// New notes start at the centre of the view; dropping the pin opens the editor there.
-function startPlacement(){
+window.atlasPlaceNote=start=>startPlacement(start);
+// New notes start at the centre of the view; dropping the pin opens the editor there. A bounty from the Wanted board
+// passes what the note starts with (name, type, wiki link…); a button click passes its event, which is ignored.
+function startPlacement(given){
+ const prefill=given&&typeof given==='object'&&typeof given.name==='string'?given:null;
  map.closePopup();cancelPlacement();if(!takesNotes())return;
  const [cx,cy]=pixelsOf(map.getCenter()),start={x:Math.max(0,Math.min(config.width,cx)),y:Math.max(0,Math.min(config.height,cy)),category:'Personal',name:''};
  draftPin=L.marker(locationOf(start),{icon:pinIcon(start),alt:'New personal note',keyboard:true,draggable:true,zIndexOffset:1000}).addTo(map);
  draftPin.getElement()?.classList.add('draft-pin');
- const drop=()=>{const [x,y]=pixelsOf(draftPin.getLatLng());if(!bounded(x,y)){status('Drag the note inside '+config.title+'.',true);return;}openEditor({id:'personal-'+crypto.randomUUID(),name:'',note:'',category:'Personal',x,y,...(config.levels?{level:config.levelId}:{})});};
+ const drop=()=>{const [x,y]=pixelsOf(draftPin.getLatLng());if(!bounded(x,y)){status('Drag the note inside '+config.title+'.',true);return;}openEditor({id:'personal-'+crypto.randomUUID(),name:'',note:'',category:'Personal',...prefill,x,y,...(config.levels?{level:config.levelId}:{})});};
  draftPin.on('dragend',drop);draftPin.on('click',drop);
  document.body.classList.add('placing');$('cancel-place').hidden=false;status('Drag the new note to its place, then let go.',true);if(compact())setPanel(false);
 }

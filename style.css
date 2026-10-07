@@ -252,3 +252,38 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .journal .results{min-height:290px}
 .embed .journal .results{flex:1;min-height:230px;max-height:none}
 .credit-item{white-space:nowrap}
+/* Wanted board: parchment notices pinned to a dark wooden board. */
+#contribute{width:100%;margin-top:8px;font-size:12px}
+.community-dialog.bounty-dialog{width:min(780px,calc(100% - 28px))}
+.bounty-dialog>h2{font:36px/1.1 var(--heading);text-align:center;letter-spacing:.08em;margin:4px 0}
+.board-lede{text-align:center;font-style:italic;color:var(--muted-foreground);margin:0 0 8px}
+.board-count{text-align:center;font-size:13px;margin:0}
+.board-points{text-align:center;font-size:12px;color:var(--primary);margin:4px 0 0}
+.board-hint{text-align:center;font-size:11px;color:var(--muted-foreground);margin:4px 0 0}
+.board-signin{margin:12px 0 0;padding:8px 11px;border:1px solid var(--amber-border);border-radius:6px;background:hsl(32 63% 50% / .1);font-size:12px;line-height:1.5}
+.bounty-board{margin-top:12px;padding:8px 16px 16px;border-radius:10px;border:1px solid #5a3d24;
+ background:repeating-linear-gradient(0deg,#00000000 0 58px,#0000004d 58px 60px),linear-gradient(90deg,#3b2817,#33220f 30%,#3d2a18 55%,#2f1f10 80%,#3a2716);box-shadow:inset 0 0 40px #0009}
+.board-group{font:15px/1.3 var(--small-caps);letter-spacing:.06em;color:#f3e2c2;margin:16px 0 12px;text-align:center}
+.board-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(210px,1fr));gap:20px 16px;align-items:start}
+.notice{position:relative;filter:drop-shadow(0 4px 5px #000a);transform:rotate(-.5deg);touch-action:pan-y}
+.notice:nth-child(even){transform:rotate(.6deg)}
+.notice-paper{position:relative;padding:20px 14px 14px;background:radial-gradient(ellipse at 30% 20%,#f4ead1,#e8d9b5 70%,#dcc89e);color:#2b1e12;
+ clip-path:polygon(0 1.5%,7% 0,15% 1.2%,24% .2%,33% 1%,42% 0,51% 1.4%,60% .3%,69% 1.1%,78% 0,87% 1.3%,95% .2%,100% 1.6%,99.3% 30%,100% 62%,99.4% 98.4%,92% 100%,83% 98.8%,74% 100%,65% 99%,56% 100%,47% 98.7%,38% 100%,29% 98.9%,20% 100%,11% 98.7%,3% 100%,0 98.2%,.6% 66%,0 34%)}
+.notice-nail{position:absolute;top:5px;left:50%;width:11px;height:11px;margin-left:-5.5px;border-radius:50%;background:radial-gradient(circle at 35% 30%,#e3c27f,#7a5527 55%,#3b2610);box-shadow:0 1px 2px #000b}
+.notice-kicker{display:flex;flex-wrap:wrap;justify-content:center;align-items:center;gap:6px;margin:0 0 2px;font:14px var(--small-caps);letter-spacing:.24em;color:#7a3328;text-transform:none}
+.notice-seal{display:inline-block;padding:2px 8px;border-radius:999px;background:radial-gradient(circle at 40% 35%,#b5513a,#7f2c1d 70%);color:#f8e6c4;font:600 10px/1.4 var(--body);letter-spacing:.05em;box-shadow:inset 0 0 0 1px #5c1e13,0 1px 1px #0006}
+.notice-name{margin:4px 0;text-align:center;font:21px/1.15 var(--heading)}
+.notice-name a{color:#24180d;text-decoration:none}
+.notice-name a:hover,.notice-name a:focus-visible{text-decoration:underline}
+.notice-meta{text-align:center;font-size:12px;color:#5a4630;margin:0 0 6px}
+.notice-reward{text-align:center;font-size:11px;font-style:italic;color:#6b4a22;margin:0 0 10px}
+.notice.priority .notice-reward{font-weight:600;color:#7a3328}
+.notice-foot{display:flex;flex-wrap:wrap;justify-content:center;gap:6px}
+.notice-foot .notice-wiki{display:inline-block;padding:6px 10px;border:1px solid #9b7a4e;border-radius:var(--radius);background:#f7eed8;color:#3a2918;font-size:12px;text-decoration:none}
+.notice-foot .notice-wiki:hover{background:#fff6e0}
+.notice-foot .notice-take{font-size:12px;padding:6px 10px}
+.notice-stamp{position:absolute;left:50%;top:46%;transform:translate(-50%,-50%) rotate(-11deg);padding:4px 10px;border:2px solid #8b2c1f;border-radius:6px;color:#8b2c1f;background:#efe3c4d9;font:700 11px/1.3 var(--body);letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}
+.notice.claimed .notice-kicker,.notice.claimed .notice-name,.notice.claimed .notice-meta,.notice.claimed .notice-reward{opacity:.55}
+.board-credit{display:block;text-align:center;margin-top:12px}
+@media(max-width:560px){.board-grid{grid-template-columns:1fr}.bounty-board{padding:8px 10px 12px}}
+@media(prefers-reduced-motion:reduce){.notice,.notice:nth-child(even){transform:none}}

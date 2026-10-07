@@ -248,3 +248,32 @@ commit;
 -- where raw_user_meta_data->>'full_name' = '<your Discord name>' on conflict do nothing;
 -- insert into public.admins(user_id) select id from auth.users
 -- where email = '<your email>' on conflict do nothing;
+-- Wanted board and contribution points.
+-- One live claim per bounty and map: a second "Take the bounty" suggestion for the same wiki NPC is refused while the
+-- first waits for review or publishing; a rejected claim frees the bounty again.
+create unique index if not exists suggestions_one_claim_per_bounty on public.suggestions (map,(payload->>'bounty'))
+ where payload ? 'bounty' and status in ('pending','approved');
+-- The bounties of a map someone has claimed (wiki ids), for the board's stamps; who claimed them is never returned.
+create or replace function public.claimed_bounties(map_id text)
+returns setof text language sql stable security definer set search_path=public as $$
+ select distinct payload->>'bounty' from public.suggestions
+ where map=map_id and kind='new-marker' and payload ? 'bounty' and status in ('pending','approved');
+$$;
+revoke all on function public.claimed_bounties(text) from public,anon;
+grant execute on function public.claimed_bounties(text) to authenticated;
+-- Contribution points of the signed-in account: 1 for an approved or published suggestion (new marker, move or edit),
+-- 2 for a bounty from the Wanted board, 3 for a priority bounty (trainers, merchants). Reports count nothing.
+-- The bounty flags stay with each suggestion (payload.bounty, payload.priority), so the values can change later.
+create or replace function public.my_contribution_points()
+returns table(points integer,suggestions integer,bounties integer,priority_bounties integer)
+language sql stable security definer set search_path=public as $$
+ with mine as (
+  select case when payload ? 'bounty' and payload->>'priority'='true' then 'priority' when payload ? 'bounty' then 'bounty' else 'plain' end as kind_of
+  from public.suggestions where user_id=auth.uid() and kind<>'report' and status in ('approved','published')
+ )
+ select coalesce(sum(case kind_of when 'priority' then 3 when 'bounty' then 2 else 1 end),0)::int,
+  (count(*) filter (where kind_of='plain'))::int,(count(*) filter (where kind_of='bounty'))::int,(count(*) filter (where kind_of='priority'))::int
+ from mine;
+$$;
+revoke all on function public.my_contribution_points() from public,anon;
+grant execute on function public.my_contribution_points() to authenticated;

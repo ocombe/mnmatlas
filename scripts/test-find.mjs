@@ -22,3 +22,6 @@ console.log('Find checks passed: wiki ids, exact names, trainer classes, contain
   for(const t of data?.trainers||[])(t.classes||[]).forEach((cl,i)=>{const name=cl==='Shadowknight'?'Shadow Knight':cl;assert(Object.hasOwn(abbr,name),f+': unknown class '+cl);assert.equal(abbr[name],t.abbreviations[i],f+': '+cl);});
   for(const m of Array.isArray(data)?data:[])for(const cl of m.classes||[])assert(Object.hasOwn(abbr,cl),f+': unknown class '+cl);}
  console.log('Class checks passed: every class on the maps has its abbreviation.');}
+// Every script the pages load must at least parse (a slip in one stops the whole atlas).
+for(const f of ['app.js','community.js','wiki-links.js','find.js','place-labels.js','icons.js','hidden-areas.js','world-zones.js','sheet-edge.js'])new vm.Script(await readFile(new URL('../'+f,import.meta.url),'utf8'),{filename:f});
+console.log('Script checks passed: every page script parses.');

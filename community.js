@@ -48,7 +48,9 @@
   account.replaceChildren();
   if(user){
    const head=text('div','','account-head'),who=text('div');who.append(text('strong',displayName(user)),text('small','Signed in with Discord'));head.append(avatar(36),who);
-   account.append(head,syncLine);if(admin)account.append(reviewButton);
+   // Contribution points: approved suggestions count 1, bounties 2, priority bounties 3.
+   const points=text('p','','account-points');points.hidden=true;myPoints().then(p=>{if(!p)return;points.textContent='Contribution points: '+p.points+(p.bounties+p.priority_bounties?' · '+(p.bounties+p.priority_bounties)+((p.bounties+p.priority_bounties)===1?' bounty':' bounties'):'');points.hidden=false;});
+   account.append(head,points,syncLine);if(admin)account.append(reviewButton);
    account.append(button('Sign out',()=>{closeAccount();signOut();}),text('hr'),button('Delete my account…',()=>{closeAccount();deleteDialog();},'account-delete'));
   }
   else account.append(text('p','Sign in with Discord to keep your notes on every device, report problems and suggest fixes.'),button('Sign in with Discord',signIn,'primary'));
@@ -214,6 +216,88 @@
   // A trainer's classes ride with its wiki link, so the note reads "Beastmaster trainer" first like the atlas's own trainers.
   $('wiki').dataset.wikiClasses=JSON.stringify(trainerClasses(row));
   if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+ // The Wanted board: NPCs the wiki knows in this map's zone that the map does not mark yet, as bounties to take.
+ // Trainers and merchants come first as priority bounties. Taking one starts the pin with a note filled from the wiki
+ // and "Also suggest this for the public map" ticked. Signed out, the board asks to sign in (the list needs it).
+ let bountyNext=null;
+ // A note placed from a bounty remembers it, so its suggestion carries the bounty (worth 2 points, 3 for priority).
+ const bountyKey='mnmaps-bounty-notes';
+ const readBounties=()=>{try{const v=JSON.parse(localStorage.getItem(bountyKey)||'{}');return v&&typeof v==='object'&&!Array.isArray(v)?v:{};}catch{return {};}};
+ const writeBounties=v=>{try{localStorage.setItem(bountyKey,JSON.stringify(v));}catch{}};
+ const looseName=v=>String(v??'').split(/\s+[—–-]\s+|\s*\(/)[0].normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^(the|a|an) /,'');
+ // On the map already: the same wiki id, or our name holding the wiki's ("Paymaster Elara Venn" is "Elara Venn").
+ function placedOnMap(row,places){const name=looseName(row.name);return places.some(p=>p.w===row.id||(name.length>=4&&(looseName(p.n)===name||(' '+looseName(p.n)+' ').includes(' '+name+' '))));}
+ const bountyGroups=[{key:'trainer',title:'Class trainers',priority:true},{key:'merchant',title:'Merchants',priority:true},{key:'quest',title:'Quest givers'},{key:'named',title:'Named NPCs'}];
+ const bountyGroup=row=>isClassTrainer(row)?'trainer':row.role==='merchant'?'merchant':row.role==='quest'?'quest':'named';
+ const bountyKind=row=>{const g=bountyGroup(row),classes=trainerClasses(row);return g==='trainer'?'Class trainer'+(classes.length?' · '+classes.join(' / '):''):g==='merchant'?'Merchant':g==='quest'?'Quest giver':'Named';};
+ // The list is built when the atlas is published (bounties/<map>.json); this browser keeps it for an hour.
+ const wantedKey=id=>'mnmaps-wanted-'+id;
+ function keptWanted(id){try{const v=JSON.parse(localStorage.getItem(wantedKey(id))||'null');return v&&Date.now()-v.at<3600000&&Array.isArray(v.rows)?v:null;}catch{return null;}}
+ async function wantedList(){
+  let file=keptWanted(config.id);
+  if(!file){const r=await fetch('bounties/'+encodeURIComponent(config.id)+'.json');if(r.status===404)throw Error('none');if(!r.ok)throw Error('failed');
+   const body=await r.json();file={at:Date.now(),site:Object.hasOwn(wikiSites,body?.site)?body.site:'mnm-wiki',rows:(Array.isArray(body?.rows)?body.rows:[]).filter(r=>r&&typeof r.id==='string'&&typeof r.name==='string'&&/^https:\/\/([a-z0-9-]+\.)*monstersandmemories\.wiki\//.test(String(r.url)))};
+   try{localStorage.setItem(wantedKey(config.id),JSON.stringify(file));}catch{}}
+  // Markers suggested since the list was built are left out too.
+  let places=[];try{const index=await (await fetch('data/find-index.json')).json();places=index.filter(p=>p.m===config.id);}catch{places=allMarkers().map(m=>({n:m.name,w:m.wikiId,m:config.id}));}
+  return {site:file.site,rows:file.rows.filter(r=>!placedOnMap(r,places))};
+ }
+ // Bounties someone already claimed (a suggestion waiting for review or publishing), from the atlas's own database.
+ async function claimedBounties(){if(!user)return new Set();try{const {data,error}=await client.rpc('claimed_bounties',{map_id:config.id});if(error)throw error;return new Set((data||[]).map(r=>typeof r==='string'?r:r?.claimed_bounties).filter(Boolean));}catch{return new Set();}}
+ async function takeBounty(row,note){
+  if(!user){popupSignIn(m=>status(m+' You can also sign in from the top bar.'));return;}
+  // Checked again on the click: someone may have claimed it since the board opened.
+  if((await claimedBounties()).has(row.id)){markClaimed(note,'Someone just claimed this one');return;}
+  const classes=trainerClasses(row),type=isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Personal');
+  bountyNext={id:row.id,priority:!!row.priority};dialog.close();
+  window.atlasPlaceNote?.({name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})});
+ }
+ function markClaimed(note,label='Claimed, awaiting review'){note.classList.add('claimed');note.querySelector('.notice-take')?.remove();if(!note.querySelector('.notice-stamp'))note.querySelector('.notice-paper').append(text('span',label,'notice-stamp'));status(label==='Claimed, awaiting review'?label:label+'.');}
+ const wikiLink=(row,label,cls)=>{const a=text('a',label,cls);a.href=row.url;a.target='_blank';a.rel='noopener';return a;};
+ async function bountyBoard(){
+  const d=showDialog('Wanted');dialog.classList.add('bounty-dialog');dialog.addEventListener('close',()=>dialog.classList.remove('bounty-dialog'),{once:true});
+  d.append(text('p','Whereabouts sought by the atlas. Find them in the world, mark them on the map.','board-lede'));
+  const zone=searchZone()||config.title,count=text('p','Reading the notices…','board-count');d.append(count);
+  if(!user){const tip=text('div','','board-signin');tip.append(text('strong','Did you know?','wiki-tip-label'),button('Sign in',()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.')),'wiki-signin'),text('span',' to take a bounty: place the NPC on the map and earn points and your name in the atlas credits.'));d.append(tip);}
+  else myPoints().then(p=>{if(p&&dialog.open)count.after(text('p','Your points: '+p.points,'board-points'));});
+  let found;try{found=await wantedList();}catch(e){count.textContent=e.message==='none'?'The wanted list for '+zone+' isn’t available yet.':'The wanted list could not be loaded right now. Please try again later.';
+   const actions=text('div','','dialog-actions');actions.append(button('Close',()=>d.close()));d.append(actions);return;}
+  if(!dialog.open)return;
+  const claimed=await claimedBounties(),{site,rows}=found,priority=rows.filter(r=>r.priority).length;
+  if(!rows.length)count.textContent='No bounties here. Every NPC the wiki knows is on the map.';
+  else count.textContent=rows.length+(rows.length===1?' bounty':' bounties')+' open in '+zone+(priority?', '+priority+' priority':'');
+  const board=text('div','','bounty-board');
+  for(const group of bountyGroups){
+   const mine=rows.filter(r=>bountyGroup(r)===group.key).sort((a,b)=>a.name.localeCompare(b.name));if(!mine.length)continue;
+   board.append(text('h3',group.title+(group.priority?' · priority':''),'board-group'));
+   const grid=text('div','','board-grid');
+   for(const row of mine){
+    const note=text('article','','notice'+(row.priority?' priority':''));
+    const kicker=text('p','Wanted','notice-kicker');if(row.priority)kicker.append(text('span','Priority · 3 points','notice-seal'));
+    const name=text('h4','','notice-name');name.append(wikiLink(row,row.name,''));
+    // The paper carries the torn edge; the notice around it carries the shadow and the nail, which a clip would cut off.
+    const paper=text('div','','notice-paper');
+    paper.append(kicker,name,text('p',[row.level?'Level '+row.level:'',bountyKind(row)].filter(Boolean).join(' · '),'notice-meta'),
+     text('p',(row.priority?'High reward: 3 points':'Reward: 2 points')+' and your name in the atlas credits','notice-reward'));
+    const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Read the wiki page ↗','notice-wiki'));
+    if(claimed.has(row.id))paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
+    paper.append(foot);note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',claimed.has(row.id));grid.append(note);}
+   board.append(grid);}
+  if(rows.length)d.append(board);
+  const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';d.append(credit);}
+  const actions=text('div','','dialog-actions');actions.append(button('Close',()=>d.close()));d.append(actions);
+  contributeCount();
+ }
+ // The Contribute button shows how many bounties are open once this browser has the list, never fetching it on load.
+ function contributeCount(){const open=$('contribute'),kept=config&&keptWanted(config.id);if(!open)return;const n=kept?kept.rows.length:0;open.textContent=n?'Wanted: '+n+(n===1?' bounty':' bounties'):'Wanted: help place NPCs';}
+ {const open=$('contribute');if(open){open.onclick=()=>bountyBoard();
+  // Not on the world map (no notes there) nor in a single-map embed.
+  const show=()=>{open.hidden=!config||!!config.zonesFile;if(config)contributeCount();};show();window.addEventListener('atlas:loaded',show);}}
+ // A bounty's note opens with the suggestion ticked, whatever the last choice was.
+ window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;if(bountyNext&&m?.wikiId===bountyNext.id){const check=$('suggest-check');if(check){check.checked=true;check.dispatchEvent(new Event('change'));}
+  const all=readBounties();all[m.id]={bounty:bountyNext.id,priority:bountyNext.priority};writeBounties(all);}bountyNext=null;});
+ // Contribution points (approved suggestions: 1, bounty 2, priority bounty 3), from the database; null when unavailable.
+ async function myPoints(){if(!user)return null;try{const {data,error}=await client.rpc('my_contribution_points');if(error)throw error;const row=Array.isArray(data)?data[0]:data;return row&&Number.isFinite(row.points)?row:null;}catch{return null;}}
  function editDialog(target,kind){
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
@@ -257,6 +341,7 @@
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
  function notePayload(m){
   const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;if(m.category==='Class trainer'&&classesOk(m.classes))payload.classes=m.classes;
+  const bounty=readBounties()[m.id];if(bounty&&m.wikiId===bounty.bounty){payload.bounty=bounty.bounty;if(bounty.priority)payload.priority=true;}
   return payload;
  }
  function shareNote(m){
@@ -315,7 +400,7 @@
  async function suggestOnSave(m,credited){
   if(readSet(sharedKey).has(sharedToken(m)))return;
   try{const published=await sendNote(m,credited);remember(sharedKey,[sharedToken(m)]);freshPopup();status(sentLine(published)||'Saved, and suggested for the public map: it is waiting for review.');event('suggestion-sent');}
-  catch(e){status(turnedOff(e)?'Saved to your field notes. Your account can no longer send suggestions.':'Saved to your field notes, but the suggestion did not go through. You can send it from the note’s popup with Share with everyone.');}
+  catch(e){status(e?.code==='23505'?'Someone just claimed this bounty. Your note is kept in your field notes.':turnedOff(e)?'Saved to your field notes. Your account can no longer send suggestions.':'Saved to your field notes, but the suggestion did not go through. You can send it from the note’s popup with Share with everyone.');}
  }
  async function followNote(m,rec){
   const payload=notePayload(m),key=followId(m),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(same(payload,rec.sent))return;
@@ -415,7 +500,9 @@
     if(row.review_note)card.append(text('p',row.review_note,'reported-reason'));
     if(row.kind==='report')card.append(text('p',reasons[row.payload.reason]||'Something else','reported-reason'));
     if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));if(typeof row.payload.wiki==='string'&&(f.wiki||'')!==row.payload.wiki)card.append(text('p','Wiki page: '+was(f.wiki)+'\n→ '+was(row.payload.wiki),'review-change'));}
-    if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType==='label'?'Area label':row.payload.noteType==='exit'?'Zone exit':row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));if(row.payload.wiki)card.append(text('p','Wiki page: '+row.payload.wiki,'review-change'));}
+    if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType==='label'?'Area label':row.payload.noteType==='exit'?'Zone exit':row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));if(row.payload.wiki)card.append(text('p','Wiki page: '+row.payload.wiki,'review-change'));
+     // A bounty from the Wanted board is worth more points once approved: the badge says which, with its wiki page.
+     if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge');badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 points':'Bounty · 2 points'));if(row.payload.wiki){const a=text('a',' Wiki page ↗');a.href=row.payload.wiki;a.target='_blank';a.rel='noopener';badge.append(a);}card.append(badge);}}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
     const actions=text('div','','dialog-actions');if(row.user_id!==user?.id&&state==='pending')actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button(row.kind==='report'?'Show on map':'Review on map',()=>preview(row,()=>pendingTab(all,offset,state))),...decisions(row,()=>note.value,card));card.append(actions);content.append(card);
    }

@@ -30,6 +30,12 @@ jobs:
         run: |
           python3 -m pip install --quiet pillow fonttools brotli
           python3 scripts/make-mini-maps.py
+      # The Wanted board's lists need the wiki key (repository secret WIKI_API_KEY); without it they are skipped.
+      - name: Build bounty lists
+        continue-on-error: true
+        env:
+          WIKI_API_KEY: ${{ secrets.WIKI_API_KEY }}
+        run: node scripts/make-bounties.mjs
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:
