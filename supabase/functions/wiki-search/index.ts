@@ -19,6 +19,8 @@ function headers(req:Request){
 }
 const reply=(req:Request,status:number,body:unknown,extra:Record<string,string>={})=>new Response(JSON.stringify(body),{status,headers:{...headers(req),...extra}});
 const text=(v:unknown,max:number)=>typeof v==='string'?v.replace(/[\u0000-\u001f\u007f<>]/g,'').trim().slice(0,max):'';
+// Zone names compared loosely: case, accents, apostrophes and a leading "the" do not matter.
+const zoneKey=(v:string)=>v.normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^the /,'');
 
 async function signedIn(req:Request){
  const auth=req.headers.get('authorization')||'',key=req.headers.get('apikey')||Deno.env.get('SUPABASE_ANON_KEY')||'';
@@ -35,8 +37,10 @@ Deno.serve(async req=>{
  if(!key)return reply(req,503,{error:'not-configured'});
  const user=await signedIn(req);if(!user)return reply(req,401,{error:'sign-in'});
  const q=text(url.searchParams.get('q'),80).toLowerCase().replace(/\s+/g,' '),wanted=(url.searchParams.get('type')||'npc,item,quest,zone').split(',').filter(t=>types.has(t)).sort();
+ // zone: only results from that wiki zone (the map being edited); the wiki's search has no zone filter of its own.
+ const zone=zoneKey(text(url.searchParams.get('zone'),80));
  if(q.length<2||!wanted.length)return reply(req,400,{error:'query'});
- const now=Date.now(),id=wanted.join(',')+'|'+q,hit=cache.get(id);
+ const now=Date.now(),id=wanted.join(',')+'|'+zone+'|'+q,hit=cache.get(id);
  if(hit&&now-hit.at<keep)return reply(req,200,{site,results:hit.results},{'Cache-Control':'private, max-age=1800'});
  const recent=(perUser.get(user)||[]).filter(t=>now-t<60000);
  if(recent.length>=limit)return reply(req,429,{error:'busy'},{'Retry-After':'30'});
@@ -53,7 +57,7 @@ Deno.serve(async req=>{
   let page:URL|null=null;try{page=new URL(String(row.url));}catch{}
   if(!page||page.protocol!=='https:'||!/(^|\.)monstersandmemories\.wiki$/.test(page.hostname))return null;
   return {id:text(row.id,160),type:text(row.type,20),name:text(row.name,100),zone:text(row.zone,100),url:page.href};
- }).filter((row:{id:string,name:string}|null)=>row&&row.id&&row.name).slice(0,12);
+ }).filter((row:{id:string,name:string,zone:string}|null)=>row&&row.id&&row.name&&(!zone||zoneKey(row.zone)===zone)).slice(0,12);
  cache.delete(id);cache.set(id,{at:now,results});if(cache.size>most)cache.delete(cache.keys().next().value!);
  return reply(req,200,{site,results},{'Cache-Control':'private, max-age=1800'});
 });
