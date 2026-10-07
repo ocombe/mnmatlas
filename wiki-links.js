@@ -3,7 +3,8 @@
 'use strict';
 // Sites a marker may link to. A link to any other address is refused when it is saved and never shown.
 const wikiSites={
- 'mnm-wiki':{name:'Monsters and Memories Wiki',hosts:['monstersandmemories.wiki']},
+ // home and credit: the wiki's front page and the credit its data must carry wherever it is shown (search results).
+ 'mnm-wiki':{name:'Monsters and Memories Wiki',hosts:['monstersandmemories.wiki'],home:'https://monstersandmemories.wiki/',credit:'Data from the Monsters and Memories Wiki'},
  'old-wiki':{name:'the old community wiki',hosts:['monstersandmemories.miraheze.org']},
  'monme':{name:'Petrichor’s database',hosts:['monme.no']},
 };

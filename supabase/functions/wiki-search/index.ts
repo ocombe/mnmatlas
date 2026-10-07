@@ -7,6 +7,10 @@ const local=/^http:\/\/(localhost|127\.0\.0\.1)(:\d+)?$/;
 const types=new Set(['npc','item','quest','zone']);
 // The wiki allows 120 requests a minute for the whole atlas; one visitor gets a share of that.
 const perUser=new Map<string,number[]>(),limit=20;
+// Recent answers are kept for a while, so the same name searched again (by anyone) does not reach the wiki twice.
+const cache=new Map<string,{at:number,results:unknown[]}>(),keep=30*60000,most=500;
+// Results come from this wiki; the site credits it under them.
+const site='mnm-wiki';
 
 function headers(req:Request){
  const origin=req.headers.get('origin')||'';
@@ -30,16 +34,18 @@ Deno.serve(async req=>{
  if(url.searchParams.has('check'))return reply(req,200,{configured:/^mnmp_\S+$/.test(key)});
  if(!key)return reply(req,503,{error:'not-configured'});
  const user=await signedIn(req);if(!user)return reply(req,401,{error:'sign-in'});
- const now=Date.now(),recent=(perUser.get(user)||[]).filter(t=>now-t<60000);
+ const q=text(url.searchParams.get('q'),80).toLowerCase().replace(/\s+/g,' '),wanted=(url.searchParams.get('type')||'npc,item,quest,zone').split(',').filter(t=>types.has(t)).sort();
+ if(q.length<2||!wanted.length)return reply(req,400,{error:'query'});
+ const now=Date.now(),id=wanted.join(',')+'|'+q,hit=cache.get(id);
+ if(hit&&now-hit.at<keep)return reply(req,200,{site,results:hit.results},{'Cache-Control':'private, max-age=1800'});
+ const recent=(perUser.get(user)||[]).filter(t=>now-t<60000);
  if(recent.length>=limit)return reply(req,429,{error:'busy'},{'Retry-After':'30'});
  recent.push(now);perUser.set(user,recent);
- const q=text(url.searchParams.get('q'),80),wanted=(url.searchParams.get('type')||'npc,item,quest,zone').split(',').filter(t=>types.has(t));
- if(q.length<2||!wanted.length)return reply(req,400,{error:'query'});
  let r:Response;
  try{r=await fetch(api+'search?q='+encodeURIComponent(q)+'&type='+wanted.join(','),{headers:{Authorization:'Bearer '+key,Accept:'application/json'}});}
  catch{return reply(req,502,{error:'wiki'});}
  if(r.status===429)return reply(req,429,{error:'busy'},{'Retry-After':'30'});
- if(r.status===404)return reply(req,200,{results:[]});
+ if(r.status===404)return reply(req,200,{site,results:[]});
  if(!r.ok)return reply(req,502,{error:'wiki',status:r.status});
  const data=await r.json().catch(()=>null),rows=Array.isArray(data?.results)?data.results:[];
  // Only what the editor shows and stores: an id for later lookups, the name, the kind, the zone and the page address.
@@ -48,5 +54,6 @@ Deno.serve(async req=>{
   if(!page||page.protocol!=='https:'||!/(^|\.)monstersandmemories\.wiki$/.test(page.hostname))return null;
   return {id:text(row.id,160),type:text(row.type,20),name:text(row.name,100),zone:text(row.zone,100),url:page.href};
  }).filter((row:{id:string,name:string}|null)=>row&&row.id&&row.name).slice(0,12);
- return reply(req,200,{results},{'Cache-Control':'private, max-age=300'});
+ cache.delete(id);cache.set(id,{at:now,results});if(cache.size>most)cache.delete(cache.keys().next().value!);
+ return reply(req,200,{site,results},{'Cache-Control':'private, max-age=1800'});
 });

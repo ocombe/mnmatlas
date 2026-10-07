@@ -140,21 +140,28 @@
  // The search goes through the atlas's own backend function, which holds the wiki's partner key.
  const finders=new Set(),wikiTypes={npc:'NPC',item:'Item',quest:'Quest',zone:'Zone'};
  async function wikiSearch(q){
+  // Answers are kept in this browser for a day (and shared ones on the backend), so a repeated search costs the wiki nothing.
+  const key=q.toLowerCase().replace(/\s+/g,' '),saved=readSearches(),hit=saved[key];if(hit&&Date.now()-hit.at<864e5)return hit;
   const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error('sign-in');
-  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(q),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}});
-  if(!r.ok)throw Error(r.status===429?'busy':'failed');const body=await r.json();return Array.isArray(body?.results)?body.results:[];
+  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}});
+  if(!r.ok)throw Error(r.status===429?'busy':'failed');const body=await r.json();
+  const answer={at:Date.now(),site:Object.hasOwn(wikiSites,body?.site)?body.site:'mnm-wiki',results:Array.isArray(body?.results)?body.results:[]};
+  saved[key]=answer;const keys=Object.keys(saved).sort((a,b)=>saved[b].at-saved[a].at);for(const old of keys.slice(100))delete saved[old];
+  try{localStorage.setItem(searchesKey,JSON.stringify(saved));}catch{}return answer;
  }
+ const searchesKey='mnmaps-wiki-searches';
+ function readSearches(){try{const rows=JSON.parse(localStorage.getItem(searchesKey)||'{}');return rows&&typeof rows==='object'&&!Array.isArray(rows)?rows:{};}catch{return {};}}
  function wikiFinder(input){
   const box=text('div','','wiki-finder'),search=document.createElement('input'),list=text('div','','wiki-results'),signedOut=text('p','Sign in to search the wiki by name, or paste a page address.','form-hint');
   search.type='search';search.maxLength=80;search.placeholder='Search the wiki by name';search.setAttribute('aria-label','Search the Monsters and Memories Wiki by name');
-  const credit=text('a','Data from the Monsters and Memories Wiki','wiki-credit');credit.href='https://monstersandmemories.wiki/';credit.target='_blank';credit.rel='noopener';
   let timer,serial=0;
-  const show=(rows,message)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
+  // The credit names and links the wiki the results came from.
+  const show=(rows,message,from)=>{list.replaceChildren();if(message)list.append(text('p',message,'form-hint'));
    for(const row of rows){const b=button('',()=>{input.value=row.url;input.dispatchEvent(new Event('input'));search.value='';show([]);input.focus?.();},'wiki-result');
     b.append(text('strong',row.name),text('small',[wikiTypes[row.type]||row.type,row.zone].filter(Boolean).join(' · ')));list.append(b);}
-   if(rows.length)list.append(credit);};
+   const source=wikiSites[from];if(rows.length&&source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';list.append(credit);}};
   search.addEventListener('input',()=>{clearTimeout(timer);const q=search.value.trim(),mine=++serial;if(q.length<2){show([]);return;}
-   timer=setTimeout(async()=>{show([],'Searching…');try{const rows=await wikiSearch(q);if(mine===serial)show(rows,rows.length?'':'No wiki page found with that name.');}
+   timer=setTimeout(async()=>{show([],'Searching…');try{const {site,results}=await wikiSearch(q);if(mine===serial)show(results,results.length?'':'No wiki page found with that name.',site);}
     catch(e){if(mine===serial)show([],e.message==='busy'?'The wiki is busy. Try again in a moment.':'The wiki could not be searched right now. You can paste the page address instead.');}},350);});
   box.append(search,list,signedOut);
   box.update=()=>{search.hidden=list.hidden=!user;signedOut.hidden=!!user;if(!user){search.value='';show([]);}};
