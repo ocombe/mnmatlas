@@ -102,9 +102,26 @@ function fitCardPopup(){
 }
 // A popup's own buttons (copy, edit, delete, share, suggest, report) end it as one tidy list; ways to move on (a floor,
 // another map) stay in the body.
+// Each action button gets a small line icon above its label, like the map's own tools.
+const actionPaths={
+ link:'M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71 M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71',
+ edit:'M17 3a2.85 2.83 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5Z M15 5l4 4',
+ report:'M4 15s1-1 4-1 5 2 8 2 4-1 4-1V3s-1 1-4 1-5-2-8-2-4 1-4 1z M4 22v-7',
+ delete:'M3 6h18 M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6 M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M10 11v6 M14 11v6',
+ share:'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13',
+ reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5'};
+function actionIcon(button){
+ const label=button.textContent,kind=button.classList.contains('copy-place')?'link':button.classList.contains('community-report')?'report':button.classList.contains('popup-delete')?'delete':
+  /^(suggest|edit)/i.test(label)?'edit':/^share/i.test(label)?'share':/^reset/i.test(label)?'reset':null;
+ if(!kind||button.querySelector('svg'))return;
+ const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
+ for(const [k,v] of Object.entries({viewBox:'0 0 24 24',width:'16',height:'16','aria-hidden':'true',fill:'none',stroke:'currentColor','stroke-width':'1.8','stroke-linecap':'round','stroke-linejoin':'round'}))svg.setAttribute(k,v);
+ path.setAttribute('d',actionPaths[kind]);svg.append(path);button.prepend(svg);
+}
 function tidyActions(n){
  const actions=text('div','','popup-actions');
  for(const el of [...n.children]){if(el.matches('button:not(.level-link)'))actions.append(el);else if(el.matches('.community-actions')){actions.append(...el.children);el.remove();}}
+ for(const b of actions.querySelectorAll('button'))actionIcon(b);
  if(actions.children.length)n.append(actions);return n;
 }
 const wikiPage=(label,href,cls='')=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
@@ -117,21 +134,24 @@ function npcCard(c,m){
  // A named mob's kind already says Named; our title's level ("(levels 51–53)") leads the line instead of sitting in the name.
  const shown=[c.race,c.class,/named/i.test(noteKind(m))?'named':''].filter(Boolean).map(v=>v.toLowerCase()),level=titleLevel(markerTitle(m)).level;
  const tags=[level&&level[0].toUpperCase()+level.slice(1),...String(c.tags||'').split(' · ').filter(t=>t&&!shown.includes(t.toLowerCase()))].filter(Boolean).join(' · ');
- const box=text('div','','npc-card'),facts=text('div','','npc-facts');if(tags)facts.append(text('p',tags,'npc-tags'));
+ // One band across the popup holds everything from the wiki: the tag line and facts, then loot and the wiki's own words
+ // as sections under small headings, then its credit.
+ const box=text('div','','npc-card');if(tags)box.append(text('p',tags,'npc-tags'));
  const rows=document.createElement('dl'),row=(term,value)=>{if(value)rows.append(text('dt',term),text('dd',value));};
  // Our title may already give a level ("levels 51–53"): then the wiki's is left out rather than shown beside it.
- if(!/\blevels?\b/i.test(markerTitle(m)))row('Level',c.level);row('Location',c.location);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));
- if(rows.children.length)facts.append(rows);if(facts.children.length)box.append(facts);
- if(Array.isArray(c.loot)&&c.loot.length){const loot=text('div','','npc-loot'),list=document.createElement('ul');const head=text('p','Notable loot','npc-heading');if(c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));loot.append(head);
+ if(!level)row('Level',c.level);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));row('Location',c.location);
+ if(rows.children.length)box.append(rows);
+ const section=(heading,cls)=>{const s=text('section','','npc-section '+cls),h=text('h4',heading,'npc-heading');s.append(h);box.append(s);return [s,h];};
+ if(Array.isArray(c.loot)&&c.loot.length){const [loot,head]=section('Notable loot','npc-loot'),list=document.createElement('ul');if(c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));
   for(const i of c.loot){const li=document.createElement('li');li.append(wikiPage(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
-  loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(wikiPage('+'+more+' more on the wiki',c.url,'npc-more'));box.append(loot);}
- if(c.summary){const p=text('p',c.summary+' ','npc-summary');p.append(wikiPage('Read more on the wiki ↗',c.url));box.append(p);}
+  loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(wikiPage('+'+more+' more on the wiki',c.url,'npc-more'));}
+ if(c.summary){const [about]=section('From the wiki','npc-about');about.append(text('p',c.summary,'npc-summary'),wikiPage('Read more on the wiki ↗',c.url,'npc-read'));}
  box.append(wikiPage('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
  return box;
 }
 function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
- if(card)n.append(npcCard(card,m));if(m.note){if(card)n.append(text('p','Atlas note','popup-label'));n.append(text('p',m.note,card?'npc-our-note':''));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
+ if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
  if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
