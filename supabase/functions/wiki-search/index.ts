@@ -62,11 +62,12 @@ Deno.serve(async req=>{
  if(!r.ok)return reply(req,502,{error:'wiki',status:r.status});
  const data=await r.json().catch(()=>null),rows=Array.isArray(data?.results)?data.results:[];
  // Only what the editor shows and stores: an id for later lookups, the name, the kind, the zone and the page address,
- // plus what the wiki's terms allow to pre-fill a new marker: its role, level and short location line (never descriptions).
+ // plus what the wiki's terms allow to pre-fill a new marker: its role, level, short location line and hover-card tags
+ // ("Named · Bat · Fighter", which carry a trainer's class), never descriptions or loot.
  const results=rows.map((row:Record<string,unknown>)=>{
   let page:URL|null=null;try{page=new URL(String(row.url));}catch{}
   if(!page||page.protocol!=='https:'||!/(^|\.)monstersandmemories\.wiki$/.test(page.hostname))return null;
-  return {id:text(row.id,160),type:text(row.type,20),name:text(row.name,100),zone:text(row.zone,100),url:page.href,role:text(row.role,20).toLowerCase(),level:text(typeof row.level==='number'?String(row.level):row.level,20),location:text(row.location,240)};
+  return {id:text(row.id,160),type:text(row.type,20),name:text(row.name,100),zone:text(row.zone,100),url:page.href,role:text(row.role,20).toLowerCase(),level:text(typeof row.level==='number'?String(row.level):row.level,20),location:text(row.location,240),tags:text(Array.isArray(row.tags)?row.tags.join(' · '):row.tags,160)};
  }).filter((row:{id:string,name:string,zone:string}|null)=>row&&row.id&&row.name&&(!zone||row.zone.split(',').some(z=>zoneKey(z)===zone))).slice(0,12);
  cache.delete(id);cache.set(id,{at:now,results});if(cache.size>most)cache.delete(cache.keys().next().value!);
  return reply(req,200,{site,results},{'Cache-Control':'private, max-age=1800'});
