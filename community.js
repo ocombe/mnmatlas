@@ -196,7 +196,7 @@
   const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
   const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
   const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
-  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki);d.append(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
+  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki,row=>{name.value=row.name;});d.append(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
   const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim(),newWiki=wiki?wikiAddress(wiki.value):'',oldWiki=target.wiki||'';
@@ -307,7 +307,7 @@
   if(user){const uid=user.id;try{const {data,error}=await client.from('admins').select('user_id').eq('user_id',uid).maybeSingle();if(error)throw error;if(serial!==authSerial)return;admin=!!data;accountUI();}catch{status('Account permissions could not load. Please try again.');}}
   if(serial===authSerial)await onMap();
  }
- function clearPreview(){reviewLayer?.remove();reviewLayer=null;$('community-preview')?.remove();}
+ function clearPreview(){reviewLayer?.remove();reviewLayer=null;const bar=$('community-preview');bar?.dispatchEvent(new Event('wiki-done'));bar?.remove();}
  review.addEventListener('close',()=>{reviewSerial++;});
  function reviewShell(){
   review.replaceChildren();const title=text('h2','Review suggestions');title.id='review-title';review.append(title);
@@ -395,7 +395,9 @@
    if(row.kind==='new-marker'||edit){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
    if(row.kind==='new-marker'&&!p.noteType){category=field('Type',document.createElement('select'));for(const k of Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))){const o=text('option',k);o.value=k;category.append(o);}category.value=categories[p.category]?p.category:Object.keys(categories)[0];}
    if(row.kind==='new-marker'||edit){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
-   let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';}
+   let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
+    // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
+    const finder=wikiFinder(wiki,found=>{if(name){name.value=found.name;restyle();}});bar.append(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
    const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category!=='Tradeskill')delete p.trade;}pin.setIcon(pinIcon(look()));};
    for(const el of [name,category])el?.addEventListener('input',restyle);category?.addEventListener('change',restyle);
@@ -405,7 +407,7 @@
     restyle();if(note)p.note=note.value.trim();
     if(wiki){const link=wikiAddress(wiki.value);if(link===null)throw Error('Wiki link');
      // An older edit without a link only gains one when a page is typed in; the published link it saw is kept for the check.
-     if(link!==(p.wiki||''))delete p.wikiId;
+     const picked=wikiIdFor(wiki,link);if(picked)p.wikiId=picked;else if(link!==(p.wiki||''))delete p.wikiId;
      if(edit&&!Object.hasOwn(p,'wiki')){if(link){p.wiki=link;p.from={...p.from,wiki:target?.wiki||''};}}else if(link||edit)p.wiki=link;else delete p.wiki;}
     if(!report&&!edit){const [x,y]=pixelsOf(pin.getLatLng());if(!bounded(x,y,config.minZoom))throw Error('Outside the map');if(move)p.to=[x,y];else{p.x=x;p.y=y;}}
     if(!p.name)throw Error('Name required');return p;
