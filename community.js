@@ -206,7 +206,7 @@
  const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit');
  const sharedToken=m=>scope()+':'+m.id;
  window.atlasCommunity={popup(m,n){
-  if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m)));return;}
+  if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));if(!config.zonesFile)n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m)));return;}
   const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report'));n.append(row);
  },placePopup(p,n){
   if(p.kind!=='label'||!labelData.labels.some(l=>l.id===p.id))return;

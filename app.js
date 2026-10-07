@@ -144,9 +144,11 @@ function drawMarkers(){
 function setPanel(open){if(!compact())desktopPanelOpen=open;$('journal').classList.toggle('closed',!open);$('toggle-panel').setAttribute('aria-expanded',String(open));map?.invalidateSize({pan:true,animate:false});}
 function updateCategoryButtons(){for(const b of $('categories').children)b.setAttribute('aria-pressed',String(enabled.has(b.dataset.category)));$('hide-pins').setAttribute('aria-pressed',String(showPins));}
 function cancelPlacement(){if(draftPin)$('status').hidden=true;draftPin?.remove();draftPin=null;document.body.classList.remove('placing');$('cancel-place').hidden=true;}
+// The world map (the one with zone outlines) takes no new notes: places belong on their zone's map. Notes saved there earlier stay.
+const takesNotes=()=>!config.zonesFile;
 // New notes start at the centre of the view; dropping the pin opens the editor there.
 function startPlacement(){
- map.closePopup();cancelPlacement();
+ map.closePopup();cancelPlacement();if(!takesNotes())return;
  const [cx,cy]=pixelsOf(map.getCenter()),start={x:Math.max(0,Math.min(config.width,cx)),y:Math.max(0,Math.min(config.height,cy)),category:'Personal',name:''};
  draftPin=L.marker(locationOf(start),{icon:pinIcon(start),alt:'New personal note',keyboard:true,draggable:true,zIndexOffset:1000}).addTo(map);
  draftPin.getElement()?.classList.add('draft-pin');
@@ -421,7 +423,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
   sheetTileLayer(config,config.frame||{x:0,y:0,width:config.width,height:config.height},config.tilePath+'?v='+encodeURIComponent(config.tileRevision),{tileSize:config.tileSize,minZoom:config.minZoom,maxZoom:config.maxZoom,maxNativeZoom:config.maxNativeZoom,noWrap:true,bounds,keepBuffer:1,attribution:text('span',config.attribution.map).outerHTML}).on('tileerror',()=>status('A map tile could not load. Please reload.')).addTo(map);
   const currentHidden={...hiddenData};for(const key of ['areas','additionalAreas','routes','connections','destinations','levelStacks'])if(Array.isArray(hiddenData[key]))currentHidden[key]=hiddenData[key].filter(atLevel);
   fitMap();wheelAfterClick();map.on('resize',()=>{limitZoomOut();updateZoom();});disposeBackdrop=setupSheetEdge(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
-  buildPlaceIndex();refreshSearch();setPanel(!compact()&&desktopPanelOpen&&!config.entry);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=false;$('edit-positions').hidden=false;updateAlignmentStatus();
+  buildPlaceIndex();refreshSearch();setPanel(!compact()&&desktopPanelOpen&&!config.entry);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=!takesNotes();if($('add-note'))$('add-note').hidden=!takesNotes();$('edit-positions').hidden=false;updateAlignmentStatus();
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});
   map.on('popupclose',()=>{if(!applyingView){activePlace=null;scheduleUrl();}});
