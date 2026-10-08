@@ -756,8 +756,10 @@
     else{look={...(t||{category:'Personal'}),name:p.name,id:'suggested-'+row.id};tag=p.remove===true?'Removal':'Edited marker';}
    }catch{continue;}
    const dup=duplicatesOf(row).length>0,state=waiting?'waiting for review':'approved, not live yet';
-   const pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:waiting?950:900,keyboard:true,title:tag+' ('+state+'): '+(p.name||'')});
-   pin.on('add',()=>{const el=pin.getElement();if(!el)return;el.classList.add('approved-pin');if(waiting)el.classList.add('pending-pin');if(row.kind==='edit-marker')el.classList.add(p.remove===true?'approved-remove':'approved-edit');if(dup)el.classList.add('duplicate-pin');});
+   // The atlas's own hover tooltip, like the published markers (a browser title would show beside it); the full
+   // description is the pin's aria-label.
+   const label=tag+' ('+state+'): '+(p.name||''),pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:waiting?950:900,keyboard:true,label}).bindTooltip(()=>text('span',markerTitle(look)+' · '+state),{direction:'top',offset:[0,-23]});
+   pin.on('add',()=>{const el=pin.getElement();if(!el)return;el.setAttribute('aria-label',label);el.classList.add('approved-pin');if(waiting)el.classList.add('pending-pin');if(row.kind==='edit-marker')el.classList.add(p.remove===true?'approved-remove':'approved-edit');if(dup)el.classList.add('duplicate-pin');});
    pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);suggestionPins.set(row.id,pin);}
  }
  function approvedPopup(row,tag){
