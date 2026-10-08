@@ -1,6 +1,6 @@
 // Offline checks for scripts/wiki-reconcile.mjs: name matching, the plan and applying approved rows.
 import assert from 'node:assert/strict';
-import {query,match,inZone,plan,applyRows} from './wiki-reconcile.mjs';
+import {query,match,inZone,plan,applyRows,npcCategories,queries} from './wiki-reconcile.mjs';
 
 const npc=(name,zone='Underdocks',slug=name.toLowerCase().replace(/\W+/g,'-'))=>({id:'npc-'+slug,name,zone,url:'https://monstersandmemories.wiki/npcs/'+slug});
 assert.equal(query('Bank — north-east quay'),'Bank');assert.equal(query('Cleric / Shadowknight trainers'),'Cleric');assert.equal(query('A baker (Night Market)'),'A baker');
@@ -26,6 +26,11 @@ assert.equal(p.rows[0].wikiName,'A bag merchant');assert.equal(p.rows[0].newName
 // A trainer named after a class does not match a mob of that class; a named trainer does.
 {const q=plan(c,{markers:[{path:'m.json',m:{id:'t1',name:'Necromancer / Shadow Knight — Concourse',category:'Class trainer'}},{path:'m.json',m:{id:'t2',name:'Nurvol Cereveth',category:'Class trainer'}}],labels:[]},new Map([['Necromancer',[npc('A necromancer')]],['Nurvol Cereveth',[npc('Nurvol Cereveth')]]]));
  assert.deepEqual(q.rows.map(r=>r.match),['none','exact']);}
+// A shady merchant is reconciled through Vendor, without a separate NPC category.
+{const features={markers:[{path:'m.json',m:{id:'fence',name:'Mira',category:'Vendor',vendor:'Shady merchant',x:1,y:2}}],labels:[]};
+ assert(npcCategories.has('Vendor'));assert(!npcCategories.has('Shady merchant'));assert.deepEqual(queries(c,features),['Mira']);
+ const q=plan(c,features,new Map([['Mira',[npc('Mira')]]]));assert.equal(q.rows[0].category,'Vendor');assert(q.rows[0].approve);
+ const files=new Map([['m.json',features.markers.map(x=>({...x.m}))]]);assert.deepEqual(applyRows(q.rows,files),['linked fence']);assert.equal(files.get('m.json')[0].vendor,'Shady merchant');}
 const files=new Map([['m.json',structuredClone(markers)],['l.json',structuredClone(labels)]]);for(const r of p.rows)if(r.source==='label')r.markersPath='m.json';
 p.rows[1].approve=true;const done=applyRows(p.rows,files);
 assert.deepEqual(done,['linked bag','linked marsh','made marker pay']);

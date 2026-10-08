@@ -172,7 +172,8 @@
  {
   "id": "shady-merchant-west",
   "name": "Shady merchant — west",
-  "category": "Shady merchant",
+  "category": "Vendor",
+  "vendor": "Shady merchant",
   "x": 1707,
   "y": 2646,
   "approximate": true,
@@ -182,7 +183,8 @@
  {
   "id": "shady-merchant-east",
   "name": "Shady merchant — east",
-  "category": "Shady merchant",
+  "category": "Vendor",
+  "vendor": "Shady merchant",
   "x": 2731,
   "y": 2215,
   "approximate": true,

@@ -68,6 +68,37 @@ try{
  approved=[{id:40,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'A beastmaster instructor',category:'Class trainer',classes:['Beastmaster']}},{id:41,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Odd trainer',category:'Class trainer',classes:['Warrior']}}];
  const trained=await run();assert.equal(trained.code,0,trained.output);assert(trained.output.includes('Unsupported classes'));
  {const all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8'));assert.deepEqual(all.find(m=>m.id==='community-40').classes,['Beastmaster']);assert(!all.some(m=>m.id==='community-41'));}
+ // Current and older vendor kinds publish with sorted item tags; invalid tags go back to review.
+ approved=[
+  {id:60,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Leatherworker',category:'Vendor',vendor:'Leatherworking supplies',sells:['Recipes','Materials']}},
+  {id:61,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Alchemist',category:'Vendor',vendor:'Alchemy vendor'}},
+  {id:62,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Bank',category:'Bank',vendor:'Leatherworking supplies',sells:['Recipes']}},
+  {id:63,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Label',category:'Vendor',noteType:'label',vendor:'Leatherworking supplies',sells:['Recipes']}},
+  ...[[],['Recipes','Recipes'],['Dragon eggs'],null,'Recipes',Array(13).fill('Recipes')].map((sells,i)=>({id:64+i,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Bad tags '+i,category:'Vendor',sells}})),
+  {id:70,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Unknown merchant',category:'Vendor',vendor:'Dragon seller'}},
+  {id:71,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Recipes',category:'Vendor',sells:['Recipes']}},
+  {id:72,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Herbalist',category:'Vendor',vendor:'Herbalism supplies'}}
+ ];
+ const vendors=await run();assert.equal(vendors.code,0,vendors.output);assert.equal((vendors.output.match(/Unsupported Sells tags/g)||[]).length,6);assert(vendors.output.includes('Unsupported vendor kind'));
+ {const all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')),leather=all.find(m=>m.id==='community-60');assert.equal(leather.vendor,'Leatherworking vendor');assert.deepEqual(leather.sells,['Materials','Recipes']);
+  const alchemist=all.find(m=>m.id==='community-61');assert.equal(alchemist.vendor,'Alchemy vendor');assert(!Object.hasOwn(alchemist,'sells'));
+  const bank=all.find(m=>m.id==='community-62');assert(!Object.hasOwn(bank,'vendor')&&!Object.hasOwn(bank,'sells'));assert.deepEqual(all.find(m=>m.id==='community-71').sells,['Recipes']);assert.equal(all.find(m=>m.id==='community-72').vendor,'Herbalism vendor');
+  for(let id=64;id<=70;id++)assert(!all.some(m=>m.id==='community-'+id));}
+ {const label=JSON.parse(await readFile(fixture+'/data/labels.json','utf8')).labels.find(m=>m.id==='community-63');assert(!Object.hasOwn(label,'vendor')&&!Object.hasOwn(label,'sells'));}
+ // Suggestions from older pages publish the old category as the Shady merchant vendor kind.
+ approved=[
+  {id:80,map:'test-map',level:'lower',kind:'new-marker',payload:{x:8,y:9,name:'Mira',category:'Shady merchant',note:'By the gate',wiki:'https://monstersandmemories.wiki/npcs/mira',wikiId:'npc-mira'}},
+  {id:81,map:'test-map',level:'lower',kind:'new-marker',payload:{x:8,y:9,name:'Fence',category:'Shady merchant',vendor:'Baker',sells:['Recipes','Materials']}},
+  {id:82,map:'test-map',level:'lower',kind:'new-marker',payload:{x:8,y:9,name:'Bad fence',category:'Shady merchant',sells:['Unknown']}},
+  {id:83,map:'test-map',level:'lower',kind:'new-marker',payload:{x:8,y:9,name:'Market',category:'Shady merchant',noteType:'label',sells:['Recipes']}}
+ ];
+ const beforeShady=await readFile(fixture+'/data/markers.json','utf8'),shadyDry=await run(true);assert.equal(shadyDry.code,0,shadyDry.output);assert.equal(await readFile(fixture+'/data/markers.json','utf8'),beforeShady);
+ const shady=await run();assert.equal(shady.code,0,shady.output);assert(shady.output.includes('Unsupported Sells tags'));assert(!shady.output.includes('Unsupported marker fields'));
+ {const raw=await readFile(fixture+'/data/markers.json','utf8'),all=JSON.parse(raw),m=all.find(m=>m.id==='community-80');
+  assert.deepEqual(m,{id:'community-80',community:true,name:'Mira',category:'Vendor',note:'By the gate',x:8,y:9,level:'lower',wiki:'https://monstersandmemories.wiki/npcs/mira',wikiId:'npc-mira',vendor:'Shady merchant'});
+  const fence=all.find(m=>m.id==='community-81');assert.equal(fence.category,'Vendor');assert.equal(fence.vendor,'Shady merchant');assert.deepEqual(fence.sells,['Materials','Recipes']);assert(!all.some(m=>m.id==='community-82'));
+  assert(raw.endsWith('\r\n')&&!/(?<!\r)\n/.test(raw),'Publishing keeps the file line endings');}
+ {const label=JSON.parse(await readFile(fixture+'/data/labels.json','utf8')).labels.find(m=>m.id==='community-83');assert(!Object.hasOwn(label,'vendor')&&!Object.hasOwn(label,'sells'));}
  // A removal (an edit approved as one) takes the marker off the map; a second one finds it already gone.
  approved=[{id:50,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-40',payload:{name:'A beastmaster instructor',note:'',remove:true,reason:'duplicate',from:{name:'A beastmaster instructor',note:''}}},{id:51,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-40',payload:{name:'A beastmaster instructor',note:'',remove:true,from:{name:'A beastmaster instructor',note:''}}}];
  const removed=await run();assert.equal(removed.code,0,removed.output);assert(!JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).some(m=>m.id==='community-40'),'A removal takes the marker off the map');

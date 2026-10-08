@@ -99,7 +99,8 @@
   {
     "id": "wiki-13",
     "name": "Shady merchant — west outskirts",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 653,
     "y": 1645,
     "note": ""
@@ -107,7 +108,8 @@
   {
     "id": "wiki-14",
     "name": "A greedy halfling",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 966,
     "y": 1278,
     "note": "",
@@ -118,7 +120,8 @@
   {
     "id": "wiki-15",
     "name": "Shady merchant — North Gate",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 1861,
     "y": 1089,
     "note": ""
@@ -126,7 +129,8 @@
   {
     "id": "wiki-16",
     "name": "Shady merchant — east North Gate",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 2020,
     "y": 1042,
     "note": ""
@@ -514,6 +518,9 @@
     "name": "A bag merchant",
     "category": "Vendor",
     "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ],
     "note": "",
     "x": 1150,
     "y": 1515,
@@ -541,13 +548,24 @@
     "y": 1654,
     "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-obaid",
     "wikiId": "npc-quartermaster-obaid",
-    "vendor": "Quartermaster"
+    "vendor": "Quartermaster",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Quest items",
+      "Shields",
+      "Weapons"
+    ]
   },
   {
     "id": "community-102",
     "community": true,
     "name": "Halrinn Grimsul",
     "category": "Vendor",
+    "sells": [
+      "Food & drink",
+      "Quest items"
+    ],
     "note": "",
     "x": 949,
     "y": 1371,
@@ -575,7 +593,13 @@
     "y": 1361,
     "wiki": "https://monstersandmemories.wiki/npcs/a-cook",
     "wikiId": "npc-a-cook",
-    "vendor": "Cook"
+    "vendor": "Cook",
+    "sells": [
+      "Bags",
+      "Food & drink",
+      "Materials",
+      "Weapons"
+    ]
   },
   {
     "id": "community-107",
@@ -610,7 +634,11 @@
     "y": 1268,
     "wiki": "https://monstersandmemories.wiki/npcs/an-herbalist",
     "wikiId": "npc-an-herbalist",
-    "vendor": "Herbalism supplies"
+    "vendor": "Herbalism vendor",
+    "sells": [
+      "Bags",
+      "Weapons"
+    ]
   },
   {
     "id": "community-111",
@@ -622,7 +650,13 @@
     "y": 1260,
     "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-wayfarers-hospice",
     "wikiId": "npc-a-reagent-vendor-wayfarers-hospice",
-    "vendor": "Reagent vendor"
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Armor",
+      "Bags",
+      "Materials",
+      "Shields"
+    ]
   },
   {
     "id": "community-112",
@@ -634,7 +668,11 @@
     "y": 1265,
     "wiki": "https://monstersandmemories.wiki/npcs/a-cleric-scribe",
     "wikiId": "npc-a-cleric-scribe",
-    "vendor": "Spell scribe"
+    "vendor": "Spell scribe",
+    "sells": [
+      "Armor",
+      "Materials"
+    ]
   },
   {
     "id": "community-113",
@@ -674,6 +712,9 @@
     "community": true,
     "name": "Dilshad Abolfazl",
     "category": "Vendor",
+    "sells": [
+      "Bags"
+    ],
     "note": "",
     "x": 1077,
     "y": 1231,
@@ -690,7 +731,10 @@
     "y": 1206,
     "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-saif",
     "wikiId": "npc-leatherworker-saif",
-    "vendor": "Leatherworking supplies"
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Recipes"
+    ]
   },
   {
     "id": "community-121",
@@ -724,5 +768,60 @@
     "y": 1259,
     "wiki": "https://monstersandmemories.wiki/npcs/bieito-brightsmile",
     "wikiId": "npc-bieito-brightsmile"
+  },
+  {
+    "id": "community-140",
+    "community": true,
+    "name": "Leila Ghasem",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1681,
+    "y": 1376,
+    "wiki": "https://monstersandmemories.wiki/npcs/leila-ghasem",
+    "wikiId": "npc-leila-ghasem"
+  },
+  {
+    "id": "community-141",
+    "community": true,
+    "name": "Errol Shrewtender",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1382,
+    "wiki": "https://monstersandmemories.wiki/npcs/errol-shrewtender",
+    "wikiId": "npc-errol-shrewtender"
+  },
+  {
+    "id": "community-142",
+    "community": true,
+    "name": "Masoumeh Akhtar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1387,
+    "wiki": "https://monstersandmemories.wiki/npcs/masoumeh-akhtar",
+    "wikiId": "npc-masoumeh-akhtar"
+  },
+  {
+    "id": "community-143",
+    "community": true,
+    "name": "Old Mother Roshan",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1365,
+    "wiki": "https://monstersandmemories.wiki/npcs/old-mother-roshan",
+    "wikiId": "npc-old-mother-roshan"
+  },
+  {
+    "id": "community-144",
+    "community": true,
+    "name": "Talnach Wilenner",
+    "category": "Vendor",
+    "note": "",
+    "x": 1683,
+    "y": 1339,
+    "wiki": "https://monstersandmemories.wiki/npcs/talnach-wilenner",
+    "wikiId": "npc-talnach-wilenner"
   }
 ]

@@ -11,7 +11,7 @@ import {fileURLToPath,pathToFileURL} from 'node:url';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..');
 const api='https://monstersandmemories.wiki/api/partner/v1/';
 // Marker types that stand for a person or a creature; other types (lifts, stairs, banks, tradeskill stations) are left alone.
-export const npcCategories=new Set(['Named mob','Notable NPC','Vendor','Shady merchant','Class trainer','Quest','Mob camp']);
+export const npcCategories=new Set(['Named mob','Notable NPC','Vendor','Class trainer','Quest','Mob camp']);
 
 // Same loose zone comparison as the wiki-search backend: case, accents, apostrophes and a leading "the" do not matter.
 export const zoneKey=v=>String(v||'').normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^the /,'');

@@ -21,6 +21,7 @@
  let user=null,admin=false,authSerial=0,mapSerial=0,reviewLayer=null,syncing=false,syncReady='',syncTimer,reviewSerial=0;
  // Reports sent in this visit; nothing is kept per marker, so a fixed marker starts clean.
  const reportedNow=new Set(),syncJobs=new Map(),sentKey='mnmaps-community-sent',sharedKey='mnmaps-community-shared';
+ const normaliseSuggestion=row=>({...row,payload:normaliseMarker(row.payload)});
  const scope=()=>config.id+'-'+config.tileRevision,displayName=u=>String(u?.user_metadata?.full_name||u?.user_metadata?.name||u?.user_metadata?.preferred_username||'Discord member').slice(0,80);
  function readSet(key){try{const rows=JSON.parse(localStorage.getItem(key)||'[]');return new Set(Array.isArray(rows)?rows.filter(r=>typeof r==='string'):[]);}catch{return new Set();}}
  function remember(key,values){try{const rows=readSet(key);for(const value of values)rows.add(value);localStorage.setItem(key,JSON.stringify([...rows]));}catch{status('Sent successfully, but this browser could not remember it.');}}
@@ -483,7 +484,7 @@
   }return rows;
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
- function notePayload(m){
+ function notePayload(m){m=normaliseMarker(m);
   const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note,...markerExtras(m)};
   const bounty=readBounties()[m.id];if(bounty&&m.wikiId===bounty.bounty){payload.bounty=bounty.bounty;if(bounty.priority)payload.priority=true;}
   return payload;
@@ -614,7 +615,7 @@
   catch(e){status(e?.code==='23505'?'Someone just claimed this bounty. Your note is kept in your field notes.':'Saved to your field notes. '+sendError(e,'The suggestion did not go through: you can send it from the note’s popup with Share with everyone.'));}
  }
  async function followNote(m,rec){
-  const payload=notePayload(m),key=followId(m),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(same(payload,rec.sent))return;
+  const payload=notePayload(m),key=followId(m),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(same(payload,normaliseMarker(rec.sent)))return;
   const keep=()=>{const all=readFollowed();all[key]={...rec,sent:payload};writeFollowed(all);};
   try{
    const {data:row,error}=await client.from('suggestions').select('status,payload,reviewed_at,review_note').eq('id',rec.id).maybeSingle();if(error)throw error;
@@ -629,17 +630,17 @@
     // The marker it becomes is community-<suggestion id>; place names and exits live with the labels. What changed since
     // this note last sent is sent as a move and an edit of it, from what is live (else what was approved, a reviewer's
     // changes included), so the publishing job's checks see the text and spot it really shows.
-    const old=rec.sent,label=payload.noteType==='label'||payload.noteType==='exit',target='community-'+rec.id,base={user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,target_id:target,comment:null,credit:!!rec.credit};
+    const old=normaliseMarker(rec.sent),label=payload.noteType==='label'||payload.noteType==='exit',target='community-'+rec.id,base={user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,target_id:target,comment:null,credit:!!rec.credit};
     const live=(label?labelData.labels:originals).find(x=>x.id===target),shown={...old,...row.payload,...(live?{name:live.name,note:live.note||'',wiki:live.wiki||'',x:live.x,y:live.y}:{})};
     let sent=false;
     if(old.x!==payload.x||old.y!==payload.y){await submit({...base,kind:label?'move-label':'move-marker',payload:{name:payload.name,from:[shown.x,shown.y],to:[payload.x,payload.y]}});sent=true;}
     const wikiOf=p=>label?{}:{wiki:p.wiki||'',...(p.wiki&&p.wikiId?{wikiId:p.wikiId}:{})};
     if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||''))){
      await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:shown.name,note:shown.note||'',...(label?{}:{wiki:shown.wiki||''})}}});sent=true;}
-    // A marker's type, trade, class, kind or colour (an exit's arrow or map) cannot follow it once approved.
-    const fixed=(label?['arrow','toMap']:['category','trade','classes','vendor','color']).some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
+    // A marker's type, trade, class, kind, Sells tags or colour (an exit's arrow or map) cannot follow it once approved.
+    const fixed=(label?['arrow','toMap']:['category','trade','classes','vendor','sells','color']).some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
     keep();
-    if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind or class change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
+    if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind, class or Sells change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
     else if(sent)status('Saved, and the change was sent for review.');
     return;
    }
@@ -682,7 +683,7 @@
  async function syncNotes(serial){
   if(!user||!map||loading||alignmentMode)return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
   try{const {data,error}=await client.from('user_notes').select('notes').eq('user_id',uid).eq('map',key).maybeSingle();if(error)throw error;if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
-   const remote=data?.notes||[];if(!Array.isArray(remote)||remote.length>2000||!remote.every(valid))throw Error();
+   const notes=data?.notes||[];if(!Array.isArray(notes)||notes.length>2000||!notes.every(valid))throw Error();const remote=notes.map(normaliseMarker);
    // A note on one side only was either added there (keep it) or deleted on the other side since the last sync (drop it).
    const base=readBase(uid,key),localIds=new Set(personal.map(m=>m.id)),remoteIds=new Set(remote.map(m=>m.id)),merged=new Map();
    for(const m of remote)if(localIds.has(m.id)||!base?.has(m.id))merged.set(m.id,m);
@@ -748,7 +749,7 @@
  async function loadApproved(){
   const serial=++approvedSerial;let approved=[],pending=[],rejected=[];
   if(user&&config&&!config.zonesFile){
-   const read=async(state,since)=>{let q=client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name,comment,reviewed_at,review_note').eq('status',state).eq('map',config.id);if(since)q=q.gte('reviewed_at',since);const {data,error}=await q.limit(500);if(error)throw error;return Array.isArray(data)?data:[];};
+   const read=async(state,since)=>{let q=client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name,comment,reviewed_at,review_note').eq('status',state).eq('map',config.id);if(since)q=q.gte('reviewed_at',since);const {data,error}=await q.limit(500);if(error)throw error;return Array.isArray(data)?data.map(normaliseSuggestion):[];};
    try{approved=await read('approved');if(admin)pending=await read('pending');}catch{}
    if(admin)try{rejected=await read('rejected',await publishedSince());}catch{}}
   if(serial!==approvedSerial)return;approvedRows=approved;pendingRows=pending;rejectedRows=rejected;drawApproved();
@@ -820,7 +821,7 @@
   clearPreview();const serial=++reviewSerial,content=$('review-content');content.replaceChildren();
   const tabs=text('div','','community-tabs');for(const [value,label] of [['pending','Waiting for review'],['approved','Approved, not live yet']]){const b=button(label,()=>pendingTab(all,0,value));b.setAttribute('aria-pressed',String(state===value));tabs.append(b);}
   const toggle=text('label','','community-check'),check=document.createElement('input');check.type='checkbox';check.checked=all;check.onchange=()=>pendingTab(check.checked,0,state);toggle.append(check,text('span','All maps'));content.append(tabs,toggle,text('p','Loading…','form-hint'));
-  try{let request=client.from('suggestions').select('*').eq('status',state).order('created_at',{ascending:false}).order('id',{ascending:false});if(!all)request=request.eq('map',config.id);const {data,error}=await request.range(offset,offset+199);if(error)throw error;if(serial!==reviewSerial||!admin)return;content.lastChild.remove();
+  try{let request=client.from('suggestions').select('*').eq('status',state).order('created_at',{ascending:false}).order('id',{ascending:false});if(!all)request=request.eq('map',config.id);const {data:incoming,error}=await request.range(offset,offset+199);if(error)throw error;if(serial!==reviewSerial||!admin)return;const data=incoming.map(normaliseSuggestion);content.lastChild.remove();
    if(!data.length)content.append(text('p',state==='approved'?'Nothing waiting to go live. Approved suggestions are published within the hour.':'Nothing to review. Reports come from Report a problem on a marker; suggestions from Edit, Suggest an edit and Share with everyone.','form-hint'));
    const perAuthor=new Map();for(const row of data)perAuthor.set(row.user_id,(perAuthor.get(row.user_id)||0)+1);
    // Reviewing on the map goes on to the next suggestion of this list once one is decided; the list comes back after the last.
@@ -890,7 +891,7 @@
    if(config.id!==row.map||(row.level&&config.levelId!==row.level))await loadMap(row.map,url);
    if(config.id!==row.map||(row.level&&config.levelId!==row.level)||loading)throw Error();
    clearPreview();reviewLayer=L.layerGroup().addTo(map);
-   const p=structuredClone(row.payload),edit=row.kind==='edit-marker'||row.kind==='edit-label',move=row.kind==='move-marker'||row.kind==='move-label',report=row.kind==='report';
+   const p=normaliseMarker(structuredClone(row.payload)),edit=row.kind==='edit-marker'||row.kind==='edit-label',move=row.kind==='move-marker'||row.kind==='move-label',report=row.kind==='report';
    const target=row.kind==='edit-label'||row.kind==='move-label'?labelData.labels.find(l=>l.id===row.target_id):originals.find(m=>m.id===row.target_id);
    const xy=v=>{if(!Array.isArray(v)||v.length!==2||!bounded(...v,config.minZoom))throw Error();return locationOf({x:v[0],y:v[1]});};
    // An edited thing stands where it is published: a marker, a place name, or a trainer chip with that id. When it is
@@ -918,12 +919,13 @@
    if(row.kind==='new-marker'||edit&&!removal){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
    // The same types as the note form (Personal included, so a shared personal note keeps its type).
    if(row.kind==='new-marker'&&!p.noteType){category=fillSelect(field('Type',document.createElement('select')),categoryChoices().map(k=>[k,k]));category.value=categories[p.category]?p.category:'Personal';}
-   // A tradeskill's trade, a class trainer's class and a vendor's kind can be set or fixed here before approving.
-   let trade,trainerClass,vendor;const trades=Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)),said=(p.name||'')+' '+(p.note||'');
+   // A tradeskill's trade, a class trainer's class and a vendor's kind and Sells tags can be fixed before approving.
+   let trade,trainerClass,vendor,sells;const trades=Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)),said=(p.name||'')+' '+(p.note||'');
    if(category){trade=fillSelect(field('Trade',document.createElement('select')),[['Any trade',''],...trades.map(t=>[t,t])]);trade.value=p.trade||tradeNamed(said,trades);
     trainerClass=fillSelect(field('Class',document.createElement('select')),[['Not set',''],...atlasClasses.map(k=>[k,k])]);trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
-    vendor=fillSelect(field('Kind',document.createElement('select')),[['Not set',''],...vendorKindItems(false)]);vendor.value=p.vendor||vendorKindNamed(said);
-    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
+    vendor=fillSelect(field('Kind',document.createElement('select')),[['Not set',''],...vendorKindItems(false)]);vendor.value=vendorKindNow(p.vendor)||vendorKindNamed(said);
+    const row=text('fieldset','','preview-field sells-field');row.append(text('legend','Sells'));sells=sellsChips(text('div','','sells-chips'),p.sells);row.append(sells);bar.append(row);
+    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';sells.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
    if(row.kind==='new-marker'||edit&&!removal){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
    let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'&&!removal){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
@@ -931,9 +933,9 @@
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
    // The type's own fields follow the note form's rule (markerExtras): a trainer's several classes stay unless one is chosen.
    const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;
-    if(category){const kept=markerExtras({category:category.value,trade:trade.value,vendor:vendor.value,classes:trainerClass.value?[trainerClass.value]:p.classes});p.category=category.value;for(const k of ['trade','classes','vendor'])if(Object.hasOwn(kept,k))p[k]=kept[k];else delete p[k];}
+    if(category){const kept=markerExtras({category:category.value,trade:trade.value,vendor:vendor.value,sells:pickedSells(sells),classes:trainerClass.value?[trainerClass.value]:p.classes});p.category=category.value;for(const k of ['trade','classes','vendor','sells'])if(Object.hasOwn(kept,k))p[k]=kept[k];else delete p[k];}
     pin?.setIcon(pinIcon(look()));};
-   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor])el?.addEventListener('change',restyle);
+   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor,sells])el?.addEventListener('change',restyle);
    const reviewNote=document.createElement('input');reviewNote.placeholder='Optional review note';reviewNote.setAttribute('aria-label','Optional review note');reviewNote.maxLength=500;bar.append(reviewNote);
    // The adjusted payload keeps the visitor's other fields; positions are checked against the map bounds.
    const edits=()=>{

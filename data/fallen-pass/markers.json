@@ -52,7 +52,8 @@
  {
   "id": "shady-merchant-1",
   "name": "Shady merchant",
-  "category": "Notable NPC",
+  "category": "Vendor",
+  "vendor": "Shady merchant",
   "x": 1908,
   "y": 1150,
   "approximate": true,

@@ -231,7 +231,8 @@
     "level": "lower",
     "approximate": true,
     "note": "Approximate; to confirm in game. Shady merchant.",
-    "category": "Shady merchant"
+    "category": "Vendor",
+    "vendor": "Shady merchant"
   },
   {
     "id": "wiki-medic",
@@ -496,7 +497,7 @@
     "id": "wiki-apothecary",
     "name": "Apothecary",
     "category": "Vendor",
-    "vendor": "Alchemy supplies",
+    "vendor": "Alchemy vendor",
     "x": 2652,
     "y": 4874,
     "note": "Approximate; to confirm in game. Western shore; exact shop entrance to confirm.",
@@ -519,6 +520,10 @@
     "community": true,
     "name": "Hargin Earthcaller",
     "category": "Vendor",
+    "sells": [
+      "Armor",
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 4419,
     "y": 3632,
@@ -544,6 +549,10 @@
     "name": "Munk",
     "category": "Vendor",
     "vendor": "Butcher",
+    "sells": [
+      "Materials",
+      "Quest items"
+    ],
     "note": "",
     "x": 3645,
     "y": 4141,
