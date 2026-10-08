@@ -148,19 +148,6 @@
     "wikiId": "npc-supplier-jul"
   },
   {
-    "id": "nurvol-cereveth",
-    "name": "Nurvol Cereveth",
-    "category": "Class trainer",
-    "x": 4621,
-    "y": 3108,
-    "note": "Approximate position; to confirm in game. Inquisitor trainer.",
-    "classes": [
-      "Inquisitor"
-    ],
-    "wiki": "https://monstersandmemories.wiki/npcs/nurvol-cereveth",
-    "wikiId": "npc-nurvol-cereveth"
-  },
-  {
     "id": "klavel-sul",
     "name": "Klavel Sul",
     "category": "Class trainer",
@@ -499,5 +486,149 @@
     "y": 6817,
     "wiki": "https://monstersandmemories.wiki/npcs/an-angry-cultist",
     "wikiId": "npc-an-angry-cultist"
+  },
+  {
+    "id": "community-67",
+    "community": true,
+    "name": "Girtel Xal'tharn",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4625,
+    "y": 3190,
+    "classes": [
+      "Inquisitor"
+    ]
+  },
+  {
+    "id": "community-69",
+    "community": true,
+    "name": "an ith'vayen toxicologist",
+    "category": "Vendor",
+    "note": "toxicologist, alchemy materials",
+    "x": 4347,
+    "y": 2385,
+    "vendor": "Alchemy supplies"
+  },
+  {
+    "id": "community-71",
+    "community": true,
+    "name": "a reagent vendor",
+    "category": "Vendor",
+    "note": "",
+    "x": 4375,
+    "y": 2354,
+    "vendor": "Reagent vendor"
+  },
+  {
+    "id": "community-72",
+    "community": true,
+    "name": "an enchanting scribe",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4371,
+    "y": 2373,
+    "trade": "(Dis)Enchanting"
+  },
+  {
+    "id": "community-75",
+    "community": true,
+    "name": "Zarlya Vael'xirith",
+    "category": "Class trainer",
+    "note": "Ranger",
+    "x": 3404,
+    "y": 2709,
+    "classes": [
+      "Ranger"
+    ]
+  },
+  {
+    "id": "community-77",
+    "community": true,
+    "name": "Sarzi Vaelxirith",
+    "category": "Class trainer",
+    "note": "Archer",
+    "x": 3466,
+    "y": 2836,
+    "classes": [
+      "Archer"
+    ]
+  },
+  {
+    "id": "community-78",
+    "community": true,
+    "name": "a fighter instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3390,
+    "y": 2685,
+    "classes": [
+      "Fighter"
+    ]
+  },
+  {
+    "id": "community-79",
+    "community": true,
+    "name": "an inquisitor instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3486,
+    "y": 2854,
+    "classes": [
+      "Inquisitor"
+    ]
+  },
+  {
+    "id": "community-80",
+    "community": true,
+    "name": "a monk instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3471,
+    "y": 2878,
+    "classes": [
+      "Monk"
+    ]
+  },
+  {
+    "id": "community-82",
+    "community": true,
+    "name": "Cleric Spells",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3490,
+    "y": 2737,
+    "classes": [
+      "Cleric"
+    ]
+  },
+  {
+    "id": "community-84",
+    "community": true,
+    "name": "a necromancer scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3697,
+    "y": 2474,
+    "classes": [
+      "Necromancer"
+    ]
+  },
+  {
+    "id": "community-86",
+    "community": true,
+    "name": "A reagent vendor",
+    "category": "Vendor",
+    "note": "necromancer reagents",
+    "x": 3711,
+    "y": 2511
+  },
+  {
+    "id": "community-94",
+    "community": true,
+    "name": "Teleporter",
+    "category": "Teleporter",
+    "note": "Teleporter from tunnel opposite way of bank. Goes up a level towards the Necromancer quest NPCs.",
+    "x": 4340,
+    "y": 2777
   }
 ]

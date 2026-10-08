@@ -71,20 +71,21 @@
    "toMap": "great-cavern-sea",
    "approximate": true,
    "note": "The boat route west toward the Great Cavern Sea. Approximate location; to confirm in game."
+  },
+  {
+   "id": "community-81",
+   "community": true,
+   "name": "Blind Midden",
+   "kind": "exit",
+   "priority": 50,
+   "minZoom": 0,
+   "note": "",
+   "x": 5797,
+   "y": 3553,
+   "arrow": "east"
   }
  ],
  "trainers": [
-  {
-   "id": "nurvol-cereveth",
-   "abbreviations": [
-    "INQ"
-   ],
-   "classes": [
-    "Inquisitor"
-   ],
-   "x": 4621,
-   "y": 3108
-  },
   {
    "id": "klavel-sul",
    "abbreviations": [
