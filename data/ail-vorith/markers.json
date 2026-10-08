@@ -630,5 +630,59 @@
     "note": "Teleporter from tunnel opposite way of bank. Goes up a level towards the Necromancer quest NPCs.",
     "x": 4340,
     "y": 2777
+  },
+  {
+    "id": "community-45",
+    "community": true,
+    "name": "Vael'xirith",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3412,
+    "y": 2771
+  },
+  {
+    "id": "community-73",
+    "community": true,
+    "name": "Grakkesh",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4278,
+    "y": 2265
+  },
+  {
+    "id": "community-87",
+    "community": true,
+    "name": "K'Xai the Bound",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3724,
+    "y": 2665
+  },
+  {
+    "id": "community-88",
+    "community": true,
+    "name": "Vaslir Vharkith",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4068,
+    "y": 2281
+  },
+  {
+    "id": "community-90",
+    "community": true,
+    "name": "Vaslir Kiannes",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4169,
+    "y": 2331
+  },
+  {
+    "id": "community-91",
+    "community": true,
+    "name": "Vaslir Maryn",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4199,
+    "y": 2390
   }
 ]
