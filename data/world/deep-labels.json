@@ -3,8 +3,8 @@
   {
    "id": "zone-great-cavern-sea",
    "name": "Great Cavern Sea",
-   "x": 1060,
-   "y": 1102,
+   "x": 1109,
+   "y": 1377,
    "kind": "zone",
    "priority": 100,
    "toMap": "great-cavern-sea"
