@@ -798,7 +798,21 @@
  review.addEventListener('close',()=>{reviewSerial++;});
  function reviewShell(){
   review.replaceChildren();const title=text('h2','Review suggestions');title.id='review-title';review.append(title);
-  const content=text('div','','review-content');content.id='review-content';review.append(content);const actions=text('div','','dialog-actions');actions.append(button('Close',()=>review.close()));review.append(actions);
+  const content=text('div','','review-content');content.id='review-content';review.append(content);const actions=text('div','','dialog-actions');actions.append(publishButton(),button('Close',()=>review.close()));review.append(actions);
+ }
+ // Publish now starts one run of the publishing job, after a batch of approvals; it shows once the function is set up.
+ const publishUrl=()=>settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/publish-now';
+ function publishButton(){
+  const b=button('Publish now',async()=>{
+   b.disabled=true;
+   try{const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error();
+    const r=await fetch(publishUrl(),{method:'POST',headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}}),out=await r.json().catch(()=>({}));
+    status(out.started?'Publishing started: approved changes go live in a few minutes.':out.running?'A publishing run is already going; it picks up everything approved.':'Publishing could not start. Please try again.');}
+   catch{status('Publishing could not start. Please try again.');}
+   finally{b.disabled=false;}
+  },'primary');
+  b.hidden=true;fetch(publishUrl()+'?check=1',{headers:{apikey:settings.supabaseKey}}).then(r=>r.json()).then(d=>{b.hidden=!d?.configured;}).catch(()=>{});
+  return b;
  }
  function openReview(){if(!admin)return;if(!map||loading){status('The map is still loading.');return;}reviewShell();review.showModal();pendingTab();}
  // Approved suggestions stay listed, and can still be adjusted, until the publishing job puts them live.
