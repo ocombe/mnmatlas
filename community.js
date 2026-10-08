@@ -442,7 +442,7 @@
   },'The request could not be sent. Please try again.');
   actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
  }
- const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit','edit');
+ const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p',admin?'Edit approved: it shows here once the publishing job has run.':'Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit','edit');
  const sharedToken=m=>scope()+':'+m.id;
  // Deleting a note that carries a suggestion withdraws it: a pending, unreviewed one (the author's right), or an
  // approved one not live yet when an admin deletes it. Then a bounty is open again. One already accepted for a
