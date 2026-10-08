@@ -106,11 +106,14 @@
   },
   {
     "id": "wiki-14",
-    "name": "Shady merchant — Sojourner’s Camp",
+    "name": "A greedy halfling",
     "category": "Shady merchant",
-    "x": 984,
-    "y": 1269,
-    "note": ""
+    "x": 966,
+    "y": 1278,
+    "note": "",
+    "community": true,
+    "wikiId": "npc-a-greedy-halfling",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-greedy-halfling"
   },
   {
     "id": "wiki-15",
@@ -182,14 +185,6 @@
     "category": "Tradeskill",
     "x": 991,
     "y": 1199,
-    "note": ""
-  },
-  {
-    "id": "wiki-27",
-    "name": "Leatherworking — Tannery",
-    "category": "Tradeskill",
-    "x": 1152,
-    "y": 1200,
     "note": ""
   },
   {
@@ -673,5 +668,61 @@
     "y": 1217,
     "wiki": "https://monstersandmemories.wiki/npcs/rider-ebraim",
     "wikiId": "npc-rider-ebraim"
+  },
+  {
+    "id": "community-119",
+    "community": true,
+    "name": "Dilshad Abolfazl",
+    "category": "Vendor",
+    "note": "",
+    "x": 1077,
+    "y": 1231,
+    "wiki": "https://monstersandmemories.wiki/npcs/dilshad-abolfazl",
+    "wikiId": "npc-dilshad-abolfazl"
+  },
+  {
+    "id": "community-120",
+    "community": true,
+    "name": "Leatherworker Saif",
+    "category": "Vendor",
+    "note": "",
+    "x": 1116,
+    "y": 1206,
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-saif",
+    "wikiId": "npc-leatherworker-saif",
+    "vendor": "Leatherworking supplies"
+  },
+  {
+    "id": "community-121",
+    "community": true,
+    "name": "Leatherworker Haiat",
+    "category": "Personal",
+    "note": "",
+    "x": 1116,
+    "y": 1198,
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-haiat",
+    "wikiId": "npc-leatherworker-haiat"
+  },
+  {
+    "id": "community-123",
+    "community": true,
+    "name": "Old Rankle",
+    "category": "Personal",
+    "note": "Ashira tails bounty",
+    "x": 1134,
+    "y": 1190,
+    "wiki": "https://monstersandmemories.wiki/npcs/old-rankle",
+    "wikiId": "npc-old-rankle"
+  },
+  {
+    "id": "community-125",
+    "community": true,
+    "name": "Bieito Brightsmile",
+    "category": "Personal",
+    "note": "",
+    "x": 1005,
+    "y": 1259,
+    "wiki": "https://monstersandmemories.wiki/npcs/bieito-brightsmile",
+    "wikiId": "npc-bieito-brightsmile"
   }
 ]
