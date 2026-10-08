@@ -216,9 +216,9 @@
  function wikiCredit(site,lead='',cls='wiki-credit'){const source=wikiSites[site];return source?externalLink(lead+(source.credit||'Data from '+source.name),source.home||'https://'+source.hosts[0]+'/',cls):null;}
  // A picked NPC pre-fills a new note as the wiki's terms allow: its name (with its level, as the atlas writes levels),
  // its type from the wiki's role, and its short location line as the note. Nothing the visitor typed is replaced,
- // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level.
+ // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level; any other NPC is a notable NPC.
  const roleTypes={merchant:'Vendor',quest:'Quest',mob:'Mob camp'};
- const roleType=row=>isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'');
+ const roleType=row=>isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Notable NPC');
  const levelText=level=>{const v=String(level??'').trim();return v?' ('+(/[-–]/.test(v)?'levels '+v.replace(/\s*[-–]\s*/,'–'):'level '+v)+')':'';};
  const wikiNote=row=>row.location||'';
  {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{

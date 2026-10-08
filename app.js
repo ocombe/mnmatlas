@@ -13,7 +13,7 @@ const az=(a,b)=>a.localeCompare(b);
 const vendorKindItems=withGroups=>Object.entries(vendorKinds).sort(([a],[b])=>az(a,b)).map(([label,kinds])=>({label,options:[...(withGroups?[['All '+label.toLowerCase(),'g:'+label]]:[]),...Object.keys(kinds).sort(az).map(k=>[k,withGroups?'k:'+k:k])]}));
 const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Shady merchant':['♧','#785268'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
 // Additional marker types; a map's own extraCategories override these colours and glyphs.
-const noteCategories={'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
+const noteCategories={'Notable NPC':['●','#2388aa'],'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
 let categories={...baseCategories},allCategories={...baseCategories,...noteCategories};
 const mobileLayout=matchMedia('(max-width: 760px)');
 let embedded=false;try{embedded=window.self!==window.top;}catch{embedded=true;}
