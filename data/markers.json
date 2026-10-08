@@ -110,11 +110,6 @@
     "name": "A greedy halfling",
     "category": "Vendor",
     "vendor": "Shady merchant",
-    "sells": [
-      "Materials",
-      "Shields",
-      "Weapons"
-    ],
     "x": 966,
     "y": 1278,
     "note": "",

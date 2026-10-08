@@ -170,7 +170,9 @@ function npcCard(c,m){
  return box;
 }
 function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(externalLink(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
- if(m.category==='Vendor'&&Array.isArray(m.sells)&&m.sells.length)n.append(text('p','Sells: '+sellTypes.filter(t=>m.sells.includes(t)).join(' · '),'marker-sells'));
+ // A shady merchant buys anything and sells back whatever players sold it, so its stock has no fixed types.
+ if(m.category==='Vendor'&&m.vendor==='Shady merchant')n.append(text('p','Buys anything; sells what players have sold to it.','marker-sells'));
+ else if(m.category==='Vendor'&&Array.isArray(m.sells)&&m.sells.length)n.append(text('p','Sells: '+sellTypes.filter(t=>m.sells.includes(t)).join(' · '),'marker-sells'));
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
  if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel)n.append(button(m.direction==='up'?'Go up':'Go down',()=>switchAt(m),'level-link'));const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads)n.append(button('Go to '+leads.title,()=>openMap(leads.id),'level-link'));
  if(m.id.startsWith('personal-'))n.append(button('Edit note',()=>openEditor(m),'','edit'),button('Delete',()=>confirmDelete(m),'popup-delete','delete'));
