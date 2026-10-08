@@ -62,15 +62,16 @@
   {
    "id": "to-great-cavern-sea",
    "name": "to Great Cavern Sea",
-   "x": 1480,
-   "y": 2760,
+   "x": 2254,
+   "y": 7269,
    "kind": "exit",
    "priority": 90,
    "minZoom": 1.5,
    "arrow": "west",
    "toMap": "great-cavern-sea",
    "approximate": true,
-   "note": "The boat route west toward the Great Cavern Sea. Approximate location; to confirm in game."
+   "note": "The boat route west toward the Great Cavern Sea. Approximate location; to confirm in game.",
+   "community": true
   },
   {
    "id": "community-81",

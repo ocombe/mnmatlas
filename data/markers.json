@@ -823,5 +823,16 @@
     "y": 1339,
     "wiki": "https://monstersandmemories.wiki/npcs/talnach-wilenner",
     "wikiId": "npc-talnach-wilenner"
+  },
+  {
+    "id": "community-161",
+    "community": true,
+    "name": "Night Terror (level 8)",
+    "category": "Named mob",
+    "note": "",
+    "x": 1441,
+    "y": 1021,
+    "wiki": "https://monstersandmemories.wiki/npcs/night-terror",
+    "wikiId": "npc-night-terror"
   }
 ]
