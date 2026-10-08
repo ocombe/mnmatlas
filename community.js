@@ -728,14 +728,17 @@
  // already on the map with the same wiki page or name.
  function duplicatesOf(row){
   if(row.kind!=='new-marker')return [];const p=row.payload||{},at=suggestionAt(row),key=looseName(p.name),found=[];
+  // A kind of NPC ("A reagent vendor") stands in many places: by name it only matches close by.
+  const generic=/^(a|an)\s/i.test(String(p.name||'').trim());
   for(const other of [...pendingRows,...approvedRows]){if(other.id===row.id||other.kind!=='new-marker')continue;const q=other.payload||{},there=suggestionAt(other);
-   const near=at&&there&&Math.hypot(at[0]-there[0],at[1]-there[1])<=15,same=(p.wikiId&&p.wikiId===q.wikiId)||(key.length>=4&&key===looseName(q.name));
-   if(near||same)found.push({row:other,name:q.name,why:same?'same NPC':'close by',state:other.status==='approved'?'approved':'waiting'});}
-  for(const m of originals){if((p.wikiId&&m.wikiId===p.wikiId)||(key.length>=4&&looseName(m.name)===key))found.push({marker:m,name:m.name,why:p.wikiId&&m.wikiId===p.wikiId?'same wiki page':'same name',state:'on the map'});}
+   const gap=at&&there?Math.hypot(at[0]-there[0],at[1]-there[1]):Infinity,near=gap<=15,same=(p.wikiId&&p.wikiId===q.wikiId)||(key.length>=4&&key===looseName(q.name)&&(!generic||gap<=60));
+   if(near||same)found.push({row:other,name:q.name,why:same?'same NPC':'close by',state:other.status==='approved'?'approved':'waiting',author:other.author_name,sameAuthor:!!row.user_id&&other.user_id===row.user_id});}
+  for(const m of originals){const gap=at?Math.hypot(at[0]-m.x,at[1]-m.y):Infinity;if((p.wikiId&&m.wikiId===p.wikiId)||(key.length>=4&&looseName(m.name)===key&&(!generic||gap<=60)))found.push({marker:m,name:m.name,why:p.wikiId&&m.wikiId===p.wikiId?'same wiki page':'same name',state:'on the map'});}
   return found;}
  function duplicateList(row,onPick){
   const found=duplicatesOf(row);if(!found.length)return null;const box=text('div','','duplicate-box');box.append(text('strong','Possible duplicate'+(found.length>1?'s':'')));
-  for(const d of found){const b=button(d.name+' · '+d.state+' ('+d.why+')',()=>onPick(d),'duplicate-jump');box.append(b);}return box;}
+  // Who sent each one, so two from the same person stand out (markers already on the map have no author here).
+  for(const d of found){const by=d.row?' · '+(d.sameAuthor?'by the same person':'by '+(d.author||'a Discord member')):'';box.append(button(d.name+' · '+d.state+by+' ('+d.why+')',()=>onPick(d),'duplicate-jump'));}return box;}
  function jumpTo(d){map.closePopup();if(d.marker){choose(d.marker);return;}const pin=suggestionPins.get(d.row.id);if(pin){map.setView(pin.getLatLng(),Math.max(map.getZoom(),config.defaultView.placeZoom));pin.openPopup();}else preview(d.row,loadApproved,loadApproved,null,true);}
  function overlayToggle(id,key,label,count,after){
   let section=$(id);if(!count){section?.remove();return;}
@@ -777,7 +780,7 @@
  function approvedPopup(row,tag){
   const p=row.payload||{},waiting=row.status==='pending',refused=row.status==='rejected',n=text('div','');n.append(text('div',tag+' · '+(refused?'rejected':waiting?'waiting for review':'approved, not live yet'),'tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker'&&p.remove!==true)n.append(text('p',p.note));
   if(p.remove===true)n.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
-  n.append(text('p',refused?'Rejected'+(row.reviewed_at?' '+new Date(row.reviewed_at).toLocaleString():'')+'. Sent by '+(row.author_name||'a Discord member')+'.':waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour.','moved-note'));
+  n.append(text('p',refused?'Rejected'+(row.reviewed_at?' '+new Date(row.reviewed_at).toLocaleString():'')+'. Sent by '+(row.author_name||'a Discord member')+'.':waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour. Sent by '+(row.author_name||'a Discord member')+'.','moved-note'));
   if(refused&&row.review_note)n.append(text('p','Review note: '+row.review_note,'reported-reason'));
   const dups=duplicateList(row,jumpTo);if(dups)n.append(dups);
   if(admin&&refused){const actions=text('div','','popup-actions'),back=button('Back to waiting',()=>{map.closePopup?.();return reviewAction(row,'pending','',n);});actions.append(back);n.append(actions);}
