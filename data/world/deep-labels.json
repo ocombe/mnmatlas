@@ -3,50 +3,34 @@
   {
    "id": "zone-great-cavern-sea",
    "name": "Great Cavern Sea",
-   "x": 1270,
-   "y": 1250,
+   "x": 1060,
+   "y": 1102,
    "kind": "zone",
    "priority": 100,
    "toMap": "great-cavern-sea"
   },
   {
-   "id": "zone-rothold",
-   "name": "Rothold",
-   "x": 575,
-   "y": 365,
-   "kind": "zone",
-   "priority": 60
-  },
-  {
    "id": "zone-ail-vorith",
    "name": "Ail'Vorith",
-   "x": 2145,
-   "y": 615,
+   "x": 2136,
+   "y": 813,
    "kind": "zone",
    "priority": 100,
    "toMap": "ail-vorith"
   },
   {
-   "id": "zone-blind-midden",
-   "name": "Blind Midden",
-   "x": 1985,
-   "y": 1235,
-   "kind": "zone",
-   "priority": 60
-  },
-  {
    "id": "zone-caves-of-irem",
    "name": "Caves of Irem",
-   "x": 470,
-   "y": 2420,
+   "x": 463,
+   "y": 2272,
    "kind": "zone",
    "priority": 60
   },
   {
    "id": "zone-underdocks",
    "name": "Underdocks",
-   "x": 262,
-   "y": 3010,
+   "x": 342,
+   "y": 3216,
    "kind": "zone",
    "priority": 100,
    "toMap": "underdocks"

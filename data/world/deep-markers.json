@@ -1,1 +1,20 @@
-[]
+[
+ {
+  "id": "dungeon-rothold",
+  "name": "Rothold",
+  "category": "Dungeon",
+  "x": 1313,
+  "y": 266,
+  "note": "Dungeon entrance.",
+  "minZoom": 1.5
+ },
+ {
+  "id": "dungeon-blind-midden",
+  "name": "Blind Midden",
+  "category": "Dungeon",
+  "x": 1559,
+  "y": 965,
+  "note": "Dungeon entrance.",
+  "minZoom": 1.5
+ }
+]
