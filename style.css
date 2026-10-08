@@ -410,7 +410,7 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 @keyframes pending-glow{0%,100%{box-shadow:0 0 0 0 #9fd3e300,0 2px 4px #30251480}50%{box-shadow:0 0 10px 3px #9fd3e3aa,0 2px 4px #30251480}}
 @media(prefers-reduced-motion:reduce){.pending-pin.pin span{animation:none;box-shadow:0 0 8px 2px #9fd3e388}}
 
-.duplicate-pin.pin span{outline:2px solid #e0654f;outline-offset:2px}
+.duplicate-pin.pin span{outline:2px solid #e8a33a;outline-offset:2px}
 .duplicate-box{display:flex;flex-direction:column;gap:4px;margin:8px 0;padding:8px 10px;border:1px solid #a04438;border-radius:var(--radius);background:hsl(8 40% 14%);font-size:12px}
 .duplicate-box strong{color:#f2a08f;font-weight:600}
 .duplicate-box .duplicate-jump{margin:0;padding:4px 8px;text-align:left;font-size:12px;background:transparent;border-color:#5a2a22}
@@ -433,6 +433,12 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .approved-pin .trainer-badge{border-style:dashed}
 .pending-pin .trainer-badge{animation:pending-glow 2.2s ease-in-out infinite}
 @media(prefers-reduced-motion:reduce){.pending-pin .trainer-badge{animation:none;box-shadow:0 0 8px 2px #9fd3e388}}
-.duplicate-pin .trainer-badge{outline:2px solid #e0654f;outline-offset:2px}
+.duplicate-pin .trainer-badge{outline:2px solid #e8a33a;outline-offset:2px}
 .rejected-pin .trainer-badge{filter:grayscale(.7)}
 .rejected-pin.trainer-pin::before{left:50%;transform:translateX(-50%)}
+/* A possible duplicate: an amber ring with a small "?" (a rejection is the red cross). */
+.duplicate-pin::before{content:"?";position:absolute;right:-9px;top:-9px;z-index:3;width:15px;height:15px;display:grid;place-items:center;border-radius:50%;background:#e8a33a;color:#2b1c0e;font:700 10px/1 var(--body);box-shadow:0 0 0 1px #2b1c0e;pointer-events:none}
+.duplicate-pin.trainer-pin::before{right:-7px;top:-8px}
+.duplicate-box{border-color:#a87a2c;background:hsl(36 40% 13%)}
+.duplicate-box strong{color:#f0c27a}
+.duplicate-box .duplicate-jump{border-color:#5a4422}
