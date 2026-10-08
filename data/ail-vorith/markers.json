@@ -107,7 +107,7 @@
     "id": "leatherworker-vex",
     "name": "Leatherworker Vex",
     "category": "Vendor",
-    "vendor": "Leatherworking supplies",
+    "vendor": "Leatherworking vendor",
     "x": 4625,
     "y": 4362,
     "note": "Approximate position; to confirm in game. Newbie armour; quest rewards.",
@@ -507,7 +507,7 @@
     "note": "toxicologist, alchemy materials",
     "x": 4347,
     "y": 2385,
-    "vendor": "Alchemy supplies"
+    "vendor": "Alchemy vendor"
   },
   {
     "id": "community-71",

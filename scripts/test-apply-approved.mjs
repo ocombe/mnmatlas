@@ -68,6 +68,23 @@ try{
  approved=[{id:40,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'A beastmaster instructor',category:'Class trainer',classes:['Beastmaster']}},{id:41,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Odd trainer',category:'Class trainer',classes:['Warrior']}}];
  const trained=await run();assert.equal(trained.code,0,trained.output);assert(trained.output.includes('Unsupported classes'));
  {const all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8'));assert.deepEqual(all.find(m=>m.id==='community-40').classes,['Beastmaster']);assert(!all.some(m=>m.id==='community-41'));}
+ // Current and older vendor kinds publish with sorted item tags; invalid tags go back to review.
+ approved=[
+  {id:60,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Leatherworker',category:'Vendor',vendor:'Leatherworking supplies',sells:['Recipes','Materials']}},
+  {id:61,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Alchemist',category:'Vendor',vendor:'Alchemy vendor'}},
+  {id:62,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Bank',category:'Bank',vendor:'Leatherworking supplies',sells:['Recipes']}},
+  {id:63,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Label',category:'Vendor',noteType:'label',vendor:'Leatherworking supplies',sells:['Recipes']}},
+  ...[[],['Recipes','Recipes'],['Dragon eggs'],null,'Recipes',Array(13).fill('Recipes')].map((sells,i)=>({id:64+i,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Bad tags '+i,category:'Vendor',sells}})),
+  {id:70,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Unknown merchant',category:'Vendor',vendor:'Dragon seller'}},
+  {id:71,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Recipes',category:'Vendor',sells:['Recipes']}},
+  {id:72,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Herbalist',category:'Vendor',vendor:'Herbalism supplies'}}
+ ];
+ const vendors=await run();assert.equal(vendors.code,0,vendors.output);assert.equal((vendors.output.match(/Unsupported Sells tags/g)||[]).length,6);assert(vendors.output.includes('Unsupported vendor kind'));
+ {const all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')),leather=all.find(m=>m.id==='community-60');assert.equal(leather.vendor,'Leatherworking vendor');assert.deepEqual(leather.sells,['Materials','Recipes']);
+  const alchemist=all.find(m=>m.id==='community-61');assert.equal(alchemist.vendor,'Alchemy vendor');assert(!Object.hasOwn(alchemist,'sells'));
+  const bank=all.find(m=>m.id==='community-62');assert(!Object.hasOwn(bank,'vendor')&&!Object.hasOwn(bank,'sells'));assert.deepEqual(all.find(m=>m.id==='community-71').sells,['Recipes']);assert.equal(all.find(m=>m.id==='community-72').vendor,'Herbalism vendor');
+  for(let id=64;id<=70;id++)assert(!all.some(m=>m.id==='community-'+id));}
+ {const label=JSON.parse(await readFile(fixture+'/data/labels.json','utf8')).labels.find(m=>m.id==='community-63');assert(!Object.hasOwn(label,'vendor')&&!Object.hasOwn(label,'sells'));}
  // A removal (an edit approved as one) takes the marker off the map; a second one finds it already gone.
  approved=[{id:50,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-40',payload:{name:'A beastmaster instructor',note:'',remove:true,reason:'duplicate',from:{name:'A beastmaster instructor',note:''}}},{id:51,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-40',payload:{name:'A beastmaster instructor',note:'',remove:true,from:{name:'A beastmaster instructor',note:''}}}];
  const removed=await run();assert.equal(removed.code,0,removed.output);assert(!JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).some(m=>m.id==='community-40'),'A removal takes the marker off the map');

@@ -393,6 +393,13 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .vendor-filter{display:flex;align-items:center;gap:8px;margin:2px 0 10px;font-size:12px;color:var(--muted-foreground);flex-shrink:0}
 .vendor-filter[hidden]{display:none}
 .vendor-filter select{flex:1;min-width:0;padding:6px 8px;font-size:12px}
+/* Item tags wrap in the note form and review bar; real checkboxes keep keyboard toggling and focus. */
+.sells-field{border:0;padding:0;min-width:0}.sells-field legend{padding:0;margin-bottom:4px}
+.sells-chips{display:flex;flex-wrap:wrap;gap:5px}.sells-chips label{position:relative;margin:0;cursor:pointer}
+.sells-chips input{position:absolute;opacity:0;width:1px;height:1px;padding:0}
+.sells-chips span{display:block;padding:5px 8px;border:1px solid var(--border);border-radius:var(--radius);background:var(--muted);color:var(--foreground);font:12px/1.3 var(--body)}
+.sells-chips input:checked+span{background:#5a3b22;border-color:var(--primary);color:#fff0cc}.sells-chips input:focus-visible+span{outline:2px solid var(--primary);outline-offset:2px}
+.sells-field[hidden]{display:none}.leaflet-popup-content .marker-sells{margin:0 0 7px;font-size:12px;color:var(--muted-foreground)}
 .community-preview .preview-close{flex:none;width:30px;height:30px;padding:0;margin-left:auto;font-size:20px;line-height:1;background:transparent}
 .community-preview .preview-steps+.preview-close{margin-left:4px}
 .dialog-actions .community-remove{margin-right:auto;background:transparent;color:#f29579;border-color:transparent}

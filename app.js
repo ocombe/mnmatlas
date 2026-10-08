@@ -11,6 +11,9 @@ function fillSelect(select,items){for(const item of items){if(Array.isArray(item
 // Vendor kinds in their groups, both A to Z; withGroups also offers each whole group ("g:<group>", kinds then "k:<kind>").
 const az=(a,b)=>a.localeCompare(b);
 const vendorKindItems=withGroups=>Object.entries(vendorKinds).sort(([a],[b])=>az(a,b)).map(([label,kinds])=>({label,options:[...(withGroups?[['All '+label.toLowerCase(),'g:'+label]]:[]),...Object.keys(kinds).sort(az).map(k=>[k,withGroups?'k:'+k:k])]}));
+// Compact checkboxes shared by the note form and review bar; values follow the wiki's item order.
+function sellsChips(box,values=[]){for(const type of sellTypes){const label=text('label',''),input=document.createElement('input');input.type='checkbox';input.value=type;input.checked=Array.isArray(values)&&values.includes(type);label.append(input,text('span',type));box.append(label);}return box;}
+const pickedSells=box=>[...box.querySelectorAll('input')].filter(i=>i.checked).map(i=>i.value);
 const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Shady merchant':['♧','#785268'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
 // Additional marker types; a map's own extraCategories override these colours and glyphs.
 const noteCategories={'Notable NPC':['●','#2388aa'],'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
@@ -65,7 +68,7 @@ function status(message,sticky=false){clearTimeout(statusTimer);$('status').text
 function locationOf(m){return map.unproject([m.x,m.y],config.coordinateZoom);}
 function pixelsOf(latlng){const p=map.project(latlng,config.coordinateZoom);return [Math.round(p.x),Math.round(p.y)];}
 function bounded(x,y,z=map.getZoom()){return Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z)&&x>=0&&y>=0&&x<=config.width&&y<=config.height&&z>=config.minZoom&&z<=config.maxZoom;}
-function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
+function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&sellsOk(m.sells)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
 function persist(next){try{localStorage.setItem(storageKey('notes'),JSON.stringify(next));personal=next;window.dispatchEvent(new CustomEvent('atlas:notes'));return true;}catch{status('Your browser could not save this change. Free some storage and try again.',true);return false;}}
 function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=text('a','');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function allMarkers(){return [...originals,...personal];}
@@ -75,17 +78,17 @@ const classesOf=m=>m.category==='Class trainer'&&Array.isArray(m.classes)?m.clas
 const squash=v=>String(v).toLocaleLowerCase().replace(/[^a-z]/g,'');
 // A vendor with a kind reads kind first ("Used weapons dealer"), like a trainer reads class first, unless its name
 // already is just that kind ("A bag merchant", "Butchers").
-const vendorNamed=m=>{const bare=String(m.name).toLowerCase().replace(/[^a-z ]+/g,' ').trim().replace(/^(a|an|the) /,'').replace(/s$/,''),forms=vendorKinds[vendorGroupOf(m.vendor)]?.[m.vendor]||[];return squash(bare)===squash(m.vendor)||forms.some(f=>squash(f)===squash(bare));};
-function markerTitle(m){if(m.category==='Vendor'&&m.vendor&&!vendorNamed(m))return m.vendor;const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
+const vendorNamed=m=>{const kind=vendorKindNow(m.vendor),bare=String(m.name).toLowerCase().replace(/[^a-z ]+/g,' ').trim().replace(/^(a|an|the) /,'').replace(/s$/,''),forms=vendorKinds[vendorGroupOf(kind)]?.[kind]||[];return squash(bare)===squash(kind)||forms.some(f=>squash(f)===squash(bare));};
+function markerTitle(m){const kind=vendorKindNow(m.vendor);if(m.category==='Vendor'&&kind&&!vendorNamed(m))return kind;const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
 // The name under a class-first (or kind-first) title; nothing when the name is only class abbreviations ("NEC").
 function markerSubtitle(m){
  return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
-// What a vendor sells: its kind, or the kind its name says ("A bag merchant"), for search and the vendor filter.
-const vendorKindFor=m=>m.category==='Vendor'?m.vendor||vendorKindNamed(m.name):'';
-const markerText=m=>(m.name+' '+m.category+' '+m.note+' '+classesOf(m).join(' ')+' '+vendorWords(vendorKindFor(m))).toLocaleLowerCase();
-// Vendors can be narrowed to a group ("g:Food and drink") or one kind ("k:Bag merchant"); '' shows them all.
+// A vendor's kind, or the kind its name says ("A bag merchant"), for search and the vendor filter.
+const vendorKindFor=m=>m.category==='Vendor'?vendorKindNow(m.vendor)||vendorKindNamed(m.name):'';
+const markerText=m=>(m.name+' '+m.category+' '+m.note+' '+classesOf(m).join(' ')+' '+vendorWords(vendorKindFor(m))+' '+(m.category==='Vendor'&&Array.isArray(m.sells)?m.sells.join(' '):'')).toLocaleLowerCase();
+// Vendors can be narrowed to a group, kind or Sells tag ("s:Recipes"); '' shows them all.
 let vendorGroup='';
-const vendorShown=m=>{if(!vendorGroup||m.category!=='Vendor')return true;const kind=vendorKindFor(m);return vendorGroup.startsWith('g:')?vendorGroupOf(kind)===vendorGroup.slice(2):kind===vendorGroup.slice(2);};
+const vendorShown=m=>{if(!vendorGroup||m.category!=='Vendor')return true;if(vendorGroup.startsWith('s:'))return Array.isArray(m.sells)&&m.sells.includes(vendorGroup.slice(2));const kind=vendorKindFor(m);return vendorGroup.startsWith('g:')?vendorGroupOf(kind)===vendorGroup.slice(2):kind===vendorGroup.slice(2);};
 const searchTerms=()=>$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
 const shownMarker=(m,terms)=>enabled.has(m.category)&&vendorShown(m)&&terms.every(t=>markerText(m).includes(t));
 function visibleMarkers(){const terms=searchTerms();return allMarkers().filter(m=>atLevel(m)&&shownMarker(m,terms));}
@@ -167,6 +170,7 @@ function npcCard(c,m){
  return box;
 }
 function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(externalLink(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
+ if(m.category==='Vendor'&&Array.isArray(m.sells)&&m.sells.length)n.append(text('p','Sells: '+sellTypes.filter(t=>m.sells.includes(t)).join(' · '),'marker-sells'));
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
  if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel)n.append(button(m.direction==='up'?'Go up':'Go down',()=>switchAt(m),'level-link'));const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads)n.append(button('Go to '+leads.title,()=>openMap(leads.id),'level-link'));
  if(m.id.startsWith('personal-'))n.append(button('Edit note',()=>openEditor(m),'','edit'),button('Delete',()=>confirmDelete(m),'popup-delete','delete'));
@@ -358,7 +362,7 @@ function finishEdit(save){
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
 // Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
 // The dot beside Category shows the colour the pin will have.
-function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';$('class-field').hidden=type!=='marker'||$('category').value!=='Class trainer';$('vendor-field').hidden=type!=='marker'||$('category').value!=='Vendor';guessTrade();guessVendor();}
+function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';$('class-field').hidden=type!=='marker'||$('category').value!=='Class trainer';$('vendor-field').hidden=type!=='marker'||$('category').value!=='Vendor';$('sells-field').hidden=$('vendor-field').hidden;guessTrade();guessVendor();}
 // A class trainer's classes ride on the wiki field (a wiki pick may give two); the Class menu shows a single one and
 // sets it. Every change goes through pickClasses, so the two never disagree.
 function pickedClasses(){try{const v=JSON.parse($('wiki').dataset.wikiClasses||'[]');return classesOk(v)?v:[];}catch{return [];}}
@@ -367,7 +371,8 @@ function pickClasses(list){const v=Array.isArray(list)?list.filter(c=>atlasClass
 function guessVendor(){if($('category').value!=='Vendor'||$('vendor-kind').value)return;const kind=vendorKindNamed($('name').value+' '+$('note').value);if(kind)$('vendor-kind').value=kind;}
 // A Tradeskill named in its name or note ("an enchanting trainer") starts on that trade; a chosen trade stays.
 function guessTrade(){if($('category').value!=='Tradeskill'||$('trade').value)return;const trade=tradeNamed($('name').value+' '+$('note').value,Object.keys(tradePaths));if(trade)$('trade').value=trade;}
-function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);pickClasses(m.classes);$('vendor-kind').value=m.vendor||'';
+function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);pickClasses(m.classes);$('vendor-kind').value=vendorKindNow(m.vendor)||'';
+ for(const i of $('sells-chips').querySelectorAll('input'))i.checked=Array.isArray(m.sells)&&m.sells.includes(i.value);
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
@@ -729,8 +734,9 @@ function setupControls(){
  fillSelect($('trainer-class'),atlasClasses.map(c=>[c,c]));
  $('trainer-class').onchange=()=>pickClasses($('trainer-class').value?[$('trainer-class').value]:[]);
  fillSelect($('vendor-kind'),vendorKindItems(false));
+ sellsChips($('sells-chips'));
  for(const id of ['name','note'])$(id).addEventListener('input',()=>{guessTrade();guessVendor();});
- {const pick=$('vendor-filter-select');fillSelect(pick,vendorKindItems(true));pick.onchange=()=>{vendorGroup=pick.value;drawMarkers();};}
+ {const pick=$('vendor-filter-select');fillSelect(pick,[...vendorKindItems(true),{label:'Sells',options:sellTypes.map(t=>[t,'s:'+t])}]);pick.onchange=()=>{vendorGroup=pick.value;drawMarkers();};}
  fillSelect($('trade'),Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)).map(t=>[t,t]));
  for(const r of document.querySelectorAll('input[name="note-type"],input[name="pin-colour"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
  $('cancel-place').onclick=cancelPlacement;document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelPlacement();if(compact())setPanel(false);}});
@@ -745,7 +751,7 @@ function setupControls(){
   if(wiki===null){status(wikiHint);$('wiki').focus();return;}
   const colour=document.querySelector('input[name="pin-colour"]:checked')?.value,base={...draft};for(const k of markerExtraKeys)delete base[k];
   const m={...base,name:$('name').value.trim(),note:$('note').value,category,...markerExtras({category,noteType:type==='marker'?undefined:type,
-   arrow:document.querySelector('input[name="exit-arrow"]:checked')?.value||'north',toMap:$('exit-target').value,trade:$('trade').value,vendor:$('vendor-kind').value,
+   arrow:document.querySelector('input[name="exit-arrow"]:checked')?.value||'north',toMap:$('exit-target').value,trade:$('trade').value,vendor:$('vendor-kind').value,sells:pickedSells($('sells-chips')),
    color:colour&&(category==='Personal'||colour===draft.color)?colour:'',wiki,wikiId:wiki?wikiIdFor($('wiki'),wiki):'',
    // A trainer picked from the wiki keeps its classes, so it reads class first ("Beastmaster trainer").
    classes:pickedClasses()})};

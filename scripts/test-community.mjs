@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
-const source=await readFile(new URL('../community.js',import.meta.url),'utf8'),wikiLinks=await readFile(new URL('../wiki-links.js',import.meta.url),'utf8');
+const source=await readFile(new URL('../community.js',import.meta.url),'utf8'),wikiLinks=await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),app=await readFile(new URL('../app.js',import.meta.url),'utf8');
 class Node {
  constructor(tag,value='',cls=''){this.tagName=tag;this.textContent=value;this.className=cls;this.children=[];this.listeners={};this.hidden=false;this.value='';this.open=false;this.style={setProperty(){}};this.classList={add(){},remove(){}};}
  append(...nodes){for(const n of nodes){if(n.parentElement)n.remove();n.parentElement=this;this.children.push(n);}}
@@ -53,7 +53,7 @@ function environment(settings={},hostname='atlas.example',session=null){
  context.config.defaultView={placeZoom:3};context.map.fitBounds=()=>{};context.map.setView=()=>{};context.bounded=(x,y)=>Number.isFinite(x)&&Number.isFinite(y);context.locationOf=m=>[m.x,m.y];context.L={layerGroup(){const layer={items:[],addTo(){layers.push(layer);return layer;},addLayer(item){layer.items.push(item);},remove(){layer.removed=true;}};return layer;},circleMarker(where,options){return {where,options,bindTooltip(){return this;}};},polyline(where,options){return {where,options,getLatLngs(){return where;},setLatLngs(w){where=w;}};},marker(where,options){return {where,options,bindTooltip(){return this;},bindPopup(content){this.popup=content;return this;},on(){return this;},setIcon(icon){this.options.icon=icon;},getLatLng(){return where;}};},latLngBounds:locations=>locations};context.structuredClone=structuredClone;context.categories={Personal:['P','#a04438'],Tradeskill:['T','#385f60'],Vendor:['V','#876036']};context.markerSymbol=()=>document.createElement('b');context.pinIcon=m=>({look:m});context.pixelsOf=where=>where;
  context.allMarkers=()=>[...context.originals,...context.personal];context.popup=m=>{const n=new Node('div');context.window.atlasCommunity?.popup(m,n);return n;};context.drawMarkers=()=>{for(const m of context.allMarkers())context.pins.set(m.id,{setPopupContent(){}});};
  context.persist=next=>{saved.set('notes',JSON.stringify(next));context.personal=next;context.window.dispatchEvent({type:'atlas:notes'});return true;};
- vm.createContext(context);vm.runInContext(wikiLinks,context,{filename:'wiki-links.js'});vm.runInContext(source,context,{filename:'community.js'});
+ vm.createContext(context);vm.runInContext(wikiLinks,context,{filename:'wiki-links.js'});vm.runInContext(app.slice(app.indexOf('const az='),app.indexOf('const baseCategories=')),context);vm.runInContext(source,context,{filename:'community.js'});
  return {context,wikiRequests,elements,head,body,bottom,bar,calls,counts,statuses,remote,saved,suggestions,layers,banned,get creations(){return creations;},set failNotes(v){failNotes=v;},set failSuggestions(v){failSuggestions=v;},emit:type=>context.window.dispatchEvent({type}),async tick(ms){const jobs=[...timers].filter(([,t])=>t.ms===ms);for(const [id,t] of jobs){timers.delete(id);t.fn();}await settle();}};
 }
 for(const settings of [{},{supabaseUrl:'https://project.example'},{supabaseKey:'public-key'}]){const e=environment(settings);assert.equal(e.calls.length,0);assert.equal(e.creations,0);assert.equal(e.head.children.length,0);assert.equal(e.bottom.children.length,0);assert.equal(e.bar.children.length,1);}
@@ -145,12 +145,23 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  const approved=e.suggestions.find(r=>r.id===11);assert.equal(approved.status,'approved');assert.equal(approved.payload.name,'Chef Arzya');assert.equal(approved.payload.category,'Vendor');assert.equal(approved.payload.trade,undefined);}
  // On the map, picking the NPC from the wiki fixes the suggestion's name and sets its link and id before approval.
  e.context.fetch=async()=>({ok:true,status:200,json:async()=>({results:[{id:'npc-chef-arzya',type:'npc',name:'Chef Arzya the Bold',zone:'Test map',url:'https://monstersandmemories.wiki/npcs/chef-arzya'}]})});
- e.suggestions.push({id:14,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'chef arzya',x:5,y:6,category:'Vendor'},author_name:'Member',created_at:new Date().toISOString()});
+ e.suggestions.push({id:14,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'chef arzya',x:5,y:6,category:'Vendor',vendor:'Leatherworking supplies',sells:['Recipes','Materials']},author_name:'Member',created_at:new Date().toISOString()});
  reviewButton.onclick();await settle();await review.querySelectorAll('button').filter(n=>n.textContent==='Review on map').at(-1).onclick();await settle();
- {const bar=e.context.$('community-preview'),find=bar.querySelectorAll('input')[0];assert.equal(find.placeholder,'Type a name to search the wiki, or any name','The review bar’s Name field searches the wiki');find.value='arzya';find.fire('input');await e.tick(600);
+ {const bar=e.context.$('community-preview'),find=bar.querySelectorAll('input')[0];assert.equal(bar.querySelectorAll('select').at(-1).value,'Leatherworking vendor','A legacy kind opens on its current name');
+ const tags=bar.querySelectorAll('input').filter(n=>n.type==='checkbox');assert.equal(tags.length,12);assert.equal(JSON.stringify(tags.filter(n=>n.checked).map(n=>n.value)),JSON.stringify(['Materials','Recipes']));assert(!tags[0].parentElement.parentElement.parentElement.hidden);
+ tags.find(n=>n.value==='Bags').checked=true;tags.find(n=>n.value==='Recipes').checked=false;
+ assert.equal(find.placeholder,'Type a name to search the wiki, or any name','The review bar’s Name field searches the wiki');find.value='arzya';find.fire('input');await e.tick(600);
  bar.querySelectorAll('button').find(n=>n.className==='wiki-result').onclick();assert.equal(bar.querySelectorAll('input')[0].value,'Chef Arzya the Bold');
  await bar.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();const approved=e.suggestions.find(r=>r.id===14);
- assert.equal(approved.payload.name,'Chef Arzya the Bold');assert.equal(approved.payload.wiki,'https://monstersandmemories.wiki/npcs/chef-arzya');assert.equal(approved.payload.wikiId,'npc-chef-arzya');}
+ assert.equal(approved.payload.name,'Chef Arzya the Bold');assert.equal(approved.payload.wiki,'https://monstersandmemories.wiki/npcs/chef-arzya');assert.equal(approved.payload.wikiId,'npc-chef-arzya');assert.equal(approved.payload.vendor,'Leatherworking vendor');assert.equal(JSON.stringify(approved.payload.sells),JSON.stringify(['Bags','Materials']));}
+ // Clearing the chips omits Sells, and changing the category drops both vendor fields.
+ for(const [id,type] of [[15,'Vendor'],[16,'Personal']]){
+  e.suggestions.push({id,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'Merchant '+id,x:5,y:6,category:'Vendor',vendor:'Alchemy supplies',sells:['Recipes']},author_name:'Member',created_at:new Date().toISOString()});
+  reviewButton.onclick();await settle();await review.querySelectorAll('button').filter(n=>n.textContent==='Review on map').at(-1).onclick();await settle();
+  const bar=e.context.$('community-preview'),category=bar.querySelectorAll('select')[0],tags=bar.querySelectorAll('input').filter(n=>n.type==='checkbox');
+  if(type==='Vendor')for(const tag of tags)tag.checked=false;else{category.value=type;category.fire('change');assert(tags[0].parentElement.parentElement.parentElement.hidden);}
+  await bar.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();const p=e.suggestions.find(r=>r.id===id).payload;assert(!Object.hasOwn(p,'sells'));assert.equal(p.vendor,type==='Vendor'?'Alchemy vendor':undefined);
+ }
  // Deciding on the map goes straight on to the next suggestion of the list, with how many are left.
  for(const id of [31,32])e.suggestions.push({id,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'Next '+id,x:5,y:6,category:'Vendor'},author_name:'Member',created_at:new Date(Date.now()-id*1000).toISOString()});
  reviewButton.onclick();await settle();{const opened=review.querySelectorAll('button').filter(n=>n.textContent==='Review on map');await opened[0].onclick();await settle();
@@ -193,17 +204,18 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  // suggestion: a move while it is pending updates it, and an edit once approved becomes an edit of the new marker.
  {const ctx=e.context,$=ctx.$,check=$('suggest-check'),credit=$('suggest-credit'),inserts=()=>e.calls.filter(c=>c.table==='suggestions'&&c.op==='insert');
   assert(!$('suggest-on-save').hidden,'The note form offers to suggest the note');check.checked=true;check.fire('change');assert(!credit.parentElement.hidden,'The credit choice shows with it');credit.checked=false;
-  const note={id:'personal-follow',name:'Lamp post',category:'Personal',note:'',x:10,y:12},before=inserts().length;
+  const note={id:'personal-follow',name:'Lamp post',category:'Vendor',vendor:'Leatherworking supplies',sells:['Recipes'],note:'',x:10,y:12},before=inserts().length;
   ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note}});await settle();
-  assert.equal(inserts().length,before+1);const sent=inserts().at(-1).payload;assert.equal(sent.kind,'new-marker');assert.equal(sent.payload.name,'Lamp post');assert.equal(sent.credit,false);
+  assert.equal(inserts().length,before+1);const sent=inserts().at(-1).payload;assert.equal(sent.kind,'new-marker');assert.equal(sent.payload.name,'Lamp post');assert.equal(sent.credit,false);assert.equal(sent.payload.vendor,'Leatherworking vendor');assert.equal(JSON.stringify(sent.payload.sells),'["Recipes"]');
   const id=Object.values(JSON.parse(ctx.localStorage.getItem('mnmaps-suggested-notes'))).at(-1).id;e.suggestions.push({id,status:'pending',user_id:'user-1',kind:'new-marker',map:'test-map',payload:sent.payload});
-  ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...note,x:20},moved:true}});await settle();
-  const moved=e.calls.filter(c=>c.table==='suggestions'&&c.op==='update').at(-1);assert.equal(moved.filters.id,id);assert.equal(moved.payload.payload.x,20,'A pending suggestion moves with its note');assert.equal(inserts().length,before+1,'and nothing new is sent');
+  note.sells=['Recipes','Materials'];ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...note,x:20},moved:true}});await settle();
+  const moved=e.calls.filter(c=>c.table==='suggestions'&&c.op==='update').at(-1);assert.equal(moved.filters.id,id);assert.equal(moved.payload.payload.x,20,'A pending suggestion moves with its note');assert.equal(JSON.stringify(moved.payload.payload.sells),'["Materials","Recipes"]');assert.equal(inserts().length,before+1,'and nothing new is sent');
   e.suggestions.find(r=>r.id===id).status='approved';
   ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...note,x:20,name:'Old lamp post'}}});await settle();
   const edit=inserts().at(-1).payload;assert.equal(edit.kind,'edit-marker');assert.equal(edit.target_id,'community-'+id);assert.equal(edit.payload.from.name,'Lamp post');assert.equal(edit.payload.name,'Old lamp post');
   ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...note,x:30,y:12,name:'Old lamp post'},moved:true}});await settle();
   const move=inserts().at(-1).payload;assert.equal(move.kind,'move-marker');assert.equal(JSON.stringify(move.payload.from),'[20,12]');assert.equal(JSON.stringify(move.payload.to),'[30,12]');
+  const count=inserts().length;ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...note,x:30,name:'Old lamp post',sells:['Materials']}}});await settle();assert.equal(inserts().length,count,'Tags alone cannot edit an approved marker');assert(e.statuses.at(-1).includes('Sells change cannot follow an approved suggestion'));
   e.suggestions.splice(e.suggestions.findIndex(r=>r.id===id),1);check.checked=false;check.fire('change');}
  // A note placed from a bounty is claimed as it is saved, whatever the suggest box says; the bounty is then marked
  // claimed on this device. A claim that fails keeps the note private and offers to try again.

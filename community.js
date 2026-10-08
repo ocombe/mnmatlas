@@ -636,10 +636,10 @@
     const wikiOf=p=>label?{}:{wiki:p.wiki||'',...(p.wiki&&p.wikiId?{wikiId:p.wikiId}:{})};
     if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||''))){
      await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:shown.name,note:shown.note||'',...(label?{}:{wiki:shown.wiki||''})}}});sent=true;}
-    // A marker's type, trade, class, kind or colour (an exit's arrow or map) cannot follow it once approved.
-    const fixed=(label?['arrow','toMap']:['category','trade','classes','vendor','color']).some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
+    // A marker's type, trade, class, kind, Sells tags or colour (an exit's arrow or map) cannot follow it once approved.
+    const fixed=(label?['arrow','toMap']:['category','trade','classes','vendor','sells','color']).some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
     keep();
-    if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind or class change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
+    if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind, class or Sells change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
     else if(sent)status('Saved, and the change was sent for review.');
     return;
    }
@@ -918,12 +918,13 @@
    if(row.kind==='new-marker'||edit&&!removal){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
    // The same types as the note form (Personal included, so a shared personal note keeps its type).
    if(row.kind==='new-marker'&&!p.noteType){category=fillSelect(field('Type',document.createElement('select')),categoryChoices().map(k=>[k,k]));category.value=categories[p.category]?p.category:'Personal';}
-   // A tradeskill's trade, a class trainer's class and a vendor's kind can be set or fixed here before approving.
-   let trade,trainerClass,vendor;const trades=Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)),said=(p.name||'')+' '+(p.note||'');
+   // A tradeskill's trade, a class trainer's class and a vendor's kind and Sells tags can be fixed before approving.
+   let trade,trainerClass,vendor,sells;const trades=Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)),said=(p.name||'')+' '+(p.note||'');
    if(category){trade=fillSelect(field('Trade',document.createElement('select')),[['Any trade',''],...trades.map(t=>[t,t])]);trade.value=p.trade||tradeNamed(said,trades);
     trainerClass=fillSelect(field('Class',document.createElement('select')),[['Not set',''],...atlasClasses.map(k=>[k,k])]);trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
-    vendor=fillSelect(field('Kind',document.createElement('select')),[['Not set',''],...vendorKindItems(false)]);vendor.value=p.vendor||vendorKindNamed(said);
-    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
+    vendor=fillSelect(field('Kind',document.createElement('select')),[['Not set',''],...vendorKindItems(false)]);vendor.value=vendorKindNow(p.vendor)||vendorKindNamed(said);
+    const row=text('fieldset','','preview-field sells-field');row.append(text('legend','Sells'));sells=sellsChips(text('div','','sells-chips'),p.sells);row.append(sells);bar.append(row);
+    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';sells.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
    if(row.kind==='new-marker'||edit&&!removal){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
    let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'&&!removal){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
@@ -931,9 +932,9 @@
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
    // The type's own fields follow the note form's rule (markerExtras): a trainer's several classes stay unless one is chosen.
    const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;
-    if(category){const kept=markerExtras({category:category.value,trade:trade.value,vendor:vendor.value,classes:trainerClass.value?[trainerClass.value]:p.classes});p.category=category.value;for(const k of ['trade','classes','vendor'])if(Object.hasOwn(kept,k))p[k]=kept[k];else delete p[k];}
+    if(category){const kept=markerExtras({category:category.value,trade:trade.value,vendor:vendor.value,sells:pickedSells(sells),classes:trainerClass.value?[trainerClass.value]:p.classes});p.category=category.value;for(const k of ['trade','classes','vendor','sells'])if(Object.hasOwn(kept,k))p[k]=kept[k];else delete p[k];}
     pin?.setIcon(pinIcon(look()));};
-   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor])el?.addEventListener('change',restyle);
+   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor,sells])el?.addEventListener('change',restyle);
    const reviewNote=document.createElement('input');reviewNote.placeholder='Optional review note';reviewNote.setAttribute('aria-label','Optional review note');reviewNote.maxLength=500;bar.append(reviewNote);
    // The adjusted payload keeps the visitor's other fields; positions are checked against the map bounds.
    const edits=()=>{

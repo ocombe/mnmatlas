@@ -49,18 +49,24 @@ function wikiLinkFor(place,parent=wikiEmbedParent()){
  const adapted=typeof rule.adapt==='function'?wikiAddress(rule.adapt(href,site,place)):'';
  return adapted&&wikiSiteOf(new URL(adapted).hostname)===rule.site?show(adapted):null;
 }
-// What a vendor sells, from the merchants the Monsters and Memories Wiki lists, in groups. Shady merchants and stables
+// Vendor kinds, from the merchants the Monsters and Memories Wiki lists, in groups. Shady merchants and stables
 // have their own marker types. Each kind lists the words that name it ("A bag merchant", "a pelt trader").
 const vendorKinds={
  'Food and drink':{Baker:['baker'],Barkeep:['barkeep','bartender'],Brewer:['brewer','brewing'],Butcher:['butcher'],Cook:['cook','chef'],Fishmonger:['fishwife','fisherman','fish merchant'],'Grain seller':['grain seller','grain'],Grocer:['grocer'],Innkeeper:['innkeeper'],'Produce vendor':['produce'],'Spice merchant':['spicemonger','spice']},
  'Arms and armour':{'Plate armorer':['plate armorer','plate armor'],'Chain armorer':['chain armorer','chain armor'],'Cloth armorer':['cloth armorer','cloth armor'],'Used armor trader':['used armor'],'Used weapons dealer':['used weapons'],Weaponsmith:['weaponsmith','weapon merchant','weapons'],Bowyer:['bowyer','archery'],Fletcher:['fletcher','fletching'],Quartermaster:['quartermaster'],'Scrap dealer':['scrap dealer','rusty weapons']},
- 'Trade supplies':{'Alchemy supplies':['alchemist','alchemy','apothecary'],'Blacksmithing supplies':['blacksmith','blacksmithing'],'Dye merchant':['dye'],'Fishing supplies':['fishing'],'Herbalism supplies':['herbalist','herbalism'],'Jewelcrafting supplies':['jewelcrafter','jewelcrafting'],'Leatherworking supplies':['leatherworker','leatherworking','pelt trader'],'Lumberjack supplies':['lumberjack','woodworker'],'Mining supplies':['miner','mining'],'Smelting supplies':['smelter','smelting'],'Spinning supplies':['spinner','spinning'],'Spycraft supplies':['spymaster','spycraft'],'Stone cutting supplies':['stonecutter','stone cutting','mason'],'Survival supplies':['survivalist','outdoorsman','wilderness'],'Tailoring supplies':['tailor','tailoring'],'Tanning supplies':['tanner','tanning'],'Tinkering supplies':['tinkerer','tinkering'],Cobbler:['cobbler']},
+ 'Trade vendors':{'Alchemy vendor':['alchemist','alchemy','apothecary','alchemy recipes'],'Blacksmithing vendor':['blacksmith','blacksmithing','blacksmithing recipes','blacksmithing schematics'],'Dye merchant':['dye'],'Fishing vendor':['fishing','fishing recipes'],'Herbalism vendor':['herbalist','herbalism','herbalism recipes'],'Jewelcrafting vendor':['jewelcrafter','jewelcrafting','jewelcrafting recipes'],'Leatherworking vendor':['leatherworker','leatherworking','pelt trader','leatherworking recipes','leatherworking patterns'],'Lumberjack vendor':['lumberjack','woodworker','lumberjack recipes'],'Mining vendor':['miner','mining','mining recipes'],'Smelting vendor':['smelter','smelting','smelting recipes'],'Spinning vendor':['spinner','spinning','spinning recipes'],'Spycraft vendor':['spymaster','spycraft','spycraft recipes'],'Stone cutting vendor':['stonecutter','stone cutting','mason','stone cutting recipes'],'Survival vendor':['survivalist','outdoorsman','wilderness','survival recipes'],'Tailoring vendor':['tailor','tailoring','tailoring recipes','tailoring patterns'],'Tanning vendor':['tanner','tanning','tanning recipes'],'Tinkering vendor':['tinkerer','tinkering','tinkering recipes','tinkering schematics'],Cobbler:['cobbler']},
  'Spells and reagents':{'Reagent vendor':['reagent'],'Spell scribe':['scribe','spell vendor','spells vendor'],'Poison maker':['poison'],Enchanter:['enchanter']},
  'General goods':{'General goods':['goods merchant','general goods','supplies vendor','supplier'],'Bag merchant':['bag merchant','bags'],'Adventuring supplies':['adventure gear','adventuring','outfitter'],'Traveling merchant':['merchant traveler','traveling merchant'],'Instrument merchant':['instrument'],'Property merchant':['property','housing','realtor'],Medic:['medic']},
 };
 const vendorKindList=Object.values(vendorKinds).flatMap(g=>Object.keys(g));
+// Older notes and waiting suggestions still use the supplies names.
+const vendorLegacy=Object.fromEntries(Object.keys(vendorKinds['Trade vendors']).filter(k=>k.endsWith(' vendor')).map(k=>[k.replace(/ vendor$/,' supplies'),k]));
+const vendorKindNow=v=>typeof v==='string'&&Object.hasOwn(vendorLegacy,v)?vendorLegacy[v]:v;
 const vendorGroupOf=kind=>Object.keys(vendorKinds).find(g=>Object.hasOwn(vendorKinds[g],kind))||'';
-const vendorKindOk=v=>v===undefined||vendorKindList.includes(v);
+const vendorKindOk=v=>v===undefined||vendorKindList.includes(vendorKindNow(v));
+// The wiki's item types; its NPC lookup does not say which ones a merchant sells, so visitors choose them.
+const sellTypes=['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Weapons'];
+const sellsOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=sellTypes.length&&new Set(v).size===v.length&&[...v].every(t=>sellTypes.includes(t));
 const vendorWords=kind=>{const g=vendorGroupOf(kind);return g?[kind,g,...vendorKinds[g][kind]].join(' '):'';};
 // The kind a vendor's name or note names, the longest words first ("used weapons" before "weapon"); '' if none.
 const vendorForms=Object.values(vendorKinds).flatMap(g=>Object.entries(g).flatMap(([kind,forms])=>forms.map(f=>[f,kind]))).sort((a,b)=>b[0].length-a[0].length);
@@ -133,15 +139,15 @@ function mapTrainerClasses(markers,chips){
 const trainerOnMap=(row,classes)=>{const c=trainerClasses(row);return c.length>0&&c.every(x=>classes.has(x));};
 // The optional fields a marker keeps, by what it is, so a note, its backup, its suggestion and the review bar all keep
 // the same ones: an area label nothing else; a zone exit its arrow and the map it leads to; a marker its colour and wiki
-// page (with the wiki's id), a tradeskill its trade, a class trainer its classes, a vendor its kind. Values are checked
+// page (with the wiki's id), a tradeskill its trade, a class trainer its classes, a vendor its kind and Sells tags. Values are checked
 // where they are saved (app.js valid(), scripts/apply-approved.mjs).
-const markerExtraKeys=['noteType','arrow','toMap','color','wiki','wikiId','trade','classes','vendor'];
+const markerExtraKeys=['noteType','arrow','toMap','color','wiki','wikiId','trade','classes','vendor','sells'];
 function markerExtras(m){
  const out={};
  if(m.noteType==='label'||m.noteType==='exit'){out.noteType=m.noteType;if(m.noteType==='exit'){if(m.arrow)out.arrow=m.arrow;if(m.toMap)out.toMap=m.toMap;}return out;}
  if(m.color)out.color=m.color;if(m.wiki){out.wiki=m.wiki;if(m.wikiId)out.wikiId=m.wikiId;}
  if(m.category==='Tradeskill'&&m.trade)out.trade=m.trade;
  if(m.category==='Class trainer'&&Array.isArray(m.classes)&&m.classes.length)out.classes=[...m.classes];
- if(m.category==='Vendor'&&m.vendor)out.vendor=m.vendor;
+ if(m.category==='Vendor'){if(m.vendor)out.vendor=vendorKindNow(m.vendor);if(Array.isArray(m.sells)&&m.sells.length)out.sells=[...m.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
  return out;
 }

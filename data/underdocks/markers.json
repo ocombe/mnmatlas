@@ -496,7 +496,7 @@
     "id": "wiki-apothecary",
     "name": "Apothecary",
     "category": "Vendor",
-    "vendor": "Alchemy supplies",
+    "vendor": "Alchemy vendor",
     "x": 2652,
     "y": 4874,
     "note": "Approximate; to confirm in game. Western shore; exact shop entrance to confirm.",
