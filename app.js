@@ -14,7 +14,7 @@ const vendorKindItems=withGroups=>Object.entries(vendorKinds).sort(([a],[b])=>az
 // Compact checkboxes shared by the note form and review bar; values follow the wiki's item order.
 function sellsChips(box,values=[]){for(const type of sellTypes){const label=text('label',''),input=document.createElement('input');input.type='checkbox';input.value=type;input.checked=Array.isArray(values)&&values.includes(type);label.append(input,text('span',type));box.append(label);}return box;}
 const pickedSells=box=>[...box.querySelectorAll('input')].filter(i=>i.checked).map(i=>i.value);
-const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Shady merchant':['♧','#785268'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
+const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
 // Additional marker types; a map's own extraCategories override these colours and glyphs.
 const noteCategories={'Notable NPC':['●','#2388aa'],'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
 let categories={...baseCategories},allCategories={...baseCategories,...noteCategories};
@@ -68,7 +68,7 @@ function status(message,sticky=false){clearTimeout(statusTimer);$('status').text
 function locationOf(m){return map.unproject([m.x,m.y],config.coordinateZoom);}
 function pixelsOf(latlng){const p=map.project(latlng,config.coordinateZoom);return [Math.round(p.x),Math.round(p.y)];}
 function bounded(x,y,z=map.getZoom()){return Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z)&&x>=0&&y>=0&&x<=config.width&&y<=config.height&&z>=config.minZoom&&z<=config.maxZoom;}
-function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&sellsOk(m.sells)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
+function valid(m){m=normaliseMarker(m);return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&sellsOk(m.sells)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
 function persist(next){try{localStorage.setItem(storageKey('notes'),JSON.stringify(next));personal=next;window.dispatchEvent(new CustomEvent('atlas:notes'));return true;}catch{status('Your browser could not save this change. Free some storage and try again.',true);return false;}}
 function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=text('a','');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function allMarkers(){return [...originals,...personal];}
@@ -371,7 +371,7 @@ function pickClasses(list){const v=Array.isArray(list)?list.filter(c=>atlasClass
 function guessVendor(){if($('category').value!=='Vendor'||$('vendor-kind').value)return;const kind=vendorKindNamed($('name').value+' '+$('note').value);if(kind)$('vendor-kind').value=kind;}
 // A Tradeskill named in its name or note ("an enchanting trainer") starts on that trade; a chosen trade stays.
 function guessTrade(){if($('category').value!=='Tradeskill'||$('trade').value)return;const trade=tradeNamed($('name').value+' '+$('note').value,Object.keys(tradePaths));if(trade)$('trade').value=trade;}
-function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);pickClasses(m.classes);$('vendor-kind').value=vendorKindNow(m.vendor)||'';
+function openEditor(m){m=normaliseMarker(m);draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);pickClasses(m.classes);$('vendor-kind').value=vendorKindNow(m.vendor)||'';
  for(const i of $('sells-chips').querySelectorAll('input'))i.checked=Array.isArray(m.sells)&&m.sells.includes(i.value);
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
@@ -407,7 +407,7 @@ function exportAlignment(){download({version:1,map:config.id,tileRevision:config
 function restoreStorage(){
  migratePreviousStorage();
  personal=[];alignmentPositions={};alignmentLabelPositions={};selectedAlignmentId=null;selectedAlignmentKind='marker';$('legacy-notes').hidden=true;
- try{const saved=JSON.parse(localStorage.getItem(storageKey('notes'))||'[]');if(!Array.isArray(saved)||saved.length>2000||!saved.every(valid))throw Error();personal=saved.map(m=>config.levels&&!m.level?{...m,level:config.defaultLevel}:m);}catch{status('Saved notes could not be read. Import a valid backup to recover them.',true);}
+ try{const saved=JSON.parse(localStorage.getItem(storageKey('notes'))||'[]');if(!Array.isArray(saved)||saved.length>2000||!saved.every(valid))throw Error();personal=saved.map(normaliseMarker).map(m=>config.levels&&!m.level?{...m,level:config.defaultLevel}:m);}catch{status('Saved notes could not be read. Import a valid backup to recover them.',true);}
  // Positions moved in this browser apply everywhere; entries for markers no longer published are dropped.
  const readMoves=(kind,published)=>{try{const saved=JSON.parse(localStorage.getItem(storageKey(kind))||'{}');if(!saved||Array.isArray(saved)||typeof saved!=='object')return {};// A move that has since been published matches the published spot and is dropped.
   return Object.fromEntries(Object.entries(saved).filter(([id,p])=>published.has(id)&&Array.isArray(p)&&p.length===2&&bounded(...p,config.minZoom)&&!(published.get(id)[0]===p[0]&&published.get(id)[1]===p[1])));}catch{return {};}};
@@ -583,7 +583,7 @@ async function loadMap(id,url=new URL(location.href),push=false){
   if(serial!==loadSerial)return;
   const keepEditing=alignmentMode||(!map&&url.searchParams.has('align'));if(alignmentMode)saveEdits();alignmentMode=false;editSnapshot=null;
   disposeLabels();hiddenController?.dispose();disposeZones();disposeZones=()=>{};disposeBackdrop();disposeBackdrop=()=>{};map?.remove();pins.clear();map=null;
-  config=next;categories={...allCategories,...(config.extraCategories||{})};originals=markers;labelData=labels;hiddenData=hidden;publishedPositions=new Map(originals.map(m=>[m.id,[m.x,m.y]]));publishedLabelPositions=new Map(labels.labels.map(r=>[r.id,[r.x,r.y]]));
+  config=next;categories={...allCategories,...(config.extraCategories||{})};originals=markers.map(normaliseMarker);labelData=labels;hiddenData=hidden;publishedPositions=new Map(originals.map(m=>[m.id,[m.x,m.y]]));publishedLabelPositions=new Map(labels.labels.map(r=>[r.id,[r.x,r.y]]));
   activePlace=null;sharedPin=null;cancelPlacement();if($('editor').open)closeEditor();$('search').value='';enabled=new Set(Object.keys(categories));showPins=true;updateCategoryButtons();
   document.body.classList.remove('aligning');$('edit-bar').hidden=true;restoreStorage();setupCategoryControls();updateTitles();
   map=L.map('map',{crs:L.CRS.Simple,minZoom:config.minZoom,maxZoom:config.maxZoom,zoomSnap:0,zoomDelta:.5,zoomControl:false,attributionControl:true,maxBoundsViscosity:1});
@@ -644,7 +644,7 @@ async function importNotes(file){
  if(data.type==='mnmaps-browser-data'&&data.version===1){await receiveBrowserData(data.items);return;}
  if(data.tileRevision!==config.tileRevision)throw Error('These notes use another map revision. Keep the backup and reposition them on this edition.');
  if(data.version!==1||data.map!==config.id||!Array.isArray(data.markers)||!data.markers.every(valid))throw Error('Not a valid '+config.title+' field-notes file.');
- const imported=data.markers.map(m=>({id:m.id,name:m.name.trim(),category:m.category,note:m.note,x:m.x,y:m.y,...markerExtras(m),...(config.levels?{level:m.level||config.defaultLevel}:{})}));
+ const imported=data.markers.map(normaliseMarker).map(m=>({id:m.id,name:m.name.trim(),category:m.category,note:m.note,x:m.x,y:m.y,...markerExtras(m),...(config.levels?{level:m.level||config.defaultLevel}:{})}));
  const merged=new Map(personal.map(m=>[m.id,m]));for(const m of imported)merged.set(m.id,m);
  // Imported while editing: Cancel only undoes moves, so the imported notes stay.
  if(merged.size>2000)throw Error('The combined notes exceed 2,000 markers.');if(persist([...merged.values()])){if(editSnapshot)editSnapshot.personal=[...editSnapshot.personal.filter(p=>!imported.some(m=>m.id===p.id)),...imported];setupCategoryControls();buildPlaceIndex();drawMarkers();status('Notes imported. Matching IDs updated; other notes kept.');}

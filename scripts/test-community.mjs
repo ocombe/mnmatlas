@@ -260,4 +260,26 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  await confirm.querySelectorAll('button').find(n=>n.textContent==='Delete my account'&&n.className==='danger').onclick();await settle();assert.equal(e.calls.filter(r=>r.rpc==='delete_my_account').length,1);assert.equal(e.calls.find(r=>r.signOut).signOut.scope,'local');
  assert(!menu.querySelectorAll('button').some(n=>n.textContent==='Delete my account…'));assert(menu.hidden,'The menu closes for the confirm dialog');const writes=e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length;await e.tick(2000);assert.equal(e.calls.filter(r=>r.table==='user_notes'&&r.op==='upsert').length,writes,'No sync after deletion');
 }
-console.log('Client checks passed: top-bar account menu, banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync and admin preview/approval.');
+// Old-category synced notes, suggestion pins and review controls all read the same vendor kind.
+{const session={user:{id:'shady-admin',admin:true,user_metadata:{full_name:'Reviewer'}}},e=environment({supabaseUrl:'https://project.example',supabaseKey:'public-key'},'atlas.example',session),ctx=e.context;
+ const old={id:'personal-shady',name:'Mira',category:'Shady merchant',note:'By the gate',x:50,y:60,sells:['Materials']};e.remote.push(old);await settle();
+ const local=ctx.personal.find(m=>m.id===old.id);assert.equal(local.category,'Vendor');assert.equal(local.vendor,'Shady merchant');assert.equal(JSON.stringify(local.sells),'["Materials"]');assert.equal(e.remote.find(m=>m.id===old.id).vendor,'Shady merchant');
+ for(const [id,status] of [[901,'pending'],[902,'approved'],[903,'rejected']])e.suggestions.push({id,status,map:'test-map',level:'lower',kind:'new-marker',payload:{name:'Mira '+id,category:'Shady merchant',x:id-850,y:60,note:'At the market'},author_name:'Member',created_at:new Date().toISOString(),reviewed_at:new Date().toISOString()});
+ e.emit('atlas:loaded');await settle();const pins=e.layers.at(-1).items.filter(p=>p.options?.icon?.look);assert.equal(pins.length,3);
+ for(const pin of pins){assert.equal(pin.options.icon.look.category,'Vendor');assert.equal(pin.options.icon.look.vendor,'Shady merchant');}
+ const reviewButton=e.bar.children[1].children[1].querySelectorAll('button').find(n=>n.textContent==='Review suggestions');reviewButton.onclick();await settle();const review=e.body.children.find(n=>n.id==='community-review');
+ assert(review.querySelectorAll('p').some(n=>n.className==='form-hint'&&n.textContent==='Vendor'),'The review list uses the Vendor category');
+ await review.querySelectorAll('button').find(n=>n.textContent==='Review on map').onclick();await settle();const bar=ctx.$('community-preview'),selects=bar.querySelectorAll('select');
+ assert.equal(selects[0].value,'Vendor');assert.equal(selects.at(-1).value,'Shady merchant');assert(!selects.at(-1).parentElement.hidden);assert.equal(e.layers.at(-1).items[0].options.icon.look.category,'Vendor');
+ await bar.querySelectorAll('button').find(n=>n.textContent==='Approve').onclick();await settle();const approved=e.suggestions.find(r=>r.id===901);assert.equal(approved.payload.category,'Vendor');assert.equal(approved.payload.vendor,'Shady merchant');assert.equal(approved.payload.note,'At the market');
+ // Sending an old note and updating a pending suggestion writes the current category and kind.
+ const check=ctx.$('suggest-check');check.checked=true;check.fire('change');ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:old}});await settle();
+ const inserts=()=>e.calls.filter(c=>c.table==='suggestions'&&c.op==='insert'),sent=inserts().at(-1).payload;assert.equal(sent.payload.category,'Vendor');assert.equal(sent.payload.vendor,'Shady merchant');
+ const followKey='mnmaps-suggested-notes',records=JSON.parse(ctx.localStorage.getItem(followKey)),key=Object.keys(records)[0],id=records[key].id;
+ const restoreOldSent=()=>{const records=JSON.parse(ctx.localStorage.getItem(followKey));records[key].sent.category='Shady merchant';delete records[key].sent.vendor;ctx.localStorage.setItem(followKey,JSON.stringify(records));};restoreOldSent();
+ e.suggestions.push({id,status:'pending',map:'test-map',kind:'new-marker',payload:{...sent.payload,category:'Shady merchant',vendor:undefined}});
+ ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...old,name:'Mira the fence'}}});await settle();let row=e.suggestions.find(r=>r.id===id);assert.equal(row.payload.category,'Vendor');assert.equal(row.payload.vendor,'Shady merchant');
+ row.status='approved';restoreOldSent();ctx.window.dispatchEvent({type:'atlas:note-saved',detail:{note:{...old,name:'Mira the fence',note:'Under the bridge'}}});await settle();
+ assert.equal(inserts().at(-1).payload.kind,'edit-marker');assert(!e.statuses.at(-1).includes('cannot follow'),'Normalisation alone does not report a type or kind change');
+}
+console.log('Client checks passed: top-bar account menu, banning, account deletion, disabled/partial config, localhost exclusion, private counters, sign-in redirect, problem reports, suggestions, shared notes, merge, offline sync, shady merchant compatibility and admin preview/approval.');

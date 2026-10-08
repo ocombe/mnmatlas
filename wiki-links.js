@@ -49,16 +49,18 @@ function wikiLinkFor(place,parent=wikiEmbedParent()){
  const adapted=typeof rule.adapt==='function'?wikiAddress(rule.adapt(href,site,place)):'';
  return adapted&&wikiSiteOf(new URL(adapted).hostname)===rule.site?show(adapted):null;
 }
-// Vendor kinds, from the merchants the Monsters and Memories Wiki lists, in groups. Shady merchants and stables
-// have their own marker types. Each kind lists the words that name it ("A bag merchant", "a pelt trader").
+// Vendor kinds, from the merchants the Monsters and Memories Wiki lists, in groups. Stables have their own marker type.
+// Each kind lists the words that name it ("A bag merchant", "a pelt trader").
 const vendorKinds={
  'Food and drink':{Baker:['baker'],Barkeep:['barkeep','bartender'],Brewer:['brewer','brewing'],Butcher:['butcher'],Cook:['cook','chef'],Fishmonger:['fishwife','fisherman','fish merchant'],'Grain seller':['grain seller','grain'],Grocer:['grocer'],Innkeeper:['innkeeper'],'Produce vendor':['produce'],'Spice merchant':['spicemonger','spice']},
  'Arms and armour':{'Plate armorer':['plate armorer','plate armor'],'Chain armorer':['chain armorer','chain armor'],'Cloth armorer':['cloth armorer','cloth armor'],'Used armor trader':['used armor'],'Used weapons dealer':['used weapons'],Weaponsmith:['weaponsmith','weapon merchant','weapons'],Bowyer:['bowyer','archery'],Fletcher:['fletcher','fletching'],Quartermaster:['quartermaster'],'Scrap dealer':['scrap dealer','rusty weapons']},
  'Trade vendors':{'Alchemy vendor':['alchemist','alchemy','apothecary','alchemy recipes'],'Blacksmithing vendor':['blacksmith','blacksmithing','blacksmithing recipes','blacksmithing schematics'],'Dye merchant':['dye'],'Fishing vendor':['fishing','fishing recipes'],'Herbalism vendor':['herbalist','herbalism','herbalism recipes'],'Jewelcrafting vendor':['jewelcrafter','jewelcrafting','jewelcrafting recipes'],'Leatherworking vendor':['leatherworker','leatherworking','pelt trader','leatherworking recipes','leatherworking patterns'],'Lumberjack vendor':['lumberjack','woodworker','lumberjack recipes'],'Mining vendor':['miner','mining','mining recipes'],'Smelting vendor':['smelter','smelting','smelting recipes'],'Spinning vendor':['spinner','spinning','spinning recipes'],'Spycraft vendor':['spymaster','spycraft','spycraft recipes'],'Stone cutting vendor':['stonecutter','stone cutting','mason','stone cutting recipes'],'Survival vendor':['survivalist','outdoorsman','wilderness','survival recipes'],'Tailoring vendor':['tailor','tailoring','tailoring recipes','tailoring patterns'],'Tanning vendor':['tanner','tanning','tanning recipes'],'Tinkering vendor':['tinkerer','tinkering','tinkering recipes','tinkering schematics'],Cobbler:['cobbler']},
  'Spells and reagents':{'Reagent vendor':['reagent'],'Spell scribe':['scribe','spell vendor','spells vendor'],'Poison maker':['poison'],Enchanter:['enchanter']},
- 'General goods':{'General goods':['goods merchant','general goods','supplies vendor','supplier'],'Bag merchant':['bag merchant','bags'],'Adventuring supplies':['adventure gear','adventuring','outfitter'],'Traveling merchant':['merchant traveler','traveling merchant'],'Instrument merchant':['instrument'],'Property merchant':['property','housing','realtor'],Medic:['medic']},
+ 'General goods':{'Shady merchant':['shady merchant','fence','black market'],'General goods':['goods merchant','general goods','supplies vendor','supplier'],'Bag merchant':['bag merchant','bags'],'Adventuring supplies':['adventure gear','adventuring','outfitter'],'Traveling merchant':['merchant traveler','traveling merchant'],'Instrument merchant':['instrument'],'Property merchant':['property','housing','realtor'],Medic:['medic']},
 };
 const vendorKindList=Object.values(vendorKinds).flatMap(g=>Object.keys(g));
+// Older markers, notes and suggestions used Shady merchant as a marker type. Read them as a vendor kind.
+const normaliseMarker=m=>m?.category==='Shady merchant'?{...m,category:'Vendor',vendor:'Shady merchant'}:m;
 // Older notes and waiting suggestions still use the supplies names.
 const vendorLegacy=Object.fromEntries(Object.keys(vendorKinds['Trade vendors']).filter(k=>k.endsWith(' vendor')).map(k=>[k.replace(/ vendor$/,' supplies'),k]));
 const vendorKindNow=v=>typeof v==='string'&&Object.hasOwn(vendorLegacy,v)?vendorLegacy[v]:v;

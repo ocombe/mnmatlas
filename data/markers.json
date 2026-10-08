@@ -99,7 +99,8 @@
   {
     "id": "wiki-13",
     "name": "Shady merchant — west outskirts",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 653,
     "y": 1645,
     "note": ""
@@ -107,7 +108,8 @@
   {
     "id": "wiki-14",
     "name": "A greedy halfling",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 966,
     "y": 1278,
     "note": "",
@@ -118,7 +120,8 @@
   {
     "id": "wiki-15",
     "name": "Shady merchant — North Gate",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 1861,
     "y": 1089,
     "note": ""
@@ -126,7 +129,8 @@
   {
     "id": "wiki-16",
     "name": "Shady merchant — east North Gate",
-    "category": "Shady merchant",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
     "x": 2020,
     "y": 1042,
     "note": ""

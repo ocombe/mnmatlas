@@ -231,7 +231,8 @@
     "level": "lower",
     "approximate": true,
     "note": "Approximate; to confirm in game. Shady merchant.",
-    "category": "Shady merchant"
+    "category": "Vendor",
+    "vendor": "Shady merchant"
   },
   {
     "id": "wiki-medic",

@@ -20,7 +20,7 @@ console.log('Find checks passed: wiki ids, exact names, trainer classes, contain
  const {readdir}=await import('node:fs/promises'),files=[];const walk=async d=>{for(const e of await readdir(d,{withFileTypes:true}))e.isDirectory()?await walk(d+'/'+e.name):e.name.endsWith('.json')&&files.push(d+'/'+e.name);};await walk(new URL('../data',import.meta.url).pathname.replace(/^\/([A-Z]:)/,'$1'));
  for(const f of files){const data=JSON.parse(await readFile(f,'utf8'));
   for(const t of data?.trainers||[])(t.classes||[]).forEach((cl,i)=>{const name=cl==='Shadowknight'?'Shadow Knight':cl;assert(Object.hasOwn(abbr,name),f+': unknown class '+cl);assert.equal(abbr[name],t.abbreviations[i],f+': '+cl);});
-  for(const m of Array.isArray(data)?data:[]){for(const cl of m.classes||[])assert(Object.hasOwn(abbr,cl),f+': unknown class '+cl);if(m.vendor)assert(vendorKinds.includes(m.vendor),f+': stored vendor kind is current: '+m.vendor);}}
+  for(const m of Array.isArray(data)?data:[]){assert.notEqual(m.category,'Shady merchant',f+': shady merchants are vendors');for(const cl of m.classes||[])assert(Object.hasOwn(abbr,cl),f+': unknown class '+cl);if(m.vendor)assert(vendorKinds.includes(m.vendor),f+': stored vendor kind is current: '+m.vendor);}}
  // A trainer's class: the wiki's tags or class field win over the name; other NPCs' tags never make them trainers;
  // a guess is left out; the wiki's Warrior is Fighter. A trainer covered by a chip is on the map.
  const [tc,ict,onMap,chipClasses]=vm.runInContext('[trainerClasses,isClassTrainer,trainerOnMap,mapTrainerClasses]',c),list=v=>JSON.stringify(v);
@@ -65,6 +65,8 @@ console.log('Script checks passed: every page script parses.');
  assert(ok(undefined)&&ok('Bag merchant')&&!ok('Dragon seller'));
  for(const [old,current] of Object.entries(legacy)){assert(ok(old)&&ok(current));assert.equal(now(old),current);assert.equal(now(current),current);assert.equal(group(current),'Trade vendors');}
  assert.equal(Object.keys(legacy).length,16);assert.equal(now(undefined),undefined);assert.equal(now('Dye merchant'),'Dye merchant');assert.equal(now('Cobbler'),'Cobbler');assert.equal(now('Adventuring supplies'),'Adventuring supplies');
+ assert(ok('Shady merchant'));assert.equal(group('Shady merchant'),'General goods');
+ for(const name of ['A shady merchant','Fence','The black market'])assert.equal(named(name),'Shady merchant');
  assert(!ok(['Alchemy supplies'])&&!ok(null)&&!ok({}));
  for(const [name,kind] of [['A leatherworker','Leatherworking vendor'],['Leatherworking patterns','Leatherworking vendor'],['Leatherworking recipes','Leatherworking vendor'],['Blacksmithing schematics','Blacksmithing vendor'],['Tailoring patterns','Tailoring vendor'],['Tinkering schematics','Tinkering vendor']])assert.equal(named(name),kind);
  assert.equal(JSON.stringify(types),JSON.stringify(['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Weapons']));
@@ -107,7 +109,7 @@ console.log('Script checks passed: every page script parses.');
  // Import and save validation reject malformed tag arrays while still accepting old kinds.
  Object.assign(c,{config:{width:100,height:100},registry:{maps:[]},categories:{Vendor:[]},tradePaths:{},pinColours:{},exitArrows:{},validLevel:v=>v===undefined});
  vm.runInContext(app.slice(app.indexOf('function valid('),app.indexOf('function persist(')),c);const valid=vm.runInContext('valid',c),note={...merchant,id:'personal-vendor',x:10,y:20};
- assert(valid(note));assert(valid({...note,sells:undefined}));for(const sells of [[],['Recipes','Recipes'],['Unknown'],null,'Recipes'])assert(!valid({...note,sells}));
+ assert(valid(note));assert(valid({...note,sells:undefined}));assert(valid({...note,category:'Shady merchant',vendor:undefined}),'Old-category notes remain valid');for(const sells of [[],['Recipes','Recipes'],['Unknown'],null,'Recipes'])assert(!valid({...note,sells}));
  // Open and save through the editor's real handlers, including a second note and a category change.
  const elements=new Map(),get=id=>{if(!elements.has(id))elements.set(id,new Node('div'));return elements.get(id);};
  c.document.getElementById=get;c.document.querySelectorAll=()=>[];c.document.querySelector=s=>s.includes('note-type')?{value:c.noteType||'marker'}:null;
@@ -119,6 +121,7 @@ console.log('Script checks passed: every page script parses.');
  open(note);assert.equal(get('vendor-kind').value,'Leatherworking vendor');assert(!get('sells-field').hidden);assert.deepEqual(tags.filter(t=>t.checked).map(t=>t.value),['Materials','Recipes']);
  save();assert.equal(c.personal[0].vendor,'Leatherworking vendor');assert.equal(JSON.stringify(c.personal[0].sells),'["Materials","Recipes"]');
  open({...note,sells:undefined});assert(!tags.some(t=>t.checked),'Opening another note clears previous chips');save();assert(!Object.hasOwn(c.personal[0],'sells'));
+ open({...note,category:'Shady merchant',vendor:undefined});assert.equal(get('category').value,'Vendor');assert.equal(get('vendor-kind').value,'Shady merchant');save();assert.equal(c.personal[0].category,'Vendor');assert.equal(c.personal[0].vendor,'Shady merchant');
  open(note);get('category').value='Personal';vm.runInContext('updateEditorFields()',c);assert(get('sells-field').hidden&&get('vendor-field').hidden);save();assert(!Object.hasOwn(c.personal[0],'vendor')&&!Object.hasOwn(c.personal[0],'sells'));
  c.noteType='label';open(note);assert(get('sells-field').hidden&&get('vendor-field').hidden);
  // A popup places the short Sells line below the kind and name, including with a wiki card.
@@ -128,3 +131,27 @@ console.log('Script checks passed: every page script parses.');
  assert(!popup({...published,sells:undefined}).children.some(n=>n.className==='marker-sells'));assert(!popup({...published,category:'Personal'}).children.some(n=>n.className==='marker-sells'));
  c.npcCardFor=()=>({url:'https://monstersandmemories.wiki/npcs/kaela'});c.titleLevel=name=>({name});c.npcCard=()=>new Node('section');assert.equal(popup(published).children[3].textContent,'Sells: Materials · Recipes');
  console.log('App vendor checks passed: legacy titles, tag search, kind and Sells filters, optgroups, validation, editor saves and popups.');}
+
+// Older local notes and backups become Vendor notes without losing their fields or mutating the source.
+{const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),saved=new Map(),elements=new Map(),c={URL};vm.createContext(c);
+ vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../icons.js',import.meta.url),'utf8'),c);
+ vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),c);vm.runInContext('categories={...allCategories}',c);
+ const normalise=vm.runInContext('normaliseMarker',c),old={id:'personal-shady',name:'Mira',category:'Shady merchant',note:'By the gate',x:10,y:20,approximate:true,wiki:'https://monstersandmemories.wiki/npcs/mira',wikiId:'npc-mira',sells:['Materials']},current=normalise(old);
+ assert.deepEqual(JSON.parse(JSON.stringify(current)),{...old,category:'Vendor',vendor:'Shady merchant'});assert.equal(old.category,'Shady merchant');assert.equal(normalise(current),current);assert.equal(normalise(null),null);assert.equal(normalise(undefined),undefined);
+ assert.equal(normalise({...old,vendor:'Baker'}).vendor,'Shady merchant','The old category determines its kind');assert(!vm.runInContext("Object.hasOwn(categories,'Shady merchant')||Object.hasOwn(categoryPaths,'Shady merchant')",c));
+ Object.assign(c,{config:{id:'test-map',title:'Test map',tileRevision:'v1',width:100,height:100,levels:[{id:'lower'}],defaultLevel:'lower'},registry:{maps:[]},personal:[],publishedPositions:new Map(),publishedLabelPositions:new Map(),alignmentMode:false,editSnapshot:null,
+  localStorage:{getItem:k=>saved.get(k)||null},storageKey:k=>k,validLevel:v=>v===undefined||v==='lower',migratePreviousStorage(){},applyOverrides(){},status(){},setupCategoryControls(){},buildPlaceIndex(){},drawMarkers(){},persist(rows){c.personal=rows;return true;},$:id=>{if(!elements.has(id))elements.set(id,{});return elements.get(id);}});
+ vm.runInContext(app.slice(app.indexOf('function valid('),app.indexOf('function persist(')),c);vm.runInContext(app.slice(app.indexOf('function restoreStorage('),app.indexOf('let labelData=')),c);
+ saved.set('notes',JSON.stringify([old]));vm.runInContext('restoreStorage()',c);assert.equal(c.personal.length,1);assert.deepEqual(JSON.parse(JSON.stringify(c.personal[0])),{...current,level:'lower'});
+ vm.runInContext(app.slice(app.indexOf('async function importNotes('),app.indexOf('// The types a note')),c);
+ await vm.runInContext('importNotes',c)({size:500,text:async()=>JSON.stringify({version:1,map:'test-map',tileRevision:'v1',markers:[{...old,id:'personal-backup'}]})});
+ const imported=c.personal.find(m=>m.id==='personal-backup');assert.equal(imported.category,'Vendor');assert.equal(imported.vendor,'Shady merchant');assert.equal(imported.wikiId,old.wikiId);assert.equal(JSON.stringify(imported.sells),'["Materials"]');
+ vm.runInContext(app.slice(app.indexOf('const classesOf='),app.indexOf('function copyButton(')),c);c.m=current;
+ assert.equal(vm.runInContext('markerTitle(m)',c),'Shady merchant');assert(vm.runInContext("markerText(m).includes('fence')&&markerText(m).includes('black market')",c));
+ for(const filter of ['g:General goods','k:Shady merchant']){c.filter=filter;assert(vm.runInContext('vendorGroup=filter;vendorShown(m)',c));}
+ c.filter='k:Baker';assert(!vm.runInContext('vendorGroup=filter;vendorShown(m)',c));
+ vm.runInContext(app.slice(app.indexOf('const categoryChoices='),app.indexOf('function setupCategoryControls(')),c);assert(!vm.runInContext('categoryChoices()',c).includes('Shady merchant'));
+ const node=()=>({children:[],style:{setProperty(k,v){this[k]=v;}},setAttribute(k,v){this[k]=v;},append(n){this.children.push(n);}});c.document={createElementNS:node};c.text=node;c.L={divIcon:options=>options};
+ vm.runInContext(app.slice(app.indexOf('function pinIcon('),app.indexOf('function openMap(')),c);const pin=vm.runInContext('pinIcon(m)',c);
+ assert.equal(pin.html.style['--pin'],vm.runInContext('categories.Vendor[1]',c));assert.equal(pin.html.children[0].children[0].d,vm.runInContext('categoryPaths.Vendor',c));
+ console.log('Shady merchant checks passed: compatibility, local loading, backup import, editor, vocabulary, filters and Vendor appearance.');}
