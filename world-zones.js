@@ -44,8 +44,10 @@ function setupWorldZones(map,config,data){
  let shown=null;
  // The colour pane lives in the map's layer space, so its clip polygon uses layer points.
  const clip=()=>{if(shown)colour.style.clipPath='polygon('+shown.getLatLngs()[0].map(ll=>{const p=map.latLngToLayerPoint(ll);return p.x+'px '+p.y+'px';}).join(',')+')';};
- const show=area=>{shown=area;clip();colour.style.display='';};
- const hide=area=>{if(shown===area){shown=null;colour.style.display='none';}};
+ // A map without a coloured edition (already painted in colour) lights the zone under the pointer instead.
+ const lit={stroke:true,color:'#fff4d6',weight:2.5,opacity:.95,fillColor:'#fff4d6',fillOpacity:.2},unlit={stroke:false,fillOpacity:0};
+ const show=area=>{if(shown&&shown!==area&&!config.colourTilePath)shown.setStyle(unlit);shown=area;if(config.colourTilePath){clip();colour.style.display='';}else area.setStyle(lit);};
+ const hide=area=>{if(shown===area){shown=null;if(config.colourTilePath)colour.style.display='none';else area.setStyle(unlit);}};
  const hideDuringZoom=()=>{colour.style.visibility='hidden';},restore=()=>{clip();colour.style.visibility='';};
  map.on('zoomstart',hideDuringZoom);map.on('zoomend viewreset',restore);
  for(const line of Array.isArray(data.borders)?data.borders:[])
