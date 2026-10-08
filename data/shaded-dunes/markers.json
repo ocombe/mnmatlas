@@ -151,13 +151,16 @@
  },
  {
   "id": "npc-3",
-  "name": "Notable NPC",
+  "name": "Cheikho",
   "category": "Notable NPC",
   "x": 3289,
   "y": 3394,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
-  "minZoom": 3
+  "note": "",
+  "minZoom": 3,
+  "wikiId": "npc-cheikho",
+  "wiki": "https://monstersandmemories.wiki/npcs/cheikho",
+  "community": true
  },
  {
   "id": "undead-10-15-1",
@@ -201,13 +204,16 @@
  },
  {
   "id": "generic-6-10-3",
-  "name": "Creatures (levels 6–10)",
+  "name": "Crocodiles / Caimans (levels 7–13)",
   "category": "Mob camp",
   "x": 3762,
   "y": 3866,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
-  "minZoom": 3
+  "note": "",
+  "minZoom": 3,
+  "wikiId": "npc-a-caiman",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-caiman",
+  "community": true
  },
  {
   "id": "ashira-6-10-3",
