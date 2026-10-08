@@ -110,6 +110,11 @@
     "name": "A greedy halfling",
     "category": "Vendor",
     "vendor": "Shady merchant",
+    "sells": [
+      "Materials",
+      "Shields",
+      "Weapons"
+    ],
     "x": 966,
     "y": 1278,
     "note": "",
@@ -518,6 +523,9 @@
     "name": "A bag merchant",
     "category": "Vendor",
     "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ],
     "note": "",
     "x": 1150,
     "y": 1515,
@@ -545,13 +553,24 @@
     "y": 1654,
     "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-obaid",
     "wikiId": "npc-quartermaster-obaid",
-    "vendor": "Quartermaster"
+    "vendor": "Quartermaster",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Quest items",
+      "Shields",
+      "Weapons"
+    ]
   },
   {
     "id": "community-102",
     "community": true,
     "name": "Halrinn Grimsul",
     "category": "Vendor",
+    "sells": [
+      "Food & drink",
+      "Quest items"
+    ],
     "note": "",
     "x": 949,
     "y": 1371,
@@ -579,7 +598,13 @@
     "y": 1361,
     "wiki": "https://monstersandmemories.wiki/npcs/a-cook",
     "wikiId": "npc-a-cook",
-    "vendor": "Cook"
+    "vendor": "Cook",
+    "sells": [
+      "Bags",
+      "Food & drink",
+      "Materials",
+      "Weapons"
+    ]
   },
   {
     "id": "community-107",
@@ -614,7 +639,11 @@
     "y": 1268,
     "wiki": "https://monstersandmemories.wiki/npcs/an-herbalist",
     "wikiId": "npc-an-herbalist",
-    "vendor": "Herbalism vendor"
+    "vendor": "Herbalism vendor",
+    "sells": [
+      "Bags",
+      "Weapons"
+    ]
   },
   {
     "id": "community-111",
@@ -626,7 +655,13 @@
     "y": 1260,
     "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-wayfarers-hospice",
     "wikiId": "npc-a-reagent-vendor-wayfarers-hospice",
-    "vendor": "Reagent vendor"
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Armor",
+      "Bags",
+      "Materials",
+      "Shields"
+    ]
   },
   {
     "id": "community-112",
@@ -638,7 +673,11 @@
     "y": 1265,
     "wiki": "https://monstersandmemories.wiki/npcs/a-cleric-scribe",
     "wikiId": "npc-a-cleric-scribe",
-    "vendor": "Spell scribe"
+    "vendor": "Spell scribe",
+    "sells": [
+      "Armor",
+      "Materials"
+    ]
   },
   {
     "id": "community-113",
@@ -678,6 +717,9 @@
     "community": true,
     "name": "Dilshad Abolfazl",
     "category": "Vendor",
+    "sells": [
+      "Bags"
+    ],
     "note": "",
     "x": 1077,
     "y": 1231,
@@ -694,7 +736,10 @@
     "y": 1206,
     "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-saif",
     "wikiId": "npc-leatherworker-saif",
-    "vendor": "Leatherworking vendor"
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Recipes"
+    ]
   },
   {
     "id": "community-121",

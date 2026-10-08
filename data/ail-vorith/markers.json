@@ -108,6 +108,9 @@
     "name": "Leatherworker Vex",
     "category": "Vendor",
     "vendor": "Leatherworking vendor",
+    "sells": [
+      "Bags"
+    ],
     "x": 4625,
     "y": 4362,
     "note": "Approximate position; to confirm in game. Newbie armour; quest rewards.",
@@ -130,6 +133,9 @@
     "name": "Melzorra",
     "category": "Vendor",
     "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ],
     "x": 4613,
     "y": 4334,
     "note": "Approximate position; to confirm in game. Bags.",
@@ -141,6 +147,11 @@
     "name": "Supplier Jul",
     "category": "Vendor",
     "vendor": "General goods",
+    "sells": [
+      "Materials",
+      "Shields",
+      "Weapons"
+    ],
     "x": 4631,
     "y": 4295,
     "note": "Approximate position; to confirm in game. General supplies.",
@@ -327,6 +338,9 @@
     "name": "Nyxia Ak'kin",
     "category": "Vendor",
     "vendor": "Barkeep",
+    "sells": [
+      "Quest items"
+    ],
     "x": 4461,
     "y": 3916,
     "note": "Approximate position; to confirm in game. Food and rations.",
@@ -517,7 +531,12 @@
     "note": "",
     "x": 4375,
     "y": 2354,
-    "vendor": "Reagent vendor"
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Weapons"
+    ]
   },
   {
     "id": "community-72",
@@ -618,6 +637,11 @@
     "community": true,
     "name": "A reagent vendor",
     "category": "Vendor",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Weapons"
+    ],
     "note": "necromancer reagents",
     "x": 3711,
     "y": 2511

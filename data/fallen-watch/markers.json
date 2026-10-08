@@ -311,6 +311,9 @@
     "id": "marcus-aden",
     "name": "Marcus Aden",
     "category": "Vendor",
+    "sells": [
+      "Bags"
+    ],
     "level": "floor-1",
     "x": 2340,
     "y": 800,

@@ -520,6 +520,10 @@
     "community": true,
     "name": "Hargin Earthcaller",
     "category": "Vendor",
+    "sells": [
+      "Armor",
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 4419,
     "y": 3632,
@@ -545,6 +549,10 @@
     "name": "Munk",
     "category": "Vendor",
     "vendor": "Butcher",
+    "sells": [
+      "Materials",
+      "Quest items"
+    ],
     "note": "",
     "x": 3645,
     "y": 4141,
