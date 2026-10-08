@@ -125,8 +125,10 @@ def main():
                     draw_chip(draw, *spot, chips[m['id']], chip)
                 else:
                     draw_pin(draw, *spot, rgb(m.get('color') or extra.get(m.get('category')) or colours.get(m.get('category'), '#365f59')))
-                # The caption plate, like the site's: the name, and who it is for a trainer.
+                # The caption plate, like the site's: the name, then who it is for a trainer and the zone (and level).
                 title, who = title_of(m)
+                where = c['title'] + (' · ' + level['title'] if c.get('levels') and level.get('title') else '')
+                who = ' · '.join(filter(None, [who, where]))
                 title = fit(draw, title, heading, W - 30)
                 who = fit(draw, who, italic, W - 30) if who else ''
                 plate_h = 26 + (15 if who else 0)
