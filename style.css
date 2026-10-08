@@ -397,3 +397,11 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .community-preview .preview-steps+.preview-close{margin-left:4px}
 .dialog-actions .community-remove{margin-right:auto;background:transparent;color:#f29579;border-color:transparent}
 .dialog-actions .community-remove:hover{border-color:#a04438}
+/* NPC card popups as one system: the wiki band and the atlas's own sections meet at full-width rules; headings carry no
+   rule of their own; the first fact row has no line above it (the band's edge is enough). */
+.leaflet-popup-content .npc-card dl>dt:first-of-type,.leaflet-popup-content .npc-card dl>dd:first-of-type{border-top:0}
+.leaflet-popup-content .npc-heading{border-bottom:0;padding-bottom:0;margin-bottom:5px}
+.leaflet-popup-content .npc-card+.npc-ours{margin-top:0;padding-top:11px}
+.leaflet-popup-content:has(.npc-card) .popup-actions{margin-left:0!important;margin-right:0!important;padding-left:20px;padding-right:24px}
+.leaflet-popup-content:has(.npc-card) .npc-card+.popup-actions{margin-top:0;border-top:0}
+.vendor-filter select{background:var(--muted);border:1px solid var(--border);border-radius:var(--radius);color:var(--foreground)}
