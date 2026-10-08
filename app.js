@@ -64,11 +64,12 @@ function allMarkers(){return [...originals,...personal];}
 // when it names someone, sits underneath. Names that already spell out the classes ("Cleric / Paladin — Hospice") stay.
 const classesOf=m=>m.category==='Class trainer'&&Array.isArray(m.classes)?m.classes.filter(c=>typeof c==='string'&&c.trim()):[];
 const squash=v=>String(v).toLocaleLowerCase().replace(/[^a-z]/g,'');
-function markerTitle(m){const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
-// The name under a class-first title; nothing when the name is only class abbreviations ("NEC").
+// A vendor with a kind reads kind first ("Used weapons dealer"), like a trainer reads class first, unless its name
+// already is just that kind ("A bag merchant", "Butchers").
+const vendorNamed=m=>{const bare=String(m.name).toLowerCase().replace(/[^a-z ]+/g,' ').trim().replace(/^(a|an|the) /,'').replace(/s$/,''),forms=vendorKinds[vendorGroupOf(m.vendor)]?.[m.vendor]||[];return squash(bare)===squash(m.vendor)||forms.some(f=>squash(f)===squash(bare));};
+function markerTitle(m){if(m.category==='Vendor'&&m.vendor&&!vendorNamed(m))return m.vendor;const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
+// The name under a class-first (or kind-first) title; nothing when the name is only class abbreviations ("NEC").
 function markerSubtitle(m){
- // A vendor's kind reads under its name ("Bag merchant"), unless the name already says it.
- if(m.category==='Vendor'&&m.vendor&&!m.name.toLowerCase().includes(m.vendor.toLowerCase().replace(/ (supplies|merchant)$/,'')))return m.vendor;
  return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
 // What a vendor sells: its kind, or the kind its name says ("A bag merchant"), for search and the vendor filter.
 const vendorKindFor=m=>m.category==='Vendor'?m.vendor||vendorKindNamed(m.name):'';
