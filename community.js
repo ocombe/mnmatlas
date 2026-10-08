@@ -660,8 +660,49 @@
  }
  async function onMap(){
   if(!map||loading)return;const serial=++mapSerial;syncReady='';clearPreview();if(review.open)review.close();
-  await syncNotes(serial);
+  loadApproved();await syncNotes(serial);
  }
+ // Approved suggestions wait for the publishing run; until then admins see them all on the map, and each author their
+ // own (the read policy already lets authors read their rows), as faded pins: a new marker where it will stand, a move
+ // at its new spot with a dotted line from the current one, an edit marked as edited. Each goes once its change is live.
+ let approvedLayer=null,approvedRows=[],approvedSerial=0;
+ const approvedKey='mnmaps-show-approved';
+ const approvedShown=()=>{try{return localStorage.getItem(approvedKey)!=='false';}catch{return true;}};
+ function approvedLive(row){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id);
+  if(row.kind==='new-marker')return originals.some(m=>m.id==='community-'+row.id);
+  if(row.kind==='move-marker')return !t||!Array.isArray(p.to)||(Math.round(t.x)===Math.round(p.to[0])&&Math.round(t.y)===Math.round(p.to[1]));
+  if(row.kind==='edit-marker')return !t||(t.name===p.name&&(t.note||'')===(p.note||'')&&(p.wiki===undefined||(t.wiki||'')===p.wiki));
+  return true;}
+ function approvedToggle(rows){
+  let section=$('approved-controls');if(!rows.length){section?.remove();return;}
+  if(!section){section=text('section','','approved-controls');section.id='approved-controls';const label=text('label',''),box=document.createElement('input');box.type='checkbox';box.id='approved-toggle';
+   box.onchange=()=>{try{localStorage.setItem(approvedKey,String(box.checked));}catch{}drawApproved();};label.append(box,text('span',''));section.append(label);$('hidden-controls')?.after(section);}
+  section.querySelector('input').checked=approvedShown();section.querySelector('span').textContent=' Show approved, not live yet ('+rows.length+')';}
+ async function loadApproved(){
+  const serial=++approvedSerial;approvedRows=[];
+  if(user&&config&&!config.zonesFile){try{const {data,error}=await client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name').eq('status','approved').eq('map',config.id).limit(500);if(error)throw error;if(serial!==approvedSerial)return;approvedRows=Array.isArray(data)?data:[];}catch{}}
+  if(serial===approvedSerial)drawApproved();
+ }
+ function drawApproved(){
+  approvedLayer?.remove();approvedLayer=null;
+  const rows=map&&config?approvedRows.filter(r=>['new-marker','move-marker','edit-marker'].includes(r.kind)&&!(r.kind==='new-marker'&&r.payload?.noteType)&&(!config.levels||!r.level||r.level===config.levelId)&&!approvedLive(r)):[];
+  approvedToggle(rows);if(!rows.length||!approvedShown())return;approvedLayer=L.layerGroup().addTo(map);
+  for(const row of rows){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id);let at,look,tag;
+   try{
+    if(row.kind==='new-marker'){at=locationOf({x:p.x,y:p.y,level:row.level});look={...p,id:'approved-'+row.id};tag='New marker';}
+    else if(row.kind==='move-marker'){at=locationOf({...t,x:p.to[0],y:p.to[1]});look={...t,id:'approved-'+row.id};tag='Moved marker';approvedLayer.addLayer(L.polyline([locationOf(t),at],{color:'#e2b46a',weight:2,dashArray:'3 6',interactive:false}));}
+    else{at=locationOf(t);look={...t,name:p.name,id:'approved-'+row.id};tag='Edited marker';}
+   }catch{continue;}
+   const pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:900,keyboard:true,title:tag+' (approved, not live yet): '+(p.name||'')});
+   pin.on('add',()=>{const el=pin.getElement();el?.classList.add('approved-pin');if(row.kind==='edit-marker')el?.classList.add('approved-edit');});
+   pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);}
+ }
+ function approvedPopup(row,tag){
+  const p=row.payload||{},n=text('div','');n.append(text('div',tag+' · approved, not live yet','tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker')n.append(text('p',p.note));
+  n.append(text('p','Approved: it goes live with the next publishing run, within the hour.','moved-note'));
+  if(admin){const actions=text('div','','popup-actions');actions.append(button('Review on map',()=>{map.closePopup();preview(row,loadApproved,loadApproved);}));n.append(actions);}
+  else if(row.user_id===user?.id)n.append(text('p','Your suggestion. Thank you!','community-note'));
+  return n;}
  async function authChanged(session){
   const next=session?.user||null;if(next?.id===user?.id)return;
   const serial=++authSerial;user=next;admin=false;syncReady='';accountUI();for(const f of finders)f.update();if(review.open)review.close();clearPreview();freshPopup();
@@ -737,7 +778,7 @@
  }
  async function reviewAction(row,state,note,card,payload=null,done=()=>{}){
   for(const b of card.querySelectorAll('button'))b.disabled=true;
-  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);done();}
+  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);loadApproved();done();}
   catch{status('Review could not be saved. Please refresh the list.');for(const b of card.querySelectorAll('button'))b.disabled=false;}
  }
  // On the map, a suggestion can be adjusted before approval (or while approved and not live yet):

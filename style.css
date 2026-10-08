@@ -384,3 +384,9 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .community-preview .preview-left{font-size:12px;color:var(--muted-foreground)}
 .community-preview .preview-steps{display:flex;gap:4px;margin-left:auto}
 .community-preview .preview-step{padding:4px 8px;font-size:12px}
+/* Approved, not live yet: faded, with a dashed rim; an edit carries a small "edited" tag. */
+.approved-pin{opacity:.62}
+.approved-pin:hover,.approved-pin:focus-visible{opacity:.95}
+.approved-pin.pin span{border-style:dashed;border-color:#f3e2c2}
+.approved-pin.approved-edit::after{content:"edited";position:absolute;left:50%;top:-14px;transform:translateX(-50%);padding:0 4px;border-radius:var(--radius);background:#2b1c0e;color:#f3e2c2;font:600 9px/14px var(--body);letter-spacing:.03em;white-space:nowrap}
+.approved-controls{margin-top:6px}
