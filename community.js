@@ -682,45 +682,77 @@
   if(!map||loading)return;const serial=++mapSerial;syncReady='';clearPreview();if(review.open)review.close();
   loadApproved();await syncNotes(serial);
  }
- // Approved suggestions wait for the publishing run; until then admins see them all on the map, and each author their
- // own (the read policy already lets authors read their rows), as faded pins: a new marker where it will stand, a move
- // at its new spot with a dotted line from the current one, an edit marked as edited. Each goes once its change is live.
- let approvedLayer=null,approvedRows=[],approvedSerial=0;
- const approvedKey='mnmaps-show-approved';
- const approvedShown=()=>{try{return localStorage.getItem(approvedKey)!=='false';}catch{return true;}};
+ // Suggestions on the map before they are live. Approved ones wait for the publishing run: admins see them all, and each
+ // author their own (the read policy already lets authors read their rows). Admins also see those waiting for review,
+ // with a soft glow. Each is drawn like the marker it will be, faded: a new marker where it will stand, a move at its
+ // new spot with a dotted line from the current one, an edit tagged as such. Each goes once its change is live.
+ // Suggestions close together (or naming the same NPC), and ones repeating a marker already on the map, are flagged
+ // as possible duplicates, with a jump between them.
+ let approvedLayer=null,approvedRows=[],pendingRows=[],approvedSerial=0;const suggestionPins=new Map();
+ const approvedKey='mnmaps-show-approved',pendingKey='mnmaps-show-pending';
+ const shownSetting=key=>{try{return localStorage.getItem(key)!=='false';}catch{return true;}};
  function approvedLive(row){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id);
   if(row.kind==='new-marker')return originals.some(m=>m.id==='community-'+row.id);
+  if(p.remove===true)return !t;
   if(row.kind==='move-marker')return !t||!Array.isArray(p.to)||(Math.round(t.x)===Math.round(p.to[0])&&Math.round(t.y)===Math.round(p.to[1]));
   if(row.kind==='edit-marker')return !t||(t.name===p.name&&(t.note||'')===(p.note||'')&&(p.wiki===undefined||(t.wiki||'')===p.wiki));
   return true;}
- function approvedToggle(rows){
-  let section=$('approved-controls');if(!rows.length){section?.remove();return;}
-  if(!section){section=text('section','','approved-controls');section.id='approved-controls';const label=text('label',''),box=document.createElement('input');box.type='checkbox';box.id='approved-toggle';
-   box.onchange=()=>{try{localStorage.setItem(approvedKey,String(box.checked));}catch{}drawApproved();};label.append(box,text('span',''));section.append(label);$('hidden-controls')?.after(section);}
-  section.querySelector('input').checked=approvedShown();section.querySelector('span').textContent=' Show approved, not live yet ('+rows.length+')';}
+ const drawable=r=>['new-marker','move-marker','edit-marker'].includes(r.kind)&&!(r.kind==='new-marker'&&r.payload?.noteType)&&(!config.levels||!r.level||r.level===config.levelId);
+ // Where a suggestion stands on this map, in map units.
+ function suggestionAt(row){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id);
+  if(row.kind==='new-marker')return Number.isFinite(p.x)&&Number.isFinite(p.y)?[p.x,p.y]:null;
+  if(row.kind==='move-marker')return Array.isArray(p.to)?p.to:null;
+  if(t)return [t.x,t.y];const chip=labelData.trainers?.find(x=>x.id===row.target_id);return chip?[chip.x,chip.y]:null;}
+ const nameKey=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/^(a|an|the) /,'').split(' (')[0];
+ // Possible duplicates of a new marker: other suggestions within 15 map units or naming the same NPC, and markers
+ // already on the map with the same wiki page or name.
+ function duplicatesOf(row){
+  if(row.kind!=='new-marker')return [];const p=row.payload||{},at=suggestionAt(row),key=nameKey(p.name),found=[];
+  for(const other of [...pendingRows,...approvedRows]){if(other.id===row.id||other.kind!=='new-marker')continue;const q=other.payload||{},there=suggestionAt(other);
+   const near=at&&there&&Math.hypot(at[0]-there[0],at[1]-there[1])<=15,same=(p.wikiId&&p.wikiId===q.wikiId)||(key.length>=4&&key===nameKey(q.name));
+   if(near||same)found.push({row:other,name:q.name,why:same?'same NPC':'close by',state:other.status==='approved'?'approved':'waiting'});}
+  for(const m of originals){if((p.wikiId&&m.wikiId===p.wikiId)||(key.length>=4&&nameKey(m.name)===key))found.push({marker:m,name:m.name,why:p.wikiId&&m.wikiId===p.wikiId?'same wiki page':'same name',state:'on the map'});}
+  return found;}
+ function duplicateList(row,onPick){
+  const found=duplicatesOf(row);if(!found.length)return null;const box=text('div','','duplicate-box');box.append(text('strong','Possible duplicate'+(found.length>1?'s':'')));
+  for(const d of found){const b=button(d.name+' · '+d.state+' ('+d.why+')',()=>onPick(d),'duplicate-jump');box.append(b);}return box;}
+ function jumpTo(d){map.closePopup();if(d.marker){choose(d.marker);return;}const pin=suggestionPins.get(d.row.id);if(pin){map.setView(pin.getLatLng(),Math.max(map.getZoom(),config.defaultView.placeZoom));pin.openPopup();}else preview(d.row,loadApproved,loadApproved,null,true);}
+ function overlayToggle(id,key,label,count,after){
+  let section=$(id);if(!count){section?.remove();return;}
+  if(!section){section=text('section','','approved-controls');section.id=id;const l=text('label',''),box=document.createElement('input');box.type='checkbox';
+   box.onchange=()=>{try{localStorage.setItem(key,String(box.checked));}catch{}drawApproved();};l.append(box,text('span',''));section.append(l);(after()||$('hidden-controls'))?.after(section);}
+  section.querySelector('input').checked=shownSetting(key);section.querySelector('span').textContent=' '+label+' ('+count+')';}
  async function loadApproved(){
-  const serial=++approvedSerial;approvedRows=[];
-  if(user&&config&&!config.zonesFile){try{const {data,error}=await client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name').eq('status','approved').eq('map',config.id).limit(500);if(error)throw error;if(serial!==approvedSerial)return;approvedRows=Array.isArray(data)?data:[];}catch{}}
-  if(serial===approvedSerial)drawApproved();
+  const serial=++approvedSerial;let approved=[],pending=[];
+  if(user&&config&&!config.zonesFile){
+   const read=async state=>{const {data,error}=await client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name,comment').eq('status',state).eq('map',config.id).limit(500);if(error)throw error;return Array.isArray(data)?data:[];};
+   try{approved=await read('approved');if(admin)pending=await read('pending');}catch{}}
+  if(serial!==approvedSerial)return;approvedRows=approved;pendingRows=pending;drawApproved();
  }
  function drawApproved(){
-  approvedLayer?.remove();approvedLayer=null;
-  const rows=map&&config?approvedRows.filter(r=>['new-marker','move-marker','edit-marker'].includes(r.kind)&&!(r.kind==='new-marker'&&r.payload?.noteType)&&(!config.levels||!r.level||r.level===config.levelId)&&!approvedLive(r)):[];
-  approvedToggle(rows);if(!rows.length||!approvedShown())return;approvedLayer=L.layerGroup().addTo(map);
-  for(const row of rows){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id);let at,look,tag;
+  approvedLayer?.remove();approvedLayer=null;suggestionPins.clear();
+  const ready=map&&config,approved=ready?approvedRows.filter(r=>drawable(r)&&!approvedLive(r)):[],pending=ready&&admin?pendingRows.filter(r=>drawable(r)&&!approvedLive(r)):[];
+  overlayToggle('approved-controls',approvedKey,'Show approved, not live yet',approved.length,()=>null);
+  overlayToggle('pending-controls',pendingKey,'Show waiting for review',pending.length,()=>$('approved-controls'));
+  const rows=[...(shownSetting(approvedKey)?approved:[]),...(shownSetting(pendingKey)?pending:[])];if(!rows.length)return;approvedLayer=L.layerGroup().addTo(map);
+  for(const row of rows){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id),waiting=row.status==='pending';let at,look,tag;
    try{
-    if(row.kind==='new-marker'){at=locationOf({x:p.x,y:p.y,level:row.level});look={...p,id:'approved-'+row.id};tag='New marker';}
-    else if(row.kind==='move-marker'){at=locationOf({...t,x:p.to[0],y:p.to[1]});look={...t,id:'approved-'+row.id};tag='Moved marker';approvedLayer.addLayer(L.polyline([locationOf(t),at],{color:'#e2b46a',weight:2,dashArray:'3 6',interactive:false}));}
-    else{at=locationOf(t);look={...t,name:p.name,id:'approved-'+row.id};tag='Edited marker';}
+    const xy=suggestionAt(row);if(!xy)continue;at=locationOf({...(t||{}),x:xy[0],y:xy[1],level:row.level||t?.level});
+    if(row.kind==='new-marker'){look={...p,id:'suggested-'+row.id};tag='New marker';}
+    else if(row.kind==='move-marker'){look={...t,id:'suggested-'+row.id};tag='Moved marker';if(t)approvedLayer.addLayer(L.polyline([locationOf(t),at],{color:waiting?'#8fc7d8':'#e2b46a',weight:2,dashArray:'3 6',interactive:false}));}
+    else{look={...(t||{category:'Personal'}),name:p.name,id:'suggested-'+row.id};tag=p.remove===true?'Removal':'Edited marker';}
    }catch{continue;}
-   const pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:900,keyboard:true,title:tag+' (approved, not live yet): '+(p.name||'')});
-   pin.on('add',()=>{const el=pin.getElement();el?.classList.add('approved-pin');if(row.kind==='edit-marker')el?.classList.add('approved-edit');});
-   pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);}
+   const dup=duplicatesOf(row).length>0,state=waiting?'waiting for review':'approved, not live yet';
+   const pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:waiting?950:900,keyboard:true,title:tag+' ('+state+'): '+(p.name||'')});
+   pin.on('add',()=>{const el=pin.getElement();if(!el)return;el.classList.add('approved-pin');if(waiting)el.classList.add('pending-pin');if(row.kind==='edit-marker')el.classList.add(p.remove===true?'approved-remove':'approved-edit');if(dup)el.classList.add('duplicate-pin');});
+   pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);suggestionPins.set(row.id,pin);}
  }
  function approvedPopup(row,tag){
-  const p=row.payload||{},n=text('div','');n.append(text('div',tag+' · approved, not live yet','tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker')n.append(text('p',p.note));
-  n.append(text('p','Approved: it goes live with the next publishing run, within the hour.','moved-note'));
-  if(admin){const actions=text('div','','popup-actions'),edit=button('Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);});if(typeof actionIcon==='function')actionIcon(edit);actions.append(edit);n.append(actions);}
+  const p=row.payload||{},waiting=row.status==='pending',n=text('div','');n.append(text('div',tag+' · '+(waiting?'waiting for review':'approved, not live yet'),'tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker'&&p.remove!==true)n.append(text('p',p.note));
+  if(p.remove===true)n.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
+  n.append(text('p',waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour.','moved-note'));
+  const dups=duplicateList(row,jumpTo);if(dups)n.append(dups);
+  if(admin){const actions=text('div','','popup-actions'),edit=button(waiting?'Edit and review':'Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);});if(typeof actionIcon==='function')actionIcon(edit);actions.append(edit);n.append(actions);}
   else if(row.user_id===user?.id)n.append(text('p','Your suggestion. Thank you!','community-note'));
   return n;}
  async function authChanged(session){
@@ -831,7 +863,7 @@
    // A close button (and Escape): back to the map from a pin, back to the list from the review queue.
    const close=()=>{document.removeEventListener?.('keydown',onKey,true);clearPreview();if(fromPin)loadApproved();else refresh();},onKey=e=>{if(e.key==='Escape'&&$('community-preview')===bar&&!e.target.closest?.('.wiki-results')){e.preventDefault();close();}};
    const x=button('×',close,'preview-close');x.setAttribute('aria-label','Close');x.title='Close';head.append(x);document.addEventListener?.('keydown',onKey,true);bar.addEventListener('wiki-done',()=>document.removeEventListener?.('keydown',onKey,true));
-   bar.append(head);if(!here)bar.append(text('p','This marker is not on the map any more (removed or replaced since), so there is no pin to show. You can still decide on it.','reported-reason'));
+   bar.append(head);{const dups=duplicateList(row,d=>{clearPreview();if(d.marker){choose(d.marker);return;}preview(d.row,refresh,next,null,fromPin);});if(dups)bar.append(dups);}if(!here)bar.append(text('p','This marker is not on the map any more (removed or replaced since), so there is no pin to show. You can still decide on it.','reported-reason'));
    const field=(label,el)=>{const l=text('label',label,'preview-field');l.append(el);bar.append(l);return el;};
    let name,note,category;
    const removal=p.remove===true;if(removal)bar.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));

@@ -160,6 +160,12 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
  e.emit('atlas:loaded');await settle();
  {const live=e.layers.filter(l=>!l.removed),pins=live.flatMap(l=>l.items).filter(i=>/approved, not live yet/.test(i.options?.title||''));
   assert(pins.some(i=>i.options.title.includes('Chef Arzya the Bold')),'An approved new marker shows on the map before it is published');}
+ // Waiting suggestions show for an admin too, and two close together are flagged as possible duplicates.
+ e.suggestions.push({id:61,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'Twin A',x:50,y:50,category:'Vendor'},author_name:'Member',created_at:new Date().toISOString()},{id:62,status:'pending',map:'test-map',level:'lower',kind:'new-marker',payload:{name:'Twin B',x:55,y:52,category:'Vendor'},author_name:'Member',created_at:new Date().toISOString()});
+ e.emit('atlas:loaded');await settle();
+ {const pins=e.layers.filter(l=>!l.removed).flatMap(l=>l.items).filter(i=>/waiting for review/.test(i.options?.title||''));const twin=pins.find(i=>i.options.title.includes('Twin A'));assert(twin,'A waiting suggestion shows on the map for an admin');
+  const pop=twin.popup();assert(pop.querySelectorAll('strong').some(n=>/Possible duplicate/.test(n.textContent)),'Two suggestions close together are flagged');assert(pop.querySelectorAll('button').some(n=>/Twin B/.test(n.textContent)));}
+ for(const r of e.suggestions)if(r.id===61||r.id===62)r.status='rejected';
  // Saving a note with "Also suggest this for the public map" ticked sends it at once; the note then follows its
  // suggestion: a move while it is pending updates it, and an edit once approved becomes an edit of the new marker.
  {const ctx=e.context,$=ctx.$,check=$('suggest-check'),credit=$('suggest-credit'),inserts=()=>e.calls.filter(c=>c.table==='suggestions'&&c.op==='insert');
