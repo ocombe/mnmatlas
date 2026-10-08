@@ -50,6 +50,7 @@ function wikiIdFrom(p,id){const wikiId=wikiIdOf(p.wikiId);if(wikiId===null)fail(
 function validatePayload(row,c){
  const p=row.payload;if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
  if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
+ if(p.remove!==undefined&&(p.remove!==true||row.kind!=='edit-marker'||p.reason!==undefined&&!['duplicate','missing','other'].includes(p.reason)))fail('Invalid removal for suggestion '+row.id+'.');
  if((row.kind==='edit-marker'||row.kind==='edit-label')&&(!p.from||typeof p.from!=='object'||typeof p.from.name!=='string'||typeof (p.note??'')!=='string'||(p.note||'').length>2000))fail('Invalid edit for suggestion '+row.id+'.');
  if(row.kind==='new-marker'){
   // Only categories this map can draw; an unknown one would break the map for every visitor.
@@ -79,7 +80,14 @@ async function apply(row){
  if(row.kind==='edit-marker'||row.kind==='edit-label'){
   const label=row.kind==='edit-label',f=await file(label?c.labelsFile:c.markersFile),rows=label?f.data?.labels:f.data;
   if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
-  const m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId));if(!m)fail('Target missing for suggestion '+row.id+'.');
+  const m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId));
+  // An edit an admin approved as a removal takes the marker off the map, with the trainer chip of the same id.
+  if(!label&&p.remove===true){
+   if(m){rows.splice(rows.indexOf(m),1);f.changed=true;}
+   if(c.labelsFile){const lf=await file(c.labelsFile),chips=lf.data?.trainers;if(Array.isArray(chips)){const i=chips.findIndex(t=>t.id===row.target_id);if(i>=0){chips.splice(i,1);lf.changed=true;}}}
+   return m?'marker removed':'already removed';
+  }
+  if(!m)fail('Target missing for suggestion '+row.id+'.');
   // A marker edit may also set or clear the wiki link; older edits without one leave it as it is.
   const linked=!label&&p.wiki!==undefined,wiki=linked?wikiOf(p.wiki,row.id):'',seenWiki=linked?wikiOf(p.from.wiki,row.id):'';
   const name=clean(p.name),note=clean(p.note||'',true),was=before(label?c.labelsFile:c.markersFile,m),seen={name:clean(p.from.name),note:clean(p.from.note||'',true)};

@@ -421,7 +421,27 @@
    catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The edit could not be sent. Please try again.');}
    finally{send.disabled=false;}
   },'primary');
-  actions.append(button('Cancel',()=>d.close()),send);d.append(actions);name.focus?.();
+  if(marker)actions.append(button('Suggest removing this',()=>removalDialog(target),'community-remove'));
+  actions.append(button('Cancel',()=>d.close()),send);
+  d.append(actions);name.focus?.();
+ }
+ const removalReasons={duplicate:'A duplicate of another marker',missing:'Not in the game (or no longer)',other:'Something else'};
+ function removalDialog(target){
+  if(!user){signInDialog();return;}
+  const d=showDialog('Suggest removing “'+target.name+'”');d.append(text('p','Tell us why it should go. An admin checks it before the marker leaves the map.','form-hint'));
+  const list=text('div','','community-choices'),radios=[];
+  for(const [value,label] of Object.entries(removalReasons)){const l=text('label',''),r=document.createElement('input');r.type='radio';r.name='removal-reason';r.value=value;l.append(r,text('span',label));list.append(l);radios.push(r);}
+  d.append(list);const l=text('label','Details'),why=document.createElement('textarea');why.id='removal-details';l.htmlFor=why.id;why.maxLength=500;why.rows=3;why.placeholder='For example: the same vendor is marked by the north gate.';d.append(l,why);const credit=creditBox(d);
+  const actions=text('div','','dialog-actions'),send=button(admin?'Remove':'Send for review',async()=>{
+   const reason=radios.find(r=>r.checked)?.value,details=why.value.trim();
+   if(!reason){status('Choose a reason.');return;}if(reason==='other'&&!details){status('Tell us why it should go.');why.focus?.();return;}
+   send.disabled=true;
+   try{const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind:'edit-marker',target_id:target.id,payload:{name:target.name,note:target.note||'',remove:true,reason,from:{name:target.name,note:target.note||''}},comment:details||null,credit:credit.checked});
+    editedNow.add(editToken('edit-marker',target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your removal request is waiting for review.');event('removal-sent');}
+   catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The request could not be sent. Please try again.');}
+   finally{send.disabled=false;}
+  },'primary');
+  actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
  }
  const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit');
  const sharedToken=m=>scope()+':'+m.id;
@@ -735,6 +755,7 @@
     // A suggestion the publishing job could not apply comes back with its reason.
     if(row.review_note)card.append(text('p',row.review_note,'reported-reason'));
     if(row.kind==='report')card.append(text('p',reasons[row.payload.reason]||'Something else','reported-reason'));
+    if(row.payload?.remove===true)card.append(text('p',(row.status==='approved'?'Approved removal: the marker goes at the next publishing run.':'Removal')+(removalReasons[row.payload.reason]?' · '+removalReasons[row.payload.reason]:''),'reported-reason'));
     if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));if(typeof row.payload.wiki==='string'&&(f.wiki||'')!==row.payload.wiki)card.append(text('p','Wiki page: '+was(f.wiki)+'\n→ '+was(row.payload.wiki),'review-change'));}
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType==='label'?'Area label':row.payload.noteType==='exit'?'Zone exit':row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));if(row.payload.wiki)card.append(text('p','Wiki page: '+row.payload.wiki,'review-change'));
      // A bounty from the Wanted board is worth more points once approved: the badge says which, with its wiki page.
@@ -774,7 +795,7 @@
  function reviewTitle(row){
   const title=text('strong','','review-title'),p=row.payload,target=row.kind==='new-marker'?p:originals.find(m=>m.id===row.target_id&&row.map===config.id);
   try{if(target&&!target.noteType&&categories[target.category]){const face=text('span','','review-icon');face.style.setProperty('--pin',target.color||categories[target.category][1]);face.append(markerSymbol(target));title.append(face);}}catch{}
-  title.append(text('span',p.name));return title;
+  title.append(text('span',(p.remove===true?'Removal: ':'')+p.name));return title;
  }
  async function reviewAction(row,state,note,card,payload=null,done=()=>{}){
   for(const b of card.querySelectorAll('button'))b.disabled=true;
@@ -792,13 +813,17 @@
    const p=structuredClone(row.payload),edit=row.kind==='edit-marker'||row.kind==='edit-label',move=row.kind==='move-marker'||row.kind==='move-label',report=row.kind==='report';
    const target=row.kind==='edit-label'||row.kind==='move-label'?labelData.labels.find(l=>l.id===row.target_id):originals.find(m=>m.id===row.target_id);
    const xy=v=>{if(!Array.isArray(v)||v.length!==2||!bounded(...v,config.minZoom))throw Error();return locationOf({x:v[0],y:v[1]});};
-   const here=edit?xy((row.kind==='edit-label'?publishedLabelPositions:publishedPositions).get(row.target_id)):move?xy(p.to):xy([p.x,p.y]);
+   // An edited thing stands where it is published: a marker, a place name, or a trainer chip with that id. When it is
+   // gone from the map (removed since), the suggestion still opens here, without a pin, to be decided.
+   let here=null;
+   if(edit){const chip=labelData.trainers?.find(t=>t.id===row.target_id),at=(row.kind==='edit-label'?publishedLabelPositions:publishedPositions).get(row.target_id)||(chip?[chip.x,chip.y]:null);try{if(at)here=xy(at);}catch{}}
+   else here=move?xy(p.to):xy([p.x,p.y]);
    const look=()=>row.kind==='new-marker'?{...p,id:'review-'+row.id}:row.kind.endsWith('label')?{id:'review-'+row.id,name:p.name,noteType:'label',category:'Personal'}:{...(target||{category:'Personal'}),id:'review-'+row.id,name:edit?p.name:target?.name||p.name};
-   const pin=L.marker(here,{icon:pinIcon(look()),draggable:!edit&&!report,zIndexOffset:1500,keyboard:false}).bindTooltip(()=>text('span',(report?'Reported':edit?'Being edited':move?'Suggested position':'Suggested marker')+' · '+p.name),{permanent:true,direction:'bottom',offset:[0,6]});
-   reviewLayer.addLayer(pin);
+   const pin=here&&L.marker(here,{icon:pinIcon(look()),draggable:!edit&&!report,zIndexOffset:1500,keyboard:false}).bindTooltip(()=>text('span',(report?'Reported':edit?'Being edited':move?'Suggested position':'Suggested marker')+' · '+p.name),{permanent:true,direction:'bottom',offset:[0,6]});
+   if(pin)reviewLayer.addLayer(pin);
    let line=null;
    if(move){const from=L.circleMarker(xy(p.from),{radius:6,color:'#2f6f9a',fillColor:'#2f6f9a',fillOpacity:.75,weight:3}).bindTooltip(()=>text('span','Published position'),{permanent:true,direction:'top'});reviewLayer.addLayer(from);line=L.polyline([xy(p.from),here],{color:'#b5861f',weight:2,dashArray:'6 6'});reviewLayer.addLayer(line);}
-   pin.on('drag',()=>line?.setLatLngs([line.getLatLngs()[0],pin.getLatLng()]));
+   pin?.on('drag',()=>line?.setLatLngs([line.getLatLngs()[0],pin.getLatLng()]));
    const bar=text('section','','community-preview');bar.id='community-preview';bar.setAttribute('aria-label','Review selected suggestion');
    const head=text('div','','preview-head');head.append(text('strong',(kinds[row.kind]||'Suggestion')+(row.status==='approved'?' · approved, not live yet':'')));
    if(nav){head.append(text('span',nav.left+' left','preview-left'));const steps=text('span','','preview-steps');
@@ -806,10 +831,11 @@
    // A close button (and Escape): back to the map from a pin, back to the list from the review queue.
    const close=()=>{document.removeEventListener?.('keydown',onKey,true);clearPreview();if(fromPin)loadApproved();else refresh();},onKey=e=>{if(e.key==='Escape'&&$('community-preview')===bar&&!e.target.closest?.('.wiki-results')){e.preventDefault();close();}};
    const x=button('×',close,'preview-close');x.setAttribute('aria-label','Close');x.title='Close';head.append(x);document.addEventListener?.('keydown',onKey,true);bar.addEventListener('wiki-done',()=>document.removeEventListener?.('keydown',onKey,true));
-   bar.append(head);
+   bar.append(head);if(!here)bar.append(text('p','This marker is not on the map any more (removed or replaced since), so there is no pin to show. You can still decide on it.','reported-reason'));
    const field=(label,el)=>{const l=text('label',label,'preview-field');l.append(el);bar.append(l);return el;};
    let name,note,category;
-   if(row.kind==='new-marker'||edit){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
+   const removal=p.remove===true;if(removal)bar.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
+   if(row.kind==='new-marker'||edit&&!removal){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
    if(row.kind==='new-marker'&&!p.noteType){category=field('Type',document.createElement('select'));for(const k of Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))){const o=text('option',k);o.value=k;category.append(o);}category.value=categories[p.category]?p.category:Object.keys(categories)[0];}
    // A tradeskill's trade and a class trainer's class can be set or fixed here before approving.
    let trade,trainerClass,vendor;const option=(label,value)=>{const o=text('option',label);o.value=value;return o;},trades=typeof tradePaths==='object'?Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)):[];
@@ -817,14 +843,14 @@
     trainerClass=field('Class',document.createElement('select'));trainerClass.append(option('Not set',''),...atlasClasses.map(k=>option(k,k)));trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
     vendor=field('Kind',document.createElement('select'));vendor.append(option('Not set',''));for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;for(const k of Object.keys(kinds))set.append(option(k,k));vendor.append(set);}vendor.value=p.vendor||vendorKindNamed((p.name||'')+' '+(p.note||''));
     const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
-   if(row.kind==='new-marker'||edit){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
-   let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
+   if(row.kind==='new-marker'||edit&&!removal){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
+   let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'&&!removal){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
     const finder=wikiFinder(wiki,()=>restyle(),name);name.after(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
    const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category==='Tradeskill'&&trade?.value)p.trade=trade.value;else delete p.trade;
     if(p.category==='Class trainer'&&trainerClass?.value)p.classes=[trainerClass.value];else if(p.category!=='Class trainer')delete p.classes;
-    if(p.category==='Vendor'&&vendor?.value)p.vendor=vendor.value;else delete p.vendor;}pin.setIcon(pinIcon(look()));};
+    if(p.category==='Vendor'&&vendor?.value)p.vendor=vendor.value;else delete p.vendor;}pin?.setIcon(pinIcon(look()));};
    for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor])el?.addEventListener('change',restyle);
    const reviewNote=document.createElement('input');reviewNote.placeholder='Optional review note';reviewNote.setAttribute('aria-label','Optional review note');reviewNote.maxLength=500;bar.append(reviewNote);
    // The adjusted payload keeps the visitor's other fields; positions are checked against the map bounds.
@@ -839,13 +865,15 @@
    };
    const safe=()=>{try{return edits();}catch(e){status(e.message==='Name required'?'Give it a name.':e.message==='Wiki link'?wikiHint:'Keep the marker inside the map.');throw e;}};
    const actions=text('div','','dialog-actions');if(!fromPin)actions.append(button('Back to the list',close));
-   if(!report)actions.append(button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
+   if(!report&&!removal)actions.append(button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
     const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length){status('Changes could not be saved. Please refresh the list.');return;}row.payload=structuredClone(payload);status('Changes saved.');if(fromPin)close();else loadApproved();}));
    const wrapped=decisions(row,()=>reviewNote.value,bar,()=>{try{return safe();}catch{return undefined;}},next);
+   // Someone asking to take it off the map ("remove this", a duplicate): approve it as a removal instead of a text change.
+   if(row.kind==='edit-marker'&&row.status==='pending'&&!removal){const remove=button('Remove from map',()=>reviewAction(row,'approved',reviewNote.value,bar,{...structuredClone(row.payload),name:row.payload.from?.name||row.payload.name,note:row.payload.from?.note||'',remove:true},next),'danger');remove.title='Approve as a removal: the marker, and its trainer chip, go at the next publishing run';wrapped.unshift(remove);}
    actions.append(...wrapped);bar.append(actions);$('map-frame').append(bar);
-   if(move)map.fitBounds(L.latLngBounds([xy(p.from),here]),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else map.setView(here,config.defaultView.placeZoom);if(compact())setPanel(false);
+   if(move)map.fitBounds(L.latLngBounds([xy(p.from),here]),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else if(here)map.setView(here,config.defaultView.placeZoom);if(compact())setPanel(false);
    status(move?'Blue: published position. Drag the suggested marker to adjust it.':report?'The reported marker.':edit?'The marker or name being edited.':'Drag the suggested marker to adjust it.');
-  }catch{clearPreview();status('This suggestion could not be shown on the map.');}
+  }catch{clearPreview();status('This suggestion could not be shown on the map.');if(!fromPin)refresh();}
  }
  accountUI();client.auth.onAuthStateChange((eventName,session)=>{setTimeout(()=>authChanged(session).catch(()=>status('Account could not refresh. Your local notes are safe.')),0);});
  client.auth.getSession().then(({data,error})=>{if(error)throw error;return authChanged(data.session);}).catch(()=>status('Account could not load. Your local notes are safe.'));

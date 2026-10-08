@@ -395,3 +395,5 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .vendor-filter select{flex:1;min-width:0;padding:6px 8px;font-size:12px}
 .community-preview .preview-close{flex:none;width:30px;height:30px;padding:0;margin-left:auto;font-size:20px;line-height:1;background:transparent}
 .community-preview .preview-steps+.preview-close{margin-left:4px}
+.dialog-actions .community-remove{margin-right:auto;background:transparent;color:#f29579;border-color:transparent}
+.dialog-actions .community-remove:hover{border-color:#a04438}
