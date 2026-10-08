@@ -332,8 +332,10 @@ function finishEdit(save){
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
 // Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
 // The dot beside Category shows the colour the pin will have.
-function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';}
-function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);
+function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';$('class-field').hidden=type!=='marker'||$('category').value!=='Class trainer';guessTrade();}
+// A Tradeskill named in its name or note ("an enchanting trainer") starts on that trade; a chosen trade stays.
+function guessTrade(){if($('category').value!=='Tradeskill'||$('trade').value)return;const trade=tradeNamed($('name').value+' '+$('note').value,Object.keys(tradePaths));if(trade)$('trade').value=trade;}
+function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);$('trainer-class').value=Array.isArray(m.classes)&&m.classes.length===1?m.classes[0]:'';
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
@@ -682,12 +684,19 @@ function setupControls(){
  $('edit-toggle').onclick=()=>alignmentMode?askFinishEdit():enterEdit();$('edit-positions').onclick=enterEdit;$('edit-done').onclick=()=>finishEdit(true);$('edit-cancel').onclick=()=>finishEdit(false);
  $('add').onclick=startPlacement;if($('add-note'))$('add-note').onclick=startPlacement;
  for(const [name,hex] of Object.entries(pinColours)){const label=text('label','');label.title=name;const input=text('input','');input.type='radio';input.name='pin-colour';input.value=hex;input.setAttribute('aria-label',name);const swatch=text('span','');swatch.style.setProperty('--swatch',hex);label.append(input,swatch);$('colour-swatches').append(label);}
+ // A class trainer's class: picked here, or filled from the wiki pick; it rides with the note as its classes.
+ for(const c of atlasClasses)$('trainer-class').append(new Option(c,c));
+ $('trainer-class').onchange=()=>{$('wiki').dataset.wikiClasses=JSON.stringify($('trainer-class').value?[$('trainer-class').value]:[]);};
+ for(const id of ['name','note'])$(id).addEventListener('input',guessTrade);
  for(const tradeName of Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b))){const option=text('option',tradeName);option.value=tradeName;$('trade').append(option);}
  for(const r of document.querySelectorAll('input[name="note-type"],input[name="pin-colour"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
  $('cancel-place').onclick=cancelPlacement;document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelPlacement();if(compact())setPanel(false);}});
  // Closing the editor without saving also drops a new note's pin; a saved note has already ended placement.
  $('cancel-edit').onclick=closeEditor;$('editor').addEventListener('close',()=>{draft=null;cancelPlacement();});
- $('marker-form').onsubmit=e=>{e.preventDefault();if(!draft)return;const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
+ $('marker-form').onsubmit=e=>{e.preventDefault();if(!draft)return;
+  {const sharing=!!$('suggest-check')?.checked&&!$('suggest-on-save')?.hidden&&!$('suggest-check').parentElement.hidden,type=noteTypeValue(),kind=$('category').value;
+   if(sharing&&type==='marker'&&kind==='Tradeskill'&&!$('trade').value){status('Choose the trade before suggesting it for the public map.');$('trade').focus();return;}
+   if(sharing&&type==='marker'&&kind==='Class trainer'&&!$('marker-form').classList.contains('bounty-mode')){let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}if(!classes.length){status('Choose the class they teach before suggesting it for the public map.');$('trainer-class').focus();return;}}}const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
   delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;delete m.wikiId;delete m.classes;
   if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
   const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&(m.category==='Personal'||colour===draft.color))m.color=colour;

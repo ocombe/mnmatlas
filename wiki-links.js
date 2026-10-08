@@ -45,6 +45,13 @@ function wikiLinkFor(place,parent=wikiEmbedParent()){
  const adapted=typeof rule.adapt==='function'?wikiAddress(rule.adapt(href,site,place)):'';
  return adapted&&wikiSiteOf(new URL(adapted).hostname)===rule.site?show(adapted):null;
 }
+// The trade a name or note names ("an enchanting trainer" -> "(Dis)Enchanting"), from the atlas's trade list; '' if none.
+function tradeNamed(words,trades){
+ const said=' '+String(words??'').toLowerCase().replace(/[^a-z]+/g,' ')+' ';
+ for(const trade of trades){const forms=trade.toLowerCase().replace(/\((dis)\)/,'$1|').split(/\s*\/\s*/).flatMap(f=>f.includes('|')?[f.replace('|',''),f.split('|')[1]]:[f]);
+  if(forms.some(f=>f&&said.includes(' '+f.replace(/[^a-z]+/g,' ').trim()+' ')))return trade;}
+ return '';
+}
 // Whether this page may send readers to a wiki site at all: always on the atlas itself; inside another site only when
 // its rule shows every link or that wiki is its own (as wikiLinkFor decides for one link). Features built on a wiki
 // (the Wanted board, the Name field's wiki suggestions) only appear where that wiki may be linked.

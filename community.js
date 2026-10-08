@@ -808,13 +808,19 @@
    let name,note,category;
    if(row.kind==='new-marker'||edit){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
    if(row.kind==='new-marker'&&!p.noteType){category=field('Type',document.createElement('select'));for(const k of Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))){const o=text('option',k);o.value=k;category.append(o);}category.value=categories[p.category]?p.category:Object.keys(categories)[0];}
+   // A tradeskill's trade and a class trainer's class can be set or fixed here before approving.
+   let trade,trainerClass;const option=(label,value)=>{const o=text('option',label);o.value=value;return o;},trades=typeof tradePaths==='object'?Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)):[];
+   if(category){trade=field('Trade',document.createElement('select'));trade.append(option('Any trade',''),...trades.map(t=>option(t,t)));trade.value=p.trade||tradeNamed((p.name||'')+' '+(p.note||''),trades);
+    trainerClass=field('Class',document.createElement('select'));trainerClass.append(option('Not set',''),...atlasClasses.map(k=>option(k,k)));trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
+    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';};fit();category.addEventListener('change',fit);}
    if(row.kind==='new-marker'||edit){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
    let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
     const finder=wikiFinder(wiki,()=>restyle(),name);name.after(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
-   const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category!=='Tradeskill')delete p.trade;}pin.setIcon(pinIcon(look()));};
-   for(const el of [name,category])el?.addEventListener('input',restyle);category?.addEventListener('change',restyle);
+   const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category==='Tradeskill'&&trade?.value)p.trade=trade.value;else delete p.trade;
+    if(p.category==='Class trainer'&&trainerClass?.value)p.classes=[trainerClass.value];else if(p.category!=='Class trainer')delete p.classes;}pin.setIcon(pinIcon(look()));};
+   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass])el?.addEventListener('change',restyle);
    const reviewNote=document.createElement('input');reviewNote.placeholder='Optional review note';reviewNote.setAttribute('aria-label','Optional review note');reviewNote.maxLength=500;bar.append(reviewNote);
    // The adjusted payload keeps the visitor's other fields; positions are checked against the map bounds.
    const edits=()=>{
