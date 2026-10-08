@@ -417,3 +417,8 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .community-preview .duplicate-box{margin:6px 0}
 /* One or two buttons: icon and label on one line; stacked tiles only for three or more. */
 .leaflet-popup-content .popup-actions:not(:has(>button:nth-of-type(3))) button{flex-direction:row;gap:8px;min-height:38px}
+/* Rejected in the last day (admins): fainter still, crossed out. */
+.rejected-pin{opacity:.42}
+.rejected-pin:hover,.rejected-pin:focus-visible{opacity:.85}
+.rejected-pin.pin span{filter:grayscale(.7);border-style:dashed}
+.rejected-pin::before{content:"\2715";position:absolute;left:0;top:0;width:25px;height:25px;display:grid;place-items:center;z-index:2;color:#ff8f7a;font:700 18px/1 var(--body);text-shadow:0 0 3px #000,0 0 6px #000;pointer-events:none}

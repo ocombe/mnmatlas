@@ -702,8 +702,15 @@
  // new spot with a dotted line from the current one, an edit tagged as such. Each goes once its change is live.
  // Suggestions close together (or naming the same NPC), and ones repeating a marker already on the map, are flagged
  // as possible duplicates, with a jump between them.
- let approvedLayer=null,approvedRows=[],pendingRows=[],approvedSerial=0;const suggestionPins=new Map();
- const approvedKey='mnmaps-show-approved',pendingKey='mnmaps-show-pending';
+ let approvedLayer=null,approvedRows=[],pendingRows=[],rejectedRows=[],approvedSerial=0;const suggestionPins=new Map();
+ const approvedKey='mnmaps-show-approved',pendingKey='mnmaps-show-pending',rejectedKey='mnmaps-show-rejected';
+ // Rejected suggestions stay in the database and never go live; admins see the ones rejected since the site was last
+ // published, crossed out, until the next update. The published time is the site files' Last-Modified (as the update
+ // check reads it); without it, the last day.
+ async function publishedSince(){
+  try{const r=await fetch('site.webmanifest',{method:'HEAD',cache:'no-store'}),stamp=r.ok&&Date.parse(r.headers.get('last-modified')||'');if(Number.isFinite(stamp))return new Date(stamp).toISOString();}catch{}
+  return new Date(Date.now()-24*3600000).toISOString();
+ }
  const shownSetting=key=>{try{return localStorage.getItem(key)!=='false';}catch{return true;}};
  function approvedLive(row){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id);
   if(row.kind==='new-marker')return originals.some(m=>m.id==='community-'+row.id);
@@ -736,38 +743,42 @@
    box.onchange=()=>{try{localStorage.setItem(key,String(box.checked));}catch{}drawApproved();};l.append(box,text('span',''));section.append(l);(after()||$('hidden-controls'))?.after(section);}
   section.querySelector('input').checked=shownSetting(key);section.querySelector('span').textContent=' '+label+' ('+count+')';}
  async function loadApproved(){
-  const serial=++approvedSerial;let approved=[],pending=[];
+  const serial=++approvedSerial;let approved=[],pending=[],rejected=[];
   if(user&&config&&!config.zonesFile){
-   const read=async state=>{const {data,error}=await client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name,comment').eq('status',state).eq('map',config.id).limit(500);if(error)throw error;return Array.isArray(data)?data:[];};
-   try{approved=await read('approved');if(admin)pending=await read('pending');}catch{}}
-  if(serial!==approvedSerial)return;approvedRows=approved;pendingRows=pending;drawApproved();
+   const read=async(state,since)=>{let q=client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name,comment,reviewed_at,review_note').eq('status',state).eq('map',config.id);if(since)q=q.gte('reviewed_at',since);const {data,error}=await q.limit(500);if(error)throw error;return Array.isArray(data)?data:[];};
+   try{approved=await read('approved');if(admin)pending=await read('pending');}catch{}
+   if(admin)try{rejected=await read('rejected',await publishedSince());}catch{}}
+  if(serial!==approvedSerial)return;approvedRows=approved;pendingRows=pending;rejectedRows=rejected;drawApproved();
  }
  function drawApproved(){
   approvedLayer?.remove();approvedLayer=null;suggestionPins.clear();
-  const ready=map&&config,approved=ready?approvedRows.filter(r=>drawable(r)&&!approvedLive(r)):[],pending=ready&&admin?pendingRows.filter(r=>drawable(r)&&!approvedLive(r)):[];
+  const ready=map&&config,approved=ready?approvedRows.filter(r=>drawable(r)&&!approvedLive(r)):[],pending=ready&&admin?pendingRows.filter(r=>drawable(r)&&!approvedLive(r)):[],rejected=ready&&admin?rejectedRows.filter(drawable):[];
   overlayToggle('approved-controls',approvedKey,'Show approved, not live yet',approved.length,()=>null);
   overlayToggle('pending-controls',pendingKey,'Show waiting for review',pending.length,()=>$('approved-controls'));
-  const rows=[...(shownSetting(approvedKey)?approved:[]),...(shownSetting(pendingKey)?pending:[])];if(!rows.length)return;approvedLayer=L.layerGroup().addTo(map);
-  for(const row of rows){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id),waiting=row.status==='pending';let at,look,tag;
+  overlayToggle('rejected-controls',rejectedKey,'Show rejected, until the next update',rejected.length,()=>$('pending-controls')||$('approved-controls'));
+  const rows=[...(shownSetting(rejectedKey)?rejected:[]),...(shownSetting(approvedKey)?approved:[]),...(shownSetting(pendingKey)?pending:[])];if(!rows.length)return;approvedLayer=L.layerGroup().addTo(map);
+  for(const row of rows){const p=row.payload||{},t=originals.find(m=>m.id===row.target_id),waiting=row.status==='pending',refused=row.status==='rejected';let at,look,tag;
    try{
     const xy=suggestionAt(row);if(!xy)continue;at=locationOf({...(t||{}),x:xy[0],y:xy[1],level:row.level||t?.level});
     if(row.kind==='new-marker'){look={...p,id:'suggested-'+row.id};tag='New marker';}
     else if(row.kind==='move-marker'){look={...t,id:'suggested-'+row.id};tag='Moved marker';if(t)approvedLayer.addLayer(L.polyline([locationOf(t),at],{color:waiting?'#8fc7d8':'#e2b46a',weight:2,dashArray:'3 6',interactive:false}));}
     else{look={...(t||{category:'Personal'}),name:p.name,id:'suggested-'+row.id};tag=p.remove===true?'Removal':'Edited marker';}
    }catch{continue;}
-   const dup=duplicatesOf(row).length>0,state=waiting?'waiting for review':'approved, not live yet';
+   const dup=!refused&&duplicatesOf(row).length>0,state=refused?'rejected':waiting?'waiting for review':'approved, not live yet';
    // The atlas's own hover tooltip, like the published markers (a browser title would show beside it); the full
    // description is the pin's aria-label.
-   const label=tag+' ('+state+'): '+(p.name||''),pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:waiting?950:900,keyboard:true,label}).bindTooltip(()=>text('span',markerTitle(look)+' · '+state),{direction:'top',offset:[0,-23]});
-   pin.on('add',()=>{const el=pin.getElement();if(!el)return;el.setAttribute('aria-label',label);el.classList.add('approved-pin');if(waiting)el.classList.add('pending-pin');if(row.kind==='edit-marker')el.classList.add(p.remove===true?'approved-remove':'approved-edit');if(dup)el.classList.add('duplicate-pin');});
+   const label=tag+' ('+state+'): '+(p.name||''),pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:refused?850:waiting?950:900,keyboard:true,label}).bindTooltip(()=>text('span',markerTitle(look)+' · '+state),{direction:'top',offset:[0,-23]});
+   pin.on('add',()=>{const el=pin.getElement();if(!el)return;el.setAttribute('aria-label',label);el.classList.add('approved-pin');if(waiting)el.classList.add('pending-pin');if(refused)el.classList.add('rejected-pin');if(row.kind==='edit-marker')el.classList.add(p.remove===true?'approved-remove':'approved-edit');if(dup)el.classList.add('duplicate-pin');});
    pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);suggestionPins.set(row.id,pin);}
  }
  function approvedPopup(row,tag){
-  const p=row.payload||{},waiting=row.status==='pending',n=text('div','');n.append(text('div',tag+' · '+(waiting?'waiting for review':'approved, not live yet'),'tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker'&&p.remove!==true)n.append(text('p',p.note));
+  const p=row.payload||{},waiting=row.status==='pending',refused=row.status==='rejected',n=text('div','');n.append(text('div',tag+' · '+(refused?'rejected':waiting?'waiting for review':'approved, not live yet'),'tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker'&&p.remove!==true)n.append(text('p',p.note));
   if(p.remove===true)n.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
-  n.append(text('p',waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour.','moved-note'));
+  n.append(text('p',refused?'Rejected'+(row.reviewed_at?' '+new Date(row.reviewed_at).toLocaleString():'')+'. Sent by '+(row.author_name||'a Discord member')+'.':waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour.','moved-note'));
+  if(refused&&row.review_note)n.append(text('p','Review note: '+row.review_note,'reported-reason'));
   const dups=duplicateList(row,jumpTo);if(dups)n.append(dups);
-  if(admin){const actions=text('div','','popup-actions'),edit=button(waiting?'Edit and review':'Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);},'','edit');actionIcon(edit);actions.append(edit);n.append(actions);}
+  if(admin&&refused){const actions=text('div','','popup-actions'),back=button('Back to waiting',()=>{map.closePopup?.();return reviewAction(row,'pending','',n);});actions.append(back);n.append(actions);}
+  else if(admin){const actions=text('div','','popup-actions'),edit=button(waiting?'Edit and review':'Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);},'','edit');actionIcon(edit);actions.append(edit);n.append(actions);}
   else if(row.user_id===user?.id)n.append(text('p','Your suggestion. Thank you!','community-note'));
   return n;}
  async function authChanged(session){
