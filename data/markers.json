@@ -768,5 +768,60 @@
     "y": 1259,
     "wiki": "https://monstersandmemories.wiki/npcs/bieito-brightsmile",
     "wikiId": "npc-bieito-brightsmile"
+  },
+  {
+    "id": "community-140",
+    "community": true,
+    "name": "Leila Ghasem",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1681,
+    "y": 1376,
+    "wiki": "https://monstersandmemories.wiki/npcs/leila-ghasem",
+    "wikiId": "npc-leila-ghasem"
+  },
+  {
+    "id": "community-141",
+    "community": true,
+    "name": "Errol Shrewtender",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1382,
+    "wiki": "https://monstersandmemories.wiki/npcs/errol-shrewtender",
+    "wikiId": "npc-errol-shrewtender"
+  },
+  {
+    "id": "community-142",
+    "community": true,
+    "name": "Masoumeh Akhtar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1387,
+    "wiki": "https://monstersandmemories.wiki/npcs/masoumeh-akhtar",
+    "wikiId": "npc-masoumeh-akhtar"
+  },
+  {
+    "id": "community-143",
+    "community": true,
+    "name": "Old Mother Roshan",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1365,
+    "wiki": "https://monstersandmemories.wiki/npcs/old-mother-roshan",
+    "wikiId": "npc-old-mother-roshan"
+  },
+  {
+    "id": "community-144",
+    "community": true,
+    "name": "Talnach Wilenner",
+    "category": "Vendor",
+    "note": "",
+    "x": 1683,
+    "y": 1339,
+    "wiki": "https://monstersandmemories.wiki/npcs/talnach-wilenner",
+    "wikiId": "npc-talnach-wilenner"
   }
 ]
