@@ -3,8 +3,8 @@
   {
    "id": "zone-night-harbor",
    "name": "Night Harbor",
-   "x": 2300,
-   "y": 2110,
+   "x": 2350,
+   "y": 2169,
    "kind": "zone",
    "priority": 100,
    "toMap": "night-harbor"
@@ -12,8 +12,8 @@
   {
    "id": "zone-shaded-dunes",
    "name": "Shaded Dunes",
-   "x": 1983,
-   "y": 2162,
+   "x": 1986,
+   "y": 2200,
    "kind": "zone",
    "priority": 100,
    "toMap": "shaded-dunes"
@@ -21,8 +21,8 @@
   {
    "id": "zone-sungreet-strand",
    "name": "Sungreet Strand",
-   "x": 2411,
-   "y": 1697,
+   "x": 2409,
+   "y": 1771,
    "kind": "zone",
    "priority": 100,
    "toMap": "sungreet-strand"
@@ -30,8 +30,8 @@
   {
    "id": "zone-fallen-pass",
    "name": "Fallen Pass",
-   "x": 1690,
-   "y": 2245,
+   "x": 1668,
+   "y": 2256,
    "kind": "zone",
    "priority": 100,
    "toMap": "fallen-pass"
@@ -39,8 +39,8 @@
   {
    "id": "zone-glass-flats",
    "name": "Glass Flats",
-   "x": 2144,
-   "y": 1168,
+   "x": 2125,
+   "y": 1175,
    "kind": "zone",
    "priority": 60,
    "toMap": "glass-flats"
@@ -48,8 +48,8 @@
   {
    "id": "zone-vale-of-zintar",
    "name": "Vale of Zintar",
-   "x": 1318,
-   "y": 1496,
+   "x": 1259,
+   "y": 1493,
    "kind": "zone",
    "priority": 60,
    "toMap": "vale-of-zintar"
@@ -65,8 +65,8 @@
   {
    "id": "zone-keepers-bight",
    "name": "Keeper's Bight",
-   "x": 1470,
-   "y": 776,
+   "x": 1456,
+   "y": 803,
    "kind": "zone",
    "priority": 60,
    "toMap": "keepers-bight"
@@ -74,7 +74,7 @@
   {
    "id": "zone-evershade-weald",
    "name": "Evershade Weald",
-   "x": 1570,
+   "x": 1569,
    "y": 425,
    "kind": "zone",
    "priority": 100,
@@ -91,8 +91,8 @@
   {
    "id": "zone-scarwood",
    "name": "Scarwood",
-   "x": 2017,
-   "y": 579,
+   "x": 2010,
+   "y": 581,
    "kind": "zone",
    "priority": 60,
    "toMap": "scarwood"
