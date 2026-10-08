@@ -16,7 +16,7 @@
       "maxZoom": 5,
       "coordinateZoom": 4,
       "tileSize": 256,
-      "tileRevision": "v2",
+      "tileRevision": "v3",
       "tilePath": "assets/tiles/world/{z}/{x}/{y}.webp",
       "markersFile": "data/world/markers.json",
       "labelsFile": "data/world/labels.json",
