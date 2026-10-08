@@ -24,7 +24,6 @@
  const scope=()=>config.id+'-'+config.tileRevision,displayName=u=>String(u?.user_metadata?.full_name||u?.user_metadata?.name||u?.user_metadata?.preferred_username||'Discord member').slice(0,80);
  function readSet(key){try{const rows=JSON.parse(localStorage.getItem(key)||'[]');return new Set(Array.isArray(rows)?rows.filter(r=>typeof r==='string'):[]);}catch{return new Set();}}
  function remember(key,values){try{const rows=readSet(key);for(const value of values)rows.add(value);localStorage.setItem(key,JSON.stringify([...rows]));}catch{status('Sent successfully, but this browser could not remember it.');}}
- const button=(label,action,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=action;return b;};
  // Account lives in the top bar: a Sign in / avatar button that opens a small menu.
  const accountBox=text('div','','account'),accountButton=text('button','','account-button'),account=text('div','','account-menu');
  accountButton.type='button';accountButton.setAttribute('aria-haspopup','true');accountButton.setAttribute('aria-expanded','false');account.id='account-menu';account.hidden=true;accountButton.setAttribute('aria-controls',account.id);
@@ -113,6 +112,18 @@
   actions.append(button('Cancel',()=>d.close()),go);d.append(actions);
  }
  function showDialog(title){dialog.replaceChildren();const heading=text('h2',title);heading.id='community-title';dialog.append(heading);if(!dialog.open)dialog.showModal();return dialog;}
+ // A labelled field of a dialog.
+ function field(d,label,id,el){const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;}
+ const textBox=(rows,max,placeholder='')=>{const t=document.createElement('textarea');t.rows=rows;t.maxLength=max;t.placeholder=placeholder;return t;};
+ // Radio choices of a dialog ({value: label}); picked() is the chosen value, or undefined.
+ function choiceList(d,name,options){
+  const list=text('div','','community-choices'),radios=Object.entries(options).map(([value,label])=>{const row=text('label',''),r=document.createElement('input');r.type='radio';r.name=name;r.value=value;row.append(r,text('span',label));list.append(row);return r;});
+  d.append(list);return {radios,picked:()=>radios.find(r=>r.checked)?.value};
+ }
+ // What went wrong when sending, in the visitor's words.
+ const sendError=(e,fallback,what='suggestions')=>turnedOff(e)?'Your account can no longer send '+what+'.':e?.code==='too-long'?'This is too long to send: shorten its description.':fallback;
+ // A dialog's send button: it needs an account, runs once at a time and says what went wrong.
+ function sendButton(label,run,failed,what){const b=button(label,async()=>{if(!user){signInDialog();return;}b.disabled=true;try{await run();}catch(e){status(sendError(e,failed,what));}finally{b.disabled=false;}},'primary');return b;}
  function signInDialog(){const d=showDialog('Sign in to contribute');d.append(text('p','Sign in with Discord to report problems or send suggestions for review. Your positions and notes remain saved in this browser.'));const actions=text('div','','dialog-actions');actions.append(button('Close',()=>d.close()),button('Sign in with Discord',signIn,'primary'));d.append(actions);}
  function freshPopup(){if(!map||loading)return;for(const m of allMarkers()){const pin=pins.get(m.id);if(pin)pin.setPopupContent(popup(m));}}
  // A report says what is wrong, so it can be acted on; it waits in review until fixed or dismissed.
@@ -122,20 +133,16 @@
  function reportDialog(m){
   if(!user){signInDialog();return;}
   const d=showDialog('Report a problem');d.append(text('p',m.name,'form-hint'));
-  const list=text('div','','community-choices'),radios=[];
-  for(const [key,label] of Object.entries(reasons)){const row=text('label',''),r=document.createElement('input');r.type='radio';r.name='report-reason';r.value=key;row.append(r,text('span',label));list.append(row);radios.push(r);}
-  d.append(list);
+  const reason=choiceList(d,'report-reason',reasons);
   const hint=text('p','Tip: in ✎ Edit you can drag the marker to the right spot and send it for review.','form-hint');hint.hidden=true;d.append(hint);
-  for(const r of radios)r.onchange=()=>{hint.hidden=r.value!=='position'||!r.checked;};
-  const label=text('label','Details (optional)');label.htmlFor='report-comment';const comment=document.createElement('textarea');comment.id='report-comment';comment.maxLength=500;comment.rows=3;comment.placeholder='For example: it is on the other side of the bridge.';d.append(label,comment);
-  const actions=text('div','','dialog-actions'),send=button('Send report',async()=>{
-   const picked=radios.find(r=>r.checked);if(!picked){status('Choose what is wrong.');return;}if(!user){signInDialog();return;}
-   send.disabled=true;const [x,y]=publishedPositions.get(m.id)||[m.x,m.y];
-   try{const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,kind:'report',target_id:m.id,payload:{name:m.name,reason:picked.value,x,y},comment:comment.value.trim()||null});if(error)throw error;
-    reportedNow.add(reportToken(m));d.close();freshPopup();status('Thanks! Your report is waiting for review.');event('report-sent');}
-   catch(e){status(turnedOff(e)?'Your account can no longer send reports.':'The report could not be sent. Please try again.');}
-   finally{send.disabled=false;}
-  },'primary');
+  for(const r of reason.radios)r.onchange=()=>{hint.hidden=r.value!=='position'||!r.checked;};
+  const comment=field(d,'Details (optional)','report-comment',textBox(3,500,'For example: it is on the other side of the bridge.'));
+  const actions=text('div','','dialog-actions'),send=sendButton('Send report',async()=>{
+   const picked=reason.picked();if(!picked){status('Choose what is wrong.');return;}
+   const [x,y]=publishedPositions.get(m.id)||[m.x,m.y];
+   const {error}=await client.from('suggestions').insert({user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,kind:'report',target_id:m.id,payload:{name:m.name,reason:picked,x,y},comment:comment.value.trim()||null});if(error)throw error;
+   reportedNow.add(reportToken(m));d.close();freshPopup();status('Thanks! Your report is waiting for review.');event('report-sent');
+  },'The report could not be sent. Please try again.','reports');
   actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
  }
  // A published marker's or place name's text can be corrected; the change waits in review like any suggestion.
@@ -147,7 +154,6 @@
  // the world map spans every zone.
  let finderCount=0;const finders=new Set(),wikiTypes={npc:'NPC'},markerTypes=Object.keys(wikiTypes).join(',');
  const searchZone=()=>!config||config.zonesFile?'':config.wikiZone||config.title||'';
- const searchPlaceholder=()=>{const zone=searchZone();return zone?'Search NPCs in '+zone:'Search NPCs in every zone';};
  async function wikiSearch(q,signal,asking){
   // Answers are kept in this browser for a day (and shared ones on the backend), so a repeated search costs the wiki nothing.
   const zone=searchZone(),key=q.toLowerCase().replace(/\s+/g,' '),id=markerTypes+'|'+zone.toLowerCase()+'|'+key,saved=readSearches(),hit=saved[id];if(hit&&Date.now()-hit.at<864e5)return hit;
@@ -180,7 +186,7 @@
   const options=()=>[...list.querySelectorAll('button')].filter(b=>String(b.className).split(' ').includes('wiki-result'));
   const highlight=i=>{const all=options();active=all.length?(i+all.length)%all.length:-1;all.forEach((b,n)=>{b.className=n===active?'wiki-result active':'wiki-result';b.setAttribute('aria-selected',String(n===active));});if(active>=0){name.setAttribute('aria-activedescendant',all[active].id);all[active].scrollIntoView?.({block:'nearest'});}else name.removeAttribute('aria-activedescendant');};
   // The credit names and links the wiki the results came from, under the list and again after a pick.
-  const credit=(from,lead='')=>{const source=wikiSites[from];if(!source)return;const line=text('a',lead+(source.credit||'Data from '+source.name),'wiki-credit');line.href=source.home||'https://'+source.hosts[0]+'/';line.target='_blank';line.rel='noopener';list.append(line);};
+  const credit=(from,lead)=>{const line=wikiCredit(from,lead);if(line)list.append(line);};
   const pick=(row,from)=>{name.value=row.name+levelText(row.level);wanted=name.value.trim().toLowerCase().replace(/\s+/g,' ');
    input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);
    stop();show([]);credit(from,'Filled from the wiki · ');name.focus?.();};
@@ -206,6 +212,8 @@
   box.reset=()=>{stop();wanted='';show([]);};
   finders.add(box);box.update();return box;
  }
+ // The credit a wiki's data carries, linking its front page; null for a site not listed.
+ function wikiCredit(site,lead='',cls='wiki-credit'){const source=wikiSites[site];return source?externalLink(lead+(source.credit||'Data from '+source.name),source.home||'https://'+source.hosts[0]+'/',cls):null;}
  // A picked NPC pre-fills a new note as the wiki's terms allow: its name (with its level, as the atlas writes levels),
  // its type from the wiki's role, and its short location line as the note. Nothing the visitor typed is replaced,
  // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level.
@@ -216,8 +224,8 @@
  {const field=$('wiki-field');if(field){const finder=wikiFinder($('wiki'),row=>{
   const type=roleType(row);if(type&&$('category').value==='Personal'&&[...$('category').options].some(o=>o.value===type)){$('category').value=type;$('category').dispatchEvent(new Event('change'));}
   // A trainer's classes ride with its wiki link, so the note reads "Beastmaster trainer" first like the atlas's own trainers.
-  $('wiki').dataset.wikiClasses=JSON.stringify(trainerClasses(row));
-  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);if(typeof guessVendor==='function')guessVendor();},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+  pickClasses(trainerClasses(row));
+  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);guessVendor();},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  // The Wanted board: NPCs the wiki knows in this map's zone that the map does not mark yet, as bounties to take.
  // Trainers and merchants come first as priority bounties. Taking one starts the pin with a note filled from the wiki
  // that saving claims (sends for review). Signed out, the note can be kept private and claimed after signing in.
@@ -264,7 +272,7 @@
   catch{return new Set(Object.keys(local));}
  }
  // What a bounty's note starts with: the wiki's name and level, its type, its page and id, a trainer's classes.
- function bountyPrefill(row){const classes=trainerClasses(row),type=isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Personal');
+ function bountyPrefill(row){const classes=trainerClasses(row),type=roleType(row)||'Personal';
   return {name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
  const signInToTake=()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.'));
 // The reward a bounty earns, in the bounty board's own words (one place to change it).
@@ -298,7 +306,6 @@
   });
  }
  function markClaimed(note,label='Claimed, awaiting review'){note.classList.add('claimed');note.querySelector('.notice-take')?.remove();if(!note.querySelector('.notice-stamp'))note.querySelector('.notice-paper').append(text('span',label,'notice-stamp'));status(label==='Claimed, awaiting review'?label:label+'.');}
- const wikiLink=(row,label,cls)=>{const a=text('a',label,cls);a.href=row.url;a.target='_blank';a.rel='noopener';return a;};
  // The notices' paper: the paper texture with a rim cut the same way as the map's own parchment edge (sheet-edge.js):
  // a ragged cut, then a scorched band fading into the paper. Drawn once the texture is in, flat cream until then.
  let paperTexture=null;
@@ -370,7 +377,7 @@
   filter.addEventListener('keydown',e=>{if(e.key==='Escape'&&filter.value){e.preventDefault();e.stopPropagation();clear.onclick();}});
   for(const g of groups){const t=button('',()=>show(g.key),'wanted-tab');t.dataset.key=g.key;t.setAttribute('role','tab');t.append(text('span',g.title.replace('Class trainers','Trainers').replace('Quest givers','Quests').replace('Named NPCs','Named')),text('small',String(g.rows.filter(r=>!claimed.has(r.id)).length)));tabs.append(t);}
   view.append(box,tabs,reward,list);
-  const source=wikiSites[site];if(source){const credit=text('a',source.credit||'Data from '+source.name,'wiki-credit board-credit');credit.href=source.home||'https://'+source.hosts[0]+'/';credit.target='_blank';credit.rel='noopener';view.append(credit);}
+  const credit=wikiCredit(site,'','wiki-credit board-credit');if(credit)view.append(credit);
   show(chosen);contributeCount(open);
   if(focus){const el=[...list.children].find(n=>n.dataset.bounty===wantedFocus);if(el){el.classList.add('notice-focus');el.scrollIntoView({block:'center'});}}wantedFocus=null;
  }
@@ -379,9 +386,9 @@
  // is the drag handle; a claimed one is stamped.
  function notice(row,isClaimed){
   const note=text('article','','notice'+(row.priority?' priority':'')),paper=text('div','','notice-paper'),name=text('h4','','notice-name');
-  name.append(wikiLink(row,row.name,''));paper.append(text('p',row.priority?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord,'notice-tag'));
+  name.append(externalLink(row.name,row.url));paper.append(text('p',row.priority?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord,'notice-tag'));
   paper.append(name,text('p',[row.level?'Level '+row.level:'',bountyKind(row)].filter(Boolean).join(' · '),'notice-meta'));
-  const foot=text('div','','notice-foot');foot.append(wikiLink(row,'Wiki ↗','notice-wiki'));
+  const foot=text('div','','notice-foot');foot.append(externalLink('Wiki ↗',row.url,'notice-wiki'));
   if(isClaimed)paper.append(text('span','Claimed, awaiting review','notice-stamp'));else foot.append(button('Take the bounty',()=>takeBounty(row,note),'notice-take primary'));
   paper.append(foot);note.dataset.bounty=row.id;note.append(paper,text('span','','notice-nail'));note.classList.toggle('claimed',isClaimed);bountyDrag(note,row);return note;
  }
@@ -405,22 +412,19 @@
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
   const marker=kind==='edit-marker';
   d.append(text('p','Fix the name or the description'+(marker?', or link its wiki page':'')+'. Your change waits for review before it appears on the map.','form-hint'));
-  const field=(label,id,el)=>{const l=text('label',label);l.htmlFor=id;el.id=id;d.append(l,el);return el;};
-  const name=field('Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
-  const note=field('Description','edit-note',document.createElement('textarea'));note.maxLength=2000;note.rows=4;note.value=target.note||'';note.placeholder='What players should know about this place.';
-  let wiki=null;if(marker){wiki=field('Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki,null,name);name.after(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
-  const why=field('Why (optional)','edit-comment',document.createElement('textarea'));why.maxLength=500;why.rows=2;why.placeholder='For example: the vendor was renamed in the last patch.';const credit=creditBox(d);
-  const actions=text('div','','dialog-actions'),send=button(admin?'Publish':'Send for review',async()=>{
+  const name=field(d,'Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
+  const note=field(d,'Description','edit-note',textBox(4,2000,'What players should know about this place.'));note.value=target.note||'';
+  let wiki=null;if(marker){wiki=field(d,'Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki,null,name);name.after(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
+  const why=field(d,'Why (optional)','edit-comment',textBox(2,500,'For example: the vendor was renamed in the last patch.'));const credit=creditBox(d);
+  const actions=text('div','','dialog-actions'),send=sendButton(admin?'Publish':'Send for review',async()=>{
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim(),newWiki=wiki?wikiAddress(wiki.value):'',oldWiki=target.wiki||'';
    if(!newName){status('Give it a name.');name.focus?.();return;}
    if(newWiki===null){status(wikiHint);wiki.focus?.();return;}
    if(newName===target.name&&newNote===oldNote&&newWiki===oldWiki){status(marker?'Change the name, the description or the wiki page first.':'Change the name or the description first.');return;}
-   if(!user){signInDialog();return;}send.disabled=true;
-   try{const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,...(marker?{wiki:newWiki,...(wikiIdFor(wiki,newWiki)?{wikiId:wikiIdFor(wiki,newWiki)}:{})}:{}),from:{name:target.name,note:target.note||'',...(marker?{wiki:oldWiki}:{})}},comment:why.value.trim()||null,credit:credit.checked});
-    editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your edit is waiting for review.');event('edit-sent');}
-   catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The edit could not be sent. Please try again.');}
-   finally{send.disabled=false;}
-  },'primary');
+   const wikiId=marker&&wikiIdFor(wiki,newWiki);
+   const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,...(marker?{wiki:newWiki,...(wikiId?{wikiId}:{})}:{}),from:{name:target.name,note:target.note||'',...(marker?{wiki:oldWiki}:{})}},comment:why.value.trim()||null,credit:credit.checked});
+   editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your edit is waiting for review.');event('edit-sent');
+  },'The edit could not be sent. Please try again.');
   if(marker)actions.append(button('Suggest removing this',()=>removalDialog(target),'community-remove'));
   actions.append(button('Cancel',()=>d.close()),send);
   d.append(actions);name.focus?.();
@@ -429,21 +433,16 @@
  function removalDialog(target){
   if(!user){signInDialog();return;}
   const d=showDialog('Suggest removing “'+target.name+'”');d.append(text('p','Tell us why it should go. An admin checks it before the marker leaves the map.','form-hint'));
-  const list=text('div','','community-choices'),radios=[];
-  for(const [value,label] of Object.entries(removalReasons)){const l=text('label',''),r=document.createElement('input');r.type='radio';r.name='removal-reason';r.value=value;l.append(r,text('span',label));list.append(l);radios.push(r);}
-  d.append(list);const l=text('label','Details'),why=document.createElement('textarea');why.id='removal-details';l.htmlFor=why.id;why.maxLength=500;why.rows=3;why.placeholder='For example: the same vendor is marked by the north gate.';d.append(l,why);const credit=creditBox(d);
-  const actions=text('div','','dialog-actions'),send=button(admin?'Remove':'Send for review',async()=>{
-   const reason=radios.find(r=>r.checked)?.value,details=why.value.trim();
+  const choice=choiceList(d,'removal-reason',removalReasons),why=field(d,'Details','removal-details',textBox(3,500,'For example: the same vendor is marked by the north gate.')),credit=creditBox(d);
+  const actions=text('div','','dialog-actions'),send=sendButton(admin?'Remove':'Send for review',async()=>{
+   const reason=choice.picked(),details=why.value.trim();
    if(!reason){status('Choose a reason.');return;}if(reason==='other'&&!details){status('Tell us why it should go.');why.focus?.();return;}
-   send.disabled=true;
-   try{const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind:'edit-marker',target_id:target.id,payload:{name:target.name,note:target.note||'',remove:true,reason,from:{name:target.name,note:target.note||''}},comment:details||null,credit:credit.checked});
-    editedNow.add(editToken('edit-marker',target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your removal request is waiting for review.');event('removal-sent');}
-   catch(e){status(turnedOff(e)?'Your account can no longer send suggestions.':'The request could not be sent. Please try again.');}
-   finally{send.disabled=false;}
-  },'primary');
+   const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind:'edit-marker',target_id:target.id,payload:{name:target.name,note:target.note||'',remove:true,reason,from:{name:target.name,note:target.note||''}},comment:details||null,credit:credit.checked});
+   editedNow.add(editToken('edit-marker',target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your removal request is waiting for review.');event('removal-sent');
+  },'The request could not be sent. Please try again.');
   actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
  }
- const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit');
+ const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p','Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit','edit');
  const sharedToken=m=>scope()+':'+m.id;
  // Deleting a note that carries a suggestion withdraws it: a pending, unreviewed one (the author's right), or an
  // approved one not live yet when an admin deletes it. Then a bounty is open again. One already accepted for a
@@ -460,15 +459,17 @@
    const {data:row,error}=await client.from('suggestions').select('status,reviewed_at').eq('id',rec.id).maybeSingle();if(error)throw error;
    // Gone already, or refused: nothing to withdraw, and a bounty is open again.
    if(!row||row.status==='rejected'){forget();if(b)unmarkBountyClaimed(b.map||config.id,b.bounty);return;}
-   if(!(row.status==='pending'&&!row.reviewed_at)&&!(admin&&row.status==='approved')){forget();status(b?'Your claim was already accepted, so the marker stays on the public map.':'Your suggestion was already accepted, so the marker stays on the public map.',true);return;}
+   if(!(row.status==='pending'&&!row.reviewed_at)&&!(admin&&row.status==='approved')){
+    // Accepted (approved or live) stays on the map; one already looked at (sent back by the publishing job) waits for its review.
+    forget();status(row.status==='pending'?'Note deleted. Your '+what+' is already being reviewed, so it could not be withdrawn.':'Your '+(b?'claim':'suggestion')+' was already accepted, so the marker stays on the public map.',true);return;}
    const {data:done,error:refused}=await client.from('suggestions').delete().eq('id',rec.id).select('id');if(refused)throw refused;if(!done?.length)throw Error('not withdrawn');
    forget();if(b)unmarkBountyClaimed(b.map||config.id,b.bounty);status('Note deleted, and your '+what+' was withdrawn.');event('suggestion-withdrawn');
   }catch{status('Note deleted, but your '+what+' could not be withdrawn: it is still waiting for review.',true);}
  }
  window.addEventListener('atlas:note-deleted',e=>{withdrawNote(e.detail?.note);});
  window.atlasCommunity={deleteNotice,popup(m,n){
-  if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));if(!config.zonesFile)n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m)));return;}
-  const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report'));n.append(row);
+  if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));if(!config.zonesFile)n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m),'','share'));return;}
+  const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report','report'));n.append(row);
  },placePopup(p,n){
   if(p.kind!=='label'||!labelData.labels.some(l=>l.id===p.id))return;
   n.append(editButton(labelData.labels.find(l=>l.id===p.id),'edit-label'));
@@ -483,7 +484,7 @@
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
  function notePayload(m){
-  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;if(m.category==='Class trainer'&&classesOk(m.classes))payload.classes=m.classes;if(m.category==='Vendor'&&m.vendor&&vendorKindOk(m.vendor))payload.vendor=m.vendor;
+  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note,...markerExtras(m)};
   const bounty=readBounties()[m.id];if(bounty&&m.wikiId===bounty.bounty){payload.bounty=bounty.bounty;if(bounty.priority)payload.priority=true;}
   return payload;
  }
@@ -501,7 +502,10 @@
  // An admin's own suggestion is approved as soon as it is saved. It is still an ordinary pending insert followed by
  // the same approval the review page does, so the database rules decide: only an account in admins can approve.
  async function submit(row){return (await submitRow(row)).published;}
+ // The publishing job refuses a suggestion of 4 KB or more (in UTF-8): refused here first, with a clear message.
+ const payloadBytes=v=>encodeURIComponent(JSON.stringify(v)).replace(/%[0-9A-F]{2}/g,'x').length;
  async function submitRow(row){
+  if(payloadBytes(row.payload)>=4096)throw Object.assign(Error('Too long'),{code:'too-long'});
   const {data,error}=await client.from('suggestions').insert(row).select('id').single();if(error)throw error;
   const id=data?.id??null;if(!admin||id==null)return {id,published:false};
   const {data:done,error:fail}=await client.from('suggestions').update({status:'approved',reviewed_at:new Date().toISOString(),review_note:'Approved on sending (admin)'}).eq('id',data.id).eq('status','pending').select('id');
@@ -541,14 +545,13 @@
   if(check)check.parentElement.hidden=!!b;
   if(!b){if(credit&&check)credit.parentElement.hidden=!check.checked;return;}
   row.hidden=false;credit.parentElement.hidden=false;$('editor-title').textContent='Claim a bounty';
-  let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}
-  const facts=text('div','','bounty-facts');facts.id='bounty-facts';const list=document.createElement('dl');
+  const classes=pickedClasses(),facts=text('div','','bounty-facts');facts.id='bounty-facts';const list=document.createElement('dl');
   const fact=(term,value)=>{list.append(text('dt',term));const dd=document.createElement('dd');dd.append(value);list.append(dd);};
-  const category=$('category').value,page=text('a',$('wiki').value.replace(/^https:\/\//,''),'');page.href=$('wiki').value;page.target='_blank';page.rel='noopener';
+  const category=$('category').value,page=externalLink($('wiki').value.replace(/^https:\/\//,''),$('wiki').value);
   fact('Name',$('name').value);fact('Show as','Marker');fact('Category',category+(category==='Class trainer'&&classes.length?' · '+classes.join(' / '):''));fact('Wiki page',page);facts.append(list);
   // A trainer the wiki gives no class for: the finder says which, or the marker could not be placed right.
   if(category==='Class trainer'&&!classes.length){const field=text('div','','field'),label=text('label','Class'),pick=document.createElement('select');label.htmlFor=pick.id='bounty-class';pick.required=true;
-   pick.append(new Option('Choose the class they teach',''),...atlasClasses.map(c=>new Option(c,c)));pick.onchange=()=>{$('wiki').dataset.wikiClasses=JSON.stringify(pick.value?[pick.value]:[]);};field.append(label,pick);facts.append(field);}
+   fillSelect(pick,[['Choose the class they teach',''],...atlasClasses.map(c=>[c,c])]);pick.onchange=()=>pickClasses(pick.value?[pick.value]:[]);field.append(label,pick);facts.append(field);}
   facts.append(text('p','From the wiki. Add what you saw in Notes.','form-hint'));form.querySelector('.form-head').after(facts);
  }
  window.addEventListener('atlas:editor-open',e=>{claimAfterSignIn=false;privateSave=false;setBountyForm(e.detail?.note);});
@@ -608,35 +611,46 @@
  async function suggestOnSave(m,credited){
   if(readSet(sharedKey).has(sharedToken(m)))return;
   try{const published=await sendNote(m,credited);remember(sharedKey,[sharedToken(m)]);freshPopup();status(sentLine(published)||'Saved, and suggested for the public map: it is waiting for review.');event('suggestion-sent');}
-  catch(e){status(e?.code==='23505'?'Someone just claimed this bounty. Your note is kept in your field notes.':turnedOff(e)?'Saved to your field notes. Your account can no longer send suggestions.':'Saved to your field notes, but the suggestion did not go through. You can send it from the note’s popup with Share with everyone.');}
+  catch(e){status(e?.code==='23505'?'Someone just claimed this bounty. Your note is kept in your field notes.':'Saved to your field notes. '+sendError(e,'The suggestion did not go through: you can send it from the note’s popup with Share with everyone.'));}
  }
  async function followNote(m,rec){
   const payload=notePayload(m),key=followId(m),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(same(payload,rec.sent))return;
-  const keep=sent=>{const all=readFollowed();all[key]={...rec,...sent};writeFollowed(all);};
+  const keep=()=>{const all=readFollowed();all[key]={...rec,sent:payload};writeFollowed(all);};
   try{
-   const {data:row,error}=await client.from('suggestions').select('status').eq('id',rec.id).maybeSingle();if(error)throw error;
+   const {data:row,error}=await client.from('suggestions').select('status,payload,reviewed_at,review_note').eq('id',rec.id).maybeSingle();if(error)throw error;
    if(row?.status==='pending'){
-    const {data:done,error:refused}=await client.from('suggestions').update({payload}).eq('id',rec.id).eq('status','pending').select('id');
-    if(!refused&&done?.length){keep({sent:payload});status('Saved, and your suggestion was updated.');return;}
-    await sendNote(m,!!rec.credit);status('Saved, and your suggestion was sent again with the change.');return;
+    // Its author may change it only until it has been looked at (the database's rule; an admin always may). After that
+    // the change stays in the note: sending it again would only make a duplicate.
+    if(admin||(!row.reviewed_at&&!row.review_note)){const {data:done,error:refused}=await client.from('suggestions').update({payload}).eq('id',rec.id).eq('status','pending').select('id');
+     if(!refused&&done?.length){keep();status('Saved, and your suggestion was updated.');return;}}
+    status('Saved to your field notes. Your suggestion is already being reviewed, so this change was not added to it.',true);return;
    }
    if(row?.status==='approved'||row?.status==='published'){
-    // The marker it becomes is community-<suggestion id>; place names and exits live with the labels.
+    // The marker it becomes is community-<suggestion id>; place names and exits live with the labels. What changed since
+    // this note last sent is sent as a move and an edit of it, from what is live (else what was approved, a reviewer's
+    // changes included), so the publishing job's checks see the text and spot it really shows.
     const old=rec.sent,label=payload.noteType==='label'||payload.noteType==='exit',target='community-'+rec.id,base={user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,target_id:target,comment:null,credit:!!rec.credit};
-    if(old.x!==payload.x||old.y!==payload.y)await submit({...base,kind:label?'move-label':'move-marker',payload:{name:payload.name,from:[old.x,old.y],to:[payload.x,payload.y]}});
+    const live=(label?labelData.labels:originals).find(x=>x.id===target),shown={...old,...row.payload,...(live?{name:live.name,note:live.note||'',wiki:live.wiki||'',x:live.x,y:live.y}:{})};
+    let sent=false;
+    if(old.x!==payload.x||old.y!==payload.y){await submit({...base,kind:label?'move-label':'move-marker',payload:{name:payload.name,from:[shown.x,shown.y],to:[payload.x,payload.y]}});sent=true;}
     const wikiOf=p=>label?{}:{wiki:p.wiki||'',...(p.wiki&&p.wikiId?{wikiId:p.wikiId}:{})};
-    if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||'')))
-     await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:old.name,note:old.note||'',...(label?{}:{wiki:old.wiki||''})}}});
-    keep({sent:payload});status('Saved, and the change was sent for review.');return;
+    if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||''))){
+     await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:shown.name,note:shown.note||'',...(label?{}:{wiki:shown.wiki||''})}}});sent=true;}
+    // A marker's type, trade, class, kind or colour (an exit's arrow or map) cannot follow it once approved.
+    const fixed=(label?['arrow','toMap']:['category','trade','classes','vendor','color']).some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
+    keep();
+    if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind or class change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
+    else if(sent)status('Saved, and the change was sent for review.');
+    return;
    }
    const all=readFollowed();delete all[key];writeFollowed(all);
-  }catch(e){status('Saved to your field notes, but your suggestion could not be updated. You can share the note again from its popup.');}
+  }catch(e){status('Saved to your field notes, but your suggestion could not be updated. '+sendError(e,'You can share the note again from its popup.'));}
  }
  function sendDialog(title,rows,sharing){
   const d=showDialog(title);d.append(text('p',sharing?'Send this note for review before it appears in the community atlas.':'Your positions are saved locally. Choose the changes to send for review.'));
   const list=text('div','','community-choices'),checks=[];
   for(const row of rows){const label=text('label',''),check=document.createElement('input');check.type='checkbox';check.checked=true;label.append(check,text('span',row.name));list.append(label);checks.push(check);}d.append(list);
-  const label=text('label','Optional comment');label.htmlFor='suggestion-comment';const comment=document.createElement('textarea');comment.id='suggestion-comment';comment.maxLength=500;comment.rows=3;d.append(label,comment);const credit=creditBox(d);
+  const comment=field(d,'Optional comment','suggestion-comment',textBox(3,500)),credit=creditBox(d);
   const actions=text('div','','dialog-actions'),send=button(user?(admin?'Publish':'Send for review'):'Sign in with Discord',async()=>{
    if(!user){await signIn();return;}const selected=rows.filter((_,i)=>checks[i].checked&&!checks[i].disabled);if(!selected.length){status('Choose at least one item.');return;}
    send.disabled=true;let done=0;
@@ -644,7 +658,7 @@
     // Separate inserts let the daily limit apply to every row; partial success is remembered.
     let published=0;for(const row of selected){const {token,name,...suggestion}=row;if(await submit({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null,credit:credit.checked}))published++;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
     if(done){freshPopup();d.close();status(sentLine(published===done)||'Thanks! Your suggestion is waiting for review.');}
-   }catch(e){if(turnedOff(e)){status('Your account can no longer send suggestions. Your local notes and positions are safe.');freshPopup();return;}status('Some suggestions could not be sent. Unsent items remain selected; your local notes and positions are safe.');freshPopup();}
+   }catch(e){status(sendError(e,'Some suggestions could not be sent; unsent items remain selected.')+' Your local notes and positions are safe.');freshPopup();}
    finally{if(done)event('suggestion-sent');send.disabled=false;}
   },'primary');actions.append(button('Not now',()=>d.close()),send);d.append(actions);
  }
@@ -703,15 +717,14 @@
   if(row.kind==='new-marker')return Number.isFinite(p.x)&&Number.isFinite(p.y)?[p.x,p.y]:null;
   if(row.kind==='move-marker')return Array.isArray(p.to)?p.to:null;
   if(t)return [t.x,t.y];const chip=labelData.trainers?.find(x=>x.id===row.target_id);return chip?[chip.x,chip.y]:null;}
- const nameKey=v=>String(v??'').normalize('NFD').replace(/[\u0300-\u036f]/g,'').toLowerCase().replace(/[^a-z0-9]+/g,' ').trim().replace(/^(a|an|the) /,'').split(' (')[0];
  // Possible duplicates of a new marker: other suggestions within 15 map units or naming the same NPC, and markers
  // already on the map with the same wiki page or name.
  function duplicatesOf(row){
-  if(row.kind!=='new-marker')return [];const p=row.payload||{},at=suggestionAt(row),key=nameKey(p.name),found=[];
+  if(row.kind!=='new-marker')return [];const p=row.payload||{},at=suggestionAt(row),key=looseName(p.name),found=[];
   for(const other of [...pendingRows,...approvedRows]){if(other.id===row.id||other.kind!=='new-marker')continue;const q=other.payload||{},there=suggestionAt(other);
-   const near=at&&there&&Math.hypot(at[0]-there[0],at[1]-there[1])<=15,same=(p.wikiId&&p.wikiId===q.wikiId)||(key.length>=4&&key===nameKey(q.name));
+   const near=at&&there&&Math.hypot(at[0]-there[0],at[1]-there[1])<=15,same=(p.wikiId&&p.wikiId===q.wikiId)||(key.length>=4&&key===looseName(q.name));
    if(near||same)found.push({row:other,name:q.name,why:same?'same NPC':'close by',state:other.status==='approved'?'approved':'waiting'});}
-  for(const m of originals){if((p.wikiId&&m.wikiId===p.wikiId)||(key.length>=4&&nameKey(m.name)===key))found.push({marker:m,name:m.name,why:p.wikiId&&m.wikiId===p.wikiId?'same wiki page':'same name',state:'on the map'});}
+  for(const m of originals){if((p.wikiId&&m.wikiId===p.wikiId)||(key.length>=4&&looseName(m.name)===key))found.push({marker:m,name:m.name,why:p.wikiId&&m.wikiId===p.wikiId?'same wiki page':'same name',state:'on the map'});}
   return found;}
  function duplicateList(row,onPick){
   const found=duplicatesOf(row);if(!found.length)return null;const box=text('div','','duplicate-box');box.append(text('strong','Possible duplicate'+(found.length>1?'s':'')));
@@ -752,12 +765,12 @@
   if(p.remove===true)n.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
   n.append(text('p',waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour.','moved-note'));
   const dups=duplicateList(row,jumpTo);if(dups)n.append(dups);
-  if(admin){const actions=text('div','','popup-actions'),edit=button(waiting?'Edit and review':'Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);});if(typeof actionIcon==='function')actionIcon(edit);actions.append(edit);n.append(actions);}
+  if(admin){const actions=text('div','','popup-actions'),edit=button(waiting?'Edit and review':'Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);},'','edit');actionIcon(edit);actions.append(edit);n.append(actions);}
   else if(row.user_id===user?.id)n.append(text('p','Your suggestion. Thank you!','community-note'));
   return n;}
  async function authChanged(session){
   const next=session?.user||null;if(next?.id===user?.id)return;
-  const serial=++authSerial;user=next;admin=false;syncReady='';accountUI();for(const f of finders)f.update();if(review.open)review.close();clearPreview();freshPopup();
+  const serial=++authSerial;user=next;admin=false;syncReady='';accountUI();for(const f of finders)f.update();if(review.open)review.close();if(!user&&dialog.open)dialog.close();clearPreview();freshPopup();
   if(user){const uid=user.id;try{const {data,error}=await client.from('admins').select('user_id').eq('user_id',uid).maybeSingle();if(error)throw error;if(serial!==authSerial)return;admin=!!data;accountUI();}catch{status('Account permissions could not load. Please try again.');}}
   if(serial===authSerial)await onMap();
   if(serial===authSerial&&user)afterSignIn();
@@ -778,7 +791,7 @@
    if(!data.length)content.append(text('p',state==='approved'?'Nothing waiting to go live. Approved suggestions are published within the hour.':'Nothing to review. Reports come from Report a problem on a marker; suggestions from Edit, Suggest an edit and Share with everyone.','form-hint'));
    const perAuthor=new Map();for(const row of data)perAuthor.set(row.user_id,(perAuthor.get(row.user_id)||0)+1);
    // Reviewing on the map goes on to the next suggestion of this list once one is decided; the list comes back after the last.
-   const decided=new Set(),reopen=()=>{if(!review.open)review.showModal();pendingTab(all,offset,state);};
+   const decided=new Set(),again=()=>pendingTab(all,offset,state),reopen=()=>{if(!review.open)review.showModal();again();};
    const open=row=>preview(row,reopen,after(row),nav(row));
    const after=row=>()=>{decided.add(row.id);const next=data.slice(data.indexOf(row)+1).find(r=>!decided.has(r.id))||data.find(r=>!decided.has(r.id));if(next)open(next);else{reopen();status('That was the last one: nothing left to review here.');}};
    // On the map: how many are left, and the one before or after this one without deciding it.
@@ -791,47 +804,49 @@
     if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));if(typeof row.payload.wiki==='string'&&(f.wiki||'')!==row.payload.wiki)card.append(text('p','Wiki page: '+was(f.wiki)+'\n→ '+was(row.payload.wiki),'review-change'));}
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType==='label'?'Area label':row.payload.noteType==='exit'?'Zone exit':row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));if(row.payload.wiki)card.append(text('p','Wiki page: '+row.payload.wiki,'review-change'));
      // A bounty from the Wanted board is worth more points once approved: the badge says which, with its wiki page.
-     if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge');badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord));if(row.payload.wiki){const a=text('a',' Wiki page ↗');a.href=row.payload.wiki;a.target='_blank';a.rel='noopener';badge.append(a);}card.append(badge);}}
+     if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge'),page=wikiAddress(row.payload.wiki);badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord));if(page)badge.append(externalLink(' Wiki page ↗',page));card.append(badge);}}
     const label=text('label','Optional review note'),note=document.createElement('textarea');note.rows=2;note.maxLength=500;label.append(note);card.append(label);
-    const actions=text('div','','dialog-actions');if(row.user_id!==user?.id&&state==='pending')actions.append(button('Ban author',()=>banDialog(row,all),'review-ban'));actions.append(button(row.kind==='report'?'Show on map':'Review on map',()=>open(row)),...decisions(row,()=>note.value,card,()=>null,()=>decided.add(row.id)));card.append(actions);content.append(card);
+    const actions=text('div','','dialog-actions');if(row.user_id!==user?.id&&state==='pending')actions.append(button('Ban author',()=>banDialog(row,again),'review-ban'));actions.append(button(row.kind==='report'?'Show on map':'Review on map',()=>open(row)),...decisions(row,()=>note.value,card,()=>null,()=>decided.add(row.id)));card.append(actions);content.append(card);
    }
    const pages=text('div','','dialog-actions');if(offset)pages.append(button('Newer',()=>pendingTab(all,Math.max(0,offset-200),state)));if(data.length===200)pages.append(button('Older',()=>pendingTab(all,offset+200,state)));content.append(pages);
-   await bannedList(content,serial,all);
+   // The banned list is extra: if it cannot load, the suggestions above stay.
+   try{await bannedList(content,serial,again);}catch{}
   }catch{if(serial===reviewSerial){content.lastChild?.remove();content.append(text('p','Suggestions could not load. Try again.','form-hint'));}status('Suggestions could not load. Please try again.');}
  }
  // A banned account can still use the atlas and its notes, but cannot send suggestions or reports.
- function banDialog(row,all){
+ function banDialog(row,again){
   const name=row.author_name||'Discord member',d=showDialog('Ban '+name+' from suggestions?');
   d.append(text('p','They can still use the atlas and their notes, but can no longer send suggestions or reports. All their suggestions waiting for review are dismissed.'),text('p','You can lift the ban later under Banned authors.','form-hint'));
   const actions=text('div','','dialog-actions'),go=button('Ban and dismiss',async()=>{
    go.disabled=true;
    try{let {error}=await client.from('banned').insert({user_id:row.user_id,author_name:name});if(error&&error.code!=='23505')throw error;
     ({error}=await client.from('suggestions').update({status:'rejected',reviewed_at:new Date().toISOString(),review_note:'Author banned'}).eq('user_id',row.user_id).eq('status','pending'));if(error)throw error;
-    d.close();status(name+' is banned; their waiting suggestions were dismissed.');pendingTab(all);}
+    d.close();status(name+' is banned; their waiting suggestions were dismissed.');again();countWaiting();}
    catch{go.disabled=false;status('The ban could not be saved. Please try again.');}
   },'danger');
   actions.append(button('Cancel',()=>d.close()),go);d.append(actions);
  }
- async function bannedList(content,serial,all){
+ async function bannedList(content,serial,again){
   const {data,error}=await client.from('banned').select('user_id,author_name,banned_at').order('banned_at',{ascending:false});if(error)throw error;if(serial!==reviewSerial||!data.length)return;
   const section=text('section','','review-banned');section.append(text('h3','Banned authors'));
-  for(const row of data){const line=text('div','','review-banned-row');line.append(text('span',(row.author_name||'Discord member')+' · since '+new Date(row.banned_at).toLocaleDateString()),button('Lift ban',async()=>{const {error}=await client.from('banned').delete().eq('user_id',row.user_id);if(error){status('The ban could not be lifted. Please try again.');return;}status((row.author_name||'This account')+' can send suggestions again.');pendingTab(all);}));section.append(line);}
+  for(const row of data){const line=text('div','','review-banned-row');line.append(text('span',(row.author_name||'Discord member')+' · since '+new Date(row.banned_at).toLocaleDateString()),button('Lift ban',async()=>{const {error}=await client.from('banned').delete().eq('user_id',row.user_id);if(error){status('The ban could not be lifted. Please try again.');return;}status((row.author_name||'This account')+' can send suggestions again.');again();}));section.append(line);}
   content.append(section);
  }
  // Reports close as fixed or dismissed; other suggestions are approved for publishing or rejected.
  const kinds={'move-marker':'Moved marker','move-label':'Moved label','new-marker':'New marker','edit-marker':'Edited marker','edit-label':'Edited place name',report:'Problem report'};
- function decisions(row,note,card,edits=()=>null,done=()=>{}){const report=row.kind==='report';
-  if(row.status==='approved')return [button('Reject',()=>reviewAction(row,'rejected',note(),card,null,done)),button('Back to waiting',()=>reviewAction(row,'pending',note(),card,null,done))];
-  return [button(report?'Dismiss':'Reject',()=>reviewAction(row,'rejected',note(),card,null,done)),button(report?'Fixed':'Approve',()=>reviewAction(row,report?'resolved':'approved',note(),card,edits(),done),'primary')];}
+ // edits gives the adjusted payload to approve (null: as sent); when it throws (it says why), nothing is decided.
+ function decisions(row,note,card,edits=()=>null,done=()=>{}){const report=row.kind==='report',act=(state,payload=null)=>reviewAction(row,state,note(),card,payload,done);
+  if(row.status==='approved')return [button('Reject',()=>act('rejected')),button('Back to waiting',()=>act('pending'))];
+  return [button(report?'Dismiss':'Reject',()=>act('rejected')),button(report?'Fixed':'Approve',()=>{let payload;try{payload=edits();}catch{return;}return act(report?'resolved':'approved',payload);},'primary')];}
  // The card title shows the icon the visitor chose (or the marker being moved or edited).
  function reviewTitle(row){
   const title=text('strong','','review-title'),p=row.payload,target=row.kind==='new-marker'?p:originals.find(m=>m.id===row.target_id&&row.map===config.id);
   try{if(target&&!target.noteType&&categories[target.category]){const face=text('span','','review-icon');face.style.setProperty('--pin',target.color||categories[target.category][1]);face.append(markerSymbol(target));title.append(face);}}catch{}
   title.append(text('span',(p.remove===true?'Removal: ':'')+p.name));return title;
  }
- async function reviewAction(row,state,note,card,payload=null,done=()=>{}){
+ async function reviewAction(row,state,note,card,payload,done){
   for(const b of card.querySelectorAll('button'))b.disabled=true;
-  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);loadApproved();done();}
+  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);loadApproved();countWaiting();done();}
   catch{status('Review could not be saved. Please refresh the list.');for(const b of card.querySelectorAll('button'))b.disabled=false;}
  }
  // On the map, a suggestion can be adjusted before approval (or while approved and not live yet):
@@ -863,26 +878,28 @@
    // A close button (and Escape): back to the map from a pin, back to the list from the review queue.
    const close=()=>{document.removeEventListener?.('keydown',onKey,true);clearPreview();if(fromPin)loadApproved();else refresh();},onKey=e=>{if(e.key==='Escape'&&$('community-preview')===bar&&!e.target.closest?.('.wiki-results')){e.preventDefault();close();}};
    const x=button('×',close,'preview-close');x.setAttribute('aria-label','Close');x.title='Close';head.append(x);document.addEventListener?.('keydown',onKey,true);bar.addEventListener('wiki-done',()=>document.removeEventListener?.('keydown',onKey,true));
-   bar.append(head);{const dups=duplicateList(row,d=>{clearPreview();if(d.marker){choose(d.marker);return;}preview(d.row,refresh,next,null,fromPin);});if(dups)bar.append(dups);}if(!here)bar.append(text('p','This marker is not on the map any more (removed or replaced since), so there is no pin to show. You can still decide on it.','reported-reason'));
+   bar.append(head);{const dups=duplicateList(row,d=>{clearPreview();if(d.marker){choose(d.marker);return;}preview(d.row,refresh,refresh,null,fromPin);});if(dups)bar.append(dups);}if(!here)bar.append(text('p','This marker is not on the map any more (removed or replaced since), so there is no pin to show. You can still decide on it.','reported-reason'));
    const field=(label,el)=>{const l=text('label',label,'preview-field');l.append(el);bar.append(l);return el;};
    let name,note,category;
    const removal=p.remove===true;if(removal)bar.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
    if(row.kind==='new-marker'||edit&&!removal){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
-   if(row.kind==='new-marker'&&!p.noteType){category=field('Type',document.createElement('select'));for(const k of Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))){const o=text('option',k);o.value=k;category.append(o);}category.value=categories[p.category]?p.category:Object.keys(categories)[0];}
-   // A tradeskill's trade and a class trainer's class can be set or fixed here before approving.
-   let trade,trainerClass,vendor;const option=(label,value)=>{const o=text('option',label);o.value=value;return o;},trades=typeof tradePaths==='object'?Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)):[];
-   if(category){trade=field('Trade',document.createElement('select'));trade.append(option('Any trade',''),...trades.map(t=>option(t,t)));trade.value=p.trade||tradeNamed((p.name||'')+' '+(p.note||''),trades);
-    trainerClass=field('Class',document.createElement('select'));trainerClass.append(option('Not set',''),...atlasClasses.map(k=>option(k,k)));trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
-    vendor=field('Kind',document.createElement('select'));vendor.append(option('Not set',''));for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;for(const k of Object.keys(kinds))set.append(option(k,k));vendor.append(set);}vendor.value=p.vendor||vendorKindNamed((p.name||'')+' '+(p.note||''));
+   // The same types as the note form (Personal included, so a shared personal note keeps its type).
+   if(row.kind==='new-marker'&&!p.noteType){category=fillSelect(field('Type',document.createElement('select')),categoryChoices().map(k=>[k,k]));category.value=categories[p.category]?p.category:'Personal';}
+   // A tradeskill's trade, a class trainer's class and a vendor's kind can be set or fixed here before approving.
+   let trade,trainerClass,vendor;const trades=Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)),said=(p.name||'')+' '+(p.note||'');
+   if(category){trade=fillSelect(field('Trade',document.createElement('select')),[['Any trade',''],...trades.map(t=>[t,t])]);trade.value=p.trade||tradeNamed(said,trades);
+    trainerClass=fillSelect(field('Class',document.createElement('select')),[['Not set',''],...atlasClasses.map(k=>[k,k])]);trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
+    vendor=fillSelect(field('Kind',document.createElement('select')),[['Not set',''],...vendorKindItems(false)]);vendor.value=p.vendor||vendorKindNamed(said);
     const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
    if(row.kind==='new-marker'||edit&&!removal){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
    let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'&&!removal){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
     const finder=wikiFinder(wiki,()=>restyle(),name);name.after(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
-   const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category==='Tradeskill'&&trade?.value)p.trade=trade.value;else delete p.trade;
-    if(p.category==='Class trainer'&&trainerClass?.value)p.classes=[trainerClass.value];else if(p.category!=='Class trainer')delete p.classes;
-    if(p.category==='Vendor'&&vendor?.value)p.vendor=vendor.value;else delete p.vendor;}pin?.setIcon(pinIcon(look()));};
+   // The type's own fields follow the note form's rule (markerExtras): a trainer's several classes stay unless one is chosen.
+   const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;
+    if(category){const kept=markerExtras({category:category.value,trade:trade.value,vendor:vendor.value,classes:trainerClass.value?[trainerClass.value]:p.classes});p.category=category.value;for(const k of ['trade','classes','vendor'])if(Object.hasOwn(kept,k))p[k]=kept[k];else delete p[k];}
+    pin?.setIcon(pinIcon(look()));};
    for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor])el?.addEventListener('change',restyle);
    const reviewNote=document.createElement('input');reviewNote.placeholder='Optional review note';reviewNote.setAttribute('aria-label','Optional review note');reviewNote.maxLength=500;bar.append(reviewNote);
    // The adjusted payload keeps the visitor's other fields; positions are checked against the map bounds.
@@ -897,11 +914,13 @@
    };
    const safe=()=>{try{return edits();}catch(e){status(e.message==='Name required'?'Give it a name.':e.message==='Wiki link'?wikiHint:'Keep the marker inside the map.');throw e;}};
    const actions=text('div','','dialog-actions');if(!fromPin)actions.append(button('Back to the list',close));
-   if(!report&&!removal)actions.append(button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
-    const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length){status('Changes could not be saved. Please refresh the list.');return;}row.payload=structuredClone(payload);status('Changes saved.');if(fromPin)close();else loadApproved();}));
-   const wrapped=decisions(row,()=>reviewNote.value,bar,()=>{try{return safe();}catch{return undefined;}},next);
+   if(!report&&!removal){const save=button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
+     save.disabled=true;
+     try{const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length)throw error||Error();row.payload=structuredClone(payload);status('Changes saved.');if(fromPin)close();else loadApproved();}
+     catch{status('Changes could not be saved. Please refresh the list.');}finally{save.disabled=false;}});actions.append(save);}
+   const wrapped=decisions(row,()=>reviewNote.value,bar,safe,next);
    // Someone asking to take it off the map ("remove this", a duplicate): approve it as a removal instead of a text change.
-   if(row.kind==='edit-marker'&&row.status==='pending'&&!removal){const remove=button('Remove from map',()=>reviewAction(row,'approved',reviewNote.value,bar,{...structuredClone(row.payload),name:row.payload.from?.name||row.payload.name,note:row.payload.from?.note||'',remove:true},next),'danger');remove.title='Approve as a removal: the marker, and its trainer chip, go at the next publishing run';wrapped.unshift(remove);}
+   if(row.kind==='edit-marker'&&row.status==='pending'&&!removal){const remove=button('Remove from map',()=>reviewAction(row,'approved',reviewNote.value,bar,{...structuredClone(row.payload),name:row.payload.from?.name||row.payload.name,note:row.payload.from?.note||'',remove:true,reason:'other'},next),'danger');remove.title='Approve as a removal: the marker, and its trainer chip, go at the next publishing run';wrapped.unshift(remove);}
    actions.append(...wrapped);bar.append(actions);$('map-frame').append(bar);
    if(move)map.fitBounds(L.latLngBounds([xy(p.from),here]),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else if(here)map.setView(here,config.defaultView.placeZoom);if(compact())setPanel(false);
    status(move?'Blue: published position. Drag the suggested marker to adjust it.':report?'The reported marker.':edit?'The marker or name being edited.':'Drag the suggested marker to adjust it.');

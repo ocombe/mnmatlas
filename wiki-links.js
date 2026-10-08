@@ -1,5 +1,7 @@
 /* Wiki links on markers. A marker keeps one address; the sites below say which addresses are accepted,
-   and the embedding sites below say what a marker's link becomes when the atlas is shown on their pages. */
+   and the embedding sites below say what a marker's link becomes when the atlas is shown on their pages.
+   Also the marker vocabulary the site, its suggestions and the publishing job share: vendor kinds, trainer classes,
+   and which optional fields each kind of marker keeps (markerExtras). */
 'use strict';
 // Sites a marker may link to. A link to any other address is refused when it is saved and never shown.
 const wikiSites={
@@ -34,12 +36,14 @@ function wikiEmbedParent(){
  let origin='';try{origin=location.ancestorOrigins?.[0]||(document.referrer?new URL(document.referrer).origin:'');}catch{origin='';}
  try{const parent=new URL(origin);return parent.origin===location.origin?null:parent.hostname;}catch{return '';}
 }
+// The rule of the site embedding this page (by its host); null for a site not listed.
+function embedRule(parent){const host=Object.keys(wikiEmbedHosts).find(h=>wikiHostMatches(parent,h));return host?wikiEmbedHosts[host]:null;}
 // The link a place shows here, as {href,site,name}, or null when it has none or this embed hides it.
 function wikiLinkFor(place,parent=wikiEmbedParent()){
  const href=wikiAddress(place?.wiki);if(!href)return null;
  const site=wikiSiteOf(new URL(href).hostname),show=h=>{const s=wikiSiteOf(new URL(h).hostname);return s?{href:h,site:s,name:wikiSites[s].name}:null;};
  if(parent===null)return show(href);
- const host=Object.keys(wikiEmbedHosts).find(h=>wikiHostMatches(parent,h)),rule=host&&wikiEmbedHosts[host];
+ const rule=embedRule(parent);
  if(!rule||rule.links==='none')return null;
  if(rule.links==='all'||site===rule.site)return show(href);
  const adapted=typeof rule.adapt==='function'?wikiAddress(rule.adapt(href,site,place)):'';
@@ -59,10 +63,10 @@ const vendorGroupOf=kind=>Object.keys(vendorKinds).find(g=>Object.hasOwn(vendorK
 const vendorKindOk=v=>v===undefined||vendorKindList.includes(v);
 const vendorWords=kind=>{const g=vendorGroupOf(kind);return g?[kind,g,...vendorKinds[g][kind]].join(' '):'';};
 // The kind a vendor's name or note names, the longest words first ("used weapons" before "weapon"); '' if none.
+const vendorForms=Object.values(vendorKinds).flatMap(g=>Object.entries(g).flatMap(([kind,forms])=>forms.map(f=>[f,kind]))).sort((a,b)=>b[0].length-a[0].length);
 function vendorKindNamed(words){
  const said=' '+String(words??'').toLowerCase().replace(/[^a-z]+/g,' ')+' ';
- const all=Object.values(vendorKinds).flatMap(g=>Object.entries(g).flatMap(([kind,forms])=>forms.map(f=>[f,kind]))).sort((a,b)=>b[0].length-a[0].length);
- return all.find(([f])=>said.includes(' '+f+' ')||said.includes(' '+f+'s '))?.[1]||'';
+ return vendorForms.find(([f])=>said.includes(' '+f+' ')||said.includes(' '+f+'s '))?.[1]||'';
 }
 // The trade a name or note names ("an enchanting trainer" -> "(Dis)Enchanting"), from the atlas's trade list; '' if none.
 function tradeNamed(words,trades){
@@ -76,7 +80,7 @@ function tradeNamed(words,trades){
 // (the Wanted board, the Name field's wiki suggestions) only appear where that wiki may be linked.
 function wikiSiteShown(site,parent=wikiEmbedParent()){
  if(parent===null)return true;
- const host=Object.keys(wikiEmbedHosts).find(h=>wikiHostMatches(parent,h)),rule=host&&wikiEmbedHosts[host];
+ const rule=embedRule(parent);
  return !!rule&&rule.links!=='none'&&(rule.links==='all'||rule.site===site);
 }
 const wikiHint='A wiki link must be a page on '+Object.values(wikiSites).map(s=>s.name).join(', ').replace(/, ([^,]*)$/,' or $1')+'.';
@@ -94,10 +98,6 @@ function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.d
 const classAbbreviations={Archer:'ARC',Bard:'BRD',Beastlord:'BST',Beastmaster:'BST',Cleric:'CLR',Druid:'DRU',Elementalist:'ELE',Enchanter:'ENC',Fighter:'FTR',Inquisitor:'INQ',Monk:'MNK',Necromancer:'NEC',Paladin:'PAL',Ranger:'RNG',Rogue:'ROG','Shadow Knight':'SHD',Shaman:'SHM',Spellblade:'SPB',Wizard:'WIZ'};
 const atlasClasses=Object.keys(classAbbreviations);
 const classesOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=6&&v.every(c=>atlasClasses.includes(c));
-// The wiki files class trainers as merchants, so a trainer is known by its name or the wiki's trainer role, and its class
-// by the wiki's class or tags, else by its name: a class with instructor, trainer or
-// guildmaster ("A beastmaster instructor" teaches Beastmaster). Only the name counts: plenty of other merchants stand in
-// a guild hall. "Instructor"/"guildmaster" alone, or the wiki's own "trainer" role, still mark a trainer of unknown class.
 // The wiki's own class for an NPC: its class field or a class among its hover-card tags ("Human · Enchanter"). The
 // wiki's Warrior is the atlas's Fighter; a guess ("Shadow Knight?") is left out.
 function wikiClassesOf(row){
@@ -105,16 +105,21 @@ function wikiClassesOf(row){
  const found=[];for(const p of parts){const c=p.toLowerCase()==='warrior'?'Fighter':atlasClasses.find(x=>x.toLowerCase()===p.toLowerCase());if(c&&!found.includes(c))found.push(c);}
  return found;
 }
+// The wiki files class trainers as merchants, so a trainer is known by its name or the wiki's trainer role, and its class
+// by the wiki's class or tags, else by its name: a class with instructor, trainer or
+// guildmaster ("A beastmaster instructor" teaches Beastmaster). Only the name counts: plenty of other merchants stand in
+// a guild hall. "Instructor"/"guildmaster" alone, or the wiki's own "trainer" role, still mark a trainer of unknown class.
+const trainerWords=/\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b/i,teacherWords=/\b(instructors?|guild\s*masters?|guildmasters?)\b/i;
 function trainerClasses(row){
  // A bounty row may carry the classes the wiki gives (see scripts/make-bounties.mjs).
  if(Array.isArray(row?.classes)){const given=row.classes.filter(c=>atlasClasses.includes(c));if(given.length)return given;}
- const name=String(row?.name??''),named=/\b(instructors?|trainers?|guild\s*masters?|guildmasters?)\b/i.test(name);
+ const name=String(row?.name??''),named=trainerWords.test(name);
  // For a trainer, the wiki's own class wins over the one read from the name (any NPC's tags name a class, so only then).
  if(named||row?.role==='trainer'){const given=wikiClassesOf(row);if(given.length)return given;}
  if(!named)return [];
  return atlasClasses.filter(c=>new RegExp('\\b'+c.replace(' ','\\s*')+'s?\\b','i').test(name));
 }
-const isClassTrainer=row=>trainerClasses(row).length>0||row?.role==='trainer'||/\b(instructors?|guild\s*masters?|guildmasters?)\b/i.test(String(row?.name??''));
+const isClassTrainer=row=>trainerClasses(row).length>0||row?.role==='trainer'||teacherWords.test(String(row?.name??''));
 // The classes a map already shows trainers for: class trainer markers and trainer chips (older chips only have their
 // abbreviations, BST standing for both Beastlord and Beastmaster). A map keeps one marker or chip per guild, so an
 // instructor whose classes all have one is on the map already, whatever their name.
@@ -126,3 +131,17 @@ function mapTrainerClasses(markers,chips){
  return found;
 }
 const trainerOnMap=(row,classes)=>{const c=trainerClasses(row);return c.length>0&&c.every(x=>classes.has(x));};
+// The optional fields a marker keeps, by what it is, so a note, its backup, its suggestion and the review bar all keep
+// the same ones: an area label nothing else; a zone exit its arrow and the map it leads to; a marker its colour and wiki
+// page (with the wiki's id), a tradeskill its trade, a class trainer its classes, a vendor its kind. Values are checked
+// where they are saved (app.js valid(), scripts/apply-approved.mjs).
+const markerExtraKeys=['noteType','arrow','toMap','color','wiki','wikiId','trade','classes','vendor'];
+function markerExtras(m){
+ const out={};
+ if(m.noteType==='label'||m.noteType==='exit'){out.noteType=m.noteType;if(m.noteType==='exit'){if(m.arrow)out.arrow=m.arrow;if(m.toMap)out.toMap=m.toMap;}return out;}
+ if(m.color)out.color=m.color;if(m.wiki){out.wiki=m.wiki;if(m.wikiId)out.wikiId=m.wikiId;}
+ if(m.category==='Tradeskill'&&m.trade)out.trade=m.trade;
+ if(m.category==='Class trainer'&&Array.isArray(m.classes)&&m.classes.length)out.classes=[...m.classes];
+ if(m.category==='Vendor'&&m.vendor)out.vendor=m.vendor;
+ return out;
+}

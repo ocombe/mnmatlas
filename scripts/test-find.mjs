@@ -64,3 +64,14 @@ console.log('Script checks passed: every page script parses.');
  assert.equal(named('Butchers'),'Butcher');assert.equal(named('Marcus Aden'),'');assert.equal(group('Reagent vendor'),'Spells and reagents');
  assert(ok(undefined)&&ok('Bag merchant')&&!ok('Dragon seller'));
  console.log('Vendor checks passed: kinds from names, groups, only listed kinds.');}
+
+// Every copy of a note (its backup, its suggestion, the review bar) keeps the same optional fields for its kind.
+{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+ const extras=m=>JSON.parse(JSON.stringify(vm.runInContext('markerExtras',c)(m)));
+ assert.deepEqual(extras({category:'Vendor',vendor:'Bag merchant',trade:'Cooking',classes:['Bard'],wiki:'https://monstersandmemories.wiki/npcs/x',wikiId:'npc-x'}),{wiki:'https://monstersandmemories.wiki/npcs/x',wikiId:'npc-x',vendor:'Bag merchant'});
+ assert.deepEqual(extras({category:'Class trainer',classes:['Cleric','Paladin'],vendor:'Baker'}),{classes:['Cleric','Paladin']});
+ assert.deepEqual(extras({category:'Tradeskill',trade:'Cooking',color:'#123456'}),{color:'#123456',trade:'Cooking'});
+ assert.deepEqual(extras({category:'Personal',noteType:'exit',arrow:'west',toMap:'scarwood',wiki:'https://monstersandmemories.wiki/npcs/x'}),{noteType:'exit',arrow:'west',toMap:'scarwood'});
+ assert.deepEqual(extras({category:'Personal',noteType:'label',arrow:'west'}),{noteType:'label'});
+ assert.deepEqual(extras({category:'Vendor',wikiId:'npc-x'}),{},'A wiki id only rides with its link');
+ console.log('Marker field checks passed: each kind of note keeps its own fields.');}

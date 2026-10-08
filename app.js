@@ -2,6 +2,14 @@
 'use strict';
 const $=id=>document.getElementById(id);
 const text=(tag,value,cls)=>{const n=document.createElement(tag);n.textContent=value;if(cls)n.className=cls;return n;};
+// A plain button; icon names its small line icon when it ends a popup (actionPaths).
+const button=(label,action,cls,icon)=>{const b=text('button',label,cls);b.type='button';b.onclick=action;if(icon)b.dataset.icon=icon;return b;};
+// A link that opens in a new tab.
+const externalLink=(label,href,cls)=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
+// Fills a select: [label,value] pairs, and {label,options} for a group of them.
+function fillSelect(select,items){for(const item of items){if(Array.isArray(item)){const o=text('option',item[0]);o.value=item[1];select.append(o);continue;}const set=document.createElement('optgroup');set.label=item.label;fillSelect(set,item.options);select.append(set);}return select;}
+// Vendor kinds in their groups; withGroups also offers each whole group ("g:<group>", kinds then "k:<kind>").
+const vendorKindItems=withGroups=>Object.entries(vendorKinds).map(([label,kinds])=>({label,options:[...(withGroups?[['All '+label.toLowerCase(),'g:'+label]]:[]),...Object.keys(kinds).map(k=>[k,withGroups?'k:'+k:k])]}));
 const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Shady merchant':['♧','#785268'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
 // Additional marker types; a map's own extraCategories override these colours and glyphs.
 const noteCategories={'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
@@ -77,14 +85,16 @@ const markerText=m=>(m.name+' '+m.category+' '+m.note+' '+classesOf(m).join(' ')
 // Vendors can be narrowed to a group ("g:Food and drink") or one kind ("k:Bag merchant"); '' shows them all.
 let vendorGroup='';
 const vendorShown=m=>{if(!vendorGroup||m.category!=='Vendor')return true;const kind=vendorKindFor(m);return vendorGroup.startsWith('g:')?vendorGroupOf(kind)===vendorGroup.slice(2):kind===vendorGroup.slice(2);};
-function visibleMarkers(){const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);return allMarkers().filter(m=>atLevel(m)&&enabled.has(m.category)&&vendorShown(m)&&terms.every(t=>markerText(m).includes(t)));}
+const searchTerms=()=>$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+const shownMarker=(m,terms)=>enabled.has(m.category)&&vendorShown(m)&&terms.every(t=>markerText(m).includes(t));
+function visibleMarkers(){const terms=searchTerms();return allMarkers().filter(m=>atLevel(m)&&shownMarker(m,terms));}
 function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers();}
-function copyButton(place){const b=text('button','Copy link','copy-place');b.type='button';b.onclick=()=>copyLink(place);return b;}
+function copyButton(place){return button('Copy link',()=>copyLink(place),'copy-place','copy');}
 function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker',quiet:m.switchOnClick&&!alignmentMode});}
 // Arriving through a floor link: no popup, just a short glow on the landing marker.
 function flashPin(id){const el=pins.get(id)?.getElement();if(!el)return;el.classList.remove('just-arrived');void el.offsetWidth;el.classList.add('just-arrived');setTimeout(()=>el.classList.remove('just-arrived'),1700);}
 // A marker's wiki page opens in a new tab; an embed on another site may hide it (wiki-links.js).
-function wikiButton(m){const link=wikiLinkFor(m);if(!link)return null;const a=text('a','Read on '+link.name+' ↗','wiki-link');a.href=link.href;a.target='_blank';a.rel='noopener';return a;}
+function wikiButton(m){const link=wikiLinkFor(m);return link?externalLink('Read on '+link.name+' ↗',link.href,'wiki-link'):null;}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;
 // NPC wiki cards (npc-cards/<map>.json, built when publishing): read once per map, when its first wiki-linked NPC pin is
 // drawn; those pins' popups then get their card. Only where this page may link to the wiki (embed rules).
@@ -119,13 +129,11 @@ const actionPaths={
  delete:'M3 6h18 M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6 M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M10 11v6 M14 11v6',
  share:'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13',
  reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5'};
-function actionIcon(button){
- const label=button.textContent,kind=button.classList.contains('copy-place')?'copy':button.classList.contains('community-report')?'report':button.classList.contains('popup-delete')?'delete':
-  /^(suggest|edit)/i.test(label)?'edit':/^share/i.test(label)?'share':/^reset/i.test(label)?'reset':null;
- if(!kind||button.querySelector('svg'))return;
+function actionIcon(b){
+ const kind=b.dataset.icon;if(!Object.hasOwn(actionPaths,kind||'')||b.querySelector('svg'))return;
  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
  for(const [k,v] of Object.entries({viewBox:'0 0 24 24',width:'16',height:'16','aria-hidden':'true',fill:'none',stroke:'currentColor','stroke-width':'1.8','stroke-linecap':'round','stroke-linejoin':'round'}))svg.setAttribute(k,v);
- path.setAttribute('d',actionPaths[kind]);svg.append(path);button.prepend(svg);
+ path.setAttribute('d',actionPaths[kind]);svg.append(path);b.prepend(svg);
 }
 function tidyActions(n){
  const actions=text('div','','popup-actions');
@@ -133,7 +141,6 @@ function tidyActions(n){
  for(const b of actions.querySelectorAll('button'))actionIcon(b);
  if(actions.children.length)n.append(actions);return n;
 }
-const wikiPage=(label,href,cls='')=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
 // A short card in the wiki's own order: its tag line, level, location, race and class, the first loot items, the start
 // of its summary, each linking back to the wiki, with its credit.
 // "Ebon Scholar Myrddin (levels 51–53)": the name, and the level our title gives, apart.
@@ -152,29 +159,32 @@ function npcCard(c,m){
  if(rows.children.length)box.append(rows);
  const section=(heading,cls)=>{const s=text('section','','npc-section '+cls),h=text('h4',heading,'npc-heading');s.append(h);box.append(s);return [s,h];};
  if(Array.isArray(c.loot)&&c.loot.length){const [loot,head]=section('Notable loot','npc-loot'),list=document.createElement('ul');if(c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));
-  for(const i of c.loot){const li=document.createElement('li');li.append(wikiPage(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
-  loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(wikiPage('+'+more+' more on the wiki',c.url,'npc-more'));}
- if(c.summary){const [about]=section('From the wiki','npc-about');about.append(text('p',c.summary,'npc-summary'),wikiPage('Read more on the wiki ↗',c.url,'npc-read'));}
- box.append(wikiPage('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
+  for(const i of c.loot){const li=document.createElement('li');li.append(externalLink(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
+  loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(externalLink('+'+more+' more on the wiki',c.url,'npc-more'));}
+ if(c.summary){const [about]=section('From the wiki','npc-about');about.append(text('p',c.summary,'npc-summary'),externalLink('Read more on the wiki ↗',c.url,'npc-read'));}
+ box.append(externalLink('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
  return box;
 }
-function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(wikiPage(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
+function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(externalLink(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
- if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel){const b=text('button',m.direction==='up'?'Go up':'Go down','level-link');b.type='button';b.onclick=()=>switchAt(m);n.append(b);}const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads){const go=text('button','Go to '+leads.title,'level-link');go.type='button';go.onclick=()=>openMap(leads.id);n.append(go);}
- if(m.id.startsWith('personal-')){const edit=text('button','Edit note');edit.onclick=()=>openEditor(m);const del=text('button','Delete','popup-delete');del.type='button';del.onclick=()=>confirmDelete(m);n.append(edit,del);}
- if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode){const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetMarker(m.id);n.append(reset);}}
+ if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel)n.append(button(m.direction==='up'?'Go up':'Go down',()=>switchAt(m),'level-link'));const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads)n.append(button('Go to '+leads.title,()=>openMap(leads.id),'level-link'));
+ if(m.id.startsWith('personal-'))n.append(button('Edit note',()=>openEditor(m),'','edit'),button('Delete',()=>confirmDelete(m),'popup-delete','delete'));
+ if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode)n.append(button('Reset position',()=>resetMarker(m.id),'','reset'));}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
  if(!singleMap)window.atlasCommunity?.popup(m,n);return tidyActions(n);}
 function labelEditPopup(row){
  const n=text('div','');n.append(text('div','Place name','tag'),text('h3',row.name));
- if(alignmentLabelPositions[row.id]){n.append(text('p','Position moved in this browser.','moved-note'));const reset=text('button','Reset position');reset.type='button';reset.onclick=()=>resetLabel(row.id);n.append(reset);}
+ if(alignmentLabelPositions[row.id])n.append(text('p','Position moved in this browser.','moved-note'),button('Reset position',()=>resetLabel(row.id),'','reset'));
  window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
  L.popup({autoPan:false,offset:[0,-8]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
 }
 function placePopup(p){const n=text('div','');n.append(text('div',p.kind==='hidden'?'Hidden area':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));const wiki=wikiButton(p);if(wiki)n.append(wiki);if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));if(!singleMap)window.atlasCommunity?.placePopup?.(p,n);return tidyActions(n);}
+// Makes a marker shown on the map again: its type on, pins shown, no search or vendor filter hiding it.
+function revealMarker(m){enabled.add(m.category);showPins=true;$('search').value='';$('clear-search').hidden=true;setVendorGroup('');updateCategoryButtons();drawMarkers();}
+function setVendorGroup(value){vendorGroup=value;const pick=$('vendor-filter-select');if(pick)pick.value=value;}
 function choose(m){
  if(alignmentMode&&!m.id.startsWith('personal-'))selectAlignment(m,'marker');
- if(!enabled.has(m.category)||!pins.has(m.id)||!showPins){enabled.add(m.category);showPins=true;$('search').value='';updateCategoryButtons();drawMarkers();}
+ if(!enabled.has(m.category)||!pins.has(m.id)||!showPins)revealMarker(m);
  openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));
 }
 function openPlace(p,zoom=config.defaultView.placeZoom){
@@ -202,8 +212,15 @@ function pinIcon(m){
  return L.divIcon({className:'pin',html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
 }
 function openMap(id){goToMap(id);}
+// One line of the search results: an optional icon, the title and a small line under it.
+function resultRow(title,detail,onClick,symbolOf,cls='place'){
+ const b=text('button','',cls),label=text('span','');b.type='button';
+ if(symbolOf){const glyph=text('span','','symbol');glyph.append(markerSymbol(symbolOf));b.append(glyph);}
+ label.append(text('strong',title),text('small',detail));b.append(label);b.onclick=onClick;return b;
+}
+const markerDetail=(m,...more)=>[noteKind(m),markerSubtitle(m),...more].filter(Boolean).join(' · ');
 function drawMarkers(){
- {const box=$('vendor-filter');if(box){const has=allMarkers().some(m=>m.category==='Vendor'&&atLevel(m));box.hidden=!has||!enabled.has('Vendor');if(box.hidden&&vendorGroup){vendorGroup='';$('vendor-filter-select').value='';}}}
+ {const box=$('vendor-filter');if(box){const has=allMarkers().some(m=>m.category==='Vendor'&&atLevel(m));box.hidden=!has||!enabled.has('Vendor');if(box.hidden&&vendorGroup)setVendorGroup('');}}
  for(const pin of pins.values())pin.remove();pins.clear();const list=$('results');list.replaceChildren();
  const matches=visibleMarkers();$('count').textContent=matches.length+' places';
  for(const m of matches){
@@ -220,26 +237,25 @@ function drawMarkers(){
   if(m.switchOnClick&&!alignmentMode)pin.unbindPopup();
   if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
   if(!m.noteType)pin.bindTooltip(()=>text('span',markerTitle(m)),{direction:'top',offset:[0,-23]});if(showPins)pin.addTo(map);pins.set(m.id,pin);
-  const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);
-  const label=text('span','');label.append(text('strong',markerTitle(m)),text('small',[noteKind(m),markerSubtitle(m)].filter(Boolean).join(' · ')+(m.id.startsWith('personal-')?' · Personal note':'')));b.append(label);b.onclick=()=>opens?openMap(opens.id):choose(m);list.append(b);
+  list.append(resultRow(markerTitle(m),markerDetail(m,own?'Personal note':''),()=>opens?openMap(opens.id):choose(m),m));
  }
  // Place names and hidden areas can be found even when their visual layer hides.
- const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
+ const terms=searchTerms();
  // A search also lists matching markers from the other levels; choosing one opens its level at the marker.
  const otherLevel=p=>config.levels&&p.level&&!atLevel(p)?' · '+(config.levels.find(l=>l.id===p.level)?.title||p.level):'';
- if(terms.length&&config.levels){for(const m of allMarkers().filter(m=>!atLevel(m)&&enabled.has(m.category)&&terms.every(t=>markerText(m).includes(t)))){const b=text('button','','place'),glyph=text('span','','symbol');glyph.append(markerSymbol(m));b.append(glyph);const label=text('span','');label.append(text('strong',markerTitle(m)),text('small',[noteKind(m),markerSubtitle(m)].filter(Boolean).join(' · ')+otherLevel(m)));b.append(label);b.onclick=()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom));list.append(b);}}
- if(terms.length){for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t)))){const b=text('button','','place');const label=text('span','');label.append(text('strong',p.name),text('small',(p.kind==='hidden'?'Hidden area':'Place name')+otherLevel(p)));b.append(label);b.onclick=()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0));list.append(b);}}
+ if(terms.length&&config.levels)for(const m of allMarkers().filter(m=>!atLevel(m)&&shownMarker(m,terms)))list.append(resultRow(markerTitle(m),markerDetail(m)+otherLevel(m),()=>openPlace({...m,kind:'marker'},Math.max(map.getZoom(),config.defaultView.placeZoom)),m));
+ if(terms.length)for(const p of placeIndex.filter(p=>p.kind!=='marker'&&terms.every(t=>p.name.toLocaleLowerCase().includes(t))))list.append(resultRow(p.name,(p.kind==='hidden'?'Hidden area':'Place name')+otherLevel(p),()=>openPlace(p,Math.max(config.defaultView.placeZoom,p.minZoom||0))));
  $('count').textContent=list.childElementCount+' places';
  // NPCs on this map's Wanted board (not on the map yet) that match: choosing one opens its notice on the board.
  const wanted=terms.length&&window.atlasWantedMatches?window.atlasWantedMatches(terms):[];
  if(wanted.length){list.append(text('p','Wanted: not on the map yet','find-heading'));
-  for(const w of wanted){const b=text('button','','place wanted-result'),glyph=text('span','','symbol');glyph.append(markerSymbol({category:w.category,name:w.name}));b.append(glyph);const label=text('span','');label.append(text('strong',w.name),text('small',['Wanted',w.kind,w.claimed?'claimed, awaiting review':''].filter(Boolean).join(' · ')));b.append(label);b.onclick=()=>window.atlasOpenBounty?.(w.id);list.append(b);}}
+  for(const w of wanted)list.append(resultRow(w.name,['Wanted',w.kind,w.claimed?'claimed, awaiting review':''].filter(Boolean).join(' · '),()=>window.atlasOpenBounty?.(w.id),{category:w.category,name:w.name},'place wanted-result'));}
  // Matches of a ?find= link on other maps, while its text is still in the search box.
  if(findState&&$('search').value.trim()===findState.text){
   const away=findState.hits.filter(e=>e.m!==config.id);
   if(away.length)list.append(text('p','On other maps','find-heading'));
-  for(const e of away){const b=text('button','','place'),label=text('span',''),where=registry.maps.find(c=>c.id===e.m);const as={name:e.n,category:e.k,classes:e.c};label.append(text('strong',markerTitle(as)),text('small',[e.k,markerSubtitle(as),where?.title].filter(Boolean).join(' · ')));b.append(label);
-   b.onclick=()=>{const url=mapLink(e.m);url.searchParams.set('place',e.p);if(e.l)url.searchParams.set('level',e.l);goToMap(e.m,url);};list.append(b);}
+  for(const e of away){const where=registry.maps.find(c=>c.id===e.m),as={name:e.n,category:e.k,classes:e.c};
+   list.append(resultRow(markerTitle(as),[e.k,markerSubtitle(as),where?.title].filter(Boolean).join(' · '),()=>{const url=mapLink(e.m);url.searchParams.set('place',e.p);if(e.l)url.searchParams.set('level',e.l);goToMap(e.m,url);}));}
   if(!findState.hits.length)list.append(text('p','Nothing on the atlas matches “'+findState.text+'” yet.','empty'));
  }
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
@@ -312,22 +328,21 @@ function deleteNote(id){
  // A note that carries a suggestion (a bounty claim) withdraws it too (community.js).
  if(gone)window.dispatchEvent(new CustomEvent('atlas:note-deleted',{detail:{note:gone}}));return true;
 }
+// A small question with its answers ([label, action, class]); any answer closes it.
+function confirmDialog(id,title,message,answers){
+ let d=$(id);if(!d){d=document.createElement('dialog');d.id=id;d.setAttribute('aria-labelledby',id+'-title');document.body.append(d);}
+ const heading=text('h2',title),actions=text('div','','dialog-actions');heading.id=id+'-title';
+ actions.append(...answers.map(([label,fn,cls])=>button(label,()=>{d.close();fn();},cls)));
+ d.replaceChildren(heading,text('p',message),actions);d.showModal();
+}
 // A note can be deleted straight from its popup, after a small confirmation.
 function confirmDelete(m){
  const also=window.atlasCommunity?.deleteNotice?.(m);
- let d=$('delete-confirm');if(!d){d=document.createElement('dialog');d.id='delete-confirm';d.setAttribute('aria-labelledby','delete-confirm-title');document.body.append(d);}
- const title=text('h2','Delete this note?');title.id='delete-confirm-title';const actions=text('div','','dialog-actions');
- const act=(label,fn,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=()=>{d.close();fn();};return b;};
- actions.append(act('Cancel',()=>{}),act('Delete',()=>deleteNote(m.id),'danger'));
- d.replaceChildren(title,text('p','"'+m.name+'" will be removed from your notes'+(document.querySelector('.community-who')?' on every device you sync.':'.')+(also?' '+also:'')),actions);d.showModal();
+ confirmDialog('delete-confirm','Delete this note?','"'+m.name+'" will be removed from your notes'+(document.querySelector('.community-who')?' on every device you sync.':'.')+(also?' '+also:''),[['Cancel',()=>{}],['Delete',()=>deleteNote(m.id),'danger']]);
 }
 function askFinishEdit(){
  if(!editChanged()){finishEdit(true);return;}
- let d=$('edit-confirm');if(!d){d=document.createElement('dialog');d.id='edit-confirm';d.setAttribute('aria-labelledby','edit-confirm-title');document.body.append(d);}
- const title=text('h2','Save your changes?');title.id='edit-confirm-title';const actions=text('div','','dialog-actions');
- const act=(label,fn,cls)=>{const b=text('button',label,cls);b.type='button';b.onclick=()=>{d.close();fn();};return b;};
- actions.append(act('Keep editing',()=>{}),act('Discard',()=>finishEdit(false)),act('Save',()=>finishEdit(true),'primary'));
- d.replaceChildren(title,text('p','You moved markers or names while editing. Save keeps the new positions in this browser; Discard puts everything back.'),actions);d.showModal();
+ confirmDialog('edit-confirm','Save your changes?','You moved markers or names while editing. Save keeps the new positions in this browser; Discard puts everything back.',[['Keep editing',()=>{}],['Discard',()=>finishEdit(false)],['Save',()=>finishEdit(true),'primary']]);
 }
 function finishEdit(save){
  if(!alignmentMode)return;
@@ -343,11 +358,15 @@ function noteTypeValue(){return document.querySelector('input[name="note-type"]:
 // Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
 // The dot beside Category shows the colour the pin will have.
 function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';$('class-field').hidden=type!=='marker'||$('category').value!=='Class trainer';$('vendor-field').hidden=type!=='marker'||$('category').value!=='Vendor';guessTrade();guessVendor();}
+// A class trainer's classes ride on the wiki field (a wiki pick may give two); the Class menu shows a single one and
+// sets it. Every change goes through pickClasses, so the two never disagree.
+function pickedClasses(){try{const v=JSON.parse($('wiki').dataset.wikiClasses||'[]');return classesOk(v)?v:[];}catch{return [];}}
+function pickClasses(list){const v=Array.isArray(list)?list.filter(c=>atlasClasses.includes(c)):[];$('wiki').dataset.wikiClasses=JSON.stringify(v);$('trainer-class').value=v.length===1?v[0]:'';}
 // A vendor named for what it sells ("A bag merchant") starts on that kind; a chosen kind stays.
 function guessVendor(){if($('category').value!=='Vendor'||$('vendor-kind').value)return;const kind=vendorKindNamed($('name').value+' '+$('note').value);if(kind)$('vendor-kind').value=kind;}
 // A Tradeskill named in its name or note ("an enchanting trainer") starts on that trade; a chosen trade stays.
 function guessTrade(){if($('category').value!=='Tradeskill'||$('trade').value)return;const trade=tradeNamed($('name').value+' '+$('note').value,Object.keys(tradePaths));if(trade)$('trade').value=trade;}
-function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);$('trainer-class').value=Array.isArray(m.classes)&&m.classes.length===1?m.classes[0]:'';$('vendor-kind').value=m.vendor||'';
+function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);pickClasses(m.classes);$('vendor-kind').value=m.vendor||'';
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
@@ -414,8 +433,12 @@ async function copyLink(place){
  if(place){url.searchParams.set('x',String(place.x));url.searchParams.set('y',String(place.y));url.searchParams.set('z',String(Math.max(map.getZoom(),config.defaultView.placeZoom)));}
  // Alignment drafts are local editing state, not part of a shared destination; a single-map embed shares the full atlas.
  url.searchParams.delete('align');if(singleMap)url.searchParams.delete('embed');
- try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText(url.href);status('Link copied. Personal notes are not included.');}
- catch{$('link-value').value=url.href;$('link-dialog').showModal();$('link-value').select();}
+ if(await copyText(url.href))status('Link copied. Personal notes are not included.');
+ else{$('link-value').value=url.href;$('link-dialog').showModal();$('link-value').select();}
+}
+// Copies to the clipboard where this page may; false when it cannot (an iframe without clipboard-write).
+async function copyText(value){
+ try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))return false;await navigator.clipboard.writeText(value);return true;}catch{return false;}
 }
 // A single-map embed links back to the same view in the full atlas, in a new tab.
 function openInAtlas(){const url=viewUrl();url.searchParams.delete('embed');window.open(url.href,'_blank','noopener');}
@@ -451,8 +474,8 @@ function openEmbed(){
  updateEmbed();$('embed-dialog').showModal();$('embed-code').select();
 }
 async function copyEmbed(field){
- try{const policy=document.permissionsPolicy||document.featurePolicy;if(!navigator.clipboard?.writeText||(policy&&!policy.allowsFeature('clipboard-write')))throw Error('Clipboard unavailable');await navigator.clipboard.writeText($(field).value);status(field==='embed-code'?'Embed code copied.':'Map address copied.');}
- catch{$(field).focus();$(field).select();status('Press Ctrl+C (or ⌘C) to copy.');}
+ if(await copyText($(field).value))status(field==='embed-code'?'Embed code copied.':'Map address copied.');
+ else{$(field).focus();$(field).select();status('Press Ctrl+C (or ⌘C) to copy.');}
 }
 // In a single-map embed the scroll wheel scrolls the page until the map is clicked, and again once the pointer leaves it.
 function wheelAfterClick(){
@@ -464,7 +487,7 @@ function applyLocation(url){
  applyingView=true;activePlace=null;sharedPin?.remove();sharedPin=null;map.closePopup();
  const q=url.searchParams,wanted=q.get('place');let warning='';
  const values=['x','y','z'].map(k=>q.has(k)&&q.get(k).trim()!==''?Number(q.get(k)):NaN);
- if(wanted){const p=findPlace(wanted);if(p){if(p.kind==='marker'){enabled.add(p.category);showPins=true;$('search').value='';updateCategoryButtons();drawMarkers();}const z=Number.isFinite(values[2])&&values[2]>=config.minZoom&&values[2]<=config.maxZoom?values[2]:config.defaultView.placeZoom;openPlace(p,z);applyingView=false;return;}warning='That place was not found on this map.';}
+ if(wanted){const p=findPlace(wanted);if(p){if(p.kind==='marker')revealMarker(p);const z=Number.isFinite(values[2])&&values[2]>=config.minZoom&&values[2]<=config.maxZoom?values[2]:config.defaultView.placeZoom;openPlace(p,z);applyingView=false;return;}warning='That place was not found on this map.';}
  if(bounded(...values)){map.setView(locationOf({x:values[0],y:values[1]}),values[2],{animate:false});if(!ownView)sharedPin=L.circleMarker(locationOf({x:values[0],y:values[1]}),{radius:6,color:'rgb(113,61,25)',weight:2,fillColor:'#fff1cb',fillOpacity:.8,interactive:false}).addTo(map);}
  else{
   const legacy=('#'+(url.href.split('#')[1]||'')).match(/^#view=([\d.]+),(-?[\d.]+),(-?[\d.]+)$/),p=legacy?.slice(1).map(Number);
@@ -492,7 +515,7 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
 function mapBounds(){const f=config.frame||{x:0,y:0,width:config.width,height:config.height};return L.latLngBounds(map.unproject([f.x,f.y+f.height],config.coordinateZoom),map.unproject([f.x+f.width,f.y],config.coordinateZoom));}
 function appendAttributionLinks(parent,a){
  // A source or licence never breaks inside ("CC BY-SA 4.0" stays whole); separators go only between items.
- let first=true;for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;const link=text('a',title,'credit-item');link.href=href;link.target='_blank';link.rel='noopener';if(!first)parent.append(text('span',' · '));parent.append(link);first=false;}
+ let first=true;for(const [title,href] of [[a.sourceTitle,a.sourceUrl],[a.license,a.licenseUrl]]){if(!href)continue;if(!first)parent.append(text('span',' · '));parent.append(externalLink(title,href,'credit-item'));first=false;}
 }
 function updateTitles(){
  document.title=config.title+' · MnM Atlas';document.querySelector('meta[name="description"]').content=config.description;
@@ -614,9 +637,13 @@ async function importNotes(file){
  if(data.type==='mnmaps-browser-data'&&data.version===1){await receiveBrowserData(data.items);return;}
  if(data.tileRevision!==config.tileRevision)throw Error('These notes use another map revision. Keep the backup and reposition them on this edition.');
  if(data.version!==1||data.map!==config.id||!Array.isArray(data.markers)||!data.markers.every(valid))throw Error('Not a valid '+config.title+' field-notes file.');
- const merged=new Map(personal.map(m=>[m.id,m]));for(const m of data.markers)merged.set(m.id,{id:m.id,name:m.name.trim(),category:m.category,note:m.note,x:m.x,y:m.y,...(m.noteType?{noteType:m.noteType}:{}),...(m.arrow?{arrow:m.arrow}:{}),...(m.toMap?{toMap:m.toMap}:{}),...(m.trade?{trade:m.trade}:{}),...(m.color?{color:m.color}:{}),...(m.wiki?{wiki:m.wiki}:{}),...(m.wiki&&m.wikiId?{wikiId:m.wikiId}:{}),...(m.category==='Class trainer'&&m.classes?{classes:m.classes}:{}),...(config.levels?{level:m.level||config.defaultLevel}:{})});
- if(merged.size>2000)throw Error('The combined notes exceed 2,000 markers.');if(persist([...merged.values()])){setupCategoryControls();buildPlaceIndex();drawMarkers();status('Notes imported. Matching IDs updated; other notes kept.');}
+ const imported=data.markers.map(m=>({id:m.id,name:m.name.trim(),category:m.category,note:m.note,x:m.x,y:m.y,...markerExtras(m),...(config.levels?{level:m.level||config.defaultLevel}:{})}));
+ const merged=new Map(personal.map(m=>[m.id,m]));for(const m of imported)merged.set(m.id,m);
+ // Imported while editing: Cancel only undoes moves, so the imported notes stay.
+ if(merged.size>2000)throw Error('The combined notes exceed 2,000 markers.');if(persist([...merged.values()])){if(editSnapshot)editSnapshot.personal=[...editSnapshot.personal.filter(p=>!imported.some(m=>m.id===p.id)),...imported];setupCategoryControls();buildPlaceIndex();drawMarkers();status('Notes imported. Matching IDs updated; other notes kept.');}
 }
+// The types a note (or a suggestion under review) can take: Personal first, then the others A to Z.
+const categoryChoices=()=>['Personal',...Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))];
 function setupCategoryControls(){
  // Filters list this map's categories plus any your notes use; notes may use every type.
  const own={...baseCategories,...(config.extraCategories||{})},used=new Set(allMarkers().map(m=>m.category));
@@ -625,7 +652,7 @@ function setupCategoryControls(){
  for(const kind of filters){const b=text('button','');b.dataset.category=kind;b.append(markerSymbol({category:kind,name:''}),text('span',kind==='Class trainer'?'Class trainers':kind));b.onclick=()=>{enabled.has(kind)?enabled.delete(kind):enabled.add(kind);updateCategoryButtons();drawMarkers();};$('categories').append(b);}
  updateCategoryButtons();
  const select=$('category'),current=select.value;select.replaceChildren();
- for(const kind of ['Personal',...Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))]){const option=text('option',kind);option.value=kind;select.append(option);}
+ fillSelect(select,categoryChoices().map(k=>[k,k]));
  if(current)select.value=current;
 }
 // People who asked to be credited for published suggestions, kept in the site data by the publishing job.
@@ -685,7 +712,7 @@ function setupControls(){
  instantTips();
  $('about').onclick=()=>{$('about-dialog').showModal();showContributors();};$('close-about').onclick=()=>$('about-dialog').close();
 
- $('all-categories').onclick=()=>{if(allTypesShown())for(const b of $('categories').children)enabled.delete(b.dataset.category);else{enabled=new Set(Object.keys(categories));showPins=true;}updateCategoryButtons();drawMarkers();};
+ $('all-categories').onclick=()=>{if(allTypesShown())for(const b of $('categories').children)enabled.delete(b.dataset.category);else{enabled=new Set(Object.keys(categories));showPins=true;setVendorGroup('');}updateCategoryButtons();drawMarkers();};
  $('search').oninput=refreshSearch;$('clear-search').onclick=()=>{$('search').value='';refreshSearch();$('search').focus();};
  $('zoom-in').onclick=()=>map.zoomIn();$('zoom-out').onclick=()=>map.zoomOut();$('fit').onclick=fitMap;
  $('hide-pins').onclick=()=>{showPins=!showPins;updateCategoryButtons();drawMarkers();};
@@ -697,13 +724,12 @@ function setupControls(){
  $('add').onclick=startPlacement;if($('add-note'))$('add-note').onclick=startPlacement;
  for(const [name,hex] of Object.entries(pinColours)){const label=text('label','');label.title=name;const input=text('input','');input.type='radio';input.name='pin-colour';input.value=hex;input.setAttribute('aria-label',name);const swatch=text('span','');swatch.style.setProperty('--swatch',hex);label.append(input,swatch);$('colour-swatches').append(label);}
  // A class trainer's class: picked here, or filled from the wiki pick; it rides with the note as its classes.
- for(const c of atlasClasses)$('trainer-class').append(new Option(c,c));
- $('trainer-class').onchange=()=>{$('wiki').dataset.wikiClasses=JSON.stringify($('trainer-class').value?[$('trainer-class').value]:[]);};
- for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;for(const kind of Object.keys(kinds))set.append(new Option(kind,kind));$('vendor-kind').append(set);}
+ fillSelect($('trainer-class'),atlasClasses.map(c=>[c,c]));
+ $('trainer-class').onchange=()=>pickClasses($('trainer-class').value?[$('trainer-class').value]:[]);
+ fillSelect($('vendor-kind'),vendorKindItems(false));
  for(const id of ['name','note'])$(id).addEventListener('input',()=>{guessTrade();guessVendor();});
- {const pick=$('vendor-filter-select');for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;set.append(new Option('All '+group.toLowerCase(),'g:'+group));for(const kind of Object.keys(kinds))set.append(new Option(kind,'k:'+kind));pick.append(set);}
-  pick.onchange=()=>{vendorGroup=pick.value;drawMarkers();};}
- for(const tradeName of Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b))){const option=text('option',tradeName);option.value=tradeName;$('trade').append(option);}
+ {const pick=$('vendor-filter-select');fillSelect(pick,vendorKindItems(true));pick.onchange=()=>{vendorGroup=pick.value;drawMarkers();};}
+ fillSelect($('trade'),Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)).map(t=>[t,t]));
  for(const r of document.querySelectorAll('input[name="note-type"],input[name="pin-colour"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
  $('cancel-place').onclick=cancelPlacement;document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelPlacement();if(compact())setPanel(false);}});
  // Closing the editor without saving also drops a new note's pin; a saved note has already ended placement.
@@ -711,14 +737,17 @@ function setupControls(){
  $('marker-form').onsubmit=e=>{e.preventDefault();if(!draft)return;
   {const sharing=!!$('suggest-check')?.checked&&!$('suggest-on-save')?.hidden&&!$('suggest-check').parentElement.hidden,type=noteTypeValue(),kind=$('category').value;
    if(sharing&&type==='marker'&&kind==='Tradeskill'&&!$('trade').value){status('Choose the trade before suggesting it for the public map.');$('trade').focus();return;}
-   if(sharing&&type==='marker'&&kind==='Class trainer'&&!$('marker-form').classList.contains('bounty-mode')){let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}if(!classes.length){status('Choose the class they teach before suggesting it for the public map.');$('trainer-class').focus();return;}}}const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
-  delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;delete m.wikiId;delete m.classes;delete m.vendor;
-  if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;if(type==='marker'&&m.category==='Vendor'&&$('vendor-kind').value)m.vendor=$('vendor-kind').value;
-  const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&(m.category==='Personal'||colour===draft.color))m.color=colour;
-  if(type==='marker'){const wiki=wikiAddress($('wiki').value);if(wiki===null){status(wikiHint);$('wiki').focus();return;}if(wiki){m.wiki=wiki;const id=wikiIdFor($('wiki'),wiki);if(id)m.wikiId=id;}
+   if(sharing&&type==='marker'&&kind==='Class trainer'&&!$('marker-form').classList.contains('bounty-mode')&&!pickedClasses().length){status('Choose the class they teach before suggesting it for the public map.');$('trainer-class').focus();return;}}
+  // What the form says, then only the fields this kind of note keeps (markerExtras).
+  const type=noteTypeValue(),category=type==='marker'?$('category').value:'Personal',wiki=type==='marker'?wikiAddress($('wiki').value):'';
+  if(wiki===null){status(wikiHint);$('wiki').focus();return;}
+  const colour=document.querySelector('input[name="pin-colour"]:checked')?.value,base={...draft};for(const k of markerExtraKeys)delete base[k];
+  const m={...base,name:$('name').value.trim(),note:$('note').value,category,...markerExtras({category,noteType:type==='marker'?undefined:type,
+   arrow:document.querySelector('input[name="exit-arrow"]:checked')?.value||'north',toMap:$('exit-target').value,trade:$('trade').value,vendor:$('vendor-kind').value,
+   color:colour&&(category==='Personal'||colour===draft.color)?colour:'',wiki,wikiId:wiki?wikiIdFor($('wiki'),wiki):'',
    // A trainer picked from the wiki keeps its classes, so it reads class first ("Beastmaster trainer").
-   if(m.category==='Class trainer'){let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}if(classes.length&&classesOk(classes))m.classes=classes;}}
-  if(!valid(m))return;if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));window.dispatchEvent(new CustomEvent('atlas:note-saved',{detail:{note:m}}));}};
+   classes:pickedClasses()})};
+  if(!valid(m)){status('This note could not be saved: check its name and fields.');return;}if(personal.length>=2000&&!personal.some(p=>p.id===m.id)){status('You have reached the 2,000-note limit. Export and remove older notes.');return;}const added=!personal.some(p=>p.id===m.id);if(persist([...personal.filter(p=>p.id!==m.id),m])){keepInSnapshot(m);closeEditor();cancelPlacement();enabled.add(m.category);setupCategoryControls();$('search').value='';buildPlaceIndex();refreshSearch();choose(m);status('Saved to your field notes.');if(added)window.dispatchEvent(new CustomEvent('atlas:note-added'));window.dispatchEvent(new CustomEvent('atlas:note-saved',{detail:{note:m}}));}};
  $('delete').onclick=()=>{if(draft&&deleteNote(draft.id))closeEditor();};
  $('export').onclick=()=>download({version:1,map:config.id,tileRevision:config.tileRevision,markers:personal},`${config.id}-field-notes.json`);
  $('import').onclick=()=>$('import-file').click();$('import-file').onchange=async e=>{try{if(e.target.files[0])await importNotes(e.target.files[0]);}catch(e){status('Import failed: '+e.message,true);}finally{$('import-file').value='';}};
@@ -746,21 +775,22 @@ function watchForUpdates(){
 // ?find=<text> (or ?wiki=<wiki id>), for links from other sites: one match opens its map on that place; several, or none,
 // open the Search menu with the text, listing matches on other maps; &map=<id> looks on that map only. Embed settings are kept.
 let findState=null;
+// The address of a map for a ?find= link, keeping its other settings (embed and the like).
+function findTarget(url,id){const next=mapAddress(id);for(const [k,v] of url.searchParams)if(!['find','wiki','map','place','level','x','y','z'].includes(k))next.searchParams.set(k,v);return next;}
 async function findArrival(url){
- const text=(url.searchParams.get('find')??url.searchParams.get('wiki')??'').trim().slice(0,100);if(!text)return null;
+ const asked=(url.searchParams.get('find')??url.searchParams.get('wiki')??'').trim().slice(0,100);if(!asked)return null;
  const only=registry.maps.some(c=>c.id===url.searchParams.get('map'))?url.searchParams.get('map'):'';
  let index=[];try{index=await fetchData('data/find-index.json',[]);}catch{}
- const hits=findPlaces(index,text,only).filter(e=>registry.maps.some(c=>c.id===e.m)),maps=[...new Set(hits.map(e=>e.m))];
- const target=maps.length===1?maps[0]:only||registry.defaultMap,next=mapAddress(target);
- for(const [k,v] of url.searchParams)if(!['find','wiki','map','place','level','x','y','z'].includes(k))next.searchParams.set(k,v);
+ const hits=findPlaces(index,asked,only).filter(e=>registry.maps.some(c=>c.id===e.m)),maps=[...new Set(hits.map(e=>e.m))];
+ const target=maps.length===1?maps[0]:only||registry.defaultMap,next=findTarget(url,target);
  if(hits.length===1){next.searchParams.set('place',hits[0].p);if(hits[0].l)next.searchParams.set('level',hits[0].l);}
  // Not on the atlas yet: an NPC on a Wanted board (by wiki id, else exact name) opens its map with the board on its notice.
  if(!hits.length){let wanted=[];try{wanted=await fetchData('bounties/index.json',[]);}catch{}
   const rows=(Array.isArray(wanted)?wanted:[]).filter(e=>e&&typeof e.w==='string'&&typeof e.n==='string'&&registry.maps.some(c=>c.id===e.m)&&(!only||e.m===only));
-  const found=rows.filter(e=>e.w===text),named=found.length?found:rows.filter(e=>findKey(e.n)===findKey(text));
-  if(named.length===1){const next2=mapAddress(named[0].m);for(const [k,v] of url.searchParams)if(!['find','wiki','map','place','level','x','y','z'].includes(k))next2.searchParams.set(k,v);history.replaceState({map:named[0].m},'',next2);return {map:named[0].m,url:next2,text,hits:null,bounty:named[0].w};}}
+  const found=rows.filter(e=>e.w===asked),named=found.length?found:rows.filter(e=>findKey(e.n)===findKey(asked));
+  if(named.length===1){const there=findTarget(url,named[0].m);history.replaceState({map:named[0].m},'',there);return {map:named[0].m,url:there,text:asked,hits:null,bounty:named[0].w};}}
  history.replaceState({map:target},'',next);
- return {map:target,url:next,text,hits:hits.length===1?null:hits};
+ return {map:target,url:next,text:asked,hits:hits.length===1?null:hits};
 }
 async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
 document.addEventListener('DOMContentLoaded',init,{once:true});
