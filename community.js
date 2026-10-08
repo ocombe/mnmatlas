@@ -717,7 +717,7 @@
   if(row.kind==='new-marker')return originals.some(m=>m.id==='community-'+row.id);
   if(p.remove===true)return !t;
   if(row.kind==='move-marker')return !t||!Array.isArray(p.to)||(Math.round(t.x)===Math.round(p.to[0])&&Math.round(t.y)===Math.round(p.to[1]));
-  if(row.kind==='edit-marker')return !t||(t.name===p.name&&(t.note||'')===(p.note||'')&&(p.wiki===undefined||(t.wiki||'')===p.wiki));
+  if(row.kind==='edit-marker')return !t||(t.name===p.name&&(t.note||'')===(p.note||'')&&(p.wiki===undefined||(t.wiki||'')===p.wiki)&&(p.category===undefined||t.category===p.category));
   return true;}
  const drawable=r=>['new-marker','move-marker','edit-marker'].includes(r.kind)&&!(r.kind==='new-marker'&&r.payload?.noteType)&&(!config.levels||!r.level||r.level===config.levelId);
  // Where a suggestion stands on this map, in map units.
@@ -835,7 +835,7 @@
     if(row.review_note)card.append(text('p',row.review_note,'reported-reason'));
     if(row.kind==='report')card.append(text('p',reasons[row.payload.reason]||'Something else','reported-reason'));
     if(row.payload?.remove===true)card.append(text('p',(row.status==='approved'?'Approved removal: the marker goes at the next publishing run.':'Removal')+(removalReasons[row.payload.reason]?' · '+removalReasons[row.payload.reason]:''),'reported-reason'));
-    if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));if(typeof row.payload.wiki==='string'&&(f.wiki||'')!==row.payload.wiki)card.append(text('p','Wiki page: '+was(f.wiki)+'\n→ '+was(row.payload.wiki),'review-change'));}
+    if(row.kind==='edit-marker'||row.kind==='edit-label'){const f=row.payload.from||{},was=v=>v||'(none)';if(f.name!==row.payload.name)card.append(text('p','Name: '+was(f.name)+' → '+row.payload.name,'review-change'));if((f.note||'')!==(row.payload.note||''))card.append(text('p','Description: '+was(f.note)+'\n→ '+was(row.payload.note),'review-change'));if(typeof row.payload.wiki==='string'&&(f.wiki||'')!==row.payload.wiki)card.append(text('p','Wiki page: '+was(f.wiki)+'\n→ '+was(row.payload.wiki),'review-change'));if(typeof row.payload.category==='string'&&typeof f.category==='string'&&f.category!==row.payload.category)card.append(text('p','Type: '+f.category+' → '+row.payload.category,'review-change'));}
     if(row.kind==='new-marker'){card.append(text('p',row.payload.noteType==='label'?'Area label':row.payload.noteType==='exit'?'Zone exit':row.payload.category,'form-hint'));if(row.payload.note)card.append(text('p',row.payload.note));if(row.payload.wiki)card.append(text('p','Wiki page: '+row.payload.wiki,'review-change'));
      // A bounty from the Wanted board is worth more points once approved: the badge says which, with its wiki page.
      if(typeof row.payload.bounty==='string'){const badge=text('p','','bounty-badge'),page=wikiAddress(row.payload.wiki);badge.append(text('strong',row.payload.priority===true?'Priority bounty · 3 '+rewardWord:'Bounty · 2 '+rewardWord));if(page)badge.append(externalLink(' Wiki page ↗',page));card.append(badge);}}
@@ -896,10 +896,13 @@
    const xy=v=>{if(!Array.isArray(v)||v.length!==2||!bounded(...v,config.minZoom))throw Error();return locationOf({x:v[0],y:v[1]});};
    // An edited thing stands where it is published: a marker, a place name, or a trainer chip with that id. When it is
    // gone from the map (removed since), the suggestion still opens here, without a pin, to be decided.
+   // A marker edit can change the type too while reviewing: it starts from the type the edit carries, else the published one.
+   const retypable=row.kind==='edit-marker'&&p.remove!==true&&!!target&&!target.noteType&&Object.hasOwn(categories,target.category)&&target.category!=='Personal';
+   if(retypable&&p.category===undefined){p.category=target.category;for(const k of ['trade','classes','vendor','sells'])if(target[k]!==undefined)p[k]=structuredClone(target[k]);p.from={...p.from,category:target.category};}
    let here=null;
    if(edit){const chip=labelData.trainers?.find(t=>t.id===row.target_id),at=(row.kind==='edit-label'?publishedLabelPositions:publishedPositions).get(row.target_id)||(chip?[chip.x,chip.y]:null);try{if(at)here=xy(at);}catch{}}
    else here=move?xy(p.to):xy([p.x,p.y]);
-   const look=()=>row.kind==='new-marker'?{...p,id:'review-'+row.id}:row.kind.endsWith('label')?{id:'review-'+row.id,name:p.name,noteType:'label',category:'Personal'}:{...(target||{category:'Personal'}),id:'review-'+row.id,name:edit?p.name:target?.name||p.name};
+   const look=()=>row.kind==='new-marker'?{...p,id:'review-'+row.id}:row.kind.endsWith('label')?{id:'review-'+row.id,name:p.name,noteType:'label',category:'Personal'}:{...(target||{category:'Personal'}),...(retypable?{category:p.category,trade:p.trade,classes:p.classes,vendor:p.vendor,sells:p.sells}:{}),id:'review-'+row.id,name:edit?p.name:target?.name||p.name};
    const pin=here&&L.marker(here,{icon:pinIcon(look()),draggable:!edit&&!report,zIndexOffset:1500,keyboard:false}).bindTooltip(()=>text('span',(report?'Reported':edit?'Being edited':move?'Suggested position':'Suggested marker')+' · '+p.name),{permanent:true,direction:'bottom',offset:[0,6]});
    if(pin)reviewLayer.addLayer(pin);
    let line=null;
@@ -917,8 +920,8 @@
    let name,note,category;
    const removal=p.remove===true;if(removal)bar.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
    if(row.kind==='new-marker'||edit&&!removal){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
-   // The same types as the note form (Personal included, so a shared personal note keeps its type).
-   if(row.kind==='new-marker'&&!p.noteType){category=fillSelect(field('Type',document.createElement('select')),categoryChoices().map(k=>[k,k]));category.value=categories[p.category]?p.category:'Personal';}
+   // The same types as the note form (Personal included, so a shared personal note keeps its type; an edited published marker can't become one).
+   if(row.kind==='new-marker'&&!p.noteType||retypable){category=fillSelect(field('Type',document.createElement('select')),categoryChoices().filter(k=>!retypable||k!=='Personal').map(k=>[k,k]));category.value=categories[p.category]?p.category:'Personal';}
    // A tradeskill's trade, a class trainer's class and a vendor's kind and Sells tags can be fixed before approving.
    let trade,trainerClass,vendor,sells;const trades=Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)),said=(p.name||'')+' '+(p.note||'');
    if(category){trade=fillSelect(field('Trade',document.createElement('select')),[['Any trade',''],...trades.map(t=>[t,t])]);trade.value=p.trade||tradeNamed(said,trades);

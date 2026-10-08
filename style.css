@@ -233,6 +233,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .community-tabs button[aria-pressed=true]{background:#5a3b22;border-color:var(--primary);color:#fff0cc}
 .community-preview .preview-field{display:block;font-size:11px;color:var(--muted-foreground);margin-top:8px}.community-preview .preview-field>input,.community-preview .preview-field>select,.community-preview .preview-field>textarea{display:block;width:100%;margin-top:3px;padding:7px 8px;color:var(--foreground);background:var(--muted);border:1px solid var(--border);border-radius:var(--radius);font:12px var(--body)}
 .community-preview{max-height:calc(100% - 40px);overflow:auto}
+/* While moving markers, the review bar opens above the Editing bar, not over it. */
+.aligning .community-preview{bottom:72px;max-height:calc(100% - 96px)}
 .leaflet-popup-content .popup-delete{color:#f29579}.leaflet-popup-content .marker-who{margin:-4px 0 7px;font-size:13px;font-style:italic;color:var(--muted-foreground)}
 #delete-confirm button.danger,#edit-confirm button.danger{background:#a04438;border-color:#a04438;color:#fff}
 /* Instant tooltips for the map toolbar (names come from each button's data-tip). */

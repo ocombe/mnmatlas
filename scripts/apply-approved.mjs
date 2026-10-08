@@ -31,7 +31,7 @@ const app=await readFile(resolve(root,'app.js'),'utf8'),icons=await readFile(res
 vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),context);
 vm.runInContext(icons,context);
 // Wiki links: only pages on the sites the atlas knows, in the same stored form the site writes.
-vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellsOk=vm.runInContext('sellsOk',context),sellTypes=vm.runInContext('sellTypes',context),normaliseMarker=vm.runInContext('normaliseMarker',context);
+vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellsOk=vm.runInContext('sellsOk',context),sellTypes=vm.runInContext('sellTypes',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
 const base=vm.runInContext('Object.keys(allCategories)',context),supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
 function configuration(row){
@@ -56,11 +56,24 @@ function validatePayload(row,c){
   // note form offers them), so a "Notable NPC" may stand on any zone map. An unknown one would break the map for everyone.
   if(!supported.categories.includes(p.category)||typeof (p.note??'')!=='string'||(p.note||'').length>2000||![undefined,'marker','label','exit'].includes(p.noteType)||p.trade!==undefined&&!supported.trades.includes(p.trade)||p.color!==undefined&&!supported.colours.includes(p.color)||p.arrow!==undefined&&!supported.arrows.includes(p.arrow))fail('Unsupported marker fields for suggestion '+row.id+'.');
  }else if(typeof row.target_id!=='string'||!row.target_id)fail('Missing target for suggestion '+row.id+'.');
+ // A marker edit may change the type too (set while reviewing): the same check as a new marker's type.
+ if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.category==='Personal'||p.trade!==undefined&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
  return p;
 }
 // Published state before this run touched a marker: several approved changes to one marker apply in order.
 const original=new Map();
-function before(path,m){const key=path+'#'+m.id;if(!original.has(key))original.set(key,{x:Math.round(m.x),y:Math.round(m.y),name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||''});return original.get(key);}
+function before(path,m){const key=path+'#'+m.id;if(!original.has(key))original.set(key,{x:Math.round(m.x),y:Math.round(m.y),name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||'',category:m.category});return original.get(key);}
+// A type's own fields: a tradeskill's trade, a trainer's classes (from the atlas's class list only), a vendor's kind and
+// Sells tags (old suggestions may still say supplies).
+const typeKeys=['trade','classes','vendor','sells'];
+function typeFields(m,p,id){
+ if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;
+ if(p.category==='Class trainer'&&p.classes!==undefined){if(!classesOk(p.classes))fail('Unsupported classes for suggestion '+id+'.');m.classes=[...p.classes];}
+ if(p.category==='Vendor'){if(p.vendor!==undefined){if(typeof p.vendor!=='string'||!vendorKindOk(p.vendor))fail('Unsupported vendor kind for suggestion '+id+'.');m.vendor=vendorKindNow(p.vendor);}
+  if(!sellsOk(p.sells))fail('Unsupported Sells tags for suggestion '+id+'.');if(p.sells)m.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
+ return m;
+}
+const typeOf=m=>JSON.stringify([m.category,...typeKeys.map(k=>m[k])]);
 async function apply(row){
  const c=configuration(row),p=validatePayload(row,c),id='community-'+row.id;
  if(row.kind==='new-marker'){
@@ -69,12 +82,7 @@ async function apply(row){
   if(rows.some(m=>m.id===id))return 'already present';
   const m={id,community:true,name:clean(p.name),...(label?{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
   if(label&&p.noteType==='exit'){m.arrow=p.arrow||'east';if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
-  if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;const wiki=wikiOf(p.wiki,row.id),wikiId=wikiIdFrom(p,row.id);if(wiki){m.wiki=wiki;if(wikiId)m.wikiId=wikiId;}
-   // A shared trainer note keeps the classes it teaches, from the atlas's class list only.
-   if(p.category==='Class trainer'&&p.classes!==undefined){if(!classesOk(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');m.classes=[...p.classes];}
-   // A vendor keeps its current kind and chosen item types; old suggestions may still say supplies.
-   if(p.category==='Vendor'){if(p.vendor!==undefined){if(typeof p.vendor!=='string'||!vendorKindOk(p.vendor))fail('Unsupported vendor kind for suggestion '+row.id+'.');m.vendor=vendorKindNow(p.vendor);}
-    if(!sellsOk(p.sells))fail('Unsupported Sells tags for suggestion '+row.id+'.');if(p.sells)m.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}}
+  if(!label){typeFields(m,p,row.id);if(p.color)m.color=p.color;const wiki=wikiOf(p.wiki,row.id),wikiId=wikiIdFrom(p,row.id);if(wiki){m.wiki=wiki;if(wikiId)m.wikiId=wikiId;}}
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
  }
  // Text edits only apply while the published text is still what the visitor saw.
@@ -93,8 +101,16 @@ async function apply(row){
   const linked=!label&&p.wiki!==undefined,wiki=linked?wikiOf(p.wiki,row.id):'',seenWiki=linked?wikiOf(p.from.wiki,row.id):'';
   const name=clean(p.name),note=clean(p.note||'',true),was=before(label?c.labelsFile:c.markersFile,m),seen={name:clean(p.from.name),note:clean(p.from.note||'',true)};
   const now={name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||''},same=(a,b)=>a.name===b.name&&a.note===b.note&&(!linked||a.wiki===b.wiki);
-  if(same(now,{name,note,wiki}))return 'already edited';
-  if(!same(now,{...seen,wiki:seenWiki})&&!same(was,{...seen,wiki:seenWiki}))fail('The published text changed after this was sent; check it again.');
+  // A new type (set while reviewing) applies while the published type is still the one the edit started from.
+  const typed=!label&&p.category!==undefined?typeFields({category:p.category},p,row.id):null,retype=typed&&typeOf(m)!==typeOf(typed);
+  if(same(now,{name,note,wiki})&&!retype)return 'already edited';
+  if(!same(now,{name,note,wiki})&&!same(now,{...seen,wiki:seenWiki})&&!same(was,{...seen,wiki:seenWiki}))fail('The published text changed after this was sent; check it again.');
+  if(retype&&typeof p.from.category==='string'&&m.category!==p.from.category&&m.category!==typed.category&&was.category!==p.from.category)fail('The published type changed after this was sent; check it again.');
+  if(retype){m.category=typed.category;for(const k of typeKeys)if(Object.hasOwn(typed,k))m[k]=typed[k];else delete m[k];
+   // Its trainer chip follows: gone when it is no longer a trainer, otherwise showing the classes it teaches now.
+   if(c.labelsFile){const lf=await file(c.labelsFile),chips=lf.data?.trainers,i=Array.isArray(chips)?chips.findIndex(t=>t.id===m.id):-1;
+    if(i>=0&&m.category!=='Class trainer'){chips.splice(i,1);lf.changed=true;}
+    else if(i>=0&&m.classes?.length){chips[i].classes=[...m.classes];chips[i].abbreviations=m.classes.map(k=>classAbbreviations[k]);lf.changed=true;}}}
   m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;if(linked){const wikiId=wikiIdFrom(p,row.id);if(wikiId)m.wikiId=wikiId;else if(wiki!==(m.wiki||''))delete m.wikiId;if(wiki)m.wiki=wiki;else{delete m.wiki;delete m.wikiId;}}m.community=true;f.changed=true;return label?'place name edited':'marker edited';
  }
  const path=row.kind==='move-label'?c.labelsFile:c.markersFile,f=await file(path),rows=row.kind==='move-label'?f.data.labels:f.data;
