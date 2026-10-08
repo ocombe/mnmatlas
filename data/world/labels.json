@@ -3,8 +3,8 @@
   {
    "id": "zone-night-harbor",
    "name": "Night Harbor",
-   "x": 2350,
-   "y": 2169,
+   "x": 2420,
+   "y": 2290,
    "kind": "zone",
    "priority": 100,
    "toMap": "night-harbor"
@@ -12,8 +12,8 @@
   {
    "id": "zone-shaded-dunes",
    "name": "Shaded Dunes",
-   "x": 1986,
-   "y": 2200,
+   "x": 2100,
+   "y": 2150,
    "kind": "zone",
    "priority": 100,
    "toMap": "shaded-dunes"
