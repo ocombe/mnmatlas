@@ -1,6 +1,40 @@
 /* World map: zone areas (a charted zone opens its map), approximate dotted zone lines,
    and the coloured edition of the map revealed inside the zone under the pointer. */
 'use strict';
+// Clicking a charted zone flies the world map into that zone, fades it out while it keeps growing, then the zone's own
+// map fades in from slightly closer and settles at its full view. Reduced motion (or a second click) just opens it.
+function zoomIntoZone(map,area,id){
+ const box=map.getContainer();
+ if(box.classList.contains('zone-zooming')||matchMedia('(prefers-reduced-motion: reduce)').matches){goToMap(id);return;}
+ box.classList.add('zone-zooming');
+ warmTiles(registry.maps.find(c=>c.id===id));
+ let left=false;
+ const settle=()=>{box.classList.add('zone-enter');box.classList.remove('zone-leave');void box.offsetWidth;box.classList.remove('zone-enter','zone-zooming');};
+ const leave=()=>{
+  if(left)return;left=true;
+  box.classList.add('zone-leave');
+  setTimeout(()=>{
+   // the zone map fades in once loaded; if loading fails or stalls, never leave the map hidden
+   const stall=setTimeout(settle,8000);
+   window.addEventListener('atlas:loaded',()=>{clearTimeout(stall);setTimeout(settle,30);},{once:true});
+   goToMap(id);
+  },260);
+ };
+ // leave when the flight ends (a moveend already queued by the map's own settling must not cut it short)
+ const flight=1.1;
+ map.flyToBounds(area.getBounds(),{duration:flight,easeLinearity:.2,padding:[24,24],maxZoom:map.getMaxZoom()});
+ setTimeout(leave,flight*1000+40);
+}
+// While the world map zooms, fetch the zone map's low-zoom tiles so it appears without a blank wait.
+function warmTiles(base){
+ if(!base)return;
+ const c=base.levels?levelConfig(base,base.levels.find(l=>l.id===base.defaultLevel)):base;
+ const url=c.tilePath+'?v='+encodeURIComponent(c.tileRevision);let budget=96;
+ for(let z=Math.max(0,c.minZoom);z<=Math.min(3,c.maxNativeZoom)&&budget>0;z++){
+  const s=2**(z-c.coordinateZoom),nx=Math.ceil(c.width*s/c.tileSize),ny=Math.ceil(c.height*s/c.tileSize);
+  for(let y=0;y<ny&&budget>0;y++)for(let x=0;x<nx&&budget>0;x++,budget--)new Image().src=url.replace('{z}',z).replace('{x}',x).replace('{y}',y);
+ }
+}
 function setupWorldZones(map,config,data){
  const pos=xy=>map.unproject(xy,config.coordinateZoom);
  const pane=map.getPane('worldZones')||map.createPane('worldZones');pane.style.zIndex='420';
@@ -24,7 +58,7 @@ function setupWorldZones(map,config,data){
   areas.push(area);
   area.on('click',()=>{
    if(!target){show(area);return;}
-   goToMap(target.id);
+   zoomIntoZone(map,area,target.id);
   });
  }
  // Follow the pointer over the map (also over zone names, which sit above the areas) and colour the zone under it.
