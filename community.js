@@ -767,9 +767,12 @@
    const dup=!refused&&duplicatesOf(row).length>0,state=refused?'rejected':waiting?'waiting for review':'approved, not live yet';
    // The atlas's own hover tooltip, like the published markers (a browser title would show beside it); the full
    // description is the pin's aria-label.
-   const label=tag+' ('+state+'): '+(p.name||''),pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:refused?850:waiting?950:900,keyboard:true,label}).bindTooltip(()=>text('span',markerTitle(look)+' · '+state),{direction:'top',offset:[0,-23]});
+   const label=tag+' ('+state+'): '+(p.name||''),pin=L.marker(at,{icon:pinIcon(look),zIndexOffset:refused?850:waiting?950:900,keyboard:true,label}).bindTooltip(()=>text('span',tag+': '+markerTitle(look)+' · '+state),{direction:'top',offset:[0,-23]});
    pin.on('add',()=>{const el=pin.getElement();if(!el)return;el.setAttribute('aria-label',label);el.classList.add('approved-pin');if(waiting)el.classList.add('pending-pin');if(refused)el.classList.add('rejected-pin');if(row.kind==='edit-marker')el.classList.add(p.remove===true?'approved-remove':'approved-edit');if(dup)el.classList.add('duplicate-pin');});
-   pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);suggestionPins.set(row.id,pin);}
+   pin.bindPopup(()=>approvedPopup(row,tag),{autoPan:true});approvedLayer.addLayer(pin);suggestionPins.set(row.id,pin);
+   // An edit or a removal sits on a marker already there: a small label above it says which, and in what state.
+   if(row.kind==='edit-marker'){const what=p.remove===true?'removal':'edit',when=refused?'rejected':waiting?'waiting':'approved';
+    approvedLayer.addLayer(L.marker(at,{icon:L.divIcon({className:'suggestion-badge '+what+' '+when,html:'<span>'+(p.remove===true?'✕ ':'✎ ')+what+' · '+when+'</span>',iconSize:[0,0],iconAnchor:[0,48]}),interactive:false,keyboard:false,zIndexOffset:1000}));}}
  }
  function approvedPopup(row,tag){
   const p=row.payload||{},waiting=row.status==='pending',refused=row.status==='rejected',n=text('div','');n.append(text('div',tag+' · '+(refused?'rejected':waiting?'waiting for review':'approved, not live yet'),'tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker'&&p.remove!==true)n.append(text('p',p.note));

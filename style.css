@@ -388,7 +388,7 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .approved-pin{opacity:.62}
 .approved-pin:hover,.approved-pin:focus-visible{opacity:.95}
 .approved-pin.pin span{border-style:dashed;border-color:#f3e2c2}
-.approved-pin.approved-edit::after{content:"edited";position:absolute;left:50%;top:-14px;transform:translateX(-50%);padding:0 4px;border-radius:var(--radius);background:#2b1c0e;color:#f3e2c2;font:600 9px/14px var(--body);letter-spacing:.03em;white-space:nowrap}
+
 .approved-controls{margin-top:6px}
 .vendor-filter{display:flex;align-items:center;gap:8px;margin:2px 0 10px;font-size:12px;color:var(--muted-foreground);flex-shrink:0}
 .vendor-filter[hidden]{display:none}
@@ -409,7 +409,7 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .pending-pin.pin span{border-color:#9fd3e3;animation:pending-glow 2.2s ease-in-out infinite}
 @keyframes pending-glow{0%,100%{box-shadow:0 0 0 0 #9fd3e300,0 2px 4px #30251480}50%{box-shadow:0 0 10px 3px #9fd3e3aa,0 2px 4px #30251480}}
 @media(prefers-reduced-motion:reduce){.pending-pin.pin span{animation:none;box-shadow:0 0 8px 2px #9fd3e388}}
-.approved-pin.approved-remove::after{content:"remove";position:absolute;left:50%;top:-14px;transform:translateX(-50%);padding:0 4px;border-radius:var(--radius);background:#7f2c1d;color:#f8e6c4;font:600 9px/14px var(--body);white-space:nowrap}
+
 .duplicate-pin.pin span{outline:2px solid #e0654f;outline-offset:2px}
 .duplicate-box{display:flex;flex-direction:column;gap:4px;margin:8px 0;padding:8px 10px;border:1px solid #a04438;border-radius:var(--radius);background:hsl(8 40% 14%);font-size:12px}
 .duplicate-box strong{color:#f2a08f;font-weight:600}
@@ -422,3 +422,17 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .rejected-pin:hover,.rejected-pin:focus-visible{opacity:.85}
 .rejected-pin.pin span{filter:grayscale(.7);border-style:dashed}
 .rejected-pin::before{content:"\2715";position:absolute;left:0;top:0;width:25px;height:25px;display:grid;place-items:center;z-index:2;color:#ff8f7a;font:700 18px/1 var(--body);text-shadow:0 0 3px #000,0 0 6px #000;pointer-events:none}
+/* The label over an edit or a removal waiting on a marker. */
+.suggestion-badge{pointer-events:none}
+.suggestion-badge span{position:absolute;left:0;top:0;transform:translateX(-50%);padding:1px 6px;border-radius:var(--radius);white-space:nowrap;font:600 10px/16px var(--body);letter-spacing:.02em;background:#2b1c0e;color:#f3e2c2;border:1px solid #6b5236;box-shadow:0 1px 3px #000a}
+.suggestion-badge.removal span{background:#7f2c1d;border-color:#c25a45;color:#fde9df}
+.suggestion-badge.waiting span{box-shadow:0 0 6px 1px #9fd3e3aa,0 1px 3px #000a}
+.suggestion-badge.rejected span{opacity:.55;text-decoration:line-through}
+/* Trainer chips as ghosts look like the round ghost pins: dashed edge, the waiting glow, the duplicate ring, the
+   rejected cross centred. */
+.approved-pin .trainer-badge{border-style:dashed}
+.pending-pin .trainer-badge{animation:pending-glow 2.2s ease-in-out infinite}
+@media(prefers-reduced-motion:reduce){.pending-pin .trainer-badge{animation:none;box-shadow:0 0 8px 2px #9fd3e388}}
+.duplicate-pin .trainer-badge{outline:2px solid #e0654f;outline-offset:2px}
+.rejected-pin .trainer-badge{filter:grayscale(.7)}
+.rejected-pin.trainer-pin::before{left:50%;transform:translateX(-50%)}
