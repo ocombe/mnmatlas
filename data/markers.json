@@ -169,14 +169,6 @@
     "note": ""
   },
   {
-    "id": "wiki-22",
-    "name": "Riding — Wayfarer’s Hospice",
-    "category": "Tradeskill",
-    "x": 927.81,
-    "y": 1215.26,
-    "note": ""
-  },
-  {
     "id": "wiki-23",
     "name": "Lumberjacking — Sojourner’s Camp",
     "category": "Tradeskill",
@@ -190,22 +182,6 @@
     "category": "Tradeskill",
     "x": 991,
     "y": 1199,
-    "note": ""
-  },
-  {
-    "id": "wiki-25",
-    "name": "Herbalism — Wayfarer’s Hospice",
-    "category": "Tradeskill",
-    "x": 861,
-    "y": 1261,
-    "note": ""
-  },
-  {
-    "id": "wiki-26",
-    "name": "First Aid — Wayfarer’s Hospice",
-    "category": "Tradeskill",
-    "x": 903,
-    "y": 1264,
     "note": ""
   },
   {
@@ -239,15 +215,6 @@
     "x": 910,
     "y": 1393,
     "note": ""
-  },
-  {
-    "id": "wiki-31",
-    "name": "Cooking — Shaded Bloom Inn",
-    "category": "Tradeskill",
-    "x": 958,
-    "y": 1359,
-    "note": "",
-    "community": true
   },
   {
     "id": "wiki-32",
@@ -430,13 +397,14 @@
     "id": "class-1",
     "name": "Cleric / Paladin — Hospice",
     "category": "Class trainer",
-    "x": 823.93,
-    "y": 1240.04,
+    "x": 822,
+    "y": 1255,
     "note": "CLR / PAL - Approximate guild location.",
     "classes": [
       "Cleric",
       "Paladin"
-    ]
+    ],
+    "community": true
   },
   {
     "id": "class-2",
@@ -558,18 +526,6 @@
     "wikiId": "npc-a-bag-merchant"
   },
   {
-    "id": "community-57",
-    "community": true,
-    "name": "A barkeep",
-    "category": "Vendor",
-    "vendor": "Barkeep",
-    "note": "",
-    "x": 949,
-    "y": 1370,
-    "wiki": "https://monstersandmemories.wiki/npcs/a-barkeep",
-    "wikiId": "npc-a-barkeep"
-  },
-  {
     "id": "community-66",
     "community": true,
     "name": "Jalwa Noor",
@@ -579,5 +535,143 @@
     "y": 1534,
     "wiki": "https://monstersandmemories.wiki/npcs/jalwa-noor",
     "wikiId": "npc-jalwa-noor"
+  },
+  {
+    "id": "community-99",
+    "community": true,
+    "name": "Quartermaster Obaid",
+    "category": "Vendor",
+    "note": "Ashira warrior bracer bounty quest",
+    "x": 901,
+    "y": 1654,
+    "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-obaid",
+    "wikiId": "npc-quartermaster-obaid",
+    "vendor": "Quartermaster"
+  },
+  {
+    "id": "community-102",
+    "community": true,
+    "name": "Halrinn Grimsul",
+    "category": "Vendor",
+    "note": "",
+    "x": 949,
+    "y": 1371,
+    "wiki": "https://monstersandmemories.wiki/npcs/halrinn-grimsul",
+    "wikiId": "npc-halrinn-grimsul"
+  },
+  {
+    "id": "community-104",
+    "community": true,
+    "name": "Chef Argna",
+    "category": "Personal",
+    "note": "",
+    "x": 959,
+    "y": 1360,
+    "wiki": "https://monstersandmemories.wiki/npcs/chef-argna",
+    "wikiId": "npc-chef-argna"
+  },
+  {
+    "id": "community-105",
+    "community": true,
+    "name": "A cook",
+    "category": "Vendor",
+    "note": "",
+    "x": 952,
+    "y": 1361,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cook",
+    "wikiId": "npc-a-cook",
+    "vendor": "Cook"
+  },
+  {
+    "id": "community-107",
+    "community": true,
+    "name": "A medic",
+    "category": "Vendor",
+    "note": "",
+    "x": 904,
+    "y": 1264,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-medic",
+    "wikiId": "npc-a-medic",
+    "vendor": "Medic"
+  },
+  {
+    "id": "community-108",
+    "community": true,
+    "name": "Herbalism Zaarid",
+    "category": "Personal",
+    "note": "",
+    "x": 853,
+    "y": 1267,
+    "wiki": "https://monstersandmemories.wiki/npcs/herbalism-zaarid",
+    "wikiId": "npc-herbalism-zaarid"
+  },
+  {
+    "id": "community-110",
+    "community": true,
+    "name": "An herbalist",
+    "category": "Vendor",
+    "note": "",
+    "x": 883,
+    "y": 1268,
+    "wiki": "https://monstersandmemories.wiki/npcs/an-herbalist",
+    "wikiId": "npc-an-herbalist",
+    "vendor": "Herbalism supplies"
+  },
+  {
+    "id": "community-111",
+    "community": true,
+    "name": "A reagent vendor (Wayfarers Hospice)",
+    "category": "Vendor",
+    "note": "",
+    "x": 817,
+    "y": 1260,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-wayfarers-hospice",
+    "wikiId": "npc-a-reagent-vendor-wayfarers-hospice",
+    "vendor": "Reagent vendor"
+  },
+  {
+    "id": "community-112",
+    "community": true,
+    "name": "A cleric scribe",
+    "category": "Vendor",
+    "note": "",
+    "x": 820,
+    "y": 1265,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cleric-scribe",
+    "wikiId": "npc-a-cleric-scribe",
+    "vendor": "Spell scribe"
+  },
+  {
+    "id": "community-113",
+    "community": true,
+    "name": "Dalinder Grammanoot",
+    "category": "Personal",
+    "note": "",
+    "x": 824,
+    "y": 1267,
+    "wiki": "https://monstersandmemories.wiki/npcs/dalinder-grammanoot",
+    "wikiId": "npc-dalinder-grammanoot"
+  },
+  {
+    "id": "community-115",
+    "community": true,
+    "name": "Trey Fulton",
+    "category": "Personal",
+    "note": "",
+    "x": 820,
+    "y": 1234,
+    "wiki": "https://monstersandmemories.wiki/npcs/trey-fulton",
+    "wikiId": "npc-trey-fulton"
+  },
+  {
+    "id": "community-116",
+    "community": true,
+    "name": "Rider Ebraim",
+    "category": "Personal",
+    "note": "",
+    "x": 909,
+    "y": 1217,
+    "wiki": "https://monstersandmemories.wiki/npcs/rider-ebraim",
+    "wikiId": "npc-rider-ebraim"
   }
 ]
