@@ -8,8 +8,9 @@ const button=(label,action,cls,icon)=>{const b=text('button',label,cls);b.type='
 const externalLink=(label,href,cls)=>{const a=text('a',label,cls);a.href=href;a.target='_blank';a.rel='noopener';return a;};
 // Fills a select: [label,value] pairs, and {label,options} for a group of them.
 function fillSelect(select,items){for(const item of items){if(Array.isArray(item)){const o=text('option',item[0]);o.value=item[1];select.append(o);continue;}const set=document.createElement('optgroup');set.label=item.label;fillSelect(set,item.options);select.append(set);}return select;}
-// Vendor kinds in their groups; withGroups also offers each whole group ("g:<group>", kinds then "k:<kind>").
-const vendorKindItems=withGroups=>Object.entries(vendorKinds).map(([label,kinds])=>({label,options:[...(withGroups?[['All '+label.toLowerCase(),'g:'+label]]:[]),...Object.keys(kinds).map(k=>[k,withGroups?'k:'+k:k])]}));
+// Vendor kinds in their groups, both A to Z; withGroups also offers each whole group ("g:<group>", kinds then "k:<kind>").
+const az=(a,b)=>a.localeCompare(b);
+const vendorKindItems=withGroups=>Object.entries(vendorKinds).sort(([a],[b])=>az(a,b)).map(([label,kinds])=>({label,options:[...(withGroups?[['All '+label.toLowerCase(),'g:'+label]]:[]),...Object.keys(kinds).sort(az).map(k=>[k,withGroups?'k:'+k:k])]}));
 const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Shady merchant':['♧','#785268'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
 // Additional marker types; a map's own extraCategories override these colours and glyphs.
 const noteCategories={'Quest':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
@@ -646,9 +647,9 @@ async function importNotes(file){
 // The types a note (or a suggestion under review) can take: Personal first, then the others A to Z.
 const categoryChoices=()=>['Personal',...Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))];
 function setupCategoryControls(){
- // Filters list this map's categories plus any your notes use; notes may use every type.
+ // Filters list this map's categories plus any your notes use, A to Z with Personal last; notes may use every type.
  const own={...baseCategories,...(config.extraCategories||{})},used=new Set(allMarkers().map(m=>m.category));
- const filters=Object.keys(categories).filter(k=>k!=='Personal'&&(Object.hasOwn(own,k)||used.has(k))).concat('Personal');
+ const filters=Object.keys(categories).filter(k=>k!=='Personal'&&(Object.hasOwn(own,k)||used.has(k))).sort((a,b)=>(a==='Class trainer'?'Class trainers':a).localeCompare(b==='Class trainer'?'Class trainers':b)).concat('Personal');
  $('categories').replaceChildren();
  for(const kind of filters){const b=text('button','');b.dataset.category=kind;b.append(markerSymbol({category:kind,name:''}),text('span',kind==='Class trainer'?'Class trainers':kind));b.onclick=()=>{enabled.has(kind)?enabled.delete(kind):enabled.add(kind);updateCategoryButtons();drawMarkers();};$('categories').append(b);}
  updateCategoryButtons();
