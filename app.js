@@ -56,7 +56,7 @@ function status(message,sticky=false){clearTimeout(statusTimer);$('status').text
 function locationOf(m){return map.unproject([m.x,m.y],config.coordinateZoom);}
 function pixelsOf(latlng){const p=map.project(latlng,config.coordinateZoom);return [Math.round(p.x),Math.round(p.y)];}
 function bounded(x,y,z=map.getZoom()){return Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z)&&x>=0&&y>=0&&x<=config.width&&y<=config.height&&z>=config.minZoom&&z<=config.maxZoom;}
-function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
+function valid(m){return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
 function persist(next){try{localStorage.setItem(storageKey('notes'),JSON.stringify(next));personal=next;window.dispatchEvent(new CustomEvent('atlas:notes'));return true;}catch{status('Your browser could not save this change. Free some storage and try again.',true);return false;}}
 function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=text('a','');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 function allMarkers(){return [...originals,...personal];}
@@ -66,9 +66,17 @@ const classesOf=m=>m.category==='Class trainer'&&Array.isArray(m.classes)?m.clas
 const squash=v=>String(v).toLocaleLowerCase().replace(/[^a-z]/g,'');
 function markerTitle(m){const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
 // The name under a class-first title; nothing when the name is only class abbreviations ("NEC").
-function markerSubtitle(m){return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
-const markerText=m=>(m.name+' '+m.category+' '+m.note+' '+classesOf(m).join(' ')).toLocaleLowerCase();
-function visibleMarkers(){const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);return allMarkers().filter(m=>atLevel(m)&&enabled.has(m.category)&&terms.every(t=>markerText(m).includes(t)));}
+function markerSubtitle(m){
+ // A vendor's kind reads under its name ("Bag merchant"), unless the name already says it.
+ if(m.category==='Vendor'&&m.vendor&&!m.name.toLowerCase().includes(m.vendor.toLowerCase().replace(/ (supplies|merchant)$/,'')))return m.vendor;
+ return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
+// What a vendor sells: its kind, or the kind its name says ("A bag merchant"), for search and the vendor filter.
+const vendorKindFor=m=>m.category==='Vendor'?m.vendor||vendorKindNamed(m.name):'';
+const markerText=m=>(m.name+' '+m.category+' '+m.note+' '+classesOf(m).join(' ')+' '+vendorWords(vendorKindFor(m))).toLocaleLowerCase();
+// Vendors can be narrowed to a group ("g:Food and drink") or one kind ("k:Bag merchant"); '' shows them all.
+let vendorGroup='';
+const vendorShown=m=>{if(!vendorGroup||m.category!=='Vendor')return true;const kind=vendorKindFor(m);return vendorGroup.startsWith('g:')?vendorGroupOf(kind)===vendorGroup.slice(2):kind===vendorGroup.slice(2);};
+function visibleMarkers(){const terms=$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);return allMarkers().filter(m=>atLevel(m)&&enabled.has(m.category)&&vendorShown(m)&&terms.every(t=>markerText(m).includes(t)));}
 function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers();}
 function copyButton(place){const b=text('button','Copy link','copy-place');b.type='button';b.onclick=()=>copyLink(place);return b;}
 function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker',quiet:m.switchOnClick&&!alignmentMode});}
@@ -194,6 +202,7 @@ function pinIcon(m){
 }
 function openMap(id){goToMap(id);}
 function drawMarkers(){
+ {const box=$('vendor-filter');if(box){const has=allMarkers().some(m=>m.category==='Vendor'&&atLevel(m));box.hidden=!has||!enabled.has('Vendor');if(box.hidden&&vendorGroup){vendorGroup='';$('vendor-filter-select').value='';}}}
  for(const pin of pins.values())pin.remove();pins.clear();const list=$('results');list.replaceChildren();
  const matches=visibleMarkers();$('count').textContent=matches.length+' places';
  for(const m of matches){
@@ -332,10 +341,12 @@ function finishEdit(save){
 function noteTypeValue(){return document.querySelector('input[name="note-type"]:checked')?.value||'marker';}
 // Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
 // The dot beside Category shows the colour the pin will have.
-function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';$('class-field').hidden=type!=='marker'||$('category').value!=='Class trainer';guessTrade();}
+function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=$('category').value!=='Personal';$('pin-preview').hidden=$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',$('category').value==='Personal'&&picked?picked:draft?.color||own);$('marker-fields').hidden=type!=='marker';$('trade-field').hidden=type!=='marker'||$('category').value!=='Tradeskill';$('exit-fields').hidden=type!=='exit';$('exit-target-field').hidden=type!=='exit';$('wiki-field').hidden=type!=='marker';$('class-field').hidden=type!=='marker'||$('category').value!=='Class trainer';$('vendor-field').hidden=type!=='marker'||$('category').value!=='Vendor';guessTrade();guessVendor();}
+// A vendor named for what it sells ("A bag merchant") starts on that kind; a chosen kind stays.
+function guessVendor(){if($('category').value!=='Vendor'||$('vendor-kind').value)return;const kind=vendorKindNamed($('name').value+' '+$('note').value);if(kind)$('vendor-kind').value=kind;}
 // A Tradeskill named in its name or note ("an enchanting trainer") starts on that trade; a chosen trade stays.
 function guessTrade(){if($('category').value!=='Tradeskill'||$('trade').value)return;const trade=tradeNamed($('name').value+' '+$('note').value,Object.keys(tradePaths));if(trade)$('trade').value=trade;}
-function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);$('trainer-class').value=Array.isArray(m.classes)&&m.classes.length===1?m.classes[0]:'';
+function openEditor(m){draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);$('wiki').dataset.wikiClasses=JSON.stringify(m.classes||[]);$('trainer-class').value=Array.isArray(m.classes)&&m.classes.length===1?m.classes[0]:'';$('vendor-kind').value=m.vendor||'';
  for(const r of document.querySelectorAll('input[name="note-type"]'))r.checked=r.value===(m.noteType||'marker');$('trade').value=m.trade||'';
  for(const r of document.querySelectorAll('input[name="exit-arrow"]'))r.checked=r.value===(m.arrow||'north');
  for(const r of document.querySelectorAll('input[name="pin-colour"]'))r.checked=r.value===(m.color||'');
@@ -687,7 +698,10 @@ function setupControls(){
  // A class trainer's class: picked here, or filled from the wiki pick; it rides with the note as its classes.
  for(const c of atlasClasses)$('trainer-class').append(new Option(c,c));
  $('trainer-class').onchange=()=>{$('wiki').dataset.wikiClasses=JSON.stringify($('trainer-class').value?[$('trainer-class').value]:[]);};
- for(const id of ['name','note'])$(id).addEventListener('input',guessTrade);
+ for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;for(const kind of Object.keys(kinds))set.append(new Option(kind,kind));$('vendor-kind').append(set);}
+ for(const id of ['name','note'])$(id).addEventListener('input',()=>{guessTrade();guessVendor();});
+ {const pick=$('vendor-filter-select');for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;set.append(new Option('All '+group.toLowerCase(),'g:'+group));for(const kind of Object.keys(kinds))set.append(new Option(kind,'k:'+kind));pick.append(set);}
+  pick.onchange=()=>{vendorGroup=pick.value;drawMarkers();};}
  for(const tradeName of Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b))){const option=text('option',tradeName);option.value=tradeName;$('trade').append(option);}
  for(const r of document.querySelectorAll('input[name="note-type"],input[name="pin-colour"]'))r.onchange=updateEditorFields;$('category').onchange=updateEditorFields;
  $('cancel-place').onclick=cancelPlacement;document.addEventListener('keydown',e=>{if(e.key==='Escape'){cancelPlacement();if(compact())setPanel(false);}});
@@ -697,8 +711,8 @@ function setupControls(){
   {const sharing=!!$('suggest-check')?.checked&&!$('suggest-on-save')?.hidden&&!$('suggest-check').parentElement.hidden,type=noteTypeValue(),kind=$('category').value;
    if(sharing&&type==='marker'&&kind==='Tradeskill'&&!$('trade').value){status('Choose the trade before suggesting it for the public map.');$('trade').focus();return;}
    if(sharing&&type==='marker'&&kind==='Class trainer'&&!$('marker-form').classList.contains('bounty-mode')){let classes=[];try{classes=JSON.parse($('wiki').dataset.wikiClasses||'[]');}catch{}if(!classes.length){status('Choose the class they teach before suggesting it for the public map.');$('trainer-class').focus();return;}}}const type=noteTypeValue(),m={...draft,name:$('name').value.trim(),note:$('note').value,category:type==='marker'?$('category').value:'Personal'};
-  delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;delete m.wikiId;delete m.classes;
-  if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;
+  delete m.noteType;delete m.arrow;delete m.trade;delete m.color;delete m.toMap;delete m.wiki;delete m.wikiId;delete m.classes;delete m.vendor;
+  if(type!=='marker')m.noteType=type;if(type==='exit'){m.arrow=document.querySelector('input[name="exit-arrow"]:checked')?.value||'north';if($('exit-target').value)m.toMap=$('exit-target').value;}if(type==='marker'&&m.category==='Tradeskill'&&$('trade').value)m.trade=$('trade').value;if(type==='marker'&&m.category==='Vendor'&&$('vendor-kind').value)m.vendor=$('vendor-kind').value;
   const colour=document.querySelector('input[name="pin-colour"]:checked')?.value;if(type==='marker'&&colour&&(m.category==='Personal'||colour===draft.color))m.color=colour;
   if(type==='marker'){const wiki=wikiAddress($('wiki').value);if(wiki===null){status(wikiHint);$('wiki').focus();return;}if(wiki){m.wiki=wiki;const id=wikiIdFor($('wiki'),wiki);if(id)m.wikiId=id;}
    // A trainer picked from the wiki keeps its classes, so it reads class first ("Beastmaster trainer").

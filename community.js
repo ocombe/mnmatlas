@@ -217,7 +217,7 @@
   const type=roleType(row);if(type&&$('category').value==='Personal'&&[...$('category').options].some(o=>o.value===type)){$('category').value=type;$('category').dispatchEvent(new Event('change'));}
   // A trainer's classes ride with its wiki link, so the note reads "Beastmaster trainer" first like the atlas's own trainers.
   $('wiki').dataset.wikiClasses=JSON.stringify(trainerClasses(row));
-  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
+  if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);if(typeof guessVendor==='function')guessVendor();},$('name'));$('name').after(finder);$('editor')?.addEventListener('close',()=>finder.reset());}}
  // The Wanted board: NPCs the wiki knows in this map's zone that the map does not mark yet, as bounties to take.
  // Trainers and merchants come first as priority bounties. Taking one starts the pin with a note filled from the wiki
  // that saving claims (sends for review). Signed out, the note can be kept private and claimed after signing in.
@@ -463,7 +463,7 @@
  }
  function offerPositions(){const rows=movedItems();if(!rows.length)return;sendDialog('Suggest positions',rows,false);}
  function notePayload(m){
-  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;if(m.category==='Class trainer'&&classesOk(m.classes))payload.classes=m.classes;
+  const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note};for(const key of ['noteType','arrow','trade','color','toMap','wiki'])if(m[key])payload[key]=m[key];if(m.wiki&&m.wikiId)payload.wikiId=m.wikiId;if(m.category==='Class trainer'&&classesOk(m.classes))payload.classes=m.classes;if(m.category==='Vendor'&&m.vendor&&vendorKindOk(m.vendor))payload.vendor=m.vendor;
   const bounty=readBounties()[m.id];if(bounty&&m.wikiId===bounty.bounty){payload.bounty=bounty.bounty;if(bounty.priority)payload.priority=true;}
   return payload;
  }
@@ -700,7 +700,7 @@
  function approvedPopup(row,tag){
   const p=row.payload||{},n=text('div','');n.append(text('div',tag+' · approved, not live yet','tag'),text('h3',p.name||''));if(p.note&&row.kind!=='move-marker')n.append(text('p',p.note));
   n.append(text('p','Approved: it goes live with the next publishing run, within the hour.','moved-note'));
-  if(admin){const actions=text('div','','popup-actions');actions.append(button('Review on map',()=>{map.closePopup();preview(row,loadApproved,loadApproved);}));n.append(actions);}
+  if(admin){const actions=text('div','','popup-actions'),edit=button('Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);});if(typeof actionIcon==='function')actionIcon(edit);actions.append(edit);n.append(actions);}
   else if(row.user_id===user?.id)n.append(text('p','Your suggestion. Thank you!','community-note'));
   return n;}
  async function authChanged(session){
@@ -783,7 +783,7 @@
  }
  // On the map, a suggestion can be adjusted before approval (or while approved and not live yet):
  // drag its marker, and change the name, type and description of a new marker or the text of an edit.
- async function preview(row,refresh=()=>{},next=refresh,nav=null){
+ async function preview(row,refresh=()=>{},next=refresh,nav=null,fromPin=false){
   try{
    review.close();const url=new URL(location.href);url.searchParams.set('map',row.map);for(const k of ['place','x','y','z'])url.searchParams.delete(k);if(row.level)url.searchParams.set('level',row.level);else url.searchParams.delete('level');
    if(config.id!==row.map||(row.level&&config.levelId!==row.level))await loadMap(row.map,url);
@@ -803,24 +803,29 @@
    const head=text('div','','preview-head');head.append(text('strong',(kinds[row.kind]||'Suggestion')+(row.status==='approved'?' · approved, not live yet':'')));
    if(nav){head.append(text('span',nav.left+' left','preview-left'));const steps=text('span','','preview-steps');
     const step=(label,go,hint)=>{const b=button(label,go,'preview-step');b.disabled=!go;b.title=hint;steps.append(b);};step('‹ Previous',nav.previous,'The suggestion before this one');step('Skip ›',nav.skip,'The next suggestion, deciding this one later');head.append(steps);}
+   // A close button (and Escape): back to the map from a pin, back to the list from the review queue.
+   const close=()=>{document.removeEventListener?.('keydown',onKey,true);clearPreview();if(fromPin)loadApproved();else refresh();},onKey=e=>{if(e.key==='Escape'&&$('community-preview')===bar&&!e.target.closest?.('.wiki-results')){e.preventDefault();close();}};
+   const x=button('×',close,'preview-close');x.setAttribute('aria-label','Close');x.title='Close';head.append(x);document.addEventListener?.('keydown',onKey,true);bar.addEventListener('wiki-done',()=>document.removeEventListener?.('keydown',onKey,true));
    bar.append(head);
    const field=(label,el)=>{const l=text('label',label,'preview-field');l.append(el);bar.append(l);return el;};
    let name,note,category;
    if(row.kind==='new-marker'||edit){name=field('Name',document.createElement('input'));name.maxLength=100;name.value=p.name;}
    if(row.kind==='new-marker'&&!p.noteType){category=field('Type',document.createElement('select'));for(const k of Object.keys(categories).filter(k=>k!=='Personal').sort((a,b)=>a.localeCompare(b))){const o=text('option',k);o.value=k;category.append(o);}category.value=categories[p.category]?p.category:Object.keys(categories)[0];}
    // A tradeskill's trade and a class trainer's class can be set or fixed here before approving.
-   let trade,trainerClass;const option=(label,value)=>{const o=text('option',label);o.value=value;return o;},trades=typeof tradePaths==='object'?Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)):[];
+   let trade,trainerClass,vendor;const option=(label,value)=>{const o=text('option',label);o.value=value;return o;},trades=typeof tradePaths==='object'?Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)):[];
    if(category){trade=field('Trade',document.createElement('select'));trade.append(option('Any trade',''),...trades.map(t=>option(t,t)));trade.value=p.trade||tradeNamed((p.name||'')+' '+(p.note||''),trades);
     trainerClass=field('Class',document.createElement('select'));trainerClass.append(option('Not set',''),...atlasClasses.map(k=>option(k,k)));trainerClass.value=Array.isArray(p.classes)&&p.classes.length===1?p.classes[0]:'';
-    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';};fit();category.addEventListener('change',fit);}
+    vendor=field('Kind',document.createElement('select'));vendor.append(option('Not set',''));for(const [group,kinds] of Object.entries(vendorKinds)){const set=document.createElement('optgroup');set.label=group;for(const k of Object.keys(kinds))set.append(option(k,k));vendor.append(set);}vendor.value=p.vendor||vendorKindNamed((p.name||'')+' '+(p.note||''));
+    const fit=()=>{trade.parentElement.hidden=category.value!=='Tradeskill';trainerClass.parentElement.hidden=category.value!=='Class trainer';vendor.parentElement.hidden=category.value!=='Vendor';};fit();category.addEventListener('change',fit);}
    if(row.kind==='new-marker'||edit){note=field('Description',document.createElement('textarea'));note.rows=2;note.maxLength=2000;note.value=p.note||'';}
    let wiki;if(row.kind==='new-marker'&&!p.noteType||row.kind==='edit-marker'){wiki=field('Wiki page',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=Object.hasOwn(p,'wiki')?p.wiki:edit?target?.wiki||'':'';setWikiPick(wiki,wiki.value,p.wikiId||(!Object.hasOwn(p,'wiki')&&edit?target?.wikiId:''));
     // Picking the NPC from the wiki fixes the name too, so it is spelled as on the wiki.
     const finder=wikiFinder(wiki,()=>restyle(),name);name.after(finder);bar.addEventListener('wiki-done',()=>finders.delete(finder));}
    if(!edit&&!report)bar.append(text('p','Drag the marker to adjust its position.','form-hint'));
    const restyle=()=>{if(name)p.name=name.value.replace(/\s+/g,' ').trim()||p.name;if(category){p.category=category.value;if(p.category==='Tradeskill'&&trade?.value)p.trade=trade.value;else delete p.trade;
-    if(p.category==='Class trainer'&&trainerClass?.value)p.classes=[trainerClass.value];else if(p.category!=='Class trainer')delete p.classes;}pin.setIcon(pinIcon(look()));};
-   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass])el?.addEventListener('change',restyle);
+    if(p.category==='Class trainer'&&trainerClass?.value)p.classes=[trainerClass.value];else if(p.category!=='Class trainer')delete p.classes;
+    if(p.category==='Vendor'&&vendor?.value)p.vendor=vendor.value;else delete p.vendor;}pin.setIcon(pinIcon(look()));};
+   for(const el of [name,category])el?.addEventListener('input',restyle);for(const el of [category,trade,trainerClass,vendor])el?.addEventListener('change',restyle);
    const reviewNote=document.createElement('input');reviewNote.placeholder='Optional review note';reviewNote.setAttribute('aria-label','Optional review note');reviewNote.maxLength=500;bar.append(reviewNote);
    // The adjusted payload keeps the visitor's other fields; positions are checked against the map bounds.
    const edits=()=>{
@@ -833,9 +838,9 @@
     if(!p.name)throw Error('Name required');return p;
    };
    const safe=()=>{try{return edits();}catch(e){status(e.message==='Name required'?'Give it a name.':e.message==='Wiki link'?wikiHint:'Keep the marker inside the map.');throw e;}};
-   const actions=text('div','','dialog-actions');actions.append(button('Back to the list',()=>{clearPreview();refresh();}));
+   const actions=text('div','','dialog-actions');if(!fromPin)actions.append(button('Back to the list',close));
    if(!report)actions.append(button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
-    const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length){status('Changes could not be saved. Please refresh the list.');return;}row.payload=structuredClone(payload);status('Changes saved.');}));
+    const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length){status('Changes could not be saved. Please refresh the list.');return;}row.payload=structuredClone(payload);status('Changes saved.');if(fromPin)close();else loadApproved();}));
    const wrapped=decisions(row,()=>reviewNote.value,bar,()=>{try{return safe();}catch{return undefined;}},next);
    actions.append(...wrapped);bar.append(actions);$('map-frame').append(bar);
    if(move)map.fitBounds(L.latLngBounds([xy(p.from),here]),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else map.setView(here,config.defaultView.placeZoom);if(compact())setPanel(false);

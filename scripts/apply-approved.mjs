@@ -31,7 +31,7 @@ const app=await readFile(resolve(root,'app.js'),'utf8'),icons=await readFile(res
 vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),context);
 vm.runInContext(icons,context);
 // Wiki links: only pages on the sites the atlas knows, in the same stored form the site writes.
-vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context);
+vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context);
 const base=vm.runInContext('Object.keys(allCategories)',context),supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
 function configuration(row){
@@ -70,7 +70,9 @@ async function apply(row){
   if(label&&p.noteType==='exit'){m.arrow=p.arrow||'east';if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
   if(!label){if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;if(p.color)m.color=p.color;const wiki=wikiOf(p.wiki,row.id),wikiId=wikiIdFrom(p,row.id);if(wiki){m.wiki=wiki;if(wikiId)m.wikiId=wikiId;}
    // A shared trainer note keeps the classes it teaches, from the atlas's class list only.
-   if(p.category==='Class trainer'&&p.classes!==undefined){if(!classesOk(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');m.classes=[...p.classes];}}
+   if(p.category==='Class trainer'&&p.classes!==undefined){if(!classesOk(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');m.classes=[...p.classes];}
+   // A vendor keeps what it sells, from the atlas's list of kinds only.
+   if(p.category==='Vendor'&&p.vendor!==undefined){if(typeof p.vendor!=='string'||!vendorKindOk(p.vendor))fail('Unsupported vendor kind for suggestion '+row.id+'.');m.vendor=p.vendor;}}
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
  }
  // Text edits only apply while the published text is still what the visitor saw.

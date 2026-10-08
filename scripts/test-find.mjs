@@ -56,3 +56,11 @@ console.log('Script checks passed: every page script parses.');
  assert.equal(JSON.stringify(c.loot.map(i=>i.name)),'["C","B","A","D","E"]');assert.equal(c.loot[0].dropRate,4);assert.equal(c.loot[1].dropRate,0.25,'Rates are percent already');assert.equal(c.lootCount,6);
  assert.equal(card({name:'X',url:'https://evil.example/npcs/x'}),null);
  console.log('Card checks passed: NPC cards keep short facts and wiki links only.');}
+
+// Vendor kinds come from the wiki's merchants, in groups; a name says its kind, the longest words first.
+{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+ const [named,ok,group]=vm.runInContext('[vendorKindNamed,vendorKindOk,vendorGroupOf]',c);
+ assert.equal(named('A bag merchant'),'Bag merchant');assert.equal(named('A used weapons dealer'),'Used weapons dealer');assert.equal(named('A reagent vendor (Wayfarers Hospice)'),'Reagent vendor');
+ assert.equal(named('Butchers'),'Butcher');assert.equal(named('Marcus Aden'),'');assert.equal(group('Reagent vendor'),'Spells and reagents');
+ assert(ok(undefined)&&ok('Bag merchant')&&!ok('Dragon seller'));
+ console.log('Vendor checks passed: kinds from names, groups, only listed kinds.');}

@@ -45,6 +45,25 @@ function wikiLinkFor(place,parent=wikiEmbedParent()){
  const adapted=typeof rule.adapt==='function'?wikiAddress(rule.adapt(href,site,place)):'';
  return adapted&&wikiSiteOf(new URL(adapted).hostname)===rule.site?show(adapted):null;
 }
+// What a vendor sells, from the merchants the Monsters and Memories Wiki lists, in groups. Shady merchants and stables
+// have their own marker types. Each kind lists the words that name it ("A bag merchant", "a pelt trader").
+const vendorKinds={
+ 'Food and drink':{Baker:['baker'],Barkeep:['barkeep','bartender'],Brewer:['brewer','brewing'],Butcher:['butcher'],Cook:['cook','chef'],Fishmonger:['fishwife','fisherman','fish merchant'],'Grain seller':['grain seller','grain'],Grocer:['grocer'],Innkeeper:['innkeeper'],'Produce vendor':['produce'],'Spice merchant':['spicemonger','spice']},
+ 'Arms and armour':{'Plate armorer':['plate armorer','plate armor'],'Chain armorer':['chain armorer','chain armor'],'Cloth armorer':['cloth armorer','cloth armor'],'Used armor trader':['used armor'],'Used weapons dealer':['used weapons'],Weaponsmith:['weaponsmith','weapon merchant','weapons'],Bowyer:['bowyer','archery'],Fletcher:['fletcher','fletching'],Quartermaster:['quartermaster'],'Scrap dealer':['scrap dealer','rusty weapons']},
+ 'Trade supplies':{'Alchemy supplies':['alchemist','alchemy','apothecary'],'Blacksmithing supplies':['blacksmith','blacksmithing'],'Dye merchant':['dye'],'Fishing supplies':['fishing'],'Herbalism supplies':['herbalist','herbalism'],'Jewelcrafting supplies':['jewelcrafter','jewelcrafting'],'Leatherworking supplies':['leatherworker','leatherworking','pelt trader'],'Lumberjack supplies':['lumberjack','woodworker'],'Mining supplies':['miner','mining'],'Smelting supplies':['smelter','smelting'],'Spinning supplies':['spinner','spinning'],'Spycraft supplies':['spymaster','spycraft'],'Stone cutting supplies':['stonecutter','stone cutting','mason'],'Survival supplies':['survivalist','outdoorsman','wilderness'],'Tailoring supplies':['tailor','tailoring'],'Tanning supplies':['tanner','tanning'],'Tinkering supplies':['tinkerer','tinkering'],Cobbler:['cobbler']},
+ 'Spells and reagents':{'Reagent vendor':['reagent'],'Spell scribe':['scribe','spell vendor','spells vendor'],'Poison maker':['poison'],Enchanter:['enchanter']},
+ 'General goods':{'General goods':['goods merchant','general goods','supplies vendor','supplier'],'Bag merchant':['bag merchant','bags'],'Adventuring supplies':['adventure gear','adventuring','outfitter'],'Traveling merchant':['merchant traveler','traveling merchant'],'Instrument merchant':['instrument'],'Property merchant':['property','housing','realtor'],Medic:['medic']},
+};
+const vendorKindList=Object.values(vendorKinds).flatMap(g=>Object.keys(g));
+const vendorGroupOf=kind=>Object.keys(vendorKinds).find(g=>Object.hasOwn(vendorKinds[g],kind))||'';
+const vendorKindOk=v=>v===undefined||vendorKindList.includes(v);
+const vendorWords=kind=>{const g=vendorGroupOf(kind);return g?[kind,g,...vendorKinds[g][kind]].join(' '):'';};
+// The kind a vendor's name or note names, the longest words first ("used weapons" before "weapon"); '' if none.
+function vendorKindNamed(words){
+ const said=' '+String(words??'').toLowerCase().replace(/[^a-z]+/g,' ')+' ';
+ const all=Object.values(vendorKinds).flatMap(g=>Object.entries(g).flatMap(([kind,forms])=>forms.map(f=>[f,kind]))).sort((a,b)=>b[0].length-a[0].length);
+ return all.find(([f])=>said.includes(' '+f+' ')||said.includes(' '+f+'s '))?.[1]||'';
+}
 // The trade a name or note names ("an enchanting trainer" -> "(Dis)Enchanting"), from the atlas's trade list; '' if none.
 function tradeNamed(words,trades){
  const said=' '+String(words??'').toLowerCase().replace(/[^a-z]+/g,' ')+' ';
