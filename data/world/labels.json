@@ -39,8 +39,8 @@
   {
    "id": "zone-glass-flats",
    "name": "Glass Flats",
-   "x": 2125,
-   "y": 1175,
+   "x": 2126,
+   "y": 1178,
    "kind": "zone",
    "priority": 60,
    "toMap": "glass-flats"
@@ -49,7 +49,7 @@
    "id": "zone-vale-of-zintar",
    "name": "Vale of Zintar",
    "x": 1259,
-   "y": 1493,
+   "y": 1494,
    "kind": "zone",
    "priority": 60,
    "toMap": "vale-of-zintar"
@@ -65,8 +65,8 @@
   {
    "id": "zone-keepers-bight",
    "name": "Keeper's Bight",
-   "x": 1456,
-   "y": 803,
+   "x": 1454,
+   "y": 805,
    "kind": "zone",
    "priority": 60,
    "toMap": "keepers-bight"
@@ -91,8 +91,8 @@
   {
    "id": "zone-scarwood",
    "name": "Scarwood",
-   "x": 2010,
-   "y": 581,
+   "x": 2018,
+   "y": 575,
    "kind": "zone",
    "priority": 60,
    "toMap": "scarwood"
@@ -100,8 +100,8 @@
   {
    "id": "zone-tel-ekir",
    "name": "Tel Ekir",
-   "x": 2142,
-   "y": 1632,
+   "x": 2134,
+   "y": 1641,
    "kind": "zone",
    "priority": 60,
    "toMap": "tel-ekir"
