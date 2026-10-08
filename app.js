@@ -462,9 +462,6 @@ function miniImage(m){
 }
 function updateEmbed(){
  const mini=embedPlace?.kind==='marker'&&$('embed-place').checked&&$('embed-mini').checked;$('embed-height').hidden=$('embed-height-label').hidden=mini;
- // A still image is about the marker alone: name it, not the zone (title, intro; the zone's level choice is hidden).
- $('embed-title').textContent=mini?'Embed this spot':'Embed this map';$('embed-level-row').hidden=mini||!config.levels;
- {const who=text('span',mini?markerTitle(embedPlace):config.title);$('embed-intro').replaceChildren(mini?'Paste this code into a wiki page or website. It shows a small still image of ':'Paste this code into a wiki page or website. It shows ',who,mini?' that opens it in the full atlas.':' on its own, with a button to open it in the full atlas.');}
  if(mini){const {link,image}=miniImage(embedPlace);$('embed-address').value=image.href;$('embed-preview').href=link.href;
   $('embed-code').value=`<a href="${htmlAttr(link.href)}" title="Open in MnM Atlas"><img src="${htmlAttr(image.href)}" width="320" height="200" alt="${htmlAttr(markerTitle(embedPlace)+' on MnM Atlas')}" loading="lazy" style="border:0"></a>`;return;}
  const url=embedAddress();$('embed-address').value=url.href;$('embed-preview').href=url.href;
@@ -472,6 +469,7 @@ function updateEmbed(){
 }
 function openEmbed(){
  if(!config)return;embedPlace=activePlace&&!activePlace.id.startsWith('personal-')?activePlace:null;
+ $('embed-map-name').textContent=config.title;
  $('embed-level-row').hidden=!config.levels;$('embed-level-name').textContent=config.levelTitle||'';$('embed-level').checked=true;
  $('embed-place-row').hidden=!embedPlace;$('embed-place-name').textContent=embedPlace?markerTitle(embedPlace):'';$('embed-place').checked=true;
  $('embed-mini-row').hidden=embedPlace?.kind!=='marker';$('embed-mini').checked=false;
