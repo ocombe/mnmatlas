@@ -956,7 +956,7 @@
    const wrapped=decisions(row,()=>reviewNote.value,bar,safe,next);
    // Someone asking to take it off the map ("remove this", a duplicate): approve it as a removal instead of a text change.
    if(row.kind==='edit-marker'&&row.status==='pending'&&!removal){const remove=button('Remove from map',()=>reviewAction(row,'approved',reviewNote.value,bar,{...structuredClone(row.payload),name:row.payload.from?.name||row.payload.name,note:row.payload.from?.note||'',remove:true,reason:'other'},next),'danger');remove.title='Approve as a removal: the marker, and its trainer chip, go at the next publishing run';wrapped.unshift(remove);}
-   actions.append(...wrapped);bar.append(actions);$('map-frame').append(bar);
+   actions.append(...wrapped);bar.append(actions);$('map-frame').append(bar);window.atlasDragRestore?.(bar);
    if(move)map.fitBounds(L.latLngBounds([xy(p.from),here]),{padding:[60,60],maxZoom:config.defaultView.placeZoom+1});else if(here)map.setView(here,config.defaultView.placeZoom);if(compact())setPanel(false);
    status(move?'Blue: published position. Drag the suggested marker to adjust it.':report?'The reported marker.':edit?'The marker or name being edited.':'Drag the suggested marker to adjust it.');
   }catch{clearPreview();status('This suggestion could not be shown on the map.');if(!fromPin)refresh();}

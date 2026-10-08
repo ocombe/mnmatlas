@@ -452,3 +452,8 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 .duplicate-box{border-color:#a87a2c;background:hsl(36 40% 13%)}
 .duplicate-box strong{color:#f0c27a}
 .duplicate-box .duplicate-jump{border-color:#5a4422}
+/* Moved by their header: dialogs and the review bar. */
+@media(min-width:761px){dialog .form-head,dialog > h2,#community-preview .preview-head,.leaflet-popup-content > div > .tag,.leaflet-popup-content > div > h3{cursor:move;touch-action:none;user-select:none}}
+dialog.dragging,#community-preview.dragging,.leaflet-popup.dragging{user-select:none;opacity:.96}
+/* A dialog moved aside dims the map less, so the markers under it show. */
+dialog.moved::backdrop{background:#0000001f}
