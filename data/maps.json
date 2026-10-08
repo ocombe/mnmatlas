@@ -60,7 +60,7 @@
           "levelSubtitle": "Beneath the known lands",
           "width": 2464,
           "height": 3440,
-          "tileRevision": "v5",
+          "tileRevision": "v6",
           "tilePath": "assets/tiles/world-deep/{z}/{x}/{y}.webp",
           "colourTilePath": null,
           "zonesFile": "data/world/deep-zones.json",
