@@ -267,11 +267,12 @@
   },
   {
     "id": "wiki-34",
-    "name": "Spycraft — bard guild",
+    "name": "Spycraft",
     "category": "Tradeskill",
-    "x": 997,
-    "y": 1512,
-    "note": ""
+    "x": 1015,
+    "y": 1521,
+    "note": "Below the bard guild",
+    "community": true
   },
   {
     "id": "wiki-35",
@@ -441,12 +442,13 @@
     "id": "class-2",
     "name": "Bard — Bard guild",
     "category": "Class trainer",
-    "x": 1024.06,
-    "y": 1550,
+    "x": 1010,
+    "y": 1533,
     "note": "BRD - Approximate guild location.",
     "classes": [
       "Bard"
-    ]
+    ],
+    "community": true
   },
   {
     "id": "class-3",
