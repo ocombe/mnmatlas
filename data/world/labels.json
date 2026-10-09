@@ -30,8 +30,8 @@
   {
    "id": "zone-fallen-pass",
    "name": "Fallen Pass",
-   "x": 1668,
-   "y": 2256,
+   "x": 1667,
+   "y": 2255,
    "kind": "zone",
    "priority": 100,
    "toMap": "fallen-pass"
@@ -39,8 +39,8 @@
   {
    "id": "zone-glass-flats",
    "name": "Glass Flats",
-   "x": 2126,
-   "y": 1178,
+   "x": 2127,
+   "y": 1177,
    "kind": "zone",
    "priority": 60,
    "toMap": "glass-flats"
@@ -48,8 +48,8 @@
   {
    "id": "zone-vale-of-zintar",
    "name": "Vale of Zintar",
-   "x": 1259,
-   "y": 1494,
+   "x": 1261,
+   "y": 1487,
    "kind": "zone",
    "priority": 60,
    "toMap": "vale-of-zintar"
@@ -57,16 +57,16 @@
   {
    "id": "zone-shallow-shoals",
    "name": "Shallow Shoals",
-   "x": 566,
-   "y": 1068,
+   "x": 563,
+   "y": 1049,
    "kind": "zone",
    "priority": 60
   },
   {
    "id": "zone-keepers-bight",
    "name": "Keeper's Bight",
-   "x": 1454,
-   "y": 805,
+   "x": 1458,
+   "y": 794,
    "kind": "zone",
    "priority": 60,
    "toMap": "keepers-bight"
@@ -74,8 +74,8 @@
   {
    "id": "zone-evershade-weald",
    "name": "Evershade Weald",
-   "x": 1569,
-   "y": 425,
+   "x": 1568,
+   "y": 426,
    "kind": "zone",
    "priority": 100,
    "toMap": "evershade-weald"
@@ -101,7 +101,7 @@
    "id": "zone-tel-ekir",
    "name": "Tel Ekir",
    "x": 2134,
-   "y": 1641,
+   "y": 1640,
    "kind": "zone",
    "priority": 60,
    "toMap": "tel-ekir"
