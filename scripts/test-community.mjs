@@ -66,7 +66,7 @@ for(const hostname of ['localhost','127.0.0.1']){const e=environment({goatcounte
 }
 {
  const e=environment({supabaseUrl:'https://project.example',supabaseKey:'public-key'});await settle();assert.equal(e.bar.children.length,2);assert.equal(e.bar.children[1].className,'account');assert.equal(e.bar.children[1].children[0].children[0].textContent,'Sign in');
- const popup=e.context.popup(e.context.originals[0]),report=popup.children[0].children[1];assert.equal(report.textContent,'Report a problem');assert.equal(popup.children[0].children[0].textContent,'Suggest an edit');await report.onclick();assert(e.body.children.find(n=>n.id==='community-dialog').open);assert.equal(e.calls.filter(r=>r.table==='suggestions').length,0);
+ const popup=e.context.popup(e.context.originals[0]),report=popup.children[0].children[1];assert.equal(report.textContent,'Report');assert.equal(report['aria-label'],'Report a problem');assert.equal(popup.children[0].children[0].textContent,'Edit');assert.equal(popup.children[0].children[0]['aria-label'],'Suggest an edit');await report.onclick();assert(e.body.children.find(n=>n.id==='community-dialog').open);assert.equal(e.calls.filter(r=>r.table==='suggestions').length,0);
  const d=e.body.children.find(n=>n.id==='community-dialog'),sign=d.querySelectorAll('button').find(n=>n.textContent==='Sign in with Discord');await sign.onclick();assert.equal(e.calls.find(r=>r.oauth).oauth.options.redirectTo,'https://atlas.example/?map=test-map');
 }
 {
