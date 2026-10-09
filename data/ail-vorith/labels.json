@@ -71,7 +71,20 @@
    "toMap": "great-cavern-sea",
    "approximate": true,
    "note": "The boat route west toward the Great Cavern Sea. Approximate location; to confirm in game.",
-   "community": true
+   "community": true,
+   "route": [
+    {
+     "map": "ail-vorith",
+     "place": "to-great-cavern-sea"
+    },
+    {
+     "map": "great-cavern-sea"
+    },
+    {
+     "map": "underdocks",
+     "place": "wiki-boat-de-city"
+    }
+   ]
   },
   {
    "id": "community-81",

@@ -168,7 +168,17 @@
    "priority": 85,
    "minZoom": 1.5,
    "arrow": "west",
-   "toMap": "shallow-shoals"
+   "toMap": "shallow-shoals",
+   "route": [
+    {
+     "map": "keepers-bight",
+     "place": "to-shallow-shoals"
+    },
+    {
+     "map": "shallow-shoals",
+     "title": "Shallow Shoals"
+    }
+   ]
   },
   {
    "id": "boat-night-harbor",
@@ -180,7 +190,17 @@
    "minZoom": 1.5,
    "arrow": "west",
    "toMap": "night-harbor",
-   "toPlace": "place-36"
+   "toPlace": "place-36",
+   "route": [
+    {
+     "map": "keepers-bight",
+     "place": "boat-night-harbor"
+    },
+    {
+     "map": "night-harbor",
+     "place": "place-36"
+    }
+   ]
   },
   {
    "id": "to-blacktide-bay-dungeon",

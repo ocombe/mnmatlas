@@ -394,7 +394,17 @@
       "tier": "exit",
       "community": true,
       "toMap": "keepers-bight",
-      "toPlace": "boat-night-harbor"
+      "toPlace": "boat-night-harbor",
+      "route": [
+        {
+          "map": "night-harbor",
+          "place": "place-36"
+        },
+        {
+          "map": "keepers-bight",
+          "place": "boat-night-harbor"
+        }
+      ]
     },
     {
       "id": "place-37",

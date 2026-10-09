@@ -83,13 +83,26 @@
       "y": 3868,
       "level": "lower",
       "approximate": true,
-      "note": "Approximate; to confirm in game.",
+      "note": "Departs at 3am, 11am and 7pm.",
       "kind": "exit",
       "tier": "exit",
       "priority": 75,
       "minZoom": 3.75,
       "arrow": "northwest",
-      "toMap": "ail-vorith"
+      "toMap": "ail-vorith",
+      "route": [
+        {
+          "map": "underdocks",
+          "place": "wiki-boat-de-city"
+        },
+        {
+          "map": "great-cavern-sea"
+        },
+        {
+          "map": "ail-vorith",
+          "place": "to-great-cavern-sea"
+        }
+      ]
     },
     {
       "id": "wiki-bath-house",
