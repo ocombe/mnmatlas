@@ -83,7 +83,7 @@
       "y": 3868,
       "level": "lower",
       "approximate": true,
-      "note": "Departs at 3am, 11am and 7pm.",
+      "note": "Departs 3am, 11am and 7pm. Game time: type /time in game. Be on board before it leaves.",
       "kind": "exit",
       "tier": "exit",
       "priority": 75,
@@ -106,7 +106,14 @@
           "map": "ail-vorith",
           "place": "to-great-cavern-sea"
         }
-      ]
+      ],
+      "timesSource": {
+        "title": "Boats",
+        "site": "Monsters and Memories Wiki",
+        "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
     },
     {
       "id": "wiki-bath-house",

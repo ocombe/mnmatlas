@@ -465,3 +465,4 @@ dialog.moved::backdrop{background:#0000001f}
 .boat-card .boat-route-title{margin:10px 0 4px;font-size:10px;letter-spacing:1px;text-transform:uppercase;color:var(--primary)}
 .boat-route{margin:0;padding-left:20px}.boat-route li{margin:3px 0}.boat-route button{margin:0;padding:4px 10px;font-size:12px}.boat-route strong{font-weight:600}
 .place-name.exit.boat .boat-times{grid-column:2;margin:-1px 0 1px;font:600 .66em/1.2 var(--body);letter-spacing:.4px;color:#f0c67a}
+.boat-card .boat-credit{margin:8px 0 0;font-size:10px;color:var(--muted-foreground)}.boat-card .boat-credit a{color:inherit}

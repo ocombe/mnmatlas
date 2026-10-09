@@ -18,8 +18,11 @@ function boatCard(row){
   list.append(li);
  }
  n.append(text('p','Route','boat-route-title'),list);
+ // Times taken from a wiki page are credited under the card, with its licence.
+ const s=row.timesSource;if(s?.url&&/^https:\/\//.test(s.url)){const credit=text('p','Times: ','boat-credit'),page=text('a',(s.title||'page')+' · '+(s.site||'wiki'));page.href=s.url;page.target='_blank';page.rel='noopener';credit.append(page);if(s.license){credit.append(text('span',', '));const lic=text('a',s.license);if(/^https:\/\//.test(s.licenseUrl||'')){lic.href=s.licenseUrl;lic.target='_blank';lic.rel='noopener';}credit.append(lic);}n.append(credit);}
  window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
- L.popup({autoPan:true,offset:[0,-10]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
+ // Pan clear of the title card and toolbar so the whole card shows.
+ L.popup({autoPan:true,autoPanPaddingTopLeft:[24,150],autoPanPaddingBottomRight:[70,40],offset:[0,-10]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
 }
 function trainerIcon(m){
  const detail=trainerDetails.get(m.id);

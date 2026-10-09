@@ -172,13 +172,25 @@
    "route": [
     {
      "map": "keepers-bight",
-     "place": "to-shallow-shoals"
+     "place": "boat-night-harbor"
     },
     {
      "map": "shallow-shoals",
      "title": "Shallow Shoals"
+    },
+    {
+     "map": "night-harbor",
+     "place": "place-36"
     }
-   ]
+   ],
+   "note": "Departs 5am, 1pm and 9pm. Game time: type /time in game. Be on board before it leaves. The boat stops briefly at Shallow Shoals on its way to Night Harbor.",
+   "timesSource": {
+    "title": "Boats",
+    "site": "Monsters and Memories Wiki",
+    "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
   },
   {
    "id": "boat-night-harbor",
@@ -197,10 +209,22 @@
      "place": "boat-night-harbor"
     },
     {
+     "map": "shallow-shoals",
+     "title": "Shallow Shoals"
+    },
+    {
      "map": "night-harbor",
      "place": "place-36"
     }
-   ]
+   ],
+   "note": "Departs 5am, 1pm and 9pm. Game time: type /time in game. Be on board before it leaves.",
+   "timesSource": {
+    "title": "Boats",
+    "site": "Monsters and Memories Wiki",
+    "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
   },
   {
    "id": "to-blacktide-bay-dungeon",
