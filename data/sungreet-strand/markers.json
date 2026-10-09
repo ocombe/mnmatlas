@@ -214,11 +214,12 @@
   "id": "npc-5",
   "name": "Researchers",
   "category": "Notable NPC",
-  "x": 2478,
-  "y": 6007,
+  "x": 3011,
+  "y": 6487,
   "approximate": true,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "npc-6",
@@ -375,13 +376,14 @@
  },
  {
   "id": "generic-1-5-1",
-  "name": "Creatures (levels 1–5)",
+  "name": "Ashira (levels 6-10)",
   "category": "Mob camp",
   "x": 3490,
   "y": 7911,
   "approximate": true,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "crocodiles-1-5-1",
