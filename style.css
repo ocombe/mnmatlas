@@ -459,3 +459,5 @@ body.notice-dragging,body.notice-dragging *{-webkit-user-select:none;user-select
 dialog.dragging,#community-preview.dragging,.leaflet-popup.dragging{user-select:none;opacity:.96}
 /* A dialog moved aside dims the map less, so the markers under it show. */
 dialog.moved::backdrop{background:#0000001f}
+/* Map picker: dungeons carry the world map's dungeon sign. */
+.map-option:has(.map-dungeon){display:flex;align-items:center;gap:8px}.map-option .map-dungeon{display:inline-grid;flex:none;place-items:center;width:20px;height:20px;margin-left:auto;border-radius:50%;background:#5a3b1e;color:#fff1d6;box-shadow:0 0 0 1.5px #d29a48;font:13px/1 var(--heading)}

@@ -676,7 +676,19 @@ function instantTips(){
  const watch=new MutationObserver(list=>{for(const m of list)sync(m.target);});
  for(const b of document.querySelectorAll('.map-tools button')){sync(b);watch.observe(b,{attributes:true,attributeFilter:['title']});}
 }
-// Map picker: the world map first, then the zone maps A to Z, with a type-to-filter box (no letter shortcuts, so any keyboard layout works).
+// Which zones lie in the Deep and which are dungeons, read from the world map's own data (its Deep zones and dungeon markers).
+const mapKinds={deep:new Set(),dungeon:new Set()};
+async function loadMapKinds(){
+ const world=registry.maps.find(m=>m.entry);if(!world)return;
+ const parts=[{level:world.defaultLevel,zones:world.zonesFile,markers:world.markersFile},...(world.levels||[]).map(l=>({level:l.id,zones:l.zonesFile,markers:l.markersFile}))];
+ await Promise.all(parts.map(async p=>{
+  const deep=p.level==='deep',[zones,markers]=await Promise.all([p.zones?fetchData(p.zones,{}).catch(()=>({})):{},p.markers?fetchData(p.markers,[]).catch(()=>[]):[]]);
+  const list=Array.isArray(zones?.zones)?zones.zones:Array.isArray(zones)?zones:[];
+  if(deep)for(const z of list)if(typeof z?.id==='string')mapKinds.deep.add(z.id);
+  for(const m of Array.isArray(markers)?markers:[])if(m?.category==='Dungeon'&&typeof m.toMap==='string'){mapKinds.dungeon.add(m.toMap);if(deep)mapKinds.deep.add(m.toMap);}
+ }));
+}
+// Map picker: the world map first, then the zone maps of the Surface and of the Deep, each A to Z, with a type-to-filter box (no letter shortcuts, so any keyboard layout works).
 const pickers=[],mapOrder=new Intl.Collator('en',{sensitivity:'base',ignorePunctuation:true});
 const foldName=v=>v.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’'`]/g,'').toLowerCase();
 function setPickerMap(id){for(const p of pickers)p.set(id);}
@@ -687,17 +699,17 @@ function buildMapPicker(host){
  menu.className='map-menu';menu.id=uid+'-menu';menu.hidden=true;box.className='search-box';box.append(text('span','⌕'));box.firstChild.setAttribute('aria-hidden','true');
  input.type='search';input.placeholder='Search maps…';input.autocomplete='off';input.spellcheck=false;input.setAttribute('aria-label','Search maps');input.setAttribute('role','combobox');input.setAttribute('aria-autocomplete','list');input.setAttribute('aria-expanded','true');input.setAttribute('aria-controls',uid+'-list');
  list.className='map-menu-list';list.id=uid+'-list';list.setAttribute('role','listbox');list.setAttribute('aria-label','Maps');empty.hidden=true;
- const options=[],group=document.createElement('div'),heading=text('div','Zone maps','map-menu-group');heading.id=uid+'-zones';group.setAttribute('role','group');group.setAttribute('aria-labelledby',heading.id);group.append(heading);
+ const options=[],groups=[['surface','Surface'],['deep','The Deep']].map(([key,label])=>{const el=document.createElement('div'),heading=text('div',label,'map-menu-group');heading.id=uid+'-'+key;el.setAttribute('role','group');el.setAttribute('aria-labelledby',heading.id);el.append(heading);return {key,el,heading};});
  let current=null,active=null,shown=[],loadingMap=false;
- const option=c=>{const o=text('div',c.title,'map-option');o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
+ const option=c=>{const o=text('div',c.title,'map-option');if(mapKinds.dungeon.has(c.id)){const d=text('span','⛫','map-dungeon');d.title='Dungeon';d.setAttribute('aria-label','dungeon');o.append(d);}o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
   o.onmousedown=e=>e.preventDefault();o.onclick=()=>choose(c.id);o.onpointermove=()=>{if(active!==o)setActive(o,false);};options.push(o);return o;};
  for(const c of registry.maps.filter(c=>c.entry))list.append(option(c));
- for(const c of registry.maps.filter(c=>!c.entry).sort((a,b)=>mapOrder.compare(a.title,b.title)))group.append(option(c));
- list.append(group);box.append(input);menu.append(box,list,empty);host.replaceChildren(button,menu);
+ for(const c of registry.maps.filter(c=>!c.entry).sort((a,b)=>mapOrder.compare(a.title,b.title)))groups[mapKinds.deep.has(c.id)?1:0].el.append(option(c));
+ for(const g of groups)if(g.el.children.length>1)list.append(g.el);box.append(input);menu.append(box,list,empty);host.replaceChildren(button,menu);
  function setActive(o,scroll=true){active?.classList.remove('active');active=o;if(o){o.classList.add('active');input.setAttribute('aria-activedescendant',o.id);if(scroll)o.scrollIntoView({block:'nearest'});}else input.removeAttribute('aria-activedescendant');}
  function filter(){const words=foldName(input.value).split(/\s+/).filter(Boolean);shown=[];
   for(const o of options){const hit=words.every(w=>o.dataset.key.includes(w));o.hidden=!hit;if(hit)shown.push(o);}
-  heading.hidden=!shown.some(o=>group.contains(o));empty.hidden=shown.length>0;if(!shown.length)empty.textContent='No map matches “'+input.value.trim()+'”.';
+  for(const g of groups)g.heading.hidden=!shown.some(o=>g.el.contains(o));empty.hidden=shown.length>0;if(!shown.length)empty.textContent='No map matches “'+input.value.trim()+'”.';
   setActive((!words.length&&shown.find(o=>o.dataset.map===current))||shown[0]||null);}
  function open(focus){if(!menu.hidden||loadingMap)return;menu.hidden=false;host.classList.add('open');button.setAttribute('aria-expanded','true');input.value='';filter();if(focus)input.focus({preventScroll:true});}
  function close(refocus){if(menu.hidden)return;menu.hidden=true;host.classList.remove('open');button.setAttribute('aria-expanded','false');if(refocus)button.focus({preventScroll:true});}
@@ -802,7 +814,7 @@ async function findArrival(url){
  history.replaceState({map:target},'',next);
  return {map:target,url:next,text:asked,hits:hits.length===1?null:hits};
 }
-async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
+async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));await loadMapKinds().catch(()=>{});for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
 // Dialogs, the review bar and marker popups can be moved by their header, to see the map underneath: a drag anywhere
 // on the header that is not a button, link or field. Dialogs and the review bar keep their place while the page is
 // open (the review bar from one suggestion to the next); a popup until it closes. Nothing leaves the window, and the
