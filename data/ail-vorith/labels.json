@@ -81,6 +81,10 @@
      "map": "great-cavern-sea"
     },
     {
+     "map": "caves-of-irem",
+     "title": "Caves of Irem"
+    },
+    {
      "map": "underdocks",
      "place": "wiki-boat-de-city"
     }
