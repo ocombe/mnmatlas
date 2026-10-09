@@ -883,5 +883,17 @@
     "sells": [
       "Food & drink"
     ]
+  },
+  {
+    "id": "community-184",
+    "community": true,
+    "name": "Tailor Darya",
+    "category": "Vendor",
+    "note": "",
+    "x": 1141,
+    "y": 1551,
+    "vendor": "Tailoring vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/tailor-darya",
+    "wikiId": "npc-tailor-darya"
   }
 ]
