@@ -200,5 +200,28 @@
   "approximate": true,
   "note": "Approximate location; to confirm in game.",
   "minZoom": 3.25
+ },
+ {
+  "id": "community-130",
+  "community": true,
+  "name": "Kyros Emeraldscale (level 8)",
+  "category": "Named mob",
+  "note": "",
+  "x": 1477,
+  "y": 2128,
+  "wiki": "https://monstersandmemories.wiki/npcs/kyros-emeraldscale",
+  "wikiId": "npc-kyros-emeraldscale"
+ },
+ {
+  "id": "community-134",
+  "community": true,
+  "name": "A shifty elf",
+  "category": "Vendor",
+  "note": "",
+  "x": 3035,
+  "y": 2183,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-shifty-elf",
+  "wikiId": "npc-a-shifty-elf",
+  "vendor": "Shady merchant"
  }
 ]

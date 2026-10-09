@@ -219,9 +219,10 @@
     "id": "wiki-32",
     "name": "Jewelcrafting — Night Market",
     "category": "Tradeskill",
-    "x": 1118,
-    "y": 1482,
-    "note": ""
+    "x": 1179,
+    "y": 1485,
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-33",
@@ -834,5 +835,53 @@
     "y": 1021,
     "wiki": "https://monstersandmemories.wiki/npcs/night-terror",
     "wikiId": "npc-night-terror"
+  },
+  {
+    "id": "community-136",
+    "community": true,
+    "name": "Guard Atep",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1605,
+    "y": 1115,
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-atep",
+    "wikiId": "npc-guard-atep"
+  },
+  {
+    "id": "community-139",
+    "community": true,
+    "name": "A smelter",
+    "category": "Vendor",
+    "note": "",
+    "x": 1164,
+    "y": 1558,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-smelter",
+    "wikiId": "npc-a-smelter",
+    "vendor": "Smelting vendor"
+  },
+  {
+    "id": "community-145",
+    "community": true,
+    "name": "Fedamius Steele III",
+    "category": "Quest",
+    "note": "RANGER starter quest",
+    "x": 806,
+    "y": 1698,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Fighter_Starter_Quest_(Night_Harbor)"
+  },
+  {
+    "id": "community-174",
+    "community": true,
+    "name": "A baker (Night Market)",
+    "category": "Vendor",
+    "note": "",
+    "x": 1160,
+    "y": 1608,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-baker-night-market",
+    "wikiId": "npc-a-baker-night-market",
+    "vendor": "Baker",
+    "sells": [
+      "Food & drink"
+    ]
   }
 ]
