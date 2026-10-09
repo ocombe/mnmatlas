@@ -119,7 +119,8 @@
         "notesRevision": "previous",
         "hiddenKey": "mnmaps-night-harbor-hidden-areas"
       },
-      "migratePreviousStorage": true
+      "migratePreviousStorage": true,
+      "city": true
     },
     {
       "id": "underdocks",
@@ -236,7 +237,8 @@
         "changes": "Names and locations adapted from the Foreign Quarter community map; positions adjusted to this illustration and class abbreviations expanded."
       },
       "hiddenPrimaryStack": null,
-      "legacyStorage": {}
+      "legacyStorage": {},
+      "city": true
     },
     {
       "id": "faelindral",
@@ -318,7 +320,8 @@
           "map": "faelindral",
           "title": "Faelindral (platforms)"
         }
-      ]
+      ],
+      "city": true
     },
     {
       "id": "evershade-weald",
