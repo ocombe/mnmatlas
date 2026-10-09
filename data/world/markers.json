@@ -15,7 +15,7 @@
   "category": "Dungeon",
   "x": 1897,
   "y": 2183,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true,
   "toMap": "ancient-crypt"
@@ -55,7 +55,7 @@
   "category": "Dungeon",
   "x": 2037,
   "y": 2282,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true
  },
@@ -65,7 +65,7 @@
   "category": "Dungeon",
   "x": 2477,
   "y": 1947,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true,
   "toMap": "grain-cellar"
@@ -76,7 +76,7 @@
   "category": "Dungeon",
   "x": 1477,
   "y": 519,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true
  },
@@ -86,7 +86,7 @@
   "category": "Dungeon",
   "x": 1772,
   "y": 518,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true
  },
@@ -96,7 +96,7 @@
   "category": "Dungeon",
   "x": 437,
   "y": 1218,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true
  },
@@ -106,7 +106,7 @@
   "category": "Dungeon",
   "x": 2401,
   "y": 1579,
-  "note": "Dungeon entrance (approximate position).",
+  "note": "Dungeon entrance.",
   "minZoom": 2.75,
   "approximate": true
  }

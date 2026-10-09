@@ -13,7 +13,7 @@
       "priority": 80,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "wayguard-garrison",
@@ -25,7 +25,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "pixie-lift",
@@ -37,7 +37,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "temple-lift",
@@ -49,7 +49,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "keeper-s-lift",
@@ -61,7 +61,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "traveler-s-lift",
@@ -73,7 +73,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "trader-s-terrace",
@@ -85,7 +85,7 @@
       "priority": 80,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "ranger-s-rest",
@@ -97,7 +97,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "quite-den",
@@ -109,7 +109,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "well-of-order",
@@ -121,7 +121,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "willows-whisper",
@@ -133,7 +133,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "wayward-branch-inn",
@@ -145,7 +145,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "the-balanced-branch",
@@ -157,7 +157,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "lambent-lantern",
@@ -169,7 +169,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "heartwood-archives",
@@ -181,7 +181,7 @@
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "lower-tier",
@@ -193,7 +193,7 @@
       "priority": 80,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0); position approximate."
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
       "id": "weald-travelers-lift",

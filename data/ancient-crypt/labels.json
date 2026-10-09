@@ -13,7 +13,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate room location; confirm in game."
+      "note": ""
     },
     {
       "id": "library-loft",
@@ -25,7 +25,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate room location; confirm in game."
+      "note": ""
     },
     {
       "id": "chapel-gallery",
@@ -37,7 +37,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate room location; confirm in game."
+      "note": ""
     },
     {
       "id": "chapel-nave",
@@ -49,7 +49,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate room location; confirm in game."
+      "note": ""
     },
     {
       "id": "west-hall",
@@ -61,7 +61,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate room location; confirm in game."
+      "note": ""
     },
     {
       "id": "lower-passages",
@@ -73,7 +73,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate room location; confirm in game."
+      "note": ""
     },
     {
       "id": "exit-wyrmsbane-tomb",
@@ -85,7 +85,7 @@
       "priority": 95,
       "minZoom": 2,
       "approximate": true,
-      "note": "Approximate exit location; confirm in game.",
+      "note": "",
       "arrow": "east",
       "toMap": "wyrmsbane-tomb",
       "toPlace": "exit-ancient-crypt"
@@ -100,7 +100,7 @@
       "priority": 95,
       "minZoom": 2,
       "approximate": true,
-      "note": "Approximate exit location; confirm in game.",
+      "note": "",
       "arrow": "south",
       "toMap": "shaded-dunes",
       "toPlace": "to-ancient-crypt"
@@ -115,7 +115,7 @@
       "priority": 95,
       "minZoom": 2,
       "approximate": true,
-      "note": "Approximate exit location; confirm in game.",
+      "note": "",
       "arrow": "west"
     }
   ],

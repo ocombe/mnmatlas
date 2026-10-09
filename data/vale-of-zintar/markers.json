@@ -6,7 +6,7 @@
   "x": 4550,
   "y": 2277,
   "approximate": true,
-  "note": "The Sand Giant City at the head of the vale. Approximate location; to confirm in game.",
+  "note": "The Sand Giant City at the head of the vale.",
   "minZoom": 3
  },
  {
@@ -16,7 +16,7 @@
   "x": 4660,
   "y": 2187,
   "approximate": true,
-  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/grand-vizier-alkithar",
   "wikiId": "npc-grand-vizier-alkithar"
@@ -28,7 +28,7 @@
   "x": 4682,
   "y": 2187,
   "approximate": true,
-  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/old-scar",
   "wikiId": "npc-old-scar"
@@ -40,7 +40,7 @@
   "x": 4704,
   "y": 2187,
   "approximate": true,
-  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/khalbaar-the-growler",
   "wikiId": "npc-khalbaar-the-growler"
@@ -52,7 +52,7 @@
   "x": 4440,
   "y": 2187,
   "approximate": true,
-  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/spicy-raziq",
   "wikiId": "npc-spicy-raziq"
@@ -64,7 +64,7 @@
   "x": 4462,
   "y": 2187,
   "approximate": true,
-  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/zubair-goldtongue",
   "wikiId": "npc-zubair-goldtongue"
@@ -76,7 +76,7 @@
   "x": 4484,
   "y": 2187,
   "approximate": true,
-  "note": "In the Sand Giant City. Approximate location; to confirm in game.",
+  "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/sularfaan-the-flamekeeper",
   "wikiId": "npc-sularfaan-the-flamekeeper"
@@ -88,7 +88,7 @@
   "x": 1376,
   "y": 3811,
   "approximate": true,
-  "note": "On Fisher Rock, off the west coast. Approximate location; to confirm in game.",
+  "note": "On Fisher Rock, off the west coast.",
   "minZoom": 3
  },
  {
@@ -98,7 +98,7 @@
   "x": 1476,
   "y": 3731,
   "approximate": true,
-  "note": "At the giant fishing camp on Fisher Rock. Approximate location; to confirm in game.",
+  "note": "At the giant fishing camp on Fisher Rock.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/hadir-the-shipbreaker",
   "wikiId": "npc-hadir-the-shipbreaker"
@@ -110,7 +110,7 @@
   "x": 1508,
   "y": 4764,
   "approximate": true,
-  "note": "Along the west beach. Approximate location; to confirm in game.",
+  "note": "Along the west beach.",
   "minZoom": 3
  },
  {
@@ -120,7 +120,7 @@
   "x": 1608,
   "y": 4684,
   "approximate": true,
-  "note": "With the beach giants. Approximate location; to confirm in game.",
+  "note": "With the beach giants.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/hemalmula-the-hunter",
   "wikiId": "npc-hemalmula-the-hunter"
@@ -132,7 +132,7 @@
   "x": 1630,
   "y": 4684,
   "approximate": true,
-  "note": "With the beach giants. Approximate location; to confirm in game.",
+  "note": "With the beach giants.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/rami-al-qawwaasr",
   "wikiId": "npc-rami-al-qawwaasr"
@@ -144,7 +144,7 @@
   "x": 2892,
   "y": 5391,
   "approximate": true,
-  "note": "The camp at the lake. Approximate location; to confirm in game.",
+  "note": "The camp at the lake.",
   "minZoom": 3
  },
  {
@@ -154,7 +154,7 @@
   "x": 2992,
   "y": 5311,
   "approximate": true,
-  "note": "At the lake camp. Approximate location; to confirm in game.",
+  "note": "At the lake camp.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/mhirunne-of-whispers",
   "wikiId": "npc-mhirunne-of-whispers"
@@ -166,7 +166,7 @@
   "x": 3014,
   "y": 5311,
   "approximate": true,
-  "note": "At the lake camp. Approximate location; to confirm in game.",
+  "note": "At the lake camp.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/najarica",
   "wikiId": "npc-najarica"
@@ -178,7 +178,7 @@
   "x": 2638,
   "y": 6360,
   "approximate": true,
-  "note": "Orc camps around the Copper Mine and its cave. Approximate location; to confirm in game.",
+  "note": "Orc camps around the Copper Mine and its cave.",
   "minZoom": 3
  },
  {
@@ -188,7 +188,7 @@
   "x": 2738,
   "y": 6280,
   "approximate": true,
-  "note": "At the orc camps and cave of the Copper Mine. Approximate location; to confirm in game.",
+  "note": "At the orc camps and cave of the Copper Mine.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/servarator-vakraar",
   "wikiId": "npc-servarator-vakraar"
@@ -200,7 +200,7 @@
   "x": 2760,
   "y": 6280,
   "approximate": true,
-  "note": "At the orc camps and cave of the Copper Mine. Approximate location; to confirm in game.",
+  "note": "At the orc camps and cave of the Copper Mine.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-dustrend-kennel-master",
   "wikiId": "npc-a-dustrend-kennel-master"
@@ -212,7 +212,7 @@
   "x": 5566,
   "y": 7354,
   "approximate": true,
-  "note": "At the Putrid Oasis. Approximate location; to confirm in game.",
+  "note": "At the Putrid Oasis.",
   "minZoom": 3
  },
  {
@@ -222,7 +222,7 @@
   "x": 5666,
   "y": 7274,
   "approximate": true,
-  "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
+  "note": "At the corrupted Ashira camp by the Putrid Oasis.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/onis-the-elder",
   "wikiId": "npc-onis-the-elder"
@@ -234,7 +234,7 @@
   "x": 5688,
   "y": 7274,
   "approximate": true,
-  "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
+  "note": "At the corrupted Ashira camp by the Putrid Oasis.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/fernic-the-cur",
   "wikiId": "npc-fernic-the-cur"
@@ -246,7 +246,7 @@
   "x": 5710,
   "y": 7274,
   "approximate": true,
-  "note": "At the corrupted Ashira camp by the Putrid Oasis. Approximate location; to confirm in game.",
+  "note": "At the corrupted Ashira camp by the Putrid Oasis.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/seshena-the-lost",
   "wikiId": "npc-seshena-the-lost"
@@ -258,7 +258,7 @@
   "x": 2280,
   "y": 7745,
   "approximate": true,
-  "note": "Among the termite mounds. Approximate location; to confirm in game.",
+  "note": "Among the termite mounds.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-tomb-burrower",
   "wikiId": "npc-a-tomb-burrower"
@@ -270,7 +270,7 @@
   "x": 2380,
   "y": 7665,
   "approximate": true,
-  "note": "Among the termite mounds. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
+  "note": "Among the termite mounds. Marked \"to verify\" on the source map.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-gold-devourer",
   "wikiId": "npc-a-gold-devourer"
@@ -282,7 +282,7 @@
   "x": 2402,
   "y": 7665,
   "approximate": true,
-  "note": "Among the termite mounds. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
+  "note": "Among the termite mounds. Marked \"to verify\" on the source map.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-silver-devourer",
   "wikiId": "npc-a-silver-devourer"
@@ -294,7 +294,7 @@
   "x": 4602,
   "y": 8073,
   "approximate": true,
-  "note": "In the Snake Den. Marked \"to verify\" on the source map. Approximate location; to confirm in game.",
+  "note": "In the Snake Den. Marked \"to verify\" on the source map.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/bloodfang",
   "wikiId": "npc-bloodfang"
@@ -306,7 +306,7 @@
   "x": 2922,
   "y": 8775,
   "approximate": true,
-  "note": "At the Pyrmos mercenary tower near the road to Fallen Pass. Approximate location; to confirm in game.",
+  "note": "At the Pyrmos mercenary tower near the road to Fallen Pass.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-merchant-traveler",
   "wikiId": "npc-a-merchant-traveler"

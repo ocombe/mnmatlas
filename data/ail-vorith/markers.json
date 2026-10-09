@@ -5,7 +5,7 @@
     "category": "Teleporter",
     "x": 4245,
     "y": 4565,
-    "note": "Approximate position; to confirm in game. Teleporter destination to confirm."
+    "note": "Teleporter destination to confirm."
   },
   {
     "id": "guild-registrar-customs-agent",
@@ -13,7 +13,7 @@
     "category": "Guild",
     "x": 4550,
     "y": 4667,
-    "note": "Approximate position; to confirm in game. Guild registrar and customs agent."
+    "note": "Guild registrar and customs agent."
   },
   {
     "id": "bankers",
@@ -21,7 +21,7 @@
     "category": "Bank",
     "x": 4460,
     "y": 4500,
-    "note": "Approximate position; to confirm in game. Bank in the polygonal hall."
+    "note": "Bank in the polygonal hall."
   },
   {
     "id": "guild-registrar-bank-hall",
@@ -29,7 +29,7 @@
     "category": "Guild",
     "x": 4467,
     "y": 4481,
-    "note": "Approximate position; to confirm in game. Guild registrar in the bank hall."
+    "note": "Guild registrar in the bank hall."
   },
   {
     "id": "grindstone",
@@ -37,7 +37,7 @@
     "category": "Tradeskill",
     "x": 4221,
     "y": 4069,
-    "note": "Approximate position; to confirm in game. Grindstone beside the forge."
+    "note": "Grindstone beside the forge."
   },
   {
     "id": "forge",
@@ -45,7 +45,7 @@
     "category": "Forge",
     "x": 4244,
     "y": 4054,
-    "note": "Approximate position; to confirm in game. Forge beside the blacksmith."
+    "note": "Forge beside the blacksmith."
   },
   {
     "id": "blacksmithing-smelting-zorvek",
@@ -53,7 +53,7 @@
     "category": "Tradeskill",
     "x": 4257,
     "y": 4070,
-    "note": "Approximate position; to confirm in game. Blacksmith."
+    "note": "Blacksmith."
   },
   {
     "id": "miral-the-dark-elf",
@@ -61,7 +61,7 @@
     "category": "Personal",
     "x": 4294,
     "y": 3964,
-    "note": "Approximate position; to confirm in game. Service not specified on the community map."
+    "note": "Service not specified on the community map."
   },
   {
     "id": "survival-thirvol",
@@ -69,7 +69,7 @@
     "category": "Tradeskill",
     "x": 4770,
     "y": 4465,
-    "note": "Approximate position; to confirm in game. Survivalist."
+    "note": "Survivalist."
   },
   {
     "id": "lumberjacking-kulzzanrek",
@@ -77,7 +77,7 @@
     "category": "Tradeskill",
     "x": 4758,
     "y": 4531,
-    "note": "Approximate position; to confirm in game. Woodcutter."
+    "note": "Woodcutter."
   },
   {
     "id": "magnificent-vhaspire",
@@ -85,7 +85,7 @@
     "category": "Personal",
     "x": 4807,
     "y": 4476,
-    "note": "Approximate position; to confirm in game. Hardcore."
+    "note": "Hardcore."
   },
   {
     "id": "solitary-vhaldrek",
@@ -93,7 +93,7 @@
     "category": "Personal",
     "x": 4846,
     "y": 4466,
-    "note": "Approximate position; to confirm in game. Self Found."
+    "note": "Self Found."
   },
   {
     "id": "tailoring-ruzzuna",
@@ -101,7 +101,7 @@
     "category": "Tradeskill",
     "x": 4665,
     "y": 4412,
-    "note": "Approximate position; to confirm in game. Tailor in the market."
+    "note": "Tailor in the market."
   },
   {
     "id": "leatherworker-vex",
@@ -113,7 +113,7 @@
     ],
     "x": 4625,
     "y": 4362,
-    "note": "Approximate position; to confirm in game. Newbie armour; quest rewards.",
+    "note": "Newbie armour; quest rewards.",
     "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-vex",
     "wikiId": "npc-leatherworker-vex"
   },
@@ -124,7 +124,7 @@
     "vendor": "Used weapons dealer",
     "x": 4774,
     "y": 4385,
-    "note": "Approximate position; to confirm in game. Used weapons.",
+    "note": "Used weapons.",
     "wiki": "https://monstersandmemories.wiki/npcs/kulzzara",
     "wikiId": "npc-kulzzara"
   },
@@ -138,7 +138,7 @@
     ],
     "x": 4613,
     "y": 4334,
-    "note": "Approximate position; to confirm in game. Bags.",
+    "note": "Bags.",
     "wiki": "https://monstersandmemories.wiki/npcs/melzorra",
     "wikiId": "npc-melzorra"
   },
@@ -154,7 +154,7 @@
     ],
     "x": 4631,
     "y": 4295,
-    "note": "Approximate position; to confirm in game. General supplies.",
+    "note": "General supplies.",
     "wiki": "https://monstersandmemories.wiki/npcs/supplier-jul",
     "wikiId": "npc-supplier-jul"
   },
@@ -164,7 +164,7 @@
     "category": "Class trainer",
     "x": 4457,
     "y": 4293,
-    "note": "Approximate position; to confirm in game. Monk trainer.",
+    "note": "Monk trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/klavel-sul",
     "wikiId": "npc-klavel-sul",
     "classes": [
@@ -177,7 +177,7 @@
     "category": "Class trainer",
     "x": 4444,
     "y": 4257,
-    "note": "Approximate position; to confirm in game. Fighter trainer.",
+    "note": "Fighter trainer.",
     "classes": [
       "Fighter"
     ],
@@ -190,7 +190,7 @@
     "category": "Class trainer",
     "x": 4355,
     "y": 4218,
-    "note": "Approximate position; to confirm in game. Archer trainer.",
+    "note": "Archer trainer.",
     "classes": [
       "Archer"
     ],
@@ -203,7 +203,7 @@
     "category": "Class trainer",
     "x": 4405,
     "y": 4236,
-    "note": "Approximate position; to confirm in game. Ranger trainer.",
+    "note": "Ranger trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/laren-drindar",
     "wikiId": "npc-laren-drindar",
     "classes": [
@@ -216,7 +216,7 @@
     "category": "Class trainer",
     "x": 4404,
     "y": 4314,
-    "note": "Approximate position; to confirm in game. Upstairs. Spellblade trainer.",
+    "note": "Upstairs. Spellblade trainer.",
     "classes": [
       "Spellblade"
     ],
@@ -229,7 +229,7 @@
     "category": "Class trainer",
     "x": 4401,
     "y": 4286,
-    "note": "Approximate position; to confirm in game. Upstairs. Paladin trainer.",
+    "note": "Upstairs. Paladin trainer.",
     "classes": [
       "Paladin"
     ],
@@ -242,7 +242,7 @@
     "category": "Exit",
     "x": 4460,
     "y": 4245,
-    "note": "Approximate position; to confirm in game. Stairs to the upper platform."
+    "note": "Stairs to the upper platform."
   },
   {
     "id": "zalethra-drezzorith",
@@ -250,7 +250,7 @@
     "category": "Class trainer",
     "x": 4292,
     "y": 4123,
-    "note": "Approximate position; to confirm in game. Cleric trainer.",
+    "note": "Cleric trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/zalethra-drezzorith",
     "wikiId": "npc-zalethra-drezzorith",
     "classes": [
@@ -263,7 +263,7 @@
     "category": "Class trainer",
     "x": 4329,
     "y": 4131,
-    "note": "Approximate position; to confirm in game. Elementalist trainer.",
+    "note": "Elementalist trainer.",
     "classes": [
       "Elementalist"
     ],
@@ -276,7 +276,7 @@
     "category": "Class trainer",
     "x": 4357,
     "y": 4125,
-    "note": "Approximate position; to confirm in game. Wizard trainer.",
+    "note": "Wizard trainer.",
     "classes": [
       "Wizard"
     ],
@@ -289,7 +289,7 @@
     "category": "Personal",
     "x": 4387,
     "y": 4140,
-    "note": "Approximate position; to confirm in game. Trainer upstairs at the Obsidian Academy; class not stated on the community map."
+    "note": "Trainer upstairs at the Obsidian Academy; class not stated on the community map."
   },
   {
     "id": "vaslir-naiyth",
@@ -297,7 +297,7 @@
     "category": "Class trainer",
     "x": 4377,
     "y": 4035,
-    "note": "Approximate position; to confirm in game. Necromancer trainer.",
+    "note": "Necromancer trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/vaslir-naiyth",
     "wikiId": "npc-vaslir-naiyth",
     "classes": [
@@ -310,7 +310,7 @@
     "category": "Class trainer",
     "x": 4467,
     "y": 4084,
-    "note": "Approximate position; to confirm in game. Enchanter trainer.",
+    "note": "Enchanter trainer.",
     "wiki": "https://monstersandmemories.wiki/npcs/amarah-ithvayen",
     "wikiId": "npc-amarah-ithvayen",
     "classes": [
@@ -323,7 +323,7 @@
     "category": "Stable",
     "x": 4412,
     "y": 3949,
-    "note": "Approximate position; to confirm in game. Stablemaster."
+    "note": "Stablemaster."
   },
   {
     "id": "cook-vashuk",
@@ -331,7 +331,7 @@
     "category": "Tradeskill",
     "x": 4409,
     "y": 3906,
-    "note": "Approximate position; to confirm in game. Downstairs; follow the stairs down."
+    "note": "Downstairs; follow the stairs down."
   },
   {
     "id": "nyxia-ak-kin",
@@ -343,7 +343,7 @@
     ],
     "x": 4461,
     "y": 3916,
-    "note": "Approximate position; to confirm in game. Food and rations.",
+    "note": "Food and rations.",
     "wiki": "https://monstersandmemories.wiki/npcs/nyxia-akkin",
     "wikiId": "npc-nyxia-akkin"
   },
@@ -353,7 +353,7 @@
     "category": "Personal",
     "x": 4498,
     "y": 4167,
-    "note": "Approximate position; to confirm in game. Paths; meaning to confirm in game."
+    "note": "Paths; meaning to confirm in game."
   },
   {
     "id": "apprentice-esveth",
@@ -361,7 +361,7 @@
     "category": "Personal",
     "x": 4620,
     "y": 3920,
-    "note": "Approximate position; to confirm in game. Service not specified on the community map."
+    "note": "Service not specified on the community map."
   },
   {
     "id": "toilmaster-vorith",
@@ -369,7 +369,7 @@
     "category": "Personal",
     "x": 5096,
     "y": 3911,
-    "note": "Approximate position; to confirm in game. At the bridge. Starter quest.",
+    "note": "At the bridge. Starter quest.",
     "community": true
   },
   {
@@ -378,7 +378,7 @@
     "category": "Personal",
     "x": 5065,
     "y": 3785,
-    "note": "Approximate position; to confirm in game. At the bridge.",
+    "note": "At the bridge.",
     "community": true
   },
   {
@@ -415,7 +415,7 @@
     "community": true,
     "name": "a jewelcrafting trainer",
     "category": "Tradeskill",
-    "note": "approximate location",
+    "note": "",
     "x": 4522,
     "y": 2625,
     "trade": "Jewelcrafting"

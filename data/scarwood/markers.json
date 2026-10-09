@@ -6,7 +6,7 @@
   "x": 1756,
   "y": 2840,
   "approximate": true,
-  "note": "Roam the western forest. Approximate location; to confirm in game.",
+  "note": "Roam the western forest.",
   "minZoom": 3
  },
  {
@@ -16,7 +16,7 @@
   "x": 5148,
   "y": 3304,
   "approximate": true,
-  "note": "Bandit camp: bulky bandits, bandit archers and trail bandits. Approximate location; to confirm in game.",
+  "note": "Bandit camp: bulky bandits, bandit archers and trail bandits.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-bandit",
   "wikiId": "npc-a-bandit"
@@ -28,7 +28,7 @@
   "x": 5258,
   "y": 3234,
   "approximate": true,
-  "note": "In the bandit camp. Approximate location; to confirm in game.",
+  "note": "In the bandit camp.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/garran-grinholdt",
   "wikiId": "npc-garran-grinholdt"
@@ -40,7 +40,7 @@
   "x": 5280,
   "y": 3234,
   "approximate": true,
-  "note": "In the bandit camp. Approximate location; to confirm in game.",
+  "note": "In the bandit camp.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/thorne-grinholdt",
   "wikiId": "npc-thorne-grinholdt"
@@ -52,7 +52,7 @@
   "x": 2001,
   "y": 580,
   "approximate": true,
-  "note": "Poacher camp around the hunting lodge. Approximate location; to confirm in game.",
+  "note": "Poacher camp around the hunting lodge.",
   "minZoom": 3
  },
  {
@@ -62,7 +62,7 @@
   "x": 2111,
   "y": 510,
   "approximate": true,
-  "note": "Follow the left-hand cliff face until you reach the hunting lodge. Approximate location; to confirm in game.",
+  "note": "Follow the left-hand cliff face until you reach the hunting lodge.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/krev-thistlehook",
   "wikiId": "npc-krev-thistlehook"
@@ -74,7 +74,7 @@
   "x": 4756,
   "y": 5429,
   "approximate": true,
-  "note": "In the lake. Approximate location; to confirm in game.",
+  "note": "In the lake.",
   "minZoom": 3
  },
  {
@@ -84,7 +84,7 @@
   "x": 5778,
   "y": 5499,
   "approximate": true,
-  "note": "Camp on the east shore of the lake: Ail’trist clerics and sentries, Sojourner bowmen, druidic sojourners. Approximate location; to confirm in game.",
+  "note": "Camp on the east shore of the lake: Ail’trist clerics and sentries, Sojourner bowmen, druidic sojourners.",
   "minZoom": 3
  },
  {
@@ -94,7 +94,7 @@
   "x": 5188,
   "y": 1433,
   "approximate": true,
-  "note": "Corrupted giant camp by the giants’ road. Approximate location; to confirm in game.",
+  "note": "Corrupted giant camp by the giants’ road.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-corrupted-hill-giant",
   "wikiId": "npc-a-corrupted-hill-giant"
@@ -106,7 +106,7 @@
   "x": 5308,
   "y": 1363,
   "approximate": true,
-  "note": "In the corrupted giant camp. Approximate location; to confirm in game.",
+  "note": "In the corrupted giant camp.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/dregath-warwake",
   "wikiId": "npc-dregath-warwake"
@@ -118,7 +118,7 @@
   "x": 6256,
   "y": 1451,
   "approximate": true,
-  "note": "Spawns by the last stump at the west end of the giants’ road, near the three-way crossing, and wanders down the road. Approximate location; to confirm in game.",
+  "note": "Spawns by the last stump at the west end of the giants’ road, near the three-way crossing, and wanders down the road.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/yurl-rootrender",
   "wikiId": "npc-yurl-rootrender"
@@ -130,7 +130,7 @@
   "x": 2031,
   "y": 5645,
   "approximate": true,
-  "note": "Giant huts by the Hill Giant cave. Approximate location; to confirm in game.",
+  "note": "Giant huts by the Hill Giant cave.",
   "minZoom": 3
  },
  {
@@ -140,7 +140,7 @@
   "x": 1791,
   "y": 6071,
   "approximate": true,
-  "note": "In the barrel room of the Hill Giant cave, south-west corner of the zone. Approximate location; to confirm in game.",
+  "note": "In the barrel room of the Hill Giant cave, south-west corner of the zone.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/krothun-veincarver",
   "wikiId": "npc-krothun-veincarver"

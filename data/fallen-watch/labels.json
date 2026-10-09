@@ -13,7 +13,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "ravine",
@@ -25,7 +25,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "dracolich-caves",
@@ -37,7 +37,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "lower-cave-entrance",
@@ -49,7 +49,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "shaft-stair",
@@ -61,7 +61,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "entry-cave",
@@ -73,7 +73,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "portcullis",
@@ -85,7 +85,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "armory-lower",
@@ -97,7 +97,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "barracks-lower",
@@ -109,7 +109,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "rat-cave",
@@ -121,7 +121,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "stores-north",
@@ -133,7 +133,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "enchanting-large",
@@ -145,7 +145,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "training-room",
@@ -157,7 +157,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "barracks",
@@ -169,7 +169,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "stores-south",
@@ -181,7 +181,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "keg-room",
@@ -193,7 +193,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "officer-halls",
@@ -205,7 +205,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "enchanting-upper",
@@ -217,7 +217,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "cage-room",
@@ -229,7 +229,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "dining-hall",
@@ -241,7 +241,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "kitchen",
@@ -253,7 +253,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "spider-cave",
@@ -265,7 +265,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "tomb-passage",
@@ -277,7 +277,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "church",
@@ -289,7 +289,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "greenhouse",
@@ -301,7 +301,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "officer-compound",
@@ -313,7 +313,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "officer-tower",
@@ -325,7 +325,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "keep-courtyard",
@@ -337,7 +337,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "main-tower",
@@ -349,7 +349,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "tower-d",
@@ -361,7 +361,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "main-tower-room",
@@ -373,7 +373,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Balcony, throne room, elevator and ballista crown are above this room. Approximate; confirm in game."
+      "note": "Balcony, throne room, elevator and ballista crown are above this room."
     },
     {
       "id": "tower-d-room",
@@ -385,7 +385,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "officer-deck",
@@ -397,7 +397,7 @@
       "priority": 80,
       "minZoom": 3,
       "approximate": true,
-      "note": "Approximate; confirm in game."
+      "note": ""
     },
     {
       "id": "exit-fallen-pass",
@@ -410,7 +410,7 @@
       "minZoom": 1.5,
       "arrow": "north",
       "approximate": true,
-      "note": "Arrival stair landing. Approximate; confirm in game.",
+      "note": "Arrival stair landing.",
       "toMap": "fallen-pass",
       "toPlace": "to-fallen-watch"
     }

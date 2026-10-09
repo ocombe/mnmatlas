@@ -6,7 +6,7 @@
   "x": 1454,
   "y": 730,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Druid"
   ]
@@ -18,7 +18,7 @@
   "x": 1126,
   "y": 870,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Archer",
    "Fighter"
@@ -31,7 +31,7 @@
   "x": 1808,
   "y": 1176,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Ranger"
   ]
@@ -43,7 +43,7 @@
   "x": 2124,
   "y": 1112,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Beastlord"
   ]
@@ -55,7 +55,7 @@
   "x": 1860,
   "y": 1654,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Shaman"
   ]
@@ -67,7 +67,7 @@
   "x": 1462,
   "y": 1790,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode.",
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Bard",
    "Rogue"
@@ -80,7 +80,7 @@
   "x": 1400,
   "y": 1980,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-8",
@@ -89,7 +89,7 @@
   "x": 1204,
   "y": 1672,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode. The Lower Tier vendor list also names a cook at the inn."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). The Lower Tier vendor list also names a cook at the inn."
  },
  {
   "id": "wiki-9",
@@ -98,7 +98,7 @@
   "x": 1610,
   "y": 1454,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-24",
@@ -107,7 +107,7 @@
   "x": 1474.97,
   "y": 990.57,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-25",
@@ -116,7 +116,7 @@
   "x": 1443.22,
   "y": 1012.34,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-26",
@@ -125,7 +125,7 @@
   "x": 1475.87,
   "y": 1025.03,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-27",
@@ -134,7 +134,7 @@
   "x": 1427.8,
   "y": 1064.04,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-28",
@@ -143,7 +143,7 @@
   "x": 1453.2,
   "y": 1090.34,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-29",
@@ -152,7 +152,7 @@
   "x": 1383.36,
   "y": 1146.58,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-30",
@@ -161,7 +161,7 @@
   "x": 1417.82,
   "y": 1150.2,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-31",
@@ -170,7 +170,7 @@
   "x": 1329.84,
   "y": 1416.87,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-32",
@@ -179,7 +179,7 @@
   "x": 1270.88,
   "y": 1435.92,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-33",
@@ -188,7 +188,7 @@
   "x": 1348.89,
   "y": 1485.8,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-34",
@@ -197,7 +197,7 @@
   "x": 1154.78,
   "y": 1538.41,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-35",
@@ -206,7 +206,7 @@
   "x": 1187.44,
   "y": 1553.83,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-36",
@@ -215,7 +215,7 @@
   "x": 1278.14,
   "y": 1615.51,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-37",
@@ -224,7 +224,7 @@
   "x": 1649.12,
   "y": 1444.08,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-38",
@@ -233,7 +233,7 @@
   "x": 1842.31,
   "y": 1098.5,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-39",
@@ -242,7 +242,7 @@
   "x": 1888.57,
   "y": 1264.49,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-40",
@@ -251,7 +251,7 @@
   "x": 1997.42,
   "y": 1249.98,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-41",
@@ -260,7 +260,7 @@
   "x": 1957.51,
   "y": 1318.0,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-42",
@@ -269,7 +269,7 @@
   "x": 1994.69,
   "y": 1332.52,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-43",
@@ -278,7 +278,7 @@
   "x": 2023.72,
   "y": 1154.74,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-44",
@@ -287,7 +287,7 @@
   "x": 2188.8,
   "y": 1173.79,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "wiki-45",
@@ -296,7 +296,7 @@
   "x": 2300.36,
   "y": 1111.2,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). Position approximate; adjustable in alignment mode."
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
   "id": "maggot-npc-01",
@@ -404,7 +404,7 @@
   "x": 1034,
   "y": 1964,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "lift-keeper-s-down",
@@ -413,7 +413,7 @@
   "x": 2020,
   "y": 886,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "lift-pixie-down",
@@ -422,7 +422,7 @@
   "x": 552,
   "y": 852,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "ramp-01-down",
@@ -431,7 +431,7 @@
   "x": 1298,
   "y": 2660,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "ramp-02-down",
@@ -440,7 +440,7 @@
   "x": 2216,
   "y": 1592,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "ramp-03-down",
@@ -449,7 +449,7 @@
   "x": 1720,
   "y": 134,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "ramp-04-down",
@@ -458,7 +458,7 @@
   "x": 2490,
   "y": 1676,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "ramp-05-down",
@@ -467,7 +467,7 @@
   "x": 2482,
   "y": 924,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "ramp-06-down",
@@ -476,7 +476,7 @@
   "x": 2712,
   "y": 920,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map). Approximate connection; to confirm in game."
+  "note": "Leads down to the forest floor (Evershade Weald map)."
  },
  {
   "id": "temple-lift",
