@@ -126,6 +126,43 @@
    "arrow": "east",
    "approximate": true,
    "note": "Approximate location; to confirm in game."
+  },
+  {
+   "id": "boat-route",
+   "name": "Boat route",
+   "kind": "exit",
+   "arrow": "east",
+   "x": 4339,
+   "y": 6029,
+   "priority": 80,
+   "minZoom": 0,
+   "passes": true,
+   "route": [
+    {
+     "map": "underdocks",
+     "place": "wiki-boat-de-city"
+    },
+    {
+     "map": "caves-of-irem",
+     "title": "Caves of Irem"
+    },
+    {
+     "map": "great-cavern-sea",
+     "place": "boat-route"
+    },
+    {
+     "map": "ail-vorith",
+     "place": "to-great-cavern-sea"
+    }
+   ],
+   "note": "The boat between the Underdocks and Ail’Vorith sails through here without stopping. Toward Ail’Vorith it enters around 2pm, 10pm and 6am; toward the Underdocks around 12am, 8am and 4pm (game time).",
+   "timesSource": {
+    "title": "Boats",
+    "site": "Monsters and Memories Wiki",
+    "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
   }
  ],
  "trainers": []

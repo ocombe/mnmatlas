@@ -8,7 +8,7 @@ function boatSeal(){
  const path=document.createElementNS(ns,'path');path.setAttribute('d','M3 15h18l-3 5H6z M12 3v12 M12 4l6 9h-6');svg.append(path);seal.append(svg);return seal;
 }
 function boatCard(row){
- const n=text('div','','boat-card');n.append(text('div','Boat','tag'),text('h3',row.name));if(row.note)n.append(text('p',row.note));
+ const n=text('div','','boat-card');n.append(text('div',row.passes?'Boat route':'Boat','tag'),text('h3',row.name));if(row.note)n.append(text('p',row.note));
  const list=text('ol','','boat-route');
  for(const stop of row.route){
   const id=typeof stop==='string'?stop:stop?.map,c=registry.maps.find(m=>m.id===id),li=document.createElement('li');if(!id)continue;
@@ -49,7 +49,9 @@ function setupPlaceLabels(data){
   if(boat){
    face.append(boatSeal(),text('span',' '+row.name,'exit-name'));
    // Departure times read straight from the sign: the times found in its description, under the name.
-   const times=String(row.note||'').match(/\b\d{1,2}(?::\d{2})?\s?(?:am|pm)\b/gi);if(times?.length)face.append(text('small',times.map(t=>t.replace(/\s/g,'').toLowerCase()).join(' · '),'boat-times'));
+   // A route the boat only sails through says so instead of listing times.
+   if(row.passes)face.append(text('small','passes by · no stop','boat-times'));
+   else{const times=String(row.note||'').match(/\b\d{1,2}(?::\d{2})?\s?(?:am|pm)\b/gi);if(times?.length)face.append(text('small',times.map(t=>t.replace(/\s/g,'').toLowerCase()).join(' · '),'boat-times'));}
    if(!alignmentMode){face.tabIndex=0;face.setAttribute('role','button');face.title='Departures and stops';L.DomEvent.disableClickPropagation(face);
     const open=()=>boatCard(row);face.addEventListener('click',open);face.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}
   }else if(row.kind==='exit'){

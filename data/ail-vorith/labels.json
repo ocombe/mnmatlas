@@ -78,7 +78,8 @@
      "place": "to-great-cavern-sea"
     },
     {
-     "map": "great-cavern-sea"
+     "map": "great-cavern-sea",
+     "place": "boat-route"
     },
     {
      "map": "caves-of-irem",
