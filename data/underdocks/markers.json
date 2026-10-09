@@ -224,17 +224,6 @@
     "category": "Tradeskill"
   },
   {
-    "id": "wiki-shady",
-    "name": "Shady merchant — harbour island",
-    "x": 3741,
-    "y": 4767,
-    "level": "lower",
-    "approximate": true,
-    "note": "Shady merchant.",
-    "category": "Vendor",
-    "vendor": "Shady merchant"
-  },
-  {
     "id": "wiki-medic",
     "name": "First Aid — harbour island",
     "x": 3797,
@@ -738,5 +727,28 @@
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/delilah",
     "wikiId": "npc-1790076525443-t431c"
+  },
+  {
+    "id": "community-166",
+    "community": true,
+    "name": "Gaden Shale",
+    "category": "Vendor",
+    "note": "",
+    "x": 3745,
+    "y": 4767,
+    "level": "lower",
+    "vendor": "Shady merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/gaden-shale",
+    "wikiId": "npc-1790076526837-7nyqu"
+  },
+  {
+    "id": "community-169",
+    "community": true,
+    "name": "Lightstone Vender",
+    "category": "Vendor",
+    "note": "Lightstone",
+    "x": 3652,
+    "y": 4749,
+    "level": "lower"
   }
 ]
