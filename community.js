@@ -730,7 +730,8 @@
   if(row.kind==='new-marker')return originals.some(m=>m.id==='community-'+row.id);
   if(p.remove===true)return !t;
   if(row.kind==='move-marker')return !t||!Array.isArray(p.to)||(Math.round(t.x)===Math.round(p.to[0])&&Math.round(t.y)===Math.round(p.to[1]));
-  if(row.kind==='edit-marker')return !t||(t.name===p.name&&(t.note||'')===(p.note||'')&&(p.wiki===undefined||(t.wiki||'')===p.wiki)&&(p.category===undefined||t.category===p.category));
+  // Only what the edit changes counts (the publishing job leaves the other fields as they are now).
+  if(row.kind==='edit-marker'){const f=p.from||{},moved=(k,a,b)=>a!==b&&(f[k]===undefined||(f[k]||'')!==b);return !t||(!moved('name',t.name,p.name)&&!moved('note',t.note||'',p.note||'')&&(p.wiki===undefined||!moved('wiki',t.wiki||'',p.wiki))&&(p.category===undefined||t.category===p.category));}
   return true;}
  const drawable=r=>['new-marker','move-marker','edit-marker'].includes(r.kind)&&!(r.kind==='new-marker'&&r.payload?.noteType)&&(!config.levels||!r.level||r.level===config.levelId);
  // Where a suggestion stands on this map, in map units.

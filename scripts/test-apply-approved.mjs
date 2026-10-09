@@ -115,7 +115,11 @@ try{
   const beforeTypes=readFileSync(fixture+'/data/markers.json','utf8');
   approved=[{id:63,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{...text(now('published')),from:{...text(now('published')).from,category:'Inn'},category:'Vendor'}},{id:64,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{...text(now('published')),category:'Personal'}}];
   r=await run();assert.equal(r.code,0,r.output);assert(r.output.includes('The published type changed'));assert(r.output.includes('Unsupported marker fields for suggestion 64'));assert.equal(readFileSync(fixture+'/data/markers.json','utf8'),beforeTypes);}
- console.log('Publisher checks passed: type changes on edits, wiki links and ids, trainer classes, removals, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
+ // A name edit sent before the note was cleaned up still applies, and leaves the newer note alone.
+ {const now=id=>JSON.parse(readFileSync(fixture+'/data/markers.json','utf8')).find(m=>m.id===id),m=now('community-81');
+  approved=[{id:65,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-81',payload:{name:'Night fence',note:'Approximate location; to confirm in game.',from:{name:m.name,note:'Approximate location; to confirm in game.'}}}];
+  const r=await run();assert.equal(r.code,0,r.output);assert(!r.output.includes('changed after'),r.output);assert.equal(now('community-81').name,'Night fence');assert.equal(now('community-81').note,m.note,'An untouched note is not written back');}
+ console.log('Publisher checks passed: type changes on edits, field-wise edits, wiki links and ids, trainer classes, removals, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});
 }

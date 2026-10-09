@@ -100,7 +100,10 @@ async function apply(row){
   // A marker edit may also set or clear the wiki link; older edits without one leave it as it is.
   const linked=!label&&p.wiki!==undefined,wiki=linked?wikiOf(p.wiki,row.id):'',seenWiki=linked?wikiOf(p.from.wiki,row.id):'';
   const name=clean(p.name),note=clean(p.note||'',true),was=before(label?c.labelsFile:c.markersFile,m),seen={name:clean(p.from.name),note:clean(p.from.note||'',true)};
-  const now={name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||''},same=(a,b)=>a.name===b.name&&a.note===b.note&&(!linked||a.wiki===b.wiki);
+  // Only the fields the edit changes are checked and written, so a newer change to another field (a note cleaned up
+  // since, say) neither blocks it nor gets undone by it.
+  const touched={name:name!==seen.name,note:note!==seen.note,wiki:linked&&wiki!==seenWiki};
+  const now={name:clean(m.name),note:clean(m.note||'',true),wiki:m.wiki||''},same=(a,b)=>(!touched.name||a.name===b.name)&&(!touched.note||a.note===b.note)&&(!touched.wiki||a.wiki===b.wiki);
   // A new type (set while reviewing) applies while the published type is still the one the edit started from.
   const typed=!label&&p.category!==undefined?typeFields({category:p.category},p,row.id):null,retype=typed&&typeOf(m)!==typeOf(typed);
   if(same(now,{name,note,wiki})&&!retype)return 'already edited';
@@ -111,7 +114,7 @@ async function apply(row){
    if(c.labelsFile){const lf=await file(c.labelsFile),chips=lf.data?.trainers,i=Array.isArray(chips)?chips.findIndex(t=>t.id===m.id):-1;
     if(i>=0&&m.category!=='Class trainer'){chips.splice(i,1);lf.changed=true;}
     else if(i>=0&&m.classes?.length){chips[i].classes=[...m.classes];chips[i].abbreviations=m.classes.map(k=>classAbbreviations[k]);lf.changed=true;}}}
-  m.name=name;if(note||Object.hasOwn(m,'note'))m.note=note;if(linked){const wikiId=wikiIdFrom(p,row.id);if(wikiId)m.wikiId=wikiId;else if(wiki!==(m.wiki||''))delete m.wikiId;if(wiki)m.wiki=wiki;else{delete m.wiki;delete m.wikiId;}}m.community=true;f.changed=true;return label?'place name edited':'marker edited';
+  if(touched.name)m.name=name;if(touched.note&&(note||Object.hasOwn(m,'note')))m.note=note;if(touched.wiki||linked&&wiki===(m.wiki||'')){const wikiId=wikiIdFrom(p,row.id);if(wikiId)m.wikiId=wikiId;else if(wiki!==(m.wiki||''))delete m.wikiId;if(wiki)m.wiki=wiki;else{delete m.wiki;delete m.wikiId;}}m.community=true;f.changed=true;return label?'place name edited':'marker edited';
  }
  const path=row.kind==='move-label'?c.labelsFile:c.markersFile,f=await file(path),rows=row.kind==='move-label'?f.data.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
