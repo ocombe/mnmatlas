@@ -70,8 +70,33 @@
    "arrow": "west",
    "toMap": "great-cavern-sea",
    "approximate": true,
-   "note": "The boat route west toward the Great Cavern Sea.",
-   "community": true
+   "note": "Departs 7am, 3pm and 11pm. Game time: type /time in game. Be on board before it leaves. A bell rings when the boat arrives (one ring) and leaves (two rings).",
+   "community": true,
+   "route": [
+    {
+     "map": "ail-vorith",
+     "place": "to-great-cavern-sea"
+    },
+    {
+     "map": "great-cavern-sea",
+     "place": "boat-route"
+    },
+    {
+     "map": "caves-of-irem",
+     "title": "Caves of Irem"
+    },
+    {
+     "map": "underdocks",
+     "place": "wiki-boat-de-city"
+    }
+   ],
+   "timesSource": {
+    "title": "Boats",
+    "site": "Monsters and Memories Wiki",
+    "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+   }
   },
   {
    "id": "community-81",

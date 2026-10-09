@@ -201,6 +201,8 @@ function openPlace(p,zoom=config.defaultView.placeZoom){
  applyingView=true;activePlace=p;
  map.setView(locationOf(p),zoom,{animate:false});
  if(p.kind==='marker'){const pin=pins.get(p.id);if(pin&&!map.hasLayer(pin))pin.addTo(map);pin?.openPopup();}
+ // A boat dock opens its departures-and-stops card here too.
+ else if(p.kind==='label'&&Array.isArray(p.route)&&p.route.length>1)boatCard(p);
  else {if(p.kind==='hidden')hiddenController?.show(p.id);L.popup({autoPan:false}).setLatLng(locationOf(p)).setContent(placePopup(p)).openOn(map);}
  activePlace=p;applyingView=false;if(compact())setPanel(false);scheduleUrl();
 }
@@ -267,6 +269,16 @@ function drawMarkers(){
  }
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
  schedulePlaceLabels();
+}
+function keepPopupInside(pop){
+ const el=pop.getElement?.(),frame=$('map')?.getBoundingClientRect();if(!el||!frame)return;
+ const tip=el.querySelector('.leaflet-popup-tip-container'),base=pop._fitBase||(pop._fitBase=L.point(pop.options.offset||[0,7]));
+ if(pop.options.offset&&!L.point(pop.options.offset).equals(base)){pop.options.offset=base;pop.update();}if(tip){tip.style.marginLeft='';tip.style.visibility='';}
+ const r=el.getBoundingClientRect(),left=frame.left+10,right=frame.right-62,top=frame.top+10,bottom=frame.bottom-10;let dx=0,dy=0;
+ if(r.width<right-left){if(r.left<left)dx=left-r.left;else if(r.right>right)dx=right-r.right;}
+ if(r.height<bottom-top){if(r.top<top)dy=top-r.top;else if(r.bottom>bottom)dy=bottom-r.bottom;}
+ if(!dx&&!dy)return;pop.options.offset=L.point(base.x+dx,base.y+dy);pop.update();
+ if(tip){tip.style.marginLeft=(-20-dx)+'px';if(dy)tip.style.visibility='hidden';}
 }
 function setPanel(open){if(!compact())desktopPanelOpen=open;$('journal').classList.toggle('closed',!open);$('toggle-panel').setAttribute('aria-expanded',String(open));map?.invalidateSize({pan:true,animate:false});}
 // The link beside Show on map hides every type when all are shown, and shows them all otherwise.
@@ -598,6 +610,8 @@ async function loadMap(id,url=new URL(location.href),push=false){
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});
   map.on('popupclose',()=>{if(!applyingView){activePlace=null;scheduleUrl();}});
+  // Near the edge of a map the view cannot pan further, so a popup slides sideways to stay inside; its tip keeps pointing at the place.
+  map.on('popupopen',e=>{requestAnimationFrame(()=>keepPopupInside(e.popup));setTimeout(()=>{if(map.hasLayer(e.popup))keepPopupInside(e.popup);},450);});
   if(push){const next=mapAddress(config.id);next.search=url.search;for(const k of ['map','place','x','y','z','level'])next.searchParams.delete(k);url=next;history.pushState({map:config.id},'',url);}
   applyLocation(url);ownView=false;updateZoom();if(keepEditing)enterEdit();loading=false;document.body.dataset.ready='true';syncUrl();
   window.dispatchEvent(new CustomEvent('atlas:loaded'));

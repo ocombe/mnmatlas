@@ -394,7 +394,29 @@
       "tier": "exit",
       "community": true,
       "toMap": "keepers-bight",
-      "toPlace": "boat-night-harbor"
+      "toPlace": "boat-night-harbor",
+      "route": [
+        {
+          "map": "night-harbor",
+          "place": "place-36"
+        },
+        {
+          "map": "shallow-shoals",
+          "title": "Shallow Shoals"
+        },
+        {
+          "map": "keepers-bight",
+          "place": "boat-night-harbor"
+        }
+      ],
+      "note": "Departs 1am, 9am and 5pm. Game time: type /time in game. Be on board before it leaves. Board at the middle dock of the big harbour. It stops briefly at Shallow Shoals on the way.",
+      "timesSource": {
+        "title": "Boats",
+        "site": "Monsters and Memories Wiki",
+        "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
     },
     {
       "id": "place-37",

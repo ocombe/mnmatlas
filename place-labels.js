@@ -1,6 +1,29 @@
 /* Community place names. Text only, no HTML input. */
 'use strict';
 let atlasLabels,trainerDetails=new Map(),labelPins=new Map(),schedulePlaceLabels=()=>{};
+// The boat seal replaces the exit arrow on docks.
+function boatSeal(){
+ const seal=text('b','','exit-arrow'),ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
+ for(const [k,v] of Object.entries({viewBox:'0 0 24 24',width:'14',height:'14',fill:'none',stroke:'currentColor','stroke-width':'2','stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true'}))svg.setAttribute(k,v);
+ const path=document.createElementNS(ns,'path');path.setAttribute('d','M3 15h18l-3 5H6z M12 3v12 M12 4l6 9h-6');svg.append(path);seal.append(svg);return seal;
+}
+function boatCard(row){
+ const n=text('div','','boat-card');n.append(text('div',row.passes?'Boat route':'Boat','tag'),text('h3',row.name));if(row.note)n.append(text('p',row.note));
+ const list=text('ol','','boat-route');
+ for(const stop of row.route){
+  const id=typeof stop==='string'?stop:stop?.map,c=registry.maps.find(m=>m.id===id),li=document.createElement('li');if(!id)continue;
+  if(id===config.id)li.append(text('strong',(c?.title||id)+' · you are here'));
+  else if(c){const b=text('button',c.title);b.type='button';b.onclick=()=>{map.closePopup();const url=mapLink(c.id);if(stop.place)url.searchParams.set('place',stop.place);goToMap(c.id,url);};li.append(b);}
+  else li.append(text('span',(stop.title||id)+' (not mapped yet)'));
+  list.append(li);
+ }
+ n.append(text('p','Route','boat-route-title'),list);
+ // Times taken from a wiki page are credited under the card, with its licence.
+ const s=row.timesSource;if(s?.url&&/^https:\/\//.test(s.url)){const credit=text('p','Times: ','boat-credit'),page=text('a',(s.title||'page')+' · '+(s.site||'wiki'));page.href=s.url;page.target='_blank';page.rel='noopener';credit.append(page);if(s.license){credit.append(text('span',', '));const lic=text('a',s.license);if(/^https:\/\//.test(s.licenseUrl||'')){lic.href=s.licenseUrl;lic.target='_blank';lic.rel='noopener';}credit.append(lic);}n.append(credit);}
+ window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
+ // Pan clear of the title card and toolbar so the whole card shows.
+ L.popup({autoPan:true,autoPanPaddingTopLeft:[24,150],autoPanPaddingBottomRight:[70,40],offset:[0,-10],maxHeight:Math.max(180,($('map')?.clientHeight||600)-60)}).setLatLng(locationOf(row)).setContent(n).openOn(map);
+}
 function trainerIcon(m){
  const detail=trainerDetails.get(m.id);
  // A trainer without a chip of the map's own (a personal note) shows the classes it was given, else its own short name.
@@ -19,9 +42,19 @@ function setupPlaceLabels(data){
  try{toggle.checked=localStorage.getItem(key)!=='false';}catch{toggle.checked=true;}
  const pane=map.getPane('placeNames')||map.createPane('placeNames');pane.style.zIndex=alignmentMode?'650':'450';pane.style.pointerEvents='none';
  const entries=data.labels.filter(atLevel).sort((a,b)=>b.priority-a.priority).map(row=>{
-  const target=(row.kind==='exit'||row.kind==='zone')&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
-  const face=text(target?'a':'span',row.kind==='exit'?'':row.name,'place-name '+row.kind+(target?' linked':''));
-  if(row.kind==='exit'){
+  // A boat dock opens a card with its departure times and every stop on the route, instead of jumping to one map.
+  const boat=row.kind==='exit'&&Array.isArray(row.route)&&row.route.length>1;
+  const target=!boat&&(row.kind==='exit'||row.kind==='zone')&&!alignmentMode&&registry.maps.find(c=>c.id===row.toMap);
+  const face=text(target?'a':'span',row.kind==='exit'?'':row.name,'place-name '+row.kind+(target||boat&&!alignmentMode?' linked':'')+(boat?' boat':''));
+  if(boat){
+   face.append(boatSeal(),text('span',' '+row.name,'exit-name'));
+   // Departure times read straight from the sign: the times found in its description, under the name.
+   // A zone the boat only sails through says so instead of listing departure times.
+   if(row.passes)face.append(text('small','passes by · no stop','boat-times'));
+   else{const times=String(row.note||'').match(/\b\d{1,2}(?::\d{2})?\s?(?:am|pm)\b/gi);if(times?.length)face.append(text('small',times.map(t=>t.replace(/\s/g,'').toLowerCase()).join(' · '),'boat-times'));}
+   if(!alignmentMode){face.tabIndex=0;face.setAttribute('role','button');face.title='Departures and stops';L.DomEvent.disableClickPropagation(face);
+    const open=()=>boatCard(row);face.addEventListener('click',open);face.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}
+  }else if(row.kind==='exit'){
    // Published exits may also go up or down (ladders, roof cracks); unknown arrows fall back to a plain one.
    const glyph=exitArrows[row.arrow]||{up:'⤒',down:'⤓'}[row.arrow]||'→';
    const side=/west/.test(row.arrow)?'west':/east/.test(row.arrow)?'east':['south','down'].includes(row.arrow)?'south':'north';

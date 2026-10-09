@@ -83,13 +83,38 @@
       "y": 3868,
       "level": "lower",
       "approximate": true,
-      "note": "",
+      "note": "Departs 3am, 11am and 7pm. Game time: type /time in game. Be on board before it leaves.",
       "kind": "exit",
       "tier": "exit",
       "priority": 75,
       "minZoom": 3.75,
       "arrow": "northwest",
-      "toMap": "ail-vorith"
+      "toMap": "ail-vorith",
+      "route": [
+        {
+          "map": "underdocks",
+          "place": "wiki-boat-de-city"
+        },
+        {
+          "map": "caves-of-irem",
+          "title": "Caves of Irem"
+        },
+        {
+          "map": "great-cavern-sea",
+          "place": "boat-route"
+        },
+        {
+          "map": "ail-vorith",
+          "place": "to-great-cavern-sea"
+        }
+      ],
+      "timesSource": {
+        "title": "Boats",
+        "site": "Monsters and Memories Wiki",
+        "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
     },
     {
       "id": "wiki-bath-house",
