@@ -456,7 +456,7 @@
   },'The request could not be sent. Please try again.');
   actions.append(button('Cancel',()=>d.close()),send);d.append(actions);
  }
- const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p',admin?'Edit approved: it shows here once the publishing job has run.':'Edit sent for review','moved-note'):button('Suggest an edit',()=>editDialog(target,kind),'community-edit','edit');
+ const editButton=(target,kind)=>editedNow.has(editToken(kind,target.id))?text('p',admin?'Edit approved: it shows here once the publishing job has run.':'Edit sent for review','moved-note'):(b=>(b.setAttribute('aria-label','Suggest an edit'),b))(button('Edit',()=>editDialog(target,kind),'community-edit','edit'));
  const sharedToken=m=>scope()+':'+m.id;
  // Deleting a note that carries a suggestion withdraws it: a pending, unreviewed one (the author's right), or an
  // approved one not live yet when an admin deletes it. Then a bounty is open again. One already accepted for a
@@ -483,7 +483,7 @@
  window.addEventListener('atlas:note-deleted',e=>{withdrawNote(e.detail?.note);});
  window.atlasCommunity={deleteNotice,popup(m,n){
   if(m.id.startsWith('personal-')){if(alignmentMode)return;const shared=readSet(sharedKey).has(sharedToken(m));if(!config.zonesFile)n.append(shared?text('p','Shared for review','moved-note'):button('Share with everyone',()=>shareNote(m),'','share'));return;}
-  const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):button('Report a problem',()=>reportDialog(m),'community-report','report'));n.append(row);
+  const row=text('div','','community-actions');row.append(editButton(m,'edit-marker'),reportedNow.has(reportToken(m))?text('p','Reported, thanks','moved-note'):(b=>(b.setAttribute('aria-label','Report a problem'),b))(button('Report',()=>reportDialog(m),'community-report','report')));n.append(row);
  },placePopup(p,n){
   if(p.kind!=='label'||!labelData.labels.some(l=>l.id===p.id))return;
   n.append(editButton(labelData.labels.find(l=>l.id===p.id),'edit-label'));
@@ -730,7 +730,8 @@
   if(row.kind==='new-marker')return originals.some(m=>m.id==='community-'+row.id);
   if(p.remove===true)return !t;
   if(row.kind==='move-marker')return !t||!Array.isArray(p.to)||(Math.round(t.x)===Math.round(p.to[0])&&Math.round(t.y)===Math.round(p.to[1]));
-  if(row.kind==='edit-marker')return !t||(t.name===p.name&&(t.note||'')===(p.note||'')&&(p.wiki===undefined||(t.wiki||'')===p.wiki)&&(p.category===undefined||t.category===p.category));
+  // Only what the edit changes counts (the publishing job leaves the other fields as they are now).
+  if(row.kind==='edit-marker'){const f=p.from||{},moved=(k,a,b)=>a!==b&&(f[k]===undefined||(f[k]||'')!==b);return !t||(!moved('name',t.name,p.name)&&!moved('note',t.note||'',p.note||'')&&(p.wiki===undefined||!moved('wiki',t.wiki||'',p.wiki))&&(p.category===undefined||t.category===p.category));}
   return true;}
  const drawable=r=>['new-marker','move-marker','edit-marker'].includes(r.kind)&&!(r.kind==='new-marker'&&r.payload?.noteType)&&(!config.levels||!r.level||r.level===config.levelId);
  // Where a suggestion stands on this map, in map units.

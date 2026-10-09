@@ -85,7 +85,7 @@
    "minZoom": 1,
    "arrow": "south",
    "approximate": true,
-   "note": "The way to the Caves of Irem, and on to the Underdocks by the river. Approximate location; to confirm in game.",
+   "note": "The way to the Caves of Irem, and on to the Underdocks by the river.",
    "toMap": "caves-of-irem",
    "community": true
   },
@@ -99,7 +99,7 @@
    "minZoom": 1,
    "arrow": "east",
    "approximate": true,
-   "note": "Approximate location; to confirm in game.",
+   "note": "",
    "toMap": "ail-vorith"
   },
   {
@@ -112,7 +112,7 @@
    "minZoom": 1,
    "arrow": "north",
    "approximate": true,
-   "note": "Docks and a broken lift at the end of the northern gorge. Approximate location; to confirm in game.",
+   "note": "Docks and a broken lift at the end of the northern gorge.",
    "toMap": "rothold"
   },
   {
@@ -125,7 +125,7 @@
    "minZoom": 1.5,
    "arrow": "east",
    "approximate": true,
-   "note": "Approximate location; to confirm in game."
+   "note": ""
   }
  ],
  "trainers": []

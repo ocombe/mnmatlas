@@ -6,7 +6,7 @@
   "x": 2552,
   "y": 1022,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -16,7 +16,7 @@
   "x": 2626,
   "y": 1221,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -26,7 +26,7 @@
   "x": 2464,
   "y": 1318,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -36,7 +36,7 @@
   "x": 1393,
   "y": 1611,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian",
   "wikiId": "npc-a-fae-guardian"
@@ -48,7 +48,7 @@
   "x": 2224,
   "y": 3090,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -58,7 +58,7 @@
   "x": 2842,
   "y": 2818,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -68,7 +68,7 @@
   "x": 4031,
   "y": 2803,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -78,7 +78,7 @@
   "x": 3108,
   "y": 3406,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -88,7 +88,7 @@
   "x": 3703,
   "y": 3312,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -98,7 +98,7 @@
   "x": 2946,
   "y": 1851,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -108,7 +108,7 @@
   "x": 533,
   "y": 3208,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3
  },
  {
@@ -118,7 +118,7 @@
   "x": 480,
   "y": 3273,
   "approximate": true,
-  "note": "In the wolf cave. Approximate location; to confirm in game.",
+  "note": "In the wolf cave.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-beguiled-alpha-wolf",
   "wikiId": "npc-a-beguiled-alpha-wolf"
@@ -130,7 +130,7 @@
   "x": 3354,
   "y": 2977,
   "approximate": true,
-  "note": "In the orc cave. Approximate location; to confirm in game.",
+  "note": "In the orc cave.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/taeresh-deathcharmer",
   "wikiId": "npc-taeresh-deathcharmer"
@@ -142,7 +142,7 @@
   "x": 4049,
   "y": 1824,
   "approximate": true,
-  "note": "Deep inside the cave behind the waterfall. Approximate location; to confirm in game.",
+  "note": "Deep inside the cave behind the waterfall.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/mistress-naelira",
   "wikiId": "npc-mistress-naelira"
@@ -154,7 +154,7 @@
   "x": 2981,
   "y": 1895,
   "approximate": true,
-  "note": "Inside the mushroom cave. Approximate location; to confirm in game.",
+  "note": "Inside the mushroom cave.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/sporeweaver-underveil",
   "wikiId": "npc-sporeweaver-underveil"
@@ -166,7 +166,7 @@
   "x": 1720,
   "y": 2361,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3.25
  },
  {
@@ -177,7 +177,7 @@
   "x": 1707,
   "y": 2646,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3.25
  },
  {
@@ -188,7 +188,7 @@
   "x": 2731,
   "y": 2215,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3.25
  },
  {
@@ -198,7 +198,7 @@
   "x": 1692,
   "y": 2626,
   "approximate": true,
-  "note": "Approximate location; to confirm in game.",
+  "note": "",
   "minZoom": 3.25
  },
  {

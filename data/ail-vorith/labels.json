@@ -47,7 +47,7 @@
    "kind": "building",
    "priority": 45,
    "minZoom": 4.5,
-   "note": "Approximate location; to confirm in game."
+   "note": ""
   },
   {
    "id": "obsidian-academy",
@@ -57,7 +57,7 @@
    "kind": "building",
    "priority": 50,
    "minZoom": 4.5,
-   "note": "Approximate location; to confirm in game."
+   "note": ""
   },
   {
    "id": "to-great-cavern-sea",
@@ -70,7 +70,7 @@
    "arrow": "west",
    "toMap": "great-cavern-sea",
    "approximate": true,
-   "note": "The boat route west toward the Great Cavern Sea. Approximate location; to confirm in game.",
+   "note": "The boat route west toward the Great Cavern Sea.",
    "community": true
   },
   {

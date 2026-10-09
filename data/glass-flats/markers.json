@@ -6,7 +6,7 @@
   "x": 7026,
   "y": 7429,
   "approximate": true,
-  "note": "Goblin camp along the south wall, near the road to Sungreet Strand. Approximate location; to confirm in game.",
+  "note": "Goblin camp along the south wall, near the road to Sungreet Strand.",
   "minZoom": 3
  },
  {
@@ -16,7 +16,7 @@
   "x": 7116,
   "y": 7369,
   "approximate": true,
-  "note": "In the goblin camp, near the wall path. Approximate location; to confirm in game.",
+  "note": "In the goblin camp, near the wall path.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/baron-bigtent",
   "wikiId": "npc-baron-bigtent"
@@ -28,7 +28,7 @@
   "x": 6056,
   "y": 6767,
   "approximate": true,
-  "note": "Camp on the corner of the main salt flat; Layla Faraj, Nadia Al-Hakim, Sami Hassoun and Tarek Mansur are here. Approximate location; to confirm in game.",
+  "note": "Camp on the corner of the main salt flat; Layla Faraj, Nadia Al-Hakim, Sami Hassoun and Tarek Mansur are here.",
   "minZoom": 3
  },
  {
@@ -38,7 +38,7 @@
   "x": 6456,
   "y": 5450,
   "approximate": true,
-  "note": "On the salt flats. Approximate location; to confirm in game.",
+  "note": "On the salt flats.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-salt-elemental",
   "wikiId": "npc-a-salt-elemental"
@@ -50,7 +50,7 @@
   "x": 5406,
   "y": 1784,
   "approximate": true,
-  "note": "Jackals, vipers, asps, sand striders, scarabs, sand ticks and basilisks roam the open sand. Approximate location; to confirm in game.",
+  "note": "Jackals, vipers, asps, sand striders, scarabs, sand ticks and basilisks roam the open sand.",
   "minZoom": 3
  },
  {
@@ -60,7 +60,7 @@
   "x": 6758,
   "y": 2054,
   "approximate": true,
-  "note": "Giant crystallized skeletons among the crystals. Approximate location; to confirm in game.",
+  "note": "Giant crystallized skeletons among the crystals.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-crystallized-skeleton",
   "wikiId": "npc-a-crystallized-skeleton"
@@ -72,7 +72,7 @@
   "x": 7568,
   "y": 4714,
   "approximate": true,
-  "note": "Crystallized skeleton area by the crystal canyon. Approximate location; to confirm in game.",
+  "note": "Crystallized skeleton area by the crystal canyon.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-crystallized-skeleton",
   "wikiId": "npc-a-crystallized-skeleton"
@@ -84,7 +84,7 @@
   "x": 9190,
   "y": 5055,
   "approximate": true,
-  "note": "Inside the dark crystals. Approximate location; to confirm in game.",
+  "note": "Inside the dark crystals.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/yealaroth-the-consumed",
   "wikiId": "npc-yealaroth-the-consumed"
@@ -96,7 +96,7 @@
   "x": 7976,
   "y": 4305,
   "approximate": true,
-  "note": "In the crystal canyon and caves. Approximate location; to confirm in game.",
+  "note": "In the crystal canyon and caves.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-shard-bat",
   "wikiId": "npc-a-shard-bat"
@@ -108,7 +108,7 @@
   "x": 8086,
   "y": 4235,
   "approximate": true,
-  "note": "At the very back of the crystal caves. Approximate location; to confirm in game.",
+  "note": "At the very back of the crystal caves.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/shattershriek",
   "wikiId": "npc-shattershriek"
@@ -120,7 +120,7 @@
   "x": 3030,
   "y": 6423,
   "approximate": true,
-  "note": "Highwaymen camp and caves. Approximate location; to confirm in game.",
+  "note": "Highwaymen camp and caves.",
   "minZoom": 3
  },
  {
@@ -130,7 +130,7 @@
   "x": 3140,
   "y": 6343,
   "approximate": true,
-  "note": "Up on a ledge of the highwaymen camp. Approximate location; to confirm in game.",
+  "note": "Up on a ledge of the highwaymen camp.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/tarakhan-the-boulder",
   "wikiId": "npc-tarakhan-the-boulder"
@@ -142,7 +142,7 @@
   "x": 2920,
   "y": 6343,
   "approximate": true,
-  "note": "In the highwaymen caves. Approximate location; to confirm in game.",
+  "note": "In the highwaymen caves.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/soraya-the-mirage",
   "wikiId": "npc-soraya-the-mirage"
@@ -154,7 +154,7 @@
   "x": 3030,
   "y": 6533,
   "approximate": true,
-  "note": "In the highwaymen caves: first cave, first hallway on the left, room with a blue bed. Approximate location; to confirm in game.",
+  "note": "In the highwaymen caves: first cave, first hallway on the left, room with a blue bed.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/malik-the-glass-viper",
   "wikiId": "npc-malik-the-glass-viper"
@@ -166,7 +166,7 @@
   "x": 3256,
   "y": 4904,
   "approximate": true,
-  "note": "The undead keep and its tower hill. Approximate location; to confirm in game.",
+  "note": "The undead keep and its tower hill.",
   "minZoom": 3
  },
  {
@@ -176,7 +176,7 @@
   "x": 3256,
   "y": 4784,
   "approximate": true,
-  "note": "Top of the blue-flamed undead tower. Approximate location; to confirm in game.",
+  "note": "Top of the blue-flamed undead tower.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/guillome-the-accursed",
   "wikiId": "npc-guillome-the-accursed"
@@ -188,7 +188,7 @@
   "x": 3376,
   "y": 4844,
   "approximate": true,
-  "note": "Inside the undead tower. Approximate location; to confirm in game.",
+  "note": "Inside the undead tower.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/selene-brightmantle",
   "wikiId": "npc-selene-brightmantle"
@@ -200,7 +200,7 @@
   "x": 3366,
   "y": 4994,
   "approximate": true,
-  "note": "Door at the top of the ramp on the south side of the tower hill, room on the right. Approximate location; to confirm in game.",
+  "note": "Door at the top of the ramp on the south side of the tower hill, room on the right.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/bishop-aybram",
   "wikiId": "npc-bishop-aybram"
@@ -212,7 +212,7 @@
   "x": 3136,
   "y": 4994,
   "approximate": true,
-  "note": "Ground floor of the keep: through the large opening in the hillside, up the stairs, second hall on the left. Approximate location; to confirm in game.",
+  "note": "Ground floor of the keep: through the large opening in the hillside, up the stairs, second hall on the left.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/seneschal-kazmer",
   "wikiId": "npc-seneschal-kazmer"
@@ -224,7 +224,7 @@
   "x": 3126,
   "y": 4864,
   "approximate": true,
-  "note": "In the undead fort, before Seneschal Kazmer. Approximate location; to confirm in game.",
+  "note": "In the undead fort, before Seneschal Kazmer.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-girault",
   "wikiId": "npc-quartermaster-girault"
@@ -236,7 +236,7 @@
   "x": 3256,
   "y": 5074,
   "approximate": true,
-  "note": "Door near the charred druid ring on the tower hill, first hall, alcove on the left. Approximate location; to confirm in game.",
+  "note": "Door near the charred druid ring on the tower hill, first hall, alcove on the left.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/hovarth-ezzadel",
   "wikiId": "npc-hovarth-ezzadel"
@@ -248,7 +248,7 @@
   "x": 3260,
   "y": 5254,
   "approximate": true,
-  "note": "At the gazebo on the undead tower hill. Approximate location; to confirm in game.",
+  "note": "At the gazebo on the undead tower hill.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/stormcaller-tabigan",
   "wikiId": "npc-stormcaller-tabigan"
@@ -260,7 +260,7 @@
   "x": 3120,
   "y": 5274,
   "approximate": true,
-  "note": "Among the burnt trees of the tower hill. Approximate location; to confirm in game.",
+  "note": "Among the burnt trees of the tower hill.",
   "minZoom": 3
  },
  {
@@ -270,7 +270,7 @@
   "x": 3030,
   "y": 5194,
   "approximate": true,
-  "note": "Ground level of the broken tower in the undead area; placeholder is a charred tracker. Approximate location; to confirm in game.",
+  "note": "Ground level of the broken tower in the undead area; placeholder is a charred tracker.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/fenrix-lightfoot",
   "wikiId": "npc-fenrix-lightfoot"
@@ -282,7 +282,7 @@
   "x": 3408,
   "y": 5420,
   "approximate": true,
-  "note": "With the spiders. Approximate location; to confirm in game.",
+  "note": "With the spiders.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/chaim-the-herald",
   "wikiId": "npc-chaim-the-herald"
@@ -294,7 +294,7 @@
   "x": 3430,
   "y": 5420,
   "approximate": true,
-  "note": "With the spiders. Approximate location; to confirm in game.",
+  "note": "With the spiders.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/mistress-nephidna",
   "wikiId": "npc-mistress-nephidna"
@@ -306,7 +306,7 @@
   "x": 1122,
   "y": 5665,
   "approximate": true,
-  "note": "The cultist temple under the western rock. Approximate location; to confirm in game.",
+  "note": "The cultist temple under the western rock.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-cultist",
   "wikiId": "npc-a-cultist"
@@ -318,7 +318,7 @@
   "x": 1232,
   "y": 5595,
   "approximate": true,
-  "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
+  "note": "Upper floor of the cultist temple.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/ebon-scholar-myrddin",
   "wikiId": "npc-ebon-scholar-myrddin"
@@ -330,7 +330,7 @@
   "x": 1254,
   "y": 5595,
   "approximate": true,
-  "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
+  "note": "Upper floor of the cultist temple.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/high-wyrmseer-valthrun",
   "wikiId": "npc-high-wyrmseer-valthrun"
@@ -342,7 +342,7 @@
   "x": 1276,
   "y": 5595,
   "approximate": true,
-  "note": "Upper floor of the cultist temple. Approximate location; to confirm in game.",
+  "note": "Upper floor of the cultist temple.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/emissary-irina",
   "wikiId": "npc-emissary-irina"
@@ -354,7 +354,7 @@
   "x": 816,
   "y": 4208,
   "approximate": true,
-  "note": "A giant near the Vale of Zintar zone line. Approximate location; to confirm in game.",
+  "note": "A giant near the Vale of Zintar zone line.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/esaneq",
   "wikiId": "npc-esaneq"

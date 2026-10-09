@@ -13,7 +13,7 @@
       "priority": 90,
       "minZoom": 2.5,
       "approximate": true,
-      "note": "Approximate location; confirm in game."
+      "note": ""
     },
     {
       "id": "ashira-camp",
@@ -25,7 +25,7 @@
       "priority": 80,
       "minZoom": 2.5,
       "approximate": true,
-      "note": "Approximate location; confirm in game."
+      "note": ""
     },
     {
       "id": "side-ponds",
@@ -37,7 +37,7 @@
       "priority": 70,
       "minZoom": 2.5,
       "approximate": true,
-      "note": "Approximate location; confirm in game."
+      "note": ""
     },
     {
       "id": "bloodynose-camp",
@@ -49,7 +49,7 @@
       "priority": 85,
       "minZoom": 2.5,
       "approximate": true,
-      "note": "Approximate location; confirm in game."
+      "note": ""
     },
     {
       "id": "old-gate",
@@ -61,7 +61,7 @@
       "priority": 70,
       "minZoom": 2.5,
       "approximate": true,
-      "note": "Approximate location; confirm in game."
+      "note": ""
     },
     {
       "id": "hin-adaru",
@@ -73,7 +73,7 @@
       "priority": 85,
       "minZoom": 2.5,
       "approximate": true,
-      "note": "Approximate location; confirm in game."
+      "note": ""
     },
     {
       "id": "to-sungreet-strand",
@@ -101,7 +101,7 @@
       "minZoom": 1.5,
       "arrow": "south",
       "approximate": true,
-      "note": "South end of the canyon; the crossing is approximate.",
+      "note": "South end of the canyon.",
       "toMap": "shaded-dunes",
       "toPlace": "to-tel-ekir"
     }
