@@ -412,8 +412,18 @@
   if(!user){signInDialog();return;}
   const d=showDialog(kind==='edit-label'?'Suggest a better place name':'Suggest an edit');
   const marker=kind==='edit-marker';
-  d.append(text('p','Fix the name or the description'+(marker?', or link its wiki page':'')+'. Your change waits for review before it appears on the map.','form-hint'));
+  // A published marker's type can be fixed too, with that type's own trade, class or vendor kind, as in the note form.
+  const typable=marker&&!target.noteType&&Object.hasOwn(categories,target.category)&&target.category!=='Personal';
+  d.append(text('p','Fix the name'+(typable?', the type':'')+' or the description'+(marker?', or link its wiki page':'')+'. Your change waits for review before it appears on the map.','form-hint'));
   const name=field(d,'Name','edit-name',document.createElement('input'));name.maxLength=100;name.required=true;name.value=target.name;
+  let type=null,trade,trainerClass,vendor,sells;
+  if(typable){const group=(label,id,el)=>{const box=text('div','','edit-type-field');field(box,label,id,el);d.append(box);return el;};
+   type=fillSelect(group('Type','edit-type',document.createElement('select')),categoryChoices().filter(k=>k!=='Personal').map(k=>[k,k]));type.value=target.category;
+   trade=fillSelect(group('Trade','edit-trade',document.createElement('select')),[['Any trade',''],...Object.keys(tradePaths).sort((a,b)=>a.localeCompare(b)).map(t=>[t,t])]);trade.value=target.trade||'';
+   trainerClass=fillSelect(group('Class','edit-class',document.createElement('select')),[['Not set',''],...atlasClasses.map(k=>[k,k])]);trainerClass.value=target.classes?.length===1?target.classes[0]:'';
+   vendor=fillSelect(group('Kind','edit-vendor',document.createElement('select')),[['Not set',''],...vendorKindItems(false)]);vendor.value=vendorKindNow(target.vendor)||'';
+   const box=text('fieldset','','sells-field');box.append(text('legend','Sells'));sells=sellsChips(text('div','','sells-chips'),target.sells);box.append(sells);d.append(box);
+   const fit=()=>{trade.parentElement.hidden=type.value!=='Tradeskill';trainerClass.parentElement.hidden=type.value!=='Class trainer';vendor.parentElement.hidden=sells.parentElement.hidden=type.value!=='Vendor';};fit();type.addEventListener('change',fit);}
   const note=field(d,'Description','edit-note',textBox(4,2000,'What players should know about this place.'));note.value=target.note||'';
   let wiki=null;if(marker){wiki=field(d,'Wiki page (optional)','edit-wiki',document.createElement('input'));wiki.inputMode='url';wiki.maxLength=300;wiki.spellcheck=false;wiki.value=target.wiki||'';setWikiPick(wiki,target.wiki,target.wikiId);wiki.placeholder='https://monstersandmemories.wiki/…';const finder=wikiFinder(wiki,null,name);name.after(finder);d.addEventListener('close',()=>finders.delete(finder),{once:true});}
   const why=field(d,'Why (optional)','edit-comment',textBox(2,500,'For example: the vendor was renamed in the last patch.'));const credit=creditBox(d);
@@ -421,9 +431,12 @@
    const newName=name.value.replace(/\s+/g,' ').trim(),newNote=note.value.trim(),oldNote=(target.note||'').trim(),newWiki=wiki?wikiAddress(wiki.value):'',oldWiki=target.wiki||'';
    if(!newName){status('Give it a name.');name.focus?.();return;}
    if(newWiki===null){status(wikiHint);wiki.focus?.();return;}
-   if(newName===target.name&&newNote===oldNote&&newWiki===oldWiki){status(marker?'Change the name, the description or the wiki page first.':'Change the name or the description first.');return;}
+   // The type's own fields follow the note form's rule (markerExtras); they are only sent when the type or one of them changed.
+   const typeKeys=['trade','classes','vendor','sells'],typeOf=m=>{const x=markerExtras(m);return JSON.stringify([m.category,...typeKeys.map(k=>x[k])]);};
+   const typed=type?{category:type.value,...markerExtras({category:type.value,trade:trade.value,vendor:vendor.value,sells:pickedSells(sells),classes:trainerClass.value?[trainerClass.value]:target.classes})}:null,retyped=!!typed&&typeOf(typed)!==typeOf(target);
+   if(newName===target.name&&newNote===oldNote&&newWiki===oldWiki&&!retyped){status(typable?'Change the name, the type, the description or the wiki page first.':marker?'Change the name, the description or the wiki page first.':'Change the name or the description first.');return;}
    const wikiId=marker&&wikiIdFor(wiki,newWiki);
-   const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,...(marker?{wiki:newWiki,...(wikiId?{wikiId}:{})}:{}),from:{name:target.name,note:target.note||'',...(marker?{wiki:oldWiki}:{})}},comment:why.value.trim()||null,credit:credit.checked});
+   const published=await submit({user_id:user.id,author_name:displayName(user),map:config.id,level:target.level||config.levelId||null,kind,target_id:target.id,payload:{name:newName,note:newNote,...(marker?{wiki:newWiki,...(wikiId?{wikiId}:{})}:{}),...(retyped?{category:typed.category,...Object.fromEntries(typeKeys.filter(k=>Object.hasOwn(typed,k)).map(k=>[k,typed[k]]))}:{}),from:{name:target.name,note:target.note||'',...(marker?{wiki:oldWiki}:{}),...(retyped?{category:target.category}:{})}},comment:why.value.trim()||null,credit:credit.checked});
    editedNow.add(editToken(kind,target.id));d.close();freshPopup();map.closePopup();status(sentLine(published)||'Thanks! Your edit is waiting for review.');event('edit-sent');
   },'The edit could not be sent. Please try again.');
   if(marker)actions.append(button('Suggest removing this',()=>removalDialog(target),'community-remove'));
