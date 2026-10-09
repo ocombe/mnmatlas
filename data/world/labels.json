@@ -48,8 +48,8 @@
   {
    "id": "zone-vale-of-zintar",
    "name": "Vale of Zintar",
-   "x": 1261,
-   "y": 1487,
+   "x": 1262,
+   "y": 1493,
    "kind": "zone",
    "priority": 60,
    "toMap": "vale-of-zintar"
@@ -57,8 +57,8 @@
   {
    "id": "zone-shallow-shoals",
    "name": "Shallow Shoals",
-   "x": 563,
-   "y": 1049,
+   "x": 499,
+   "y": 1065,
    "kind": "zone",
    "priority": 60
   },
