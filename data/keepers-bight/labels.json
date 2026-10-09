@@ -162,8 +162,8 @@
   {
    "id": "boat-night-harbor",
    "name": "Boat to Night Harbor",
-   "x": 1833,
-   "y": 3143,
+   "x": 1730,
+   "y": 3020,
    "kind": "exit",
    "priority": 85,
    "minZoom": 1.5,
