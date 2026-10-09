@@ -814,5 +814,17 @@
     "level": "upper",
     "wiki": "https://monstersandmemories.wiki/npcs/squeaker",
     "wikiId": "npc-1790076533772-160l1"
+  },
+  {
+    "id": "community-229",
+    "community": true,
+    "name": "Gunder Dinnig",
+    "category": "Quest",
+    "note": "",
+    "x": 4662,
+    "y": 3704,
+    "level": "lower",
+    "wikiId": "npc-1790076527284-6tysj",
+    "wiki": "https://monstersandmemories.wiki/npcs/gunder-dinnig"
   }
 ]

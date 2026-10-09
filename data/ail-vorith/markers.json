@@ -431,16 +431,6 @@
     "trade": "Leatherworking"
   },
   {
-    "id": "community-41",
-    "community": true,
-    "name": "Herbalism Trainer",
-    "category": "Tradeskill",
-    "note": "",
-    "x": 4021,
-    "y": 3368,
-    "trade": "Herbalism"
-  },
-  {
     "id": "community-43",
     "community": true,
     "name": "Bank",
@@ -708,5 +698,51 @@
     "note": "",
     "x": 4199,
     "y": 2390
+  },
+  {
+    "id": "community-224",
+    "community": true,
+    "name": "Galvera",
+    "category": "Vendor",
+    "note": "",
+    "x": 3922,
+    "y": 3119,
+    "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ]
+  },
+  {
+    "id": "community-225",
+    "community": true,
+    "name": "an herbalist",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4041,
+    "y": 3337,
+    "trade": "Herbalism"
+  },
+  {
+    "id": "community-226",
+    "community": true,
+    "name": "an alchemy trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4049,
+    "y": 3334,
+    "trade": "Alchemy"
+  },
+  {
+    "id": "community-227",
+    "community": true,
+    "name": "an alchemist supplier",
+    "category": "Vendor",
+    "note": "",
+    "x": 4049,
+    "y": 3335,
+    "vendor": "Alchemy vendor",
+    "sells": [
+      "Bags"
+    ]
   }
 ]
