@@ -1029,5 +1029,16 @@
     "x": 1726,
     "y": 957,
     "trade": "Brewing / Fermenting"
+  },
+  {
+    "id": "community-235",
+    "community": true,
+    "name": "Sproggets Bedsprings",
+    "category": "Vendor",
+    "note": "",
+    "x": 1095,
+    "y": 1484,
+    "wiki": "https://monstersandmemories.wiki/npcs/sproggets-bedsprings",
+    "wikiId": "npc-sproggets-bedsprings"
   }
 ]

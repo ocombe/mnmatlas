@@ -270,14 +270,15 @@
   {
     "id": "quartermaster-boothroy",
     "name": "Quartermaster Boothroy",
-    "category": "Notable NPC",
+    "category": "Named mob",
     "x": 1578.03,
     "y": 2993.64,
     "level": "floor-1",
     "approximate": true,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-boothroy",
-    "wikiId": "npc-quartermaster-boothroy"
+    "wikiId": "npc-quartermaster-boothroy",
+    "community": true
   },
   {
     "id": "jakob-gefrey",
@@ -402,14 +403,15 @@
   {
     "id": "escaped-minion",
     "name": "An escaped minion",
-    "category": "Notable NPC",
+    "category": "Named mob",
     "x": 2122.25,
     "y": 2645.82,
     "level": "floor-1",
     "approximate": true,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/an-escaped-minion",
-    "wikiId": "npc-an-escaped-minion"
+    "wikiId": "npc-an-escaped-minion",
+    "community": true
   },
   {
     "id": "cave-slope-3-4-0-from",
