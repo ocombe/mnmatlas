@@ -919,5 +919,21 @@
     "vendor": "Blacksmithing vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-baran",
     "wikiId": "npc-blacksmith-baran"
+  },
+  {
+    "id": "teleporter-to-docks",
+    "name": "Teleporter to Docks",
+    "category": "Teleporter",
+    "x": 1898.97,
+    "y": 1246.93,
+    "note": "Teleports you to the Docks."
+  },
+  {
+    "id": "teleporter-to-sageside",
+    "name": "Teleporter to Sageside",
+    "category": "Teleporter",
+    "x": 1909.92,
+    "y": 1690.49,
+    "note": "Teleports you to Sageside."
   }
 ]

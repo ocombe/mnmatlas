@@ -99,6 +99,12 @@
         "padding": 18,
         "placeZoom": 3.5
       },
+      "extraCategories": {
+        "Teleporter": [
+          "✦",
+          "#385f60"
+        ]
+      },
       "attribution": {
         "map": "Illustrated fan atlas · Not an official game map",
         "text": "Place names & guilds adapted from Maggot’s wiki map · approximate",

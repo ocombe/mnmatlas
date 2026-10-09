@@ -281,26 +281,6 @@
       "tier": "building"
     },
     {
-      "id": "place-27",
-      "name": "Teleporter to Docks",
-      "kind": "building",
-      "priority": 40,
-      "minZoom": 4,
-      "x": 1898.97,
-      "y": 1246.93,
-      "tier": "building"
-    },
-    {
-      "id": "place-28",
-      "name": "Teleporter to Sageside",
-      "kind": "building",
-      "priority": 40,
-      "minZoom": 4,
-      "x": 1909.92,
-      "y": 1690.49,
-      "tier": "building"
-    },
-    {
       "id": "place-29",
       "name": "The Bends",
       "kind": "district",
