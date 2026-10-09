@@ -692,5 +692,51 @@
     "sells": [
       "Materials"
     ]
+  },
+  {
+    "id": "community-147",
+    "community": true,
+    "name": "Berrie",
+    "category": "Vendor",
+    "note": "Named Cobbler Vendor on the terrace above the fountain.",
+    "x": 3629,
+    "y": 4271,
+    "level": "lower",
+    "vendor": "Cobbler",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-148",
+    "community": true,
+    "name": "Citadel Exchange",
+    "category": "Bank",
+    "note": "On third level inside the golden dome tower.",
+    "x": 3706,
+    "y": 4630,
+    "level": "lower"
+  },
+  {
+    "id": "community-149",
+    "community": true,
+    "name": "Guild Registrar",
+    "category": "Guild",
+    "note": "On 3rd level across form the Exchange entrance.",
+    "x": 3816,
+    "y": 4559,
+    "level": "lower"
+  },
+  {
+    "id": "community-167",
+    "community": true,
+    "name": "Delilah",
+    "category": "Quest",
+    "note": "Quest NPC",
+    "x": 2570,
+    "y": 3821,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/delilah",
+    "wikiId": "npc-1790076525443-t431c"
   }
 ]
