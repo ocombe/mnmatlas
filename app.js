@@ -693,6 +693,9 @@ async function loadMapKinds(){
  }));
  for(const c of registry.maps)mapKinds.uncharted.delete(foldName(c.title));
 }
+// Small round badges after a map's name: the world map's dungeon sign, or towers for a major city (registry flag "city").
+const cityTowers='<svg viewBox="0 0 16 16" width="13" height="13" aria-hidden="true" fill="currentColor"><path d="M1.5 15V7.5l1.5-1 1.5 1V9H6V4l2-1.8L10 4v5h1.5V7.5l1.5-1 1.5 1V15h-5v-2.5a1 1 0 0 0-2 0V15z"/></svg>';
+function mapBadge(kind){const b=document.createElement('span');b.className='map-badge map-'+kind;b.title=kind==='city'?'City':'Dungeon';b.setAttribute('role','img');b.setAttribute('aria-label',kind==='city'?'city':'dungeon');if(kind==='city')b.innerHTML=cityTowers;else b.textContent='⛫';return b;}
 // Map picker: the world map first, then the zone maps of the Surface and of the Deep, each A to Z, with a type-to-filter box (no letter shortcuts, so any keyboard layout works).
 const pickers=[],mapOrder=new Intl.Collator('en',{sensitivity:'base',ignorePunctuation:true});
 const foldName=v=>v.normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’'`]/g,'').toLowerCase();
@@ -706,11 +709,11 @@ function buildMapPicker(host){
  list.className='map-menu-list';list.id=uid+'-list';list.setAttribute('role','listbox');list.setAttribute('aria-label','Maps');empty.hidden=true;
  const options=[],groups=[['surface','Surface'],['deep','The Deep']].map(([key,label])=>{const el=document.createElement('div'),heading=text('div',label,'map-menu-group');heading.id=uid+'-'+key;el.setAttribute('role','group');el.setAttribute('aria-labelledby',heading.id);el.append(heading);return {key,el,heading};});
  let current=null,active=null,shown=[],loadingMap=false;
- const option=c=>{const o=text('div',c.title,'map-option');if(mapKinds.dungeon.has(c.id)){const d=text('span','⛫','map-dungeon');d.title='Dungeon';d.setAttribute('aria-label','dungeon');o.append(d);}o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
+ const option=c=>{const o=text('div',c.title,'map-option');if(c.city)o.append(mapBadge('city'));else if(mapKinds.dungeon.has(c.id))o.append(mapBadge('dungeon'));o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
   o.onmousedown=e=>e.preventDefault();o.onclick=()=>choose(c.id);o.onpointermove=()=>{if(active!==o)setActive(o,false);};options.push(o);return o;};
  for(const c of registry.maps.filter(c=>c.entry))list.append(option(c));
  // An uncharted place is listed in its group but greyed out and cannot be chosen.
- const locked=[],uncharted=u=>{const o=text('div',u.title,'map-option uncharted');o.append(text('span','uncharted','map-uncharted'));if(u.dungeon){const d=text('span','⛫','map-dungeon');d.title='Dungeon';d.setAttribute('aria-label','dungeon');o.append(d);}
+ const locked=[],uncharted=u=>{const o=text('div',u.title,'map-option uncharted');o.append(text('span','uncharted','map-uncharted'));if(u.dungeon)o.append(mapBadge('dungeon'));
   o.setAttribute('role','option');o.setAttribute('aria-disabled','true');o.setAttribute('aria-selected','false');o.dataset.key=foldName(u.title);o.onmousedown=e=>e.preventDefault();locked.push(o);return o;};
  const entries=[...registry.maps.filter(c=>!c.entry).map(c=>({title:c.title,deep:mapKinds.deep.has(c.id),make:()=>option(c)})),...[...mapKinds.uncharted.values()].map(u=>({title:u.title,deep:u.deep,make:()=>uncharted(u)}))];
  for(const e of entries.sort((a,b)=>mapOrder.compare(a.title,b.title)))groups[e.deep?1:0].el.append(e.make());
