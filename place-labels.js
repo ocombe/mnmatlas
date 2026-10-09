@@ -50,7 +50,7 @@ function setupPlaceLabels(data){
    face.append(boatSeal(),text('span',' '+row.name,'exit-name'));
    // Departure times read straight from the sign: the times found in its description, under the name.
    // A zone the boat only sails through says so instead of listing departure times.
-   if(row.passes)face.append(text('small','boat passes through','boat-times'));
+   if(row.passes)face.append(text('small','passes by · no stop','boat-times'));
    else{const times=String(row.note||'').match(/\b\d{1,2}(?::\d{2})?\s?(?:am|pm)\b/gi);if(times?.length)face.append(text('small',times.map(t=>t.replace(/\s/g,'').toLowerCase()).join(' · '),'boat-times'));}
    if(!alignmentMode){face.tabIndex=0;face.setAttribute('role','button');face.title='Departures and stops';L.DomEvent.disableClickPropagation(face);
     const open=()=>boatCard(row);face.addEventListener('click',open);face.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}
