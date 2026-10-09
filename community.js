@@ -669,7 +669,7 @@
    if(!user){await signIn();return;}const selected=rows.filter((_,i)=>checks[i].checked&&!checks[i].disabled);if(!selected.length){status('Choose at least one item.');return;}
    send.disabled=true;let done=0;
    try{
-    // Separate inserts let the daily limit apply to every row; partial success is remembered.
+    // Separate inserts: partial success is remembered.
     let published=0;for(const row of selected){const {token,name,...suggestion}=row;if(await submit({...suggestion,user_id:user.id,author_name:displayName(user),comment:comment.value.trim()||null,credit:credit.checked}))published++;remember(sharing?sharedKey:sentKey,[token]);checks[rows.indexOf(row)].disabled=true;checks[rows.indexOf(row)].checked=false;done++;}
     if(done){freshPopup();d.close();status(sentLine(published===done)||'Thanks! Your suggestion is waiting for review.');}
    }catch(e){status(sendError(e,'Some suggestions could not be sent; unsent items remain selected.')+' Your local notes and positions are safe.');freshPopup();}

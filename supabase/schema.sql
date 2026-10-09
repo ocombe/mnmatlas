@@ -77,18 +77,12 @@ create index if not exists suggestions_user_created on public.suggestions(user_i
 create index if not exists suggestions_status_map on public.suggestions(status,map,created_at desc);
 create index if not exists votes_map_target on public.votes(map,target_id);
 
--- Serialize each account's inserts, including batches, at the daily limit.
+-- Refuse suggestions from banned accounts and stamp the creation time. There is no daily limit; spam is handled with the ban.
 create or replace function public.limit_suggestions()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
- if auth.uid() is not null then
-  perform pg_advisory_xact_lock(hashtextextended(auth.uid()::text,0));
-  if exists (select 1 from public.banned where user_id=auth.uid()) then
-   raise exception 'Suggestions are turned off for this account';
-  end if;
-  if (select count(*) from public.suggestions where user_id=auth.uid() and created_at>now()-interval '24 hours')>=50 then
-   raise exception 'Daily suggestion limit reached';
-  end if;
+ if auth.uid() is not null and exists (select 1 from public.banned where user_id=auth.uid()) then
+  raise exception 'Suggestions are turned off for this account';
  end if;
  new.created_at=now();
  return new;
@@ -169,7 +163,7 @@ create policy suggestions_read on public.suggestions for select to authenticated
 );
 drop policy if exists suggestions_insert on public.suggestions;
 create policy suggestions_insert on public.suggestions for insert to authenticated with check (
- -- The daily limit lives in the suggestions_daily_limit trigger; a policy reading this table would recurse.
+ -- The ban check lives in the suggestions_daily_limit trigger; a policy reading this table would recurse.
  user_id=auth.uid() and status='pending' and reviewed_at is null and review_note is null
 );
 drop policy if exists suggestions_update on public.suggestions;
@@ -222,7 +216,7 @@ revoke all on public.admins,public.suggestions,public.votes,public.user_notes fr
 revoke all on sequence public.suggestions_id_seq from public,anon,authenticated;
 grant select on public.admins to authenticated;
 grant select,update,delete on public.suggestions to authenticated;
--- The creation timestamp cannot be supplied by a browser to evade the daily limit.
+-- The creation timestamp cannot be supplied by a browser.
 -- Credits for published suggestions, written by the publishing job only. Deleting an account clears user_id,
 -- so its entries show as Anonymous in the public contributors list.
 create table if not exists public.credits (
