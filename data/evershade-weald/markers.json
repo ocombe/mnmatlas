@@ -223,5 +223,29 @@
   "wiki": "https://monstersandmemories.wiki/npcs/a-shifty-elf",
   "wikiId": "npc-a-shifty-elf",
   "vendor": "Shady merchant"
+ },
+ {
+  "id": "community-132",
+  "community": true,
+  "name": "Lumberjacking Supplies Evershade",
+  "category": "Vendor",
+  "note": "",
+  "x": 2551,
+  "y": 2080,
+  "vendor": "Lumberjack vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-supplies-evershade",
+  "wikiId": "npc-lumberjacking-supplies-evershade"
+ },
+ {
+  "id": "community-133",
+  "community": true,
+  "name": "Lumberjacking Trainer Evershade",
+  "category": "Tradeskill",
+  "note": "",
+  "x": 2555,
+  "y": 2049,
+  "trade": "Lumberjacking",
+  "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-trainer-evershade",
+  "wikiId": "npc-lumberjacking-trainer-evershade"
  }
 ]

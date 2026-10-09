@@ -895,5 +895,29 @@
     "vendor": "Tailoring vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/tailor-darya",
     "wikiId": "npc-tailor-darya"
+  },
+  {
+    "id": "community-137",
+    "community": true,
+    "name": "Blacksmith Musafar",
+    "category": "Vendor",
+    "note": "",
+    "x": 1148,
+    "y": 1552,
+    "vendor": "Blacksmithing vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-musafar",
+    "wikiId": "npc-blacksmith-musafar"
+  },
+  {
+    "id": "community-138",
+    "community": true,
+    "name": "Blacksmith Baran",
+    "category": "Vendor",
+    "note": "",
+    "x": 1148,
+    "y": 1559,
+    "vendor": "Blacksmithing vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-baran",
+    "wikiId": "npc-blacksmith-baran"
   }
 ]

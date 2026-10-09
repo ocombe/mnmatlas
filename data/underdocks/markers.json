@@ -376,8 +376,9 @@
     "x": 3466,
     "y": 4487,
     "level": "lower",
-    "note": "",
-    "community": true
+    "note": "The Balanced Blade.\nOn mezzanine floor below the exchange. Follow signs for Forge Row.\n- Blacksmithing Trainer\n- Weaponsmith Vendor\n- Used Weapon Vendor\n- a Patternmaker",
+    "community": true,
+    "trade": "Blacksmithing / Smelting"
   },
   {
     "id": "trade-cooking",
@@ -750,5 +751,32 @@
     "x": 3652,
     "y": 4749,
     "level": "lower"
+  },
+  {
+    "id": "community-146",
+    "community": true,
+    "name": "Hilari Hidecraft",
+    "category": "Vendor",
+    "note": "Leather Armor Vendor",
+    "x": 3731,
+    "y": 4772,
+    "level": "lower",
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-157",
+    "community": true,
+    "name": "Fisherman Dren",
+    "category": "Tradeskill",
+    "note": "Citadel North Dock",
+    "x": 3287,
+    "y": 4302,
+    "level": "lower",
+    "trade": "Fishing",
+    "wiki": "https://monstersandmemories.wiki/npcs/fisherman-dren",
+    "wikiId": "npc-1790076526323-q6xvs"
   }
 ]

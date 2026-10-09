@@ -181,16 +181,6 @@
   "minZoom": 3
  },
  {
-  "id": "npc-4",
-  "name": "Notable NPC",
-  "category": "Notable NPC",
-  "x": 2467,
-  "y": 4729,
-  "approximate": true,
-  "note": "",
-  "minZoom": 3
- },
- {
   "id": "humanoid-11-15-2",
   "name": "Humanoids (levels 11–15)",
   "category": "Mob camp",
@@ -455,5 +445,49 @@
   "approximate": true,
   "note": "Inside the tunnels behind the two tunnel entrances.",
   "minZoom": 3
+ },
+ {
+  "id": "community-176",
+  "community": true,
+  "name": "Sister Elara",
+  "category": "Notable NPC",
+  "note": "",
+  "x": 2266,
+  "y": 4593,
+  "wiki": "https://monstersandmemories.wiki/npcs/sister-elara",
+  "wikiId": "npc-sister-elara"
+ },
+ {
+  "id": "community-177",
+  "community": true,
+  "name": "Tig Pebblebank",
+  "category": "Notable NPC",
+  "note": "",
+  "x": 2433,
+  "y": 4705,
+  "wiki": "https://monstersandmemories.wiki/npcs/tig-pebblebank",
+  "wikiId": "npc-tig-pebblebank"
+ },
+ {
+  "id": "community-178",
+  "community": true,
+  "name": "Tolman Sneed",
+  "category": "Named mob",
+  "note": "Spawns in the middle pack of the encampment, roughly 1 hour spawn timer.\n\nDropped a 2H int staff and a wis/int (?) chest",
+  "x": 3757,
+  "y": 4580,
+  "wiki": "https://monstersandmemories.wiki/npcs/tolman-sneed",
+  "wikiId": "npc-tolman-sneed"
+ },
+ {
+  "id": "community-179",
+  "community": true,
+  "name": "Foreman Stonehammer",
+  "category": "Quest",
+  "note": "",
+  "x": 2255,
+  "y": 4585,
+  "wiki": "https://monstersandmemories.wiki/npcs/foreman-stonehammer",
+  "wikiId": "npc-foreman-stonehammer"
  }
 ]
