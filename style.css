@@ -473,11 +473,10 @@ dialog.moved::backdrop{background:#0000001f}
 /* Travel inside a zone: lifts, stairs, bridges, ladders and teleporters carry their own pictogram. Signs that stay within
    the zone (Faelindral's platforms and the Evershade Weald below) are moss-green boards, apart from the brown zone exits. */
 :is(.place-name,.personal-label).exit .exit-arrow svg{width:1.05em;height:1.05em}
-.place-name.exit.travel{column-gap:4px;padding:0;border:0;background:none;box-shadow:none;max-width:170px;font-size:.84em;color:#24331f;text-shadow:-1px -1px 1px #fff3d7,1px -1px 1px #fff3d7,-1px 1px 1px #fff3d7,1px 1px 1px #fff3d7,0 0 4px #fff3d7,0 0 7px #fff3d7}
-.place-name.exit.travel .exit-arrow{width:1.45em;height:1.45em;background:#4f6b45d9;box-shadow:0 0 0 1.2px #e6f0cf,0 1px 3px #0007}
-.place-name.exit.travel .exit-name{top:0;font-weight:600}
-.place-name.exit.travel.linked:hover,.place-name.exit.travel.linked:focus-visible{background:none;border:0;color:#10200c}
-.place-name.exit.travel.linked:hover .exit-name,.place-name.exit.travel.linked:focus-visible .exit-name{text-decoration:underline;text-underline-offset:2px}
+.place-name.exit.travel{column-gap:5px;padding:2px 8px 2px 2px;border:1px solid #cfe3a8b3;background:#1b2618a6;box-shadow:0 1px 3px #0005;max-width:180px;font-size:.84em;color:#f1f6e4;text-shadow:0 1px 2px #000c}
+.place-name.exit.travel .exit-arrow{width:1.45em;height:1.45em;background:#4f6b45d9;box-shadow:0 0 0 1.2px #e6f0cf}
+.place-name.exit.travel .exit-name{top:.1em}
+.place-name.exit.travel.linked:hover,.place-name.exit.travel.linked:focus-visible{background:#1b2618d9;border-color:#e6f0cf;color:#fbfff0}
 .place-name.exit.travel.linked:hover .exit-arrow,.place-name.exit.travel.linked:focus-visible .exit-arrow{background:#5f8053}
 .level-pin span{position:relative}.level-pin svg{width:16px;height:16px}
 .level-pin .level-dir{position:absolute;right:-6px;bottom:-6px;display:grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#2a1f15;box-shadow:0 0 0 1.5px #f5e2b4;color:#fff1d6;font:700 10px/1 var(--body);font-style:normal}
