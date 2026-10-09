@@ -3,37 +3,41 @@
   {
    "id": "zone-great-cavern-sea",
    "name": "Great Cavern Sea",
-   "x": 1109,
-   "y": 1377,
+   "x": 1144,
+   "y": 1150,
    "kind": "zone",
    "priority": 100,
-   "toMap": "great-cavern-sea"
+   "toMap": "great-cavern-sea",
+   "community": true
   },
   {
    "id": "zone-ail-vorith",
    "name": "Ail'Vorith",
-   "x": 2136,
-   "y": 813,
+   "x": 2139,
+   "y": 853,
    "kind": "zone",
    "priority": 100,
-   "toMap": "ail-vorith"
+   "toMap": "ail-vorith",
+   "community": true
   },
   {
    "id": "zone-caves-of-irem",
    "name": "Caves of Irem",
-   "x": 463,
-   "y": 2272,
+   "x": 505,
+   "y": 2319,
    "kind": "zone",
-   "priority": 60
+   "priority": 60,
+   "community": true
   },
   {
    "id": "zone-underdocks",
    "name": "Underdocks",
-   "x": 342,
-   "y": 3216,
+   "x": 302,
+   "y": 3129,
    "kind": "zone",
    "priority": 100,
-   "toMap": "underdocks"
+   "toMap": "underdocks",
+   "community": true
   }
  ],
  "trainers": []

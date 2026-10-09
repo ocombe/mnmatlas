@@ -111,13 +111,14 @@
  },
  {
   "id": "npc-2",
-  "name": "Notable NPC",
+  "name": "Nimasu",
   "category": "Notable NPC",
   "x": 2801,
   "y": 2414,
   "approximate": true,
   "note": "Approximate location; to confirm in game.",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "undead-6-10-1",

@@ -803,4 +803,25 @@ async function findArrival(url){
  return {map:target,url:next,text:asked,hits:hits.length===1?null:hits};
 }
 async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
+// Dialogs, the review bar and marker popups can be moved by their header, to see the map underneath: a drag anywhere
+// on the header that is not a button, link or field. Dialogs and the review bar keep their place while the page is
+// open (the review bar from one suggestion to the next); a popup until it closes. Nothing leaves the window, and the
+// phone layout keeps its fixed panels.
+const dragHandles='dialog .form-head, dialog > h2, #community-preview .preview-head, .leaflet-popup-content > div > .tag, .leaflet-popup-content > div > h3';
+const dragPlaces=new Map();
+const dragKey=el=>el.classList.contains('leaflet-popup')?el:el.id||el.className;
+function placeDragged(el,dx,dy){
+ const r=el.getBoundingClientRect(),[ox,oy]=dragPlaces.get(dragKey(el))||[0,0],left=r.left-ox,top=r.top-oy;
+ // The header stays on screen: at least 60 px of the box inside the window sideways, its top edge inside it.
+ dx=Math.min(Math.max(dx,60-left-r.width),innerWidth-60-left);dy=Math.min(Math.max(dy,-top),innerHeight-40-top);
+ el.style.translate=dx+'px '+dy+'px';dragPlaces.set(dragKey(el),[dx,dy]);el.classList.toggle('moved',!!(dx||dy));
+}
+window.atlasDragRestore=el=>{const at=dragPlaces.get(dragKey(el));if(at){el.style.translate=at[0]+'px '+at[1]+'px';el.classList.toggle('moved',!!(at[0]||at[1]));}};
+document.addEventListener('pointerdown',e=>{
+ const handle=e.button===0&&!mobileLayout.matches&&e.target.closest?.(dragHandles);if(!handle||e.target.closest('button,input,select,textarea,a,label'))return;
+ const box=handle.closest('dialog,#community-preview,.leaflet-popup');if(!box)return;
+ const [ox,oy]=dragPlaces.get(dragKey(box))||[0,0],x0=e.clientX,y0=e.clientY;
+ const move=ev=>{placeDragged(box,ox+ev.clientX-x0,oy+ev.clientY-y0);ev.preventDefault();},stop=()=>{removeEventListener('pointermove',move);removeEventListener('pointerup',stop);removeEventListener('pointercancel',stop);box.classList.remove('dragging');};
+ box.classList.add('dragging');addEventListener('pointermove',move);addEventListener('pointerup',stop);addEventListener('pointercancel',stop);e.preventDefault();
+});
 document.addEventListener('DOMContentLoaded',init,{once:true});

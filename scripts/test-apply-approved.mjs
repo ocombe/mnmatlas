@@ -1,5 +1,6 @@
 import assert from 'node:assert/strict';
 import {mkdtemp,mkdir,copyFile,writeFile,readFile,rm} from 'node:fs/promises';
+import {readFileSync} from 'node:fs';
 import {resolve,dirname,relative,sep} from 'node:path';
 import {fileURLToPath} from 'node:url';
 import {createServer} from 'node:http';
@@ -102,7 +103,19 @@ try{
  // A removal (an edit approved as one) takes the marker off the map; a second one finds it already gone.
  approved=[{id:50,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-40',payload:{name:'A beastmaster instructor',note:'',remove:true,reason:'duplicate',from:{name:'A beastmaster instructor',note:''}}},{id:51,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-40',payload:{name:'A beastmaster instructor',note:'',remove:true,from:{name:'A beastmaster instructor',note:''}}}];
  const removed=await run();assert.equal(removed.code,0,removed.output);assert(!JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).some(m=>m.id==='community-40'),'A removal takes the marker off the map');
- console.log('Publisher checks passed: wiki links and ids, trainer classes, removals, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
+ // A reviewer may change an edited marker's type: its old type's fields go, the new ones come, and a trainer chip follows.
+ {const now=id=>JSON.parse(readFileSync(fixture+'/data/markers.json','utf8')).find(m=>m.id===id),text=m=>({name:m.name,note:m.note||'',from:{name:m.name,note:m.note||'',category:m.category}});
+  const chips=()=>JSON.parse(readFileSync(fixture+'/data/labels.json','utf8')).trainers;
+  approved=[{id:60,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-81',payload:{...text(now('community-81')),category:'Tradeskill',trade:'Fishing',vendor:'Shady merchant'}}];
+  let r=await run();assert.equal(r.code,0,r.output);let m=now('community-81');assert.equal(m.category,'Tradeskill');assert.equal(m.trade,'Fishing');assert(!Object.hasOwn(m,'vendor')&&!Object.hasOwn(m,'sells'),'The old type\'s fields go');
+  approved=[{id:61,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{...text(now('published')),category:'Class trainer',classes:['Monk']}}];
+  r=await run();assert.equal(r.code,0,r.output);assert.deepEqual(now('published').classes,['Monk']);{const chip=chips().find(t=>t.id==='published');assert.deepEqual([chip.classes,chip.abbreviations],[['Monk'],['MNK']]);}
+  approved=[{id:62,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{...text(now('published')),category:'Bank'}}];
+  r=await run();assert.equal(r.code,0,r.output);assert.equal(now('published').category,'Bank');assert(!Object.hasOwn(now('published'),'classes'));assert(!chips().some(t=>t.id==='published'),'A marker that stops being a trainer loses its chip');
+  const beforeTypes=readFileSync(fixture+'/data/markers.json','utf8');
+  approved=[{id:63,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{...text(now('published')),from:{...text(now('published')).from,category:'Inn'},category:'Vendor'}},{id:64,map:'test-map',level:'lower',kind:'edit-marker',target_id:'published',payload:{...text(now('published')),category:'Personal'}}];
+  r=await run();assert.equal(r.code,0,r.output);assert(r.output.includes('The published type changed'));assert(r.output.includes('Unsupported marker fields for suggestion 64'));assert.equal(readFileSync(fixture+'/data/markers.json','utf8'),beforeTypes);}
+ console.log('Publisher checks passed: type changes on edits, wiki links and ids, trainer classes, removals, text cleanup, per-map categories, dry run, moves, level overrides, new markers/labels, formatting, retries and conflict protection.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});
 }

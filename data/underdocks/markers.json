@@ -570,5 +570,173 @@
     "y": 3585,
     "level": "lower",
     "color": "#6a4a7a"
+  },
+  {
+    "id": "community-151",
+    "community": true,
+    "name": "Mardah Stoneshiner",
+    "category": "Vendor",
+    "note": "Next door to the Citadel blacksmiths",
+    "x": 3413,
+    "y": 4490,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/mardah-stoneshiner",
+    "wikiId": "npc-1790076529811-b582s",
+    "vendor": "Jewelcrafting vendor",
+    "sells": [
+      "Jewelry"
+    ]
+  },
+  {
+    "id": "community-152",
+    "community": true,
+    "name": "Sorgen Stoneshiner",
+    "category": "Tradeskill",
+    "note": "Next door to the citadel blacksmiths",
+    "x": 3385,
+    "y": 4454,
+    "level": "lower",
+    "trade": "Jewelcrafting",
+    "wiki": "https://monstersandmemories.wiki/npcs/sorgen-stoneshiner",
+    "wikiId": "npc-1790076533771-moy05"
+  },
+  {
+    "id": "community-153",
+    "community": true,
+    "name": "Variagruss Grinhelm",
+    "category": "Vendor",
+    "note": "Blacksmithing Schematics Vendor on Forge Row",
+    "x": 3513,
+    "y": 4502,
+    "level": "lower",
+    "vendor": "Blacksmithing vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-155",
+    "community": true,
+    "name": "Fishmonger Lyla",
+    "category": "Vendor",
+    "note": "Citadel North Docks",
+    "x": 3318,
+    "y": 4376,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/fishmonger-lyla",
+    "wikiId": "npc-1790076526323-rfh8o",
+    "vendor": "Fishmonger"
+  },
+  {
+    "id": "community-156",
+    "community": true,
+    "name": "Fisher Rivy",
+    "category": "Vendor",
+    "note": "",
+    "x": 3273,
+    "y": 4384,
+    "level": "lower",
+    "vendor": "Fishing vendor"
+  },
+  {
+    "id": "community-158",
+    "community": true,
+    "name": "Barkeeper Khordic",
+    "category": "Vendor",
+    "note": "Above the Exchange in The High Note",
+    "x": 3729,
+    "y": 4682,
+    "level": "lower",
+    "vendor": "Barkeep",
+    "sells": [
+      "Food & drink"
+    ]
+  },
+  {
+    "id": "community-159",
+    "community": true,
+    "name": "Tailoring Skill",
+    "category": "Tradeskill",
+    "note": "Across from The High Note on the top terrace of the Citadel",
+    "x": 3832,
+    "y": 4525,
+    "level": "lower",
+    "trade": "Tailoring"
+  },
+  {
+    "id": "community-160",
+    "community": true,
+    "name": "Tailor Gira",
+    "category": "Vendor",
+    "note": "Citadel Tailor room across from the High Note on top terrace of the citadel",
+    "x": 3855,
+    "y": 4465,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/tailor-gira",
+    "wikiId": "npc-1790076534265-fsg3q",
+    "vendor": "Tailoring vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-162",
+    "community": true,
+    "name": "Idris Mavri",
+    "category": "Vendor",
+    "note": "In tailor room on the top terrace of the citadel across from the High Note",
+    "x": 3876,
+    "y": 4495,
+    "level": "lower",
+    "vendor": "Tailoring vendor",
+    "sells": [
+      "Materials"
+    ]
+  },
+  {
+    "id": "community-147",
+    "community": true,
+    "name": "Berrie",
+    "category": "Vendor",
+    "note": "Named Cobbler Vendor on the terrace above the fountain.",
+    "x": 3629,
+    "y": 4271,
+    "level": "lower",
+    "vendor": "Cobbler",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-148",
+    "community": true,
+    "name": "Citadel Exchange",
+    "category": "Bank",
+    "note": "On third level inside the golden dome tower.",
+    "x": 3706,
+    "y": 4630,
+    "level": "lower"
+  },
+  {
+    "id": "community-149",
+    "community": true,
+    "name": "Guild Registrar",
+    "category": "Guild",
+    "note": "On 3rd level across form the Exchange entrance.",
+    "x": 3816,
+    "y": 4559,
+    "level": "lower"
+  },
+  {
+    "id": "community-167",
+    "community": true,
+    "name": "Delilah",
+    "category": "Quest",
+    "note": "Quest NPC",
+    "x": 2570,
+    "y": 3821,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/delilah",
+    "wikiId": "npc-1790076525443-t431c"
   }
 ]
