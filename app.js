@@ -677,7 +677,8 @@ function instantTips(){
  for(const b of document.querySelectorAll('.map-tools button')){sync(b);watch.observe(b,{attributes:true,attributeFilter:['title']});}
 }
 // Which zones lie in the Deep and which are dungeons, read from the world map's own data (its Deep zones and dungeon markers).
-const mapKinds={deep:new Set(),dungeon:new Set()};
+// Zones and dungeons the world map knows but that have no map yet are listed too, as uncharted.
+const mapKinds={deep:new Set(),dungeon:new Set(),uncharted:new Map()};
 async function loadMapKinds(){
  const world=registry.maps.find(m=>m.entry);if(!world)return;
  const parts=[{level:world.defaultLevel,zones:world.zonesFile,markers:world.markersFile},...(world.levels||[]).map(l=>({level:l.id,zones:l.zonesFile,markers:l.markersFile}))];
@@ -685,8 +686,12 @@ async function loadMapKinds(){
   const deep=p.level==='deep',[zones,markers]=await Promise.all([p.zones?fetchData(p.zones,{}).catch(()=>({})):{},p.markers?fetchData(p.markers,[]).catch(()=>[]):[]]);
   const list=Array.isArray(zones?.zones)?zones.zones:Array.isArray(zones)?zones:[];
   if(deep)for(const z of list)if(typeof z?.id==='string')mapKinds.deep.add(z.id);
-  for(const m of Array.isArray(markers)?markers:[])if(m?.category==='Dungeon'&&typeof m.toMap==='string'){mapKinds.dungeon.add(m.toMap);if(deep)mapKinds.deep.add(m.toMap);}
+  for(const z of list)if(z?.charted===false&&typeof z.name==='string')mapKinds.uncharted.set(foldName(z.name),{title:z.name,deep,dungeon:false});
+  for(const m of Array.isArray(markers)?markers:[])if(m?.category==='Dungeon'){
+   if(typeof m.toMap==='string'){mapKinds.dungeon.add(m.toMap);if(deep)mapKinds.deep.add(m.toMap);}
+   else if(typeof m.name==='string')mapKinds.uncharted.set(foldName(m.name),{title:m.name,deep,dungeon:true});}
  }));
+ for(const c of registry.maps)mapKinds.uncharted.delete(foldName(c.title));
 }
 // Map picker: the world map first, then the zone maps of the Surface and of the Deep, each A to Z, with a type-to-filter box (no letter shortcuts, so any keyboard layout works).
 const pickers=[],mapOrder=new Intl.Collator('en',{sensitivity:'base',ignorePunctuation:true});
@@ -704,12 +709,17 @@ function buildMapPicker(host){
  const option=c=>{const o=text('div',c.title,'map-option');if(mapKinds.dungeon.has(c.id)){const d=text('span','⛫','map-dungeon');d.title='Dungeon';d.setAttribute('aria-label','dungeon');o.append(d);}o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
   o.onmousedown=e=>e.preventDefault();o.onclick=()=>choose(c.id);o.onpointermove=()=>{if(active!==o)setActive(o,false);};options.push(o);return o;};
  for(const c of registry.maps.filter(c=>c.entry))list.append(option(c));
- for(const c of registry.maps.filter(c=>!c.entry).sort((a,b)=>mapOrder.compare(a.title,b.title)))groups[mapKinds.deep.has(c.id)?1:0].el.append(option(c));
+ // An uncharted place is listed in its group but greyed out and cannot be chosen.
+ const locked=[],uncharted=u=>{const o=text('div',u.title,'map-option uncharted');o.append(text('span','uncharted','map-uncharted'));if(u.dungeon){const d=text('span','⛫','map-dungeon');d.title='Dungeon';d.setAttribute('aria-label','dungeon');o.append(d);}
+  o.setAttribute('role','option');o.setAttribute('aria-disabled','true');o.setAttribute('aria-selected','false');o.dataset.key=foldName(u.title);o.onmousedown=e=>e.preventDefault();locked.push(o);return o;};
+ const entries=[...registry.maps.filter(c=>!c.entry).map(c=>({title:c.title,deep:mapKinds.deep.has(c.id),make:()=>option(c)})),...[...mapKinds.uncharted.values()].map(u=>({title:u.title,deep:u.deep,make:()=>uncharted(u)}))];
+ for(const e of entries.sort((a,b)=>mapOrder.compare(a.title,b.title)))groups[e.deep?1:0].el.append(e.make());
  for(const g of groups)if(g.el.children.length>1)list.append(g.el);box.append(input);menu.append(box,list,empty);host.replaceChildren(button,menu);
  function setActive(o,scroll=true){active?.classList.remove('active');active=o;if(o){o.classList.add('active');input.setAttribute('aria-activedescendant',o.id);if(scroll)o.scrollIntoView({block:'nearest'});}else input.removeAttribute('aria-activedescendant');}
  function filter(){const words=foldName(input.value).split(/\s+/).filter(Boolean);shown=[];
   for(const o of options){const hit=words.every(w=>o.dataset.key.includes(w));o.hidden=!hit;if(hit)shown.push(o);}
-  for(const g of groups)g.heading.hidden=!shown.some(o=>g.el.contains(o));empty.hidden=shown.length>0;if(!shown.length)empty.textContent='No map matches “'+input.value.trim()+'”.';
+  for(const o of locked)o.hidden=!words.every(w=>o.dataset.key.includes(w));
+  for(const g of groups)g.heading.hidden=![...shown,...locked].some(o=>!o.hidden&&g.el.contains(o));empty.hidden=shown.length>0||locked.some(o=>!o.hidden);if(!shown.length)empty.textContent='No map matches “'+input.value.trim()+'”.';
   setActive((!words.length&&shown.find(o=>o.dataset.map===current))||shown[0]||null);}
  function open(focus){if(!menu.hidden||loadingMap)return;menu.hidden=false;host.classList.add('open');button.setAttribute('aria-expanded','true');input.value='';filter();if(focus)input.focus({preventScroll:true});}
  function close(refocus){if(menu.hidden)return;menu.hidden=true;host.classList.remove('open');button.setAttribute('aria-expanded','false');if(refocus)button.focus({preventScroll:true});}
