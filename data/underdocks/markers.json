@@ -778,5 +778,41 @@
     "trade": "Fishing",
     "wiki": "https://monstersandmemories.wiki/npcs/fisherman-dren",
     "wikiId": "npc-1790076526323-q6xvs"
+  },
+  {
+    "id": "community-187",
+    "community": true,
+    "name": "Simrut the Green (level 40)",
+    "category": "Quest",
+    "note": "",
+    "x": 4539,
+    "y": 3601,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/simrut-the-green",
+    "wikiId": "npc-simrut-the-green"
+  },
+  {
+    "id": "community-188",
+    "community": true,
+    "name": "Belot",
+    "category": "Named mob",
+    "note": "",
+    "x": 4258,
+    "y": 749,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/belot",
+    "wikiId": "npc-1790076523474-xutcr"
+  },
+  {
+    "id": "community-189",
+    "community": true,
+    "name": "Squeaker",
+    "category": "Quest",
+    "note": "",
+    "x": 3345,
+    "y": 4892,
+    "level": "upper",
+    "wiki": "https://monstersandmemories.wiki/npcs/squeaker",
+    "wikiId": "npc-1790076533772-160l1"
   }
 ]
