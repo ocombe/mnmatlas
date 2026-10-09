@@ -323,16 +323,6 @@
   "minZoom": 3
  },
  {
-  "id": "ashira-1-5-1",
-  "name": "Ashira (levels 1–5)",
-  "category": "Mob camp",
-  "x": 3237,
-  "y": 7025,
-  "approximate": true,
-  "note": "",
-  "minZoom": 3
- },
- {
   "id": "ashira-1-5-2",
   "name": "Ashira (levels 1–5)",
   "category": "Mob camp",
@@ -344,13 +334,14 @@
  },
  {
   "id": "generic-6-10-7",
-  "name": "Creatures (levels 6–10)",
+  "name": "Ashira (levels 6–10)",
   "category": "Mob camp",
-  "x": 3426,
-  "y": 6297,
+  "x": 3446,
+  "y": 7500,
   "approximate": true,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "generic-6-10-8",
@@ -461,8 +452,8 @@
   "id": "community-177",
   "community": true,
   "name": "Tig Pebblebank",
-  "category": "Notable NPC",
-  "note": "",
+  "category": "Quest",
+  "note": "Gives Tig's Measuring Quest for The Measure Stick",
   "x": 2433,
   "y": 4705,
   "wiki": "https://monstersandmemories.wiki/npcs/tig-pebblebank",
