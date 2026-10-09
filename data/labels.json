@@ -409,7 +409,7 @@
           "place": "boat-night-harbor"
         }
       ],
-      "note": "Departs 1am, 9am and 5pm. Game time: type /time in game. Be on board before it leaves. Board at the middle dock of the big harbour.",
+      "note": "Departs 1am, 9am and 5pm. Game time: type /time in game. Be on board before it leaves. Board at the middle dock of the big harbour. It stops briefly at Shallow Shoals on the way.",
       "timesSource": {
         "title": "Boats",
         "site": "Monsters and Memories Wiki",

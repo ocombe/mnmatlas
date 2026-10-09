@@ -22,7 +22,7 @@ function boatCard(row){
  const s=row.timesSource;if(s?.url&&/^https:\/\//.test(s.url)){const credit=text('p','Times: ','boat-credit'),page=text('a',(s.title||'page')+' · '+(s.site||'wiki'));page.href=s.url;page.target='_blank';page.rel='noopener';credit.append(page);if(s.license){credit.append(text('span',', '));const lic=text('a',s.license);if(/^https:\/\//.test(s.licenseUrl||'')){lic.href=s.licenseUrl;lic.target='_blank';lic.rel='noopener';}credit.append(lic);}n.append(credit);}
  window.atlasCommunity?.placePopup?.({...row,kind:'label'},n);
  // Pan clear of the title card and toolbar so the whole card shows.
- L.popup({autoPan:true,autoPanPaddingTopLeft:[24,150],autoPanPaddingBottomRight:[70,40],offset:[0,-10]}).setLatLng(locationOf(row)).setContent(n).openOn(map);
+ L.popup({autoPan:true,autoPanPaddingTopLeft:[24,150],autoPanPaddingBottomRight:[70,40],offset:[0,-10],maxHeight:Math.max(180,($('map')?.clientHeight||600)-60)}).setLatLng(locationOf(row)).setContent(n).openOn(map);
 }
 function trainerIcon(m){
  const detail=trainerDetails.get(m.id);
@@ -49,8 +49,8 @@ function setupPlaceLabels(data){
   if(boat){
    face.append(boatSeal(),text('span',' '+row.name,'exit-name'));
    // Departure times read straight from the sign: the times found in its description, under the name.
-   // A route the boat only sails through says so instead of listing times.
-   if(row.passes)face.append(text('small','passes by · no stop','boat-times'));
+   // A zone the boat only sails through says so instead of listing departure times.
+   if(row.passes)face.append(text('small','boat passes through','boat-times'));
    else{const times=String(row.note||'').match(/\b\d{1,2}(?::\d{2})?\s?(?:am|pm)\b/gi);if(times?.length)face.append(text('small',times.map(t=>t.replace(/\s/g,'').toLowerCase()).join(' · '),'boat-times'));}
    if(!alignmentMode){face.tabIndex=0;face.setAttribute('role','button');face.title='Departures and stops';L.DomEvent.disableClickPropagation(face);
     const open=()=>boatCard(row);face.addEventListener('click',open);face.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}
