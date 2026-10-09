@@ -201,6 +201,8 @@ function openPlace(p,zoom=config.defaultView.placeZoom){
  applyingView=true;activePlace=p;
  map.setView(locationOf(p),zoom,{animate:false});
  if(p.kind==='marker'){const pin=pins.get(p.id);if(pin&&!map.hasLayer(pin))pin.addTo(map);pin?.openPopup();}
+ // A boat dock opens its departures-and-stops card here too.
+ else if(p.kind==='label'&&Array.isArray(p.route)&&p.route.length>1)boatCard(p);
  else {if(p.kind==='hidden')hiddenController?.show(p.id);L.popup({autoPan:false}).setLatLng(locationOf(p)).setContent(placePopup(p)).openOn(map);}
  activePlace=p;applyingView=false;if(compact())setPanel(false);scheduleUrl();
 }

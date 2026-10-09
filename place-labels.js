@@ -45,6 +45,8 @@ function setupPlaceLabels(data){
   const face=text(target?'a':'span',row.kind==='exit'?'':row.name,'place-name '+row.kind+(target||boat&&!alignmentMode?' linked':'')+(boat?' boat':''));
   if(boat){
    face.append(boatSeal(),text('span',' '+row.name,'exit-name'));
+   // Departure times read straight from the sign: the times found in its description, under the name.
+   const times=String(row.note||'').match(/\b\d{1,2}(?::\d{2})?\s?(?:am|pm)\b/gi);if(times?.length)face.append(text('small',times.map(t=>t.replace(/\s/g,'').toLowerCase()).join(' · '),'boat-times'));
    if(!alignmentMode){face.tabIndex=0;face.setAttribute('role','button');face.title='Departures and stops';L.DomEvent.disableClickPropagation(face);
     const open=()=>boatCard(row);face.addEventListener('click',open);face.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();open();}});}
   }else if(row.kind==='exit'){
