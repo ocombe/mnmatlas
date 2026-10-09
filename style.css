@@ -470,3 +470,12 @@ dialog.moved::backdrop{background:#0000001f}
 /* Map picker: dungeons carry the world map's dungeon sign. */
 .map-option:has(.map-badge){display:flex;align-items:center;gap:8px}.map-option .map-badge{display:inline-grid;flex:none;place-items:center;width:20px;height:20px;margin-left:auto;border-radius:50%;background:#5a3b1e;color:#fff1d6;box-shadow:0 0 0 1.5px #d29a48;font:13px/1 var(--heading)}.map-option .map-city{background:#2f4a5e;box-shadow:0 0 0 1.5px #d2b26e}
 .map-option.uncharted{display:flex;align-items:center;gap:8px;color:#8d7c66;font-style:italic;cursor:default}.map-option.uncharted .map-badge{filter:grayscale(.7);opacity:.6}.map-uncharted{flex:none;padding:1px 6px;border:1px solid #5b4a37;border-radius:9px;font:normal 9px/1.4 var(--body,inherit);letter-spacing:.6px;text-transform:uppercase;color:#9a8670}
+/* Travel inside a zone: lifts, stairs, bridges, ladders and teleporters carry their own pictogram. Signs that stay within
+   the zone (Faelindral's platforms and the Evershade Weald below) are moss-green boards, apart from the brown zone exits. */
+:is(.place-name,.personal-label).exit .exit-arrow svg{width:1.05em;height:1.05em}
+.place-name.exit.travel{border-color:#a9c48b;background:#1b2618f2;color:#eef3dc}
+.place-name.exit.travel .exit-arrow{background:#4f6b45;box-shadow:0 0 0 1.5px #cfe3a8}
+.place-name.exit.travel.linked:hover,.place-name.exit.travel.linked:focus-visible{background:#253421;border-color:#cfe3a8;color:#fbfff0}
+.place-name.exit.travel.linked:hover .exit-arrow,.place-name.exit.travel.linked:focus-visible .exit-arrow{background:#5f8053}
+.level-pin span{position:relative}.level-pin svg{width:16px;height:16px}
+.level-pin .level-dir{position:absolute;right:-6px;bottom:-6px;display:grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#2a1f15;box-shadow:0 0 0 1.5px #f5e2b4;color:#fff1d6;font:700 10px/1 var(--body);font-style:normal}

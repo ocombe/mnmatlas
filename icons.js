@@ -46,9 +46,36 @@ const categoryPaths = {
 Object.assign(categoryPaths,{'Herbs':tradePaths['Herbalism'],'Wood':tradePaths['Lumberjacking'],'Ore':tradePaths['Mining']});
 // A small palette personal markers may use instead of their category colour.
 const pinColours={Red:'#a04438',Amber:'#b5861f',Green:'#4f7a3a',Teal:'#385f60',Blue:'#2f6f9a',Purple:'#6a4a7a',Brown:'#6b4f2e',Slate:'#4d5560'};
+// Ways to travel inside a zone: one pictogram each, on the round travel seals and on travel signs.
+const travelPaths={
+  'Lift':'M6 2h12v20H6z M12 5.5v13 M9 8.5l3-3 3 3 M9 15.5l3 3 3-3',
+  'Stairs':'M3 20h4v-4h4v-4h4V8h4V4h2 M3 20h18V4',
+  'Ladder':'M7 2v20 M17 2v20 M7 6h10 M7 11h10 M7 16h10',
+  'Bridge':'M2 8h20 M4 8v12 M20 8v12 M4 20a8 8 0 0 1 16 0 M8 8v5 M12 8v4 M16 8v5',
+  'Teleporter':'M12 2c4.4 0 8 4.5 8 10s-3.6 10-8 10-8-4.5-8-10 3.6-10 8-10z M12 7c2 0 3.5 2.2 3.5 5s-1.5 5-3.5 5-3.5-2.2-3.5-5S10 7 12 7z M12 11v2'
+};
+// A sign's or marker's way of travel: its own field, its category, or words in its name.
+function travelKind(name,category,given){
+  if(Object.hasOwn(travelPaths,given||''))return given;
+  if(Object.hasOwn(travelPaths,category||''))return category;
+  const s=String(name||'');
+  if(/\b(lifts?|elevators?)\b/i.test(s))return 'Lift';
+  if(/teleport|portal|translocat/i.test(s))return 'Teleporter';
+  if(/\bbridges?\b/i.test(s))return 'Bridge';
+  if(/\bladders?\b/i.test(s))return 'Ladder';
+  if(/stair|\bsteps\b|\bramps?\b/i.test(s))return 'Stairs';
+  return category==='Level connection'?'Stairs':'';
+}
+function travelSvg(kind){
+  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
+  for(const [key,value] of Object.entries({viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':'2','stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true','focusable':'false'}))svg.setAttribute(key,value);
+  const shape=document.createElementNS(ns,'path');shape.setAttribute('d',travelPaths[kind]);svg.append(shape);return svg;
+}
 const exitArrows={north:'↑',northeast:'↗',east:'→',southeast:'↘',south:'↓',southwest:'↙',west:'←',northwest:'↖'};
 function tradeskillName(marker){return marker.category==='Tradeskill'?marker.name.split(/\s+[—–-]\s+/)[0].trim():'';}
 function markerSymbol(marker){
+  const travel=!marker.noteType&&['Lift','Stairs','Ladder','Teleporter','Level connection'].includes(marker.category)?travelKind(marker.name,marker.category):'';
+  if(travel)return travelSvg(travel);
   if(marker.toLevel)return text('b',marker.direction==='up'?'↑':'↓');
   if(marker.noteType==='exit')return text('b',exitArrows[marker.arrow]||'→');
   if(marker.noteType==='label')return text('b','Aa','label-glyph');

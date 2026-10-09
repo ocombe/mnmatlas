@@ -59,7 +59,10 @@ function setupPlaceLabels(data){
    const glyph=exitArrows[row.arrow]||{up:'⤒',down:'⤓'}[row.arrow]||'→';
    const side=/west/.test(row.arrow)?'west':/east/.test(row.arrow)?'east':['south','down'].includes(row.arrow)?'south':'north';
    face.classList.add('to-'+side);if(!target&&!alignmentMode)face.classList.add('unmapped');
-   face.append(text('b',glyph,'exit-arrow'),text('span',' '+row.name,'exit-name'));
+   const travel=travelKind(row.name,'',row.travel),inside=(config.linkedMaps||[]).some(l=>l.map===row.toMap&&l.map!==config.id);
+   if(inside)face.classList.add('travel');
+   const seal=text('b',travel?'':glyph,'exit-arrow');if(travel){seal.append(travelSvg(travel));seal.title=travel;}
+   face.append(seal,text('span',' '+row.name,'exit-name'));
    if(!target&&!alignmentMode)face.append(text('small','not mapped yet','exit-soon'));
   }
   // Exit names that lead to another published map open it, at the matching exit when given.

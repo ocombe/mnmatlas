@@ -205,7 +205,8 @@
       "minZoom": 1.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "travelers-lift"
+      "toPlace": "travelers-lift",
+      "travel": "Lift"
     },
     {
       "id": "weald-keepers-lift",
@@ -217,7 +218,8 @@
       "minZoom": 1.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "keepers-lift"
+      "toPlace": "keepers-lift",
+      "travel": "Lift"
     },
     {
       "id": "weald-pixie-lift",
@@ -229,7 +231,8 @@
       "minZoom": 1.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "pixie-lift"
+      "toPlace": "pixie-lift",
+      "travel": "Lift"
     },
     {
       "id": "weald-south-stairway",
@@ -241,7 +244,8 @@
       "minZoom": 1.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "south-stairway"
+      "toPlace": "south-stairway",
+      "travel": "Stairs"
     },
     {
       "id": "weald-eastern-cliff-bridge",
@@ -253,7 +257,8 @@
       "minZoom": 2.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "eastern-cliff-bridge"
+      "toPlace": "eastern-cliff-bridge",
+      "travel": "Bridge"
     },
     {
       "id": "weald-north-cliff-stairway",
@@ -265,7 +270,8 @@
       "minZoom": 2.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "north-cliff-stairway"
+      "toPlace": "north-cliff-stairway",
+      "travel": "Stairs"
     },
     {
       "id": "weald-southeast-cliff-bridge",
@@ -277,7 +283,8 @@
       "minZoom": 2.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "southeast-cliff-bridge"
+      "toPlace": "southeast-cliff-bridge",
+      "travel": "Bridge"
     },
     {
       "id": "weald-river-bridge-west",
@@ -289,7 +296,8 @@
       "minZoom": 2.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "river-bridge-west"
+      "toPlace": "river-bridge-west",
+      "travel": "Bridge"
     },
     {
       "id": "weald-river-bridge-east",
@@ -301,7 +309,8 @@
       "minZoom": 2.5,
       "arrow": "south",
       "toMap": "evershade-weald",
-      "toPlace": "river-bridge-east"
+      "toPlace": "river-bridge-east",
+      "travel": "Bridge"
     }
   ],
   "trainers": [
