@@ -435,57 +435,75 @@
  },
  {
   "id": "ramp-01-down",
-  "name": "South stairway",
+  "name": "South stairway — down to Evershade Weald",
   "category": "Level connection",
   "x": 1298,
   "y": 2660,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "south-stairway",
+  "direction": "down"
  },
  {
   "id": "ramp-02-down",
-  "name": "Eastern cliff bridge",
+  "name": "Eastern cliff bridge — down to Evershade Weald",
   "category": "Level connection",
   "x": 2216,
   "y": 1592,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "eastern-cliff-bridge",
+  "direction": "down"
  },
  {
   "id": "ramp-03-down",
-  "name": "North cliff stairway",
+  "name": "North cliff stairway — down to Evershade Weald",
   "category": "Level connection",
   "x": 1720,
   "y": 134,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "north-cliff-stairway",
+  "direction": "down"
  },
  {
   "id": "ramp-04-down",
-  "name": "Southeast cliff bridge",
+  "name": "Southeast cliff bridge — down to Evershade Weald",
   "category": "Level connection",
   "x": 2490,
   "y": 1676,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "southeast-cliff-bridge",
+  "direction": "down"
  },
  {
   "id": "ramp-05-down",
-  "name": "River bridge — west",
+  "name": "West river bridge — down to Evershade Weald",
   "category": "Level connection",
   "x": 2482,
   "y": 924,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "river-bridge-west",
+  "direction": "down"
  },
  {
   "id": "ramp-06-down",
-  "name": "River bridge — east",
+  "name": "East river bridge — down to Evershade Weald",
   "category": "Level connection",
   "x": 2712,
   "y": 920,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "river-bridge-east",
+  "direction": "down"
  },
  {
   "id": "temple-lift",

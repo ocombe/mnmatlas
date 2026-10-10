@@ -280,5 +280,79 @@
   "toMap": "faelindral",
   "toPlace": "lift-pixie-down",
   "direction": "up"
+ },
+ {
+  "id": "south-stairway",
+  "name": "South stairway — up to Faelindral",
+  "category": "Level connection",
+  "x": 2044,
+  "y": 3167,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-01-down",
+  "direction": "up"
+ },
+ {
+  "id": "eastern-cliff-bridge",
+  "name": "Eastern cliff bridge — up to Faelindral",
+  "category": "Level connection",
+  "x": 2510,
+  "y": 2118,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-02-down",
+  "direction": "up"
+ },
+ {
+  "id": "north-cliff-stairway",
+  "name": "North cliff stairway — up to Faelindral",
+  "category": "Level connection",
+  "x": 2728,
+  "y": 1165,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-03-down",
+  "direction": "up"
+ },
+ {
+  "id": "southeast-cliff-bridge",
+  "name": "Southeast cliff bridge — up to Faelindral",
+  "category": "Level connection",
+  "x": 2966,
+  "y": 2733,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-04-down",
+  "direction": "up"
+ },
+ {
+  "id": "river-bridge-west",
+  "name": "West river bridge — up to Faelindral",
+  "category": "Level connection",
+  "x": 2921,
+  "y": 2034,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-05-down",
+  "direction": "up"
+ },
+ {
+  "id": "river-bridge-east",
+  "name": "East river bridge — up to Faelindral",
+  "category": "Level connection",
+  "x": 3681,
+  "y": 2123,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-06-down",
+  "direction": "up"
+ },
+ {
+  "id": "to-blacktide-bay",
+  "name": "Lift to Blacktide Bay",
+  "category": "Lift",
+  "x": 4146,
+  "y": 3377,
+  "note": "Leads to Blacktide Bay."
  }
 ]
