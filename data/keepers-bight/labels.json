@@ -203,16 +203,6 @@
    "minZoom": 1.5,
    "arrow": "down",
    "toMap": "blacktide-bay"
-  },
-  {
-   "id": "orc-cave",
-   "name": "Orc Cave",
-   "x": 2706,
-   "y": 6454,
-   "kind": "exit",
-   "priority": 80,
-   "minZoom": 2,
-   "arrow": "down"
   }
  ],
  "trainers": []

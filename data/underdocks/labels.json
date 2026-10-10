@@ -130,20 +130,6 @@
       "minZoom": 4.5
     },
     {
-      "id": "wiki-northern-gates",
-      "name": "Northern Gates",
-      "x": 3038,
-      "y": 3512,
-      "level": "lower",
-      "approximate": true,
-      "note": "North-west bridge and gate approach.",
-      "kind": "exit",
-      "tier": "exit",
-      "priority": 75,
-      "minZoom": 3.75,
-      "arrow": "northwest"
-    },
-    {
       "id": "upper-to-night-harbor",
       "name": "to Night Harbor",
       "x": 4329,
