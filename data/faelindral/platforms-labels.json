@@ -196,45 +196,6 @@
       "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
     },
     {
-      "id": "weald-travelers-lift",
-      "name": "down to Evershade Weald",
-      "x": 1034,
-      "y": 2010,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "south",
-      "toMap": "evershade-weald",
-      "toPlace": "travelers-lift",
-      "travel": "Lift"
-    },
-    {
-      "id": "weald-keepers-lift",
-      "name": "down to Evershade Weald",
-      "x": 2020,
-      "y": 932,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "south",
-      "toMap": "evershade-weald",
-      "toPlace": "keepers-lift",
-      "travel": "Lift"
-    },
-    {
-      "id": "weald-pixie-lift",
-      "name": "down to Evershade Weald",
-      "x": 552,
-      "y": 898,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "south",
-      "toMap": "evershade-weald",
-      "toPlace": "pixie-lift",
-      "travel": "Lift"
-    },
-    {
       "id": "weald-south-stairway",
       "name": "down to Evershade Weald",
       "x": 1298,

@@ -247,5 +247,38 @@
   "trade": "Lumberjacking",
   "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-trainer-evershade",
   "wikiId": "npc-lumberjacking-trainer-evershade"
+ },
+ {
+  "id": "travelers-lift",
+  "name": "Traveler's Lift — up to Faelindral",
+  "category": "Lift",
+  "x": 1795,
+  "y": 2513,
+  "note": "Rises to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "lift-traveler-s-down",
+  "direction": "up"
+ },
+ {
+  "id": "keepers-lift",
+  "name": "Keeper's Lift — up to Faelindral",
+  "category": "Lift",
+  "x": 2582,
+  "y": 1957,
+  "note": "Rises to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "lift-keeper-s-down",
+  "direction": "up"
+ },
+ {
+  "id": "pixie-lift",
+  "name": "Pixie Lift — up to Faelindral",
+  "category": "Lift",
+  "x": 1547,
+  "y": 2019,
+  "note": "Rises to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "lift-pixie-down",
+  "direction": "up"
  }
 ]

@@ -174,7 +174,10 @@ function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card
  if(m.category==='Vendor'&&m.vendor==='Shady merchant')n.append(text('p','Buys anything; sells what players have sold to it.','marker-sells'));
  else if(m.category==='Vendor'&&Array.isArray(m.sells)&&m.sells.length)n.append(text('p','Sells: '+sellTypes.filter(t=>m.sells.includes(t)).join(' · '),'marker-sells'));
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
- if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel)n.append(button(m.direction==='up'?'Go up':'Go down',()=>switchAt(m),'level-link'));const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads)n.append(button('Go to '+leads.title,()=>openMap(leads.id),'level-link'));
+ if(card)n.append(npcCard(card,m));if(m.note){if(card){const ours=text('section','','npc-section npc-ours');ours.append(text('h4','Atlas note','npc-heading'),text('p',m.note));n.append(ours);}else n.append(text('p',m.note));}const wiki=!card&&wikiButton(m);if(wiki)n.append(wiki);n.append(copyButton(m));if(m.toLevel)n.append(button(m.direction==='up'?'Go up':'Go down',()=>switchAt(m),'level-link'));
+ // A lift to a linked map (Evershade Weald and Faelindral) goes to the matching lift there.
+ {const to=!m.noteType&&m.toPlace&&registry.maps.find(c=>c.id===m.toMap);if(to)n.append(button((m.direction==='up'?'Go up to ':m.direction==='down'?'Go down to ':'Go to ')+to.title,()=>{const url=mapLink(to.id);url.searchParams.set('place',m.toPlace);goToMap(to.id,url);},'level-link'));}
+const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.toMap);if(leads)n.append(button('Go to '+leads.title,()=>openMap(leads.id),'level-link'));
  if(m.id.startsWith('personal-'))n.append(button('Edit note',()=>openEditor(m),'','edit'),button('Delete',()=>confirmDelete(m),'popup-delete','delete'));
  if(alignmentPositions[m.id]){n.append(text('p','Position moved in this browser.','moved-note'));if(alignmentMode)n.append(button('Reset position',()=>resetMarker(m.id),'','reset'));}
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
@@ -216,7 +219,7 @@ function pinIcon(m){
  }
  if(m.category==='Class trainer')return trainerIcon(m);
  const face=text('span','');face.style.setProperty('--pin',m.color||categories[m.category][1]);face.append(markerSymbol(m));
- if(m.toLevel&&face.firstChild?.tagName==='svg')face.append(text('i',m.direction==='up'?'↑':'↓','level-dir'));
+ if((m.toLevel||m.toMap&&m.direction)&&face.firstChild?.tagName==='svg')face.append(text('i',m.direction==='up'?'↑':'↓','level-dir'));
  // Ways up and down (ladders, stairs, lifts, passages) are round seals centred on the spot, like the exit signs' arrows.
  if(m.toLevel||['Ladder','Stairs','Lift','Passage','Level connection'].includes(m.category))return L.divIcon({className:'pin level-pin',html:face,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
  return L.divIcon({className:'pin',html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
@@ -241,7 +244,7 @@ function drawMarkers(){
   pin.on('add',()=>pin.getElement()?.setAttribute('aria-label',[markerTitle(m),markerSubtitle(m)].filter(Boolean).join(', ')));
   // A marker that stands for another published map (a dungeon entrance on the world map) opens that map.
   // Personal zone exits keep their popup (Go to, Edit note) instead.
-  const opens=!own&&!alignmentMode&&typeof m.toMap==='string'&&registry.maps.find(c=>c.id===m.toMap);
+  const opens=!own&&!alignmentMode&&typeof m.toMap==='string'&&!m.toPlace&&registry.maps.find(c=>c.id===m.toMap);
   pin.on('click',()=>opens?openMap(opens.id):m.switchOnClick&&!alignmentMode?switchAt(m):choose(m));if(opens)pin.unbindPopup();
   // A floor link switches floor straight away; its details stay in the search menu list.
   if(m.switchOnClick&&!alignmentMode)pin.unbindPopup();

@@ -399,30 +399,39 @@
  },
  {
   "id": "lift-traveler-s-down",
-  "name": "Traveler's Lift",
+  "name": "Traveler's Lift — down to Evershade Weald",
   "category": "Lift",
   "x": 1034,
   "y": 1964,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "travelers-lift",
+  "direction": "down"
  },
  {
   "id": "lift-keeper-s-down",
-  "name": "Keeper's Lift",
+  "name": "Keeper's Lift — down to Evershade Weald",
   "category": "Lift",
   "x": 2020,
   "y": 886,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "keepers-lift",
+  "direction": "down"
  },
  {
   "id": "lift-pixie-down",
-  "name": "Pixie Lift",
+  "name": "Pixie Lift — down to Evershade Weald",
   "category": "Lift",
   "x": 552,
   "y": 852,
   "approximate": true,
-  "note": "Leads down to the forest floor (Evershade Weald map)."
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "pixie-lift",
+  "direction": "down"
  },
  {
   "id": "ramp-01-down",

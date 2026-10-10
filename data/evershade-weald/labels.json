@@ -108,42 +108,6 @@
    "arrow": "southeast"
   },
   {
-   "id": "travelers-lift",
-   "name": "Traveler's Lift to Faelindral",
-   "x": 1795,
-   "y": 2513,
-   "kind": "exit",
-   "priority": 95,
-   "minZoom": 1.5,
-   "arrow": "north",
-   "toMap": "faelindral",
-   "toPlace": "lift-traveler-s-down"
-  },
-  {
-   "id": "keepers-lift",
-   "name": "Keeper's Lift to Faelindral",
-   "x": 2582,
-   "y": 1957,
-   "kind": "exit",
-   "priority": 95,
-   "minZoom": 1.5,
-   "arrow": "north",
-   "toMap": "faelindral",
-   "toPlace": "lift-keeper-s-down"
-  },
-  {
-   "id": "pixie-lift",
-   "name": "Pixie Lift to Faelindral",
-   "x": 1547,
-   "y": 2019,
-   "kind": "exit",
-   "priority": 95,
-   "minZoom": 1.5,
-   "arrow": "north",
-   "toMap": "faelindral",
-   "toPlace": "lift-pixie-down"
-  },
-  {
    "id": "south-stairway",
    "name": "Stairway to Faelindral",
    "x": 2044,
