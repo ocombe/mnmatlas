@@ -30,12 +30,13 @@ Deno.serve(async req=>{
  if(req.method!=='POST')return reply(req,405,{error:'method'});
  if(!token)return reply(req,503,{error:'not-configured'});
  if(!await isAdmin(req))return reply(req,403,{error:'admins-only'});
- // One run at a time: a batch of approvals needs a single run, and a run already waiting picks everything up.
- for(const status of ['queued','in_progress']){
+ // An existing waiting run will read the approvals; a running one has already read its batch.
+ let running=false;
+ for(const status of ['queued','pending','waiting','in_progress']){
   const r=await github('/runs?per_page=1&status='+status,token);if(!r.ok)return reply(req,502,{error:'github'});
-  const runs=await r.json();if(runs?.total_count>0)return reply(req,200,{started:false,running:true});
+  const runs=await r.json();if(runs?.total_count>0){if(status!=='in_progress')return reply(req,200,{started:false,queued:true});running=true;}
  }
  const r=await github('/dispatches',token,{method:'POST',body:JSON.stringify({ref:'main',inputs:{dry_run:'false'}})});
  if(r.status!==204)return reply(req,502,{error:'github'});
- return reply(req,200,{started:true});
+ return reply(req,200,running?{started:true,queued:true}:{started:true});
 });

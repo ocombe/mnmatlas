@@ -763,7 +763,7 @@
  async function loadApproved(){
   const serial=++approvedSerial;let approved=[],pending=[],rejected=[];
   if(user&&config&&!config.zonesFile){
-   const read=async(state,since)=>{let q=client.from('suggestions').select('id,kind,map,level,target_id,payload,status,user_id,author_name,comment,reviewed_at,review_note').eq('status',state).eq('map',config.id);if(since)q=q.gte('reviewed_at',since);const {data,error}=await q.limit(500);if(error)throw error;return Array.isArray(data)?data.map(normaliseSuggestion):[];};
+   const read=async(state,since)=>{let q=client.from('suggestions').select('*').eq('status',state).eq('map',config.id);if(since)q=q.gte('reviewed_at',since);const {data,error}=await q.limit(500);if(error)throw error;return Array.isArray(data)?data.map(normaliseSuggestion):[];};
    try{approved=await read('approved');if(admin)pending=await read('pending');}catch{}
    if(admin)try{rejected=await read('rejected',await publishedSince());}catch{}}
   if(serial!==approvedSerial)return;approvedRows=approved;pendingRows=pending;rejectedRows=rejected;drawApproved();
@@ -822,7 +822,7 @@
    b.disabled=true;
    try{const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error();
     const r=await fetch(publishUrl(),{method:'POST',headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token}}),out=await r.json().catch(()=>({}));
-    status(out.started?'Publishing started: approved changes go live in a few minutes.':out.running?'A publishing run is already going; it picks up everything approved.':'Publishing could not start. Please try again.');}
+    status(out.queued?'Queued after the current run.':out.started?'Publishing started: approved changes go live in a few minutes.':out.running?'A publishing run is already going; it picks up everything approved.':'Publishing could not start. Please try again.');}
    catch{status('Publishing could not start. Please try again.');}
    finally{b.disabled=false;}
   },'primary');
@@ -892,9 +892,10 @@
   try{if(target&&!target.noteType&&categories[target.category]){const face=text('span','','review-icon');face.style.setProperty('--pin',target.color||categories[target.category][1]);face.append(markerSymbol(target));title.append(face);}}catch{}
   title.append(text('span',(p.remove===true?'Removal: ':'')+p.name));return title;
  }
+ function version(q,row){return row.updated_at?q.eq('updated_at',row.updated_at):q;}
  async function reviewAction(row,state,note,card,payload,done){
   for(const b of card.querySelectorAll('button'))b.disabled=true;
-  try{const {data,error}=await client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending').select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);loadApproved();countWaiting();done();}
+  try{const {data,error}=await version(client.from('suggestions').update({status:state,reviewed_at:state==='pending'?null:new Date().toISOString(),review_note:note.trim()||null,...(payload?{payload}:{})}).eq('id',row.id).eq('status',row.status||'pending'),row).select('id');if(error||!data?.length)throw error||Error();card.remove();clearPreview();status({approved:'Suggestion approved for publishing.',pending:'Back in the review queue.',resolved:'Report marked as fixed.',rejected:row.kind==='report'?'Report dismissed.':'Suggestion rejected.'}[state]);loadApproved();countWaiting();done();}
   catch{status('Review could not be saved. Please refresh the list.');for(const b of card.querySelectorAll('button'))b.disabled=false;}
  }
  // On the map, a suggestion can be adjusted before approval (or while approved and not live yet):
@@ -968,7 +969,7 @@
    const actions=text('div','','dialog-actions');if(!fromPin)actions.append(button('Back to the list',close));
    if(!report&&!removal){const save=button(row.status==='approved'?'Save changes':'Save without approving',async()=>{let payload;try{payload=safe();}catch{return;}
      save.disabled=true;
-     try{const {data,error}=await client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status).select('id');if(error||!data?.length)throw error||Error();row.payload=structuredClone(payload);status('Changes saved.');if(fromPin)close();else loadApproved();}
+     try{const {data,error}=await version(client.from('suggestions').update({payload}).eq('id',row.id).eq('status',row.status),row).select('*');if(error||!data?.length)throw error||Error();row.payload=structuredClone(payload);if(data[0].updated_at)row.updated_at=data[0].updated_at;status('Changes saved.');if(fromPin)close();else loadApproved();}
      catch{status('Changes could not be saved. Please refresh the list.');}finally{save.disabled=false;}});actions.append(save);}
    const wrapped=decisions(row,()=>reviewNote.value,bar,safe,next);
    // Someone asking to take it off the map ("remove this", a duplicate): approve it as a removal instead of a text change.

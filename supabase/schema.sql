@@ -42,16 +42,31 @@ create table if not exists public.banned (
  author_name text check (char_length(author_name)<=80),
  banned_at timestamptz not null default now()
 );
+-- Review decisions carry the version that was opened, so a newer correction stays waiting.
+alter table public.suggestions add column if not exists updated_at timestamptz not null default now();
+create or replace function public.stamp_suggestion_update()
+returns trigger language plpgsql set search_path = '' as $$
+begin
+ new.updated_at=clock_timestamp();
+ return new;
+end;
+$$;
+revoke all on function public.stamp_suggestion_update() from public,anon,authenticated;
+drop trigger if exists suggestions_updated_at on public.suggestions;
+create trigger suggestions_updated_at before update on public.suggestions for each row execute function public.stamp_suggestion_update();
+
 -- Kind, status and payload rules live here so re-running this file updates an existing table.
 -- A report says what is wrong with a published marker; it closes as resolved (fixed) or rejected (dismissed).
 alter table public.suggestions drop constraint if exists suggestions_kind_check;
 alter table public.suggestions add constraint suggestions_kind_check check (kind in ('move-marker','move-label','new-marker','edit-marker','edit-label','report'));
 alter table public.suggestions drop constraint if exists suggestions_status_check;
 alter table public.suggestions add constraint suggestions_status_check check (status in ('pending','approved','rejected','published','resolved'));
+-- Existing rows remain readable; the updated rule applies to every new write.
 alter table public.suggestions drop constraint if exists suggestion_payload;
 alter table public.suggestions add constraint suggestion_payload check (coalesce(
  jsonb_typeof(payload)='object' and jsonb_typeof(payload->'name')='string'
  and char_length(payload->>'name') between 1 and 100
+ and (kind='new-marker' or (not payload ? 'bounty' and not payload ? 'priority'))
  and (not payload ? 'note' or (jsonb_typeof(payload->'note')='string' and char_length(payload->>'note')<=2000))
  and case when kind in ('move-marker','move-label') then
   target_id is not null and jsonb_typeof(payload->'from')='array' and jsonb_typeof(payload->'to')='array'
@@ -72,7 +87,7 @@ alter table public.suggestions add constraint suggestion_payload check (coalesce
   and (not payload ? 'arrow' or payload->>'arrow' in ('north','northeast','east','southeast','south','southwest','west','northwest'))
   and (not payload ? 'trade' or (jsonb_typeof(payload->'trade')='string' and char_length(payload->>'trade')<=80))
   and (not payload ? 'color' or payload->>'color' in ('#a04438','#b5861f','#4f7a3a','#385f60','#2f6f9a','#6a4a7a','#6b4f2e','#4d5560'))
- end,false));
+ end,false)) not valid;
 create index if not exists suggestions_user_created on public.suggestions(user_id,created_at);
 create index if not exists suggestions_status_map on public.suggestions(status,map,created_at desc);
 create index if not exists votes_map_target on public.votes(map,target_id);

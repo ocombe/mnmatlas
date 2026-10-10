@@ -42,18 +42,40 @@ jobs:
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "::error::Add the SUPABASE_SERVICE_KEY repository secret first."; exit 1; fi
           if [ "$DRY_RUN" = "true" ]; then node scripts/apply-approved.mjs --dry-run; else node scripts/apply-approved.mjs; fi
-      # Runs even when the step above failed: data written before a failed backend update must be kept so a rerun can finish the batch.
       - name: Save and publish the changes
-        if: ${{ !cancelled() && inputs.dry_run != true }}
+        id: save
+        if: ${{ success() && inputs.dry_run != true }}
+        env:
+          SUPABASE_URL: https://ihdmipwmgsmzugcekwbk.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          git config user.name 'github-actions[bot]'
+          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          save() {
+            git add data
+            if ! git diff --cached --quiet; then git commit -m 'Publish approved community suggestions'; fi
+          }
+          save
+          if ! git push origin HEAD:main; then
+            # Recheck against the edition that won the race, once, before trying the push again.
+            git fetch origin main
+            git reset --hard origin/main
+            node scripts/apply-approved.mjs
+            save
+            git push origin HEAD:main
+          fi
+          # The site is rebuilt only when this run changed its data.
+          if [ "$(git rev-parse HEAD)" != "$GITHUB_SHA" ]; then echo "pushed=true" >> "$GITHUB_OUTPUT"; fi
+      - name: Acknowledge the published suggestions
+        if: ${{ success() && inputs.dry_run != true }}
+        env:
+          SUPABASE_URL: https://ihdmipwmgsmzugcekwbk.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: node scripts/apply-approved.mjs --mark-published .publish/applied.json
+      # A push made by this job does not start other workflows, so start the site publish directly.
+      - name: Publish the site
+        if: ${{ success() && inputs.dry_run != true && steps.save.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |
-          git add data
-          if git diff --cached --quiet; then echo "No approved suggestions to publish."; exit 0; fi
-          git config user.name 'github-actions[bot]'
-          git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
-          git commit -m 'Publish approved community suggestions'
-          git pull --rebase origin main
-          git push origin HEAD:main
-          # A push made by this job does not start other workflows, so start the site publish directly.
           gh workflow run pages.yml --ref main
