@@ -1,0 +1,26 @@
+{
+  "label:zone-great-cavern-sea#deep": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:zone-ail-vorith#deep": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:zone-caves-of-irem#deep": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:zone-underdocks#deep": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ]
+}

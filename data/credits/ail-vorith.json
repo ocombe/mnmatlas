@@ -1,0 +1,264 @@
+{
+  "marker:toilmaster-vorith": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:toilmistress-rallvessa": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-24": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-25": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-26": [
+    {
+      "name": "nephelin3",
+      "what": "added"
+    }
+  ],
+  "marker:community-27": [
+    {
+      "name": "nephelin3",
+      "what": "added"
+    }
+  ],
+  "marker:community-28": [
+    {
+      "name": "nephelin3",
+      "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "removed"
+    }
+  ],
+  "marker:community-40": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-41": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    },
+    {
+      "name": "ocombe",
+      "what": "removed"
+    }
+  ],
+  "marker:community-43": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-44": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-45": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-46": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-47": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-64": [
+    {
+      "name": "cideus.",
+      "what": "added"
+    }
+  ],
+  "marker:community-65": [
+    {
+      "name": "cideus.",
+      "what": "added"
+    },
+    {
+      "name": "cideus.",
+      "what": "moved"
+    }
+  ],
+  "marker:community-67": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-69": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-71": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-72": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-73": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-75": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-77": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-78": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-79": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-80": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "label:community-81": [
+    {
+      "name": "ckalen.",
+      "what": "added"
+    }
+  ],
+  "marker:community-82": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-84": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:community-86": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:community-87": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:community-88": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:community-90": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:community-91": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:community-94": [
+    {
+      "name": "andrewd0450",
+      "what": "added"
+    }
+  ],
+  "marker:nurvol-cereveth": [
+    {
+      "name": null,
+      "what": "removed"
+    }
+  ],
+  "label:to-great-cavern-sea": [
+    {
+      "name": "cideus.",
+      "what": "moved"
+    }
+  ],
+  "marker:community-224": [
+    {
+      "name": "prowlingcactus",
+      "what": "added"
+    }
+  ],
+  "marker:community-225": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-226": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ],
+  "marker:community-227": [
+    {
+      "name": "satoukurotama",
+      "what": "added"
+    }
+  ]
+}

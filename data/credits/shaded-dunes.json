@@ -1,0 +1,20 @@
+{
+  "marker:npc-3": [
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:generic-6-10-3": [
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:npc-2": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ]
+}

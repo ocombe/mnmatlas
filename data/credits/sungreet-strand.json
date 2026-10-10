@@ -1,0 +1,122 @@
+{
+  "marker:npc-2": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-176": [
+    {
+      "name": "theemcredible",
+      "what": "added"
+    }
+  ],
+  "marker:community-177": [
+    {
+      "name": "theemcredible",
+      "what": "added"
+    },
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:community-178": [
+    {
+      "name": "broodje",
+      "what": "added"
+    }
+  ],
+  "marker:community-179": [
+    {
+      "name": "broodje",
+      "what": "added"
+    }
+  ],
+  "marker:npc-4": [
+    {
+      "name": null,
+      "what": "removed"
+    }
+  ],
+  "marker:generic-6-10-7": [
+    {
+      "name": "ocombe",
+      "what": "edited"
+    },
+    {
+      "name": "ocombe",
+      "what": "moved"
+    }
+  ],
+  "marker:ashira-1-5-1": [
+    {
+      "name": "ocombe",
+      "what": "removed"
+    }
+  ],
+  "marker:generic-1-5-1": [
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:npc-5": [
+    {
+      "name": "ocombe",
+      "what": "moved"
+    }
+  ],
+  "marker:community-256": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    },
+    {
+      "name": "ocombe",
+      "what": "moved"
+    },
+    {
+      "name": "ocombe",
+      "what": "moved"
+    },
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:community-259": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    },
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:community-270": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    }
+  ],
+  "marker:community-274": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    }
+  ],
+  "marker:community-275": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    }
+  ],
+  "marker:community-286": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    }
+  ]
+}

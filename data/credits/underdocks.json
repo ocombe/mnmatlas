@@ -1,0 +1,274 @@
+{
+  "marker:wiki-east-bank": [
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:trade-blacksmithing": [
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": "_arinna",
+      "what": "edited"
+    }
+  ],
+  "marker:class-necromancer-cleric-shadowknight": [
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-30": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:trade-lumberjacking": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:wiki-quartermaster#lower": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:wiki-marshall-harding#lower": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:wiki-paymaster-elara-venn#lower": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-36": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-37": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:wiki-butchers": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "label:wiki-west-raft#lower": [
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:wiki-east-raft#lower": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:class-archer-warrior-ranger": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:wiki-marshall-harding": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:community-59": [
+    {
+      "name": "warmtofu",
+      "what": "added"
+    }
+  ],
+  "marker:community-60": [
+    {
+      "name": "warmtofu",
+      "what": "added"
+    }
+  ],
+  "marker:community-61": [
+    {
+      "name": "warmtofu",
+      "what": "added"
+    }
+  ],
+  "marker:community-83": [
+    {
+      "name": "wintermute420",
+      "what": "added"
+    }
+  ],
+  "marker:community-146": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-147": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-148": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-149": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-151": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-152": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-153": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-155": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-156": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-157": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-158": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-159": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-160": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-162": [
+    {
+      "name": "_arinna",
+      "what": "added"
+    }
+  ],
+  "marker:community-166": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-167": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-169": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:wiki-shady": [
+    {
+      "name": null,
+      "what": "removed"
+    }
+  ],
+  "marker:community-187": [
+    {
+      "name": "skegar",
+      "what": "added"
+    }
+  ],
+  "marker:community-188": [
+    {
+      "name": "skegar",
+      "what": "added"
+    }
+  ],
+  "marker:community-189": [
+    {
+      "name": "skegar",
+      "what": "added"
+    }
+  ],
+  "marker:community-229": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    },
+    {
+      "name": "ocombe",
+      "what": "edited"
+    }
+  ],
+  "marker:community-247": [
+    {
+      "name": "heshballantine",
+      "what": "added"
+    }
+  ]
+}
