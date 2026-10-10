@@ -826,5 +826,17 @@
     "level": "lower",
     "wikiId": "npc-1790076527284-6tysj",
     "wiki": "https://monstersandmemories.wiki/npcs/gunder-dinnig"
+  },
+  {
+    "id": "community-247",
+    "community": true,
+    "name": "Mikra Velrane",
+    "category": "Quest",
+    "note": "",
+    "x": 4516,
+    "y": 3788,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/mikra-velrane",
+    "wikiId": "npc-1790076530368-aqgfb"
   }
 ]
