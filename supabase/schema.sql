@@ -6,7 +6,7 @@ create table if not exists public.admins (
 create table if not exists public.suggestions (
  id bigint generated always as identity primary key,
  created_at timestamptz not null default now(),
- user_id uuid not null default auth.uid() references auth.users on delete cascade,
+ user_id uuid default auth.uid() references auth.users on delete set null,
  author_name text check (char_length(author_name)<=80),
  map text not null check (map ~ '^[a-z0-9-]{1,80}$'),
  level text check (level ~ '^[a-z0-9-]{1,80}$'),
@@ -42,6 +42,10 @@ create table if not exists public.banned (
  author_name text check (char_length(author_name)<=80),
  banned_at timestamptz not null default now()
 );
+-- Published changes keep their credit when an account is deleted.
+alter table public.suggestions alter column user_id drop not null;
+alter table public.suggestions drop constraint if exists suggestions_user_id_fkey;
+alter table public.suggestions add constraint suggestions_user_id_fkey foreign key (user_id) references auth.users on delete set null;
 -- Review decisions carry the version that was opened, so a newer correction stays waiting.
 alter table public.suggestions add column if not exists updated_at timestamptz not null default now();
 create or replace function public.stamp_suggestion_update()
@@ -133,12 +137,13 @@ end;
 $$;
 revoke all on function public.clean_suggestion() from public,anon,authenticated;
 
--- A signed-in visitor can delete their own account; suggestions, reports, votes and synced notes go with it (on delete cascade).
+-- A signed-in visitor can delete their account; published changes stay with anonymous credit.
 create or replace function public.delete_my_account()
 returns void language plpgsql security definer set search_path = '' as $$
 declare uid uuid:=auth.uid();
 begin
  if uid is null then raise exception 'Not signed in'; end if;
+ delete from public.suggestions where user_id=uid and status<>'published';
  delete from auth.users where id=uid;
 end;
 $$;
@@ -152,6 +157,8 @@ create or replace function public.guard_own_suggestion_update()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
  if auth.uid() is null or exists (select 1 from public.admins where user_id=auth.uid()) then return new; end if;
+ -- The account is already gone when its foreign key clears the published row's author.
+ if new.user_id is null and old.status='published' and not exists (select 1 from auth.users where id=old.user_id) then return new; end if;
  new.id=old.id; new.created_at=old.created_at; new.user_id=old.user_id; new.author_name=old.author_name;
  new.map=old.map; new.kind=old.kind; new.target_id=old.target_id;
  new.comment=nullif(public.clean_text(new.comment,true),'');

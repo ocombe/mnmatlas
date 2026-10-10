@@ -6,7 +6,8 @@ import vm from 'node:vm';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dryRun=process.argv.includes('--dry-run');
 const args=process.argv.slice(2),url=process.env.SUPABASE_URL,key=process.env.SUPABASE_SERVICE_KEY;
-const fail=message=>{throw new Error(message);};
+const fail=message=>{throw new Error(message);},warning=message=>console.log('::warning::'+String(message).replace(/[\r\n]/g,' '));
+const parse=text=>JSON.parse(text.replace(/^\uFEFF/,''));
 const mark=args[0]==='--mark-published'?args[1]:null;
 if(mark?args.length!==2:args.some(a=>a!=='--dry-run'))fail('Usage: node scripts/apply-approved.mjs [--dry-run | --mark-published <file>]');
 if(!url||!key)fail('Set SUPABASE_URL and SUPABASE_SERVICE_KEY in your environment.');
@@ -23,18 +24,18 @@ function dataPath(path){
  const absolute=resolve(root,path),local=relative(root,absolute);if(local.startsWith('..'+sep)||local==='..')fail('Data file is outside the atlas.');return absolute;
 }
 async function file(path,empty){
- if(!files.has(path)){let original;try{original=await readFile(dataPath(path),'utf8');}catch(e){if(empty===undefined||e.code!=='ENOENT')throw e;original=JSON.stringify(empty,null,2)+'\n';}const spacing=original.match(/\r?\n([ \t]+)\S/);files.set(path,{data:JSON.parse(original),original,indent:spacing?spacing[1]:2,newline:original.includes('\r\n')?'\r\n':'\n',trailing:/\r?\n$/.test(original),changed:false});}
+ if(!files.has(path)){let original;try{original=await readFile(dataPath(path),'utf8');}catch(e){if(empty===undefined||e.code!=='ENOENT')throw e;original=JSON.stringify(empty,null,2)+'\n';}const spacing=original.match(/\r?\n([ \t]+)\S/);files.set(path,{data:parse(original),original,indent:spacing?spacing[1]:2,newline:original.includes('\r\n')?'\r\n':'\n',trailing:/\r?\n$/.test(original),changed:false});}
  if(staged){if(!staged.has(path))staged.set(path,{...files.get(path),data:structuredClone(files.get(path).data)});return staged.get(path);}return files.get(path);
 }
-const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
+const registry=parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
 // Reuse the site's supported categories, trades, arrows and colour palette.
 const context=vm.createContext({URL});
 const app=await readFile(resolve(root,'app.js'),'utf8'),icons=await readFile(resolve(root,'icons.js'),'utf8'),wikiLinks=await readFile(resolve(root,'wiki-links.js'),'utf8');
 vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),context);
 vm.runInContext(icons,context);
-vm.runInContext(await readFile(resolve(root,'changes.js'),'utf8'),context);const {fieldsOf,matchesFrom,conflicts,applyTo,whatOf}=context.atlasChanges;
+vm.runInContext(await readFile(resolve(root,'changes.js'),'utf8'),context);const {buildChanges,fieldsOf,matchesFrom,conflicts,applyTo,whatOf}=context.atlasChanges;
 // Wiki links: only pages on the sites the atlas knows, in the same stored form the site writes.
-vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellsOk=vm.runInContext('sellsOk',context),sellTypes=vm.runInContext('sellTypes',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
+vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellsOk=vm.runInContext('sellsOk',context),sellTypes=vm.runInContext('sellTypes',context),normaliseChange=vm.runInContext('normaliseChange',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
 const base=vm.runInContext('Object.keys(allCategories)',context),supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
 function configuration(row){
@@ -64,11 +65,12 @@ function validatePayload(row,c){
  if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.category==='Personal'||p.trade!==undefined&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
  p.name=clean(p.name);if(p.note!==undefined)p.note=clean(p.note,true);
  if(p.from&&!Array.isArray(p.from))p.from={...p.from,name:clean(p.from.name),...(p.from.note!==undefined?{note:clean(p.from.note,true)}:{})};
- return p;
+ if(row.kind==='new-marker')point([p.x,p.y],c,row.id);else if(row.kind.startsWith('move-')){point(p.from,c,row.id);point(p.to,c,row.id);}
+ return normaliseChange({...row,payload:p}).payload;
 }
 // Every row works on private file copies; a refused row never leaves part of its change behind.
 const original=new Map(),history=new Map();let batch=[],past=null;
-function before(path,m){const key=path+'#'+m.id;if(!original.has(key))original.set(key,structuredClone(m));return original.get(key);}
+function before(path,m,row){const key=path+'#'+runKey(row);if(!original.has(key))original.set(key,structuredClone(m));return original.get(key);}
 const typeKeys=['trade','classes','vendor','sells'];
 function typeFields(m,p,id){
  if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;
@@ -77,12 +79,34 @@ function typeFields(m,p,id){
   if(!sellsOk(p.sells))fail('Unsupported Sells tags for suggestion '+id+'.');if(p.sells)m.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
  return m;
 }
-const runKey=row=>row.map+'#'+(row.level||'')+'#'+(row.kind==='new-marker'?'community-'+row.id:row.target_id);
+const targetKind=row=>row.kind.endsWith('label')||row.kind==='new-marker'&&['label','exit'].includes(row.payload?.noteType)?'label':'marker';
+const runKey=row=>row.runKey||row.map+'#'+targetKind(row)+'#'+(row.kind==='new-marker'?'community-'+row.id:row.target_id);
+// Validate the whole run before any retry can use a later row as a link in its chain.
+async function prepare(row){
+ const c=configuration(row),p=validatePayload(row,c),label=targetKind({...row,payload:p})==='label';
+ if(row.kind==='new-marker')[p.x,p.y]=point([p.x,p.y],c,row.id);
+ else if(row.kind.startsWith('move-')){p.from=point(p.from,c,row.id);p.to=point(p.to,c,row.id);}
+ const f=await file(label?c.labelsFile:c.markersFile),rows=label?f.data?.labels:f.data;
+ if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
+ const m=rows.find(m=>m.id===row.target_id),chip=!label&&c.labelsFile?(await file(c.labelsFile)).data?.trainers?.find(m=>m.id===row.target_id):null;
+ const category=p.category||p.from?.category||m?.category||(chip?'Class trainer':undefined);
+ if(!label&&!row.kind.startsWith('move-')){
+  if(!category&&p.classes!==undefined&&!classesOk(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');
+  if(p.wiki!==undefined||row.kind==='new-marker')p.wiki=wikiOf(p.wiki,row.id);
+  if(p.wikiId!==undefined||row.kind==='new-marker')p.wikiId=wikiIdFrom(p,row.id);
+  if(p.wiki!==undefined&&p.from?.wiki!==undefined)p.from.wiki=wikiOf(p.from.wiki,row.id);
+  const typed=typeFields({category},{...p,category},row.id);for(const k of typeKeys)if(Object.hasOwn(p,k)){if(Object.hasOwn(typed,k))p[k]=typed[k];else delete p[k];}
+  if(p.from&&!Array.isArray(p.from)){p.from=normaliseMarker(p.from);if(p.from.vendor!==undefined)p.from.vendor=vendorKindNow(p.from.vendor);if(Array.isArray(p.from.sells))p.from.sells=[...p.from.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
+ }
+ if(row.kind.startsWith('edit-'))for(const k of ['color','level','arrow','toMap'])if(p[k]!==undefined&&(k==='color'&&!supported.colours.includes(p[k])||k==='level'&&!(c.levels||[]).some(l=>l.id===p[k])||k==='arrow'&&!supported.arrows.includes(p[k])||k==='toMap'&&!registry.maps.some(r=>r.id===p[k])))fail('Unsupported marker fields for suggestion '+row.id+'.');
+ const added=batch.find(r=>r.kind==='new-marker'&&r.map===row.map&&'community-'+r.id===row.target_id),level=!label&&(row.kind==='new-marker'?c.levelId:(m||chip)?.level||added?.level)?'#'+(row.level||''):'';
+ return {...row,payload:p,runKey:row.map+'#'+targetKind({...row,payload:p})+'#'+(row.kind==='new-marker'?'community-'+row.id:row.target_id)+level};
+}
 function laterState(row,state){
- let next=state,chained=false;const changed=new Set();
+ let next=state,chained=false;const changed=new Set(),log=[{id:row.id,fields:fieldsOf(row)}];
  for(const later of batch){if(Number(later.id)<=Number(row.id)||runKey(later)!==runKey(row))continue;
-  const r={...later,payload:normaliseMarker(later.payload)},touched=fieldsOf(r);
-  if(![...touched].every(f=>matchesFrom(r,next,f)))continue;chained=true;for(const f of touched)changed.add(f);next=applyTo(next,r);
+  const r=later,touched=fieldsOf(r);
+  if(conflicts(r,next,log).length||![...touched].every(f=>matchesFrom(r,next,f)))continue;chained=true;for(const f of touched)changed.add(f);next=applyTo(next,r);log.push({id:r.id,fields:touched});
  }
  return {next,chained,changed};
 }
@@ -97,7 +121,7 @@ function superseded(row,m){
 function check(row,m,path){
  const log=history.get(runKey(row))||[],hits=conflicts(row,m,log);if(hits.length)fail('conflicts with #'+hits.join(', #'));
  if(!m)return;
- const was=before(path,m);
+ const was=before(path,m,row);
  for(const field of fieldsOf(row))if(field!=='added'&&!matchesFrom(row,m,field)&&!matchesFrom(row,was,field)){
   if(field==='position')fail('The published position changed after this was sent; check it again.');
   if(field==='type')fail('The published type changed after this was sent; check it again.');
@@ -105,27 +129,23 @@ function check(row,m,path){
  }
 }
 async function applyRow(row){
- const c=configuration(row),p=validatePayload(row,c),id='community-'+row.id;
+ const c=configuration(row),p=row.payload,id='community-'+row.id;
  row={...row,payload:p};
  if(row.kind==='new-marker'){
   const [x,y]=point([p.x,p.y],c,row.id),label=['label','exit'].includes(p.noteType),path=label?c.labelsFile:c.markersFile,f=await file(path),rows=label?f.data.labels:f.data;
   if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
   const existing=rows.find(m=>m.id===id);
+  if(existing)return 'already present';
+  if((await publishedSuggestions()).some(r=>r.payload?.remove===true&&r.map===row.map&&targetKind(r)===targetKind(row)&&r.target_id===id)||(history.get(runKey(row))||[]).some(r=>r.fields.has('removed')))return 'already removed';
   const m={id,community:true,name:clean(p.name),...(label?{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
   if(label&&p.noteType==='exit'){m.arrow=p.arrow||'east';if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
   if(!label){typeFields(m,p,row.id);if(p.color)m.color=p.color;const wiki=wikiOf(p.wiki,row.id),wikiId=wikiIdFrom(p,row.id);if(wiki){m.wiki=wiki;if(wikiId)m.wikiId=wikiId;}}
-  if(existing){
-   if(hash(existing)===hash(m))return 'already present';
-   const {next,chained}=laterState(row,m);delete next.removed;
-   if(chained&&hash(existing)===hash(next))return 'already superseded';
-   rows[rows.indexOf(existing)]=m;f.changed=true;return label?'place name amended':'marker amended';
-  }
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
  }
  const label=row.kind.endsWith('label'),path=label?c.labelsFile:c.markersFile,f=await file(path),rows=label?f.data?.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
- let m=rows.find(m=>m.id===row.target_id&&(!c.levels||!m.level||m.level===c.levelId)),mf=f,mrows=rows;
- const lf=c.labelsFile?await file(c.labelsFile):null,chips=lf?.data?.trainers,chip=chips?.find(t=>t.id===row.target_id&&(!c.levels||!t.level||t.level===c.levelId));
+ let m=rows.find(m=>m.id===row.target_id&&(fieldsOf(row).has('level')||!c.levels||!m.level||m.level===c.levelId)),mf=f,mrows=rows;
+ const lf=c.labelsFile?await file(c.labelsFile):null,chips=lf?.data?.trainers,chip=chips?.find(t=>t.id===row.target_id&&(fieldsOf(row).has('level')||!c.levels||!t.level||t.level===c.levelId));
  if(!m&&!label&&chip){m=chip;mf=lf;mrows=chips;}
  const live=m&&m===chip?{...m,name:m.name||m.building||'',category:m.category||'Class trainer'}:m;
  const edit=row.kind.startsWith('edit-'),fields=fieldsOf(row);
@@ -142,7 +162,7 @@ async function applyRow(row){
   if(fields.has('name'))next.name=clean(p.name);
   if(fields.has('note'))next.note=clean(p.note||'',true);
   if(typed){next.category=typed.category;for(const k of typeKeys)if(Object.hasOwn(typed,k))next[k]=typed[k];else delete next[k];}
-  if(fields.has('wiki')){if(wiki){next.wiki=wiki;if(wikiId)next.wikiId=wikiId;else if(wiki!==m.wiki)delete next.wikiId;}else{delete next.wiki;delete next.wikiId;}}
+  if(fields.has('wiki')){if(wiki){next.wiki=wiki;if(wikiId)next.wikiId=wikiId;else if(p.wikiId!==undefined||wiki!==m.wiki)delete next.wikiId;}else{delete next.wiki;delete next.wikiId;}}
   for(const k of ['color','level','arrow','toMap'])if(fields.has(k))next[k]=p[k];
   // Retries after a successful push can find the desired values already on the map.
   const hits=conflicts(row,live,history.get(runKey(row))||[]);if(hits.length)fail('conflicts with #'+hits.join(', #'));
@@ -162,20 +182,20 @@ async function applyRow(row){
 }
 async function apply(row){
  staged=new Map();try{const result=await applyRow(row);for(const [path,f] of staged)files.set(path,f);
-  const key=runKey(row),log=history.get(key)||[];log.push({id:row.id,fields:result==='already superseded'?new Set():fieldsOf({...row,payload:normaliseMarker(row.payload)})});history.set(key,log);return result;
+  const key=runKey(row),log=history.get(key)||[];log.push({id:row.id,fields:result==='already superseded'||row.kind==='new-marker'&&['already present','already removed'].includes(result)?new Set():fieldsOf(row)});history.set(key,log);return result;
  }finally{staged=null;}
 }
 // Credits are kept in the database so a deleted account's rows lose their user and show as Anonymous;
 // the public list is rebuilt from them on every run, also when nothing new was approved.
-async function updateContributors(credited){
+async function updateContributors(credited,applied){
  let log=[];
  try{
   if(!dryRun&&credited.length)await request('credits?on_conflict=suggestion_id',{method:'POST',headers:{Prefer:'resolution=ignore-duplicates,return=minimal'},body:JSON.stringify(credited)});
   for(let offset=0;;offset+=1000){const page=await request('credits?select=suggestion_id,user_id,name&order=suggestion_id.asc&limit=1000&offset='+offset);if(!Array.isArray(page))fail('Invalid credits response.');log.push(...page);if(page.length<1000)break;}
  }catch(e){fail('Contributors not updated: '+e.message);}
  for(const c of credited)if(!log.some(r=>r.suggestion_id===c.suggestion_id))log.push(c);
- const people=new Map();
- for(const r of log){const key=r.user_id||'anonymous',p=people.get(key)||{name:'',count:0};p.count++;if(r.user_id)p.name=clean(r.name||'').slice(0,80)||p.name;people.set(key,p);}
+ const live=new Set([...(await publishedSuggestions()).map(r=>String(r.id)),...applied.map(r=>String(r.id))]),people=new Map();
+ for(const r of log){if(!live.has(String(r.suggestion_id)))continue;const key=r.user_id||'anonymous',p=people.get(key)||{name:'',count:0};p.count++;if(r.user_id)p.name=clean(r.name||'').slice(0,80)||p.name;people.set(key,p);}
  const list=[...people].map(([key,p])=>({name:key==='anonymous'||!p.name?'Anonymous':p.name,count:p.count})).reduce((all,p)=>{const same=p.name==='Anonymous'&&all.find(r=>r.name==='Anonymous');if(same)same.count+=p.count;else all.push(p);return all;},[]).sort((a,b)=>b.count-a.count||a.name.localeCompare(b.name));
  const f=await file('data/contributors.json',{contributors:[]});
  if(JSON.stringify(f.data.contributors||[])!==JSON.stringify(list)){f.data={contributors:list};f.changed=true;console.log((dryRun?'Would list ':'Listing ')+list.length+' contributors.');}
@@ -184,13 +204,20 @@ async function updateContributors(credited){
 // Hash sorted keys so the database's JSON key order cannot change the version we applied.
 function hash(payload){const stable=v=>Array.isArray(v)?v.map(stable):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])])):v;return createHash('sha256').update(JSON.stringify(stable(payload))).digest('hex');}
 async function markPublished(path){
- const applied=JSON.parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');
+ const applied=parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');
  for(const a of applied){
   if(!/^\d+$/.test(String(a.id))||!/^[a-f0-9]{64}$/.test(a.payloadHash))fail('Invalid applied entry.');
-  const rows=await request('suggestions?status=eq.approved&id=eq.'+a.id+'&select=*'),row=rows?.[0];
-  if(!row||row.status!=='approved'||hash(row.payload)!==a.payloadHash)continue;
-  // The payload predicate closes the gap between this read and the acknowledgement.
-  await request('suggestions?status=eq.approved&id=eq.'+a.id+'&payload=eq.'+encodeURIComponent(JSON.stringify(row.payload))+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):''),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status:'published'})});
+  try{
+   const rows=await request('suggestions?id=eq.'+a.id+'&select=*'),row=rows?.[0];if(!row||row.status==='published')continue;
+   const same=hash(row.payload)===a.payloadHash&&row.updated_at===a.updated_at&&row.status==='approved',body={status:'published'};
+   if(!same){
+    body.review_note='Published as approved on '+(a.appliedAt||new Date().toISOString())+'; a later change was not included. Edit the marker again to change it.';
+    // Published history describes the live version, including the place and author credit it earned.
+    if(a.version)for(const k of ['map','level','kind','target_id','payload','credit','author_name'])if(Object.hasOwn(a.version,k))body[k]=a.version[k];
+   }
+   // A short version predicate closes the gap between this read and the acknowledgement.
+   await request('suggestions?id=eq.'+a.id+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):'&status=eq.'+encodeURIComponent(row.status)),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+  }catch(e){warning('Suggestion '+a.id+' could not be acknowledged: '+e.message);}
  }
 }
 async function updateCredits(applied,log){
@@ -200,7 +227,7 @@ async function updateCredits(applied,log){
  for(const r of [...rows.values()].sort((a,b)=>Number(a.id)-Number(b.id))){
   if(r.kind==='report'||!maps.has(r.map))continue;const id=r.kind==='new-marker'?'community-'+r.id:r.target_id;if(!id)continue;
   const credit=names.get(String(r.id)),name=r.credit===true&&r.user_id&&credit?.user_id?clean(credit.name||'').slice(0,80)||null:null;
-  const map=maps.get(r.map);if(!Object.hasOwn(map,id))Object.defineProperty(map,id,{value:[],enumerable:true});map[id].push({name,what:whatOf(r)});
+  const map=maps.get(r.map),key=targetKind(r)+':'+id;if(!Object.hasOwn(map,key))Object.defineProperty(map,key,{value:[],enumerable:true});map[key].push({name,what:whatOf(r)});
  }
  for(const [map,data] of maps){const f=await file('data/credits/'+map+'.json',{});if(JSON.stringify(f.data)!==JSON.stringify(data)){f.data=data;f.changed=true;}}
 }
@@ -240,15 +267,19 @@ async function main(){
  const rows=[];let after='0';
  while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch);if(batch.length<1000)break;after=batch.at(-1).id;}
  if(!rows.length)console.log('No approved suggestions.');
- batch=[...new Map([...(await publishedSuggestions()),...rows].map(r=>[String(r.id),r])).values()].sort((a,b)=>Number(a.id)-Number(b.id));
  // A suggestion that cannot apply goes back to the review queue with the reason; the others still publish.
- const applied=[],credited=[],held=[];
- for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');let result;
-  try{result=await apply(row);}catch(e){held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480)});console.log((process.env.GITHUB_ACTIONS?'::warning::':'')+'Suggestion '+row.id+' goes back to review: '+e.message);continue;}
-  applied.push({id:row.id,note:result,payloadHash:hash(row.payload)});console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
+ batch=[...(await publishedSuggestions()),...rows];
+ const applied=[],credited=[],held=[],ready=new Map(),hold=(row,e)=>{held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480)});warning('Suggestion '+row.id+' goes back to review: '+e.message);};
+ for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');try{ready.set(String(row.id),await prepare(row));}catch(e){hold(row,e);}}
+ // The ledger accepts the same validated rows as the job; invalid rows have already been held.
+ const ledger=buildChanges({rows,normalise:row=>ready.get(String(row.id))||null});
+ batch=ledger.targets().flatMap(t=>t.rows);for(const row of await publishedSuggestions())if(!ready.has(String(row.id)))try{batch.push(await prepare(row));}catch{}batch.sort((a,b)=>Number(a.id)-Number(b.id));
+ for(const row of rows){const prepared=ready.get(String(row.id));if(!prepared)continue;let result;
+  try{result=await apply(prepared);}catch(e){hold(row,e);batch=batch.filter(r=>String(r.id)!==String(row.id));continue;}
+  applied.push({id:row.id,note:result,payloadHash:hash(row.payload),...(row.updated_at?{updated_at:row.updated_at}:{}),appliedAt:new Date().toISOString(),version:Object.fromEntries(['map','level','kind','target_id','payload','credit','author_name'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]))});console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
   // Credits count published changes from people who ticked "Credit me as a contributor".
   const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&row.user_id)credited.push({suggestion_id:row.id,user_id:row.user_id,name:who});}
- const log=await updateContributors(credited);
+ const log=await updateContributors(credited,applied);
  await updateCredits(rows.filter(r=>applied.some(a=>String(a.id)===String(r.id))),log||[]);
  const changed=[...files].filter(([,f])=>f.changed);
  if(!dryRun){
@@ -256,7 +287,7 @@ async function main(){
   await mkdir(resolve(root,'.publish'),{recursive:true});
   await writeFile(resolve(root,'.publish/applied.json'),JSON.stringify(applied,null,2)+'\n');
   await writeFile(resolve(root,'.publish/held.json'),JSON.stringify(held,null,2)+'\n');
-  for(const h of held){const row=rows.find(r=>r.id===h.id);await request('suggestions?status=eq.approved&id=eq.'+h.id+'&payload=eq.'+encodeURIComponent(JSON.stringify(row.payload)),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status:'pending',review_note:h.note})});}
+  for(const h of held){const row=rows.find(r=>r.id===h.id);try{await request('suggestions?status=eq.approved&id=eq.'+h.id+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):''),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status:'pending',review_note:h.note})});}catch(e){warning('Suggestion '+h.id+' could not be sent back to review: '+e.message);}}
 
  }
  console.log((dryRun?'Dry run: ':'Complete: ')+applied.length+' suggestions, '+(held.length?held.length+' back to review, ':'')+changed.length+' data files'+(dryRun?' would change.':' changed.'));

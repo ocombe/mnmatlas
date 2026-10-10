@@ -41,4 +41,35 @@ alter table public.suggestions add constraint suggestion_payload check (coalesce
   and (not payload ? 'color' or payload->>'color' in ('#a04438','#b5861f','#4f7a3a','#385f60','#2f6f9a','#6a4a7a','#6b4f2e','#4d5560'))
  end,false)) not valid;
 
+-- Published changes keep their credit when an account is deleted.
+alter table public.suggestions alter column user_id drop not null;
+alter table public.suggestions drop constraint if exists suggestions_user_id_fkey;
+alter table public.suggestions add constraint suggestions_user_id_fkey foreign key (user_id) references auth.users on delete set null;
+create or replace function public.delete_my_account()
+returns void language plpgsql security definer set search_path = '' as $$
+declare uid uuid:=auth.uid();
+begin
+ if uid is null then raise exception 'Not signed in'; end if;
+ delete from public.suggestions where user_id=uid and status<>'published';
+ delete from auth.users where id=uid;
+end;
+$$;
+revoke all on function public.delete_my_account() from public,anon,authenticated;
+grant execute on function public.delete_my_account() to authenticated;
+
+create or replace function public.guard_own_suggestion_update()
+returns trigger language plpgsql security definer set search_path = public as $$
+begin
+ if auth.uid() is null or exists (select 1 from public.admins where user_id=auth.uid()) then return new; end if;
+ -- The account is already gone when its foreign key clears the published row's author.
+ if new.user_id is null and old.status='published' and not exists (select 1 from auth.users where id=old.user_id) then return new; end if;
+ new.id=old.id; new.created_at=old.created_at; new.user_id=old.user_id; new.author_name=old.author_name;
+ new.map=old.map; new.kind=old.kind; new.target_id=old.target_id;
+ new.comment=nullif(public.clean_text(new.comment,true),'');
+ if jsonb_typeof(new.payload->'name')='string' then new.payload=jsonb_set(new.payload,'{name}',to_jsonb(public.clean_text(new.payload->>'name')));end if;
+ if jsonb_typeof(new.payload->'note')='string' then new.payload=jsonb_set(new.payload,'{note}',to_jsonb(public.clean_text(new.payload->>'note',true)));end if;
+ return new;
+end;
+$$;
+revoke all on function public.guard_own_suggestion_update() from public,anon,authenticated;
 commit;

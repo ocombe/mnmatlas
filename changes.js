@@ -28,31 +28,36 @@
   const out=new Set(),fields=fieldsOf(row);
   for(const h of history||[]){
    if(h.fields.has('removed')){out.add(h.id);continue;}
-   for(const f of fields)if(!matchesFrom(row,state,f)&&(h.fields.has(f)||h.fields.has('added')||f==='removed'&&(h.fields.has('name')||has(row.payload?.from,'note')&&h.fields.has('note'))))out.add(h.id);
+   for(const f of fields)if((!matchesFrom(row,state,f)||f==='type'&&h.fields.has('type')&&!keysFor(state||{}).every(k=>has(row.payload?.from,k)))&&(h.fields.has(f)||h.fields.has('added')||f==='removed'&&(h.fields.has('name')||has(row.payload?.from,'note')&&h.fields.has('note'))))out.add(h.id);
   }
   return [...out];
  }
  function applyTo(state,row){
   const p=row.payload||{},fields=fieldsOf(row),out=copy(state)||{};
-  if(fields.has('added')){for(const [k,v] of Object.entries(p))if(!['from','bounty','priority','remove'].includes(k))out[k]=copy(v);out.id='community-'+row.id;if(row.level&&!has(p,'level'))out.level=row.level;if(['label','exit'].includes(p.noteType))out.kind=p.noteType==='exit'?'exit':'building';out.removed=false;}
+  if(fields.has('added')){
+   const label=['label','exit'].includes(p.noteType);Object.assign(out,{id:'community-'+row.id,community:true,name:p.name,note:p.note||'',x:Math.round(p.x),y:Math.round(p.y),...(row.level?{level:row.level}:{})});
+   if(label){Object.assign(out,{kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0});if(p.noteType==='exit'){out.arrow=p.arrow||'east';if(p.toMap)out.toMap=p.toMap;}}
+   else{out.category=p.category;for(const k of [...keysFor(p).slice(1),'color','wiki','wikiId'])if(has(p,k)&&p[k])out[k]=copy(p[k]);if(!out.wiki){delete out.wiki;delete out.wikiId;}}out.removed=false;
+  }
   else for(const f of fields){
    if(f==='removed')out.removed=true;
-   else if(f==='position')[out.x,out.y]=copy(p.to);
+   else if(f==='position')[out.x,out.y]=p.to.map(Math.round);
    else if(f==='type'){if(has(p,'category'))for(const k of typeKeys)delete out[k];for(const k of keysFor(p))if(has(p,k))out[k]=copy(p[k]);}
-   else if(f==='wiki'){const changed=has(p,'wiki')&&p.wiki!==out.wiki;for(const k of ['wiki','wikiId'])if(has(p,k))out[k]=p[k];else if(k==='wikiId'&&changed)delete out[k];if(!out.wiki)delete out.wikiId;}
+   else if(f==='wiki'){const changed=has(p,'wiki')&&p.wiki!==out.wiki;for(const k of ['wiki','wikiId'])if(has(p,k))out[k]=p[k];else if(k==='wikiId'&&changed)delete out[k];if(!out.wikiId)delete out.wikiId;if(!out.wiki){delete out.wiki;delete out.wikiId;}}
    else out[f]=copy(p[f]);
   }
+  if(fields.size&&!fields.has('removed'))out.community=true;
   return out;
  }
  const whatOf=row=>row.kind==='new-marker'?'added':row.payload?.remove===true?'removed':row.kind.startsWith('move-')?'moved':'edited';
- function buildChanges({mapId,levelId,markers=[],labels=[],trainers=[],publishedPositions,publishedLabelPositions,rows=[],includePending=false}){
+ function buildChanges({mapId,levelId,markers=[],labels=[],trainers=[],publishedPositions,publishedLabelPositions,rows=[],includePending=false,normalise=row=>row}){
   const all=new Map(),byRow=new Map(),newKinds=new Map();
   const here=p=>!levelId||!p.level||p.level===levelId,position=(points,id)=>points?.get?points.get(id):points?.[id];
   function target(kind,id,published=null,isNew=false){const key=kind+':'+id;if(!all.has(key))all.set(key,{key,kind,id,isNew,published,effective:copy(published)||{removed:false},proposed:copy(published)||{removed:false},rows:[],changed:new Set(),contributors:[],missing:!published&&!isNew});return all.get(key);}
   for(const [kind,list,points] of [['marker',markers,publishedPositions],['label',Array.isArray(labels)?labels:labels.labels||[],publishedLabelPositions],['chip',trainers,null]])for(const p of list)if(here(p)){
    const kept=copy(p),at=position(points,p.id);if(kind!=='chip'){delete kept.x;delete kept.y;if(at)[kept.x,kept.y]=copy(at);}else{kept.name=kept.name||kept.building||'';kept.category=kept.category||'Class trainer';}target(kind,p.id,kept);
   }
-  const sorted=rows.filter(r=>(!mapId||r.map===mapId)&&(!levelId||r.level===levelId)).slice().sort((a,b)=>Number(a.id)-Number(b.id));
+  const sorted=rows.map(row=>normalise(copy(row))).filter(Boolean).filter(r=>(!mapId||r.map===mapId)&&(!levelId||r.level===levelId)).slice().sort((a,b)=>Number(a.id)-Number(b.id));
   for(const row of sorted)if(row.kind==='new-marker')newKinds.set('community-'+row.id,['label','exit'].includes(row.payload?.noteType)?'label':'marker');
   for(const row of sorted){
    if(!['new-marker','move-marker','move-label','edit-marker','edit-label'].includes(row.kind))continue;
@@ -66,7 +71,10 @@
    const start=()=>({...copy(t.published),removed:false}),history=[];let proposed=start(),effective=start();
    for(const r of t.rows){
     if(!['pending','approved'].includes(r.status))continue;
-    r.conflictsWith=conflicts(r,proposed,history);proposed=applyTo(proposed,r);history.push(r);
+    r.conflictsWith=conflicts(r,proposed,history);if(r.conflictsWith.length)continue;
+    // An unacknowledged addition never rebuilds a place already in the published file.
+    if(r.fields.has('added')&&t.published)continue;
+    proposed=applyTo(proposed,r);history.push(r);
     if(r.status==='approved'||includePending)effective=applyTo(effective,r);
     for(const f of r.fields)t.changed.add(f);
    }

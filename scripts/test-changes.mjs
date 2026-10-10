@@ -18,8 +18,8 @@ const fixture=rows=>({mapId:'bay',levelId:'lower',markers:[marker],labels:[label
  assert.deepEqual([set.get('label:hall').published.x,set.get('label:hall').published.y],[3,4]);
 }
 {
- const set=buildChanges(fixture([edit(1,'First'),edit(2,'Second'),move(3,[10,20],[30,40]),move(4,[10,20],[50,60]),edit(5,'Chained','Second')])),t=set.get('marker:bank');
- assert.deepEqual(plain(t.rows.map(r=>r.conflictsWith)),[[],[1],[],[3],[]]);assert.equal(t.effective.name,'Chained');
+ const set=buildChanges(fixture([edit(1,'First'),edit(2,'Second'),move(3,[10,20],[30,40]),move(4,[10,20],[50,60]),edit(5,'Chained','First')])),t=set.get('marker:bank');
+ assert.deepEqual(plain(t.rows.map(r=>r.conflictsWith)),[[],[1],[],[3],[]]);assert.equal(t.effective.name,'Chained');assert.equal(t.effective.x,30);assert.equal(t.proposed.x,30);
 }
 {
  const removed=row(2,'edit-marker',{name:'First',remove:true,from:{name:'First',note:'By the gate'}}),t=buildChanges(fixture([edit(1,'First'),removed,move(3,[10,20],[30,40]),edit(4,'Last','First')])).get('marker:bank');
@@ -45,6 +45,28 @@ const fixture=rows=>({mapId:'bay',levelId:'lower',markers:[marker],labels:[label
  assert.deepEqual(fields(row(3,'edit-marker',{name:'Bank',wiki:'page',wikiId:'id',from:{name:'Bank',wiki:''}})),['wiki']);
  const linked={...marker,wiki:'old-page',wikiId:'old-id'},input=fixture([row(4,'edit-marker',{name:'Bank',wiki:'new-page',from:{name:'Bank',wiki:'old-page'}})]);input.markers=[linked];assert.equal(buildChanges(input).get('marker:bank').effective.wikiId,undefined);
  const history=buildChanges(fixture([edit(9,'Old','Bank',{status:'published'}),edit(10,'Rejected','Bank',{status:'rejected'})]));assert.equal(history.targets().length,0);assert.equal(history.get('marker:bank').effective.name,'Bank');
+}
+// Older type bases cannot chain after a type edit; a complete current base can.
+{
+ const trainer={...marker,category:'Class trainer',classes:['Monk']},change=(id,classes,from)=>row(id,'edit-marker',{name:'Bank',category:'Class trainer',classes,from:{name:'Bank',...from}});
+ const input={...fixture([]),markers:[trainer]},first=change(1,['Cleric'],{category:'Class trainer'}),second=change(2,['Druid'],{category:'Class trainer'}),third=change(3,['Enchanter'],{category:'Class trainer',classes:['Cleric']});
+ const t=buildChanges({...input,rows:[first,second,third]}).get('marker:bank');assert.deepEqual(plain(t.rows.map(r=>r.conflictsWith)),[[],[1],[]]);assert.deepEqual(plain(t.effective.classes),['Enchanter']);
+ const vendor={...marker,category:'Vendor',vendor:'Baker',sells:['Food & drink']},v=(id,vendor,from)=>row(id,'edit-marker',{name:'Bank',category:'Vendor',vendor,sells:['Recipes'],from:{name:'Bank',...from}});
+ const t2=buildChanges({...fixture([]),markers:[vendor],rows:[v(1,'Cook',{category:'Vendor'}),v(2,'Baker',{category:'Vendor'}),v(3,'Grocer',{category:'Vendor',vendor:'Cook',sells:['Recipes']})]}).get('marker:bank');assert.deepEqual(plain(t2.rows.map(r=>r.conflictsWith)),[[],[1],[]]);assert.equal(t2.effective.vendor,'Grocer');
+ const trade={...marker,category:'Tradeskill',trade:'Mining'},tr=(id,trade,from)=>row(id,'edit-marker',{name:'Bank',category:'Tradeskill',trade,from:{name:'Bank',...from}});
+ const t3=buildChanges({...fixture([]),markers:[trade],rows:[tr(1,'Fishing',{category:'Tradeskill'}),tr(2,'Cooking',{category:'Tradeskill'})]}).get('marker:bank');assert.deepEqual(plain(t3.rows[1].conflictsWith),[1]);assert.equal(t3.effective.trade,'Fishing');
+}
+// A refused rename never supplies the base for another rename, and additions leave live places alone.
+{
+ const t=buildChanges(fixture([edit(1,'First'),edit(2,'Second'),edit(3,'Third','Second'),edit(4,'Fourth','First')])).get('marker:bank');assert.deepEqual(plain(t.rows.map(r=>r.conflictsWith)),[[],[1],[1],[]]);assert.equal(t.effective.name,'Fourth');assert.equal(t.proposed.name,'Fourth');
+ const add=row(10,'new-marker',{name:'Old camp',category:'Bank',x:1.3,y:2.7}),id='community-10';
+ const t2=buildChanges({...fixture([add]),markers:[{id,name:'Live camp',category:'Inn'}],publishedPositions:new Map([[id,[4,5]]])}).get('marker:'+id);assert.equal(t2.effective.name,'Live camp');assert.equal(t2.effective.category,'Inn');assert.equal(t2.effective.x,4);
+ const rounded=buildChanges(fixture([move(1,[10.4,19.6],[30.4,40.6]),move(2,[30.3,40.7],[50.2,60.8])])).get('marker:bank');assert.deepEqual([rounded.effective.x,rounded.effective.y],[50,61]);assert(rounded.rows.every(r=>!r.conflictsWith.length));
+}
+// The caller may normalise valid rows or exclude invalid rows before the ledger chains them.
+{
+ const seen=[],t=buildChanges({...fixture([edit(1,'  First  '),edit(2,'Invalid'),edit(3,'Third','First')]),normalise:r=>{seen.push(r.id);if(r.id===2)return null;r.payload.name=r.payload.name.trim();return r;}}).get('marker:bank');assert.deepEqual(seen,[1,2,3]);assert.equal(t.effective.name,'Third');assert.equal(t.rows.length,2);assert(t.rows.every(r=>!r.conflictsWith.length));
+ const sameId=buildChanges({...fixture([row(1,'edit-label',{name:'Great bank',remove:true,from:{name:'Hall'}},{target_id:'bank'}),edit(2,'Bay bank')]),labels:[{...label,id:'bank'}],publishedLabelPositions:new Map([['bank',[3,4]]])});assert(sameId.get('label:bank').effective.removed);assert.equal(sameId.get('marker:bank').effective.name,'Bay bank');assert(!sameId.forRow(2).rows[0].conflictsWith.length);
 }
 for(const [a,b] of [['',''],['Old hall','New hall'],['Same  words','Same words!'],['','Hello'],['Gone','']]){
  const diff=diffWords(a,b);assert.equal(diff.filter(r=>r.op!=='ins').map(r=>r.text).join(''),a);assert.equal(diff.filter(r=>r.op!=='del').map(r=>r.text).join(''),b);assert(diff.every(r=>['same','del','ins'].includes(r.op)));

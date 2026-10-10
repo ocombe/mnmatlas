@@ -51,9 +51,11 @@ jobs:
         run: |
           git config user.name 'github-actions[bot]'
           git config user.email '41898282+github-actions[bot]@users.noreply.github.com'
+          committed=false
           save() {
+            committed=false
             git add data
-            if ! git diff --cached --quiet; then git commit -m 'Publish approved community suggestions'; fi
+            if ! git diff --cached --quiet; then git commit -m 'Publish approved community suggestions'; committed=true; fi
           }
           save
           if ! git push origin HEAD:main; then
@@ -65,7 +67,7 @@ jobs:
             git push origin HEAD:main
           fi
           # The site is rebuilt only when this run changed its data.
-          if [ "$(git rev-parse HEAD)" != "$GITHUB_SHA" ]; then echo "pushed=true" >> "$GITHUB_OUTPUT"; fi
+          if [ "$committed" = "true" ]; then echo "pushed=true" >> "$GITHUB_OUTPUT"; fi
       - name: Acknowledge the published suggestions
         if: ${{ success() && inputs.dry_run != true }}
         env:

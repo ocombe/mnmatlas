@@ -70,6 +70,15 @@ const vendorKindOk=v=>v===undefined||vendorKindList.includes(vendorKindNow(v));
 const sellTypes=['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Weapons'];
 const sellsOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=sellTypes.length&&new Set(v).size===v.length&&[...v].every(t=>sellTypes.includes(t));
 const vendorWords=kind=>{const g=vendorGroupOf(kind);return g?[kind,g,...vendorKinds[g][kind]].join(' '):'';};
+// Stored suggestions and the review ledger use the same clean text, links and type names.
+function normaliseChange(row){
+ const clean=(v,multiline)=>{const t=String(v).normalize('NFC').replace(/\r\n?/g,'\n').replace(/[\u0000-\u0008\u000b-\u001f\u007f-\u009f\u00ad\u061c\u180e\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff<>]/g,'');return multiline?t.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():t.replace(/\s+/g,' ').trim();};
+ const normal=p=>{p=normaliseMarker({...p});for(const k of ['name','note'])if(typeof p[k]==='string')p[k]=clean(p[k],k==='note');
+  if(p.wiki!==undefined){const link=wikiAddress(p.wiki);if(link!==null)p.wiki=link;}if(p.wikiId!==undefined){const id=wikiIdOf(p.wikiId);if(id!==null)p.wikiId=id;}
+  if(p.vendor!==undefined)p.vendor=vendorKindNow(p.vendor);if(Array.isArray(p.sells))p.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));return p;};
+ const p=normal(row.payload);if(Array.isArray(p.from))p.from=p.from.map(Math.round);else if(p.from)p.from=normal(p.from);
+ if(Array.isArray(p.to))p.to=p.to.map(Math.round);if(row.kind==='new-marker'){p.x=Math.round(p.x);p.y=Math.round(p.y);}return {...row,payload:p};
+}
 // The kind a vendor's name or note names, the longest words first ("used weapons" before "weapon"); '' if none.
 const vendorForms=Object.values(vendorKinds).flatMap(g=>Object.entries(g).flatMap(([kind,forms])=>forms.map(f=>[f,kind]))).sort((a,b)=>b[0].length-a[0].length);
 function vendorKindNamed(words){
