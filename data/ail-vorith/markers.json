@@ -744,5 +744,25 @@
     "sells": [
       "Bags"
     ]
+  },
+  {
+    "id": "community-231",
+    "community": true,
+    "name": "Deepfisher Garina",
+    "category": "Tradeskill",
+    "note": "in the docks area under the city",
+    "x": 4013,
+    "y": 2556,
+    "trade": "Fishing"
+  },
+  {
+    "id": "community-232",
+    "community": true,
+    "name": "a fishing supplier",
+    "category": "Vendor",
+    "note": "",
+    "x": 4024,
+    "y": 2553,
+    "vendor": "Fishing vendor"
   }
 ]
