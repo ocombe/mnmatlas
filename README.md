@@ -45,6 +45,8 @@ When accounts are enabled, **Sign in** in the top bar (Discord) lets you **Repor
 
 **Copy link** and **Share this view** hand out the map's own address. Each `<map-id>/index.html` is the full atlas page with that map's title and link preview card (`assets/cards/<map-id>.jpg`, 1200×630); these pages and `404.html` (which opens a map whose name was typed in another case) are built from `index.html` by `scripts/make-share-pages.mjs` and are not kept in the repo. GitHub runs it on every push to `main` and publishes the result (`.github/workflows/pages.yml`; Pages source: GitHub Actions). Run `node scripts/make-share-pages.mjs` locally to preview the map addresses. A new map needs its card, or publishing stops with an error and the current site stays up.
 
+**What's new.** `data/changelog.json` lists the atlas's changes, newest first: a date, a short title, one or two sentences and the maps it touches. Every publish adds an entry for what it changes; the publishing job will add its own line for community changes once the notices panel ships.
+
 Public settings live in `config.js`; empty values disable their features. See [Supabase setup and access checks](supabase/README.md) and [publishing approved suggestions](scripts/README.md). To enable visit stats, set `goatcounter` to your GoatCounter site code (just the code, not a URL). Counts are anonymous, use no cookies, and record map/level visits and named actions without search text, note text or coordinates. Localhost visits are skipped. Only the optional counter script is loaded remotely, from `gc.zgo.at`; it uses [GoatCounter's manual count API](https://www.goatcounter.com/help/js).
 
 Credits and licences

@@ -1,0 +1,53 @@
+{
+ "entries": [
+  {
+   "date": "2026-10-10",
+   "title": "Lifts, bridges and stairways as travel seals",
+   "text": "Between Evershade Weald and Faelindral, lifts, bridges and stairways are now round seals with an up or down mark; their popup takes you to the matching spot on the other map. Two signs that led nowhere were taken down in the Underdocks and Keeper's Bight.",
+   "maps": [
+    "evershade-weald",
+    "faelindral",
+    "underdocks",
+    "keepers-bight"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "title": "Harbour signs show departures",
+   "text": "Each boat dock lists its sailing times and stops, from Night Harbor to Keeper's Bight and down in the Deep.",
+   "maps": [
+    "night-harbor",
+    "keepers-bight",
+    "underdocks",
+    "ail-vorith",
+    "great-cavern-sea"
+   ]
+  },
+  {
+   "date": "2026-10-09",
+   "title": "Surface and the Deep in the map picker",
+   "text": "Maps are grouped by where they lie, with dungeons and cities marked, and travel signs show lifts, stairs, bridges, ladders and teleporters.",
+   "maps": []
+  },
+  {
+   "date": "2026-10-08",
+   "title": "World maps redrawn",
+   "text": "The surface and the Deep follow the official layout; click a zone to fly into it.",
+   "maps": [
+    "world"
+   ]
+  },
+  {
+   "date": "2026-10-08",
+   "title": "Vendors say what they sell",
+   "text": "Filter vendors by their wares from the Search menu.",
+   "maps": []
+  },
+  {
+   "date": "2026-10-07",
+   "title": "Wiki cards and the Wanted board",
+   "text": "Markers link to their wiki page, NPCs show a wiki card, and each map's Wanted board lists the NPCs it is still missing.",
+   "maps": []
+  }
+ ]
+}
