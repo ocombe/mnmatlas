@@ -2,6 +2,12 @@
  "entries": [
   {
    "date": "2026-10-10",
+   "title": "Safer publishing of travellers' changes",
+   "text": "Several changes to the same place no longer overwrite each other, an accepted change can no longer be lost on its way to the atlas, and every traveller who improved a place stays credited.",
+   "maps": []
+  },
+  {
+   "date": "2026-10-10",
    "title": "Lifts, bridges and stairways as travel seals",
    "text": "Between Evershade Weald and Faelindral, lifts, bridges and stairways are now round seals with an up or down mark; their popup takes you to the matching spot on the other map. Two signs that led nowhere were taken down in the Underdocks and Keeper's Bight.",
    "maps": [
