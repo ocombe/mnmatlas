@@ -482,5 +482,61 @@
   "y": 4585,
   "wiki": "https://monstersandmemories.wiki/npcs/foreman-stonehammer",
   "wikiId": "npc-foreman-stonehammer"
+ },
+ {
+  "id": "community-256",
+  "community": true,
+  "name": "Marker 2",
+  "category": "Quest",
+  "note": "Marker 2 for Tig's Measuring quest",
+  "x": 2862,
+  "y": 4754
+ },
+ {
+  "id": "community-259",
+  "community": true,
+  "name": "Marker 1",
+  "category": "Quest",
+  "note": "Marker 1 for Tig's Measuring quest",
+  "x": 2173,
+  "y": 4751
+ },
+ {
+  "id": "community-270",
+  "community": true,
+  "name": "Marker 3",
+  "category": "Quest",
+  "note": "Marker 3 for Tig's Measuring quest",
+  "x": 2887,
+  "y": 3499
+ },
+ {
+  "id": "community-274",
+  "community": true,
+  "name": "Marker 5",
+  "category": "Quest",
+  "note": "Marker 5 for Tig's Measuring quest",
+  "x": 2646,
+  "y": 3866
+ },
+ {
+  "id": "community-275",
+  "community": true,
+  "name": "Marker 4",
+  "category": "Quest",
+  "note": "Marker 4 for Tig's Measuring quest",
+  "x": 2656,
+  "y": 3831
+ },
+ {
+  "id": "community-286",
+  "community": true,
+  "name": "Tust Brookturner",
+  "category": "Quest",
+  "note": "Gives a free 8 slots bag when you say \"samples\"",
+  "x": 2440,
+  "y": 4688,
+  "wiki": "https://monstersandmemories.wiki/npcs/tust-brookturner",
+  "wikiId": "npc-tust-brookturner"
  }
 ]
