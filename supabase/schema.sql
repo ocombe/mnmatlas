@@ -42,9 +42,17 @@ create table if not exists public.banned (
  author_name text check (char_length(author_name)<=80),
  banned_at timestamptz not null default now()
 );
--- Published changes keep their credit when an account is deleted.
+-- Accepted changes keep anonymous credit when an account is deleted.
 alter table public.suggestions alter column user_id drop not null;
-alter table public.suggestions drop constraint if exists suggestions_user_id_fkey;
+do $$
+declare fk record;
+begin
+ for fk in select c.conname from pg_constraint c
+  where c.contype='f' and c.conrelid='public.suggestions'::regclass and c.confrelid='auth.users'::regclass
+  and c.conkey=array[(select attnum from pg_attribute where attrelid='public.suggestions'::regclass and attname='user_id')]::smallint[]
+ loop execute format('alter table public.suggestions drop constraint %I',fk.conname); end loop;
+end;
+$$;
 alter table public.suggestions add constraint suggestions_user_id_fkey foreign key (user_id) references auth.users on delete set null;
 -- Review decisions carry the version that was opened, so a newer correction stays waiting.
 alter table public.suggestions add column if not exists updated_at timestamptz not null default now();
@@ -137,13 +145,16 @@ end;
 $$;
 revoke all on function public.clean_suggestion() from public,anon,authenticated;
 
--- A signed-in visitor can delete their account; published changes stay with anonymous credit.
+-- A signed-in visitor can delete their account; accepted changes stay with anonymous credit.
 create or replace function public.delete_my_account()
 returns void language plpgsql security definer set search_path = '' as $$
 declare uid uuid:=auth.uid();
 begin
  if uid is null then raise exception 'Not signed in'; end if;
- delete from public.suggestions where user_id=uid and status<>'published';
+ perform set_config('atlas.deleting_account', auth.uid()::text, true);
+ delete from public.suggestions where user_id=uid and status not in ('published','approved');
+ update public.suggestions set author_name=null,comment=null,payload=case when kind<>'new-marker' then payload-'bounty'-'priority' else payload end where user_id=uid;
+ update public.credits set name=null where user_id=uid;
  delete from auth.users where id=uid;
 end;
 $$;
@@ -157,8 +168,8 @@ create or replace function public.guard_own_suggestion_update()
 returns trigger language plpgsql security definer set search_path = public as $$
 begin
  if auth.uid() is null or exists (select 1 from public.admins where user_id=auth.uid()) then return new; end if;
- -- The account is already gone when its foreign key clears the published row's author.
- if new.user_id is null and old.status='published' and not exists (select 1 from auth.users where id=old.user_id) then return new; end if;
+ -- Only the account-deletion transaction may anonymise accepted rows and clear their foreign key.
+ if current_setting('atlas.deleting_account', true) = old.user_id::text then return new; end if;
  new.id=old.id; new.created_at=old.created_at; new.user_id=old.user_id; new.author_name=old.author_name;
  new.map=old.map; new.kind=old.kind; new.target_id=old.target_id;
  new.comment=nullif(public.clean_text(new.comment,true),'');

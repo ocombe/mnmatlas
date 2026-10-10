@@ -13,6 +13,7 @@
   if(p.remove===true)return new Set(['removed']);
   for(const k of ['name','note','color','level','arrow','toMap'])if(has(p,k)&&!equal(value(p,k),value(f,k)))out.add(k);
   if(['wiki','wikiId'].some(k=>has(p,k)&&!equal(value(p,k),value(f,k))))out.add('wiki');
+  // Phase 2 must send the full type base in from: category and all of its type keys.
   if(keysFor(p).some(k=>has(p,k)&&!equal(p[k],f[k])))out.add('type');
   return out;
  }

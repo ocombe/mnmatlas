@@ -69,7 +69,7 @@ function validatePayload(row,c){
  return normaliseChange({...row,payload:p}).payload;
 }
 // Every row works on private file copies; a refused row never leaves part of its change behind.
-const original=new Map(),history=new Map();let batch=[],past=null;
+const original=new Map(),history=new Map();let batch=[],past=null,heldIds=new Set(),missingVersion=false;
 function before(path,m,row){const key=path+'#'+runKey(row);if(!original.has(key))original.set(key,structuredClone(m));return original.get(key);}
 const typeKeys=['trade','classes','vendor','sells'];
 function typeFields(m,p,id){
@@ -99,12 +99,12 @@ async function prepare(row){
   if(p.from&&!Array.isArray(p.from)){p.from=normaliseMarker(p.from);if(p.from.vendor!==undefined)p.from.vendor=vendorKindNow(p.from.vendor);if(Array.isArray(p.from.sells))p.from.sells=[...p.from.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
  }
  if(row.kind.startsWith('edit-'))for(const k of ['color','level','arrow','toMap'])if(p[k]!==undefined&&(k==='color'&&!supported.colours.includes(p[k])||k==='level'&&!(c.levels||[]).some(l=>l.id===p[k])||k==='arrow'&&!supported.arrows.includes(p[k])||k==='toMap'&&!registry.maps.some(r=>r.id===p[k])))fail('Unsupported marker fields for suggestion '+row.id+'.');
- const added=batch.find(r=>r.kind==='new-marker'&&r.map===row.map&&'community-'+r.id===row.target_id),level=!label&&(row.kind==='new-marker'?c.levelId:(m||chip)?.level||added?.level)?'#'+(row.level||''):'';
+ const added=batch.find(r=>r.kind==='new-marker'&&r.map===row.map&&'community-'+r.id===row.target_id),level=(label?row.level:(row.kind==='new-marker'?c.levelId:(m||chip)?.level||added?.level))?'#'+(row.level||''):'';
  return {...row,payload:p,runKey:row.map+'#'+targetKind({...row,payload:p})+'#'+(row.kind==='new-marker'?'community-'+row.id:row.target_id)+level};
 }
 function laterState(row,state){
  let next=state,chained=false;const changed=new Set(),log=[{id:row.id,fields:fieldsOf(row)}];
- for(const later of batch){if(Number(later.id)<=Number(row.id)||runKey(later)!==runKey(row))continue;
+ for(const later of batch){if(heldIds.has(String(later.id))||Number(later.id)<=Number(row.id)||runKey(later)!==runKey(row))continue;
   const r=later,touched=fieldsOf(r);
   if(conflicts(r,next,log).length||![...touched].every(f=>matchesFrom(r,next,f)))continue;chained=true;for(const f of touched)changed.add(f);next=applyTo(next,r);log.push({id:r.id,fields:touched});
  }
@@ -203,23 +203,65 @@ async function updateContributors(credited,applied){
 }
 // Hash sorted keys so the database's JSON key order cannot change the version we applied.
 function hash(payload){const stable=v=>Array.isArray(v)?v.map(stable):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])])):v;return createHash('sha256').update(JSON.stringify(stable(payload))).digest('hex');}
-async function markPublished(path){
- const applied=parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');
+function versionWarning(row){if(!row.updated_at&&!missingVersion){missingVersion=true;warning('Suggestion version column is missing; checking payload hashes before status updates.');}}
+async function guardedPatch(row,body){
+ versionWarning(row);
+ if(!row.updated_at){const latest=(await request('suggestions?id=eq.'+row.id+'&select=*'))?.[0];if(!latest||latest.status!==row.status||hash(latest.payload)!==hash(row.payload))return false;
+  // Truth also wins for a later rejection: restore approved under its current status guard first.
+  if(row.status!=='approved'&&body.status==='published'){
+   const restored=await request('suggestions?id=eq.'+row.id+'&status=eq.'+encodeURIComponent(row.status),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({status:'approved'})});
+   if(!restored?.length)return false;return guardedPatch({...row,status:'approved'},body);
+  }
+ }
+ const result=await request('suggestions?id=eq.'+row.id+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):'&status=eq.'+encodeURIComponent(row.status)),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify(body)});
+ return Array.isArray(result)&&result.length>0;
+}
+async function liveTarget(row){
+ const c=configuration(row),label=targetKind(row)==='label',f=await file(label?c.labelsFile:c.markersFile),id=row.kind==='new-marker'?'community-'+row.id:row.target_id;
+ const here=m=>m.id===id&&(!c.levels||!m.level||m.level===row.level||row.payload?.level===m.level);
+ return (label?f.data.labels:f.data).find(here)||(!label&&c.labelsFile?(await file(c.labelsFile)).data.trainers?.find(here):null);
+}
+const publicValues=m=>Object.fromEntries(['name','note','wiki','wikiId','category',...typeKeys,'color','level','arrow','toMap'].filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
+async function recoverVersion(row,a){
+ const same=hash(row.payload)===a.payloadHash,m=same?null:await liveTarget(row),payload=structuredClone(row.payload),credit=(await request('credits?select=suggestion_id,user_id,name&suggestion_id=eq.'+row.id))?.find(c=>String(c.suggestion_id)===String(row.id));
+ if(m){
+  if(row.kind.startsWith('move-'))payload.to=[m.x,m.y];
+  else {for(const k of ['name','note','wiki','wikiId','category',...typeKeys,'color','level','arrow','toMap'])if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
+ }
+ return {...row,payload,credit:!!credit,...(credit?{user_id:credit.user_id,author_name:credit.name}:{})};
+}
+async function correctionRows(row,version,appliedHash){
+ if(row.status==='rejected'||hash(row.payload)===appliedHash)return [];
+ const live=await liveTarget(version),p=structuredClone(row.payload),base=live?publicValues(live):publicValues(version.payload),label=targetKind(version)==='label',meta=Object.fromEntries(['user_id','author_name','credit','map','level'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]));
+ const make=(kind,payload)=>({...meta,status:'approved',kind,target_id:version.kind==='new-marker'?'community-'+row.id:row.target_id,payload,review_note:'Correction made after publishing (#'+row.id+')'});
+ if(row.kind.startsWith('move-'))return [make(row.kind,{...p,from:live?[live.x,live.y]:version.payload.to})];
+ if(row.kind!=='new-marker')return [make(row.kind,{...p,from:base})];
+ const out=[],text={...p,from:base};for(const k of ['x','y','bounty','priority','noteType',...(label?['category',...typeKeys]:[])])delete text[k];
+ if([...fieldsOf({kind:label?'edit-label':'edit-marker',payload:text})].length)out.push(make(label?'edit-label':'edit-marker',text));
+ if(live&&(Math.round(p.x)!==live.x||Math.round(p.y)!==live.y))out.push(make(label?'move-label':'move-marker',{name:p.name,from:[live.x,live.y],to:[p.x,p.y]}));return out;
+}
+async function acknowledge(applied){
  for(const a of applied){
   if(!/^\d+$/.test(String(a.id))||!/^[a-f0-9]{64}$/.test(a.payloadHash))fail('Invalid applied entry.');
   try{
-   const rows=await request('suggestions?id=eq.'+a.id+'&select=*'),row=rows?.[0];if(!row||row.status==='published')continue;
-   const same=hash(row.payload)===a.payloadHash&&row.updated_at===a.updated_at&&row.status==='approved',body={status:'published'};
+   const row=(await request('suggestions?id=eq.'+a.id+'&select=*'))?.[0];if(!row||row.status==='published')continue;versionWarning(row);
+   const version=a.version?{...row,...a.version}:await recoverVersion(row,a),corrections=await correctionRows(row,version,a.payloadHash),same=hash(row.payload)===a.payloadHash&&row.updated_at===(a.updated_at??a.updatedAt??undefined)&&row.status==='approved',body={status:'published'};
    if(!same){
-    body.review_note='Published as approved on '+(a.appliedAt||new Date().toISOString())+'; a later change was not included. Edit the marker again to change it.';
-    // Published history describes the live version, including the place and author credit it earned.
-    if(a.version)for(const k of ['map','level','kind','target_id','payload','credit','author_name'])if(Object.hasOwn(a.version,k))body[k]=a.version[k];
+    body.review_note='Published as approved on '+(a.appliedAt||new Date().toISOString())+'; a later change was not included.'+(corrections.length?' The correction returns to the review queue.':'');
    }
-   // A short version predicate closes the gap between this read and the acknowledgement.
-   await request('suggestions?id=eq.'+a.id+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):'&status=eq.'+encodeURIComponent(row.status)),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify(body)});
+   for(const k of ['map','level','kind','target_id','payload','credit','author_name'])if(Object.hasOwn(version,k))body[k]=version[k];
+   if(row.user_id===null)body.author_name=null;
+   // Save the correction first: a lost acknowledgement can retry without losing the traveller's change.
+   if(!dryRun)for(const correction of corrections){
+    const existing=await request('suggestions?select=*&review_note=eq.'+encodeURIComponent(correction.review_note));
+    if(!existing.some(r=>r.review_note===correction.review_note&&r.kind===correction.kind&&hash(r.payload)===hash(correction.payload)))await request('suggestions',{method:'POST',body:JSON.stringify(correction)});
+   }
+   if(!dryRun)await guardedPatch(row,body);
   }catch(e){warning('Suggestion '+a.id+' could not be acknowledged: '+e.message);}
  }
+ past=null;
 }
+async function markPublished(path){const applied=parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');await acknowledge(applied);}
 async function updateCredits(applied,log){
  const published=await publishedSuggestions();
  const rows=new Map(published.map(r=>[String(r.id),r]));for(const r of applied)rows.set(String(r.id),r);
@@ -227,7 +269,7 @@ async function updateCredits(applied,log){
  for(const r of [...rows.values()].sort((a,b)=>Number(a.id)-Number(b.id))){
   if(r.kind==='report'||!maps.has(r.map))continue;const id=r.kind==='new-marker'?'community-'+r.id:r.target_id;if(!id)continue;
   const credit=names.get(String(r.id)),name=r.credit===true&&r.user_id&&credit?.user_id?clean(credit.name||'').slice(0,80)||null:null;
-  const map=maps.get(r.map),key=targetKind(r)+':'+id;if(!Object.hasOwn(map,key))Object.defineProperty(map,key,{value:[],enumerable:true});map[key].push({name,what:whatOf(r)});
+  const map=maps.get(r.map),key=targetKind(r)+':'+id+(targetKind(r)==='label'&&r.level?'#'+r.level:'');if(!Object.hasOwn(map,key))Object.defineProperty(map,key,{value:[],enumerable:true});map[key].push({name,what:whatOf(r)});
  }
  for(const [map,data] of maps){const f=await file('data/credits/'+map+'.json',{});if(JSON.stringify(f.data)!==JSON.stringify(data)){f.data=data;f.changed=true;}}
 }
@@ -264,30 +306,43 @@ function keepRows(f){
  return text.slice(0,tree.start)+render(tree,f.data,0)+text.slice(tree.end);
 }
 async function main(){
+ const publishLog=await file('data/publish-log.json',[]);if(!Array.isArray(publishLog.data))fail('Invalid publish log.');
+ await acknowledge(publishLog.data.flatMap(run=>run.rows.map(row=>({...row,appliedAt:run.at}))));
  const rows=[];let after='0';
  while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch);if(batch.length<1000)break;after=batch.at(-1).id;}
  if(!rows.length)console.log('No approved suggestions.');
  // A suggestion that cannot apply goes back to the review queue with the reason; the others still publish.
  batch=[...(await publishedSuggestions()),...rows];
- const applied=[],credited=[],held=[],ready=new Map(),hold=(row,e)=>{held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480)});warning('Suggestion '+row.id+' goes back to review: '+e.message);};
- for(const row of rows){if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');try{ready.set(String(row.id),await prepare(row));}catch(e){hold(row,e);}}
+ const applied=[],credited=[],held=[],ready=new Map(),hold=(row,e)=>{if(heldIds.has(String(row.id)))return;heldIds.add(String(row.id));held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480)});warning('Suggestion '+row.id+' goes back to review: '+e.message);};
+ for(const row of rows){versionWarning(row);if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');try{ready.set(String(row.id),await prepare(row));}catch(e){hold(row,e);}}
  // The ledger accepts the same validated rows as the job; invalid rows have already been held.
  const ledger=buildChanges({rows,normalise:row=>ready.get(String(row.id))||null});
- batch=ledger.targets().flatMap(t=>t.rows);for(const row of await publishedSuggestions())if(!ready.has(String(row.id)))try{batch.push(await prepare(row));}catch{}batch.sort((a,b)=>Number(a.id)-Number(b.id));
- for(const row of rows){const prepared=ready.get(String(row.id));if(!prepared)continue;let result;
+ batch=ledger.targets().flatMap(t=>t.rows);batch.sort((a,b)=>Number(a.id)-Number(b.id));
+ // Each dry pass starts from the edition on disk; held rows never re-enter a chain.
+ const snapshot=new Map([...files].map(([path,f])=>[path,{...f,data:structuredClone(f.data)}]));
+ const rewind=()=>{files.clear();for(const [path,f] of snapshot)files.set(path,{...f,data:structuredClone(f.data)});original.clear();history.clear();};
+ for(let pass=0;pass<rows.length;pass++){
+  rewind();const size=heldIds.size;
+  for(const row of rows){const prepared=ready.get(String(row.id));if(!prepared||heldIds.has(String(row.id)))continue;try{await apply(prepared);}catch(e){hold(row,e);}}
+  if(heldIds.size===size)break;
+ }
+ rewind();
+ for(const row of rows){const prepared=ready.get(String(row.id));if(!prepared||heldIds.has(String(row.id)))continue;let result;
   try{result=await apply(prepared);}catch(e){hold(row,e);batch=batch.filter(r=>String(r.id)!==String(row.id));continue;}
-  applied.push({id:row.id,note:result,payloadHash:hash(row.payload),...(row.updated_at?{updated_at:row.updated_at}:{}),appliedAt:new Date().toISOString(),version:Object.fromEntries(['map','level','kind','target_id','payload','credit','author_name'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]))});console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
+  applied.push({id:row.id,note:result,payloadHash:hash(row.payload),...(row.updated_at?{updated_at:row.updated_at}:{}),appliedAt:new Date().toISOString(),version:Object.fromEntries(['user_id','map','level','kind','target_id','payload','credit','author_name'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]))});console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
   // Credits count published changes from people who ticked "Credit me as a contributor".
   const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&row.user_id)credited.push({suggestion_id:row.id,user_id:row.user_id,name:who});}
  const log=await updateContributors(credited,applied);
  await updateCredits(rows.filter(r=>applied.some(a=>String(a.id)===String(r.id))),log||[]);
+ {const runLog=await file('data/publish-log.json');runLog.data=[...runLog.data,{at:new Date().toISOString(),rows:applied.map(a=>({id:a.id,payloadHash:a.payloadHash,updatedAt:a.updated_at??null}))}].slice(-20);runLog.changed=true;}
+ held.sort((a,b)=>Number(a.id)-Number(b.id));
  const changed=[...files].filter(([,f])=>f.changed);
  if(!dryRun){
   for(const [path,f] of changed){const content=keepRows(f),target=dataPath(path),temporary=target+'.tmp';await mkdir(dirname(target),{recursive:true});await writeFile(temporary,content,'utf8');await rename(temporary,target);}
   await mkdir(resolve(root,'.publish'),{recursive:true});
   await writeFile(resolve(root,'.publish/applied.json'),JSON.stringify(applied,null,2)+'\n');
   await writeFile(resolve(root,'.publish/held.json'),JSON.stringify(held,null,2)+'\n');
-  for(const h of held){const row=rows.find(r=>r.id===h.id);try{await request('suggestions?status=eq.approved&id=eq.'+h.id+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):''),{method:'PATCH',headers:{Prefer:'return=minimal'},body:JSON.stringify({status:'pending',review_note:h.note})});}catch(e){warning('Suggestion '+h.id+' could not be sent back to review: '+e.message);}}
+  for(const h of held){const row=rows.find(r=>r.id===h.id);try{await guardedPatch(row,{status:'pending',review_note:h.note});}catch(e){warning('Suggestion '+h.id+' could not be sent back to review: '+e.message);}}
 
  }
  console.log((dryRun?'Dry run: ':'Complete: ')+applied.length+' suggestions, '+(held.length?held.length+' back to review, ':'')+changed.length+' data files'+(dryRun?' would change.':' changed.'));
