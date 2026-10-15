@@ -56,3 +56,5 @@ Both are built by GitHub when publishing (`.github/workflows/pages.yml`), with t
 - `node scripts/make-npc-cards.mjs` writes `npc-cards/<map-id>.json`: for every marker linked to a wiki NPC, its tags, level, race, class, location line, short summary and first five loot items (likeliest first) with their pages and the loot count, never the full description. Cards the live atlas already has and that are less than a day old are kept, so a publish only asks the wiki about newly linked NPCs and cards due for a refresh, about 85 a minute at most (`CARDS_FROM=<site>` reads the previous cards from another address, for testing).
 
 `node scripts/test-find.mjs` also checks trainer classes from tags and chips, and what a card keeps.
+
+Run `node scripts/test-embed-auth.mjs` for the authenticated embed protocol, and `node scripts/test-embed-auth-sql.mjs` for its isolated PostgreSQL migration and access checks. See [integration instructions](../docs/embed-discord-signin.md).

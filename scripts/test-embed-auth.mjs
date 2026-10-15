@@ -1,0 +1,60 @@
+import assert from 'node:assert/strict';
+import {readFile} from 'node:fs/promises';
+import vm from 'node:vm';
+import {createHandoff} from '../supabase/functions/embed-handoff/handler.mjs';
+const secret='a'.repeat(48),partner={id:'companion',origin:'https://companion.example',secret},nonce='n'.repeat(40),token='atlas-token',grants=new Map();let clock=Date.now(),serial=0,identity={userId:'synthetic-user',discordId:'123456789012345678'};
+const store={issue:async row=>{grants.set(row.code_hash,row)},redeem:async q=>{const r=grants.get(q.code_hash);if(!r||r.partner!==q.partner||r.nonce!==q.nonce||Date.parse(r.expires_at)<=Date.parse(q.at))return null;grants.delete(q.code_hash);return r}};
+const handle=createHandoff({partners:[partner],authenticate:async req=>req.headers.get('authorization')==='Bearer '+token?identity:null,store,now:()=>clock,random:()=>String(++serial).padStart(72,'0')});
+const send=(body,headers={})=>handle(new Request('https://atlas.example/handoff',{method:'POST',headers,body:JSON.stringify(body)}));
+const issue=()=>send({action:'issue',partner:partner.id,nonce},{origin:'https://www.mnmatlas.com',authorization:'Bearer '+token});
+const redeem=(code,extra={},headers={})=>send({action:'redeem',partner:partner.id,nonce,code,...extra},{authorization:'Bearer '+secret,...headers});
+assert.equal((await issue()).status,200);
+assert.equal((await send({action:'issue',partner:partner.id,nonce},{origin:'https://evil.example',authorization:'Bearer '+token})).status,403);
+assert.equal((await send({action:'issue',partner:partner.id,nonce},{origin:'https://www.mnmatlas.com'})).status,401);
+let issued=await (await issue()).json();
+assert.equal((await redeem(issued.code,{}, {origin:partner.origin})).status,403);
+assert.equal((await redeem(issued.code,{}, {authorization:'Bearer wrong'})).status,401);
+assert.equal((await redeem(issued.code,{nonce:'x'.repeat(40)})).status,401);
+assert.equal((await redeem(issued.code,{partner:'untrusted'})).status,400);
+let result=await (await redeem(issued.code)).json();assert.deepEqual(result,{issuer:'mnmatlas',audience:partner.id,nonce,subject:identity.userId,discordId:identity.discordId});
+assert.equal((await redeem(issued.code)).status,401);
+issued=await (await issue()).json();const races=await Promise.all([redeem(issued.code),redeem(issued.code)]);assert.deepEqual(races.map(r=>r.status).sort(),[200,401]);
+issued=await (await issue()).json();clock+=61000;assert.equal((await redeem(issued.code)).status,401);
+identity=null;assert.equal((await issue()).status,401);
+assert.equal((await handle(new Request('https://atlas.example',{method:'GET'}))).status,405);
+assert.equal((await send({action:'issue',partner:partner.id,nonce:'short'})).status,400);
+assert.equal((await handle(new Request('https://atlas.example',{method:'POST',body:'invalid'}))).status,400);
+console.log('PASS backend: verified identity, trusted origins, secret, nonce/audience binding, expiration, atomic single use, malformed requests');
+
+const source=await readFile(new URL('../embed-auth.js',import.meta.url),'utf8');
+function fixture({enabled=true,accept=true}={}){
+ let receive,approved=0,fetched=0;const replies=[],parent={postMessage:(data,origin)=>replies.push({data,origin})},host={parent,addEventListener:(name,fn)=>receive=fn,removeEventListener:()=>receive=null};
+ const scope=vm.createContext({window:{},URL,Date,Map,setTimeout,clearTimeout,fetch:()=>{throw Error('unexpected')}});vm.runInContext(source,scope);
+ const dispose=scope.window.installAtlasEmbedAuth({host,client:{auth:{getSession:async()=>({data:{session:{access_token:'private-atlas-token'}}})}},settings:{embedAuthPartners:enabled?[{id:partner.id,origin:partner.origin}]:[],supabaseUrl:'https://project.example',supabaseKey:'public'},approve:async()=>{approved++;return accept},fetcher:async(url,req)=>{fetched++;assert.equal(req.headers.Authorization,'Bearer private-atlas-token');const body=JSON.parse(req.body);return {ok:true,json:async()=>({code:'1'.repeat(72),nonce:body.nonce,expiresAt:Date.now()+60000})}}});
+ const event=(overrides={})=>({origin:partner.origin,source:parent,data:{type:'mnmatlas:signin',version:1,requestId:nonce},...overrides});
+ return {event,get receive(){return receive},replies,dispose,get approved(){return approved},get fetched(){return fetched}};
+}
+let f=fixture({enabled:false});assert.equal(f.receive,undefined);
+f=fixture();await f.receive(f.event({origin:'https://evil.example'}));await f.receive(f.event({source:{}}));await f.receive(f.event({data:{type:'mnmatlas:signin',version:1,requestId:'bad'}}));assert.equal(f.approved,0);
+await f.receive(f.event());assert.equal(f.approved,1);assert.equal(f.fetched,1);assert.equal(f.replies[0].origin,partner.origin);assert.equal(f.replies[0].data.requestId,nonce);assert.equal(f.replies[0].data.code,'1'.repeat(72));assert.equal(JSON.stringify(f.replies).includes('token'),false);
+await f.receive(f.event());assert.equal(f.fetched,1);f.dispose();assert.equal(f.receive,null);
+f=fixture({accept:false});await f.receive(f.event());assert.equal(f.fetched,0);assert.equal(f.replies[0].data.error,'cancelled');
+console.log('PASS embed: disabled default, exact parent/origin, nonce validation, consent, replay guard, code-only response, cancellation, disposal');
+const sql=await readFile(new URL('../supabase/embed-auth.sql',import.meta.url),'utf8');
+assert.match(sql,/revoke all on public\.embed_auth_codes from public, anon, authenticated/);assert.match(sql,/delete from public\.embed_auth_codes c where c\.code_hash=wanted_hash and c\.partner=wanted_partner and c\.nonce=wanted_nonce and c\.expires_at>now\(\)/);
+console.log('PASS SQL contract: restricted table access and atomic bound delete-return redemption (live database checks still required)');
+// Exercise the deployed adapter against a synthetic Supabase Auth and REST service.
+const {stripTypeScriptTypes}=await import('node:module');
+const adapter=stripTypeScriptTypes(await readFile(new URL('../supabase/functions/embed-handoff/index.ts',import.meta.url),'utf8')).replace(/^import .*;\s*/, '');
+let deployed,authOK=true,rpcCalls=[];
+const env={SUPABASE_URL:'https://project.example',SUPABASE_ANON_KEY:'public-key',SUPABASE_SERVICE_ROLE_KEY:'service-secret',EMBED_AUTH_PARTNERS:JSON.stringify([partner])};
+const Deno={env:{get:k=>env[k]},serve:handler=>deployed=handler};
+const upstream=async(url,options)=>{
+ if(url.endsWith('/auth/v1/user'))return new Response(JSON.stringify(authOK?{id:'synthetic-user',identities:[{provider:'discord',identity_data:{sub:'123456789012345678'}}]}:{}),{status:authOK?200:401});
+ assert.equal(options.headers.Authorization,'Bearer service-secret');rpcCalls.push({url,body:JSON.parse(options.body)});return new Response('null',{status:200});
+};
+new Function('Deno','fetch','createHandoff',adapter)(Deno,upstream,createHandoff);
+let response=await deployed(new Request('https://atlas.example',{method:'POST',headers:{origin:'https://www.mnmatlas.com',authorization:'Bearer synthetic'},body:JSON.stringify({action:'issue',partner:partner.id,nonce})}));
+assert.equal(response.status,200);assert.equal(rpcCalls.length,1);assert(rpcCalls[0].url.endsWith('/rpc/issue_embed_auth_code'));assert.equal(rpcCalls[0].body.grant_payload.discord_id,'123456789012345678');assert.equal(rpcCalls[0].body.grant_payload.code_hash.length,64);
+authOK=false;response=await deployed(new Request('https://atlas.example',{method:'POST',headers:{origin:'https://www.mnmatlas.com',authorization:'Bearer synthetic'},body:JSON.stringify({action:'issue',partner:partner.id,nonce})}));assert.equal(response.status,401);assert.equal(rpcCalls.length,1);
+console.log('PASS deployment adapter: Auth-verified Discord identity, hashed grant persistence, backend-only service credential and rejected invalid session');

@@ -78,6 +78,16 @@
  }
  // Inside another site's frame Discord refuses to load, so sign-in runs in a small window (signin.html) that posts the session back here.
  let signInWindow=null,signInWatch;
+ // Host-initiated sign-in still requires an Atlas-side consent gesture. This also
+ // gives browsers a user gesture for the existing Discord popup.
+ window.installAtlasEmbedAuth?.({client,settings,approve:partner=>new Promise(resolve=>{
+  const consent=text('dialog','','community-dialog');consent.setAttribute('aria-label','Sign in to '+(partner.name||partner.id));consent.append(text('h2','Sign in to '+(partner.name||partner.id)+'?'));document.body.append(consent);consent.showModal();
+  consent.append(text('p','Share your verified Discord identity with '+partner.origin+'. Your Atlas notes and permissions stay here.'));
+  let settled=false;const finish=value=>{if(settled)return;settled=true;clearTimeout(expiry);consent.close();consent.remove();resolve(value)};
+  const expiry=setTimeout(()=>finish(false),300000);
+  const actions=text('div','','dialog-actions');
+  actions.append(button('Cancel',()=>finish(false)),button('Continue with Discord',()=>{if(user){finish(true);return;}popupSignIn(message=>status(message));}));consent.append(actions);consent.addEventListener('close',()=>finish(false),{once:true});
+ })});
  function fullAtlasHint(message){
   account.querySelector('.community-fallback')?.remove();openAccount();
   const url=new URL(location.href);url.searchParams.delete('embed');url.hash='';
