@@ -1,6 +1,7 @@
 {
  "entries": [
   {
+<<<<<<< HEAD
    "date": "2026-10-18",
    "title": "Into Rothold",
    "text": "Follow the river from the Great Cavern Sea into Rothold, past the docks and Mist Lake to the Thralled Mines. Five charts open the ruined keep, its prison, upper caves and crypt to travellers.",
@@ -52,6 +53,14 @@
    "text": "The Grain Cellar now has two floors. The entrance stair climbs from the corner of the octagonal hall to the passage under the granary door, all where it really runs; switch floors at the middle landing.",
    "maps": [
     "grain-cellar"
+=======
+   "date": "2026-10-16",
+   "title": "Grimtide Sanctum is charted",
+   "text": "Dive beneath the wreck in the Shallow Shoals and enter the sunken halls of Grimtide Sanctum. Follow three floors through broken crossings, flooded tunnels and crypts to the cavern far below.",
+   "maps": [
+    "grimtide-sanctum",
+    "shallow-shoals"
+>>>>>>> ed06d88c4 (Grimtide Sanctum: map entry, floor links, Shallow Shoals and world links)
    ]
   },
   {

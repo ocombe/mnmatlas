@@ -1469,6 +1469,101 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "grimtide-sanctum",
+      "title": "Grimtide Sanctum",
+      "subtitle": "Three floors beneath the Shallow Shoals",
+      "cartoucheKicker": "The sunken temple",
+      "breadcrumb": "Monsters & Memories / Grimtide Sanctum",
+      "description": "An illustrated fan atlas of Grimtide Sanctum, a sunken goblin temple beneath the Shallow Shoals, reached by diving under a wreck. Explore its halls, flooded tunnels and sunken cavern across three floors, and keep your own field notes.",
+      "width": 5280,
+      "height": 6400,
+      "frame": {
+        "x": 64,
+        "y": 224,
+        "width": 5152,
+        "height": 6112
+      },
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/grimtide-sanctum/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/grimtide-sanctum/markers.json",
+      "labelsFile": "data/grimtide-sanctum/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "point",
+        "x": 1660,
+        "y": 2220,
+        "z": 3.5,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Sanctum halls",
+          "tilePath": "assets/tiles/grimtide-sanctum/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Flooded tunnels",
+          "tilePath": "assets/tiles/grimtide-sanctum/floor-2/{z}/{x}/{y}.webp",
+          "defaultView": {
+            "mode": "point",
+            "x": 2100,
+            "y": 1460,
+            "z": 3,
+            "placeZoom": 5
+          }
+        },
+        {
+          "id": "floor-3",
+          "title": "Sunken cavern",
+          "tilePath": "assets/tiles/grimtide-sanctum/floor-3/{z}/{x}/{y}.webp",
+          "defaultView": {
+            "mode": "point",
+            "x": 3500,
+            "y": 4460,
+            "z": 2.5,
+            "placeZoom": 5
+          }
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Room shapes after Map by FeelingCaptive2973 (CC BY-SA 4.0)",
+        "sourceTitle": "Map by FeelingCaptive2973",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:MAP_GrimtideSanctum.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Room shapes only adapted from Map by FeelingCaptive2973. The adapted room shapes carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by FeelingCaptive2973",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:MAP_GrimtideSanctum.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Room shapes only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

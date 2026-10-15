@@ -109,7 +109,8 @@
    "priority": 90,
    "minZoom": 1.5,
    "arrow": "down",
-   "toMap": "grimtide-sanctum"
+   "toMap": "grimtide-sanctum",
+   "toPlace": "to-shallow-shoals"
   },
   {
    "id": "to-hidden-grotto",

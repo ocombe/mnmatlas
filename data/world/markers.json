@@ -99,7 +99,8 @@
   "y": 1218,
   "note": "Dungeon entrance.",
   "minZoom": 2.75,
-  "approximate": true
+  "approximate": true,
+  "toMap": "grimtide-sanctum"
  },
  {
   "id": "dungeon-surukla",
