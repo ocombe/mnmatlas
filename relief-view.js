@@ -337,7 +337,7 @@ export function mount(container, opts) {
       controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
       controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
       controls.minPolarAngle = Math.PI / 6; controls.maxPolarAngle = Math.PI * .43;
-      controls.minAzimuthAngle = -Math.PI * .75; controls.maxAzimuthAngle = Math.PI * .75;
+      controls.minAzimuthAngle = -Infinity; controls.maxAzimuthAngle = Infinity; // turn freely all the way round
       controls.minZoom = .72; controls.maxZoom = 6; controls.zoomSpeed = 9; controls.rotateSpeed = .6;
       controls.update(); controls.saveState();
       controls.addEventListener('change', () => {
