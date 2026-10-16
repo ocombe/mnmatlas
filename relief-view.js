@@ -15,6 +15,7 @@ export function mount(container, opts) {
   let pendingHighlight = true;
   let detailTimer = 0, detailAbort = null, detailKey = '', detailTexture = null;
   let renderer, scene, camera, controls, data, resizeObserver, intersectionObserver;
+  let fitScale = 1;
   const layers = new Map();
   const own = resource => { resources.add(resource); return resource; };
   const root = document.createElement('div'); root.className = 'relief-view';
@@ -77,8 +78,8 @@ export function mount(container, opts) {
       if (dirty && !disposed) { dirty = false; renderer.render(scene, camera); }
     });
   }
-  // Only the current, on-screen floor gets detail. Four base mip chains plus one
-  // native detail chain use at most 63 MiB; old detail is released before loading.
+  // Only the current, on-screen floor gets detail. Base illustrations and one
+  // native detail chain share the available budget; old detail is released before loading.
   function scheduleDetail() {
     clearTimeout(detailTimer);
     if (!active || !data || !layers.size) return;
@@ -127,7 +128,7 @@ export function mount(container, opts) {
     const width = root.clientWidth, height = root.clientHeight;
     renderer.setPixelRatio(Math.min(window.devicePixelRatio || 1, 2));
     renderer.setSize(width, height, false);
-    const aspect = width / height, half = 94 * Math.max(1, .85 / aspect);
+    const aspect = width / height, half = 94 * fitScale * Math.max(1, .85 / aspect);
     camera.left = -half * aspect; camera.right = half * aspect;
     camera.top = half; camera.bottom = -half; camera.updateProjectionMatrix();
     invalidate(); scheduleDetail();
@@ -149,6 +150,9 @@ export function mount(container, opts) {
   }
   function highlight() {
     pendingHighlight = false;
+    if (data?.routesFollowLevels && scene) for (const route of scene.children) {
+      if (route.userData.linkLevels) route.visible = otherMode !== 'hidden' || route.userData.linkLevels.some(id => id === current || id === hovered);
+    }
     root.setAttribute('aria-label', 'Relief view: ' + (levels.find(level => level.id === current)?.title || ''));
     for (const [id, layer] of layers) {
       const selected = id === current, hover = id === hovered;
@@ -310,19 +314,21 @@ export function mount(container, opts) {
   }
   handle.ready = (async () => {
     try {
-      const base = new URL(String(opts.base || './assets/relief/sunken-resort/').replace(/\/?$/, '/'), document.baseURI);
-      asset = name => { const url = new URL(name, base); url.searchParams.set('v', 'plan-12'); return url; };
+      if (!opts.base) throw new Error('A relief address is required.');
+      const base = new URL(String(opts.base).replace(/\/?$/, '/'), document.baseURI);
+      asset = name => { const url = new URL(name, base); url.searchParams.set('v', 'relief-1'); return url; };
       data = await json(asset('plan.json'));
       if (disposed) return handle;
       if (data.version !== 3 || !data.grid || !data.box || !data.levels) throw new Error('This plan is unavailable.');
       scene = new THREE.Scene();
       renderer = new THREE.WebGLRenderer({ canvas, alpha: true, antialias: true, powerPreference: 'low-power' });
       renderer.setClearColor(0, 0); renderer.outputColorSpace = THREE.SRGBColorSpace; renderer.toneMapping = THREE.NoToneMapping;
-      camera = new THREE.OrthographicCamera(-84, 84, 94, -94, .1, 1500);
+      fitScale = Math.max(1, (data.box[2]-data.box[0])/data.pixelsPerUnit/135, (data.box[3]-data.box[1])/data.pixelsPerUnit/data.northCos/135);
+      camera = new THREE.OrthographicCamera(-84, 84, 94, -94, .1, 1500 * fitScale);
       const bottom = Math.min(...data.levels.map(level => level.minHeight));
       const top = Math.max(...data.levels.map(level => level.maxHeight));
       const target = new THREE.Vector3(0, (top + bottom) / 2 + 5, 0);
-      camera.position.copy(target).add(new THREE.Vector3(160, 150, 190));
+      camera.position.copy(target).add(new THREE.Vector3(160, 150, 190).multiplyScalar(fitScale));
       controls = new OrbitControls(camera, canvas); controls.target.copy(target);
       controls.enablePan = true; controls.enableDamping = false; controls.screenSpacePanning = true;
       controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
@@ -332,7 +338,7 @@ export function mount(container, opts) {
       controls.minZoom = .72; controls.maxZoom = 6; controls.zoomSpeed = 9; controls.rotateSpeed = .6;
       controls.update(); controls.saveState();
       controls.addEventListener('change', () => {
-        const bounded = controls.target.clone().clamp(target.clone().addScalar(-40), target.clone().addScalar(40));
+        const bounded = controls.target.clone().clamp(target.clone().addScalar(-40 * fitScale), target.clone().addScalar(40 * fitScale));
         camera.position.add(bounded.clone().sub(controls.target)); controls.target.copy(bounded);
         invalidate(); scheduleDetail();
       });
@@ -371,7 +377,7 @@ export function mount(container, opts) {
           if (ha === null || hb === null) continue;
           const pa = new THREE.Vector3(...position(link.a.x, link.a.y, ha)), pb = new THREE.Vector3(...position(link.b.x, link.b.y, hb));
           if (![...pa,...pb].every(Number.isFinite)) continue;
-          const route = new THREE.Group(); route.userData.link = [link.a.id,link.b.id];
+          const route = new THREE.Group(); route.userData.link = [link.a.id,link.b.id]; route.userData.linkLevels = [link.a.level,link.b.level];
           const length = pa.distanceTo(pb), direction = pb.clone().sub(pa).normalize();
           for (let start = 0; start < length; start += 2.7) {
             const end = Math.min(length, start + 1.6);

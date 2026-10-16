@@ -2,6 +2,8 @@
 (() => {
  'use strict';
  const $ = id => document.getElementById(id);
+ const active = () => typeof config === 'undefined' ? null : config;
+ const planLevels = entry => entry.levels?.length ? entry.levels.map(level => ({ id:level.id, title:level.title })) : [{ id:entry.defaultLevel || 'floor-1', title:entry.title }];
  const buttons = () => [...($('level-controls')?.querySelectorAll('button[data-level]') || [])];
  const pref = value => { try { if (value === undefined) return localStorage.getItem('floor-plan-size'); localStorage.setItem('floor-plan-size', value); } catch { return null; } };
  const el = (tag, cls, text) => { const n = document.createElement(tag); n.className = cls; if (text) n.textContent = text; return n; };
@@ -21,12 +23,12 @@
   readyTimer = setTimeout(settle, 150);
  }
  const resizeMap = () => requestAnimationFrame(() => requestAnimationFrame(() => window.dispatchEvent(new Event('resize'))));
- function build(key) {
+ function build(key, entry) {
   const frame = $('map-frame'), map = $('map');
   if (!frame || !map) return null;
   const marker = document.createComment('map position'); map.before(marker);
   const panel = el('div', 'floor-stack'); panel.id = 'floor-stack';
-  const head = el('div', 'floor-stack-head'), fold = el('button', 'floor-stack-toggle', 'Floors'); fold.type = 'button';
+  const head = el('div', 'floor-stack-head'), fold = el('button', 'floor-stack-toggle', planLevels(entry).length > 1 ? 'Floors' : 'Relief view'); fold.type = 'button';
   const size = control('floor-stack-size', 'Expand relief view');
   const stage = el('div', 'floor-stack-plan'), slot = el('div', 'floor-stack-map');
   const shrink = control('floor-plan-shrink', 'Back to 2D map', true);
@@ -42,12 +44,14 @@
   let phone = phoneQuery.matches;
   head.append(fold, size, actions); panel.append(head, stage, slot); frame.append(panel);
   let plan = null, loading = null, disposed = false, big = pref() === 'full', folded = false;
-  let current = buttons().find(b => b.getAttribute('aria-pressed') === 'true')?.dataset.level || buttons()[0]?.dataset.level;
+  const levels = planLevels(entry), request = new AbortController();
+  let current = active()?.levelId || entry.defaultLevel || levels[0].id;
   const select = id => buttons().find(b => b.dataset.level === id)?.click();
   // Paired map passages; the plan omits dashes for stairs with shared landings.
   async function floorLinks() {
    try {
-    const r = await fetch('data/sunken-resort/markers.json'); if (!r.ok) return [];
+    if (!entry.markersFile) return [];
+    const r = await fetch(entry.markersFile, { signal:request.signal }); if (!r.ok) return [];
     const data = await r.json(), rows = Array.isArray(data) ? data : data.markers || [], byId = new Map(rows.map(m => [m.id, m])), seen = new Set(), out = [];
     for (const m of rows) {
      const other = m.toMarker && byId.get(m.toMarker);
@@ -62,13 +66,13 @@
    if (disposed || !mapReady || (!big && (folded || phone)) || plan || loading) return;
    loading = (async () => {
     try {
-     modulePromise ||= import('./relief-view.js?v=plan-12').catch(e => { modulePromise = null; throw e; });
+     modulePromise ||= import('./relief-view.js?v=relief-1').catch(e => { modulePromise = null; throw e; });
      const { mount } = await modulePromise;
      if (disposed || (!big && (folded || phone))) return;
      const links = await floorLinks();
      if (disposed || (!big && (folded || phone))) return;
      stage.replaceChildren();
-     plan = mount(stage, { base: 'assets/relief/sunken-resort/', levels: buttons().map(b => ({id:b.dataset.level,title:b.textContent})), current, onPick:select, toolbar:actions, links });
+     plan = mount(stage, { base: entry.relief, levels, current, onPick:select, toolbar:actions, links });
      await plan.ready;
     } catch {
      plan?.dispose(); plan = null;
@@ -116,8 +120,8 @@
   const listeners = [['pointerdown',start],['pointermove',move],['pointerup',end],['pointercancel',cancel],['click',click]];
   for (const [event,fn] of listeners) map.addEventListener(event,fn);
   apply();
-  return { key, ensurePlan, update() { current = buttons().find(b => b.getAttribute('aria-pressed') === 'true')?.dataset.level; plan?.setCurrent(current); ensurePlan(); }, dispose() {
-   disposed = true; plan?.dispose(); for (const [event,fn] of listeners) map.removeEventListener(event,fn);
+  return { key, ensurePlan, update() { current = active()?.levelId || entry.defaultLevel || levels[0].id; plan?.setCurrent(current); ensurePlan(); }, dispose() {
+   disposed = true; request.abort(); plan?.dispose(); for (const [event,fn] of listeners) map.removeEventListener(event,fn);
    phoneQuery.removeEventListener('change', phoneChange); window.removeEventListener('resize', placeTools); toolsObserver.disconnect();
    phoneOpen.remove(); fullTools.remove(); frame.classList.remove('floor-plan-phone');
    for (const prop of ['--plan-tools-top','--plan-tools-right','--plan-tool-width','--plan-tool-height']) frame.style.removeProperty(prop);
@@ -125,14 +129,15 @@
   } };
  }
  function sync() {
-  const id = location.pathname.split('/').filter(Boolean).at(-1), levels = buttons();
-  const key = id === 'sunken-resort' && document.body.classList.contains('has-levels') && levels.length > 1 ? levels.map(b => b.dataset.level).join(',') : '';
+  const entry = active();
+  const local = value => typeof value === 'string' && /^[a-zA-Z0-9_./-]+$/.test(value) && !value.startsWith('/') && !value.split('/').includes('..');
+  const key = entry && local(entry.relief) ? JSON.stringify([entry.id, entry.relief, entry.markersFile, planLevels(entry)]) : '';
   if (built && built.key !== key) { built.dispose(); built = null; }
-  if (key && !built) built = build(key);
+  if (key && !built) built = build(key, entry);
   built?.update();
  }
  function start() {
-  const controls = $('level-controls'); if (!controls) return;
+  const controls = $('level-controls') || $('map-frame'); if (!controls) return;
   new MutationObserver(sync).observe(controls, {childList:true,subtree:true,attributes:true,attributeFilter:['aria-pressed']});
   window.addEventListener('atlas:loaded', afterMap);
   if (document.body.dataset.ready === 'true') afterMap();
