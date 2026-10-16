@@ -539,19 +539,23 @@
   "name": "Muggrah Goblins",
   "category": "Mob camp",
   "note": "Goblin camp along the south wall, near the road to Sungreet Strand.",
-  "x": 6803,
-  "y": 7145,
+  "x": 6745,
+  "y": 7121,
   "shape": {
    "form": "outline",
    "kind": "area",
    "points": [
     [
-     7170,
-     7442
+     7065,
+     7347
     ],
     [
-     7208,
-     7210
+     7100,
+     7263
+    ],
+    [
+     7018,
+     7145
     ],
     [
      6880,
