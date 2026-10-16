@@ -1300,6 +1300,7 @@
     },
     {
       "id": "sunken-resort",
+      "relief": "assets/relief/sunken-resort/",
       "title": "Sunken Resort",
       "subtitle": "Four floors beneath a Scarwood lake",
       "cartoucheKicker": "The flooded halls",
@@ -1472,6 +1473,7 @@
     },
     {
       "id": "grimtide-sanctum",
+      "relief": "assets/relief/grimtide-sanctum/",
       "title": "Grimtide Sanctum",
       "subtitle": "Three floors beneath the Shallow Shoals",
       "cartoucheKicker": "The sunken temple",
