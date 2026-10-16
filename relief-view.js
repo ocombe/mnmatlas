@@ -161,7 +161,8 @@ export function mount(container, opts) {
       const full = selected || otherMode === 'shown';
       layer.top.visible = selected || hover || otherMode !== 'hidden';
       layer.walls.visible = layer.top.visible && layer.wallsWanted !== false;
-      for (const surface of [layer.top, layer.walls]) {
+      layer.steps.visible = layer.top.visible;
+      for (const surface of [layer.top, layer.walls, layer.steps]) {
         surface.material.opacity = full ? 1 : hover ? .85 : .68;
         surface.material.userData.fade.value = full ? 0 : hover ? .25 : .64;
         // Opaque surfaces establish depth before the faded plans are blended.
@@ -185,7 +186,7 @@ export function mount(container, opts) {
     if (offset !== heights.length) throw new Error('Incomplete plan heights.');
     const content = Uint8Array.from(atob(grid.content), c => c.charCodeAt(0));
     if (content.length !== (nx - 1) * (ny - 1)) throw new Error('Incomplete plan footprint.');
-    const pos = [], uv = [], triangles = [], wallPos = [], wallUv = [];
+    const pos = [], uv = [], triangles = [], wallPos = [], wallUv = [], stepPos = [];
     const sharedVertices = new Map();
     let vertexIds = new Int32Array(nx * ny).fill(-1), sheetHeights = heights;
     function vertex(x, y) {
@@ -200,15 +201,33 @@ export function mount(container, opts) {
       uv.push(x / (nx - 1), 1 - y / (ny - 1));
       return id;
     }
-    for (let y = 0; y < ny - 1; y++) for (let x = 0; x < nx - 1; x++) {
+    for (let y = 0; !grid.panels && y < ny - 1; y++) for (let x = 0; x < nx - 1; x++) {
       if (content[y * (nx - 1) + x] !== 1) continue;
       const a = vertex(x, y), b = vertex(x + 1, y), c = vertex(x, y + 1), d = vertex(x + 1, y + 1);
       triangles.push(a, c, b, b, c, d);
     }
+    if (grid.panels) {
+      if (!Array.isArray(grid.panels) || !grid.panels.length) throw new Error('Incomplete floor regions.');
+      for (const p of grid.panels) {
+        if (!Array.isArray(p) || p.length !== 8 || !p.every(Number.isFinite) || p[2] <= p[0] || p[3] <= p[1] || p[0] < 0 || p[1] < 0 || p[2] > x1-x0 || p[3] > y1-y0) throw new Error('Invalid floor region.');
+        const start = pos.length / 3;
+        for (const [x,y,h] of [[p[0],p[1],p[4]],[p[2],p[1],p[5]],[p[0],p[3],p[6]],[p[2],p[3],p[7]]]) {
+          pos.push(...position(x0+x,y0+y,h)); uv.push(x/(x1-x0),1-y/(y1-y0));
+        }
+        triangles.push(start,start+2,start+1,start+1,start+2,start+3);
+      }
+    }
+    // Internal steps use plain stone, independently of optional outline walls.
+    for (const p of grid.risers || []) {
+      if (!Array.isArray(p) || p.length !== 8 || !p.every(Number.isFinite)) throw new Error('Invalid floor step.');
+      const corners = [[p[0],p[1],p[2]],[p[0],p[1],p[3]],[p[4],p[5],p[6]],[p[4],p[5],p[7]]]
+        .map(([x,y,h]) => position(x0+x,y0+y,h));
+      for (const i of [0,2,1,1,2,3]) stepPos.push(...corners[i]);
+    }
     const sheets = [{ heights, content }];
     // A returning stair can pass above another flight on the same floor.
     // Each sheet remains a regular illustrated grid with its own shared vertices.
-    for (const patch of grid.patches || []) {
+    for (const patch of grid.panels ? [] : grid.patches || []) {
       const ph = new Float32Array(nx * ny), pc = Uint8Array.from(atob(patch.content), c => c.charCodeAt(0));
       let k = 0;
       if (!Array.isArray(patch.heightRuns) || patch.heightRuns.length % 2 || pc.length !== content.length) throw new Error('Invalid stair surface.');
@@ -252,7 +271,11 @@ export function mount(container, opts) {
     wallsGeometry.setAttribute('uv', new THREE.Float32BufferAttribute(wallUv, 2));
     const walls = new THREE.Mesh(wallsGeometry, own(new THREE.MeshBasicMaterial({ color: level.wallColor, side: THREE.DoubleSide, toneMapped: false })));
     walls.visible = level.walls !== false; // trial without walls (owner, 2026-10-15)
-    for (const surface of [top, walls]) {
+    const stepsGeometry = own(new THREE.BufferGeometry());
+    stepsGeometry.setAttribute('position', new THREE.Float32BufferAttribute(stepPos, 3));
+    const steps = new THREE.Mesh(stepsGeometry, own(new THREE.MeshBasicMaterial({ color: level.wallColor, side: THREE.DoubleSide, toneMapped: false })));
+    steps.userData.level = level.id; steps.userData.stepWall = true;
+    for (const surface of [top, walls, steps]) {
       const fade = { value: 0 }; surface.material.userData.fade = fade;
       surface.material.onBeforeCompile = shader => {
         shader.uniforms.planFade = fade;
@@ -266,8 +289,8 @@ export function mount(container, opts) {
       };
       surface.material.customProgramCacheKey = () => 'plan-fade-v2';
     }
-    walls.userData.level = level.id; scene.add(top, walls);
-    return { top, walls, wallsWanted: level.walls !== false, heights, content, sheets, texture };
+    walls.userData.level = level.id; scene.add(top, walls, steps);
+    return { top, walls, steps, wallsWanted: level.walls !== false, heights, content, sheets, texture, panels: grid.panels };
   }
   function release() {
     controls?.dispose();
@@ -318,7 +341,7 @@ export function mount(container, opts) {
     try {
       if (!opts.base) throw new Error('A relief address is required.');
       const base = new URL(String(opts.base).replace(/\/?$/, '/'), document.baseURI);
-      asset = name => { const url = new URL(name, base); url.searchParams.set('v', 'relief-2'); return url; };
+      asset = name => { const url = new URL(name, base); url.searchParams.set('v', 'relief-3'); return url; };
       data = await json(asset('plan.json'));
       if (disposed) return handle;
       if (data.version !== 3 || !data.grid || !data.box || !data.levels) throw new Error('This plan is unavailable.');
@@ -362,6 +385,15 @@ export function mount(container, opts) {
           const spec = data.levels.find(item => item.id === id), layer = layers.get(id);
           if (!spec || !layer) return null;
           const [nx, ny] = data.grid, [x0,y0,x1,y1] = data.box;
+          if (layer.panels) {
+            const x=px-x0,y=py-y0,values=[];
+            for (const p of layer.panels) {
+              if (x<p[0]||x>p[2]||y<p[1]||y>p[3]) continue;
+              const u=(x-p[0])/(p[2]-p[0]),v=(y-p[1])/(p[3]-p[1]);
+              values.push(u+v<=1 ? p[4]*(1-u-v)+p[5]*u+p[6]*v : p[5]*(1-v)+p[6]*(1-u)+p[7]*(u+v-1));
+            }
+            return values.length ? Math.max(...values) : spec.height;
+          }
           const gx = THREE.MathUtils.clamp((px-x0)/(x1-x0)*(nx-1),0,nx-1-1e-8);
           const gy = THREE.MathUtils.clamp((py-y0)/(y1-y0)*(ny-1),0,ny-1-1e-8);
           const x = Math.floor(gx), y = Math.floor(gy), u = gx-x, v = gy-y, values = [];
@@ -397,7 +429,7 @@ export function mount(container, opts) {
         const rect = canvas.getBoundingClientRect();
         pointer.set((event.clientX - rect.left) / rect.width * 2 - 1, -(event.clientY - rect.top) / rect.height * 2 + 1);
         ray.setFromCamera(pointer, camera);
-        const hits = ray.intersectObjects([...layers.values()].flatMap(layer => [layer.top, layer.walls]));
+        const hits = ray.intersectObjects([...layers.values()].flatMap(layer => [layer.top, layer.walls, layer.steps]));
         for (const intersection of hits) {
           const id = intersection.object.userData.level, layer = layers.get(id);
           if (intersection.uv) {

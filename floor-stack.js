@@ -74,7 +74,7 @@
    if (disposed || !mapReady || (!big && (folded || phone)) || plan || loading) return;
    loading = (async () => {
     try {
-     modulePromise ||= import('./relief-view.js?v=relief-2').catch(e => { modulePromise = null; throw e; });
+     modulePromise ||= import('./relief-view.js?v=relief-3').catch(e => { modulePromise = null; throw e; });
      const { mount } = await modulePromise;
      if (disposed || (!big && (folded || phone))) return;
      const links = await floorLinks();
