@@ -34,6 +34,7 @@ const tradePaths = {
   'Cartography': 'M2 5l6-3 8 3 6-3v17l-6 3-8-3-6 3z M8 2v17m8-14v17 M11 10l2 3m-2 0 2-3'
 };
 const categoryPaths = {
+  'Camping spot': tradePaths.Survival,
   'Notable NPC': 'M16 7a4 4 0 1 0-8 0 4 4 0 1 0 8 0 M4 22v-3a8 8 0 0 1 16 0v3 M4 22h16',
   'Bank': 'M8 7 6 2h12l-2 5 M8 7h8c1 4 6 6 6 10 0 7-20 7-20 0 0-4 5-6 6-10z M8 8h8 M15 12h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9 M12 11v10',
   'Inn': 'M2 4v18 M2 17h20v5 M2 10h7v7 M9 8h9q4 0 4 4v5 M4 12h3v3H4z',

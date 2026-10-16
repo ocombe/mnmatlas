@@ -16,10 +16,10 @@ function sellsChips(box,values=[]){for(const type of sellTypes){const label=text
 const pickedSells=box=>[...box.querySelectorAll('input')].filter(i=>i.checked).map(i=>i.value);
 const baseCategories={'Bank':['▣','#916c30'],'Inn':['☾','#9a543a'],'Stable':['♞','#665e3e'],'Tradeskill':['⚒','#385f60'],'Class trainer':['◈','#4e4668'],'Personal':['✧','#a04438']};
 // Additional marker types; a map's own extraCategories override these colours and glyphs.
-const noteCategories={'Notable NPC':['●','#2388aa'],'Quest':['!','#b5861f'],'Quest NPC':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
+const noteCategories={'Camping spot':['⛺','#6b4f2e'],'Notable NPC':['●','#2388aa'],'Quest':['!','#b5861f'],'Quest NPC':['!','#b5861f'],'Mob camp':['⚔','#7a3328'],'Named mob':['☠','#46404f'],'Vendor':['◇','#876036'],'Herbs':['✿','#4f7a3a'],'Wood':['♣','#6b4f2e'],'Ore':['⛏','#55606b']};
 let categories={...baseCategories},allCategories={...baseCategories,...noteCategories};
-// Resource spots stay in personal notes: never shared, never a type for a public marker (2026-10-16).
-const privateOnlyCategories=new Set(['Herbs','Wood','Ore']),privateOnly=m=>!!m&&!m.noteType&&privateOnlyCategories.has(m.category);
+// Resource and camping spots stay in personal notes: never shared, never a type for a public marker (2026-10-16).
+const privateOnlyCategories=new Set(['Herbs','Wood','Ore','Camping spot']),privateOnly=m=>!!m&&!m.noteType&&privateOnlyCategories.has(m.category);
 const mobileLayout=matchMedia('(max-width: 760px)');
 let embedded=false;try{embedded=window.self!==window.top;}catch{embedded=true;}
 const embedParam=new URLSearchParams(location.search).get('embed');

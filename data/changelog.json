@@ -1,6 +1,12 @@
 {
  "entries": [
   {
+   "date": "2026-10-17",
+   "title": "A tent for the night",
+   "text": "Personal notes can now mark a Camping spot with a tent, kept apart from mob camps. Like ore, wood and herb spots, camping spots stay in your own notes. Thanks to James-McMenamin for the idea and the first version.",
+   "maps": []
+  },
+  {
    "date": "2026-10-16",
    "title": "Missing buildings drawn",
    "text": "Six places the maps had left blank are now drawn: the stable north of Red Mantle Camp in Fallen Pass (with its stablemaster and stablehand), the Stables cave on Fallen Watch's first level, and the stables of Ail'Vorith, Penshaw in Keeper's Bight, Evershade Weald and the Underdocks.",
