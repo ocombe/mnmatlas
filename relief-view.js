@@ -53,6 +53,8 @@ export function mount(container, opts) {
     target.addEventListener(name, fn, options); cleanups.push(() => target.removeEventListener(name, fn, options));
   };
   const pick = id => { if (!disposed && layers.has(id)) opts.onPick?.(id); };
+  // Clockwise angle of north on screen, in radians, for the map's compass.
+  const heading = () => { if (!disposed && controls) opts.onHeading?.(controls.getAzimuthalAngle()); };
   root.append(canvas, status, announce); container.append(root);
   listen(others, 'click', () => {
     otherMode = otherModes[(otherModes.indexOf(otherMode) + 1) % otherModes.length];
@@ -316,7 +318,7 @@ export function mount(container, opts) {
     try {
       if (!opts.base) throw new Error('A relief address is required.');
       const base = new URL(String(opts.base).replace(/\/?$/, '/'), document.baseURI);
-      asset = name => { const url = new URL(name, base); url.searchParams.set('v', 'relief-1'); return url; };
+      asset = name => { const url = new URL(name, base); url.searchParams.set('v', 'relief-2'); return url; };
       data = await json(asset('plan.json'));
       if (disposed) return handle;
       if (data.version !== 3 || !data.grid || !data.box || !data.levels) throw new Error('This plan is unavailable.');
@@ -328,21 +330,23 @@ export function mount(container, opts) {
       const bottom = Math.min(...data.levels.map(level => level.minHeight));
       const top = Math.max(...data.levels.map(level => level.maxHeight));
       const target = new THREE.Vector3(0, (top + bottom) / 2 + 5, 0);
-      camera.position.copy(target).add(new THREE.Vector3(160, 150, 190).multiplyScalar(fitScale));
+      // Start, and reset, with north up as on the map; the camera looks north from the south.
+      camera.position.copy(target).add(new THREE.Vector3(0, 150, 248.4).multiplyScalar(fitScale));
       controls = new OrbitControls(camera, canvas); controls.target.copy(target);
       controls.enablePan = true; controls.enableDamping = false; controls.screenSpacePanning = true;
       controls.mouseButtons = { LEFT: THREE.MOUSE.ROTATE, MIDDLE: THREE.MOUSE.DOLLY, RIGHT: THREE.MOUSE.PAN };
       controls.touches = { ONE: THREE.TOUCH.ROTATE, TWO: THREE.TOUCH.DOLLY_PAN };
       controls.minPolarAngle = Math.PI / 6; controls.maxPolarAngle = Math.PI * .43;
-      controls.minAzimuthAngle = -Math.PI * .65; controls.maxAzimuthAngle = Math.PI * .85;
+      controls.minAzimuthAngle = -Math.PI * .75; controls.maxAzimuthAngle = Math.PI * .75;
       controls.minZoom = .72; controls.maxZoom = 6; controls.zoomSpeed = 9; controls.rotateSpeed = .6;
       controls.update(); controls.saveState();
       controls.addEventListener('change', () => {
         const bounded = controls.target.clone().clamp(target.clone().addScalar(-40 * fitScale), target.clone().addScalar(40 * fitScale));
         camera.position.add(bounded.clone().sub(controls.target)); controls.target.copy(bounded);
-        invalidate(); scheduleDetail();
+        invalidate(); scheduleDetail(); heading();
       });
-      listen(reset, 'click', () => { controls.reset(); invalidate(); });
+      listen(reset, 'click', () => { controls.reset(); invalidate(); heading(); });
+      heading();
       // Fetch in parallel and register each resource before another request can fail.
       await Promise.all(levels.map(async level => {
         const spec = data.levels.find(item => item.id === level.id);

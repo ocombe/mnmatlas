@@ -43,7 +43,15 @@
   const phoneQuery = matchMedia('(max-width:760px), (max-height:500px) and (pointer:coarse)');
   let phone = phoneQuery.matches;
   head.append(fold, size, actions); panel.append(head, stage, slot); frame.append(panel);
-  let plan = null, loading = null, disposed = false, big = pref() === 'full', folded = false;
+  let plan = null, loading = null, disposed = false, big = pref() === 'full', folded = false, north = 0;
+  // While the relief fills the frame, the map compass turns with it.
+  function compass() {
+   const rose = frame.querySelector('.compass'); if (!rose) return;
+   const turn = big && plan && !disposed ? north : 0;
+   // Turn about the rose's centre: the rose is as tall as the compass is wide.
+   rose.style.transformOrigin = turn ? `50% ${rose.offsetHeight - rose.offsetWidth / 2}px` : '';
+   rose.style.transform = turn ? `rotate(${turn}rad)` : '';
+  }
   const levels = planLevels(entry), request = new AbortController();
   let current = active()?.levelId || entry.defaultLevel || levels[0].id;
   const select = id => buttons().find(b => b.dataset.level === id)?.click();
@@ -66,13 +74,13 @@
    if (disposed || !mapReady || (!big && (folded || phone)) || plan || loading) return;
    loading = (async () => {
     try {
-     modulePromise ||= import('./relief-view.js?v=relief-1').catch(e => { modulePromise = null; throw e; });
+     modulePromise ||= import('./relief-view.js?v=relief-2').catch(e => { modulePromise = null; throw e; });
      const { mount } = await modulePromise;
      if (disposed || (!big && (folded || phone))) return;
      const links = await floorLinks();
      if (disposed || (!big && (folded || phone))) return;
      stage.replaceChildren();
-     plan = mount(stage, { base: entry.relief, levels, current, onPick:select, toolbar:actions, links });
+     plan = mount(stage, { base: entry.relief, levels, current, onPick:select, toolbar:actions, links, onHeading: angle => { north = angle; compass(); } });
      await plan.ready;
     } catch {
      plan?.dispose(); plan = null;
@@ -98,7 +106,7 @@
    else { marker.after(map); panel.append(stage); head.append(actions); fullTools.remove(); }
    const label = big ? 'Expand map' : 'Expand relief view'; size.setAttribute('aria-label', label); size.title = label;
    size.hidden = folded; actions.hidden = !big && folded;
-   placeTools(); resizeMap(); ensurePlan();
+   placeTools(); resizeMap(); ensurePlan(); compass();
   }
   function swap() {
    big = !big; pref(big ? 'full' : 'mini'); apply();
@@ -121,7 +129,7 @@
   for (const [event,fn] of listeners) map.addEventListener(event,fn);
   apply();
   return { key, ensurePlan, update() { current = active()?.levelId || entry.defaultLevel || levels[0].id; plan?.setCurrent(current); ensurePlan(); }, dispose() {
-   disposed = true; request.abort(); plan?.dispose(); for (const [event,fn] of listeners) map.removeEventListener(event,fn);
+   disposed = true; request.abort(); plan?.dispose(); compass(); for (const [event,fn] of listeners) map.removeEventListener(event,fn);
    phoneQuery.removeEventListener('change', phoneChange); window.removeEventListener('resize', placeTools); toolsObserver.disconnect();
    phoneOpen.remove(); fullTools.remove(); frame.classList.remove('floor-plan-phone');
    for (const prop of ['--plan-tools-top','--plan-tools-right','--plan-tool-width','--plan-tool-height']) frame.style.removeProperty(prop);
