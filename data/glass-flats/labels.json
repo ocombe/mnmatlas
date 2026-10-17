@@ -69,14 +69,26 @@
   {
    "id": "to-sungreet-strand",
    "name": "to Sungreet Strand",
-   "x": 8836,
-   "y": 8570,
+   "x": 7880,
+   "y": 7412,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1,
    "arrow": "south",
    "toMap": "sungreet-strand",
    "toPlace": "to-glass-flats"
+  },
+  {
+   "id": "to-sungreet-strand-road",
+   "name": "to Sungreet Strand",
+   "x": 7240,
+   "y": 7399,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "south",
+   "toMap": "sungreet-strand",
+   "toPlace": "to-glass-flats-road"
   },
   {
    "id": "to-vale-of-zintar",
