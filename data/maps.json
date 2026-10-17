@@ -833,6 +833,17 @@
       "markersFile": "data/vale-of-zintar/markers.json",
       "labelsFile": "data/vale-of-zintar/labels.json",
       "hiddenAreasFile": null,
+      "overlays": [
+        {
+          "id": "floating-citadel",
+          "image": "assets/overlays/vale-of-zintar/floating-citadel.webp",
+          "x": 5376,
+          "y": 6656,
+          "width": 576,
+          "height": 640,
+          "opacity": 0.55
+        }
+      ],
       "defaultView": {
         "mode": "fit",
         "padding": 18,
