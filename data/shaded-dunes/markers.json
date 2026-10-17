@@ -508,5 +508,87 @@
   },
   "wiki": "https://monstersandmemories.wiki/npcs/chompers",
   "wikiId": "npc-chompers"
+ },
+ {
+  "id": "community-749",
+  "community": true,
+  "name": "Smugglers / Wererats",
+  "category": "Mob camp",
+  "note": "",
+  "x": 1849,
+  "y": 2563,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     1830,
+     2822
+    ],
+    [
+     1740,
+     2792
+    ],
+    [
+     1726,
+     2749
+    ],
+    [
+     1745,
+     2704
+    ],
+    [
+     1889,
+     2554
+    ],
+    [
+     1862,
+     2470
+    ],
+    [
+     1767,
+     2412
+    ],
+    [
+     1775,
+     2333
+    ],
+    [
+     1971,
+     2402
+    ],
+    [
+     1933,
+     2530
+    ],
+    [
+     1958,
+     2605
+    ],
+    [
+     1864,
+     2620
+    ],
+    [
+     1848,
+     2692
+    ],
+    [
+     1850,
+     2764
+    ]
+   ]
+  },
+  "levels": [
+   7,
+   11
+  ],
+  "mobs": [
+   {
+    "name": "A wererat",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-wererat",
+    "wikiId": "npc-a-wererat"
+   }
+  ]
  }
 ]
