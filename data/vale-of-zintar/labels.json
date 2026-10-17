@@ -157,6 +157,15 @@
    "minZoom": 3.5
   },
   {
+   "id": "floating-citadel",
+   "name": "Floating citadel (overhead)",
+   "x": 5680,
+   "y": 6790,
+   "kind": "district",
+   "priority": 55,
+   "minZoom": 4
+  },
+  {
    "id": "to-fallen-pass",
    "name": "to Fallen Pass",
    "x": 2986,
