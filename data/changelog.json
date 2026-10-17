@@ -2,6 +2,14 @@
  "entries": [
   {
    "date": "2026-10-17",
+   "title": "A citadel over the oasis",
+   "text": "The Necronaut citadel that floats high above the Putrid Oasis in the Vale of Zintar is now drawn on the map, faint enough to see the oasis beneath it.",
+   "maps": [
+    "vale-of-zintar"
+   ]
+  },
+  {
+   "date": "2026-10-17",
    "title": "A tent for the night",
    "text": "Personal notes can now mark a Camping spot with a tent, kept apart from mob camps. Like ore, wood and herb spots, camping spots stay in your own notes. Thanks to James-McMenamin for the idea and the first version.",
    "maps": []
