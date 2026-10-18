@@ -2,6 +2,15 @@
  "entries": [
   {
    "date": "2026-10-18",
+   "title": "The Infested Crypt is charted",
+   "text": "Slip through the door in the rocks of Shaded Dunes into the Infested Crypt. Two floors lead past egg-laden halls and up the spiderweb ladder to the balcony and the broodmother’s canopy.",
+   "maps": [
+    "infested-crypt",
+    "shaded-dunes"
+   ]
+  },
+  {
+   "date": "2026-10-18",
    "title": "Grimtide Sanctum is charted",
    "text": "Dive beneath the wreck in the Shallow Shoals and enter the sunken halls of Grimtide Sanctum. Follow three floors through broken crossings, flooded tunnels and crypts to the cavern far below.",
    "maps": [

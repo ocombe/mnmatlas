@@ -1,0 +1,72 @@
+{
+  "map": "infested-crypt",
+  "tileRevision": "v1",
+  "coordinateZoom": 4,
+  "labels": [
+    {
+      "id": "main-hall",
+      "name": "Main hall",
+      "level": "floor-1",
+      "x": 1450,
+      "y": 900,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 2.5,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "broodmother-hall",
+      "name": "Broodmother’s hall",
+      "level": "floor-1",
+      "x": 2780,
+      "y": 1000,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 2.5,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "balcony",
+      "name": "Balcony",
+      "level": "floor-2",
+      "x": 1200,
+      "y": 640,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 2.5,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "broodmother-canopy",
+      "name": "Broodmother’s canopy",
+      "level": "floor-2",
+      "x": 2780,
+      "y": 1080,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 2.5,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "exit-shaded-dunes",
+      "name": "to Shaded Dunes",
+      "level": "floor-1",
+      "x": 225,
+      "y": 262,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "west",
+      "travel": "Exit",
+      "toMap": "shaded-dunes",
+      "toPlace": "to-infested-crypt",
+      "approximate": true,
+      "note": ""
+    }
+  ],
+  "trainers": []
+}

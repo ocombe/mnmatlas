@@ -129,12 +129,14 @@
   {
    "id": "to-infested-crypt",
    "name": "to Infested Crypt",
-   "x": 2863,
-   "y": 3104,
+   "x": 2915,
+   "y": 3316,
    "kind": "exit",
-   "priority": 90,
-   "minZoom": 2,
-   "arrow": "east"
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "east",
+   "toMap": "infested-crypt",
+   "toPlace": "exit-shaded-dunes"
   },
   {
    "id": "shaded-dunes",

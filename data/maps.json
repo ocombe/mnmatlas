@@ -773,6 +773,77 @@
       "legacyStorage": {}
     },
     {
+      "id": "infested-crypt",
+      "title": "Infested Crypt",
+      "subtitle": "Two floors beneath Shaded Dunes",
+      "cartoucheKicker": "The broodmother’s lair",
+      "breadcrumb": "Monsters & Memories / Infested Crypt",
+      "description": "An illustrated fan atlas of the Infested Crypt, a spider-ridden crypt behind a door in the rocks of Shaded Dunes. Explore its halls, the webbed balcony and the broodmother’s canopy across two floors, and keep your own field notes.",
+      "width": 3264,
+      "height": 1568,
+      "minZoom": 0,
+      "maxNativeZoom": 4,
+      "maxZoom": 6,
+      "coordinateZoom": 4,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/infested-crypt/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/infested-crypt/markers.json",
+      "labelsFile": "data/infested-crypt/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Crypt halls",
+          "tilePath": "assets/tiles/infested-crypt/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Balcony and webs",
+          "tilePath": "assets/tiles/infested-crypt/floor-2/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names after Map by Doola and Map by chazsolo (CC BY-SA 4.0)",
+        "sourceTitle": "Map by Doola",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Infested_Crypt_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Doola and Map by chazsolo. The adapted names carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Doola",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Infested_Crypt_Map.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Infested-crypt-isometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Room names only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
       "id": "scarwood",
       "title": "Scarwood",
       "subtitle": "A traveller’s chart",
