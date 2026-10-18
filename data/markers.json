@@ -89,15 +89,6 @@
     "note": ""
   },
   {
-    "id": "wiki-13",
-    "name": "Shady merchant — west outskirts",
-    "category": "Vendor",
-    "vendor": "Shady merchant",
-    "x": 653,
-    "y": 1645,
-    "note": ""
-  },
-  {
     "id": "wiki-14",
     "name": "A greedy halfling",
     "category": "Vendor",
@@ -1579,5 +1570,72 @@
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
     "wikiId": "npc-a-used-weapons-dealer"
+  },
+  {
+    "id": "community-717",
+    "community": true,
+    "name": "A shifty gnome",
+    "category": "Vendor",
+    "note": "Gnome which will give a bag to fill with cloth.",
+    "x": 657,
+    "y": 1648,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shifty-gnome",
+    "wikiId": "npc-a-shifty-gnome"
+  },
+  {
+    "id": "community-730",
+    "community": true,
+    "name": "Cultist Camp",
+    "category": "Mob camp",
+    "note": "The cultists are located in the underground cave.",
+    "x": 2237,
+    "y": 630,
+    "levels": [
+      14,
+      17
+    ],
+    "mobs": []
+  },
+  {
+    "id": "community-755",
+    "community": true,
+    "name": "A Master Blacksmith",
+    "category": "Quest NPC",
+    "note": "Spawns at night(6pm) for Cinder Beetle Armor quest",
+    "x": 1149,
+    "y": 1569,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Cinder_Beetle_Armor_Quests"
+  },
+  {
+    "id": "community-756",
+    "community": true,
+    "name": "A wash maiden",
+    "category": "Quest NPC",
+    "note": "Part 1 - Laundry Day Quest",
+    "x": 934,
+    "y": 1525,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Laundry_Day_Quest"
+  },
+  {
+    "id": "community-758",
+    "community": true,
+    "name": "Willy (level 5)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 835,
+    "y": 1220,
+    "wiki": "https://monstersandmemories.wiki/npcs/willy",
+    "wikiId": "npc-willy"
+  },
+  {
+    "id": "community-759",
+    "community": true,
+    "name": "Aaliyah (level 40)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1565,
+    "y": 1548,
+    "wiki": "https://monstersandmemories.wiki/npcs/aaliyah",
+    "wikiId": "npc-aaliyah"
   }
 ]

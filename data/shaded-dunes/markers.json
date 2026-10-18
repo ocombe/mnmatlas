@@ -223,7 +223,7 @@
  },
  {
   "id": "humanoid-6-10-1",
-  "name": "Humanoids",
+  "name": "Wererats",
   "category": "Mob camp",
   "levels": [
    6,
@@ -233,7 +233,15 @@
   "y": 3977,
   "approximate": true,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "mobs": [
+   {
+    "name": "A wererat",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-wererat",
+    "wikiId": "npc-a-wererat"
+   }
+  ],
+  "community": true
  },
  {
   "id": "generic-6-10-2",
@@ -295,11 +303,12 @@
   "id": "npc-4",
   "name": "Notable NPC — Wizard Spells",
   "category": "Notable NPC",
-  "x": 4591,
-  "y": 3326,
+  "x": 4786,
+  "y": 3133,
   "approximate": true,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "giant-15plus-1",
@@ -590,5 +599,47 @@
     "wikiId": "npc-a-wererat"
    }
   ]
+ },
+ {
+  "id": "community-716",
+  "community": true,
+  "name": "Wizart Portal",
+  "category": "Teleporter",
+  "note": "Wizard's and their group mates will be teleported to this location via Gate or Portal spells.",
+  "x": 4827,
+  "y": 3133,
+  "travel": "Teleporter"
+ },
+ {
+  "id": "community-721",
+  "community": true,
+  "name": "Tunnel Entrance",
+  "category": "Passage",
+  "note": "Semi-hidden entrance to a tunnel here.",
+  "x": 1680,
+  "y": 1483
+ },
+ {
+  "id": "community-722",
+  "community": true,
+  "name": "Tunnel Exit",
+  "category": "Passage",
+  "note": "",
+  "x": 2317,
+  "y": 1875
+ },
+ {
+  "id": "community-723",
+  "community": true,
+  "name": "Ashira",
+  "category": "Mob camp",
+  "note": "",
+  "x": 2414,
+  "y": 1817,
+  "levels": [
+   6,
+   10
+  ],
+  "mobs": []
  }
 ]

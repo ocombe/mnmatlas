@@ -639,5 +639,15 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/lord-gaduuz",
   "wikiId": "npc-lord-gaduuz"
+ },
+ {
+  "id": "community-711",
+  "community": true,
+  "name": "Wizard Port",
+  "category": "Teleporter",
+  "note": "",
+  "x": 2878,
+  "y": 4009,
+  "travel": "Teleporter"
  }
 ]

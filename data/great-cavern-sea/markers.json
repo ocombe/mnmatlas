@@ -52,5 +52,62 @@
   "x": 5134,
   "y": 4418,
   "mobs": []
+ },
+ {
+  "id": "community-714",
+  "community": true,
+  "name": "Wizard Exodus",
+  "category": "Respawn point",
+  "note": "Wizards and their evacuated group members will teleport here.",
+  "x": 4043,
+  "y": 9223
+ },
+ {
+  "id": "community-728",
+  "community": true,
+  "name": "Foreman Vikkit",
+  "category": "Named mob",
+  "note": "When going up center ramp, make a left and follow the path going North to find. The PH spawns with 2 other goblins. (potential 3 pull)",
+  "x": 3102,
+  "y": 7191,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.miraheze.org/wiki/Foreman_Vikkit"
+ },
+ {
+  "id": "community-738",
+  "community": true,
+  "name": "Mold Beetles blue to 22",
+  "category": "Mob camp",
+  "note": "",
+  "x": 1716,
+  "y": 5666,
+  "levels": [
+   18,
+   20
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-739",
+  "community": true,
+  "name": "Feed Beetle",
+  "category": "Mob camp",
+  "note": "Red to 22",
+  "x": 2933,
+  "y": 4763,
+  "mobs": []
+ },
+ {
+  "id": "community-740",
+  "community": true,
+  "name": "Goblin Searcher",
+  "category": "Mob camp",
+  "note": "Green to 22.",
+  "x": 4611,
+  "y": 3307,
+  "mobs": []
  }
 ]

@@ -102,5 +102,47 @@
       "name": null,
       "what": "moved"
     }
+  ],
+  "marker:wood-elves": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-742": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
+  ],
+  "marker:community-744": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
+  ],
+  "marker:community-745": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
+  ],
+  "marker:krelvya-drynn": [
+    {
+      "name": "seldrath",
+      "what": "moved"
+    }
+  ],
+  "marker:community-747": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
+  ],
+  "marker:community-748": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
   ]
 }

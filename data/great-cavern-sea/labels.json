@@ -125,6 +125,17 @@
    "arrow": "east",
    "approximate": true,
    "note": ""
+  },
+  {
+   "id": "community-718",
+   "community": true,
+   "name": "Goblin Island",
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0,
+   "note": "Isle of Goblins within the Great Cavern Sea. Levels 20-25",
+   "x": 2941,
+   "y": 7034
   }
  ],
  "trainers": []

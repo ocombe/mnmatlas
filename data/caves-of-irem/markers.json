@@ -1,1 +1,24 @@
-[]
+[
+  {
+    "id": "community-751",
+    "community": true,
+    "name": "Elder Firstflush",
+    "category": "Quest NPC",
+    "note": "Spawns in the clearing of shrooms",
+    "x": 3144,
+    "y": 3659,
+    "wiki": "https://monstersandmemories.wiki/npcs/elder-firstflush",
+    "wikiId": "npc-elder-firstflush"
+  },
+  {
+    "id": "community-757",
+    "community": true,
+    "name": "Swarmcaller Skarr'Vokk",
+    "category": "Notable NPC",
+    "note": "Spawns in and around the tents on the island",
+    "x": 3577,
+    "y": 3339,
+    "wiki": "https://monstersandmemories.wiki/npcs/swarmcaller-skarrvokk",
+    "wikiId": "npc-swarmcaller-skarrvokk"
+  }
+]

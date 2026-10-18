@@ -770,5 +770,35 @@
       "name": "mazamune",
       "what": "added"
     }
+  ],
+  "marker:community-712": [
+    {
+      "name": "itodd",
+      "what": "added"
+    }
+  ],
+  "marker:community-713": [
+    {
+      "name": "itodd",
+      "what": "added"
+    }
+  ],
+  "marker:melzorra": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-731": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-753": [
+    {
+      "name": "grizzly4902",
+      "what": "added"
+    }
   ]
 }

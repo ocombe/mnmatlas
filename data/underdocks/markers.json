@@ -1395,5 +1395,16 @@
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/slylara-llumare",
     "wikiId": "npc-slylara-llumare"
+  },
+  {
+    "id": "community-726",
+    "community": true,
+    "name": "Jull Orebel",
+    "category": "Vendor",
+    "note": "",
+    "x": 3945,
+    "y": 3918,
+    "level": "upper",
+    "vendor": "Mining vendor"
   }
 ]

@@ -754,5 +754,47 @@
       "name": "obeyourfatheryah",
       "what": "added"
     }
+  ],
+  "marker:community-717": [
+    {
+      "name": "skulkingfox",
+      "what": "added"
+    }
+  ],
+  "marker:community-730": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-755": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-756": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-758": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-759": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:wiki-13": [
+    {
+      "name": "ocombe",
+      "what": "removed"
+    }
   ]
 }

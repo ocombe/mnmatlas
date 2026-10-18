@@ -128,8 +128,8 @@
   {
    "id": "to-shaded-dunes",
    "name": "to Shaded Dunes",
-   "x": 1136,
-   "y": 1062,
+   "x": 2363,
+   "y": 2641,
    "kind": "exit",
    "priority": 85,
    "minZoom": 2,
@@ -137,7 +137,8 @@
    "approximate": true,
    "note": "",
    "toMap": "shaded-dunes",
-   "toPlace": "to-caves-of-irem"
+   "toPlace": "to-caves-of-irem",
+   "community": true
   },
   {
    "id": "from-ancient-crypt",

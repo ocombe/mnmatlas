@@ -27,13 +27,14 @@
   "id": "krelvya-drynn",
   "name": "Krelvya Drynn (level 60+)",
   "category": "Quest NPC",
-  "x": 2380,
-  "y": 3044,
+  "x": 2159,
+  "y": 3603,
   "minZoom": 3,
   "approximate": true,
   "note": "At the top of the Red Mantle tower in the south-west of Penshaw.",
   "wiki": "https://monstersandmemories.wiki/npcs/krelvya-drynn",
-  "wikiId": "npc-krelvya-drynn"
+  "wikiId": "npc-krelvya-drynn",
+  "community": true
  },
  {
   "id": "dubar-falshim",
@@ -320,13 +321,14 @@
   "id": "wood-elves",
   "name": "Ranger Valegazer",
   "category": "Quest NPC",
-  "x": 3678,
-  "y": 613,
+  "x": 3869,
+  "y": 1565,
   "minZoom": 3,
   "approximate": true,
   "note": "Wood elf camp (scouts and bridge guards) on the way to Evershade Weald; guards Irilis and Velbloom stand at the entrance to Evershade Weald.",
   "wiki": "https://monstersandmemories.wiki/npcs/ranger-valegazer",
-  "wikiId": "npc-ranger-valegazer"
+  "wikiId": "npc-ranger-valegazer",
+  "community": true
  },
  {
   "id": "widow-vethra",
@@ -632,5 +634,69 @@
   "note": "Sells Ritual Oil (1gp 23sp)",
   "x": 2114,
   "y": 4295
+ },
+ {
+  "id": "community-742",
+  "community": true,
+  "name": "a blacksmith",
+  "category": "Vendor",
+  "note": "scraps, gems, blacksmithing tools, and other blacksmithing materials",
+  "x": 2886,
+  "y": 3005,
+  "vendor": "Blacksmithing vendor",
+  "sells": [
+   "Materials"
+  ]
+ },
+ {
+  "id": "community-744",
+  "community": true,
+  "name": "Sybille Abegg",
+  "category": "Vendor",
+  "note": "Village of Penshaw - Mossy Brook Inn",
+  "x": 2715,
+  "y": 3024,
+  "vendor": "Cook",
+  "wiki": "https://monstersandmemories.wiki/npcs/sybille-abegg",
+  "wikiId": "npc-sybille-abegg"
+ },
+ {
+  "id": "community-745",
+  "community": true,
+  "name": "Harold Abegg",
+  "category": "Vendor",
+  "note": "Village of Penshaw - Mossy Brook Inn",
+  "x": 2783,
+  "y": 2992,
+  "vendor": "Innkeeper",
+  "wiki": "https://monstersandmemories.wiki/npcs/harold-abegg",
+  "wikiId": "npc-harold-abegg"
+ },
+ {
+  "id": "community-747",
+  "community": true,
+  "name": "Tessa Kentwell",
+  "category": "Vendor",
+  "note": "In the tannery near the Red Mantle building.",
+  "x": 2724,
+  "y": 2766,
+  "vendor": "Tanning vendor",
+  "sells": [
+   "Materials"
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/tessa-kentwell",
+  "wikiId": "npc-tessa-kentwell"
+ },
+ {
+  "id": "community-748",
+  "community": true,
+  "name": "Hendrik Valbreken",
+  "category": "Vendor",
+  "note": "Timberwolf Trading Co.",
+  "x": 2865,
+  "y": 2617,
+  "vendor": "Adventuring supplies",
+  "wiki": "https://monstersandmemories.wiki/npcs/hendrik-valbreken",
+  "wikiId": "npc-hendrik-valbreken"
  }
 ]

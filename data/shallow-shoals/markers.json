@@ -132,5 +132,49 @@
   "minZoom": 3,
   "approximate": true,
   "note": "Player Island: sells housing; a realtor nearby sells housing keys."
+ },
+ {
+  "id": "community-735",
+  "community": true,
+  "name": "Captain Bilgesneak",
+  "category": "Named mob",
+  "note": "Goblin Island",
+  "x": 4417,
+  "y": 5729,
+  "levels": [
+   36,
+   36
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-bilgesneak",
+  "wikiId": "npc-captain-bilgesneak"
+ },
+ {
+  "id": "community-736",
+  "community": true,
+  "name": "a Ba'Haara storyteller (levels 38–42)",
+  "category": "Named mob",
+  "note": "Drops Bard Flute",
+  "x": 3318,
+  "y": 13373,
+  "levels": [
+   38,
+   38
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/a-bahaara-storyteller",
+  "wikiId": "npc-a-ba-haara-storyteller"
+ },
+ {
+  "id": "community-737",
+  "community": true,
+  "name": "Goblins",
+  "category": "Mob camp",
+  "note": "",
+  "x": 4986,
+  "y": 5794,
+  "levels": [
+   35,
+   36
+  ],
+  "mobs": []
  }
 ]

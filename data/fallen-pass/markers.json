@@ -14,8 +14,8 @@
     "wiki": "https://monstersandmemories.wiki/npcs/a-plagueborn-drake"
    }
   ],
-  "x": 2119,
-  "y": 725,
+  "x": 1819,
+  "y": 580,
   "approximate": true,
   "note": "Normal movement, No spellcasters.",
   "minZoom": 2,
@@ -440,11 +440,12 @@
    31,
    40
   ],
-  "x": 2340,
-  "y": 2990,
+  "x": 1902,
+  "y": 2908,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "community": true
  },
  {
   "id": "humanoid-31-40-3",
@@ -671,8 +672,8 @@
   "name": "Qassem Brolt (level 34)",
   "category": "Named mob",
   "note": "Spawns on the 2nd Floor of the Cave from the Cove.",
-  "x": 2448,
-  "y": 3050,
+  "x": 1692,
+  "y": 2858,
   "levels": [
    34,
    34

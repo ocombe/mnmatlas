@@ -860,5 +860,18 @@
   "y": 3954,
   "wiki": "https://monstersandmemories.wiki/npcs/adah-mukhtar",
   "wikiId": "npc-adah-mukhtar"
+ },
+ {
+  "id": "community-754",
+  "community": true,
+  "name": "Ashira Packleader",
+  "category": "Named mob",
+  "note": "6 Min spawntimer",
+  "x": 4496,
+  "y": 2425,
+  "levels": [
+   22,
+   22
+  ]
  }
 ]

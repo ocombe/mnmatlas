@@ -139,11 +139,12 @@
     "sells": [
       "Bags"
     ],
-    "x": 4613,
-    "y": 4334,
+    "x": 4679,
+    "y": 4135,
     "note": "Bags.",
     "wiki": "https://monstersandmemories.wiki/npcs/melzorra",
-    "wikiId": "npc-melzorra"
+    "wikiId": "npc-melzorra",
+    "community": true
   },
   {
     "id": "klavel-sul",
@@ -1543,5 +1544,51 @@
     "x": 3868,
     "y": 3491,
     "wiki": "https://monstersandmemories.miraheze.org/wiki/Ailis_Hal%27kareth"
+  },
+  {
+    "id": "community-712",
+    "community": true,
+    "name": "Mournful Outcast",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4404,
+    "y": 5062,
+    "wiki": "https://monstersandmemories.wiki/npcs/mournful-outcast",
+    "wikiId": "npc-mournful-outcast"
+  },
+  {
+    "id": "community-713",
+    "community": true,
+    "name": "Cook Deepbite (levels ~13–14)",
+    "category": "Named mob",
+    "note": "Beyond the hidden wall, in the goblin caves",
+    "x": 1818,
+    "y": 1736,
+    "wiki": "https://monstersandmemories.wiki/npcs/cook-deepbite",
+    "wikiId": "npc-cook-deepbite"
+  },
+  {
+    "id": "community-731",
+    "community": true,
+    "name": "Thanetal",
+    "category": "Quest NPC",
+    "note": "He spawns here, then he paths south, across the bridge, through the spirits / elementals, down along the shore near the bridge with the runaways - then he walks across water to the shore near the cultist cave, along the shore down to the toilmaster / newbie bridge then into town.  After he reaches wherever it is he goes in town he despawns, then appears back at the spawn point to begin again.",
+    "x": 1929,
+    "y": 2297,
+    "wiki": "https://monstersandmemories.wiki/npcs/thanetal",
+    "wikiId": "npc-thanetal"
+  },
+  {
+    "id": "community-753",
+    "community": true,
+    "name": "Gullach",
+    "category": "Named mob",
+    "note": "Named Mob for Inquisitor house quest, spawns from any outcast/runnaway",
+    "x": 3987,
+    "y": 6455,
+    "levels": [
+      15,
+      15
+    ]
   }
 ]
