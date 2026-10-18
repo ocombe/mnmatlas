@@ -736,5 +736,29 @@
   "y": 882,
   "approximate": true,
   "minZoom": 2
+ },
+ {
+  "id": "community-791",
+  "community": true,
+  "name": "Kallen Oison",
+  "category": "Named mob",
+  "note": "",
+  "x": 2052,
+  "y": 1490
+ },
+ {
+  "id": "community-792",
+  "community": true,
+  "name": "Kowmeh Lalen (level 40)",
+  "category": "Named mob",
+  "note": "Deep in Plagueborn citizens, just below the cliff from upper skellies, near the undead lake. In a building with an altar and pews.",
+  "x": 2907,
+  "y": 1363,
+  "levels": [
+   40,
+   40
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/kowmeh-lalen",
+  "wikiId": "npc-kowmeh-lalen"
  }
 ]

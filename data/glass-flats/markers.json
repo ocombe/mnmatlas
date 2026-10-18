@@ -523,15 +523,16 @@
   "id": "community-358",
   "community": true,
   "name": "Adept Kossco (levels ~51–52)",
-  "category": "Class trainer",
+  "category": "Named mob",
   "note": "near a scorched medic",
   "x": 3250,
   "y": 4993,
-  "classes": [
-   "Monk"
-  ],
   "wiki": "https://monstersandmemories.wiki/npcs/adept-kossco",
-  "wikiId": "npc-adept-kossco"
+  "wikiId": "npc-adept-kossco",
+  "levels": [
+   51,
+   51
+  ]
  },
  {
   "id": "community-415",

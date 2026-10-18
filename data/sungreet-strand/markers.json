@@ -873,5 +873,20 @@
    22,
    22
   ]
+ },
+ {
+  "id": "community-762",
+  "community": true,
+  "name": "Frightweaver (level 25)",
+  "category": "Named mob",
+  "note": "",
+  "x": 2644,
+  "y": 2984,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/frightweaver",
+  "wikiId": "npc-frightweaver"
  }
 ]

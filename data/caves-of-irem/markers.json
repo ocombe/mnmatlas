@@ -20,5 +20,25 @@
     "y": 3339,
     "wiki": "https://monstersandmemories.wiki/npcs/swarmcaller-skarrvokk",
     "wikiId": "npc-swarmcaller-skarrvokk"
+  },
+  {
+    "id": "community-761",
+    "community": true,
+    "name": "Beetles",
+    "category": "Mob camp",
+    "note": "",
+    "x": 2798,
+    "y": 4440,
+    "levels": [
+      17,
+      20
+    ],
+    "mobs": [
+      {
+        "name": "A giant deep glowbeetle",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-giant-deep-glowbeetle",
+        "wikiId": "npc-a-giant-deep-glowbeetle"
+      }
+    ]
   }
 ]

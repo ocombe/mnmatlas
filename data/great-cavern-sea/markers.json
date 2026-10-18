@@ -109,5 +109,33 @@
   "x": 4611,
   "y": 3307,
   "mobs": []
+ },
+ {
+  "id": "community-772",
+  "community": true,
+  "name": "Fissure Spiders",
+  "category": "Mob camp",
+  "note": "",
+  "x": 6063,
+  "y": 2935,
+  "levels": [
+   14,
+   15
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-773",
+  "community": true,
+  "name": "Shore Beetles",
+  "category": "Mob camp",
+  "note": "",
+  "x": 6148,
+  "y": 2782,
+  "levels": [
+   13,
+   14
+  ],
+  "mobs": []
  }
 ]

@@ -698,5 +698,27 @@
   "vendor": "Adventuring supplies",
   "wiki": "https://monstersandmemories.wiki/npcs/hendrik-valbreken",
   "wikiId": "npc-hendrik-valbreken"
+ },
+ {
+  "id": "community-763",
+  "community": true,
+  "name": "Hendrick Valbreken",
+  "category": "Vendor",
+  "note": "",
+  "x": 2864,
+  "y": 2617,
+  "wiki": "https://monstersandmemories.wiki/npcs/hendrick-valbreken",
+  "wikiId": "npc-hendrick-valbreken"
+ },
+ {
+  "id": "community-764",
+  "community": true,
+  "name": "A stablemaster",
+  "category": "Stable",
+  "note": "",
+  "x": 3169,
+  "y": 2699,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-stablemaster",
+  "wikiId": "npc-a-stablemaster"
  }
 ]

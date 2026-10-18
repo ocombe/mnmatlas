@@ -146,38 +146,6 @@
     "note": ""
   },
   {
-    "id": "wiki-20",
-    "name": "Survival — Sojourner’s Camp",
-    "category": "Tradeskill",
-    "x": 900,
-    "y": 1137,
-    "note": ""
-  },
-  {
-    "id": "wiki-21",
-    "name": "Wilderness — Sojourner’s Camp",
-    "category": "Tradeskill",
-    "x": 982,
-    "y": 1142,
-    "note": ""
-  },
-  {
-    "id": "wiki-23",
-    "name": "Lumberjacking — Sojourner’s Camp",
-    "category": "Tradeskill",
-    "x": 947,
-    "y": 1202,
-    "note": ""
-  },
-  {
-    "id": "wiki-24",
-    "name": "Mining — Sojourner’s Camp",
-    "category": "Tradeskill",
-    "x": 991,
-    "y": 1199,
-    "note": ""
-  },
-  {
     "id": "wiki-28",
     "name": "Skinning / Tanning — Tannery",
     "category": "Tradeskill",
@@ -1637,5 +1605,236 @@
     "y": 1548,
     "wiki": "https://monstersandmemories.wiki/npcs/aaliyah",
     "wikiId": "npc-aaliyah"
+  },
+  {
+    "id": "community-766",
+    "community": true,
+    "name": "Brewer Gromni",
+    "category": "Vendor",
+    "note": "",
+    "x": 1142,
+    "y": 1485,
+    "vendor": "Brewer",
+    "wiki": "https://monstersandmemories.wiki/npcs/brewer-gromni",
+    "wikiId": "npc-brewer-gromni"
+  },
+  {
+    "id": "community-767",
+    "community": true,
+    "name": "Suhib the Night Market Realtor",
+    "category": "Quest NPC",
+    "note": "Night Market",
+    "x": 1177,
+    "y": 1550,
+    "wiki": "https://monstersandmemories.wiki/npcs/suhib-the-night-market-realtor",
+    "wikiId": "npc-suhib-the-night-market-realtor"
+  },
+  {
+    "id": "community-768",
+    "community": true,
+    "name": "A property merchant",
+    "category": "Vendor",
+    "note": "Night Market, next to Suhib the Night Market Realtor - North bank, next to Auditor Kristoff",
+    "x": 1186,
+    "y": 1550,
+    "vendor": "Property merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-property-merchant",
+    "wikiId": "npc-a-property-merchant"
+  },
+  {
+    "id": "community-769",
+    "community": true,
+    "name": "Weaponsmith Fahkri",
+    "category": "Vendor",
+    "note": "",
+    "x": 1185,
+    "y": 1563,
+    "vendor": "Weaponsmith",
+    "wiki": "https://monstersandmemories.wiki/npcs/weaponsmith-fahkri",
+    "wikiId": "npc-weaponsmith-fahkri"
+  },
+  {
+    "id": "community-770",
+    "community": true,
+    "name": "a beggar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1223,
+    "y": 1539,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beggar",
+    "wikiId": "npc-a-beggar"
+  },
+  {
+    "id": "community-771",
+    "community": true,
+    "name": "a beggar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1246,
+    "y": 1622,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beggar",
+    "wikiId": "npc-a-beggar"
+  },
+  {
+    "id": "community-774",
+    "community": true,
+    "name": "a beggar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1073,
+    "y": 1570,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beggar",
+    "wikiId": "npc-a-beggar"
+  },
+  {
+    "id": "community-775",
+    "community": true,
+    "name": "Irfan Raz",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1091,
+    "y": 1641,
+    "wiki": "https://monstersandmemories.wiki/npcs/irfan-raz",
+    "wikiId": "npc-irfan-raz"
+  },
+  {
+    "id": "community-776",
+    "community": true,
+    "name": "A poison maker (Night Harbor)",
+    "category": "Vendor",
+    "note": "",
+    "x": 1107,
+    "y": 1653,
+    "vendor": "Poison maker",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-poison-maker-night-harbor",
+    "wikiId": "npc-a-poison-maker-night-harbor"
+  },
+  {
+    "id": "community-777",
+    "community": true,
+    "name": "Albrecht",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1109,
+    "y": 1609,
+    "wiki": "https://monstersandmemories.wiki/npcs/albrecht",
+    "wikiId": "npc-albrecht"
+  },
+  {
+    "id": "community-778",
+    "community": true,
+    "name": "Sinastin Aspenleaf",
+    "category": "Class trainer",
+    "note": "The City Illuminator's Guild is tucked away within the Night Market district, Sinastin can be found in the back room of the main building.",
+    "x": 1082,
+    "y": 1609,
+    "classes": [
+      "Rogue"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/sinastin-aspenleaf",
+    "wikiId": "npc-sinastin-aspenleaf"
+  },
+  {
+    "id": "community-779",
+    "community": true,
+    "name": "a priest of Relle",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 934,
+    "y": 1602
+  },
+  {
+    "id": "community-780",
+    "community": true,
+    "name": "Spymaster Uzaiyn",
+    "category": "Tradeskill",
+    "note": "Spycraft trainer - underneath the Bard Guild stage; take ladder down in middle of stage",
+    "x": 997,
+    "y": 1526,
+    "trade": "Spycraft",
+    "wiki": "https://monstersandmemories.wiki/npcs/spymaster-uzaiyn",
+    "wikiId": "npc-spymaster-uzaiyn"
+  },
+  {
+    "id": "community-781",
+    "community": true,
+    "name": "A spymaster",
+    "category": "Vendor",
+    "note": "Underneath the Bard Guild stage in Night Harbor",
+    "x": 992,
+    "y": 1526,
+    "vendor": "Spycraft vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-spymaster",
+    "wikiId": "npc-a-spymaster"
+  },
+  {
+    "id": "community-782",
+    "community": true,
+    "name": "Stumpy the Whistler",
+    "category": "Quest NPC",
+    "note": "Possible location",
+    "x": 1057,
+    "y": 1475,
+    "wiki": "https://monstersandmemories.wiki/npcs/stumpy-the-whistler",
+    "wikiId": "npc-stumpy-the-whistler"
+  },
+  {
+    "id": "community-783",
+    "community": true,
+    "name": "Miner Falmud",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 998,
+    "y": 1216,
+    "trade": "Mining",
+    "wiki": "https://monstersandmemories.wiki/npcs/miner-falmud",
+    "wikiId": "npc-miner-falmud"
+  },
+  {
+    "id": "community-785",
+    "community": true,
+    "name": "Lumberjacking Bubir",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 956,
+    "y": 1211,
+    "trade": "Lumberjacking",
+    "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-bubir",
+    "wikiId": "npc-lumberjacking-bubir"
+  },
+  {
+    "id": "community-786",
+    "community": true,
+    "name": "Outdoorsman Gahira",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 985,
+    "y": 1147,
+    "trade": "Wilderness",
+    "wiki": "https://monstersandmemories.wiki/npcs/outdoorsman-gahira",
+    "wikiId": "npc-outdoorsman-gahira"
+  },
+  {
+    "id": "community-787",
+    "community": true,
+    "name": "A priest of Eltindra",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 954,
+    "y": 1133,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-priest-of-eltindra",
+    "wikiId": "npc-1790076511178-rburf"
+  },
+  {
+    "id": "community-788",
+    "community": true,
+    "name": "Survivalist Faiza",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 906,
+    "y": 1137,
+    "trade": "Survival",
+    "wiki": "https://monstersandmemories.wiki/npcs/survivalist-faiza",
+    "wikiId": "npc-survivalist-faiza"
   }
 ]
