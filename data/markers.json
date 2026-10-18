@@ -1836,5 +1836,14 @@
     "trade": "Survival",
     "wiki": "https://monstersandmemories.wiki/npcs/survivalist-faiza",
     "wikiId": "npc-survivalist-faiza"
+  },
+  {
+    "id": "community-798",
+    "community": true,
+    "name": "Lieutenant Eiker",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 528,
+    "y": 1076
   }
 ]
