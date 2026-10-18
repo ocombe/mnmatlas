@@ -112,7 +112,8 @@
    "arrow": "north",
    "approximate": true,
    "note": "Docks and a broken lift at the end of the northern gorge.",
-   "toMap": "rothold"
+   "toMap": "rothold",
+   "toPlace": "to-great-cavern-sea"
   },
   {
    "id": "to-blind-midden",

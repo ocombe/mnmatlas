@@ -1,0 +1,266 @@
+{
+  "map": "rothold",
+  "tileRevision": "v3",
+  "coordinateZoom": 5,
+  "labels": [
+    {
+      "id": "river",
+      "name": "River",
+      "level": "level-1",
+      "x": 3502.0,
+      "y": 2977.0,
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 1.5
+    },
+    {
+      "id": "mist-lake",
+      "name": "Mist Lake",
+      "level": "level-1",
+      "x": 2077.0,
+      "y": 3892.0,
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 1.5
+    },
+    {
+      "id": "thralled-mines",
+      "name": "Thralled Mines",
+      "level": "level-1",
+      "x": 3007.0,
+      "y": 1732.0,
+      "kind": "district",
+      "priority": 90,
+      "minZoom": 2
+    },
+    {
+      "id": "gorge",
+      "name": "The gorge",
+      "level": "level-1",
+      "x": 5287.0,
+      "y": 1117.0,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 2
+    },
+    {
+      "id": "river-docks",
+      "name": "River docks",
+      "level": "level-1",
+      "x": 4042.0,
+      "y": 2692.0,
+      "kind": "building",
+      "priority": 70,
+      "minZoom": 3.5
+    },
+    {
+      "id": "lake-dock",
+      "name": "Lake dock",
+      "level": "level-1",
+      "x": 1387.0,
+      "y": 2542.0,
+      "kind": "building",
+      "priority": 65,
+      "minZoom": 3.5
+    },
+    {
+      "id": "gorge-docks",
+      "name": "Gorge docks",
+      "level": "level-1",
+      "x": 5302.0,
+      "y": 2392.0,
+      "kind": "building",
+      "priority": 70,
+      "minZoom": 3.5
+    },
+    {
+      "id": "broken-lift",
+      "name": "Broken lift",
+      "level": "level-1",
+      "x": 5729.5,
+      "y": 1541.5,
+      "kind": "building",
+      "priority": 65,
+      "minZoom": 4
+    },
+    {
+      "id": "chapel",
+      "name": "Chapel",
+      "level": "level-2",
+      "x": 4349.5,
+      "y": 1705.0,
+      "kind": "building",
+      "priority": 80,
+      "minZoom": 4
+    },
+    {
+      "id": "well",
+      "name": "Well",
+      "level": "level-2",
+      "x": 4499.5,
+      "y": 1726.0,
+      "kind": "building",
+      "priority": 75,
+      "minZoom": 4
+    },
+    {
+      "id": "keep-courtyard",
+      "name": "Keep halls",
+      "level": "level-2",
+      "x": 4237.0,
+      "y": 1544.5,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 3
+    },
+    {
+      "id": "gorge-road",
+      "name": "Gorge road",
+      "level": "level-2",
+      "x": 4762.0,
+      "y": 2047.0,
+      "kind": "district",
+      "priority": 75,
+      "minZoom": 3
+    },
+    {
+      "id": "library",
+      "name": "Library",
+      "level": "level-3",
+      "x": 4313.5,
+      "y": 1708.0,
+      "kind": "building",
+      "priority": 80,
+      "minZoom": 4
+    },
+    {
+      "id": "bar",
+      "name": "Bar",
+      "level": "level-3",
+      "x": 4076.5,
+      "y": 1516.0,
+      "kind": "building",
+      "priority": 75,
+      "minZoom": 4
+    },
+    {
+      "id": "dining-hall",
+      "name": "Dining hall",
+      "level": "level-3",
+      "x": 4484.5,
+      "y": 1327.0,
+      "kind": "building",
+      "priority": 75,
+      "minZoom": 4
+    },
+    {
+      "id": "crypt",
+      "name": "Crypt",
+      "level": "level-4",
+      "x": 4177.0,
+      "y": 1162.0,
+      "kind": "district",
+      "priority": 95,
+      "minZoom": 2.5
+    },
+    {
+      "id": "crypt-hall",
+      "name": "Crypt hall",
+      "level": "level-4",
+      "x": 4177.0,
+      "y": 1379.5,
+      "kind": "building",
+      "priority": 80,
+      "minZoom": 4
+    },
+    {
+      "id": "kitchen",
+      "name": "Kitchen",
+      "level": "level-4",
+      "x": 4489.0,
+      "y": 1583.5,
+      "kind": "building",
+      "priority": 75,
+      "minZoom": 4
+    },
+    {
+      "id": "keg-room",
+      "name": "Keg room",
+      "level": "level-4",
+      "x": 4421.5,
+      "y": 1709.5,
+      "kind": "building",
+      "priority": 70,
+      "minZoom": 4.5
+    },
+    {
+      "id": "jail",
+      "name": "Jail",
+      "level": "level-5",
+      "x": 4147.0,
+      "y": 1664.5,
+      "kind": "building",
+      "priority": 85,
+      "minZoom": 3.5
+    },
+    {
+      "id": "upper-caves",
+      "name": "Upper caves",
+      "level": "level-5",
+      "x": 3487.0,
+      "y": 1829.5,
+      "kind": "district",
+      "priority": 85,
+      "minZoom": 2.5
+    },
+    {
+      "id": "spore-chamber",
+      "name": "Spore chamber",
+      "level": "level-5",
+      "x": 4132.0,
+      "y": 2377.0,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 3
+    },
+    {
+      "id": "waterfall",
+      "name": "Waterfall",
+      "level": "level-5",
+      "x": 3311.5,
+      "y": 1514.5,
+      "kind": "building",
+      "priority": 70,
+      "minZoom": 4
+    },
+    {
+      "id": "to-great-cavern-sea",
+      "name": "to Great Cavern Sea",
+      "level": "level-1",
+      "x": 5369.5,
+      "y": 802.0,
+      "kind": "exit",
+      "priority": 100,
+      "minZoom": 1,
+      "arrow": "north",
+      "travel": "Exit",
+      "note": "The northern gorge leads to the Great Cavern Sea.",
+      "toMap": "great-cavern-sea",
+      "toPlace": "to-rothold"
+    },
+    {
+      "id": "to-fields-of-the-lost",
+      "name": "to Fields of the Lost",
+      "level": "level-2",
+      "x": 4027.0,
+      "y": 1597.0,
+      "kind": "exit",
+      "priority": 100,
+      "minZoom": 1,
+      "arrow": "west",
+      "travel": "Exit",
+      "note": "The surface gate."
+    }
+  ],
+  "trainers": []
+}

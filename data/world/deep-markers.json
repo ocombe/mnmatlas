@@ -6,7 +6,8 @@
   "x": 1313,
   "y": 266,
   "note": "Dungeon entrance.",
-  "minZoom": 1.5
+  "minZoom": 1.5,
+  "toMap": "rothold"
  },
  {
   "id": "dungeon-blind-midden",

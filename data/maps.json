@@ -1381,6 +1381,94 @@
       },
       "hiddenPrimaryStack": null,
       "legacyStorage": {}
+    },
+    {
+      "id": "rothold",
+      "title": "Rothold",
+      "subtitle": "The ruined keep and caverns of the Deep",
+      "cartoucheKicker": "A fortress beneath the surface",
+      "breadcrumb": "Monsters & Memories / Rothold",
+      "description": "An illustrated fan atlas of Rothold. Explore the river, Mist Lake, the Thralled Mines and five sheets of the ruined keep and crypt, and keep your own field notes.",
+      "width": 6464,
+      "height": 5216,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v3",
+      "tilePath": "assets/tiles/rothold/level-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/rothold/markers.json",
+      "labelsFile": "data/rothold/labels.json",
+      "hiddenAreasFile": null,
+      "defaultLevel": "level-1",
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "levels": [
+        {
+          "id": "level-1",
+          "title": "Caves",
+          "tilePath": "assets/tiles/rothold/level-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-2",
+          "title": "Keep floor 0",
+          "tilePath": "assets/tiles/rothold/level-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-3",
+          "title": "Keep floor -1",
+          "tilePath": "assets/tiles/rothold/level-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-4",
+          "title": "Keep floor -2 and Crypt",
+          "tilePath": "assets/tiles/rothold/level-4/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-5",
+          "title": "Keep floor -3",
+          "tilePath": "assets/tiles/rothold/level-5/{z}/{x}/{y}.webp"
+        }
+      ],
+      "wikiZone": "Rothold",
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ],
+        "Lift": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Skoop (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Skoop",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Rothold_map_by_skoop.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Skoop; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Skoop",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Rothold_map_by_skoop.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
     }
   ]
 }

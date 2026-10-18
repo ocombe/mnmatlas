@@ -1,6 +1,14 @@
 {
  "entries": [
   {
+   "date": "2026-10-18",
+   "title": "Into Rothold",
+   "text": "Follow the river from the Great Cavern Sea into Rothold, past the docks and Mist Lake to the Thralled Mines. Five charts open the ruined keep, its prison, upper caves and crypt to travellers.",
+   "maps": [
+    "rothold"
+   ]
+  },
+  {
    "date": "2026-10-17",
    "title": "A citadel over the oasis",
    "text": "The Necronaut citadel that floats high above the Putrid Oasis in the Vale of Zintar is now drawn on the map, faint enough to see the oasis beneath it.",
