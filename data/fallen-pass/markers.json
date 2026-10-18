@@ -760,5 +760,20 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/kowmeh-lalen",
   "wikiId": "npc-kowmeh-lalen"
+ },
+ {
+  "id": "community-805",
+  "community": true,
+  "name": "Tora'Galdo (level 38)",
+  "category": "Named mob",
+  "note": "",
+  "x": 1877,
+  "y": 1212,
+  "levels": [
+   38,
+   38
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/toragaldo",
+  "wikiId": "npc-toragaldo"
  }
 ]

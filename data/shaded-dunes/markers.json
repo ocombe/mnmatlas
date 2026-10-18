@@ -641,5 +641,45 @@
    10
   ],
   "mobs": []
+ },
+ {
+  "id": "community-801",
+  "community": true,
+  "name": "Fishing",
+  "category": "Tradeskill",
+  "note": "Thorn Sturgeon, Green Eye Bass",
+  "x": 6319,
+  "y": 3089,
+  "trade": "Fishing"
+ },
+ {
+  "id": "community-803",
+  "community": true,
+  "name": "Fishing",
+  "category": "Tradeskill",
+  "note": "Thorn Sturgeon, Grouper, Basa",
+  "x": 5366,
+  "y": 3067,
+  "trade": "Fishing"
+ },
+ {
+  "id": "community-810",
+  "community": true,
+  "name": "Fishing",
+  "category": "Tradeskill",
+  "note": "Spotted Angelfish, Oasis Perch, Tainted Guppy",
+  "x": 3922,
+  "y": 3001,
+  "trade": "Fishing"
+ },
+ {
+  "id": "community-812",
+  "community": true,
+  "name": "Fishing",
+  "category": "Tradeskill",
+  "note": "Whitefish, Basa",
+  "x": 6775,
+  "y": 3855,
+  "trade": "Fishing"
  }
 ]

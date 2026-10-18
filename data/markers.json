@@ -1845,5 +1845,99 @@
     "note": "",
     "x": 528,
     "y": 1076
+  },
+  {
+    "id": "community-800",
+    "community": true,
+    "name": "Marvion Hallows",
+    "category": "Vendor",
+    "note": "Upstairs in the library, inside the small room at the top of the stairs inside the library.",
+    "x": 1500,
+    "y": 890,
+    "vendor": "Spell scribe",
+    "wiki": "https://monstersandmemories.wiki/npcs/marvion-hallows",
+    "wikiId": "npc-marvion-hallows"
+  },
+  {
+    "id": "community-802",
+    "community": true,
+    "name": "Sekhmet",
+    "category": "Quest NPC",
+    "note": "Downstairs directly ahead as you enter The Concourse of Souls. At the very bottom in a pit.",
+    "x": 1537,
+    "y": 903,
+    "wiki": "https://monstersandmemories.wiki/npcs/sekhmet",
+    "wikiId": "npc-sekhmet"
+  },
+  {
+    "id": "community-804",
+    "community": true,
+    "name": "Everett Graves",
+    "category": "Quest NPC",
+    "note": "Ahead and slightly left as you enter The Concourse of Souls, on the main floor.",
+    "x": 1489,
+    "y": 913,
+    "wiki": "https://monstersandmemories.wiki/npcs/everett-graves",
+    "wikiId": "npc-everett-graves"
+  },
+  {
+    "id": "community-806",
+    "community": true,
+    "name": "Witcher Sayyaad",
+    "category": "Quest NPC",
+    "note": "1st floor, to the right as you enter The Concourse of Souls.",
+    "x": 1517,
+    "y": 942,
+    "wiki": "https://monstersandmemories.wiki/npcs/witcher-sayyaad",
+    "wikiId": "npc-witcher-sayyaad"
+  },
+  {
+    "id": "community-807",
+    "community": true,
+    "name": "A necromancer scribe",
+    "category": "Vendor",
+    "note": "Upstairs in the library, on the upper library floor.",
+    "x": 1484,
+    "y": 915,
+    "vendor": "Spell scribe",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-necromancer-scribe",
+    "wikiId": "npc-a-necromancer-scribe"
+  },
+  {
+    "id": "community-808",
+    "community": true,
+    "name": "A reagent vendor (Concourse of Souls)",
+    "category": "Vendor",
+    "note": "Upstairs in the library, first floor.",
+    "x": 1473,
+    "y": 910,
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Materials"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-concourse-of-souls",
+    "wikiId": "npc-a-reagent-vendor-concourse-of-souls"
+  },
+  {
+    "id": "community-809",
+    "community": true,
+    "name": "Kemilla",
+    "category": "Quest NPC",
+    "note": "Downstairs directly ahead as you enter The Concourse of Souls. Left side, last room.",
+    "x": 1536,
+    "y": 889,
+    "wiki": "https://monstersandmemories.wiki/npcs/kemilla",
+    "wikiId": "npc-kemilla"
+  },
+  {
+    "id": "community-811",
+    "community": true,
+    "name": "Buckmarr Gorstagg",
+    "category": "Quest NPC",
+    "note": "To the right when entering The Concourse of Souls, down the hall and to the left inside a small room.",
+    "x": 1548,
+    "y": 907,
+    "wiki": "https://monstersandmemories.wiki/npcs/buckmarr-gorstagg",
+    "wikiId": "npc-buckmarr-gorstagg"
   }
 ]

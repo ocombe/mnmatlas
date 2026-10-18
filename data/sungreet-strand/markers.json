@@ -888,5 +888,20 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/frightweaver",
   "wikiId": "npc-frightweaver"
+ },
+ {
+  "id": "community-813",
+  "community": true,
+  "name": "Vile Will (level 15)",
+  "category": "Named mob",
+  "note": "Located upstairs in a wheat and cabbage plantation villa.",
+  "x": 4515,
+  "y": 6894,
+  "levels": [
+   15,
+   15
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/vile-will",
+  "wikiId": "npc-vile-will"
  }
 ]

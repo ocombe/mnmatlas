@@ -946,5 +946,53 @@
       "name": "ocombe",
       "what": "added"
     }
+  ],
+  "marker:community-800": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-802": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-804": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-806": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-807": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-808": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-809": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-811": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
   ]
 }

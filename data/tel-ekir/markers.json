@@ -418,5 +418,21 @@
     "level": "floor-1",
     "wiki": "https://monstersandmemories.wiki/npcs/a-bloodynose-trainer",
     "wikiId": "npc-a-bloodynose-trainer"
+  },
+  {
+    "id": "community-797",
+    "community": true,
+    "name": "Crafty Rufkas (level 16)",
+    "category": "Named mob",
+    "note": "",
+    "x": 2477,
+    "y": 2602,
+    "level": "floor-1",
+    "levels": [
+      16,
+      16
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/crafty-rufkas",
+    "wikiId": "npc-crafty-rufkas"
   }
 ]
