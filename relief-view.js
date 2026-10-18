@@ -380,7 +380,11 @@ export function mount(container, opts) {
       }));
       if (disposed) return handle;
       // Keep a visible dashed route for shafts and other unjoined passages.
-      if (Array.isArray(opts.links) && opts.links.length) {
+      // Marker pairs from the map, plus routes the plan itself carries (e.g. both ends on one floor).
+      const routeKey = link => [link?.a?.id, link?.b?.id].sort().join('|');
+      const routeLinks = [...(Array.isArray(opts.links) ? opts.links : []), ...(Array.isArray(data.links) ? data.links : [])]
+        .filter((link, i, all) => all.findIndex(other => routeKey(other) === routeKey(link)) === i);
+      if (routeLinks.length) {
         const surfaceHeight = (id, px, py) => {
           const spec = data.levels.find(item => item.id === id), layer = layers.get(id);
           if (!spec || !layer) return null;
@@ -406,7 +410,7 @@ export function mount(container, opts) {
         };
         const material = own(new THREE.MeshBasicMaterial({ color: 0xb4501e, depthTest: false, transparent: true, opacity: .95 }));
         const dot = own(new THREE.SphereGeometry(.65, 10, 8));
-        for (const link of opts.links) {
+        for (const link of routeLinks) {
           if (!link?.a || !link?.b) continue;
           if (data.joinedLinks?.some(pair => (pair.a === link.a.id && pair.b === link.b.id) || (pair.a === link.b.id && pair.b === link.a.id))) continue;
           const ha = surfaceHeight(link.a.level, link.a.x, link.a.y), hb = surfaceHeight(link.b.level, link.b.x, link.b.y);
