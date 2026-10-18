@@ -878,6 +878,25 @@
           "id": "floor-2",
           "title": "Lower caves, beach and bay",
           "tilePath": "assets/tiles/blacktide-bay/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "caves",
+          "title": "Keeper’s Bight caves",
+          "width": 2208,
+          "height": 2880,
+          "minZoom": 0,
+          "maxNativeZoom": 4,
+          "maxZoom": 6,
+          "coordinateZoom": 4,
+          "tileRevision": "caves-v1",
+          "alignmentGroup": "keepers-bight-caves",
+          "tilePath": "assets/tiles/blacktide-bay/caves/{z}/{x}/{y}.webp",
+          "labelsFile": "data/blacktide-bay/caves-labels.json",
+          "defaultView": {
+            "mode": "fit",
+            "padding": 18,
+            "placeZoom": 4
+          }
         }
       ],
       "extraCategories": {
@@ -887,6 +906,14 @@
         ],
         "Passage": [
           "↕",
+          "#64795b"
+        ],
+        "Lift": [
+          "↕",
+          "#64795b"
+        ],
+        "Exit": [
+          "↗",
           "#64795b"
         ]
       },

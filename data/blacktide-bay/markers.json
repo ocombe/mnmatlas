@@ -28,5 +28,48 @@
     "toMarker": "stairs-fortress-floor-1",
     "direction": "up",
     "switchOnClick": true
+  },
+  {
+    "id": "kb-lifts-floor-1",
+    "name": "Lifts - up to the Keeper’s Bight caves",
+    "category": "Lift",
+    "travel": "Lift",
+    "level": "floor-1",
+    "x": 4707,
+    "y": 7074,
+    "approximate": true,
+    "note": "",
+    "toLevel": "caves",
+    "toMarker": "kb-lifts-caves",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "kb-lifts-caves",
+    "name": "Lifts - down to Blacktide Bay",
+    "category": "Lift",
+    "travel": "Lift",
+    "level": "caves",
+    "x": 1028,
+    "y": 216,
+    "approximate": true,
+    "note": "",
+    "toLevel": "floor-1",
+    "toMarker": "kb-lifts-floor-1",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "caves-exit-keepers-bight",
+    "name": "to Keeper’s Bight",
+    "category": "Exit",
+    "travel": "Exit",
+    "level": "caves",
+    "x": 240,
+    "y": 1652,
+    "approximate": true,
+    "note": "",
+    "toMap": "keepers-bight",
+    "toPlace": "to-blacktide-bay-dungeon"
   }
 ]

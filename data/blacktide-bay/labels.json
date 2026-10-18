@@ -102,22 +102,6 @@
       "toPlace": "to-blacktide-bay",
       "approximate": true,
       "note": ""
-    },
-    {
-      "id": "exit-keepers-bight",
-      "name": "Lift to Keeper’s Bight",
-      "level": "floor-1",
-      "x": 4707,
-      "y": 7074,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "up",
-      "travel": "Lift",
-      "toMap": "keepers-bight",
-      "toPlace": "to-blacktide-bay-dungeon",
-      "approximate": true,
-      "note": ""
     }
   ],
   "trainers": []

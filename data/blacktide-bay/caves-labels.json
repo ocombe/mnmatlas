@@ -1,0 +1,20 @@
+{
+  "map": "blacktide-bay",
+  "tileRevision": "caves-v1",
+  "coordinateZoom": 4,
+  "labels": [
+    {
+      "id": "caves-orc-camp",
+      "name": "Orc camp",
+      "level": "caves",
+      "x": 870,
+      "y": 520,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 2,
+      "approximate": true,
+      "note": ""
+    }
+  ],
+  "trainers": []
+}

@@ -195,15 +195,15 @@
   },
   {
    "id": "to-blacktide-bay-dungeon",
-   "name": "Lift to Blacktide Bay (dungeon)",
-   "x": 3059,
-   "y": 5876,
+   "name": "Orc caves to Blacktide Bay",
+   "x": 2702,
+   "y": 6582,
    "kind": "exit",
    "priority": 90,
    "minZoom": 1.5,
-   "arrow": "down",
+   "arrow": "west",
    "toMap": "blacktide-bay",
-   "toPlace": "exit-keepers-bight"
+   "toPlace": "caves-exit-keepers-bight"
   }
  ],
  "trainers": []
