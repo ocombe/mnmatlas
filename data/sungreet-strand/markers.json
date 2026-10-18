@@ -849,5 +849,16 @@
   "y": 3668,
   "wiki": "https://monstersandmemories.wiki/npcs/nerguk",
   "wikiId": "npc-nerguk"
+ },
+ {
+  "id": "community-750",
+  "community": true,
+  "name": "Adah Mukhtar",
+  "category": "Vendor",
+  "note": "high level, don't pull it thinking it's lvl ~20",
+  "x": 4125,
+  "y": 3954,
+  "wiki": "https://monstersandmemories.wiki/npcs/adah-mukhtar",
+  "wikiId": "npc-adah-mukhtar"
  }
 ]
