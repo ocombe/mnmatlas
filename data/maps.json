@@ -844,6 +844,74 @@
       "legacyStorage": {}
     },
     {
+      "id": "blacktide-bay",
+      "title": "Blacktide Bay",
+      "subtitle": "Two floors under the cliffs of Evershade Weald",
+      "cartoucheKicker": "The orcs’ hidden harbour",
+      "breadcrumb": "Monsters & Memories / Blacktide Bay",
+      "description": "An illustrated fan atlas of Blacktide Bay, an orc stronghold in a great sea cave reached by lift from Evershade Weald and Keeper’s Bight. Explore the upper caves and fortress, the waterfall caves, the beach camp and the ships at anchor across two floors, and keep your own field notes.",
+      "width": 8256,
+      "height": 7648,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/blacktide-bay/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/blacktide-bay/markers.json",
+      "labelsFile": "data/blacktide-bay/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Upper caves and fortress",
+          "tilePath": "assets/tiles/blacktide-bay/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Lower caves, beach and bay",
+          "tilePath": "assets/tiles/blacktide-bay/floor-2/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Passage": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by chazsolo (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Blacktide_Bay.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by chazsolo; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Blacktide_Bay.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
       "id": "scarwood",
       "title": "Scarwood",
       "subtitle": "A traveller’s chart",

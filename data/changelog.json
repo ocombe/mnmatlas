@@ -2,6 +2,16 @@
  "entries": [
   {
    "date": "2026-10-18",
+   "title": "Blacktide Bay is charted",
+   "text": "Ride the lifts down from Evershade Weald or Keeper’s Bight into Blacktide Bay. Two floors lead from the orc fortress and the upper caves down to the waterfall caves, the beach camp and the ships at anchor in the bay.",
+   "maps": [
+    "blacktide-bay",
+    "evershade-weald",
+    "keepers-bight"
+   ]
+  },
+  {
+   "date": "2026-10-18",
    "title": "The Infested Crypt is charted",
    "text": "Slip through the door in the rocks of Shaded Dunes into the Infested Crypt. Two floors lead past egg-laden halls and up the spiderweb ladder to the balcony and the broodmother’s canopy.",
    "maps": [

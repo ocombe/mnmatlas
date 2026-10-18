@@ -79,7 +79,8 @@
   "y": 519,
   "note": "Dungeon entrance.",
   "minZoom": 2.75,
-  "approximate": true
+  "approximate": true,
+  "toMap": "blacktide-bay"
  },
  {
   "id": "dungeon-sunken-resort",

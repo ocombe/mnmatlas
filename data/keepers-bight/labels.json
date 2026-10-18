@@ -202,7 +202,8 @@
    "priority": 90,
    "minZoom": 1.5,
    "arrow": "down",
-   "toMap": "blacktide-bay"
+   "toMap": "blacktide-bay",
+   "toPlace": "exit-keepers-bight"
   }
  ],
  "trainers": []

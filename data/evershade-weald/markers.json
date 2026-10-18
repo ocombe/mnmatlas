@@ -400,7 +400,10 @@
   "category": "Lift",
   "x": 4146,
   "y": 3377,
-  "note": "Leads to Blacktide Bay."
+  "note": "Leads to Blacktide Bay.",
+  "toMap": "blacktide-bay",
+  "toPlace": "exit-evershade-weald",
+  "direction": "down"
  },
  {
   "id": "community-240",
