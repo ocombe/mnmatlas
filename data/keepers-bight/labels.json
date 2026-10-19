@@ -195,15 +195,27 @@
   },
   {
    "id": "to-blacktide-bay-dungeon",
-   "name": "Orc caves to Blacktide Bay",
-   "x": 2702,
-   "y": 6582,
+   "name": "Orc caves (west door) to Blacktide Bay",
+   "x": 2699,
+   "y": 6578,
    "kind": "exit",
    "priority": 90,
    "minZoom": 1.5,
-   "arrow": "west",
+   "arrow": "east",
    "toMap": "blacktide-bay",
    "toPlace": "caves-exit-keepers-bight"
+  },
+  {
+   "id": "to-blacktide-bay-dungeon-south",
+   "name": "Orc caves (south) to Blacktide Bay",
+   "x": 3038,
+   "y": 7010,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "north",
+   "toMap": "blacktide-bay",
+   "toPlace": "caves-exit-keepers-bight-south"
   }
  ],
  "trainers": []

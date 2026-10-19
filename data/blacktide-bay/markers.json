@@ -71,5 +71,18 @@
     "note": "",
     "toMap": "keepers-bight",
     "toPlace": "to-blacktide-bay-dungeon"
+  },
+  {
+    "id": "caves-exit-keepers-bight-south",
+    "name": "to Keeper’s Bight (south)",
+    "category": "Exit",
+    "travel": "Exit",
+    "level": "caves",
+    "x": 985,
+    "y": 2658,
+    "approximate": true,
+    "note": "",
+    "toMap": "keepers-bight",
+    "toPlace": "to-blacktide-bay-dungeon-south"
   }
 ]
