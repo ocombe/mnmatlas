@@ -2,12 +2,14 @@
  "entries": [
   {
    "date": "2026-10-19",
-   "title": "Fishing spots and passages",
-   "text": "Fishing spots are now a marker of their own: list the fish that bite in a water, and search a fish’s name to find every water that holds it. Thanks to a fellow angler for the idea. Passages now say how you get through (tunnel, swim, climb, drop or secret) and whether the way is one way only. Thanks to argus_q, whose waterfall routes in Blacktide Bay inspired them.",
+   "title": "Fishing spots, passages and traps",
+   "text": "Fishing spots are now a marker of their own: list the fish that bite in a water, and search a fish’s name to find every water that holds it. Thanks to a fellow angler for the idea. Passages now say how you get through (tunnel, swim, climb, drop or secret) and whether the way is one way only. Thanks to argus_q, whose waterfall routes in Blacktide Bay inspired them. Traps now have a marker of their own, a pit lined with spikes.",
    "maps": [
     "shaded-dunes",
     "shallow-shoals",
-    "blacktide-bay"
+    "blacktide-bay",
+    "ancient-crypt",
+    "wyrmsbane-tomb"
    ]
   },
   {
