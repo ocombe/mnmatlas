@@ -35,7 +35,8 @@ const tradePaths = {
 };
 const categoryPaths = {
   'Camping spot': tradePaths.Survival,
-  'Fishing spot': tradePaths['Fishing'],
+  'Fishing spot': 'M2 6q2.5-3 5 0t5 0t5 0t5 0 M4 16c3-4.5 9-4.5 12 0-3 4.5-9 4.5-12 0z M16 16l5-3.5v7z M7.5 15.5v.01',
+  'Trap': 'M2 8h5v12h10V8h5 M7.5 20 9 13l1.5 7 M10.5 20 12 13l1.5 7 M13.5 20 15 13l1.5 7',
   'Notable NPC': 'M16 7a4 4 0 1 0-8 0 4 4 0 1 0 8 0 M4 22v-3a8 8 0 0 1 16 0v3 M4 22h16',
   'Bank': 'M8 7 6 2h12l-2 5 M8 7h8c1 4 6 6 6 10 0 7-20 7-20 0 0-4 5-6 6-10z M8 8h8 M15 12h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9 M12 11v10',
   'Inn': 'M2 4v18 M2 17h20v5 M2 10h7v7 M9 8h9q4 0 4 4v5 M4 12h3v3H4z',
@@ -62,7 +63,7 @@ const passagePaths={
   'Passage':'M3 20V9a5 5 0 0 1 10 0v11 M8 20V9a5 5 0 0 1 10 0v11 M3 20h15',
   'Tunnel':'M3 20v-8a9 9 0 0 1 18 0v8 M7 20v-8a5 5 0 0 1 10 0v8 M3 20h18',
   'Swim':'M18 5a2 2 0 1 0-4 0 2 2 0 1 0 4 0 M3 12l6-4 7 5 M9 8l3 6 M2 16q3-3 6 0t6 0t6 0 M2 21q3-3 6 0t6 0t6 0',
-  'Climb':'M18 2v20 M6 2q5 5 0 10t0 10 M6 6h5 M5 12h6 M5 18h6 M15 6h3 M15 14h3',
+  'Climb':'M7 2v20 M17 2v20 M7 6h10 M7 11h10 M7 16h10',
   'Drop':'M2 7h9v5 M16 3v16 M12 15l4 4 4-4 M2 21h20',
   'Secret':'M8 12a6 6 0 1 1 8 0l2 10H6z'
 };
@@ -89,7 +90,7 @@ function markerSymbol(marker){
   if(marker.category==='Passage'&&!marker.noteType){const face=text('span','','travel-symbol');face.append(travelSvg(Object.hasOwn(passagePaths,marker.way||'')?marker.way:'Passage'));if(marker.oneWay||marker.toLevel&&marker.direction)face.append(text('small',exitArrows[marker.direction]||(marker.oneWay?'→':'')));return face;}
   const travel=!marker.noteType&&['Exit','Lift','Stairs','Ladder','Bridge','Teleporter','Level connection'].includes(marker.category)?travelKind(marker.name,marker.category,marker.travel):'';
   if(travel){const face=text('span','','travel-symbol');face.append(travelSvg(travel));if(exitArrows[marker.direction])face.append(text('small',exitArrows[marker.direction]));return face;}
-  if(marker.toLevel)return text('b',marker.direction==='up'?'↑':'↓');
+  if(marker.toLevel&&marker.category!=='Trap')return text('b',marker.direction==='up'?'↑':'↓');
   if(marker.noteType==='exit')return text('b',exitArrows[marker.arrow]||'→');
   if(marker.noteType==='label')return text('b','Aa','label-glyph');
   const skill=Object.hasOwn(tradePaths,marker.trade||'')?marker.trade:tradeskillName(marker), path=Object.hasOwn(tradePaths,skill)?tradePaths[skill]:(Object.hasOwn(categoryPaths,marker.category)?categoryPaths[marker.category]:null);

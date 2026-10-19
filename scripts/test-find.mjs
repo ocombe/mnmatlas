@@ -246,6 +246,7 @@ console.log('Script checks passed: every page script parses.');
  const m={category:'Passage',oneWay:true};assert.equal(symbol(m).children[1].textContent,String.fromCharCode(0x2192));assert.equal(symbol({...m,direction:'east'}).children[1].textContent,String.fromCharCode(0x2192));assert.equal(symbol({...m,toLevel:'lower',direction:'down'}).children[1].textContent,String.fromCharCode(0x2913));
  const base={id:'personal-fishing',name:'Fishing',category:'Fishing spot',note:'',x:20,y:20,fish:[{name:'Basa'}],shape:{kind:'area',form:'rect',points:[[10,10],[30,10],[30,30],[10,30]]}};assert(valid(base));assert(!valid({...base,category:'Bank'}));assert(!valid({...base,noteType:'label'}));assert(!valid({...base,fish:[{name:''}]}));
  const passage={...base,category:'Passage',fish:undefined,way:'Swim',oneWay:true};assert(valid(passage));for(const bad of [{way:'Walk'},{oneWay:'yes'},{category:'Bank'},{noteType:'exit'}])assert(!valid({...passage,...bad}));
- assert(!vm.runInContext("privateOnlyCategories.has('Fishing spot')",c));assert.equal(vm.runInContext("categoryPaths['Fishing spot']===tradePaths.Fishing",c),true);
+ assert(!vm.runInContext("privateOnlyCategories.has('Fishing spot')",c));assert.equal(vm.runInContext("categoryPaths['Fishing spot']!==tradePaths.Fishing&&passagePaths.Climb===travelPaths.Ladder",c),true);
+ const trap={id:'personal-trap',name:'Pit trap',category:'Trap',note:'',x:10,y:20};assert(valid(trap));assert.equal(symbol(trap).tagName,'svg');assert.equal(symbol({...trap,toLevel:'lower',direction:'down'}).tagName,'svg');
  console.log('Passage symbol checks passed: six pictograms, green seals, compass/fallback arrows, floor direction and personal field validation.');
 }
