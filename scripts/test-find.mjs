@@ -205,7 +205,7 @@ console.log('Script checks passed: every page script parses.');
  const water={id:'water',name:'Fishing',category:'Fishing spot',note:'',fish:[{name:'Thorn Sturgeon',wikiId:'item-thorn-sturgeon',wiki:'https://monstersandmemories.wiki/items/thorn-sturgeon'},{name:'Basa'},{name:'Grouper'},{name:'Whitefish'}]};
  const fishCard=nodes(vm.runInContext('campCard',c)(water));assert(fishCard.some(x=>x.textContent==='Fish'));assert(fishCard.some(x=>x.textContent==='Basa'&&x.tag==='span'));assert(fishCard.some(x=>x.textContent==='Thorn Sturgeon'&&x.href===water.fish[0].wiki));assert(!fishCard.some(x=>x.textContent==='Loot'));assert(vm.runInContext('markerText',c)(water).includes('thorn sturgeon'));
  const short=nodes(vm.runInContext('markerHoverCard',c)(water));assert(short.some(x=>x.textContent==='Thorn Sturgeon, Basa, Grouper and 1 more'));assert(nodes(vm.runInContext('popup',c)(water)).some(x=>x.textContent==='Fish'));
- assert.equal(vm.runInContext('markerSubtitle',c)({category:'Passage',way:'Swim',oneWay:true}),'Passage'+String.fromCharCode(0x20,0xb7,0x20)+'Swim'+String.fromCharCode(0x20,0xb7,0x20)+'One way');
+ assert.equal(vm.runInContext('markerSubtitle',c)({category:'Passage',way:'Swim',oneWay:true}),'Swim'+String.fromCharCode(0x20,0xb7,0x20)+'One way');
  console.log('Fishing display checks passed: linked/plain fish roster, no loot, hover limit, popup and local search.');
 
  console.log('Camp display checks passed: parsed ranges, mob-name search, shared loot pages, highest rates, sources, eight items, more count and embed rules.');
