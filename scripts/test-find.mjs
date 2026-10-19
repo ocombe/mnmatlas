@@ -205,7 +205,7 @@ console.log('Script checks passed: every page script parses.');
  const water={id:'water',name:'Fishing',category:'Fishing spot',note:'',fish:[{name:'Thorn Sturgeon',wikiId:'item-thorn-sturgeon',wiki:'https://monstersandmemories.wiki/items/thorn-sturgeon'},{name:'Basa'},{name:'Grouper'},{name:'Whitefish'}]};
  const fishCard=nodes(vm.runInContext('campCard',c)(water));assert(fishCard.some(x=>x.textContent==='Fish'));assert(fishCard.some(x=>x.textContent==='Basa'&&x.tag==='span'));assert(fishCard.some(x=>x.textContent==='Thorn Sturgeon'&&x.href===water.fish[0].wiki));assert(!fishCard.some(x=>x.textContent==='Loot'));assert(vm.runInContext('markerText',c)(water).includes('thorn sturgeon'));
  const short=nodes(vm.runInContext('markerHoverCard',c)(water));assert(short.some(x=>x.textContent==='Thorn Sturgeon, Basa, Grouper and 1 more'));assert(nodes(vm.runInContext('popup',c)(water)).some(x=>x.textContent==='Fish'));
- assert.equal(vm.runInContext('markerSubtitle',c)({category:'Passage',way:'Swim',oneWay:true}),'Swim'+String.fromCharCode(0x20,0xb7,0x20)+'One way');assert.equal(vm.runInContext('markerSubtitle',c)({category:'Mob camp',name:'Ambushers',ambush:true}),'Ambush'+String.fromCharCode(0x20,0xb7,0x20)+'hidden until close');
+ assert.equal(vm.runInContext('markerSubtitle',c)({category:'Passage',way:'Swim',oneWay:true}),'Swim'+String.fromCharCode(0x20,0xb7,0x20)+'One way');assert.equal(vm.runInContext('markerSubtitle',c)({category:'Named mob',name:'Lurker',ambush:true}),'Ambush'+String.fromCharCode(0x20,0xb7,0x20)+'hidden until close');
  console.log('Fishing display checks passed: linked/plain fish roster, no loot, hover limit, popup and local search.');
 
  console.log('Camp display checks passed: parsed ranges, mob-name search, shared loot pages, highest rates, sources, eight items, more count and embed rules.');
@@ -248,7 +248,8 @@ console.log('Script checks passed: every page script parses.');
  const passage={...base,category:'Passage',fish:undefined,way:'Swim',oneWay:true};assert(valid(passage));for(const bad of [{way:'Walk'},{oneWay:'yes'},{category:'Bank'},{noteType:'exit'}])assert(!valid({...passage,...bad}));
  assert(!vm.runInContext("privateOnlyCategories.has('Fishing spot')",c));assert.equal(vm.runInContext("categoryPaths['Fishing spot']!==tradePaths.Fishing&&passagePaths.Climb===travelPaths.Ladder",c),true);
  const trap={id:'personal-trap',name:'Pit trap',category:'Trap',note:'',x:10,y:20};assert(valid(trap));assert.equal(symbol(trap).tagName,'svg');assert.equal(symbol({...trap,toLevel:'lower',direction:'down'}).tagName,'svg');
- const ambush={id:'personal-ambush',name:'Ambushers',category:'Mob camp',note:'',x:10,y:20,ambush:true};assert(valid(ambush));assert(valid({...ambush,category:'Named mob'}));for(const bad of [{ambush:'yes'},{category:'Bank'},{noteType:'label'}])assert(!valid({...ambush,...bad}));
+ const ambush={id:'personal-ambush',name:'Lurker',category:'Named mob',note:'',x:10,y:20,ambush:true};assert(valid(ambush));for(const bad of [{ambush:'yes'},{category:'Mob camp'},{category:'Ambush'},{category:'Bank'},{noteType:'label'}])assert(!valid({...ambush,...bad}));
+ assert(valid({id:'personal-hidden',name:'Ambushers',category:'Ambush',note:'',x:10,y:20,levels:[20,24]}));assert.equal(symbol({category:'Ambush',name:'Ambushers'}).tagName,'svg');
  assert(pin(ambush).html.children.some(n=>n.className==='ambush-mark'));assert(!pin({...ambush,ambush:false}).html.children.some(n=>n.className==='ambush-mark'));
  console.log('Passage symbol checks passed: six pictograms, green seals, compass/fallback arrows, floor direction and personal field validation.');
 }

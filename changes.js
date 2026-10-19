@@ -72,7 +72,7 @@
    else if(p[f]===null||p[f]==='')delete out[f];else out[f]=copy(p[f]);
   }
   if(out.shape){out.shape=root.atlasShapes.validate(out.shape);[out.x,out.y]=root.atlasShapes.anchor(out.shape);}
-  if(!['Mob camp','Named mob'].includes(out.category))delete out.levels;if(out.category!=='Mob camp')delete out.mobs;if(out.category!=='Fishing spot')delete out.fish;if(out.category!=='Passage'){delete out.way;delete out.oneWay;}if(!['Mob camp','Named mob'].includes(out.category))delete out.ambush;
+  if(!mobTypes.includes(out.category))delete out.levels;if(!campTypes.includes(out.category))delete out.mobs;if(out.category!=='Fishing spot')delete out.fish;if(out.category!=='Passage'){delete out.way;delete out.oneWay;}if(out.category!=='Named mob')delete out.ambush;
   if(out.category==='Named mob'&&out.levels!=null&&!levelsOk(out.levels,out.category))throw Error('Choose a level from 1 to 99.');
   if(fields.size&&!fields.has('removed'))out.community=true;
   return out;

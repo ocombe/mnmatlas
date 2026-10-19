@@ -69,6 +69,7 @@ const passagePaths={
 };
 // Small marks added to a pin: an ambush is a mob that stays hidden until you are close.
 const markPaths={'Ambush':'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M3 3l18 18'};
+categoryPaths['Ambush']=markPaths['Ambush'];
 // A sign's or marker's way of travel: its own field, its category, or words in its name.
 function travelKind(name,category,given){
   if(Object.hasOwn(travelPaths,given||''))return given;

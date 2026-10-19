@@ -40,7 +40,7 @@ export function card(n){
  return c;
 }
 
-export function markerNpcIds(markers){const ids=new Set();for(const m of Array.isArray(markers)?markers:[])for(const entry of [m,...(m?.category==='Mob camp'&&Array.isArray(m.mobs)?m.mobs:[])])if(typeof entry?.wikiId==='string'&&/^npc-[a-z0-9-]{1,150}$/.test(entry.wikiId))ids.add(entry.wikiId);return ids;}
+export function markerNpcIds(markers){const ids=new Set();for(const m of Array.isArray(markers)?markers:[])for(const entry of [m,...(['Mob camp','Ambush'].includes(m?.category)&&Array.isArray(m.mobs)?m.mobs:[])])if(typeof entry?.wikiId==='string'&&/^npc-[a-z0-9-]{1,150}$/.test(entry.wikiId))ids.add(entry.wikiId);return ids;}
 export async function buildCards({root:folder=root,secret,fetcher=fetch,sleep,site:source=site}={}){
  const root=folder;
  const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));let built=0,asked=0;

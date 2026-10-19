@@ -3,7 +3,7 @@
   {
    "date": "2026-10-19",
    "title": "Ambushes and secrets",
-   "text": "Mob camps and named mobs can now be marked as an ambush: a small crossed-out eye on the pin warns of creatures that stay hidden until you are close. Thanks to argus_q for spotting the first one. Secrets have a marker of their own, a little sparkle.",
+   "text": "Ambushes now have a marker of their own, a crossed-out eye, for creatures that stay hidden until you are close; a named mob that lies in wait carries the same eye on its pin. Thanks to argus_q for spotting the first one. Secrets have a marker of their own, a little sparkle.",
    "maps": [
     "blacktide-bay"
    ]
