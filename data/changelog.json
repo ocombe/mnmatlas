@@ -2,16 +2,8 @@
  "entries": [
   {
    "date": "2026-10-19",
-   "title": "Ambushes and secrets",
-   "text": "Ambushes now have a marker of their own, a crossed-out eye, for creatures that stay hidden until you are close; a named mob that lies in wait carries the same eye on its pin. Thanks to argus_q for spotting the first one. Secrets have a marker of their own, a little sparkle.",
-   "maps": [
-    "blacktide-bay"
-   ]
-  },
-  {
-   "date": "2026-10-19",
-   "title": "Fishing spots, passages and traps",
-   "text": "Fishing spots are now a marker of their own: list the fish that bite in a water, and search a fish’s name to find every water that holds it. Thanks to a fellow angler for the idea. Passages now say how you get through (tunnel, swim, climb or drop) and whether the way is one way only. Thanks to argus_q, whose waterfall routes in Blacktide Bay inspired them. Traps now have a marker of their own, a pit lined with spikes.",
+   "title": "Fishing spots, passages, traps and ambushes",
+   "text": "Fishing spots are now a marker of their own: list the fish that bite in a water, and search a fish’s name to find every water that holds it. Thanks to a fellow angler for the idea. Passages now say how you get through (tunnel, swim, climb or drop) and whether the way is one way only. Thanks to argus_q, whose waterfall routes in Blacktide Bay inspired them. Traps now have a marker of their own, a pit lined with spikes. Ambushes now have a marker of their own, a crossed-out eye, for creatures that stay hidden until you are close; a named mob that lies in wait carries the same eye on its pin. Thanks to argus_q for spotting the first one. Secrets have a marker of their own, a little sparkle.",
    "maps": [
     "shaded-dunes",
     "shallow-shoals",
