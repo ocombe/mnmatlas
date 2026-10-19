@@ -140,7 +140,7 @@ const shownMarker=(m,terms)=>enabled.has(m.category)&&vendorShown(m)&&terms.ever
 function visibleMarkers(){const terms=searchTerms();return allMarkers().filter(m=>atLevel(m)&&shownMarker(m,terms));}
 function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers();}
 function copyButton(place){return button('Copy link',()=>copyLink(place),'copy-place','copy');}
-function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);if(destination)changeLevel(m.toLevel,{...destination,kind:'marker',quiet:m.switchOnClick&&!alignmentMode});}
+function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);changeLevel(m.toLevel,destination?{...destination,kind:'marker',quiet:!alignmentMode}:{id:'',x:m.x,y:m.y,quiet:true});}
 // Arriving through a floor link: no popup, just a short glow on the landing marker.
 function flashPin(id){const el=(pins.get(id)||labelPins.get(id))?.getElement();if(!el)return;el.classList.remove('just-arrived');void el.offsetWidth;el.classList.add('just-arrived');setTimeout(()=>el.classList.remove('just-arrived'),1700);}
 // A marker's wiki page opens in a new tab; an embed on another site may hide it (wiki-links.js).
@@ -346,8 +346,8 @@ function drawMarkers(){
   // A pin that travels when clicked (an exit to another map, stairs or a lift set to go there) just travels outside edit
   // mode: Leaflet's own click-to-open is taken off, so its card no longer flashes up before the new map or floor loads.
   // Search results and the review desk still open its card through choose().
-  if(opens||crosses||m.switchOnClick&&!alignmentMode)pin.off('click',pin._openPopup,pin);
-  pin.on('click',()=>window.atlasCommunity?.reviewOpen?.()?choose(m):opens?openMap(opens.id):crosses?cross():m.switchOnClick&&!alignmentMode?switchAt(m):alignmentMode&&!own?window.atlasCommunity?.change?.(m,'edit-marker')||choose(m):choose(m));pin.on('contextmenu',()=>choose(m));
+  if(opens||crosses||travelsOnClick(m)&&!alignmentMode)pin.off('click',pin._openPopup,pin);
+  pin.on('click',()=>window.atlasCommunity?.reviewOpen?.()?choose(m):opens?openMap(opens.id):crosses?cross():travelsOnClick(m)&&!alignmentMode?switchAt(m):alignmentMode&&!own?window.atlasCommunity?.change?.(m,'edit-marker')||choose(m):choose(m));pin.on('contextmenu',()=>choose(m));
   if(alignmentMode){pin.on('dragstart',()=>{map.closePopup();if(!own)selectAlignment(m,'marker');});pin.on('dragend',()=>(own?movePersonal:moveAlignedMarker)(m.id,pin.getLatLng()));}
   bindMarkerTooltip(pin,m);if(showPins)pin.addTo(map);pins.set(m.id,pin);
   list.append(resultRow(markerTitle(m),markerDetail(m,own?'Personal note':''),()=>choose(m),m));
@@ -374,6 +374,9 @@ function drawMarkers(){
  if(!list.childElementCount)list.append(text('p','No places found. Try another name or enable more categories.','empty'));
  window.atlasCommunity?.filtersChanged?.();schedulePlaceLabels();
 }
+// A floor link travels when clicked unless it is a trap or "Go there when tapped" was turned off. Without an arrival
+// marker it lands on the same spot of the other floor. Personal notes keep their card (Edit note) unless ticked.
+function travelsOnClick(m){return !!m.toLevel&&(m.switchOnClick??(m.category!=='Trap'&&!String(m.id).startsWith('personal-')));}
 function keepPopupInside(pop){
  const el=pop.getElement?.(),frame=$('map')?.getBoundingClientRect();if(!el||!frame)return;
  const tip=el.querySelector('.leaflet-popup-tip-container'),base=pop._fitBase||(pop._fitBase=L.point(pop.options.offset||[0,7]));
