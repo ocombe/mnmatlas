@@ -26,7 +26,7 @@
  const stable=v=>Array.isArray(v)?v.map(stable):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])])):v;
  const equal=(a,b)=>JSON.stringify(stable(a))===JSON.stringify(stable(b)),typeKeys=['category','trade','classes','vendor','sells'];
  const keysFor=p=>['category',...(p.category===undefined?['trade','classes','vendor','sells']:p.category==='Tradeskill'?['trade']:p.category==='Class trainer'?['classes']:p.category==='Vendor'?['vendor','sells']:[])];
- const editKeys=['name','note','color','level','kind','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','minZoom','approximate','tier','priority','building','levels','mobs','fish','way','oneWay','shape'];
+ const editKeys=['name','note','color','level','kind','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','minZoom','approximate','tier','priority','building','levels','mobs','fish','way','oneWay','ambush','shape'];
  const value=(p,k)=>['shape','levels'].includes(k)?p?.[k]??null:['mobs','fish'].includes(k)?(p?.[k]?.length?p[k]:null):['name','note','wiki','wikiId'].includes(k)?p?.[k]||'':p?.[k];
  function fieldsOf(row){
   const p=row.payload||{},f=p.from||{},out=new Set();
@@ -72,7 +72,7 @@
    else if(p[f]===null||p[f]==='')delete out[f];else out[f]=copy(p[f]);
   }
   if(out.shape){out.shape=root.atlasShapes.validate(out.shape);[out.x,out.y]=root.atlasShapes.anchor(out.shape);}
-  if(!['Mob camp','Named mob'].includes(out.category))delete out.levels;if(out.category!=='Mob camp')delete out.mobs;if(out.category!=='Fishing spot')delete out.fish;if(out.category!=='Passage'){delete out.way;delete out.oneWay;}
+  if(!['Mob camp','Named mob'].includes(out.category))delete out.levels;if(out.category!=='Mob camp')delete out.mobs;if(out.category!=='Fishing spot')delete out.fish;if(out.category!=='Passage'){delete out.way;delete out.oneWay;}if(!['Mob camp','Named mob'].includes(out.category))delete out.ambush;
   if(out.category==='Named mob'&&out.levels!=null&&!levelsOk(out.levels,out.category))throw Error('Choose a level from 1 to 99.');
   if(fields.size&&!fields.has('removed'))out.community=true;
   return out;

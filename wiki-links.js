@@ -118,7 +118,7 @@ const levelsText=v=>levelsOk(v)?'Levels '+v[0]+(v[1]===null?'+':v[1]===v[0]?'':'
 function namedLevels(m){if(levelsOk(m?.levels,'Named mob'))return m.levels;const v=/\(levels?\s+([^)]*)\)\s*$/i.exec(m?.name||'');return v?levelRange(v[1].replace(/\s+or\s+/i,'–')):null;}
 const namedLevelText=m=>m.category==='Named mob'?levelsText(namedLevels(m)).replace(/^Levels /,'Level '):'';
 const mobsOk=v=>Array.isArray(v)&&v.length<=12&&v.every(m=>m&&typeof m==='object'&&!Array.isArray(m)&&Object.keys(m).every(k=>['name','wikiId','wiki'].includes(k))&&typeof m.name==='string'&&!!m.name.trim()&&m.name.length<=100&&typeof m.wikiId==='string'&&!!wikiIdOf(m.wikiId)&&typeof m.wiki==='string'&&!!wikiAddress(m.wiki))&&new Set(v.map(m=>m.wikiId)).size===v.length;
-const passageWays=['Tunnel','Swim','Climb','Drop','Secret'];
+const passageWays=['Tunnel','Swim','Climb','Drop'];
 const wayOk=v=>typeof v==='string'&&passageWays.includes(v);
 const fishOk=v=>Array.isArray(v)&&v.length<=12&&[...v].every(m=>m&&typeof m==='object'&&!Array.isArray(m)&&Object.keys(m).every(k=>['name','wikiId','wiki'].includes(k))&&typeof m.name==='string'&&!!m.name.trim()&&m.name.length<=100&&(!Object.hasOwn(m,'wikiId')||typeof m.wikiId==='string'&&/^item-[a-z0-9-]{1,150}$/.test(m.wikiId))&&(!Object.hasOwn(m,'wiki')||typeof m.wiki==='string'&&!!wikiAddress(m.wiki)&&new URL(wikiAddress(m.wiki)).pathname.startsWith('/items/')))&&new Set(v.map(m=>m.name.trim().toLocaleLowerCase())).size===v.length&&new Set(v.filter(m=>m.wikiId).map(m=>m.wikiId)).size===v.filter(m=>m.wikiId).length;
 // The id rides on the address field with the address it was picked for, so typing another address or clearing it drops the id.
@@ -166,7 +166,7 @@ const trainerOnMap=(row,classes)=>{const c=trainerClasses(row);return c.length>0
 // the same ones: an area label nothing else; a zone exit its arrow and the map it leads to; a marker its colour and wiki
 // page (with the wiki's id), a tradeskill its trade, a class trainer its classes, a vendor its kind and Sells tags. Values are checked
 // where they are saved (app.js valid(), scripts/apply-approved.mjs).
-const markerExtraKeys=['shape','noteType','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','level','minZoom','approximate','color','wiki','wikiId','trade','classes','vendor','sells','levels','mobs','fish','way','oneWay'];
+const markerExtraKeys=['shape','noteType','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','level','minZoom','approximate','color','wiki','wikiId','trade','classes','vendor','sells','levels','mobs','fish','way','oneWay','ambush'];
 function markerExtras(m){
  const out={};if(m.shape&&m.noteType!=='label'&&m.noteType!=='exit')out.shape=structuredClone(m.shape);for(const k of ['level','minZoom','approximate'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
  if(m.noteType!=='label')for(const k of ['travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
@@ -176,6 +176,7 @@ function markerExtras(m){
  if(m.category==='Mob camp'&&m.mobs!=null)out.mobs=structuredClone(m.mobs);
  if(m.category==='Fishing spot'&&m.fish!=null)out.fish=structuredClone(m.fish);
  if(m.category==='Passage')for(const k of ['way','oneWay'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
+ if(['Mob camp','Named mob'].includes(m.category)&&typeof m.ambush==='boolean')out.ambush=m.ambush;
  if(m.category==='Tradeskill'&&m.trade)out.trade=m.trade;
  if(m.category==='Class trainer'&&Array.isArray(m.classes)&&m.classes.length)out.classes=[...m.classes];
  if(m.category==='Vendor'){if(m.vendor)out.vendor=vendorKindNow(m.vendor);if(Array.isArray(m.sells)&&m.sells.length)out.sells=[...m.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}

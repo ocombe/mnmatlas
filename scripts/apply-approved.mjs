@@ -51,7 +51,7 @@ function point(p,c,id){if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFin
 function wikiOf(value,id){const link=wikiAddress(value);if(link===null)fail('Unsupported wiki link for suggestion '+id+'.');return link;}
 // The wiki's id for the linked entry, kept beside the link it was picked with.
 function wikiIdFrom(p,id){const wikiId=wikiIdOf(p.wikiId);if(wikiId===null)fail('Invalid wiki id for suggestion '+id+'.');return wikiId;}
-const rosterKeys=['levels','mobs','fish','way','oneWay'],fieldCategory=(k,c)=>k==='levels'?['Mob camp','Named mob'].includes(c):c===(k==='mobs'?'Mob camp':k==='fish'?'Fishing spot':'Passage'),fieldOk=(k,v,c)=>k==='levels'?levelsOk(v,c):k==='mobs'?mobsOk(v):k==='fish'?fishOk(v):k==='way'?wayOk(v):typeof v==='boolean';
+const rosterKeys=['levels','mobs','fish','way','oneWay','ambush'],fieldCategory=(k,c)=>k==='levels'||k==='ambush'?['Mob camp','Named mob'].includes(c):c===(k==='mobs'?'Mob camp':k==='fish'?'Fishing spot':'Passage'),fieldOk=(k,v,c)=>k==='levels'?levelsOk(v,c):k==='mobs'?mobsOk(v):k==='fish'?fishOk(v):k==='way'?wayOk(v):typeof v==='boolean';
 function validatePayload(row,c){
  const p=normaliseMarker(structuredClone(row.payload));if(p?.travelArrow!==undefined){p.arrow=p.travelArrow;delete p.travelArrow;}if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
  if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
@@ -201,7 +201,7 @@ async function applyRow(row){
   if(fields.has('wiki')){if(wiki){next.wiki=wiki;if(wikiId)next.wikiId=wikiId;else if(p.wikiId!==undefined||wiki!==m.wiki)delete next.wikiId;}else{delete next.wiki;delete next.wikiId;}}
   for(const k of editKeys.filter(k=>!['name','note'].includes(k)))if(fields.has(k)&&!(k==='building'&&chip&&chip!==m)){if(p[k]===null||p[k]==='')delete next[k];else next[k]=p[k];}
   if(next.shape){shapes.validate(next.shape,c);[next.x,next.y]=shapes.anchor(next.shape);}
-  if(!['Mob camp','Named mob'].includes(next.category))delete next.levels;if(next.category!=='Mob camp')delete next.mobs;if(next.category!=='Fishing spot')delete next.fish;if(next.category!=='Passage'){delete next.way;delete next.oneWay;}if(next.levels!=null&&!levelsOk(next.levels,next.category))fail('Unsupported levels for suggestion '+row.id+'.');
+  if(!['Mob camp','Named mob'].includes(next.category))delete next.levels;if(next.category!=='Mob camp')delete next.mobs;if(next.category!=='Fishing spot')delete next.fish;if(next.category!=='Passage'){delete next.way;delete next.oneWay;}if(!['Mob camp','Named mob'].includes(next.category))delete next.ambush;if(next.levels!=null&&!levelsOk(next.levels,next.category))fail('Unsupported levels for suggestion '+row.id+'.');
   // Retries after a successful push can find the desired values already on the map.
   const hits=conflicts(row,live,history.get(runKey(row))||[]);if(hits.length)fail('conflicts with #'+hits.join(', #'));
   if(JSON.stringify(next)===JSON.stringify(m)&&(!fields.has('building')||!chip||chip===m||chip.building===p.building))return 'already edited';
@@ -261,12 +261,12 @@ async function liveTarget(row){
  const here=m=>m.id===id&&(!c.levels||!m.level||m.level===row.level||row.payload?.level===m.level);
  return (label?f.data.labels:f.data).find(here)||(!label&&c.labelsFile?(await file(c.labelsFile)).data.trainers?.find(here):null);
 }
-const publicValues=m=>Object.fromEntries(['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','category',...typeKeys,'color','level','arrow','toMap'].filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
+const publicValues=m=>Object.fromEntries(['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','ambush','category',...typeKeys,'color','level','arrow','toMap'].filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
 async function recoverVersion(row,a){
  const same=hash(row.payload)===a.payloadHash,m=same?null:await liveTarget(row),payload=structuredClone(row.payload),credit=(await request('credits?select=suggestion_id,user_id,name&suggestion_id=eq.'+row.id))?.find(c=>String(c.suggestion_id)===String(row.id));
  if(m){
   if(row.kind.startsWith('move-'))payload.to=[m.x,m.y];
-  else {for(const k of ['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','category',...typeKeys,'color','level','arrow','toMap'])if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
+  else {for(const k of ['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','ambush','category',...typeKeys,'color','level','arrow','toMap'])if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
  }
  return {...row,payload,credit:!!credit,...(credit?{user_id:credit.user_id,author_name:credit.name}:{})};
 }

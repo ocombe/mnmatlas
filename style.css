@@ -599,3 +599,7 @@ dialog.moved::backdrop{background:#0000001f}
 .pin span.travel-symbol{position:static;width:auto;height:auto;border:0;border-radius:0;background:none;box-shadow:none;transform:none;outline:0;animation:none;filter:none}
 /* Its way arrow sits on the seal's rim as a small dark badge, like the up/down mark of floor links. */
 .level-pin .travel-symbol small{right:-6px;bottom:-6px;display:grid;place-items:center;width:14px;height:14px;border-radius:50%;background:#2a1f15;box-shadow:0 0 0 1.5px #f5e2b4;color:#fff1d6;font:700 10px/1 var(--body)}
+/* An ambush mark rides on the pin's top: a small dark badge with a crossed-out eye. */
+.pin .ambush-mark{position:absolute;top:-7px;right:-7px;display:grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#2a1f15;box-shadow:0 0 0 1.5px #f5e2b4;color:#fff1d6;transform:rotate(45deg)}
+.pin .ambush-mark svg{width:10px;height:10px;transform:none}
+

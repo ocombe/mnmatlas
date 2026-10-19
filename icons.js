@@ -36,6 +36,7 @@ const tradePaths = {
 const categoryPaths = {
   'Camping spot': tradePaths.Survival,
   'Fishing spot': 'M2 6q2.5-3 5 0t5 0t5 0t5 0 M4 16c3-4.5 9-4.5 12 0-3 4.5-9 4.5-12 0z M16 16l5-3.5v7z M7.5 15.5v.01',
+  'Secret': 'M12 2l2.2 6.8L21 11l-6.8 2.2L12 20l-2.2-6.8L3 11l6.8-2.2z M19 2v4 M17 4h4 M5 17v4 M3 19h4',
   'Trap': 'M2 8h5v12h10V8h5 M7.5 20 9 13l1.5 7 M10.5 20 12 13l1.5 7 M13.5 20 15 13l1.5 7',
   'Notable NPC': 'M16 7a4 4 0 1 0-8 0 4 4 0 1 0 8 0 M4 22v-3a8 8 0 0 1 16 0v3 M4 22h16',
   'Bank': 'M8 7 6 2h12l-2 5 M8 7h8c1 4 6 6 6 10 0 7-20 7-20 0 0-4 5-6 6-10z M8 8h8 M15 12h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9 M12 11v10',
@@ -64,9 +65,10 @@ const passagePaths={
   'Tunnel':'M3 20v-8a9 9 0 0 1 18 0v8 M7 20v-8a5 5 0 0 1 10 0v8 M3 20h18',
   'Swim':'M18 5a2 2 0 1 0-4 0 2 2 0 1 0 4 0 M3 12l6-4 7 5 M9 8l3 6 M2 16q3-3 6 0t6 0t6 0 M2 21q3-3 6 0t6 0t6 0',
   'Climb':'M7 2v20 M17 2v20 M7 6h10 M7 11h10 M7 16h10',
-  'Drop':'M2 7h9v5 M16 3v16 M12 15l4 4 4-4 M2 21h20',
-  'Secret':'M8 12a6 6 0 1 1 8 0l2 10H6z'
+  'Drop':'M2 7h9v5 M16 3v16 M12 15l4 4 4-4 M2 21h20'
 };
+// Small marks added to a pin: an ambush is a mob that stays hidden until you are close.
+const markPaths={'Ambush':'M2 12s4-7 10-7 10 7 10 7-4 7-10 7S2 12 2 12z M12 9a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M3 3l18 18'};
 // A sign's or marker's way of travel: its own field, its category, or words in its name.
 function travelKind(name,category,given){
   if(Object.hasOwn(travelPaths,given||''))return given;
@@ -82,7 +84,7 @@ function travelKind(name,category,given){
 function travelSvg(kind){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
   for(const [key,value] of Object.entries({viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':'2','stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true','focusable':'false'}))svg.setAttribute(key,value);
-  const shape=document.createElementNS(ns,'path');shape.setAttribute('d',travelPaths[kind]||passagePaths[kind]);svg.append(shape);return svg;
+  const shape=document.createElementNS(ns,'path');shape.setAttribute('d',travelPaths[kind]||passagePaths[kind]||markPaths[kind]);svg.append(shape);return svg;
 }
 const exitArrows={up:'⤒',down:'⤓',updown:'↕',north:'↑',northeast:'↗',east:'→',southeast:'↘',south:'↓',southwest:'↙',west:'←',northwest:'↖'};
 function tradeskillName(marker){return marker.category==='Tradeskill'?marker.name.split(/\s+[—–-]\s+/)[0].trim():'';}
