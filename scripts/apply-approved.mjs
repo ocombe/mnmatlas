@@ -307,7 +307,7 @@ async function updateCredits(applied,log){
  const rows=new Map(published.map(r=>[String(r.id),r]));for(const r of applied)rows.set(String(r.id),r);
  const names=new Map(log.map(r=>[String(r.suggestion_id),r])),maps=new Map(registry.maps.map(m=>[m.id,{}]));
  for(const r of [...rows.values()].sort((a,b)=>Number(a.id)-Number(b.id))){
-  if(r.kind==='report'||!maps.has(r.map))continue;const id=r.kind==='new-marker'?'community-'+r.id:r.target_id;if(!id)continue;
+  if(['report','feedback'].includes(r.kind)||!maps.has(r.map))continue;const id=r.kind==='new-marker'?'community-'+r.id:r.target_id;if(!id)continue;
   const credit=names.get(String(r.id)),name=r.credit===true&&r.user_id&&credit?.user_id?clean(credit.name||'').slice(0,80)||null:null;
   const kind=await creditKind(r,id,[...rows.values()]),map=maps.get(r.map),key=kind+':'+id+(kind==='label'&&r.level?'#'+r.level:'');if(!Object.hasOwn(map,key))Object.defineProperty(map,key,{value:[],enumerable:true});map[key].push({name,what:whatOf(r)});
  }

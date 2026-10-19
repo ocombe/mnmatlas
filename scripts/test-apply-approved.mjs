@@ -417,6 +417,13 @@ try{
   console.log('Fishing, Passage and Ambush publisher checks passed: valid fields, held invalid/wrong types, Area, edits and type cleanup.');
  }
 
+ // Closing a report or message can never create a public marker, even if its status was set incorrectly.
+ {
+  await reset([]);
+  approved=[R(1300,'feedback',null,{name:'Legend idea',topic:'idea',note:'Please add a legend.',x:20,y:30,z:2}),R(1301,'report',null,{name:'Map drawn wrong',reason:'art',x:20,y:30})];
+  const result=await run();assert.equal(result.code,0,result.output);assert.deepEqual(await json('data/markers.json'),[]);assert.deepEqual(await json('.publish/applied.json'),[]);assert.deepEqual((await json('.publish/held.json')).map(r=>r.id),[1300,1301]);assert(!creditRows.some(r=>[1300,1301].includes(r.suggestion_id)));
+  console.log('Spot report and feedback publisher checks passed: neither can be applied or credited.');
+ }
  console.log('Publisher checks passed: atomic rows, fixed-point holds, durable recovery, corrections, level-scoped labels, payload races, anonymous deletion SQL, credits, number spelling and publishing workflow.');
 }finally{
  await new Promise(resolve=>server.close(resolve));const local=relative(root,fixture);if(local.startsWith('scripts'+sep+'.publish-test-'))await rm(fixture,{recursive:true,force:true});

@@ -9,22 +9,26 @@
 
 Problem reports are suggestions with kind `report`: a marker ID, a reason (`position`, `name`, `type`, `missing`, `other`) and the published position. Admins close them as `resolved` (fixed) or `rejected` (dismissed); the publishing script never applies them. The `votes` table and `vote_totals` function are no longer used by the site; only the service role can call `vote_totals`. Admins can ban an author from **Review suggestions**: the account goes into `banned` (admin-only), its waiting suggestions are dismissed, and the insert trigger refuses its new suggestions and reports. Banned accounts can still use the atlas and sync notes; **Lift ban** removes the row. `delete_my_account()` lets a signed-in visitor delete their own sign-in; their suggestions, reports, votes and synced notes are removed with it (on delete cascade). Every suggestion and report is cleaned on insert (`clean_suggestion` trigger): control, invisible and direction-changing characters and angle brackets are removed from names, notes and comments, and the author name is taken from the Discord sign-in rather than the browser. The publishing script applies the same cleanup and only accepts categories the target map can draw. All tables have Row Level Security. Anonymous users have no table or sequence access. There is no daily limit on suggestions; spam is handled with the ban. Browser inserts cannot supply the creation timestamp.
 
+Spot reports mark a position without a marker; feedback carries an idea or problem with the current map and view. Run `spot-feedback.sql` by hand to enable them on an existing service (it is safe to run twice). The review desk closes reports as Fixed and feedback as Done, or dismisses either; neither is published or earns renown. Both use the same sign-in, text cleanup, ban and withdrawal rules as suggestions.
+
 Notes use the map ID and tile revision as their scope, retaining each note's level. Sign-in and map loads merge by ID, with the browser's version winning conflicts. Saves push after about two seconds. A failed sync keeps local data, displays a quiet status line and retries on a later save or reconnection. Export notes for a separate backup. Deleting a note and immediately leaving before its sync completes can leave the remote copy to be merged on the next visit.
 
 ## Manual access checks
 
-Use two signed-in, non-admin accounts A and B. Use their authenticated browser sessions or JWTs with the publishable key, **never** the service key. Create one pending suggestion, report and note row for each. A must see only A's private rows. Anonymous sessions must fail to read or write any table.
+Use two signed-in, non-admin accounts A and B. Use their authenticated browser sessions or JWTs with the publishable key, **never** the service key. Create one pending suggestion, marker report, spot report, feedback and note row for each. A must see only A's private rows. Anonymous sessions must fail to read or write any table.
 
 With A's session, confirm these operations fail or return no changed/read rows:
 
-- Approve, reject, edit or delete A's own suggestion.
+- Approve or reject A's own suggestion; edit or withdraw it after review.
 - Approve, edit or delete B's suggestion; select B's suggestions, reports or notes.
 - Insert a suggestion with B's `user_id`, with `status='approved'`, with non-null `reviewed_at` or `review_note`, or with a supplied `created_at`.
 - Insert/update/delete notes belonging to B; change an owned row's `user_id` to B.
 - Insert/update/delete an admin row, including one for A.
 - Insert an oversized payload, name, note, comment or notes array.
+- Insert a target-less report with a marker-only reason, or feedback with a target, invalid topic, empty/oversized note or nonnumeric view coordinates.
+- Confirm valid spot reports and feedback insert, can be withdrawn while pending, and are refused for a banned account.
 
-Then add A to `admins` in the dashboard. Confirm A can read pending suggestions from B and approve/reject them and mark reports fixed or dismissed, while B cannot. Confirm the admin can still only select their own admin row and their own private notes. Remove A's admin row after this check if it is a test account.
+Then add A to `admins` in the dashboard. Confirm A can read pending suggestions from B and approve/reject them and mark reports fixed or dismissed and feedback done or dismissed, while B cannot. Confirm feedback from other maps remains listed, and neither kind earns renown. Confirm the admin can still only select their own admin row and their own private notes. Remove A's admin row after this check if it is a test account.
 
 Provider and redirect setup follows the [Discord sign-in guide](https://supabase.com/docs/guides/auth/social-login/auth-discord) and [redirect URL guide](https://supabase.com/docs/guides/auth/redirect-urls). Access rules follow [Supabase Row Level Security](https://supabase.com/docs/guides/database/postgres/row-level-security).
 

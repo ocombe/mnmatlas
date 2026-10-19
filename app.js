@@ -550,13 +550,31 @@ function viewUrl(place=activePlace){
 }
 function syncUrl(){if(!map||loading)return;const url=viewUrl();history.replaceState({map:config.id},'',url);document.querySelector('meta[property="og:url"]').content=url.href;}
 function scheduleUrl(){clearTimeout(urlTimer);if(!loading)urlTimer=setTimeout(syncUrl,250);}
-async function copyLink(place){
- const url=viewUrl(place===undefined?activePlace:place);
+function spotUrl(spot){const url=viewUrl(null);url.searchParams.set('x',String(spot.x));url.searchParams.set('y',String(spot.y));url.searchParams.set('z',String(Math.round(Math.max(map.getZoom(),config.defaultView.placeZoom)*100)/100));url.searchParams.delete('place');url.searchParams.delete('embed');return url;}
+async function copyLink(place,spot){
+ const url=spot?spotUrl(spot):viewUrl(place===undefined?activePlace:place);
  if(place){url.searchParams.set('x',String(place.x));url.searchParams.set('y',String(place.y));url.searchParams.set('z',String(Math.max(map.getZoom(),config.defaultView.placeZoom)));}
  // Alignment drafts are local editing state, not part of a shared destination; a single-map embed shares the full atlas.
  url.searchParams.delete('align');if(singleMap)url.searchParams.delete('embed');
  if(await copyText(url.href))status('Link copied. Personal notes are not included.');
  else{$('link-value').value=url.href;$('link-dialog').showModal();$('link-value').select();}
+}
+function setupSpotMenu(){
+ const owner=map,container=owner.getContainer(),menu=text('div','','spot-menu');menu.hidden=true;menu.setAttribute('aria-label','This spot');$('map-frame').append(menu);
+ let timer=null,start=null,held=false,spot=null;
+ const cancel=()=>{clearTimeout(timer);timer=null;start=null;};
+ const close=(focus=false)=>{cancel();menu.hidden=true;if(focus===true)container.focus({preventScroll:true});};
+ const allowed=target=>!loading&&!alignmentMode&&!draftPin&&!window.atlasShapeUI?.active&&!window.atlasCommunity?.spotBusy?.()&&!document.querySelector('dialog[open],.dragging')&&!target.closest('.leaflet-marker-icon,.leaflet-interactive,.leaflet-popup,.leaflet-tooltip,.leaflet-control,.spot-menu,button,a,input,textarea,select');
+ const open=(target,x,y)=>{if(!allowed(target))return false;const projected=owner.project(owner.containerPointToLatLng(owner.mouseEventToContainerPoint({clientX:x,clientY:y})),config.coordinateZoom),px=projected.x,py=projected.y;if(px<0||py<0||px>config.width||py>config.height)return false;spot={x:Math.round(px*100)/100,y:Math.round(py*100)/100};menu.hidden=false;const rect=$('map-frame').getBoundingClientRect();menu.style.left=Math.max(6,Math.min(x-rect.left,rect.width-menu.offsetWidth-6))+'px';menu.style.top=Math.max(6,Math.min(y-rect.top,rect.height-menu.offsetHeight-6))+'px';menu.querySelector('button').focus({preventScroll:true});return true;};
+ menu.append(button('Copy link to this spot',()=>{const at=spot;close();copyLink(null,at);}),button('Report a problem here',()=>{const at=spot;close();if(window.atlasCommunity?.reportSpot)window.atlasCommunity.reportSpot(at);else status('Reports are unavailable at the moment.');}));
+ const context=e=>{if(open(e.target,e.clientX,e.clientY)){e.preventDefault();e.stopImmediatePropagation();}};
+ const down=e=>{cancel();held=false;if(e.touches.length!==1){close();return;}if(!allowed(e.target))return;const t=e.touches[0];start={x:t.clientX,y:t.clientY,target:e.target};timer=setTimeout(()=>{const at=start;if(at)held=open(at.target,at.x,at.y);timer=null;},550);};
+ const move=e=>{if(e.touches.length!==1||start&&Math.hypot(e.touches[0].clientX-start.x,e.touches[0].clientY-start.y)>10){close();held=false;}};
+ const up=e=>{cancel();if(held){e.preventDefault();held=false;}};
+ const key=e=>{if(!menu.hidden&&e.key==='Escape'){e.preventDefault();e.stopPropagation();close(true);}};
+ const click=e=>{if(!menu.contains(e.target))close();};
+ container.addEventListener('contextmenu',context,true);container.addEventListener('touchstart',down,{capture:true,passive:true});container.addEventListener('touchmove',move,{capture:true,passive:true});container.addEventListener('touchend',up,{capture:true,passive:false});container.addEventListener('touchcancel',close,true);document.addEventListener('keydown',key,true);document.addEventListener('pointerdown',click,true);
+ owner.on('movestart zoomstart click',close);owner.once('unload',()=>{close();menu.remove();container.removeEventListener('contextmenu',context,true);container.removeEventListener('touchstart',down,true);container.removeEventListener('touchmove',move,true);container.removeEventListener('touchend',up,true);container.removeEventListener('touchcancel',close,true);document.removeEventListener('keydown',key,true);document.removeEventListener('pointerdown',click,true);});
 }
 // Copies to the clipboard where this page may; false when it cannot (an iframe without clipboard-write).
 async function copyText(value){
@@ -707,7 +725,8 @@ async function loadMap(id,url=new URL(location.href),push=false,reviewToken=null
   config=next;categories={...allCategories,...(config.extraCategories||{})};originals=markers.map(normaliseMarker);labelData=labels;hiddenData=hidden;publishedPositions=new Map(originals.map(m=>[m.id,[m.x,m.y]]));publishedLabelPositions=new Map(labels.labels.map(r=>[r.id,[r.x,r.y]]));
   activePlace=null;sharedPin=null;cancelPlacement();if($('editor').open)closeEditor();$('search').value='';enabled=new Set(Object.keys(categories));showPins=true;updateCategoryButtons();
   document.body.classList.remove('aligning');$('edit-bar').hidden=true;restoreStorage();setupCategoryControls();updateTitles();
-  map=L.map('map',{crs:L.CRS.Simple,minZoom:config.minZoom,maxZoom:config.maxZoom,zoomSnap:0,zoomDelta:.5,zoomControl:false,attributionControl:true,maxBoundsViscosity:1});
+  map=L.map('map',{crs:L.CRS.Simple,minZoom:config.minZoom,maxZoom:config.maxZoom,zoomSnap:0,zoomDelta:.5,zoomControl:false,attributionControl:true,maxBoundsViscosity:1,tapTolerance:10});
+  setupSpotMenu();
   markerPopupOpen=false;
   map.on('popupopen',()=>{markerPopupOpen=true;map.eachLayer(layer=>{if(layer instanceof L.Tooltip)map.closeTooltip(layer);});requestAnimationFrame(fitCardPopup);});
   map.on('popupclose',()=>{markerPopupOpen=false;});
