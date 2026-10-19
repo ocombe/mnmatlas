@@ -118,5 +118,22 @@
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-crypt-guardian",
     "wikiId": "npc-a-frenzied-crypt-guardian"
+  },
+  {
+    "id": "community-914",
+    "community": true,
+    "name": "broodmother",
+    "category": "Named mob",
+    "note": "Back room spawns in the webs above",
+    "x": 2852,
+    "y": 767,
+    "level": "floor-1",
+    "levels": [
+      17,
+      17
+    ],
+    "ambush": false,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-large-crypt-broodmatron",
+    "wikiId": "npc-a-large-crypt-broodmatron"
   }
 ]

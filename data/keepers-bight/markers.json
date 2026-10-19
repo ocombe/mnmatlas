@@ -782,5 +782,52 @@
   "vendor": "Lumberjack vendor",
   "wiki": "https://monstersandmemories.wiki/npcs/a-woodworker",
   "wikiId": "npc-a-woodworker"
+ },
+ {
+  "id": "community-888",
+  "community": true,
+  "name": "Fishing (60-120)",
+  "category": "Fishing spot",
+  "note": "Thorn Sturgeon\nMoontide Salmon",
+  "x": 1854,
+  "y": 2887,
+  "fish": []
+ },
+ {
+  "id": "community-893",
+  "community": true,
+  "name": "Aragon Brythe",
+  "category": "Vendor",
+  "note": "Vendor in the northern hallway selling Inquisitor scrolls.",
+  "x": 2185,
+  "y": 4149,
+  "vendor": "Spell scribe",
+  "sells": [
+   "Spell scrolls"
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/aragon-brythe",
+  "wikiId": "npc-aragon-brythe"
+ },
+ {
+  "id": "community-913",
+  "community": true,
+  "name": "A shady farmer",
+  "category": "Mob camp",
+  "note": "At the farms, south of Penshaw. First farm on the left, once arriving from the road.",
+  "x": 2129,
+  "y": 5346,
+  "levels": [
+   20,
+   24
+  ],
+  "mobs": [
+   {
+    "name": "A shady farmer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shady-farmer",
+    "wikiId": "npc-a-shady-farmer"
+   }
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/a-shady-farmer",
+  "wikiId": "npc-a-shady-farmer"
  }
 ]

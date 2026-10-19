@@ -19,12 +19,20 @@
     {
       "name": "argus_q",
       "what": "added"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "marker:community-826": [
     {
       "name": "argus_q",
       "what": "added"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "marker:community-827": [
@@ -82,6 +90,40 @@
   "marker:community-843": [
     {
       "name": "ocombe",
+      "what": "added"
+    },
+    {
+      "name": "argus_q",
+      "what": "moved"
+    }
+  ],
+  "marker:community-915": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-916": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "label:community-917#floor-1": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-920": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-922": [
+    {
+      "name": "argus_q",
       "what": "added"
     }
   ]

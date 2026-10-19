@@ -128,7 +128,8 @@
     "level": "floor-2",
     "travel": "Stairs",
     "toLevel": "floor-1",
-    "direction": "up"
+    "direction": "up",
+    "toMarker": "community-826"
   },
   {
     "id": "community-826",
@@ -141,7 +142,8 @@
     "level": "floor-1",
     "travel": "Stairs",
     "toLevel": "floor-2",
-    "direction": "down"
+    "direction": "down",
+    "toMarker": "community-825"
   },
   {
     "id": "community-827",
@@ -210,11 +212,72 @@
     "name": "One Way Waterfall",
     "category": "Passage",
     "note": "",
-    "x": 1542,
-    "y": 2267,
+    "x": 1878,
+    "y": 1572,
     "level": "floor-2",
     "way": "Drop",
     "oneWay": true,
     "direction": "down"
+  },
+  {
+    "id": "community-915",
+    "community": true,
+    "name": "Prince Mali'Tik (level 18)",
+    "category": "Named mob",
+    "note": "",
+    "x": 4124,
+    "y": 841,
+    "level": "floor-2",
+    "levels": [
+      18,
+      18
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/prince-malitik",
+    "wikiId": "npc-prince-malitik"
+  },
+  {
+    "id": "community-916",
+    "community": true,
+    "name": "Captain Kruush (level 29)",
+    "category": "Named mob",
+    "note": "",
+    "x": 2342,
+    "y": 4876,
+    "level": "floor-2",
+    "levels": [
+      29,
+      29
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/captain-kruush",
+    "wikiId": "npc-captain-kruush"
+  },
+  {
+    "id": "community-920",
+    "community": true,
+    "name": "Gurowl the Beast (level 14)",
+    "category": "Named mob",
+    "note": "",
+    "x": 2755,
+    "y": 1522,
+    "level": "floor-1",
+    "levels": [
+      14,
+      14
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/gurowl-the-beast",
+    "wikiId": "npc-gurowl-the-beast"
+  },
+  {
+    "id": "community-922",
+    "community": true,
+    "name": "Swim up waterfall",
+    "category": "Passage",
+    "note": "Waterfall can be swam up.",
+    "x": 1541,
+    "y": 2283,
+    "level": "floor-2",
+    "way": "Swim",
+    "oneWay": false,
+    "direction": "updown"
   }
 ]

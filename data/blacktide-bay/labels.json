@@ -126,6 +126,18 @@
       "x": 4054,
       "y": 1610,
       "level": "floor-2"
+    },
+    {
+      "id": "community-917",
+      "community": true,
+      "name": "Kennel Room",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "1-2 Orcs at each door.  1 in middle of room with 4-5 wolves",
+      "x": 2752,
+      "y": 1467,
+      "level": "floor-1"
     }
   ],
   "trainers": []

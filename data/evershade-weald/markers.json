@@ -791,5 +791,14 @@
   "note": "part of Bard starter quest",
   "x": 2576,
   "y": 1978
+ },
+ {
+  "id": "community-903",
+  "community": true,
+  "name": "Mason Rymfar",
+  "category": "Notable NPC",
+  "note": "Masonry trainer",
+  "x": 2448,
+  "y": 1981
  }
 ]
