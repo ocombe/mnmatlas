@@ -165,6 +165,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-71": [
@@ -175,6 +179,14 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "darkhayn",
+      "what": "moved"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-72": [
@@ -185,6 +197,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "darkhayn",
+      "what": "removed"
     }
   ],
   "marker:community-73": [
@@ -369,6 +385,14 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
+    },
+    {
+      "name": "darkhayn",
+      "what": "moved"
     }
   ],
   "marker:community-273": [
@@ -729,6 +753,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-588": [
@@ -825,6 +853,72 @@
     {
       "name": "deadmo",
       "what": "moved"
+    }
+  ],
+  "marker:community-846": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-849": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-853": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-854": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-856": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-857": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-858": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-859": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-860": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-861": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-862": [
+    {
+      "name": "darkhayn",
+      "what": "added"
     }
   ]
 }

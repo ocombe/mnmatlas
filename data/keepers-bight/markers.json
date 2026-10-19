@@ -62,25 +62,27 @@
   "id": "harbor-office",
   "name": "Harbormaster Greywake",
   "category": "Quest NPC",
-  "x": 2093,
-  "y": 3023,
+  "x": 2105,
+  "y": 3174,
   "minZoom": 3,
   "approximate": true,
   "note": "In the last building on the docks, farthest from the lifts.",
   "wiki": "https://monstersandmemories.wiki/npcs/harbormaster-greywake",
-  "wikiId": "npc-harbormaster-greywake"
+  "wikiId": "npc-harbormaster-greywake",
+  "community": true
  },
  {
   "id": "harbor-office-customs-agent-priorton",
   "name": "Customs Agent Priorton",
   "category": "Quest NPC",
-  "x": 2115,
-  "y": 3023,
+  "x": 2094,
+  "y": 3166,
   "minZoom": 3,
   "approximate": true,
   "note": "In the last building on the docks, farthest from the lifts.",
   "wiki": "https://monstersandmemories.wiki/npcs/customs-agent-priorton",
-  "wikiId": "npc-customs-agent-priorton"
+  "wikiId": "npc-customs-agent-priorton",
+  "community": true
  },
  {
   "id": "dock-lift",
@@ -720,5 +722,31 @@
   "y": 2699,
   "wiki": "https://monstersandmemories.wiki/npcs/a-stablemaster",
   "wikiId": "npc-a-stablemaster"
+ },
+ {
+  "id": "community-863",
+  "community": true,
+  "name": "A waning spirit (level 25+)",
+  "category": "Named mob",
+  "note": "",
+  "x": 4729,
+  "y": 2870,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/a-waning-spirit",
+  "wikiId": "npc-a-waining-spirit"
+ },
+ {
+  "id": "community-866",
+  "community": true,
+  "name": "Cyra Brinewell",
+  "category": "Vendor",
+  "note": "",
+  "x": 2105,
+  "y": 3119,
+  "wiki": "https://monstersandmemories.wiki/npcs/cyra-brinewell",
+  "wikiId": "npc-cyra-brinewell"
  }
 ]

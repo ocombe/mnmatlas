@@ -1419,5 +1419,28 @@
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/mindless-blightspore",
     "wikiId": "npc-mindless-blightspore"
+  },
+  {
+    "id": "community-845",
+    "community": true,
+    "name": "Maude Astarace",
+    "category": "Quest NPC",
+    "note": "Part of starter quest for Elementalist",
+    "x": 4469,
+    "y": 3701,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/maude-astarace",
+    "wikiId": "npc-1790076530367-4d0q2"
+  },
+  {
+    "id": "community-850",
+    "community": true,
+    "name": "Chaltise Elymnar",
+    "category": "Vendor",
+    "note": "Elementalist Reagent Vendor.",
+    "x": 4485,
+    "y": 3733,
+    "level": "lower",
+    "vendor": "Reagent vendor"
   }
 ]

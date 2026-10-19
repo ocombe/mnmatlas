@@ -523,32 +523,22 @@
     "note": "toxicologist, alchemy materials",
     "x": 4371,
     "y": 2443,
-    "vendor": "Alchemy vendor"
+    "vendor": "Poison maker"
   },
   {
     "id": "community-71",
     "community": true,
     "name": "a reagent vendor",
     "category": "Vendor",
-    "note": "",
-    "x": 4431,
-    "y": 2395,
+    "note": "enchanter reagent merchant, upstair",
+    "x": 4390,
+    "y": 2329,
     "vendor": "Reagent vendor",
     "sells": [
       "Bags",
       "Materials",
       "Weapons"
     ]
-  },
-  {
-    "id": "community-72",
-    "community": true,
-    "name": "an enchanting scribe",
-    "category": "Tradeskill",
-    "note": "",
-    "x": 4441,
-    "y": 2422,
-    "trade": "(Dis)Enchanting"
   },
   {
     "id": "community-75",
@@ -779,9 +769,9 @@
     "community": true,
     "name": "Vhas Ith'vayen",
     "category": "Class trainer",
-    "note": "",
-    "x": 4407,
-    "y": 2433,
+    "note": "upstair",
+    "x": 4376,
+    "y": 2451,
     "classes": [
       "Enchanter"
     ]
@@ -1462,7 +1452,7 @@
     "note": "",
     "x": 3969,
     "y": 3109,
-    "vendor": "General goods"
+    "vendor": "Adventuring supplies"
   },
   {
     "id": "community-588",
@@ -1593,5 +1583,113 @@
       15,
       15
     ]
+  },
+  {
+    "id": "community-846",
+    "community": true,
+    "name": "Fargoth Ith'vayen",
+    "category": "Notable NPC",
+    "note": "upstair",
+    "x": 4348,
+    "y": 2302
+  },
+  {
+    "id": "community-849",
+    "community": true,
+    "name": "an enchanter scribe",
+    "category": "Vendor",
+    "note": "upstair",
+    "x": 4336,
+    "y": 2351,
+    "vendor": "Enchanter"
+  },
+  {
+    "id": "community-853",
+    "community": true,
+    "name": "Gredin Lar'daz",
+    "category": "Vendor",
+    "note": "Upstair, sells Disenchanting Cube and Tome of Enchantement",
+    "x": 4410,
+    "y": 2438
+  },
+  {
+    "id": "community-854",
+    "community": true,
+    "name": "Enchanter Grevek",
+    "category": "Tradeskill",
+    "note": "upstair, Disenchanter",
+    "x": 4439,
+    "y": 2406,
+    "trade": "(Dis)Enchanting"
+  },
+  {
+    "id": "community-856",
+    "community": true,
+    "name": "an enchanting trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4427,
+    "y": 2428,
+    "trade": "(Dis)Enchanting"
+  },
+  {
+    "id": "community-857",
+    "community": true,
+    "name": "Luran Malis'tar",
+    "category": "Vendor",
+    "note": "",
+    "x": 4468,
+    "y": 2446
+  },
+  {
+    "id": "community-858",
+    "community": true,
+    "name": "a leatherworking merchant",
+    "category": "Vendor",
+    "note": "",
+    "x": 4462,
+    "y": 2528,
+    "vendor": "Leatherworking vendor"
+  },
+  {
+    "id": "community-859",
+    "community": true,
+    "name": "Lerem Hasser",
+    "category": "Vendor",
+    "note": "leatherworking recipe",
+    "x": 4435,
+    "y": 2556,
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-860",
+    "community": true,
+    "name": "Haggler Igorel",
+    "category": "Notable NPC",
+    "note": "Commerce trainer",
+    "x": 4034,
+    "y": 3050
+  },
+  {
+    "id": "community-861",
+    "community": true,
+    "name": "Sevissa Nallinth",
+    "category": "Vendor",
+    "note": "",
+    "x": 4194,
+    "y": 2975,
+    "vendor": "Property merchant"
+  },
+  {
+    "id": "community-862",
+    "community": true,
+    "name": "Realtor Lerisal",
+    "category": "Notable NPC",
+    "note": "take sale notices",
+    "x": 4167,
+    "y": 2964
   }
 ]

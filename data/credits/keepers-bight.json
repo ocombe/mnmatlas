@@ -156,5 +156,29 @@
       "name": "seldrath",
       "what": "added"
     }
+  ],
+  "marker:community-863": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
+  ],
+  "marker:community-866": [
+    {
+      "name": "seldrath",
+      "what": "added"
+    }
+  ],
+  "marker:harbor-office": [
+    {
+      "name": "seldrath",
+      "what": "moved"
+    }
+  ],
+  "marker:harbor-office-customs-agent-priorton": [
+    {
+      "name": "seldrath",
+      "what": "moved"
+    }
   ]
 }
