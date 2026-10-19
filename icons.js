@@ -84,10 +84,10 @@ function travelSvg(kind){
   for(const [key,value] of Object.entries({viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':'2','stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true','focusable':'false'}))svg.setAttribute(key,value);
   const shape=document.createElementNS(ns,'path');shape.setAttribute('d',travelPaths[kind]||passagePaths[kind]);svg.append(shape);return svg;
 }
-const exitArrows={up:'⤒',down:'⤓',north:'↑',northeast:'↗',east:'→',southeast:'↘',south:'↓',southwest:'↙',west:'←',northwest:'↖'};
+const exitArrows={up:'⤒',down:'⤓',updown:'↕',north:'↑',northeast:'↗',east:'→',southeast:'↘',south:'↓',southwest:'↙',west:'←',northwest:'↖'};
 function tradeskillName(marker){return marker.category==='Tradeskill'?marker.name.split(/\s+[—–-]\s+/)[0].trim():'';}
 function markerSymbol(marker){
-  if(marker.category==='Passage'&&!marker.noteType){const face=text('span','','travel-symbol');face.append(travelSvg(Object.hasOwn(passagePaths,marker.way||'')?marker.way:'Passage'));if(marker.oneWay||marker.toLevel&&marker.direction)face.append(text('small',exitArrows[marker.direction]||(marker.oneWay?'→':'')));return face;}
+  if(marker.category==='Passage'&&!marker.noteType){const face=text('span','','travel-symbol');face.append(travelSvg(Object.hasOwn(passagePaths,marker.way||'')?marker.way:'Passage'));if(exitArrows[marker.direction]||marker.oneWay)face.append(text('small',exitArrows[marker.direction]||'→'));return face;}
   const travel=!marker.noteType&&['Exit','Lift','Stairs','Ladder','Bridge','Teleporter','Level connection'].includes(marker.category)?travelKind(marker.name,marker.category,marker.travel):'';
   if(travel){const face=text('span','','travel-symbol');face.append(travelSvg(travel));if(exitArrows[marker.direction])face.append(text('small',exitArrows[marker.direction]));return face;}
   if(marker.toLevel&&marker.category!=='Trap')return text('b',marker.direction==='up'?'↑':'↓');

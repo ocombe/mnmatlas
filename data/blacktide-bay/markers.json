@@ -177,6 +177,7 @@
     "x": 3149,
     "y": 3698,
     "level": "floor-2",
-    "way": "Swim"
+    "way": "Swim",
+    "direction": "updown"
   }
 ]
