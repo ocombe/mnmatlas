@@ -176,5 +176,52 @@
    36
   ],
   "mobs": []
+ },
+ {
+  "id": "community-818",
+  "community": true,
+  "name": "Fishing",
+  "category": "Tradeskill",
+  "note": "Deep Sea Devourer, Sunscale Skimmer, Raw Bay Crab",
+  "x": 4106,
+  "y": 10363,
+  "trade": "Fishing"
+ },
+ {
+  "id": "community-822",
+  "community": true,
+  "name": "Ghost of Selam",
+  "category": "Notable NPC",
+  "note": "",
+  "x": 1326,
+  "y": 7298,
+  "wiki": "https://monstersandmemories.wiki/npcs/ghost-of-selam",
+  "wikiId": "npc-ghost-of-selam"
+ },
+ {
+  "id": "community-823",
+  "community": true,
+  "name": "Skizzak Darkrain (level 35)",
+  "category": "Named mob",
+  "note": "",
+  "x": 1661,
+  "y": 7749,
+  "levels": [
+   35,
+   35
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/skizzak-darkrain",
+  "wikiId": "npc-skizzak-darkrain"
+ },
+ {
+  "id": "community-824",
+  "community": true,
+  "name": "Sylvaine",
+  "category": "Notable NPC",
+  "note": "",
+  "x": 3640,
+  "y": 13199,
+  "wiki": "https://monstersandmemories.wiki/npcs/sylvaine",
+  "wikiId": "npc-sylvaine"
  }
 ]

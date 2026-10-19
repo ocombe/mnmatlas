@@ -1407,5 +1407,17 @@
     "y": 3918,
     "level": "upper",
     "vendor": "Mining vendor"
+  },
+  {
+    "id": "community-814",
+    "community": true,
+    "name": "mindless blightspore",
+    "category": "Named mob",
+    "note": "Uncommon spawn; kill placeholder mobs in the area if not visible. Drops Blightspore Brain for Shaman's Underdocks starter quest.",
+    "x": 2831,
+    "y": 427,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/mindless-blightspore",
+    "wikiId": "npc-mindless-blightspore"
   }
 ]

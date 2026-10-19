@@ -681,5 +681,25 @@
   "x": 6775,
   "y": 3855,
   "trade": "Fishing"
+ },
+ {
+  "id": "community-815",
+  "community": true,
+  "name": "Fishing",
+  "category": "Tradeskill",
+  "note": "Basa, Grouper, Thorn Sturgeon",
+  "x": 2276,
+  "y": 2515,
+  "trade": "Fishing"
+ },
+ {
+  "id": "community-816",
+  "community": true,
+  "name": "Monk Starter",
+  "category": "Quest",
+  "note": "Stand under Waterfall and drink Elixir of Mental Focus",
+  "x": 2297,
+  "y": 2644,
+  "wiki": "https://monstersandmemories.wiki/quests/monk-starter-quest-night-harbor"
  }
 ]

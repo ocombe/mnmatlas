@@ -129,6 +129,10 @@
     {
       "name": "satoukurotama",
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-64": [
@@ -583,6 +587,10 @@
     {
       "name": "darkhayn",
       "what": "edited"
+    },
+    {
+      "name": "deadmo",
+      "what": "moved"
     }
   ],
   "marker:m-yal-wehear": [
@@ -799,6 +807,24 @@
     {
       "name": "grizzly4902",
       "what": "added"
+    }
+  ],
+  "marker:blacksmithing-smelting-zorvek": [
+    {
+      "name": "deadmo",
+      "what": "moved"
+    }
+  ],
+  "marker:forge": [
+    {
+      "name": "deadmo",
+      "what": "moved"
+    }
+  ],
+  "marker:grindstone": [
+    {
+      "name": "deadmo",
+      "what": "moved"
     }
   ]
 }

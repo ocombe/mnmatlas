@@ -35,32 +35,35 @@
     "id": "grindstone",
     "name": "Grindstone",
     "category": "Tradeskill",
-    "x": 4221,
-    "y": 4069,
-    "note": "Grindstone beside the forge."
+    "x": 4233,
+    "y": 4262,
+    "note": "Grindstone beside the forge.",
+    "community": true
   },
   {
     "id": "forge",
     "name": "Forge",
     "category": "Forge",
-    "x": 4244,
-    "y": 4054,
-    "note": "Forge beside the blacksmith."
+    "x": 4265,
+    "y": 4257,
+    "note": "Forge beside the blacksmith.",
+    "community": true
   },
   {
     "id": "blacksmithing-smelting-zorvek",
     "name": "Blacksmithing / Smelting — Zorvek",
     "category": "Tradeskill",
-    "x": 4257,
-    "y": 4070,
-    "note": "Blacksmith."
+    "x": 4274,
+    "y": 4232,
+    "note": "Blacksmith.",
+    "community": true
   },
   {
     "id": "miral-the-dark-elf",
     "name": "Miral the Dark Elf",
     "category": "Quest NPC",
-    "x": 4294,
-    "y": 3964,
+    "x": 4128,
+    "y": 4099,
     "note": "quest npc",
     "community": true
   },
@@ -453,12 +456,12 @@
   {
     "id": "community-47",
     "community": true,
-    "name": "Mining",
-    "category": "Tradeskill",
+    "name": "Ithrak Trel",
+    "category": "Vendor",
     "note": "",
     "x": 3359,
     "y": 2999,
-    "trade": "Mining"
+    "vendor": "Mining vendor"
   },
   {
     "id": "community-64",

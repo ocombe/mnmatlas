@@ -84,5 +84,98 @@
     "note": "",
     "toMap": "keepers-bight",
     "toPlace": "to-blacktide-bay-dungeon-south"
+  },
+  {
+    "id": "community-817",
+    "community": true,
+    "name": "Commander Rursk",
+    "category": "Named mob",
+    "note": "Inside with a big pull, 5 or 6 total. Bring mez.",
+    "x": 1146,
+    "y": 2104,
+    "level": "floor-1",
+    "wiki": "https://monstersandmemories.wiki/npcs/commander-rursk",
+    "wikiId": "npc-commander-rursk",
+    "levels": [
+      15,
+      15
+    ]
+  },
+  {
+    "id": "community-821",
+    "community": true,
+    "name": "Frimbus Darplefen (level 14)",
+    "category": "Named mob",
+    "note": "Spawns in the undead gnome alcove. Placeholder: gnomish X in back right corner",
+    "x": 2106,
+    "y": 2237,
+    "level": "floor-2",
+    "levels": [
+      14,
+      14
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/frimbus-darplefen",
+    "wikiId": "npc-frimbus-darplefen"
+  },
+  {
+    "id": "community-825",
+    "community": true,
+    "name": "Ramp up",
+    "category": "Stairs",
+    "note": "",
+    "x": 3456,
+    "y": 2544,
+    "level": "floor-2",
+    "travel": "Stairs",
+    "toLevel": "floor-1",
+    "direction": "up"
+  },
+  {
+    "id": "community-826",
+    "community": true,
+    "name": "Ramp down",
+    "category": "Stairs",
+    "note": "Ramp Down",
+    "x": 3478,
+    "y": 2520,
+    "level": "floor-1",
+    "travel": "Stairs",
+    "toLevel": "floor-2",
+    "direction": "down"
+  },
+  {
+    "id": "community-827",
+    "community": true,
+    "name": "Ramp Down to Dry Dock Beach",
+    "category": "Stairs",
+    "note": "",
+    "x": 4806,
+    "y": 3914,
+    "level": "floor-1",
+    "travel": "Stairs",
+    "toLevel": "floor-2",
+    "direction": "down"
+  },
+  {
+    "id": "community-828",
+    "community": true,
+    "name": "Ramp up from Dry Dock Beach Camp",
+    "category": "Stairs",
+    "note": "",
+    "x": 4784,
+    "y": 3888,
+    "level": "floor-2",
+    "travel": "Stairs",
+    "direction": "up"
+  },
+  {
+    "id": "community-831",
+    "community": true,
+    "name": "Swim up Waterfall",
+    "category": "Passage",
+    "note": "Corner of waterfall can be swam upward",
+    "x": 3149,
+    "y": 3698,
+    "level": "floor-2"
   }
 ]
