@@ -279,5 +279,17 @@
     "way": "Swim",
     "oneWay": false,
     "direction": "updown"
+  },
+  {
+    "id": "community-941",
+    "community": true,
+    "name": "Taskmaster Murkraal",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4603,
+    "y": 4750,
+    "level": "floor-2",
+    "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-murkraal",
+    "wikiId": "npc-taskmaster-murkraal"
   }
 ]
