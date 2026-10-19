@@ -870,16 +870,6 @@
       "defaultLevel": "floor-1",
       "levels": [
         {
-          "id": "floor-1",
-          "title": "Upper caves and fortress",
-          "tilePath": "assets/tiles/blacktide-bay/floor-1/{z}/{x}/{y}.webp"
-        },
-        {
-          "id": "floor-2",
-          "title": "Lower caves, beach and bay",
-          "tilePath": "assets/tiles/blacktide-bay/floor-2/{z}/{x}/{y}.webp"
-        },
-        {
           "id": "caves",
           "title": "Keeper’s Bight caves",
           "width": 2208,
@@ -897,6 +887,16 @@
             "padding": 18,
             "placeZoom": 4
           }
+        },
+        {
+          "id": "floor-1",
+          "title": "Upper caves and fortress",
+          "tilePath": "assets/tiles/blacktide-bay/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Lower caves, beach and bay",
+          "tilePath": "assets/tiles/blacktide-bay/floor-2/{z}/{x}/{y}.webp"
         }
       ],
       "extraCategories": {
