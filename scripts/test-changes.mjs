@@ -122,3 +122,12 @@ console.log('Change ledger checks passed: published positions, composition, conf
  assert(!Object.hasOwn(apply({category:'Bank'}),'levels'));assert(!Object.hasOwn(apply({levels:null}),'levels'));assert.deepEqual(plain(context.atlasChanges.applyTo({},row(714,'new-marker',{name:'Captain',category:'Named mob',levels:[99,99],x:10,y:20})).levels),[99,99]);
  console.log('Named mob ledger checks passed: fixed levels, independent edits, conflicts, validation and clearing.');
 }
+
+{
+ const C=context.atlasChanges,plain=v=>JSON.parse(JSON.stringify(v)),fish=[{name:'Thorn Sturgeon'}],base={id:'water',name:'Fishing',category:'Fishing spot',fish},edit={id:1200,kind:'edit-marker',payload:{name:base.name,fish:[{name:'Basa'}],from:base}};
+ assert.deepEqual([...C.fieldsOf(edit)],['fish']);assert(C.matchesFrom(edit,base,'fish'));assert.deepEqual(plain(C.applyTo(base,edit).fish),[{name:'Basa'}]);assert.deepEqual(plain(C.conflicts(edit,C.applyTo(base,edit),[{id:1200,fields:C.fieldsOf(edit)}])),[1200]);
+ const switched=C.applyTo(base,{kind:'edit-marker',payload:{name:base.name,category:'Vendor',from:base}});assert(!Object.hasOwn(switched,'fish'));
+ const passage={name:'Tunnel',category:'Passage',way:'Tunnel',oneWay:true,direction:'east',toLevel:'lower'},row={kind:'edit-marker',payload:{name:'Tunnel',way:'Swim',oneWay:false,from:passage}},next=C.applyTo(passage,row);assert.deepEqual([...C.fieldsOf(row)],['way','oneWay']);assert.equal(next.way,'Swim');assert.equal(next.oneWay,false);assert.equal(next.toLevel,'lower');
+ const other=C.applyTo(passage,{kind:'edit-marker',payload:{name:'Tunnel',category:'Bank',from:passage}});assert(!Object.hasOwn(other,'way')&&!Object.hasOwn(other,'oneWay'));
+ console.log('Fishing and Passage ledger checks passed: field diffs, conflicts, floor links and type cleanup.');
+}

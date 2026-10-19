@@ -176,6 +176,7 @@
     "note": "Corner of waterfall can be swam upward",
     "x": 3149,
     "y": 3698,
-    "level": "floor-2"
+    "level": "floor-2",
+    "way": "Swim"
   }
 ]

@@ -181,11 +181,21 @@
   "id": "community-818",
   "community": true,
   "name": "Fishing",
-  "category": "Tradeskill",
-  "note": "Deep Sea Devourer, Sunscale Skimmer, Raw Bay Crab",
+  "category": "Fishing spot",
+  "note": "",
   "x": 4106,
   "y": 10363,
-  "trade": "Fishing"
+  "fish": [
+   {
+    "name": "Deep Sea Devourer"
+   },
+   {
+    "name": "Sunscale Skimmer"
+   },
+   {
+    "name": "Raw Bay Crab"
+   }
+  ]
  },
  {
   "id": "community-822",

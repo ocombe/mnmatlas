@@ -36,7 +36,7 @@ vm.runInContext(icons,context);
 vm.runInContext(await readFile(resolve(root,'changes.js'),'utf8'),context);const {buildChanges,fieldsOf,matchesFrom,conflicts,applyTo,whatOf,editKeys}=context.atlasChanges;const shapes=context.atlasShapes;
 // Wiki links: only pages on the sites the atlas knows, in the same stored form the site writes.
 vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellsOk=vm.runInContext('sellsOk',context),sellTypes=vm.runInContext('sellTypes',context),normaliseChange=vm.runInContext('normaliseChange',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
-const levelsOk=vm.runInContext('levelsOk',context),mobsOk=vm.runInContext('mobsOk',context);
+const levelsOk=vm.runInContext('levelsOk',context),mobsOk=vm.runInContext('mobsOk',context),fishOk=vm.runInContext('fishOk',context),wayOk=vm.runInContext('wayOk',context);
 const base=vm.runInContext('Object.keys(allCategories)',context),supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
 function configuration(row){
@@ -51,6 +51,7 @@ function point(p,c,id){if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFin
 function wikiOf(value,id){const link=wikiAddress(value);if(link===null)fail('Unsupported wiki link for suggestion '+id+'.');return link;}
 // The wiki's id for the linked entry, kept beside the link it was picked with.
 function wikiIdFrom(p,id){const wikiId=wikiIdOf(p.wikiId);if(wikiId===null)fail('Invalid wiki id for suggestion '+id+'.');return wikiId;}
+const rosterKeys=['levels','mobs','fish','way','oneWay'],fieldCategory=(k,c)=>k==='levels'?['Mob camp','Named mob'].includes(c):c===(k==='mobs'?'Mob camp':k==='fish'?'Fishing spot':'Passage'),fieldOk=(k,v,c)=>k==='levels'?levelsOk(v,c):k==='mobs'?mobsOk(v):k==='fish'?fishOk(v):k==='way'?wayOk(v):typeof v==='boolean';
 function validatePayload(row,c){
  const p=normaliseMarker(structuredClone(row.payload));if(p?.travelArrow!==undefined){p.arrow=p.travelArrow;delete p.travelArrow;}if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
  if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
@@ -70,11 +71,11 @@ function validatePayload(row,c){
  }else if(typeof row.target_id!=='string'||!row.target_id)fail('Missing target for suggestion '+row.id+'.');
  // A marker edit may change the type too (set while reviewing): the same check as a new marker's type.
  if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.trade!=null&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
- for(const k of ['levels','mobs'])if(p[k]!==undefined&&p[k]!==null){if(row.kind==='edit-label'||row.kind.startsWith('move-')||p.noteType==='label'||p.noteType==='exit'||(p.category??p.from?.category)!==undefined&&!(k==='levels'?['Mob camp','Named mob'].includes(p.category??p.from?.category):(p.category??p.from?.category)==='Mob camp')||!(k==='levels'?levelsOk(p[k],p.category??p.from?.category):mobsOk(p[k])))fail('Unsupported '+k+' for suggestion '+row.id+'.');}
+ for(const k of rosterKeys)if(p[k]!==undefined&&p[k]!==null){if(row.kind==='edit-label'||row.kind.startsWith('move-')||p.noteType==='label'||p.noteType==='exit'||(p.category??p.from?.category)!==undefined&&!fieldCategory(k,p.category??p.from?.category)||!fieldOk(k,p[k],p.category??p.from?.category))fail('Unsupported '+k+' for suggestion '+row.id+'.');}
  p.name=clean(p.name);if(p.note!==undefined)p.note=clean(p.note,true);
  if(p.from&&!Array.isArray(p.from))p.from={...p.from,name:clean(p.from.name),...(p.from.note!==undefined?{note:clean(p.from.note,true)}:{})};
  if(row.kind==='new-marker')point([p.x,p.y],c,row.id);else if(row.kind.startsWith('move-')){point(p.from,c,row.id);point(p.to,c,row.id);}else if(fieldsOf(row).has('position')){point([p.from.x,p.from.y],c,row.id);point([p.x,p.y],c,row.id);}
- const normal=normaliseChange({...row,payload:p}).payload;if(normal.mobs!=null&&!mobsOk(normal.mobs))fail('Unsupported mobs for suggestion '+row.id+'.');return normal;
+ const normal=normaliseChange({...row,payload:p}).payload;for(const k of rosterKeys)if(normal[k]!=null&&!fieldOk(k,normal[k],normal.category??normal.from?.category))fail('Unsupported '+k+' for suggestion '+row.id+'.');return normal;
 }
 // Every row works on private file copies; a refused row never leaves part of its change behind.
 const original=new Map(),history=new Map();let batch=[],past=null,heldIds=new Set(),missingVersion=false;
@@ -82,7 +83,7 @@ function before(path,m,row){const key=path+'#'+runKey(row);if(!original.has(key)
 const typeKeys=['trade','classes','vendor','sells'];
 function typeFields(m,p,id){
  if(p.shape)m.shape=structuredClone(p.shape);
- for(const k of ['levels','mobs'])if(p[k]!=null&&(k==='levels'?['Mob camp','Named mob'].includes(p.category):p.category==='Mob camp')){if(!(k==='levels'?levelsOk(p[k],p.category):mobsOk(p[k])))fail('Unsupported '+k+' for suggestion '+id+'.');m[k]=structuredClone(p[k]);}
+ for(const k of rosterKeys)if(p[k]!=null&&fieldCategory(k,p.category)){if(!fieldOk(k,p[k],p.category))fail('Unsupported '+k+' for suggestion '+id+'.');m[k]=structuredClone(p[k]);}
  if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;
  if(p.category==='Class trainer'&&p.classes!==undefined){if(p.classes!==null&&!classesOk(p.classes))fail('Unsupported classes for suggestion '+id+'.');if(p.classes)m.classes=[...p.classes];}
  if(p.category==='Vendor'){if(p.vendor!==undefined){if(p.vendor!==null&&(typeof p.vendor!=='string'||!vendorKindOk(p.vendor)))fail('Unsupported vendor kind for suggestion '+id+'.');if(p.vendor)m.vendor=vendorKindNow(p.vendor);}
@@ -120,7 +121,7 @@ async function prepare(row){
  await validateExtra(row,p,c,m||chip||batch.find(r=>r.kind==='new-marker'&&r.map===row.map&&'community-'+r.id===row.target_id)?.payload);
  const category=p.category||p.from?.category||m?.category||(chip?'Class trainer':undefined);
  if(!label&&!row.kind.startsWith('move-')){
-  for(const k of ['levels','mobs'])if(p[k]!=null&&(!(k==='levels'?['Mob camp','Named mob'].includes(category):category==='Mob camp')||k==='levels'&&!levelsOk(p[k],category)))fail('Unsupported '+k+' for suggestion '+row.id+'.');
+  for(const k of rosterKeys)if(p[k]!=null&&(!fieldCategory(k,category)||!fieldOk(k,p[k],category)))fail('Unsupported '+k+' for suggestion '+row.id+'.');
   if(!category&&p.classes!==undefined&&!classesOk(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');
   if(p.wiki!==undefined||row.kind==='new-marker')p.wiki=wikiOf(p.wiki,row.id);
   if(p.wikiId!==undefined||row.kind==='new-marker')p.wikiId=wikiIdFrom(p,row.id);
@@ -189,7 +190,7 @@ async function applyRow(row){
   for(const k of ['color','level','arrow','toMap'])if(p[k]!==undefined&&p[k]!==null&&p[k]!==''&&(k==='color'&&!supported.colours.includes(p[k])||k==='level'&&!(c.levels||[]).some(l=>l.id===p[k])||k==='arrow'&&!supported.arrows.includes(p[k])||k==='toMap'&&!registry.maps.some(r=>r.id===p[k])))fail('Unsupported marker fields for suggestion '+row.id+'.');
   if(!conflicts(row,live,history.get(runKey(row))||[]).length&&superseded(row,live))return 'already superseded';
   if(!m){check(row,null,path);if(p.remove)return 'already removed';fail('Target missing for suggestion '+row.id+'.');}
-  for(const k of ['levels','mobs'])if(p[k]!=null&&(!(k==='levels'?['Mob camp','Named mob'].includes(category):category==='Mob camp')||k==='levels'&&!levelsOk(p[k],category)))fail('Unsupported '+k+' for suggestion '+row.id+'.');
+  for(const k of rosterKeys)if(p[k]!=null&&(!fieldCategory(k,category)||!fieldOk(k,p[k],category)))fail('Unsupported '+k+' for suggestion '+row.id+'.');
   const next=structuredClone(m);
   if(p.remove){check(row,live,path);mrows.splice(mrows.indexOf(m),1);mf.changed=true;if(chip&&chip!==m){chips.splice(chips.indexOf(chip),1);lf.changed=true;}return label?'place name removed':'marker removed';}
   if(fields.has('name'))next.name=clean(p.name);
@@ -200,7 +201,7 @@ async function applyRow(row){
   if(fields.has('wiki')){if(wiki){next.wiki=wiki;if(wikiId)next.wikiId=wikiId;else if(p.wikiId!==undefined||wiki!==m.wiki)delete next.wikiId;}else{delete next.wiki;delete next.wikiId;}}
   for(const k of editKeys.filter(k=>!['name','note'].includes(k)))if(fields.has(k)&&!(k==='building'&&chip&&chip!==m)){if(p[k]===null||p[k]==='')delete next[k];else next[k]=p[k];}
   if(next.shape){shapes.validate(next.shape,c);[next.x,next.y]=shapes.anchor(next.shape);}
-  if(!['Mob camp','Named mob'].includes(next.category))delete next.levels;if(next.category!=='Mob camp')delete next.mobs;if(next.levels!=null&&!levelsOk(next.levels,next.category))fail('Unsupported levels for suggestion '+row.id+'.');
+  if(!['Mob camp','Named mob'].includes(next.category))delete next.levels;if(next.category!=='Mob camp')delete next.mobs;if(next.category!=='Fishing spot')delete next.fish;if(next.category!=='Passage'){delete next.way;delete next.oneWay;}if(next.levels!=null&&!levelsOk(next.levels,next.category))fail('Unsupported levels for suggestion '+row.id+'.');
   // Retries after a successful push can find the desired values already on the map.
   const hits=conflicts(row,live,history.get(runKey(row))||[]);if(hits.length)fail('conflicts with #'+hits.join(', #'));
   if(JSON.stringify(next)===JSON.stringify(m)&&(!fields.has('building')||!chip||chip===m||chip.building===p.building))return 'already edited';
@@ -260,12 +261,12 @@ async function liveTarget(row){
  const here=m=>m.id===id&&(!c.levels||!m.level||m.level===row.level||row.payload?.level===m.level);
  return (label?f.data.labels:f.data).find(here)||(!label&&c.labelsFile?(await file(c.labelsFile)).data.trainers?.find(here):null);
 }
-const publicValues=m=>Object.fromEntries(['name','note','wiki','wikiId','levels','mobs','category',...typeKeys,'color','level','arrow','toMap'].filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
+const publicValues=m=>Object.fromEntries(['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','category',...typeKeys,'color','level','arrow','toMap'].filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
 async function recoverVersion(row,a){
  const same=hash(row.payload)===a.payloadHash,m=same?null:await liveTarget(row),payload=structuredClone(row.payload),credit=(await request('credits?select=suggestion_id,user_id,name&suggestion_id=eq.'+row.id))?.find(c=>String(c.suggestion_id)===String(row.id));
  if(m){
   if(row.kind.startsWith('move-'))payload.to=[m.x,m.y];
-  else {for(const k of ['name','note','wiki','wikiId','levels','mobs','category',...typeKeys,'color','level','arrow','toMap'])if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
+  else {for(const k of ['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','category',...typeKeys,'color','level','arrow','toMap'])if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
  }
  return {...row,payload,credit:!!credit,...(credit?{user_id:credit.user_id,author_name:credit.name}:{})};
 }

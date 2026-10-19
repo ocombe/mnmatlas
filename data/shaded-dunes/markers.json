@@ -617,7 +617,8 @@
   "category": "Passage",
   "note": "Semi-hidden entrance to a tunnel here.",
   "x": 1680,
-  "y": 1483
+  "y": 1483,
+  "way": "Tunnel"
  },
  {
   "id": "community-722",
@@ -626,7 +627,8 @@
   "category": "Passage",
   "note": "",
   "x": 2317,
-  "y": 1875
+  "y": 1875,
+  "way": "Tunnel"
  },
  {
   "id": "community-723",
@@ -646,51 +648,95 @@
   "id": "community-801",
   "community": true,
   "name": "Fishing",
-  "category": "Tradeskill",
-  "note": "Thorn Sturgeon, Green Eye Bass",
+  "category": "Fishing spot",
+  "note": "",
   "x": 6319,
   "y": 3089,
-  "trade": "Fishing"
+  "fish": [
+   {
+    "name": "Thorn Sturgeon"
+   },
+   {
+    "name": "Green Eye Bass"
+   }
+  ]
  },
  {
   "id": "community-803",
   "community": true,
   "name": "Fishing",
-  "category": "Tradeskill",
-  "note": "Thorn Sturgeon, Grouper, Basa",
+  "category": "Fishing spot",
+  "note": "",
   "x": 5366,
   "y": 3067,
-  "trade": "Fishing"
+  "fish": [
+   {
+    "name": "Thorn Sturgeon"
+   },
+   {
+    "name": "Grouper"
+   },
+   {
+    "name": "Basa"
+   }
+  ]
  },
  {
   "id": "community-810",
   "community": true,
   "name": "Fishing",
-  "category": "Tradeskill",
-  "note": "Spotted Angelfish, Oasis Perch, Tainted Guppy",
+  "category": "Fishing spot",
+  "note": "",
   "x": 3922,
   "y": 3001,
-  "trade": "Fishing"
+  "fish": [
+   {
+    "name": "Spotted Angelfish"
+   },
+   {
+    "name": "Oasis Perch"
+   },
+   {
+    "name": "Tainted Guppy"
+   }
+  ]
  },
  {
   "id": "community-812",
   "community": true,
   "name": "Fishing",
-  "category": "Tradeskill",
-  "note": "Whitefish, Basa",
+  "category": "Fishing spot",
+  "note": "",
   "x": 6775,
   "y": 3855,
-  "trade": "Fishing"
+  "fish": [
+   {
+    "name": "Whitefish"
+   },
+   {
+    "name": "Basa"
+   }
+  ]
  },
  {
   "id": "community-815",
   "community": true,
   "name": "Fishing",
-  "category": "Tradeskill",
-  "note": "Basa, Grouper, Thorn Sturgeon",
+  "category": "Fishing spot",
+  "note": "",
   "x": 2276,
   "y": 2515,
-  "trade": "Fishing"
+  "fish": [
+   {
+    "name": "Basa"
+   },
+   {
+    "name": "Grouper"
+   },
+   {
+    "name": "Thorn Sturgeon"
+   }
+  ]
  },
  {
   "id": "community-816",

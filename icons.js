@@ -35,6 +35,7 @@ const tradePaths = {
 };
 const categoryPaths = {
   'Camping spot': tradePaths.Survival,
+  'Fishing spot': tradePaths['Fishing'],
   'Notable NPC': 'M16 7a4 4 0 1 0-8 0 4 4 0 1 0 8 0 M4 22v-3a8 8 0 0 1 16 0v3 M4 22h16',
   'Bank': 'M8 7 6 2h12l-2 5 M8 7h8c1 4 6 6 6 10 0 7-20 7-20 0 0-4 5-6 6-10z M8 8h8 M15 12h-4a2 2 0 0 0 0 4h2a2 2 0 0 1 0 4H9 M12 11v10',
   'Inn': 'M2 4v18 M2 17h20v5 M2 10h7v7 M9 8h9q4 0 4 4v5 M4 12h3v3H4z',
@@ -57,6 +58,14 @@ const travelPaths={
   'Bridge':'M2 8h20 M4 8v12 M20 8v12 M4 20a8 8 0 0 1 16 0 M8 8v5 M12 8v4 M16 8v5',
   'Teleporter':'M12 2c4.4 0 8 4.5 8 10s-3.6 10-8 10-8-4.5-8-10 3.6-10 8-10z M12 7c2 0 3.5 2.2 3.5 5s-1.5 5-3.5 5-3.5-2.2-3.5-5S10 7 12 7z M12 11v2'
 };
+const passagePaths={
+  'Passage':'M3 20V9a5 5 0 0 1 10 0v11 M8 20V9a5 5 0 0 1 10 0v11 M3 20h15',
+  'Tunnel':'M3 20v-8a9 9 0 0 1 18 0v8 M7 20v-8a5 5 0 0 1 10 0v8 M3 20h18',
+  'Swim':'M18 5a2 2 0 1 0-4 0 2 2 0 1 0 4 0 M3 12l6-4 7 5 M9 8l3 6 M2 16q3-3 6 0t6 0t6 0 M2 21q3-3 6 0t6 0t6 0',
+  'Climb':'M18 2v20 M6 2q5 5 0 10t0 10 M6 6h5 M5 12h6 M5 18h6 M15 6h3 M15 14h3',
+  'Drop':'M2 7h9v5 M16 3v16 M12 15l4 4 4-4 M2 21h20',
+  'Secret':'M8 12a6 6 0 1 1 8 0l2 10H6z'
+};
 // A sign's or marker's way of travel: its own field, its category, or words in its name.
 function travelKind(name,category,given){
   if(Object.hasOwn(travelPaths,given||''))return given;
@@ -72,11 +81,12 @@ function travelKind(name,category,given){
 function travelSvg(kind){
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg');
   for(const [key,value] of Object.entries({viewBox:'0 0 24 24',fill:'none',stroke:'currentColor','stroke-width':'2','stroke-linecap':'round','stroke-linejoin':'round','aria-hidden':'true','focusable':'false'}))svg.setAttribute(key,value);
-  const shape=document.createElementNS(ns,'path');shape.setAttribute('d',travelPaths[kind]);svg.append(shape);return svg;
+  const shape=document.createElementNS(ns,'path');shape.setAttribute('d',travelPaths[kind]||passagePaths[kind]);svg.append(shape);return svg;
 }
 const exitArrows={up:'⤒',down:'⤓',north:'↑',northeast:'↗',east:'→',southeast:'↘',south:'↓',southwest:'↙',west:'←',northwest:'↖'};
 function tradeskillName(marker){return marker.category==='Tradeskill'?marker.name.split(/\s+[—–-]\s+/)[0].trim():'';}
 function markerSymbol(marker){
+  if(marker.category==='Passage'&&!marker.noteType){const face=text('span','','travel-symbol');face.append(travelSvg(Object.hasOwn(passagePaths,marker.way||'')?marker.way:'Passage'));if(marker.oneWay||marker.toLevel&&marker.direction)face.append(text('small',exitArrows[marker.direction]||(marker.oneWay?'→':'')));return face;}
   const travel=!marker.noteType&&['Exit','Lift','Stairs','Ladder','Bridge','Teleporter','Level connection'].includes(marker.category)?travelKind(marker.name,marker.category,marker.travel):'';
   if(travel){const face=text('span','','travel-symbol');face.append(travelSvg(travel));if(exitArrows[marker.direction])face.append(text('small',exitArrows[marker.direction]));return face;}
   if(marker.toLevel)return text('b',marker.direction==='up'?'↑':'↓');

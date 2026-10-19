@@ -201,6 +201,13 @@ console.log('Script checks passed: every page script parses.');
  console.log('Named mob display checks passed: legacy suffixes, alternatives, fixed levels, popup, hover, search, wiki priority and unchanged data.');
  let calls=0,refreshed=null;c.fetch=async url=>{assert.equal(url,'npc-cards/camp.json');calls++;return {ok:true,json:async()=>({cards})};};c.allMarkers=()=>[look];c.pins=new Map([['camp-pin',{setPopupContent(){},isPopupOpen:()=>false,getPopup:()=>null,getTooltip:()=>({isOpen:()=>true}),setTooltipContent:n=>refreshed=n}]]);c.fixtureCards=cards;
  vm.runInContext(app.slice(app.indexOf('let npcCards='),app.indexOf('// A popup with a card')),c);vm.runInContext('npcCardFor',c)(look);vm.runInContext('npcCardFor',c)(look);for(let i=0;i<6;i++)await Promise.resolve();assert.equal(calls,1);assert(refreshed&&nodes(refreshed).some(x=>/^Levels 11/.test(x.textContent)),'An open hover card is refreshed when the cards arrive');assert.equal(vm.runInContext('npcCardFor',c)(look),null,'A camp never becomes one NPC card');
+
+ const water={id:'water',name:'Fishing',category:'Fishing spot',note:'',fish:[{name:'Thorn Sturgeon',wikiId:'item-thorn-sturgeon',wiki:'https://monstersandmemories.wiki/items/thorn-sturgeon'},{name:'Basa'},{name:'Grouper'},{name:'Whitefish'}]};
+ const fishCard=nodes(vm.runInContext('campCard',c)(water));assert(fishCard.some(x=>x.textContent==='Fish'));assert(fishCard.some(x=>x.textContent==='Basa'&&x.tag==='span'));assert(fishCard.some(x=>x.textContent==='Thorn Sturgeon'&&x.href===water.fish[0].wiki));assert(!fishCard.some(x=>x.textContent==='Loot'));assert(vm.runInContext('markerText',c)(water).includes('thorn sturgeon'));
+ const short=nodes(vm.runInContext('markerHoverCard',c)(water));assert(short.some(x=>x.textContent==='Thorn Sturgeon, Basa, Grouper and 1 more'));assert(nodes(vm.runInContext('popup',c)(water)).some(x=>x.textContent==='Fish'));
+ assert.equal(vm.runInContext('markerSubtitle',c)({category:'Passage',way:'Swim',oneWay:true}),'Passage'+String.fromCharCode(0x20,0xb7,0x20)+'Swim'+String.fromCharCode(0x20,0xb7,0x20)+'One way');
+ console.log('Fishing display checks passed: linked/plain fish roster, no loot, hover limit, popup and local search.');
+
  console.log('Camp display checks passed: parsed ranges, mob-name search, shared loot pages, highest rates, sources, eight items, more count and embed rules.');
 }
 // Card publishing follows camp mob ids through the same cache and paced requests, with a fake wiki.
@@ -213,4 +220,32 @@ console.log('Script checks passed: every page script parses.');
   await buildCards({root:folder,secret:'fixture',fetcher,sleep:async ms=>waits.push(ms),site:'http://fixture/'});const result=JSON.parse(await readFile(resolve(folder,'npc-cards/camp.json'),'utf8'));assert.deepEqual(Object.keys(result.cards),['npc-one','npc-two','npc-cached']);assert.deepEqual(result.cards['npc-cached'],cached);assert.equal(result.cards['npc-two'].level,'12–15');assert.equal(result.cards['npc-two'].loot[0].dropRate,8);assert.equal(asks.length,3);assert(waits.length&&waits.every(ms=>ms>0&&ms<=700));
  }finally{assert(relative(root,folder).startsWith('scripts'+sep+'.camp-cards-test-'));await rm(folder,{recursive:true,force:true});}
  console.log('Camp card fetch checks passed: additional ids, duplicate ids, shared pacing, fresh cache and fake wiki cards.');
+}
+
+{
+ const c={URL,structuredClone};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);const [fishOk,wayOk,extras,normal]=vm.runInContext('[fishOk,wayOk,markerExtras,normaliseChange]',c),plain=v=>JSON.parse(JSON.stringify(v));
+ const item={name:'Thorn Sturgeon',wikiId:'item-thorn-sturgeon',wiki:'https://monstersandmemories.wiki/items/thorn-sturgeon'};
+ assert(fishOk([])&&fishOk([{name:'Basa'}])&&fishOk([item])&&fishOk([{name:'Basa',wikiId:'item-basa'}])&&fishOk([{name:'Basa',wiki:item.wiki}]));assert(fishOk(Array.from({length:12},(_,i)=>({name:'Fish '+i}))));
+ for(const bad of [null,{},'Basa',Array(1),Array.from({length:13},(_,i)=>({name:'Fish '+i})),[{name:''}],[{name:' '.repeat(3)}],[{name:'x'.repeat(101)}],[{name:'Basa',extra:true}],[{...item,wikiId:'npc-fish'}],[{...item,wikiId:''}],[{...item,wikiId:null}],[{...item,wiki:'https://evil.example/items/fish'}],[{...item,wiki:'https://monstersandmemories.wiki/npcs/fish'}],[item,{...item,name:'Other'}],[{name:'Basa'},{name:'bAsA'}]])assert(!fishOk(bad),JSON.stringify(bad));
+ for(const way of ['Tunnel','Swim','Climb','Drop','Secret'])assert(wayOk(way));for(const bad of ['',null,1,'Walk','swim'])assert(!wayOk(bad));
+ assert.deepEqual(plain(extras({category:'Fishing spot',fish:[item],way:'Swim',oneWay:true})),{fish:[item]});assert.deepEqual(plain(extras({category:'Passage',fish:[item],way:'Swim',oneWay:false})),{way:'Swim',oneWay:false});assert.deepEqual(plain(extras({category:'Vendor',fish:[item],way:'Swim',oneWay:true})),{});
+ const cleaned=normal({kind:'new-marker',payload:{name:'Water',category:'Fishing spot',fish:[{name:' Basa <fish> '+String.fromCharCode(0x200b)}],x:1,y:2}});assert.deepEqual(plain(cleaned.payload.fish),[{name:'Basa fish'}]);
+ index.push({n:'Fishing',m:'shaded-dunes',p:'water-1',k:'Fishing spot',f:['Thorn Sturgeon','Basa']},{n:'Fishing',m:'shaded-dunes',p:'water-2',k:'Fishing spot',f:['Thorn Sturgeon']});assert.deepEqual(ids('Thorn Sturgeon'),['water-1','water-2']);assert.deepEqual(ids('sturgeon'),['water-1','water-2']);
+ const builder=await readFile(new URL('./make-share-pages.mjs',import.meta.url),'utf8'),block=builder.slice(builder.indexOf('{const index=[]'),builder.indexOf('const template=')),built=[],maps={maps:[{id:'waters',markersFile:'water.json'}]};
+ await vm.runInNewContext('(async()=>'+block+')()', {registry:maps,root:'',resolve:(r,f)=>f,readFile:async()=>JSON.stringify([{id:'water',name:'Fishing',category:'Fishing spot',fish:[item]}]),writeFile:async(f,v)=>built.push(...JSON.parse(v)),console:{log(){}}});assert.deepEqual([...built[0].f],['Thorn Sturgeon']);
+ console.log('Fishing and Passage checks passed: fish validation, optional item links, limits, duplicates, cleaning, type fields and fish-name find index.');
+}
+
+{
+ class Node{constructor(tag,value='',cls=''){this.tagName=tag;this.textContent=value;this.className=cls;this.children=[];this.attrs={};this.style={setProperty:(k,v)=>this.attrs[k]=v};}append(...v){this.children.push(...v);}setAttribute(k,v){this.attrs[k]=v;}}
+ const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),c={URL,structuredClone,text:(...v)=>new Node(...v),document:{createElementNS:(ns,tag)=>new Node(tag)},L:{divIcon:v=>v},window:{},config:{width:100,height:100},registry:{maps:[]},validLevel:v=>v===undefined};vm.createContext(c);
+ for(const name of ['wiki-links.js','icons.js','changes.js'])vm.runInContext(await readFile(new URL('../'+name,import.meta.url),'utf8'),c);vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),c);vm.runInContext('categories={...allCategories}',c);
+ vm.runInContext(app.slice(app.indexOf('function pinIcon('),app.indexOf('function openMap(')),c);vm.runInContext(app.slice(app.indexOf('function valid('),app.indexOf('function persist(')),c);
+ const [symbol,pin,valid,paths]=vm.runInContext('[markerSymbol,pinIcon,valid,passagePaths]',c);assert.equal(new Set(Object.values(paths)).size,6);
+ for(const way of [undefined,'Tunnel','Swim','Climb','Drop','Secret']){const m={id:'personal-passage',name:'Passage',category:'Passage',note:'',x:10,y:20,...(way?{way}:{})},face=symbol(m),seal=pin(m);assert.equal(face.children[0].tagName,'svg');assert.equal(face.children[0].attrs['stroke-width'],'2');assert.equal(face.children[0].children[0].attrs.d,paths[way||'Passage']);assert(seal.className.includes('level-pin'));assert.equal(seal.html.attrs['--pin'],'#64795b');assert(valid(m));}
+ const m={category:'Passage',oneWay:true};assert.equal(symbol(m).children[1].textContent,String.fromCharCode(0x2192));assert.equal(symbol({...m,direction:'east'}).children[1].textContent,String.fromCharCode(0x2192));assert.equal(symbol({...m,toLevel:'lower',direction:'down'}).children[1].textContent,String.fromCharCode(0x2913));
+ const base={id:'personal-fishing',name:'Fishing',category:'Fishing spot',note:'',x:20,y:20,fish:[{name:'Basa'}],shape:{kind:'area',form:'rect',points:[[10,10],[30,10],[30,30],[10,30]]}};assert(valid(base));assert(!valid({...base,category:'Bank'}));assert(!valid({...base,noteType:'label'}));assert(!valid({...base,fish:[{name:''}]}));
+ const passage={...base,category:'Passage',fish:undefined,way:'Swim',oneWay:true};assert(valid(passage));for(const bad of [{way:'Walk'},{oneWay:'yes'},{category:'Bank'},{noteType:'exit'}])assert(!valid({...passage,...bad}));
+ assert(!vm.runInContext("privateOnlyCategories.has('Fishing spot')",c));assert.equal(vm.runInContext("categoryPaths['Fishing spot']===tradePaths.Fishing",c),true);
+ console.log('Passage symbol checks passed: six pictograms, green seals, compass/fallback arrows, floor direction and personal field validation.');
 }

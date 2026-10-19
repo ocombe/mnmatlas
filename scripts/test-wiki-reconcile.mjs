@@ -38,3 +38,9 @@ const out=files.get('m.json');assert.equal(out.find(m=>m.id==='bag').name,'A bag
 assert.deepEqual(out.find(m=>m.id==='pay'),{id:'pay',name:'Paymaster Elara Venn',category:'Notable NPC',x:5,y:6,note:'1st floor.',level:'lower',community:true,wiki:'https://monstersandmemories.wiki/npcs/paymaster-elara-venn',wikiId:'npc-paymaster-elara-venn'});
 assert(!files.get('l.json').labels.some(l=>l.id==='pay'),'The place name is gone once it is a marker');
 console.log('Wiki reconcile checks passed: name matching, zones, plan, approvals and applying.');
+
+{
+ const features={markers:[{path:'m.json',m:{id:'water',name:'Fishing',category:'Fishing spot',fish:[{name:'Basa'}]}},{path:'m.json',m:{id:'tunnel',name:'Tunnel',category:'Passage',way:'Tunnel',oneWay:true}}],labels:[]};
+ assert.deepEqual(queries(c,features),[]);assert.deepEqual(plan(c,features,new Map()).rows,[]);
+ console.log('Fishing and Passage reconcile checks passed: waters and passages stay outside NPC reconciliation.');
+}

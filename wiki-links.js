@@ -76,7 +76,7 @@ function normaliseChange(row){
  const clean=(v,multiline)=>{const t=String(v).normalize('NFC').replace(/\r\n?/g,'\n').replace(/[\u0000-\u0008\u000b-\u001f\u007f-\u009f\u00ad\u061c\u180e\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff<>]/g,'');return multiline?t.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():t.replace(/\s+/g,' ').trim();};
  const normal=p=>{p=normaliseMarker({...p});for(const k of ['name','note'])if(typeof p[k]==='string')p[k]=clean(p[k],k==='note');
   if(p.wiki!==undefined){const link=wikiAddress(p.wiki);if(link!==null)p.wiki=link;}if(p.wikiId!==undefined){const id=wikiIdOf(p.wikiId);if(id!==null)p.wikiId=id;}
-  if(Array.isArray(p.mobs))p.mobs=p.mobs.map(m=>m&&typeof m==='object'?{...m,...(typeof m.name==='string'?{name:clean(m.name)}:{}),...(wikiIdOf(m.wikiId)?{wikiId:wikiIdOf(m.wikiId)}:{}),...(wikiAddress(m.wiki)?{wiki:wikiAddress(m.wiki)}:{})}:m);
+  for(const k of ['mobs','fish'])if(Array.isArray(p[k]))p[k]=p[k].map(m=>m&&typeof m==='object'?{...m,...(typeof m.name==='string'?{name:clean(m.name)}:{}),...(wikiIdOf(m.wikiId)?{wikiId:wikiIdOf(m.wikiId)}:{}),...(wikiAddress(m.wiki)?{wiki:wikiAddress(m.wiki)}:{})}:m);
   if(p.vendor!==undefined)p.vendor=vendorKindNow(p.vendor);if(Array.isArray(p.sells))p.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));return p;};
  const p=normal(row.payload);if(p.travelArrow!==undefined){p.arrow=p.travelArrow;delete p.travelArrow;}if(row.kind==='edit-label'&&p.labelPriority!==undefined){p.priority=p.labelPriority;delete p.labelPriority;}if(Array.isArray(p.from))p.from=p.from.map(Math.round);else if(p.from)p.from=normal(p.from);
  if(Array.isArray(p.to))p.to=p.to.map(Math.round);if(row.kind==='new-marker'){p.x=Math.round(p.x);p.y=Math.round(p.y);}return {...row,payload:p};
@@ -118,6 +118,9 @@ const levelsText=v=>levelsOk(v)?'Levels '+v[0]+(v[1]===null?'+':v[1]===v[0]?'':'
 function namedLevels(m){if(levelsOk(m?.levels,'Named mob'))return m.levels;const v=/\(levels?\s+([^)]*)\)\s*$/i.exec(m?.name||'');return v?levelRange(v[1].replace(/\s+or\s+/i,'–')):null;}
 const namedLevelText=m=>m.category==='Named mob'?levelsText(namedLevels(m)).replace(/^Levels /,'Level '):'';
 const mobsOk=v=>Array.isArray(v)&&v.length<=12&&v.every(m=>m&&typeof m==='object'&&!Array.isArray(m)&&Object.keys(m).every(k=>['name','wikiId','wiki'].includes(k))&&typeof m.name==='string'&&!!m.name.trim()&&m.name.length<=100&&typeof m.wikiId==='string'&&!!wikiIdOf(m.wikiId)&&typeof m.wiki==='string'&&!!wikiAddress(m.wiki))&&new Set(v.map(m=>m.wikiId)).size===v.length;
+const passageWays=['Tunnel','Swim','Climb','Drop','Secret'];
+const wayOk=v=>typeof v==='string'&&passageWays.includes(v);
+const fishOk=v=>Array.isArray(v)&&v.length<=12&&[...v].every(m=>m&&typeof m==='object'&&!Array.isArray(m)&&Object.keys(m).every(k=>['name','wikiId','wiki'].includes(k))&&typeof m.name==='string'&&!!m.name.trim()&&m.name.length<=100&&(!Object.hasOwn(m,'wikiId')||typeof m.wikiId==='string'&&/^item-[a-z0-9-]{1,150}$/.test(m.wikiId))&&(!Object.hasOwn(m,'wiki')||typeof m.wiki==='string'&&!!wikiAddress(m.wiki)&&new URL(wikiAddress(m.wiki)).pathname.startsWith('/items/')))&&new Set(v.map(m=>m.name.trim().toLocaleLowerCase())).size===v.length&&new Set(v.filter(m=>m.wikiId).map(m=>m.wikiId)).size===v.filter(m=>m.wikiId).length;
 // The id rides on the address field with the address it was picked for, so typing another address or clearing it drops the id.
 function setWikiPick(input,href,id){input.dataset.wikiUrl=wikiAddress(href)||'';input.dataset.wikiId=wikiIdOf(id)||'';}
 function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.dataset.wikiId||'':'';}
@@ -163,7 +166,7 @@ const trainerOnMap=(row,classes)=>{const c=trainerClasses(row);return c.length>0
 // the same ones: an area label nothing else; a zone exit its arrow and the map it leads to; a marker its colour and wiki
 // page (with the wiki's id), a tradeskill its trade, a class trainer its classes, a vendor its kind and Sells tags. Values are checked
 // where they are saved (app.js valid(), scripts/apply-approved.mjs).
-const markerExtraKeys=['shape','noteType','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','level','minZoom','approximate','color','wiki','wikiId','trade','classes','vendor','sells','levels','mobs'];
+const markerExtraKeys=['shape','noteType','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','level','minZoom','approximate','color','wiki','wikiId','trade','classes','vendor','sells','levels','mobs','fish','way','oneWay'];
 function markerExtras(m){
  const out={};if(m.shape&&m.noteType!=='label'&&m.noteType!=='exit')out.shape=structuredClone(m.shape);for(const k of ['level','minZoom','approximate'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
  if(m.noteType!=='label')for(const k of ['travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
@@ -171,6 +174,8 @@ function markerExtras(m){
  if(m.color)out.color=m.color;if(m.wiki){out.wiki=m.wiki;if(m.wikiId)out.wikiId=m.wikiId;}
  if(['Mob camp','Named mob'].includes(m.category)&&m.levels!=null)out.levels=structuredClone(m.levels);
  if(m.category==='Mob camp'&&m.mobs!=null)out.mobs=structuredClone(m.mobs);
+ if(m.category==='Fishing spot'&&m.fish!=null)out.fish=structuredClone(m.fish);
+ if(m.category==='Passage')for(const k of ['way','oneWay'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
  if(m.category==='Tradeskill'&&m.trade)out.trade=m.trade;
  if(m.category==='Class trainer'&&Array.isArray(m.classes)&&m.classes.length)out.classes=[...m.classes];
  if(m.category==='Vendor'){if(m.vendor)out.vendor=vendorKindNow(m.vendor);if(Array.isArray(m.sells)&&m.sells.length)out.sells=[...m.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
