@@ -103,15 +103,5 @@
   "minZoom": 2.75,
   "approximate": true,
   "toMap": "grimtide-sanctum"
- },
- {
-  "id": "dungeon-surukla",
-  "name": "Suruk'La",
-  "category": "Dungeon",
-  "x": 2401,
-  "y": 1579,
-  "note": "Dungeon entrance.",
-  "minZoom": 2.75,
-  "approximate": true
  }
 ]
