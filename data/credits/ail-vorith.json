@@ -17,6 +17,10 @@
     {
       "name": "darkhayn",
       "what": "edited"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-24": [
@@ -187,6 +191,10 @@
     {
       "name": "darkhayn",
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-72": [
@@ -343,6 +351,14 @@
     {
       "name": "satoukurotama",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-231": [
@@ -427,6 +443,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-281": [
@@ -451,6 +471,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-293": [
@@ -657,6 +681,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-565": [
@@ -805,6 +833,10 @@
     {
       "name": "mazamune",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-712": [
@@ -841,6 +873,10 @@
     {
       "name": "deadmo",
       "what": "moved"
+    },
+    {
+      "name": "darkhayn",
+      "what": "removed"
     }
   ],
   "marker:forge": [
@@ -916,6 +952,60 @@
     }
   ],
   "marker:community-862": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-872": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-879": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-880": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-886": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-887": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-889": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-890": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-891": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-892": [
     {
       "name": "darkhayn",
       "what": "added"

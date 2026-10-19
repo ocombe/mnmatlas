@@ -40,5 +40,16 @@
         "wikiId": "npc-a-giant-deep-glowbeetle"
       }
     ]
+  },
+  {
+    "id": "community-910",
+    "community": true,
+    "name": "Keeper of the Road",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1285,
+    "y": 1499,
+    "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
+    "wikiId": "npc-keeper-of-the-road"
   }
 ]

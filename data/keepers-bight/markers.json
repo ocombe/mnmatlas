@@ -748,5 +748,39 @@
   "y": 3119,
   "wiki": "https://monstersandmemories.wiki/npcs/cyra-brinewell",
   "wikiId": "npc-cyra-brinewell"
+ },
+ {
+  "id": "community-869",
+  "community": true,
+  "name": "Tolrad Oarsen",
+  "category": "Vendor",
+  "note": "",
+  "x": 2015,
+  "y": 3366,
+  "wiki": "https://monstersandmemories.wiki/npcs/tolrad-oarsen",
+  "wikiId": "npc-tolrad-oarsen"
+ },
+ {
+  "id": "community-871",
+  "community": true,
+  "name": "Otto Roth",
+  "category": "Vendor",
+  "note": "",
+  "x": 2921,
+  "y": 2788,
+  "wiki": "https://monstersandmemories.wiki/npcs/otto-roth",
+  "wikiId": "npc-otto-roth"
+ },
+ {
+  "id": "community-877",
+  "community": true,
+  "name": "A woodworker",
+  "category": "Vendor",
+  "note": "",
+  "x": 2875,
+  "y": 2201,
+  "vendor": "Lumberjack vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-woodworker",
+  "wikiId": "npc-a-woodworker"
  }
 ]

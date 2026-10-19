@@ -50,15 +50,6 @@
     "community": true
   },
   {
-    "id": "blacksmithing-smelting-zorvek",
-    "name": "Blacksmithing / Smelting — Zorvek",
-    "category": "Tradeskill",
-    "x": 4274,
-    "y": 4232,
-    "note": "Blacksmith.",
-    "community": true
-  },
-  {
     "id": "miral-the-dark-elf",
     "name": "Miral the Dark Elf",
     "category": "Quest NPC",
@@ -369,7 +360,7 @@
   {
     "id": "toilmistress-rallvessa",
     "name": "Toilmistress Rallvessa",
-    "category": "Notable NPC",
+    "category": "Quest NPC",
     "x": 5065,
     "y": 3785,
     "note": "At the bridge.",
@@ -531,8 +522,8 @@
     "name": "a reagent vendor",
     "category": "Vendor",
     "note": "enchanter reagent merchant, upstair",
-    "x": 4390,
-    "y": 2329,
+    "x": 4431,
+    "y": 2395,
     "vendor": "Reagent vendor",
     "sells": [
       "Bags",
@@ -714,9 +705,9 @@
     "community": true,
     "name": "an alchemist supplier",
     "category": "Vendor",
-    "note": "",
-    "x": 4049,
-    "y": 3335,
+    "note": "upstair",
+    "x": 3983,
+    "y": 3361,
     "vendor": "Alchemy vendor",
     "sells": [
       "Bags"
@@ -808,7 +799,7 @@
     "id": "community-280",
     "community": true,
     "name": "Alarys Drezzorith",
-    "category": "Vendor",
+    "category": "Quest NPC",
     "note": "Alarys Drezzorith is located in a building in the main city of Ail'Vorith, 4th floor, south side... just southeast of the high level Paladin and Cleric trainers.",
     "x": 3569,
     "y": 2960,
@@ -852,7 +843,7 @@
     "id": "community-285",
     "community": true,
     "name": "Tal Drezzorith",
-    "category": "Vendor",
+    "category": "Quest NPC",
     "note": "Up the last floor of the city, up stair in the building.",
     "x": 3456,
     "y": 2737,
@@ -1291,8 +1282,8 @@
     "id": "community-563",
     "community": true,
     "name": "Marshal Xyvher",
-    "category": "Notable NPC",
-    "note": "",
+    "category": "Quest NPC",
+    "note": "Paladin quest npc",
     "x": 3468,
     "y": 2686
   },
@@ -1534,8 +1525,8 @@
     "name": "Ailis Hal'kareth",
     "category": "Quest NPC",
     "note": "WIZ and SPB quest giver",
-    "x": 3868,
-    "y": 3491,
+    "x": 3693,
+    "y": 3468,
     "wiki": "https://monstersandmemories.miraheze.org/wiki/Ailis_Hal%27kareth"
   },
   {
@@ -1691,5 +1682,97 @@
     "note": "take sale notices",
     "x": 4167,
     "y": 2964
+  },
+  {
+    "id": "community-872",
+    "community": true,
+    "name": "a herbalism trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3913,
+    "y": 3436,
+    "trade": "Herbalism"
+  },
+  {
+    "id": "community-879",
+    "community": true,
+    "name": "anvil",
+    "category": "Forge",
+    "note": "",
+    "x": 3391,
+    "y": 3071
+  },
+  {
+    "id": "community-880",
+    "community": true,
+    "name": "smelter",
+    "category": "Forge",
+    "note": "",
+    "x": 3378,
+    "y": 3073
+  },
+  {
+    "id": "community-886",
+    "community": true,
+    "name": "Blacksmith Zorvek",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4299,
+    "y": 4235,
+    "trade": "Blacksmithing / Smelting",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-zorvek",
+    "wikiId": "npc-blacksmith-zorvek"
+  },
+  {
+    "id": "community-887",
+    "community": true,
+    "name": "Nurvol Cereveth",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4574,
+    "y": 4302,
+    "wiki": "https://monstersandmemories.wiki/npcs/nurvol-cereveth",
+    "wikiId": "npc-nurvol-cereveth"
+  },
+  {
+    "id": "community-889",
+    "community": true,
+    "name": "Melxura Ith'vayen",
+    "category": "Vendor",
+    "note": "",
+    "x": 4668,
+    "y": 2776,
+    "vendor": "Innkeeper"
+  },
+  {
+    "id": "community-890",
+    "community": true,
+    "name": "Aleyz Ith'vayen",
+    "category": "Notable NPC",
+    "note": "3rd floor, go upstair from Innekeeper X'ison, then on the second floor you'll enter a room and see Ilvaros Ithvayen, take the door on your left and go through a storage room and enter the next. This last room is where you'll find Aleyz Ith'vayen.",
+    "x": 4682,
+    "y": 2738,
+    "wiki": "https://monstersandmemories.wiki/npcs/aleyz-ithvayen",
+    "wikiId": "npc-aleyz-ith-vayen"
+  },
+  {
+    "id": "community-891",
+    "community": true,
+    "name": "a spirits vendor",
+    "category": "Vendor",
+    "note": "",
+    "x": 4707,
+    "y": 2803,
+    "vendor": "Brewer"
+  },
+  {
+    "id": "community-892",
+    "community": true,
+    "name": "Ilvaros Ith'vayen",
+    "category": "Vendor",
+    "note": "",
+    "x": 4724,
+    "y": 2981,
+    "vendor": "Barkeep"
   }
 ]

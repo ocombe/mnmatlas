@@ -9,12 +9,20 @@
     {
       "name": ".sethuir",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ],
   "marker:community-133": [
     {
       "name": ".sethuir",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ],
   "marker:community-134": [
@@ -181,6 +189,76 @@
     {
       "name": "karnix91",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
+    }
+  ],
+  "marker:community-894": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-895": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-896": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-899": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-900": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-901": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-902": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-904": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-905": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:eastern-cliff-bridge": [
+    {
+      "name": ".anduri",
+      "what": "edited"
+    }
+  ],
+  "marker:southeast-cliff-bridge": [
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ]
 }

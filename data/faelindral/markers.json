@@ -686,5 +686,17 @@
   "y": 863,
   "wiki": "https://monstersandmemories.wiki/npcs/wyrdguard-oakenpine",
   "wikiId": "npc-wyrdguard-oakenpine"
+ },
+ {
+  "id": "community-911",
+  "community": true,
+  "name": "Adamar the Leatherworker",
+  "category": "Vendor",
+  "note": "Located in the tanner's shop",
+  "x": 1395,
+  "y": 1124,
+  "vendor": "Leatherworking vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/adamar-the-leatherworker",
+  "wikiId": "npc-adamar-the-leatherworker"
  }
 ]

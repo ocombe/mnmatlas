@@ -274,9 +274,9 @@
  {
   "id": "community-132",
   "community": true,
-  "name": "Lumberjacking Supplies Evershade",
+  "name": "a lumberjack",
   "category": "Vendor",
-  "note": "",
+  "note": "Lumberjack vendor",
   "x": 2551,
   "y": 2080,
   "vendor": "Lumberjack vendor",
@@ -286,9 +286,9 @@
  {
   "id": "community-133",
   "community": true,
-  "name": "Lumberjacking Trainer Evershade",
+  "name": "Lumberjack Qwelyn",
   "category": "Tradeskill",
-  "note": "",
+  "note": "Lumberjack trainer",
   "x": 2555,
   "y": 2049,
   "trade": "Lumberjacking",
@@ -341,14 +341,13 @@
  },
  {
   "id": "eastern-cliff-bridge",
-  "name": "Eastern cliff bridge — up to Faelindral",
+  "name": "Eastern cliff bridge - to Skeletons",
   "category": "Level connection",
   "x": 2510,
   "y": 2118,
-  "note": "Climbs to the platforms of Faelindral.",
-  "toMap": "faelindral",
-  "toPlace": "ramp-02-down",
-  "direction": "up"
+  "note": "Leads across to Skeleton ledge",
+  "direction": "southeast",
+  "community": true
  },
  {
   "id": "north-cliff-stairway",
@@ -363,14 +362,13 @@
  },
  {
   "id": "southeast-cliff-bridge",
-  "name": "Southeast cliff bridge — up to Faelindral",
+  "name": "Southeast cliff bridge",
   "category": "Level connection",
   "x": 2966,
   "y": 2733,
-  "note": "Climbs to the platforms of Faelindral.",
-  "toMap": "faelindral",
-  "toPlace": "ramp-04-down",
-  "direction": "up"
+  "note": "Leads to the base of Keeper's lift.",
+  "direction": "northwest",
+  "community": true
  },
  {
   "id": "river-bridge-west",
@@ -701,10 +699,97 @@
   "community": true,
   "name": "Scout Amberward",
   "category": "Quest NPC",
-  "note": "",
+  "note": "Part of Archer starter quest",
   "x": 2879,
   "y": 2111,
   "wiki": "https://monstersandmemories.wiki/npcs/scout-amberward",
   "wikiId": "npc-scout-amberward"
+ },
+ {
+  "id": "community-894",
+  "community": true,
+  "name": "Archaeologist Liryna",
+  "category": "Tradeskill",
+  "note": "Archaeology trainer",
+  "x": 2765,
+  "y": 2038,
+  "trade": "Archaeology"
+ },
+ {
+  "id": "community-895",
+  "community": true,
+  "name": "an archaelogist",
+  "category": "Vendor",
+  "note": "Archaeology vendor",
+  "x": 2801,
+  "y": 2022
+ },
+ {
+  "id": "community-896",
+  "community": true,
+  "name": "Miner Treydin",
+  "category": "Tradeskill",
+  "note": "Mining trainer",
+  "x": 2668,
+  "y": 2081,
+  "trade": "Mining"
+ },
+ {
+  "id": "community-899",
+  "community": true,
+  "name": "Farmer Oweinn",
+  "category": "Tradeskill",
+  "note": "Farming trainer",
+  "x": 2463,
+  "y": 2084,
+  "trade": "Farming"
+ },
+ {
+  "id": "community-900",
+  "community": true,
+  "name": "a farmer",
+  "category": "Vendor",
+  "note": "Farming vendor",
+  "x": 2469,
+  "y": 2052
+ },
+ {
+  "id": "community-901",
+  "community": true,
+  "name": "Stonecutter Flinton",
+  "category": "Tradeskill",
+  "note": "Stonecutting trainer",
+  "x": 2469,
+  "y": 2028,
+  "trade": "Stone Cutting"
+ },
+ {
+  "id": "community-902",
+  "community": true,
+  "name": "a stonecutter",
+  "category": "Vendor",
+  "note": "Stonecutting vendor",
+  "x": 2466,
+  "y": 2005,
+  "vendor": "Stone cutting vendor"
+ },
+ {
+  "id": "community-904",
+  "community": true,
+  "name": "a mason",
+  "category": "Vendor",
+  "note": "Masonry vendor",
+  "x": 2426,
+  "y": 1970,
+  "vendor": "Stone cutting vendor"
+ },
+ {
+  "id": "community-905",
+  "community": true,
+  "name": "Wyrdguard Mithrilvine",
+  "category": "Quest NPC",
+  "note": "part of Bard starter quest",
+  "x": 2576,
+  "y": 1978
  }
 ]
