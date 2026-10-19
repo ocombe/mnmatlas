@@ -66,10 +66,10 @@ function validatePayload(row,c){
   if(p.classes===null||p.sells===null)fail('Unsupported '+(p.sells===null?'Sells tags':'classes')+' for suggestion '+row.id+'.');
   // Only categories the atlas can draw: every map's page knows every map's types (app.js merges them at start, as the
   // note form offers them), so a "Notable NPC" may stand on any zone map. An unknown one would break the map for everyone.
-  if(!supported.categories.includes(p.category)||typeof (p.note??'')!=='string'||(p.note||'').length>2000||![undefined,'marker','label','exit'].includes(p.noteType)||p.trade!==undefined&&!supported.trades.includes(p.trade)||p.color!==undefined&&!supported.colours.includes(p.color)||p.arrow!==undefined&&!supported.arrows.includes(p.arrow))fail('Unsupported marker fields for suggestion '+row.id+'.');
+  if(!supported.categories.includes(p.category)||typeof (p.note??'')!=='string'||(p.note||'').length>2000||![undefined,'marker','label','exit'].includes(p.noteType)||p.trade!=null&&!supported.trades.includes(p.trade)||p.color!==undefined&&!supported.colours.includes(p.color)||p.arrow!==undefined&&!supported.arrows.includes(p.arrow))fail('Unsupported marker fields for suggestion '+row.id+'.');
  }else if(typeof row.target_id!=='string'||!row.target_id)fail('Missing target for suggestion '+row.id+'.');
  // A marker edit may change the type too (set while reviewing): the same check as a new marker's type.
- if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.trade!==undefined&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
+ if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.trade!=null&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
  for(const k of ['levels','mobs'])if(p[k]!==undefined&&p[k]!==null){if(row.kind==='edit-label'||row.kind.startsWith('move-')||p.noteType==='label'||p.noteType==='exit'||(p.category??p.from?.category)!==undefined&&!(k==='levels'?['Mob camp','Named mob'].includes(p.category??p.from?.category):(p.category??p.from?.category)==='Mob camp')||!(k==='levels'?levelsOk(p[k],p.category??p.from?.category):mobsOk(p[k])))fail('Unsupported '+k+' for suggestion '+row.id+'.');}
  p.name=clean(p.name);if(p.note!==undefined)p.note=clean(p.note,true);
  if(p.from&&!Array.isArray(p.from))p.from={...p.from,name:clean(p.from.name),...(p.from.note!==undefined?{note:clean(p.from.note,true)}:{})};

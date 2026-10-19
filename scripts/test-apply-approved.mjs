@@ -95,13 +95,17 @@ try{
   ...[[],['Recipes','Recipes'],['Dragon eggs'],null,'Recipes',Array(13).fill('Recipes')].map((sells,i)=>({id:64+i,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Bad tags '+i,category:'Vendor',sells}})),
   {id:70,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Unknown merchant',category:'Vendor',vendor:'Dragon seller'}},
   {id:71,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Recipes',category:'Vendor',sells:['Recipes']}},
-  {id:72,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Herbalist',category:'Vendor',vendor:'Herbalism supplies'}}
+  {id:72,map:'test-map',level:'lower',kind:'new-marker',payload:{x:7,y:7,name:'Herbalist',category:'Vendor',vendor:'Herbalism supplies'}},
+  {id:73,map:'test-map',level:'lower',kind:'new-marker',payload:{x:8,y:8,name:'Mining',category:'Tradeskill',trade:'Mining'}}
  ];
  const vendors=await run();assert.equal(vendors.code,0,vendors.output);assert.equal((vendors.output.match(/Unsupported Sells tags/g)||[]).length,6);assert(vendors.output.includes('Unsupported vendor kind'));
  {const all=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')),leather=all.find(m=>m.id==='community-60');assert.equal(leather.vendor,'Leatherworking vendor');assert.deepEqual(leather.sells,['Materials','Recipes']);
   const alchemist=all.find(m=>m.id==='community-61');assert.equal(alchemist.vendor,'Alchemy vendor');assert(!Object.hasOwn(alchemist,'sells'));
   const bank=all.find(m=>m.id==='community-62');assert(!Object.hasOwn(bank,'vendor')&&!Object.hasOwn(bank,'sells'));assert.deepEqual(all.find(m=>m.id==='community-71').sells,['Recipes']);assert.equal(all.find(m=>m.id==='community-72').vendor,'Herbalism vendor');
   for(let id=64;id<=70;id++)assert(!all.some(m=>m.id==='community-'+id));}
+ // A tradeskill spot turned into a vendor clears its trade (sent as null) and publishes as that vendor.
+ approved=[{id:74,map:'test-map',level:'lower',kind:'edit-marker',target_id:'community-73',payload:{from:{x:8,y:8,name:'Mining',note:'',trade:'Mining',category:'Tradeskill'},name:'Ithrak Trel',trade:null,vendor:'Mining vendor',category:'Vendor'}}];
+ {const r=await run();assert.equal(r.code,0,r.output);assert(!r.output.includes('Unsupported marker fields'),r.output);const m=JSON.parse(await readFile(fixture+'/data/markers.json','utf8')).find(m=>m.id==='community-73');assert.equal(m.name,'Ithrak Trel');assert.equal(m.category,'Vendor');assert.equal(m.vendor,'Mining vendor');assert(!Object.hasOwn(m,'trade'));}
  {const label=JSON.parse(await readFile(fixture+'/data/labels.json','utf8')).labels.find(m=>m.id==='community-63');assert(!Object.hasOwn(label,'vendor')&&!Object.hasOwn(label,'sells'));}
  // Suggestions from older pages publish the old category as the Shady merchant vendor kind.
  approved=[
