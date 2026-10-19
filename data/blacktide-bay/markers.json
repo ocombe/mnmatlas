@@ -179,5 +179,42 @@
     "level": "floor-2",
     "way": "Swim",
     "direction": "updown"
+  },
+  {
+    "id": "community-832",
+    "community": true,
+    "name": "One Way Waterfall",
+    "category": "Passage",
+    "note": "",
+    "x": 3490,
+    "y": 3634,
+    "level": "floor-2",
+    "way": "Drop",
+    "oneWay": true,
+    "direction": "down"
+  },
+  {
+    "id": "community-840",
+    "community": true,
+    "name": "Skri'Var Ambushers (Invis)",
+    "category": "Ambush",
+    "note": "",
+    "x": 3998,
+    "y": 1194,
+    "level": "floor-2",
+    "mobs": []
+  },
+  {
+    "id": "community-843",
+    "community": true,
+    "name": "One Way Waterfall",
+    "category": "Passage",
+    "note": "",
+    "x": 1542,
+    "y": 2267,
+    "level": "floor-2",
+    "way": "Drop",
+    "oneWay": true,
+    "direction": "down"
   }
 ]

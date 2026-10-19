@@ -434,5 +434,21 @@
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/crafty-rufkas",
     "wikiId": "npc-crafty-rufkas"
+  },
+  {
+    "id": "community-841",
+    "community": true,
+    "name": "Yapala (level 13)",
+    "category": "Named mob",
+    "note": "Top level on cliff behind gate camp",
+    "x": 2699,
+    "y": 3044,
+    "level": "floor-1",
+    "levels": [
+      13,
+      13
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/yapala",
+    "wikiId": "npc-yapala"
   }
 ]

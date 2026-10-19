@@ -104,18 +104,6 @@
       "note": ""
     },
     {
-      "id": "community-829",
-      "community": true,
-      "name": "One Way Waterfall [DANGER]",
-      "kind": "building",
-      "priority": 50,
-      "minZoom": 0,
-      "note": "",
-      "x": 1544,
-      "y": 2256,
-      "level": "floor-2"
-    },
-    {
       "id": "community-830",
       "community": true,
       "name": "Undead Gnomes",
@@ -125,6 +113,18 @@
       "note": "",
       "x": 1994,
       "y": 2167,
+      "level": "floor-2"
+    },
+    {
+      "id": "community-839",
+      "community": true,
+      "name": "Skri'Var Caves",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "Mur'Hau Faction Improves with kills\nSkri'Var Faction Worsens with kills",
+      "x": 4054,
+      "y": 1610,
       "level": "floor-2"
     }
   ],
