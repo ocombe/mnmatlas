@@ -127,7 +127,7 @@ function markerTitle(m){if(['Mob camp','Named mob'].includes(m.category))return 
  if(m.category==='Tradeskill'&&typeof m.trade==='string'&&m.trade&&!squash(m.name).includes(squash(m.trade).slice(0,6)))return m.trade;const c=classesOf(m);if(!c.length||c.every(x=>squash(m.name).includes(squash(x))))return m.name;return c.join(' / ')+(c.length>1?' trainers':' trainer');}
 // The name under a class-first (or kind-first) title; nothing when the name is only class abbreviations ("NEC").
 function markerSubtitle(m){
- if(m.category==='Passage')return ['Passage',m.way,m.oneWay?'One way':''].filter(Boolean).join(' · ');
+ if(m.category==='Passage')return [m.way,m.oneWay?'One way':''].filter(Boolean).join(' · ');
  if(['Mob camp','Named mob'].includes(m.category))return '';return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
 // A vendor's kind, or the kind its name says ("A bag merchant"), for search and the vendor filter.
 const vendorKindFor=m=>m.category==='Vendor'?vendorKindNow(m.vendor)||vendorKindNamed(m.name):'';
@@ -248,7 +248,8 @@ function campLoot(m,cards,parent=wikiEmbedParent()){
 function campHover(m){
  const out=[],range=m.category==='Mob camp'?levelsText(campLevels(m)):'',roster=m.category==='Fishing spot'?m.fish:m.mobs,mobs=Array.isArray(roster)?roster.map(x=>x.name).filter(Boolean):[];if(range)out.push(text('p',range,'hover-detail'));
  if(mobs.length)out.push(text('p',mobs.slice(0,3).join(', ')+(mobs.length>3?' and '+(mobs.length-3)+' more':''),'hover-detail'));
- if(mobs.length)out.push(text('p',m.category==='Fishing spot'?'Click for all fish.':'Click for all mobs and their loot.','hover-state'));return out;
+ // A short fish list is already whole on the hover card.
+ if(m.category==='Fishing spot'?mobs.length>3:mobs.length)out.push(text('p',m.category==='Fishing spot'?'Click for all fish.':'Click for all mobs and their loot.','hover-state'));return out;
 }
 function campCard(m){
  if(m.category==='Mob camp')npcCardFor(m);const box=text('div','','npc-card camp-card'),range=m.category==='Mob camp'?levelsText(campLevels(m)):'';if(range)box.append(text('p',range,'npc-tags'));

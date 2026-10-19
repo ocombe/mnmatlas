@@ -1,6 +1,16 @@
 {
  "entries": [
   {
+   "date": "2026-10-19",
+   "title": "Fishing spots and passages",
+   "text": "Fishing spots are now a marker of their own: list the fish that bite in a water, and search a fish’s name to find every water that holds it. Thanks to a fellow angler for the idea. Passages now say how you get through (tunnel, swim, climb, drop or secret) and whether the way is one way only. Thanks to argus_q, whose waterfall routes in Blacktide Bay inspired them.",
+   "maps": [
+    "shaded-dunes",
+    "shallow-shoals",
+    "blacktide-bay"
+   ]
+  },
+  {
    "date": "2026-10-18",
    "title": "Blacktide Bay is charted",
    "text": "Ride the lifts down from Evershade Weald or Keeper’s Bight into Blacktide Bay. Two floors lead from the orc fortress and the upper caves down to the waterfall caves, the beach camp and the ships at anchor in the bay. The orc caves under Keeper’s Bight, which lead to the lifts, are charted as well.",
