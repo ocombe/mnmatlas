@@ -2,6 +2,12 @@
  "entries": [
   {
    "date": "2026-10-19",
+   "title": "Masonry",
+   "text": "Masonry joins the trades: mark its trainers and its vendors with their own sign. The mason in Evershade Weald now shows as a Masonry vendor.",
+   "maps": ["evershade-weald"]
+  },
+  {
+   "date": "2026-10-19",
    "title": "Point to any spot",
    "text": "Right-click or long-press the map to copy a link to any spot or report a problem there. Send ideas and problems from the account menu.",
    "maps": []

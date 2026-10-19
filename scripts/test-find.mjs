@@ -64,7 +64,7 @@ console.log('Script checks passed: every page script parses.');
  assert.equal(named('Butchers'),'Butcher');assert.equal(named('Marcus Aden'),'');assert.equal(group('Reagent vendor'),'Spells and reagents');
  assert(ok(undefined)&&ok('Bag merchant')&&!ok('Dragon seller'));
  for(const [old,current] of Object.entries(legacy)){assert(ok(old)&&ok(current));assert.equal(now(old),current);assert.equal(now(current),current);assert.equal(group(current),'Trade vendors');}
- assert.equal(Object.keys(legacy).length,16);assert.equal(now(undefined),undefined);assert.equal(now('Dye merchant'),'Dye merchant');assert.equal(now('Cobbler'),'Cobbler');assert.equal(now('Adventuring supplies'),'Adventuring supplies');
+ assert.equal(Object.keys(legacy).length,17);assert.equal(named('a mason'),'Masonry vendor');assert.equal(named('Stonecutter Selin'),'Stone cutting vendor');assert.equal(now(undefined),undefined);assert.equal(now('Dye merchant'),'Dye merchant');assert.equal(now('Cobbler'),'Cobbler');assert.equal(now('Adventuring supplies'),'Adventuring supplies');
  assert(ok('Shady merchant'));assert.equal(group('Shady merchant'),'General goods');
  for(const name of ['A shady merchant','Fence','The black market'])assert.equal(named(name),'Shady merchant');
  assert(!ok(['Alchemy supplies'])&&!ok(null)&&!ok({}));
