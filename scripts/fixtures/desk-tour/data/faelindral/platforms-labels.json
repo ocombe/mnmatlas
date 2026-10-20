@@ -1,0 +1,278 @@
+{
+  "map": "faelindral",
+  "tileRevision": "platforms-maggot-v1",
+  "coordinateZoom": 4,
+  "labels": [
+    {
+      "id": "sentinel-s-terrace",
+      "name": "Sentinel's Terrace",
+      "x": 1254,
+      "y": 572,
+      "kind": "building",
+      "tier": "building",
+      "priority": 80,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "wayguard-garrison",
+      "name": "Wayguard Garrison",
+      "x": 1146,
+      "y": 682,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "pixie-lift",
+      "name": "Pixie Lift",
+      "x": 506,
+      "y": 824,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "temple-lift",
+      "name": "Temple Lift",
+      "x": 1540,
+      "y": 916,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "keeper-s-lift",
+      "name": "Keeper's Lift",
+      "x": 2020,
+      "y": 822,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "traveler-s-lift",
+      "name": "Traveler's Lift",
+      "x": 958,
+      "y": 1858,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "trader-s-terrace",
+      "name": "Trader's Terrace",
+      "x": 1514,
+      "y": 1266,
+      "kind": "building",
+      "tier": "building",
+      "priority": 80,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "ranger-s-rest",
+      "name": "Ranger's Rest",
+      "x": 1804,
+      "y": 1144,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "quite-den",
+      "name": "Quiet Den",
+      "x": 2144,
+      "y": 1062,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+      "community": true
+    },
+    {
+      "id": "well-of-order",
+      "name": "Well of Order",
+      "x": 1222,
+      "y": 1392,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "willows-whisper",
+      "name": "Willows Whisper",
+      "x": 1600,
+      "y": 1396,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "wayward-branch-inn",
+      "name": "Wayward Branch Inn",
+      "x": 1064,
+      "y": 1684,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "the-balanced-branch",
+      "name": "The Balanced Branch",
+      "x": 1826,
+      "y": 1640,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "lambent-lantern",
+      "name": "Lambent Lantern",
+      "x": 1760,
+      "y": 1748,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "heartwood-archives",
+      "name": "Heartwood Archives",
+      "x": 1638,
+      "y": 2000,
+      "kind": "building",
+      "tier": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "lower-tier",
+      "name": "Lower Tier",
+      "x": 1352,
+      "y": 2190,
+      "kind": "building",
+      "tier": "building",
+      "priority": 80,
+      "minZoom": 0,
+      "approximate": true,
+      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    }
+  ],
+  "trainers": [
+    {
+      "abbreviations": [
+        "DRU"
+      ],
+      "classes": [
+        "Druid"
+      ],
+      "building": "Wayguard Garrison",
+      "id": "wiki-1",
+      "x": 1454,
+      "y": 730
+    },
+    {
+      "abbreviations": [
+        "ARC",
+        "FTR"
+      ],
+      "classes": [
+        "Archer",
+        "Fighter"
+      ],
+      "building": "Wayguard Garrison",
+      "id": "wiki-2",
+      "x": 1126,
+      "y": 870
+    },
+    {
+      "abbreviations": [
+        "RNG"
+      ],
+      "classes": [
+        "Ranger"
+      ],
+      "building": "Ranger's Rest",
+      "id": "wiki-3",
+      "x": 1808,
+      "y": 1176
+    },
+    {
+      "abbreviations": [
+        "BST"
+      ],
+      "classes": [
+        "Beastlord"
+      ],
+      "building": "Quite Den",
+      "id": "wiki-4",
+      "x": 2124,
+      "y": 1112
+    },
+    {
+      "abbreviations": [
+        "SHM"
+      ],
+      "classes": [
+        "Shaman"
+      ],
+      "building": "The Balanced Branch",
+      "id": "wiki-5",
+      "x": 1860,
+      "y": 1654
+    },
+    {
+      "abbreviations": [
+        "BRD",
+        "ROG"
+      ],
+      "classes": [
+        "Bard",
+        "Rogue"
+      ],
+      "building": "Lambent Lantern",
+      "id": "wiki-6",
+      "x": 1462,
+      "y": 1790
+    }
+  ]
+}

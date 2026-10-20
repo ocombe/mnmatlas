@@ -1,0 +1,141 @@
+[
+ {
+  "id": "vhaleth-halkareth",
+  "name": "Vhaleth Hal'kareth",
+  "category": "Named mob",
+  "levels": [
+   60,
+   60
+  ],
+  "approximate": true,
+  "minZoom": 3,
+  "note": "Deep elf wizard, near the wizard tower.",
+  "x": 5185,
+  "y": 4297,
+  "wiki": "https://monstersandmemories.wiki/npcs/vhaleth-halkareth",
+  "wikiId": "npc-vhaleth-hal-kareth"
+ },
+ {
+  "id": "community-700",
+  "community": true,
+  "name": "A shore Beetle",
+  "category": "Mob camp",
+  "note": "Green at level 17",
+  "x": 6438,
+  "y": 3732,
+  "levels": [
+   11,
+   14
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-703",
+  "community": true,
+  "name": "A Shelter Bat",
+  "category": "Mob camp",
+  "note": "Blue at 17",
+  "x": 5499,
+  "y": 4157,
+  "levels": [
+   12,
+   15
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-704",
+  "community": true,
+  "name": "A Fire Elemental",
+  "category": "Mob camp",
+  "note": "Red at 17",
+  "x": 5134,
+  "y": 4418,
+  "mobs": []
+ },
+ {
+  "id": "community-714",
+  "community": true,
+  "name": "Wizard Exodus",
+  "category": "Respawn point",
+  "note": "Wizards and their evacuated group members will teleport here.",
+  "x": 4043,
+  "y": 9223
+ },
+ {
+  "id": "community-728",
+  "community": true,
+  "name": "Foreman Vikkit",
+  "category": "Named mob",
+  "note": "When going up center ramp, make a left and follow the path going North to find. The PH spawns with 2 other goblins. (potential 3 pull)",
+  "x": 3102,
+  "y": 7191,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.miraheze.org/wiki/Foreman_Vikkit"
+ },
+ {
+  "id": "community-738",
+  "community": true,
+  "name": "Mold Beetles blue to 22",
+  "category": "Mob camp",
+  "note": "",
+  "x": 1716,
+  "y": 5666,
+  "levels": [
+   18,
+   20
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-739",
+  "community": true,
+  "name": "Feed Beetle",
+  "category": "Mob camp",
+  "note": "Red to 22",
+  "x": 2933,
+  "y": 4763,
+  "mobs": []
+ },
+ {
+  "id": "community-740",
+  "community": true,
+  "name": "Goblin Searcher",
+  "category": "Mob camp",
+  "note": "Green to 22.",
+  "x": 4611,
+  "y": 3307,
+  "mobs": []
+ },
+ {
+  "id": "community-772",
+  "community": true,
+  "name": "Fissure Spiders",
+  "category": "Mob camp",
+  "note": "",
+  "x": 6063,
+  "y": 2935,
+  "levels": [
+   14,
+   15
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-773",
+  "community": true,
+  "name": "Shore Beetles",
+  "category": "Mob camp",
+  "note": "",
+  "x": 6148,
+  "y": 2782,
+  "levels": [
+   13,
+   14
+  ],
+  "mobs": []
+ }
+]

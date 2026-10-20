@@ -1,0 +1,702 @@
+[
+ {
+  "id": "wiki-1",
+  "name": "Druid — Wayguard Garrison",
+  "category": "Class trainer",
+  "x": 1454,
+  "y": 730,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "classes": [
+   "Druid"
+  ]
+ },
+ {
+  "id": "wiki-2",
+  "name": "Archer · Fighter — Wayguard Garrison",
+  "category": "Class trainer",
+  "x": 1126,
+  "y": 870,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "classes": [
+   "Archer",
+   "Fighter"
+  ]
+ },
+ {
+  "id": "wiki-3",
+  "name": "Ranger — Ranger's Rest",
+  "category": "Class trainer",
+  "x": 1808,
+  "y": 1176,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "classes": [
+   "Ranger"
+  ]
+ },
+ {
+  "id": "wiki-4",
+  "name": "Beastlord — Quite Den",
+  "category": "Class trainer",
+  "x": 2124,
+  "y": 1112,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "classes": [
+   "Beastlord"
+  ]
+ },
+ {
+  "id": "wiki-5",
+  "name": "Shaman — The Balanced Branch",
+  "category": "Class trainer",
+  "x": 1860,
+  "y": 1654,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "classes": [
+   "Shaman"
+  ]
+ },
+ {
+  "id": "wiki-6",
+  "name": "Bard · Rogue — Lambent Lantern",
+  "category": "Class trainer",
+  "x": 1462,
+  "y": 1790,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "classes": [
+   "Bard",
+   "Rogue"
+  ]
+ },
+ {
+  "id": "wiki-7",
+  "name": "Bank — Heartwood Archives",
+  "category": "Bank",
+  "x": 1400,
+  "y": 1980,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-8",
+  "name": "Wayward Branch Inn",
+  "category": "Inn",
+  "x": 1204,
+  "y": 1672,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0). The Lower Tier vendor list also names a cook at the inn."
+ },
+ {
+  "id": "wiki-9",
+  "name": "Inn — Willows Whisper",
+  "category": "Inn",
+  "x": 1610,
+  "y": 1454,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-24",
+  "name": "Spinning — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1474.97,
+  "y": 990.57,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-25",
+  "name": "Tailoring — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1443.22,
+  "y": 1012.34,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-26",
+  "name": "Carpentry / Woodworking — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1475.87,
+  "y": 1025.03,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-27",
+  "name": "Carpentry / Woodworking — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1427.8,
+  "y": 1064.04,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-28",
+  "name": "Blacksmithing / Smelting — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1453.2,
+  "y": 1090.34,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-29",
+  "name": "Leatherworking — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1383.36,
+  "y": 1146.58,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-30",
+  "name": "Skinning / Tanning — Trader's Terrace",
+  "category": "Tradeskill",
+  "x": 1417.82,
+  "y": 1150.2,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-31",
+  "name": "Alchemy — Well of Order",
+  "category": "Tradeskill",
+  "x": 1329.84,
+  "y": 1416.87,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-32",
+  "name": "Herbalism — Well of Order",
+  "category": "Tradeskill",
+  "x": 1270.88,
+  "y": 1435.92,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-33",
+  "name": "First Aid — Well of Order",
+  "category": "Tradeskill",
+  "x": 1348.89,
+  "y": 1485.8,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-34",
+  "name": "(Dis)Enchanting — Wayward Branch Inn",
+  "category": "Tradeskill",
+  "x": 1154.78,
+  "y": 1538.41,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-35",
+  "name": "Jewelcrafting — Wayward Branch Inn",
+  "category": "Tradeskill",
+  "x": 1187.44,
+  "y": 1553.83,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-36",
+  "name": "Cooking — Wayward Branch Inn",
+  "category": "Tradeskill",
+  "x": 1278.14,
+  "y": 1615.51,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-37",
+  "name": "Brewing / Fermenting — Willows Whisper",
+  "category": "Tradeskill",
+  "x": 1649.12,
+  "y": 1444.08,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-38",
+  "name": "Fletching — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1842.31,
+  "y": 1098.5,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-39",
+  "name": "Survival — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1888.57,
+  "y": 1264.49,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-40",
+  "name": "Farming — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1997.42,
+  "y": 1249.98,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-41",
+  "name": "Mining — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1957.51,
+  "y": 1318.0,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-42",
+  "name": "Stone Cutting — Ranger's Rest",
+  "category": "Tradeskill",
+  "x": 1994.69,
+  "y": 1332.52,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-43",
+  "name": "Animal Taming — Quite Den",
+  "category": "Tradeskill",
+  "x": 2023.72,
+  "y": 1154.74,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-44",
+  "name": "Wilderness — Quite Den",
+  "category": "Tradeskill",
+  "x": 2188.8,
+  "y": 1173.79,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "wiki-45",
+  "name": "Lumberjacking — Quite Den",
+  "category": "Tradeskill",
+  "x": 2300.36,
+  "y": 1111.2,
+  "approximate": true,
+  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+ },
+ {
+  "id": "maggot-npc-01",
+  "name": "Notable NPC — Temple upper platform",
+  "category": "Notable NPC",
+  "x": 1718.02,
+  "y": 629.28,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-02",
+  "name": "Sersil Tangleroot",
+  "category": "Notable NPC",
+  "x": 711.22,
+  "y": 812.44,
+  "approximate": true,
+  "note": "",
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-sersil-tangleroot",
+  "community": true
+ },
+ {
+  "id": "maggot-npc-03",
+  "name": "Notable NPC — Wayguard Garrison",
+  "category": "Notable NPC",
+  "x": 1300.72,
+  "y": 883.4,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-04",
+  "name": "Notable NPC — Quite Den court",
+  "category": "Notable NPC",
+  "x": 2193.96,
+  "y": 945.5,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-05",
+  "name": "Notable NPC — Willows Whisper",
+  "category": "Notable NPC",
+  "x": 1483.68,
+  "y": 1450.96,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "maggot-npc-09",
+  "name": "Notable NPC — Lower Tier south platform",
+  "category": "Notable NPC",
+  "x": 1282.32,
+  "y": 2494.88,
+  "approximate": true,
+  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+ },
+ {
+  "id": "lift-traveler-s-down",
+  "name": "Traveler's Lift — down to Evershade Weald",
+  "category": "Lift",
+  "x": 1034,
+  "y": 1964,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "travelers-lift",
+  "direction": "down"
+ },
+ {
+  "id": "lift-keeper-s-down",
+  "name": "Keeper's Lift — down to Evershade Weald",
+  "category": "Lift",
+  "x": 2020,
+  "y": 886,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "keepers-lift",
+  "direction": "down"
+ },
+ {
+  "id": "lift-pixie-down",
+  "name": "Pixie Lift — down to Evershade Weald",
+  "category": "Lift",
+  "x": 552,
+  "y": 852,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "pixie-lift",
+  "direction": "down"
+ },
+ {
+  "id": "ramp-01-down",
+  "name": "South stairway — down to Evershade Weald",
+  "category": "Level connection",
+  "x": 1298,
+  "y": 2660,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "south-stairway",
+  "direction": "down"
+ },
+ {
+  "id": "ramp-02-down",
+  "name": "Eastern cliff bridge — down to Evershade Weald",
+  "category": "Level connection",
+  "x": 2216,
+  "y": 1592,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "eastern-cliff-bridge",
+  "direction": "down"
+ },
+ {
+  "id": "ramp-03-down",
+  "name": "North cliff stairway — down to Evershade Weald",
+  "category": "Level connection",
+  "x": 1720,
+  "y": 134,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "north-cliff-stairway",
+  "direction": "down"
+ },
+ {
+  "id": "ramp-04-down",
+  "name": "Southeast cliff bridge — down to Evershade Weald",
+  "category": "Level connection",
+  "x": 2490,
+  "y": 1676,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "southeast-cliff-bridge",
+  "direction": "down"
+ },
+ {
+  "id": "ramp-05-down",
+  "name": "West river bridge — down to Evershade Weald",
+  "category": "Level connection",
+  "x": 2482,
+  "y": 924,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "river-bridge-west",
+  "direction": "down"
+ },
+ {
+  "id": "ramp-06-down",
+  "name": "East river bridge — down to Evershade Weald",
+  "category": "Level connection",
+  "x": 2712,
+  "y": 920,
+  "approximate": true,
+  "note": "Leads down to the forest floor of Evershade Weald.",
+  "toMap": "evershade-weald",
+  "toPlace": "river-bridge-east",
+  "direction": "down"
+ },
+ {
+  "id": "temple-lift",
+  "name": "Temple Lift",
+  "category": "Lift",
+  "x": 1542,
+  "y": 942,
+  "approximate": true,
+  "note": "Named lift on Maggot's map. Upper landing unconfirmed; no view-switch arrow."
+ },
+ {
+  "id": "community-317",
+  "community": true,
+  "name": "Takalea Scaletender",
+  "category": "Quest NPC",
+  "note": "Located next to the Tanner building.",
+  "x": 1379,
+  "y": 1183,
+  "wiki": "https://monstersandmemories.wiki/npcs/takalea-scaletender",
+  "wikiId": "npc-takalea-scaletender"
+ },
+ {
+  "id": "community-339",
+  "community": true,
+  "name": "An outfitter",
+  "category": "Vendor",
+  "note": "Take a left at the top of the ramp, first NPC.",
+  "x": 1402,
+  "y": 1346,
+  "vendor": "Adventuring supplies",
+  "wiki": "https://monstersandmemories.wiki/npcs/an-outfitter",
+  "wikiId": "npc-an-outfitter"
+ },
+ {
+  "id": "community-340",
+  "community": true,
+  "name": "A Cloth Armorer",
+  "category": "Vendor",
+  "note": "",
+  "x": 1397,
+  "y": 1300,
+  "vendor": "Cloth armorer",
+  "sells": [
+   "Armor"
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-a-cloth-armorer"
+ },
+ {
+  "id": "community-341",
+  "community": true,
+  "name": "A bag merchant",
+  "category": "Vendor",
+  "note": "",
+  "x": 1427,
+  "y": 1266,
+  "vendor": "Bag merchant",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-bag-merchant",
+  "wikiId": "npc-a-bag-merchant"
+ },
+ {
+  "id": "community-343",
+  "community": true,
+  "name": "Tree Picture",
+  "category": "Personal",
+  "note": "There are 2 trees here with merchants around them, could add another one to the right of the one of you already on traders terrace",
+  "x": 1567,
+  "y": 1286
+ },
+ {
+  "id": "community-344",
+  "community": true,
+  "name": "a used weapons dealer",
+  "category": "Vendor",
+  "note": "",
+  "x": 1551,
+  "y": 1274,
+  "vendor": "Used weapons dealer",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer"
+ },
+ {
+  "id": "community-345",
+  "community": true,
+  "name": "a used armor dealer",
+  "category": "Vendor",
+  "note": "",
+  "x": 1596,
+  "y": 1278,
+  "vendor": "Used armor trader",
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-used-armor-trader"
+ },
+ {
+  "id": "community-346",
+  "community": true,
+  "name": "a scrap dealer",
+  "category": "Vendor",
+  "note": "directly across from the lift",
+  "x": 1108,
+  "y": 2089,
+  "vendor": "Scrap dealer",
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-a-scrap-dealer"
+ },
+ {
+  "id": "community-347",
+  "community": true,
+  "name": "Delloreli the Butcher",
+  "category": "Vendor",
+  "note": "across from the ramp up to the bank",
+  "x": 1190,
+  "y": 2135,
+  "vendor": "Butcher",
+  "wiki": "https://monstersandmemories.wiki/npcs/delloreli-the-butcher",
+  "wikiId": "npc-delloreli-the-butcher"
+ },
+ {
+  "id": "community-348",
+  "community": true,
+  "name": "Drogo the Grocer",
+  "category": "Vendor",
+  "note": "next to butcher",
+  "x": 1180,
+  "y": 2204,
+  "vendor": "Grocer",
+  "wiki": "https://monstersandmemories.wiki/npcs/drogo-the-grocer",
+  "wikiId": "npc-drogo-the-grocer"
+ },
+ {
+  "id": "community-386",
+  "community": true,
+  "name": "Moon Dances",
+  "category": "Notable NPC",
+  "note": "Near the shaman trainer.",
+  "x": 1781,
+  "y": 1567,
+  "wiki": "https://monstersandmemories.wiki/npcs/moon-dances"
+ },
+ {
+  "id": "community-449",
+  "community": true,
+  "name": "Aerin Mossfang",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 2095,
+  "y": 1153,
+  "wiki": "https://monstersandmemories.wiki/npcs/aerin-mossfang",
+  "wikiId": "npc-aerin-mossfang"
+ },
+ {
+  "id": "community-450",
+  "community": true,
+  "name": "Baewyn Mossfang",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 2122,
+  "y": 1063,
+  "wiki": "https://monstersandmemories.wiki/npcs/baewyn-mossfang",
+  "wikiId": "npc-baewyn-mossfang"
+ },
+ {
+  "id": "community-451",
+  "community": true,
+  "name": "Elyndiir Nightshade",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1604,
+  "y": 1857,
+  "wiki": "https://monstersandmemories.wiki/npcs/elyndiir-nightshade",
+  "wikiId": "npc-elyndiir-nightshade"
+ },
+ {
+  "id": "community-452",
+  "community": true,
+  "name": "Gaereth Ashenpath",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1764,
+  "y": 1137,
+  "wiki": "https://monstersandmemories.wiki/npcs/gaereth-ashenpath",
+  "wikiId": "npc-gaereth-ashenpath"
+ },
+ {
+  "id": "community-454",
+  "community": true,
+  "name": "Eraeldor Lowmist",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1820,
+  "y": 1564,
+  "wiki": "https://monstersandmemories.wiki/npcs/eraeldor-lowmist",
+  "wikiId": "npc-eraeldor-lowmist"
+ },
+ {
+  "id": "community-456",
+  "community": true,
+  "name": "Mierra Willowshade",
+  "category": "Class trainer",
+  "note": "teaches cooking",
+  "x": 1224,
+  "y": 1589,
+  "classes": [
+   "Archer"
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/mierra-willowshade",
+  "wikiId": "npc-mierra-willowshade"
+ },
+ {
+  "id": "community-458",
+  "community": true,
+  "name": "Researcher Fairgrove",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1434,
+  "y": 1988,
+  "wiki": "https://monstersandmemories.wiki/npcs/researcher-fairgrove",
+  "wikiId": "npc-researcher-fairgrove"
+ },
+ {
+  "id": "community-693",
+  "community": true,
+  "name": "Wyrdguard Oakenpine",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1299,
+  "y": 863,
+  "wiki": "https://monstersandmemories.wiki/npcs/wyrdguard-oakenpine",
+  "wikiId": "npc-wyrdguard-oakenpine"
+ },
+ {
+  "id": "community-911",
+  "community": true,
+  "name": "Adamar the Leatherworker",
+  "category": "Vendor",
+  "note": "Located in the tanner's shop",
+  "x": 1395,
+  "y": 1124,
+  "vendor": "Leatherworking vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/adamar-the-leatherworker",
+  "wikiId": "npc-adamar-the-leatherworker"
+ }
+]

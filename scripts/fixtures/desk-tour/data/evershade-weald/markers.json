@@ -1,0 +1,942 @@
+[
+ {
+  "id": "spiders-7-12-1",
+  "name": "Spiders",
+  "category": "Mob camp",
+  "levels": [
+   7,
+   12
+  ],
+  "x": 2552,
+  "y": 1022,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "spiders-7-12-2",
+  "name": "Spiders",
+  "category": "Mob camp",
+  "levels": [
+   7,
+   12
+  ],
+  "x": 2626,
+  "y": 1221,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "spiders-7-12-3",
+  "name": "Spiders",
+  "category": "Mob camp",
+  "levels": [
+   7,
+   12
+  ],
+  "x": 2464,
+  "y": 1318,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "fae-guardians-36",
+  "name": "Fae guardians",
+  "category": "Mob camp",
+  "levels": [
+   36,
+   36
+  ],
+  "mobs": [
+   {
+    "name": "Fae guardians",
+    "wikiId": "npc-a-fae-guardian",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian"
+   }
+  ],
+  "x": 1393,
+  "y": 1611,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian",
+  "wikiId": "npc-a-fae-guardian"
+ },
+ {
+  "id": "wasps-1-4",
+  "name": "Wasps",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   4
+  ],
+  "x": 2224,
+  "y": 3090,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "orcs-3-11-1",
+  "name": "Fellstone orcs",
+  "category": "Mob camp",
+  "levels": [
+   3,
+   11
+  ],
+  "x": 4031,
+  "y": 2803,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "orcs-3-11-2",
+  "name": "Fellstone orcs",
+  "category": "Mob camp",
+  "levels": [
+   3,
+   11
+  ],
+  "x": 3108,
+  "y": 3406,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "orcs-3-11-3",
+  "name": "Fellstone orcs",
+  "category": "Mob camp",
+  "levels": [
+   3,
+   11
+  ],
+  "x": 3703,
+  "y": 3312,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "myconids-13-15",
+  "name": "Myconids",
+  "category": "Mob camp",
+  "levels": [
+   13,
+   15
+  ],
+  "x": 2946,
+  "y": 1851,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "wolves-cave",
+  "name": "Beguiled wolves",
+  "category": "Mob camp",
+  "levels": [
+   8,
+   10
+  ],
+  "mobs": [
+   {
+    "name": "A beguiled wolf",
+    "wikiId": "npc-a-beguiled-wolf",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beguiled-wolf"
+   }
+  ],
+  "x": 533,
+  "y": 3208,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "beguiled-alpha-wolf",
+  "name": "A beguiled alpha wolf",
+  "category": "Named mob",
+  "levels": [
+   8,
+   8
+  ],
+  "x": 480,
+  "y": 3273,
+  "approximate": true,
+  "note": "In the wolf cave.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-beguiled-alpha-wolf",
+  "wikiId": "npc-a-beguiled-alpha-wolf"
+ },
+ {
+  "id": "taeresh-deathcharmer",
+  "name": "Taeresh Deathcharmer",
+  "category": "Named mob",
+  "levels": [
+   14,
+   14
+  ],
+  "x": 3354,
+  "y": 2977,
+  "approximate": true,
+  "note": "In the orc cave.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/taeresh-deathcharmer",
+  "wikiId": "npc-taeresh-deathcharmer"
+ },
+ {
+  "id": "mistress-naelira",
+  "name": "Mistress Naelira",
+  "category": "Named mob",
+  "x": 4049,
+  "y": 1824,
+  "approximate": true,
+  "note": "Deep inside the cave behind the waterfall.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/mistress-naelira",
+  "wikiId": "npc-mistress-naelira"
+ },
+ {
+  "id": "sporeweaver-underveil",
+  "name": "Sporeweaver Underveil",
+  "category": "Quest NPC",
+  "x": 2981,
+  "y": 1895,
+  "approximate": true,
+  "note": "Inside the mushroom cave.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/sporeweaver-underveil",
+  "wikiId": "npc-sporeweaver-underveil",
+  "community": true
+ },
+ {
+  "id": "stable",
+  "name": "Stable",
+  "category": "Stable",
+  "x": 1720,
+  "y": 2361,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3.25
+ },
+ {
+  "id": "shady-merchant-east",
+  "name": "Shady merchant — east",
+  "category": "Vendor",
+  "vendor": "Shady merchant",
+  "x": 2731,
+  "y": 2215,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3.25
+ },
+ {
+  "id": "respawn-point",
+  "name": "Respawn point",
+  "category": "Respawn point",
+  "x": 1692,
+  "y": 2626,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3.25
+ },
+ {
+  "id": "community-130",
+  "community": true,
+  "name": "Kyros Emeraldscale",
+  "category": "Named mob",
+  "levels": [
+   8,
+   8
+  ],
+  "note": "",
+  "x": 1477,
+  "y": 2128,
+  "wiki": "https://monstersandmemories.wiki/npcs/kyros-emeraldscale",
+  "wikiId": "npc-kyros-emeraldscale"
+ },
+ {
+  "id": "community-134",
+  "community": true,
+  "name": "A shifty elf",
+  "category": "Vendor",
+  "note": "",
+  "x": 3035,
+  "y": 2183,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-shifty-elf",
+  "wikiId": "npc-a-shifty-elf",
+  "vendor": "Shady merchant"
+ },
+ {
+  "id": "community-132",
+  "community": true,
+  "name": "a lumberjack",
+  "category": "Vendor",
+  "note": "Lumberjack vendor",
+  "x": 2551,
+  "y": 2080,
+  "vendor": "Lumberjack vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-supplies-evershade",
+  "wikiId": "npc-lumberjacking-supplies-evershade"
+ },
+ {
+  "id": "community-133",
+  "community": true,
+  "name": "Lumberjack Qwelyn",
+  "category": "Tradeskill",
+  "note": "Lumberjack trainer",
+  "x": 2555,
+  "y": 2049,
+  "trade": "Lumberjacking",
+  "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-trainer-evershade",
+  "wikiId": "npc-lumberjacking-trainer-evershade"
+ },
+ {
+  "id": "travelers-lift",
+  "name": "Traveler's Lift — up to Faelindral",
+  "category": "Lift",
+  "x": 1795,
+  "y": 2513,
+  "note": "Rises to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "lift-traveler-s-down",
+  "direction": "up"
+ },
+ {
+  "id": "keepers-lift",
+  "name": "Keeper's Lift — up to Faelindral",
+  "category": "Lift",
+  "x": 2582,
+  "y": 1957,
+  "note": "Rises to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "lift-keeper-s-down",
+  "direction": "up"
+ },
+ {
+  "id": "pixie-lift",
+  "name": "Pixie Lift — up to Faelindral",
+  "category": "Lift",
+  "x": 1547,
+  "y": 2019,
+  "note": "Rises to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "lift-pixie-down",
+  "direction": "up"
+ },
+ {
+  "id": "south-stairway",
+  "name": "South stairway — up to Faelindral",
+  "category": "Level connection",
+  "x": 2044,
+  "y": 3167,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-01-down",
+  "direction": "up"
+ },
+ {
+  "id": "eastern-cliff-bridge",
+  "name": "Eastern cliff bridge - to Skeletons",
+  "category": "Level connection",
+  "x": 2510,
+  "y": 2118,
+  "note": "Leads across to Skeleton ledge",
+  "direction": "southeast",
+  "community": true
+ },
+ {
+  "id": "north-cliff-stairway",
+  "name": "North cliff stairway — up to Faelindral",
+  "category": "Level connection",
+  "x": 2728,
+  "y": 1165,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-03-down",
+  "direction": "up"
+ },
+ {
+  "id": "southeast-cliff-bridge",
+  "name": "Southeast cliff bridge",
+  "category": "Level connection",
+  "x": 2966,
+  "y": 2733,
+  "note": "Leads to the base of Keeper's lift.",
+  "direction": "northwest",
+  "community": true,
+  "toMap": "faelindral",
+  "toPlace": "ramp-04-down"
+ },
+ {
+  "id": "river-bridge-west",
+  "name": "West river bridge — up to Faelindral",
+  "category": "Level connection",
+  "x": 2921,
+  "y": 2034,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-05-down",
+  "direction": "up"
+ },
+ {
+  "id": "river-bridge-east",
+  "name": "East river bridge — up to Faelindral",
+  "category": "Level connection",
+  "x": 3681,
+  "y": 2123,
+  "note": "Climbs to the platforms of Faelindral.",
+  "toMap": "faelindral",
+  "toPlace": "ramp-06-down",
+  "direction": "up"
+ },
+ {
+  "id": "to-blacktide-bay",
+  "name": "Lift to Blacktide Bay",
+  "category": "Lift",
+  "x": 4146,
+  "y": 3377,
+  "note": "Leads to Blacktide Bay.",
+  "toMap": "blacktide-bay",
+  "toPlace": "exit-evershade-weald",
+  "direction": "down"
+ },
+ {
+  "id": "community-240",
+  "community": true,
+  "name": "Rotmuzzle",
+  "category": "Named mob",
+  "levels": [
+   6,
+   6
+  ],
+  "note": "Spawns in the ruins with the skeletons, at the bottom of the hill leading up to the orc area.",
+  "x": 3057,
+  "y": 3433,
+  "wiki": "https://monstersandmemories.wiki/npcs/rotmuzzle",
+  "wikiId": "npc-rotmuzzle"
+ },
+ {
+  "id": "community-241",
+  "community": true,
+  "name": "Wasp Hive Protector",
+  "category": "Named mob",
+  "levels": [
+   3,
+   3
+  ],
+  "note": "Wasp Hive Protector can spawn in the ruins with the \"a wasp worker\" serving as its placeholder.",
+  "x": 2211,
+  "y": 3008,
+  "wiki": "https://monstersandmemories.wiki/npcs/wasp-hive-protector",
+  "wikiId": "npc-wasp-hive-protector"
+ },
+ {
+  "id": "community-242",
+  "community": true,
+  "name": "Scout Grimgaze",
+  "category": "Named mob",
+  "levels": [
+   4,
+   4
+  ],
+  "note": "Scout Grimgaze spawns in either tent spawn location with the Orc Scouts and Orc Warriors serving as its placeholder.",
+  "x": 3304,
+  "y": 1390,
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-grimgaze",
+  "wikiId": "npc-scout-grimgaze"
+ },
+ {
+  "id": "community-311",
+  "community": true,
+  "name": "Watcher Aquafis",
+  "category": "Named mob",
+  "note": "Back of the cave",
+  "x": 4095,
+  "y": 1794,
+  "wiki": "https://monstersandmemories.wiki/npcs/watcher-aquafis",
+  "wikiId": "npc-watcher-aquafis",
+  "levels": [
+   13,
+   13
+  ]
+ },
+ {
+  "id": "community-314",
+  "community": true,
+  "name": "Skeletons",
+  "category": "Mob camp",
+  "levels": [
+   4,
+   6
+  ],
+  "mobs": [
+   {
+    "name": "A skeleton",
+    "wikiId": "npc-a-skeleton",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-skeleton"
+   }
+  ],
+  "note": "Approximately 8 skeletons, good camp spot after exiting bridge",
+  "x": 3120,
+  "y": 2740,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-skeleton",
+  "wikiId": "npc-a-skeleton",
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     2985,
+     2806
+    ],
+    [
+     3010,
+     2710
+    ],
+    [
+     3234,
+     2662
+    ],
+    [
+     3229,
+     2781
+    ],
+    [
+     3179,
+     2793
+    ],
+    [
+     3116,
+     2791
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-315",
+  "community": true,
+  "name": "Skeletons",
+  "category": "Mob camp",
+  "levels": [
+   7,
+   10
+  ],
+  "mobs": [
+   {
+    "name": "An old elven skeleton",
+    "wikiId": "npc-an-old-elven-skeleton",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-old-elven-skeleton"
+   }
+  ],
+  "note": "",
+  "x": 3391,
+  "y": 2818,
+  "wiki": "https://monstersandmemories.wiki/npcs/an-old-elven-skeleton",
+  "wikiId": "npc-an-old-elven-skeleton",
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     3296,
+     2686
+    ],
+    [
+     3252,
+     2788
+    ],
+    [
+     3347,
+     2864
+    ],
+    [
+     3380,
+     2935
+    ],
+    [
+     3459,
+     2966
+    ],
+    [
+     3498,
+     2897
+    ],
+    [
+     3513,
+     2822
+    ],
+    [
+     3407,
+     2717
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-320",
+  "community": true,
+  "name": "Polietta Two-tone (level 10)",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1769,
+  "y": 1540,
+  "wiki": "https://monstersandmemories.wiki/npcs/polietta-two-tone",
+  "wikiId": "npc-polietta-two-tone"
+ },
+ {
+  "id": "community-359",
+  "community": true,
+  "name": "a miner",
+  "category": "Vendor",
+  "note": "",
+  "x": 2669,
+  "y": 2052,
+  "vendor": "Mining vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-miner"
+ },
+ {
+  "id": "community-365",
+  "community": true,
+  "name": "Rabid Wolves",
+  "category": "Mob camp",
+  "levels": [
+   4,
+   6
+  ],
+  "mobs": [
+   {
+    "name": "A rabid wolf",
+    "wikiId": "npc-a-rabid-wolf",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-rabid-wolf"
+   }
+  ],
+  "note": "Good place to farm early coin via diseased wolf pelts.",
+  "x": 3010,
+  "y": 3453,
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-a-rabid-wolf"
+ },
+ {
+  "id": "community-395",
+  "community": true,
+  "name": "Vorkuul Blighteye",
+  "category": "Named mob",
+  "note": "",
+  "x": 3159,
+  "y": 3217,
+  "levels": [
+   7,
+   7
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/vorkuul-blighteye",
+  "wikiId": "npc-vorkuul-blighteye"
+ },
+ {
+  "id": "community-419",
+  "community": true,
+  "name": "Bewildered Gorakk Four-Toes (level 11?)",
+  "category": "Named mob",
+  "note": "Spawned by Ranger Starter Quest at the tent at the end of the orc clifftop.",
+  "x": 3817,
+  "y": 3054,
+  "levels": [
+   11,
+   11
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/bewildered-gorakk-four-toes",
+  "wikiId": "npc-bewildered-gorakk-four-toes"
+ },
+ {
+  "id": "community-420",
+  "community": true,
+  "name": "Scout Leader Krindor (level 6)",
+  "category": "Named mob",
+  "note": "Spawns at the top of the ramp.",
+  "x": 3451,
+  "y": 3265,
+  "levels": [
+   6,
+   6
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-leader-krindor",
+  "wikiId": "npc-scout-leader-krindor"
+ },
+ {
+  "id": "community-424",
+  "community": true,
+  "name": "Fossergrim",
+  "category": "Mob camp",
+  "note": "Watchers up top 8-10, maidens down below 11-12",
+  "x": 3933,
+  "y": 1823,
+  "levels": [
+   8,
+   12
+  ],
+  "mobs": [
+   {
+    "name": "Fossergrim Watch",
+    "wiki": "https://monstersandmemories.wiki/npcs/fossergrim-watch",
+    "wikiId": "npc-fossergrim-watch"
+   }
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/fossergrim-watch"
+ },
+ {
+  "id": "community-427",
+  "community": true,
+  "name": "Calafreyan Skeletons",
+  "category": "Mob camp",
+  "note": "",
+  "x": 3072,
+  "y": 2908,
+  "levels": [
+   11,
+   14
+  ],
+  "mobs": [
+   {
+    "name": "A Calafreyan soldier",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-calafreyan-soldier",
+    "wikiId": "npc-a-calafreyan-soldier"
+   }
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-a-calafreyan-soldier"
+ },
+ {
+  "id": "community-460",
+  "community": true,
+  "name": "A shady trader",
+  "category": "Vendor",
+  "note": "",
+  "x": 1904,
+  "y": 2545,
+  "vendor": "Shady merchant",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-shady-trader",
+  "wikiId": "npc-a-shady-trader"
+ },
+ {
+  "id": "community-461",
+  "community": true,
+  "name": "A fisherman (Faelindral)",
+  "category": "Vendor",
+  "note": "",
+  "x": 1816,
+  "y": 2585,
+  "vendor": "Fishmonger",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-fisherman-faelindral",
+  "wikiId": "npc-a-fisherman-faelindral"
+ },
+ {
+  "id": "community-471",
+  "community": true,
+  "name": "Daegolar the Pauper",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1829,
+  "y": 2518,
+  "wiki": "https://monstersandmemories.wiki/npcs/daegolar-the-pauper",
+  "wikiId": "npc-daegolar-the-pauper"
+ },
+ {
+  "id": "community-472",
+  "community": true,
+  "name": "Guard Pippi Pinecone",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1989,
+  "y": 2380,
+  "wiki": "https://monstersandmemories.wiki/npcs/guard-pippi-pinecone",
+  "wikiId": "npc-guard-pippi-pinecone"
+ },
+ {
+  "id": "community-473",
+  "community": true,
+  "name": "Scout Stonebranch",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 1846,
+  "y": 2680,
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-stonebranch",
+  "wikiId": "npc-scout-stonebranch"
+ },
+ {
+  "id": "community-475",
+  "community": true,
+  "name": "Scout Amberward",
+  "category": "Quest NPC",
+  "note": "Part of Archer starter quest",
+  "x": 2879,
+  "y": 2111,
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-amberward",
+  "wikiId": "npc-scout-amberward"
+ },
+ {
+  "id": "community-894",
+  "community": true,
+  "name": "Archaeologist Liryna",
+  "category": "Tradeskill",
+  "note": "Archaeology trainer",
+  "x": 2765,
+  "y": 2038,
+  "trade": "Archaeology"
+ },
+ {
+  "id": "community-895",
+  "community": true,
+  "name": "an archaelogist",
+  "category": "Vendor",
+  "note": "Archaeology vendor",
+  "x": 2801,
+  "y": 2022
+ },
+ {
+  "id": "community-896",
+  "community": true,
+  "name": "Miner Treydin",
+  "category": "Tradeskill",
+  "note": "Mining trainer",
+  "x": 2668,
+  "y": 2081,
+  "trade": "Mining"
+ },
+ {
+  "id": "community-899",
+  "community": true,
+  "name": "Farmer Oweinn",
+  "category": "Tradeskill",
+  "note": "Farming trainer",
+  "x": 2463,
+  "y": 2084,
+  "trade": "Farming"
+ },
+ {
+  "id": "community-900",
+  "community": true,
+  "name": "a farmer",
+  "category": "Vendor",
+  "note": "Farming vendor",
+  "x": 2469,
+  "y": 2052
+ },
+ {
+  "id": "community-901",
+  "community": true,
+  "name": "Stonecutter Flinton",
+  "category": "Tradeskill",
+  "note": "Stonecutting trainer",
+  "x": 2469,
+  "y": 2028,
+  "trade": "Stone Cutting"
+ },
+ {
+  "id": "community-902",
+  "community": true,
+  "name": "a stonecutter",
+  "category": "Vendor",
+  "note": "Stonecutting vendor",
+  "x": 2466,
+  "y": 2005,
+  "vendor": "Stone cutting vendor"
+ },
+ {
+  "id": "community-904",
+  "community": true,
+  "name": "a mason",
+  "category": "Vendor",
+  "note": "Masonry vendor",
+  "x": 2426,
+  "y": 1970,
+  "vendor": "Stone cutting vendor"
+ },
+ {
+  "id": "community-905",
+  "community": true,
+  "name": "Wyrdguard Mithrilvine",
+  "category": "Quest NPC",
+  "note": "part of Bard starter quest",
+  "x": 2576,
+  "y": 1978
+ },
+ {
+  "id": "community-903",
+  "community": true,
+  "name": "Mason Rymfar",
+  "category": "Notable NPC",
+  "note": "Masonry trainer",
+  "x": 2448,
+  "y": 1981
+ },
+ {
+  "id": "community-984",
+  "community": true,
+  "name": "Fellstone Scout",
+  "category": "Mob camp",
+  "note": "Tent of 3-4 Scouts.  2-3 more roaming around tents",
+  "x": 3331,
+  "y": 1397,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     3266,
+     1333
+    ],
+    [
+     3339,
+     1292
+    ],
+    [
+     3411,
+     1350
+    ],
+    [
+     3448,
+     1402
+    ],
+    [
+     3409,
+     1462
+    ],
+    [
+     3336,
+     1482
+    ],
+    [
+     3252,
+     1474
+    ],
+    [
+     3223,
+     1376
+    ]
+   ]
+  },
+  "levels": [
+   3,
+   5
+  ],
+  "mobs": [
+   {
+    "name": "A Fellstone scout",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fellstone-scout",
+    "wikiId": "npc-a-fellstone-scout"
+   }
+  ]
+ },
+ {
+  "id": "community-985",
+  "community": true,
+  "name": "Decipher the Unintelligible Writings",
+  "category": "Quest",
+  "note": "Drops off Scouts",
+  "x": 3337,
+  "y": 1347,
+  "wiki": "https://monstersandmemories.wiki/quests/decipher-the-unintelligible-writings"
+ }
+]

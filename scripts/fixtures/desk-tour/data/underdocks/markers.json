@@ -1,0 +1,1446 @@
+[
+  {
+    "id": "lift-1-lower",
+    "name": "Lift 1 — to Upper city",
+    "category": "Lift",
+    "x": 3613.98,
+    "y": 4076.99,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "lift-1-upper",
+    "direction": "up"
+  },
+  {
+    "id": "lift-1-upper",
+    "name": "Lift 1 — to Lower docks",
+    "category": "Lift",
+    "x": 3613.98,
+    "y": 4076.99,
+    "note": "",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "lift-1-lower",
+    "direction": "down"
+  },
+  {
+    "id": "lift-2-lower",
+    "name": "Lift 2 — to Upper city",
+    "category": "Lift",
+    "x": 3379.76,
+    "y": 4235.11,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "lift-2-upper",
+    "direction": "up"
+  },
+  {
+    "id": "lift-2-upper",
+    "name": "Lift 2 — to Lower docks",
+    "category": "Lift",
+    "x": 3379.76,
+    "y": 4235.11,
+    "note": "",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "lift-2-lower",
+    "direction": "down"
+  },
+  {
+    "id": "lift-3-lower",
+    "name": "Lift 3 — to Upper city",
+    "category": "Lift",
+    "x": 3798.02,
+    "y": 4596.41,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "lift-3-upper",
+    "direction": "up"
+  },
+  {
+    "id": "lift-3-upper",
+    "name": "Lift 3 — to Lower docks",
+    "category": "Lift",
+    "x": 3798.02,
+    "y": 4596.41,
+    "note": "",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "lift-3-lower",
+    "direction": "down"
+  },
+  {
+    "id": "lift-4-lower",
+    "name": "Lift 4 — to Upper city",
+    "category": "Lift",
+    "x": 3603.64,
+    "y": 4661.75,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "lift-4-upper",
+    "direction": "up"
+  },
+  {
+    "id": "lift-4-upper",
+    "name": "Lift 4 — to Lower docks",
+    "category": "Lift",
+    "x": 3603.64,
+    "y": 4661.75,
+    "note": "",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "lift-4-lower",
+    "direction": "down"
+  },
+  {
+    "id": "lift-5-lower",
+    "name": "Lift 5 — to Upper city",
+    "category": "Lift",
+    "x": 3631.77,
+    "y": 4824.53,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "lift-5-upper",
+    "direction": "up"
+  },
+  {
+    "id": "lift-5-upper",
+    "name": "Lift 5 — to Lower docks",
+    "category": "Lift",
+    "x": 3631.77,
+    "y": 4824.53,
+    "note": "",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "lift-5-lower",
+    "direction": "down"
+  },
+  {
+    "id": "lift-6-lower",
+    "name": "Lift 6 — to Upper city",
+    "category": "Lift",
+    "x": 3876.72,
+    "y": 4474.49,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "lift-6-upper",
+    "direction": "up"
+  },
+  {
+    "id": "lift-6-upper",
+    "name": "Lift 6 — to Lower docks",
+    "category": "Lift",
+    "x": 3876.72,
+    "y": 4474.49,
+    "note": "",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "lift-6-lower",
+    "direction": "down"
+  },
+  {
+    "id": "stairs-sw-lower",
+    "name": "Stairs to Upper city",
+    "category": "Stairs",
+    "x": 2966,
+    "y": 5500,
+    "note": "Stairs from this landing climb a tower to a high bridge over the water, then a second tower up to the Upper city square.",
+    "level": "lower",
+    "approximate": true,
+    "toLevel": "upper",
+    "toMarker": "stairs-sw-upper",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "stairs-sw-upper",
+    "name": "Stairs to Lower docks",
+    "category": "Stairs",
+    "x": 3594,
+    "y": 5080,
+    "note": "Stairs down a tower to a high bridge over the water, then a second tower down to a landing on the south-west quay.",
+    "level": "upper",
+    "approximate": true,
+    "toLevel": "lower",
+    "toMarker": "stairs-sw-lower",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "wiki-alchemist",
+    "name": "Alchemy — south-west quay",
+    "x": 2673,
+    "y": 4855,
+    "level": "lower",
+    "approximate": true,
+    "note": "Alchemy.",
+    "category": "Tradeskill"
+  },
+  {
+    "id": "wiki-herbalist",
+    "name": "Herbalism — south-west quay",
+    "x": 2653,
+    "y": 4864,
+    "level": "lower",
+    "approximate": true,
+    "note": "Herbalism.",
+    "category": "Tradeskill"
+  },
+  {
+    "id": "wiki-west-bank",
+    "name": "Bank — south-west quay",
+    "x": 2907,
+    "y": 4983,
+    "level": "lower",
+    "approximate": true,
+    "note": "",
+    "category": "Bank"
+  },
+  {
+    "id": "wiki-enchanting",
+    "name": "(Dis)Enchanting — south-west quay",
+    "x": 2953,
+    "y": 5056,
+    "level": "lower",
+    "approximate": true,
+    "note": "Enchanting and disenchanting.",
+    "category": "Tradeskill"
+  },
+  {
+    "id": "wiki-medic",
+    "name": "Medic Florina",
+    "x": 3797,
+    "y": 4713,
+    "level": "lower",
+    "approximate": true,
+    "note": "Upstairs in building with Assistant Norwan, who is visible from the outside.",
+    "category": "Tradeskill",
+    "trade": "First Aid",
+    "community": true
+  },
+  {
+    "id": "wiki-leatherworking",
+    "name": "Leatherworker Keiros",
+    "x": 3825,
+    "y": 4215,
+    "level": "lower",
+    "approximate": true,
+    "note": "",
+    "category": "Tradeskill",
+    "community": true,
+    "trade": "Leatherworking"
+  },
+  {
+    "id": "wiki-fletcher-bowyer",
+    "name": "Fletching — north-east quay",
+    "x": 4576,
+    "y": 3736,
+    "level": "lower",
+    "approximate": true,
+    "note": "Fletching and bow making.",
+    "category": "Tradeskill"
+  },
+  {
+    "id": "class-elementalist-wizard-enchanter",
+    "name": "Elementalist / Wizard / Enchanter trainers",
+    "x": 4408,
+    "y": 3638,
+    "level": "lower",
+    "approximate": true,
+    "note": "",
+    "category": "Class trainer",
+    "classes": [
+      "Elementalist",
+      "Wizard",
+      "Enchanter"
+    ]
+  },
+  {
+    "id": "class-archer-warrior-ranger",
+    "name": "Fighter / Ranger trainers",
+    "x": 4527,
+    "y": 3759,
+    "level": "lower",
+    "approximate": true,
+    "note": "",
+    "category": "Class trainer",
+    "classes": [
+      "Archer",
+      "Fighter",
+      "Ranger"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/archer-brann",
+    "wikiId": "npc-1790076523473-qxhtb",
+    "community": true
+  },
+  {
+    "id": "wiki-east-bank",
+    "name": "Bank — north-east quay",
+    "x": 4825,
+    "y": 3991,
+    "level": "lower",
+    "approximate": true,
+    "note": "Southern end of the eastern shore; exact building to confirm.",
+    "category": "Bank",
+    "community": true
+  },
+  {
+    "id": "class-necromancer-cleric-shadowknight",
+    "name": "Cleric / Shadowknight trainers",
+    "x": 5452,
+    "y": 4283,
+    "level": "lower",
+    "approximate": true,
+    "note": "In the cave beneath the south-east rock; to confirm in game.",
+    "category": "Class trainer",
+    "community": true,
+    "classes": [
+      "Cleric",
+      "Shadow Knight"
+    ]
+  },
+  {
+    "id": "upper-stable",
+    "name": "Stable — upper city",
+    "category": "Stable",
+    "x": 3929,
+    "y": 4885,
+    "note": "",
+    "level": "upper"
+  },
+  {
+    "id": "class-druid",
+    "name": "Druid trainer",
+    "x": 3332,
+    "y": 5668,
+    "level": "lower",
+    "note": "In the cave beneath the southern rock.",
+    "category": "Class trainer",
+    "classes": [
+      "Druid"
+    ]
+  },
+  {
+    "id": "class-rogue",
+    "name": "Rogue trainer",
+    "x": 2549,
+    "y": 5074,
+    "level": "lower",
+    "note": "Somewhere in the rogue back cave; position to confirm in game.",
+    "category": "Class trainer",
+    "classes": [
+      "Rogue"
+    ]
+  },
+  {
+    "id": "trade-cooking",
+    "name": "Cooking — harbour island",
+    "category": "Tradeskill",
+    "x": 3771,
+    "y": 4109,
+    "level": "lower",
+    "note": ""
+  },
+  {
+    "id": "trade-lumberjacking",
+    "name": "Felara",
+    "category": "Tradeskill",
+    "x": 4125,
+    "y": 4332,
+    "level": "lower",
+    "note": "",
+    "community": true,
+    "trade": "Lumberjacking"
+  },
+  {
+    "id": "community-36",
+    "community": true,
+    "name": "Deepcut bandit camps",
+    "category": "Mob camp",
+    "levels": [
+      10,
+      16
+    ],
+    "note": "",
+    "x": 4167,
+    "y": 1190,
+    "level": "lower"
+  },
+  {
+    "id": "community-37",
+    "community": true,
+    "name": "Hull Orbel",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 3915,
+    "y": 3937,
+    "level": "upper",
+    "wiki": "https://monstersandmemories.wiki/npcs/hull-orbel",
+    "wikiId": "npc-1790076528307-a58zf"
+  },
+  {
+    "id": "wiki-bag-merchant",
+    "name": "Bag merchant",
+    "category": "Vendor",
+    "vendor": "Bag merchant",
+    "x": 3934,
+    "y": 4368,
+    "note": "",
+    "level": "lower",
+    "approximate": true
+  },
+  {
+    "id": "wiki-marshall-harding",
+    "name": "Marshal Harding",
+    "category": "Quest NPC",
+    "x": 4633,
+    "y": 3607,
+    "note": "",
+    "level": "lower",
+    "approximate": true,
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/marshal-harding",
+    "wikiId": "npc-marshal-harding"
+  },
+  {
+    "id": "wiki-paymaster-elara-venn",
+    "name": "Paymaster Elara Venn",
+    "category": "Quest NPC",
+    "x": 4559,
+    "y": 3800,
+    "note": "1st floor.",
+    "level": "lower",
+    "approximate": true,
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/elara-venn",
+    "wikiId": "npc-1790076525877-7xoj8"
+  },
+  {
+    "id": "wiki-quartermaster",
+    "name": "Traven Keldress",
+    "category": "Vendor",
+    "vendor": "Quartermaster",
+    "x": 4544,
+    "y": 3803,
+    "note": "Buy / sell weapons and armour.",
+    "level": "lower",
+    "approximate": true,
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/traven-keldress",
+    "wikiId": "npc-traven-keldress"
+  },
+  {
+    "id": "wiki-apothecary",
+    "name": "Apothecary",
+    "category": "Vendor",
+    "vendor": "Alchemy vendor",
+    "x": 2652,
+    "y": 4874,
+    "note": "Western shore; exact shop entrance to confirm.",
+    "level": "lower",
+    "approximate": true
+  },
+  {
+    "id": "community-61",
+    "community": true,
+    "name": "Hargin Earthcaller",
+    "category": "Vendor",
+    "sells": [
+      "Armor",
+      "Spell scrolls"
+    ],
+    "note": "",
+    "x": 4419,
+    "y": 3632,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/hargin-earthcaller",
+    "wikiId": "npc-hargin-earthcaller"
+  },
+  {
+    "id": "community-59",
+    "community": true,
+    "name": "Draznax",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 4179,
+    "y": 4938,
+    "level": "upper",
+    "wiki": "https://monstersandmemories.wiki/npcs/draznax",
+    "wikiId": "npc-draznax"
+  },
+  {
+    "id": "community-60",
+    "community": true,
+    "name": "Munk",
+    "category": "Vendor",
+    "vendor": "Butcher",
+    "sells": [
+      "Materials",
+      "Quest items"
+    ],
+    "note": "",
+    "x": 3645,
+    "y": 4141,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/munk",
+    "wikiId": "npc-munk"
+  },
+  {
+    "id": "community-83",
+    "community": true,
+    "name": "Inn",
+    "category": "Inn",
+    "note": "",
+    "x": 4273,
+    "y": 3585,
+    "level": "lower",
+    "color": "#6a4a7a"
+  },
+  {
+    "id": "community-151",
+    "community": true,
+    "name": "Mardah Stoneshiner",
+    "category": "Vendor",
+    "note": "Next door to the Citadel blacksmiths",
+    "x": 3413,
+    "y": 4490,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/mardah-stoneshiner",
+    "wikiId": "npc-1790076529811-b582s",
+    "vendor": "Jewelcrafting vendor",
+    "sells": [
+      "Jewelry"
+    ]
+  },
+  {
+    "id": "community-152",
+    "community": true,
+    "name": "Sorgen Stoneshiner",
+    "category": "Tradeskill",
+    "note": "Next door to the citadel blacksmiths",
+    "x": 3385,
+    "y": 4454,
+    "level": "lower",
+    "trade": "Jewelcrafting",
+    "wiki": "https://monstersandmemories.wiki/npcs/sorgen-stoneshiner",
+    "wikiId": "npc-1790076533771-moy05"
+  },
+  {
+    "id": "community-153",
+    "community": true,
+    "name": "Variagruss Grinhelm",
+    "category": "Vendor",
+    "note": "Blacksmithing Schematics Vendor on Forge Row",
+    "x": 3513,
+    "y": 4502,
+    "level": "lower",
+    "vendor": "Blacksmithing vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-155",
+    "community": true,
+    "name": "Fishmonger Lyla",
+    "category": "Vendor",
+    "note": "Citadel North Docks",
+    "x": 3318,
+    "y": 4376,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/fishmonger-lyla",
+    "wikiId": "npc-1790076526323-rfh8o",
+    "vendor": "Fishmonger"
+  },
+  {
+    "id": "community-156",
+    "community": true,
+    "name": "Fisher Rivy",
+    "category": "Vendor",
+    "note": "",
+    "x": 3273,
+    "y": 4384,
+    "level": "lower",
+    "vendor": "Fishing vendor"
+  },
+  {
+    "id": "community-158",
+    "community": true,
+    "name": "Barkeeper Khordic",
+    "category": "Vendor",
+    "note": "Above the Exchange in The High Note",
+    "x": 3729,
+    "y": 4682,
+    "level": "lower",
+    "vendor": "Barkeep",
+    "sells": [
+      "Food & drink"
+    ]
+  },
+  {
+    "id": "community-159",
+    "community": true,
+    "name": "Tailoring Skill",
+    "category": "Tradeskill",
+    "note": "Across from The High Note on the top terrace of the Citadel",
+    "x": 3832,
+    "y": 4525,
+    "level": "lower",
+    "trade": "Tailoring"
+  },
+  {
+    "id": "community-160",
+    "community": true,
+    "name": "Tailor Gira",
+    "category": "Vendor",
+    "note": "Citadel Tailor room across from the High Note on top terrace of the citadel",
+    "x": 3855,
+    "y": 4465,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/tailor-gira",
+    "wikiId": "npc-1790076534265-fsg3q",
+    "vendor": "Tailoring vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-162",
+    "community": true,
+    "name": "Idris Mavri",
+    "category": "Vendor",
+    "note": "In tailor room on the top terrace of the citadel across from the High Note",
+    "x": 3876,
+    "y": 4495,
+    "level": "lower",
+    "vendor": "Tailoring vendor",
+    "sells": [
+      "Materials"
+    ]
+  },
+  {
+    "id": "community-147",
+    "community": true,
+    "name": "Berrie",
+    "category": "Vendor",
+    "note": "Named Cobbler Vendor on the terrace above the fountain.",
+    "x": 3629,
+    "y": 4271,
+    "level": "lower",
+    "vendor": "Cobbler",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-148",
+    "community": true,
+    "name": "Citadel Exchange",
+    "category": "Bank",
+    "note": "On third level inside the golden dome tower.",
+    "x": 3706,
+    "y": 4630,
+    "level": "lower"
+  },
+  {
+    "id": "community-149",
+    "community": true,
+    "name": "Guild Registrar",
+    "category": "Guild",
+    "note": "On 3rd level across form the Exchange entrance.",
+    "x": 3816,
+    "y": 4559,
+    "level": "lower"
+  },
+  {
+    "id": "community-167",
+    "community": true,
+    "name": "Delilah",
+    "category": "Quest NPC",
+    "note": "Quest NPC",
+    "x": 2570,
+    "y": 3821,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/delilah",
+    "wikiId": "npc-1790076525443-t431c"
+  },
+  {
+    "id": "community-166",
+    "community": true,
+    "name": "Gaden Shale",
+    "category": "Vendor",
+    "note": "",
+    "x": 3745,
+    "y": 4767,
+    "level": "lower",
+    "vendor": "Shady merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/gaden-shale",
+    "wikiId": "npc-1790076526837-7nyqu"
+  },
+  {
+    "id": "community-169",
+    "community": true,
+    "name": "Lightstone Vender",
+    "category": "Vendor",
+    "note": "Lightstone",
+    "x": 3652,
+    "y": 4749,
+    "level": "lower"
+  },
+  {
+    "id": "community-146",
+    "community": true,
+    "name": "Hilari Hidecraft",
+    "category": "Vendor",
+    "note": "Leather Armor Vendor",
+    "x": 3731,
+    "y": 4772,
+    "level": "lower",
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-157",
+    "community": true,
+    "name": "Fisherman Dren",
+    "category": "Tradeskill",
+    "note": "Citadel North Dock",
+    "x": 3287,
+    "y": 4302,
+    "level": "lower",
+    "trade": "Fishing",
+    "wiki": "https://monstersandmemories.wiki/npcs/fisherman-dren",
+    "wikiId": "npc-1790076526323-q6xvs"
+  },
+  {
+    "id": "community-187",
+    "community": true,
+    "name": "Simrut the Green (level 40)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 4539,
+    "y": 3601,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/simrut-the-green",
+    "wikiId": "npc-simrut-the-green"
+  },
+  {
+    "id": "community-188",
+    "community": true,
+    "name": "Belot",
+    "category": "Named mob",
+    "note": "",
+    "x": 4258,
+    "y": 749,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/belot",
+    "wikiId": "npc-1790076523474-xutcr"
+  },
+  {
+    "id": "community-189",
+    "community": true,
+    "name": "Squeaker",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 3345,
+    "y": 4892,
+    "level": "upper",
+    "wiki": "https://monstersandmemories.wiki/npcs/squeaker",
+    "wikiId": "npc-1790076533772-160l1"
+  },
+  {
+    "id": "community-229",
+    "community": true,
+    "name": "Gunder Dinnig",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 4662,
+    "y": 3704,
+    "level": "lower",
+    "wikiId": "npc-1790076527284-6tysj",
+    "wiki": "https://monstersandmemories.wiki/npcs/gunder-dinnig"
+  },
+  {
+    "id": "community-247",
+    "community": true,
+    "name": "Mikra Velrane",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 4516,
+    "y": 3788,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/mikra-velrane",
+    "wikiId": "npc-1790076530368-aqgfb"
+  },
+  {
+    "id": "community-233",
+    "community": true,
+    "name": "Guard Darek",
+    "category": "Quest NPC",
+    "note": "Appears at either the west or east gates.",
+    "x": 2722,
+    "y": 3750,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-darek",
+    "wikiId": "npc-1790076527283-02clj"
+  },
+  {
+    "id": "community-234",
+    "community": true,
+    "name": "Senior Apprentice Syrsil",
+    "category": "Quest NPC",
+    "note": "Found in the lowest level beneath the tavern, can be given Vharkith's Order (from Belot, named Deepcut Bandit) for some exp and faction with a deep elf house.",
+    "x": 3841,
+    "y": 4651,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Syrsil%27s_Stolen_Package"
+  },
+  {
+    "id": "community-244",
+    "community": true,
+    "name": "Picci Manifold",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3760,
+    "y": 5973,
+    "level": "lower",
+    "classes": [
+      "Shaman"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/picci-manifold",
+    "wikiId": "npc-1790076531813-wyfjf"
+  },
+  {
+    "id": "community-245",
+    "community": true,
+    "name": "Shew Toadwater",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3807,
+    "y": 6035,
+    "level": "lower",
+    "classes": [
+      "Shaman"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/shew-toadwater",
+    "wikiId": "npc-1790076533284-k1izh"
+  },
+  {
+    "id": "community-246",
+    "community": true,
+    "name": "Ma'lady",
+    "category": "Vendor",
+    "note": "",
+    "x": 3846,
+    "y": 5996,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/malady",
+    "wikiId": "npc-1790076529811-nnuts"
+  },
+  {
+    "id": "community-337",
+    "community": true,
+    "name": "Luskmit",
+    "category": "Quest NPC",
+    "note": "Druid starter quest npc",
+    "x": 3358,
+    "y": 5675,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/luskmit",
+    "wikiId": "npc-1790076529811-qt88v"
+  },
+  {
+    "id": "community-338",
+    "community": true,
+    "name": "Lady Valhassen",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 3853,
+    "y": 4555,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/lady-valhassen",
+    "wikiId": "npc-1790076529300-1l231"
+  },
+  {
+    "id": "community-377",
+    "community": true,
+    "name": "Jumbe Odol",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 4060,
+    "y": 4297,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/jumbe-odol",
+    "wikiId": "npc-1790076528773-33ord"
+  },
+  {
+    "id": "community-405",
+    "community": true,
+    "name": "Zalex Mortaine",
+    "category": "Class trainer",
+    "note": "Inside the library",
+    "x": 5404,
+    "y": 4216,
+    "level": "lower",
+    "classes": [
+      "Necromancer"
+    ]
+  },
+  {
+    "id": "community-436",
+    "community": true,
+    "name": "Sporcinius",
+    "category": "Named mob",
+    "note": "He pats in these caverns.",
+    "x": 705,
+    "y": 5561,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/sporcinius",
+    "wikiId": "npc-sporcinius"
+  },
+  {
+    "id": "community-441",
+    "community": true,
+    "name": "Elder skellies",
+    "category": "Mob camp",
+    "note": "",
+    "x": 789,
+    "y": 3974,
+    "level": "lower",
+    "levels": [
+      8,
+      12
+    ],
+    "mobs": [
+      {
+        "name": "An elder shadowbone",
+        "wiki": "https://monstersandmemories.wiki/npcs/an-elder-shadowbone",
+        "wikiId": "npc-an-elder-shadowbone"
+      }
+    ]
+  },
+  {
+    "id": "community-442",
+    "community": true,
+    "name": "Greater skellies",
+    "category": "Mob camp",
+    "note": "",
+    "x": 1717,
+    "y": 4362,
+    "level": "lower",
+    "levels": [
+      6,
+      10
+    ],
+    "mobs": [
+      {
+        "name": "A greater shadowbone",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-greater-shadowbone",
+        "wikiId": "npc-a-greater-shadowbone"
+      }
+    ]
+  },
+  {
+    "id": "community-443",
+    "community": true,
+    "name": "Hunters",
+    "category": "Mob camp",
+    "note": "",
+    "x": 3444,
+    "y": 1032,
+    "level": "lower",
+    "levels": [
+      6,
+      10
+    ],
+    "mobs": [
+      {
+        "name": "An undercap hunter",
+        "wiki": "https://monstersandmemories.wiki/npcs/an-undercap-hunter",
+        "wikiId": "npc-an-undercap-hunter"
+      }
+    ]
+  },
+  {
+    "id": "community-485",
+    "community": true,
+    "name": "Blacksmith Hargrul",
+    "category": "Tradeskill",
+    "note": "The Balanced Blade.\nOn mezzanine floor below the exchange. Follow signs for Forge Row.\n- Blacksmithing Trainer\n- Weaponsmith Vendor\n- Used Weapon Vendor\n- a Patternmaker",
+    "x": 3457,
+    "y": 4422,
+    "level": "lower",
+    "trade": "Blacksmithing / Smelting",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-hargrul",
+    "wikiId": "npc-1790076524014-sbecd"
+  },
+  {
+    "id": "community-533",
+    "community": true,
+    "name": "Wererats",
+    "category": "Mob camp",
+    "note": "Wererats lvl 5-9 camp\nFaction gain for Night Harbor",
+    "x": 3825,
+    "y": 2253,
+    "level": "lower",
+    "levels": [
+      5,
+      9
+    ],
+    "mobs": []
+  },
+  {
+    "id": "community-548",
+    "community": true,
+    "name": "Stevran Understock",
+    "category": "Vendor",
+    "note": "",
+    "x": 3601,
+    "y": 4672,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/stevran-understock",
+    "wikiId": "npc-1790076534264-d7cpf"
+  },
+  {
+    "id": "community-549",
+    "community": true,
+    "name": "Innkeeper Farda",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 2976,
+    "y": 5345,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/innkeeper-farda",
+    "wikiId": "npc-innkeeper-farda"
+  },
+  {
+    "id": "community-550",
+    "community": true,
+    "name": "Sir Vosirek",
+    "category": "Quest NPC",
+    "note": "2nd Floor",
+    "x": 4402,
+    "y": 3705,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/sir-vosirek",
+    "wikiId": "npc-sir-vosirek"
+  },
+  {
+    "id": "community-551",
+    "community": true,
+    "name": "Soren Akedd",
+    "category": "Quest NPC",
+    "note": "1st Floor, in Temple foyer",
+    "x": 5473,
+    "y": 4240,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/soren-akedd",
+    "wikiId": "npc-soren-akedd"
+  },
+  {
+    "id": "community-552",
+    "community": true,
+    "name": "Abbot Harrow",
+    "category": "Notable NPC",
+    "note": "In crypt down the ramp in the temple",
+    "x": 5648,
+    "y": 4198,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/abbot-harrow",
+    "wikiId": "npc-abbot-harrow"
+  },
+  {
+    "id": "community-553",
+    "community": true,
+    "name": "Acolyte Vryar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 5264,
+    "y": 3940,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/acolyte-vryar",
+    "wikiId": "npc-acolyte-vryar"
+  },
+  {
+    "id": "community-554",
+    "community": true,
+    "name": "Lady Tabitha",
+    "category": "Notable NPC",
+    "note": "South ramp from Temple foyer, halfway up on South side.",
+    "x": 5619,
+    "y": 4373,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/lady-tabitha",
+    "wikiId": "npc-lady-tabitha"
+  },
+  {
+    "id": "community-555",
+    "community": true,
+    "name": "Telar Nur'gta",
+    "category": "Vendor",
+    "note": "Dark Elf merchant, 2nd floor",
+    "x": 4826,
+    "y": 4445,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/telar-nurgta",
+    "wikiId": "npc-telar-nur-gta"
+  },
+  {
+    "id": "community-556",
+    "community": true,
+    "name": "Korien Nock",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4500,
+    "y": 3705,
+    "level": "lower",
+    "classes": [
+      "Archer"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/korien-nock",
+    "wikiId": "npc-1790076528774-wcf00"
+  },
+  {
+    "id": "community-557",
+    "community": true,
+    "name": "An abominable ghoul",
+    "category": "Named mob",
+    "note": "In area with elder shadowbones, spawns on marker and paths counter-clockwise around perimeter of elder shadowbone spawn area",
+    "x": 606,
+    "y": 4243,
+    "level": "lower",
+    "levels": [
+      18,
+      18
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/an-abominable-ghoul",
+    "wikiId": "npc-an-abominable-ghoul"
+  },
+  {
+    "id": "community-605",
+    "community": true,
+    "name": "Letharia Hollowgrove",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3325,
+    "y": 5724,
+    "level": "lower",
+    "classes": [
+      "Druid"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/letharia-hollowgrove",
+    "wikiId": "npc-letharia-hollowgrove"
+  },
+  {
+    "id": "community-607",
+    "community": true,
+    "name": "Reyla Wildryn",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4444,
+    "y": 3325,
+    "level": "lower",
+    "classes": [
+      "Beastlord"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/reyla-wildryn",
+    "wikiId": "npc-1790076532319-ns8qr"
+  },
+  {
+    "id": "community-608",
+    "community": true,
+    "name": "Moss",
+    "category": "Vendor",
+    "note": "",
+    "x": 3344,
+    "y": 5664,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/moss",
+    "wikiId": "npc-1790076530868-tqs6p"
+  },
+  {
+    "id": "community-609",
+    "community": true,
+    "name": "Vaelen Beastbind",
+    "category": "Vendor",
+    "note": "",
+    "x": 4425,
+    "y": 3329,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/vaelen-beastbind",
+    "wikiId": "npc-1790076535162-az41m"
+  },
+  {
+    "id": "community-610",
+    "community": true,
+    "name": "Barkeeper Tull",
+    "category": "Notable NPC",
+    "note": "2nd floor of the Inn in the SW of UD",
+    "x": 2954,
+    "y": 5331,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/barkeeper-tull",
+    "wikiId": "npc-barkeeper-tull"
+  },
+  {
+    "id": "community-611",
+    "community": true,
+    "name": "Chef Brigit",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 2891,
+    "y": 5259,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/chef-brigit",
+    "wikiId": "npc-chef-brigit"
+  },
+  {
+    "id": "community-612",
+    "community": true,
+    "name": "Embalmer Tyriel",
+    "category": "Notable NPC",
+    "note": "Crypt level in Temple of Yzgorath, down the ramp from the foyer",
+    "x": 5686,
+    "y": 4205,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/embalmer-tyriel",
+    "wikiId": "npc-embalmer-tyriel"
+  },
+  {
+    "id": "community-624",
+    "community": true,
+    "name": "Helga Hewell",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4189,
+    "y": 5373,
+    "level": "lower",
+    "trade": "Carpentry / Woodworking"
+  },
+  {
+    "id": "community-625",
+    "community": true,
+    "name": "Swindy",
+    "category": "Vendor",
+    "note": "Honestly not sure what kind of vendor this is, but it was the only one I could find that would buy my gems in the Underdocks.",
+    "x": 2774,
+    "y": 4711,
+    "level": "lower",
+    "vendor": "Shady merchant"
+  },
+  {
+    "id": "community-627",
+    "community": true,
+    "name": "Assistant Norwan",
+    "category": "Vendor",
+    "note": "",
+    "x": 3809,
+    "y": 4728,
+    "level": "lower",
+    "vendor": "Medic"
+  },
+  {
+    "id": "community-628",
+    "community": true,
+    "name": "Tanner Paluvian",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3804,
+    "y": 4164,
+    "level": "lower",
+    "trade": "Skinning / Tanning"
+  },
+  {
+    "id": "community-629",
+    "community": true,
+    "name": "Tavia Tawyer",
+    "category": "Vendor",
+    "note": "Sells leatherworking kit, seam ripper, and rough/light/heavy/satin thread.",
+    "x": 3824,
+    "y": 4178,
+    "level": "lower",
+    "vendor": "Leatherworking vendor"
+  },
+  {
+    "id": "community-632",
+    "community": true,
+    "name": "Ruk Sacksnatch",
+    "category": "Vendor",
+    "note": "",
+    "x": 3885,
+    "y": 4282,
+    "level": "lower",
+    "vendor": "Bag merchant"
+  },
+  {
+    "id": "community-638",
+    "community": true,
+    "name": "a guild registrar",
+    "category": "Guild",
+    "note": "",
+    "x": 4524,
+    "y": 3502,
+    "level": "lower"
+  },
+  {
+    "id": "community-639",
+    "community": true,
+    "name": "Barkeeper Lyrsa",
+    "category": "Vendor",
+    "note": "",
+    "x": 4522,
+    "y": 3426,
+    "level": "lower",
+    "vendor": "Barkeep"
+  },
+  {
+    "id": "community-640",
+    "community": true,
+    "name": "Innkeeper Narik",
+    "category": "Inn",
+    "note": "",
+    "x": 4505,
+    "y": 3404,
+    "level": "lower"
+  },
+  {
+    "id": "community-641",
+    "community": true,
+    "name": "Feslan Godfrey",
+    "category": "Vendor",
+    "note": "",
+    "x": 4572,
+    "y": 3454,
+    "level": "lower",
+    "vendor": "Cook"
+  },
+  {
+    "id": "community-642",
+    "community": true,
+    "name": "Gorik Tundsen",
+    "category": "Vendor",
+    "note": "",
+    "x": 4551,
+    "y": 3431,
+    "level": "lower",
+    "vendor": "Cook"
+  },
+  {
+    "id": "community-643",
+    "community": true,
+    "name": "Cartalia Wain",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3680,
+    "y": 4111,
+    "level": "lower",
+    "trade": "Wagoneering"
+  },
+  {
+    "id": "community-644",
+    "community": true,
+    "name": "Solitary Tarka",
+    "category": "Notable NPC",
+    "note": "Solo Ruleset NPC",
+    "x": 3579,
+    "y": 4348,
+    "level": "lower"
+  },
+  {
+    "id": "community-645",
+    "community": true,
+    "name": "Magnificent Horgus",
+    "category": "Notable NPC",
+    "note": "Hardcore Ruleset NPC",
+    "x": 3574,
+    "y": 4373,
+    "level": "lower"
+  },
+  {
+    "id": "community-646",
+    "community": true,
+    "name": "Surtey the Pauper",
+    "category": "Notable NPC",
+    "note": "Self-Found Ruleset NPC",
+    "x": 3549,
+    "y": 4372,
+    "level": "lower"
+  },
+  {
+    "id": "community-664",
+    "community": true,
+    "name": "Slylara Llumare",
+    "category": "Quest NPC",
+    "note": "Rogue starter quest",
+    "x": 2615,
+    "y": 5223,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/slylara-llumare",
+    "wikiId": "npc-slylara-llumare"
+  },
+  {
+    "id": "community-726",
+    "community": true,
+    "name": "Jull Orebel",
+    "category": "Vendor",
+    "note": "",
+    "x": 3945,
+    "y": 3918,
+    "level": "upper",
+    "vendor": "Mining vendor"
+  },
+  {
+    "id": "community-814",
+    "community": true,
+    "name": "mindless blightspore",
+    "category": "Named mob",
+    "note": "Uncommon spawn; kill placeholder mobs in the area if not visible. Drops Blightspore Brain for Shaman's Underdocks starter quest.",
+    "x": 2831,
+    "y": 427,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/mindless-blightspore",
+    "wikiId": "npc-mindless-blightspore"
+  },
+  {
+    "id": "community-845",
+    "community": true,
+    "name": "Maude Astarace",
+    "category": "Quest NPC",
+    "note": "Part of starter quest for Elementalist",
+    "x": 4469,
+    "y": 3701,
+    "level": "lower",
+    "wiki": "https://monstersandmemories.wiki/npcs/maude-astarace",
+    "wikiId": "npc-1790076530367-4d0q2"
+  },
+  {
+    "id": "community-850",
+    "community": true,
+    "name": "Chaltise Elymnar",
+    "category": "Vendor",
+    "note": "Elementalist Reagent Vendor.",
+    "x": 4485,
+    "y": 3733,
+    "level": "lower",
+    "vendor": "Reagent vendor"
+  }
+]

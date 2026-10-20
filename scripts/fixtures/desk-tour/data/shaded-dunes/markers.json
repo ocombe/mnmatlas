@@ -1,0 +1,751 @@
+[
+ {
+  "id": "ashira-6-10-1",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 1708,
+  "y": 919,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-6-10-2",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 2165,
+  "y": 1514,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "undead-night-1",
+  "name": "Undead at night",
+  "category": "Mob camp",
+  "levels": [
+   10,
+   15
+  ],
+  "x": 4527,
+  "y": 1348,
+  "approximate": true,
+  "note": "At the Crypt Ruins at night; friendly NPCs are there by day.",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-night-1",
+  "name": "Humanoids at night",
+  "category": "Mob camp",
+  "levels": [
+   10,
+   15
+  ],
+  "x": 4730,
+  "y": 1350,
+  "approximate": true,
+  "note": "At the Crypt Ruins at night; friendly NPCs are there by day.",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-1",
+  "name": "Friendly NPCs by day",
+  "category": "Notable NPC",
+  "x": 4553,
+  "y": 1530,
+  "approximate": true,
+  "note": "At the Crypt Ruins by day; undead and humanoids take their place at night.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-10-15-1",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   10,
+   15
+  ],
+  "x": 3688,
+  "y": 2261,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-1",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 4917,
+  "y": 2227,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-1-5-1",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 6114,
+  "y": 1208,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-1-5-2",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 6526,
+  "y": 1220,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-1-5-1",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 6581,
+  "y": 1566,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-1-5-2",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 6488,
+  "y": 2154,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-2",
+  "name": "Nimasu",
+  "category": "Notable NPC",
+  "x": 2801,
+  "y": 2414,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "undead-6-10-1",
+  "name": "Undead",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 1569,
+  "y": 3043,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     2419,
+     3639
+    ],
+    [
+     2378,
+     3392
+    ],
+    [
+     1735,
+     3288
+    ],
+    [
+     1594,
+     2835
+    ],
+    [
+     1723,
+     2535
+    ],
+    [
+     1411,
+     2269
+    ],
+    [
+     864,
+     2322
+    ],
+    [
+     1333,
+     3336
+    ],
+    [
+     1567,
+     3628
+    ],
+    [
+     2003,
+     3784
+    ]
+   ]
+  },
+  "community": true
+ },
+ {
+  "id": "humanoid-6-10-1",
+  "name": "Wererats",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 2098,
+  "y": 3977,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "mobs": [
+   {
+    "name": "A wererat",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-wererat",
+    "wikiId": "npc-a-wererat"
+   }
+  ],
+  "community": true
+ },
+ {
+  "id": "generic-6-10-2",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 2667,
+  "y": 3669,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-3",
+  "name": "Cheikho",
+  "category": "Quest NPC",
+  "x": 3289,
+  "y": 3394,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "wikiId": "npc-cheikho",
+  "wiki": "https://monstersandmemories.wiki/npcs/cheikho",
+  "community": true
+ },
+ {
+  "id": "undead-10-15-1",
+  "name": "Undead",
+  "category": "Mob camp",
+  "levels": [
+   10,
+   17
+  ],
+  "x": 3674,
+  "y": 2909,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "undead-6-10-2",
+  "name": "Undead",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 4627,
+  "y": 3147,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-4",
+  "name": "Notable NPC — Wizard Spells",
+  "category": "Notable NPC",
+  "x": 4786,
+  "y": 3133,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "giant-15plus-1",
+  "name": "Wandering giant",
+  "category": "Mob camp",
+  "levels": [
+   15,
+   null
+  ],
+  "x": 4201,
+  "y": 3492,
+  "approximate": true,
+  "note": "Roams the dunes.",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-3",
+  "name": "Crocodiles / Caimans",
+  "category": "Mob camp",
+  "levels": [
+   7,
+   13
+  ],
+  "mobs": [
+   {
+    "name": "Crocodiles / Caimans",
+    "wikiId": "npc-a-caiman",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-caiman"
+   }
+  ],
+  "x": 3762,
+  "y": 3866,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "wikiId": "npc-a-caiman",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-caiman",
+  "community": true
+ },
+ {
+  "id": "ashira-6-10-3",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 5654,
+  "y": 3060,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-10-15-1",
+  "name": "Bandits",
+  "category": "Mob camp",
+  "levels": [
+   10,
+   15
+  ],
+  "x": 6132,
+  "y": 3023,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "mobs": [
+   {
+    "name": "A bandit",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-bandit",
+    "wikiId": "npc-a-bandit"
+   }
+  ],
+  "community": true
+ },
+ {
+  "id": "humanoid-10-15-2",
+  "name": "Bandits",
+  "category": "Mob camp",
+  "levels": [
+   10,
+   15
+  ],
+  "x": 6278,
+  "y": 2912,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "mobs": [
+   {
+    "name": "A bandit",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-bandit",
+    "wikiId": "npc-a-bandit"
+   }
+  ],
+  "community": true
+ },
+ {
+  "id": "generic-1-5-3",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 6690,
+  "y": 3161,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-5",
+  "name": "Notable NPC — Dock",
+  "category": "Notable NPC",
+  "x": 6548,
+  "y": 3802,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-4",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 5429,
+  "y": 3890,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "community-446",
+  "community": true,
+  "name": "Toma the Two-Faced",
+  "category": "Named mob",
+  "note": "",
+  "x": 2266,
+  "y": 3884,
+  "levels": [
+   8,
+   8
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/toma-the-two-faced",
+  "wikiId": "npc-toma-the-two-faced",
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     2216,
+     3829
+    ],
+    [
+     2282,
+     3854
+    ],
+    [
+     2336,
+     3814
+    ],
+    [
+     2394,
+     3810
+    ],
+    [
+     2393,
+     3924
+    ],
+    [
+     2130,
+     3950
+    ],
+    [
+     2144,
+     3845
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-619",
+  "community": true,
+  "name": "Chompers (level ~16)",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 4488,
+  "y": 3844,
+  "shape": {
+   "kind": "path",
+   "loop": false,
+   "points": [
+    [
+     4488,
+     3844
+    ],
+    [
+     3071,
+     3752
+    ]
+   ]
+  },
+  "wiki": "https://monstersandmemories.wiki/npcs/chompers",
+  "wikiId": "npc-chompers"
+ },
+ {
+  "id": "community-749",
+  "community": true,
+  "name": "Smugglers / Wererats",
+  "category": "Mob camp",
+  "note": "",
+  "x": 1849,
+  "y": 2563,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     1830,
+     2822
+    ],
+    [
+     1740,
+     2792
+    ],
+    [
+     1726,
+     2749
+    ],
+    [
+     1745,
+     2704
+    ],
+    [
+     1889,
+     2554
+    ],
+    [
+     1862,
+     2470
+    ],
+    [
+     1767,
+     2412
+    ],
+    [
+     1775,
+     2333
+    ],
+    [
+     1971,
+     2402
+    ],
+    [
+     1933,
+     2530
+    ],
+    [
+     1958,
+     2605
+    ],
+    [
+     1864,
+     2620
+    ],
+    [
+     1848,
+     2692
+    ],
+    [
+     1850,
+     2764
+    ]
+   ]
+  },
+  "levels": [
+   7,
+   11
+  ],
+  "mobs": [
+   {
+    "name": "A wererat",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-wererat",
+    "wikiId": "npc-a-wererat"
+   }
+  ]
+ },
+ {
+  "id": "community-716",
+  "community": true,
+  "name": "Wizart Portal",
+  "category": "Teleporter",
+  "note": "Wizard's and their group mates will be teleported to this location via Gate or Portal spells.",
+  "x": 4827,
+  "y": 3133,
+  "travel": "Teleporter"
+ },
+ {
+  "id": "community-721",
+  "community": true,
+  "name": "Tunnel Entrance",
+  "category": "Passage",
+  "note": "Semi-hidden entrance to a tunnel here.",
+  "x": 1680,
+  "y": 1483,
+  "way": "Tunnel"
+ },
+ {
+  "id": "community-722",
+  "community": true,
+  "name": "Tunnel Exit",
+  "category": "Passage",
+  "note": "",
+  "x": 2317,
+  "y": 1875,
+  "way": "Tunnel"
+ },
+ {
+  "id": "community-723",
+  "community": true,
+  "name": "Ashira",
+  "category": "Mob camp",
+  "note": "",
+  "x": 2414,
+  "y": 1817,
+  "levels": [
+   6,
+   10
+  ],
+  "mobs": []
+ },
+ {
+  "id": "community-801",
+  "community": true,
+  "name": "Fishing",
+  "category": "Fishing spot",
+  "note": "",
+  "x": 6319,
+  "y": 3089,
+  "fish": [
+   {
+    "name": "Thorn Sturgeon"
+   },
+   {
+    "name": "Green Eye Bass"
+   }
+  ]
+ },
+ {
+  "id": "community-803",
+  "community": true,
+  "name": "Fishing",
+  "category": "Fishing spot",
+  "note": "",
+  "x": 5366,
+  "y": 3067,
+  "fish": [
+   {
+    "name": "Thorn Sturgeon"
+   },
+   {
+    "name": "Grouper"
+   },
+   {
+    "name": "Basa"
+   }
+  ]
+ },
+ {
+  "id": "community-810",
+  "community": true,
+  "name": "Fishing",
+  "category": "Fishing spot",
+  "note": "",
+  "x": 3922,
+  "y": 3001,
+  "fish": [
+   {
+    "name": "Spotted Angelfish"
+   },
+   {
+    "name": "Oasis Perch"
+   },
+   {
+    "name": "Tainted Guppy"
+   }
+  ]
+ },
+ {
+  "id": "community-812",
+  "community": true,
+  "name": "Fishing",
+  "category": "Fishing spot",
+  "note": "",
+  "x": 6775,
+  "y": 3855,
+  "fish": [
+   {
+    "name": "Whitefish"
+   },
+   {
+    "name": "Basa"
+   }
+  ]
+ },
+ {
+  "id": "community-815",
+  "community": true,
+  "name": "Fishing",
+  "category": "Fishing spot",
+  "note": "",
+  "x": 2276,
+  "y": 2515,
+  "fish": [
+   {
+    "name": "Basa"
+   },
+   {
+    "name": "Grouper"
+   },
+   {
+    "name": "Thorn Sturgeon"
+   }
+  ]
+ },
+ {
+  "id": "community-816",
+  "community": true,
+  "name": "Monk Starter",
+  "category": "Quest",
+  "note": "Stand under Waterfall and drink Elixir of Mental Focus",
+  "x": 2297,
+  "y": 2644,
+  "wiki": "https://monstersandmemories.wiki/quests/monk-starter-quest-night-harbor"
+ }
+]

@@ -1,0 +1,254 @@
+{
+  "map": "underdocks",
+  "tileRevision": "v2",
+  "coordinateZoom": 5,
+  "source": {
+    "title": "Keirvan's Underdocks bottom floor wiki map",
+    "url": "https://monstersandmemories.miraheze.org/wiki/File:UnderdocksBottomFloorCity.png",
+    "author": "Keirvan",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "changes": "Place names and locations adapted from Keirvan's Underdocks bottom floor map (CC BY-SA 4.0); positions adjusted to this map, abbreviations expanded."
+  },
+  "labels": [
+    {
+      "id": "wiki-rogue-cave",
+      "name": "Rogue back cave",
+      "x": 2576,
+      "y": 5108,
+      "level": "lower",
+      "approximate": true,
+      "note": "In a cave behind the western buildings.",
+      "kind": "building",
+      "tier": "building",
+      "priority": 40,
+      "minZoom": 4.5
+    },
+    {
+      "id": "wiki-stairs-up",
+      "name": "Stairs up",
+      "x": 2704,
+      "y": 5264,
+      "level": "lower",
+      "approximate": true,
+      "note": "Stairs on the western shore; destination to confirm in game.",
+      "kind": "building",
+      "tier": "building",
+      "priority": 40,
+      "minZoom": 4.5
+    },
+    {
+      "id": "wiki-druid-shaman-cave",
+      "name": "Druid / Shaman cave entrance",
+      "x": 3176,
+      "y": 5412,
+      "level": "lower",
+      "approximate": true,
+      "note": "Cave entrance; interior positions to confirm in game.",
+      "kind": "building",
+      "tier": "building",
+      "priority": 40,
+      "minZoom": 4.5
+    },
+    {
+      "id": "wiki-west-raft",
+      "name": "Raft — western shore",
+      "x": 3411,
+      "y": 4820,
+      "level": "lower",
+      "approximate": true,
+      "note": "",
+      "kind": "building",
+      "tier": "building",
+      "priority": 40,
+      "minZoom": 4.5
+    },
+    {
+      "id": "wiki-east-raft",
+      "name": "Raft — eastern shore",
+      "x": 4128,
+      "y": 4176,
+      "level": "lower",
+      "approximate": true,
+      "note": "",
+      "kind": "building",
+      "tier": "building",
+      "priority": 40,
+      "minZoom": 4.5
+    },
+    {
+      "id": "wiki-boat-de-city",
+      "name": "Boat to Ail'Vorith",
+      "x": 3460,
+      "y": 3868,
+      "level": "lower",
+      "approximate": true,
+      "note": "Departs 3am, 11am and 7pm. Game time: type /time in game. Be on board before it leaves.",
+      "kind": "exit",
+      "tier": "exit",
+      "priority": 75,
+      "minZoom": 3.75,
+      "arrow": "northwest",
+      "toMap": "ail-vorith",
+      "route": [
+        {
+          "map": "underdocks",
+          "place": "wiki-boat-de-city"
+        },
+        {
+          "map": "caves-of-irem",
+          "place": "boat-route"
+        },
+        {
+          "map": "great-cavern-sea",
+          "place": "boat-route"
+        },
+        {
+          "map": "ail-vorith",
+          "place": "to-great-cavern-sea"
+        }
+      ],
+      "timesSource": {
+        "title": "Boats",
+        "site": "Monsters and Memories Wiki",
+        "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "id": "wiki-bath-house",
+      "name": "Bath house",
+      "x": 3842,
+      "y": 4634,
+      "level": "lower",
+      "approximate": true,
+      "note": "Basement.",
+      "kind": "building",
+      "tier": "building",
+      "priority": 40,
+      "minZoom": 4.5
+    },
+    {
+      "id": "upper-to-night-harbor",
+      "name": "to Night Harbor",
+      "x": 4329,
+      "y": 5433,
+      "level": "upper",
+      "kind": "exit",
+      "tier": "exit",
+      "priority": 75,
+      "minZoom": 3.75,
+      "arrow": "east",
+      "toMap": "night-harbor",
+      "toPlace": "place-37"
+    },
+    {
+      "id": "to-caves-of-irem",
+      "name": "to Caves of Irem",
+      "x": 260,
+      "y": 1040,
+      "level": "lower",
+      "kind": "exit",
+      "tier": "exit",
+      "priority": 90,
+      "minZoom": 2,
+      "arrow": "northwest",
+      "approximate": true,
+      "note": "The river runs on to the Caves of Irem.",
+      "toMap": "caves-of-irem",
+      "toPlace": "to-underdocks"
+    },
+    {
+      "id": "community-498",
+      "community": true,
+      "name": "Graveyard",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "",
+      "x": 5238,
+      "y": 4016,
+      "level": "lower"
+    }
+  ],
+  "trainers": [
+    {
+      "id": "class-elementalist-wizard-enchanter",
+      "abbreviations": [
+        "ELE",
+        "WIZ",
+        "ENC"
+      ],
+      "classes": [
+        "Elementalist",
+        "Wizard",
+        "Enchanter"
+      ],
+      "building": "Elementalist / Wizard / Enchanter trainers",
+      "x": 4408,
+      "y": 3638,
+      "level": "lower"
+    },
+    {
+      "id": "class-archer-warrior-ranger",
+      "abbreviations": [
+        "ARC",
+        "FTR",
+        "RNG"
+      ],
+      "classes": [
+        "Archer",
+        "Fighter",
+        "Ranger"
+      ],
+      "building": "Archer / Fighter / Ranger trainers",
+      "x": 4527,
+      "y": 3759,
+      "level": "lower",
+      "name": "Fighter / Ranger trainers"
+    },
+    {
+      "id": "class-necromancer-cleric-shadowknight",
+      "abbreviations": [
+        "CLR",
+        "SHD"
+      ],
+      "classes": [
+        "Cleric",
+        "Shadowknight"
+      ],
+      "building": "Cleric / Shadowknight trainers",
+      "x": 5452,
+      "y": 4283,
+      "level": "lower"
+    },
+    {
+      "id": "class-druid",
+      "abbreviations": [
+        "DRU"
+      ],
+      "classes": [
+        "Druid"
+      ],
+      "building": "Druid trainer",
+      "x": 3332,
+      "y": 5668,
+      "level": "lower"
+    },
+    {
+      "id": "class-rogue",
+      "abbreviations": [
+        "ROG"
+      ],
+      "classes": [
+        "Rogue"
+      ],
+      "building": "Rogue trainer",
+      "x": 2549,
+      "y": 5074,
+      "level": "lower"
+    }
+  ],
+  "version": 1
+}

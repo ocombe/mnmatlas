@@ -1,0 +1,833 @@
+[
+ {
+  "id": "penshaw-red-mantle",
+  "name": "Detective Brunsworth",
+  "category": "Quest NPC",
+  "x": 2702,
+  "y": 2884,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the tan stone building with a minaret and Red Mantle banners, in the middle of Penshaw.",
+  "wiki": "https://monstersandmemories.wiki/npcs/detective-brunsworth",
+  "wikiId": "npc-detective-brunsworth"
+ },
+ {
+  "id": "penshaw-red-mantle-reeve-thurston-winter",
+  "name": "Reeve Thurston Winter",
+  "category": "Quest NPC",
+  "x": 2724,
+  "y": 2884,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the tan stone building with a minaret and Red Mantle banners, in the middle of Penshaw.",
+  "wiki": "https://monstersandmemories.wiki/npcs/reeve-thurston-winter",
+  "wikiId": "npc-reeve-thurston-winter"
+ },
+ {
+  "id": "krelvya-drynn",
+  "name": "Krelvya Drynn (level 60+)",
+  "category": "Quest NPC",
+  "x": 2159,
+  "y": 3603,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the top of the Red Mantle tower in the south-west of Penshaw.",
+  "wiki": "https://monstersandmemories.wiki/npcs/krelvya-drynn",
+  "wikiId": "npc-krelvya-drynn",
+  "community": true
+ },
+ {
+  "id": "dubar-falshim",
+  "name": "Dubar Falshim (level 42)",
+  "category": "Notable NPC",
+  "x": 2800,
+  "y": 2752,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In Penshaw.",
+  "wiki": "https://monstersandmemories.wiki/npcs/dubar-falshim",
+  "wikiId": "npc-dubar-falshim"
+ },
+ {
+  "id": "wheelhouse-tavern",
+  "name": "Wheelhouse Tavern (Tracker Baumery at the bar)",
+  "category": "Inn",
+  "x": 2916,
+  "y": 2801,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Tavern in Penshaw."
+ },
+ {
+  "id": "harbor-office",
+  "name": "Harbormaster Greywake",
+  "category": "Quest NPC",
+  "x": 2105,
+  "y": 3174,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the last building on the docks, farthest from the lifts.",
+  "wiki": "https://monstersandmemories.wiki/npcs/harbormaster-greywake",
+  "wikiId": "npc-harbormaster-greywake",
+  "community": true
+ },
+ {
+  "id": "harbor-office-customs-agent-priorton",
+  "name": "Customs Agent Priorton",
+  "category": "Quest NPC",
+  "x": 2094,
+  "y": 3166,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the last building on the docks, farthest from the lifts.",
+  "wiki": "https://monstersandmemories.wiki/npcs/customs-agent-priorton",
+  "wikiId": "npc-customs-agent-priorton",
+  "community": true
+ },
+ {
+  "id": "dock-lift",
+  "name": "Lift between the docks and Penshaw",
+  "category": "Lift",
+  "x": 2275,
+  "y": 2705,
+  "minZoom": 3,
+  "approximate": true,
+  "note": ""
+ },
+ {
+  "id": "farmers",
+  "name": "Brenna McMiller",
+  "category": "Quest NPC",
+  "x": 2695,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brenna-mcmiller",
+  "wikiId": "npc-brenna-mcmiller"
+ },
+ {
+  "id": "farmers-calen-mcmiller",
+  "name": "Calen McMiller",
+  "category": "Quest NPC",
+  "x": 2717,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left.",
+  "wiki": "https://monstersandmemories.wiki/npcs/calen-mcmiller",
+  "wikiId": "npc-calen-mcmiller"
+ },
+ {
+  "id": "farmers-garrick-harlow",
+  "name": "Garrick Harlow",
+  "category": "Notable NPC",
+  "x": 2739,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left.",
+  "wiki": "https://monstersandmemories.wiki/npcs/garrick-harlow",
+  "wikiId": "npc-garrick-harlow"
+ },
+ {
+  "id": "farmers-mira-harlow",
+  "name": "Mira Harlow",
+  "category": "Notable NPC",
+  "x": 2761,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left.",
+  "wiki": "https://monstersandmemories.wiki/npcs/mira-harlow",
+  "wikiId": "npc-mira-harlow"
+ },
+ {
+  "id": "farmers-hazel",
+  "name": "Hazel",
+  "category": "Notable NPC",
+  "x": 2783,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left.",
+  "wiki": "https://monstersandmemories.wiki/npcs/hazel",
+  "wikiId": "npc-hazel"
+ },
+ {
+  "id": "farmers-heather",
+  "name": "Heather",
+  "category": "Notable NPC",
+  "x": 2805,
+  "y": 3694,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the farms south of Penshaw along the road: the McMillers at the first farm on the right, the Harlows at the second on the right, Hazel and Heather at the second on the left.",
+  "wiki": "https://monstersandmemories.wiki/npcs/heather",
+  "wikiId": "npc-heather"
+ },
+ {
+  "id": "thoren-blackwood",
+  "name": "Thoren Blackwood",
+  "category": "Named mob",
+  "levels": [
+   25,
+   25
+  ],
+  "x": 2009,
+  "y": 5307,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the shady farm.",
+  "wiki": "https://monstersandmemories.wiki/npcs/thoren-blackwood",
+  "wikiId": "npc-thoren-blackwood"
+ },
+ {
+  "id": "hanging-garden-inn",
+  "name": "Hanging Garden Inn",
+  "category": "Inn",
+  "x": 4848,
+  "y": 5523,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Tree house inn. Skree and Felgin Ironwhisker at the bar, Ranger Rylin at the top."
+ },
+ {
+  "id": "timberfang",
+  "name": "Timberfang",
+  "category": "Named mob",
+  "x": 4588,
+  "y": 5563,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Near the western cliffs by the tree house.",
+  "wiki": "https://monstersandmemories.wiki/npcs/timberfang",
+  "wikiId": "npc-timberfang"
+ },
+ {
+  "id": "poachers-28-30-1",
+  "name": "Poachers",
+  "category": "Mob camp",
+  "levels": [
+   28,
+   30
+  ],
+  "mobs": [
+   {
+    "name": "Poachers",
+    "wikiId": "npc-a-poacher",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-poacher"
+   }
+  ],
+  "x": 5474,
+  "y": 4123,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Poacher camp at the hunting lodge: bruisers, herbalists, pathfinders.",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-poacher",
+  "wikiId": "npc-a-poacher"
+ },
+ {
+  "id": "poacher-named",
+  "name": "Poacher Garrus",
+  "category": "Named mob",
+  "x": 5604,
+  "y": 4043,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the poacher camp.",
+  "wiki": "https://monstersandmemories.wiki/npcs/poacher-garrus",
+  "wikiId": "npc-poacher-garrus"
+ },
+ {
+  "id": "poacher-named-poacher-tolan",
+  "name": "Poacher Tolan",
+  "category": "Named mob",
+  "x": 5626,
+  "y": 4043,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the poacher camp.",
+  "wiki": "https://monstersandmemories.wiki/npcs/poacher-tolan",
+  "wikiId": "npc-poacher-tolan"
+ },
+ {
+  "id": "redpaw",
+  "name": "Redpaw",
+  "category": "Named mob",
+  "levels": [
+   25,
+   25
+  ],
+  "x": 3832,
+  "y": 4592,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Bear Cave.",
+  "wiki": "https://monstersandmemories.wiki/npcs/redpaw",
+  "wikiId": "npc-redpaw"
+ },
+ {
+  "id": "bear-cave-npcs",
+  "name": "Poacher Wilna",
+  "category": "Named mob",
+  "x": 3972,
+  "y": 4512,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Bear Cave.",
+  "wiki": "https://monstersandmemories.wiki/npcs/poacher-wilna",
+  "wikiId": "npc-poacher-wilna",
+  "community": true
+ },
+ {
+  "id": "bear-cave-npcs-fendris-the-forsaken",
+  "name": "Fendris the Forsaken",
+  "category": "Named mob",
+  "x": 3994,
+  "y": 4512,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Bear Cave.",
+  "wiki": "https://monstersandmemories.wiki/npcs/fendris-the-forsaken",
+  "wikiId": "npc-fendris-the-forsaken",
+  "community": true
+ },
+ {
+  "id": "lumberjacks",
+  "name": "Brother Gurrom",
+  "category": "Quest NPC",
+  "x": 2799,
+  "y": 2177,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the lumberjack camp.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brother-gurrom",
+  "wikiId": "npc-brother-gurrom",
+  "community": true
+ },
+ {
+  "id": "lumberjacks-brother-juro",
+  "name": "Brother Juro",
+  "category": "Quest NPC",
+  "x": 2843,
+  "y": 2185,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the lumberjack camp.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brother-juro",
+  "wikiId": "npc-brother-juro",
+  "community": true
+ },
+ {
+  "id": "wood-elves",
+  "name": "Ranger Valegazer",
+  "category": "Quest NPC",
+  "x": 3869,
+  "y": 1565,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Wood elf camp (scouts and bridge guards) on the way to Evershade Weald; guards Irilis and Velbloom stand at the entrance to Evershade Weald.",
+  "wiki": "https://monstersandmemories.wiki/npcs/ranger-valegazer",
+  "wikiId": "npc-ranger-valegazer",
+  "community": true
+ },
+ {
+  "id": "widow-vethra",
+  "name": "Widow Vethra",
+  "category": "Named mob",
+  "levels": [
+   16,
+   16
+  ],
+  "x": 2345,
+  "y": 1302,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "At the spider log.",
+  "wiki": "https://monstersandmemories.wiki/npcs/widow-vethra",
+  "wikiId": "npc-widow-vethra"
+ },
+ {
+  "id": "blacktide-23-25-1",
+  "name": "Blacktide crew and slavers",
+  "category": "Mob camp",
+  "levels": [
+   23,
+   25
+  ],
+  "x": 2135,
+  "y": 6483,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Around Blacktide Bay: acolytes, bowmen, brutes, guards, raiders, seers, slavers, trackers and warmages, with enslaved dwarves, gnomes and humans and a Bloodchain overseer."
+ },
+ {
+  "id": "brakzul",
+  "name": "Brak'zul Bonecarver",
+  "category": "Named mob",
+  "levels": [
+   28,
+   28
+  ],
+  "x": 2588,
+  "y": 6266,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In a tent in the enslaved elf pens.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brakzul-bonecarver",
+  "wikiId": "npc-brakzul-bonecarver",
+  "community": true
+ },
+ {
+  "id": "orc-cave-named",
+  "name": "Belthakar Dunecaller",
+  "category": "Named mob",
+  "levels": [
+   26,
+   26
+  ],
+  "x": 2706,
+  "y": 6574,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Orc Cave.",
+  "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
+  "wikiId": "npc-belthakar-dunecaller"
+ },
+ {
+  "id": "orc-cave-named-rarthan-wartide",
+  "name": "Rarthan Wartide",
+  "category": "Named mob",
+  "levels": [
+   26,
+   26
+  ],
+  "x": 2728,
+  "y": 6574,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "In the Orc Cave.",
+  "wiki": "https://monstersandmemories.wiki/npcs/rarthan-wartide",
+  "wikiId": "npc-rarthan-wartide"
+ },
+ {
+  "id": "brukk-goldgut",
+  "name": "Brukk Goldgut",
+  "category": "Named mob",
+  "levels": [
+   45,
+   45
+  ],
+  "x": 3605,
+  "y": 7333,
+  "minZoom": 3,
+  "approximate": true,
+  "note": "Hill giant bandits. At the giants’ fire near the road to the Vale of Zintar.",
+  "wiki": "https://monstersandmemories.wiki/npcs/brukk-goldgut",
+  "wikiId": "npc-brukk-goldgut"
+ },
+ {
+  "id": "community-308",
+  "community": true,
+  "name": "Captain Hale",
+  "category": "Quest NPC",
+  "note": "At the docks of Penshaw. Hale is in the last ship, farthest out from the lifts.",
+  "x": 1896,
+  "y": 3232,
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-hale",
+  "wikiId": "npc-captain-hale"
+ },
+ {
+  "id": "community-309",
+  "community": true,
+  "name": "Captain Hale's Crates",
+  "category": "Quest",
+  "note": "Watch out for sharks.",
+  "x": 1186,
+  "y": 3152,
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-hale",
+  "wikiId": "npc-captain-hale"
+ },
+ {
+  "id": "community-380",
+  "community": true,
+  "name": "Mirella Nighthorn",
+  "category": "Named mob",
+  "levels": [
+   25,
+   25
+  ],
+  "note": "Large northern Sangrel camp, Multiple PHs",
+  "x": 2165,
+  "y": 769,
+  "wiki": "https://monstersandmemories.wiki/npcs/mirella-nighthorn",
+  "wikiId": "npc-mirella-nighthorn"
+ },
+ {
+  "id": "community-407",
+  "community": true,
+  "name": "Sangrels camp",
+  "category": "Mob camp",
+  "note": "",
+  "x": 2229,
+  "y": 798,
+  "levels": [
+   22,
+   26
+  ],
+  "mobs": [
+   {
+    "name": "A Sangrel arcanist",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-arcanist",
+    "wikiId": "npc-a-sangrel-arcanist"
+   },
+   {
+    "name": "A Sangrel entangler",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-entangler",
+    "wikiId": "npc-a-sangrel-entangler"
+   },
+   {
+    "name": "A Sangrel grappler",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-grappler",
+    "wikiId": "npc-a-sangrel-grappler"
+   },
+   {
+    "name": "A Sangrel hunter",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-hunter",
+    "wikiId": "npc-a-sangrel-hunter"
+   },
+   {
+    "name": "A Sangrel shadowblade",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-shadowblade",
+    "wikiId": "npc-a-sangrel-shadowblade"
+   },
+   {
+    "name": "A Sangrel striker",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-striker",
+    "wikiId": "npc-a-sangrel-striker"
+   }
+  ]
+ },
+ {
+  "id": "community-462",
+  "community": true,
+  "name": "Sangrels",
+  "category": "Mob camp",
+  "note": "",
+  "x": 5592,
+  "y": 5434,
+  "levels": [
+   16,
+   18
+  ],
+  "mobs": [
+   {
+    "name": "A Sangrel arcanist",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-arcanist",
+    "wikiId": "npc-a-sangrel-arcanist"
+   },
+   {
+    "name": "A Sangrel striker",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-striker",
+    "wikiId": "npc-a-sangrel-striker"
+   },
+   {
+    "name": "A Sangrel grappler",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-grappler",
+    "wikiId": "npc-a-sangrel-grappler"
+   },
+   {
+    "name": "A Sangrel entangler",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-entangler",
+    "wikiId": "npc-a-sangrel-entangler"
+   },
+   {
+    "name": "A Sangrel hunter",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-hunter",
+    "wikiId": "npc-a-sangrel-hunter"
+   },
+   {
+    "name": "A Sangrel shadowblade",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sangrel-shadowblade",
+    "wikiId": "npc-a-sangrel-shadowblade"
+   }
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     5486,
+     5064
+    ],
+    [
+     5614,
+     5094
+    ],
+    [
+     5694,
+     5532
+    ],
+    [
+     5676,
+     5706
+    ],
+    [
+     5532,
+     5816
+    ],
+    [
+     5534,
+     5398
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-465",
+  "community": true,
+  "name": "Felgin Ironwhisker",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 4894,
+  "y": 5586,
+  "wiki": "https://monstersandmemories.wiki/npcs/felgin-ironwhisker",
+  "wikiId": "npc-felgin-ironwhisker"
+ },
+ {
+  "id": "community-466",
+  "community": true,
+  "name": "Alysse Selegrass",
+  "category": "Vendor",
+  "note": "",
+  "x": 4914,
+  "y": 5560,
+  "wiki": "https://monstersandmemories.wiki/npcs/alysse-selegrass",
+  "wikiId": "npc-alysse-selegrass"
+ },
+ {
+  "id": "community-467",
+  "community": true,
+  "name": "Lloyd Matthias",
+  "category": "Vendor",
+  "note": "",
+  "x": 4872,
+  "y": 5558,
+  "wiki": "https://monstersandmemories.wiki/npcs/lloyd-matthias",
+  "wikiId": "npc-lloyd-matthias"
+ },
+ {
+  "id": "community-468",
+  "community": true,
+  "name": "Faelar Thistlebrook",
+  "category": "Vendor",
+  "note": "",
+  "x": 3586,
+  "y": 5854,
+  "wiki": "https://monstersandmemories.wiki/npcs/faelar-thistlebrook",
+  "wikiId": "npc-faelar-thistlebrook"
+ },
+ {
+  "id": "community-482",
+  "community": true,
+  "name": "Sacristan Lorik",
+  "category": "Vendor",
+  "note": "Sells Ritual Oil (1gp 23sp)",
+  "x": 2114,
+  "y": 4295
+ },
+ {
+  "id": "community-742",
+  "community": true,
+  "name": "a blacksmith",
+  "category": "Vendor",
+  "note": "scraps, gems, blacksmithing supplies, and other blacksmithing materials",
+  "x": 2886,
+  "y": 3005,
+  "vendor": "Blacksmithing vendor",
+  "sells": [
+   "Materials"
+  ]
+ },
+ {
+  "id": "community-744",
+  "community": true,
+  "name": "Sybille Abegg",
+  "category": "Vendor",
+  "note": "Village of Penshaw - Mossy Brook Inn",
+  "x": 2715,
+  "y": 3024,
+  "vendor": "Cook",
+  "wiki": "https://monstersandmemories.wiki/npcs/sybille-abegg",
+  "wikiId": "npc-sybille-abegg"
+ },
+ {
+  "id": "community-745",
+  "community": true,
+  "name": "Harold Abegg",
+  "category": "Vendor",
+  "note": "Village of Penshaw - Mossy Brook Inn",
+  "x": 2783,
+  "y": 2992,
+  "vendor": "Innkeeper",
+  "wiki": "https://monstersandmemories.wiki/npcs/harold-abegg",
+  "wikiId": "npc-harold-abegg"
+ },
+ {
+  "id": "community-747",
+  "community": true,
+  "name": "Tessa Kentwell",
+  "category": "Vendor",
+  "note": "In the tannery near the Red Mantle building.",
+  "x": 2724,
+  "y": 2766,
+  "vendor": "Tanning vendor",
+  "sells": [
+   "Materials"
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/tessa-kentwell",
+  "wikiId": "npc-tessa-kentwell"
+ },
+ {
+  "id": "community-748",
+  "community": true,
+  "name": "Hendrik Valbreken",
+  "category": "Vendor",
+  "note": "Timberwolf Trading Co.",
+  "x": 2865,
+  "y": 2617,
+  "vendor": "Adventuring supplies",
+  "wiki": "https://monstersandmemories.wiki/npcs/hendrik-valbreken",
+  "wikiId": "npc-hendrik-valbreken"
+ },
+ {
+  "id": "community-763",
+  "community": true,
+  "name": "Hendrick Valbreken",
+  "category": "Vendor",
+  "note": "",
+  "x": 2864,
+  "y": 2617,
+  "wiki": "https://monstersandmemories.wiki/npcs/hendrick-valbreken",
+  "wikiId": "npc-hendrick-valbreken"
+ },
+ {
+  "id": "community-764",
+  "community": true,
+  "name": "A stablemaster",
+  "category": "Stable",
+  "note": "",
+  "x": 3169,
+  "y": 2699,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-stablemaster",
+  "wikiId": "npc-a-stablemaster"
+ },
+ {
+  "id": "community-863",
+  "community": true,
+  "name": "A waning spirit (level 25+)",
+  "category": "Named mob",
+  "note": "",
+  "x": 4729,
+  "y": 2870,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/a-waning-spirit",
+  "wikiId": "npc-a-waining-spirit"
+ },
+ {
+  "id": "community-866",
+  "community": true,
+  "name": "Cyra Brinewell",
+  "category": "Vendor",
+  "note": "",
+  "x": 2105,
+  "y": 3119,
+  "wiki": "https://monstersandmemories.wiki/npcs/cyra-brinewell",
+  "wikiId": "npc-cyra-brinewell"
+ },
+ {
+  "id": "community-869",
+  "community": true,
+  "name": "Tolrad Oarsen",
+  "category": "Vendor",
+  "note": "",
+  "x": 2015,
+  "y": 3366,
+  "wiki": "https://monstersandmemories.wiki/npcs/tolrad-oarsen",
+  "wikiId": "npc-tolrad-oarsen"
+ },
+ {
+  "id": "community-871",
+  "community": true,
+  "name": "Otto Roth",
+  "category": "Vendor",
+  "note": "",
+  "x": 2921,
+  "y": 2788,
+  "wiki": "https://monstersandmemories.wiki/npcs/otto-roth",
+  "wikiId": "npc-otto-roth"
+ },
+ {
+  "id": "community-877",
+  "community": true,
+  "name": "A woodworker",
+  "category": "Vendor",
+  "note": "",
+  "x": 2875,
+  "y": 2201,
+  "vendor": "Lumberjack vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-woodworker",
+  "wikiId": "npc-a-woodworker"
+ },
+ {
+  "id": "community-888",
+  "community": true,
+  "name": "Fishing (60-120)",
+  "category": "Fishing spot",
+  "note": "Thorn Sturgeon\nMoontide Salmon",
+  "x": 1854,
+  "y": 2887,
+  "fish": []
+ },
+ {
+  "id": "community-893",
+  "community": true,
+  "name": "Aragon Brythe",
+  "category": "Vendor",
+  "note": "Vendor in the northern hallway selling Inquisitor scrolls.",
+  "x": 2185,
+  "y": 4149,
+  "vendor": "Spell scribe",
+  "sells": [
+   "Spell scrolls"
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/aragon-brythe",
+  "wikiId": "npc-aragon-brythe"
+ },
+ {
+  "id": "community-913",
+  "community": true,
+  "name": "A shady farmer",
+  "category": "Mob camp",
+  "note": "At the farms, south of Penshaw. First farm on the left, once arriving from the road.",
+  "x": 2129,
+  "y": 5346,
+  "levels": [
+   20,
+   24
+  ],
+  "mobs": [
+   {
+    "name": "A shady farmer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shady-farmer",
+    "wikiId": "npc-a-shady-farmer"
+   }
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/a-shady-farmer",
+  "wikiId": "npc-a-shady-farmer"
+ }
+]

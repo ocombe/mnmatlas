@@ -1,0 +1,1721 @@
+{
+  "version": 1,
+  "defaultMap": "world",
+  "maps": [
+    {
+      "id": "world",
+      "title": "World map",
+      "subtitle": "The known lands",
+      "cartoucheKicker": "Monsters & Memories",
+      "breadcrumb": "Monsters & Memories / World map",
+      "description": "The world of Monsters & Memories seen from far above, every charted zone painted where it lies: hover a zone to see its name, click a charted zone to open its map.",
+      "width": 2768,
+      "height": 2544,
+      "minZoom": 0,
+      "maxNativeZoom": 4,
+      "maxZoom": 5,
+      "coordinateZoom": 4,
+      "tileSize": 256,
+      "tileRevision": "v5",
+      "tilePath": "assets/tiles/world/{z}/{x}/{y}.webp",
+      "markersFile": "data/world/markers.json",
+      "labelsFile": "data/world/labels.json",
+      "hiddenAreasFile": null,
+      "zonesFile": "data/world/zones.json",
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 2
+      },
+      "extraCategories": {
+        "Dungeon": [
+          "⛫",
+          "#5a3b1e"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Zone connections after the Monsters and Memories Wiki · zone shapes and lines approximate",
+        "sourceTitle": "Monsters and Memories Wiki: Zones & World Map",
+        "sourceUrl": "https://monstersandmemories.wiki/zones",
+        "license": "Used with the wiki's permission",
+        "licenseUrl": "https://monstersandmemories.wiki/zones",
+        "changes": "Which zones connect follows the wiki's zone list; shapes, positions and lines are drawn for this atlas and approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {},
+      "colourTilePath": null,
+      "entry": true,
+      "worn": false,
+      "defaultLevel": "surface",
+      "levels": [
+        {
+          "id": "surface",
+          "title": "Surface",
+          "tilePath": "assets/tiles/world/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "deep",
+          "title": "The Deep",
+          "levelSubtitle": "Beneath the known lands",
+          "width": 2464,
+          "height": 3440,
+          "tileRevision": "v7",
+          "tilePath": "assets/tiles/world-deep/{z}/{x}/{y}.webp",
+          "colourTilePath": null,
+          "zonesFile": "data/world/deep-zones.json",
+          "labelsFile": "data/world/deep-labels.json",
+          "markersFile": "data/world/deep-markers.json"
+        }
+      ]
+    },
+    {
+      "id": "night-harbor",
+      "title": "Night Harbor",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The Free City of",
+      "breadcrumb": "Monsters & Memories / Night Harbor",
+      "description": "An illustrated atlas of Night Harbor. Explore landmarks, find class trainers, and keep your own field notes.",
+      "width": 3072,
+      "height": 2688,
+      "frame": {
+        "x": 192,
+        "y": 352,
+        "width": 2880,
+        "height": 2336
+      },
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "coordinateZoom": 4,
+      "maxZoom": 6,
+      "tilePath": "assets/tiles/night-harbor-v2/{z}/{x}/{y}.webp",
+      "markersFile": "data/markers.json",
+      "labelsFile": "data/labels.json",
+      "hiddenAreasFile": "data/hidden-areas.json",
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 3.5
+      },
+      "extraCategories": {
+        "Teleporter": [
+          "✦",
+          "#385f60"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names & guilds adapted from Maggot’s wiki map · approximate",
+        "sourceTitle": "Maggot’s Night Harbor V5 wiki map",
+        "sourceUrl": "https://static.wikitide.net/monstersandmemorieswiki/5/5a/Night_harbor_V5.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names and guild locations adapted from Maggot's Night Harbor map (CC BY-SA 4.0); positions adjusted to this map, 'Docs' corrected to 'Docks'."
+      },
+      "hiddenPrimaryStack": {
+        "lower": "stone-hall",
+        "upper": "upper-stone",
+        "lowerLabel": "lower stone halls",
+        "upperLabel": "upper stone gallery"
+      },
+      "legacyStorage": {
+        "notesKey": "mnmaps-night-harbor-notes-v1",
+        "notesRevision": "previous",
+        "hiddenKey": "mnmaps-night-harbor-hidden-areas"
+      },
+      "migratePreviousStorage": true,
+      "city": true
+    },
+    {
+      "id": "underdocks",
+      "title": "Underdocks",
+      "subtitle": "Two levels beneath the city",
+      "cartoucheKicker": "The hidden harbour",
+      "breadcrumb": "Monsters & Memories / Underdocks",
+      "description": "An illustrated fan atlas of the Underdocks. Explore the lower docks and upper city, find places, and keep your own field notes.",
+      "width": 6144,
+      "height": 6496,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v3",
+      "tilePath": "assets/tiles/underdocks/lower/{z}/{x}/{y}.webp",
+      "markersFile": "data/underdocks/markers.json",
+      "labelsFile": "data/underdocks/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "lower",
+      "levels": [
+        {
+          "id": "lower",
+          "title": "Lower docks",
+          "tilePath": "assets/tiles/underdocks/lower/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "upper",
+          "title": "Upper city",
+          "tilePath": "assets/tiles/underdocks/upper/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Lift": [
+          "↕",
+          "#64795b"
+        ],
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names & locations adapted from Keirvan’s wiki map · approximate",
+        "sourceTitle": "Keirvan’s Underdocks bottom floor wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:UnderdocksBottomFloorCity.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names and locations adapted from Keirvan's Underdocks bottom floor map (CC BY-SA 4.0); positions adjusted to this map, abbreviations expanded."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "ail-vorith",
+      "title": "Ail'Vorith",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The cavern city",
+      "breadcrumb": "Monsters & Memories / Ail'Vorith",
+      "description": "Explore Ail'Vorith, the Foreign Quarter and the cavern lake in this illustrated fan atlas.",
+      "width": 7424,
+      "height": 8192,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "tilePath": "assets/tiles/ail-vorith/{z}/{x}/{y}.webp",
+      "markersFile": "data/ail-vorith/markers.json",
+      "labelsFile": "data/ail-vorith/labels.json",
+      "hiddenAreasFile": "data/ail-vorith/hidden-areas.json",
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Vendor": [
+          "◈",
+          "#916c30"
+        ],
+        "Guild": [
+          "⚑",
+          "#4e4668"
+        ],
+        "Teleporter": [
+          "✦",
+          "#385f60"
+        ],
+        "Exit": [
+          "↗",
+          "#64795b"
+        ],
+        "Forge": [
+          "⚒",
+          "#665e3e"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Foreign Quarter layout after the community map by Neeferio, CC BY-SA 4.0",
+        "sourceTitle": "Neeferio's Foreign Quarter map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Ailvorith_foreignquarters2.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and locations adapted from the Foreign Quarter community map; positions adjusted to this illustration and class abbreviations expanded."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {},
+      "city": true
+    },
+    {
+      "id": "faelindral",
+      "title": "Faelindral",
+      "subtitle": "The city in the trees",
+      "cartoucheKicker": "Among the branches",
+      "breadcrumb": "Monsters & Memories / Faelindral",
+      "description": "An illustrated fan atlas of Faelindral, the city in the trees: its platforms, lifts and guild halls, with place names and personal field notes. The forest floor below is the Evershade Weald map.",
+      "width": 2920,
+      "height": 2860,
+      "minZoom": 0,
+      "maxNativeZoom": 4,
+      "maxZoom": 6,
+      "coordinateZoom": 4,
+      "tileSize": 256,
+      "tileRevision": "platforms-maggot-v1",
+      "tilePath": "assets/tiles/faelindral/platforms/{z}/{x}/{y}.webp",
+      "markersFile": "data/faelindral/markers.json",
+      "labelsFile": "data/faelindral/platforms-labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "extraCategories": {
+        "Lift": [
+          "↕",
+          "#64795b"
+        ],
+        "Level connection": [
+          "↕",
+          "#64795b"
+        ],
+        "Vendor": [
+          "◇",
+          "#876036"
+        ],
+        "Respawn point": [
+          "★",
+          "#614b32"
+        ],
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Platforms adapted from Maggot's Faelindral map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Faelindral wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Faelindral_V2.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Platforms artwork, markers and place names adapted from Maggot's Faelindral map. Artwork licensed CC BY-SA 4.0; raised deck restored and ground bridge omitted. Locations approximate. Other artwork and site licences unchanged."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {},
+      "artworkCredits": [
+        {
+          "map": "Illustrated fan atlas · Not an official game map",
+          "text": "Platforms artwork, markers and place names: adapted from Maggot's Faelindral map, licensed CC BY-SA 4.0. Other artwork and site licences remain unchanged.",
+          "sourceTitle": "Maggot's Faelindral wiki map",
+          "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Faelindral_V2.jpg",
+          "license": "CC BY-SA 4.0",
+          "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+          "changes": "Platforms artwork, markers and place names adapted from Maggot's Faelindral map. Artwork licensed CC BY-SA 4.0; raised deck restored and ground bridge omitted. Locations approximate. Other artwork and site licences unchanged."
+        }
+      ],
+      "alignmentGroup": "platforms",
+      "levelSubtitle": "Simplified view",
+      "viewNote": "Simplified view: platform layout, distances and heights are approximate.",
+      "linkedMaps": [
+        {
+          "map": "evershade-weald",
+          "title": "Evershade Weald (ground)"
+        },
+        {
+          "map": "faelindral",
+          "title": "Faelindral (platforms)"
+        }
+      ],
+      "wikiPlaces": [
+        "Faelindral city",
+        "in Faelindral",
+        "Sentinel's Terrace",
+        "Sentinel's Gaze",
+        "Trader's Terrace",
+        "Ranger's Rest",
+        "Balanced Branch",
+        "Lambent Lantern",
+        "Heartwood Archives",
+        "Well of Order",
+        "Willows Whisper",
+        "Wayward Branch",
+        "Quite Den",
+        "Wayguard Garrison",
+        "Lower Tier",
+        "Kennels",
+        "Beastmaster guild",
+        "shaman guild",
+        "Weaponsmith",
+        "Tanner",
+        "Inn",
+        "archery range"
+      ],
+      "city": true
+    },
+    {
+      "id": "evershade-weald",
+      "title": "Evershade Weald",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The forest beneath Faelindral",
+      "breadcrumb": "Monsters & Memories / Evershade Weald",
+      "description": "An illustrated fan atlas of Evershade Weald: the shaded valley under Faelindral, its river, caves and camps, with place names and personal field notes.",
+      "width": 5312,
+      "height": 4160,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/evershade-weald/{z}/{x}/{y}.webp",
+      "markersFile": "data/evershade-weald/markers.json",
+      "labelsFile": "data/evershade-weald/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ],
+        "Respawn point": [
+          "★",
+          "#614b32"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Nindaan's Evershade Weald map (CC BY-SA 4.0)",
+        "sourceTitle": "Nindaan's Evershade Weald wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Evershade_Weald_june_26.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, caves, creature camps and exits adapted from Nindaan's Evershade Weald map; positions adjusted to this illustration and approximate; level bands from the community wiki's creature listings."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {},
+      "linkedMaps": [
+        {
+          "map": "evershade-weald",
+          "title": "Evershade Weald (ground)"
+        },
+        {
+          "map": "faelindral",
+          "title": "Faelindral (platforms)"
+        }
+      ],
+      "wikiPlaces": [
+        "bottom of",
+        "base of",
+        "foot of",
+        "stables"
+      ]
+    },
+    {
+      "id": "sungreet-strand",
+      "title": "Sungreet Strand",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The river valley",
+      "breadcrumb": "Monsters & Memories / Sungreet Strand",
+      "description": "An illustrated fan atlas of Sungreet Strand: the quarry, the palm groves, the river and its camps, with place names and personal field notes.",
+      "width": 6812,
+      "height": 9362,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/sungreet-strand/{z}/{x}/{y}.webp",
+      "markersFile": "data/sungreet-strand/markers.json",
+      "labelsFile": "data/sungreet-strand/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Maggot's Sungreet Strand map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Sungreet Strand wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Sungreet_Strand_v4.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, creature camps and notable NPC locations adapted from Maggot's Sungreet Strand map; positions adjusted to this illustration and approximate; level bands and creature types follow his legend."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "shaded-dunes",
+      "title": "Shaded Dunes",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The desert south of Night Harbor",
+      "breadcrumb": "Monsters & Memories / Shaded Dunes",
+      "description": "An illustrated fan atlas of Shaded Dunes: the crypt ruins, the oases, the dunes and the coast, with place names and personal field notes.",
+      "width": 7082,
+      "height": 5582,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/shaded-dunes/{z}/{x}/{y}.webp",
+      "markersFile": "data/shaded-dunes/markers.json",
+      "labelsFile": "data/shaded-dunes/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Maggot's Shaded Dunes map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Shaded Dunes wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Shaded_Dunes_Map.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, creature camps and notable NPC locations adapted from Maggot's Shaded Dunes map; positions adjusted to this illustration and approximate; level bands and creature types follow his legend."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "fallen-pass",
+      "title": "Fallen Pass",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The canyons west of Shaded Dunes",
+      "breadcrumb": "Monsters & Memories / Fallen Pass",
+      "description": "An illustrated fan atlas of Fallen Pass: the red canyons, the green lake, Fallen Watch and the coast, with place names and personal field notes.",
+      "width": 4320,
+      "height": 3968,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/fallen-pass/{z}/{x}/{y}.webp",
+      "markersFile": "data/fallen-pass/markers.json",
+      "labelsFile": "data/fallen-pass/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and markers after Maggot's Fallen Pass map (CC BY-SA 4.0)",
+        "sourceTitle": "Maggot's Fallen Pass wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Fallen_pass_v1.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, creature camps and notable NPC locations adapted from Maggot's Fallen Pass map; positions adjusted to this illustration and approximate; level bands and creature types follow his legend."
+      },
+      "artworkCredits": [
+        {
+          "map": "Illustrated fan atlas · Not an official game map",
+          "text": "Exits and place names also checked against the Monsters and Memories Wiki's Fallen Pass map, with the author's permission.",
+          "sourceTitle": "Monsters and Memories Wiki: Fallen Pass",
+          "sourceUrl": "https://monstersandmemories.wiki/zones/z-fallen-pass"
+        }
+      ],
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "wyrmsbane-tomb",
+      "title": "Tomb of the Last Wyrmsbane",
+      "subtitle": "Five floors beneath Night Harbor",
+      "cartoucheKicker": "The last resting place",
+      "breadcrumb": "Monsters & Memories / Tomb of the Last Wyrmsbane",
+      "description": "An illustrated fan atlas of the Tomb of the Last Wyrmsbane. Explore five floors, find the chapel, ossuary and elite tombs, and keep your own field notes.",
+      "width": 4416,
+      "height": 5664,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "tilePath": "assets/tiles/wyrmsbane-tomb/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/wyrmsbane-tomb/markers.json",
+      "labelsFile": "data/wyrmsbane-tomb/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "point",
+        "x": 2150,
+        "y": 2700,
+        "z": 2.5,
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Entrance halls",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Fork halls and chapel",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Ossuary and bone construct",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Elite tombs",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-4/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-5",
+          "title": "Deep caverns",
+          "tilePath": "assets/tiles/wyrmsbane-tomb/floor-5/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Walabus, Map by chazsolo and Map by Hogs (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Walabus",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:WyrmsbaneCombined_v0.91.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Walabus, Map by chazsolo and Map by Hogs; positions adjusted to this illustration and names expanded. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Walabus",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:WyrmsbaneCombined_v0.91.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:TombOfTheLastWyrmsbaneIsometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by Hogs",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Wyrmsbane_Tomb.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "glass-flats",
+      "title": "Glass Flats",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The salt flats north of Sungreet Strand",
+      "breadcrumb": "Monsters & Memories / Glass Flats",
+      "description": "An illustrated fan atlas of Glass Flats: the salt flats, the crystal fields, the undead keep and the camps, with place names and personal field notes.",
+      "width": 10812,
+      "height": 7856,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/glass-flats/{z}/{x}/{y}.webp",
+      "markersFile": "data/glass-flats/markers.json",
+      "labelsFile": "data/glass-flats/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Landmarks and exits after ElusiveGarden's Glass Flats map (CC BY-SA 4.0)",
+        "sourceTitle": "ElusiveGarden's Glass Flats wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Glass_Flats_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Landmarks and exits checked against ElusiveGarden's Glass Flats map; creature camps and named creatures placed from the community wiki's location notes; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "ancient-crypt",
+      "title": "Ancient Crypt",
+      "subtitle": "Three sheets beneath Shaded Dunes",
+      "cartoucheKicker": "Halls of the forgotten",
+      "breadcrumb": "Monsters & Memories / Ancient Crypt",
+      "description": "An illustrated fan atlas of Ancient Crypt. Explore the main halls, library loft, chapel and lower passages, and keep your own field notes.",
+      "width": 4256,
+      "height": 4672,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "tilePath": "assets/tiles/ancient-crypt/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/ancient-crypt/markers.json",
+      "labelsFile": "data/ancient-crypt/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Main halls",
+          "tilePath": "assets/tiles/ancient-crypt/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Library loft and chapel nave",
+          "tilePath": "assets/tiles/ancient-crypt/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Lower passages",
+          "tilePath": "assets/tiles/ancient-crypt/floor-3/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Doola (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Doola",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Ancient_Crypt_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Doola; positions adjusted to this illustration and names expanded. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Doola",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Ancient_Crypt_Map.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "infested-crypt",
+      "title": "Infested Crypt",
+      "subtitle": "Two floors beneath Shaded Dunes",
+      "cartoucheKicker": "The broodmother’s lair",
+      "breadcrumb": "Monsters & Memories / Infested Crypt",
+      "description": "An illustrated fan atlas of the Infested Crypt, a spider-ridden crypt behind a door in the rocks of Shaded Dunes. Explore its halls, the webbed balcony and the broodmother’s canopy across two floors, and keep your own field notes.",
+      "width": 3264,
+      "height": 1568,
+      "minZoom": 0,
+      "maxNativeZoom": 4,
+      "maxZoom": 6,
+      "coordinateZoom": 4,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/infested-crypt/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/infested-crypt/markers.json",
+      "labelsFile": "data/infested-crypt/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Crypt halls",
+          "tilePath": "assets/tiles/infested-crypt/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Balcony and webs",
+          "tilePath": "assets/tiles/infested-crypt/floor-2/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names after Map by Doola and Map by chazsolo (CC BY-SA 4.0)",
+        "sourceTitle": "Map by Doola",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Infested_Crypt_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Doola and Map by chazsolo. The adapted names carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Doola",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Infested_Crypt_Map.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Infested-crypt-isometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Room names only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "blacktide-bay",
+      "title": "Blacktide Bay",
+      "subtitle": "Two floors under the cliffs of Evershade Weald",
+      "cartoucheKicker": "The orcs’ hidden harbour",
+      "breadcrumb": "Monsters & Memories / Blacktide Bay",
+      "description": "An illustrated fan atlas of Blacktide Bay, an orc stronghold in a great sea cave reached by lift from Evershade Weald and Keeper’s Bight. Explore the upper caves and fortress, the waterfall caves, the beach camp and the ships at anchor across two floors, and keep your own field notes.",
+      "width": 8256,
+      "height": 7648,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/blacktide-bay/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/blacktide-bay/markers.json",
+      "labelsFile": "data/blacktide-bay/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "caves",
+          "title": "Keeper’s Bight caves",
+          "width": 2208,
+          "height": 2880,
+          "minZoom": 0,
+          "maxNativeZoom": 4,
+          "maxZoom": 6,
+          "coordinateZoom": 4,
+          "tileRevision": "caves-v1",
+          "alignmentGroup": "keepers-bight-caves",
+          "tilePath": "assets/tiles/blacktide-bay/caves/{z}/{x}/{y}.webp",
+          "labelsFile": "data/blacktide-bay/caves-labels.json",
+          "defaultView": {
+            "mode": "fit",
+            "padding": 18,
+            "placeZoom": 4
+          }
+        },
+        {
+          "id": "floor-1",
+          "title": "Upper caves and fortress",
+          "tilePath": "assets/tiles/blacktide-bay/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Lower caves, beach and bay",
+          "tilePath": "assets/tiles/blacktide-bay/floor-2/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Lift": [
+          "↕",
+          "#64795b"
+        ],
+        "Exit": [
+          "↗",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by chazsolo (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Blacktide_Bay.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by chazsolo; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Blacktide_Bay.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "scarwood",
+      "title": "Scarwood",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The scarred forest between Keeper’s Bight and the Fields of the Lost",
+      "breadcrumb": "Monsters & Memories / Scarwood",
+      "description": "An illustrated fan atlas of Scarwood: the scarred forest, the giants’ road, the lake over the Sunken Resort and the camps, with place names and personal field notes.",
+      "width": 10880,
+      "height": 6464,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/scarwood/{z}/{x}/{y}.webp",
+      "markersFile": "data/scarwood/markers.json",
+      "labelsFile": "data/scarwood/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Landmarks and exits after ElusiveGarden's Scarwood map (CC BY-SA 4.0)",
+        "sourceTitle": "ElusiveGarden's Scarwood wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Scarwood.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Landmarks and exits checked against ElusiveGarden's Scarwood map; camps and named creatures placed from the community wiki's location notes; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "vale-of-zintar",
+      "title": "Vale of Zintar",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The giants' vale north of Fallen Pass",
+      "breadcrumb": "Monsters & Memories / Vale of Zintar",
+      "description": "An illustrated fan atlas of the Vale of Zintar: the Sand Giant City, the lake camp, the Copper Mine, the Putrid Oasis and the coast, with place names and personal field notes.",
+      "width": 8640,
+      "height": 9728,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v3",
+      "tilePath": "assets/tiles/vale-of-zintar/{z}/{x}/{y}.webp",
+      "markersFile": "data/vale-of-zintar/markers.json",
+      "labelsFile": "data/vale-of-zintar/labels.json",
+      "hiddenAreasFile": null,
+      "overlays": [
+        {
+          "id": "floating-citadel",
+          "image": "assets/overlays/vale-of-zintar/floating-citadel.webp",
+          "x": 5376,
+          "y": 6656,
+          "width": 576,
+          "height": 640,
+          "opacity": 0.55
+        }
+      ],
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names, camps and exits after Ganderdot's Vale of Zintar map (CC BY-SA 4.0)",
+        "sourceTitle": "Ganderdot's Vale of Zintar wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Vale_of_Zintar_Map.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names, camps, named creatures and exits adapted from Ganderdot's Vale of Zintar map; positions placed on this illustration and approximate; entries he marked 'verify' are flagged."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "grain-cellar",
+      "title": "Grain Cellar",
+      "subtitle": "Beneath a Sungreet Strand granary",
+      "cartoucheKicker": "The cult below the farm",
+      "breadcrumb": "Monsters & Memories / Grain Cellar",
+      "description": "An illustrated fan atlas of the Grain Cellar. Find the grain bins, the cells, the cave tunnel and the crocodile altar, and keep your own field notes.",
+      "width": 4640,
+      "height": 4512,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "tilePath": "assets/tiles/grain-cellar/cellar/{z}/{x}/{y}.webp",
+      "markersFile": "data/grain-cellar/markers.json",
+      "labelsFile": "data/grain-cellar/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "cellar",
+      "levels": [
+        {
+          "id": "cellar",
+          "title": "Cellar",
+          "tilePath": "assets/tiles/grain-cellar/cellar/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "entrance",
+          "title": "Entrance stair",
+          "tilePath": "assets/tiles/grain-cellar/entrance/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by chazsolo and Map by Itsjustprax (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Grain_Cellar_Isometric.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by chazsolo and Map by Itsjustprax; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Grain_Cellar_Isometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          },
+          {
+            "sourceTitle": "Map by Itsjustprax",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Graincellar.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "great-cavern-sea",
+      "title": "Great Cavern Sea",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The underground sea of the Deep, between the Caves of Irem and Ail'Vorith",
+      "breadcrumb": "Monsters & Memories / Great Cavern Sea",
+      "description": "An illustrated fan atlas of the Great Cavern Sea: the vast underground sea of the Deep, its islands, the myconid village, the orc camp, the rat island and the roads to Ail'Vorith, the Caves of Irem and Rothold, with place names and personal field notes.",
+      "width": 7744,
+      "height": 10368,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "tilePath": "assets/tiles/great-cavern-sea/{z}/{x}/{y}.webp",
+      "markersFile": "data/great-cavern-sea/markers.json",
+      "labelsFile": "data/great-cavern-sea/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4.5
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Illustrated fan map; positions approximate.",
+        "sourceTitle": "",
+        "sourceUrl": "",
+        "license": "",
+        "licenseUrl": ""
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "caves-of-irem",
+      "title": "Caves of Irem",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "A buried sea of the Deep, beneath the Shaded Dunes",
+      "breadcrumb": "Monsters & Memories / Caves of Irem",
+      "description": "An illustrated fan atlas of the Caves of Irem: the underground sea and its glowing mushroom forest, the Pyramid Complex, the Cave of 1000 Eyes, the Green Lake and the roads to the Great Cavern Sea and the Underdocks, with place names and personal field notes.",
+      "width": 8064,
+      "height": 10112,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/caves-of-irem/{z}/{x}/{y}.webp",
+      "markersFile": "data/caves-of-irem/markers.json",
+      "labelsFile": "data/caves-of-irem/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4.5
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Place names and exits adapted from Naawa’s community map, CC BY-SA 4.0 · approximate",
+        "sourceTitle": "Naawa’s Caves of Irem wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Caves_of_Irem_By_Naawa.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Place names and exits adapted from Naawa's Caves of Irem map (CC BY-SA 4.0); positions adjusted to this map."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "tel-ekir",
+      "title": "Tel Ekir",
+      "subtitle": "The hidden canyon sanctuary",
+      "cartoucheKicker": "Beneath the Life Font",
+      "breadcrumb": "Monsters & Memories / Tel Ekir",
+      "description": "An illustrated fan atlas of Tel Ekir. Explore the canyon, the Life Font, the Ashira and Bloodynose camps and the tunnels of Hin Adaru across four floors, and keep your own field notes.",
+      "width": 4800,
+      "height": 4512,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/tel-ekir/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/tel-ekir/markers.json",
+      "labelsFile": "data/tel-ekir/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Canyon",
+          "tilePath": "assets/tiles/tel-ekir/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Tunnels",
+          "tilePath": "assets/tiles/tel-ekir/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Hidden rooms",
+          "tilePath": "assets/tiles/tel-ekir/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Hin Adaru inner rooms",
+          "tilePath": "assets/tiles/tel-ekir/floor-4/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by chazsolo (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by chazsolo",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Tel-ekir-isometric.jpg",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by chazsolo; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by chazsolo",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Tel-ekir-isometric.jpg",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "keepers-bight",
+      "title": "Keeper’s Bight",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The coast of Penshaw between Evershade Weald and the Vale of Zintar",
+      "breadcrumb": "Monsters & Memories / Keeper’s Bight",
+      "description": "An illustrated fan atlas of Keeper’s Bight: the town of Penshaw and its docks, the temple and farms, the forest with the Hanging Garden Inn, and Blacktide Bay, with place names and personal field notes.",
+      "width": 6528,
+      "height": 8064,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/keepers-bight/{z}/{x}/{y}.webp",
+      "markersFile": "data/keepers-bight/markers.json",
+      "labelsFile": "data/keepers-bight/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Landmarks and exits after ElusiveGarden's Keeper's Bight map (CC BY-SA 4.0)",
+        "sourceTitle": "ElusiveGarden's Keeper's Bight wiki map",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Keepersbighteg.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Landmarks and exits checked against ElusiveGarden's Keeper's Bight map; camps and named creatures placed from the community wiki's location notes; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "fallen-watch",
+      "title": "Fallen Watch",
+      "subtitle": "Seven floors of the ruined keep",
+      "cartoucheKicker": "The ruined keep",
+      "breadcrumb": "Monsters & Memories / Fallen Watch",
+      "description": "An illustrated fan atlas of Fallen Watch. Explore seven floors, from the ravine and lower caves to the keep grounds and upper towers, and keep your own field notes.",
+      "width": 4832,
+      "height": 4960,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/fallen-watch/floor-6/{z}/{x}/{y}.webp",
+      "markersFile": "data/fallen-watch/markers.json",
+      "labelsFile": "data/fallen-watch/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "point",
+        "x": 2110,
+        "y": 2360,
+        "z": 3,
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-6",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Ravine",
+          "tilePath": "assets/tiles/fallen-watch/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Lower caves",
+          "tilePath": "assets/tiles/fallen-watch/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Lvl 1 - Entrance halls",
+          "tilePath": "assets/tiles/fallen-watch/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Lvl 2 - Barracks",
+          "tilePath": "assets/tiles/fallen-watch/floor-4/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-5",
+          "title": "Lvl 3 - Dining hall",
+          "tilePath": "assets/tiles/fallen-watch/floor-5/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-6",
+          "title": "Keep grounds",
+          "tilePath": "assets/tiles/fallen-watch/floor-6/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-7",
+          "title": "Upper towers",
+          "tilePath": "assets/tiles/fallen-watch/floor-7/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Lift": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Skoop (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Skoop",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Fallen_watch_map_by_skoop.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Skoop; positions adjusted to this illustration and names expanded. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Skoop",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Fallen_watch_map_by_skoop.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "shallow-shoals",
+      "title": "Shallow Shoals",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "The islands off the coast between Keeper’s Bight and Fallen Pass",
+      "breadcrumb": "Monsters & Memories / Shallow Shoals",
+      "description": "An illustrated fan atlas of Shallow Shoals: the island archipelago with Zaedin’s Landing, Black Shoals Fortress, Pirate Island and Player Island, with place names and personal field notes.",
+      "width": 6976,
+      "height": 14784,
+      "minZoom": 0,
+      "maxNativeZoom": 6,
+      "maxZoom": 7,
+      "coordinateZoom": 6,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/shallow-shoals/{z}/{x}/{y}.webp",
+      "markersFile": "data/shallow-shoals/markers.json",
+      "labelsFile": "data/shallow-shoals/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "extraCategories": {
+        "Notable NPC": [
+          "●",
+          "#2388aa"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Island names and exits after ElusiveGarden's Shallow Shoals map; people and creatures from the community wiki (CC BY-SA 4.0)",
+        "sourceTitle": "Shallow Shoals, Monsters and Memories community wiki",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/Shallow_Shoals",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Island names and exits checked against ElusiveGarden's Shallow Shoals map; people and creatures placed from the community wiki's island lists; positions approximate."
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "glinting-hollow",
+      "title": "Glinting Hollow",
+      "subtitle": "A traveller’s chart",
+      "cartoucheKicker": "Six fae hollows beyond the Evershade Weald",
+      "breadcrumb": "Monsters & Memories / Glinting Hollow",
+      "description": "An illustrated fan atlas of Glinting Hollow, the fae caves reached by a druid portal from the Evershade Weald: six hollows of pine forest, pond, firepits, braziers, ice and glowing mushrooms, with place names and personal field notes.",
+      "width": 5184,
+      "height": 3488,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/glinting-hollow/{z}/{x}/{y}.webp",
+      "markersFile": "data/glinting-hollow/markers.json",
+      "labelsFile": "data/glinting-hollow/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Area names after community descriptions · approximate",
+        "sourceTitle": "",
+        "sourceUrl": "",
+        "license": "",
+        "licenseUrl": ""
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "sunken-resort",
+      "relief": "assets/relief/sunken-resort/",
+      "title": "Sunken Resort",
+      "subtitle": "Four floors beneath a Scarwood lake",
+      "cartoucheKicker": "The flooded halls",
+      "breadcrumb": "Monsters & Memories / Sunken Resort",
+      "description": "An illustrated fan atlas of Sunken Resort, a flooded resort beneath a Scarwood lake. Explore four floors, from the bowl, pool and kelp rooms to the wisp and elemental caves, and keep your own field notes.",
+      "width": 3488,
+      "height": 3232,
+      "frame": {
+        "x": 192,
+        "y": 192,
+        "width": 3104,
+        "height": 2976
+      },
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/sunken-resort/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/sunken-resort/markers.json",
+      "labelsFile": "data/sunken-resort/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Floor -1",
+          "tilePath": "assets/tiles/sunken-resort/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Floor -2",
+          "tilePath": "assets/tiles/sunken-resort/floor-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-3",
+          "title": "Floor -3",
+          "tilePath": "assets/tiles/sunken-resort/floor-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-4",
+          "title": "Caves",
+          "tilePath": "assets/tiles/sunken-resort/floor-4/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Skoop (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Skoop",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Sunken_resort.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Skoop; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Skoop",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Sunken_resort.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "rothold",
+      "title": "Rothold",
+      "subtitle": "The ruined keep and caverns of the Deep",
+      "cartoucheKicker": "A fortress beneath the surface",
+      "breadcrumb": "Monsters & Memories / Rothold",
+      "description": "An illustrated fan atlas of Rothold. Explore the river, Mist Lake, the Thralled Mines and five sheets of the ruined keep and crypt, and keep your own field notes.",
+      "width": 6464,
+      "height": 5216,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v3",
+      "tilePath": "assets/tiles/rothold/level-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/rothold/markers.json",
+      "labelsFile": "data/rothold/labels.json",
+      "hiddenAreasFile": null,
+      "defaultLevel": "level-1",
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 5
+      },
+      "levels": [
+        {
+          "id": "level-1",
+          "title": "Caves",
+          "tilePath": "assets/tiles/rothold/level-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-2",
+          "title": "Keep floor 0",
+          "tilePath": "assets/tiles/rothold/level-2/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-3",
+          "title": "Keep floor -1",
+          "tilePath": "assets/tiles/rothold/level-3/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-4",
+          "title": "Keep floor -2 and Crypt",
+          "tilePath": "assets/tiles/rothold/level-4/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "level-5",
+          "title": "Keep floor -3",
+          "tilePath": "assets/tiles/rothold/level-5/{z}/{x}/{y}.webp"
+        }
+      ],
+      "wikiZone": "Rothold",
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ],
+        "Lift": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Names and positions after Map by Skoop (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Map by Skoop",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Rothold_map_by_skoop.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Names and positions only adapted from Map by Skoop; positions adjusted to this illustration. The adapted names and positions carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by Skoop",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Rothold_map_by_skoop.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Names and positions only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
+      "id": "grimtide-sanctum",
+      "relief": "assets/relief/grimtide-sanctum/",
+      "title": "Grimtide Sanctum",
+      "subtitle": "Three floors beneath the Shallow Shoals",
+      "cartoucheKicker": "The sunken temple",
+      "breadcrumb": "Monsters & Memories / Grimtide Sanctum",
+      "description": "An illustrated fan atlas of Grimtide Sanctum, a sunken goblin temple beneath the Shallow Shoals, reached by diving under a wreck. Explore its halls, flooded tunnels and sunken cavern across three floors, and keep your own field notes.",
+      "width": 5280,
+      "height": 6400,
+      "frame": {
+        "x": 64,
+        "y": 224,
+        "width": 5152,
+        "height": 6112
+      },
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 7,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/grimtide-sanctum/floor-1/{z}/{x}/{y}.webp",
+      "markersFile": "data/grimtide-sanctum/markers.json",
+      "labelsFile": "data/grimtide-sanctum/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "point",
+        "x": 1660,
+        "y": 2220,
+        "z": 3.5,
+        "placeZoom": 5
+      },
+      "defaultLevel": "floor-1",
+      "levels": [
+        {
+          "id": "floor-1",
+          "title": "Sanctum halls",
+          "tilePath": "assets/tiles/grimtide-sanctum/floor-1/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "floor-2",
+          "title": "Flooded tunnels",
+          "tilePath": "assets/tiles/grimtide-sanctum/floor-2/{z}/{x}/{y}.webp",
+          "defaultView": {
+            "mode": "point",
+            "x": 2100,
+            "y": 1460,
+            "z": 3,
+            "placeZoom": 5
+          }
+        },
+        {
+          "id": "floor-3",
+          "title": "Sunken cavern",
+          "tilePath": "assets/tiles/grimtide-sanctum/floor-3/{z}/{x}/{y}.webp",
+          "defaultView": {
+            "mode": "point",
+            "x": 3500,
+            "y": 4460,
+            "z": 2.5,
+            "placeZoom": 5
+          }
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Room shapes after Map by FeelingCaptive2973 (CC BY-SA 4.0)",
+        "sourceTitle": "Map by FeelingCaptive2973",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:MAP_GrimtideSanctum.png",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Room shapes only adapted from Map by FeelingCaptive2973. The adapted room shapes carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Map by FeelingCaptive2973",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:MAP_GrimtideSanctum.png",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Room shapes only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    }
+  ]
+}

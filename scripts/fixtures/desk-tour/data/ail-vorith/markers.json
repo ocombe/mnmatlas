@@ -1,0 +1,1789 @@
+[
+  {
+    "id": "teleporter-pad",
+    "name": "Teleporter Pad",
+    "category": "Teleporter",
+    "x": 4245,
+    "y": 4565,
+    "note": "Teleporter destination to confirm."
+  },
+  {
+    "id": "guild-registrar-customs-agent",
+    "name": "Guild Registrar / Customs Agent",
+    "category": "Guild",
+    "x": 4550,
+    "y": 4667,
+    "note": "Guild registrar and customs agent."
+  },
+  {
+    "id": "bankers",
+    "name": "Bankers",
+    "category": "Bank",
+    "x": 4460,
+    "y": 4500,
+    "note": "Bank in the polygonal hall."
+  },
+  {
+    "id": "guild-registrar-bank-hall",
+    "name": "Guild Registrar — bank hall",
+    "category": "Guild",
+    "x": 4467,
+    "y": 4481,
+    "note": "Guild registrar in the bank hall."
+  },
+  {
+    "id": "grindstone",
+    "name": "Grindstone",
+    "category": "Tradeskill",
+    "x": 4233,
+    "y": 4262,
+    "note": "Grindstone beside the forge.",
+    "community": true
+  },
+  {
+    "id": "forge",
+    "name": "Forge",
+    "category": "Forge",
+    "x": 4265,
+    "y": 4257,
+    "note": "Forge beside the blacksmith.",
+    "community": true
+  },
+  {
+    "id": "miral-the-dark-elf",
+    "name": "Miral the Dark Elf",
+    "category": "Quest NPC",
+    "x": 4128,
+    "y": 4099,
+    "note": "quest npc",
+    "community": true
+  },
+  {
+    "id": "survival-thirvol",
+    "name": "Survival — Thirvol",
+    "category": "Tradeskill",
+    "x": 4770,
+    "y": 4465,
+    "note": "Survivalist."
+  },
+  {
+    "id": "lumberjacking-kulzzanrek",
+    "name": "Lumberjacking — Kulzzanrek",
+    "category": "Tradeskill",
+    "x": 4758,
+    "y": 4531,
+    "note": "Woodcutter."
+  },
+  {
+    "id": "magnificent-vhaspire",
+    "name": "Magnificent Vhaspire",
+    "category": "Notable NPC",
+    "x": 4807,
+    "y": 4476,
+    "note": "Hardcore.",
+    "community": true
+  },
+  {
+    "id": "solitary-vhaldrek",
+    "name": "Solitary Vhaldrek",
+    "category": "Notable NPC",
+    "x": 4846,
+    "y": 4466,
+    "note": "Solo Self Found.",
+    "community": true
+  },
+  {
+    "id": "tailoring-ruzzuna",
+    "name": "Tailoring — Ruzzuna",
+    "category": "Tradeskill",
+    "x": 4665,
+    "y": 4412,
+    "note": "Tailor in the market."
+  },
+  {
+    "id": "leatherworker-vex",
+    "name": "Leatherworker Vex",
+    "category": "Vendor",
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Bags"
+    ],
+    "x": 4625,
+    "y": 4362,
+    "note": "Newbie armour; quest rewards.",
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-vex",
+    "wikiId": "npc-leatherworker-vex"
+  },
+  {
+    "id": "kulzzara",
+    "name": "Kulzzara",
+    "category": "Vendor",
+    "vendor": "Used weapons dealer",
+    "x": 4774,
+    "y": 4385,
+    "note": "Used weapons.",
+    "wiki": "https://monstersandmemories.wiki/npcs/kulzzara",
+    "wikiId": "npc-kulzzara"
+  },
+  {
+    "id": "melzorra",
+    "name": "Melzorra",
+    "category": "Vendor",
+    "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ],
+    "x": 4679,
+    "y": 4135,
+    "note": "Bags.",
+    "wiki": "https://monstersandmemories.wiki/npcs/melzorra",
+    "wikiId": "npc-melzorra",
+    "community": true
+  },
+  {
+    "id": "klavel-sul",
+    "name": "Klavel Sul",
+    "category": "Class trainer",
+    "x": 4457,
+    "y": 4293,
+    "note": "Monk trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/klavel-sul",
+    "wikiId": "npc-klavel-sul",
+    "classes": [
+      "Monk"
+    ]
+  },
+  {
+    "id": "tharkan-inathar",
+    "name": "Tharkan Inathar",
+    "category": "Class trainer",
+    "x": 4444,
+    "y": 4257,
+    "note": "Fighter trainer.",
+    "classes": [
+      "Fighter"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/tharkan-inathar",
+    "wikiId": "npc-tharkan-inathar"
+  },
+  {
+    "id": "lurithos-kest",
+    "name": "Lurithos Kest",
+    "category": "Class trainer",
+    "x": 4355,
+    "y": 4218,
+    "note": "Archer trainer.",
+    "classes": [
+      "Archer"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/lurithos-kest",
+    "wikiId": "npc-lurithos-kest"
+  },
+  {
+    "id": "laren-drin-dar",
+    "name": "Laren Drin'dar",
+    "category": "Class trainer",
+    "x": 4405,
+    "y": 4236,
+    "note": "Ranger trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/laren-drindar",
+    "wikiId": "npc-laren-drindar",
+    "classes": [
+      "Ranger"
+    ]
+  },
+  {
+    "id": "ilnara-hal-kareth",
+    "name": "Ilnara Hal'kareth",
+    "category": "Class trainer",
+    "x": 4404,
+    "y": 4314,
+    "note": "Upstairs. Spellblade trainer.",
+    "classes": [
+      "Spellblade"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/ilnara-halkareth",
+    "wikiId": "npc-ilnara-hal-kareth"
+  },
+  {
+    "id": "mentvar-drezzorith",
+    "name": "Mentvar Drezzorith",
+    "category": "Class trainer",
+    "x": 4401,
+    "y": 4286,
+    "note": "Upstairs. Paladin trainer.",
+    "classes": [
+      "Paladin"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/mentvar-drezzorith",
+    "wikiId": "npc-mentvar-drezzorith"
+  },
+  {
+    "id": "to-upper-platform",
+    "name": "To Upper Platform",
+    "category": "Exit",
+    "x": 4460,
+    "y": 4245,
+    "note": "Stairs to the upper platform."
+  },
+  {
+    "id": "zalethra-drezzorith",
+    "name": "Zalethra Drezzorith",
+    "category": "Class trainer",
+    "x": 4292,
+    "y": 4123,
+    "note": "Cleric trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/zalethra-drezzorith",
+    "wikiId": "npc-zalethra-drezzorith",
+    "classes": [
+      "Cleric"
+    ]
+  },
+  {
+    "id": "lothur-varros",
+    "name": "Lothur Varros",
+    "category": "Class trainer",
+    "x": 4329,
+    "y": 4131,
+    "note": "Elementalist trainer.",
+    "classes": [
+      "Elementalist"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/lothur-varros",
+    "wikiId": "npc-lothur-varros"
+  },
+  {
+    "id": "vhasilla-hal-kareth",
+    "name": "Vhasilla Hal'kareth",
+    "category": "Class trainer",
+    "x": 4357,
+    "y": 4125,
+    "note": "Wizard trainer.",
+    "classes": [
+      "Wizard"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/vhasilla-halkareth",
+    "wikiId": "npc-vhasilla-hal-kareth"
+  },
+  {
+    "id": "m-yal-wehear",
+    "name": "M'yal Wehear",
+    "category": "Notable NPC",
+    "x": 4387,
+    "y": 4140,
+    "note": "Trainer upstairs at the Obsidian Academy; class not stated on the community map.",
+    "community": true
+  },
+  {
+    "id": "vaslir-naiyth",
+    "name": "Vaslir Naiyth",
+    "category": "Class trainer",
+    "x": 4377,
+    "y": 4035,
+    "note": "Necromancer trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/vaslir-naiyth",
+    "wikiId": "npc-vaslir-naiyth",
+    "classes": [
+      "Necromancer"
+    ]
+  },
+  {
+    "id": "amarah-ith-vayen",
+    "name": "Amarah Ith'vayen",
+    "category": "Class trainer",
+    "x": 4467,
+    "y": 4084,
+    "note": "Enchanter trainer.",
+    "wiki": "https://monstersandmemories.wiki/npcs/amarah-ithvayen",
+    "wikiId": "npc-amarah-ithvayen",
+    "classes": [
+      "Enchanter"
+    ]
+  },
+  {
+    "id": "stablemaster-raxr",
+    "name": "Stablemaster Raxr",
+    "category": "Stable",
+    "x": 4412,
+    "y": 3949,
+    "note": "Stablemaster."
+  },
+  {
+    "id": "cook-vashuk",
+    "name": "Cook Vashuk",
+    "category": "Tradeskill",
+    "x": 4409,
+    "y": 3906,
+    "note": "Downstairs; follow the stairs down."
+  },
+  {
+    "id": "nyxia-ak-kin",
+    "name": "Nyxia Ak'kin",
+    "category": "Vendor",
+    "vendor": "Barkeep",
+    "sells": [
+      "Quest items"
+    ],
+    "x": 4461,
+    "y": 3916,
+    "note": "Food and rations.",
+    "wiki": "https://monstersandmemories.wiki/npcs/nyxia-akkin",
+    "wikiId": "npc-nyxia-akkin"
+  },
+  {
+    "id": "provost-xan-shorn",
+    "name": "Provost Xan'shorn",
+    "category": "Notable NPC",
+    "x": 4498,
+    "y": 4167,
+    "note": "Paths; meaning to confirm in game.",
+    "community": true
+  },
+  {
+    "id": "apprentice-esveth",
+    "name": "Apprentice Esveth",
+    "category": "Notable NPC",
+    "x": 4620,
+    "y": 3920,
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "toilmaster-vorith",
+    "name": "Toilmaster Vorith",
+    "category": "Quest NPC",
+    "x": 5096,
+    "y": 3911,
+    "note": "At the bridge. Starter quest.",
+    "community": true
+  },
+  {
+    "id": "toilmistress-rallvessa",
+    "name": "Toilmistress Rallvessa",
+    "category": "Quest NPC",
+    "x": 5065,
+    "y": 3785,
+    "note": "At the bridge.",
+    "community": true
+  },
+  {
+    "id": "community-24",
+    "community": true,
+    "name": "Inn",
+    "category": "Inn",
+    "note": "",
+    "x": 4657,
+    "y": 2774
+  },
+  {
+    "id": "community-25",
+    "community": true,
+    "name": "Chef Arzya",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4669,
+    "y": 2745,
+    "trade": "Cooking"
+  },
+  {
+    "id": "community-26",
+    "community": true,
+    "name": "a tailoring trainer",
+    "category": "Tradeskill",
+    "note": "downstairs",
+    "x": 4538,
+    "y": 2655,
+    "trade": "Tailoring"
+  },
+  {
+    "id": "community-27",
+    "community": true,
+    "name": "a jewelcrafting trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4522,
+    "y": 2625,
+    "trade": "Jewelcrafting"
+  },
+  {
+    "id": "community-40",
+    "community": true,
+    "name": "a leatherworking trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4404,
+    "y": 2532,
+    "trade": "Leatherworking"
+  },
+  {
+    "id": "community-43",
+    "community": true,
+    "name": "Bank",
+    "category": "Bank",
+    "note": "",
+    "x": 4480,
+    "y": 2921
+  },
+  {
+    "id": "community-44",
+    "community": true,
+    "name": "Fletching Trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3302,
+    "y": 2662,
+    "trade": "Fletching"
+  },
+  {
+    "id": "community-46",
+    "community": true,
+    "name": "Blacksmith Kulzzavhol",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3370,
+    "y": 3025,
+    "trade": "Blacksmithing / Smelting"
+  },
+  {
+    "id": "community-47",
+    "community": true,
+    "name": "Ithrak Trel",
+    "category": "Vendor",
+    "note": "",
+    "x": 3359,
+    "y": 2999,
+    "vendor": "Mining vendor"
+  },
+  {
+    "id": "community-64",
+    "community": true,
+    "name": "A Deepgulp explorer",
+    "category": "Mob camp",
+    "levels": [
+      5,
+      7
+    ],
+    "mobs": [
+      {
+        "name": "A Deepgulp explorer",
+        "wikiId": "npc-a-deepgulp-explorer",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer"
+      }
+    ],
+    "note": "",
+    "x": 6264,
+    "y": 1939,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
+    "wikiId": "npc-a-deepgulp-explorer"
+  },
+  {
+    "id": "community-65",
+    "community": true,
+    "name": "An angry cultist",
+    "category": "Mob camp",
+    "mobs": [
+      {
+        "name": "An angry cultist",
+        "wikiId": "npc-an-angry-cultist",
+        "wiki": "https://monstersandmemories.wiki/npcs/an-angry-cultist"
+      }
+    ],
+    "note": "",
+    "x": 4839,
+    "y": 5521,
+    "wiki": "https://monstersandmemories.wiki/npcs/an-angry-cultist",
+    "wikiId": "npc-an-angry-cultist"
+  },
+  {
+    "id": "community-67",
+    "community": true,
+    "name": "Girtel Xal'tharn",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4625,
+    "y": 3190,
+    "classes": [
+      "Inquisitor"
+    ]
+  },
+  {
+    "id": "community-69",
+    "community": true,
+    "name": "an ith'vayen toxicologist",
+    "category": "Vendor",
+    "note": "toxicologist, alchemy materials",
+    "x": 4371,
+    "y": 2443,
+    "vendor": "Poison maker"
+  },
+  {
+    "id": "community-71",
+    "community": true,
+    "name": "a reagent vendor",
+    "category": "Vendor",
+    "note": "enchanter reagent merchant, upstair",
+    "x": 4431,
+    "y": 2395,
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-75",
+    "community": true,
+    "name": "Zarlya Vael'xirith",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3384,
+    "y": 2707,
+    "classes": [
+      "Ranger"
+    ]
+  },
+  {
+    "id": "community-77",
+    "community": true,
+    "name": "Sarzi Vaelxirith",
+    "category": "Class trainer",
+    "note": "Archer",
+    "x": 3466,
+    "y": 2836,
+    "classes": [
+      "Archer"
+    ]
+  },
+  {
+    "id": "community-78",
+    "community": true,
+    "name": "a fighter instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3390,
+    "y": 2685,
+    "classes": [
+      "Fighter"
+    ]
+  },
+  {
+    "id": "community-79",
+    "community": true,
+    "name": "an inquisitor instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3486,
+    "y": 2854,
+    "classes": [
+      "Inquisitor"
+    ]
+  },
+  {
+    "id": "community-80",
+    "community": true,
+    "name": "a monk instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3471,
+    "y": 2878,
+    "classes": [
+      "Monk"
+    ]
+  },
+  {
+    "id": "community-84",
+    "community": true,
+    "name": "a necromancer scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3697,
+    "y": 2474,
+    "classes": [
+      "Necromancer"
+    ]
+  },
+  {
+    "id": "community-86",
+    "community": true,
+    "name": "A reagent vendor",
+    "category": "Vendor",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Weapons"
+    ],
+    "note": "necromancer reagents",
+    "x": 3711,
+    "y": 2511
+  },
+  {
+    "id": "community-94",
+    "community": true,
+    "name": "Teleporter",
+    "category": "Teleporter",
+    "note": "Teleporter from tunnel opposite way of bank. Goes up a level towards the Necromancer quest NPCs.",
+    "x": 4340,
+    "y": 2777
+  },
+  {
+    "id": "community-45",
+    "community": true,
+    "name": "High Commander Ral Vael'xirith",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3438,
+    "y": 2784
+  },
+  {
+    "id": "community-73",
+    "community": true,
+    "name": "Grakkesh",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4278,
+    "y": 2265
+  },
+  {
+    "id": "community-87",
+    "community": true,
+    "name": "K'Xai the Bound",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3724,
+    "y": 2665
+  },
+  {
+    "id": "community-88",
+    "community": true,
+    "name": "Vaslir Vharkith",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4068,
+    "y": 2281
+  },
+  {
+    "id": "community-90",
+    "community": true,
+    "name": "Vaslir Kiannes",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4169,
+    "y": 2331
+  },
+  {
+    "id": "community-91",
+    "community": true,
+    "name": "Vaslir Maryn",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4199,
+    "y": 2390
+  },
+  {
+    "id": "community-225",
+    "community": true,
+    "name": "an herbalist",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4041,
+    "y": 3337,
+    "trade": "Herbalism"
+  },
+  {
+    "id": "community-226",
+    "community": true,
+    "name": "an alchemy trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4049,
+    "y": 3334,
+    "trade": "Alchemy"
+  },
+  {
+    "id": "community-227",
+    "community": true,
+    "name": "an alchemist supplier",
+    "category": "Vendor",
+    "note": "upstair",
+    "x": 3983,
+    "y": 3361,
+    "vendor": "Alchemy vendor",
+    "sells": [
+      "Bags"
+    ]
+  },
+  {
+    "id": "community-231",
+    "community": true,
+    "name": "Deepfisher Garina",
+    "category": "Tradeskill",
+    "note": "in the docks area under the city",
+    "x": 4013,
+    "y": 2556,
+    "trade": "Fishing"
+  },
+  {
+    "id": "community-232",
+    "community": true,
+    "name": "a fishing supplier",
+    "category": "Vendor",
+    "note": "",
+    "x": 4024,
+    "y": 2553,
+    "vendor": "Fishing vendor"
+  },
+  {
+    "id": "community-239",
+    "community": true,
+    "name": "Ruzzuna",
+    "category": "Vendor",
+    "note": "",
+    "x": 4707,
+    "y": 4423,
+    "vendor": "Cloth armorer",
+    "wiki": "https://monstersandmemories.wiki/npcs/ruzzuna",
+    "wikiId": "npc-ruzzuna"
+  },
+  {
+    "id": "community-254",
+    "community": true,
+    "name": "Tanning Trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4449,
+    "y": 2474,
+    "trade": "Skinning / Tanning"
+  },
+  {
+    "id": "community-269",
+    "community": true,
+    "name": "Vhas Ith'vayen",
+    "category": "Class trainer",
+    "note": "upstair",
+    "x": 4376,
+    "y": 2451,
+    "classes": [
+      "Enchanter"
+    ]
+  },
+  {
+    "id": "community-273",
+    "community": true,
+    "name": "Kelnir",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3792,
+    "y": 2238
+  },
+  {
+    "id": "community-276",
+    "community": true,
+    "name": "teleporter",
+    "category": "Teleporter",
+    "note": "Goes to the top of the tower with spell caster trainers.",
+    "x": 3835,
+    "y": 3352
+  },
+  {
+    "id": "community-278",
+    "community": true,
+    "name": "a blacksmiting supplier",
+    "category": "Vendor",
+    "note": "",
+    "x": 3305,
+    "y": 3022,
+    "vendor": "Blacksmithing vendor"
+  },
+  {
+    "id": "community-280",
+    "community": true,
+    "name": "Alarys Drezzorith",
+    "category": "Quest NPC",
+    "note": "Alarys Drezzorith is located in a building in the main city of Ail'Vorith, 4th floor, south side... just southeast of the high level Paladin and Cleric trainers.",
+    "x": 3569,
+    "y": 2960,
+    "wiki": "https://monstersandmemories.wiki/npcs/alarys-drezzorith",
+    "wikiId": "npc-alarys-drezzorith"
+  },
+  {
+    "id": "community-281",
+    "community": true,
+    "name": "Marveta Drezzorith",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3675,
+    "y": 2739
+  },
+  {
+    "id": "community-282",
+    "community": true,
+    "name": "a paladin instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3711,
+    "y": 2729,
+    "classes": [
+      "Paladin"
+    ]
+  },
+  {
+    "id": "community-283",
+    "community": true,
+    "name": "a cleric scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3602,
+    "y": 2586,
+    "classes": [
+      "Cleric"
+    ]
+  },
+  {
+    "id": "community-285",
+    "community": true,
+    "name": "Tal Drezzorith",
+    "category": "Quest NPC",
+    "note": "Up the last floor of the city, up stair in the building.",
+    "x": 3456,
+    "y": 2737,
+    "wiki": "https://monstersandmemories.wiki/npcs/tal-drezzorith",
+    "wikiId": "npc-tal-drezzorith"
+  },
+  {
+    "id": "community-293",
+    "community": true,
+    "name": "a spellblade instructor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3705,
+    "y": 3375,
+    "classes": [
+      "Spellblade"
+    ]
+  },
+  {
+    "id": "community-294",
+    "community": true,
+    "name": "a wizard scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3723,
+    "y": 3311,
+    "classes": [
+      "Wizard"
+    ]
+  },
+  {
+    "id": "community-295",
+    "community": true,
+    "name": "a necromancer scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3696,
+    "y": 3330,
+    "classes": [
+      "Necromancer"
+    ]
+  },
+  {
+    "id": "community-296",
+    "community": true,
+    "name": "an enchanter scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3744,
+    "y": 3383,
+    "classes": [
+      "Enchanter"
+    ]
+  },
+  {
+    "id": "community-297",
+    "community": true,
+    "name": "an elementalist scribe",
+    "category": "Class trainer",
+    "note": "",
+    "x": 3769,
+    "y": 3365,
+    "classes": [
+      "Elementalist"
+    ]
+  },
+  {
+    "id": "community-298",
+    "community": true,
+    "name": "Vespera Varros",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3817,
+    "y": 3341
+  },
+  {
+    "id": "community-299",
+    "community": true,
+    "name": "Zarok Hal'kareth",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3833,
+    "y": 3342
+  },
+  {
+    "id": "community-300",
+    "community": true,
+    "name": "Lyraeth Hal'kareth",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3839,
+    "y": 3326
+  },
+  {
+    "id": "community-301",
+    "community": true,
+    "name": "Nyxar Ith'vayen",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3827,
+    "y": 3315
+  },
+  {
+    "id": "community-302",
+    "community": true,
+    "name": "Aelith Varros",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3813,
+    "y": 3325
+  },
+  {
+    "id": "community-303",
+    "community": true,
+    "name": "a woodworking trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3272,
+    "y": 2974,
+    "trade": "Carpentry / Woodworking"
+  },
+  {
+    "id": "community-307",
+    "community": true,
+    "name": "Glaeron Kes'tel",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3426,
+    "y": 2762
+  },
+  {
+    "id": "community-381",
+    "community": true,
+    "name": "Bonescraper Zekkir",
+    "category": "Named mob",
+    "note": "",
+    "x": 2720,
+    "y": 6514
+  },
+  {
+    "id": "community-401",
+    "community": true,
+    "name": "Desperate Runaways",
+    "category": "Mob camp",
+    "note": "",
+    "x": 3480,
+    "y": 5044,
+    "levels": [
+      15,
+      20
+    ],
+    "mobs": []
+  },
+  {
+    "id": "community-402",
+    "community": true,
+    "name": "Runaway entrance",
+    "category": "Passage",
+    "note": "Entrance to runaways hideout.",
+    "x": 3404,
+    "y": 5009
+  },
+  {
+    "id": "community-410",
+    "community": true,
+    "name": "Supplier Jul",
+    "category": "Vendor",
+    "note": "Located in Foreign Quarter in first house on left.",
+    "x": 4729,
+    "y": 4121,
+    "vendor": "General goods",
+    "wiki": "https://monstersandmemories.wiki/npcs/supplier-jul",
+    "wikiId": "npc-supplier-jul"
+  },
+  {
+    "id": "community-421",
+    "community": true,
+    "name": "outcast camp",
+    "category": "Mob camp",
+    "note": "",
+    "x": 4144,
+    "y": 6182,
+    "levels": [
+      12,
+      13
+    ],
+    "mobs": [
+      {
+        "name": "A mournful outcast",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-mournful-outcast",
+        "wikiId": "npc-a-mournful-outcast"
+      }
+    ]
+  },
+  {
+    "id": "community-422",
+    "community": true,
+    "name": "Jerek D'shadow",
+    "category": "Named mob",
+    "note": "",
+    "x": 4163,
+    "y": 6292,
+    "levels": [
+      13,
+      13
+    ]
+  },
+  {
+    "id": "community-423",
+    "community": true,
+    "name": "Laeran Birchshade",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 3910,
+    "y": 6224
+  },
+  {
+    "id": "community-428",
+    "community": true,
+    "name": "Inq",
+    "category": "Class trainer",
+    "note": "",
+    "x": 4614,
+    "y": 4270,
+    "classes": [
+      "Inquisitor"
+    ]
+  },
+  {
+    "id": "community-476",
+    "community": true,
+    "name": "exile camp",
+    "category": "Mob camp",
+    "note": "",
+    "x": 3332,
+    "y": 5833,
+    "levels": [
+      15,
+      16
+    ],
+    "mobs": []
+  },
+  {
+    "id": "community-477",
+    "community": true,
+    "name": "Goblin/Researcher camp",
+    "category": "Mob camp",
+    "note": "",
+    "x": 1975,
+    "y": 2281,
+    "levels": [
+      8,
+      12
+    ],
+    "mobs": [
+      {
+        "name": "A Deepgulp scavenger",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-scavenger",
+        "wikiId": "npc-1790076501781-orey6"
+      },
+      {
+        "name": "A Deepgulp warrior",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-warrior",
+        "wikiId": "npc-1790076502237-wipid"
+      },
+      {
+        "name": "A Deepgulp hunter",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-hunter",
+        "wikiId": "npc-1790076501781-gd6wf"
+      },
+      {
+        "name": "A Deepgulp shaman",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-shaman",
+        "wikiId": "npc-1790076501781-tssr8"
+      },
+      {
+        "name": "A Deepgulp berserker",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-berserker",
+        "wikiId": "npc-1790076501781-s23p7"
+      },
+      {
+        "name": "A Deepgulp mystic",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-mystic",
+        "wikiId": "npc-1790076501781-36d4h"
+      }
+    ]
+  },
+  {
+    "id": "community-478",
+    "community": true,
+    "name": "Researcher Dranit",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 2557,
+    "y": 2045
+  },
+  {
+    "id": "community-484",
+    "community": true,
+    "name": "Nyxa'ira",
+    "category": "Named mob",
+    "note": "Found in pool room after clearing room several times, drops balanced chain hood.",
+    "x": 3132,
+    "y": 4549,
+    "levels": [
+      20,
+      20
+    ]
+  },
+  {
+    "id": "community-543",
+    "community": true,
+    "name": "Elemental/Skull",
+    "category": "Mob camp",
+    "note": "",
+    "x": 3504,
+    "y": 3696,
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          3197,
+          3770
+        ],
+        [
+          3212,
+          3699
+        ],
+        [
+          3280,
+          3639
+        ],
+        [
+          3323,
+          3636
+        ],
+        [
+          3386,
+          3629
+        ],
+        [
+          3419,
+          3590
+        ],
+        [
+          3519,
+          3573
+        ],
+        [
+          3567,
+          3571
+        ],
+        [
+          3612,
+          3607
+        ],
+        [
+          3654,
+          3608
+        ],
+        [
+          3702,
+          3603
+        ],
+        [
+          3787,
+          3602
+        ],
+        [
+          3911,
+          3635
+        ],
+        [
+          3816,
+          3710
+        ],
+        [
+          3663,
+          3726
+        ],
+        [
+          3607,
+          3813
+        ],
+        [
+          3509,
+          3750
+        ],
+        [
+          3426,
+          3802
+        ],
+        [
+          3368,
+          3829
+        ],
+        [
+          3267,
+          3836
+        ],
+        [
+          3210,
+          3820
+        ]
+      ]
+    },
+    "levels": [
+      8,
+      11
+    ],
+    "mobs": [
+      {
+        "name": "A rogue elemental",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-rogue-elemental",
+        "wikiId": "npc-a-rogue-elemental"
+      },
+      {
+        "name": "A spectral remnant",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-spectral-remnant",
+        "wikiId": "npc-a-spectral-remnant"
+      },
+      {
+        "name": "A separated skull",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-separated-skull",
+        "wikiId": "npc-a-separated-skull"
+      },
+      {
+        "name": "A stray elemental",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-stray-elemental",
+        "wikiId": "npc-a-stray-elemental"
+      }
+    ]
+  },
+  {
+    "id": "community-563",
+    "community": true,
+    "name": "Marshal Xyvher",
+    "category": "Quest NPC",
+    "note": "Paladin quest npc",
+    "x": 3468,
+    "y": 2686
+  },
+  {
+    "id": "community-565",
+    "community": true,
+    "name": "a used weapons dealer",
+    "category": "Vendor",
+    "note": "",
+    "x": 4364,
+    "y": 3027,
+    "vendor": "Used weapons dealer"
+  },
+  {
+    "id": "community-568",
+    "community": true,
+    "name": "Innekeeper X'ison",
+    "category": "Vendor",
+    "note": "",
+    "x": 4675,
+    "y": 2931,
+    "vendor": "Innkeeper"
+  },
+  {
+    "id": "community-569",
+    "community": true,
+    "name": "Messara",
+    "category": "Vendor",
+    "note": "",
+    "x": 4227,
+    "y": 2261,
+    "vendor": "Bag merchant"
+  },
+  {
+    "id": "community-570",
+    "community": true,
+    "name": "Dirmav Ves'trinok",
+    "category": "Vendor",
+    "note": "",
+    "x": 4227,
+    "y": 2112
+  },
+  {
+    "id": "community-572",
+    "community": true,
+    "name": "Andala Thulne",
+    "category": "Vendor",
+    "note": "",
+    "x": 3261,
+    "y": 2683,
+    "vendor": "Fletcher"
+  },
+  {
+    "id": "community-573",
+    "community": true,
+    "name": "Kelssina Maezzinar",
+    "category": "Vendor",
+    "note": "furniture materials",
+    "x": 3316,
+    "y": 2994
+  },
+  {
+    "id": "community-575",
+    "community": true,
+    "name": "a smelting trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3382,
+    "y": 3039,
+    "trade": "Blacksmithing / Smelting"
+  },
+  {
+    "id": "community-577",
+    "community": true,
+    "name": "a smelting supplier",
+    "category": "Vendor",
+    "note": "",
+    "x": 3354,
+    "y": 3016,
+    "vendor": "Smelting vendor"
+  },
+  {
+    "id": "community-579",
+    "community": true,
+    "name": "Feresek Murivhar",
+    "category": "Vendor",
+    "note": "copper and bronze schematics",
+    "x": 3320,
+    "y": 3013,
+    "vendor": "Blacksmithing vendor"
+  },
+  {
+    "id": "community-580",
+    "community": true,
+    "name": "Nullemak Vrinsinar",
+    "category": "Vendor",
+    "note": "Iron and Steel schematics",
+    "x": 3335,
+    "y": 3022,
+    "vendor": "Blacksmithing vendor"
+  },
+  {
+    "id": "community-581",
+    "community": true,
+    "name": "a mining trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3359,
+    "y": 3082,
+    "trade": "Mining"
+  },
+  {
+    "id": "community-582",
+    "community": true,
+    "name": "a reagent vendor",
+    "category": "Vendor",
+    "note": "wizard reagent vendor",
+    "x": 3800,
+    "y": 3229,
+    "vendor": "Reagent vendor"
+  },
+  {
+    "id": "community-583",
+    "community": true,
+    "name": "Vaelis Butcher",
+    "category": "Vendor",
+    "note": "",
+    "x": 4239,
+    "y": 2798,
+    "vendor": "Butcher"
+  },
+  {
+    "id": "community-584",
+    "community": true,
+    "name": "Baker Kaelen",
+    "category": "Vendor",
+    "note": "",
+    "x": 4208,
+    "y": 2754,
+    "vendor": "Baker"
+  },
+  {
+    "id": "community-585",
+    "community": true,
+    "name": "a used weapons dealer",
+    "category": "Vendor",
+    "note": "",
+    "x": 3659,
+    "y": 3038,
+    "vendor": "Used weapons dealer"
+  },
+  {
+    "id": "community-587",
+    "community": true,
+    "name": "Leric Tharkol",
+    "category": "Vendor",
+    "note": "",
+    "x": 3969,
+    "y": 3109,
+    "vendor": "Adventuring supplies"
+  },
+  {
+    "id": "community-588",
+    "community": true,
+    "name": "Jexil Vhalens",
+    "category": "Vendor",
+    "note": "",
+    "x": 3952,
+    "y": 3073,
+    "vendor": "Grocer"
+  },
+  {
+    "id": "community-589",
+    "community": true,
+    "name": "Umben Fasseth",
+    "category": "Vendor",
+    "note": "",
+    "x": 3988,
+    "y": 3288,
+    "vendor": "Lumberjack vendor"
+  },
+  {
+    "id": "community-590",
+    "community": true,
+    "name": "Azana Ethinel",
+    "category": "Vendor",
+    "note": "",
+    "x": 3914,
+    "y": 3318,
+    "vendor": "Produce vendor"
+  },
+  {
+    "id": "community-591",
+    "community": true,
+    "name": "Korsen Yul",
+    "category": "Vendor",
+    "note": "wooden weapons merchant",
+    "x": 3891,
+    "y": 3206
+  },
+  {
+    "id": "community-592",
+    "community": true,
+    "name": "Rilar Tret\"rel",
+    "category": "Vendor",
+    "note": "",
+    "x": 3924,
+    "y": 3203
+  },
+  {
+    "id": "community-593",
+    "community": true,
+    "name": "Chief Glowgut",
+    "category": "Named mob",
+    "note": "inside the goblin cave",
+    "x": 1867,
+    "y": 1771,
+    "levels": [
+      13,
+      13
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/chief-glowgut",
+    "wikiId": "npc-1790076524906-phjpl"
+  },
+  {
+    "id": "community-661",
+    "community": true,
+    "name": "Myal Vehear",
+    "category": "Quest NPC",
+    "note": "Quest giver for SPB and WIZ",
+    "x": 4541,
+    "y": 4131,
+    "wiki": "https://monstersandmemories.wiki/npcs/myal-vehear",
+    "wikiId": "npc-myal-vehear"
+  },
+  {
+    "id": "community-662",
+    "community": true,
+    "name": "Ailis Hal'kareth",
+    "category": "Quest NPC",
+    "note": "WIZ and SPB quest giver",
+    "x": 3693,
+    "y": 3468,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Ailis_Hal%27kareth"
+  },
+  {
+    "id": "community-712",
+    "community": true,
+    "name": "Mournful Outcast",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4404,
+    "y": 5062,
+    "wiki": "https://monstersandmemories.wiki/npcs/mournful-outcast",
+    "wikiId": "npc-mournful-outcast"
+  },
+  {
+    "id": "community-713",
+    "community": true,
+    "name": "Cook Deepbite (levels ~13–14)",
+    "category": "Named mob",
+    "note": "Beyond the hidden wall, in the goblin caves",
+    "x": 1818,
+    "y": 1736,
+    "wiki": "https://monstersandmemories.wiki/npcs/cook-deepbite",
+    "wikiId": "npc-cook-deepbite"
+  },
+  {
+    "id": "community-731",
+    "community": true,
+    "name": "Thanetal",
+    "category": "Quest NPC",
+    "note": "He spawns here, then he paths south, across the bridge, through the spirits / elementals, down along the shore near the bridge with the runaways - then he walks across water to the shore near the cultist cave, along the shore down to the toilmaster / newbie bridge then into town.  After he reaches wherever it is he goes in town he despawns, then appears back at the spawn point to begin again.",
+    "x": 1929,
+    "y": 2297,
+    "wiki": "https://monstersandmemories.wiki/npcs/thanetal",
+    "wikiId": "npc-thanetal"
+  },
+  {
+    "id": "community-753",
+    "community": true,
+    "name": "Gullach",
+    "category": "Named mob",
+    "note": "Named Mob for Inquisitor house quest, spawns from any outcast/runnaway",
+    "x": 3987,
+    "y": 6455,
+    "levels": [
+      15,
+      15
+    ]
+  },
+  {
+    "id": "community-846",
+    "community": true,
+    "name": "Fargoth Ith'vayen",
+    "category": "Notable NPC",
+    "note": "upstair",
+    "x": 4348,
+    "y": 2302
+  },
+  {
+    "id": "community-849",
+    "community": true,
+    "name": "an enchanter scribe",
+    "category": "Vendor",
+    "note": "upstair",
+    "x": 4336,
+    "y": 2351,
+    "vendor": "Enchanter"
+  },
+  {
+    "id": "community-853",
+    "community": true,
+    "name": "Gredin Lar'daz",
+    "category": "Vendor",
+    "note": "Upstair, sells Disenchanting Cube and Tome of Enchantement",
+    "x": 4410,
+    "y": 2438
+  },
+  {
+    "id": "community-854",
+    "community": true,
+    "name": "Enchanter Grevek",
+    "category": "Tradeskill",
+    "note": "upstair, Disenchanter",
+    "x": 4439,
+    "y": 2406,
+    "trade": "(Dis)Enchanting"
+  },
+  {
+    "id": "community-856",
+    "community": true,
+    "name": "an enchanting trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4427,
+    "y": 2428,
+    "trade": "(Dis)Enchanting"
+  },
+  {
+    "id": "community-857",
+    "community": true,
+    "name": "Luran Malis'tar",
+    "category": "Vendor",
+    "note": "",
+    "x": 4468,
+    "y": 2446
+  },
+  {
+    "id": "community-858",
+    "community": true,
+    "name": "a leatherworking merchant",
+    "category": "Vendor",
+    "note": "",
+    "x": 4462,
+    "y": 2528,
+    "vendor": "Leatherworking vendor"
+  },
+  {
+    "id": "community-859",
+    "community": true,
+    "name": "Lerem Hasser",
+    "category": "Vendor",
+    "note": "leatherworking recipe",
+    "x": 4435,
+    "y": 2556,
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-860",
+    "community": true,
+    "name": "Haggler Igorel",
+    "category": "Notable NPC",
+    "note": "Commerce trainer",
+    "x": 4034,
+    "y": 3050
+  },
+  {
+    "id": "community-861",
+    "community": true,
+    "name": "Sevissa Nallinth",
+    "category": "Vendor",
+    "note": "",
+    "x": 4194,
+    "y": 2975,
+    "vendor": "Property merchant"
+  },
+  {
+    "id": "community-862",
+    "community": true,
+    "name": "Realtor Lerisal",
+    "category": "Notable NPC",
+    "note": "take sale notices",
+    "x": 4167,
+    "y": 2964
+  },
+  {
+    "id": "community-872",
+    "community": true,
+    "name": "a herbalism trainer",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 3913,
+    "y": 3436,
+    "trade": "Herbalism"
+  },
+  {
+    "id": "community-879",
+    "community": true,
+    "name": "anvil",
+    "category": "Forge",
+    "note": "",
+    "x": 3391,
+    "y": 3071
+  },
+  {
+    "id": "community-880",
+    "community": true,
+    "name": "smelter",
+    "category": "Forge",
+    "note": "",
+    "x": 3378,
+    "y": 3073
+  },
+  {
+    "id": "community-886",
+    "community": true,
+    "name": "Blacksmith Zorvek",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 4299,
+    "y": 4235,
+    "trade": "Blacksmithing / Smelting",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-zorvek",
+    "wikiId": "npc-blacksmith-zorvek"
+  },
+  {
+    "id": "community-887",
+    "community": true,
+    "name": "Nurvol Cereveth",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 4574,
+    "y": 4302,
+    "wiki": "https://monstersandmemories.wiki/npcs/nurvol-cereveth",
+    "wikiId": "npc-nurvol-cereveth"
+  },
+  {
+    "id": "community-889",
+    "community": true,
+    "name": "Melxura Ith'vayen",
+    "category": "Vendor",
+    "note": "",
+    "x": 4668,
+    "y": 2776,
+    "vendor": "Innkeeper"
+  },
+  {
+    "id": "community-890",
+    "community": true,
+    "name": "Aleyz Ith'vayen",
+    "category": "Notable NPC",
+    "note": "3rd floor, go upstair from Innekeeper X'ison, then on the second floor you'll enter a room and see Ilvaros Ithvayen, take the door on your left and go through a storage room and enter the next. This last room is where you'll find Aleyz Ith'vayen.",
+    "x": 4682,
+    "y": 2738,
+    "wiki": "https://monstersandmemories.wiki/npcs/aleyz-ithvayen",
+    "wikiId": "npc-aleyz-ith-vayen"
+  },
+  {
+    "id": "community-891",
+    "community": true,
+    "name": "a spirits vendor",
+    "category": "Vendor",
+    "note": "",
+    "x": 4707,
+    "y": 2803,
+    "vendor": "Brewer"
+  },
+  {
+    "id": "community-892",
+    "community": true,
+    "name": "Ilvaros Ith'vayen",
+    "category": "Vendor",
+    "note": "",
+    "x": 4724,
+    "y": 2981,
+    "vendor": "Barkeep"
+  },
+  {
+    "id": "community-979",
+    "community": true,
+    "name": "Xilonen Velgarrith",
+    "category": "Quest NPC",
+    "note": "Located on the second floor of the martial building. Enter the building, in the far left corner take the steps up, then turn left, take the first door on the left.",
+    "x": 4586,
+    "y": 4227,
+    "wiki": "https://monstersandmemories.wiki/npcs/xilonen-velgarrith",
+    "wikiId": "npc-xilonen-velgarrith"
+  }
+]

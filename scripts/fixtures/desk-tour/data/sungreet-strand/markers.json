@@ -1,0 +1,907 @@
+[
+ {
+  "id": "goblin-20plus-1",
+  "name": "Goblins",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 2043,
+  "y": 829,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "goblin-11-15-1",
+  "name": "Goblins",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 2996,
+  "y": 1514,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "goblin-11-15-2",
+  "name": "Goblins",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 2912,
+  "y": 2135,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-1",
+  "name": "Notable NPC",
+  "category": "Notable NPC",
+  "x": 2708,
+  "y": 2390,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "goblin-6-10-1",
+  "name": "Goblins",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 1352,
+  "y": 2650,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-20plus-1",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 2440,
+  "y": 3059,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-1",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 3195,
+  "y": 1744,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-20plus-1",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 4029,
+  "y": 2058,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-20plus-2",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 4636,
+  "y": 2408,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-20plus-1",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 3753,
+  "y": 1913,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-2",
+  "name": "Druids",
+  "category": "Notable NPC",
+  "x": 3842,
+  "y": 3012,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "generic-6-10-2",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 4099,
+  "y": 3244,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-20plus-2",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 4780,
+  "y": 3555,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-3",
+  "name": "Notable NPC",
+  "category": "Notable NPC",
+  "x": 1966,
+  "y": 3833,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "goblin-20plus-2",
+  "name": "Goblins",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 2393,
+  "y": 3764,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "bugs-11-15-1",
+  "name": "Bugs",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 2215,
+  "y": 4236,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "goblin-15-20-1",
+  "name": "Goblins",
+  "category": "Mob camp",
+  "levels": [
+   15,
+   20
+  ],
+  "x": 2622,
+  "y": 4227,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-11-15-1",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 2664,
+  "y": 4520,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-11-15-2",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 3048,
+  "y": 5119,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-3",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 3504,
+  "y": 4513,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-4",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 2525,
+  "y": 5621,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-5",
+  "name": "Researchers",
+  "category": "Notable NPC",
+  "x": 3011,
+  "y": 6487,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "npc-6",
+  "name": "Notable NPC — River Pirate Tavern",
+  "category": "Notable NPC",
+  "x": 4127,
+  "y": 3862,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-15-20-1",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   15,
+   20
+  ],
+  "x": 4128,
+  "y": 4011,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-11-15-3",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 3757,
+  "y": 4674,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-5",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 5034,
+  "y": 4568,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-20plus-2",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   20,
+   null
+  ],
+  "x": 4723,
+  "y": 4944,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-6",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 4763,
+  "y": 5332,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "crocodiles-6-10-1",
+  "name": "Crocodiles",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "mobs": [
+   {
+    "name": "Crocodiles",
+    "wikiId": "npc-a-crocodile",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile"
+   }
+  ],
+  "x": 5944,
+  "y": 5770,
+  "approximate": true,
+  "note": "On the beach below the east cliff.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile",
+  "wikiId": "npc-a-crocodile"
+ },
+ {
+  "id": "undead-11-15-1",
+  "name": "Humanoid",
+  "category": "Mob camp",
+  "mobs": [
+   {
+    "name": "A grim farmhand",
+    "wikiId": "npc-a-grim-farmhand",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-grim-farmhand"
+   },
+   {
+    "name": "A gruff farmhand",
+    "wikiId": "npc-a-gruff-farmhand",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-gruff-farmhand"
+   },
+   {
+    "name": "A sly farmhand",
+    "wikiId": "npc-a-sly-farmhand",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sly-farmhand"
+   },
+   {
+    "name": "A sullen farmhand",
+    "wikiId": "npc-a-sullen-farmhand",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-sullen-farmhand"
+   },
+   {
+    "name": "A watchful farmhand",
+    "wikiId": "npc-a-watchful-farmhand",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-watchful-farmhand"
+   },
+   {
+    "name": "A weary farmhand",
+    "wikiId": "npc-a-weary-farmhand",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-weary-farmhand"
+   }
+  ],
+  "levels": [
+   11,
+   15
+  ],
+  "x": 3280,
+  "y": 5604,
+  "approximate": true,
+  "note": "Skintaker Camp",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "humanoid-11-15-4",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "x": 4021,
+  "y": 5516,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "npc-7",
+  "name": "Notable NPC",
+  "category": "Notable NPC",
+  "x": 4579,
+  "y": 5834,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "ashira-1-5-2",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 3278,
+  "y": 8602,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-7",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 3446,
+  "y": 7500,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "generic-6-10-8",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 5077,
+  "y": 6514,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "humanoid-6-10-1",
+  "name": "Humanoids",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 4186,
+  "y": 6844,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-6-10-9",
+  "name": "Creatures",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 4739,
+  "y": 7763,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "generic-1-5-1",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   6,
+   10
+  ],
+  "x": 3490,
+  "y": 7911,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3,
+  "community": true
+ },
+ {
+  "id": "crocodiles-1-5-1",
+  "name": "Crocodiles",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "mobs": [
+   {
+    "name": "Crocodiles",
+    "wikiId": "npc-a-crocodile",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile"
+   }
+  ],
+  "x": 5771,
+  "y": 8370,
+  "approximate": true,
+  "note": "On the beach below the east cliff.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile",
+  "wikiId": "npc-a-crocodile"
+ },
+ {
+  "id": "ashira-1-5-3",
+  "name": "Ashira",
+  "category": "Mob camp",
+  "levels": [
+   1,
+   5
+  ],
+  "x": 4089,
+  "y": 8202,
+  "approximate": true,
+  "note": "",
+  "minZoom": 3
+ },
+ {
+  "id": "crocodiles-8-12-1",
+  "name": "Crocodiles",
+  "category": "Mob camp",
+  "levels": [
+   8,
+   12
+  ],
+  "mobs": [
+   {
+    "name": "Crocodiles",
+    "wikiId": "npc-a-crocodile",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile"
+   }
+  ],
+  "x": 5947,
+  "y": 4824,
+  "approximate": true,
+  "note": "On the beach below the east cliff, north of the levels 6–10 crocodiles.",
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile",
+  "wikiId": "npc-a-crocodile"
+ },
+ {
+  "id": "tunnels-bugs",
+  "name": "Bugs in the tunnels",
+  "category": "Mob camp",
+  "levels": [
+   15,
+   20
+  ],
+  "x": 1122,
+  "y": 4278,
+  "approximate": true,
+  "note": "Inside the tunnels behind the two tunnel entrances.",
+  "minZoom": 3
+ },
+ {
+  "id": "tunnels-npc",
+  "name": "Notable NPC in the tunnels",
+  "category": "Notable NPC",
+  "x": 1122,
+  "y": 4358,
+  "approximate": true,
+  "note": "Inside the tunnels behind the two tunnel entrances.",
+  "minZoom": 3
+ },
+ {
+  "id": "community-176",
+  "community": true,
+  "name": "Sister Elara",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 2266,
+  "y": 4593,
+  "wiki": "https://monstersandmemories.wiki/npcs/sister-elara",
+  "wikiId": "npc-sister-elara"
+ },
+ {
+  "id": "community-177",
+  "community": true,
+  "name": "Tig Pebblebank",
+  "category": "Quest NPC",
+  "note": "Gives Tig's Measuring Quest for The Measure Stick",
+  "x": 2433,
+  "y": 4705,
+  "wiki": "https://monstersandmemories.wiki/npcs/tig-pebblebank",
+  "wikiId": "npc-tig-pebblebank"
+ },
+ {
+  "id": "community-178",
+  "community": true,
+  "name": "Tolman Sneed",
+  "category": "Named mob",
+  "note": "Spawns in the middle pack of the encampment, roughly 1 hour spawn timer.\n\nDropped a 2H int staff and a wis/int (?) chest",
+  "x": 3757,
+  "y": 4580,
+  "wiki": "https://monstersandmemories.wiki/npcs/tolman-sneed",
+  "wikiId": "npc-tolman-sneed"
+ },
+ {
+  "id": "community-179",
+  "community": true,
+  "name": "Foreman Stonehammer",
+  "category": "Quest NPC",
+  "note": "",
+  "x": 2255,
+  "y": 4585,
+  "wiki": "https://monstersandmemories.wiki/npcs/foreman-stonehammer",
+  "wikiId": "npc-foreman-stonehammer"
+ },
+ {
+  "id": "community-256",
+  "community": true,
+  "name": "Marker 2",
+  "category": "Quest",
+  "note": "Marker 2 for Tig's Measuring quest",
+  "x": 2862,
+  "y": 4754
+ },
+ {
+  "id": "community-259",
+  "community": true,
+  "name": "Marker 1",
+  "category": "Quest",
+  "note": "Marker 1 for Tig's Measuring quest",
+  "x": 2173,
+  "y": 4751
+ },
+ {
+  "id": "community-270",
+  "community": true,
+  "name": "Marker 3",
+  "category": "Quest",
+  "note": "Marker 3 for Tig's Measuring quest",
+  "x": 2887,
+  "y": 3499
+ },
+ {
+  "id": "community-274",
+  "community": true,
+  "name": "Marker 5",
+  "category": "Quest",
+  "note": "Marker 5 for Tig's Measuring quest",
+  "x": 2646,
+  "y": 3866
+ },
+ {
+  "id": "community-275",
+  "community": true,
+  "name": "Marker 4",
+  "category": "Quest",
+  "note": "Marker 4 for Tig's Measuring quest",
+  "x": 2656,
+  "y": 3831
+ },
+ {
+  "id": "community-286",
+  "community": true,
+  "name": "Tust Brookturner",
+  "category": "Quest NPC",
+  "note": "Gives a free 8 slots bag when you say \"samples\"",
+  "x": 2440,
+  "y": 4688,
+  "wiki": "https://monstersandmemories.wiki/npcs/tust-brookturner",
+  "wikiId": "npc-tust-brookturner"
+ },
+ {
+  "id": "community-287",
+  "community": true,
+  "name": "Zahkir Dunewake",
+  "category": "Named mob",
+  "note": "",
+  "x": 4490,
+  "y": 7881,
+  "wiki": "https://monstersandmemories.wiki/npcs/zahkir-dunewake",
+  "wikiId": "npc-zahkir-dunewake"
+ },
+ {
+  "id": "community-319",
+  "community": true,
+  "name": "Undead",
+  "category": "Mob camp",
+  "levels": [
+   11,
+   15
+  ],
+  "note": "Only spawn at night.",
+  "x": 3930,
+  "y": 6428
+ },
+ {
+  "id": "community-430",
+  "community": true,
+  "name": "Warlord Muggrah (level 25)",
+  "category": "Named mob",
+  "note": "Muggrah Goblin Camp on the mountain past Tel Ekir. Pathing brawler that walks a circuit around the snake statue is the PH.",
+  "x": 2460,
+  "y": 900,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/warlord-muggrah",
+  "wikiId": "npc-warlord-muggrah"
+ },
+ {
+  "id": "community-431",
+  "community": true,
+  "name": "Best Appraiser Bibic",
+  "category": "Named mob",
+  "note": "Muggrah Goblin Camp on the mountain past Tel Ekir. By fallen obelisk.",
+  "x": 2398,
+  "y": 795,
+  "wiki": "https://monstersandmemories.wiki/npcs/best-appraiser-bibic",
+  "wikiId": "npc-best-appraiser-bibic"
+ },
+ {
+  "id": "community-437",
+  "community": true,
+  "name": "Klimpi the Feared",
+  "category": "Named mob",
+  "note": "Muggrah Goblin Camp on the mountain past Tel Ekir.",
+  "x": 2468,
+  "y": 1034,
+  "wiki": "https://monstersandmemories.wiki/npcs/klimpi-the-feared",
+  "wikiId": "npc-klimpi-the-feared"
+ },
+ {
+  "id": "community-654",
+  "community": true,
+  "name": "Rizik Goresnout",
+  "category": "Named mob",
+  "note": "",
+  "x": 1039,
+  "y": 2725,
+  "levels": [
+   7,
+   7
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/rizik-goresnout",
+  "wikiId": "npc-rizik-goresnout"
+ },
+ {
+  "id": "community-665",
+  "community": true,
+  "name": "Rhakar Vexfang",
+  "category": "Named mob",
+  "note": "Central Ashira Camp near Night Harbor zoneline\nPH: Ashira Warrior",
+  "x": 4484,
+  "y": 8476,
+  "levels": [
+   5,
+   5
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/rhakar-vexfang",
+  "wikiId": "npc-rhakar-vexfang"
+ },
+ {
+  "id": "community-701",
+  "community": true,
+  "name": "Dizzik (level ~20)",
+  "category": "Named mob",
+  "note": "",
+  "x": 2755,
+  "y": 3924,
+  "wiki": "https://monstersandmemories.wiki/npcs/dizzik",
+  "wikiId": "npc-dizzik"
+ },
+ {
+  "id": "community-702",
+  "community": true,
+  "name": "Nerguk (level ~25)",
+  "category": "Named mob",
+  "note": "",
+  "x": 2287,
+  "y": 3668,
+  "wiki": "https://monstersandmemories.wiki/npcs/nerguk",
+  "wikiId": "npc-nerguk"
+ },
+ {
+  "id": "community-750",
+  "community": true,
+  "name": "Adah Mukhtar",
+  "category": "Vendor",
+  "note": "high level, don't pull it thinking it's lvl ~20",
+  "x": 4125,
+  "y": 3954,
+  "wiki": "https://monstersandmemories.wiki/npcs/adah-mukhtar",
+  "wikiId": "npc-adah-mukhtar"
+ },
+ {
+  "id": "community-754",
+  "community": true,
+  "name": "Ashira Packleader",
+  "category": "Named mob",
+  "note": "6 Min spawntimer",
+  "x": 4496,
+  "y": 2425,
+  "levels": [
+   22,
+   22
+  ]
+ },
+ {
+  "id": "community-762",
+  "community": true,
+  "name": "Frightweaver (level 25)",
+  "category": "Named mob",
+  "note": "",
+  "x": 2644,
+  "y": 2984,
+  "levels": [
+   25,
+   25
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/frightweaver",
+  "wikiId": "npc-frightweaver"
+ },
+ {
+  "id": "community-813",
+  "community": true,
+  "name": "Vile Will (level 15)",
+  "category": "Named mob",
+  "note": "Located upstairs in a wheat and cabbage plantation villa.",
+  "x": 4515,
+  "y": 6894,
+  "levels": [
+   15,
+   15
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/vile-will",
+  "wikiId": "npc-vile-will"
+ }
+]

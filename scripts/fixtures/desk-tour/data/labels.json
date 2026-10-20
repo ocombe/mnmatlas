@@ -1,0 +1,591 @@
+{
+  "version": 1,
+  "map": "night-harbor",
+  "tileRevision": "v2",
+  "coordinateZoom": 4,
+  "source": {
+    "title": "Maggot's Night Harbor V5 wiki map",
+    "url": "https://static.wikitide.net/monstersandmemorieswiki/5/5a/Night_harbor_V5.jpg",
+    "author": "Maggot",
+    "license": "CC BY-SA 4.0",
+    "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+    "changes": "Place names and guild locations adapted from Maggot's Night Harbor map (CC BY-SA 4.0); positions adjusted to this map, 'Docs' corrected to 'Docks'."
+  },
+  "labels": [
+    {
+      "id": "place-1",
+      "name": "Blackfeather Bazaar",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 1606.22,
+      "y": 921.41,
+      "linkedArea": "city-court",
+      "alignmentHelper": true,
+      "tier": "major"
+    },
+    {
+      "id": "place-2",
+      "name": "Temple to Matswar",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1332.13,
+      "y": 929.31,
+      "tier": "building"
+    },
+    {
+      "id": "place-3",
+      "name": "The Concourse of Souls",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1498,
+      "y": 998,
+      "tier": "building"
+    },
+    {
+      "id": "place-4",
+      "name": "The Arena",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1385,
+      "y": 1065,
+      "linkedArea": "arena",
+      "alignmentHelper": true,
+      "tier": "building"
+    },
+    {
+      "id": "place-5",
+      "name": "Temple to Eltindra",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 920.04,
+      "y": 1105.52,
+      "linkedArea": "eltindra-temple",
+      "alignmentHelper": true,
+      "tier": "building"
+    },
+    {
+      "id": "place-6",
+      "name": "Sojourner's Camp",
+      "kind": "district",
+      "priority": 70,
+      "minZoom": 3.25,
+      "x": 894,
+      "y": 1183,
+      "tier": "minor"
+    },
+    {
+      "id": "place-7",
+      "name": "Hospice",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 827,
+      "y": 1259,
+      "tier": "building"
+    },
+    {
+      "id": "place-8",
+      "name": "Night Harbor Crypt",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1371,
+      "y": 1191,
+      "tier": "building"
+    },
+    {
+      "id": "place-9",
+      "name": "Tannery",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1148,
+      "y": 1219,
+      "tier": "building"
+    },
+    {
+      "id": "place-10",
+      "name": "Shaded Bloom Inn",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 979,
+      "y": 1417,
+      "tier": "building"
+    },
+    {
+      "id": "place-11",
+      "name": "Saltbreeze Park",
+      "kind": "district",
+      "priority": 70,
+      "minZoom": 3.25,
+      "x": 1474.26,
+      "y": 1452.26,
+      "tier": "minor"
+    },
+    {
+      "id": "place-12",
+      "name": "West Gate",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 874,
+      "y": 1305,
+      "tier": "major"
+    },
+    {
+      "id": "place-13",
+      "name": "Night Market",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 1175.19,
+      "y": 1552.38,
+      "tier": "major"
+    },
+    {
+      "id": "place-14",
+      "name": "Bathhouse",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 950.72,
+      "y": 1525.22,
+      "tier": "building"
+    },
+    {
+      "id": "place-15",
+      "name": "Shrine to Porbor",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1189.94,
+      "y": 1634.01,
+      "tier": "building"
+    },
+    {
+      "id": "place-16",
+      "name": "Temple to Relle",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 940,
+      "y": 1606.02,
+      "tier": "building"
+    },
+    {
+      "id": "place-17",
+      "name": "Little Half Town",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 1415.73,
+      "y": 1658.42,
+      "tier": "major"
+    },
+    {
+      "id": "place-18",
+      "name": "Steel Talon Garrison",
+      "kind": "district",
+      "priority": 70,
+      "minZoom": 3.25,
+      "x": 854.91,
+      "y": 1734.31,
+      "tier": "minor"
+    },
+    {
+      "id": "place-19",
+      "name": "Temple to Haradrel",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 838.01,
+      "y": 1898.01,
+      "tier": "building"
+    },
+    {
+      "id": "place-20",
+      "name": "Steel Talon Naval Base",
+      "kind": "district",
+      "priority": 70,
+      "minZoom": 3.25,
+      "x": 1044.07,
+      "y": 1842.3,
+      "tier": "minor"
+    },
+    {
+      "id": "place-21",
+      "name": "Palace",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 2045.95,
+      "y": 1410.04,
+      "tier": "major"
+    },
+    {
+      "id": "place-22",
+      "name": "Sageside",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 1887.6,
+      "y": 1144.7,
+      "tier": "major"
+    },
+    {
+      "id": "place-23",
+      "name": "North Gate",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 1891,
+      "y": 1038,
+      "tier": "major"
+    },
+    {
+      "id": "place-24",
+      "name": "Library",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 2134.1,
+      "y": 1203.85,
+      "tier": "building"
+    },
+    {
+      "id": "place-25",
+      "name": "Temples to Vespyra & Tilustra",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 2118.42,
+      "y": 1038.17,
+      "tier": "building"
+    },
+    {
+      "id": "place-26",
+      "name": "Grave Digger Camp",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1739,
+      "y": 718,
+      "linkedArea": "grave-digger-passage",
+      "alignmentHelper": true,
+      "tier": "building"
+    },
+    {
+      "id": "place-29",
+      "name": "The Bends",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 2188.91,
+      "y": 1678.85,
+      "tier": "major"
+    },
+    {
+      "id": "place-30",
+      "name": "Temple to Yuum",
+      "kind": "building",
+      "priority": 40,
+      "minZoom": 4,
+      "x": 1947.98,
+      "y": 1910.05,
+      "tier": "building"
+    },
+    {
+      "id": "place-31",
+      "name": "Twilight Harbor",
+      "kind": "district",
+      "priority": 100,
+      "minZoom": 0,
+      "x": 1597.34,
+      "y": 2033.1,
+      "tier": "major"
+    },
+    {
+      "id": "place-32",
+      "name": "to Shaded Dunes",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 424,
+      "y": 1463,
+      "arrow": "west",
+      "tier": "exit",
+      "toMap": "shaded-dunes",
+      "toPlace": "to-night-harbor"
+    },
+    {
+      "id": "place-33",
+      "name": "to Sungreet Strand",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 1883,
+      "y": 571,
+      "arrow": "north",
+      "tier": "exit",
+      "toMap": "sungreet-strand",
+      "toPlace": "to-night-harbor"
+    },
+    {
+      "id": "place-34",
+      "name": "to Wyrmsbane Tomb",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 625,
+      "y": 920,
+      "arrow": "east",
+      "linkedArea": "wyrmsbane-entrance",
+      "alignmentHelper": true,
+      "tier": "exit",
+      "toMap": "wyrmsbane-tomb",
+      "toPlace": "exit-night-harbor"
+    },
+    {
+      "id": "place-35",
+      "name": "to Sewers",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 1644.01,
+      "y": 1783.97,
+      "arrow": "west",
+      "tier": "exit"
+    },
+    {
+      "id": "place-36",
+      "name": "Boat to Keeper's Bight (Faelindral)",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 1730,
+      "y": 2066,
+      "arrow": "south",
+      "tier": "exit",
+      "community": true,
+      "toMap": "keepers-bight",
+      "toPlace": "boat-night-harbor",
+      "route": [
+        {
+          "map": "night-harbor",
+          "place": "place-36"
+        },
+        {
+          "map": "shallow-shoals",
+          "place": "boat-zaedins-landing"
+        },
+        {
+          "map": "keepers-bight",
+          "place": "boat-night-harbor"
+        }
+      ],
+      "note": "Departs 1am, 9am and 5pm. Game time: type /time in game. Be on board before it leaves. Board at the middle dock of the big harbour. It stops briefly at Shallow Shoals on the way.",
+      "timesSource": {
+        "title": "Boats",
+        "site": "Monsters and Memories Wiki",
+        "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
+      }
+    },
+    {
+      "id": "place-37",
+      "name": "to Underdocks",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 2016,
+      "y": 1453,
+      "arrow": "north",
+      "linkedArea": "underdocks-entrance",
+      "alignmentHelper": true,
+      "tier": "exit",
+      "toMap": "underdocks",
+      "toPlace": "upper-to-night-harbor"
+    },
+    {
+      "id": "place-38",
+      "name": "to North Gate yard",
+      "kind": "exit",
+      "priority": 60,
+      "minZoom": 3.25,
+      "x": 1781,
+      "y": 845,
+      "arrow": "east",
+      "linkedArea": "east-terrace",
+      "tier": "exit",
+      "toMap": "night-harbor"
+    },
+    {
+      "id": "community-937",
+      "community": true,
+      "name": "West Bank",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "",
+      "x": 985,
+      "y": 1326
+    },
+    {
+      "id": "community-938",
+      "community": true,
+      "name": "North Bank",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "",
+      "x": 1793,
+      "y": 1184
+    }
+  ],
+  "trainers": [
+    {
+      "id": "class-1",
+      "abbreviations": [
+        "CLR",
+        "PAL"
+      ],
+      "classes": [
+        "Cleric",
+        "Paladin"
+      ],
+      "building": "Hospice",
+      "x": 822,
+      "y": 1255
+    },
+    {
+      "id": "class-2",
+      "abbreviations": [
+        "BRD"
+      ],
+      "classes": [
+        "Bard"
+      ],
+      "building": "Bard guild",
+      "x": 1010,
+      "y": 1533,
+      "note": "Bard Guild:\n\nClass Trainer:\nJalwa Noor\nJaimee Langris ( Quest Giver )\n\nVendors:\na composer - Bard Scrolls\nRaise Alyssum - Instrument Vendor"
+    },
+    {
+      "id": "class-3",
+      "abbreviations": [
+        "ARC",
+        "FTR",
+        "RNG"
+      ],
+      "classes": [
+        "Archer",
+        "Fighter",
+        "Ranger"
+      ],
+      "building": "Steel Talon Garrison",
+      "x": 859,
+      "y": 1683
+    },
+    {
+      "id": "class-4",
+      "abbreviations": [
+        "ROG"
+      ],
+      "classes": [
+        "Rogue"
+      ],
+      "building": "Rogue guild",
+      "x": 1116.1,
+      "y": 1636.88
+    },
+    {
+      "id": "class-5",
+      "abbreviations": [
+        "BST",
+        "SHM"
+      ],
+      "classes": [
+        "Beastmaster",
+        "Shaman"
+      ],
+      "building": "North Saltbreeze garden",
+      "x": 1646.38,
+      "y": 1377.07
+    },
+    {
+      "id": "class-6",
+      "abbreviations": [
+        "DRU"
+      ],
+      "classes": [
+        "Druid"
+      ],
+      "building": "South Saltbreeze garden",
+      "x": 1654.24,
+      "y": 1514.46
+    },
+    {
+      "id": "class-7",
+      "abbreviations": [
+        "ELE",
+        "MNK"
+      ],
+      "classes": [
+        "Elementalist",
+        "Monk"
+      ],
+      "building": "Little Half Town temple",
+      "x": 1506,
+      "y": 1698.02
+    },
+    {
+      "id": "class-8",
+      "abbreviations": [
+        "NEC",
+        "SHD"
+      ],
+      "classes": [
+        "Necromancer",
+        "Shadow Knight"
+      ],
+      "building": "The Concourse of Souls",
+      "x": 1474.34,
+      "y": 956.87
+    },
+    {
+      "id": "class-9",
+      "abbreviations": [
+        "ENC",
+        "INQ",
+        "SPB"
+      ],
+      "classes": [
+        "Enchanter",
+        "Inquisitor",
+        "Spellblade"
+      ],
+      "building": "Spellbinders of the Spire",
+      "x": 2229,
+      "y": 1001
+    },
+    {
+      "id": "class-10",
+      "abbreviations": [
+        "WIZ"
+      ],
+      "classes": [
+        "Wizard"
+      ],
+      "building": "Wizard guild",
+      "x": 2133.99,
+      "y": 1096.22
+    }
+  ]
+}

@@ -1,0 +1,115 @@
+{
+ "map": "evershade-weald",
+ "tileRevision": "v1",
+ "coordinateZoom": 6,
+ "labels": [
+  {
+   "id": "evershade-weald",
+   "name": "Evershade Weald",
+   "x": 2993,
+   "y": 2416,
+   "kind": "district",
+   "priority": 100,
+   "minZoom": 0.5
+  },
+  {
+   "id": "lookout-cave",
+   "name": "Lookout Cave",
+   "x": 976,
+   "y": 1741,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "druid-ring",
+   "name": "Druid Ring",
+   "x": 1242,
+   "y": 2096,
+   "kind": "building",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "mushroom-cave",
+   "name": "Mushroom cave",
+   "x": 2224,
+   "y": 2037,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "wolf-cave",
+   "name": "Wolf Cave",
+   "x": 497,
+   "y": 3125,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "orc-cave",
+   "name": "Orc Cave",
+   "x": 3354,
+   "y": 3043,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "waterfall-cave",
+   "name": "Cave behind the waterfall",
+   "x": 4049,
+   "y": 1913,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5
+  },
+  {
+   "id": "fake-cave-wall",
+   "name": "Fake cave wall",
+   "x": 3984,
+   "y": 3466,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 3.5
+  },
+  {
+   "id": "to-glinting-hollow",
+   "name": "to Glinting Hollow",
+   "x": 731,
+   "y": 1484,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "northwest",
+   "toMap": "glinting-hollow",
+   "toPlace": "exit-evershade-weald"
+  },
+  {
+   "id": "to-keepers-bight",
+   "name": "to Keeper's Bight",
+   "x": 2475,
+   "y": 3811,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "south",
+   "toMap": "keepers-bight",
+   "toPlace": "to-evershade-weald"
+  },
+  {
+   "id": "community-995",
+   "community": true,
+   "name": "Elf Skeleton Ruins",
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0,
+   "note": "",
+   "x": 3218,
+   "y": 2812
+  }
+ ],
+ "trainers": []
+}

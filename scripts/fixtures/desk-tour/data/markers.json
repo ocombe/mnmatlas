@@ -1,0 +1,2006 @@
+[
+  {
+    "id": "wiki-1",
+    "name": "Bank — west city",
+    "category": "Bank",
+    "x": 1018,
+    "y": 1326,
+    "note": ""
+  },
+  {
+    "id": "wiki-2",
+    "name": "Bank — Sageside",
+    "category": "Bank",
+    "x": 1793,
+    "y": 1206,
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "wiki-4",
+    "name": "Inn — Blackfeather Bazaar",
+    "category": "Inn",
+    "x": 1638,
+    "y": 811,
+    "note": ""
+  },
+  {
+    "id": "wiki-5",
+    "name": "Stable — Wayfarer’s Hospice",
+    "category": "Stable",
+    "x": 897,
+    "y": 1213,
+    "note": ""
+  },
+  {
+    "id": "wiki-6",
+    "name": "Shaded Bloom Inn",
+    "category": "Inn",
+    "x": 948,
+    "y": 1394,
+    "note": ""
+  },
+  {
+    "id": "wiki-7",
+    "name": "Inn — west Sageside",
+    "category": "Inn",
+    "x": 1572,
+    "y": 1248,
+    "note": ""
+  },
+  {
+    "id": "wiki-8",
+    "name": "Inn — east Sageside",
+    "category": "Inn",
+    "x": 1965,
+    "y": 1209,
+    "note": ""
+  },
+  {
+    "id": "wiki-9",
+    "name": "Inn — south waterfront",
+    "category": "Inn",
+    "x": 1767,
+    "y": 1731,
+    "note": ""
+  },
+  {
+    "id": "wiki-10",
+    "name": "Stable — west city",
+    "category": "Stable",
+    "x": 887,
+    "y": 1592,
+    "note": ""
+  },
+  {
+    "id": "wiki-11",
+    "name": "Stable — North Gate",
+    "category": "Stable",
+    "x": 1822,
+    "y": 1085,
+    "note": ""
+  },
+  {
+    "id": "wiki-12",
+    "name": "Stable — Little Half Town",
+    "category": "Stable",
+    "x": 1356,
+    "y": 1601,
+    "note": ""
+  },
+  {
+    "id": "wiki-14",
+    "name": "A greedy halfling",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
+    "x": 966,
+    "y": 1278,
+    "note": "",
+    "community": true,
+    "wikiId": "npc-a-greedy-halfling",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-greedy-halfling"
+  },
+  {
+    "id": "wiki-15",
+    "name": "A suspicious salesman",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
+    "x": 1840,
+    "y": 1081,
+    "note": "",
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-suspicious-salesman",
+    "wikiId": "npc-a-suspicious-salesman"
+  },
+  {
+    "id": "wiki-16",
+    "name": "Shady merchant — east North Gate",
+    "category": "Vendor",
+    "vendor": "Shady merchant",
+    "x": 2020,
+    "y": 1042,
+    "note": ""
+  },
+  {
+    "id": "wiki-17",
+    "name": "Inn — north of Bathhouse",
+    "category": "Inn",
+    "x": 1006,
+    "y": 1475,
+    "note": ""
+  },
+  {
+    "id": "wiki-18",
+    "name": "Stone Cutting — north of Sojourner’s Camp",
+    "category": "Tradeskill",
+    "x": 1055.11,
+    "y": 1072.93,
+    "note": ""
+  },
+  {
+    "id": "wiki-19",
+    "name": "Tinkering — north of Sojourner’s Camp",
+    "category": "Tradeskill",
+    "x": 1055,
+    "y": 1087,
+    "note": ""
+  },
+  {
+    "id": "wiki-28",
+    "name": "Skinning / Tanning — Tannery",
+    "category": "Tradeskill",
+    "x": 1143,
+    "y": 1240,
+    "note": ""
+  },
+  {
+    "id": "wiki-29",
+    "name": "Wagoneering — Shaded Bloom Inn",
+    "category": "Tradeskill",
+    "x": 910,
+    "y": 1365,
+    "note": ""
+  },
+  {
+    "id": "wiki-30",
+    "name": "Animal Taming — Shaded Bloom Inn",
+    "category": "Tradeskill",
+    "x": 910,
+    "y": 1393,
+    "note": ""
+  },
+  {
+    "id": "wiki-32",
+    "name": "Jewelcrafting — Night Market",
+    "category": "Tradeskill",
+    "x": 1179,
+    "y": 1485,
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "wiki-33",
+    "name": "Brewing / Fermenting — Night Market",
+    "category": "Tradeskill",
+    "x": 1146,
+    "y": 1475,
+    "note": ""
+  },
+  {
+    "id": "wiki-34",
+    "name": "Spycraft",
+    "category": "Tradeskill",
+    "x": 1015,
+    "y": 1521,
+    "note": "Below the bard guild",
+    "community": true
+  },
+  {
+    "id": "wiki-36",
+    "name": "Blacksmithing / Smelting — Night Market",
+    "category": "Vendor",
+    "x": 1173,
+    "y": 1566,
+    "note": "",
+    "vendor": "Weaponsmith",
+    "community": true
+  },
+  {
+    "id": "wiki-37",
+    "name": "Pottery — Shrine to Porbor",
+    "category": "Tradeskill",
+    "x": 1190,
+    "y": 1609,
+    "note": ""
+  },
+  {
+    "id": "wiki-38",
+    "name": "Riding — west city",
+    "category": "Tradeskill",
+    "x": 887,
+    "y": 1621,
+    "note": ""
+  },
+  {
+    "id": "wiki-39",
+    "name": "Fletching — Steel Talon Garrison",
+    "category": "Tradeskill",
+    "x": 821,
+    "y": 1660,
+    "note": ""
+  },
+  {
+    "id": "wiki-40",
+    "name": "Archaeology — Blackfeather Bazaar",
+    "category": "Tradeskill",
+    "x": 1659,
+    "y": 988,
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "wiki-41",
+    "name": "Alchemy — Blackfeather Bazaar",
+    "category": "Tradeskill",
+    "x": 1727,
+    "y": 950,
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "wiki-42",
+    "name": "Survival — North Gate",
+    "category": "Tradeskill",
+    "x": 1793,
+    "y": 1086,
+    "note": ""
+  },
+  {
+    "id": "wiki-43",
+    "name": "Tailoring — Sageside",
+    "category": "Tradeskill",
+    "x": 1989,
+    "y": 1129,
+    "note": ""
+  },
+  {
+    "id": "wiki-44",
+    "name": "Spinning — Sageside",
+    "category": "Tradeskill",
+    "x": 2024,
+    "y": 1127,
+    "note": ""
+  },
+  {
+    "id": "wiki-45",
+    "name": "Spellcrafting — wizard guild",
+    "category": "Tradeskill",
+    "x": 2123,
+    "y": 1097,
+    "note": ""
+  },
+  {
+    "id": "wiki-46",
+    "name": "Astrology — wizard guild",
+    "category": "Tradeskill",
+    "x": 2152,
+    "y": 1099,
+    "note": ""
+  },
+  {
+    "id": "wiki-47",
+    "name": "Cooking — Sageside",
+    "category": "Tradeskill",
+    "x": 2001,
+    "y": 1176,
+    "note": ""
+  },
+  {
+    "id": "wiki-48",
+    "name": "Farming — north outskirts",
+    "category": "Tradeskill",
+    "x": 2060,
+    "y": 922,
+    "note": ""
+  },
+  {
+    "id": "wiki-49",
+    "name": "Fletching — Little Half Town",
+    "category": "Tradeskill",
+    "x": 1359,
+    "y": 1711,
+    "note": ""
+  },
+  {
+    "id": "wiki-50",
+    "name": "(Dis)Enchanting — southeast of Little Half Town",
+    "category": "Tradeskill",
+    "x": 1666,
+    "y": 1711,
+    "note": ""
+  },
+  {
+    "id": "wiki-51",
+    "name": "Navigation — waterfront",
+    "category": "Tradeskill",
+    "x": 1965,
+    "y": 1770,
+    "note": ""
+  },
+  {
+    "id": "wiki-52",
+    "name": "Carpentry / Woodworking — waterfront",
+    "category": "Tradeskill",
+    "x": 1944,
+    "y": 1771,
+    "note": ""
+  },
+  {
+    "id": "wiki-53",
+    "name": "Cartography — eastern island",
+    "category": "Tradeskill",
+    "x": 2652,
+    "y": 2022,
+    "note": "",
+    "community": true
+  },
+  {
+    "id": "class-1",
+    "name": "Cleric / Paladin — Hospice",
+    "category": "Class trainer",
+    "x": 822,
+    "y": 1255,
+    "note": "CLR / PAL",
+    "classes": [
+      "Cleric",
+      "Paladin"
+    ],
+    "community": true
+  },
+  {
+    "id": "class-2",
+    "name": "Bard — Bard guild",
+    "category": "Class trainer",
+    "x": 1010,
+    "y": 1533,
+    "note": "Bard Guild:\n\nClass Trainer:\nJalwa Noor\nJaimee Langris ( Quest Giver )\n\nVendors:\na composer - Bard Scrolls\nRaise Alyssum - Instrument Vendor",
+    "classes": [
+      "Bard"
+    ],
+    "community": true
+  },
+  {
+    "id": "class-3",
+    "name": "Archer / Fighter / Ranger — Steel Talon Garrison",
+    "category": "Class trainer",
+    "x": 859,
+    "y": 1683,
+    "note": "ARC / FTR / RNG",
+    "classes": [
+      "Archer",
+      "Fighter",
+      "Ranger"
+    ]
+  },
+  {
+    "id": "class-4",
+    "name": "Rogue — Rogue guild",
+    "category": "Class trainer",
+    "x": 1116.1,
+    "y": 1636.88,
+    "note": "ROG",
+    "classes": [
+      "Rogue"
+    ]
+  },
+  {
+    "id": "class-5",
+    "name": "Beastmaster / Shaman — North Saltbreeze garden",
+    "category": "Class trainer",
+    "x": 1646.38,
+    "y": 1377.07,
+    "note": "BST / SHM",
+    "classes": [
+      "Beastmaster",
+      "Shaman"
+    ]
+  },
+  {
+    "id": "class-6",
+    "name": "Druid — South Saltbreeze garden",
+    "category": "Class trainer",
+    "x": 1654.24,
+    "y": 1514.46,
+    "note": "DRU",
+    "classes": [
+      "Druid"
+    ]
+  },
+  {
+    "id": "class-7",
+    "name": "Elementalist / Monk — Little Half Town temple",
+    "category": "Class trainer",
+    "x": 1506,
+    "y": 1698.02,
+    "note": "ELE / MNK",
+    "classes": [
+      "Elementalist",
+      "Monk"
+    ]
+  },
+  {
+    "id": "class-8",
+    "name": "Necromancer / Shadow Knight — The Concourse of Souls",
+    "category": "Class trainer",
+    "x": 1474.34,
+    "y": 956.87,
+    "note": "NEC / SHD",
+    "classes": [
+      "Necromancer",
+      "Shadow Knight"
+    ]
+  },
+  {
+    "id": "class-9",
+    "name": "Enchanter / Inquisitor / Spellblade — Spellbinders of the Spire",
+    "category": "Class trainer",
+    "x": 2229,
+    "y": 1001,
+    "note": "ENC / INQ / SPB",
+    "classes": [
+      "Enchanter",
+      "Inquisitor",
+      "Spellblade"
+    ]
+  },
+  {
+    "id": "class-10",
+    "name": "Wizard — Wizard guild",
+    "category": "Class trainer",
+    "x": 2133.99,
+    "y": 1096.22,
+    "note": "WIZ",
+    "classes": [
+      "Wizard"
+    ]
+  },
+  {
+    "id": "community-55",
+    "community": true,
+    "name": "A bag merchant",
+    "category": "Vendor",
+    "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ],
+    "note": "",
+    "x": 1150,
+    "y": 1515,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-bag-merchant",
+    "wikiId": "npc-a-bag-merchant"
+  },
+  {
+    "id": "community-66",
+    "community": true,
+    "name": "Jalwa Noor",
+    "category": "Class trainer",
+    "note": "Bard Trainer",
+    "x": 1021,
+    "y": 1534,
+    "wiki": "https://monstersandmemories.wiki/npcs/jalwa-noor",
+    "wikiId": "npc-jalwa-noor",
+    "classes": [
+      "Bard"
+    ]
+  },
+  {
+    "id": "community-99",
+    "community": true,
+    "name": "Quartermaster Obaid",
+    "category": "Vendor",
+    "note": "Ashira warrior bracer bounty quest",
+    "x": 901,
+    "y": 1654,
+    "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-obaid",
+    "wikiId": "npc-quartermaster-obaid",
+    "vendor": "Quartermaster",
+    "sells": [
+      "Bags",
+      "Materials",
+      "Quest items",
+      "Shields",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-102",
+    "community": true,
+    "name": "Halrinn Grimsul",
+    "category": "Vendor",
+    "sells": [
+      "Food & drink",
+      "Quest items"
+    ],
+    "note": "",
+    "x": 949,
+    "y": 1371,
+    "wiki": "https://monstersandmemories.wiki/npcs/halrinn-grimsul",
+    "wikiId": "npc-halrinn-grimsul"
+  },
+  {
+    "id": "community-104",
+    "community": true,
+    "name": "Chef Argna",
+    "category": "Personal",
+    "note": "",
+    "x": 959,
+    "y": 1360,
+    "wiki": "https://monstersandmemories.wiki/npcs/chef-argna",
+    "wikiId": "npc-chef-argna"
+  },
+  {
+    "id": "community-105",
+    "community": true,
+    "name": "A cook",
+    "category": "Vendor",
+    "note": "",
+    "x": 952,
+    "y": 1361,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cook",
+    "wikiId": "npc-a-cook",
+    "vendor": "Cook",
+    "sells": [
+      "Bags",
+      "Food & drink",
+      "Materials",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-107",
+    "community": true,
+    "name": "A medic",
+    "category": "Vendor",
+    "note": "",
+    "x": 904,
+    "y": 1264,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-medic",
+    "wikiId": "npc-a-medic",
+    "vendor": "Medic"
+  },
+  {
+    "id": "community-108",
+    "community": true,
+    "name": "Herbalism Zaarid",
+    "category": "Personal",
+    "note": "",
+    "x": 853,
+    "y": 1267,
+    "wiki": "https://monstersandmemories.wiki/npcs/herbalism-zaarid",
+    "wikiId": "npc-herbalism-zaarid"
+  },
+  {
+    "id": "community-110",
+    "community": true,
+    "name": "An herbalist",
+    "category": "Vendor",
+    "note": "",
+    "x": 883,
+    "y": 1268,
+    "wiki": "https://monstersandmemories.wiki/npcs/an-herbalist",
+    "wikiId": "npc-an-herbalist",
+    "vendor": "Herbalism vendor",
+    "sells": [
+      "Bags",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-111",
+    "community": true,
+    "name": "A reagent vendor (Wayfarers Hospice)",
+    "category": "Vendor",
+    "note": "",
+    "x": 817,
+    "y": 1260,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-wayfarers-hospice",
+    "wikiId": "npc-a-reagent-vendor-wayfarers-hospice",
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Armor",
+      "Bags",
+      "Materials",
+      "Shields"
+    ]
+  },
+  {
+    "id": "community-112",
+    "community": true,
+    "name": "A cleric scribe",
+    "category": "Vendor",
+    "note": "",
+    "x": 820,
+    "y": 1265,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cleric-scribe",
+    "wikiId": "npc-a-cleric-scribe",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Armor",
+      "Materials"
+    ]
+  },
+  {
+    "id": "community-113",
+    "community": true,
+    "name": "Dalinder Grammanoot",
+    "category": "Personal",
+    "note": "",
+    "x": 824,
+    "y": 1267,
+    "wiki": "https://monstersandmemories.wiki/npcs/dalinder-grammanoot",
+    "wikiId": "npc-dalinder-grammanoot"
+  },
+  {
+    "id": "community-115",
+    "community": true,
+    "name": "Trey Fulton",
+    "category": "Personal",
+    "note": "",
+    "x": 820,
+    "y": 1234,
+    "wiki": "https://monstersandmemories.wiki/npcs/trey-fulton",
+    "wikiId": "npc-trey-fulton"
+  },
+  {
+    "id": "community-116",
+    "community": true,
+    "name": "Rider Ebraim",
+    "category": "Personal",
+    "note": "",
+    "x": 909,
+    "y": 1217,
+    "wiki": "https://monstersandmemories.wiki/npcs/rider-ebraim",
+    "wikiId": "npc-rider-ebraim"
+  },
+  {
+    "id": "community-119",
+    "community": true,
+    "name": "Dilshad Abolfazl",
+    "category": "Vendor",
+    "sells": [
+      "Bags"
+    ],
+    "note": "",
+    "x": 1077,
+    "y": 1231,
+    "wiki": "https://monstersandmemories.wiki/npcs/dilshad-abolfazl",
+    "wikiId": "npc-dilshad-abolfazl"
+  },
+  {
+    "id": "community-120",
+    "community": true,
+    "name": "Leatherworker Saif",
+    "category": "Vendor",
+    "note": "",
+    "x": 1116,
+    "y": 1206,
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-saif",
+    "wikiId": "npc-leatherworker-saif",
+    "vendor": "Leatherworking vendor",
+    "sells": [
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-121",
+    "community": true,
+    "name": "Leatherworker Haiat",
+    "category": "Personal",
+    "note": "",
+    "x": 1116,
+    "y": 1198,
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-haiat",
+    "wikiId": "npc-leatherworker-haiat"
+  },
+  {
+    "id": "community-123",
+    "community": true,
+    "name": "Old Rankle",
+    "category": "Personal",
+    "note": "Ashira tails bounty",
+    "x": 1134,
+    "y": 1190,
+    "wiki": "https://monstersandmemories.wiki/npcs/old-rankle",
+    "wikiId": "npc-old-rankle"
+  },
+  {
+    "id": "community-125",
+    "community": true,
+    "name": "Bieito Brightsmile",
+    "category": "Personal",
+    "note": "",
+    "x": 1005,
+    "y": 1259,
+    "wiki": "https://monstersandmemories.wiki/npcs/bieito-brightsmile",
+    "wikiId": "npc-bieito-brightsmile"
+  },
+  {
+    "id": "community-140",
+    "community": true,
+    "name": "Leila Ghasem",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1681,
+    "y": 1376,
+    "wiki": "https://monstersandmemories.wiki/npcs/leila-ghasem",
+    "wikiId": "npc-leila-ghasem"
+  },
+  {
+    "id": "community-141",
+    "community": true,
+    "name": "Errol Shrewtender",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1382,
+    "wiki": "https://monstersandmemories.wiki/npcs/errol-shrewtender",
+    "wikiId": "npc-errol-shrewtender"
+  },
+  {
+    "id": "community-142",
+    "community": true,
+    "name": "Masoumeh Akhtar",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1387,
+    "wiki": "https://monstersandmemories.wiki/npcs/masoumeh-akhtar",
+    "wikiId": "npc-masoumeh-akhtar"
+  },
+  {
+    "id": "community-143",
+    "community": true,
+    "name": "Old Mother Roshan",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1682,
+    "y": 1365,
+    "wiki": "https://monstersandmemories.wiki/npcs/old-mother-roshan",
+    "wikiId": "npc-old-mother-roshan"
+  },
+  {
+    "id": "community-144",
+    "community": true,
+    "name": "Talnach Wilenner",
+    "category": "Vendor",
+    "note": "",
+    "x": 1683,
+    "y": 1339,
+    "wiki": "https://monstersandmemories.wiki/npcs/talnach-wilenner",
+    "wikiId": "npc-talnach-wilenner"
+  },
+  {
+    "id": "community-161",
+    "community": true,
+    "name": "Night Terror",
+    "category": "Named mob",
+    "levels": [
+      8,
+      8
+    ],
+    "note": "",
+    "x": 1441,
+    "y": 1021,
+    "wiki": "https://monstersandmemories.wiki/npcs/night-terror",
+    "wikiId": "npc-night-terror"
+  },
+  {
+    "id": "community-136",
+    "community": true,
+    "name": "Guard Atep",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1605,
+    "y": 1115,
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-atep",
+    "wikiId": "npc-guard-atep"
+  },
+  {
+    "id": "community-139",
+    "community": true,
+    "name": "A smelter",
+    "category": "Vendor",
+    "note": "",
+    "x": 1164,
+    "y": 1558,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-smelter",
+    "wikiId": "npc-a-smelter",
+    "vendor": "Smelting vendor"
+  },
+  {
+    "id": "community-145",
+    "community": true,
+    "name": "Fedamius Steele III",
+    "category": "Quest NPC",
+    "note": "RANGER/FIGHTER starter quest",
+    "x": 806,
+    "y": 1698,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Fighter_Starter_Quest_(Night_Harbor)"
+  },
+  {
+    "id": "community-174",
+    "community": true,
+    "name": "A baker (Night Market)",
+    "category": "Vendor",
+    "note": "",
+    "x": 1160,
+    "y": 1608,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-baker-night-market",
+    "wikiId": "npc-a-baker-night-market",
+    "vendor": "Baker",
+    "sells": [
+      "Food & drink"
+    ]
+  },
+  {
+    "id": "community-137",
+    "community": true,
+    "name": "Blacksmith Musafar",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 1148,
+    "y": 1552,
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-musafar",
+    "wikiId": "npc-blacksmith-musafar",
+    "trade": "Blacksmithing / Smelting"
+  },
+  {
+    "id": "community-138",
+    "community": true,
+    "name": "Blacksmith Baran",
+    "category": "Vendor",
+    "note": "",
+    "x": 1148,
+    "y": 1559,
+    "vendor": "Blacksmithing vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-baran",
+    "wikiId": "npc-blacksmith-baran"
+  },
+  {
+    "id": "teleporter-to-docks",
+    "name": "Teleporter to Docks",
+    "category": "Teleporter",
+    "x": 1898.97,
+    "y": 1246.93,
+    "note": "Teleports you to the Docks."
+  },
+  {
+    "id": "teleporter-to-sageside",
+    "name": "Teleporter to Sageside",
+    "category": "Teleporter",
+    "x": 1909.92,
+    "y": 1690.49,
+    "note": "Teleports you to Sageside."
+  },
+  {
+    "id": "community-190",
+    "community": true,
+    "name": "Weaponsmith Sielah Zefir",
+    "category": "Vendor",
+    "note": "",
+    "x": 1641,
+    "y": 1017,
+    "vendor": "Weaponsmith",
+    "wiki": "https://monstersandmemories.wiki/npcs/weaponsmith-sielah-zefir",
+    "wikiId": "npc-weaponsmith-sielah-zefir"
+  },
+  {
+    "id": "community-194",
+    "community": true,
+    "name": "A pelt trader",
+    "category": "Vendor",
+    "note": "",
+    "x": 1668,
+    "y": 1011,
+    "vendor": "Leatherworking vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-pelt-trader",
+    "wikiId": "npc-a-pelt-trader"
+  },
+  {
+    "id": "community-208",
+    "community": true,
+    "name": "A goods merchant",
+    "category": "Vendor",
+    "note": "",
+    "x": 1714,
+    "y": 891,
+    "vendor": "General goods",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-goods-merchant",
+    "wikiId": "npc-a-goods-merchant"
+  },
+  {
+    "id": "community-209",
+    "community": true,
+    "name": "A used weapons dealer",
+    "category": "Vendor",
+    "note": "",
+    "x": 1611,
+    "y": 883,
+    "vendor": "Used weapons dealer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
+    "wikiId": "npc-a-used-weapons-dealer"
+  },
+  {
+    "id": "community-210",
+    "community": true,
+    "name": "Nerida Thinblade",
+    "category": "Vendor",
+    "note": "",
+    "x": 1638,
+    "y": 804,
+    "wiki": "https://monstersandmemories.wiki/npcs/nerida-thinblade",
+    "wikiId": "npc-nerida-thinblade"
+  },
+  {
+    "id": "community-211",
+    "community": true,
+    "name": "Elmswood",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1631,
+    "y": 808,
+    "wiki": "https://monstersandmemories.wiki/npcs/elmswood",
+    "wikiId": "npc-elmswood"
+  },
+  {
+    "id": "community-212",
+    "community": true,
+    "name": "Alchemist Vizyl",
+    "category": "Vendor",
+    "note": "",
+    "x": 1726,
+    "y": 943,
+    "vendor": "Alchemy vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/alchemist-vizyl",
+    "wikiId": "npc-alchemist-vizyl"
+  },
+  {
+    "id": "community-215",
+    "community": true,
+    "name": "a fermenter",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 1726,
+    "y": 957,
+    "trade": "Brewing / Fermenting"
+  },
+  {
+    "id": "community-235",
+    "community": true,
+    "name": "Sproggets Bedsprings",
+    "category": "Vendor",
+    "note": "",
+    "x": 1095,
+    "y": 1484,
+    "wiki": "https://monstersandmemories.wiki/npcs/sproggets-bedsprings",
+    "wikiId": "npc-sproggets-bedsprings"
+  },
+  {
+    "id": "community-243",
+    "community": true,
+    "name": "Snar the Egg Collector (level 8)",
+    "category": "Named mob",
+    "note": "",
+    "x": 2340,
+    "y": 1005,
+    "wiki": "https://monstersandmemories.wiki/npcs/snar-the-egg-collector",
+    "wikiId": "npc-snar-the-egg-collector"
+  },
+  {
+    "id": "community-250",
+    "community": true,
+    "name": "Milham the Mad",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 834,
+    "y": 1227,
+    "wiki": "https://monstersandmemories.wiki/npcs/milham-the-mad",
+    "wikiId": "npc-milham-the-mad"
+  },
+  {
+    "id": "community-251",
+    "community": true,
+    "name": "Grubbfist (level 9)",
+    "category": "Named mob",
+    "note": "There’s a cave; he’s at the camp farthest from the North Gate.",
+    "x": 1677,
+    "y": 626,
+    "wiki": "https://monstersandmemories.wiki/npcs/grubbfist",
+    "wikiId": "npc-grubbfist"
+  },
+  {
+    "id": "community-252",
+    "community": true,
+    "name": "Noel Klares (level 3)",
+    "category": "Quest NPC",
+    "note": "Top floor, on the roof",
+    "x": 829,
+    "y": 1206,
+    "wiki": "https://monstersandmemories.wiki/npcs/noel-klares",
+    "wikiId": "npc-noel-klares"
+  },
+  {
+    "id": "community-312",
+    "community": true,
+    "name": "Calaada Acaciathorn",
+    "category": "Quest NPC",
+    "note": "Top Floor around back",
+    "x": 1613,
+    "y": 1533,
+    "wiki": "https://monstersandmemories.wiki/npcs/calaada-acaciathorn",
+    "wikiId": "npc-calaada-acaciathorn"
+  },
+  {
+    "id": "community-321",
+    "community": true,
+    "name": "Harbormaster Daoud",
+    "category": "Quest NPC",
+    "note": "He stands here (at night)",
+    "x": 1627,
+    "y": 1905,
+    "wiki": "https://monstersandmemories.wiki/npcs/harbormaster-daoud",
+    "wikiId": "npc-harbormaster-daoud"
+  },
+  {
+    "id": "community-322",
+    "community": true,
+    "name": "Elrind Steele",
+    "category": "Quest NPC",
+    "note": "You can get to the library through a window on the ramparts just south of the tower",
+    "x": 790,
+    "y": 1794,
+    "wiki": "https://monstersandmemories.wiki/npcs/elrind-steele",
+    "wikiId": "npc-elrind-steele"
+  },
+  {
+    "id": "community-323",
+    "community": true,
+    "name": "Jiselle Heyley",
+    "category": "Quest NPC",
+    "note": "Upstairs in the room with Dalinder",
+    "x": 835,
+    "y": 1269,
+    "wiki": "https://monstersandmemories.wiki/npcs/jiselle-heyley",
+    "wikiId": "npc-jiselle-heyley"
+  },
+  {
+    "id": "community-324",
+    "community": true,
+    "name": "Assistant Researcher Farland",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 546,
+    "y": 1113,
+    "wiki": "https://monstersandmemories.wiki/npcs/assistant-researcher-farland",
+    "wikiId": "npc-assistant-researcher-farland"
+  },
+  {
+    "id": "community-325",
+    "community": true,
+    "name": "A chain armorer",
+    "category": "Vendor",
+    "note": "",
+    "x": 1126,
+    "y": 1568,
+    "vendor": "Chain armorer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-chain-armorer",
+    "wikiId": "npc-a-chain-armorer"
+  },
+  {
+    "id": "community-326",
+    "community": true,
+    "name": "A plate armorer",
+    "category": "Vendor",
+    "note": "",
+    "x": 1141,
+    "y": 1569,
+    "vendor": "Plate armorer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-plate-armorer",
+    "wikiId": "npc-a-plate-armorer"
+  },
+  {
+    "id": "community-327",
+    "community": true,
+    "name": "Mafeed the Butcher",
+    "category": "Vendor",
+    "note": "",
+    "x": 1134,
+    "y": 1610,
+    "vendor": "Butcher",
+    "wiki": "https://monstersandmemories.wiki/npcs/mafeed-the-butcher",
+    "wikiId": "npc-mafeed-the-butcher"
+  },
+  {
+    "id": "community-328",
+    "community": true,
+    "name": "A cobbler",
+    "category": "Vendor",
+    "note": "",
+    "x": 1236,
+    "y": 1516,
+    "vendor": "Cobbler",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cobbler",
+    "wikiId": "npc-a-cobbler"
+  },
+  {
+    "id": "community-329",
+    "community": true,
+    "name": "A spicemonger",
+    "category": "Vendor",
+    "note": "",
+    "x": 1212,
+    "y": 1516,
+    "vendor": "Spice merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-spicemonger",
+    "wikiId": "npc-a-spicemonger"
+  },
+  {
+    "id": "community-330",
+    "community": true,
+    "name": "A jewelcrafter",
+    "category": "Vendor",
+    "note": "",
+    "x": 1174,
+    "y": 1483,
+    "vendor": "Jewelcrafting vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-jewelcrafter",
+    "wikiId": "npc-a-jewelcrafter"
+  },
+  {
+    "id": "community-331",
+    "community": true,
+    "name": "A survivalist",
+    "category": "Vendor",
+    "note": "",
+    "x": 1972,
+    "y": 1101,
+    "vendor": "Survival vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-survivalist",
+    "wikiId": "npc-a-survivalist"
+  },
+  {
+    "id": "community-362",
+    "community": true,
+    "name": "Shady Merchant",
+    "category": "Vendor",
+    "note": "Only shows up at night",
+    "x": 1176,
+    "y": 1609,
+    "vendor": "Shady merchant"
+  },
+  {
+    "id": "community-382",
+    "community": true,
+    "name": "Cordellius Hollmion",
+    "category": "Quest NPC",
+    "note": "Take the teleport to Spellbinder Spire from the wizard's guild, then go inside the doorway and down the hall",
+    "x": 2205,
+    "y": 989,
+    "wiki": "https://monstersandmemories.wiki/npcs/cordellius-hollmion",
+    "wikiId": "npc-cordellius-hollmion"
+  },
+  {
+    "id": "community-383",
+    "community": true,
+    "name": "Guard Jeskal",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1906,
+    "y": 1050,
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-jeskal",
+    "wikiId": "npc-guard-jeskal"
+  },
+  {
+    "id": "community-384",
+    "community": true,
+    "name": "Hult Beetlewrangler",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 866,
+    "y": 1127,
+    "wiki": "https://monstersandmemories.wiki/npcs/hult-beetlewrangler",
+    "wikiId": "npc-hult-beetlewrangler"
+  },
+  {
+    "id": "community-390",
+    "community": true,
+    "name": "Jamee Langris",
+    "category": "Notable NPC",
+    "note": "Jamee is located back stage in the Night Market stage.",
+    "x": 995,
+    "y": 1508,
+    "color": "#6a4a7a",
+    "wiki": "https://monstersandmemories.wiki/npcs/jamee-langris"
+  },
+  {
+    "id": "community-392",
+    "community": true,
+    "name": "a composer",
+    "category": "Class trainer",
+    "note": "Sells Bard spell scrolls.",
+    "x": 1004,
+    "y": 1536,
+    "classes": [
+      "Bard"
+    ],
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Rais_Alyssum"
+  },
+  {
+    "id": "community-393",
+    "community": true,
+    "name": "Rais Alyssum",
+    "category": "Vendor",
+    "note": "Sells Bard instruments.",
+    "x": 1001,
+    "y": 1531,
+    "vendor": "Instrument merchant",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Rais_Alyssum"
+  },
+  {
+    "id": "community-398",
+    "community": true,
+    "name": "Noura the Tailor",
+    "category": "Class trainer",
+    "note": "",
+    "x": 1131,
+    "y": 1549,
+    "classes": [
+      "Archer"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/noura-the-tailor",
+    "wikiId": "npc-noura-the-tailor"
+  },
+  {
+    "id": "community-447",
+    "community": true,
+    "name": "A cook",
+    "category": "Vendor",
+    "note": "",
+    "x": 1690,
+    "y": 921,
+    "vendor": "Cook",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cook",
+    "wikiId": "npc-a-cook"
+  },
+  {
+    "id": "community-448",
+    "community": true,
+    "name": "a butcher",
+    "category": "Vendor",
+    "note": "",
+    "x": 1723,
+    "y": 918,
+    "vendor": "Butcher"
+  },
+  {
+    "id": "community-479",
+    "community": true,
+    "name": "a curious jackal (levels 5–6)",
+    "category": "Quest",
+    "note": "",
+    "x": 529,
+    "y": 1269,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-curious-jackal",
+    "wikiId": "npc-a-curious-jackal"
+  },
+  {
+    "id": "community-486",
+    "community": true,
+    "name": "Mirembe Tiifu",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1695,
+    "y": 1910,
+    "wiki": "https://monstersandmemories.wiki/npcs/mirembe-tiifu",
+    "wikiId": "npc-mirembe-tiifu"
+  },
+  {
+    "id": "community-487",
+    "community": true,
+    "name": "Malory Moreland",
+    "category": "Quest NPC",
+    "note": "In the library.",
+    "x": 1539,
+    "y": 927,
+    "wiki": "https://monstersandmemories.wiki/npcs/malory-moreland",
+    "wikiId": "npc-malory-moreland"
+  },
+  {
+    "id": "community-488",
+    "community": true,
+    "name": "Sexton Harding",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1739,
+    "y": 1033,
+    "wiki": "https://monstersandmemories.wiki/npcs/sexton-harding",
+    "wikiId": "npc-sexton-harding"
+  },
+  {
+    "id": "community-489",
+    "community": true,
+    "name": "Fisherman Abduh",
+    "category": "Tradeskill",
+    "note": "Fisherman Abduh on the end of the dock",
+    "x": 1573,
+    "y": 2031,
+    "trade": "Fishing",
+    "wiki": "https://monstersandmemories.wiki/npcs/fisherman-abduh",
+    "wikiId": "npc-fisherman-abduh"
+  },
+  {
+    "id": "community-490",
+    "community": true,
+    "name": "Gatekeeper Nusder (level Red to 15)",
+    "category": "Quest NPC",
+    "note": "Red Mantle Keep, next to the catacombs gate",
+    "x": 1471,
+    "y": 1139,
+    "wiki": "https://monstersandmemories.wiki/npcs/gatekeeper-nusder",
+    "wikiId": "npc-gatekeeper-nusder"
+  },
+  {
+    "id": "community-491",
+    "community": true,
+    "name": "Chef Belle",
+    "category": "Vendor",
+    "note": "",
+    "x": 1996,
+    "y": 1177,
+    "vendor": "Cook",
+    "wiki": "https://monstersandmemories.wiki/npcs/chef-belle",
+    "wikiId": "npc-chef-belle"
+  },
+  {
+    "id": "community-492",
+    "community": true,
+    "name": "Chef Daisy",
+    "category": "Vendor",
+    "note": "",
+    "x": 1973,
+    "y": 1177,
+    "vendor": "Cook",
+    "wiki": "https://monstersandmemories.wiki/npcs/chef-daisy",
+    "wikiId": "npc-chef-daisy"
+  },
+  {
+    "id": "community-493",
+    "community": true,
+    "name": "A barkeep",
+    "category": "Vendor",
+    "note": "",
+    "x": 1966,
+    "y": 1188,
+    "vendor": "Barkeep",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-barkeep",
+    "wikiId": "npc-a-barkeep"
+  },
+  {
+    "id": "community-495",
+    "community": true,
+    "name": "A property merchant",
+    "category": "Vendor",
+    "note": "",
+    "x": 1822,
+    "y": 1218,
+    "vendor": "Property merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-property-merchant",
+    "wikiId": "npc-a-property-merchant"
+  },
+  {
+    "id": "community-496",
+    "community": true,
+    "name": "Guild Registrar (Night Harbor)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1765,
+    "y": 1226,
+    "wiki": "https://monstersandmemories.wiki/npcs/guild-registrar-night-harbor",
+    "wikiId": "npc-guild-registrar-night-harbor"
+  },
+  {
+    "id": "community-564",
+    "community": true,
+    "name": "Customs Inspector Bakari",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1648,
+    "y": 1907,
+    "wiki": "https://monstersandmemories.wiki/npcs/customs-inspector-bakari",
+    "wikiId": "npc-customs-inspector-bakari"
+  },
+  {
+    "id": "community-566",
+    "community": true,
+    "name": "Captain Eilionoir",
+    "category": "Vendor",
+    "note": "",
+    "x": 1559,
+    "y": 1217,
+    "wiki": "https://monstersandmemories.wiki/npcs/captain-eilionoir",
+    "wikiId": "npc-captain-eilionoir"
+  },
+  {
+    "id": "community-567",
+    "community": true,
+    "name": "Guard Andreu",
+    "category": "Quest",
+    "note": "",
+    "x": 949,
+    "y": 1764,
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-andreu",
+    "wikiId": "npc-guard-andreu"
+  },
+  {
+    "id": "community-598",
+    "community": true,
+    "name": "Master Wincog",
+    "category": "Quest NPC",
+    "note": "Master Wincog, Enchanter quest.",
+    "x": 1553,
+    "y": 1278,
+    "wiki": "https://monstersandmemories.wiki/npcs/master-wincog",
+    "wikiId": "npc-master-wincog"
+  },
+  {
+    "id": "community-650",
+    "community": true,
+    "name": "Fadila",
+    "category": "Quest NPC",
+    "note": "Accepts various drops in return for rations, water, or torches.",
+    "x": 2256,
+    "y": 779,
+    "wiki": "https://monstersandmemories.wiki/npcs/fadila",
+    "wikiId": "npc-fadila"
+  },
+  {
+    "id": "community-651",
+    "community": true,
+    "name": "Farmer Ammar",
+    "category": "Quest NPC",
+    "note": "Gives a quest for gathering some creature drops to return to his wife, Fadila.",
+    "x": 2220,
+    "y": 802,
+    "wiki": "https://monstersandmemories.wiki/npcs/farmer-ammar",
+    "wikiId": "npc-farmer-ammar"
+  },
+  {
+    "id": "community-655",
+    "community": true,
+    "name": "A shaman scribe",
+    "category": "Vendor",
+    "note": "Inside on the second floor to the right, next to the beastmaster trainers",
+    "x": 1637,
+    "y": 1366,
+    "vendor": "Spell scribe",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shaman-scribe",
+    "wikiId": "npc-a-shaman-scribe"
+  },
+  {
+    "id": "community-660",
+    "community": true,
+    "name": "Piia",
+    "category": "Quest NPC",
+    "note": "Up the blue stairs. Open door. Turn right.",
+    "x": 1683,
+    "y": 1710,
+    "wiki": "https://monstersandmemories.wiki/npcs/piia",
+    "wikiId": "npc-piia"
+  },
+  {
+    "id": "community-681",
+    "community": true,
+    "name": "Foss Dunestrider",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 905,
+    "y": 1497,
+    "wiki": "https://monstersandmemories.wiki/npcs/foss-dunestrider",
+    "wikiId": "npc-foss-dunestrider"
+  },
+  {
+    "id": "community-691",
+    "community": true,
+    "name": "A cloth armorer",
+    "category": "Vendor",
+    "note": "Night Market, Shortfolk area",
+    "x": 1113,
+    "y": 1519,
+    "vendor": "Cloth armorer",
+    "sells": [
+      "Armor",
+      "Materials"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cloth-armorer",
+    "wikiId": "npc-a-cloth-armorer"
+  },
+  {
+    "id": "community-692",
+    "community": true,
+    "name": "A used weapons dealer",
+    "category": "Vendor",
+    "note": "Night Market, Shortfolk area",
+    "x": 1113,
+    "y": 1512,
+    "vendor": "Used weapons dealer",
+    "sells": [
+      "Weapons"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
+    "wikiId": "npc-a-used-weapons-dealer"
+  },
+  {
+    "id": "community-717",
+    "community": true,
+    "name": "A shifty gnome",
+    "category": "Vendor",
+    "note": "Gnome which will give a bag to fill with cloth.",
+    "x": 657,
+    "y": 1648,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shifty-gnome",
+    "wikiId": "npc-a-shifty-gnome"
+  },
+  {
+    "id": "community-730",
+    "community": true,
+    "name": "Cultist Camp",
+    "category": "Mob camp",
+    "note": "The cultists are located in the underground cave.",
+    "x": 2237,
+    "y": 630,
+    "levels": [
+      14,
+      17
+    ],
+    "mobs": []
+  },
+  {
+    "id": "community-755",
+    "community": true,
+    "name": "A Master Blacksmith",
+    "category": "Quest NPC",
+    "note": "Spawns at night(6pm) for Cinder Beetle Armor quest",
+    "x": 1149,
+    "y": 1569,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Cinder_Beetle_Armor_Quests"
+  },
+  {
+    "id": "community-756",
+    "community": true,
+    "name": "A wash maiden",
+    "category": "Quest NPC",
+    "note": "Part 1 - Laundry Day Quest",
+    "x": 934,
+    "y": 1525,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Laundry_Day_Quest"
+  },
+  {
+    "id": "community-758",
+    "community": true,
+    "name": "Willy (level 5)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 835,
+    "y": 1220,
+    "wiki": "https://monstersandmemories.wiki/npcs/willy",
+    "wikiId": "npc-willy"
+  },
+  {
+    "id": "community-759",
+    "community": true,
+    "name": "Aaliyah (level 40)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1565,
+    "y": 1548,
+    "wiki": "https://monstersandmemories.wiki/npcs/aaliyah",
+    "wikiId": "npc-aaliyah"
+  },
+  {
+    "id": "community-766",
+    "community": true,
+    "name": "Brewer Gromni",
+    "category": "Vendor",
+    "note": "",
+    "x": 1142,
+    "y": 1485,
+    "vendor": "Brewer",
+    "wiki": "https://monstersandmemories.wiki/npcs/brewer-gromni",
+    "wikiId": "npc-brewer-gromni"
+  },
+  {
+    "id": "community-767",
+    "community": true,
+    "name": "Suhib the Night Market Realtor",
+    "category": "Quest NPC",
+    "note": "Night Market",
+    "x": 1177,
+    "y": 1550,
+    "wiki": "https://monstersandmemories.wiki/npcs/suhib-the-night-market-realtor",
+    "wikiId": "npc-suhib-the-night-market-realtor"
+  },
+  {
+    "id": "community-768",
+    "community": true,
+    "name": "A property merchant",
+    "category": "Vendor",
+    "note": "Night Market, next to Suhib the Night Market Realtor - North bank, next to Auditor Kristoff",
+    "x": 1186,
+    "y": 1550,
+    "vendor": "Property merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-property-merchant",
+    "wikiId": "npc-a-property-merchant"
+  },
+  {
+    "id": "community-769",
+    "community": true,
+    "name": "Weaponsmith Fahkri",
+    "category": "Vendor",
+    "note": "",
+    "x": 1185,
+    "y": 1563,
+    "vendor": "Weaponsmith",
+    "wiki": "https://monstersandmemories.wiki/npcs/weaponsmith-fahkri",
+    "wikiId": "npc-weaponsmith-fahkri"
+  },
+  {
+    "id": "community-770",
+    "community": true,
+    "name": "a beggar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1223,
+    "y": 1539,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beggar",
+    "wikiId": "npc-a-beggar"
+  },
+  {
+    "id": "community-771",
+    "community": true,
+    "name": "a beggar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1246,
+    "y": 1622,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beggar",
+    "wikiId": "npc-a-beggar"
+  },
+  {
+    "id": "community-774",
+    "community": true,
+    "name": "a beggar",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 1073,
+    "y": 1570,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beggar",
+    "wikiId": "npc-a-beggar"
+  },
+  {
+    "id": "community-775",
+    "community": true,
+    "name": "Irfan Raz",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1091,
+    "y": 1641,
+    "wiki": "https://monstersandmemories.wiki/npcs/irfan-raz",
+    "wikiId": "npc-irfan-raz"
+  },
+  {
+    "id": "community-776",
+    "community": true,
+    "name": "A poison maker (Night Harbor)",
+    "category": "Vendor",
+    "note": "",
+    "x": 1107,
+    "y": 1653,
+    "vendor": "Poison maker",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-poison-maker-night-harbor",
+    "wikiId": "npc-a-poison-maker-night-harbor"
+  },
+  {
+    "id": "community-777",
+    "community": true,
+    "name": "Albrecht",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1109,
+    "y": 1609,
+    "wiki": "https://monstersandmemories.wiki/npcs/albrecht",
+    "wikiId": "npc-albrecht"
+  },
+  {
+    "id": "community-778",
+    "community": true,
+    "name": "Sinastin Aspenleaf",
+    "category": "Class trainer",
+    "note": "The City Illuminator's Guild is tucked away within the Night Market district, Sinastin can be found in the back room of the main building.",
+    "x": 1082,
+    "y": 1609,
+    "classes": [
+      "Rogue"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/sinastin-aspenleaf",
+    "wikiId": "npc-sinastin-aspenleaf"
+  },
+  {
+    "id": "community-779",
+    "community": true,
+    "name": "a priest of Relle",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 934,
+    "y": 1602
+  },
+  {
+    "id": "community-780",
+    "community": true,
+    "name": "Spymaster Uzaiyn",
+    "category": "Tradeskill",
+    "note": "Spycraft trainer - underneath the Bard Guild stage; take ladder down in middle of stage",
+    "x": 997,
+    "y": 1526,
+    "trade": "Spycraft",
+    "wiki": "https://monstersandmemories.wiki/npcs/spymaster-uzaiyn",
+    "wikiId": "npc-spymaster-uzaiyn"
+  },
+  {
+    "id": "community-781",
+    "community": true,
+    "name": "A spymaster",
+    "category": "Vendor",
+    "note": "Underneath the Bard Guild stage in Night Harbor",
+    "x": 992,
+    "y": 1526,
+    "vendor": "Spycraft vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-spymaster",
+    "wikiId": "npc-a-spymaster"
+  },
+  {
+    "id": "community-782",
+    "community": true,
+    "name": "Stumpy the Whistler",
+    "category": "Quest NPC",
+    "note": "Possible location",
+    "x": 1057,
+    "y": 1475,
+    "wiki": "https://monstersandmemories.wiki/npcs/stumpy-the-whistler",
+    "wikiId": "npc-stumpy-the-whistler"
+  },
+  {
+    "id": "community-783",
+    "community": true,
+    "name": "Miner Falmud",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 998,
+    "y": 1216,
+    "trade": "Mining",
+    "wiki": "https://monstersandmemories.wiki/npcs/miner-falmud",
+    "wikiId": "npc-miner-falmud"
+  },
+  {
+    "id": "community-785",
+    "community": true,
+    "name": "Lumberjacking Bubir",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 956,
+    "y": 1211,
+    "trade": "Lumberjacking",
+    "wiki": "https://monstersandmemories.wiki/npcs/lumberjacking-bubir",
+    "wikiId": "npc-lumberjacking-bubir"
+  },
+  {
+    "id": "community-786",
+    "community": true,
+    "name": "Outdoorsman Gahira",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 985,
+    "y": 1147,
+    "trade": "Wilderness",
+    "wiki": "https://monstersandmemories.wiki/npcs/outdoorsman-gahira",
+    "wikiId": "npc-outdoorsman-gahira"
+  },
+  {
+    "id": "community-787",
+    "community": true,
+    "name": "A priest of Eltindra",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 954,
+    "y": 1133,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-priest-of-eltindra",
+    "wikiId": "npc-1790076511178-rburf"
+  },
+  {
+    "id": "community-788",
+    "community": true,
+    "name": "Survivalist Faiza",
+    "category": "Tradeskill",
+    "note": "",
+    "x": 906,
+    "y": 1137,
+    "trade": "Survival",
+    "wiki": "https://monstersandmemories.wiki/npcs/survivalist-faiza",
+    "wikiId": "npc-survivalist-faiza"
+  },
+  {
+    "id": "community-798",
+    "community": true,
+    "name": "Lieutenant Eiker",
+    "category": "Notable NPC",
+    "note": "",
+    "x": 528,
+    "y": 1076
+  },
+  {
+    "id": "community-800",
+    "community": true,
+    "name": "Marvion Hallows",
+    "category": "Vendor",
+    "note": "Upstairs in the library, inside the small room at the top of the stairs inside the library.",
+    "x": 1500,
+    "y": 890,
+    "vendor": "Spell scribe",
+    "wiki": "https://monstersandmemories.wiki/npcs/marvion-hallows",
+    "wikiId": "npc-marvion-hallows"
+  },
+  {
+    "id": "community-802",
+    "community": true,
+    "name": "Sekhmet",
+    "category": "Quest NPC",
+    "note": "Downstairs directly ahead as you enter The Concourse of Souls. At the very bottom in a pit.",
+    "x": 1537,
+    "y": 903,
+    "wiki": "https://monstersandmemories.wiki/npcs/sekhmet",
+    "wikiId": "npc-sekhmet"
+  },
+  {
+    "id": "community-804",
+    "community": true,
+    "name": "Everett Graves",
+    "category": "Quest NPC",
+    "note": "Ahead and slightly left as you enter The Concourse of Souls, on the main floor.",
+    "x": 1489,
+    "y": 913,
+    "wiki": "https://monstersandmemories.wiki/npcs/everett-graves",
+    "wikiId": "npc-everett-graves"
+  },
+  {
+    "id": "community-806",
+    "community": true,
+    "name": "Witcher Sayyaad",
+    "category": "Quest NPC",
+    "note": "1st floor, to the right as you enter The Concourse of Souls.",
+    "x": 1517,
+    "y": 942,
+    "wiki": "https://monstersandmemories.wiki/npcs/witcher-sayyaad",
+    "wikiId": "npc-witcher-sayyaad"
+  },
+  {
+    "id": "community-807",
+    "community": true,
+    "name": "A necromancer scribe",
+    "category": "Vendor",
+    "note": "Upstairs in the library, on the upper library floor.",
+    "x": 1484,
+    "y": 915,
+    "vendor": "Spell scribe",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-necromancer-scribe",
+    "wikiId": "npc-a-necromancer-scribe"
+  },
+  {
+    "id": "community-808",
+    "community": true,
+    "name": "A reagent vendor (Concourse of Souls)",
+    "category": "Vendor",
+    "note": "Upstairs in the library, first floor.",
+    "x": 1473,
+    "y": 910,
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Materials"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-concourse-of-souls",
+    "wikiId": "npc-a-reagent-vendor-concourse-of-souls"
+  },
+  {
+    "id": "community-809",
+    "community": true,
+    "name": "Kemilla",
+    "category": "Quest NPC",
+    "note": "Downstairs directly ahead as you enter The Concourse of Souls. Left side, last room.",
+    "x": 1536,
+    "y": 889,
+    "wiki": "https://monstersandmemories.wiki/npcs/kemilla",
+    "wikiId": "npc-kemilla"
+  },
+  {
+    "id": "community-811",
+    "community": true,
+    "name": "Buckmarr Gorstagg",
+    "category": "Quest NPC",
+    "note": "To the right when entering The Concourse of Souls, down the hall and to the left inside a small room.",
+    "x": 1548,
+    "y": 907,
+    "wiki": "https://monstersandmemories.wiki/npcs/buckmarr-gorstagg",
+    "wikiId": "npc-buckmarr-gorstagg"
+  },
+  {
+    "id": "community-936",
+    "community": true,
+    "name": "Bathe for +10 Cha",
+    "category": "Secret",
+    "note": "Bathe and receive +10 Charisma buff.  Improves buying and selling values",
+    "x": 944,
+    "y": 1519
+  },
+  {
+    "id": "community-939",
+    "community": true,
+    "name": "Crocodile Hatchlings",
+    "category": "Mob camp",
+    "note": "",
+    "x": 2333,
+    "y": 1002,
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          2339,
+          865
+        ],
+        [
+          2304,
+          949
+        ],
+        [
+          2303,
+          1022
+        ],
+        [
+          2322,
+          1075
+        ],
+        [
+          2316,
+          1121
+        ],
+        [
+          2357,
+          1110
+        ],
+        [
+          2358,
+          953
+        ]
+      ]
+    },
+    "levels": [
+      3,
+      4
+    ],
+    "mobs": [
+      {
+        "name": "A crocodile hatchling",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile-hatchling",
+        "wikiId": "npc-a-crocodile-hatchling"
+      }
+    ]
+  }
+]
