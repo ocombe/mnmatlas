@@ -191,6 +191,10 @@
     {
       "name": "ocombe",
       "what": "added"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "marker:wiki-27": [
@@ -206,6 +210,10 @@
     },
     {
       "name": "ocombe",
+      "what": "edited"
+    },
+    {
+      "name": "argus_q",
       "what": "edited"
     }
   ],
@@ -1016,6 +1024,90 @@
   "marker:community-939": [
     {
       "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-943": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-944": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-945": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-948": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-949": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-950": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-951": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-952": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-953": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-954": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-955": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-956": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-958": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1008": [
+    {
+      "name": null,
       "what": "added"
     }
   ]

@@ -695,8 +695,8 @@
     "id": "community-121",
     "community": true,
     "name": "Leatherworker Haiat",
-    "category": "Personal",
-    "note": "",
+    "category": "Quest NPC",
+    "note": "Quest NPC - The Yowling",
     "x": 1116,
     "y": 1198,
     "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-haiat",
@@ -706,7 +706,7 @@
     "id": "community-123",
     "community": true,
     "name": "Old Rankle",
-    "category": "Personal",
+    "category": "Quest NPC",
     "note": "Ashira tails bounty",
     "x": 1134,
     "y": 1190,
@@ -2002,5 +2002,206 @@
         "wikiId": "npc-a-crocodile-hatchling"
       }
     ]
+  },
+  {
+    "id": "community-943",
+    "community": true,
+    "name": "Goblin Troublemakers",
+    "category": "Mob camp",
+    "note": "Goblins on Dock and in Apartments",
+    "x": 1205,
+    "y": 1811,
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          1222,
+          1747
+        ],
+        [
+          1225,
+          1871
+        ],
+        [
+          1187,
+          1872
+        ],
+        [
+          1186,
+          1818
+        ],
+        [
+          1188,
+          1749
+        ]
+      ]
+    },
+    "levels": [
+      9,
+      9
+    ],
+    "mobs": [
+      {
+        "name": "A goblin troublemaker",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-troublemaker",
+        "wikiId": "npc-a-goblin-troublemaker"
+      }
+    ]
+  },
+  {
+    "id": "community-944",
+    "community": true,
+    "name": "Whiskey (level ~12)",
+    "category": "Quest NPC",
+    "note": "Appearing along streets in Night Harbor.",
+    "x": 1408,
+    "y": 1750,
+    "wiki": "https://monstersandmemories.wiki/npcs/whiskey",
+    "wikiId": "npc-whiskey"
+  },
+  {
+    "id": "community-945",
+    "community": true,
+    "name": "Banker Badhl",
+    "category": "Bank",
+    "note": "Bank for Ba'Haara faction",
+    "x": 1518,
+    "y": 1856,
+    "wiki": "https://monstersandmemories.wiki/factions/bahaara"
+  },
+  {
+    "id": "community-948",
+    "community": true,
+    "name": "A goods merchant",
+    "category": "Vendor",
+    "note": "North gate, first building on the right when heading to the Mage Tower. Smallfolk area in Night Harbor",
+    "x": 1406,
+    "y": 1662,
+    "vendor": "General goods",
+    "sells": [
+      "Bags",
+      "Materials"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/a-goods-merchant",
+    "wikiId": "npc-a-goods-merchant"
+  },
+  {
+    "id": "community-949",
+    "community": true,
+    "name": "Bones",
+    "category": "Quest NPC",
+    "note": "In Alcove next to Sekhmet",
+    "x": 1530,
+    "y": 897,
+    "wiki": "https://monstersandmemories.wiki/npcs/bones",
+    "wikiId": "npc-bones"
+  },
+  {
+    "id": "community-950",
+    "community": true,
+    "name": "Guard Halfsies (level 40)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1431,
+    "y": 1682,
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-halfsies",
+    "wikiId": "npc-guard-halfsies"
+  },
+  {
+    "id": "community-951",
+    "community": true,
+    "name": "Herbmonger Nabiah",
+    "category": "Quest NPC",
+    "note": "At Night only",
+    "x": 1197,
+    "y": 1518,
+    "wiki": "https://monstersandmemories.wiki/npcs/herbmonger-nabiah",
+    "wikiId": "npc-herbmonger-nabiah"
+  },
+  {
+    "id": "community-952",
+    "community": true,
+    "name": "Little Tamsah",
+    "category": "Quest NPC",
+    "note": "Inside BST / SHM Area",
+    "x": 1650,
+    "y": 1358,
+    "wiki": "https://monstersandmemories.wiki/npcs/little-tamsah",
+    "wikiId": "npc-little-tamsah"
+  },
+  {
+    "id": "community-953",
+    "community": true,
+    "name": "Mayana (level 15)",
+    "category": "Quest NPC",
+    "note": "",
+    "x": 1447,
+    "y": 1517,
+    "wiki": "https://monstersandmemories.wiki/npcs/mayana",
+    "wikiId": "npc-mayana"
+  },
+  {
+    "id": "community-954",
+    "community": true,
+    "name": "A fletcher",
+    "category": "Vendor",
+    "note": "",
+    "x": 1366,
+    "y": 1669,
+    "vendor": "Fletcher",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fletcher",
+    "wikiId": "npc-a-fletcher"
+  },
+  {
+    "id": "community-955",
+    "community": true,
+    "name": "A bowyer (Night Harbor)",
+    "category": "Vendor",
+    "note": "",
+    "x": 1367,
+    "y": 1680,
+    "vendor": "Bowyer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-bowyer-night-harbor",
+    "wikiId": "npc-a-bowyer-night-harbor"
+  },
+  {
+    "id": "community-956",
+    "community": true,
+    "name": "A fishwife",
+    "category": "Vendor",
+    "note": "",
+    "x": 1361,
+    "y": 1437,
+    "vendor": "Fishmonger",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fishwife",
+    "wikiId": "npc-a-fishwife"
+  },
+  {
+    "id": "community-958",
+    "community": true,
+    "name": "A baker (Shortfolk Area)",
+    "category": "Vendor",
+    "note": "Shortfolk Area\nMountain Flatbread\nWater Flask",
+    "x": 1419,
+    "y": 1652,
+    "vendor": "Baker",
+    "sells": [
+      "Food & drink"
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/a-baker-shortfolk-area",
+    "wikiId": "npc-a-baker-shortfolk-area"
+  },
+  {
+    "id": "community-1008",
+    "community": true,
+    "name": "A leatherworker",
+    "category": "Vendor",
+    "note": "North Night Harbor, Tannery",
+    "x": 1152,
+    "y": 1188,
+    "vendor": "Leatherworking vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-leatherworker",
+    "wikiId": "npc-a-leatherworker"
   }
 ]
