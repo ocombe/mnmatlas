@@ -1226,13 +1226,14 @@
     "id": "community-392",
     "community": true,
     "name": "a composer",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "Sells Bard spell scrolls.",
     "x": 1004,
     "y": 1536,
-    "classes": [
-      "Bard"
-    ],
     "wiki": "https://monstersandmemories.miraheze.org/wiki/Rais_Alyssum"
   },
   {

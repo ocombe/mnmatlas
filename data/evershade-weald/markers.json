@@ -866,7 +866,8 @@
   "id": "community-903",
   "community": true,
   "name": "Mason Rymfar",
-  "category": "Notable NPC",
+  "category": "Tradeskill",
+  "trade": "Masonry",
   "note": "Masonry trainer",
   "x": 2448,
   "y": 1981

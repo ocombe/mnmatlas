@@ -9,8 +9,8 @@
   {
    "date": "2026-10-20",
    "title": "New trades and merchants",
-   "text": "Masonry joins the trades: mark its trainers and its vendors with their own sign. Leather armorers and riding vendors join the merchants, and vendors can now be marked as selling teleport scrolls. First Aid is now called Bind Wound, as in game. Shady merchants, who buy and sell anything at a discount, wear a darker vendor pin. The mason in Evershade Weald and Hilari Hidecraft in the Underdocks now show under their proper trade.",
-   "maps": ["evershade-weald", "underdocks", "faelindral"]
+   "text": "Masonry joins the trades: mark its trainers and its vendors with their own sign. Leather armorers and riding vendors join the merchants, and vendors can now be marked as selling teleport scrolls. First Aid is now called Bind Wound, as in game. Shady merchants, who buy and sell anything at a discount, wear a darker vendor pin. The masons of Evershade Weald and Hilari Hidecraft in the Underdocks now show under their proper trade, and the spell scribes of Night Harbor and Ail’Vorith now sit with the merchants.",
+   "maps": ["evershade-weald", "underdocks", "faelindral", "night-harbor", "ail-vorith"]
   },
   {
    "date": "2026-10-19",

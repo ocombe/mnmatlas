@@ -595,13 +595,14 @@
     "id": "community-84",
     "community": true,
     "name": "a necromancer scribe",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 3697,
-    "y": 2474,
-    "classes": [
-      "Necromancer"
-    ]
+    "y": 2474
   },
   {
     "id": "community-86",
@@ -831,13 +832,14 @@
     "id": "community-283",
     "community": true,
     "name": "a cleric scribe",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 3602,
-    "y": 2586,
-    "classes": [
-      "Cleric"
-    ]
+    "y": 2586
   },
   {
     "id": "community-285",
@@ -866,49 +868,53 @@
     "id": "community-294",
     "community": true,
     "name": "a wizard scribe",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 3723,
-    "y": 3311,
-    "classes": [
-      "Wizard"
-    ]
+    "y": 3311
   },
   {
     "id": "community-295",
     "community": true,
     "name": "a necromancer scribe",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 3696,
-    "y": 3330,
-    "classes": [
-      "Necromancer"
-    ]
+    "y": 3330
   },
   {
     "id": "community-296",
     "community": true,
     "name": "an enchanter scribe",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 3744,
-    "y": 3383,
-    "classes": [
-      "Enchanter"
-    ]
+    "y": 3383
   },
   {
     "id": "community-297",
     "community": true,
     "name": "an elementalist scribe",
-    "category": "Class trainer",
+    "category": "Vendor",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ],
     "note": "",
     "x": 3769,
-    "y": 3365,
-    "classes": [
-      "Elementalist"
-    ]
+    "y": 3365
   },
   {
     "id": "community-298",
