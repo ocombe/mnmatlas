@@ -6,6 +6,8 @@
  const services=['Bank','Inn','Stable','Guild'];
  let pick='',builtFor='',select=null;
  const lower=v=>String(v||'').toLocaleLowerCase();
+ // Quest givers: Quest NPCs and anyone ticked "Gives quests" (trainers, vendors, other folk).
+ const questGiver=m=>m.category==='Quest NPC'||!!globalThis.atlasMarkerSchema?.givesQuests?.(m);
  const tradesOf=m=>m.category==='Tradeskill'?String(m.trade||'').split('/').map(t=>t.trim()).filter(Boolean):[];
  // A spell seller is a vendor, but whoever looks for their class trainer wants the class's scribe too.
  const scribeFor=(m,cls)=>m.category==='Vendor'&&vendorKindFor(m)==='Spell scribe'&&lower(m.name+' '+(m.note||'')).includes(lower(cls));
@@ -16,6 +18,7 @@
   const [kind,value]=[pick.slice(0,2),pick.slice(2)];
   if(pick==='travel')return travel.includes(m.category)||!!m.toLevel||!!m.toMap||mobs.includes(m.category);
   if(pick==='services')return services.includes(m.category);
+  if(pick==='quests')return questGiver(m);
   if(kind==='c:')return classesOf(m).includes(value)||scribeFor(m,value);
   if(kind==='t:')return tradesOf(m).includes(value)||suppliesFor(m,value);
   if(kind==='v:')return vendorKindFor(m)===value;
@@ -27,6 +30,7 @@
   const here=allMarkers().filter(m=>atLevel(m)&&!m.id.startsWith('personal-')),items=[['Everything','']];
   if(here.some(m=>travel.includes(m.category)||m.toLevel||m.toMap||mobs.includes(m.category)))items.push(['Getting around: exits, travel and mobs','travel']);
   if(here.some(m=>services.includes(m.category)))items.push(['Bank, inn and stable','services']);
+  if(here.some(questGiver))items.push(['Quest givers','quests']);
   const groups=[['Class trainer',az(here.flatMap(classesOf)),'c:'],['Crafting trainer',az(here.flatMap(tradesOf)),'t:'],['Vendor',az(here.map(vendorKindFor)),'v:'],['Vendors selling',az(here.flatMap(m=>m.category==='Vendor'&&Array.isArray(m.sells)?m.sells:[])),'s:']];
   for(const [label,values,prefix] of groups)if(values.length)items.push({label,options:values.map(v=>[v,prefix+v])});
   return items;
