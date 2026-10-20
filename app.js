@@ -334,7 +334,7 @@ function drawMarkers(){
  for(const m of matches){
   const own=m.id.startsWith('personal-');
   const pin=L.marker(locationOf(m),{icon:pinIcon(m),alt:[markerTitle(m),markerSubtitle(m)].filter(Boolean).join(', '),keyboard:true,riseOnHover:true,draggable:alignmentMode}).bindPopup(()=>popup(m),{autoPan:false});
-  pin.atlasMinZoom=m.minZoom;
+  pin.atlasMinZoom=m.minZoom;pin.atlasMarker=m;
   // An aria-label keeps the pin accessible without a second browser tooltip.
   pin.on('add',()=>pin.getElement()?.setAttribute('aria-label',[markerTitle(m),markerSubtitle(m)].filter(Boolean).join(', ')));
   // A marker that stands for another published map (a dungeon entrance on the world map) opens that map.
@@ -352,6 +352,8 @@ function drawMarkers(){
   bindMarkerTooltip(pin,m);if(showPins)pin.addTo(map);pins.set(m.id,pin);
   list.append(resultRow(markerTitle(m),markerDetail(m,own?'Personal note':''),()=>choose(m),m));
  }
+ // Crowded pins merge into groups (marker-groups.js) before the first paint.
+ window.atlasMarkerGroups?.update(true);
  // Place names and hidden areas can be found even when their visual layer hides.
  const terms=searchTerms();
  // A search also lists matching markers from the other levels; choosing one opens its level at the marker.

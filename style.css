@@ -604,3 +604,32 @@ dialog.moved::backdrop{background:#0000001f}
 .pin .ambush-mark{position:absolute;top:-7px;right:-7px;display:grid;place-items:center;width:15px;height:15px;border-radius:50%;background:#2a1f15;box-shadow:0 0 0 1.5px #f5e2b4;color:#fff1d6;transform:rotate(45deg)}
 .pin .ambush-mark svg{width:10px;height:10px;transform:none}
 
+
+/* Crowded pins (preview, marker-groups.js) */
+.marker-group .group-wrap{position:relative;width:25px;height:25px}
+.marker-group .stack-face{position:absolute;left:0;top:0;width:25px;height:25px;box-sizing:border-box;background:var(--pin,#365f59);border:2px solid #f5e2b4;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);box-shadow:0 2px 4px #30251480}
+.marker-group.s2 .stack-face:nth-child(1){transform:translate(7px,-4px) rotate(-45deg)}
+.marker-group.s3 .stack-face:nth-child(1){transform:translate(12px,-7px) rotate(-45deg)}
+.marker-group.s3 .stack-face:nth-child(2){transform:translate(6px,-3.5px) rotate(-45deg)}
+.marker-group .group-wrap>span{position:relative}
+.marker-group .group-count{position:absolute;top:-9px;left:15px;z-index:2;display:grid;place-items:center;min-width:17px;height:17px;padding:0 3px;box-sizing:border-box;border-radius:9px;background:#2a1f15;box-shadow:0 0 0 1.5px #e2b46a;color:#fff1d6;font:600 10px/1 var(--body);font-style:normal}
+.marker-group.s2 .group-count{left:22px;top:-13px}
+.marker-group.s3 .group-count{left:27px;top:-16px}
+.group-hover .group-names{list-style:none;margin:6px 0 0;padding:0}
+.group-hover .group-names li{padding:1px 0;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;max-width:260px}
+.group-hover .group-names small{color:var(--muted-foreground);font-size:11px}
+.group-hover .group-hint{margin:6px 0 0;font-size:11px;color:var(--muted-foreground)}
+.group-card .group-list{max-height:220px;overflow-y:auto;margin:0 -4px;padding:0 4px}
+.group-card .group-sub{margin:8px 0 0;font-size:9px;letter-spacing:1px;text-transform:uppercase;color:var(--primary)}
+.group-card .place.group-row{padding:6px 2px;gap:8px}
+.group-card .place.group-row .symbol{width:20px;font-size:16px}
+.group-card .place.group-row .symbol svg{width:18px;height:18px}
+.pins-far .minor-pin{pointer-events:none}
+.pins-far .minor-pin span{position:absolute;left:5px;top:17px;width:14px;height:14px;box-sizing:border-box;border-width:2px;border-radius:50%;transform:none;pointer-events:auto}
+.pins-far .minor-pin span>*{display:none}
+.group-switch{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:4px;padding:5px 6px;background:#1d1610ee;border:1px solid var(--amber-border);border-radius:var(--radius);box-shadow:var(--shadow);font:12px var(--body);color:var(--foreground)}
+.group-switch-title{padding:0 8px 0 4px;font:14px var(--heading);color:var(--muted-foreground)}
+.group-switch button{padding:5px 9px;border:1px solid transparent;border-radius:var(--radius);background:transparent;color:var(--foreground);font:inherit;cursor:pointer}
+.group-switch button:hover{background:var(--muted)}
+.group-switch button[aria-pressed="true"]{border-color:var(--primary);color:#f3c27a;background:#3a2a17}
+@media (max-width:640px){.group-switch{bottom:64px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100vw - 32px)}.group-switch-title{display:none}}
