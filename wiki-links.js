@@ -77,8 +77,8 @@ const shadyVendor=m=>m?.category==='Vendor'&&(vendorKindNow(m.vendor)||vendorKin
 const vendorWords=kind=>{const g=vendorGroupOf(kind);return g?[kind,g,...vendorKinds[g][kind]].join(' '):'';};
 // Stored suggestions and the review ledger use the same clean text, links and type names.
 function normaliseChange(row){
- const clean=(v,multiline)=>{const t=String(v).normalize('NFC').replace(/\r\n?/g,'\n').replace(/[\u0000-\u0008\u000b-\u001f\u007f-\u009f\u00ad\u061c\u180e\u200b-\u200f\u202a-\u202e\u2060-\u2069\ufeff<>]/g,'');return multiline?t.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():t.replace(/\s+/g,' ').trim();};
- const normal=p=>{p=normaliseMarker({...p});for(const k of ['name','note'])if(typeof p[k]==='string')p[k]=clean(p[k],k==='note');
+ const clean=globalThis.atlasMarkerSchema.clean;
+ const normal=p=>{p=normaliseMarker({...p});for(const k of ['name','note','building'])if(typeof p[k]==='string')p[k]=clean(p[k],k==='note');
   if(p.wiki!==undefined){const link=wikiAddress(p.wiki);if(link!==null)p.wiki=link;}if(p.wikiId!==undefined){const id=wikiIdOf(p.wikiId);if(id!==null)p.wikiId=id;}
   for(const k of ['mobs','fish'])if(Array.isArray(p[k]))p[k]=p[k].map(m=>m&&typeof m==='object'?{...m,...(typeof m.name==='string'?{name:clean(m.name)}:{}),...(wikiIdOf(m.wikiId)?{wikiId:wikiIdOf(m.wikiId)}:{}),...(wikiAddress(m.wiki)?{wiki:wikiAddress(m.wiki)}:{})}:m);
   if(p.vendor!==undefined)p.vendor=vendorKindNow(p.vendor);if(Array.isArray(p.sells))p.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));return p;};
@@ -115,7 +115,7 @@ function wikiIdOf(value){
 }
 // Camp ranges also read the older level suffix without changing the marker.
 // Mob camps and ambushes (mobs hidden until you are close) both list their mobs and a level range.
-const campTypes=['Mob camp','Ambush'],mobTypes=['Mob camp','Named mob','Ambush'];
+const campTypes=globalThis.atlasMarkerSchema.categoriesFor('mobs'),mobTypes=globalThis.atlasMarkerSchema.categoriesFor('levels');
 const levelsOk=(v,category)=>Array.isArray(v)&&v.length===2&&Number.isInteger(v[0])&&v[0]>=1&&v[0]<=99&&(v[1]===null||Number.isInteger(v[1])&&v[1]>=v[0]&&v[1]<=99)&&(category!=='Named mob'||v[0]===v[1]);
 function levelRange(value){const m=/^(?:levels?\s+)?(\d{1,2})\s*(?:([-–—])\s*(\d{1,2})|(\+))?$/i.exec(String(value??'').trim());if(!m)return null;const v=[Number(m[1]),m[4]?null:Number(m[3]||m[1])];return levelsOk(v)?v:null;}
 function campLevels(m){if(levelsOk(m?.levels))return m.levels;const v=/\(levels?\s+([^)]*)\)\s*$/i.exec(m?.name||'');return v?levelRange(v[1]):null;}
@@ -172,19 +172,5 @@ const trainerOnMap=(row,classes)=>{const c=trainerClasses(row);return c.length>0
 // the same ones: an area label nothing else; a zone exit its arrow and the map it leads to; a marker its colour and wiki
 // page (with the wiki's id), a tradeskill its trade, a class trainer its classes, a vendor its kind and Sells tags. Values are checked
 // where they are saved (app.js valid(), scripts/apply-approved.mjs).
-const markerExtraKeys=['shape','noteType','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','level','minZoom','approximate','color','wiki','wikiId','trade','classes','vendor','sells','levels','mobs','fish','way','oneWay','ambush'];
-function markerExtras(m){
- const out={};if(m.shape&&m.noteType!=='label'&&m.noteType!=='exit')out.shape=structuredClone(m.shape);for(const k of ['level','minZoom','approximate'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
- if(m.noteType!=='label')for(const k of ['travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
- if(m.noteType==='label'||m.noteType==='exit'){out.noteType=m.noteType;if(m.noteType==='exit'){if(m.arrow)out.arrow=m.arrow;if(m.toMap)out.toMap=m.toMap;}return out;}
- if(m.color)out.color=m.color;if(m.wiki){out.wiki=m.wiki;if(m.wikiId)out.wikiId=m.wikiId;}
- if(mobTypes.includes(m.category)&&m.levels!=null)out.levels=structuredClone(m.levels);
- if(campTypes.includes(m.category)&&m.mobs!=null)out.mobs=structuredClone(m.mobs);
- if(m.category==='Fishing spot'&&m.fish!=null)out.fish=structuredClone(m.fish);
- if(m.category==='Passage')for(const k of ['way','oneWay'])if(m[k]!==undefined&&m[k]!==null&&m[k]!=='')out[k]=m[k];
- if(m.category==='Named mob'&&typeof m.ambush==='boolean')out.ambush=m.ambush;
- if(m.category==='Tradeskill'&&m.trade)out.trade=m.trade;
- if(m.category==='Class trainer'&&Array.isArray(m.classes)&&m.classes.length)out.classes=[...m.classes];
- if(m.category==='Vendor'){if(m.vendor)out.vendor=vendorKindNow(m.vendor);if(Array.isArray(m.sells)&&m.sells.length)out.sells=[...m.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
- return out;
-}
+const markerExtraKeys=globalThis.atlasMarkerSchema.extraKeys;
+function markerExtras(m){return globalThis.atlasMarkerSchema.extras(m);}

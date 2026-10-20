@@ -11,7 +11,7 @@ import vm from 'node:vm';
 import {key,zoneSlug} from './wiki-reconcile.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),api='https://monstersandmemories.wiki/api/partner/v1/';
-const context={};vm.createContext(context);vm.runInContext(await readFile(resolve(root,'wiki-links.js'),'utf8'),context);
+const context={};vm.createContext(context);vm.runInContext(await readFile(resolve(root,'marker-schema.js'),'utf8'),context);vm.runInContext(await readFile(resolve(root,'wiki-links.js'),'utf8'),context);
 const [isClassTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]=vm.runInContext('[isClassTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]',context);
 // The same loose comparison as the board: our extra words after a dash or in brackets, a leading article, case and accents aside.
 const looseName=v=>String(v??'').split(/\s+[—–-]\s+|\s*\(/)[0].normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^(the|a|an) /,'');

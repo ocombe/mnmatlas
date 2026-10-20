@@ -1,7 +1,7 @@
 import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
-const context=vm.createContext({});vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),context);vm.runInContext(await readFile(new URL('../changes.js',import.meta.url),'utf8'),context);
+const context=vm.createContext({URL});vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),context);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),context);vm.runInContext(await readFile(new URL('../changes.js',import.meta.url),'utf8'),context);
 {
  const S=context.atlasShapes,C=context.atlasChanges,rect={kind:'area',form:'rect',points:[[10,10],[30,10],[30,30],[10,30]]},path={kind:'path',points:[[40,40],[50,50],[60,40]],loop:true},base={id:'shape',name:'Patrol',category:'Bank',x:20,y:20,shape:rect};
  const plain=v=>JSON.parse(JSON.stringify(v));assert.deepEqual(plain(S.anchor(rect)),[20,20]);assert.deepEqual(plain(S.anchor(path)),[40,40]);assert.equal(S.describe(rect),'Area (rectangle)');
@@ -54,7 +54,7 @@ const fixture=rows=>({mapId:'bay',levelId:'lower',markers:[marker],labels:[label
  const retype=row(1,'edit-marker',{name:'Bank',category:'Tradeskill',trade:'Mining',from:{name:'Bank',category:'Bank'}}),rename=row(2,'edit-marker',{name:'Smithy',category:'Bank',from:{name:'Bank',category:'Bank'}}),t=buildChanges(fixture([retype,rename])).get('marker:bank');
  assert.deepEqual(fields(retype),['type']);assert.deepEqual(fields(rename),['name']);assert.equal(t.effective.category,'Tradeskill');assert.equal(t.effective.trade,'Mining');assert(t.rows.every(r=>!r.conflictsWith.length));
  assert.deepEqual(fields(row(3,'edit-marker',{name:'Bank',wiki:'page',wikiId:'id',from:{name:'Bank',wiki:''}})),['wiki']);
- const linked={...marker,wiki:'old-page',wikiId:'old-id'},input=fixture([row(4,'edit-marker',{name:'Bank',wiki:'new-page',from:{name:'Bank',wiki:'old-page'}})]);input.markers=[linked];assert.equal(buildChanges(input).get('marker:bank').effective.wikiId,undefined);
+ const linked={...marker,wiki:'https://monstersandmemories.wiki/npcs/old-page',wikiId:'old-id'},input=fixture([row(4,'edit-marker',{name:'Bank',wiki:'https://monstersandmemories.wiki/npcs/new-page',from:{name:'Bank',wiki:'https://monstersandmemories.wiki/npcs/old-page'}})]);input.markers=[linked];assert.equal(buildChanges(input).get('marker:bank').effective.wikiId,undefined);
  const history=buildChanges(fixture([edit(9,'Old','Bank',{status:'published'}),edit(10,'Rejected','Bank',{status:'rejected'})]));assert.equal(history.targets().length,0);assert.equal(history.get('marker:bank').effective.name,'Bank');
 }
 // Older type bases cannot chain after a type edit; a complete current base can.
@@ -82,7 +82,7 @@ const fixture=rows=>({mapId:'bay',levelId:'lower',markers:[marker],labels:[label
 for(const [a,b] of [['',''],['Old hall','New hall'],['Same  words','Same words!'],['','Hello'],['Gone','']]){
  const diff=diffWords(a,b);assert.equal(diff.filter(r=>r.op!=='ins').map(r=>r.text).join(''),a);assert.equal(diff.filter(r=>r.op!=='del').map(r=>r.text).join(''),b);assert(diff.every(r=>['same','del','ins'].includes(r.op)));
 }
-const browser=vm.createContext({window:{}});vm.runInContext(await readFile(new URL('../changes.js',import.meta.url),'utf8'),browser);assert(browser.window.atlasChanges);
+const browser=vm.createContext({window:{}});vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),browser);vm.runInContext(await readFile(new URL('../changes.js',import.meta.url),'utf8'),browser);assert(browser.window.atlasChanges);
 const page=await readFile(new URL('../index.html',import.meta.url),'utf8');for(const script of ['changes.js','review-model.js','review-desk.js','notices.js'])assert(page.indexOf('src="'+script)<page.indexOf('src="community.js'),script+' loads before community');
 {
  const r=row(600,'edit-marker',{name:'Moved bank',x:30,y:40,from:{...marker,x:10,y:20}}),t=buildChanges(fixture([r])).forRow(600);assert(fieldsOf(r).has('position'));assert.equal(t.effective.x,30);assert.equal(t.effective.name,'Moved bank');assert(!Object.hasOwn(t.effective,'approximate'));const stale=row(601,'move-marker',{name:'Bank',from:[10,20],to:[50,60]});assert.deepEqual([...buildChanges(fixture([r,stale])).forRow(601).rows[1].conflictsWith],[600]);
@@ -110,7 +110,7 @@ console.log('Change ledger checks passed: published positions, composition, conf
 {
  const mobs=[{name:'Goblin',wikiId:'npc-goblin',wiki:'https://monstersandmemories.wiki/npcs/goblin'}],camp={...marker,category:'Mob camp',levels:[11,15],mobs};
  const a=row(701,'edit-marker',{name:camp.name,levels:[12,16],from:camp}),b=row(702,'edit-marker',{name:camp.name,mobs:[],from:camp}),d=row(703,'edit-marker',{name:camp.name,levels:[13,17],from:camp});
- assert.deepEqual(fields(a),['levels']);assert.deepEqual(fields(b),['mobs']);const t=buildChanges({...fixture([]),markers:[camp],rows:[a,b,d]}).forRow(701);assert.deepEqual(plain(t.rows.map(r=>r.conflictsWith)),[[],[],[701]]);assert.deepEqual(plain(t.effective.levels),[12,16]);assert.deepEqual(plain(t.effective.mobs),[]);
+ assert.deepEqual(fields(a),['levels']);assert.deepEqual(fields(b),['mobs']);const t=buildChanges({...fixture([]),markers:[camp],rows:[a,b,d]}).forRow(701);assert.deepEqual(plain(t.rows.map(r=>r.conflictsWith)),[[],[],[701]]);assert.deepEqual(plain(t.effective.levels),[12,16]);assert(!Object.hasOwn(t.effective,'mobs'));
  const fresh=row(704,'edit-marker',{name:camp.name,levels:[20,null],from:{name:camp.name,levels:null}});assert(context.atlasChanges.matchesFrom(fresh,{name:camp.name},'levels'));
  const switched=context.atlasChanges.applyTo(camp,row(705,'edit-marker',{name:camp.name,category:'Vendor',from:camp}));assert(!Object.hasOwn(switched,'mobs')&&!Object.hasOwn(switched,'levels'));
  console.log('Camp conflict checks passed: independent fields, stale levels, blank bases and changing type.');

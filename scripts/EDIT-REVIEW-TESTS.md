@@ -25,9 +25,31 @@ community closures for observation; it replaces no production function.
 and runs the actual publishing script in disposable directories under `scripts/`.
 All requests use its local listener.
 
-New-marker preview comparisons deliberately include every property. The current
-preview adds `removed:false`, which publication omits. These exact parity checks
-therefore fail even where all marker content survives publication.
+Preview comparisons deliberately include every property. Both the ledger and
+publication use `marker-schema.js`; a new marker has no `removed:false` property.
+The fixtures load that script before its consumers, just as the page does.
+
+The apply phase stages `.publish/applied.json` and `.publish/held.json` without
+changing suggestion statuses. The post-push `--mark-published` phase acknowledges
+the applied rows and returns the held versions to review. The older publisher
+suite finalizes only holds after its simulated push, keeping its acknowledgement
+race checks separate. The job contract suite checks both phases explicitly,
+including failed writes, version misses and continued processing of other rows.
+
+Publisher and ledger expectations were corrected to match the field contract:
+unknown fields are held rather than discarded; private marker types are held;
+null and empty optional arrays mean absence; clears remove keys. Valid additions
+remain separate fixtures for formatting and preview checks. Ledger wiki fixtures
+use valid addresses and provide `URL`. Browser fixtures use the complete trade
+and arrow choices rather than a short subset.
+
+Recovery entries retain their old envelope and add an optional `version` with the
+applied content, without account ids or author names. Older entries remain
+readable. Recovery tests check the exact applied shape and travel values and the
+complete correction baseline. Empty and all-held runs preserve data and the log;
+credit rebuilding is tested during an actual publication. Failed status writes
+now require an error annotation and a nonzero exit, including acknowledgement
+version misses. The older publisher assertions were updated accordingly.
 
 The empty-run case checks that no data or recovery-log change can trigger
 publication; it executes no commit or workflow. The updown case checks the client

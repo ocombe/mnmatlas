@@ -194,7 +194,7 @@
   if(position.every(Number.isFinite)&&!row.payload.remove&&row.kind!=='report'){clearPreview();reviewLayer=L.layerGroup().addTo(map);const pin=L.marker(locationOf(value),{icon:pinIcon({...value,category:value.category||'Personal',...(t?.kind==='label'?{atlasLabel:true,noteType:value.kind==='exit'?'exit':'label'}:{})}),draggable:true,zIndexOffset:1200}).addTo(reviewLayer);pin.on('dragend',()=>position=pixelsOf(pin.getLatLng()));d.append(text('p','Drag the pin to adjust its spot.','form-hint'));map.setView(locationOf(value),config.defaultView.placeZoom);}
   const initial=JSON.stringify(fields?.read()||{}),start=JSON.stringify(position),leave=()=>JSON.stringify(fields?.read()||{})===initial&&JSON.stringify(position)===start&&why.value===(row.comment||'')||window.confirm('Leave without saving these changes?');
   const actions=text('div','','dialog-actions');actions.append(button('Cancel',()=>{try{if(leave())d.close();}catch{if(window.confirm('Leave without saving these changes?'))d.close();}}),sendButton('Save suggestion',async()=>{
-   let payload=structuredClone(row.payload);if(fields){const now=fields.read();if(row.kind==='new-marker'){payload={...payload,...now};for(const k of ['trade','classes','vendor','sells','wikiId'])if(payload[k]===null)delete payload[k];}else{const delta=window.atlasFields.delta(now,value);delete delta.from;delete delta.name;if(now.name!==value.name)delta.name=now.name;Object.assign(payload,delta);}}
+   let payload=structuredClone(row.payload);if(fields){const now=fields.read();if(row.kind==='new-marker'){payload={...payload,...now};for(const k of [...globalThis.atlasMarkerSchema.typeKeys.slice(1),'wikiId'])if(payload[k]===null)delete payload[k];}else{const delta=window.atlasFields.delta(now,value);delete delta.from;delete delta.name;if(now.name!==value.name)delta.name=now.name;Object.assign(payload,delta);}}
    if(position.every(Number.isFinite)){if(!bounded(...position,config.minZoom))throw Error('Keep the pin inside the map.');if(move)payload.to=position;else if(row.kind==='new-marker'||JSON.stringify(position)!==start){payload.x=position[0];payload.y=position[1];if(payload.from&&!Array.isArray(payload.from))payload.from={...base,...payload.from};}}
    payload=window.atlasFields.stored(row.kind,payload);
    const amendments=[...approvedRows,...pendingRows],newest=newestOnTarget(row,amendments);
@@ -740,7 +740,7 @@
     if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||''))){
      await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:shown.name,note:shown.note||'',...(label?{}:{wiki:shown.wiki||''})}}});sent=true;}
     // A marker's type, trade, class, kind, Sells tags or colour (an exit's arrow or map) cannot follow it once approved.
-    const fixed=(label?['arrow','toMap']:['category','trade','classes','vendor','sells','color']).some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
+    const fixed=globalThis.atlasMarkerSchema.followKeys.some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
     keep();
     if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind, class or Sells change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
     else if(sent)status('Saved, and the change was sent for review.');

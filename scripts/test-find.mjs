@@ -16,7 +16,7 @@ assert.deepEqual(ids('bank','underdocks'),['bank-ne'],'map= keeps one map, then 
 assert.deepEqual(ids("keeper's"),['kb']);assert.deepEqual(ids('zzqq'),[]);assert.deepEqual(ids(''),[]);
 console.log('Find checks passed: wiki ids, exact names, trainer classes, contains, one map, nothing found.');
 // Every class the maps use is on the shared class list with the abbreviation its chips show.
-{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);const abbr=vm.runInContext('classAbbreviations',c),vendorKinds=vm.runInContext('vendorKindList',c);
+{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);const abbr=vm.runInContext('classAbbreviations',c),vendorKinds=vm.runInContext('vendorKindList',c);
  const {readdir}=await import('node:fs/promises'),files=[];const walk=async d=>{for(const e of await readdir(d,{withFileTypes:true}))e.isDirectory()?await walk(d+'/'+e.name):e.name.endsWith('.json')&&files.push(d+'/'+e.name);};await walk(new URL('../data',import.meta.url).pathname.replace(/^\/([A-Z]:)/,'$1'));
  for(const f of files){const data=JSON.parse(await readFile(f,'utf8'));
   for(const t of data?.trainers||[])(t.classes||[]).forEach((cl,i)=>{const name=cl==='Shadowknight'?'Shadow Knight':cl;assert(Object.hasOwn(abbr,name),f+': unknown class '+cl);assert.equal(abbr[name],t.abbreviations[i],f+': '+cl);});
@@ -39,7 +39,7 @@ console.log('Script checks passed: every page script parses.');
 
 // The wiki-built features show only where the Monsters and Memories Wiki may be linked: on the atlas itself and inside
 // that wiki; not inside the other wikis, nor on unknown sites.
-{const c={window:{},location:{},document:{}};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+{const c={window:{},location:{},document:{}};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
  const shown=vm.runInContext('wikiSiteShown',c);
  assert.equal(shown('mnm-wiki',null),true);assert.equal(shown('mnm-wiki','monstersandmemories.wiki'),true);assert.equal(shown('mnm-wiki','www.monstersandmemories.wiki'),true);
  assert.equal(shown('mnm-wiki','monstersandmemories.miraheze.org'),false);assert.equal(shown('old-wiki','monstersandmemories.miraheze.org'),true);
@@ -58,7 +58,7 @@ console.log('Script checks passed: every page script parses.');
  console.log('Card checks passed: NPC cards keep short facts and wiki links only.');}
 
 // Vendor kinds come from the wiki's merchants, in groups; a name says its kind, the longest words first.
-{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
  const [named,ok,group,now,legacy,types,sellsOk]=vm.runInContext('[vendorKindNamed,vendorKindOk,vendorGroupOf,vendorKindNow,vendorLegacy,sellTypes,sellsOk]',c);
  assert.equal(named('A bag merchant'),'Bag merchant');assert.equal(named('A used weapons dealer'),'Used weapons dealer');assert.equal(named('A reagent vendor (Wayfarers Hospice)'),'Reagent vendor');
  assert.equal(named('Butchers'),'Butcher');assert.equal(named('Marcus Aden'),'');assert.equal(group('Reagent vendor'),'Spells and reagents');
@@ -76,7 +76,7 @@ console.log('Script checks passed: every page script parses.');
  console.log('Vendor checks passed: current and legacy kinds, recipe names, groups and Sells validation.');}
 
 // Every copy of a note (its backup, its suggestion, the review bar) keeps the same optional fields for its kind.
-{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+{const c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
  const extras=m=>JSON.parse(JSON.stringify(vm.runInContext('markerExtras',c)(m)));
  assert.deepEqual(extras({category:'Vendor',vendor:'Bag merchant',trade:'Cooking',classes:['Bard'],wiki:'https://monstersandmemories.wiki/npcs/x',wikiId:'npc-x'}),{wiki:'https://monstersandmemories.wiki/npcs/x',wikiId:'npc-x',vendor:'Bag merchant'});
  assert.deepEqual(extras({category:'Vendor',vendor:'Leatherworking supplies',sells:['Recipes','Materials']}),{vendor:'Leatherworking vendor',sells:['Materials','Recipes']});
@@ -90,7 +90,7 @@ console.log('Script checks passed: every page script parses.');
  console.log('Marker field checks passed: each kind of note keeps its own fields.');}
 
 // The app reads legacy notes through current kinds; item tags narrow vendors without hiding other categories.
-{const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+{const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),c={};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
  vm.runInContext(app.slice(app.indexOf('const az='),app.indexOf('const baseCategories=')),c);
  Object.assign(c,{privateNoteFor:()=>'',privateNoteBox(){},privateNoteLine(){}});vm.runInContext(app.slice(app.indexOf('const classesOf='),app.indexOf('function copyButton(')),c);
  const [title,subtitle,named,kind,search,shown]=vm.runInContext('[markerTitle,markerSubtitle,vendorNamed,vendorKindFor,markerText,vendorShown]',c),pick=value=>{c.filter=value;vm.runInContext('vendorGroup=filter',c);};
@@ -152,7 +152,7 @@ console.log('Script checks passed: every page script parses.');
 
 // Older local notes and backups become Vendor notes without losing their fields or mutating the source.
 {const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),saved=new Map(),elements=new Map(),c={URL};vm.createContext(c);
- vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../icons.js',import.meta.url),'utf8'),c);
+ vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../icons.js',import.meta.url),'utf8'),c);
  vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),c);vm.runInContext('categories={...allCategories}',c);
  const normalise=vm.runInContext('normaliseMarker',c),old={id:'personal-shady',name:'Mira',category:'Shady merchant',note:'By the gate',x:10,y:20,approximate:true,wiki:'https://monstersandmemories.wiki/npcs/mira',wikiId:'npc-mira',sells:['Materials']},current=normalise(old);
  assert.deepEqual(JSON.parse(JSON.stringify(current)),{...old,category:'Vendor',vendor:'Shady merchant'});assert.equal(old.category,'Shady merchant');assert.equal(normalise(current),current);assert.equal(normalise(null),null);assert.equal(normalise(undefined),undefined);
@@ -177,7 +177,7 @@ console.log('Script checks passed: every page script parses.');
 
 // Camp displays combine the known cards only, with page identity, rates and every source.
 {
- const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),c={URL,window:{},location:{},document:{},config:{id:'camp'},structuredClone,matchMedia:()=>({matches:true})};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
+ const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),c={URL,window:{},location:{},document:{},config:{id:'camp'},structuredClone,matchMedia:()=>({matches:true})};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);
  vm.runInContext(app.slice(app.indexOf('function titleLevel('),app.indexOf('function npcCard(c')),c);vm.runInContext(app.slice(app.indexOf('function campLoot('),app.indexOf('function popup(m)')),c);
  const [range,caption,loot]=vm.runInContext('[campLevels,levelsText,campLoot]',c),plain=v=>JSON.parse(JSON.stringify(v));
  for(const [name,wanted] of [['Goblins (levels 11–15)',[11,15]],['Orcs (level 20+)',[20,null]],['Rats (level 3)',[3,3]],['Rats (levels 0–100)',null],['Camp',null]])assert.deepEqual(plain(range({name})),wanted);
@@ -225,7 +225,7 @@ console.log('Script checks passed: every page script parses.');
 }
 
 {
- const c={URL,structuredClone};vm.createContext(c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);const [fishOk,wayOk,extras,normal]=vm.runInContext('[fishOk,wayOk,markerExtras,normaliseChange]',c),plain=v=>JSON.parse(JSON.stringify(v));
+ const c={URL,structuredClone};vm.createContext(c);vm.runInContext(await readFile(new URL('../marker-schema.js',import.meta.url),'utf8'),c);vm.runInContext(await readFile(new URL('../wiki-links.js',import.meta.url),'utf8'),c);const [fishOk,wayOk,extras,normal]=vm.runInContext('[fishOk,wayOk,markerExtras,normaliseChange]',c),plain=v=>JSON.parse(JSON.stringify(v));
  const item={name:'Thorn Sturgeon',wikiId:'item-thorn-sturgeon',wiki:'https://monstersandmemories.wiki/items/thorn-sturgeon'};
  assert(fishOk([])&&fishOk([{name:'Basa'}])&&fishOk([item])&&fishOk([{name:'Basa',wikiId:'item-basa'}])&&fishOk([{name:'Basa',wiki:item.wiki}]));assert(fishOk(Array.from({length:12},(_,i)=>({name:'Fish '+i}))));
  for(const bad of [null,{},'Basa',Array(1),Array.from({length:13},(_,i)=>({name:'Fish '+i})),[{name:''}],[{name:' '.repeat(3)}],[{name:'x'.repeat(101)}],[{name:'Basa',extra:true}],[{...item,wikiId:'npc-fish'}],[{...item,wikiId:''}],[{...item,wikiId:null}],[{...item,wiki:'https://evil.example/items/fish'}],[{...item,wiki:'https://monstersandmemories.wiki/npcs/fish'}],[item,{...item,name:'Other'}],[{name:'Basa'},{name:'bAsA'}]])assert(!fishOk(bad),JSON.stringify(bad));
@@ -241,7 +241,7 @@ console.log('Script checks passed: every page script parses.');
 {
  class Node{constructor(tag,value='',cls=''){this.tagName=tag;this.textContent=value;this.className=cls;this.children=[];this.attrs={};this.style={setProperty:(k,v)=>this.attrs[k]=v};}append(...v){this.children.push(...v);}setAttribute(k,v){this.attrs[k]=v;}}
  const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),c={URL,structuredClone,text:(...v)=>new Node(...v),document:{createElementNS:(ns,tag)=>new Node(tag)},L:{divIcon:v=>v},window:{},config:{width:100,height:100},registry:{maps:[]},validLevel:v=>v===undefined};vm.createContext(c);
- for(const name of ['wiki-links.js','icons.js','changes.js'])vm.runInContext(await readFile(new URL('../'+name,import.meta.url),'utf8'),c);vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),c);vm.runInContext('categories={...allCategories}',c);
+ for(const name of ['marker-schema.js','wiki-links.js','icons.js','changes.js'])vm.runInContext(await readFile(new URL('../'+name,import.meta.url),'utf8'),c);vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),c);vm.runInContext('categories={...allCategories}',c);
  vm.runInContext(app.slice(app.indexOf('function pinIcon('),app.indexOf('function openMap(')),c);vm.runInContext(app.slice(app.indexOf('function valid('),app.indexOf('function persist(')),c);
  const [symbol,pin,valid,paths]=vm.runInContext('[markerSymbol,pinIcon,valid,passagePaths]',c);assert.equal(new Set(Object.values(paths)).size,5);
  for(const way of [undefined,'Tunnel','Swim','Climb','Drop']){const m={id:'personal-passage',name:'Passage',category:'Passage',note:'',x:10,y:20,...(way?{way}:{})},face=symbol(m),seal=pin(m);assert.equal(face.children[0].tagName,'svg');assert.equal(face.children[0].attrs['stroke-width'],'2');assert.equal(face.children[0].children[0].attrs.d,paths[way||'Passage']);assert(seal.className.includes('level-pin'));assert.equal(seal.html.attrs['--pin'],'#64795b');assert(valid(m));}

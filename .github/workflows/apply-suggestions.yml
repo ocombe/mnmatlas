@@ -68,7 +68,7 @@ jobs:
           fi
           # The site is rebuilt only when this run changed its data.
           if [ "$committed" = "true" ]; then echo "pushed=true" >> "$GITHUB_OUTPUT"; fi
-      - name: Acknowledge the published suggestions
+      - name: Acknowledge published suggestions and return holds
         if: ${{ success() && inputs.dry_run != true }}
         env:
           SUPABASE_URL: https://ihdmipwmgsmzugcekwbk.supabase.co
@@ -76,7 +76,7 @@ jobs:
         run: node scripts/apply-approved.mjs --mark-published .publish/applied.json
       # A push made by this job does not start other workflows, so start the site publish directly.
       - name: Publish the site
-        if: ${{ success() && inputs.dry_run != true && steps.save.outputs.pushed == 'true' }}
+        if: ${{ !cancelled() && inputs.dry_run != true && steps.save.outputs.pushed == 'true' }}
         env:
           GH_TOKEN: ${{ github.token }}
         run: |

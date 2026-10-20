@@ -1,8 +1,12 @@
 import {readFile} from 'node:fs/promises';
 import vm from 'node:vm';
 const read = file => readFile(new URL('../' + file, import.meta.url), 'utf8');
+const awaitSchema = await read('marker-schema.js');
 const changes = await read('changes.js');
 const fields = await read('marker-fields.js');
+const iconContext = vm.createContext({});
+vm.runInContext(await read('icons.js'), iconContext);
+const fieldChoices = vm.runInContext('({tradePaths,exitArrows})', iconContext);
 const source = await read('community.js');
 const wikiLinks = await read('wiki-links.js');
 const app = await read('app.js');
@@ -572,9 +576,8 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
     ]
   };
   context.labelPins=new Map();
-  context.exitArrows={
-    up:'?',down:'?',north:'?',east:'?'
-  };
+  context.exitArrows=fieldChoices.exitArrows;
+  context.tradePaths=fieldChoices.tradePaths;
   context.travelKind=()=>'';
   context.travelSvg=()=>new Node('svg');
   context.fetchData=async()=>[];
@@ -711,6 +714,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   context);
   vm.runInContext(app.slice(app.indexOf('// Private annotations'),app.indexOf('function migratePreviousStorage(')),
   context);
+  vm.runInContext(awaitSchema,context,{filename:'marker-schema.js'});
   vm.runInContext(wikiLinks,context,{
     filename:'wiki-links.js'
   });

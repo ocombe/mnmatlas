@@ -16,6 +16,10 @@ const apply = async () => {
 const assertHeld = async (id, field) => {
   await apply();
   const held = await job.json('.publish/held.json');
+  assert.equal(job.state.rows.find(r => r.id === id).status, 'approved',
+    'Apply stages holds until the successful-push mark step');
+  const marked = await job.run(true);
+  assert.equal(marked.code, 0, marked.output);
   const row = job.state.rows.find(r => r.id === id);
   assert(held.some(h => h.id === id), 'The row must be held');
   assert.equal(row.status, 'pending');
@@ -25,6 +29,13 @@ const assertHeld = async (id, field) => {
 };
 
 try {
+  await checks.test('B6', 'shared apply returns a refusal reason for an unknown field', async () => {
+    const e = await browser();
+    const result = e.context.atlasMarkerSchema.apply(null, suggestion(100, 'new-marker',
+      {...addition, futureField: 'Keep this'}));
+    assert.equal(result.refusal, 'unknown field futureField');
+  });
+
   for (const kind of ['new-marker', 'edit-marker']) {
     await checks.test('B6', `${kind} refuses unknown futureField`, async () => {
       const payload = kind === 'new-marker' ? {...addition, futureField: 'Keep this'} :
@@ -46,6 +57,18 @@ try {
       });
     }
   }
+
+  await checks.test('B9', 'review type choices exclude every private category', async () => {
+    const e = await browser(true);
+    e.suggestions.push(suggestion(100, 'new-marker', addition, {status: 'pending'}));
+    const {openDesk} = await import('./regression-harness.mjs');
+    await openDesk(e);
+    const choices = e.context.$('review-category').querySelectorAll('option').map(o => o.value);
+    assert(choices.includes('Quest NPC'));
+    for (const category of ['Personal', 'Ore', 'Wood', 'Herbs', 'Camping spot']) {
+      assert(!choices.includes(category), `${category} must stay private`);
+    }
+  });
 
   await checks.test('B10', 'Old Rankle #940 and #1006 both publish the same Quest NPC wish', async () => {
     const rankle = {...marker, id: 'community-123', name: 'Old Rankle', category: 'Personal'};
@@ -148,9 +171,9 @@ try {
       const row = suggestion(100, 'edit-marker', {name: 'Bay Bank', from: marker});
       if (operation === 'hold') row.payload.from.name = 'Old Bank';
       await job.reset({markers: [marker], rows: [row]});
-      if (operation === 'acknowledgement') await apply();
+      await apply();
       job.state.failPatch = () => true;
-      const result = await job.run(operation === 'acknowledgement');
+      const result = await job.run(true);
       assert(job.state.requests.some(r => r.method === 'PATCH'), 'The failing write was attempted');
       assert(result.code !== 0 || result.output.includes('::error::'),
         'Write failures must be errors, not warning-only success');
@@ -194,6 +217,105 @@ try {
       for (const [k, v] of Object.entries(late)) assert.deepEqual(output[k], v);
     });
   }
+
+  await checks.test('B13', 'lost runner preserves the exact applied shape and travel version', async () => {
+    const row = suggestion(100, 'edit-marker', {name: 'Renamed passage', from: link});
+    await job.reset({markers: [link, arrival], rows: [row]});
+    await apply();
+    const log = await job.json('data/publish-log.json');
+    assert.deepEqual(log[0].rows[0].version.payload, row.payload);
+    assert(!Object.hasOwn(log[0].rows[0].version, 'author_name'));
+    await job.write('.publish/applied.json', []);
+    Object.assign(job.state.rows[0].payload, {shape: changedShape, direction: 'down',
+      switchOnClick: false});
+    job.state.rows[0].updated_at = '2026-10-20T11:00:00Z';
+    await apply();
+    const published = job.state.rows.find(r => r.id === 100);
+    assert.equal(published.status, 'published');
+    assert.deepEqual(published.payload, row.payload, 'Recovery records only what actually landed');
+    const correction = job.state.rows.find(r => r.id !== 100);
+    assert(correction);
+    for (const key of ['x', 'y', 'shape', 'toLevel', 'toMarker', 'direction', 'travel',
+      'switchOnClick']) assert.deepEqual(correction.payload.from[key], link[key]);
+    assert.deepEqual(await job.json('.publish/held.json'), []);
+    const actual = (await job.json('data/markers.json'))[0];
+    assert.deepEqual(actual.shape, changedShape);
+    assert.equal(actual.direction, 'down');
+    assert.equal(actual.switchOnClick, false);
+  });
+
+  for (const operation of ['hold', 'acknowledgement']) {
+    await checks.test('B16', `failed ${operation} continues through the other rows`, async () => {
+      const other = {...marker, id: 'other'};
+      const rows = [marker, other].map((m, i) => suggestion(100 + i, 'edit-marker', {
+        name: 'Renamed ' + m.id, from: {...m,
+          ...(operation === 'hold' ? {name: 'Stale'} : {})}
+      }, {target_id: m.id}));
+      await job.reset({markers: [marker, other], rows});
+      await apply();
+      assert(!job.state.requests.some(r => r.method === 'PATCH'),
+        'Apply cannot send holds or acknowledgements before a successful push');
+      job.state.failPatch = q => q.get('id') === 'eq.100';
+      const result = await job.run(true);
+      assert.equal(result.code, 1, result.output);
+      assert(result.output.includes('::error::'));
+      assert.equal(job.state.rows[0].status, 'approved');
+      assert.equal(job.state.rows[1].status,
+        operation === 'hold' ? 'pending' : 'published');
+    });
+  }
+
+  await checks.test('B16', 'a version check miss is logged and leaves a newer held row alone', async () => {
+    const row = suggestion(100, 'edit-marker', {name: 'New bank',
+      from: {...marker, name: 'Stale bank'}});
+    await job.reset({markers: [marker], rows: [row]});
+    await apply();
+    job.state.rows[0].updated_at = '2026-10-20T13:00:00Z';
+    const result = await job.run(true);
+    assert.equal(result.code, 0, result.output);
+    assert(result.output.includes('version check missed'));
+    assert.equal(job.state.rows[0].status, 'approved');
+  });
+
+  await checks.test('B13', 'late new-marker shape correction moves its anchor in one valid edit', async () => {
+    const row = suggestion(100, 'new-marker', {...addition, category: 'Passage',
+      x: 10, y: 20, shape, direction: 'up'});
+    await job.reset({rows: [row]});
+    await apply();
+    const movedShape = {...shape, points: [[30, 40], [50, 60]]};
+    Object.assign(job.state.rows[0].payload, {shape: movedShape, x: 30, y: 40});
+    job.state.rows[0].updated_at = '2026-10-20T13:00:00Z';
+    const marked = await job.run(true);
+    assert.equal(marked.code, 0, marked.output);
+    const correction = job.state.rows.find(r => r.id !== 100);
+    assert.deepEqual(correction.payload.from.shape, shape);
+    assert.deepEqual([correction.payload.from.x, correction.payload.from.y], [10, 20]);
+    await apply();
+    assert.deepEqual(await job.json('.publish/held.json'), []);
+    const actual = (await job.json('data/markers.json'))[0];
+    assert.deepEqual(actual.shape, movedShape);
+    assert.deepEqual([actual.x, actual.y], [30, 40]);
+  });
+
+  await checks.test('B20', 'building uses the same text cleanup as marker names', async () => {
+    const row = suggestion(100, 'edit-marker', {name: marker.name,
+      building: '\u202e <Guild>\t  Hall ', from: marker});
+    await job.reset({markers: [marker], rows: [row]});
+    await apply();
+    const actual = (await job.json('data/markers.json'))[0];
+    assert.equal(actual.building, 'Guild Hall');
+    const e = await browser();
+    assert.deepEqual(plain(e.context.window.atlasChanges.applyTo(marker, row)), actual);
+  });
+
+  await checks.test('B21', 'an all-held run changes no data or recovery log', async () => {
+    await job.reset({markers: [marker], rows: [suggestion(100, 'new-marker',
+      {...addition, futureField: 'Keep this'})]});
+    const result = await apply();
+    assert.equal((await job.json('.publish/held.json')).length, 1);
+    assert.deepEqual(await job.json('data/publish-log.json'), []);
+    assert(result.output.includes('0 data files changed.'));
+  });
 
   await checks.test('B11', 'client new exit updown payload is accepted by the job', async () => {
     const e = await browser();

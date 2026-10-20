@@ -18,6 +18,8 @@ async function request(path,options={}){
  if(!response.ok)fail('Backend request failed (HTTP '+response.status+').');
  const body=await response.text();return body?JSON.parse(body):null;
 }
+let writeErrors=0;
+const writeError=message=>{writeErrors++;console.error('::error::'+String(message).replace(/[\r\n]/g,' '));};
 const files=new Map();let staged=null;
 function dataPath(path){
  if(typeof path!=='string'||!/^data\/[a-zA-Z0-9_./-]+\.json$/.test(path)||path.split('/').includes('..')||path.split('/').includes('tiles'))fail('Invalid data file in map registry.');
@@ -33,30 +35,31 @@ const context=vm.createContext({URL});
 const app=await readFile(resolve(root,'app.js'),'utf8'),icons=await readFile(resolve(root,'icons.js'),'utf8'),wikiLinks=await readFile(resolve(root,'wiki-links.js'),'utf8');
 vm.runInContext(app.slice(app.indexOf('const baseCategories='),app.indexOf('const mobileLayout=')),context);
 vm.runInContext(icons,context);
-vm.runInContext(await readFile(resolve(root,'changes.js'),'utf8'),context);const {buildChanges,fieldsOf,matchesFrom,conflicts,applyTo,whatOf,editKeys}=context.atlasChanges;const shapes=context.atlasShapes;
+vm.runInContext(await readFile(resolve(root,'marker-schema.js'),'utf8'),context);const schema=context.atlasMarkerSchema;
+vm.runInContext(await readFile(resolve(root,'changes.js'),'utf8'),context);const {buildChanges,fieldsOf,matchesFrom,conflicts,applyTo,whatOf}=context.atlasChanges;const shapes=context.atlasShapes;
 // Wiki links: only pages on the sites the atlas knows, in the same stored form the site writes.
-vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),classesOk=vm.runInContext('classesOk',context),vendorKindOk=vm.runInContext('vendorKindOk',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellsOk=vm.runInContext('sellsOk',context),sellTypes=vm.runInContext('sellTypes',context),normaliseChange=vm.runInContext('normaliseChange',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
-const levelsOk=vm.runInContext('levelsOk',context),mobsOk=vm.runInContext('mobsOk',context),fishOk=vm.runInContext('fishOk',context),wayOk=vm.runInContext('wayOk',context);
-const base=vm.runInContext('Object.keys(allCategories)',context),supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
+vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellTypes=vm.runInContext('sellTypes',context),normaliseChange=vm.runInContext('normaliseChange',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
+const supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
 function configuration(row){
  const base=registry.maps.find(m=>m.id===row.map);if(!base)fail('Unknown map for suggestion '+row.id+'.');
  if(!base.levels){if(row.level)fail('Unexpected level for suggestion '+row.id+'.');return base;}
- const level=base.levels.find(l=>l.id===row.level);if(!level)fail('A valid level is required for suggestion '+row.id+'.');return {...base,...level,id:base.id,levelId:level.id};
+ const level=base.levels.find(l=>l.id===(row.kind==='new-marker'?row.payload?.level||row.level:row.level));if(!level)fail('A valid level is required for suggestion '+row.id+'.');return {...base,...level,id:base.id,levelId:level.id};
 }
 // Names and notes are shown as plain text; this also drops invisible characters that could disguise text.
-const hidden=new RegExp('['+[[0x0,0x8],[0xB,0x1F],[0x7F,0x9F],[0xAD],[0x61C],[0x180E],[0x200B,0x200F],[0x202A,0x202E],[0x2060,0x2069],[0xFEFF]].map(([a,b=a])=>String.fromCharCode(a)+'-'+String.fromCharCode(b)).join('')+']','g');
-function clean(value,multiline){const t=String(value).normalize('NFC').replace(/\r\n?/g,'\n').replace(hidden,'').replace(/[<>]/g,'');return multiline?t.replace(/[ \t]+\n/g,'\n').replace(/\n{3,}/g,'\n\n').trim():t.replace(/\s+/g,' ').trim();}
+const clean=schema.clean;
 function point(p,c,id){if(!Array.isArray(p)||p.length!==2||!p.every(Number.isFinite)||p[0]<0||p[1]<0||p[0]>c.width||p[1]>c.height)fail('Invalid position for suggestion '+id+'.');return p.map(Math.round);}
 function wikiOf(value,id){const link=wikiAddress(value);if(link===null)fail('Unsupported wiki link for suggestion '+id+'.');return link;}
 // The wiki's id for the linked entry, kept beside the link it was picked with.
 function wikiIdFrom(p,id){const wikiId=wikiIdOf(p.wikiId);if(wikiId===null)fail('Invalid wiki id for suggestion '+id+'.');return wikiId;}
-const rosterKeys=['levels','mobs','fish','way','oneWay','ambush'],fieldCategory=(k,c)=>k==='levels'?['Mob camp','Named mob','Ambush'].includes(c):k==='ambush'?c==='Named mob':k==='mobs'?['Mob camp','Ambush'].includes(c):c===(k==='fish'?'Fishing spot':'Passage'),fieldOk=(k,v,c)=>k==='levels'?levelsOk(v,c):k==='mobs'?mobsOk(v):k==='fish'?fishOk(v):k==='way'?wayOk(v):typeof v==='boolean';
+const {rosterKeys,fieldCategory}=schema,fieldOk=(k,v,c)=>schema.clear(v)||schema.validators[k](v,c);
 function validatePayload(row,c){
  const p=normaliseMarker(structuredClone(row.payload));if(p?.travelArrow!==undefined){p.arrow=p.travelArrow;delete p.travelArrow;}if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
  if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
+ for(const k of schema.publicKeys)if(Object.hasOwn(p,k)&&k!=='name'&&schema.clear(p[k]))p[k]=null;
  // A new place name or zone exit sent from a note that once had an area keeps its spot and drops the outline, as the review desk shows it.
  if(row.kind==='new-marker'&&['label','exit'].includes(p.noteType))delete p.shape;
+ schema.validate(p,{label:targetKind({...row,payload:p})==='label'});
  if(Object.hasOwn(p,'shape')){if(row.kind==='edit-label'||row.kind==='move-label'||['label','exit'].includes(p.noteType))fail('Place names and zone exits cannot have an area or path; reject this one or ask for it as a marker.');if(p.shape===null){if(row.kind.startsWith('move-'))fail('Invalid shape: omit shape for a pin.');if(row.kind==='new-marker')delete p.shape;}else{p.shape=shapes.validate(p.shape,c);[p.x,p.y]=shapes.anchor(p.shape);}}
  if(p.from?.shape)shapes.validate(p.from.shape,c);if(p.fromShape)shapes.validate(p.fromShape,c);if(row.kind==='move-marker'&&p.shape){if(!p.fromShape)fail('Invalid shape: a move needs its previous shape.');const from=point(p.from,c,row.id),to=point(p.to,c,row.id),translated=shapes.translate(p.fromShape,to[0]-from[0],to[1]-from[1],c);if(!matchesFrom({kind:'edit-marker',payload:{from:{shape:translated}}},{shape:p.shape},'shape'))fail('Invalid shape: a move must translate every point together.');}
  if(p.arrow!==undefined&&p.arrow!==null&&p.arrow!==''&&!supported.arrows.includes(p.arrow))fail('Unsupported arrow for suggestion '+row.id+'.');
@@ -64,10 +67,9 @@ function validatePayload(row,c){
  if(row.kind!=='new-marker'&&(Object.hasOwn(p,'bounty')||Object.hasOwn(p,'priority')&&!(row.kind==='edit-label'&&typeof p.priority==='number')))fail('Bounty flags need a new marker.');
  if((row.kind==='edit-marker'||row.kind==='edit-label')&&(!p.from||typeof p.from!=='object'||typeof p.from.name!=='string'||typeof (p.note??'')!=='string'||(p.note||'').length>2000))fail('Invalid edit for suggestion '+row.id+'.');
  if(row.kind==='new-marker'){
-  if(p.classes===null||p.sells===null)fail('Unsupported '+(p.sells===null?'Sells tags':'classes')+' for suggestion '+row.id+'.');
   // Only categories the atlas can draw: every map's page knows every map's types (app.js merges them at start, as the
   // note form offers them), so a "Notable NPC" may stand on any zone map. An unknown one would break the map for everyone.
-  if(!supported.categories.includes(p.category)||typeof (p.note??'')!=='string'||(p.note||'').length>2000||![undefined,'marker','label','exit'].includes(p.noteType)||p.trade!=null&&!supported.trades.includes(p.trade)||p.color!==undefined&&!supported.colours.includes(p.color)||p.arrow!==undefined&&!supported.arrows.includes(p.arrow))fail('Unsupported marker fields for suggestion '+row.id+'.');
+  if(!supported.categories.includes(p.category)||typeof (p.note??'')!=='string'||(p.note||'').length>2000||![undefined,'marker','label','exit'].includes(p.noteType)||p.trade!=null&&!supported.trades.includes(p.trade)||p.color!=null&&p.color!==''&&!supported.colours.includes(p.color)||p.arrow!=null&&p.arrow!==''&&!supported.arrows.includes(p.arrow))fail('Unsupported marker fields for suggestion '+row.id+'.');
  }else if(typeof row.target_id!=='string'||!row.target_id)fail('Missing target for suggestion '+row.id+'.');
  // A marker edit may change the type too (set while reviewing): the same check as a new marker's type.
  if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.trade!=null&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
@@ -80,20 +82,11 @@ function validatePayload(row,c){
 // Every row works on private file copies; a refused row never leaves part of its change behind.
 const original=new Map(),history=new Map();let batch=[],past=null,heldIds=new Set(),missingVersion=false;
 function before(path,m,row){const key=path+'#'+runKey(row);if(!original.has(key))original.set(key,structuredClone(m));return original.get(key);}
-const typeKeys=['trade','classes','vendor','sells'];
-function typeFields(m,p,id){
- if(p.shape)m.shape=structuredClone(p.shape);
- for(const k of rosterKeys)if(p[k]!=null&&fieldCategory(k,p.category)){if(!fieldOk(k,p[k],p.category))fail('Unsupported '+k+' for suggestion '+id+'.');m[k]=structuredClone(p[k]);}
- if(p.trade&&p.category==='Tradeskill')m.trade=p.trade;
- if(p.category==='Class trainer'&&p.classes!==undefined){if(p.classes!==null&&!classesOk(p.classes))fail('Unsupported classes for suggestion '+id+'.');if(p.classes)m.classes=[...p.classes];}
- if(p.category==='Vendor'){if(p.vendor!==undefined){if(p.vendor!==null&&(typeof p.vendor!=='string'||!vendorKindOk(p.vendor)))fail('Unsupported vendor kind for suggestion '+id+'.');if(p.vendor)m.vendor=vendorKindNow(p.vendor);}
-  if(p.sells!==null&&!sellsOk(p.sells))fail('Unsupported Sells tags for suggestion '+id+'.');if(p.sells)m.sells=[...p.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
- return m;
-}
+const typeKeys=schema.typeKeys.slice(1);
 const targetKind=row=>row.kind.endsWith('label')||row.kind==='new-marker'&&['label','exit'].includes(row.payload?.noteType)?'label':'marker';
 const runKey=row=>row.runKey||row.map+'#'+targetKind(row)+'#'+(row.kind==='new-marker'?'community-'+row.id:row.target_id);
 // Validate the whole run before any retry can use a later row as a link in its chain.
-const ownerKeys=['minZoom','approximate','tier','priority'];let adminAuthors=null;
+const ownerKeys=schema.displayKeys;let adminAuthors=null;
 async function validateExtra(row,p,c,live){
  const touched=row.kind==='new-marker'?new Set(Object.keys(p)):fieldsOf({...row,payload:p});
  if(row.kind.startsWith('move-')&&Object.hasOwn(p,'approximate'))touched.add('approximate');
@@ -101,10 +94,9 @@ async function validateExtra(row,p,c,live){
   if(!adminAuthors){const ids=await request('admins?select=user_id');adminAuthors=new Set((ids||[]).map(r=>r.user_id));}
   if(!row.user_id||!adminAuthors.has(row.user_id))fail('Only a cartographer may change display settings; the author is not an admin.');
  }
- for(const k of ['toMap','toPlace','toLevel','toMarker','direction','travel','kind','building','tier','minZoom','priority','approximate','switchOnClick']){
-  const v=p[k];if(v===undefined||v===null||v==='')continue;
-  const valid=k==='travel'?['Exit','Lift','Stairs','Ladder','Bridge','Teleporter'].includes(v):k==='kind'?['region','zone','district','building','exit'].includes(v):k==='direction'?supported.arrows.includes(v):k==='toMap'?typeof v==='string'&&registry.maps.some(m=>m.id===v):k==='toLevel'?typeof v==='string'&&(c.levels||[]).some(l=>l.id===v):['toPlace','toMarker','building'].includes(k)?typeof v==='string'&&v.length<=100:k==='tier'?['major','minor','building'].includes(v):k==='minZoom'?Number.isFinite(v)&&v>=-5&&v<=10:k==='priority'?row.kind==='new-marker'&&typeof v==='boolean'||Number.isFinite(v)&&v>=0&&v<=1000:typeof v==='boolean';
-  if(!valid)fail('Unsupported '+k+' for suggestion '+row.id+'.');
+ for(const k of [...schema.travelKeys,'kind','building',...schema.displayKeys]){
+  const v=p[k];if(v===undefined||schema.clear(v))continue;
+  if(!schema.validators[k](v,p.category??live?.category)||k==='toMap'&&!registry.maps.some(m=>m.id===v)||k==='toLevel'&&!(c.levels||[]).some(l=>l.id===v))fail('Unsupported '+k+' for suggestion '+row.id+'.');
  }
  const destination={...live,...(!Array.isArray(p.from)?p.from:{}),...p};
  if(destination.toLevel&&destination.toMap)fail('Choose a map or a floor, not both.');
@@ -126,7 +118,6 @@ async function prepare(row){
   if(p.wiki!==undefined||row.kind==='new-marker')p.wiki=wikiOf(p.wiki,row.id);
   if(p.wikiId!==undefined||row.kind==='new-marker')p.wikiId=wikiIdFrom(p,row.id);
   if(p.wiki!==undefined&&p.from?.wiki!==undefined)p.from.wiki=wikiOf(p.from.wiki,row.id);
-  const typed=typeFields({category},{...p,category},row.id);for(const k of typeKeys)if(Object.hasOwn(p,k)){if(Object.hasOwn(typed,k))p[k]=typed[k];else delete p[k];}
   if(p.from&&!Array.isArray(p.from)){p.from=normaliseMarker(p.from);if(p.from.vendor!==undefined)p.from.vendor=vendorKindNow(p.from.vendor);if(Array.isArray(p.from.sells))p.from.sells=[...p.from.sells].sort((a,b)=>sellTypes.indexOf(a)-sellTypes.indexOf(b));}
  }
  if(row.kind.startsWith('edit-'))for(const k of ['color','level','arrow','toMap'])if(p[k]!==undefined&&p[k]!==null&&p[k]!==''&&(k==='color'&&!supported.colours.includes(p[k])||k==='level'&&!(c.levels||[]).some(l=>l.id===p[k])||k==='arrow'&&!supported.arrows.includes(p[k])||k==='toMap'&&!registry.maps.some(r=>r.id===p[k])))fail('Unsupported marker fields for suggestion '+row.id+'.');
@@ -169,42 +160,29 @@ async function applyRow(row){
   const existing=rows.find(m=>m.id===id);
   if(existing)return 'already present';
   if((await publishedSuggestions()).some(r=>r.payload?.remove===true&&r.map===row.map&&targetKind(r)===targetKind(row)&&r.target_id===id)||(history.get(runKey(row))||[]).some(r=>r.fields.has('removed')))return 'already removed';
-  const m={id,community:true,name:clean(p.name),...(label?{kind:p.kind||(p.noteType==='exit'?'exit':'building'),priority:typeof p.priority==='number'?p.priority:50,minZoom:0}:{category:p.category}),note:clean(p.note||'',true),x,y,...(c.levels?{level:c.levelId}:{})};
-  if(label&&p.noteType==='exit'){if(p.arrow)m.arrow=p.arrow;if(typeof p.toMap==='string'&&registry.maps.some(r=>r.id===p.toMap))m.toMap=p.toMap;}
-  if(!label){typeFields(m,p,row.id);if(p.color)m.color=p.color;const wiki=wikiOf(p.wiki,row.id),wikiId=wikiIdFrom(p,row.id);if(wiki){m.wiki=wiki;if(wikiId)m.wikiId=wikiId;}}
-  for(const k of editKeys.filter(k=>!['name','note','kind','priority'].includes(k)))if(p[k]!==undefined&&p[k]!==null&&p[k]!=='')m[k]=p[k];
+  const m=applyTo(null,row);if(c.levels)m.level=c.levelId;
   rows.push(m);f.changed=true;return label?'place name added':'marker added';
  }
  const label=row.kind.endsWith('label'),path=label?c.labelsFile:c.markersFile,f=await file(path),rows=label?f.data?.labels:f.data;
  if(!Array.isArray(rows))fail('Invalid feature file for suggestion '+row.id+'.');
  let m=rows.find(m=>m.id===row.target_id&&(fieldsOf(row).has('level')||!c.levels||!m.level||m.level===c.levelId)),mf=f,mrows=rows;
- const lf=c.labelsFile?await file(c.labelsFile):null,chips=lf?.data?.trainers,chip=chips?.find(t=>t.id===row.target_id&&(fieldsOf(row).has('level')||!c.levels||!t.level||t.level===c.levelId));
+ const lf=c.labelsFile?await file(c.labelsFile):null,chips=lf?.data?.trainers,chip=!label&&chips?.find(t=>t.id===row.target_id&&(fieldsOf(row).has('level')||!c.levels||!t.level||t.level===c.levelId));
  if(!m&&!label&&chip){m=chip;mf=lf;mrows=chips;}
  const live=m&&chip&&m!==chip?{...m,...(chip.building!==undefined?{building:chip.building}:{})}:m&&m===chip?{...m,name:m.name||m.building||'',category:m.category||'Class trainer'}:m;
  const edit=row.kind.startsWith('edit-'),fields=fieldsOf(row);
  if(edit){
-  // Validate even an unchanged link or type before deciding that a retry is already live.
-  const linked=!label&&p.wiki!==undefined,wiki=linked?wikiOf(p.wiki,row.id):m?.wiki||'',wikiId=linked||p.wikiId!==undefined?wikiIdFrom(p,row.id):'';
-  if(linked)wikiOf(p.from.wiki,row.id);
-  const category=p.category||m?.category||(m&&m===chip?'Class trainer':undefined),validated=typeFields({category},{...p,category},row.id),typed=fields.has('type')?validated:null;
-  for(const k of ['color','level','arrow','toMap'])if(p[k]!==undefined&&p[k]!==null&&p[k]!==''&&(k==='color'&&!supported.colours.includes(p[k])||k==='level'&&!(c.levels||[]).some(l=>l.id===p[k])||k==='arrow'&&!supported.arrows.includes(p[k])||k==='toMap'&&!registry.maps.some(r=>r.id===p[k])))fail('Unsupported marker fields for suggestion '+row.id+'.');
+  const typed=fields.has('type');
   if(!conflicts(row,live,history.get(runKey(row))||[]).length&&superseded(row,live))return 'already superseded';
   if(!m){check(row,null,path);if(p.remove)return 'already removed';fail('Target missing for suggestion '+row.id+'.');}
-  for(const k of rosterKeys)if(p[k]!=null&&(!fieldCategory(k,category)||!fieldOk(k,p[k],category)))fail('Unsupported '+k+' for suggestion '+row.id+'.');
-  const next=structuredClone(m);
   if(p.remove){check(row,live,path);mrows.splice(mrows.indexOf(m),1);mf.changed=true;if(chip&&chip!==m){chips.splice(chips.indexOf(chip),1);lf.changed=true;}return label?'place name removed':'marker removed';}
-  if(fields.has('name'))next.name=clean(p.name);
-  if(fields.has('note'))next.note=clean(p.note||'',true);
-  // A reviewer can adjust an edit's spot without replacing its traveller's row or credit.
-  if(fields.has('position')){const to=point([p.x,p.y],c,row.id);if(next.shape&&!fields.has('shape'))next.shape=shapes.translate(next.shape,to[0]-next.x,to[1]-next.y,c);[next.x,next.y]=to;}
-  if(typed){next.category=typed.category;for(const k of typeKeys)if(Object.hasOwn(typed,k))next[k]=typed[k];else delete next[k];}
-  if(fields.has('wiki')){if(wiki){next.wiki=wiki;if(wikiId)next.wikiId=wikiId;else if(p.wikiId!==undefined||wiki!==m.wiki)delete next.wikiId;}else{delete next.wiki;delete next.wikiId;}}
-  for(const k of editKeys.filter(k=>!['name','note'].includes(k)))if(fields.has(k)&&!(k==='building'&&chip&&chip!==m)){if(p[k]===null||p[k]==='')delete next[k];else next[k]=p[k];}
-  if(next.shape){shapes.validate(next.shape,c);[next.x,next.y]=shapes.anchor(next.shape);}
-  if(!['Mob camp','Named mob','Ambush'].includes(next.category))delete next.levels;if(!['Mob camp','Ambush'].includes(next.category))delete next.mobs;if(next.category!=='Fishing spot')delete next.fish;if(next.category!=='Passage'){delete next.way;delete next.oneWay;}if(next.category!=='Named mob')delete next.ambush;if(next.levels!=null&&!levelsOk(next.levels,next.category))fail('Unsupported levels for suggestion '+row.id+'.');
-  // Retries after a successful push can find the desired values already on the map.
+  const next=applyTo(live,row);
+  if(chip&&chip!==m&&!Object.hasOwn(m,'building'))delete next.building;
+  if(m===chip&&!Object.hasOwn(m,'category'))delete next.category;
+  if(next.shape)shapes.validate(next.shape,c);
+  // Identical wishes have already landed, even if an earlier row used a different base.
+  const equal=(a,b)=>hash(a)===hash(b),chipBuilding=!fields.has('building')||!chip||chip===m||equal(chip.building??null,p.building??null);
+  if(equal({...next,community:undefined},{...m,community:undefined})&&chipBuilding)return 'already edited';
   const hits=conflicts(row,live,history.get(runKey(row))||[]);if(hits.length)fail('conflicts with #'+hits.join(', #'));
-  if(JSON.stringify(next)===JSON.stringify(m)&&(!fields.has('building')||!chip||chip===m||chip.building===p.building))return 'already edited';
   check(row,live,path);next.community=true;
   const floor=fields.has('level')&&p.level?{...registry.maps.find(c=>c.id===row.map),...c.levels?.find(l=>l.id===p.level)}:null,destPath=floor?(label||m===chip?floor.labelsFile:floor.markersFile):m===chip?c.labelsFile:path;
   if(destPath&&destPath!==(m===chip?c.labelsFile:path)){const dest=await file(destPath),list=label?dest.data.labels:m===chip?dest.data.trainers:dest.data;if(list.some(x=>x.id===next.id))fail('A mark with this name already stands on that floor.');mrows.splice(mrows.indexOf(m),1);list.push(next);dest.changed=true;}else mrows[mrows.indexOf(m)]=next;mf.changed=true;
@@ -213,11 +191,12 @@ async function applyRow(row){
   return label?'place name edited':'marker edited';
  }
  const [x,y]=point(p.to,c,row.id);point(p.from,c,row.id);
+ const next=m?applyTo(live,row):null;if(next?.shape)shapes.validate(next.shape,c);
+ if(m&&hash({...next,community:undefined})===hash({...live,community:undefined}))return 'already positioned';
  const hits=conflicts(row,live,history.get(runKey(row))||[]);if(hits.length)fail('conflicts with #'+hits.join(', #'));
  if(superseded(row,live))return 'already superseded';
  if(!m)fail('Target missing for suggestion '+row.id+'.');
- if(Math.round(m.x)===x&&Math.round(m.y)===y)return 'already positioned';
- check(row,live,path);if(m.shape)m.shape=Object.hasOwn(p,'shape')?shapes.validate(p.shape,c):shapes.translate(m.shape,x-m.x,y-m.y,c);if(p.shape&&JSON.stringify(shapes.anchor(p.shape))!==JSON.stringify([x,y]))fail('Invalid shape: move anchor must match the shape.');m.x=x;m.y=y;if(Object.hasOwn(p,'approximate'))m.approximate=p.approximate;m.community=true;mf.changed=true;
+ check(row,live,path);Object.assign(m,next);mf.changed=true;
  if(!label&&chip&&chip!==m){chip.x=x;chip.y=y;if(Object.hasOwn(p,'approximate'))chip.approximate=p.approximate;lf.changed=true;}return 'position moved';
 }
 async function apply(row){
@@ -226,7 +205,7 @@ async function apply(row){
  }finally{staged=null;}
 }
 // Credits are kept in the database so a deleted account's rows lose their user and show as Anonymous;
-// the public list is rebuilt from them on every run, also when nothing new was approved.
+// the public list is rebuilt from them whenever suggestions are applied.
 async function updateContributors(credited,applied){
  let log=[];
  try{
@@ -246,39 +225,41 @@ function hash(payload){const stable=v=>Array.isArray(v)?v.map(stable):v&&typeof 
 function versionWarning(row){if(!row.updated_at&&!missingVersion){missingVersion=true;warning('Suggestion version column is missing; checking payload hashes before status updates.');}}
 async function guardedPatch(row,body){
  versionWarning(row);
- if(!row.updated_at){const latest=(await request('suggestions?id=eq.'+row.id+'&select=*'))?.[0];if(!latest||latest.status!==row.status||hash(latest.payload)!==hash(row.payload))return false;
+ if(!row.updated_at){const latest=(await request('suggestions?id=eq.'+row.id+'&select=*'))?.[0];if(!latest||latest.status!==row.status||hash(latest.payload)!==hash(row.payload)){warning('Suggestion '+row.id+' changed before its status update; version check missed.');return false;}
   // Truth also wins for a later rejection: restore approved under its current status guard first.
   if(row.status!=='approved'&&body.status==='published'){
    const restored=await request('suggestions?id=eq.'+row.id+'&status=eq.'+encodeURIComponent(row.status),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify({status:'approved'})});
-   if(!restored?.length)return false;return guardedPatch({...row,status:'approved'},body);
+   if(!restored?.length){warning('Suggestion '+row.id+' changed before its status update; version check missed.');return false;}return guardedPatch({...row,status:'approved'},body);
   }
  }
  const result=await request('suggestions?id=eq.'+row.id+(row.updated_at?'&updated_at=eq.'+encodeURIComponent(row.updated_at):'&status=eq.'+encodeURIComponent(row.status)),{method:'PATCH',headers:{Prefer:'return=representation'},body:JSON.stringify(body)});
- return Array.isArray(result)&&result.length>0;
+ const changed=Array.isArray(result)&&result.length>0;if(!changed)warning('Suggestion '+row.id+' changed before its status update; version check missed.');return changed;
 }
 async function liveTarget(row){
- const c=configuration(row),label=targetKind(row)==='label',f=await file(label?c.labelsFile:c.markersFile),id=row.kind==='new-marker'?'community-'+row.id:row.target_id;
- const here=m=>m.id===id&&(!c.levels||!m.level||m.level===row.level||row.payload?.level===m.level);
- return (label?f.data.labels:f.data).find(here)||(!label&&c.labelsFile?(await file(c.labelsFile)).data.trainers?.find(here):null);
+ const base=registry.maps.find(m=>m.id===row.map);if(!base)return null;
+ const label=targetKind(row)==='label',id=row.kind==='new-marker'?'community-'+row.id:row.target_id,preferred=row.payload?.level||row.level;
+ const configs=base.levels?.length?base.levels.slice().sort((a,b)=>Number(b.id===preferred)-Number(a.id===preferred)).map(l=>({...base,...l})): [base];
+ for(const c of configs){const path=label?c.labelsFile:c.markersFile;if(!path)continue;const f=await file(path),here=m=>m.id===id&&(!base.levels||!m.level||m.level===c.id),m=(label?f.data.labels:f.data).find(here)||(!label&&c.labelsFile?(await file(c.labelsFile)).data.trainers?.find(here):null);if(m)return m;}return null;
 }
-const publicValues=m=>Object.fromEntries(['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','ambush','category',...typeKeys,'color','level','arrow','toMap'].filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
+const publicValues=m=>Object.fromEntries(schema.publicKeys.filter(k=>Object.hasOwn(m||{},k)).map(k=>[k,m[k]]));
 async function recoverVersion(row,a){
  const same=hash(row.payload)===a.payloadHash,m=same?null:await liveTarget(row),payload=structuredClone(row.payload),credit=(await request('credits?select=suggestion_id,user_id,name&suggestion_id=eq.'+row.id))?.find(c=>String(c.suggestion_id)===String(row.id));
  if(m){
-  if(row.kind.startsWith('move-'))payload.to=[m.x,m.y];
-  else {for(const k of ['name','note','wiki','wikiId','levels','mobs','fish','way','oneWay','ambush','category',...typeKeys,'color','level','arrow','toMap'])if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
+  if(row.kind.startsWith('move-')){payload.to=[m.x,m.y];if(m.shape){payload.shape=structuredClone(m.shape);payload.fromShape=shapes.translate(m.shape,payload.from[0]-m.x,payload.from[1]-m.y);}else{delete payload.shape;delete payload.fromShape;}}
+  else {for(const k of schema.publicKeys)if(Object.hasOwn(payload,k)){if(Object.hasOwn(m,k))payload[k]=m[k];else if(['note','wiki','wikiId'].includes(k))payload[k]='';else delete payload[k];}if(row.kind==='new-marker'){payload.x=m.x;payload.y=m.y;}}
  }
  return {...row,payload,credit:!!credit,...(credit?{user_id:credit.user_id,author_name:credit.name}:{})};
 }
 async function correctionRows(row,version,appliedHash){
  if(row.status==='rejected'||hash(row.payload)===appliedHash)return [];
- const live=await liveTarget(version),p=structuredClone(row.payload),base=live?publicValues(live):publicValues(version.payload),label=targetKind(version)==='label',meta=Object.fromEntries(['user_id','author_name','credit','map','level'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]));
- const make=(kind,payload)=>({...meta,status:'approved',kind,target_id:version.kind==='new-marker'?'community-'+row.id:row.target_id,payload,review_note:'Correction made after publishing (#'+row.id+')'});
- if(row.kind.startsWith('move-'))return [make(row.kind,{...p,from:live?[live.x,live.y]:version.payload.to})];
+ const live=await liveTarget(version),p=normaliseChange(row).payload,base=live?publicValues(live):publicValues(version.payload),label=targetKind(version)==='label',meta=Object.fromEntries(['user_id','author_name','credit','map','level'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]));
+ const make=(kind,payload)=>({...meta,...(live?.level?{level:live.level}:{}),status:'approved',kind,target_id:version.kind==='new-marker'?'community-'+row.id:row.target_id,payload,review_note:'Correction made after publishing (#'+row.id+')'});
+ if(row.kind.startsWith('move-'))return [make(row.kind,{...p,from:live?[live.x,live.y]:version.payload.to,...(live?.shape?{fromShape:live.shape}:{})})];
  if(row.kind!=='new-marker')return [make(row.kind,{...p,from:base})];
+ const old=normaliseChange(version).payload;for(const k of schema.publicKeys)if(Object.hasOwn(old,k)&&!Object.hasOwn(p,k))p[k]=null;
  const out=[],text={...p,from:base};for(const k of ['x','y','bounty','priority','noteType',...(label?['category',...typeKeys]:[])])delete text[k];
  if([...fieldsOf({kind:label?'edit-label':'edit-marker',payload:text})].length)out.push(make(label?'edit-label':'edit-marker',text));
- if(live&&(Math.round(p.x)!==live.x||Math.round(p.y)!==live.y))out.push(make(label?'move-label':'move-marker',{name:p.name,from:[live.x,live.y],to:[p.x,p.y]}));return out;
+ if(live&&!text.shape&&(Math.round(p.x)!==live.x||Math.round(p.y)!==live.y))out.push(make(label?'move-label':'move-marker',{name:p.name,from:[live.x,live.y],to:[p.x,p.y]}));return out;
 }
 async function acknowledge(applied){
  for(const a of applied){
@@ -296,12 +277,21 @@ async function acknowledge(applied){
     const existing=await request('suggestions?select=*&review_note=eq.'+encodeURIComponent(correction.review_note));
     if(!existing.some(r=>r.review_note===correction.review_note&&r.kind===correction.kind&&hash(r.payload)===hash(correction.payload)))await request('suggestions',{method:'POST',body:JSON.stringify(correction)});
    }
-   if(!dryRun)await guardedPatch(row,body);
-  }catch(e){warning('Suggestion '+a.id+' could not be acknowledged: '+e.message);}
+   if(!dryRun&&!await guardedPatch(row,body))writeError('Suggestion '+a.id+' could not be acknowledged: version check missed.');
+  }catch(e){writeError('Suggestion '+a.id+' could not be acknowledged: '+e.message);}
  }
  past=null;
 }
-async function markPublished(path){const applied=parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');await acknowledge(applied);}
+async function markPublished(path){
+ const applied=parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');
+ await acknowledge(applied);
+ const held=parse(await readFile(resolve(root,dirname(path),'held.json'),'utf8').catch(e=>{if(e.code==='ENOENT')return '[]';throw e;}));if(!Array.isArray(held))fail('Invalid held list.');
+ for(const h of held)try{
+  const row=h.version;if(!row){warning('Suggestion '+h.id+' needs another validation before returning to review.');continue;}
+  await guardedPatch(row,{status:'pending',review_note:h.note});
+ }catch(e){writeError('Suggestion '+h.id+' could not be sent back to review: '+e.message);}
+ if(writeErrors)process.exitCode=1;
+}
 async function updateCredits(applied,log){
  const published=await publishedSuggestions();
  const rows=new Map(published.map(r=>[String(r.id),r]));for(const r of applied)rows.set(String(r.id),r);
@@ -359,7 +349,7 @@ async function main(){
  if(!rows.length)console.log('No approved suggestions.');
  // A suggestion that cannot apply goes back to the review queue with the reason; the others still publish.
  batch=[...(await publishedSuggestions()),...rows];
- const applied=[],credited=[],held=[],ready=new Map(),hold=(row,e)=>{if(heldIds.has(String(row.id)))return;heldIds.add(String(row.id));held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480)});warning('Suggestion '+row.id+' goes back to review: '+e.message);};
+ const applied=[],credited=[],held=[],ready=new Map(),hold=(row,e)=>{if(heldIds.has(String(row.id)))return;heldIds.add(String(row.id));held.push({id:row.id,note:'Not published: '+String(e.message).slice(0,480),version:row});warning('Suggestion '+row.id+' goes back to review: '+e.message);};
  for(const row of rows){versionWarning(row);if(!/^\d+$/.test(String(row.id)))fail('Invalid suggestion id.');try{ready.set(String(row.id),await prepare(row));}catch(e){hold(row,e);}}
  // The ledger accepts the same validated rows as the job; invalid rows have already been held.
  const ledger=buildChanges({rows,normalise:row=>ready.get(String(row.id))||null});
@@ -378,9 +368,8 @@ async function main(){
   applied.push({id:row.id,note:result,payloadHash:hash(row.payload),...(row.updated_at?{updated_at:row.updated_at}:{}),appliedAt:new Date().toISOString(),version:Object.fromEntries(['user_id','map','level','kind','target_id','payload','credit','author_name'].filter(k=>Object.hasOwn(row,k)).map(k=>[k,row[k]]))});console.log((dryRun?'Would apply ':'Ready to apply ')+row.id+': '+result+'.');
   // Credits count published changes from people who ticked "Credit me as a contributor".
   const who=row.credit===true&&typeof row.author_name==='string'?clean(row.author_name).slice(0,80):'';if(who&&row.user_id)credited.push({suggestion_id:row.id,user_id:row.user_id,name:who});}
- const log=await updateContributors(credited,applied);
- await updateCredits(rows.filter(r=>applied.some(a=>String(a.id)===String(r.id))),log||[]);
- {const runLog=await file('data/publish-log.json');runLog.data=[...runLog.data,{at:new Date().toISOString(),rows:applied.map(a=>({id:a.id,payloadHash:a.payloadHash,updatedAt:a.updated_at??null}))}].slice(-20);runLog.changed=true;}
+ if(applied.length){const log=await updateContributors(credited,applied);await updateCredits(rows.filter(r=>applied.some(a=>String(a.id)===String(r.id))),log||[]);}
+ if(applied.length){const runLog=await file('data/publish-log.json');runLog.data=[...runLog.data,{at:new Date().toISOString(),rows:applied.map(a=>({id:a.id,payloadHash:a.payloadHash,updatedAt:a.updated_at??null,version:Object.fromEntries(['map','level','kind','target_id','payload','credit'].filter(k=>Object.hasOwn(a.version,k)).map(k=>[k,a.version[k]]))}))}].slice(-20);runLog.changed=true;}
  held.sort((a,b)=>Number(a.id)-Number(b.id));
  const changed=[...files].filter(([,f])=>f.changed);
  if(!dryRun){
@@ -388,9 +377,9 @@ async function main(){
   await mkdir(resolve(root,'.publish'),{recursive:true});
   await writeFile(resolve(root,'.publish/applied.json'),JSON.stringify(applied,null,2)+'\n');
   await writeFile(resolve(root,'.publish/held.json'),JSON.stringify(held,null,2)+'\n');
-  for(const h of held){const row=rows.find(r=>r.id===h.id);try{await guardedPatch(row,{status:'pending',review_note:h.note});}catch(e){warning('Suggestion '+h.id+' could not be sent back to review: '+e.message);}}
 
  }
+ if(writeErrors)process.exitCode=1;
  console.log((dryRun?'Dry run: ':'Complete: ')+applied.length+' suggestions, '+(held.length?held.length+' back to review, ':'')+changed.length+' data files'+(dryRun?' would change.':' changed.'));
 }
 (mark?markPublished(mark):main()).catch(e=>{console.error(e.message==='fetch failed'?'Backend could not be reached.':e.message);process.exitCode=1;});

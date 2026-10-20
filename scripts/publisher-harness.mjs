@@ -80,7 +80,7 @@ export async function publisher() {
   await new Promise(done => server.listen(0, '127.0.0.1', done));
   await mkdir(resolve(folder, 'scripts'));
   await mkdir(resolve(folder, 'data'));
-  for (const name of ['app.js', 'icons.js', 'wiki-links.js', 'changes.js',
+  for (const name of ['app.js', 'icons.js', 'marker-schema.js', 'wiki-links.js', 'changes.js',
     'scripts/apply-approved.mjs']) {
     await copyFile(resolve(root, name), resolve(folder, name));
   }

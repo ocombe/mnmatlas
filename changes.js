@@ -24,10 +24,9 @@
  'use strict';
  const copy=v=>v===undefined?undefined:JSON.parse(JSON.stringify(v)),has=(v,k)=>Object.prototype.hasOwnProperty.call(v||{},k);
  const stable=v=>Array.isArray(v)?v.map(stable):v&&typeof v==='object'?Object.fromEntries(Object.keys(v).sort().map(k=>[k,stable(v[k])])):v;
- const equal=(a,b)=>JSON.stringify(stable(a))===JSON.stringify(stable(b)),typeKeys=['category','trade','classes','vendor','sells'];
- const keysFor=p=>['category',...(p.category===undefined?['trade','classes','vendor','sells']:p.category==='Tradeskill'?['trade']:p.category==='Class trainer'?['classes']:p.category==='Vendor'?['vendor','sells']:[])];
- const editKeys=['name','note','color','level','kind','travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick','minZoom','approximate','tier','priority','building','levels','mobs','fish','way','oneWay','ambush','shape'];
- const value=(p,k)=>['shape','levels'].includes(k)?p?.[k]??null:['mobs','fish'].includes(k)?(p?.[k]?.length?p[k]:null):['name','note','wiki','wikiId'].includes(k)?p?.[k]||'':p?.[k];
+ const schema=globalThis.atlasMarkerSchema;
+ const equal=(a,b)=>JSON.stringify(stable(a))===JSON.stringify(stable(b)),typeKeys=schema.typeKeys,keysFor=schema.keysFor,editKeys=schema.editKeys;
+ const value=(p,k)=>['name','note','wiki','wikiId'].includes(k)?p?.[k]||'':schema.clear(p?.[k])?undefined:p?.[k];
  function fieldsOf(row){
   const p=row.payload||{},f=p.from||{},out=new Set();
   if(row.kind==='new-marker')return new Set(['added']);
@@ -38,14 +37,14 @@
   if((!out.has('shape')||p.shape===null)&&['x','y'].some(k=>has(p,k)&&!equal(p[k],f[k])))out.add('position');
   if(['wiki','wikiId'].some(k=>has(p,k)&&!equal(value(p,k),value(f,k))))out.add('wiki');
   // Phase 2 must send the full type base in from: category and all of its type keys.
-  if(keysFor(p).some(k=>has(p,k)&&!equal(p[k]??null,f[k]??null)))out.add('type');
+  if(keysFor(p).some(k=>has(p,k)&&!equal(value(p,k),value(f,k))))out.add('type');
   return out;
  }
  function matchesFrom(row,state,field){
   const p=row.payload||{},f=p.from||{};if(!state)return false;
   if(field==='position'){const at=Array.isArray(f)?f:[f.x,f.y];return at.every(Number.isFinite)&&equal(at.map(Math.round),[state.x,state.y].map(Math.round))&&(!has(p,'fromShape')||equal(state.shape??null,p.fromShape??null));}
   if(field==='removed')return value(state,'name')===value(f,'name')&&(!has(f,'note')||value(state,'note')===value(f,'note'));
-  if(field==='type')return keysFor(f).filter(k=>has(f,k)).every(k=>equal(state[k]??null,f[k]??null));
+  if(field==='type')return keysFor(f).filter(k=>has(f,k)).every(k=>equal(value(state,k),value(f,k)));
   if(field==='wiki')return ['wiki','wikiId'].filter(k=>has(p,k)&& (k==='wiki'||has(f,k))).every(k=>equal(value(state,k),value(f,k)));
   return equal(value(state,field),field==='shape'&&Array.isArray(f)?p.fromShape??null:value(f,field));
  }
@@ -57,26 +56,7 @@
   }
   return [...out];
  }
- function applyTo(state,row){
-  const p=row.payload||{},fields=fieldsOf(row),out=copy(state)||{};
-  if(fields.has('added')){
-   const label=['label','exit'].includes(p.noteType);Object.assign(out,{id:'community-'+row.id,community:true,name:p.name,note:p.note||'',x:Math.round(p.x),y:Math.round(p.y),...(row.level?{level:row.level}:{})});
-   if(label){Object.assign(out,{kind:p.kind||(p.noteType==='exit'?'exit':'building'),priority:typeof p.priority==='number'?p.priority:50,minZoom:0});if(p.noteType==='exit'){if(p.arrow)out.arrow=p.arrow;if(p.toMap)out.toMap=p.toMap;}}
-   else{out.category=p.category;for(const k of [...keysFor(p).slice(1),'color','wiki','wikiId'])if(has(p,k)&&p[k])out[k]=copy(p[k]);if(!out.wiki){delete out.wiki;delete out.wikiId;}}for(const k of editKeys.filter(k=>!['name','note','color','kind','priority'].includes(k)))if(has(p,k))out[k]=copy(p[k]);out.removed=false;
-  }
-  else for(const f of fields){
-   if(f==='removed')out.removed=true;
-   else if(f==='position'){const at=row.kind.startsWith('move-')?p.to:[p.x,p.y];if(!Array.isArray(at)||at.length!==2||!at.every(Number.isFinite))throw Error('The suggested position is missing or invalid');if(out.shape&&!fields.has('shape'))out.shape=root.atlasShapes.translate(out.shape,Math.round(at[0])-out.x,Math.round(at[1])-out.y);[out.x,out.y]=at.map(Math.round);if(has(p,'approximate'))out.approximate=p.approximate;}
-   else if(f==='type'){if(has(p,'category'))for(const k of typeKeys)delete out[k];for(const k of keysFor(p))if(has(p,k)&&p[k]!==null&&p[k]!=='')out[k]=copy(p[k]);}
-   else if(f==='wiki'){const changed=has(p,'wiki')&&p.wiki!==out.wiki;for(const k of ['wiki','wikiId'])if(has(p,k))out[k]=p[k];else if(k==='wikiId'&&changed)delete out[k];if(!out.wikiId)delete out.wikiId;if(!out.wiki){delete out.wiki;delete out.wikiId;}}
-   else if(p[f]===null||p[f]==='')delete out[f];else out[f]=copy(p[f]);
-  }
-  if(out.shape){out.shape=root.atlasShapes.validate(out.shape);[out.x,out.y]=root.atlasShapes.anchor(out.shape);}
-  if(!mobTypes.includes(out.category))delete out.levels;if(!campTypes.includes(out.category))delete out.mobs;if(out.category!=='Fishing spot')delete out.fish;if(out.category!=='Passage'){delete out.way;delete out.oneWay;}if(out.category!=='Named mob')delete out.ambush;
-  if(out.category==='Named mob'&&out.levels!=null&&!levelsOk(out.levels,out.category))throw Error('Choose a level from 1 to 99.');
-  if(fields.size&&!fields.has('removed'))out.community=true;
-  return out;
- }
+ const applyTo=(state,row)=>{const result=schema.apply(state,row);if(has(result,'refusal')){const error=Error(result.refusal);error.name=result.name;throw error;}return result;};
  const whatOf=row=>row.kind==='new-marker'?'added':row.payload?.remove===true?'removed':row.kind.startsWith('move-')?'moved':fieldsOf(row).has('shape')?'reshaped':'edited';
  function buildChanges({mapId,levelId,markers=[],labels=[],trainers=[],publishedPositions,publishedLabelPositions,rows=[],includePending=false,normalise=row=>row,onError=null}){
   const all=new Map(),byRow=new Map(),newKinds=new Map(),fail=(row,error)=>{if(!onError)throw error;onError(row,error);};
@@ -105,7 +85,7 @@
     proposed=applyTo(proposed,r);history.push(r);
     if(includePending)effective=copy(proposed);
     for(const f of r.fields)t.changed.add(f);
-   }catch(error){fail(r,error);}}
+   }catch(error){if(error.name==='MarkerFieldError')r.refusal=error.message;else fail(r,error);}}
    t.effective=effective;t.proposed=proposed;
   }
   return {get:key=>all.get(key)||null,targets:()=>[...all.values()].filter(t=>t.rows.some(r=>['pending','approved'].includes(r.status))),forRow:id=>byRow.get(String(id))||null};
