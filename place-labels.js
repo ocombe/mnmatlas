@@ -99,7 +99,7 @@ function setupPlaceLabels(data){
   if(disposed)return;
   frame=null;
   const view=$('map').getBoundingClientRect(),zoom=map.getZoom();
-  const trainersVisible=zoom>=3.25||(enabled.size===1&&enabled.has('Class trainer'));
+  const trainersVisible=zoom>=3.25||(enabled.size===1&&enabled.has('Class trainer'))||window.atlasLookFor?.active();
   window.atlasMarkerGroups?.update();
   for(const pin of pins.values())if(Number.isFinite(pin.atlasMinZoom)){
    if(showPins&&!pin.atlasGrouped&&(alignmentMode||zoom>=pin.atlasMinZoom)){if(!map.hasLayer(pin))pin.addTo(map);}else pin.remove();

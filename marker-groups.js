@@ -80,13 +80,15 @@
   // A card opening on a grouped pin (search, a shared link) brings that pin out; closing it lets it rejoin.
   if(hooked!==map){hooked=map;map.on('popupopen popupclose',()=>setTimeout(()=>update()));}
   if(fresh){signature='';grouped=new Set();}
-  far=zoom<config.coordinateZoom-.75&&!alignmentMode;
-  const off=mode==='off'||mode==='dots'||!showPins||alignmentMode||window.atlasCommunity?.reviewOpen?.();
+  // A "Looking for" pick shows its few answers as full pins, never as dots or groups.
+  const looking=!!window.atlasLookFor?.active?.();
+  far=zoom<config.coordinateZoom-.75&&!alignmentMode&&!looking;
+  const off=looking||mode==='off'||mode==='dots'||!showPins||alignmentMode||window.atlasCommunity?.reviewOpen?.();
   // Dots: common types shrink to small dots below 60% zoom; banks, inns, stables and travel keep their pins.
   el.classList.toggle('pins-far',(mode==='dots'||mode==='mix')&&far);
   if(mode==='dots'||mode==='mix')for(const pin of pins.values()){const m=pin.atlasMarker;if(!m||!minor.includes(m.category)||m.id.startsWith('personal-')||pin.atlasDotHook)continue;pin.atlasDotHook=true;const mark=()=>pin.getElement()?.classList.add('minor-pin');pin.on('add',mark);mark();}
   const groups=off?[]:clusters([...pins.values()].filter(pin=>eligible(pin,zoom)),zoom);
-  const next=mode+(far?'far':'')+'|'+groups.map(g=>g.members.map(b=>b.m.id).sort().join(',')).sort().join('|');
+  const next=mode+(far?'far':'')+(looking?'look':'')+'|'+groups.map(g=>g.members.map(b=>b.m.id).sort().join(',')).sort().join('|');
   if(next===signature&&(layer||!groups.length))return;
   signature=next;layer?.clearLayers();if(!layer&&groups.length)layer=L.layerGroup().addTo(map);
   const now=new Set(groups.flatMap(g=>g.members.map(b=>b.pin)));

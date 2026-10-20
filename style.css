@@ -636,3 +636,8 @@ dialog.moved::backdrop{background:#0000001f}
 .group-switch button:hover{background:var(--muted)}
 .group-switch button[aria-pressed="true"]{border-color:var(--primary);color:#f3c27a;background:#3a2a17}
 @media (max-width:640px){.group-switch{bottom:64px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100vw - 32px)}.group-switch-title{display:none}}
+
+/* Looking for (preview, look-for.js) */
+.look-for{margin:8px 0 0}
+.look-for>span{flex:none;min-width:72px}
+.looking-for #categories,.looking-for #vendor-filter,.looking-for #all-categories{opacity:.45}

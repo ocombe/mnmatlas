@@ -136,7 +136,7 @@ const markerText=m=>(m.name+' '+m.category+' '+(m.ambush||m.category==='Ambush'?
 let vendorGroup='';
 const vendorShown=m=>{if(!vendorGroup||m.category!=='Vendor')return true;if(vendorGroup.startsWith('s:'))return Array.isArray(m.sells)&&m.sells.includes(vendorGroup.slice(2));const kind=vendorKindFor(m);return vendorGroup.startsWith('g:')?vendorGroupOf(kind)===vendorGroup.slice(2):kind===vendorGroup.slice(2);};
 const searchTerms=()=>$('search').value.toLocaleLowerCase().trim().split(/\s+/).filter(Boolean);
-const shownMarker=(m,terms)=>enabled.has(m.category)&&vendorShown(m)&&terms.every(t=>markerText(m).includes(t));
+const shownMarker=(m,terms)=>(window.atlasLookFor?.active()?window.atlasLookFor.shows(m):enabled.has(m.category)&&vendorShown(m))&&terms.every(t=>markerText(m).includes(t));
 function visibleMarkers(){const terms=searchTerms();return allMarkers().filter(m=>atLevel(m)&&shownMarker(m,terms));}
 function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers();}
 function copyButton(place){return button('Copy link',()=>copyLink(place),'copy-place','copy');}
@@ -280,7 +280,7 @@ function labelEditPopup(row){
 }
 function placePopup(p){const n=text('div',''),row=labelData.labels.find(l=>l.id===p.id)||p;const destination=registry.maps.find(c=>c.id===row.toMap),floor=config.levels?.find(l=>l.id===row.toLevel);n.append(text('div',p.kind==='hidden'?'Hidden area':row.kind==='exit'?'Zone exit':'Place name','tag'),text('h3',p.name));if(p.note)n.append(text('p',p.note));if(destination)n.append(button('Go to '+destination.title,()=>{const url=mapLink(destination.id);if(row.toPlace)url.searchParams.set('place',row.toPlace);goToMap(destination.id,url,{quiet:true});},'level-link'));if(floor)n.append(button('Go to '+(floor.title||floor.name||floor.id),()=>changeLevel(row.toLevel,originals.find(m=>m.id===row.toMarker)),'level-link'));const wiki=wikiButton(p);if(wiki)n.append(wiki);if(p.community)n.append(text('p','Community contribution','community-note'));n.append(copyButton(p));if(labelData.labels.some(l=>l.id===p.id))privateNoteBox(row,'label',n);if(!singleMap)window.atlasCommunity?.placePopup?.(p,n);return tidyActions(n);}
 // Makes a marker shown on the map again: its type on, pins shown, no search or vendor filter hiding it.
-function revealMarker(m){enabled.add(m.category);showPins=true;$('search').value='';$('clear-search').hidden=true;setVendorGroup('');updateCategoryButtons();drawMarkers();}
+function revealMarker(m){window.atlasLookFor?.clear();enabled.add(m.category);showPins=true;$('search').value='';$('clear-search').hidden=true;setVendorGroup('');updateCategoryButtons();drawMarkers();}
 function setVendorGroup(value){vendorGroup=value;const pick=$('vendor-filter-select');if(pick)pick.value=value;}
 function choose(m){
  if(alignmentMode&&!m.id.startsWith('personal-'))selectAlignment(m,'marker');
@@ -325,9 +325,10 @@ function resultRow(title,detail,onClick,symbolOf,cls='place'){
  label.append(text('strong',title),text('small',detail));b.append(label);b.onclick=onClick;return b;
 }
 const markerDetail=(m,...more)=>[noteKind(m),namedLevelText(m),markerSubtitle(m),...more].filter(Boolean).join(' · ');
-function shapeShown(m){const z=map.getZoom();return showPins&&(alignmentMode||z>=(m.minZoom??-Infinity))&&(m.category!=='Class trainer'||z>=3.25||enabled.size===1&&enabled.has('Class trainer'));}
+function shapeShown(m){const z=map.getZoom();return showPins&&(alignmentMode||z>=(m.minZoom??-Infinity))&&(m.category!=='Class trainer'||z>=3.25||enabled.size===1&&enabled.has('Class trainer')||window.atlasLookFor?.active());}
 function drawMarkerShapes(matches=null){window.atlasMarkerShapes?.remove();window.atlasMarkerShapes=null;if(matches===null)matches=allMarkers().some(m=>m.shape)?visibleMarkers():[];const shapes=matches.filter(m=>m.shape&&shapeShown(m));if(shapes.length){window.atlasMarkerShapes=L.layerGroup().addTo(map);for(const m of shapes){const state=window.atlasCommunity?.hoverState(m),old=state?.rows.some(r=>r.fields.has('shape')||r.fields.has('position'));window.atlasShapeUI.render(m,window.atlasMarkerShapes,{old,click:()=>choose(m)});}}map.atlasShapeVisibility=shapes.map(m=>m.id).join(',');}
 function drawMarkers(){
+ window.atlasLookFor?.build();
  {const box=$('vendor-filter');if(box){const has=allMarkers().some(m=>m.category==='Vendor'&&atLevel(m));box.hidden=!has||!enabled.has('Vendor');if(box.hidden&&vendorGroup)setVendorGroup('');}}
  for(const pin of pins.values())pin.remove();pins.clear();const list=$('results');list.replaceChildren();
  const matches=visibleMarkers();drawMarkerShapes(matches);$('count').textContent=matches.length+' places';
