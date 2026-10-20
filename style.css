@@ -605,7 +605,7 @@ dialog.moved::backdrop{background:#0000001f}
 .pin .ambush-mark svg{width:10px;height:10px;transform:none}
 
 
-/* Crowded pins (preview, marker-groups.js) */
+/* Crowded pins (marker-groups.js) */
 .marker-group .group-wrap{position:relative;width:25px;height:25px}
 .marker-group .stack-face{position:absolute;left:0;top:0;width:25px;height:25px;box-sizing:border-box;background:var(--pin,#365f59);border:2px solid #f5e2b4;border-radius:50% 50% 50% 4px;transform:rotate(-45deg);box-shadow:0 2px 4px #30251480}
 .marker-group.s2 .stack-face:nth-child(1){transform:translate(7px,-4px) rotate(-45deg)}
@@ -630,14 +630,8 @@ dialog.moved::backdrop{background:#0000001f}
 .pins-far .minor-pin{pointer-events:none}
 .pins-far .minor-pin span{position:absolute;left:5px;top:17px;width:14px;height:14px;box-sizing:border-box;border-width:2px;border-radius:50%;transform:none;pointer-events:auto}
 .pins-far .minor-pin span>*{display:none}
-.group-switch{position:fixed;left:50%;bottom:14px;transform:translateX(-50%);z-index:2000;display:flex;align-items:center;gap:4px;padding:5px 6px;background:#1d1610ee;border:1px solid var(--amber-border);border-radius:var(--radius);box-shadow:var(--shadow);font:12px var(--body);color:var(--foreground)}
-.group-switch-title{padding:0 8px 0 4px;font:14px var(--heading);color:var(--muted-foreground)}
-.group-switch button{padding:5px 9px;border:1px solid transparent;border-radius:var(--radius);background:transparent;color:var(--foreground);font:inherit;cursor:pointer}
-.group-switch button:hover{background:var(--muted)}
-.group-switch button[aria-pressed="true"]{border-color:var(--primary);color:#f3c27a;background:#3a2a17}
-@media (max-width:640px){.group-switch{bottom:64px;flex-wrap:wrap;justify-content:center;width:max-content;max-width:calc(100vw - 32px)}.group-switch-title{display:none}}
-
-/* Looking for (preview, look-for.js) */
+@media (max-width:640px){
+/* Looking for (look-for.js) */
 .look-for{margin:8px 0 0}
 .look-for>span{flex:none;min-width:72px}
 .looking-for #categories,.looking-for #vendor-filter,.looking-for #all-categories{opacity:.45}

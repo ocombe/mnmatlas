@@ -1,4 +1,4 @@
-// "Looking for…" (preview): one pick under the search box shows only what answers it (a class trainer, a craft, a kind
+// "Looking for…": one pick under the search box shows only what answers it (a class trainer, a craft, a kind
 // of vendor, what vendors sell, the way around, the bank and inn) and fits the view to it. Built from this floor's pins.
 (()=>{
  const travel=['Exit','Lift','Stairs','Ladder','Bridge','Teleporter','Passage','Level connection'];
@@ -41,7 +41,7 @@
   const key=config.id+'|'+(config.levelId||'');if(key===builtFor)return;builtFor=key;
   select.replaceChildren();fillSelect(select,options());
   if(![...select.options].some(o=>o.value===pick))pick='';select.value=pick;document.body.classList.toggle('looking-for',!!pick);
-  // ?look=c:Ranger opens the map with that pick (preview links).
+  // ?look=c:Ranger opens the map with that pick.
   const asked=new URLSearchParams(location.search).get('look');if(asked&&!pick&&[...select.options].some(o=>o.value===asked))setTimeout(()=>choosePick(asked));
  }
  function choosePick(value){

@@ -1,13 +1,11 @@
-// Crowded pins (preview): pins that sit on top of each other merge into one pin with a count. The distance is measured
-// on screen, so groups split again as you zoom in. Three looks to compare: 'type' (same type only), 'stack' (any type,
-// stacked faces), 'dots' (no groups; small dots for common types when zoomed out) and 'mix' (same type, and when zoomed
-// out the common types become dots with the count inside). Off by default.
+// Crowded pins: pins of one type that sit on top of each other merge into one pin with a count, and when zoomed out the
+// common types (vendors, quest givers, crafting) become small dots, a crowd of them one dot with the count inside. The
+// distance is measured on screen, so groups split again as you zoom in. The other looks tried in the 2026-10 preview
+// stay reachable for testing with ?groups=type|stack|dots|off; 'mix' is the atlas's look.
 (()=>{
- const modes=['type','stack','dots','mix','off'],storeKey='mnmaps-preview-groups';
+ const modes=['type','stack','dots','mix','off'];
  const params=new URLSearchParams(location.search);
- let mode='off';try{mode=localStorage.getItem(storeKey)||'off';}catch{}
- if(modes.includes(params.get('groups')))mode=params.get('groups');
- if(!modes.includes(mode))mode='off';
+ const mode=modes.includes(params.get('groups'))?params.get('groups'):'mix';
  const radius={type:44,stack:44,mix:44},custom=Number(params.get('groupRadius'));
  // Travel pins, trainers (their badges already move apart), shapes and your own notes always stay on their own.
  const groupable=['Personal','Vendor','Quest NPC','Notable NPC','Quest','Tradeskill','Forge','Bank','Inn','Guild','Stable','Mob camp','Named mob','Fishing spot','Herbs','Wood','Ore','Camping spot','Secret'];
@@ -104,15 +102,5 @@
    layer.addLayer(marker);
   }
  }
- function setMode(next){mode=next;try{localStorage.setItem(storeKey,next);}catch{}for(const b of document.querySelectorAll('.group-switch button'))b.setAttribute('aria-pressed',String(b.dataset.mode===mode));map?.closePopup();update(true);if(mode!=='dots'&&mode!=='mix'){map?.getContainer().classList.remove('pins-far');}}
- // Preview switch, shown only on this preview branch when ?groups= is in the address or a look was picked before.
- function switcher(){
-  if(document.querySelector('.group-switch')||!(params.has('groups')||mode!=='off'))return;
-  const bar=text('div','','group-switch');bar.append(text('span','Crowded pins','group-switch-title'));
-  for(const [id,label] of [['type','A · Same type'],['stack','B · Stacked'],['dots','C · Dots'],['mix','D · Same type + dots'],['off','Today']]){const b=button(label,()=>setMode(id));b.dataset.mode=id;b.setAttribute('aria-pressed',String(id===mode));bar.append(b);}
-  document.body.append(bar);
- }
- window.atlasMarkerGroups={update,mode:()=>mode,setMode};
- // app.js (text, button) runs after this file, so the switch waits for the page.
- if(document.readyState==='complete')switcher();else document.addEventListener('DOMContentLoaded',switcher);
+ window.atlasMarkerGroups={update,mode:()=>mode};
 })();

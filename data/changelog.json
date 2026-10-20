@@ -2,6 +2,12 @@
  "entries": [
   {
    "date": "2026-10-20",
+   "title": "Busy towns, easier to read",
+   "text": "Zoomed out, the shops, quest givers and crafters of a busy town gather into small numbered dots that open into a list and split apart as you zoom in. The new Looking for choice in the Search menu shows only what you need: your class trainer, a craft, a kind of merchant, the bank and inn, or the way around.",
+   "maps": []
+  },
+  {
+   "date": "2026-10-20",
    "title": "New trades and merchants",
    "text": "Masonry joins the trades: mark its trainers and its vendors with their own sign. Leather armorers and riding vendors join the merchants, and vendors can now be marked as selling teleport scrolls. First Aid is now called Bind Wound, as in game. Shady merchants, who buy and sell anything at a discount, wear a darker vendor pin. The mason in Evershade Weald and Hilari Hidecraft in the Underdocks now show under their proper trade.",
    "maps": ["evershade-weald", "underdocks", "faelindral"]
