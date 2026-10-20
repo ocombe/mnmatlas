@@ -425,6 +425,28 @@
       "linkedArea": "east-terrace",
       "tier": "exit",
       "toMap": "night-harbor"
+    },
+    {
+      "id": "community-937",
+      "community": true,
+      "name": "West Bank",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "",
+      "x": 985,
+      "y": 1326
+    },
+    {
+      "id": "community-938",
+      "community": true,
+      "name": "North Bank",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "",
+      "x": 1793,
+      "y": 1184
     }
   ],
   "trainers": [

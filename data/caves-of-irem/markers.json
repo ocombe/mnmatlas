@@ -51,5 +51,112 @@
     "y": 1499,
     "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
     "wikiId": "npc-keeper-of-the-road"
+  },
+  {
+    "id": "community-994",
+    "community": true,
+    "name": "Warden Tessaru",
+    "category": "Named mob",
+    "note": "Not a quest giver.. a named.  Dropped Signet of Warden Tessaru 2 ac, sta, int 1 sv fire clicky blaze (10s cast)  int caster ring",
+    "x": 977,
+    "y": 3081,
+    "wiki": "https://monstersandmemories.wiki/npcs/warden-tessaru",
+    "wikiId": "npc-warden-tessaru"
+  },
+  {
+    "id": "community-998",
+    "community": true,
+    "name": "Elder Sethu",
+    "category": "Named mob",
+    "note": "also.. not a quest mob drops wis leather pants and a wis cloak",
+    "x": 1623,
+    "y": 3525,
+    "wiki": "https://monstersandmemories.wiki/npcs/elder-sethu",
+    "wikiId": "npc-elder-sethu"
+  },
+  {
+    "id": "community-999",
+    "community": true,
+    "name": "Hallow Vessel",
+    "category": "Named mob",
+    "note": "saw him. didnt engage. red to 38 so think higher than 40",
+    "x": 1269,
+    "y": 3654,
+    "levels": [
+      41,
+      41
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/hallow-vessel",
+    "wikiId": "npc-hallow-vessel"
+  },
+  {
+    "id": "community-1000",
+    "community": true,
+    "name": "High Adept Vashtek",
+    "category": "Named mob",
+    "note": "",
+    "x": 927,
+    "y": 3452,
+    "wiki": "https://monstersandmemories.wiki/npcs/high-adept-vashtek",
+    "wikiId": "npc-high-adept-vashtek"
+  },
+  {
+    "id": "community-1001",
+    "community": true,
+    "name": "Mistress Mazheth",
+    "category": "Named mob",
+    "note": "enchanter named. dropped a int bracer",
+    "x": 1886,
+    "y": 3954,
+    "wiki": "https://monstersandmemories.wiki/npcs/mistress-mazheth",
+    "wikiId": "npc-mistress-mazheth"
+  },
+  {
+    "id": "community-1002",
+    "community": true,
+    "name": "Vizier Zarakh",
+    "category": "Named mob",
+    "note": "yellow to 38",
+    "x": 949,
+    "y": 3897,
+    "levels": [
+      40,
+      40
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1003",
+    "community": true,
+    "name": "High Priest Sebkha",
+    "category": "Named mob",
+    "note": "patrols around the base of the pyramid",
+    "x": 1346,
+    "y": 3120,
+    "wiki": "https://monstersandmemories.wiki/npcs/high-priest-sebkha",
+    "wikiId": "npc-high-priest-sebkha"
+  },
+  {
+    "id": "community-1004",
+    "community": true,
+    "name": "River Bandit Camp",
+    "category": "Mob camp",
+    "note": "A river bandit in the camp is Riverking Magnar's stationary placeholder.",
+    "x": 3611,
+    "y": 6567,
+    "mobs": [
+      {
+        "name": "Riverking Magnar",
+        "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
+        "wikiId": "npc-riverking-magnar"
+      },
+      {
+        "name": "Riftjaw Dess",
+        "wiki": "https://monstersandmemories.wiki/npcs/riftjaw-dess",
+        "wikiId": "npc-riftjaw-dess"
+      }
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
+    "wikiId": "npc-riverking-magnar"
   }
 ]

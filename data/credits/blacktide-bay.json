@@ -23,6 +23,10 @@
     {
       "name": "argus_q",
       "what": "edited"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "marker:community-826": [
@@ -33,18 +37,30 @@
     {
       "name": "argus_q",
       "what": "edited"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "marker:community-827": [
     {
       "name": "argus_q",
       "what": "added"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "marker:community-828": [
     {
       "name": "argus_q",
       "what": "added"
+    },
+    {
+      "name": "argus_q",
+      "what": "edited"
     }
   ],
   "label:community-829#floor-2": [
@@ -127,9 +143,51 @@
       "what": "added"
     }
   ],
+  "label:community-923#floor-2": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-924#floor-2": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-929#floor-2": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
   "marker:community-941": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-989": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-990": [
+    {
+      "name": "kwynn",
+      "what": "added"
+    }
+  ],
+  "marker:community-991": [
+    {
+      "name": "kwynn",
+      "what": "added"
+    }
+  ],
+  "marker:community-992": [
+    {
+      "name": "kwynn",
       "what": "added"
     }
   ]

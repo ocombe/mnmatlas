@@ -994,5 +994,29 @@
       "name": "seridaq",
       "what": "added"
     }
+  ],
+  "marker:community-936": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-937": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-938": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-939": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
   ]
 }

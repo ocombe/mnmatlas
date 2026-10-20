@@ -138,6 +138,42 @@
       "x": 2752,
       "y": 1467,
       "level": "floor-1"
+    },
+    {
+      "id": "community-923",
+      "community": true,
+      "name": "Upper Agari Mushroom Caves",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "Agari Cluster faction worsens with Kills.",
+      "x": 1603,
+      "y": 2641,
+      "level": "floor-2"
+    },
+    {
+      "id": "community-924",
+      "community": true,
+      "name": "Lower Agari Mushroom Caves",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "Agari Cluster Faction Worsens with Kills.",
+      "x": 1534,
+      "y": 3226,
+      "level": "floor-2"
+    },
+    {
+      "id": "community-929",
+      "community": true,
+      "name": "Poison Spider Caves",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0,
+      "note": "Beware Strong Ticking Poison",
+      "x": 1548,
+      "y": 1645,
+      "level": "floor-2"
     }
   ],
   "trainers": []

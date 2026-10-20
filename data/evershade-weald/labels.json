@@ -98,6 +98,17 @@
    "arrow": "south",
    "toMap": "keepers-bight",
    "toPlace": "to-evershade-weald"
+  },
+  {
+   "id": "community-995",
+   "community": true,
+   "name": "Elf Skeleton Ruins",
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0,
+   "note": "",
+   "x": 3218,
+   "y": 2812
   }
  ],
  "trainers": []

@@ -368,7 +368,9 @@
   "y": 2733,
   "note": "Leads to the base of Keeper's lift.",
   "direction": "northwest",
-  "community": true
+  "community": true,
+  "toMap": "faelindral",
+  "toPlace": "ramp-04-down"
  },
  {
   "id": "river-bridge-west",
@@ -480,10 +482,40 @@
    }
   ],
   "note": "Approximately 8 skeletons, good camp spot after exiting bridge",
-  "x": 3073,
-  "y": 2757,
+  "x": 3120,
+  "y": 2740,
   "wiki": "https://monstersandmemories.wiki/npcs/a-skeleton",
-  "wikiId": "npc-a-skeleton"
+  "wikiId": "npc-a-skeleton",
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     2985,
+     2806
+    ],
+    [
+     3010,
+     2710
+    ],
+    [
+     3234,
+     2662
+    ],
+    [
+     3229,
+     2781
+    ],
+    [
+     3179,
+     2793
+    ],
+    [
+     3116,
+     2791
+    ]
+   ]
+  }
  },
  {
   "id": "community-315",
@@ -502,10 +534,48 @@
    }
   ],
   "note": "",
-  "x": 3454,
-  "y": 2844,
+  "x": 3391,
+  "y": 2818,
   "wiki": "https://monstersandmemories.wiki/npcs/an-old-elven-skeleton",
-  "wikiId": "npc-an-old-elven-skeleton"
+  "wikiId": "npc-an-old-elven-skeleton",
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     3296,
+     2686
+    ],
+    [
+     3252,
+     2788
+    ],
+    [
+     3347,
+     2864
+    ],
+    [
+     3380,
+     2935
+    ],
+    [
+     3459,
+     2966
+    ],
+    [
+     3498,
+     2897
+    ],
+    [
+     3513,
+     2822
+    ],
+    [
+     3407,
+     2717
+    ]
+   ]
+  }
  },
  {
   "id": "community-320",
@@ -800,5 +870,73 @@
   "note": "Masonry trainer",
   "x": 2448,
   "y": 1981
+ },
+ {
+  "id": "community-984",
+  "community": true,
+  "name": "Fellstone Scout",
+  "category": "Mob camp",
+  "note": "Tent of 3-4 Scouts.  2-3 more roaming around tents",
+  "x": 3331,
+  "y": 1397,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     3266,
+     1333
+    ],
+    [
+     3339,
+     1292
+    ],
+    [
+     3411,
+     1350
+    ],
+    [
+     3448,
+     1402
+    ],
+    [
+     3409,
+     1462
+    ],
+    [
+     3336,
+     1482
+    ],
+    [
+     3252,
+     1474
+    ],
+    [
+     3223,
+     1376
+    ]
+   ]
+  },
+  "levels": [
+   3,
+   5
+  ],
+  "mobs": [
+   {
+    "name": "A Fellstone scout",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fellstone-scout",
+    "wikiId": "npc-a-fellstone-scout"
+   }
+  ]
+ },
+ {
+  "id": "community-985",
+  "community": true,
+  "name": "Decipher the Unintelligible Writings",
+  "category": "Quest",
+  "note": "Drops off Scouts",
+  "x": 3337,
+  "y": 1347,
+  "wiki": "https://monstersandmemories.wiki/quests/decipher-the-unintelligible-writings"
  }
 ]

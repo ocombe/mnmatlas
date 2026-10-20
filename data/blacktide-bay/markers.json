@@ -129,7 +129,8 @@
     "travel": "Stairs",
     "toLevel": "floor-1",
     "direction": "up",
-    "toMarker": "community-826"
+    "toMarker": "community-826",
+    "switchOnClick": true
   },
   {
     "id": "community-826",
@@ -143,7 +144,8 @@
     "travel": "Stairs",
     "toLevel": "floor-2",
     "direction": "down",
-    "toMarker": "community-825"
+    "toMarker": "community-825",
+    "switchOnClick": true
   },
   {
     "id": "community-827",
@@ -156,7 +158,9 @@
     "level": "floor-1",
     "travel": "Stairs",
     "toLevel": "floor-2",
-    "direction": "down"
+    "direction": "down",
+    "toMarker": "community-828",
+    "switchOnClick": true
   },
   {
     "id": "community-828",
@@ -168,7 +172,10 @@
     "y": 3888,
     "level": "floor-2",
     "travel": "Stairs",
-    "direction": "up"
+    "direction": "up",
+    "toLevel": "floor-1",
+    "toMarker": "community-827",
+    "switchOnClick": true
   },
   {
     "id": "community-831",
@@ -291,5 +298,57 @@
     "level": "floor-2",
     "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-murkraal",
     "wikiId": "npc-taskmaster-murkraal"
+  },
+  {
+    "id": "community-989",
+    "community": true,
+    "name": "Orbilis the Overseer",
+    "category": "Named mob",
+    "note": "Evil Eye is Placeholder",
+    "x": 5063,
+    "y": 1983,
+    "level": "floor-1",
+    "ambush": false,
+    "wiki": "https://monstersandmemories.wiki/npcs/orbilis-the-overseer",
+    "wikiId": "npc-orbilis-the-overseer"
+  },
+  {
+    "id": "community-990",
+    "community": true,
+    "name": "A Skri'Var hoarder",
+    "category": "Named mob",
+    "note": "Rat Side. Placeholder: a Skri'Var Ambusher",
+    "x": 3648,
+    "y": 876,
+    "level": "floor-1",
+    "ambush": false,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-hoarder",
+    "wikiId": "npc-a-skrivar-hoarder"
+  },
+  {
+    "id": "community-991",
+    "community": true,
+    "name": "Ladder Down to Rat Tunnels",
+    "category": "Ladder",
+    "note": "Leads down, near Prince Mal'tik",
+    "x": 3755,
+    "y": 767,
+    "level": "floor-1",
+    "travel": "Ladder",
+    "toLevel": "floor-2",
+    "direction": "down"
+  },
+  {
+    "id": "community-992",
+    "community": true,
+    "name": "Ladder Up",
+    "category": "Ladder",
+    "note": "Leads up, Into Hoarder's Room",
+    "x": 3772,
+    "y": 774,
+    "level": "floor-2",
+    "travel": "Ladder",
+    "toLevel": "floor-1",
+    "direction": "up"
   }
 ]

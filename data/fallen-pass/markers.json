@@ -775,5 +775,20 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/toragaldo",
   "wikiId": "npc-toragaldo"
+ },
+ {
+  "id": "community-988",
+  "community": true,
+  "name": "Sivah Arjun (level 32)",
+  "category": "Named mob",
+  "note": "Spawns in the 3rd floor area.",
+  "x": 2082,
+  "y": 2920,
+  "levels": [
+   32,
+   32
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/sivah-arjun",
+  "wikiId": "npc-sivah-arjun"
  }
 ]

@@ -1774,5 +1774,16 @@
     "x": 4724,
     "y": 2981,
     "vendor": "Barkeep"
+  },
+  {
+    "id": "community-979",
+    "community": true,
+    "name": "Xilonen Velgarrith",
+    "category": "Quest NPC",
+    "note": "Located on the second floor of the martial building. Enter the building, in the far left corner take the steps up, then turn left, take the first door on the left.",
+    "x": 4586,
+    "y": 4227,
+    "wiki": "https://monstersandmemories.wiki/npcs/xilonen-velgarrith",
+    "wikiId": "npc-xilonen-velgarrith"
   }
 ]
