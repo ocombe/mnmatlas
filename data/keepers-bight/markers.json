@@ -788,10 +788,17 @@
   "community": true,
   "name": "Fishing (60-120)",
   "category": "Fishing spot",
-  "note": "Thorn Sturgeon\nMoontide Salmon",
+  "note": "",
   "x": 1854,
   "y": 2887,
-  "fish": []
+  "fish": [
+   {
+    "name": "Thorn Sturgeon"
+   },
+   {
+    "name": "Moontide Salmon"
+   }
+  ]
  },
  {
   "id": "community-893",

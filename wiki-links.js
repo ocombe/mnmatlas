@@ -3,6 +3,8 @@
    Also the marker vocabulary the site, its suggestions and the publishing job share: vendor kinds, trainer classes,
    and which optional fields each kind of marker keeps (markerExtras). */
 'use strict';
+// A page cached from before marker-schema.js existed doesn't load it: fetch it here so the atlas still starts.
+if(!globalThis.atlasMarkerSchema&&typeof document!=='undefined'){try{const x=new XMLHttpRequest();x.open('GET',new URL('marker-schema.js',document.currentScript?.src||location.href).href,false);x.send();if(x.status===200)(0,eval)(x.responseText);}catch{}}
 // Sites a marker may link to. A link to any other address is refused when it is saved and never shown.
 const wikiSites={
  // home and credit: the wiki's front page and the credit its data must carry wherever it is shown (search results).

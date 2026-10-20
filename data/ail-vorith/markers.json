@@ -709,10 +709,7 @@
     "note": "upstair",
     "x": 3983,
     "y": 3361,
-    "vendor": "Alchemy vendor",
-    "sells": [
-      "Bags"
-    ]
+    "vendor": "Alchemy vendor"
   },
   {
     "id": "community-231",

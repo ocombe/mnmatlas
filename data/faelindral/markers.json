@@ -258,7 +258,7 @@
   "name": "Mining — Ranger's Rest",
   "category": "Tradeskill",
   "x": 1957.51,
-  "y": 1318.0,
+  "y": 1318,
   "approximate": true,
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
@@ -519,15 +519,6 @@
   "vendor": "Bag merchant",
   "wiki": "https://monstersandmemories.wiki/npcs/a-bag-merchant",
   "wikiId": "npc-a-bag-merchant"
- },
- {
-  "id": "community-343",
-  "community": true,
-  "name": "Tree Picture",
-  "category": "Personal",
-  "note": "There are 2 trees here with merchants around them, could add another one to the right of the one of you already on traders terrace",
-  "x": 1567,
-  "y": 1286
  },
  {
   "id": "community-344",
