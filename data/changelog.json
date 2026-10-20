@@ -2,9 +2,9 @@
  "entries": [
   {
    "date": "2026-10-19",
-   "title": "Masonry",
-   "text": "Masonry joins the trades: mark its trainers and its vendors with their own sign. The mason in Evershade Weald now shows as a Masonry vendor.",
-   "maps": ["evershade-weald"]
+   "title": "Masonry and leather armorers",
+   "text": "Masonry joins the trades: mark its trainers and its vendors with their own sign. Leather armorers join the armour sellers. The mason in Evershade Weald and Hilari Hidecraft in the Underdocks now show under their proper trade.",
+   "maps": ["evershade-weald", "underdocks"]
   },
   {
    "date": "2026-10-19",
