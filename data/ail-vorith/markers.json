@@ -1598,7 +1598,10 @@
     "note": "upstair",
     "x": 4336,
     "y": 2351,
-    "vendor": "Enchanter"
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ]
   },
   {
     "id": "community-853",
