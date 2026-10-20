@@ -24,7 +24,7 @@
   return true;
  }
  function clusters(entries,zoom){
-  const r=Number.isFinite(custom)&&custom>0?custom:far&&mode==='mix'?30:radius[mode],key=e=>mode==='stack'?'all':e.m.category;
+  const r=Number.isFinite(custom)&&custom>0?custom:far&&mode==='mix'?30:radius[mode],key=e=>mode==='stack'?'all':e.m.category+(shadyVendor(e.m)?'|shady':'');
   const pts=entries.map(pin=>({pin,m:pin.atlasMarker,p:map.project(pin.getLatLng(),zoom)}));
   for(const a of pts)a.n=pts.filter(b=>b!==a&&key(b)===key(a)&&a.p.distanceTo(b.p)<=r).length;
   // Densest spots first, so a group forms around the middle of a crowd rather than at its edge.
@@ -42,13 +42,14 @@
   return out;
  }
  function kindsOf(members){const count=new Map();for(const b of members)count.set(b.m.category,(count.get(b.m.category)||0)+1);return [...count].sort((a,b)=>b[1]-a[1]||a[0].localeCompare(b[0])).map(([c,n])=>({c,n}));}
- function face(category,cls){const f=text(cls==='main'?'span':'i','',cls==='main'?'':'stack-face');f.style.setProperty('--pin',categories[category]?.[1]||'#365f59');if(cls==='main')f.append(markerSymbol({category,name:''}));return f;}
+ function face(category,cls,colour){const f=text(cls==='main'?'span':'i','',cls==='main'?'':'stack-face');f.style.setProperty('--pin',colour||categories[category]?.[1]||'#365f59');if(cls==='main')f.append(markerSymbol({category,name:''}));return f;}
  function groupIcon(group){
   const kinds=kindsOf(group.members),wrap=text('div','','group-wrap');
   // Mix, zoomed out: a common type's group is a dot of its colour with the count inside.
-  if(mode==='mix'&&far&&minor.includes(kinds[0].c)){const dot=text('b',String(group.members.length));dot.style.setProperty('--pin',categories[kinds[0].c]?.[1]||'#365f59');const size=group.members.length>9?24:20;return L.divIcon({className:'marker-dot',html:dot,iconSize:[size,size],iconAnchor:[size/2,size/2],popupAnchor:[0,-size/2]});}
+  const colour=kinds.length===1&&group.members.every(b=>shadyVendor(b.m))?'#3d2b1f':null;
+  if(mode==='mix'&&far&&minor.includes(kinds[0].c)){const dot=text('b',String(group.members.length));dot.style.setProperty('--pin',colour||categories[kinds[0].c]?.[1]||'#365f59');const size=group.members.length>9?24:20;return L.divIcon({className:'marker-dot',html:dot,iconSize:[size,size],iconAnchor:[size/2,size/2],popupAnchor:[0,-size/2]});}
   if(mode==='stack')for(const k of kinds.slice(1,3).reverse())wrap.append(face(k.c,'behind'));
-  wrap.append(face(kinds[0].c,'main'),text('em',String(group.members.length),'group-count'));
+  wrap.append(face(kinds[0].c,'main',colour),text('em',String(group.members.length),'group-count'));
   return L.divIcon({className:'pin marker-group'+(mode==='stack'&&kinds.length>1?' stacked s'+Math.min(3,kinds.length):''),html:wrap,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
  }
  function title(group){const kinds=kindsOf(group.members);return kinds.length===1?group.members.length+' '+nameOf(kinds[0].c,group.members.length):group.members.length+' places';}

@@ -310,7 +310,7 @@ function pinIcon(m){
   return L.divIcon({className:'personal-label-anchor'+own,html:face,iconSize:[0,0],iconAnchor:[0,0],popupAnchor:[0,-14]});
  }
  if(m.category==='Class trainer'){const icon=trainerIcon(m);if(own)icon.options?icon.options.className+=own:icon.className+=own;return icon;}
- const face=text('span','');face.style.setProperty('--pin',m.color||categories[m.category][1]);face.append(markerSymbol(m));
+ const face=text('span','');face.style.setProperty('--pin',m.color||(shadyVendor(m)?'#3d2b1f':categories[m.category][1]));face.append(markerSymbol(m));
  if((m.toLevel||m.toMap&&m.direction)&&face.firstChild?.tagName==='svg')face.append(text('i',m.direction==='up'?'↑':'↓','level-dir'));
  if(m.ambush&&m.category==='Named mob'){const mark=text('i','','ambush-mark');mark.title='Ambush: hidden until you are close';mark.append(travelSvg('Ambush'));face.append(mark);}
  // Ways up and down (ladders, stairs, lifts, passages) are round seals centred on the spot, like the exit signs' arrows.

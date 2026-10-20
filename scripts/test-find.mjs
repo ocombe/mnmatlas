@@ -67,9 +67,10 @@ console.log('Script checks passed: every page script parses.');
  assert.equal(Object.keys(legacy).length,17);assert.equal(named('a mason'),'Masonry vendor');assert.equal(named('Stonecutter Selin'),'Stone cutting vendor');assert.equal(named('A Leather Armorer'),'Leather armorer');assert.equal(named('Leatherworking Supplies'),'Leatherworking vendor');assert.equal(now(undefined),undefined);assert.equal(now('Dye merchant'),'Dye merchant');assert.equal(now('Cobbler'),'Cobbler');assert.equal(now('Adventuring supplies'),'Adventuring supplies');
  assert(ok('Shady merchant'));assert.equal(group('Shady merchant'),'General goods');
  for(const name of ['A shady merchant','Fence','The black market'])assert.equal(named(name),'Shady merchant');
+ for(const [name,kind] of [['A greedy halfling','Shady merchant'],['A shifty gnome','Shady merchant'],['A suspicious salesman','Shady merchant'],['A leech','Medic'],['A spell merchant','Spell scribe'],['A jewelcraft supplier','Jewelcrafting vendor'],['A saddler','Riding vendor'],['Riding merchant','Riding vendor']])assert.equal(named(name),kind,name);
  assert(!ok(['Alchemy supplies'])&&!ok(null)&&!ok({}));
  for(const [name,kind] of [['A leatherworker','Leatherworking vendor'],['Leatherworking patterns','Leatherworking vendor'],['Leatherworking recipes','Leatherworking vendor'],['Blacksmithing schematics','Blacksmithing vendor'],['Tailoring patterns','Tailoring vendor'],['Tinkering schematics','Tinkering vendor']])assert.equal(named(name),kind);
- assert.equal(JSON.stringify(types),JSON.stringify(['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Weapons']));
+ assert.equal(JSON.stringify(types),JSON.stringify(['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Teleport scrolls','Weapons']));
  assert(sellsOk(undefined)&&sellsOk(['Recipes'])&&sellsOk(['Recipes','Materials'])&&sellsOk([...types]));
  for(const bad of [null,[],{},'Recipes',['recipes'],['Recipes','Recipes'],['Dragon eggs'],[1],[undefined],Array(1),Array(13).fill('Recipes')])assert(!sellsOk(bad),JSON.stringify(bad));
  console.log('Vendor checks passed: current and legacy kinds, recipe names, groups and Sells validation.');}
@@ -104,7 +105,7 @@ console.log('Script checks passed: every page script parses.');
  const select=new Node('select');c.document={createElement:tag=>new Node(tag),getElementById:()=>select};c.drawMarkers=()=>{};
  vm.runInContext(app.slice(app.indexOf('const $='),app.indexOf('// Vendor kinds in their groups')),c);
  const start=app.indexOf(" {const pick=$('vendor-filter-select');");vm.runInContext(app.slice(start,app.indexOf('\n',start)),c);
- const sells=select.children.at(-1);assert.equal(sells.label,'Sells');assert.deepEqual(sells.children.map(o=>[o.textContent,o.value]),['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Weapons'].map(t=>[t,'s:'+t]));
+ const sells=select.children.at(-1);assert.equal(sells.label,'Sells');assert.deepEqual(sells.children.map(o=>[o.textContent,o.value]),['Ammo','Armor','Bags','Food & drink','Jewelry','Materials','Mount gear','Quest items','Recipes','Shields','Spell scrolls','Teleport scrolls','Weapons'].map(t=>[t,'s:'+t]));
  select.value='s:Recipes';select.onchange();assert(shown(merchant)&&!shown(plain));
  // Import and save validation reject malformed tag arrays while still accepting old kinds.
  Object.assign(c,{config:{width:100,height:100},registry:{maps:[]},categories:{Vendor:[]},tradePaths:{},pinColours:{},exitArrows:{},validLevel:v=>v===undefined});
@@ -170,7 +171,8 @@ console.log('Script checks passed: every page script parses.');
  vm.runInContext(app.slice(app.indexOf('const categoryChoices='),app.indexOf('function setupCategoryControls(')),c);assert(!vm.runInContext('categoryChoices()',c).includes('Shady merchant'));
  const node=()=>({children:[],style:{setProperty(k,v){this[k]=v;}},setAttribute(k,v){this[k]=v;},append(n){this.children.push(n);}});c.document={createElementNS:node};c.text=node;c.L={divIcon:options=>options};
  vm.runInContext(app.slice(app.indexOf('function pinIcon('),app.indexOf('function openMap(')),c);const pin=vm.runInContext('pinIcon(m)',c);
- assert.equal(pin.html.style['--pin'],vm.runInContext('categories.Vendor[1]',c));assert.equal(pin.html.children[0].children[0].d,vm.runInContext('categoryPaths.Vendor',c));
+ // Shady merchants keep the vendor sign in a darker shade.
+ assert.equal(pin.html.style['--pin'],'#3d2b1f');assert.notEqual(pin.html.style['--pin'],vm.runInContext('categories.Vendor[1]',c));assert.equal(pin.html.children[0].children[0].d,vm.runInContext('categoryPaths.Vendor',c));
  console.log('Shady merchant checks passed: compatibility, local loading, backup import, editor, vocabulary, filters and Vendor appearance.');}
 
 // Camp displays combine the known cards only, with page identity, rates and every source.

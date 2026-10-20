@@ -9,7 +9,7 @@ const tradePaths = {
   'Lumberjacking': 'M12 2 5 10h3l-5 7h7v5h4v-5h7l-5-7h3z',
   'Mining': 'M5 22 15 4 M3 8C9 1 17 2 22 9 M13 4l5 4',
   'Herbalism': 'M12 14v8 M12 19c-5 0-7-3-7-4 4 0 7 1 7 4 M12 21c5 0 7-3 7-4-4 0-7 1-7 4 M10 5C7-1 17-1 14 5c6-3 8 5 2 5 4 5-3 9-4 3-1 6-8 2-4-3-6 0-4-8 2-5z M14 8a2 2 0 1 0-4 0 2 2 0 1 0 4 0',
-  'First Aid': 'M8 3h8v5h5v8h-5v5H8v-5H3V8h5z',
+  'Bind Wound': 'M8 3h8v5h5v8h-5v5H8v-5H3V8h5z',
   'Leatherworking': 'M7 3c3 3 7 3 10 0l4 5-4 3 2 9c-5-2-9-2-14 0l2-9-4-3z M11 9v2m0 3v2',
   'Skinning / Tanning': 'M5 21 11 15 M8 18l3 3 M11 15C18 12 22 7 20 2L9 13z',
   'Wagoneering': 'M3 7h14v9H3z M1 4h2v3m14 5h4l2 5 M7 16a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M18 16a3 3 0 1 0 0 6 3 3 0 0 0 0-6 M7 7v6m5-6v6',
