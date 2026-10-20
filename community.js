@@ -581,6 +581,7 @@
  }
  function notePayload(m){m=normaliseMarker(m);
   const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note,...markerExtras(m)};if(m.noteType==='exit'&&!payload.travel)payload.travel=travelKind(m.name,'',m.travel)||'Exit';
+  for(const k of globalThis.atlasMarkerSchema.publicKeys)if(m[k]!==undefined&&!Object.hasOwn(payload,k))payload[k]=m[k];
   const bounty=readBounties()[m.id];if(bounty&&m.wikiId===bounty.bounty){payload.bounty=bounty.bounty;if(bounty.priority)payload.priority=true;}
   return payload;
  }
@@ -714,11 +715,11 @@
   try{const published=await sendNote(m,credited);remember(sharedKey,[sharedToken(m)]);freshPopup();status(sentLine(published)||'Saved, and suggested for the public map: it is waiting for review.');event('suggestion-sent');}
   catch(e){status(e?.code==='23505'?'Someone just claimed this bounty. Your note is kept in your field notes.':'Saved to your field notes. '+sendError(e,'The suggestion did not go through: you can send it from the note’s popup with Share with everyone.'));}
  }
- async function followNote(m,rec){if(privateOnly(m))return;
+ async function followNote(m,rec){if(privateOnly(m)){status('Saved to your field notes. This private type cannot follow an approved suggestion, so this change was not sent.',true);return;}
   const payload=notePayload(m),key=followId(m),same=(a,b)=>JSON.stringify(a)===JSON.stringify(b);if(same(payload,normaliseMarker(rec.sent)))return;
   const keep=()=>{const all=readFollowed();all[key]={...rec,sent:payload};writeFollowed(all);};
   try{
-   const {data:row,error}=await client.from('suggestions').select('status,payload,reviewed_at,review_note').eq('id',rec.id).maybeSingle();if(error)throw error;
+   const {data:row,error}=await client.from('suggestions').select('status,level,payload,reviewed_at,review_note').eq('id',rec.id).maybeSingle();if(error)throw error;
    if(row?.status==='pending'){
     // Its author may change it only until it has been looked at (the database's rule; an admin always may). After that
     // the change stays in the note: sending it again would only make a duplicate.
@@ -730,49 +731,55 @@
     // The marker it becomes is community-<suggestion id>; place names and exits live with the labels. What changed since
     // this note last sent is sent as a move and an edit of it, from what is live (else what was approved, a reviewer's
     // changes included), so the publishing job's checks see the text and spot it really shows.
-    const old=normaliseMarker(rec.sent),label=payload.noteType==='label'||payload.noteType==='exit',target='community-'+rec.id,base={user_id:user.id,author_name:displayName(user),map:config.id,level:m.level||config.levelId||null,target_id:target,comment:null,credit:!!rec.credit};
-    const live=(label?labelData.labels:originals).find(x=>x.id===target),shown={...old,...row.payload,...(live?{name:live.name,note:live.note||'',wiki:live.wiki||'',x:live.x,y:live.y,shape:live.shape}:{})};
-    let sent=false;
-    const reshaped=!label&&JSON.stringify(old.shape??null)!==JSON.stringify(payload.shape??null);
-    if(!reshaped&&(old.x!==payload.x||old.y!==payload.y)){await submit({...base,kind:label?'move-label':'move-marker',payload:{name:payload.name,from:[shown.x,shown.y],to:[payload.x,payload.y]}});sent=true;}
-    if(reshaped){await submit({...base,kind:'edit-marker',payload:{name:payload.name,shape:payload.shape||null,from:{name:shown.name,shape:shown.shape||null}}});sent=true;}
-    const wikiOf=p=>label?{}:{wiki:p.wiki||'',...(p.wiki&&p.wikiId?{wikiId:p.wikiId}:{})};
-    if(old.name!==payload.name||(old.note||'')!==(payload.note||'')||(!label&&(old.wiki||'')!==(payload.wiki||''))){
-     await submit({...base,kind:label?'edit-label':'edit-marker',payload:{name:payload.name,note:payload.note||'',...wikiOf(payload),from:{name:shown.name,note:shown.note||'',...(label?{}:{wiki:shown.wiki||''})}}});sent=true;}
-    // A marker's type, trade, class, kind, Sells tags or colour (an exit's arrow or map) cannot follow it once approved.
-    const fixed=globalThis.atlasMarkerSchema.followKeys.some(k=>JSON.stringify(old[k]??null)!==JSON.stringify(payload[k]??null));
-    keep();
-    if(fixed)status((sent?'Saved, and the move or text change was sent for review. ':'Saved to your field notes. ')+'A type, kind, class or Sells change cannot follow an approved suggestion: once it is live, use Report a problem on it.',true);
-    else if(sent)status('Saved, and the change was sent for review.');
+    const schema=globalThis.atlasMarkerSchema,old=normaliseMarker(rec.sent),label=['label','exit'].includes(old.noteType),target='community-'+rec.id;
+    if(old.noteType!==payload.noteType)throw Error('This note kind cannot follow the approved suggestion.');
+    const live=(label?labelData.labels:originals).find(x=>x.id===target),shown=normaliseChange({kind:'new-marker',payload:live||row.payload}).payload;
+    shown.level=shown.level||row.level||config.levelId||null;
+    const base={user_id:user.id,author_name:displayName(user),map:config.id,level:shown.level,target_id:target,comment:null,credit:!!rec.credit};
+    const changed=schema.publicKeys.filter(k=>!same(publicNoteValue(old,k),publicNoteValue(payload,k))),sentCopy={...old};let sent=false;
+    if(label&&changed.some(k=>!schema.fields[old.noteType].includes(k)))throw Error('These fields cannot follow this place name.');
+    const record=keys=>{for(const k of keys)if(Object.hasOwn(payload,k))sentCopy[k]=payload[k];else delete sentCopy[k];const all=readFollowed();all[key]={...rec,sent:{...sentCopy}};writeFollowed(all);sent=true;};
+    const send=async(kind,values,keys)=>{const result=await submitRow({...base,kind,payload:values});if(result.id==null)throw Error('The change was not sent.');record(keys);};
+    const reshaped=changed.includes('shape'),position=changed.some(k=>k==='x'||k==='y'),edits=changed.filter(k=>k!=='x'&&k!=='y');
+    const edit={name:shown.name,from:{name:shown.name}};
+    for(const k of edits){edit[k]=payload[k]??null;edit.from[k]=shown[k]??null;}
+    if(edits.some(k=>schema.typeKeys.includes(k))){for(const k of schema.keysFor(payload))edit[k]=payload[k]??null;for(const k of schema.typeKeys)edit.from[k]=shown[k]??null;}
+    if(edits.some(k=>k==='wiki'||k==='wikiId'))for(const k of ['wiki','wikiId']){edit[k]=payload[k]??null;edit.from[k]=shown[k]??null;}
+    if(reshaped&&position)for(const k of ['x','y']){edit[k]=payload[k];edit.from[k]=shown[k];}
+    schema.validate(edit,{label,category:payload.category});
+    if(position&&!reshaped)await send(label?'move-label':'move-marker',{name:shown.name,from:[shown.x,shown.y],to:[payload.x,payload.y]},['x','y']);
+    if(edits.length)await send(label?'edit-label':'edit-marker',edit,[...edits,...(reshaped&&position?['x','y']:[])]);
+    if(sent)status('Saved, and the change was sent for review.');
     return;
    }
    const all=readFollowed();delete all[key];writeFollowed(all);
   }catch(e){status('Saved to your field notes, but your suggestion could not be updated. '+sendError(e,'You can share the note again from its popup.'));}
  }
- // A shared note that is now a public marker is not kept as a second, personal copy: once its marker is live the note
- // is retired, and text of its own that the marker does not carry moves to the private "Your note" on that marker.
+ const publicNoteValue=(p,k)=>{const v=p?.[k];return globalThis.atlasMarkerSchema.clear(v)||v===undefined?null:v;};
+ const samePublicNote=(a,b,label=false)=>globalThis.atlasMarkerSchema.publicKeys.every(k=>label&&k==='category'||JSON.stringify(publicNoteValue(a,k))===JSON.stringify(publicNoteValue(b,k)));
+ // Retire a shared copy only after every public field has reached the published marker.
  // The note is found by the id its suggestion keeps, by this browser's record of the share, or (older shares) by the
  // same name and wiki page close to where it was suggested or now stands. Waiting or refused shares keep their note.
  async function retirePublishedNotes(serial){
   if(!user||!notesReadable||!privateNotesReadable||alignmentMode||!personal.length)return;
   const uid=user.id,{data,error}=await client.from('suggestions').select('id,level,payload,note_id').eq('user_id',uid).eq('map',config.id).eq('kind','new-marker').in('status',['approved','published']);
   if(error||!Array.isArray(data)||serial!==mapSerial||user?.id!==uid)return;
-  const near=0.015*Math.max(config.width,config.height),followed=readFollowed(),taken=new Set(),retired=[];let moved=0;
+  const near=0.015*Math.max(config.width,config.height),followed=readFollowed(),taken=new Set(),retired=[];
   for(const row of data){
    const p=row.payload||{},label=p.noteType==='label'||p.noteType==='exit',live=(label?labelData.labels:originals).find(x=>x.id==='community-'+row.id);if(!live)continue;
    const free=personal.filter(m=>!taken.has(m.id)&&(m.level||'')===(row.level||'')),close=m=>[[p.x,p.y],[live.x,live.y]].some(([x,y])=>Number.isFinite(x)&&Number.isFinite(y)&&Math.hypot(x-m.x,y-m.y)<=near);
-   const note=free.find(m=>m.id===row.note_id)||free.find(m=>followed[followId(m)]?.id===row.id)
-    ||free.find(m=>looseName(m.name)===looseName(p.name)&&(!m.wikiId||!p.wikiId||m.wikiId===p.wikiId)&&close(m));
+   const known=Object.entries(followed).find(([key,rec])=>key.startsWith(uid+':'+scope()+':')&&rec.id===row.id),note=row.note_id?free.find(m=>m.id===row.note_id):known?free.find(m=>followId(m)===known[0])
+    :free.find(m=>looseName(m.name)===looseName(p.name)&&(!m.wikiId||!p.wikiId||m.wikiId===p.wikiId)&&close(m));
    if(!note)continue;
-   const own=String(note.note||'').trim();
-   if(own&&own!==String(live.note||'').trim()){const kind=label?'label':'marker',was=privateNoteFor(live,kind),next=!was?own:was.includes(own)?was:was+'\n\n'+own;
-    if(next.length>1000||!savePrivateNote(live,kind,next))continue;if(next!==was)moved++;}
+   const payload=notePayload(note),rec=followed[followId(note)],published={...live,level:live.level||row.level||config.levelId||undefined};
+   if(label){for(const [k,v] of Object.entries({kind:p.noteType==='exit'?'exit':'building',priority:50,minZoom:0}))if(payload[k]===undefined)payload[k]=v;}
+   if(payload.noteType!==p.noteType||!samePublicNote(payload,published,label)||rec&&(rec.sent.noteType!==payload.noteType||!samePublicNote(notePayload(note),normaliseMarker(rec.sent),label)))continue;
    taken.add(note.id);retired.push(note);
   }
-  if(!retired.length||serial!==mapSerial||!persist(personal.filter(m=>!taken.has(m.id))))return;
+  if(!retired.length||serial!==mapSerial||!persist(personal.filter(m=>!taken.has(m.id)),true))return;
   const all=readFollowed();for(const m of retired)delete all[followId(m)];writeFollowed(all);
   setupCategoryControls();buildPlaceIndex();drawMarkers();
-  status((retired.length===1?'Your note “'+retired[0].name+'” is now on the public map, so it is no longer kept twice.':retired.length+' of your notes are now on the public map, so they are no longer kept twice.')+(moved?' Your own text is kept as “Your note” on '+(moved===1?'its marker.':'their markers.'):''),true);
+  status((retired.length===1?'Your note “'+retired[0].name+'” is now on the public map, so it is no longer kept twice.':retired.length+' of your notes are now on the public map, so they are no longer kept twice.'),true);
  }
  function sendDialog(title,rows,sharing){if(!user&&!sharing){deferredPositions={title,rows};try{localStorage.setItem(positionSigninKey,scope());}catch{}signInDialog();return;}
   const amendments=[...approvedRows,...pendingRows],d=showDialog(title);d.append(text('p',sharing?'Send this note for review before it appears in the community atlas.':'Choose the saved moves to send for review.'));
@@ -794,12 +801,23 @@
  const baseKey=(uid,key)=>'mnmaps-community-synced-'+uid+'-'+key;
  // The last synced copy of each note (older browsers kept only the ids): a side that still matches it did not change the note since.
  const noteSum=m=>JSON.stringify(Object.keys(m).sort().map(k=>[k,m[k]]));
- function readBase(uid,key){try{const v=JSON.parse(localStorage.getItem(baseKey(uid,key))||'null');return Array.isArray(v)?new Map(v.map(id=>[id,null])):v&&typeof v==='object'?new Map(Object.entries(v)):null;}catch{return null;}}
- function writeBase(uid,key,notes){try{localStorage.setItem(baseKey(uid,key),JSON.stringify(Object.fromEntries(notes.map(m=>[m.id,noteSum(m)]))));}catch{}}
+ function readBase(uid,key){const raw=localStorage.getItem(baseKey(uid,key));if(raw===null)return null;const v=JSON.parse(raw);if(Array.isArray(v)&&v.every(id=>typeof id==='string'))return new Map(v.map(id=>[id,null]));if(v&&typeof v==='object'&&!Array.isArray(v)&&Object.values(v).every(sum=>typeof sum==='string'||sum===null))return new Map(Object.entries(v));throw Error('Notes base could not be read.');}
+ function writeBase(uid,key,notes){localStorage.setItem(baseKey(uid,key),JSON.stringify(Object.fromEntries(notes.map(m=>[m.id,noteSum(m)]))));}
+ const notesBase=notes=>new Map(notes.map(m=>[m.id,noteSum(m)]));
+ function mergeMapNotes(local,remote,base){
+  for(const notes of [local,remote])if(!Array.isArray(notes)||notes.length>2000||!notes.every(valid)||new Set(notes.map(m=>m.id)).size!==notes.length)throw Error('Notes could not be read.');
+  const left=new Map(local.map(m=>[m.id,normaliseMarker(m)])),right=new Map(remote.map(m=>[m.id,normaliseMarker(m)])),merged=[];
+  // An edit survives an unchanged copy or a deletion. When both copies changed, their edit times decide.
+  for(const id of new Set([...right.keys(),...left.keys()])){const a=left.get(id),b=right.get(id),was=base?.get(id),changed=m=>!!m&&!!was&&noteSum(m)!==was;let keep;
+   if(a&&b){if(changed(b)&&!changed(a))keep=b;else if(changed(a)&&!changed(b))keep=a;else keep=(Number.isFinite(b.updated)?b.updated:0)>(Number.isFinite(a.updated)?a.updated:0)?b:a;}
+   else{const m=a||b;if(!base?.has(id)||changed(m))keep=m;}
+   if(keep)merged.push(keep);
+  }if(merged.length>2000)throw Error('Too many notes.');return merged;
+ }
  function syncIdentity(){return user?user.id+':'+scope():'';}
  function scheduleSync(){
   if(syncing||!user||!config||syncReady!==syncIdentity())return;
-  const job={uid:user.id,map:scope(),notes:personal.map(m=>({...m}))};syncJobs.set(job.uid+':'+job.map,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);
+  try{const key=user.id+':'+scope(),job={uid:user.id,map:scope(),notes:personal.map(m=>({...m})),base:syncJobs.get(key)?.base??readBase(user.id,scope())};syncJobs.set(key,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}catch{syncReady='';quiet('Notes could not sync. Your local notes are safe.');}
  }
  const privateScope=()=>scope()+'#private';
  function mergePrivateEntries(local,remote,uid){if(!Array.isArray(remote)||!remote.every(m=>validPrivate(m)&&m.owner===uid))throw Error('Private notes could not be read.');const merged=new Map();for(const m of [...remote,...local]){const old=merged.get(m.id);if(!old||m.updated>old.updated)merged.set(m.id,m);}return [...merged.values()];}
@@ -819,10 +837,23 @@
   }catch{syncing=false;quiet('Private notes could not sync. Your local notes are safe.');}
  }
  let pushing=false;
+ async function pushMapNotes(key,job){
+  for(let attempt=0;attempt<4;attempt++){
+   const {data,error}=await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();if(error)throw error;
+   const current=syncJobs.get(key)||job,notes=mergeMapNotes(current.notes,data?data.notes:[],current.base),here=user?.id===job.uid&&job.map===scope();if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
+   if(data&&(typeof data.updated_at!=='string'||!Number.isFinite(Date.parse(data.updated_at))))throw Error('Notes version could not be read.');
+   if(here){if(!notesReadable||alignmentMode)throw Error();syncing=true;let saved;try{saved=persist(notes,true);}finally{syncing=false;}if(!saved)throw Error();setupCategoryControls();buildPlaceIndex();drawMarkers();}
+   const row={user_id:job.uid,map:job.map,notes,updated_at:new Date(Math.max(Date.now(),(Date.parse(data?.updated_at)||0)+1)).toISOString()};
+   const result=data?await client.from('user_notes').update(row).eq('user_id',job.uid).eq('map',job.map).eq('updated_at',data.updated_at).select('updated_at'):await client.from('user_notes').insert(row).select('updated_at');
+   if(result.error){if(!data&&result.error.code==='23505')continue;throw result.error;}
+   if(!result.data?.length)continue;
+   writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key))syncJobs.get(key).base=notesBase(notes);return;
+  }throw Error('Notes changed during sync.');
+ }
  async function pushJobs(){
   if(pushing)return;pushing=true;let failed=false,progressed=false;
   try{for(const [key,job] of syncJobs){if(user?.id!==job.uid){syncJobs.delete(key);continue;}if(job.map===scope()&&syncReady!==syncIdentity()||job.map===privateScope()&&privateSyncReady!==syncIdentity())continue;
-   try{let notes=job.notes;if(job.map.endsWith('#private')){const {data,error}=await client.from('user_notes').select('notes').eq('user_id',job.uid).eq('map',job.map).maybeSingle();if(error)throw error;
+   try{if(!job.map.endsWith('#private')){await pushMapNotes(key,job);progressed=true;quiet('Notes synced.');continue;}let notes=job.notes;if(job.map.endsWith('#private')){const {data,error}=await client.from('user_notes').select('notes').eq('user_id',job.uid).eq('map',job.map).maybeSingle();if(error)throw error;
      const here=user?.id===job.uid&&job.map===privateScope();notes=mergePrivateEntries(here?privateNotes.filter(m=>m.owner===job.uid):notes,data?.notes||[],job.uid);if(payloadBytes(notes)>=1000000)throw Error();
      if(here){syncing=true;const saved=persistPrivate([...privateNotes.filter(m=>m.owner!==job.uid),...notes]);syncing=false;if(!saved)throw Error();}}
     const {error}=await client.from('user_notes').upsert({user_id:job.uid,map:job.map,notes,updated_at:new Date().toISOString()},{onConflict:'user_id,map'});if(error)throw error;writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===job)syncJobs.delete(key);progressed=true;quiet('Notes synced.');}
@@ -830,17 +861,11 @@
   }}finally{pushing=false;if(progressed&&!failed&&syncJobs.size){clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}}
  }
  async function syncNotes(serial){
-  if(!user||!map||loading||alignmentMode)return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
+  if(!user||!map||loading||alignmentMode||!notesReadable)return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
   try{const {data,error}=await client.from('user_notes').select('notes').eq('user_id',uid).eq('map',key).maybeSingle();if(error)throw error;if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
-   const notes=data?.notes||[];if(!Array.isArray(notes)||notes.length>2000||!notes.every(valid))throw Error();const remote=notes.map(normaliseMarker);
-   // A note on one side only was either added there (keep it) or deleted on the other side since the last sync (drop it).
-   const base=readBase(uid,key),localIds=new Set(personal.map(m=>m.id)),remoteIds=new Set(remote.map(m=>m.id)),merged=new Map();
-   for(const m of remote)if(localIds.has(m.id)||!base?.has(m.id))merged.set(m.id,m);
-   // On both sides: a copy unchanged since the last sync gives way to the other side's edit.
-   for(const m of personal)if(remoteIds.has(m.id)||!base?.has(m.id)){const there=merged.get(m.id),was=base?.get(m.id);if(there&&was&&noteSum(m)===was&&noteSum(there)!==was)continue;merged.set(m.id,m);}
-   if(merged.size>2000)throw Error();
-   syncing=true;const saved=persist([...merged.values()]);syncing=false;if(!saved)return;
-   syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();scheduleSync();await pushJobs();
+   const remote=data?data.notes:[],base=syncJobs.get(identity)?.base??readBase(uid,key),merged=mergeMapNotes(personal,remote,base);
+   syncing=true;const saved=persist(merged,true);syncing=false;if(!saved)return;
+   syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();syncJobs.set(identity,{uid,map:key,notes:merged,base:notesBase(remote)});await pushJobs();
   }catch{syncing=false;quiet('Notes could not sync. Your local notes are safe.');}
  }
  async function syncMapNotes(serial){await syncPrivateNotes(serial,false);if(serial===mapSerial)await syncNotes(serial);}

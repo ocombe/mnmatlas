@@ -206,7 +206,8 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   });
   const user=session?.user,suggestions=[],layers=[],banned=[];
   let authHandler,failNotes=false,failSuggestions=false,recordInserts=false,missingVersion=
-  false,suggestionFault=null;
+  false,suggestionFault=null,notesFault=null;
+  const notesState=fixtures.notesState||{exists:!fixtures.notesMissing,updated_at:'2026-10-20T08:00:00.000Z'};
   function result(table,request){
     calls.push({
       table,...request
@@ -219,17 +220,21 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
     };
     if(table==='user_notes'){
       const rows=(request.filters.map||request.payload?.map||'').endsWith('#private')?remotePrivate:remote;
+      const privateRow=rows===remotePrivate,fault=notesFault?.(request,rows,notesState);if(fault)return fault;
       if(request.op==='select')return {
-        data:{
-          notes:structuredClone(rows)
-        }
+        data:privateRow||notesState.exists?{notes:structuredClone(rows),updated_at:notesState.updated_at}:null
       };
       if(failNotes)return {
         error:Error('offline')
       };
-      rows.splice(0,rows.length,...request.payload.notes);
+      if(!privateRow){
+        if(request.op==='insert'&&notesState.exists)return {error:{code:'23505'}};
+        if(request.op==='update'&&(!notesState.exists||request.filters.updated_at!==notesState.updated_at))return {data:[]};
+        notesState.exists=true;notesState.updated_at=request.payload.updated_at;
+      }
+      rows.splice(0,rows.length,...structuredClone(request.payload.notes));
       return {
-        data:null
+        data:request.columns?[{updated_at:notesState.updated_at}]:null
       };
     }
     if(table==='banned'){
@@ -673,14 +678,6 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       setPopupContent(){}
     });
   };
-  context.persist=next=>{
-    saved.set('notes',JSON.stringify(next));
-    context.personal=next;
-    context.window.dispatchEvent({
-      type:'atlas:notes'
-    });
-    return true;
-  };
   context.storageKey=k=>'mnmaps-test-map-'+k+'-v1';
   context.CustomEvent=class{
     constructor(type,options){
@@ -710,6 +707,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   };
   context.campCard=()=>new Node('div');
   vm.createContext(context);
+  vm.runInContext(app.slice(app.indexOf('function persist('),app.indexOf('function download(')),context);
   vm.runInContext(app.slice(app.indexOf('function shapeShown('),app.indexOf('function drawMarkers(')),
   context);
   vm.runInContext(app.slice(app.indexOf('// Private annotations'),app.indexOf('function migratePreviousStorage(')),
@@ -740,7 +738,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   // Expose closures for observation without replacing any production function.
   const observed=fixtures.expose?source.replace(/\}\)\(\);\s*$/, `
  window.testCommunity={notePayload,followNote,retirePublishedNotes,followId,
- readFollowed,writeFollowed,editDialog,setBountyForm,claimBounty,
+ readFollowed,writeFollowed,editDialog,setBountyForm,claimBounty,mergeMapNotes,readBase,pushJobs,
  sync:()=>syncNotes(mapSerial),retire:()=>retirePublishedNotes(mapSerial),
  attachNoteFinder:()=>{noteFinderReady=false;attachNoteFinder();}};
 })();`):source;
@@ -775,6 +773,8 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       missingVersion=v;
     },set suggestionFault(v){
       suggestionFault=v;
+    },set notesFault(v){
+      notesFault=v;
     },emit:type=>context.window.dispatchEvent({
       type
     }),async tick(ms){
