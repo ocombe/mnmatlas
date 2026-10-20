@@ -220,5 +220,17 @@
       "name": "torgol",
       "what": "added"
     }
+  ],
+  "marker:community-1058": [
+    {
+      "name": "ocombe",
+      "what": "added"
+    }
+  ],
+  "marker:community-1060": [
+    {
+      "name": null,
+      "what": "added"
+    }
   ]
 }

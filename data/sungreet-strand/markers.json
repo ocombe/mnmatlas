@@ -903,5 +903,37 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/vile-will",
   "wikiId": "npc-vile-will"
+ },
+ {
+  "id": "community-1058",
+  "community": true,
+  "name": "First Mate Baird",
+  "category": "Mob camp",
+  "note": "",
+  "x": 4314,
+  "y": 4017,
+  "levels": [
+   25,
+   null
+  ],
+  "mobs": [],
+  "wiki": "https://monstersandmemories.wiki/npcs/first-mate-baird",
+  "wikiId": "npc-first-mate-baird"
+ },
+ {
+  "id": "community-1060",
+  "community": true,
+  "name": "A river pirate captain (levels 25–27)",
+  "category": "Named mob",
+  "note": "River pirate tavern. He is found on the dock outside the tavern.",
+  "x": 4422,
+  "y": 3983,
+  "levels": [
+   25,
+   25
+  ],
+  "ambush": false,
+  "wiki": "https://monstersandmemories.wiki/npcs/a-river-pirate-captain",
+  "wikiId": "npc-a-river-pirate-captain"
  }
 ]
