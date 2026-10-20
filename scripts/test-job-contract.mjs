@@ -134,6 +134,7 @@ try {
     const caves = {...map, ...map.levels.find(l => l.id === 'caves')};
     const e = await browser(true);
     e.context.registry = {maps: [map]};
+    e.context.fetchData = async file => file.includes('labels') ? {labels: [], trainers: []} : [];
     e.context.config = {...map, ...map.levels.find(l => l.id === 'floor-1'),
       id: map.id, levelId: 'floor-1'};
     const row = suggestion(100, 'new-marker', {...addition, category: 'Personal',

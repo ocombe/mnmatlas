@@ -4,6 +4,7 @@
 import {readFile,writeFile,mkdir,access} from 'node:fs/promises';
 import {resolve,dirname} from 'node:path';
 import {fileURLToPath} from 'node:url';
+import '../marker-schema.js';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),site='https://www.mnmatlas.com/';
 const html=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
@@ -13,7 +14,7 @@ const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'))
 // ?find=<text> looks names up here (find.js): every marker and place name of every map, with its level, wiki id and trainer classes.
 {const index=[],files=(m,key)=>[...new Set([m[key],...(m.levels||[]).map(l=>l[key])].filter(Boolean))];
  for(const m of registry.maps){
-  for(const file of files(m,'markersFile'))for(const p of JSON.parse(await readFile(resolve(root,file),'utf8')))if(p&&p.id&&p.name)index.push({n:p.name,m:m.id,p:p.id,k:p.category,...(p.level?{l:p.level}:{}),...(p.wikiId?{w:p.wikiId}:{}),...(Array.isArray(p.classes)?{c:p.classes}:{}),...(p.category==='Fishing spot'&&Array.isArray(p.fish)?{f:p.fish.map(x=>x.name)}:{})});
+  for(const file of files(m,'markersFile'))for(const p of JSON.parse(await readFile(resolve(root,file),'utf8')))if(p&&p.id&&p.name){const aliases=[...(p.category==='Fishing spot'&&Array.isArray(p.fish)?p.fish.map(x=>x.name):[]),...(globalThis.atlasMarkerSchema.givesQuests(p)?['Gives quests']:[])];index.push({n:p.name,m:m.id,p:p.id,k:p.category,...(p.level?{l:p.level}:{}),...(p.wikiId?{w:p.wikiId}:{}),...(Array.isArray(p.classes)?{c:p.classes}:{}),...(aliases.length?{f:aliases}:{})});}
   for(const file of files(m,'labelsFile'))for(const p of JSON.parse(await readFile(resolve(root,file),'utf8')).labels||[])if(p&&p.id&&p.name&&p.kind!=='exit')index.push({n:p.name,m:m.id,p:p.id,k:'Place name',...(p.level?{l:p.level}:{})});
  }
  await writeFile(resolve(root,'data/find-index.json'),JSON.stringify(index)+'\n','utf8');console.log('Wrote data/find-index.json ('+index.length+' places)');}

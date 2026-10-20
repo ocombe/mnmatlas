@@ -103,7 +103,7 @@ window.atlasKeepStatus=ms=>{clearTimeout(statusTimer);$('status').hidden=false;s
 function locationOf(m){return map.unproject([m.x,m.y],config.coordinateZoom);}
 function pixelsOf(latlng){const p=map.project(latlng,config.coordinateZoom);return [Math.round(p.x),Math.round(p.y)];}
 function bounded(x,y,z=map.getZoom()){return Number.isFinite(x)&&Number.isFinite(y)&&Number.isFinite(z)&&x>=0&&y>=0&&x<=config.width&&y<=config.height&&z>=config.minZoom&&z<=config.maxZoom;}
-function valid(m){m=normaliseMarker(m);if(m?.shape){try{window.atlasShapes.validate(m.shape,config);}catch{return false;}}return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&sellsOk(m.sells)&&(m.levels===undefined||mobTypes.includes(m.category)&&levelsOk(m.levels,m.category))&&(m.mobs===undefined||campTypes.includes(m.category)&&mobsOk(m.mobs))&&(m.fish===undefined||m.category==='Fishing spot'&&!m.noteType&&fishOk(m.fish))&&(m.way===undefined||m.category==='Passage'&&!m.noteType&&wayOk(m.way))&&(m.oneWay===undefined||m.category==='Passage'&&!m.noteType&&typeof m.oneWay==='boolean')&&(m.ambush===undefined||m.category==='Named mob'&&!m.noteType&&typeof m.ambush==='boolean')&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
+function valid(m){m=normaliseMarker(m);if(m?.shape){try{window.atlasShapes.validate(m.shape,config);}catch{return false;}}return m&&validLevel(m.level)&&(m.toMap===undefined||typeof m.toMap==='string'&&!!registry?.maps.some(c=>c.id===m.toMap))&&typeof m.id==='string'&&/^personal-[a-zA-Z0-9-]{1,80}$/.test(m.id)&&typeof m.name==='string'&&m.name.trim()&&m.name.length<=100&&typeof m.note==='string'&&m.note.length<=2000&&Object.hasOwn(categories,m.category)&&[undefined,'label','exit'].includes(m.noteType)&&(m.arrow===undefined||Object.hasOwn(exitArrows,m.arrow))&&(m.trade===undefined||Object.hasOwn(tradePaths,m.trade))&&(m.color===undefined||Object.values(pinColours).includes(m.color))&&(m.wiki===undefined||typeof m.wiki==='string'&&m.wiki.length<=300)&&(m.wikiId===undefined||!!wikiIdOf(m.wikiId))&&classesOk(m.classes)&&vendorKindOk(m.vendor)&&sellsOk(m.sells)&&(m.levels===undefined||mobTypes.includes(m.category)&&levelsOk(m.levels,m.category))&&(m.mobs===undefined||campTypes.includes(m.category)&&globalThis.atlasMarkerSchema.validators.mobs(m.mobs))&&(m.fish===undefined||m.category==='Fishing spot'&&!m.noteType&&fishOk(m.fish))&&(m.way===undefined||m.category==='Passage'&&!m.noteType&&wayOk(m.way))&&(m.oneWay===undefined||m.category==='Passage'&&!m.noteType&&typeof m.oneWay==='boolean')&&(m.quests===undefined||!m.noteType&&globalThis.atlasMarkerSchema.fieldCategory('quests',m.category)&&typeof m.quests==='boolean')&&(m.ambush===undefined||m.category==='Named mob'&&!m.noteType&&typeof m.ambush==='boolean')&&Number.isFinite(m.x)&&m.x>=0&&m.x<=config.width&&Number.isFinite(m.y)&&m.y>=0&&m.y<=config.height;}
 function persist(next,merged=false){if(!notesReadable){status('Saved notes could not be read. Your saved data is still kept in this browser.',true);return false;}try{if(!merged){const sum=m=>JSON.stringify(Object.keys(m).sort().filter(k=>k!=='updated').map(k=>[k,m[k]])),before=new Map(JSON.parse(localStorage.getItem(storageKey('notes'))||'[]').map(m=>[m.id,m]));next=next.map(m=>{const old=before.get(m.id);return old&&sum(old)===sum(m)?m:{...m,updated:Math.max(Date.now(),(Number.isFinite(old?.updated)?old.updated:0)+1)};});}localStorage.setItem(storageKey('notes'),JSON.stringify(next));personal=next;window.dispatchEvent(new CustomEvent('atlas:notes'));return true;}catch{status('Your browser could not save this change. Free some storage and try again.',true);return false;}}
 function download(data,name){const url=URL.createObjectURL(new Blob([JSON.stringify(data,null,2)],{type:'application/json'})),a=text('a','');a.href=url;a.download=name;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000);}
 // A note shared for the public map and published since: the public marker now stands where the note does, with the
@@ -131,7 +131,7 @@ function markerSubtitle(m){
  if(m.category==='Ambush')return 'Hidden until close';if(['Mob camp','Named mob'].includes(m.category))return m.ambush?'Ambush · hidden until close':'';return markerTitle(m)!==m.name&&!/^[A-Z]{2,4}(\s*[\/·,]\s*[A-Z]{2,4})*$/.test(m.name.trim())?m.name:'';}
 // A vendor's kind, or the kind its name says ("A bag merchant"), for search and the vendor filter.
 const vendorKindFor=m=>m.category==='Vendor'?vendorKindNow(m.vendor)||vendorKindNamed(m.name):'';
-const markerText=m=>(m.name+' '+m.category+' '+(m.ambush||m.category==='Ambush'?'ambush hidden invisible ':'')+namedLevelText(m)+' '+m.note+' '+privateNoteFor(m,'marker')+' '+classesOf(m).join(' ')+' '+vendorWords(vendorKindFor(m))+' '+(m.category==='Vendor'&&Array.isArray(m.sells)?m.sells.join(' '):'')+(campTypes.includes(m.category)&&Array.isArray(m.mobs)?' '+m.mobs.map(x=>x.name).join(' '):'')+(m.category==='Fishing spot'&&Array.isArray(m.fish)?' '+m.fish.map(x=>x.name).join(' '):'')).toLocaleLowerCase();
+const markerText=m=>(m.name+' '+m.category+' '+(globalThis.atlasMarkerSchema.givesQuests(m)?'quest gives quests ':'')+(m.ambush||m.category==='Ambush'?'ambush hidden invisible ':'')+namedLevelText(m)+' '+m.note+' '+privateNoteFor(m,'marker')+' '+classesOf(m).join(' ')+' '+vendorWords(vendorKindFor(m))+' '+(m.category==='Vendor'&&Array.isArray(m.sells)?m.sells.join(' '):'')+(campTypes.includes(m.category)&&Array.isArray(m.mobs)?' '+m.mobs.map(x=>x.name).join(' '):'')+(m.category==='Fishing spot'&&Array.isArray(m.fish)?' '+m.fish.map(x=>x.name).join(' '):'')).toLocaleLowerCase();
 // Vendors can be narrowed to a group, kind or Sells tag ("s:Recipes"); '' shows them all.
 let vendorGroup='';
 const vendorShown=m=>{if(!vendorGroup||m.category!=='Vendor')return true;if(vendorGroup.startsWith('s:'))return Array.isArray(m.sells)&&m.sells.includes(vendorGroup.slice(2));const kind=vendorKindFor(m);return vendorGroup.startsWith('g:')?vendorGroupOf(kind)===vendorGroup.slice(2):kind===vendorGroup.slice(2);};
@@ -153,6 +153,7 @@ function markerSells(m){return m.category!=='Vendor'?'':m.vendor==='Shady mercha
 function markerHoverCard(m,state){
  const n=text('div','','marker-hover'),who=markerSubtitle(m),detail=m.category==='Tradeskill'?m.trade:m.category==='Class trainer'?classesOf(m).join(' / '):markerSells(m);
  n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),text('h3',markerTitle(m)));if(who)n.append(text('div',who,'marker-who'));if(detail)n.append(text('div',detail,'hover-detail'));
+ if(globalThis.atlasMarkerSchema.givesQuests(m))n.append(text('div','Gives quests','hover-detail'));
  if(campTypes.includes(m.category)||m.category==='Fishing spot')n.append(...campHover(m));else if(namedLevelText(m))n.append(text('p',namedLevelText(m),'hover-detail'));
  const first=String(m.note||'').split(/\r?\n/,1)[0].trim();if(first)n.append(text('p',first.length>120?first.slice(0,119).trimEnd()+'…':first,'hover-note'));
  const rows=state?.rows||[],waiting=rows.filter(r=>r.status==='pending'),approved=rows.filter(r=>r.status==='approved'),rejected=rows.filter(r=>r.status==='rejected'),words=(count,end)=>count+' change'+(count===1?'':'s')+' '+end;
@@ -258,6 +259,7 @@ function campCard(m){
  if(credited)box.append(externalLink('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));return box;
 }
 function popup(m){const n=text('div',''),card=npcCardFor(m),title=text('h3',card?'':markerTitle(m));if(card)title.append(externalLink(titleLevel(markerTitle(m)).name,card.url,'npc-name'));n.append(text('div',noteKind(m)+(m.id.startsWith('personal-')?' · Your note':''),'tag'),title);{const who=markerSubtitle(m);if(who)n.append(text('p',who,'marker-who'));}
+ if(globalThis.atlasMarkerSchema.givesQuests(m))n.append(text('p','Gives quests','marker-quests'));
  // A shady merchant buys anything and sells back whatever players sold it, so its stock has no fixed types.
  {const sells=markerSells(m);if(sells)n.append(text('p',sells,'marker-sells'));}
  // With a wiki card the wiki comes first; the atlas's own note and actions follow.
@@ -300,6 +302,7 @@ function openPlace(p,zoom=config.defaultView.placeZoom){
  activePlace=p;applyingView=false;if(compact()&&!window.atlasCommunity?.reviewOpen?.())setPanel(false);scheduleUrl();
 }
 function pinIcon(m){
+ function questMark(){const mark=text('i','!','quest-mark');mark.setAttribute('aria-label','Gives quests');return mark;}
  const own=m.id?.startsWith('personal-')?' personal-pin':'';
  // Personal area labels and zone exits are lettering, drawn like the map's own names.
  if(m.noteType){
@@ -309,10 +312,11 @@ function pinIcon(m){
   if(m.noteType==='exit'){const seal=text('b','','exit-arrow');seal.append(travelSvg(travelKind(m.name,'',m.travel)||'Exit'));if(exitArrows[m.arrow])seal.append(text('small',exitArrows[m.arrow],'travel-direction'));face.append(seal,text('span',' '+m.name,'exit-name'));}
   return L.divIcon({className:'personal-label-anchor'+own,html:face,iconSize:[0,0],iconAnchor:[0,0],popupAnchor:[0,-14]});
  }
- if(m.category==='Class trainer'){const icon=trainerIcon(m);if(own)icon.options?icon.options.className+=own:icon.className+=own;return icon;}
+ if(m.category==='Class trainer'){const icon=trainerIcon(m),body=icon.options?.html||icon.html;if(globalThis.atlasMarkerSchema.givesQuests(m)&&body?.append)body.querySelector('.trainer-badge')?.append(questMark());if(own)icon.options?icon.options.className+=own:icon.className+=own;return icon;}
  const face=text('span','');face.style.setProperty('--pin',m.color||(shadyVendor(m)?'#3d2b1f':categories[m.category][1]));face.append(markerSymbol(m));
  if((m.toLevel||m.toMap&&m.direction)&&face.firstChild?.tagName==='svg')face.append(text('i',m.direction==='up'?'↑':'↓','level-dir'));
- if(m.ambush&&m.category==='Named mob'){const mark=text('i','','ambush-mark');mark.title='Ambush: hidden until you are close';mark.append(travelSvg('Ambush'));face.append(mark);}
+ if(m.ambush&&m.category==='Named mob'){const mark=text('i','','ambush-mark');mark.setAttribute('aria-label','Ambush: hidden until you are close');mark.append(travelSvg('Ambush'));face.append(mark);}
+ if(globalThis.atlasMarkerSchema.givesQuests(m))face.append(questMark());
  // Ways up and down (ladders, stairs, lifts, passages) are round seals centred on the spot, like the exit signs' arrows.
  if(m.toLevel||['Exit','Ladder','Stairs','Lift','Bridge','Teleporter','Passage','Level connection'].includes(m.category))return L.divIcon({className:'pin level-pin'+own,html:face,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
  return L.divIcon({className:'pin'+own,html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
@@ -491,12 +495,11 @@ function noteTypeValue(){return document.querySelector('input[name="note-type"]:
 // Each category has its own pin colour, so types stay recognisable on the map; only Personal notes pick one.
 // The dot beside Category shows the colour the pin will have.
 function updateEditorFields(){const type=noteTypeValue(),own=categories[$('category').value]?.[1]||'#a04438',picked=document.querySelector('input[name="pin-colour"]:checked')?.value;$('default-colour').style.setProperty('--swatch',own);$('pin-colours').hidden=type!=='marker'||$('category').value!=='Personal';$('pin-preview').hidden=type!=='marker'||$('category').value==='Personal';$('pin-preview').style.setProperty('--swatch',picked||draft?.color||own);noteFields?.fit();for(const k of ['category','trade','classes','vendor','sells','wiki'])if(noteFields?.boxes[k])noteFields.boxes[k].hidden=type!=='marker'||k!=='category'&&k!=='wiki'&&noteFields.boxes[k].hidden;guessTrade();guessVendor();}
-// A class trainer's classes ride on the wiki field (a wiki pick may give two); the Class menu shows a single one and
-// sets it. Every change goes through pickClasses, so the two never disagree.
-function pickedClasses(){try{const v=JSON.parse($('wiki').dataset.wikiClasses||'[]');return classesOk(v)?v:[];}catch{return [];}}
-function pickClasses(list){const v=Array.isArray(list)?list.filter(c=>atlasClasses.includes(c)):[];$('wiki').dataset.wikiClasses=JSON.stringify(v);$('trainer-class').value=v.length===1?v[0]:'';}
+// Class picks stay together in the shared form and the wiki's saved selection.
+function pickedClasses(){if(noteFields?.readClasses)return noteFields.readClasses();try{const v=JSON.parse($('wiki').dataset.wikiClasses||'[]');return classesOk(v)?v:[];}catch{return [];}}
+function pickClasses(list){const v=Array.isArray(list)?list.filter(c=>atlasClasses.includes(c)):[];$('wiki').dataset.wikiClasses=JSON.stringify(v);if(noteFields?.setClasses)noteFields.setClasses(v);else $('trainer-class').value=v.length===1?v[0]:'';}
 // A vendor named for what it sells ("A bag merchant") starts on that kind; a chosen kind stays.
-function guessVendor(){if($('category').value!=='Vendor'||$('vendor-kind').value)return;const kind=vendorKindNamed($('name').value+' '+$('note').value);if(kind)$('vendor-kind').value=kind;}
+function guessVendor(){if($('category').value!=='Vendor'||$('vendor-kind').value)return;const kind=vendorKindNamed($('name').value+' '+$('note').value);if(kind){$('vendor-kind').value=kind;if(typeof noteFields!=='undefined')noteFields?.fit();}}
 // A Tradeskill named in its name or note ("an enchanting trainer") starts on that trade; a chosen trade stays.
 function guessTrade(){if($('category').value!=='Tradeskill'||$('trade').value)return;const trade=tradeNamed($('name').value+' '+$('note').value,Object.keys(tradePaths));if(trade)$('trade').value=trade;}
 function openEditor(m){cancelPlacement();m=normaliseMarker(m);draft={...m};$('editor-title').textContent=personal.some(p=>p.id===m.id)?'Your discovery':'A new discovery';$('name').value=m.name;$('category').value=m.category;$('note').value=m.note;$('wiki').value=m.wiki||'';setWikiPick($('wiki'),m.wiki,m.wikiId);pickClasses(m.classes);$('vendor-kind').value=vendorKindNow(m.vendor)||'';
@@ -911,7 +914,7 @@ function setupControls(){
  for(const [name,hex] of Object.entries(pinColours)){const label=text('label','');label.title=name;const input=text('input','');input.type='radio';input.name='pin-colour';input.value=hex;input.setAttribute('aria-label',name);const swatch=text('span','');swatch.style.setProperty('--swatch',hex);label.append(input,swatch);$('colour-swatches').append(label);}
  // A class trainer's class: picked here, or filled from the wiki pick; it rides with the note as its classes.
 
- $('trainer-class').onchange=()=>pickClasses($('trainer-class').value?[$('trainer-class').value]:[]);
+ $('trainer-class').onchange=()=>pickClasses(noteFields.readClasses());
 
  for(const id of ['name','note'])$(id).addEventListener('input',()=>{guessTrade();guessVendor();});
  {const pick=$('vendor-filter-select');fillSelect(pick,[...vendorKindItems(true),{label:'Sells',options:sellTypes.map(t=>[t,'s:'+t])}]);pick.onchange=()=>{vendorGroup=pick.value;drawMarkers();};}

@@ -79,7 +79,7 @@
    const start=()=>({...copy(t.published),removed:false}),history=[],approvedHistory=[];let proposed=start(),effective=start();
    for(const r of t.rows){try{
     if(!['pending','approved'].includes(r.status))continue;
-    r.conflictsWith=conflicts(r,proposed,history);if(r.status==='approved'&&!(r.fields.has('added')&&t.published)&&!conflicts(r,effective,approvedHistory).length){effective=applyTo(effective,r);approvedHistory.push(r);}if(r.conflictsWith.length)continue;
+    r.before=copy(proposed);r.conflictsWith=conflicts(r,proposed,history);if(r.status==='approved'&&!(r.fields.has('added')&&t.published)&&!conflicts(r,effective,approvedHistory).length){effective=applyTo(effective,r);approvedHistory.push(r);}if(r.conflictsWith.length)continue;
     // An unacknowledged addition never rebuilds a place already in the published file.
     if(r.fields.has('added')&&t.published)continue;
     proposed=applyTo(proposed,r);history.push(r);

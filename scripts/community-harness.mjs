@@ -738,7 +738,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   // Expose closures for observation without replacing any production function.
   const observed=fixtures.expose?source.replace(/\}\)\(\);\s*$/, `
  window.testCommunity={notePayload,followNote,retirePublishedNotes,followId,
- readFollowed,writeFollowed,editDialog,setBountyForm,claimBounty,mergeMapNotes,readBase,pushJobs,
+ readFollowed,writeFollowed,editDialog,changeOwn,setBountyForm,claimBounty,mergeMapNotes,readBase,pushJobs,
  sync:()=>syncNotes(mapSerial),retire:()=>retirePublishedNotes(mapSerial),
  attachNoteFinder:()=>{noteFinderReady=false;attachNoteFinder();}};
 })();`):source;

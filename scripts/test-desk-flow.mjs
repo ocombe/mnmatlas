@@ -285,6 +285,28 @@ try {
     assert(sent, 'The bounty claim was sent');
     assert(!Object.hasOwn(sent.payload.payload, 'vendor'), 'A hidden guessed Kind must not be claimed');
   });
+  await checks.test('B23', 'bounty form shows Gives quests and the claim keeps its tick', async () => {
+    const m = {id: 'personal-bounty', name: 'Rell', category: 'Vendor', note: '',
+      wiki: 'https://monstersandmemories.wiki/npcs/rell', wikiId: 'npc-rell',
+      x: 30, y: 40, level: 'lower', quests: true};
+    const {e, c, form} = await noteForm(m);
+    e.recordInserts = true;
+    const main = new Node('form');
+    main.append(new Node('div', '', 'form-head'));
+    e.elements.set('marker-form', main);
+    e.elements.set('editor-title', new Node('h2'));
+    new Node('label').append(c.$('suggest-check'));
+    e.saved.set('mnmaps-bounty-notes', JSON.stringify({[m.id]: {
+      bounty: m.wikiId, map: 'test-map', priority: true
+    }}));
+    c.window.testCommunity.setBountyForm(m);
+    assert(main.classList.contains('bounty-mode'));
+    assert(!form.boxes.quests.hidden);
+    assert.equal(form.boxes.quests.firstChild, form.controls.quests);
+    assert.equal(await c.window.testCommunity.claimBounty({...m, ...form.read()}, false), 'claimed');
+    const sent = e.calls.filter(r => r.table === 'suggestions' && r.op === 'insert').at(-1);
+    assert.equal(sent.payload.payload.quests, true);
+  });
 } finally {
   await job.close();
 }

@@ -27,6 +27,8 @@ const sells = (form, values) => {
   form.controls.sells.fire('change');
 };
 const specs = [
+  ...['Tradeskill', 'Class trainer', 'Vendor', 'Named mob', 'Notable NPC'].map(category => ({name: `${category} Gives quests`, value: {category, quests: true}, change: {quests: false}, edit: f => set(f, 'quests', false)})),
+  {name: 'Typed mob', value: {category: 'Mob camp', mobs: [{name: 'Fish'}]}, change: {note: 'At the door'}, edit: f => set(f, 'note', 'At the door')},
   {name: 'Mob camp', value: {category: 'Mob camp', levels: [8, 12], mobs: [mob]},
     change: {levels: [9, 12]}, edit: f => {f.controls.levels.min.value = '9';}},
   {name: 'Named mob with Ambush tick', value: {category: 'Named mob', levels: [8, 8],

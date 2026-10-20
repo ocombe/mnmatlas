@@ -259,6 +259,7 @@ const fields = [
     change: {way: 'Swim'}},
   {name: 'Passage One way', value: {category: 'Passage', way: 'Drop', oneWay: false},
     change: {oneWay: true}},
+  {name: 'NPC Gives quests', value: {category: 'Notable NPC', quests: false}, change: {quests: true}},
   {name: 'Named mob Ambush', value: {category: 'Named mob', levels: [8, 8], ambush: false},
     change: {ambush: true}},
   {name: 'Fishing spot floor', value: {category: 'Fishing spot', fish: [{name: 'Basa'}]},

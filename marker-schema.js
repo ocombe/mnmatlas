@@ -3,8 +3,10 @@
  'use strict';
  const copy=v=>v===undefined?undefined:JSON.parse(JSON.stringify(v)),has=(v,k)=>Object.hasOwn(v||{},k),clear=v=>v===null||v===''||Array.isArray(v)&&!v.length;
  const privateCategories=['Personal','Ore','Wood','Herbs','Camping spot'],publicCategory=c=>typeof c==='string'&&!!c&&!privateCategories.includes(c);
- const typeKeys=['category','trade','classes','vendor','sells'],rosterKeys=['levels','mobs','fish','way','oneWay','ambush'];
+ const questCategories=['Class trainer','Tradeskill','Vendor','Notable NPC','Named mob','Guild'],givesQuests=m=>m?.quests===true&&!m.noteType&&questCategories.includes(m.category);
+ const typeKeys=['category','trade','classes','vendor','sells'],rosterKeys=['levels','mobs','fish','way','oneWay','ambush','quests'];
  const categoryFields={Tradeskill:['trade'],'Class trainer':['classes'],Vendor:['vendor','sells'],'Mob camp':['levels','mobs'],Ambush:['levels','mobs'],'Named mob':['levels','ambush'],'Fishing spot':['fish'],Passage:['way','oneWay']};
+ for(const c of questCategories)(categoryFields[c]||=[]).push('quests');
  const typedKeys=[...typeKeys.slice(1),...rosterKeys],travelKeys=['travel','arrow','toMap','toPlace','toLevel','toMarker','direction','switchOnClick'];
  const travelKinds=['Exit','Lift','Stairs','Ladder','Bridge','Teleporter'],arrowChoices=['','up','down','updown','north','northeast','east','southeast','south','southwest','west','northwest'];
  const displayKeys=['minZoom','approximate','tier','priority'],extraKeys=['shape','noteType',...travelKeys,'level','minZoom','approximate','color','wiki','wikiId',...typedKeys];
@@ -21,7 +23,7 @@
  const arrows=()=>arrowChoices.slice(1);
  const validators={name:v=>typeof v==='string'&&!!clean(v)&&v.length<=100,note:v=>typeof v==='string'&&v.length<=2000,building:v=>typeof v==='string'&&v.length<=100,
   category:v=>publicCategory(v),trade:v=>typeof v==='string'&&(typeof tradePaths!=='object'||has(tradePaths,v)),classes:v=>classesOk(v),vendor:v=>typeof v==='string'&&vendorKindOk(v),sells:v=>sellsOk(v),
-  levels:(v,c)=>levelsOk(v,c),mobs:v=>mobsOk(v),fish:v=>fishOk(v),way:v=>wayOk(v),oneWay:v=>typeof v==='boolean',ambush:v=>typeof v==='boolean',
+  levels:(v,c)=>levelsOk(v,c),mobs:v=>Array.isArray(v)&&v.length<=12&&v.every(m=>m&&typeof m==='object'&&!Array.isArray(m)&&Object.keys(m).every(k=>['name','wikiId','wiki'].includes(k))&&typeof m.name==='string'&&!!m.name.trim()&&m.name.length<=100&&(!has(m,'wikiId')||typeof m.wikiId==='string'&&!!wikiIdOf(m.wikiId))&&(!has(m,'wiki')||typeof m.wiki==='string'&&!!wikiAddress(m.wiki)))&&new Set(v.map(m=>m.name.trim().toLocaleLowerCase())).size===v.length&&new Set(v.filter(m=>m.wikiId).map(m=>m.wikiId)).size===v.filter(m=>m.wikiId).length,fish:v=>fishOk(v),way:v=>wayOk(v),oneWay:v=>typeof v==='boolean',ambush:v=>typeof v==='boolean',quests:v=>typeof v==='boolean',
   wiki:v=>typeof v==='string'&&wikiAddress(v)!==null,wikiId:v=>typeof v==='string'&&wikiIdOf(v)!==null,shape:v=>{shapes().validate(v);return true;},
   arrow:v=>arrows().includes(v),direction:v=>arrows().includes(v),travel:v=>travelKinds.includes(v),kind:v=>['region','zone','district','building','exit'].includes(v),
   tier:v=>['major','minor','building'].includes(v),minZoom:v=>Number.isFinite(v)&&v>=-5&&v<=10,priority:v=>typeof v==='boolean'||Number.isFinite(v)&&v>=0&&v<=1000,
@@ -67,6 +69,6 @@
   if(out.category==='Named mob'&&out.levels!=null&&!levelsOk(out.levels,out.category))throw Error('Choose a level from 1 to 99.');
   if(fields.size)out.community=true;return out;
  }catch(error){return {refusal:error.message,name:error.name};}}
- const schema={fields,categoriesFor,followKeys,travelKinds,arrowChoices,typeKeys,rosterKeys,typedKeys,travelKeys,displayKeys,extraKeys,editKeys,publicKeys,privateCategories,publicCategory,categoryFields,fieldsFor,keysFor,fieldCategory,validators,validate,clear,clean,sources,extras,apply};
+ const schema={fields,categoriesFor,followKeys,travelKinds,arrowChoices,typeKeys,rosterKeys,typedKeys,travelKeys,displayKeys,extraKeys,editKeys,publicKeys,privateCategories,publicCategory,categoryFields,fieldsFor,keysFor,fieldCategory,validators,validate,clear,clean,sources,extras,apply,questCategories,givesQuests};
  root.atlasMarkerSchema=schema;if(root.window)root.window.atlasMarkerSchema=schema;
 })(globalThis);

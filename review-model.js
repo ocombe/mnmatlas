@@ -2,6 +2,7 @@
 'use strict';
 window.atlasReview=(()=>{
  const closedKind=r=>r.kind==='report'||r.kind==='feedback';
+ const jobNote=value=>/^(Not published:|Approved on sending \(admin\)|Correction made\b)/.test(value||''),authorNote=row=>jobNote(row.review_note)?'':row.review_note||'';
  const spotReasons={art:'Map drawn wrong',missing:'Something missing',other:'Something else'},topics={idea:'An idea for the atlas',bug:'Something is not working',other:'Something else'};
  const title=r=>r.kind==='feedback'?'Feedback: '+(r.payload?.name||'A message'):r.kind==='report'?'Report: '+(r.target_id==null?spotReasons[r.payload?.reason]||'Something else':r.payload?.name||'A place'):r.payload?.name||'A discovery';
  const decision=(r,status)=>closedKind(r)&&status==='approved'?'resolved':status;
@@ -29,5 +30,5 @@ window.atlasReview=(()=>{
  const ownRows=(rows,uid)=>rows.filter(r=>uid&&r.user_id===uid).slice().sort((a,b)=>String(b.created_at||'').localeCompare(String(a.created_at||''))||Number(b.id)-Number(a.id));
  const unread=(rows,seen,key=r=>String(r.id),version=stamp)=>rows.filter(r=>seen[key(r)]!==version(r));
  const state=r=>closedKind(r)&&r.status==='rejected'?'Dismissed':r.kind==='feedback'&&r.status==='resolved'?'Done':({published:'On the map',approved:'Approved · next edition',pending:'Waiting for review',rejected:'Set aside',resolved:'Fixed'}[r.status]||'Waiting for review');
- return {group,target,targetKind,point,keyAction,stamp,ownRows,unread,state,closedKind,spotReasons,topics,title,decision,spotLink};
+ return {group,target,targetKind,point,keyAction,stamp,ownRows,unread,state,closedKind,spotReasons,topics,title,decision,spotLink,jobNote,authorNote};
 })();

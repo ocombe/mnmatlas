@@ -17,6 +17,7 @@ exit nonzero on failure. Run a suite directly to narrow the output. Set
 | `test-job-contract.mjs` | Unknown fields, private types, same-value rows, nulls, floors, namespaces, empty runs, write failures and corrections |
 | `test-notes-sync.mjs` | Two devices, interleaved saves/deletions, approved-note following and retirement |
 | `test-desk-flow.mjs` | Card isolation, reversions, stale approval, review notes, undo, bulk failures, wiki picks and type-specific forms |
+| `test-desk-forms-f3.mjs` | All approval paths, failed reloads, full Undo, dirty refresh, class chips, typed mobs and Gives quests |
 
 `community-harness.mjs` reuses the existing community suite's browser helpers.
 It loads the actual browser scripts. An optional fixture flag exposes existing
@@ -55,3 +56,13 @@ The empty-run case checks that no data or recovery-log change can trigger
 publication; it executes no commit or workflow. The updown case checks the client
 and publisher contract, without mirroring or executing database constraints.
 Database coverage belongs to a separate run.
+
+The F3 round trips also cover Gives quests on new markers, edits and type switches,
+plus typed mob names. The follow suite adds the new field to its coverage check.
+Older community expectations that put wiki levels in names, mixed later rows into
+cards or approved Personal markers were corrected to follow the public field rules.
+The Blacktide Bay desk fixture now supplies valid empty published files for reloads.
+
+For an offline browser preview, run `python scripts/preview-offline.py 8783` and
+open `http://127.0.0.1:8783/?map=night-harbor`. This server disables accounts and
+external requests; review decisions are exercised by the local browser fixtures.

@@ -171,8 +171,20 @@
  async function reviewLocations(rows,onError=(row,error)=>desk.rowError(row,error)){
   const ids=[...new Set(rows.flatMap(r=>[r.map,r.payload?.toMap,r.payload?.from?.toMap]).filter(Boolean))];await Promise.all(ids.map(async id=>{const c=registry.maps.find(c=>c.id===id);if(!c||id===config.id&&!c.levels||reviewMaps.has(id))return;try{const levels=c.levels?.length?c.levels:[c],markers=[],labels=[],trainers=[];for(const floor of levels){const conf={...c,...floor},m=conf.markersFile?await fetchData(conf.markersFile,[]):[],l=conf.labelsFile?await fetchData(conf.labelsFile,{labels:[],trainers:[]}):{};markers.push(...m.map(r=>({...r,level:r.level||(c.levels?floor.id:undefined)})));labels.push(...(l.labels||[]).map(r=>({...r,level:r.level||(c.levels?floor.id:undefined)})));trainers.push(...(l.trainers||[]).map(r=>({...r,level:r.level||(c.levels?floor.id:undefined)})));}reviewMaps.set(id,{markers,labels,trainers,rows:rows.filter(r=>r.map===id)});}catch(error){for(const row of rows.filter(r=>r.map===id||r.payload?.toMap===id||r.payload?.from?.toMap===id))onError(row,error);}}));for(const id of ids)if(reviewMaps.has(id))reviewMaps.get(id).rows=rows.filter(r=>r.map===id);
  }
+ async function reloadReview(row,rows){
+  const c=registry.maps.find(c=>c.id===row.map);if(!c)throw Error('This map is not available.');const markers=[],labels=[],trainers=[],seen=new Set();
+  for(const floor of c.levels?.length?c.levels:[c]){const conf={...c,...floor};for(const [file,key] of [[conf.markersFile,'markers'],[conf.labelsFile,'labels']]){if(!file||seen.has(file))continue;seen.add(file);const data=await fetchData(file);if(key==='markers'){if(!Array.isArray(data))throw Error('Published markers could not load.');markers.push(...data.map(r=>({...r,level:r.level||(c.levels?floor.id:undefined)})));}else{if(!Array.isArray(data?.labels))throw Error('Published place names could not load.');labels.push(...data.labels.map(r=>({...r,level:r.level||(c.levels?floor.id:undefined)})));trainers.push(...(data.trainers||[]).map(r=>({...r,level:r.level||(c.levels?floor.id:undefined)})));}}}
+  // Older pages and fixtures can lack file paths; keep their published baseline.
+  if(!seen.size)return;reviewMaps.set(row.map,{markers,labels,trainers,rows:rows.filter(r=>r.map===row.map),fresh:true});currentReviewSet=null;
+ }
+ async function validateReviewLinks(p,next,c){
+  if(p.toMarker){if(!next.toLevel)throw Error('Choose the floor before the arrival marker.');const floor={...c,...c.levels?.find(l=>l.id===next.toLevel)},marks=floor.markersFile?await fetchData(floor.markersFile):originals;if(!marks.some(m=>m.id===p.toMarker&&(!m.level||m.level===next.toLevel)))throw Error('Arrival marker missing on that floor.');}
+  if(p.toPlace){if(!next.toMap)throw Error('Choose the map before the arrival place.');const dest=registry.maps.find(c=>c.id===next.toMap);if(!dest)throw Error('Choose a valid destination map.');const conf={...dest,...dest.levels?.find(l=>l.id===dest.defaultLevel)||dest.levels?.[0]},marks=conf.markersFile?await fetchData(conf.markersFile):[],labels=conf.labelsFile?(await fetchData(conf.labelsFile)).labels:[];if(![...marks,...labels].some(m=>m.id===p.toPlace))throw Error('Arrival place missing on that map.');}
+ }
+ async function reviewAuthorIsAdmin(id){if(!id)return false;const {data,error}=await client.from('admins').select('user_id').eq('user_id',id).maybeSingle();if(error)throw error;return !!data;}
  function reviewTarget(row){
   if(row.kind==='feedback'||row.kind==='report'&&row.target_id==null)return null;
+  const fresh=reviewMaps.get(row.map);if(fresh?.fresh)return otherMapChanges(fresh,row.map,row.level).forRow(row.id);
   let current=null;if(row.map===config.id){if(!currentReviewSet||currentReviewSet.serial!==approvedSerial||currentReviewSet.map!==config.id||currentReviewSet.level!==config.levelId)currentReviewSet={serial:approvedSerial,map:config.id,level:config.levelId,set:changeSet()};current=currentReviewSet.set.forRow(row.id);if(current&&!current.missing)return current;}
   // A floor correction needs the mark on its old floor as well as its destination.
   const data=reviewMaps.get(row.map),from=data?otherMapChanges(data,row.map,row.level).forRow(row.id):null;
@@ -194,8 +206,9 @@
   if(position.every(Number.isFinite)&&!row.payload.remove&&row.kind!=='report'){clearPreview();reviewLayer=L.layerGroup().addTo(map);const pin=L.marker(locationOf(value),{icon:pinIcon({...value,category:value.category||'Personal',...(t?.kind==='label'?{atlasLabel:true,noteType:value.kind==='exit'?'exit':'label'}:{})}),draggable:true,zIndexOffset:1200}).addTo(reviewLayer);pin.on('dragend',()=>position=pixelsOf(pin.getLatLng()));d.append(text('p','Drag the pin to adjust its spot.','form-hint'));map.setView(locationOf(value),config.defaultView.placeZoom);}
   const initial=JSON.stringify(fields?.read()||{}),start=JSON.stringify(position),leave=()=>JSON.stringify(fields?.read()||{})===initial&&JSON.stringify(position)===start&&why.value===(row.comment||'')||window.confirm('Leave without saving these changes?');
   const actions=text('div','','dialog-actions');actions.append(button('Cancel',()=>{try{if(leave())d.close();}catch{if(window.confirm('Leave without saving these changes?'))d.close();}}),sendButton('Save suggestion',async()=>{
-   let payload=structuredClone(row.payload);if(fields){const now=fields.read();if(row.kind==='new-marker'){payload={...payload,...now};for(const k of [...globalThis.atlasMarkerSchema.typeKeys.slice(1),'wikiId'])if(payload[k]===null)delete payload[k];}else{const delta=window.atlasFields.delta(now,value);delete delta.from;delete delta.name;if(now.name!==value.name)delta.name=now.name;Object.assign(payload,delta);}}
-   if(position.every(Number.isFinite)){if(!bounded(...position,config.minZoom))throw Error('Keep the pin inside the map.');if(move)payload.to=position;else if(row.kind==='new-marker'||JSON.stringify(position)!==start){payload.x=position[0];payload.y=position[1];if(payload.from&&!Array.isArray(payload.from))payload.from={...base,...payload.from};}}
+   let payload=structuredClone(row.payload);if(fields){const now=fields.read();if(row.kind==='new-marker'){payload={...payload,...now};for(const k of [...globalThis.atlasMarkerSchema.typeKeys.slice(1),'wikiId'])if(payload[k]===null)delete payload[k];}else payload=window.atlasFields.delta(now,window.atlasChanges.nextFrom({effective:base},row.kind));}
+   if(position.every(Number.isFinite)){if(!bounded(...position,config.minZoom))throw Error('Keep the pin inside the map.');if(move)payload.to=position;else if(row.kind==='new-marker'||JSON.stringify(position)!==start||window.atlasChanges.fieldsOf(row).has('position')){payload.x=position[0];payload.y=position[1];if(payload.from&&!Array.isArray(payload.from))payload.from={...base,...payload.from};}}
+   if(row.kind.startsWith('edit-')&&!payload.remove&&!window.atlasChanges.fieldsOf({...row,payload}).size){if(!await withdrawOwn(row))throw Error('Changed since opened');d.close();status('All changes reverted. Your suggestion was withdrawn.');return;}
    payload=window.atlasFields.stored(row.kind,payload);
    const amendments=[...approvedRows,...pendingRows],newest=newestOnTarget(row,amendments);
    if(row.kind==='report'||newest?.id===row.id){const {data,error}=await version(client.from('suggestions').update({payload,comment:why.value.trim()||null,...(admin&&row.kind!=='report'?{status:'approved',reviewed_at:new Date().toISOString()}:{})}).eq('id',row.id).eq('user_id',user.id).eq('status','pending').is('reviewed_at',null),row).select('*');if(error||!data?.length)throw error||Error('Changed since opened');window.atlasNotices?.sent(normaliseSuggestion(data[0]));}
@@ -244,7 +257,7 @@
   const highlight=i=>{const all=options();active=all.length?(i+all.length)%all.length:-1;all.forEach((b,n)=>{b.className=n===active?'wiki-result active':'wiki-result';b.setAttribute('aria-selected',String(n===active));});if(active>=0){name.setAttribute('aria-activedescendant',all[active].id);all[active].scrollIntoView?.({block:'nearest'});}else name.removeAttribute('aria-activedescendant');};
   // The credit names and links the wiki the results came from, under the list and again after a pick.
   const credit=(from,lead)=>{const line=wikiCredit(from,lead);if(line)list.append(line);};
-  const pick=(row,from)=>{if(!enabled())return;name.value=multi?'':row.name+levelText(row.level);wanted=name.value.trim().toLowerCase().replace(/\s+/g,' ');
+  const pick=(row,from)=>{if(!enabled())return;name.value=multi?'':row.name;wanted=name.value.trim().toLowerCase().replace(/\s+/g,' ');
    input.value=row.url;setWikiPick(input,row.url,row.id);input.dispatchEvent(new Event('input'));picked?.(row);
    stop();show([]);credit(from,'Filled from the wiki · ');name.focus?.();};
   const show=(rows,message,from,heading)=>{list.replaceChildren();active=-1;name.removeAttribute('aria-activedescendant');name.setAttribute('aria-expanded',String(rows.length>0));
@@ -265,13 +278,13 @@
    else if(e.key==='Enter'&&active>=0){e.preventDefault();all[active].onclick();}
    else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();stop();show([]);}});
   box.append(spinner,list,signedOut);
-  box.update=()=>{if(!enabled()){stop();wanted='';show([]);box.hidden=true;name.removeAttribute('aria-autocomplete');name.removeAttribute('aria-controls');name.placeholder='Give this place a name';return;}name.setAttribute('aria-controls',list.id);name.setAttribute('aria-autocomplete','list');name.placeholder=type==='item'?'Find a fish, or type a name and press Enter':multi?'Find a mob in the wiki':user?'Type a name to search the wiki, or any name':'Give this place a name';box.hidden=false;list.hidden=spinner.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';show([]);}else busy(false);};
+  box.update=()=>{if(!enabled()){stop();wanted='';show([]);box.hidden=true;name.removeAttribute('aria-autocomplete');name.removeAttribute('aria-controls');name.placeholder='Give this place a name';return;}name.setAttribute('aria-controls',list.id);name.setAttribute('aria-autocomplete','list');name.placeholder=type==='item'?'Find a fish, or type a name and press Enter':multi?'Find a mob, or type a name and press Enter':user?'Type a name to search the wiki, or any name':'Give this place a name';box.hidden=false;list.hidden=spinner.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';show([]);}else busy(false);};
   box.reset=()=>{stop();wanted='';show([]);};box.dispose=()=>{box.reset();finders.delete(box);};
   finders.add(box);box.update();return box;
  }
  // The credit a wiki's data carries, linking its front page; null for a site not listed.
  function wikiCredit(site,lead='',cls='wiki-credit'){const source=wikiSites[site];return source?externalLink(lead+(source.credit||'Data from '+source.name),source.home||'https://'+source.hosts[0]+'/',cls):null;}
- // A picked NPC pre-fills a new note as the wiki's terms allow: its name (with its level, as the atlas writes levels),
+ // A picked NPC pre-fills a new note as the wiki's terms allow: its name and level in separate fields,
  // its type from the wiki's role, and its short location line as the note. Nothing the visitor typed is replaced,
  // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level; any other NPC is a notable NPC.
  const roleTypes={merchant:'Vendor',quest:'Quest NPC',mob:'Mob camp'};
@@ -332,7 +345,7 @@
  }
  // What a bounty's note starts with: the wiki's name and level, its type, its page and id, a trainer's classes.
  function bountyPrefill(row){const classes=trainerClasses(row),type=roleType(row)||'Personal';
-  return {name:row.name+levelText(row.level),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
+  return {name:row.name,...(type==='Named mob'&&levelRange(row.level)?{levels:[levelRange(row.level)[0],levelRange(row.level)[0]]}:{}),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
  const signInToTake=()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.'));
 // The reward a bounty earns, in the bounty board's own words (one place to change it).
  const rewardWord='renown';
@@ -482,10 +495,10 @@
   if(kind==='edit-label'){d.append(text('p','Drag the name on the map to move it.','form-hint'));if(movePin){const bar=text('div','','place-move-bar'),name=text('strong',base.name),done=button('Done',()=>{d.classList.remove('moving-place');fields.controls.name.focus?.();});bar.append(name,done);d.append(button('Move on the map',()=>{name.textContent=fields.controls.name.value||base.name;d.classList.add('moving-place');map.closePopup();},'place-move-button'),bar);}}
   const actions=text('div','','dialog-actions'),send=sendButton(admin?'Save':'Send for review',async()=>{
    let now;try{now=fields.read();}catch(e){status(e.message);return;}let payload=window.atlasFields.delta(now,window.atlasChanges.nextFrom(state||{effective:base},kind));
-   if(Object.keys(payload).length===2&&payload.name===base.name&&!moved){status('Change a field or move the name first.');return;}
-   if(Object.keys(payload).length>2||payload.name!==base.name)await saveOwn({kind,target_id:target.id,map:config.id,level:target.level||config.levelId||null,payload,comment:why.value.trim()||null,credit:credit.checked,user_id:user.id,author_name:displayName(user)},amendments);
+   if(!own&&Object.keys(payload).length===2&&payload.name===base.name&&!moved){status('Change a field or move the name first.');return;}
+   let saved=null;if(own||Object.keys(payload).length>2||payload.name!==base.name)saved=await saveOwn({kind,target_id:target.id,map:config.id,level:target.level||config.levelId||null,payload,comment:why.value.trim()||null,credit:credit.checked,user_id:user.id,author_name:displayName(user)},amendments,{replace:!!own});
    if(moved&&start.some((v,i)=>v!==moved[i])){if(!bounded(...moved,config.minZoom)){status('Keep the name inside the map.');return;}await saveOwn({kind:'move-label',target_id:target.id,map:config.id,level:target.level||config.levelId||null,payload:{name:base.name,from:start,to:moved},credit:credit.checked,user_id:user.id,author_name:displayName(user)},amendments);}
-   d.close();await loadApproved();freshPopup();status(admin?'Saved: it arrives with the next edition.':'Thanks! Your change is waiting for review.');event('edit-sent');
+   d.close();await loadApproved();freshPopup();status(saved?.withdrawn?'All changes reverted. Your suggestion was withdrawn.':admin?'Saved: it arrives with the next edition.':'Thanks! Your change is waiting for review.');event('edit-sent');
   },'The change could not be saved. It may have changed since you opened it; open Change again.');
   actions.append(button('✕ It should be removed',()=>removalDialog(target,kind),'community-remove'),button('Cancel',()=>guardClose(d,fields,base,moved)),send);d.append(actions);fields.controls.name.focus?.();
   d.oncancel=e=>{e.preventDefault();guardClose(d,fields,base,moved);};
@@ -520,9 +533,10 @@
  // Repeated saves amend only this account's open row; the original base still protects earlier contributions.
  function newestOnTarget(row,rows){const rules=window.atlasReview;return rows.filter(r=>!r.sourceStatus&&['pending','approved'].includes(r.status)&&rules.target(r)===rules.target(row)&&rules.targetKind(r)===rules.targetKind(row)&&r.map===row.map&&(rules.targetKind(row)!=='label'||(r.level||null)===(row.level||null))).sort((a,b)=>Number(b.id)-Number(a.id))[0];}
  // A desk receipt pairs the saved version with its decision's undo; amendments retain their earlier contents.
- async function saveOwn(row,amendments=[...approvedRows,...pendingRows],{receipt=false}={}){
+ async function saveOwn(row,amendments=[...approvedRows,...pendingRows],{receipt=false,replace=false}={}){
   const newest=row.target_id?newestOnTarget(row,amendments):null,old=newest&&newest.user_id===user.id&&newest.kind===row.kind&&(admin||newest.status==='pending'&&!newest.reviewed_at)?newest:null;
   if(!old)return receipt?submitRow(row,{receipt}):submit(row);const delta={...row.payload};if(!row.kind.startsWith('move-')&&delta.remove!==true&&delta.name===delta.from?.name)delete delta.name;let payload={...old.payload,...delta,from:row.kind.startsWith('move-')?old.payload.from:{...row.payload.from,...old.payload.from},...(row.kind==='move-marker'&&old.payload.fromShape?{fromShape:old.payload.fromShape}:{})};
+  if(replace){payload={...row.payload,from:old.payload.from};if(!window.atlasChanges.fieldsOf({...row,payload}).size){if(!await withdrawOwn(old))throw Error('Changed since opened');return {withdrawn:true};}}
   payload=window.atlasFields.stored(row.kind,payload);if(row.payload.remove!==true){delete payload.remove;delete payload.reason;}if(payloadBytes(payload)>=4096)throw Object.assign(Error('Too long'),{code:'too-long'});
   let q=client.from('suggestions').update({payload,status:admin?'approved':'pending',comment:row.comment??old.comment,credit:row.credit??old.credit,...(admin?{reviewed_at:new Date().toISOString()}:{})}).eq('id',old.id).eq('user_id',user.id).eq('status',old.status);if(!admin)q=q.is('reviewed_at',null);const {data,error}=await version(q,old).select('*');if(error||!data?.length)throw error||Error('Changed since opened');await loadApproved();const saved=normaliseSuggestion(data[0]);window.atlasNotices?.sent(saved);return receipt?{row:saved,before:old,published:admin}:true;
  }
@@ -663,7 +677,7 @@
   if(keep)keep.onclick=()=>{privateSave=true;$('marker-form').requestSubmit();if($('editor').open)privateSave=false;};}
  async function claimBounty(m,credited,quiet=false){
   const b=readBounties()[m.id];if(!b)return 'failed';
-  try{const published=await sendNote(m,credited);remember(sharedKey,[sharedToken(m)]);markBountyClaimed(b.map||config.id,b.bounty);freshPopup();event('suggestion-sent');
+  try{const claim={...m};delete claim.vendor;delete claim.sells;const published=await sendNote(claim,credited);remember(sharedKey,[sharedToken(m)]);markBountyClaimed(b.map||config.id,b.bounty);freshPopup();event('suggestion-sent');
    if(!quiet)status(sentLine(published)||'Bounty claimed: your marker is waiting for review.');return 'claimed';}
   catch(e){
    if(e?.code==='23505'){markBountyClaimed(b.map||config.id,b.bounty);if(!quiet)status('Someone claimed this bounty first. Your note stays in your private field notes.',true);return 'taken';}
@@ -893,7 +907,7 @@
  const shownSetting=key=>{try{return localStorage.getItem(key)!=='false';}catch{return true;}};
  function approvedLive(row){const p=row.payload||{},t=changeSet().forRow(row.id),live=t?.published;
   if(row.kind==='new-marker')return !!live||!!row.sourceStatus&&t?.effective.removed===true;if(p.remove===true)return !live;if(!live)return false;
-  const next=window.atlasChanges.applyTo(live,row);return [...window.atlasChanges.fieldsOf(row)].every(f=>f==='position'?next.x===live.x&&next.y===live.y:f==='type'?['category','trade','classes','vendor','sells'].every(k=>JSON.stringify(next[k])===JSON.stringify(live[k])):f==='wiki'?next.wiki===live.wiki&&next.wikiId===live.wikiId:JSON.stringify(next[f])===JSON.stringify(live[f]));}
+  const next=globalThis.atlasMarkerSchema.apply(live,row);if(next.refusal)return false;return [...window.atlasChanges.fieldsOf(row)].every(f=>f==='position'?next.x===live.x&&next.y===live.y:f==='type'?['category','trade','classes','vendor','sells'].every(k=>JSON.stringify(next[k])===JSON.stringify(live[k])):f==='wiki'?next.wiki===live.wiki&&next.wikiId===live.wikiId:JSON.stringify(next[f])===JSON.stringify(live[f]));}
  const drawable=r=>['new-marker','move-marker','edit-marker','move-label','edit-label'].includes(r.kind);
  function suggestionAt(row){const t=changeSet().forRow(row.id),p=t?.proposed;return Number.isFinite(p?.x)&&Number.isFinite(p?.y)?[p.x,p.y]:null;}
  // Possible duplicates of a new marker: other suggestions within 15 map units or naming the same NPC, and markers
@@ -994,7 +1008,7 @@
   if(p.remove===true)n.append(text('p','Removal'+(removalReasons[p.reason]?': '+removalReasons[p.reason]:'')+(row.comment?'. “'+row.comment+'”':''),'reported-reason'));
   reviewPrivateNote(row,n);
   n.append(text('p',refused?'Rejected'+(row.reviewed_at?' '+new Date(row.reviewed_at).toLocaleString():'')+'. Sent by '+(row.author_name||'a Discord member')+'.':waiting?'Sent by '+(row.author_name||'a Discord member')+', waiting for review.':'Approved: it goes live with the next publishing run, within the hour. Sent by '+(row.author_name||'a Discord member')+'.','moved-note'));
-  if(refused&&row.review_note)n.append(text('p','Review note: '+row.review_note,'reported-reason'));
+  if(row.review_note&&(refused||window.atlasReview.jobNote(row.review_note)))n.append(text('p',(window.atlasReview.jobNote(row.review_note)?'':'Review note: ')+row.review_note,'reported-reason'));
   const dups=duplicateList(row,jumpTo);if(dups)n.append(dups);
   if(admin&&refused){const actions=text('div','','popup-actions'),back=button('Back to waiting',()=>{map.closePopup?.();return reviewAction(row,'pending','',n);});actions.append(back);n.append(actions);}
   else if(admin){const actions=text('div','','popup-actions'),edit=button(waiting?'Edit and review':'Edit',()=>{map.closePopup();preview(row,loadApproved,loadApproved,null,true);},'','edit');actionIcon(edit);actions.append(edit);n.append(actions);}
@@ -1047,12 +1061,12 @@
  function version(q,row){return row.updated_at?q.eq('updated_at',row.updated_at):q;}
  async function reviewAction(row,state,note,card,payload,done){if(await desk.decideRow(row,state,note))done?.();}
  async function preview(row){return desk.open(row);}
- desk=window.createReviewDesk({client,isAdmin:()=>admin,getUser:()=>user,normalise:normaliseSuggestion,target:reviewTarget,locations:reviewLocations,places:reviewPlaces,loadApproved,countWaiting,publishButton,bannedList,banDialog,wikiFinder,finders,version,payloadBytes,reasons,removalReasons,nextSerial:()=>++reviewSerial,drawApproved,popup:suggestionPopup,privateNote:reviewPrivateNote,ownEdit:(row,payload,amendments)=>{let credit=false;try{credit=localStorage.getItem(creditKey)==='true';}catch{}return saveOwn({kind:(reviewTarget(row)?.kind||window.atlasReview.targetKind(row))==='label'?'edit-label':'edit-marker',target_id:window.atlasReview.target(row),map:row.map,level:row.level||null,user_id:user.id,author_name:displayName(user),credit,payload},amendments,{receipt:true});}});
+ desk=window.createReviewDesk({client,isAdmin:()=>admin,getUser:()=>user,normalise:normaliseSuggestion,target:reviewTarget,reload:reloadReview,validateLinks:validateReviewLinks,authorIsAdmin:reviewAuthorIsAdmin,locations:reviewLocations,places:reviewPlaces,loadApproved,countWaiting,publishButton,bannedList,banDialog,wikiFinder,finders,version,payloadBytes,reasons,removalReasons,nextSerial:()=>++reviewSerial,drawApproved,popup:suggestionPopup,privateNote:reviewPrivateNote,ownEdit:(row,payload,amendments)=>{let credit=false;try{credit=localStorage.getItem(creditKey)==='true';}catch{}return saveOwn({kind:(reviewTarget(row)?.kind||window.atlasReview.targetKind(row))==='label'?'edit-label':'edit-marker',target_id:window.atlasReview.target(row),map:row.map,level:row.level||null,user_id:user.id,author_name:displayName(user),credit,payload},amendments,{receipt:true});}});
  connectNotices();accountUI();client.auth.onAuthStateChange((eventName,session)=>{setTimeout(()=>authChanged(session).catch(()=>status('Account could not refresh. Your local notes are safe.')),0);});
  client.auth.getSession().then(({data,error})=>{if(error)throw error;return authChanged(data.session);}).catch(()=>status('Account could not load. Your local notes are safe.'));
  window.addEventListener('atlas:loaded',()=>{for(const f of finders)f.reset();onMap().catch(()=>status('Community data could not load.'));});
  window.addEventListener('atlas:private-notes',schedulePrivateSync);window.addEventListener('atlas:notes',scheduleSync);window.addEventListener('atlas:positions',offerPositions);
- window.addEventListener('atlas:published',()=>{creditsCache.clear();if(!loading)loadApproved();});
+ window.addEventListener('atlas:published',()=>{creditsCache.clear();reviewMaps.clear();currentReviewSet=null;if(!loading)loadApproved();});
  window.addEventListener('resize',()=>{if(dialog.open&&dialog.classList.contains('place-change'))fitFloating(dialog);});
  window.addEventListener('focus',()=>{if(!loading){reviewMaps.clear();loadApproved();if(admin)countWaiting();if(desk.opened)desk.refresh();}});window.addEventListener('atlas:editing',drawApproved);
  window.addEventListener('atlas:edit-ended',()=>{drawApproved();if(user&&(syncReady!==syncIdentity()||privateSyncReady!==syncIdentity()))syncMapNotes(mapSerial);});
