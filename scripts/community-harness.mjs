@@ -678,7 +678,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       setPopupContent(){}
     });
   };
-  context.storageKey=k=>'mnmaps-test-map-'+k+'-v1';
+  context.storageKey=k=>'mnmaps-'+context.config.id+'-'+k+'-'+(context.config.tileRevision||'v1');
   context.CustomEvent=class{
     constructor(type,options){
       this.type=type;
@@ -707,7 +707,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   };
   context.campCard=()=>new Node('div');
   vm.createContext(context);
-  vm.runInContext(app.slice(app.indexOf('function persist('),app.indexOf('function download(')),context);
+  vm.runInContext(app.slice(app.indexOf('function normaliseNote('),app.indexOf('function download(')),context);
   vm.runInContext(app.slice(app.indexOf('function shapeShown('),app.indexOf('function drawMarkers(')),
   context);
   vm.runInContext(app.slice(app.indexOf('// Private annotations'),app.indexOf('function migratePreviousStorage(')),

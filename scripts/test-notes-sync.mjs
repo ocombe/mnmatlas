@@ -213,17 +213,13 @@ await checks.test('B1', 'saving in-place changes advances the edit time but sync
   assert.equal(e.remote[0].updated, stamp);
 });
 
-await checks.test('B1', 'an unreadable sync base prevents upload and leaves notes intact', async () => {
+await checks.test('R2-8', 'an unreadable sync base preserves notes and repairs itself', async () => {
   const e = await browser(false, {notes: [], personal: []});
-  const count = e.calls.length;
   e.context.localStorage.setItem('mnmaps-community-synced-member-test-map-v1', '{broken');
   assert(e.context.persist([note('safe-base', 'Safe')]));
-  const local = plain(e.context.personal);
   await e.tick(2000);
-  assert.deepEqual(plain(e.context.personal), local);
-  assert.deepEqual(plain(e.remote), []);
-  assert(!e.calls.slice(count).some(r => r.table === 'user_notes' && r.op !== 'select'));
-  assert(e.statuses.includes('Notes could not sync. Your local notes are safe.'));
+  assert.equal(e.remote[0]?.id, 'personal-safe-base');
+  assert(e.context.window.testCommunity.readBase('member', 'test-map-v1').has('personal-safe-base'));
 });
 
 await checks.test('B1', 'failure to store the new base leaves a safe retryable upload', async () => {
@@ -317,10 +313,10 @@ async function followed(spec, status) {
   return {e, c, methods, changed, rec};
 }
 
-await checks.test('B2', 'follow cases cover every schema public field', async () => {
+await checks.test('B2', 'follow cases cover every editable schema public field', async () => {
   const e = await browser();
   const covered = new Set(fields.flatMap(spec => Object.keys(spec.change)));
-  assert.equal(e.context.atlasMarkerSchema.publicKeys.filter(k => !covered.has(k)).length, 0);
+  assert.equal(e.context.atlasMarkerSchema.publicKeys.filter(k => !e.context.atlasMarkerSchema.knownLabelKeys.includes(k) && !covered.has(k)).length, 0);
 });
 
 for (const spec of fields) {

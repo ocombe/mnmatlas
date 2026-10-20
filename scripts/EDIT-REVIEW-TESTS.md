@@ -17,6 +17,7 @@ exit nonzero on failure. Run a suite directly to narrow the output. Set
 | `test-job-contract.mjs` | Unknown fields, private types, same-value rows, nulls, floors, namespaces, empty runs, write failures and corrections |
 | `test-notes-sync.mjs` | Two devices, interleaved saves/deletions, approved-note following and retirement |
 | `test-desk-flow.mjs` | Card isolation, reversions, stale approval, review notes, undo, bulk failures, wiki picks and type-specific forms |
+| `test-review-f4.mjs` | R2-1 through R2-10: empty notes, map-switch sync, links, recovery, chips, classes, published data, timestamps, shares and follow receipts |
 | `test-desk-forms-f3.mjs` | All approval paths, failed reloads, full Undo, dirty refresh, class chips, typed mobs and Gives quests |
 
 `community-harness.mjs` reuses the existing community suite's browser helpers.
@@ -32,7 +33,9 @@ The fixtures load that script before its consumers, just as the page does.
 
 The apply phase stages `.publish/applied.json` and `.publish/held.json` without
 changing suggestion statuses. The post-push `--mark-published` phase acknowledges
-the applied rows and returns the held versions to review. The older publisher
+the applied rows and returns the held versions to review. A separate
+`--return-holds .publish/held.json` phase also runs after a failed push, except
+on dry runs, so held rows receive their review note independently. The older publisher
 suite finalizes only holds after its simulated push, keeping its acknowledgement
 race checks separate. The job contract suite checks both phases explicitly,
 including failed writes, version misses and continued processing of other rows.
@@ -66,3 +69,11 @@ The Blacktide Bay desk fixture now supplies valid empty published files for relo
 For an offline browser preview, run `python scripts/preview-offline.py 8783` and
 open `http://127.0.0.1:8783/?map=night-harbor`. This server disables accounts and
 external requests; review decisions are exercised by the local browser fixtures.
+
+The R2 regressions scan every published marker, label and chip, except Personal
+markers awaiting separate retyping. Legacy exit tiers and class spellings stay
+editable. A recovery acknowledgement failure emits an error annotation without
+blocking the apply phase. Receipts are retried for seven days; rows already in
+the recovery log do not create fresh receipts or re-enter the apply batch.
+Queued note uploads retain the original map configuration and storage key,
+including tileRevision, and save the merged local list before advancing the base.

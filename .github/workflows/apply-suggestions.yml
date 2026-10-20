@@ -74,6 +74,13 @@ jobs:
           SUPABASE_URL: https://ihdmipwmgsmzugcekwbk.supabase.co
           SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
         run: node scripts/apply-approved.mjs --mark-published .publish/applied.json
+      - name: Return held suggestions to review
+        if: ${{ always() && inputs.dry_run != true }}
+        env:
+          SUPABASE_URL: https://ihdmipwmgsmzugcekwbk.supabase.co
+          SUPABASE_SERVICE_KEY: ${{ secrets.SUPABASE_SERVICE_KEY }}
+        run: |
+          if [ -f .publish/held.json ]; then node scripts/apply-approved.mjs --return-holds .publish/held.json; fi
       # A push made by this job does not start other workflows, so start the site publish directly.
       - name: Publish the site
         if: ${{ !cancelled() && inputs.dry_run != true && steps.save.outputs.pushed == 'true' }}

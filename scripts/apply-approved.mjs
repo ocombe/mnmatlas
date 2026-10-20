@@ -8,8 +8,8 @@ const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),dryRun=process.
 const args=process.argv.slice(2),url=process.env.SUPABASE_URL,key=process.env.SUPABASE_SERVICE_KEY;
 const fail=message=>{throw new Error(message);},warning=message=>console.log('::warning::'+String(message).replace(/[\r\n]/g,' '));
 const parse=text=>JSON.parse(text.replace(/^\uFEFF/,''));
-const mark=args[0]==='--mark-published'?args[1]:null;
-if(mark?args.length!==2:args.some(a=>a!=='--dry-run'))fail('Usage: node scripts/apply-approved.mjs [--dry-run | --mark-published <file>]');
+const mark=args[0]==='--mark-published'?args[1]:null,holdsOnly=args[0]==='--return-holds'?args[1]:null;
+if(mark||holdsOnly?args.length!==2:args.some(a=>a!=='--dry-run'))fail('Usage: node scripts/apply-approved.mjs [--dry-run | --mark-published <file> | --return-holds <file>]');
 if(!url||!key)fail('Set SUPABASE_URL and SUPABASE_SERVICE_KEY in your environment.');
 const endpoint=new URL(url);if(!['https:','http:'].includes(endpoint.protocol))fail('Invalid project URL.');
 const headers={apikey:key,Authorization:'Bearer '+key,'Content-Type':'application/json'};
@@ -56,7 +56,7 @@ const {rosterKeys,fieldCategory}=schema,fieldOk=(k,v,c)=>schema.clear(v)||schema
 function validatePayload(row,c){
  const p=normaliseMarker(structuredClone(row.payload));if(p?.travelArrow!==undefined){p.arrow=p.travelArrow;delete p.travelArrow;}if(!p||Array.isArray(p)||typeof p!=='object'||typeof p.name!=='string'||!clean(p.name)||p.name.length>100||Buffer.byteLength(JSON.stringify(p))>=4096)fail('Invalid payload for suggestion '+row.id+'.');
  if(!['move-marker','move-label','new-marker','edit-marker','edit-label'].includes(row.kind))fail('Invalid kind for suggestion '+row.id+'.');
- for(const k of schema.publicKeys)if(Object.hasOwn(p,k)&&k!=='name'&&schema.clear(p[k]))p[k]=null;
+ for(const k of schema.publicKeys)if(Object.hasOwn(p,k)&&!['name','note'].includes(k)&&schema.clear(p[k]))p[k]=null;
  // A new place name or zone exit sent from a note that once had an area keeps its spot and drops the outline, as the review desk shows it.
  if(row.kind==='new-marker'&&['label','exit'].includes(p.noteType))delete p.shape;
  schema.validate(p,{label:targetKind({...row,payload:p})==='label'});
@@ -74,8 +74,8 @@ function validatePayload(row,c){
  // A marker edit may change the type too (set while reviewing): the same check as a new marker's type.
  if(row.kind==='edit-marker'&&p.category!==undefined&&(!supported.categories.includes(p.category)||p.trade!=null&&!supported.trades.includes(p.trade)))fail('Unsupported marker fields for suggestion '+row.id+'.');
  for(const k of rosterKeys)if(p[k]!==undefined&&p[k]!==null){if(row.kind==='edit-label'||row.kind.startsWith('move-')||p.noteType==='label'||p.noteType==='exit'||(p.category??p.from?.category)!==undefined&&!fieldCategory(k,p.category??p.from?.category)||!fieldOk(k,p[k],p.category??p.from?.category))fail('Unsupported '+k+' for suggestion '+row.id+'.');}
- p.name=clean(p.name);if(p.note!==undefined)p.note=clean(p.note,true);
- if(p.from&&!Array.isArray(p.from))p.from={...p.from,name:clean(p.from.name),...(p.from.note!==undefined?{note:clean(p.from.note,true)}:{})};
+ p.name=clean(p.name);if(p.note!==undefined)p.note=clean(p.note??'',true);
+ if(p.from&&!Array.isArray(p.from))p.from={...p.from,name:clean(p.from.name),...(p.from.note!==undefined?{note:clean(p.from.note??'',true)}:{})};
  if(row.kind==='new-marker')point([p.x,p.y],c,row.id);else if(row.kind.startsWith('move-')){point(p.from,c,row.id);point(p.to,c,row.id);}else if(fieldsOf(row).has('position')){point([p.from.x,p.from.y],c,row.id);point([p.x,p.y],c,row.id);}
  const normal=normaliseChange({...row,payload:p}).payload;for(const k of rosterKeys)if(normal[k]!=null&&!fieldOk(k,normal[k],normal.category??normal.from?.category))fail('Unsupported '+k+' for suggestion '+row.id+'.');return normal;
 }
@@ -114,7 +114,7 @@ async function prepare(row){
  const category=p.category||p.from?.category||m?.category||(chip?'Class trainer':undefined);
  if(!label&&!row.kind.startsWith('move-')){
   for(const k of rosterKeys)if(p[k]!=null&&(!fieldCategory(k,category)||!fieldOk(k,p[k],category)))fail('Unsupported '+k+' for suggestion '+row.id+'.');
-  if(!category&&p.classes!==undefined&&!classesOk(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');
+  if(!category&&p.classes!==undefined&&!schema.validators.classes(p.classes))fail('Unsupported classes for suggestion '+row.id+'.');
   if(p.wiki!==undefined||row.kind==='new-marker')p.wiki=wikiOf(p.wiki,row.id);
   if(p.wikiId!==undefined||row.kind==='new-marker')p.wikiId=wikiIdFrom(p,row.id);
   if(p.wiki!==undefined&&p.from?.wiki!==undefined)p.from.wiki=wikiOf(p.from.wiki,row.id);
@@ -196,7 +196,7 @@ async function applyRow(row){
  const hits=conflicts(row,live,history.get(runKey(row))||[]);if(hits.length)fail('conflicts with #'+hits.join(', #'));
  if(superseded(row,live))return 'already superseded';
  if(!m)fail('Target missing for suggestion '+row.id+'.');
- check(row,live,path);Object.assign(m,next);mf.changed=true;
+ check(row,live,path);for(const k of ['x','y','shape','approximate','community'])if(Object.hasOwn(next,k))m[k]=next[k];mf.changed=true;
  if(!label&&chip&&chip!==m){chip.x=x;chip.y=y;if(Object.hasOwn(p,'approximate'))chip.approximate=p.approximate;lf.changed=true;}return 'position moved';
 }
 async function apply(row){
@@ -261,7 +261,8 @@ async function correctionRows(row,version,appliedHash){
  if([...fieldsOf({kind:label?'edit-label':'edit-marker',payload:text})].length)out.push(make(label?'edit-label':'edit-marker',text));
  if(live&&!text.shape&&(Math.round(p.x)!==live.x||Math.round(p.y)!==live.y))out.push(make(label?'move-label':'move-marker',{name:p.name,from:[live.x,live.y],to:[p.x,p.y]}));return out;
 }
-async function acknowledge(applied){
+async function acknowledge(applied,{recovery=false}={}){
+ const report=message=>recovery?console.error('::error::'+String(message).replace(/[\r\n]/g,' ')):writeError(message);
  for(const a of applied){
   if(!/^\d+$/.test(String(a.id))||!/^[a-f0-9]{64}$/.test(a.payloadHash))fail('Invalid applied entry.');
   try{
@@ -277,15 +278,18 @@ async function acknowledge(applied){
     const existing=await request('suggestions?select=*&review_note=eq.'+encodeURIComponent(correction.review_note));
     if(!existing.some(r=>r.review_note===correction.review_note&&r.kind===correction.kind&&hash(r.payload)===hash(correction.payload)))await request('suggestions',{method:'POST',body:JSON.stringify(correction)});
    }
-   if(!dryRun&&!await guardedPatch(row,body))writeError('Suggestion '+a.id+' could not be acknowledged: version check missed.');
-  }catch(e){writeError('Suggestion '+a.id+' could not be acknowledged: '+e.message);}
+   if(!dryRun&&!await guardedPatch(row,body))report('Suggestion '+a.id+' could not be acknowledged: version check missed.');
+  }catch(e){report('Suggestion '+a.id+' could not be acknowledged: '+e.message);}
  }
  past=null;
 }
 async function markPublished(path){
  const applied=parse(await readFile(resolve(root,path),'utf8'));if(!Array.isArray(applied))fail('Invalid applied list.');
  await acknowledge(applied);
- const held=parse(await readFile(resolve(root,dirname(path),'held.json'),'utf8').catch(e=>{if(e.code==='ENOENT')return '[]';throw e;}));if(!Array.isArray(held))fail('Invalid held list.');
+ await returnHolds(resolve(dirname(path),'held.json'));
+}
+async function returnHolds(path){
+ const held=parse(await readFile(resolve(root,path),'utf8').catch(e=>{if(e.code==='ENOENT')return '[]';throw e;}));if(!Array.isArray(held))fail('Invalid held list.');
  for(const h of held)try{
   const row=h.version;if(!row){warning('Suggestion '+h.id+' needs another validation before returning to review.');continue;}
   await guardedPatch(row,{status:'pending',review_note:h.note});
@@ -343,9 +347,11 @@ function keepRows(f){
 }
 async function main(){
  const publishLog=await file('data/publish-log.json',[]);if(!Array.isArray(publishLog.data))fail('Invalid publish log.');
- await acknowledge(publishLog.data.flatMap(run=>run.rows.map(row=>({...row,appliedAt:run.at}))));
+ // Recovery is best effort for seven days; an old receipt cannot block later publications.
+ await acknowledge(publishLog.data.filter(run=>Date.parse(run.at)>=Date.now()-7*24*60*60*1000).flatMap(run=>run.rows.map(row=>({...row,appliedAt:run.at}))),{recovery:true});
+ const recoveredIds=new Set(publishLog.data.flatMap(run=>run.rows.map(row=>String(row.id))));
  const rows=[];let after='0';
- while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch);if(batch.length<1000)break;after=batch.at(-1).id;}
+ while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch.filter(row=>!recoveredIds.has(String(row.id))));if(batch.length<1000)break;after=batch.at(-1).id;}
  if(!rows.length)console.log('No approved suggestions.');
  // A suggestion that cannot apply goes back to the review queue with the reason; the others still publish.
  batch=[...(await publishedSuggestions()),...rows];
@@ -382,4 +388,4 @@ async function main(){
  if(writeErrors)process.exitCode=1;
  console.log((dryRun?'Dry run: ':'Complete: ')+applied.length+' suggestions, '+(held.length?held.length+' back to review, ':'')+changed.length+' data files'+(dryRun?' would change.':' changed.'));
 }
-(mark?markPublished(mark):main()).catch(e=>{console.error(e.message==='fetch failed'?'Backend could not be reached.':e.message);process.exitCode=1;});
+(mark?markPublished(mark):holdsOnly?returnHolds(holdsOnly):main()).catch(e=>{console.error(e.message==='fetch failed'?'Backend could not be reached.':e.message);process.exitCode=1;});

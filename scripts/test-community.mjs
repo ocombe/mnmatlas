@@ -28,7 +28,7 @@ const searchableSelect=await readFile(new URL('../searchable-select.js',import.m
   set value(v){if(this.children)this._index=this.options.findIndex(o=>o.value===String(v));}
   get selectedIndex(){return this._index??(this.options.length?0:-1);}
   set selectedIndex(v){this._index=Number(v);}
-  get options(){return this.querySelectorAll('option');}
+  get options(){return [...this.querySelectorAll('option')];}
  }
  class Observer {
   constructor(callback){this.callback=callback;this.pending=[];}

@@ -50,7 +50,7 @@ export async function browser(admin = false, fixtures = {}) {
 }
 
 export async function openDesk(e) {
-  const button = e.bar.querySelectorAll('button').find(n => n.textContent.startsWith('Review'));
+  const button = [...e.bar.querySelectorAll('button')].find(n => n.textContent.startsWith('Review'));
   assert(button, 'Review button exists');
   await button.onclick();
   await settle();

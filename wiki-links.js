@@ -63,7 +63,7 @@ const vendorKindList=Object.values(vendorKinds).flatMap(g=>Object.keys(g));
 // A shaped marker's spot always follows its shape, so an older or hand-edited spot never makes saved notes unreadable.
 const normaliseMarker=m=>{m=m?.category==='Shady merchant'?{...m,category:'Vendor',vendor:'Shady merchant'}:m;
  // First Aid is called Bind Wound in game; older markers and suggestions keep the old name.
- if(m?.trade==='First Aid')m={...m,trade:'Bind Wound'};if(m?.shape&&globalThis.atlasShapes)try{const [x,y]=globalThis.atlasShapes.anchor(m.shape);if(Number.isFinite(x)&&Number.isFinite(y))m={...m,x,y};}catch{}return m;};
+ if(m?.trade==='First Aid')m={...m,trade:'Bind Wound'};if(Array.isArray(m?.classes)&&m.classes.includes('Shadowknight'))m={...m,classes:m.classes.map(c=>c==='Shadowknight'?'Shadow Knight':c)};if(m?.shape&&globalThis.atlasShapes)try{const [x,y]=globalThis.atlasShapes.anchor(m.shape);if(Number.isFinite(x)&&Number.isFinite(y))m={...m,x,y};}catch{}return m;};
 // Older notes and waiting suggestions still use the supplies names.
 const vendorLegacy=Object.fromEntries(Object.keys(vendorKinds['Trade vendors']).filter(k=>k.endsWith(' vendor')).map(k=>[k.replace(/ vendor$/,' supplies'),k]));
 const vendorKindNow=v=>typeof v==='string'&&Object.hasOwn(vendorLegacy,v)?vendorLegacy[v]:v;
@@ -134,7 +134,7 @@ function wikiIdFor(input,href){return href&&input.dataset.wikiUrl===href?input.d
 // PAL, RNG, ROG, SHD, SHM, SPB, WIZ).
 const classAbbreviations={Archer:'ARC',Bard:'BRD',Beastlord:'BST',Beastmaster:'BST',Cleric:'CLR',Druid:'DRU',Elementalist:'ELE',Enchanter:'ENC',Fighter:'FTR',Inquisitor:'INQ',Monk:'MNK',Necromancer:'NEC',Paladin:'PAL',Ranger:'RNG',Rogue:'ROG','Shadow Knight':'SHD',Shaman:'SHM',Spellblade:'SPB',Wizard:'WIZ'};
 const atlasClasses=Object.keys(classAbbreviations);
-const classesOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=6&&v.every(c=>atlasClasses.includes(c));
+const classesOk=v=>v===undefined||Array.isArray(v)&&v.length>0&&v.length<=6&&v.every(c=>atlasClasses.includes(c==='Shadowknight'?'Shadow Knight':c));
 // The wiki's own class for an NPC: its class field or a class among its hover-card tags ("Human · Enchanter"). The
 // wiki's Warrior is the atlas's Fighter; a guess ("Shadow Knight?") is left out.
 function wikiClassesOf(row){

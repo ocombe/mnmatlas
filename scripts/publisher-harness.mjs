@@ -112,7 +112,8 @@ export async function publisher() {
   async function run(mark = false) {
     return new Promise((done, reject) => {
       const args = [resolve(folder, 'scripts/apply-approved.mjs')];
-      if (mark) args.push('--mark-published', '.publish/applied.json');
+      if (Array.isArray(mark)) args.push(...mark);
+      else if (mark) args.push('--mark-published', '.publish/applied.json');
       const child = spawn(process.execPath, args, {cwd: folder, env: {
         ...process.env, SUPABASE_URL: `http://127.0.0.1:${server.address().port}`,
         SUPABASE_SERVICE_KEY: 'fixture-only'

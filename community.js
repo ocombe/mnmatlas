@@ -595,7 +595,9 @@
  }
  function notePayload(m){m=normaliseMarker(m);
   const payload={x:m.x,y:m.y,name:m.name,category:m.category,note:m.note,...markerExtras(m)};if(m.noteType==='exit'&&!payload.travel)payload.travel=travelKind(m.name,'',m.travel)||'Exit';
-  for(const k of globalThis.atlasMarkerSchema.publicKeys)if(m[k]!==undefined&&!Object.hasOwn(payload,k))payload[k]=m[k];
+  const schema=globalThis.atlasMarkerSchema,allowed=schema.fields[m.noteType||(schema.fields[m.category]?m.category:'marker')];
+  for(const k of allowed)if(m[k]!==undefined&&!Object.hasOwn(payload,k)&&!(k==='wikiId'&&!m.wiki))payload[k]=m[k];
+  for(const k of Object.keys(payload))if(!allowed.includes(k)&&!['category','noteType'].includes(k))delete payload[k];
   const bounty=readBounties()[m.id];if(bounty&&m.wikiId===bounty.bounty){payload.bounty=bounty.bounty;if(bounty.priority)payload.priority=true;}
   return payload;
  }
@@ -615,10 +617,10 @@
  async function submit(row){return (await submitRow(row)).published;}
  // The publishing job refuses a suggestion of 4 KB or more (in UTF-8): refused here first, with a clear message.
  const payloadBytes=v=>encodeURIComponent(JSON.stringify(v)).replace(/%[0-9A-F]{2}/g,'x').length;
- async function submitRow(row,{receipt=false}={}){row={...row,payload:window.atlasFields.stored(row.kind,row.payload)};
+ async function submitRow(row,{receipt=false,onInserted}={}){row={...row,payload:window.atlasFields.stored(row.kind,row.payload)};
   if(payloadBytes(row.payload)>=4096)throw Object.assign(Error('Too long'),{code:'too-long'});
   const {data,error}=await client.from('suggestions').insert(row).select(receipt?'*':'id').single();if(error)throw error;
-  const id=data?.id??null,inserted=receipt&&data?normaliseSuggestion(data):null,finish=async(published,saved=inserted)=>{await loadApproved();if(receipt)window.atlasNotices?.sent(saved);else await sentUndo(id);return {id,published,...(receipt?{row:saved}:{})};};if(!admin||id==null)return finish(false);
+  const id=data?.id??null;if(id!==null)onInserted?.(id);const inserted=receipt&&data?normaliseSuggestion(data):null,finish=async(published,saved=inserted)=>{await loadApproved();if(receipt)window.atlasNotices?.sent(saved);else await sentUndo(id);return {id,published,...(receipt?{row:saved}:{})};};if(!admin||id==null)return finish(false);
   let q=client.from('suggestions').update({status:'approved',reviewed_at:new Date().toISOString(),review_note:'Approved on sending (admin)'}).eq('id',data.id).eq('status','pending');if(receipt)q=version(q,inserted);const {data:done,error:fail}=await q.select(receipt?'*':'id');
   if(fail||!done?.length){status('Saved, but it could not be approved here; approve it at the Review desk.');return finish(false);}
   return finish(true,receipt?normaliseSuggestion(done[0]):null);
@@ -753,7 +755,7 @@
     const changed=schema.publicKeys.filter(k=>!same(publicNoteValue(old,k),publicNoteValue(payload,k))),sentCopy={...old};let sent=false;
     if(label&&changed.some(k=>!schema.fields[old.noteType].includes(k)))throw Error('These fields cannot follow this place name.');
     const record=keys=>{for(const k of keys)if(Object.hasOwn(payload,k))sentCopy[k]=payload[k];else delete sentCopy[k];const all=readFollowed();all[key]={...rec,sent:{...sentCopy}};writeFollowed(all);sent=true;};
-    const send=async(kind,values,keys)=>{const result=await submitRow({...base,kind,payload:values});if(result.id==null)throw Error('The change was not sent.');record(keys);};
+    const send=async(kind,values,keys)=>{const result=await submitRow({...base,kind,payload:values},{onInserted:()=>record(keys)});if(result.id==null)throw Error('The change was not sent.');};
     const reshaped=changed.includes('shape'),position=changed.some(k=>k==='x'||k==='y'),edits=changed.filter(k=>k!=='x'&&k!=='y');
     const edit={name:shown.name,from:{name:shown.name}};
     for(const k of edits){edit[k]=payload[k]??null;edit.from[k]=shown[k]??null;}
@@ -815,12 +817,12 @@
  const baseKey=(uid,key)=>'mnmaps-community-synced-'+uid+'-'+key;
  // The last synced copy of each note (older browsers kept only the ids): a side that still matches it did not change the note since.
  const noteSum=m=>JSON.stringify(Object.keys(m).sort().map(k=>[k,m[k]]));
- function readBase(uid,key){const raw=localStorage.getItem(baseKey(uid,key));if(raw===null)return null;const v=JSON.parse(raw);if(Array.isArray(v)&&v.every(id=>typeof id==='string'))return new Map(v.map(id=>[id,null]));if(v&&typeof v==='object'&&!Array.isArray(v)&&Object.values(v).every(sum=>typeof sum==='string'||sum===null))return new Map(Object.entries(v));throw Error('Notes base could not be read.');}
+ function readBase(uid,key){try{const raw=localStorage.getItem(baseKey(uid,key));if(raw===null)return null;const v=JSON.parse(raw);if(Array.isArray(v)&&v.every(id=>typeof id==='string'))return new Map(v.map(id=>[id,null]));if(v&&typeof v==='object'&&!Array.isArray(v)&&Object.values(v).every(sum=>typeof sum==='string'||sum===null))return new Map(Object.entries(v));return null;}catch{return null;}}
  function writeBase(uid,key,notes){localStorage.setItem(baseKey(uid,key),JSON.stringify(Object.fromEntries(notes.map(m=>[m.id,noteSum(m)]))));}
- const notesBase=notes=>new Map(notes.map(m=>[m.id,noteSum(m)]));
- function mergeMapNotes(local,remote,base){
-  for(const notes of [local,remote])if(!Array.isArray(notes)||notes.length>2000||!notes.every(valid)||new Set(notes.map(m=>m.id)).size!==notes.length)throw Error('Notes could not be read.');
-  const left=new Map(local.map(m=>[m.id,normaliseMarker(m)])),right=new Map(remote.map(m=>[m.id,normaliseMarker(m)])),merged=[];
+ const notesBase=(notes,c=config)=>new Map(notes.map(m=>[m.id,noteSum(normaliseNote(m,c))]));
+ function mergeMapNotes(local,remote,base,c=config){
+  for(const notes of [local,remote])if(!Array.isArray(notes)||notes.length>2000||!notes.every(m=>valid(m,c))||new Set(notes.map(m=>m.id)).size!==notes.length)throw Error('Notes could not be read.');
+  const left=new Map(local.map(m=>[m.id,normaliseNote(m,c)])),right=new Map(remote.map(m=>[m.id,normaliseNote(m,c)])),merged=[];
   // An edit survives an unchanged copy or a deletion. When both copies changed, their edit times decide.
   for(const id of new Set([...right.keys(),...left.keys()])){const a=left.get(id),b=right.get(id),was=base?.get(id),changed=m=>!!m&&!!was&&noteSum(m)!==was;let keep;
    if(a&&b){if(changed(b)&&!changed(a))keep=b;else if(changed(a)&&!changed(b))keep=a;else keep=(Number.isFinite(b.updated)?b.updated:0)>(Number.isFinite(a.updated)?a.updated:0)?b:a;}
@@ -831,7 +833,7 @@
  function syncIdentity(){return user?user.id+':'+scope():'';}
  function scheduleSync(){
   if(syncing||!user||!config||syncReady!==syncIdentity())return;
-  try{const key=user.id+':'+scope(),job={uid:user.id,map:scope(),notes:personal.map(m=>({...m})),base:syncJobs.get(key)?.base??readBase(user.id,scope())};syncJobs.set(key,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}catch{syncReady='';quiet('Notes could not sync. Your local notes are safe.');}
+  try{const key=user.id+':'+scope(),job={uid:user.id,map:scope(),notes:personal.map(m=>({...m})),storage:storageKey('notes'),config:{...config},base:syncJobs.get(key)?.base??readBase(user.id,scope())};syncJobs.set(key,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}catch{syncReady='';quiet('Notes could not sync. Your local notes are safe.');}
  }
  const privateScope=()=>scope()+'#private';
  function mergePrivateEntries(local,remote,uid){if(!Array.isArray(remote)||!remote.every(m=>validPrivate(m)&&m.owner===uid))throw Error('Private notes could not be read.');const merged=new Map();for(const m of [...remote,...local]){const old=merged.get(m.id);if(!old||m.updated>old.updated)merged.set(m.id,m);}return [...merged.values()];}
@@ -854,14 +856,15 @@
  async function pushMapNotes(key,job){
   for(let attempt=0;attempt<4;attempt++){
    const {data,error}=await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();if(error)throw error;
-   const current=syncJobs.get(key)||job,notes=mergeMapNotes(current.notes,data?data.notes:[],current.base),here=user?.id===job.uid&&job.map===scope();if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
+   const current=syncJobs.get(key)||job,notes=mergeMapNotes(current.notes,data?data.notes:[],current.base,current.config),here=user?.id===job.uid&&job.map===scope();if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
    if(data&&(typeof data.updated_at!=='string'||!Number.isFinite(Date.parse(data.updated_at))))throw Error('Notes version could not be read.');
    if(here){if(!notesReadable||alignmentMode)throw Error();syncing=true;let saved;try{saved=persist(notes,true);}finally{syncing=false;}if(!saved)throw Error();setupCategoryControls();buildPlaceIndex();drawMarkers();}
+   else{const saved=JSON.parse(localStorage.getItem(current.storage)||'[]');if(!Array.isArray(saved)||!saved.every(m=>valid(m,current.config)))throw Error('Saved notes could not be read.');localStorage.setItem(current.storage,JSON.stringify(notes));}
    const row={user_id:job.uid,map:job.map,notes,updated_at:new Date(Math.max(Date.now(),(Date.parse(data?.updated_at)||0)+1)).toISOString()};
    const result=data?await client.from('user_notes').update(row).eq('user_id',job.uid).eq('map',job.map).eq('updated_at',data.updated_at).select('updated_at'):await client.from('user_notes').insert(row).select('updated_at');
    if(result.error){if(!data&&result.error.code==='23505')continue;throw result.error;}
    if(!result.data?.length)continue;
-   writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key))syncJobs.get(key).base=notesBase(notes);return;
+   writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key))syncJobs.get(key).base=notesBase(notes,current.config);return;
   }throw Error('Notes changed during sync.');
  }
  async function pushJobs(){
@@ -879,7 +882,7 @@
   try{const {data,error}=await client.from('user_notes').select('notes').eq('user_id',uid).eq('map',key).maybeSingle();if(error)throw error;if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
    const remote=data?data.notes:[],base=syncJobs.get(identity)?.base??readBase(uid,key),merged=mergeMapNotes(personal,remote,base);
    syncing=true;const saved=persist(merged,true);syncing=false;if(!saved)return;
-   syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();syncJobs.set(identity,{uid,map:key,notes:merged,base:notesBase(remote)});await pushJobs();
+   syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();syncJobs.set(identity,{uid,map:key,notes:merged,storage:storageKey('notes'),config:{...config},base:notesBase(remote)});await pushJobs();
   }catch{syncing=false;quiet('Notes could not sync. Your local notes are safe.');}
  }
  async function syncMapNotes(serial){await syncPrivateNotes(serial,false);if(serial===mapSerial)await syncNotes(serial);}

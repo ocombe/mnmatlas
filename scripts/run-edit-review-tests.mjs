@@ -21,11 +21,11 @@ for (const file of files) {
     child.on('exit', code => done({code, output}));
   });
   results.push({file, code: result.code});
-  for (const match of result.output.matchAll(/^FAIL (B\d+) /gm)) failures.add(match[1]);
+  for (const match of result.output.matchAll(/^FAIL (B\d+|R2-\d+) /gm)) failures.add(match[1]);
   console.log(`${result.code === 0 ? 'PASS' : 'FAIL'} FILE ${file} (exit ${result.code})`);
 }
 
 console.log('\nTest files: ' + results.map(r => `${r.file}=${r.code}`).join(', '));
 console.log('Failing ids: ' + ([...failures].sort((a, b) =>
-  Number(a.slice(1)) - Number(b.slice(1))).join(', ') || 'none'));
+  a.localeCompare(b, undefined, {numeric: true})).join(', ') || 'none'));
 if (results.some(r => r.code !== 0)) process.exitCode = 1;
