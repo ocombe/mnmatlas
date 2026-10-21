@@ -2,14 +2,6 @@
  "entries": [
   {
    "date": "2026-10-21",
-   "title": "The druid ring of Evershade Weald",
-   "text": "The ring of white mushrooms on the plateau beside the great stump is now drawn on the Evershade Weald map, with a Druid Portal pin where druids and their companions arrive.",
-   "maps": [
-    "evershade-weald"
-   ]
-  },
-  {
-   "date": "2026-10-21",
    "title": "Steadier notes and suggestions",
    "text": "Notes kept on several devices now merge instead of overwriting each other, and a shared note keeps sending its changes after it is accepted. Changes to vendors, fish, mobs and passages reach the map exactly as sent. Trainers, vendors and other folk who also hand out quests can now be marked with a Gives quests tick.",
    "maps": []
