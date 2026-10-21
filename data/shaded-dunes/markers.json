@@ -261,8 +261,8 @@
   "id": "npc-3",
   "name": "Cheikho",
   "category": "Quest NPC",
-  "x": 3289,
-  "y": 3394,
+  "x": 3168,
+  "y": 3483,
   "approximate": true,
   "note": "",
   "minZoom": 3,
@@ -356,11 +356,50 @@
    6,
    10
   ],
-  "x": 5654,
-  "y": 3060,
+  "x": 5531,
+  "y": 3034,
   "approximate": true,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     5348,
+     2890
+    ],
+    [
+     5499,
+     2913
+    ],
+    [
+     5653,
+     2981
+    ],
+    [
+     5651,
+     3100
+    ],
+    [
+     5589,
+     3212
+    ],
+    [
+     5476,
+     3154
+    ],
+    [
+     5507,
+     3022
+    ],
+    [
+     5362,
+     2964
+    ]
+   ]
+  },
+  "community": true
  },
  {
   "id": "humanoid-10-15-1",
@@ -450,8 +489,8 @@
   "name": "Toma the Two-Faced",
   "category": "Named mob",
   "note": "",
-  "x": 2266,
-  "y": 3884,
+  "x": 2065,
+  "y": 4085,
   "levels": [
    8,
    8
@@ -483,12 +522,40 @@
      3924
     ],
     [
-     2130,
-     3950
+     2455,
+     4002
     ],
     [
-     2144,
-     3845
+     2268,
+     4073
+    ],
+    [
+     2071,
+     4020
+    ],
+    [
+     1947,
+     4102
+    ],
+    [
+     1959,
+     4336
+    ],
+    [
+     1897,
+     4464
+    ],
+    [
+     1745,
+     4482
+    ],
+    [
+     1865,
+     4032
+    ],
+    [
+     2130,
+     3846
     ]
    ]
   }
@@ -605,7 +672,7 @@
   "community": true,
   "name": "Wizard Portal",
   "category": "Teleporter",
-  "note": "Wizard's and their group mates will be teleported to this location via Gate or Portal spells.",
+  "note": "Wizards and their group mates will be teleported to this location via Gate or Portal spells.",
   "x": 4827,
   "y": 3133,
   "travel": "Teleporter"
@@ -747,5 +814,67 @@
   "x": 2297,
   "y": 2644,
   "wiki": "https://monstersandmemories.wiki/quests/monk-starter-quest-night-harbor"
+ },
+ {
+  "id": "community-933",
+  "community": true,
+  "name": "Spell Blade Starter Quest - Logbook Pages 1-6",
+  "note": "Step 8 and 9",
+  "x": 5604,
+  "y": 3093,
+  "category": "Quest",
+  "wiki": "https://monstersandmemories.wiki/quests/spellblade-starter-quest"
+ },
+ {
+  "id": "community-934",
+  "community": true,
+  "name": "Ashira Ambushers",
+  "note": "",
+  "x": 5629,
+  "y": 3175,
+  "category": "Ambush",
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-an-ashira-ambusher",
+  "levels": [
+   8,
+   15
+  ],
+  "mobs": [
+   {
+    "name": "An ashira ambusher",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-ambusher",
+    "wikiId": "npc-an-ashira-ambusher"
+   }
+  ]
+ },
+ {
+  "id": "community-935",
+  "community": true,
+  "name": "A Shadow - Daytime Only",
+  "note": "Caution! Can only see via Name Plate",
+  "x": 5898,
+  "y": 1558,
+  "category": "Ambush",
+  "wiki": "https://monstersandmemories.wiki/npcs/npc-a-shadow",
+  "mobs": [
+   {
+    "name": "A shadow",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shadow",
+    "wikiId": "npc-a-shadow"
+   }
+  ],
+  "shape": {
+   "kind": "path",
+   "loop": true,
+   "points": [
+    [
+     5898,
+     1558
+    ],
+    [
+     3426,
+     1550
+    ]
+   ]
+  }
  }
 ]

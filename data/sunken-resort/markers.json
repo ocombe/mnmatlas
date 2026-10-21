@@ -148,5 +148,33 @@
     "toMarker": "link-e-floor-3",
     "direction": "up",
     "switchOnClick": true
+  },
+  {
+    "id": "community-1084",
+    "community": true,
+    "name": "an unblinking overseer",
+    "note": "A spirit ghoul that spawns in the well room.",
+    "x": 1786,
+    "y": 1867,
+    "level": "floor-3",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-unblinking-overseer",
+    "wikiId": "npc-an-unblinking-overseer",
+    "levels": [
+      35,
+      35
+    ]
+  },
+  {
+    "id": "community-1085",
+    "community": true,
+    "name": "Echo of the Unfinished",
+    "note": "A human ghost that spawns in the air pocket of the elemental caves.",
+    "x": 2902,
+    "y": 2860,
+    "level": "floor-4",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/echo-of-the-unfinished",
+    "wikiId": "npc-echo-of-the-unfinished"
   }
 ]

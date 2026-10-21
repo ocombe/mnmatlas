@@ -221,6 +221,42 @@
       "what": "added"
     }
   ],
+  "marker:community-980": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-981": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-982": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:crocodiles-1-5-1": [
+    {
+      "name": "argus_q",
+      "what": "reshaped"
+    }
+  ],
+  "marker:community-987": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1009": [
+    {
+      "name": "upidstupid",
+      "what": "added"
+    }
+  ],
   "marker:community-1058": [
     {
       "name": "ocombe",
@@ -231,6 +267,18 @@
     {
       "name": null,
       "what": "added"
+    }
+  ],
+  "label:skintakers-camp": [
+    {
+      "name": "argus_q",
+      "what": "moved"
+    }
+  ],
+  "label:researchers": [
+    {
+      "name": "argus_q",
+      "what": "moved"
     }
   ]
 }

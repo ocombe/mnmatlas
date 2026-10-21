@@ -251,9 +251,10 @@
     "id": "wiki-42",
     "name": "Survival — North Gate",
     "category": "Tradeskill",
-    "x": 1793,
-    "y": 1086,
-    "note": ""
+    "x": 1954,
+    "y": 1099,
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-43",
@@ -301,14 +302,6 @@
     "category": "Tradeskill",
     "x": 2060,
     "y": 922,
-    "note": ""
-  },
-  {
-    "id": "wiki-49",
-    "name": "Fletching — Little Half Town",
-    "category": "Tradeskill",
-    "x": 1359,
-    "y": 1711,
     "note": ""
   },
   {
@@ -1180,12 +1173,14 @@
   {
     "id": "community-362",
     "community": true,
-    "name": "Shady Merchant",
+    "name": "A shady peddler",
     "category": "Vendor",
-    "note": "Only shows up at night",
+    "note": "Only shows up at night (spawns at 6 PM in-game time and despawns at 6 AM in-game time.)",
     "x": 1176,
     "y": 1609,
-    "vendor": "Shady merchant"
+    "vendor": "Shady merchant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shady-peddler",
+    "wikiId": "npc-a-shady-peddler"
   },
   {
     "id": "community-382",
@@ -2212,5 +2207,480 @@
     "vendor": "Leatherworking vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/a-leatherworker",
     "wikiId": "npc-a-leatherworker"
+  },
+  {
+    "id": "community-765",
+    "community": true,
+    "name": "A brewer",
+    "note": "",
+    "x": 1132,
+    "y": 1485,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-brewer",
+    "wikiId": "npc-a-brewer",
+    "vendor": "Brewer"
+  },
+  {
+    "id": "community-957",
+    "community": true,
+    "name": "A Leather Armorer",
+    "note": "Kind should be Leather Armorer",
+    "x": 1412,
+    "y": 1645,
+    "category": "Vendor",
+    "vendor": "Leather armorer",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-959",
+    "community": true,
+    "name": "A reagent vendor (Shortfolk Area)",
+    "note": "",
+    "x": 1440,
+    "y": 1658,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-reagent-vendor-shortfolk-area",
+    "wikiId": "npc-a-reagent-vendor-shortfolk-area",
+    "vendor": "Reagent vendor",
+    "sells": [
+      "Materials"
+    ]
+  },
+  {
+    "id": "community-960",
+    "community": true,
+    "name": "A chain armorer",
+    "note": "Small Folk Area",
+    "x": 1439,
+    "y": 1691,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-chain-armorer",
+    "wikiId": "npc-a-chain-armorer",
+    "vendor": "Chain armorer",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-961",
+    "community": true,
+    "name": "A plate armorer",
+    "note": "Small Folk Area",
+    "x": 1462,
+    "y": 1711,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-plate-armorer",
+    "wikiId": "npc-a-plate-armorer",
+    "vendor": "Plate armorer",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-962",
+    "community": true,
+    "name": "Seamus Three-Knuckle",
+    "note": "",
+    "x": 1429,
+    "y": 1724,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/seamus-three-knuckle",
+    "wikiId": "npc-seamus-three-knuckle"
+  },
+  {
+    "id": "community-963",
+    "community": true,
+    "name": "A cobbler",
+    "note": "Small Folk Area\nShoes only",
+    "x": 1410,
+    "y": 1696,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cobbler",
+    "wikiId": "npc-a-cobbler",
+    "vendor": "Cobbler",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-964",
+    "community": true,
+    "name": "A Bag Vendor",
+    "note": "",
+    "x": 1415,
+    "y": 1717,
+    "category": "Vendor",
+    "vendor": "Bag merchant",
+    "sells": [
+      "Bags"
+    ]
+  },
+  {
+    "id": "community-965",
+    "community": true,
+    "name": "A cloth armorer",
+    "note": "Night Market. Shortfolk area",
+    "x": 1404,
+    "y": 1703,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cloth-armorer",
+    "wikiId": "npc-a-cloth-armorer",
+    "vendor": "Cloth armorer",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-966",
+    "community": true,
+    "name": "A used weapons dealer",
+    "note": "Night Market, Shortfolk area",
+    "x": 1395,
+    "y": 1697,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
+    "wikiId": "npc-a-used-weapons-dealer",
+    "vendor": "Used weapons dealer",
+    "sells": [
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-967",
+    "community": true,
+    "name": "Forge - Little Halftown",
+    "note": "",
+    "x": 1388,
+    "y": 1698,
+    "category": "Forge"
+  },
+  {
+    "id": "community-969",
+    "community": true,
+    "name": "a fishmonger",
+    "note": "",
+    "x": 1571,
+    "y": 1909,
+    "category": "Vendor",
+    "vendor": "Fishmonger",
+    "sells": [
+      "Food & drink"
+    ]
+  },
+  {
+    "id": "community-970",
+    "community": true,
+    "name": "A produce vendor",
+    "note": "",
+    "x": 1356,
+    "y": 1448,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-produce-vendor",
+    "wikiId": "npc-a-produce-vendor",
+    "vendor": "Produce vendor"
+  },
+  {
+    "id": "community-971",
+    "community": true,
+    "name": "Master Khaila",
+    "note": "North of the Twilight Harbor area. '''Directions:''' Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop dow",
+    "x": 1671,
+    "y": 1719,
+    "category": "Class trainer",
+    "wiki": "https://monstersandmemories.wiki/npcs/master-khaila",
+    "wikiId": "npc-master-khaila",
+    "classes": [
+      "Enchanter"
+    ]
+  },
+  {
+    "id": "community-972",
+    "community": true,
+    "name": "Disenchanter Qaridi",
+    "note": "",
+    "x": 1660,
+    "y": 1712,
+    "category": "Class trainer",
+    "wiki": "https://monstersandmemories.wiki/npcs/disenchanter-qaridi",
+    "wikiId": "npc-disenchanter-qaridi",
+    "classes": [
+      "Enchanter"
+    ]
+  },
+  {
+    "id": "community-973",
+    "community": true,
+    "name": "Carpenter Quais",
+    "note": "Carpentry Trainer",
+    "x": 1982,
+    "y": 1801,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/carpenter-quais",
+    "wikiId": "npc-carpenter-quais",
+    "trade": "Carpentry / Woodworking"
+  },
+  {
+    "id": "community-974",
+    "community": true,
+    "name": "Necromancer [Danger]",
+    "note": "Beware Traveling to and From Underdocks",
+    "x": 2212,
+    "y": 1619,
+    "category": "Mob camp",
+    "mobs": [
+      {
+        "name": "A necromancer",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-necromancer",
+        "wikiId": "npc-a-necromancer"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          2210,
+          1593
+        ],
+        [
+          2207,
+          1606
+        ],
+        [
+          2197,
+          1627
+        ],
+        [
+          2197,
+          1644
+        ],
+        [
+          2210,
+          1644
+        ],
+        [
+          2227,
+          1621
+        ],
+        [
+          2223,
+          1593
+        ]
+      ]
+    }
+  },
+  {
+    "id": "community-975",
+    "community": true,
+    "name": "Chef Violyn",
+    "note": "",
+    "x": 1986,
+    "y": 1175,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/chef-violyn",
+    "wikiId": "npc-chef-violyn",
+    "trade": "Cooking"
+  },
+  {
+    "id": "community-977",
+    "community": true,
+    "name": "Forge - North Gate",
+    "note": "",
+    "x": 1787,
+    "y": 1085,
+    "category": "Forge"
+  },
+  {
+    "id": "community-978",
+    "community": true,
+    "name": "A grain seller",
+    "note": "",
+    "x": 1760,
+    "y": 1222,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-grain-seller",
+    "wikiId": "npc-a-grain-seller",
+    "vendor": "Grain seller"
+  },
+  {
+    "id": "community-1010",
+    "community": true,
+    "name": "an opportunistic adventurer",
+    "note": "NPC for Corpse recovery",
+    "x": 1760,
+    "y": 1730,
+    "category": "Notable NPC"
+  },
+  {
+    "id": "community-1011",
+    "community": true,
+    "name": "a barkeep",
+    "note": "",
+    "x": 2022,
+    "y": 1726,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-barkeep",
+    "wikiId": "npc-a-barkeep",
+    "vendor": "Barkeep"
+  },
+  {
+    "id": "community-1012",
+    "community": true,
+    "name": "Yorias",
+    "note": "For Beastmaster starter quest",
+    "x": 2038,
+    "y": 1721,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/yorias",
+    "wikiId": "npc-yorias"
+  },
+  {
+    "id": "community-1083",
+    "community": true,
+    "name": "Crocodile Hatchling 3-4",
+    "note": "",
+    "x": 574,
+    "y": 1994,
+    "category": "Mob camp",
+    "levels": [
+      3,
+      4
+    ],
+    "mobs": [
+      {
+        "name": "A crocodile hatchling",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile-hatchling",
+        "wikiId": "npc-a-crocodile-hatchling"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          457,
+          1950
+        ],
+        [
+          459,
+          1973
+        ],
+        [
+          507,
+          1973
+        ],
+        [
+          524,
+          1994
+        ],
+        [
+          555,
+          2009
+        ],
+        [
+          585,
+          2013
+        ],
+        [
+          608,
+          2015
+        ],
+        [
+          627,
+          2021
+        ],
+        [
+          660,
+          2021
+        ],
+        [
+          688,
+          2026
+        ],
+        [
+          713,
+          2031
+        ],
+        [
+          716,
+          2018
+        ],
+        [
+          620,
+          2000
+        ],
+        [
+          560,
+          1987
+        ],
+        [
+          520,
+          1967
+        ],
+        [
+          484,
+          1949
+        ]
+      ]
+    }
+  },
+  {
+    "id": "community-1086",
+    "community": true,
+    "name": "A lumberjack",
+    "note": "",
+    "x": 959,
+    "y": 1216,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-lumberjack",
+    "wikiId": "npc-a-lumberjack"
+  },
+  {
+    "id": "community-1088",
+    "community": true,
+    "name": "A druid scribe",
+    "note": "Sells Druid spells and reagents",
+    "x": 1579,
+    "y": 1533,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-druid-scribe",
+    "wikiId": "npc-a-druid-scribe",
+    "vendor": "Spell scribe"
+  },
+  {
+    "id": "community-1090",
+    "community": true,
+    "name": "Eskander Akhtar",
+    "note": "Plays a role in the Night Harbor Shaman starter quest",
+    "x": 1566,
+    "y": 1349,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/eskander-akhtar",
+    "wikiId": "npc-eskander-akhtar"
+  },
+  {
+    "id": "community-1091",
+    "community": true,
+    "name": "A grocer",
+    "note": "Sells cooking ingredients.",
+    "x": 1117,
+    "y": 1512,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-grocer",
+    "wikiId": "npc-a-grocer",
+    "vendor": "Grocer"
+  },
+  {
+    "id": "community-1100",
+    "community": true,
+    "name": "Yorias",
+    "note": "",
+    "x": 2037,
+    "y": 1729,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/yorias",
+    "wikiId": "npc-yorias"
   }
 ]

@@ -242,8 +242,8 @@
   {
     "id": "jakob-tomb-route-from",
     "level": "floor-1",
-    "x": 2260.46,
-    "y": 2686.42,
+    "x": 2260,
+    "y": 2686,
     "category": "Stairs",
     "approximate": true,
     "note": "",
@@ -251,7 +251,8 @@
     "toMarker": "jakob-tomb-route-to",
     "direction": "down",
     "name": "Stairs down to the ossuary and Bone Construct room",
-    "switchOnClick": true
+    "switchOnClick": true,
+    "community": true
   },
   {
     "id": "jakob-tomb-route-to",

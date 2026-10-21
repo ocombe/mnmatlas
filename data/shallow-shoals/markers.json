@@ -233,5 +233,21 @@
   "y": 13199,
   "wiki": "https://monstersandmemories.wiki/npcs/sylvaine",
   "wikiId": "npc-sylvaine"
+ },
+ {
+  "id": "community-1093",
+  "community": true,
+  "name": "A water basilisk broodmother",
+  "note": "Basilisk island near Zaedin's Landing",
+  "x": 1099,
+  "y": 7589,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-water-basilisk-broodmother",
+  "wikiId": "npc-a-water-basilisk-broodmother",
+  "levels": [
+   35,
+   35
+  ],
+  "ambush": false
  }
 ]

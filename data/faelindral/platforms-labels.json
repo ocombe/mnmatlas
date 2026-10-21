@@ -195,6 +195,17 @@
       "minZoom": 0,
       "approximate": true,
       "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+    },
+    {
+      "id": "community-1110",
+      "community": true,
+      "name": "Broken Bridge",
+      "note": "Bridge broken to prevent spider attack",
+      "x": 1693,
+      "y": 502,
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0
     }
   ],
   "trainers": [
@@ -205,10 +216,11 @@
       "classes": [
         "Druid"
       ],
-      "building": "Wayguard Garrison",
       "id": "wiki-1",
       "x": 1454,
-      "y": 730
+      "y": 730,
+      "name": "Druid — a druid scribe",
+      "note": ""
     },
     {
       "abbreviations": [

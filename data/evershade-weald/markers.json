@@ -43,7 +43,7 @@
  },
  {
   "id": "fae-guardians-36",
-  "name": "Fae guardians",
+  "name": "Fae",
   "category": "Mob camp",
   "levels": [
    36,
@@ -52,8 +52,23 @@
   "mobs": [
    {
     "name": "Fae guardians",
-    "wikiId": "npc-a-fae-guardian",
-    "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian"
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian",
+    "wikiId": "npc-a-fae-guardian"
+   },
+   {
+    "name": "A fae spellweaver",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fae-spellweaver",
+    "wikiId": "npc-a-fae-spellweaver"
+   },
+   {
+    "name": "A fae wanderer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fae-wanderer",
+    "wikiId": "npc-a-fae-wanderer"
+   },
+   {
+    "name": "A beguiled wolf",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-beguiled-wolf",
+    "wikiId": "npc-a-beguiled-wolf"
    }
   ],
   "x": 1393,
@@ -62,7 +77,8 @@
   "note": "",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-fae-guardian",
-  "wikiId": "npc-a-fae-guardian"
+  "wikiId": "npc-a-fae-guardian",
+  "community": true
  },
  {
   "id": "wasps-1-4",
@@ -1047,5 +1063,63 @@
    13
   ],
   "quests": true
+ },
+ {
+  "id": "community-1102",
+  "community": true,
+  "name": "Ereldian Brambleshade",
+  "note": "Part of the Rogue starter quest",
+  "x": 1465,
+  "y": 1903,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/ereldian-brambleshade",
+  "wikiId": "npc-ereldian-brambleshade"
+ },
+ {
+  "id": "community-1103",
+  "community": true,
+  "name": "Scout Faeweald",
+  "note": "Part of the Archer starter quest",
+  "x": 1536,
+  "y": 1916,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-faeweald",
+  "wikiId": "npc-scout-faeweald"
+ },
+ {
+  "id": "community-1104",
+  "community": true,
+  "name": "Scout Brightleaf",
+  "note": "At the bottom of the cave in the trees. Invisible.",
+  "x": 963,
+  "y": 1775,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-brightleaf",
+  "wikiId": "npc-scout-brightleaf"
+ },
+ {
+  "id": "community-1107",
+  "community": true,
+  "name": "Spider nest",
+  "note": "",
+  "x": 2794,
+  "y": 1192,
+  "category": "Mob camp",
+  "levels": [
+   5,
+   8
+  ],
+  "mobs": [
+   {
+    "name": "An elder widow",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-elder-widow",
+    "wikiId": "npc-an-elder-widow"
+   },
+   {
+    "name": "A black widow",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-black-widow",
+    "wikiId": "npc-a-black-widow"
+   }
+  ]
  }
 ]

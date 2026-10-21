@@ -555,26 +555,53 @@
  },
  {
   "id": "crocodiles-1-5-1",
-  "name": "Crocodiles",
+  "name": "Crocodile Hatchling",
   "category": "Mob camp",
   "levels": [
-   1,
-   5
+   4,
+   6
   ],
   "mobs": [
    {
-    "name": "Crocodiles",
-    "wikiId": "npc-a-crocodile",
-    "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile"
+    "name": "A crocodile hatchling",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile-hatchling",
+    "wikiId": "npc-a-crocodile-hatchling"
    }
   ],
-  "x": 5771,
-  "y": 8370,
+  "x": 5768,
+  "y": 8276,
   "approximate": true,
   "note": "On the beach below the east cliff.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-crocodile",
-  "wikiId": "npc-a-crocodile"
+  "wikiId": "npc-a-crocodile",
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     5590,
+     8896
+    ],
+    [
+     5676,
+     8906
+    ],
+    [
+     5919,
+     7878
+    ],
+    [
+     5834,
+     7538
+    ],
+    [
+     5814,
+     7832
+    ]
+   ]
+  },
+  "community": true
  },
  {
   "id": "ashira-1-5-3",
@@ -935,5 +962,75 @@
   "ambush": false,
   "wiki": "https://monstersandmemories.wiki/npcs/a-river-pirate-captain",
   "wikiId": "npc-a-river-pirate-captain"
+ },
+ {
+  "id": "community-980",
+  "community": true,
+  "name": "Ashira 4-6",
+  "note": "Just outside the North and West gates",
+  "x": 4631,
+  "y": 8552,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-scout",
+  "wikiId": "npc-an-ashira-scout",
+  "mobs": [
+   {
+    "name": "An ashira scout",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-scout",
+    "wikiId": "npc-an-ashira-scout"
+   }
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     4416,
+     8480
+    ],
+    [
+     4726,
+     8322
+    ],
+    [
+     4758,
+     8474
+    ],
+    [
+     4750,
+     8784
+    ],
+    [
+     4606,
+     8748
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-987",
+  "community": true,
+  "name": "Ember (level 28)",
+  "note": "EMBER SPAWN",
+  "x": 1275,
+  "y": 4367,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/ember",
+  "wikiId": "npc-ember",
+  "levels": [
+   28,
+   28
+  ]
+ },
+ {
+  "id": "community-1009",
+  "community": true,
+  "name": "Mercenary Foldja (level 25+)",
+  "note": "",
+  "x": 2209,
+  "y": 1902,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/mercenary-foldja",
+  "wikiId": "npc-mercenary-foldja"
  }
 ]

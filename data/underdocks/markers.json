@@ -387,13 +387,15 @@
     "id": "community-37",
     "community": true,
     "name": "Hull Orbel",
-    "category": "Quest NPC",
+    "category": "Tradeskill",
     "note": "",
     "x": 3915,
     "y": 3937,
     "level": "upper",
     "wiki": "https://monstersandmemories.wiki/npcs/hull-orbel",
-    "wikiId": "npc-1790076528307-a58zf"
+    "wikiId": "npc-1790076528307-a58zf",
+    "quests": true,
+    "trade": "Mining"
   },
   {
     "id": "wiki-bag-merchant",

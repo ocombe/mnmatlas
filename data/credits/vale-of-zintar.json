@@ -16,5 +16,53 @@
       "name": "soulmort",
       "what": "added"
     }
+  ],
+  "marker:city-notables-2-sutarfaan-the-flamekeeper": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:city-notables-2-zubair-goldtongue": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:city-notables-2": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:city-notables-khalbaar-the-growler": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:city-notables-old-scar": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:oasis-notables": [
+    {
+      "name": "politik",
+      "what": "moved"
+    }
+  ],
+  "marker:oasis-notables-seshena-the-lost": [
+    {
+      "name": "politik",
+      "what": "moved"
+    }
+  ],
+  "marker:oasis-notables-fernic-the-cur": [
+    {
+      "name": "politik",
+      "what": "edited"
+    }
   ]
 }

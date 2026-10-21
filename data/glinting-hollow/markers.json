@@ -1,1 +1,28 @@
-[]
+[
+  {
+    "id": "community-1097",
+    "community": true,
+    "name": "Strig",
+    "note": "",
+    "x": 3070,
+    "y": 533,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/strig",
+    "wikiId": "npc-strig",
+    "levels": [
+      42,
+      42
+    ]
+  },
+  {
+    "id": "community-1098",
+    "community": true,
+    "name": "Brightspark",
+    "note": "",
+    "x": 2434,
+    "y": 954,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/brightspark",
+    "wikiId": "npc-brightspark"
+  }
+]

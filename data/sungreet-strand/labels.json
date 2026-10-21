@@ -15,20 +15,22 @@
   {
    "id": "skintakers-camp",
    "name": "Skintakers Camp",
-   "x": 2786,
-   "y": 5128,
+   "x": 3178,
+   "y": 5488,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "community": true
   },
   {
    "id": "researchers",
    "name": "Researchers",
-   "x": 2369,
-   "y": 5968,
+   "x": 3008,
+   "y": 6424,
    "kind": "building",
    "priority": 50,
-   "minZoom": 3
+   "minZoom": 3,
+   "community": true
   },
   {
    "id": "druids",
@@ -126,6 +128,28 @@
    "note": "Secret door in the farm courtyard by the river.",
    "toMap": "grain-cellar",
    "toPlace": "exit-sungreet-strand"
+  },
+  {
+   "id": "community-981",
+   "community": true,
+   "name": "Southern Farms",
+   "note": "(1st Farms)",
+   "x": 4512,
+   "y": 6995,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0
+  },
+  {
+   "id": "community-982",
+   "community": true,
+   "name": "Middle Farms",
+   "note": "(2nd Farms)",
+   "x": 4302,
+   "y": 5837,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0
   }
  ],
  "trainers": []

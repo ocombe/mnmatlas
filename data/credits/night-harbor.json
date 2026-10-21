@@ -215,6 +215,10 @@
     {
       "name": "argus_q",
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-125": [
@@ -519,6 +523,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "devoluxn",
+      "what": "edited"
     }
   ],
   "marker:wiki-15": [
@@ -803,6 +811,12 @@
     {
       "name": "ocombe",
       "what": "removed"
+    }
+  ],
+  "marker:community-765": [
+    {
+      "name": "seldrath",
+      "what": "added"
     }
   ],
   "marker:community-766": [
@@ -1099,7 +1113,133 @@
       "what": "added"
     }
   ],
+  "marker:community-957": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
   "marker:community-958": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-959": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-960": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-961": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-962": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-963": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-964": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-965": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-966": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-967": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-49": [
+    {
+      "name": "argus_q",
+      "what": "removed"
+    }
+  ],
+  "marker:community-969": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-970": [
+    {
+      "name": "burmecia",
+      "what": "added"
+    }
+  ],
+  "marker:community-971": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-972": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-973": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-974": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-975": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-42": [
+    {
+      "name": "argus_q",
+      "what": "moved"
+    }
+  ],
+  "marker:community-977": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-978": [
     {
       "name": "argus_q",
       "what": "added"
@@ -1108,6 +1248,60 @@
   "marker:community-1008": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1010": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1011": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1012": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1083": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1086": [
+    {
+      "name": "devoluxn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1088": [
+    {
+      "name": "devoluxn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1090": [
+    {
+      "name": "devoluxn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1091": [
+    {
+      "name": "devoluxn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1100": [
+    {
+      "name": "silenaus",
       "what": "added"
     }
   ]

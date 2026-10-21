@@ -1,15 +1,16 @@
 [
  {
   "id": "wiki-1",
-  "name": "Druid — Wayguard Garrison",
+  "name": "Druid — a druid scribe",
   "category": "Class trainer",
   "x": 1454,
   "y": 730,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "note": "",
   "classes": [
    "Druid"
-  ]
+  ],
+  "community": true
  },
  {
   "id": "wiki-2",
@@ -164,31 +165,16 @@
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
-  "id": "wiki-31",
-  "name": "Alchemy — Well of Order",
-  "category": "Tradeskill",
-  "x": 1329.84,
-  "y": 1416.87,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
-  "id": "wiki-32",
-  "name": "Herbalism — Well of Order",
-  "category": "Tradeskill",
-  "x": 1270.88,
-  "y": 1435.92,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
   "id": "wiki-33",
-  "name": "Bind Wound — Well of Order",
+  "name": "Medic Iuwen",
   "category": "Tradeskill",
   "x": 1348.89,
   "y": 1485.8,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+  "note": "",
+  "quests": true,
+  "trade": "Bind Wound",
+  "community": true
  },
  {
   "id": "wiki-34",
@@ -300,12 +286,13 @@
  },
  {
   "id": "maggot-npc-01",
-  "name": "Notable NPC — Temple upper platform",
-  "category": "Notable NPC",
-  "x": 1718.02,
-  "y": 629.28,
+  "name": "Scout Gladebow",
+  "category": "Quest NPC",
+  "x": 1691,
+  "y": 618,
   "approximate": true,
-  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+  "note": "Part of Archer starter quest",
+  "community": true
  },
  {
   "id": "maggot-npc-02",
@@ -317,15 +304,6 @@
   "note": "",
   "wiki": "https://monstersandmemories.wiki/npcs/npc-sersil-tangleroot",
   "community": true
- },
- {
-  "id": "maggot-npc-03",
-  "name": "Notable NPC — Wayguard Garrison",
-  "category": "Notable NPC",
-  "x": 1300.72,
-  "y": 883.4,
-  "approximate": true,
-  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
  },
  {
   "id": "maggot-npc-04",
@@ -690,5 +668,101 @@
   "vendor": "Leatherworking vendor",
   "wiki": "https://monstersandmemories.wiki/npcs/adamar-the-leatherworker",
   "wikiId": "npc-adamar-the-leatherworker"
+ },
+ {
+  "id": "community-1106",
+  "community": true,
+  "name": "Invading spiders",
+  "note": "an elder widow\na widow matron\na Mezzatrian broodling\na Mezzatrian scion",
+  "x": 1700,
+  "y": 262,
+  "category": "Mob camp",
+  "levels": [
+   5,
+   12
+  ]
+ },
+ {
+  "id": "community-1111",
+  "community": true,
+  "name": "Scout Gladebow",
+  "note": "part of Archer starter quest",
+  "x": 1691,
+  "y": 619,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/scout-gladebow",
+  "wikiId": "npc-scout-gladebow"
+ },
+ {
+  "id": "community-1113",
+  "community": true,
+  "name": "Sylvarya Starveil",
+  "note": "part of the Druid starter quest",
+  "x": 1355,
+  "y": 747,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/sylvarya-starveil",
+  "wikiId": "npc-sylvarya-starveil"
+ },
+ {
+  "id": "community-1114",
+  "community": true,
+  "name": "Lilac Latespring",
+  "note": "part of the Glinting Hollow key quest",
+  "x": 1320,
+  "y": 747,
+  "category": "Quest NPC"
+ },
+ {
+  "id": "community-1119",
+  "community": true,
+  "name": "Sylwine Brightspirit",
+  "note": "Alchemy trainer",
+  "x": 1305,
+  "y": 1411,
+  "category": "Tradeskill",
+  "wiki": "https://monstersandmemories.wiki/npcs/sylwine-brightspirit",
+  "wikiId": "npc-sylwine-brightspirit",
+  "trade": "Alchemy"
+ },
+ {
+  "id": "community-1121",
+  "community": true,
+  "name": "an alchemist",
+  "note": "",
+  "x": 1338,
+  "y": 1400,
+  "category": "Vendor",
+  "vendor": "Alchemy vendor"
+ },
+ {
+  "id": "community-1122",
+  "community": true,
+  "name": "Alchemist Binna",
+  "note": "up the ladder on the mezzanine",
+  "x": 1333,
+  "y": 1411,
+  "category": "Tradeskill",
+  "trade": "Alchemy"
+ },
+ {
+  "id": "community-1123",
+  "community": true,
+  "name": "a medic",
+  "note": "sells bandages",
+  "x": 1368,
+  "y": 1500,
+  "category": "Vendor",
+  "vendor": "Medic"
+ },
+ {
+  "id": "community-1125",
+  "community": true,
+  "name": "an herbalist",
+  "note": "sells the herbalist sickle",
+  "x": 1255,
+  "y": 1450,
+  "category": "Vendor",
+  "vendor": "Herbalism vendor"
  }
 ]
