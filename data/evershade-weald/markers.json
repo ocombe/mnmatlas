@@ -1013,5 +1013,14 @@
   "x": 1803,
   "y": 2517,
   "category": "Notable NPC"
+ },
+ {
+  "id": "druid-portal",
+  "name": "Druid Portal",
+  "category": "Teleporter",
+  "note": "Druids and their group mates arrive here by teleport spell, inside the ring of white mushrooms.",
+  "x": 1396,
+  "y": 1964,
+  "travel": "Teleporter"
  }
 ]

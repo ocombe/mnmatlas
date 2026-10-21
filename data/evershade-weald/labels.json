@@ -22,15 +22,6 @@
    "minZoom": 2.5
   },
   {
-   "id": "druid-ring",
-   "name": "Druid Ring",
-   "x": 1242,
-   "y": 2096,
-   "kind": "building",
-   "priority": 70,
-   "minZoom": 2.5
-  },
-  {
    "id": "mushroom-cave",
    "name": "Mushroom cave",
    "x": 2224,
