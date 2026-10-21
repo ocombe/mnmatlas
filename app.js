@@ -710,7 +710,7 @@ function updateTitles(){
 const localPath=p=>typeof p==='string'&&/^[a-zA-Z0-9_./{}-]+$/.test(p)&&!p.startsWith('/')&&!p.split('/').includes('..');
 const levelConfig=(base,level)=>level?{...base,...level,id:base.id,title:base.title,levelId:level.id,levelTitle:level.title}:base;
 const levelsAligned=(a,b)=>a.width===b.width&&a.height===b.height&&a.coordinateZoom===b.coordinateZoom&&(a.alignmentGroup||'shared')===(b.alignmentGroup||'shared');
-async function fetchData(path,empty){if(path===null)return empty;if(!localPath(path))throw Error('Invalid local data path');const r=await fetch(path,{cache:'no-store'});if(!r.ok)throw Error('Map data unavailable: '+path);return r.json();}
+async function fetchData(path,empty){if(path===null)return empty;if(!localPath(path))throw Error('Invalid local data path');const r=await fetch(path,{cache:'no-cache'});if(!r.ok)throw Error('Map data unavailable: '+path);return r.json();}
 function validateRegistry(data){
  if(data.version!==1||!Array.isArray(data.maps)||!data.maps.length||!data.maps.some(m=>m.id===data.defaultMap)||new Set(data.maps.map(m=>m.id)).size!==data.maps.length)throw Error('Invalid map registry');
  for(const c of data.maps){if(!/^[a-z0-9-]+$/.test(c.id)||!c.title||!c.description||![c.width,c.height,c.coordinateZoom,c.minZoom,c.maxZoom,c.maxNativeZoom,c.tileSize].every(Number.isFinite)||c.width<=0||c.height<=0||c.maxZoom<c.minZoom||!localPath(c.tilePath)||!localPath(c.markersFile)||(c.zonesFile!=null&&!localPath(c.zonesFile))||(c.colourTilePath!=null&&!localPath(c.colourTilePath))||!c.defaultView)throw Error('Invalid map configuration');}
@@ -767,7 +767,7 @@ async function loadMap(id,url=new URL(location.href),push=false,reviewToken=null
   map.on('popupopen',e=>{requestAnimationFrame(()=>keepPopupInside(e.popup));setTimeout(()=>{if(map.hasLayer(e.popup))keepPopupInside(e.popup);},450);});
   if(push){const next=mapAddress(config.id);next.search=url.search;for(const k of ['map','place','x','y','z','level'])next.searchParams.delete(k);url=next;history.pushState({map:config.id},'',url);}
   applyLocation(url);ownView=false;updateZoom();if(keepEditing)enterEdit();loading=false;document.body.dataset.ready='true';syncUrl();
-  window.dispatchEvent(new CustomEvent('atlas:loaded'));
+  window.dispatchEvent(new CustomEvent('atlas:loaded',{detail:{reviewToken}}));
   if(!requested&&id)status('Unknown map; showing '+config.title+'.');
  }catch(e){if(stale())return;loading=false;document.body.dataset.ready=map?'true':'false';if(reviewToken!==null)throw e;status('The atlas could not load. '+e.message,true);if(map)syncUrl();}
  finally{if(serial===loadSerial){if(reviewToken!==null&&stale()){loading=false;document.body.dataset.ready=map?'true':'false';}for(const p of pickers)p.busy(false);if(config)setPickerMap(config.id);}}

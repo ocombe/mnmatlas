@@ -19,6 +19,7 @@ exit nonzero on failure. Run a suite directly to narrow the output. Set
 | `test-desk-flow.mjs` | Card isolation, reversions, stale approval, review notes, undo, bulk failures, wiki picks and type-specific forms |
 | `test-review-f4.mjs` | R2-1 through R2-10: empty notes, map-switch sync, links, recovery, chips, classes, published data, timestamps, shares and follow receipts |
 | `test-desk-forms-f3.mjs` | All approval paths, failed reloads, full Undo, dirty refresh, class chips, typed mobs and Gives quests |
+| `test-desk-speed.mjs` | B30: per-step request budgets, incremental queue merging and fallback, pagination, coalesced reads, conditional files, parallel floors, throttled focus and safe note sync during travel |
 
 `community-harness.mjs` reuses the existing community suite's browser helpers.
 It loads the actual browser scripts. An optional fixture flag exposes existing

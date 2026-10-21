@@ -32,6 +32,6 @@ window.atlasNotices=(()=>{
  }
  function date(value){const d=new Date(value);return Number.isFinite(d.getTime())?d.toLocaleDateString(undefined,{day:'numeric',month:'short'}):'';}
  document.addEventListener('pointerdown',e=>{if(!box.contains(e.target))close();});box.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();close();bell.focus();}});
- window.addEventListener('focus',()=>{chronicle();refresh();});window.addEventListener('atlas:edition-check',()=>chronicle(true));chronicle();
+ let focusAt=-Infinity;window.addEventListener('focus',()=>{if(Date.now()-focusAt<60000)return;focusAt=Date.now();chronicle();refresh();});window.addEventListener('atlas:edition-check',()=>chronicle(true));chronicle();
  return {refresh,sent(row){if(!account||row.user_id!==account.id)return;const history=seen('mine');history[String(row.id)]=rules.stamp(row);try{localStorage.setItem(key('mine'),JSON.stringify(history));}catch{}if(visitSeen.mine)visitSeen.mine[String(row.id)]=rules.stamp(row);updateBadge();if(!panel.hidden)render();},setAccount(user,hooks={}){close();serial++;account=user;adapter=hooks;own=[];points=null;updateBadge();refresh();}};
 })();
