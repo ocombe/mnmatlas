@@ -66,6 +66,11 @@ console.log('Script checks passed: every page script parses.');
  // Players' records: respawn and spawn hours as given; placeholders keep wiki pages only, three at most.
  const r=card({name:'Night Terror',url:'https://monstersandmemories.wiki/npcs/night-terror',respawn:'6 hours',spawnWindow:'22-4',placeholder:[{name:'a cave bat',url:'https://monstersandmemories.wiki/npcs/a-cave-bat'},{name:'a <b>bat',url:'https://evil.example/npcs/x'},{name:'c'},{name:'d'}]});
  assert.equal(r.respawn,'6 hours');assert.equal(r.spawnWindow,'22-4');assert.equal(r.v,2);assert.equal(JSON.stringify(r.placeholder),'[{"name":"a cave bat","url":"https://monstersandmemories.wiki/npcs/a-cave-bat"},{"name":"a b bat"},{"name":"c"}]');
+ // The popup reads the wiki's own formats: "6 hours", "2h game", "9m game"; "22-4" and "18:00-06:00".
+ {const app=await readFile(new URL('../app.js',import.meta.url),'utf8'),t={};vm.createContext(t);vm.runInContext(app.slice(app.indexOf('function gameRespawn('),app.indexOf('let wikiTooltipsAdded')>0?app.indexOf('let wikiTooltipsAdded'):app.indexOf('// Camp loot')),t);
+  const [respawn,hours]=vm.runInContext('[gameRespawn,gameHours]',t);
+  assert.equal(respawn('6 hours'),'6 hours game time (about 18 min)');assert.equal(respawn('2h game'),'2h game time (about 6 min)');assert.equal(respawn('9m game'),'9m game time (about 27 s)');assert.equal(respawn('soon'),'soon');
+  assert.equal(hours('22-4'),'22:00–04:00 game time');assert.equal(hours('18:00-06:00'),'18:00–06:00 game time');assert.equal(hours('dusk'),'dusk (game time)');}
  assert.equal(c.placeholder,undefined,'No placeholder, no field');
  console.log('Card checks passed: NPC cards keep short facts and wiki links only.');}
 

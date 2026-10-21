@@ -266,14 +266,15 @@ function npcCard(c,m){
  box.append(externalLink('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
  return box;
 }
-// The wiki gives respawns in game time ("6 hours"); one game hour is 3 real minutes.
+// The wiki gives respawns in game time ("6 hours", "2h game", "9m game", "1h 30m"); one game hour is 3 real minutes.
 function gameRespawn(v){
- const t=String(v||'').trim(),m=/^(\d+(?:\.\d+)?)\s*(minutes?|mins?|hours?|hrs?|days?)$/i.exec(t);if(!m)return t;
- const real=Number(m[1])*(/^d/i.test(m[2])?72:/^h/i.test(m[2])?3:0.05),h=Math.floor(real/60),min=Math.round(real%60);
- return t+' game time (about '+(real<1?Math.round(real*60)+' s':(h?h+' h':'')+(h&&min?' ':'')+(min||!h?min+' min':''))+')';
+ const t=String(v||'').trim(),body=t.replace(/\s*game(\s*time)?$/i,'').trim(),parts=[...body.matchAll(/(\d+(?:\.\d+)?)\s*(days?|d|hours?|hrs?|h|minutes?|mins?|m)(?![a-z])/gi)];
+ if(!parts.length||body.replace(/(\d+(?:\.\d+)?)\s*(days?|d|hours?|hrs?|h|minutes?|mins?|m)(?![a-z])/gi,'').replace(/[\s,]+/g,''))return t;
+ const real=parts.reduce((sum,p)=>sum+Number(p[1])*(/^d/i.test(p[2])?72:/^h/i.test(p[2])?3:0.05),0),h=Math.floor(real/60),min=Math.round(real%60);
+ return body+' game time (about '+(real<1?Math.round(real*60)+' s':(h?h+' h':'')+(h&&min?' ':'')+(min||!h?min+' min':''))+')';
 }
-// Spawn hours as game clock times: "22-4" is 22:00–04:00.
-function gameHours(v){const t=String(v||'').trim(),m=/^(\d{1,2})\s*[-–]\s*(\d{1,2})$/.exec(t),hh=n=>String(n).padStart(2,'0')+':00';return !t?'':m&&+m[1]<24&&+m[2]<=24?hh(+m[1])+'–'+hh(+m[2])+' game time':t+' (game time)';}
+// Spawn hours as game clock times: "22-4" and "22:00-04:00" are 22:00–04:00.
+function gameHours(v){const t=String(v||'').trim(),m=/^(\d{1,2})(?::(\d{2}))?\s*[-–]\s*(\d{1,2})(?::(\d{2}))?$/.exec(t),hh=(n,mm)=>String(n).padStart(2,'0')+':'+(mm||'00');return !t?'':m&&+m[1]<24&&+m[3]<=24&&(m[2]||'0')<'60'&&(m[4]||'0')<'60'?hh(+m[1],m[2])+'–'+hh(+m[3],m[4])+' game time':t+' (game time)';}
 // Camp loot is grouped by item page, with every known source and the best known rate.
 function campLoot(m,cards,parent=wikiEmbedParent()){
  const items=new Map();for(const mob of m.mobs||[]){if(wikiLinkFor(mob,parent)?.site!=='mnm-wiki')continue;const c=cards?.[mob.wikiId];for(const i of Array.isArray(c?.loot)?c.loot:[]){const link=wikiLinkFor({wiki:i?.url},parent);if(!i?.name||link?.site!=='mnm-wiki'||!new URL(link.href).pathname.startsWith('/items/'))continue;const url=new URL(link.href);url.hash='';url.search='';const key=url.href,rate=Number.isFinite(i.dropRate)&&i.dropRate>=0&&i.dropRate<=100?i.dropRate:null,old=items.get(key);if(old){if(rate!==null&&(old.dropRate===null||rate>old.dropRate))old.dropRate=rate;if(!old.mobs.some(x=>x.wikiId===mob.wikiId))old.mobs.push(mob);}else items.set(key,{name:i.name,url:link.href,dropRate:rate,mobs:[mob]});}}
