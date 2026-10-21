@@ -21,7 +21,7 @@ for (const file of files) {
     child.on('exit', code => done({code, output}));
   });
   results.push({file, code: result.code});
-  for (const match of result.output.matchAll(/^FAIL (B\d+|R2-\d+) /gm)) failures.add(match[1]);
+  for (const match of result.output.matchAll(/^FAIL (B\d+|R[23]-\d+) /gm)) failures.add(match[1]);
   console.log(`${result.code === 0 ? 'PASS' : 'FAIL'} FILE ${file} (exit ${result.code})`);
 }
 

@@ -424,4 +424,125 @@ await checks.test('B19', 'legacy rows without any known id can retire an exact c
   assert.deepEqual(plain(f.c.personal), []);
 });
 
+for (const edit of [false, true]) await checks.test('R3-1', `a newer queued base discards its cached row${edit ? ' with another edit and a failed read' : ''}`, async () => {
+  const e = await browser(false, {notes: [note('seed', 'Seed')], personal: [note('seed', 'Seed')]});
+  const c = e.context, methods = c.window.testCommunity;
+  let release, failRead = false;
+  const saved = [];
+  e.notesFault = (request, rows, state) => {
+    if (request.op === 'update' && !release && request.payload.notes.some(n => n.id === 'personal-added')) {
+      return new Promise(resolve => {release = () => {
+        state.updated_at = request.payload.updated_at;
+        rows.splice(0, rows.length, ...plain(request.payload.notes));
+        resolve({data: [{updated_at: state.updated_at}]});
+      };});
+    }
+    if (failRead && request.op === 'select' && !request.in) return {error: Error('offline')};
+  };
+  c.persist([...c.personal, note('added', 'Added')]); await e.tick(2000);
+  assert(release, 'The first upload is waiting');
+  if (edit) c.persist([...c.personal, note('later', 'Later')]);
+  c.Date = class extends Date {static now() {return Date.now() + 300001;}};
+  c.config.levelId = 'upper'; await methods.onMap(); await settle();
+  c.window.addEventListener('atlas:notes', () => saved.push(plain(c.personal)));
+  release(); await settle();
+  failRead = edit; await e.tick(2000); await settle();
+  for (const notes of [c.personal, JSON.parse(c.localStorage.getItem(c.storageKey('notes'))), ...saved]) {
+    assert(notes.some(n => n.id === 'personal-added'), 'No local save loses the first addition');
+  }
+  failRead = false; e.notesFault = null;
+  await methods.sync(); await e.tick(2000);
+  for (const notes of [c.personal, e.remote]) {
+    assert(notes.some(n => n.id === 'personal-added'));
+    if (edit) assert(notes.some(n => n.id === 'personal-later'));
+  }
+});
+
+for (const kind of ['notes', 'private-notes']) await checks.test('R3-2', `a floor switch retries a failed ${kind} upload`, async () => {
+  const e = await browser(false, {notes: [note('seed', 'Seed')], personal: [note('seed', 'Seed')]});
+  const c = e.context;
+  e.failNotes = true;
+  if (kind === 'notes') c.persist([...c.personal, note('retry', 'Retry')]);
+  else assert(c.savePrivateNote(c.originals[0], 'marker', 'Retry private note'));
+  await e.tick(2000);
+  const start = e.calls.length;
+  e.failNotes = false; c.config.levelId = 'upper';
+  await c.window.testCommunity.onMap(); await settle();
+  const writes = e.calls.slice(start).filter(r => r.table === 'user_notes' && r.op !== 'select');
+  assert(writes.some(r => r.payload.map.endsWith('#private') === (kind === 'private-notes')), 'The switch retries the queued scope immediately');
+  if (kind === 'notes') assert(e.remote.some(n => n.id === 'personal-retry'));
+});
+
+for (const signedIn of [false, true]) for (const notify of [false, true]) await checks.test('R3-3', `${signedIn ? 'signed-in' : 'local'} tabs preserve additions ${notify ? 'with' : 'without'} a storage event`, async () => {
+  const shared = [note('seed', 'Seed')], state = {exists: true, updated_at: '2026-10-20T08:00:00.000Z'};
+  const store = new Map([['mnmaps-test-map-notes-v1', JSON.stringify(shared)]]);
+  const storage = {getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, String(v)), removeItem: k => store.delete(k)};
+  const tabs = [];
+  for (let i = 0; i < 2; i++) tabs.push(await browser(false, {notes: shared, notesState: state, personal: plain(shared), prepare(c) {
+    c.localStorage = storage;
+    if (!signedIn) c.atlasConfig.supabaseUrl = '';
+    c.persist(c.personal, true);
+  }}));
+  const [a, b] = tabs, key = a.context.storageKey('notes');
+  assert(a.context.persist([...a.context.personal, note('tab-a', 'Tab A')]));
+  if (signedIn) await a.tick(2000);
+  if (notify) {
+    b.context.window.dispatchEvent({type: 'storage', key, storageArea: storage}); await settle();
+    assert(b.context.personal.some(n => n.id === 'personal-tab-a'), 'The other tab reloads on storage');
+  }
+  assert(b.context.persist(b.context.personal.map(n => n.id === 'personal-seed' ? {...n, note: 'Edited in B'} : n)));
+  if (signedIn) await b.tick(2000);
+  for (const notes of [b.context.personal, JSON.parse(store.get(key)), ...(signedIn ? [shared] : [])]) {
+    assert(notes.some(n => n.id === 'personal-tab-a'), 'The stale tab keeps the other addition');
+    assert.equal(notes.find(n => n.id === 'personal-seed').note, 'Edited in B');
+  }
+});
+
+for (const kind of ['notes', 'private-notes']) await checks.test('R3-3', `a newly unreadable stored ${kind} copy is never overwritten`, async () => {
+  const e = await browser(false, {notes: [note('seed', 'Seed')], personal: [note('seed', 'Seed')]}), c = e.context;
+  const key = c.storageKey(kind);
+  c.localStorage.setItem(key, '{broken');
+  const save = () => kind === 'notes' ? c.persist([...c.personal, note('safe', 'Safe')]) : c.savePrivateNote(c.originals[0], 'marker', 'Safe');
+  assert.equal(save(), false);
+  c.window.dispatchEvent({type: 'storage', key, storageArea: c.localStorage});
+  assert.equal(save(), false);
+  assert.equal(c.localStorage.getItem(key), '{broken');
+  assert(c.personal.some(n => n.id === 'personal-seed'));
+});
+
+for (const notify of [false, true]) await checks.test('R3-3', `private tab saves keep additions, owners and tombstones ${notify ? 'with' : 'without'} a storage event`, async () => {
+  const store = new Map(), storage = {getItem: k => store.get(k) ?? null, setItem: (k, v) => store.set(k, String(v))};
+  const tabs = [];
+  for (let i = 0; i < 2; i++) tabs.push(await browser(false, {notes: [], personal: [], prepare(c) {
+    c.localStorage = storage; c.atlasConfig.supabaseUrl = '';
+  }}));
+  const [a, b] = tabs.map(e => e.context), key = a.storageKey('private-notes'), target = a.originals[0];
+  assert(a.savePrivateNote(target, 'marker', 'Tab A reminder'));
+  if (notify) {
+    b.window.dispatchEvent({type: 'storage', key, storageArea: storage});
+    assert.equal(b.privateNoteFor(target, 'marker'), 'Tab A reminder');
+  }
+  assert(b.savePrivateNote({...target, id: 'another'}, 'marker', 'Tab B reminder'));
+  assert(JSON.parse(store.get(key)).some(n => n.target === target.id && n.note === 'Tab A reminder'));
+  assert(a.savePrivateNote(target, 'marker', ''));
+  assert(b.savePrivateNote({...target, id: 'third'}, 'marker', 'Another reminder'));
+  assert(JSON.parse(store.get(key)).find(n => n.target === target.id).deleted, 'A stale tab cannot resurrect the deleted text');
+  const other = {...JSON.parse(store.get(key))[0], owner: 'other', note: 'Another account', deleted: false};
+  assert(b.persistPrivate([other]));
+  const rows = JSON.parse(store.get(key));
+  assert(rows.some(n => n.owner === 'other' && n.note === other.note));
+  assert(rows.some(n => n.owner === null && n.target === target.id && n.deleted));
+});
+
+await checks.test('R3-3', 'claiming a local private entry keeps one owned copy', async () => {
+  const e = await browser(false, {notes: [], personal: []}), c = e.context, key = c.storageKey('private-notes');
+  const target = c.originals[0], entry = {id: JSON.stringify(['marker', target.id, 'lower']), kind: 'marker', target: target.id,
+    level: 'lower', owner: null, name: target.name, note: 'Local reminder', x: target.x, y: target.y, updated: 10, deleted: false};
+  assert(c.persistPrivate([entry]));
+  await c.window.testCommunity.onMap(); await settle();
+  const rows = JSON.parse(c.localStorage.getItem(key));
+  assert.equal(rows.length, 1); assert.equal(rows[0].owner, 'member'); assert.equal(rows[0].note, entry.note);
+  assert.equal(e.remotePrivate[0]?.note, entry.note);
+});
+
 checks.finish();

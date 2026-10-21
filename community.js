@@ -827,17 +827,9 @@
  const noteSum=m=>JSON.stringify(Object.keys(m).sort().map(k=>[k,m[k]]));
  function readBase(uid,key){try{const raw=localStorage.getItem(baseKey(uid,key));if(raw===null)return null;const v=JSON.parse(raw);if(Array.isArray(v)&&v.every(id=>typeof id==='string'))return new Map(v.map(id=>[id,null]));if(v&&typeof v==='object'&&!Array.isArray(v)&&Object.values(v).every(sum=>typeof sum==='string'||sum===null))return new Map(Object.entries(v));return null;}catch{return null;}}
  function writeBase(uid,key,notes){localStorage.setItem(baseKey(uid,key),JSON.stringify(Object.fromEntries(notes.map(m=>[m.id,noteSum(m)]))));}
- const notesBase=(notes,c=config)=>new Map(notes.map(m=>[m.id,noteSum(normaliseNote(m,c))]));
- function mergeMapNotes(local,remote,base,c=config){
-  for(const notes of [local,remote])if(!Array.isArray(notes)||notes.length>2000||!notes.every(m=>valid(m,c))||new Set(notes.map(m=>m.id)).size!==notes.length)throw Error('Notes could not be read.');
-  const left=new Map(local.map(m=>[m.id,normaliseNote(m,c)])),right=new Map(remote.map(m=>[m.id,normaliseNote(m,c)])),merged=[];
-  // An edit survives an unchanged copy or a deletion. When both copies changed, their edit times decide.
-  for(const id of new Set([...right.keys(),...left.keys()])){const a=left.get(id),b=right.get(id),was=base?.get(id),changed=m=>!!m&&!!was&&noteSum(m)!==was;let keep;
-   if(a&&b){if(changed(b)&&!changed(a))keep=b;else if(changed(a)&&!changed(b))keep=a;else keep=(Number.isFinite(b.updated)?b.updated:0)>(Number.isFinite(a.updated)?a.updated:0)?b:a;}
-   else{const m=a||b;if(!base?.has(id)||changed(m))keep=m;}
-   if(keep)merged.push(keep);
-  }if(merged.length>2000)throw Error('Too many notes.');return merged;
- }
+ const notesBase=(notes,c=config)=>storedNotesBase(notes,c);
+ const sameBase=(a,b)=>!!a&&a.size===b.size&&[...a].every(([id,sum])=>b.get(id)===sum);
+ function mergeMapNotes(local,remote,base,c=config){return mergeStoredNotes(local,remote,base,c);}
  function syncIdentity(){return user?user.id+':'+scope():'';}
  function scheduleSync(){
   if(syncing||!user||!config||!takesNotes()||syncReady!==syncIdentity())return;
@@ -856,7 +848,7 @@
   try{if(key.length>160)throw Error();if(row===undefined){const result=await client.from('user_notes').select('notes,updated_at').eq('user_id',uid).eq('map',key).maybeSingle();if(result.error)throw result.error;row=result.data;}if(serial!==mapSerial||user?.id!==uid||key!==privateScope()||alignmentMode)return;
    if(row&&(typeof row.updated_at!=='string'||!Number.isFinite(Date.parse(row.updated_at))))throw Error();
    const remote=row?row.notes:[],merged=mergePrivateEntries(privateNotes.filter(m=>m.owner===uid||m.owner===null).map(m=>({...m,owner:uid})),remote,uid);
-   syncing=true;const saved=persistPrivate([...privateNotes.filter(m=>m.owner!==uid&&m.owner!==null),...merged]);syncing=false;if(!saved)return;
+   syncing=true;const saved=persistPrivate([...privateNotes.filter(m=>m.owner!==uid&&m.owner!==null),...merged],uid);syncing=false;if(!saved)return;
    privateSyncReady=identity;const jobKey=uid+':'+key;
    if(sameNotes(merged,remote)){writeBase(uid,key,merged);syncJobs.delete(jobKey);}else syncJobs.set(jobKey,{uid,map:key,notes:merged,remote:row});
    recoverPrivateTargets();if(push)await pushJobs();
@@ -865,17 +857,19 @@
  let pushing=false;
  async function pushMapNotes(key,job){
   for(let attempt=0;attempt<4;attempt++){
-   const {data,error}=attempt===0&&Object.hasOwn(job,'remote')?{data:job.remote}:await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();delete job.remote;if(error)throw error;
-   const current=syncJobs.get(key)||job,notes=mergeMapNotes(current.notes,data?data.notes:[],current.base,current.config),here=user?.id===job.uid&&job.map===scope();if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
+   const cached=attempt===0&&Object.hasOwn(job,'remote')&&sameBase(job.base,notesBase(job.remote?.notes||[],job.config)),{data,error}=cached?{data:job.remote}:await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();delete job.remote;if(error)throw error;
+   const current=syncJobs.get(key)||job,here=user?.id===job.uid&&job.map===scope();let notes=mergeMapNotes(current.notes,data?data.notes:[],current.base,current.config);if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
    if(data&&(typeof data.updated_at!=='string'||!Number.isFinite(Date.parse(data.updated_at))))throw Error('Notes version could not be read.');
-   if(here){if(!notesReadable||alignmentMode)throw Error();syncing=true;let saved;try{saved=persist(notes,true);}finally{syncing=false;}if(!saved)throw Error();setupCategoryControls();buildPlaceIndex();drawMarkers();}
-   else{const saved=JSON.parse(localStorage.getItem(current.storage)||'[]');if(!Array.isArray(saved)||!saved.every(m=>valid(m,current.config)))throw Error('Saved notes could not be read.');localStorage.setItem(current.storage,JSON.stringify(notes));}
-   if(sameNotes(notes,data?data.notes:[])){writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key))syncJobs.get(key).base=notesBase(notes,current.config);return;}
+   const save=()=>{if(here){if(!notesReadable||alignmentMode)throw Error();syncing=true;let saved;try{saved=persist(notes,true);}finally{syncing=false;}if(!saved)throw Error();setupCategoryControls();buildPlaceIndex();drawMarkers();return personal;}
+    const saved=JSON.parse(localStorage.getItem(current.storage)||'[]'),merged=mergeMapNotes(notes,saved,notesBase(current.notes,current.config),current.config);localStorage.setItem(current.storage,JSON.stringify(merged));return merged;};
+   if(!cached)notes=save();if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
+   if(sameNotes(notes,data?data.notes:[])){finish();return;}
+   function finish(){writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key)){const next=syncJobs.get(key);next.base=notesBase(notes,current.config);delete next.remote;}}
    const row={user_id:job.uid,map:job.map,notes,updated_at:new Date(Math.max(Date.now(),(Date.parse(data?.updated_at)||0)+1)).toISOString()};
    const result=data?await client.from('user_notes').update(row).eq('user_id',job.uid).eq('map',job.map).eq('updated_at',data.updated_at).select('updated_at'):await client.from('user_notes').insert(row).select('updated_at');
    if(result.error){if(!data&&result.error.code==='23505')continue;throw result.error;}
    if(!result.data?.length)continue;
-   writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key))syncJobs.get(key).base=notesBase(notes,current.config);return;
+   if(cached&&syncJobs.get(key)===current)save();finish();return;
   }throw Error('Notes changed during sync.');
  }
  async function pushJobs(){
@@ -899,8 +893,8 @@
   if(!user||!map||loading||alignmentMode||!notesReadable||!takesNotes())return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
   try{if(row===undefined){const result=await client.from('user_notes').select('notes,updated_at').eq('user_id',uid).eq('map',key).maybeSingle();if(result.error)throw result.error;row=result.data;}if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
    if(row&&(typeof row.updated_at!=='string'||!Number.isFinite(Date.parse(row.updated_at))))throw Error();
-   const remote=row?row.notes:[],base=syncJobs.get(identity)?.base??readBase(uid,key),merged=mergeMapNotes(personal,remote,base);
-   syncing=true;const saved=persist(merged,true);syncing=false;if(!saved)return;
+   const remote=row?row.notes:[],base=syncJobs.get(identity)?.base??readBase(uid,key);let merged=mergeMapNotes(personal,remote,base);
+   syncing=true;const saved=persist(merged,true);syncing=false;if(!saved)return;merged=personal;
    syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();
    if(sameNotes(merged,remote)){writeBase(uid,key,merged);syncJobs.delete(identity);}else syncJobs.set(identity,{uid,map:key,notes:merged,storage:storageKey('notes'),config:{...config},base:notesBase(remote),remote:row});await pushJobs();
   }catch{syncing=false;quiet('Notes could not sync. Your local notes are safe.');}
@@ -909,7 +903,7 @@
  async function syncMapNotes(serial){
   if(!user||!map||loading||alignmentMode||!takesNotes())return;const uid=user.id,key=scope(),identity=syncIdentity();
   try{const {data,error}=await client.from('user_notes').select('map,notes,updated_at').eq('user_id',uid).in('map',[key,key+'#private']);if(error)throw error;if(!Array.isArray(data))throw Error();if(serial!==mapSerial||user?.id!==uid||key!==scope())return;
-   await syncPrivateNotes(serial,false,data.find(r=>r.map===key+'#private')||null);if(serial!==mapSerial)return;await syncNotes(serial,data.find(r=>r.map===key)||null);if(serial===mapSerial&&syncReady===identity&&privateSyncReady===identity)lastNotesSync={identity,at:Date.now()};
+   await syncPrivateNotes(serial,false,data.find(r=>r.map===key+'#private')||null);if(serial!==mapSerial)return;await syncNotes(serial,data.find(r=>r.map===key)||null);if(serial===mapSerial&&syncReady===identity&&privateSyncReady===identity&&!syncJobs.has(identity)&&!syncJobs.has(uid+':'+key+'#private'))lastNotesSync={identity,at:Date.now()};
   }catch{quiet('Notes could not sync. Your local notes are safe.');}
  }
  async function onMap(reviewToken=null){
@@ -917,7 +911,7 @@
   map.off?.('zoomend',zoomApproved);map.on?.('zoomend',zoomApproved);
   if(editionPending)refreshVisitor();
   if(floorSwitch&&approvedLoaded?.map===config.id&&approvedLoaded.uid===user?.id&&approvedLoaded.admin===admin){if(floorLabels)floorLabels.edition=loadSerial;publishedMapLabels=otherFloorLabels();cachedChanges=null;drawApproved();freshPopup();}else loadApproved();
-  if(takesNotes()&&!(floorSwitch&&lastNotesSync?.identity===syncIdentity()&&Date.now()-lastNotesSync.at<300000&&syncReady===syncIdentity()&&privateSyncReady===syncIdentity())){syncReady='';privateSyncReady='';await syncMapNotes(serial);}if(serial!==mapSerial)return;
+  if(takesNotes()&&!(floorSwitch&&lastNotesSync?.identity===syncIdentity()&&Date.now()-lastNotesSync.at<300000&&syncReady===syncIdentity()&&privateSyncReady===syncIdentity())){syncReady='';privateSyncReady='';await syncMapNotes(serial);}else if(takesNotes())await pushJobs();if(serial!==mapSerial)return;
   if(!floorSwitch&&reviewToken===null&&takesNotes())await retirePublishedNotes(serial).catch(()=>{});if(serial!==mapSerial)return;if(!positionVisits.has(scope())&&!dialog.open&&!desk.opened&&offerPositions())positionVisits.add(scope());
  }
  // Suggestions on the map before they are live. Approved ones wait for the publishing run: admins see them all, and each
