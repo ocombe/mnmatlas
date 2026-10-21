@@ -125,7 +125,9 @@
    "minZoom": 1.5,
    "arrow": "east",
    "approximate": true,
-   "note": ""
+   "note": "",
+   "toMap": "blind-midden",
+   "toPlace": "exit-great-cavern-sea"
   },
   {
    "id": "community-718",

@@ -108,7 +108,9 @@
    "note": "",
    "x": 5797,
    "y": 3553,
-   "arrow": "east"
+   "arrow": "east",
+   "toMap": "blind-midden",
+   "toPlace": "exit-ail-vorith"
   },
   {
    "id": "community-1050",

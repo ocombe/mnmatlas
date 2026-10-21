@@ -1,6 +1,16 @@
 {
  "entries": [
   {
+   "date": "2026-10-22",
+   "title": "The Blind Midden is charted",
+   "text": "Below Ail’Vorith the Blind Midden opens up: three floors of sewers and caverns around a deep canyon, crossed by tall bridges. Watch your step, not every wall or floor is what it seems.",
+   "maps": [
+    "blind-midden",
+    "ail-vorith",
+    "great-cavern-sea"
+   ]
+  },
+  {
    "date": "2026-10-21",
    "title": "Steadier notes and suggestions",
    "text": "Notes kept on several devices now merge instead of overwriting each other, and a shared note keeps sending its changes after it is accepted. Changes to vendors, fish, mobs and passages reach the map exactly as sent. Trainers, vendors and other folk who also hand out quests can now be marked with a Gives quests tick.",

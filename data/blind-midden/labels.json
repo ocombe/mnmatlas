@@ -1,0 +1,40 @@
+{
+  "map": "blind-midden",
+  "tileRevision": "v2",
+  "coordinateZoom": 4,
+  "labels": [
+    {
+      "id": "exit-great-cavern-sea",
+      "name": "to Great Cavern Sea",
+      "level": "canyon",
+      "x": 1854,
+      "y": 608,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "north",
+      "travel": "Exit",
+      "toMap": "great-cavern-sea",
+      "toPlace": "to-blind-midden",
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "exit-ail-vorith",
+      "name": "to Ail’Vorith",
+      "level": "basement",
+      "x": 2590,
+      "y": 2470,
+      "kind": "exit",
+      "priority": 95,
+      "minZoom": 1.5,
+      "arrow": "east",
+      "travel": "Exit",
+      "toMap": "ail-vorith",
+      "toPlace": "community-81",
+      "approximate": true,
+      "note": ""
+    }
+  ],
+  "trainers": []
+}

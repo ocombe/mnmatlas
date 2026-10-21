@@ -16,6 +16,7 @@
   "x": 1559,
   "y": 965,
   "note": "Dungeon entrance.",
-  "minZoom": 1.5
+  "minZoom": 1.5,
+  "toMap": "blind-midden"
  }
 ]

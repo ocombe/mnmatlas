@@ -247,6 +247,79 @@
       "city": true
     },
     {
+      "id": "blind-midden",
+      "title": "Blind Midden",
+      "subtitle": "Three floors beneath Ail’Vorith",
+      "cartoucheKicker": "The sewers of the Deep",
+      "breadcrumb": "Monsters & Memories / Blind Midden",
+      "description": "An illustrated fan atlas of the Blind Midden, the sewers and caverns beside Ail’Vorith. Cross the bridges over its deep canyon, follow the watery hallways of the Basement and the Ground floor, and keep your own field notes.",
+      "width": 3328,
+      "height": 3936,
+      "minZoom": 0,
+      "maxNativeZoom": 4,
+      "maxZoom": 6,
+      "coordinateZoom": 4,
+      "tileSize": 256,
+      "tileRevision": "v2",
+      "tilePath": "assets/tiles/blind-midden/basement/{z}/{x}/{y}.webp",
+      "markersFile": "data/blind-midden/markers.json",
+      "labelsFile": "data/blind-midden/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "defaultLevel": "basement",
+      "levels": [
+        {
+          "id": "canyon",
+          "title": "Canyon and caves",
+          "tilePath": "assets/tiles/blind-midden/canyon/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "basement",
+          "title": "Basement",
+          "tilePath": "assets/tiles/blind-midden/basement/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "ground",
+          "title": "Ground floor",
+          "tilePath": "assets/tiles/blind-midden/ground/{z}/{x}/{y}.webp"
+        }
+      ],
+      "extraCategories": {
+        "Stairs": [
+          "↕",
+          "#64795b"
+        ],
+        "Ladder": [
+          "↕",
+          "#64795b"
+        ]
+      },
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Exit names after the Blind Midden maps by Aliandrah (CC BY-SA 4.0) · approximate",
+        "sourceTitle": "Blind Midden maps by Aliandrah",
+        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/Blind_Midden",
+        "license": "CC BY-SA 4.0",
+        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+        "changes": "Exit names only adapted from the Blind Midden maps by Aliandrah. The adapted names carry CC BY-SA 4.0; these credits do not cover the illustration.",
+        "sources": [
+          {
+            "sourceTitle": "Blind Midden maps by Aliandrah",
+            "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/Blind_Midden",
+            "license": "CC BY-SA 4.0",
+            "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+            "scope": "Exit names only"
+          }
+        ]
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
       "id": "faelindral",
       "title": "Faelindral",
       "subtitle": "The city in the trees",
