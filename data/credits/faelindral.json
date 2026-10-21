@@ -185,6 +185,10 @@
     {
       "name": ".anduri",
       "what": "moved"
+    },
+    {
+      "name": ".anduri",
+      "what": "removed"
     }
   ],
   "label:community-1110": [

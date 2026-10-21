@@ -285,16 +285,6 @@
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
-  "id": "maggot-npc-01",
-  "name": "Scout Gladebow",
-  "category": "Quest NPC",
-  "x": 1691,
-  "y": 618,
-  "approximate": true,
-  "note": "Part of Archer starter quest",
-  "community": true
- },
- {
   "id": "maggot-npc-02",
   "name": "Sersil Tangleroot",
   "category": "Notable NPC",

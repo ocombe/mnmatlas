@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-19T13:31:29.473Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-19T13:53:44.851Z",
     "rows": []
   },
@@ -4530,6 +4526,36 @@
             "category": "Tradeskill"
           },
           "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-21T16:54:14.446Z",
+    "rows": [
+      {
+        "id": 1112,
+        "payloadHash": "560a6d8ef201433cb1b49a21547f4fe51a4e7440b790b6eff199f142a9ddfa56",
+        "updatedAt": "2026-10-21T16:20:06.378412+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "maggot-npc-01",
+          "payload": {
+            "from": {
+              "x": 1718.02,
+              "y": 629.28,
+              "name": "Scout Gladebow",
+              "note": "Part of Archer starter quest",
+              "category": "Notable NPC",
+              "approximate": true
+            },
+            "name": "Notable NPC — Temple upper platform",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
         }
       }
     ]
