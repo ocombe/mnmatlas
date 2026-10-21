@@ -24,11 +24,12 @@
   {
    "id": "smugglers-caves",
    "name": "Smugglers Caves",
-   "x": 2176,
-   "y": 2957,
+   "x": 1906,
+   "y": 3048,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "community": true
   },
   {
    "id": "hidden-pass",

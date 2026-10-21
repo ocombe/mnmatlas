@@ -347,12 +347,13 @@
  },
  {
   "id": "maggot-npc-09",
-  "name": "Notable NPC — Lower Tier south platform",
-  "category": "Notable NPC",
-  "x": 1282.32,
-  "y": 2494.88,
+  "name": "Lorinthal Skybranch",
+  "category": "Quest NPC",
+  "x": 1328,
+  "y": 2501,
   "approximate": true,
-  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
+  "note": "For Bard Starter quest",
+  "community": true
  },
  {
   "id": "lift-traveler-s-down",

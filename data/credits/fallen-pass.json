@@ -175,12 +175,60 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-988": [
     {
       "name": "xatmakin",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-1039": [
+    {
+      "name": "demixt",
+      "what": "added"
+    }
+  ],
+  "marker:community-1040": [
+    {
+      "name": "demixt",
+      "what": "added"
+    }
+  ],
+  "marker:community-1041": [
+    {
+      "name": "demixt",
+      "what": "added"
+    }
+  ],
+  "marker:community-1042": [
+    {
+      "name": "demixt",
+      "what": "added"
+    }
+  ],
+  "marker:ratkin-31-40-1": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:smugglers-caves": [
+    {
+      "name": null,
+      "what": "moved"
     }
   ]
 }

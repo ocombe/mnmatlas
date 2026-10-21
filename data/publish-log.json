@@ -1,40 +1,5 @@
 [
   {
-    "at": "2026-10-19T10:27:01.120Z",
-    "rows": [
-      {
-        "id": 832,
-        "payloadHash": "fadfff2078ba1529ac2337d8557594c48e8c82f205bfea429fe1edfeb02322c9",
-        "updatedAt": "2026-10-19T10:24:41.167604+00:00"
-      },
-      {
-        "id": 839,
-        "payloadHash": "b4dbfb715dca773fac8603b1d89acfe16737a913642dd155c923f7b8170a02bd",
-        "updatedAt": "2026-10-19T10:25:21.233989+00:00"
-      },
-      {
-        "id": 840,
-        "payloadHash": "6d320d59cf549021fbf8f6bcdeca6b64c9aaec9a2d775e80a3b93401091e00b2",
-        "updatedAt": "2026-10-19T10:25:38.224928+00:00"
-      },
-      {
-        "id": 841,
-        "payloadHash": "b50758008ec69832ac411f4dd044ff7198bf696898ae527da5bb8c731175b5c1",
-        "updatedAt": "2026-10-19T10:25:49.367074+00:00"
-      },
-      {
-        "id": 842,
-        "payloadHash": "369226b33426c638b19a07b16c8f70c85db559f4a49dc8ad2ff70e04038060c2",
-        "updatedAt": "2026-10-19T10:24:49.730423+00:00"
-      },
-      {
-        "id": 843,
-        "payloadHash": "c94013cb02a296f78d64ec29b7cc6de6f7cf9f0e2bb27cec8729f20470d820c8",
-        "updatedAt": "2026-10-19T10:24:58.529885+00:00"
-      }
-    ]
-  },
-  {
     "at": "2026-10-19T11:42:52.537Z",
     "rows": [
       {
@@ -1812,6 +1777,422 @@
             },
             "name": "Traveler's Lift — up to Faelindral",
             "direction": "updown"
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-21T07:39:49.749Z",
+    "rows": [
+      {
+        "id": 1028,
+        "payloadHash": "a814f7ebc07c89312d75917008abb4f8271713a0fcc035006e2ed9a6fc8ffb39",
+        "updatedAt": "2026-10-21T07:35:32.750366+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-471",
+          "payload": {
+            "from": {
+              "name": "Daegolar the Pauper",
+              "note": "Talk to him at Level 1 to become Solo Self found.",
+              "sells": null,
+              "trade": null,
+              "vendor": null,
+              "classes": null,
+              "category": "Notable NPC"
+            },
+            "name": "Daegolar the Pauper",
+            "note": "Talk to him at Level 1 to activate the Solo Self found ruleset.",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1029,
+        "payloadHash": "f0ab5d3c06fcaf36fffb414a0a74d0b36790754a2704ff755f3ea7e9a11db952",
+        "updatedAt": "2026-10-21T07:35:38.261231+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1829,
+            "y": 2509,
+            "name": "Magnificent Yelmyarr",
+            "note": "Talk to him at Level 1 to activate the hardcore ruleset.",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1030,
+        "payloadHash": "9e9ebbdfebb7367ec7ccc25cb65f75c6b2a707a6db914dc86d77f47a9be78b33",
+        "updatedAt": "2026-10-21T07:36:22.5659+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "to-keepers-bight",
+          "payload": {
+            "to": [
+              2807,
+              3862
+            ],
+            "from": [
+              2475,
+              3811
+            ],
+            "name": "to Keeper's Bight"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1032,
+        "payloadHash": "145727bf3bdff07bb9b4851ce20b731a20da380156d36203c930e82787731a2a",
+        "updatedAt": "2026-10-21T07:37:09.944156+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "maggot-npc-09",
+          "payload": {
+            "from": {
+              "name": "Notable NPC — Lower Tier south platform",
+              "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name.",
+              "sells": null,
+              "trade": null,
+              "vendor": null,
+              "classes": null,
+              "category": "Notable NPC"
+            },
+            "name": "Lorinthal Skybranch",
+            "note": "For Bard Starter quest",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1033,
+        "payloadHash": "33eb3c1283c9e3c37c16245b2f527e41f3b6a01ffad39ac4c6183215d633d379",
+        "updatedAt": "2026-10-21T07:37:17.309446+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "maggot-npc-09",
+          "payload": {
+            "to": [
+              1328,
+              2501
+            ],
+            "from": [
+              1282,
+              2495
+            ],
+            "name": "Notable NPC — Lower Tier south platform"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1034,
+        "payloadHash": "16d1072a695a22923e121f06a9faab87466d1bd4a987164014879a5b480f3b1b",
+        "updatedAt": "2026-10-21T07:36:36.576195+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-420",
+          "payload": {
+            "to": [
+              3848,
+              2549
+            ],
+            "from": [
+              3451,
+              3265
+            ],
+            "name": "Scout Leader Krindor (level 6)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1035,
+        "payloadHash": "009fe529d2c30d725a03f766daf7ca64442d871892a5296697e62ac0d8b3fc85",
+        "updatedAt": "2026-10-21T07:36:51.140938+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3507,
+            "y": 3259,
+            "name": "Muleda Murktoe (level 13)",
+            "note": "Spawned as part of Druid starter quest at the moss circle here.",
+            "wiki": "https://monstersandmemories.wiki/npcs/muleda-murktoe",
+            "bounty": "npc-muleda-murktoe",
+            "levels": [
+              13,
+              13
+            ],
+            "quests": true,
+            "wikiId": "npc-muleda-murktoe",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1038,
+        "payloadHash": "c68639c549965363ac839b4d2cb3c788311ffa87a24d18c5ffbc4c3445695437",
+        "updatedAt": "2026-10-21T07:39:30.08476+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-704",
+          "payload": {
+            "from": {
+              "x": 5134,
+              "y": 4418,
+              "mobs": [],
+              "name": "A Fire Elemental",
+              "note": "Red at 17",
+              "category": "Mob camp"
+            },
+            "name": "A Fire Elemental",
+            "note": "Red at 27"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1039,
+        "payloadHash": "d6d161c681e89bec0b77e6c3008cc2a29867797f69936058d22d236b8d4a0dd2",
+        "updatedAt": "2026-10-21T07:37:44.429761+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3031,
+            "y": 2104,
+            "name": "Steward Grimaldi",
+            "note": "Lower Saman",
+            "wiki": "https://monstersandmemories.wiki/npcs/steward-grimaldi",
+            "bounty": "npc-steward-grimaldi",
+            "levels": [
+              55,
+              55
+            ],
+            "wikiId": "npc-steward-grimaldi",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1040,
+        "payloadHash": "70f6c1f2784c762e48c425a851793311c17ebb0313949648e9401379c8ef6a74",
+        "updatedAt": "2026-10-21T07:37:54.307883+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2834,
+            "y": 1927,
+            "name": "Yvette Gardener",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/yvette-gardener",
+            "bounty": "npc-yvette-gardener",
+            "levels": [
+              52,
+              52
+            ],
+            "wikiId": "npc-yvette-gardener",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1041,
+        "payloadHash": "075aadad3c2bcf7e30f10e753c5ca6a7e61a9cde8e2765388a578f58a7b794e1",
+        "updatedAt": "2026-10-21T07:38:03.536507+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2995,
+            "y": 2001,
+            "name": "Handmaiden Mira",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/handmaiden-mira",
+            "bounty": "npc-handmaiden-mira",
+            "levels": [
+              52,
+              52
+            ],
+            "wikiId": "npc-handmaiden-mira",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1042,
+        "payloadHash": "04f87fa355e5ae2e0976f436baaec57146aa6902caedcd956c3ac97cf56e7967",
+        "updatedAt": "2026-10-21T07:38:14.108047+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 676,
+            "y": 1671,
+            "name": "Demeter Stollen",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/demeter-stollen",
+            "bounty": "npc-demeter-stollen",
+            "wikiId": "npc-demeter-stollen",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1065,
+        "payloadHash": "7599b06536a16b486e5838da2cc24656254aaa408806e5c81871020a429c8f11",
+        "updatedAt": "2026-10-21T07:38:23.990112+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-805",
+          "payload": {
+            "to": [
+              1124,
+              2678
+            ],
+            "from": [
+              1877,
+              1212
+            ],
+            "name": "Tora'Galdo (level 38)"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1066,
+        "payloadHash": "bc17dffe832af695ee7b0b52ed71e3b26f17bd5b7af714dd5ddb875b0aa2eb93",
+        "updatedAt": "2026-10-21T07:39:01.052169+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "ratkin-31-40-1",
+          "payload": {
+            "to": [
+              1120,
+              2406
+            ],
+            "from": [
+              1791,
+              1167
+            ],
+            "name": "Ratkin"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1068,
+        "payloadHash": "d59760f8e5b5c4d115c6de70d1e384fa7b8e6662f1835e20a5ac966cbc974b28",
+        "updatedAt": "2026-10-21T07:39:09.818904+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "smugglers-caves",
+          "payload": {
+            "to": [
+              1906,
+              3048
+            ],
+            "from": [
+              2176,
+              2957
+            ],
+            "name": "Smugglers Caves"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1069,
+        "payloadHash": "5b8dccf220df8dc74bad47d2cc2d3971282d45f6e3ff46589b3b378cf261720b",
+        "updatedAt": "2026-10-21T07:39:15.119831+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-988",
+          "payload": {
+            "to": [
+              1854,
+              2910
+            ],
+            "from": [
+              2082,
+              2920
+            ],
+            "name": "Sivah Arjun (level 32)"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1096,
+        "payloadHash": "253330c51ff0a515f2f1a8b7c479e0bc3f377630ed8b2ac7aa3375191e19ad36",
+        "updatedAt": "2026-10-21T07:38:24.574197+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-805",
+          "payload": {
+            "from": {
+              "x": 1124,
+              "y": 2678,
+              "name": "Tora'Galdo (level 38)",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/toragaldo",
+              "levels": [
+                38,
+                38
+              ],
+              "wikiId": "npc-toragaldo",
+              "category": "Named mob"
+            },
+            "name": "Tora'Galdo"
           },
           "credit": false
         }

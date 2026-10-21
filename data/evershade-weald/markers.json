@@ -658,8 +658,8 @@
   "name": "Scout Leader Krindor (level 6)",
   "category": "Named mob",
   "note": "Spawns at the top of the ramp.",
-  "x": 3451,
-  "y": 3265,
+  "x": 3848,
+  "y": 2549,
   "levels": [
    6,
    6
@@ -738,7 +738,7 @@
   "community": true,
   "name": "Daegolar the Pauper",
   "category": "Notable NPC",
-  "note": "Talk to him at Level 1 to become Solo Self found.",
+  "note": "Talk to him at Level 1 to activate the Solo Self found ruleset.",
   "x": 1816,
   "y": 2513,
   "wiki": "https://monstersandmemories.wiki/npcs/daegolar-the-pauper",
@@ -1022,5 +1022,30 @@
   "x": 1396,
   "y": 1964,
   "travel": "Teleporter"
+ },
+ {
+  "id": "community-1029",
+  "community": true,
+  "name": "Magnificent Yelmyarr",
+  "note": "Talk to him at Level 1 to activate the hardcore ruleset.",
+  "x": 1829,
+  "y": 2509,
+  "category": "Notable NPC"
+ },
+ {
+  "id": "community-1035",
+  "community": true,
+  "name": "Muleda Murktoe (level 13)",
+  "note": "Spawned as part of Druid starter quest at the moss circle here.",
+  "x": 3507,
+  "y": 3259,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/muleda-murktoe",
+  "wikiId": "npc-muleda-murktoe",
+  "levels": [
+   13,
+   13
+  ],
+  "quests": true
  }
 ]

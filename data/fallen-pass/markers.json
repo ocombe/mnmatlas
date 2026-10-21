@@ -67,11 +67,12 @@
    31,
    40
   ],
-  "x": 1791,
-  "y": 1167,
+  "x": 1120,
+  "y": 2406,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "community": true
  },
  {
   "id": "shady-merchant-1",
@@ -764,11 +765,11 @@
  {
   "id": "community-805",
   "community": true,
-  "name": "Tora'Galdo (level 38)",
+  "name": "Tora'Galdo",
   "category": "Named mob",
   "note": "",
-  "x": 1877,
-  "y": 1212,
+  "x": 1124,
+  "y": 2678,
   "levels": [
    38,
    38
@@ -782,13 +783,69 @@
   "name": "Sivah Arjun (level 32)",
   "category": "Named mob",
   "note": "Spawns in the 3rd floor area.",
-  "x": 2082,
-  "y": 2920,
+  "x": 1854,
+  "y": 2910,
   "levels": [
    32,
    32
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/sivah-arjun",
   "wikiId": "npc-sivah-arjun"
+ },
+ {
+  "id": "community-1039",
+  "community": true,
+  "name": "Steward Grimaldi",
+  "note": "Lower Saman",
+  "x": 3031,
+  "y": 2104,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/steward-grimaldi",
+  "wikiId": "npc-steward-grimaldi",
+  "levels": [
+   55,
+   55
+  ]
+ },
+ {
+  "id": "community-1040",
+  "community": true,
+  "name": "Yvette Gardener",
+  "note": "",
+  "x": 2834,
+  "y": 1927,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/yvette-gardener",
+  "wikiId": "npc-yvette-gardener",
+  "levels": [
+   52,
+   52
+  ]
+ },
+ {
+  "id": "community-1041",
+  "community": true,
+  "name": "Handmaiden Mira",
+  "note": "",
+  "x": 2995,
+  "y": 2001,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/handmaiden-mira",
+  "wikiId": "npc-handmaiden-mira",
+  "levels": [
+   52,
+   52
+  ]
+ },
+ {
+  "id": "community-1042",
+  "community": true,
+  "name": "Demeter Stollen",
+  "note": "",
+  "x": 676,
+  "y": 1671,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/demeter-stollen",
+  "wikiId": "npc-demeter-stollen"
  }
 ]

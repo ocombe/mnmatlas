@@ -143,6 +143,10 @@
     {
       "name": ".anduri",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:community-424": [
@@ -187,6 +191,10 @@
     {
       "name": ".anduri",
       "what": "moved"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ],
   "marker:community-472": [
@@ -352,6 +360,24 @@
     }
   ],
   "marker:community-1027": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1029": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "label:to-keepers-bight": [
+    {
+      "name": ".anduri",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1035": [
     {
       "name": ".anduri",
       "what": "added"

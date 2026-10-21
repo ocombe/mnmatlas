@@ -160,5 +160,15 @@
       "name": ".anduri",
       "what": "added"
     }
+  ],
+  "marker:maggot-npc-09": [
+    {
+      "name": ".anduri",
+      "what": "edited"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
+    }
   ]
 }

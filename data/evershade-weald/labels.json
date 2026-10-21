@@ -81,14 +81,15 @@
   {
    "id": "to-keepers-bight",
    "name": "to Keeper's Bight",
-   "x": 2475,
-   "y": 3811,
+   "x": 2807,
+   "y": 3862,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1.5,
    "arrow": "south",
    "toMap": "keepers-bight",
-   "toPlace": "to-evershade-weald"
+   "toPlace": "to-evershade-weald",
+   "community": true
   },
   {
    "id": "community-995",
