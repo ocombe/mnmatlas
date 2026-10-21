@@ -341,7 +341,8 @@
     "level": "floor-1",
     "travel": "Ladder",
     "toLevel": "floor-2",
-    "direction": "down"
+    "direction": "down",
+    "toMarker": "community-992"
   },
   {
     "id": "community-992",
@@ -354,7 +355,8 @@
     "level": "floor-2",
     "travel": "Ladder",
     "toLevel": "floor-1",
-    "direction": "up"
+    "direction": "up",
+    "toMarker": "community-991"
   },
   {
     "id": "community-1036",
@@ -379,5 +381,48 @@
     "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/admiral-blacktide",
     "wikiId": "npc-admiral-blacktide"
+  },
+  {
+    "id": "ew-lifts-floor-1",
+    "name": "Lifts - up to the Evershade Weald caves",
+    "category": "Lift",
+    "travel": "Lift",
+    "level": "floor-1",
+    "x": 2073,
+    "y": 476,
+    "approximate": true,
+    "note": "",
+    "toLevel": "ew-caves",
+    "toMarker": "ew-lifts-caves",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "ew-lifts-caves",
+    "name": "Lifts - down to Blacktide Bay",
+    "category": "Lift",
+    "travel": "Lift",
+    "level": "ew-caves",
+    "x": 889,
+    "y": 820,
+    "approximate": true,
+    "note": "",
+    "toLevel": "floor-1",
+    "toMarker": "ew-lifts-floor-1",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "ew-caves-exit-evershade-weald",
+    "name": "to Evershade Weald (through the boulder)",
+    "category": "Exit",
+    "travel": "Exit",
+    "level": "ew-caves",
+    "x": 82,
+    "y": 228,
+    "approximate": true,
+    "note": "",
+    "toMap": "evershade-weald",
+    "toPlace": "to-blacktide-bay-boulder"
   }
 ]

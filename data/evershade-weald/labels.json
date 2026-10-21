@@ -58,15 +58,6 @@
    "minZoom": 2.5
   },
   {
-   "id": "fake-cave-wall",
-   "name": "Fake cave wall",
-   "x": 3984,
-   "y": 3466,
-   "kind": "building",
-   "priority": 50,
-   "minZoom": 3.5
-  },
-  {
    "id": "to-glinting-hollow",
    "name": "to Glinting Hollow",
    "x": 731,
@@ -101,6 +92,18 @@
    "note": "",
    "x": 3218,
    "y": 2812
+  },
+  {
+   "id": "to-blacktide-bay-boulder",
+   "name": "Blacktide Bay (through the boulder)",
+   "x": 3853,
+   "y": 3154,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "southeast",
+   "toMap": "blacktide-bay",
+   "toPlace": "ew-caves-exit-evershade-weald"
   }
  ],
  "trainers": []

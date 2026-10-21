@@ -414,13 +414,13 @@
  },
  {
   "id": "to-blacktide-bay",
-  "name": "Lift to Blacktide Bay",
+  "name": "Lifts to Blacktide Bay (in the orc cave)",
   "category": "Lift",
   "x": 4146,
   "y": 3377,
-  "note": "Leads to Blacktide Bay.",
+  "note": "Inside the orc cave behind the boulder at the foot of the cliff.",
   "toMap": "blacktide-bay",
-  "toPlace": "exit-evershade-weald",
+  "toPlace": "ew-lifts-caves",
   "direction": "down"
  },
  {
@@ -1121,5 +1121,13 @@
     "wikiId": "npc-a-black-widow"
    }
   ]
+ },
+ {
+  "id": "blacktide-boulder-secret",
+  "name": "Fake boulder",
+  "category": "Secret",
+  "x": 3835,
+  "y": 3128,
+  "note": "This boulder at the foot of the cliff can be walked through. Behind it, a tunnel leads to the orc cave and the lifts down to Blacktide Bay."
  }
 ]

@@ -858,6 +858,25 @@
       "defaultLevel": "floor-1",
       "levels": [
         {
+          "id": "ew-caves",
+          "title": "Evershade Weald caves",
+          "width": 1184,
+          "height": 1408,
+          "minZoom": 0,
+          "maxNativeZoom": 3,
+          "maxZoom": 5,
+          "coordinateZoom": 3,
+          "tileRevision": "ew-caves-v1",
+          "alignmentGroup": "evershade-weald-caves",
+          "tilePath": "assets/tiles/blacktide-bay/ew-caves/{z}/{x}/{y}.webp",
+          "labelsFile": "data/blacktide-bay/ew-caves-labels.json",
+          "defaultView": {
+            "mode": "fit",
+            "padding": 18,
+            "placeZoom": 3
+          }
+        },
+        {
           "id": "caves",
           "title": "Keeper’s Bight caves",
           "width": 2208,

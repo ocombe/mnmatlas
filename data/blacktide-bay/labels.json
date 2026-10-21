@@ -88,22 +88,6 @@
       "note": ""
     },
     {
-      "id": "exit-evershade-weald",
-      "name": "Lift to Evershade Weald",
-      "level": "floor-1",
-      "x": 2073,
-      "y": 476,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "up",
-      "travel": "Lift",
-      "toMap": "evershade-weald",
-      "toPlace": "to-blacktide-bay",
-      "approximate": true,
-      "note": ""
-    },
-    {
       "id": "community-830",
       "community": true,
       "name": "Undead Gnomes",
