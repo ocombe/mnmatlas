@@ -710,7 +710,10 @@ function updateTitles(){
 const localPath=p=>typeof p==='string'&&/^[a-zA-Z0-9_./{}-]+$/.test(p)&&!p.startsWith('/')&&!p.split('/').includes('..');
 const levelConfig=(base,level)=>level?{...base,...level,id:base.id,title:base.title,levelId:level.id,levelTitle:level.title}:base;
 const levelsAligned=(a,b)=>a.width===b.width&&a.height===b.height&&a.coordinateZoom===b.coordinateZoom&&(a.alignmentGroup||'shared')===(b.alignmentGroup||'shared');
-async function fetchData(path,empty){if(path===null)return empty;if(!localPath(path))throw Error('Invalid local data path');const r=await fetch(path,{cache:'no-cache'});if(!r.ok)throw Error('Map data unavailable: '+path);return r.json();}
+async function fetchData(path,empty){if(path===null)return empty;if(!localPath(path))throw Error('Invalid local data path');if(worldData.has(path))return structuredClone(await worldData.get(path));const r=await fetch(path,{cache:'no-cache'});if(!r.ok)throw Error('Map data unavailable: '+path);return r.json();}
+const worldData=new Map();
+function worldFile(path,empty){if(!worldData.has(path)){const read=fetchData(path,empty);worldData.set(path,read);read.catch(()=>worldData.delete(path));}return worldData.get(path);}
+window.addEventListener('atlas:published',()=>worldData.clear());
 function validateRegistry(data){
  if(data.version!==1||!Array.isArray(data.maps)||!data.maps.length||!data.maps.some(m=>m.id===data.defaultMap)||new Set(data.maps.map(m=>m.id)).size!==data.maps.length)throw Error('Invalid map registry');
  for(const c of data.maps){if(!/^[a-z0-9-]+$/.test(c.id)||!c.title||!c.description||![c.width,c.height,c.coordinateZoom,c.minZoom,c.maxZoom,c.maxNativeZoom,c.tileSize].every(Number.isFinite)||c.width<=0||c.height<=0||c.maxZoom<c.minZoom||!localPath(c.tilePath)||!localPath(c.markersFile)||(c.zonesFile!=null&&!localPath(c.zonesFile))||(c.colourTilePath!=null&&!localPath(c.colourTilePath))||!c.defaultView)throw Error('Invalid map configuration');}
@@ -850,7 +853,7 @@ async function loadMapKinds(){
  const world=registry.maps.find(m=>m.entry);if(!world)return;
  const parts=[{level:world.defaultLevel,zones:world.zonesFile,markers:world.markersFile},...(world.levels||[]).map(l=>({level:l.id,zones:l.zonesFile,markers:l.markersFile}))];
  await Promise.all(parts.map(async p=>{
-  const deep=p.level==='deep',[zones,markers]=await Promise.all([p.zones?fetchData(p.zones,{}).catch(()=>({})):{},p.markers?fetchData(p.markers,[]).catch(()=>[]):[]]);
+  const deep=p.level==='deep',[zones,markers]=await Promise.all([p.zones?worldFile(p.zones,{}).catch(()=>({})):{},p.markers?worldFile(p.markers,[]).catch(()=>[]):[]]);
   const list=Array.isArray(zones?.zones)?zones.zones:Array.isArray(zones)?zones:[];
   if(deep)for(const z of list)if(typeof z?.id==='string')mapKinds.deep.add(z.id);
   for(const z of list)if(z?.charted===false&&typeof z.name==='string')mapKinds.uncharted.set(foldName(z.name),{title:z.name,deep,dungeon:false});
@@ -964,10 +967,10 @@ function setupControls(){
  window.addEventListener('popstate',()=>{const url=new URL(location.href);ownView=true;loadMap(mapIdOf(url),url);});
 }
 // Every publish refreshes each file's Last-Modified, so one small HEAD request spots a newer edition.
-const updateInterval=15*60*1000;let updateStamp=null,updateCheckedAt=0;
-async function checkForUpdate(){
- if((document.hidden&&updateStamp!==null)||!$('update-notice').hidden)return;updateCheckedAt=Date.now();
- try{const r=await fetch('site.webmanifest',{method:'HEAD',cache:'no-store'}),stamp=r.ok&&(r.headers.get('last-modified')||r.headers.get('etag'));window.dispatchEvent(new Event('atlas:edition-check'));if(!stamp)return;if(updateStamp===null)updateStamp=stamp;else if(stamp!==updateStamp){updateStamp=stamp;$('update-notice').hidden=false;}}catch{}
+const updateInterval=15*60*1000;let updateStamp=null,updateCheckedAt=0,updateFlight=null;
+function checkForUpdate(){
+ if(updateFlight)return updateFlight;if((document.hidden&&updateStamp!==null)||!$('update-notice').hidden)return Promise.resolve();updateCheckedAt=Date.now();
+ updateFlight=(async()=>{try{const r=await fetch('site.webmanifest',{method:'HEAD',cache:'no-store'}),stamp=r.ok&&(r.headers.get('last-modified')||r.headers.get('etag'));if(!stamp)return;if(updateStamp===null)updateStamp=stamp;else if(stamp!==updateStamp){updateStamp=stamp;$('update-notice').hidden=false;window.dispatchEvent(new Event('atlas:edition-check'));window.dispatchEvent(new Event('atlas:published'));}}catch{}})().finally(()=>{updateFlight=null;});return updateFlight;
 }
 function watchForUpdates(){
  $('update-reload').onclick=()=>location.reload();$('update-dismiss').onclick=()=>$('update-notice').hidden=true;

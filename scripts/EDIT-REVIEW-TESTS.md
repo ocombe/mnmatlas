@@ -20,6 +20,31 @@ exit nonzero on failure. Run a suite directly to narrow the output. Set
 | `test-review-f4.mjs` | R2-1 through R2-10: empty notes, map-switch sync, links, recovery, chips, classes, published data, timestamps, shares and follow receipts |
 | `test-desk-forms-f3.mjs` | All approval paths, failed reloads, full Undo, dirty refresh, class chips, typed mobs and Gives quests |
 | `test-desk-speed.mjs` | B30: per-step request budgets, incremental queue merging and fallback, pagination, coalesced reads, conditional files, parallel floors, throttled focus and safe note sync during travel |
+| `test-request-budget.mjs` | B31: signed-in visitor requests, shared visibility/focus throttle, lazy cached renown, conditional edition files, world and floor skips, combined notes reads, unchanged merges, concurrent saves and remote deletions |
+
+The visitor budget uses empty, unchanged notes and two-floor maps. It records reads,
+writes, RPCs, manifest HEADs and data fetch cache modes at each step. The baseline
+below runs the same fixture against the preceding revision; totals exclude page
+code, fonts and tiles.
+
+| Step | Database calls before → after | Data fetches before → after | HEADs before → after |
+| --- | --- | --- | --- |
+| Signed-in map load | 15 → 6 | 7 → 6 | 2 → 1 |
+| Floor switch | 11 → 0 | 4 → 2 | 1 → 0 |
+| First map switch | 11 → 4 | 4 → 4 | 1 → 0 |
+| Second map switch | 11 → 4 | 4 → 4 | 1 → 0 |
+| First return | 7 → 4 | 1 → 0 | 1 → 0 |
+| Second return within five minutes | 7 → 0 | 1 → 0 | 1 → 0 |
+| Third return within five minutes | 7 → 0 | 1 → 0 | 1 → 0 |
+| Account menu | 0 → 1 | 0 → 0 | 0 → 0 |
+| Bell, then Your suggestions | 2 → 1 | 0 → 0 | 0 → 0 |
+| Unchanged edition tick | 0 → 0 | 2 → 0 | 1 → 1 |
+
+The account menu's one call is its first visible renown lookup; the bell reuses
+that value. All unchanged notes steps have zero writes. Marker, label, chronicle
+and publish-log reads use `no-cache`; credits retain their existing cache mode.
+The safety cases also cover unreadable combined reads, a local save while that
+read is pending, and local or remote changes after a skipped floor sync.
 
 `community-harness.mjs` reuses the existing community suite's browser helpers.
 It loads the actual browser scripts. An optional fixture flag exposes existing

@@ -52,15 +52,13 @@
    rose.style.transformOrigin = turn ? `50% ${rose.offsetHeight - rose.offsetWidth / 2}px` : '';
    rose.style.transform = turn ? `rotate(${turn}rad)` : '';
   }
-  const levels = planLevels(entry), request = new AbortController();
+  const levels = planLevels(entry), passages = originals.map(m => ({...m}));
   let current = active()?.levelId || entry.defaultLevel || levels[0].id;
   const select = id => buttons().find(b => b.dataset.level === id)?.click();
   // Paired map passages; the plan omits dashes for stairs with shared landings.
   async function floorLinks() {
    try {
-    if (!entry.markersFile) return [];
-    const r = await fetch(entry.markersFile, { signal:request.signal }); if (!r.ok) return [];
-    const data = await r.json(), rows = Array.isArray(data) ? data : data.markers || [], byId = new Map(rows.map(m => [m.id, m])), seen = new Set(), out = [];
+    const rows = passages, byId = new Map(rows.map(m => [m.id, m])), seen = new Set(), out = [];
     for (const m of rows) {
      const other = m.toMarker && byId.get(m.toMarker);
      if (!other || !m.level || !other.level || m.level === other.level) continue;
@@ -129,7 +127,7 @@
   for (const [event,fn] of listeners) map.addEventListener(event,fn);
   apply();
   return { key, ensurePlan, update() { current = active()?.levelId || entry.defaultLevel || levels[0].id; plan?.setCurrent(current); ensurePlan(); }, dispose() {
-   disposed = true; request.abort(); plan?.dispose(); compass(); for (const [event,fn] of listeners) map.removeEventListener(event,fn);
+   disposed = true; plan?.dispose(); compass(); for (const [event,fn] of listeners) map.removeEventListener(event,fn);
    phoneQuery.removeEventListener('change', phoneChange); window.removeEventListener('resize', placeTools); toolsObserver.disconnect();
    phoneOpen.remove(); fullTools.remove(); frame.classList.remove('floor-plan-phone');
    for (const prop of ['--plan-tools-top','--plan-tools-right','--plan-tool-width','--plan-tool-height']) frame.style.removeProperty(prop);

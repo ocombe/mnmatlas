@@ -50,7 +50,7 @@
   if(user){
    const head=text('div','','account-head'),who=text('div');who.append(text('strong',displayName(user)),text('small','Signed in with Discord'));head.append(avatar(36),who);
    // Contribution points: approved suggestions count 1, bounties 2, priority bounties 3.
-   const points=text('p','','account-points');points.hidden=true;myPoints().then(p=>{if(!p)return;points.textContent=rewardWord[0].toUpperCase()+rewardWord.slice(1)+': '+p.points+(p.bounties+p.priority_bounties?' · '+(p.bounties+p.priority_bounties)+((p.bounties+p.priority_bounties)===1?' bounty':' bounties'):'');points.hidden=false;});
+   const points=text('p','','account-points');points.hidden=true;
    account.append(head,points,syncLine,button('Send feedback',()=>{closeAccount();feedbackDialog();}));if(admin)account.append(reviewButton);
    account.append(button('Sign out',()=>{if(!desk.close())return;closeAccount();signOut();}),text('hr'),button('Delete my account…',()=>{closeAccount();deleteDialog();},'account-delete'));
   }
@@ -58,7 +58,7 @@
   notesLine.textContent=user?'Your notes sync to your account.':'Notes stay in this browser; sign in to sync them.';
   if(admin)countWaiting();
  }
- function openAccount(){account.hidden=false;accountBox.classList.add('open');accountButton.setAttribute('aria-expanded','true');if(admin)countWaiting();account.querySelector('button')?.focus({preventScroll:true});}
+ function openAccount(){account.hidden=false;accountBox.classList.add('open');accountButton.setAttribute('aria-expanded','true');const uid=user?.id;myPoints().then(p=>{const line=account.querySelector('.account-points');if(!p||uid!==user?.id||!line)return;line.textContent=rewardWord[0].toUpperCase()+rewardWord.slice(1)+': '+p.points+(p.bounties+p.priority_bounties?' · '+(p.bounties+p.priority_bounties)+((p.bounties+p.priority_bounties)===1?' bounty':' bounties'):'');line.hidden=false;});if(admin)countWaiting();account.querySelector('button')?.focus({preventScroll:true});}
  function closeAccount(refocus){if(account.hidden)return;account.hidden=true;accountBox.classList.remove('open');accountButton.setAttribute('aria-expanded','false');if(refocus)accountButton.focus({preventScroll:true});}
  accountButton.onclick=()=>account.hidden?openAccount():closeAccount(false);
  account.addEventListener('keydown',e=>{if(e.key==='Escape'){e.stopPropagation();closeAccount(true);}});
@@ -193,12 +193,14 @@
  // One change set per map and floor for each fetched queue; rebuilding it per lookup froze the desk with a long queue.
  function otherMapChanges(data,mapId,levelId){if(data.sets?.rows!==data.rows)data.sets={rows:data.rows,byLevel:new Map()};const key=levelId||'';let set=data.sets.byLevel.get(key);if(!set){set=window.atlasChanges.buildChanges({...data,mapId,levelId,onError:(row,error)=>desk.rowError(row,error),publishedPositions:new Map(data.markers.map(m=>[m.id,[m.x,m.y]])),publishedLabelPositions:new Map(data.labels.map(l=>[l.id,[l.x,l.y]]))});data.sets.byLevel.set(key,set);}return set;}
  function reviewPlaces(id,level){return (id===config.id?labelData.labels:reviewMaps.get(id)?.labels||[]).filter(r=>!level||!r.level||r.level===level);}
- function connectNotices(){window.atlasNotices?.setAccount(user,{closeAccount,points:myPoints,kind:desk.kind,mapName:desk.mapName,show:showOwn,change:changeOwn,withdraw:withdrawOwn,rows:async()=>{const uid=user?.id,rows=[];if(!uid)return rows;for(let offset=0;;offset+=500){const {data,error}=await client.from('suggestions').select('*').eq('user_id',uid).order('created_at',{ascending:false}).range(offset,offset+499);if(error)throw error;rows.push(...(data||[]).map(normaliseSuggestion));if(!data||data.length<500)break;}return rows;}});}
+ function connectNotices(){window.atlasNotices?.setAccount(user,{closeAccount,points:myPoints,kind:desk.kind,mapName:desk.mapName,show:showOwn,change:changeOwn,withdraw:withdrawOwn,rows:async()=>{const uid=user?.id,rows=[];if(!uid)return rows;for(let offset=0;;offset+=500){const {data,error}=await client.from('suggestions').select('id,user_id,map,level,kind,target_id,status,created_at,updated_at,reviewed_at,review_note,notice_name:payload->>name,notice_reason:payload->>reason').eq('user_id',uid).order('created_at',{ascending:false}).range(offset,offset+499);if(error)throw error;rows.push(...(data||[]).map(r=>({...normaliseSuggestion(r),noticeOnly:true,payload:{name:r.notice_name??r.payload?.name,reason:r.notice_reason??r.payload?.reason}})));if(!data||data.length<500)break;}return rows;}});}
  let ownSerial=0;
  async function travelOwn(row){if(!desk.close()||!allowLeave())return false;invalidateApproved();const serial=++ownSerial,url=new URL(location.href);for(const k of ['place','x','y','z'])url.searchParams.delete(k);url.searchParams.set('map',row.map);if(row.level)url.searchParams.set('level',row.level);else url.searchParams.delete('level');if(config.id!==row.map||row.level&&config.levelId!==row.level)await loadMap(row.map,url);if(serial!==ownSerial||config.id!==row.map||loading)return false;await loadApproved();return serial===ownSerial;}
- async function showOwn(row){if(row.kind==='feedback'||row.kind==='report'&&row.target_id==null){if(!desk.close()||!allowLeave())return;goToMap(row.map,window.atlasReview.spotLink(row));return;}if(!await travelOwn(row))return;const target=reviewTarget(row),at=window.atlasReview.point(row),live=row.status==='published'?target?.published:target?.proposed,p=Number.isFinite(live?.x)&&Number.isFinite(live?.y)?live:at.every(Number.isFinite)?{x:at[0],y:at[1]}:target?.published;if(!Number.isFinite(p?.x)||!Number.isFinite(p?.y)){status('This mark is no longer on this map.');return;}map.setView(locationOf(p),config.defaultView.placeZoom);const pin=suggestionPins.get(row.id)||pins.get(row.target_id)||labelPins.get(row.target_id);pin?.openPopup?.();if(compact())setPanel(false);}
- async function withdrawOwn(row){if(!user||row.user_id!==user.id||row.status!=='pending'||row.reviewed_at)return false;try{const {data,error}=await version(client.from('suggestions').delete().eq('id',row.id).eq('user_id',user.id).eq('status','pending').is('reviewed_at',null),row).select('id');invalidateApproved();if(error||!data?.length)throw error||Error();await loadApproved();status('Suggestion withdrawn.');return true;}catch{status('This suggestion changed or is already being reviewed. Open your notices again.');return false;}}
+ async function ownDetails(row){if(!row.noticeOnly)return row;try{const {data,error}=await client.from('suggestions').select('*').eq('id',row.id).eq('user_id',user.id).maybeSingle();if(error||!data)throw error||Error();return normaliseSuggestion(data);}catch{status('This suggestion could not load. Open your notices again.');return null;}}
+ async function showOwn(row){row=await ownDetails(row);if(!row)return;if(row.kind==='feedback'||row.kind==='report'&&row.target_id==null){if(!desk.close()||!allowLeave())return;goToMap(row.map,window.atlasReview.spotLink(row));return;}if(!await travelOwn(row))return;const target=reviewTarget(row),at=window.atlasReview.point(row),live=row.status==='published'?target?.published:target?.proposed,p=Number.isFinite(live?.x)&&Number.isFinite(live?.y)?live:at.every(Number.isFinite)?{x:at[0],y:at[1]}:target?.published;if(!Number.isFinite(p?.x)||!Number.isFinite(p?.y)){status('This mark is no longer on this map.');return;}map.setView(locationOf(p),config.defaultView.placeZoom);const pin=suggestionPins.get(row.id)||pins.get(row.target_id)||labelPins.get(row.target_id);pin?.openPopup?.();if(compact())setPanel(false);}
+ async function withdrawOwn(row){if(!user||row.user_id!==user.id||row.status!=='pending'||row.reviewed_at)return false;try{const {data,error}=await version(client.from('suggestions').delete().eq('id',row.id).eq('user_id',user.id).eq('status','pending').is('reviewed_at',null),row).select('id');invalidateApproved();if(error||!data?.length)throw error||Error();ownChanged();await loadApproved();status('Suggestion withdrawn.');return true;}catch{status('This suggestion changed or is already being reviewed. Open your notices again.');return false;}}
  async function changeOwn(row){
+  row=await ownDetails(row);if(!row)return;
   if(row.kind==='feedback'||row.kind==='report'&&row.target_id==null)return;
   if(!user||row.user_id!==user.id||row.status!=='pending'||row.reviewed_at||!await travelOwn(row))return;
   const t=reviewTarget(row),base=t?.effective||row.payload.from||{},value=window.atlasChanges.applyTo(base,row),d=showDialog('Change your suggestion'),move=row.kind.startsWith('move-');let fields=null,position=[value.x,value.y];
@@ -211,12 +213,12 @@
    if(row.kind.startsWith('edit-')&&!payload.remove&&!window.atlasChanges.fieldsOf({...row,payload}).size){if(!await withdrawOwn(row))throw Error('Changed since opened');d.close();status('All changes reverted. Your suggestion was withdrawn.');return;}
    payload=window.atlasFields.stored(row.kind,payload);
    const amendments=[...approvedRows,...pendingRows],newest=newestOnTarget(row,amendments);
-   if(row.kind==='report'||newest?.id===row.id){const {data,error}=await version(client.from('suggestions').update({payload,comment:why.value.trim()||null,...(admin&&row.kind!=='report'?{status:'approved',reviewed_at:new Date().toISOString()}:{})}).eq('id',row.id).eq('user_id',user.id).eq('status','pending').is('reviewed_at',null),row).select('*');invalidateApproved();if(error||!data?.length)throw error||Error('Changed since opened');window.atlasNotices?.sent(normaliseSuggestion(data[0]));}
+   if(row.kind==='report'||newest?.id===row.id){const {data,error}=await version(client.from('suggestions').update({payload,comment:why.value.trim()||null,...(admin&&row.kind!=='report'?{status:'approved',reviewed_at:new Date().toISOString()}:{})}).eq('id',row.id).eq('user_id',user.id).eq('status','pending').is('reviewed_at',null),row).select('*');invalidateApproved();if(error||!data?.length)throw error||Error('Changed since opened');ownChanged();window.atlasNotices?.sent(normaliseSuggestion(data[0]));}
    else{const now=fields?.read(),added=row.kind==='new-marker',kind=added?(t?.kind==='label'?'edit-label':'edit-marker'):row.kind,from=window.atlasChanges.nextFrom({effective:base.name?base:value},kind);payload=move?{...payload,from:[base.x,base.y]}:now?window.atlasFields.delta(now,from):{...payload,from};if(!move&&position.every(Number.isFinite)&&JSON.stringify(position)!==start){payload.x=position[0];payload.y=position[1];}await saveOwn({kind,target_id:added?'community-'+row.id:row.target_id,map:row.map,level:row.level,user_id:user.id,author_name:displayName(user),credit:row.credit,payload,comment:why.value.trim()||null},amendments);}
    d.close();await loadApproved();status(admin&&row.kind!=='report'?'Saved for the next edition.':'Your suggestion is updated and waiting for review.');
   },'This suggestion changed or is already being reviewed. Open it again.'));d.append(actions);d.oncancel=e=>{e.preventDefault();try{if(leave())d.close();}catch{if(window.confirm('Leave without saving these changes?'))d.close();}};d.addEventListener('close',()=>{fields?.dispose();clearPreview();},{once:true});
  }
- async function sentUndo(id){if(id==null||!user)return;let found;try{found=await client.from('suggestions').select('*').eq('id',id).maybeSingle();}catch{return;}const {data,error}=found;if(error||!data)return;const row=normaliseSuggestion(data);window.atlasNotices?.sent(row);window.atlasOfferUndo('Delete just-sent suggestion',async()=>{try{let q=version(client.from('suggestions').delete().eq('id',row.id).eq('user_id',user.id).eq('status',row.status),row);if(!admin)q=q.is('reviewed_at',null);const {data:done,error}=await q.select('id');invalidateApproved();if(error||!done?.length)throw error||Error();await loadApproved();status('Just-sent suggestion withdrawn.');}catch{status('This suggestion changed or was reviewed; it could not be withdrawn.');}});}
+ async function sentUndo(id){ownChanged();if(id==null||!user)return;let found;try{found=await client.from('suggestions').select('*').eq('id',id).maybeSingle();}catch{return;}const {data,error}=found;if(error||!data)return;const row=normaliseSuggestion(data);window.atlasNotices?.sent(row);window.atlasOfferUndo('Delete just-sent suggestion',async()=>{try{let q=version(client.from('suggestions').delete().eq('id',row.id).eq('user_id',user.id).eq('status',row.status),row);if(!admin)q=q.is('reviewed_at',null);const {data:done,error}=await q.select('id');invalidateApproved();if(error||!done?.length)throw error||Error();ownChanged();await loadApproved();status('Just-sent suggestion withdrawn.');}catch{status('This suggestion changed or was reviewed; it could not be withdrawn.');}});}
  // Wiki search (signed-in visitors): look a page up by name and fill the wiki link with it.
  // The search goes through the atlas's own backend function, which holds the wiki's partner key.
  // NPC names search this map's zone; the Fish list searches items across all zones.
@@ -480,7 +482,11 @@
  window.addEventListener('atlas:editor-open',e=>{const m=e.detail?.note;if(bountyNext&&m?.wikiId===bountyNext.id){
   const all=readBounties();all[m.id]={bounty:bountyNext.id,priority:bountyNext.priority,map:config.id};writeBounties(all);}bountyNext=null;});
  // Contribution points (approved suggestions: 1, bounty 2, priority bounty 3), from the database; null when unavailable.
- async function myPoints(){if(!user)return null;try{const {data,error}=await client.rpc('my_contribution_points');if(error)throw error;const row=Array.isArray(data)?data[0]:data;return row&&Number.isFinite(row.points)?row:null;}catch{return null;}}
+ let pointsCache=null,pointsFlight=null,pointsGeneration=0;
+ function clearPoints(){pointsCache=null;pointsFlight=null;pointsGeneration++;}
+ function ownChanged(){clearPoints();window.atlasNotices?.refresh();}
+ async function myPoints(){if(!user)return null;const uid=user.id,generation=pointsGeneration;if(pointsCache?.uid===uid&&Date.now()-pointsCache.at<300000)return pointsCache.value;if(pointsFlight?.uid===uid)return pointsFlight.promise;const entry={uid};entry.promise=(async()=>{try{const {data,error}=await client.rpc('my_contribution_points');if(error)throw error;const row=Array.isArray(data)?data[0]:data,value=row&&Number.isFinite(row.points)?row:null;if(user?.id===uid&&generation===pointsGeneration)pointsCache={uid,value,at:Date.now()};return value;}catch{return null;}finally{if(pointsFlight===entry)pointsFlight=null;}})();pointsFlight=entry;return entry.promise;}
+
  let labelMoveDraft=null;
  async function editDialog(target,kind){
   if(!user){signInDialog();return;}invalidateApproved();await loadApproved();const amendments=[...approvedRows,...pendingRows],state=targetState(target,kind),own=!admin&&amendments.filter(r=>r.user_id===user.id&&r.status==='pending'&&!r.reviewed_at&&r.kind===kind&&r.target_id===target.id&&r.map===config.id&&(kind!=='edit-label'||(r.level||null)===(target.level||config.levelId||null))).sort((a,b)=>Number(b.id)-Number(a.id))[0],base=own?window.atlasChanges.applyTo(state?.effective||target,own):(state?.isNew&&!state.published?state.proposed:state?.effective)||target,chip=state?.kind==='chip';
@@ -511,7 +517,7 @@
   if(!user){signInDialog();return;}const amendments=[...approvedRows,...pendingRows],state=targetState(target,kind),base=state?.effective?.name?state.effective:state?.proposed?.name?state.proposed:target;
   // A marker that only exists as a suggestion is not on the map yet: dropping it sets that suggestion aside (or withdraws the author's own).
   const fresh=!state?.published&&state?.rows?.find(r=>r.kind==='new-marker'&&['pending','approved'].includes(r.status));
-  if(fresh&&(admin||fresh.user_id===user.id&&fresh.status==='pending'&&!fresh.reviewed_at)){confirmDialog('drop-confirm','Drop “'+(base.name||'this marker')+'”?','It is not on the map yet, so this '+(admin&&fresh.user_id!==user.id?'sets the suggestion aside.':'withdraws the suggestion.'),[['Cancel',()=>{}],['Drop it',async()=>{map.closePopup?.();if(admin){await desk.decideRow(fresh,'rejected','Dropped before publishing');}else{const {error}=await client.from('suggestions').delete().eq('id',fresh.id).eq('status','pending');invalidateApproved();status(error?'It could not be withdrawn. Please try again.':'Suggestion withdrawn.');}await loadApproved();freshPopup();},'danger']]);return;}
+  if(fresh&&(admin||fresh.user_id===user.id&&fresh.status==='pending'&&!fresh.reviewed_at)){confirmDialog('drop-confirm','Drop “'+(base.name||'this marker')+'”?','It is not on the map yet, so this '+(admin&&fresh.user_id!==user.id?'sets the suggestion aside.':'withdraws the suggestion.'),[['Cancel',()=>{}],['Drop it',async()=>{map.closePopup?.();if(admin){await desk.decideRow(fresh,'rejected','Dropped before publishing');}else{const {error}=await client.from('suggestions').delete().eq('id',fresh.id).eq('status','pending');invalidateApproved();if(!error)ownChanged();status(error?'It could not be withdrawn. Please try again.':'Suggestion withdrawn.');}await loadApproved();freshPopup();},'danger']]);return;}
   const d=showDialog('It should be removed'),choice=choiceList(d,'removal-reason',removalReasons),why=field(d,'Details','removal-details',textBox(3,500,'Not in the game any more, or marked twice')),credit=creditBox(d);
   d.append(text('p',(base.name||target.name||'This marker')+' · '+config.title,'form-hint'));
   const actions=text('div','','dialog-actions'),send=sendButton(admin?'Approve removal':'Send for review',async()=>{
@@ -540,7 +546,7 @@
   if(!old)return receipt?submitRow(row,{receipt}):submit(row);const delta={...row.payload};if(!row.kind.startsWith('move-')&&delta.remove!==true&&delta.name===delta.from?.name)delete delta.name;let payload={...old.payload,...delta,from:row.kind.startsWith('move-')?old.payload.from:{...row.payload.from,...old.payload.from},...(row.kind==='move-marker'&&old.payload.fromShape?{fromShape:old.payload.fromShape}:{})};
   if(replace){payload={...row.payload,from:old.payload.from};if(!window.atlasChanges.fieldsOf({...row,payload}).size){if(!await withdrawOwn(old))throw Error('Changed since opened');return {withdrawn:true};}}
   payload=window.atlasFields.stored(row.kind,payload);if(row.payload.remove!==true){delete payload.remove;delete payload.reason;}if(payloadBytes(payload)>=4096)throw Object.assign(Error('Too long'),{code:'too-long'});
-  let q=client.from('suggestions').update({payload,status:admin?'approved':'pending',comment:row.comment??old.comment,credit:row.credit??old.credit,...(admin?{reviewed_at:new Date().toISOString()}:{})}).eq('id',old.id).eq('user_id',user.id).eq('status',old.status);if(!admin)q=q.is('reviewed_at',null);const {data,error}=await version(q,old).select('*');invalidateApproved();if(error||!data?.length)throw error||Error('Changed since opened');await loadApproved();const saved=normaliseSuggestion(data[0]);window.atlasNotices?.sent(saved);return receipt?{row:saved,before:old,published:admin}:true;
+  let q=client.from('suggestions').update({payload,status:admin?'approved':'pending',comment:row.comment??old.comment,credit:row.credit??old.credit,...(admin?{reviewed_at:new Date().toISOString()}:{})}).eq('id',old.id).eq('user_id',user.id).eq('status',old.status);if(!admin)q=q.is('reviewed_at',null);const {data,error}=await version(q,old).select('*');invalidateApproved();if(error||!data?.length)throw error||Error('Changed since opened');ownChanged();await loadApproved();const saved=normaliseSuggestion(data[0]);window.atlasNotices?.sent(saved);return receipt?{row:saved,before:old,published:admin}:true;
  }
  const editButton=(target,kind)=>button('Change',()=>suggestSheet(target,kind),'community-edit','edit');
  const sharedToken=m=>scope()+':'+m.id;
@@ -563,7 +569,7 @@
     // Accepted (approved or live) stays on the map; one already looked at (sent back by the publishing job) waits for its review.
     forget();status(row.status==='pending'?'Note deleted. Your '+what+' is already being reviewed, so it could not be withdrawn.':'Your '+(b?'claim':'suggestion')+' was already accepted, so the marker stays on the public map.',true);return;}
    const {data:done,error:refused}=await client.from('suggestions').delete().eq('id',rec.id).select('id');invalidateApproved();if(refused)throw refused;if(!done?.length)throw Error('not withdrawn');
-   forget();loadApproved();if(b)unmarkBountyClaimed(b.map||config.id,b.bounty);status('Note deleted, and your '+what+' was withdrawn.');event('suggestion-withdrawn');
+   forget();ownChanged();loadApproved();if(b)unmarkBountyClaimed(b.map||config.id,b.bounty);status('Note deleted, and your '+what+' was withdrawn.');event('suggestion-withdrawn');
   }catch{status('Note deleted, but your '+what+' could not be withdrawn: it is still waiting for review.',true);}
  }
  window.addEventListener('atlas:note-deleted',e=>{withdrawNote(e.detail?.note);});
@@ -622,7 +628,7 @@
  async function submitRow(row,{receipt=false,onInserted}={}){row={...row,payload:window.atlasFields.stored(row.kind,row.payload)};
   if(payloadBytes(row.payload)>=4096)throw Object.assign(Error('Too long'),{code:'too-long'});
   const {data,error}=await client.from('suggestions').insert(row).select(receipt?'*':'id').single();invalidateApproved();if(error)throw error;
-  const id=data?.id??null;if(id!==null)onInserted?.(id);const inserted=receipt&&data?normaliseSuggestion(data):null,finish=async(published,saved=inserted)=>{await loadApproved();if(receipt)window.atlasNotices?.sent(saved);else await sentUndo(id);return {id,published,...(receipt?{row:saved}:{})};};if(!admin||id==null)return finish(false);
+  const id=data?.id??null;if(id!==null)onInserted?.(id);const inserted=receipt&&data?normaliseSuggestion(data):null,finish=async(published,saved=inserted)=>{await loadApproved();if(receipt){ownChanged();window.atlasNotices?.sent(saved);}else await sentUndo(id);return {id,published,...(receipt?{row:saved}:{})};};if(!admin||id==null)return finish(false);
   let q=client.from('suggestions').update({status:'approved',reviewed_at:new Date().toISOString(),review_note:'Approved on sending (admin)'}).eq('id',data.id).eq('status','pending');if(receipt)q=version(q,inserted);const {data:done,error:fail}=await q.select(receipt?'*':'id');invalidateApproved();
   if(fail||!done?.length){status('Saved, but it could not be approved here; approve it at the Review desk.');return finish(false);}
   return finish(true,receipt?normaliseSuggestion(done[0]):null);
@@ -742,7 +748,7 @@
     // Its author may change it only until it has been looked at (the database's rule; an admin always may). After that
     // the change stays in the note: sending it again would only make a duplicate.
     if(admin||(!row.reviewed_at&&!row.review_note)){const {data:done,error:refused}=await client.from('suggestions').update({payload:window.atlasFields.stored('new-marker',payload),...(admin?{status:'approved',reviewed_at:new Date().toISOString()}:{})}).eq('id',rec.id).eq('status','pending').select('*');invalidateApproved();
-     if(!refused&&done?.length){window.atlasNotices?.sent(normaliseSuggestion(done[0]));keep();status('Saved, and your suggestion was updated.');loadApproved();return;}}
+     if(!refused&&done?.length){ownChanged();window.atlasNotices?.sent(normaliseSuggestion(done[0]));keep();status('Saved, and your suggestion was updated.');loadApproved();return;}}
     status('Saved to your field notes. Your suggestion is already being reviewed, so this change was not added to it.',true);return;
    }
    if(row?.status==='approved'||row?.status==='published'){
@@ -834,34 +840,37 @@
  }
  function syncIdentity(){return user?user.id+':'+scope():'';}
  function scheduleSync(){
-  if(syncing||!user||!config||syncReady!==syncIdentity())return;
-  try{const key=user.id+':'+scope(),job={uid:user.id,map:scope(),notes:personal.map(m=>({...m})),storage:storageKey('notes'),config:{...config},base:syncJobs.get(key)?.base??readBase(user.id,scope())};syncJobs.set(key,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}catch{syncReady='';quiet('Notes could not sync. Your local notes are safe.');}
+  if(syncing||!user||!config||!takesNotes()||syncReady!==syncIdentity())return;
+  try{const key=user.id+':'+scope(),prior=syncJobs.get(key),job={uid:user.id,map:scope(),notes:personal.map(m=>({...m})),storage:storageKey('notes'),config:{...config},base:prior?.base??readBase(user.id,scope()),...(prior&&Object.hasOwn(prior,'remote')?{remote:prior.remote}:{})};syncJobs.set(key,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}catch{syncReady='';quiet('Notes could not sync. Your local notes are safe.');}
  }
  const privateScope=()=>scope()+'#private';
  function mergePrivateEntries(local,remote,uid){if(!Array.isArray(remote)||!remote.every(m=>validPrivate(m)&&m.owner===uid))throw Error('Private notes could not be read.');const merged=new Map();for(const m of [...remote,...local]){const old=merged.get(m.id);if(!old||m.updated>old.updated)merged.set(m.id,m);}return [...merged.values()];}
  function schedulePrivateSync(){
-  if(syncing||!user||!config||privateSyncReady!==syncIdentity())return;
-  const job={uid:user.id,map:privateScope(),notes:privateNotes.filter(m=>m.owner===user.id).map(m=>({...m}))};if(job.map.length>160||payloadBytes(job.notes)>=1000000){quiet('Private notes could not sync. Your local notes are safe.');return;}
+  if(syncing||!user||!config||!takesNotes()||privateSyncReady!==syncIdentity())return;
+  const prior=syncJobs.get(user.id+':'+privateScope()),job={uid:user.id,map:privateScope(),notes:privateNotes.filter(m=>m.owner===user.id).map(m=>({...m})),...(prior&&Object.hasOwn(prior,'remote')?{remote:prior.remote}:{})};if(job.map.length>160||payloadBytes(job.notes)>=1000000){quiet('Private notes could not sync. Your local notes are safe.');return;}
   syncJobs.set(job.uid+':'+job.map,job);clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);
  }
- async function syncPrivateNotes(serial,push=true){
-  if(!user||!map||loading||alignmentMode||!privateNotesReadable)return;const uid=user.id,key=privateScope(),identity=syncIdentity();privateSyncReady='';
-  try{if(key.length>160)throw Error();const {data,error}=await client.from('user_notes').select('notes').eq('user_id',uid).eq('map',key).maybeSingle();if(error)throw error;if(serial!==mapSerial||user?.id!==uid||key!==privateScope()||alignmentMode)return;
-   const remote=data?.notes||[];
-   // Tombstones and timestamps travel with entries, so an offline deletion beats an older remote note.
-   const merged=mergePrivateEntries(privateNotes.filter(m=>m.owner===uid||m.owner===null).map(m=>({...m,owner:uid})),remote,uid);
+ const sameNotes=(a,b)=>JSON.stringify([...a].sort((a,b)=>a.id.localeCompare(b.id)).map(noteSum))===JSON.stringify([...b].sort((a,b)=>a.id.localeCompare(b.id)).map(noteSum));
+ async function syncPrivateNotes(serial,push=true,row){
+  if(!user||!map||loading||alignmentMode||!privateNotesReadable||!takesNotes())return;const uid=user.id,key=privateScope(),identity=syncIdentity();privateSyncReady='';
+  try{if(key.length>160)throw Error();if(row===undefined){const result=await client.from('user_notes').select('notes,updated_at').eq('user_id',uid).eq('map',key).maybeSingle();if(result.error)throw result.error;row=result.data;}if(serial!==mapSerial||user?.id!==uid||key!==privateScope()||alignmentMode)return;
+   if(row&&(typeof row.updated_at!=='string'||!Number.isFinite(Date.parse(row.updated_at))))throw Error();
+   const remote=row?row.notes:[],merged=mergePrivateEntries(privateNotes.filter(m=>m.owner===uid||m.owner===null).map(m=>({...m,owner:uid})),remote,uid);
    syncing=true;const saved=persistPrivate([...privateNotes.filter(m=>m.owner!==uid&&m.owner!==null),...merged]);syncing=false;if(!saved)return;
-   privateSyncReady=identity;recoverPrivateTargets();schedulePrivateSync();if(push)await pushJobs();
+   privateSyncReady=identity;const jobKey=uid+':'+key;
+   if(sameNotes(merged,remote)){writeBase(uid,key,merged);syncJobs.delete(jobKey);}else syncJobs.set(jobKey,{uid,map:key,notes:merged,remote:row});
+   recoverPrivateTargets();if(push)await pushJobs();
   }catch{syncing=false;quiet('Private notes could not sync. Your local notes are safe.');}
  }
  let pushing=false;
  async function pushMapNotes(key,job){
   for(let attempt=0;attempt<4;attempt++){
-   const {data,error}=await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();if(error)throw error;
+   const {data,error}=attempt===0&&Object.hasOwn(job,'remote')?{data:job.remote}:await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();delete job.remote;if(error)throw error;
    const current=syncJobs.get(key)||job,notes=mergeMapNotes(current.notes,data?data.notes:[],current.base,current.config),here=user?.id===job.uid&&job.map===scope();if(payloadBytes(notes)>=1000000)throw Error('Too many notes.');
    if(data&&(typeof data.updated_at!=='string'||!Number.isFinite(Date.parse(data.updated_at))))throw Error('Notes version could not be read.');
    if(here){if(!notesReadable||alignmentMode)throw Error();syncing=true;let saved;try{saved=persist(notes,true);}finally{syncing=false;}if(!saved)throw Error();setupCategoryControls();buildPlaceIndex();drawMarkers();}
    else{const saved=JSON.parse(localStorage.getItem(current.storage)||'[]');if(!Array.isArray(saved)||!saved.every(m=>valid(m,current.config)))throw Error('Saved notes could not be read.');localStorage.setItem(current.storage,JSON.stringify(notes));}
+   if(sameNotes(notes,data?data.notes:[])){writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);else if(syncJobs.has(key))syncJobs.get(key).base=notesBase(notes,current.config);return;}
    const row={user_id:job.uid,map:job.map,notes,updated_at:new Date(Math.max(Date.now(),(Date.parse(data?.updated_at)||0)+1)).toISOString()};
    const result=data?await client.from('user_notes').update(row).eq('user_id',job.uid).eq('map',job.map).eq('updated_at',data.updated_at).select('updated_at'):await client.from('user_notes').insert(row).select('updated_at');
    if(result.error){if(!data&&result.error.code==='23505')continue;throw result.error;}
@@ -872,25 +881,44 @@
  async function pushJobs(){
   if(pushing)return;pushing=true;let failed=false,progressed=false;
   try{for(const [key,job] of syncJobs){if(user?.id!==job.uid){syncJobs.delete(key);continue;}if(job.map===scope()&&syncReady!==syncIdentity()||job.map===privateScope()&&privateSyncReady!==syncIdentity())continue;
-   try{if(!job.map.endsWith('#private')){await pushMapNotes(key,job);progressed=true;quiet('Notes synced.');continue;}let notes=job.notes;if(job.map.endsWith('#private')){const {data,error}=await client.from('user_notes').select('notes').eq('user_id',job.uid).eq('map',job.map).maybeSingle();if(error)throw error;
-     const here=user?.id===job.uid&&job.map===privateScope();notes=mergePrivateEntries(here?privateNotes.filter(m=>m.owner===job.uid):notes,data?.notes||[],job.uid);if(payloadBytes(notes)>=1000000)throw Error();
-     if(here){syncing=true;const saved=persistPrivate([...privateNotes.filter(m=>m.owner!==job.uid),...notes]);syncing=false;if(!saved)throw Error();}}
-    const {error}=await client.from('user_notes').upsert({user_id:job.uid,map:job.map,notes,updated_at:new Date().toISOString()},{onConflict:'user_id,map'});if(error)throw error;writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===job)syncJobs.delete(key);progressed=true;quiet('Notes synced.');}
+   try{if(!job.map.endsWith('#private'))await pushMapNotes(key,job);else await pushPrivateNotes(key,job);progressed=true;quiet('Notes synced.');}
    catch{failed=true;quiet('Notes could not sync. Your local notes are safe.');}
   }}finally{pushing=false;if(progressed&&!failed&&syncJobs.size){clearTimeout(syncTimer);syncTimer=setTimeout(()=>pushJobs(),2000);}}
  }
- async function syncNotes(serial){
-  if(!user||!map||loading||alignmentMode||!notesReadable)return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
-  try{const {data,error}=await client.from('user_notes').select('notes').eq('user_id',uid).eq('map',key).maybeSingle();if(error)throw error;if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
-   const remote=data?data.notes:[],base=syncJobs.get(identity)?.base??readBase(uid,key),merged=mergeMapNotes(personal,remote,base);
+ async function pushPrivateNotes(key,job){
+  for(let attempt=0;attempt<4;attempt++){
+   const {data,error}=attempt===0&&Object.hasOwn(job,'remote')?{data:job.remote}:await client.from('user_notes').select('notes,updated_at').eq('user_id',job.uid).eq('map',job.map).maybeSingle();delete job.remote;if(error)throw error;
+   if(data&&(typeof data.updated_at!=='string'||!Number.isFinite(Date.parse(data.updated_at))))throw Error();
+   const current=syncJobs.get(key)||job,here=user?.id===job.uid&&job.map===privateScope(),notes=mergePrivateEntries(here?privateNotes.filter(m=>m.owner===job.uid):current.notes,data?data.notes:[],job.uid);if(payloadBytes(notes)>=1000000)throw Error();
+   if(here){syncing=true;let saved;try{saved=persistPrivate([...privateNotes.filter(m=>m.owner!==job.uid),...notes]);}finally{syncing=false;}if(!saved)throw Error();}
+   if(!sameNotes(notes,data?data.notes:[])){const row={user_id:job.uid,map:job.map,notes,updated_at:new Date(Math.max(Date.now(),(Date.parse(data?.updated_at)||0)+1)).toISOString()},result=data?await client.from('user_notes').update(row).eq('user_id',job.uid).eq('map',job.map).eq('updated_at',data.updated_at).select('updated_at'):await client.from('user_notes').insert(row).select('updated_at');if(result.error){if(!data&&result.error.code==='23505')continue;throw result.error;}if(!result.data?.length)continue;}
+   writeBase(job.uid,job.map,notes);if(syncJobs.get(key)===current)syncJobs.delete(key);return;
+  }throw Error('Private notes changed during sync.');
+ }
+ async function syncNotes(serial,row){
+  if(!user||!map||loading||alignmentMode||!notesReadable||!takesNotes())return;const uid=user.id,key=scope(),identity=uid+':'+key;syncReady='';
+  try{if(row===undefined){const result=await client.from('user_notes').select('notes,updated_at').eq('user_id',uid).eq('map',key).maybeSingle();if(result.error)throw result.error;row=result.data;}if(serial!==mapSerial||user?.id!==uid||key!==scope()||alignmentMode)return;
+   if(row&&(typeof row.updated_at!=='string'||!Number.isFinite(Date.parse(row.updated_at))))throw Error();
+   const remote=row?row.notes:[],base=syncJobs.get(identity)?.base??readBase(uid,key),merged=mergeMapNotes(personal,remote,base);
    syncing=true;const saved=persist(merged,true);syncing=false;if(!saved)return;
-   syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();syncJobs.set(identity,{uid,map:key,notes:merged,storage:storageKey('notes'),config:{...config},base:notesBase(remote)});await pushJobs();
+   syncReady=identity;setupCategoryControls();buildPlaceIndex();drawMarkers();
+   if(sameNotes(merged,remote)){writeBase(uid,key,merged);syncJobs.delete(identity);}else syncJobs.set(identity,{uid,map:key,notes:merged,storage:storageKey('notes'),config:{...config},base:notesBase(remote),remote:row});await pushJobs();
   }catch{syncing=false;quiet('Notes could not sync. Your local notes are safe.');}
  }
- async function syncMapNotes(serial){await syncPrivateNotes(serial,false);if(serial===mapSerial)await syncNotes(serial);}
+ let lastNotesSync=null,lastMapIdentity='',lastLevelId=null;
+ async function syncMapNotes(serial){
+  if(!user||!map||loading||alignmentMode||!takesNotes())return;const uid=user.id,key=scope(),identity=syncIdentity();
+  try{const {data,error}=await client.from('user_notes').select('map,notes,updated_at').eq('user_id',uid).in('map',[key,key+'#private']);if(error)throw error;if(!Array.isArray(data))throw Error();if(serial!==mapSerial||user?.id!==uid||key!==scope())return;
+   await syncPrivateNotes(serial,false,data.find(r=>r.map===key+'#private')||null);if(serial!==mapSerial)return;await syncNotes(serial,data.find(r=>r.map===key)||null);if(serial===mapSerial&&syncReady===identity&&privateSyncReady===identity)lastNotesSync={identity,at:Date.now()};
+  }catch{quiet('Notes could not sync. Your local notes are safe.');}
+ }
  async function onMap(reviewToken=null){
-  if(!map||loading)return;const serial=++mapSerial;syncReady='';privateSyncReady='';clearPreview();desk.mapChanged();
-  map.off?.('zoomend',zoomApproved);map.on?.('zoomend',zoomApproved);loadApproved();await syncMapNotes(serial);if(serial!==mapSerial)return;if(reviewToken===null)await retirePublishedNotes(serial).catch(()=>{});if(serial!==mapSerial)return;if(!positionVisits.has(scope())&&!dialog.open&&!desk.opened&&offerPositions())positionVisits.add(scope());
+  if(!map||loading)return;const identity=[config.id,user?.id,admin].join(':'),same=lastMapIdentity===identity,floorSwitch=same&&lastLevelId!==config.levelId,serial=++mapSerial;lastMapIdentity=identity;lastLevelId=config.levelId;clearPreview();desk.mapChanged();
+  map.off?.('zoomend',zoomApproved);map.on?.('zoomend',zoomApproved);
+  if(editionPending)refreshVisitor();
+  if(floorSwitch&&approvedLoaded?.map===config.id&&approvedLoaded.uid===user?.id&&approvedLoaded.admin===admin){if(floorLabels)floorLabels.edition=loadSerial;publishedMapLabels=otherFloorLabels();cachedChanges=null;drawApproved();freshPopup();}else loadApproved();
+  if(takesNotes()&&!(floorSwitch&&lastNotesSync?.identity===syncIdentity()&&Date.now()-lastNotesSync.at<300000&&syncReady===syncIdentity()&&privateSyncReady===syncIdentity())){syncReady='';privateSyncReady='';await syncMapNotes(serial);}if(serial!==mapSerial)return;
+  if(!floorSwitch&&reviewToken===null&&takesNotes())await retirePublishedNotes(serial).catch(()=>{});if(serial!==mapSerial)return;if(!positionVisits.has(scope())&&!dialog.open&&!desk.opened&&offerPositions())positionVisits.add(scope());
  }
  // Suggestions on the map before they are live. Approved ones wait for the publishing run: admins see them all, and each
  // author their own (the read policy already lets authors read their rows). Admins also see those waiting for review,
@@ -900,13 +928,17 @@
  // as possible duplicates, with a jump between them.
  let approvedLayer=null,approvedRows=[],pendingRows=[],rejectedRows=[],approvedSerial=0,mapCredits={},publishedMapLabels=[],loadedSignature='';const suggestionPins=new Map(),creditsCache=new Map();
  function zoomApproved(){if(changeSet().targets().some(t=>t.kind==='label'||t.proposed?.shape||t.published?.shape))drawApproved();}
+ let floorLabels=null;
+ function otherFloorLabels(){return (floorLabels?.rows||[]).filter(p=>p.level!==config.levelId);}
+ async function labelsForMap(){const id=config.id,edition=loadSerial;let entry=floorLabels;if(!entry||entry.id!==id||entry.edition!==edition){const level=config.levelId,current=labelData.labels||[],source=(config.levels||[]).filter(l=>l.labelsFile&&l.labelsFile!==config.labelsFile);entry={id,edition,rows:[]};floorLabels=entry;entry.read=(async()=>{try{entry.rows=[...current.map(p=>({...p,level:p.level||level})),...(await Promise.all(source.map(async l=>{const data=await fetchData(l.labelsFile,{labels:[]});return (data.labels||[]).map(p=>({...p,level:p.level||l.id}));}))).flat()];}catch{}return entry.rows;})();}await entry.read;return entry.rows.filter(p=>p.level!==config.levelId);}
+
  async function creditsForMap(){const key=config.id,edition=loadSerial;let entry=creditsCache.get(key);if(!entry||!entry.missing&&entry.edition!==edition){entry={edition,missing:false};entry.read=fetch('data/credits/'+key+'.json').then(r=>{if(r.status===404){entry.missing=true;return {};}return r.ok?r.json():{};}).catch(()=>({}));creditsCache.set(key,entry);}return entry.read;}
  const approvedKey='mnmaps-show-approved',pendingKey='mnmaps-show-pending',rejectedKey='mnmaps-show-rejected';
  // Rejected suggestions stay in the database and never go live; admins see the ones rejected since the site was last
  // published, crossed out, until the next update. The published time is the site files' Last-Modified (as the update
  // check reads it); without it, the last day.
  async function publishedSince(){
-  try{const r=await fetch('site.webmanifest',{method:'HEAD',cache:'no-store'}),stamp=r.ok&&Date.parse(r.headers.get('last-modified')||'');if(Number.isFinite(stamp))return new Date(stamp).toISOString();}catch{}
+  try{if(typeof updateStamp!=='undefined'){if(updateStamp===null&&typeof checkForUpdate==='function')await checkForUpdate();const stamp=Date.parse(updateStamp||'');if(Number.isFinite(stamp))return new Date(stamp).toISOString();}else{const r=await fetch('site.webmanifest',{method:'HEAD',cache:'no-store'}),stamp=r.ok&&Date.parse(r.headers.get('last-modified')||'');if(Number.isFinite(stamp))return new Date(stamp).toISOString();}}catch{}
   return new Date(Date.now()-24*3600000).toISOString();
  }
  const shownSetting=key=>{try{return localStorage.getItem(key)!=='false';}catch{return true;}};
@@ -977,8 +1009,9 @@
  let approvedFlight=null,approvedLoaded=null,approvedGeneration=0,editionSince=null;
  function invalidateApproved(){approvedGeneration++;approvedSerial++;approvedLoaded=null;}
  const approvedScope=()=>[config?.id,loadSerial,mapSerial,user?.id,admin,approvedGeneration].join('\0');
- function loadApproved(){const key=approvedScope();if(approvedFlight?.key===key)return approvedFlight.promise;if(approvedLoaded?.key===key&&Date.now()-approvedLoaded.at<10000)return Promise.resolve();const entry={key};entry.promise=readApproved().then(ok=>{if(ok&&approvedScope()===key)approvedLoaded={key,at:Date.now()};}).finally(()=>{if(approvedFlight===entry)approvedFlight=null;});approvedFlight=entry;return entry.promise;}
- function queueChanged(rows){const published=approvedRows.filter(r=>r.sourceStatus==='published'&&r.map===config.id),here=rows.filter(r=>r.map===config.id),since=editionSince||new Date(Date.now()-24*3600000).toISOString();approvedRows=[...here.filter(r=>r.status==='approved'),...published.filter(p=>!here.some(r=>r.id===p.id))];pendingRows=here.filter(r=>r.status==='pending');rejectedRows=here.filter(r=>r.status==='rejected'&&r.reviewed_at>=since);cachedChanges=null;currentReviewSet=null;}
+ function loadApproved(){const key=approvedScope();if(approvedFlight?.key===key)return approvedFlight.promise;if(approvedLoaded?.key===key&&Date.now()-approvedLoaded.at<10000)return Promise.resolve();const entry={key,map:config.id,uid:user?.id,admin};entry.promise=readApproved().then(ok=>{if(ok&&approvedScope()===key)approvedLoaded={key,map:entry.map,uid:entry.uid,admin:entry.admin,at:Date.now()};}).finally(()=>{if(approvedFlight===entry)approvedFlight=null;});approvedFlight=entry;return entry.promise;}
+ let ownQueueStamp=null;
+ function queueChanged(rows){const ownStamp=JSON.stringify(rows.filter(r=>r.user_id===user?.id).map(r=>[r.id,r.status,r.updated_at,r.reviewed_at]).sort((a,b)=>a[0]-b[0]));if(ownQueueStamp!==null&&ownStamp!==ownQueueStamp)clearPoints();ownQueueStamp=ownStamp;const published=approvedRows.filter(r=>r.sourceStatus==='published'&&r.map===config.id),here=rows.filter(r=>r.map===config.id),since=editionSince||new Date(Date.now()-24*3600000).toISOString();approvedRows=[...here.filter(r=>r.status==='approved'),...published.filter(p=>!here.some(r=>r.id===p.id))];pendingRows=here.filter(r=>r.status==='pending');rejectedRows=here.filter(r=>r.status==='rejected'&&r.reviewed_at>=since);cachedChanges=null;currentReviewSet=null;}
  async function readApproved(){
   const serial=++approvedSerial;let approved=[],pending=[],rejected=[],published=[];
   if(user&&config&&!config.zonesFile){
@@ -987,8 +1020,8 @@
    const since=await publishedSince();editionSince=since;const gone=admin?read('rejected',since).catch(()=>[]):null;
    try{[approved,pending,published]=await Promise.all([read('approved'),read('pending'),read('published',since)]);}catch{return false;}
    if(gone)rejected=await gone;}
-  let labels=[];try{const source=(config.levels||[]).filter(l=>l.labelsFile&&l.labelsFile!==config.labelsFile);labels=(await Promise.all(source.map(async l=>{const data=await fetchData(l.labelsFile,{labels:[]});return (data.labels||[]).map(p=>({...p,level:p.level||l.id}));}))).flat();}catch{}
-  const credits=await creditsForMap();if(serial!==approvedSerial)return false;const signature=JSON.stringify([mapSerial,loadSerial,originals,labelData,approved,pending,rejected,published,labels,credits]);currentReviewSet=null;if(!desk.opened)window.atlasNotices?.refresh();if(signature===loadedSignature){freshPopup();return true;}loadedSignature=signature;mapCredits=credits;publishedMapLabels=labels;approvedRows=[...approved,...published];pendingRows=pending;rejectedRows=rejected;cachedChanges=null;approvedRows=[...approved,...published.filter(r=>!approvedLive(r)).map(r=>({...r,status:'approved',sourceStatus:'published'}))];cachedChanges=null;drawApproved();freshPopup();return true;
+  const labels=await labelsForMap();
+  const credits=await creditsForMap();if(serial!==approvedSerial)return false;const signature=JSON.stringify([mapSerial,loadSerial,originals,labelData,approved,pending,rejected,published,labels,credits]);currentReviewSet=null;if(signature===loadedSignature){freshPopup();return true;}loadedSignature=signature;mapCredits=credits;publishedMapLabels=labels;approvedRows=[...approved,...published];pendingRows=pending;rejectedRows=rejected;cachedChanges=null;approvedRows=[...approved,...published.filter(r=>!approvedLive(r)).map(r=>({...r,status:'approved',sourceStatus:'published'}))];cachedChanges=null;drawApproved();freshPopup();return true;
  }
  let suggestedShapeLayer=null;
  function drawSuggestedShapes(){suggestedShapeLayer?.remove();suggestedShapeLayer=null;if(!map||!config)return;const visible=new Set([...(shownSetting(approvedKey)?approvedRows:[]),...(shownSetting(pendingKey)?pendingRows:[])].filter(r=>drawable(r)&&!approvedLive(r)).map(r=>String(r.id)));for(const t of changeSet().targets()){const rows=t.rows.filter(r=>visible.has(String(r.id))),proposed=t.proposed;if(t.kind==='label'||!rows.length||rows.some(r=>desk.hides(r))||config.levels&&proposed.level&&proposed.level!==config.levelId||!(proposed.shape||t.published?.shape)||!enabled.has(proposed.category)||!showPins||(proposed.minZoom??-Infinity)>map.getZoom())continue;try{suggestedShapeLayer||=L.layerGroup().addTo(map);const look={...proposed,id:t.id};if(t.published?.shape&&(t.changed.has('shape')||t.changed.has('position')))window.atlasShapeUI?.render(t.published,suggestedShapeLayer,{old:true});window.atlasShapeUI?.render(look,suggestedShapeLayer,{solid:true,click:()=>L.popup().setLatLng(locationOf(look)).setContent(suggestionPopup(rows[0],look)).openOn(map),state:()=>({rows,proposed})});}catch(error){for(const row of rows)desk.rowError(row,error);}}}
@@ -1027,7 +1060,7 @@
   return n;}
  async function authChanged(session){
   const next=session?.user||null;if(next?.id===user?.id)return;
-  const serial=++authSerial;user=next;admin=false;syncReady='';privateSyncReady='';accountUI();for(const f of finders)f.update();desk.close(true);if(!user&&dialog.open)dialog.close();clearPreview();freshPopup();
+  const serial=++authSerial;user=next;admin=false;clearPoints();ownQueueStamp=null;lastMapIdentity='';lastNotesSync=null;syncReady='';privateSyncReady='';accountUI();for(const f of finders)f.update();desk.close(true);if(!user&&dialog.open)dialog.close();clearPreview();freshPopup();
   if(user){const uid=user.id;try{const {data,error}=await client.from('admins').select('user_id').eq('user_id',uid).maybeSingle();if(error)throw error;if(serial!==authSerial)return;admin=!!data;accountUI();}catch{status('Account permissions could not load. Please try again.');}}
   if(serial===authSerial)await onMap();
   if(serial===authSerial){connectNotices();if(user)afterSignIn();}
@@ -1077,10 +1110,12 @@
  client.auth.getSession().then(({data,error})=>{if(error)throw error;return authChanged(data.session);}).catch(()=>status('Account could not load. Your local notes are safe.'));
  window.addEventListener('atlas:loaded',e=>{for(const f of finders)f.reset();onMap(e.detail?.reviewToken??null).catch(()=>status('Community data could not load.'));});
  window.addEventListener('atlas:private-notes',schedulePrivateSync);window.addEventListener('atlas:notes',scheduleSync);window.addEventListener('atlas:positions',offerPositions);
- window.addEventListener('atlas:published',()=>{invalidateApproved();creditsCache.clear();reviewMaps.clear();currentReviewSet=null;if(!loading)loadApproved();if(desk.opened)desk.refresh();});
+ window.addEventListener('atlas:published',()=>{invalidateApproved();creditsCache.clear();floorLabels=null;reviewMaps.clear();currentReviewSet=null;clearPoints();refreshVisitor(true);});
  window.addEventListener('resize',()=>{if(dialog.open&&dialog.classList.contains('place-change'))fitFloating(dialog);});
- let focusAt=-Infinity;
- window.addEventListener('focus',()=>{if(!loading&&Date.now()-focusAt>=60000){focusAt=Date.now();if(desk.opened)desk.refresh();else{invalidateApproved();loadApproved();}if(admin)countWaiting();}});window.addEventListener('atlas:editing',drawApproved);
+ let focusAt=-Infinity,deskFocusAt=-Infinity,away=false,editionPending=false;
+ function refreshVisitor(force=false){if(force)editionPending=true;if(loading||document.hidden)return;if(editionPending){editionPending=false;force=true;}if(desk.opened&&!force){if(Date.now()-deskFocusAt<60000)return;deskFocusAt=Date.now();desk.refresh();return;}if(!force&&(!away||Date.now()-focusAt<300000))return;away=false;focusAt=Date.now();invalidateApproved();loadApproved();window.atlasNotices?.refresh();if(desk.opened)desk.refresh();if(admin)countWaiting();}
+ window.addEventListener('blur',()=>{away=true;});window.addEventListener('focus',()=>refreshVisitor());window.addEventListener('atlas:editing',drawApproved);
+ document.addEventListener('visibilitychange',()=>{if(document.hidden)away=true;else refreshVisitor();});
  window.addEventListener('atlas:edit-ended',()=>{drawApproved();if(user&&(syncReady!==syncIdentity()||privateSyncReady!==syncIdentity()))syncMapNotes(mapSerial);});
  window.addEventListener('online',()=>{pushJobs();if(user&&map&&!loading&&(syncReady!==syncIdentity()||privateSyncReady!==syncIdentity()))syncMapNotes(mapSerial);});
  document.addEventListener('visibilitychange',()=>{if(document.hidden)pushJobs();});

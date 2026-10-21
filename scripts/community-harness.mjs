@@ -219,6 +219,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       :null
     };
     if(table==='user_notes'){
+      if(request.op==='select'&&request.in?.key==='map'){const fault=notesFault?.(request,remote,notesState);if(fault)return fault;return {data:request.in.values.flatMap(map=>map.endsWith('#private')?[{map,notes:structuredClone(remotePrivate),updated_at:notesState.updated_at}]:notesState.exists?[{map,notes:structuredClone(remote),updated_at:notesState.updated_at}]:[])};}
       const rows=(request.filters.map||request.payload?.map||'').endsWith('#private')?remotePrivate:remote;
       const privateRow=rows===remotePrivate,fault=notesFault?.(request,rows,notesState);if(fault)return fault;
       if(request.op==='select')return {
@@ -340,7 +341,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
         (!request.filters.user_id||r.user_id===request.filters.user_id)&&(!request.filters.map||
         r.map===request.filters.map)&&
         (!request.since||String(r[request.since.key]||'')>=request.since.value)).slice(request.range?.[0]||
-        0,(request.range?.[1]??999999)+1):[]
+        0,(request.range?.[1]??999999)+1).map(r=>request.columns?.includes('notice_name:')?Object.fromEntries(request.columns.split(',').map(k=>k==='notice_name:payload->>name'?['notice_name',r.payload?.name]:k==='notice_reason:payload->>reason'?['notice_reason',r.payload?.reason]:[k,r[k]])):r):[]
       };
     }
   }
@@ -349,9 +350,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       calls.push({
         rpc:name
       });
-      return {
-        error:null
-      };
+      return {error:null,data:name==='my_contribution_points'?[{points:3,bounties:0,priority_bounties:0}]:[]};
     },from(table){
       const request={
         op:'select',filters:{}
@@ -686,6 +685,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
     }
   };
   context.notesReadable=true;
+  context.takesNotes=()=>!context.config.zonesFile;
   context.singleMap=false;
   context.alignmentPositions={};
   context.alignmentLabelPositions={};
@@ -734,11 +734,13 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   });
   const makeDesk=context.window.createReviewDesk;
   context.window.createReviewDesk=hooks=>context.window.testReviewDesk=makeDesk(hooks);
+  fixtures.prepare?.(context);
   vm.runInContext(notices,context);
   // Expose closures for observation without replacing any production function.
   const observed=fixtures.expose?source.replace(/\}\)\(\);\s*$/, `
  window.testCommunity={notePayload,followNote,retirePublishedNotes,followId,loadApproved,invalidateApproved,reviewLocations,
- readFollowed,writeFollowed,editDialog,changeOwn,setBountyForm,claimBounty,mergeMapNotes,readBase,pushJobs,
+ readFollowed,writeFollowed,editDialog,changeOwn,setBountyForm,claimBounty,mergeMapNotes,readBase,pushJobs,onMap,syncMapNotes,submitRow,
+ publishedLabels:()=>publishedMapLabels,
  sync:()=>syncNotes(mapSerial),retire:()=>retirePublishedNotes(mapSerial),
  attachNoteFinder:()=>{noteFinderReady=false;attachNoteFinder();}};
 })();`):source;
@@ -775,7 +777,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       suggestionFault=v;
     },set notesFault(v){
       notesFault=v;
-    },emit:type=>context.window.dispatchEvent({
+    },documentEmit:type=>{for(const fn of documentEvents.get(type)||[])fn({type});},emit:type=>context.window.dispatchEvent({
       type
     }),async tick(ms){
       const jobs=[...timers].filter(([,t])=>t.ms===ms);
