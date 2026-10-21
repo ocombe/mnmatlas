@@ -30,6 +30,14 @@ console.log('Find checks passed: wiki ids, exact names, trainer classes, contain
  assert.equal(list(tc({name:'Gorr',role:'named',tags:'Named · Bat · Fighter'})),'[]');assert(!ict({name:'Gorr',role:'named',tags:'Named · Bat · Fighter'}),'A named mob with a class is no trainer');
  assert.equal(list(tc({name:'Old Brin',role:'trainer',class:'Warrior',tags:'Shadow Knight?'})),'["Fighter"]');
  assert.equal(list(tc({name:'Chahaya Tam',role:'trainer',tags:null})),'[]');
+ // The wiki's trainer role covers tradeskill trainers too: a trade title in the name makes one, unless the wiki gives a class.
+ const tt=vm.runInContext('tradeTrainer',c);
+ assert.equal(tt({name:'Carpenter Quais',role:'trainer',tags:'Human'}),'Carpentry / Woodworking');assert(!ict({name:'Carpenter Quais',role:'trainer',tags:'Human'}));
+ assert.equal(tt({name:'Noura the Tailor',role:'trainer'}),'Tailoring');assert.equal(tt({name:'Enchanter Haffiz',role:'trainer',tags:'Human'}),'(Dis)Enchanting');
+ assert.equal(tt({name:'Master Khaila',role:'trainer',tags:'Human · Enchanter'}),'');assert.equal(tt({name:'Vaclav',role:'trainer'}),'');assert(ict({name:'Vaclav',role:'trainer'}),'A trainer with no class or trade stays a class trainer');
+ assert.equal(tt({name:'Tanner Burhan',role:'merchant'}),'','Only the wiki trainer role');
+ {const icons=await readFile(new URL('../icons.js',import.meta.url),'utf8'),trades=[...icons.match(/const tradePaths = \{([\s\S]*?)\n\};/)[1].matchAll(/^\s*'?([^':\n]+?)'?\s*:/gm)].map(x=>x[1]);
+  for(const t of Object.values(vm.runInContext('tradeTitles',c)))assert(trades.includes(t),'Trade title names a known trade: '+t);}
  const chips=chipClasses([],[{abbreviations:['BST','SHM']},{classes:['Enchanter']}]);
  assert(onMap({name:'A beastmaster instructor'},chips)&&onMap({name:'Master Khaila',role:'trainer',tags:'Human · Enchanter'},chips)&&!onMap({name:'A monk instructor'},chips)&&!onMap({name:'Chahaya Tam',role:'trainer'},chips));
  console.log('Class checks passed: every class on the maps has its abbreviation; trainer classes from tags and chips.');}
@@ -55,6 +63,10 @@ console.log('Script checks passed: every page script parses.');
  assert.equal(c.description,undefined);assert.equal(c.quests,undefined);assert.equal(c.location,'Directions: by the loop');
  assert.equal(JSON.stringify(c.loot.map(i=>i.name)),'["C","B","A","D","E"]');assert.equal(c.loot[0].dropRate,4);assert.equal(c.loot[1].dropRate,0.25,'Rates are percent already');assert.equal(c.lootCount,6);
  assert.equal(card({name:'X',url:'https://evil.example/npcs/x'}),null);
+ // Players' records: respawn and spawn hours as given; placeholders keep wiki pages only, three at most.
+ const r=card({name:'Night Terror',url:'https://monstersandmemories.wiki/npcs/night-terror',respawn:'6 hours',spawnWindow:'22-4',placeholder:[{name:'a cave bat',url:'https://monstersandmemories.wiki/npcs/a-cave-bat'},{name:'a <b>bat',url:'https://evil.example/npcs/x'},{name:'c'},{name:'d'}]});
+ assert.equal(r.respawn,'6 hours');assert.equal(r.spawnWindow,'22-4');assert.equal(r.v,2);assert.equal(JSON.stringify(r.placeholder),'[{"name":"a cave bat","url":"https://monstersandmemories.wiki/npcs/a-cave-bat"},{"name":"a b bat"},{"name":"c"}]');
+ assert.equal(c.placeholder,undefined,'No placeholder, no field');
  console.log('Card checks passed: NPC cards keep short facts and wiki links only.');}
 
 // Vendor kinds come from the wiki's merchants, in groups; a name says its kind, the longest words first.
@@ -218,7 +230,7 @@ console.log('Script checks passed: every page script parses.');
  const {mkdtemp,mkdir,writeFile,rm}=await import('node:fs/promises'),{resolve,relative,sep}=await import('node:path'),{fileURLToPath}=await import('node:url'),{buildCards}=await import('./make-npc-cards.mjs');
  const root=fileURLToPath(new URL('..',import.meta.url)),folder=await mkdtemp(resolve(root,'scripts/.camp-cards-test-'));try{
   await mkdir(resolve(folder,'data'));await writeFile(resolve(folder,'data/maps.json'),JSON.stringify({maps:[{id:'camp',markersFile:'data/markers.json'}]}));await writeFile(resolve(folder,'data/markers.json'),JSON.stringify([{wikiId:'npc-one',category:'Named mob'},{category:'Mob camp',mobs:[{wikiId:'npc-two'},{wikiId:'npc-one'},{wikiId:'npc-cached'},{wikiId:'bad'}]}]));
-  const asks=[],waits=[],cached={name:'Cached mob',url:'https://monstersandmemories.wiki/npcs/cached',level:'20',at:Date.now(),loot:[{name:'Sword',url:'https://monstersandmemories.wiki/items/sword',dropRate:5}]};
+  const asks=[],waits=[],cached={v:2,name:'Cached mob',url:'https://monstersandmemories.wiki/npcs/cached',level:'20',at:Date.now(),loot:[{name:'Sword',url:'https://monstersandmemories.wiki/items/sword',dropRate:5}]};
   const fetcher=async url=>{asks.push(url);if(url==='http://fixture/npc-cards/camp.json')return {ok:true,json:async()=>({cards:{'npc-cached':cached}})};assert(url.startsWith('https://monstersandmemories.wiki/api/partner/v1/npc/'));const id=url.split('/').at(-1);return {ok:true,json:async()=>({npc:{name:id,url:'https://monstersandmemories.wiki/npcs/'+id,level:'12–15',loot:[{name:'Sword',url:'https://monstersandmemories.wiki/items/sword',dropRate:8}]}})};};
   await buildCards({root:folder,secret:'fixture',fetcher,sleep:async ms=>waits.push(ms),site:'http://fixture/'});const result=JSON.parse(await readFile(resolve(folder,'npc-cards/camp.json'),'utf8'));assert.deepEqual(Object.keys(result.cards),['npc-one','npc-two','npc-cached']);assert.deepEqual(result.cards['npc-cached'],cached);assert.equal(result.cards['npc-two'].level,'12–15');assert.equal(result.cards['npc-two'].loot[0].dropRate,8);assert.equal(asks.length,3);assert(waits.length&&waits.every(ms=>ms>0&&ms<=700));
  }finally{assert(relative(root,folder).startsWith('scripts'+sep+'.camp-cards-test-'));await rm(folder,{recursive:true,force:true});}

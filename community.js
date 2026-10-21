@@ -263,7 +263,7 @@
   const show=(rows,message,from,heading)=>{list.replaceChildren();active=-1;name.removeAttribute('aria-activedescendant');name.setAttribute('aria-expanded',String(rows.length>0));
    if(heading&&rows.length)list.append(text('p',heading,'wiki-heading'));if(message)list.append(text('p',message,'form-hint'));
    rows.forEach((row,n)=>{const b=button('',()=>pick(row,from),'wiki-result');b.id=list.id+'-'+n;b.setAttribute('role','option');b.tabIndex=-1;
-    b.append(text('strong',row.name),text('small',[isClassTrainer(row)?'Class trainer':wikiTypes[row.type]||row.type,row.level?'level '+row.level:'',row.zone].filter(Boolean).join(' · ')));list.append(b);});
+    b.append(text('strong',row.name),text('small',[isClassTrainer(row)?'Class trainer':tradeTrainer(row)?tradeTrainer(row)+' trainer':wikiTypes[row.type]||row.type,row.level?'level '+row.level:'',row.zone].filter(Boolean).join(' · ')));list.append(b);});
    if(rows.length)credit(from);};
   const showFound=(site,results)=>{const rows=results.filter(r=>type==='item'?r.type==='item':Object.hasOwn(wikiTypes,r.type)),zone=type==='item'?'':searchZone();if(type==='item'){show(rows,rows.length?'':'No wiki item with that name.',site,'Wiki items');return;}show(rows,rows.length?'':zone?'No wiki NPC in '+zone+' with that name.':'No wiki NPC with that name.',site,zone?'Wiki NPCs in '+zone:'Wiki NPCs');};
   // Typing waits 600 ms for a pause; the same words again (spaces or case aside) do not search twice.
@@ -288,13 +288,15 @@
  // its type from the wiki's role, and its short location line as the note. Nothing the visitor typed is replaced,
  // and descriptions, walkthroughs or loot never come in. A "named" NPC is a named mob only when the wiki gives it a level; any other NPC is a notable NPC.
  const roleTypes={merchant:'Vendor',quest:'Quest NPC',mob:'Mob camp'};
- const roleType=row=>isClassTrainer(row)?'Class trainer':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Notable NPC');
+ const roleType=row=>isClassTrainer(row)?'Class trainer':tradeTrainer(row)?'Tradeskill':roleTypes[row.role]||(row.role==='named'&&row.level?'Named mob':'Notable NPC');
  const levelText=level=>{const v=String(level??'').trim();return v?' ('+(/[-–]/.test(v)?'levels '+v.replace(/\s*[-–]\s*/,'–'):'level '+v)+')':'';};
  const wikiNote=row=>row.location||'';
  let noteFinderReady=false;function attachNoteFinder(){const field=$('wiki-field');if(field&&!noteFinderReady){noteFinderReady=true;noteFields.attachFinder(wikiFinder,row=>{
   const type=roleType(row);if(type&&$('category').value==='Personal'&&[...$('category').options].some(o=>o.value===type)){$('category').value=type;$('category').dispatchEvent(new Event('change'));}
   // A trainer's classes ride with its wiki link, so the note reads "Beastmaster trainer" first like the atlas's own trainers.
   pickClasses(trainerClasses(row));
+  // A tradeskill trainer's trade, when the visitor has not chosen one.
+  if($('category').value==='Tradeskill'&&!$('trade').value&&tradeTrainer(row))$('trade').value=tradeTrainer(row);
   if(!$('note').value.trim()&&wikiNote(row))$('note').value=wikiNote(row);guessVendor();});$('editor')?.addEventListener('close',()=>noteFields.root.dispatchEvent(new Event('wiki-done')));}}attachNoteFinder();window.addEventListener('atlas:fields',attachNoteFinder);
  // The Wanted board: NPCs the wiki knows in this map's zone that the map does not mark yet, as bounties to take.
  // Trainers and merchants come first as priority bounties. Taking one starts the pin with a note filled from the wiki
@@ -308,8 +310,8 @@
  // On the map already: the same wiki id, or our name holding the wiki's ("Paymaster Elara Venn" is "Elara Venn").
  function placedOnMap(row,places){const name=looseName(row.name);return places.some(p=>p.w===row.id||(name.length>=4&&(looseName(p.n)===name||(' '+looseName(p.n)+' ').includes(' '+name+' '))));}
  const bountyGroups=[{key:'trainer',title:'Class trainers',priority:true},{key:'merchant',title:'Merchants',priority:true},{key:'quest',title:'Quest givers'},{key:'named',title:'Named NPCs'}];
- const bountyGroup=row=>isClassTrainer(row)?'trainer':row.role==='merchant'?'merchant':row.role==='quest'?'quest':'named';
- const bountyKind=row=>{const g=bountyGroup(row),classes=trainerClasses(row);return g==='trainer'?'Class trainer'+(classes.length?' · '+classes.join(' / '):''):g==='merchant'?'Merchant':g==='quest'?'Quest giver':'Named';};
+ const bountyGroup=row=>isClassTrainer(row)||tradeTrainer(row)?'trainer':row.role==='merchant'?'merchant':row.role==='quest'?'quest':'named';
+ const bountyKind=row=>{const g=bountyGroup(row),classes=trainerClasses(row);return g==='trainer'?(tradeTrainer(row)?'Trainer · '+tradeTrainer(row):'Class trainer'+(classes.length?' · '+classes.join(' / '):'')):g==='merchant'?'Merchant':g==='quest'?'Quest giver':'Named';};
  // The list is built when the atlas is published (bounties/<map>.json); this browser keeps it for an hour.
  const wantedKey=id=>'mnmaps-wanted-'+id;
  function keptWanted(id){try{const v=JSON.parse(localStorage.getItem(wantedKey(id))||'null');return v&&Date.now()-v.at<3600000&&Array.isArray(v.rows)?v:null;}catch{return null;}}
@@ -345,7 +347,7 @@
  }
  // What a bounty's note starts with: the wiki's name and level, its type, its page and id, a trainer's classes.
  function bountyPrefill(row){const classes=trainerClasses(row),type=roleType(row)||'Personal';
-  return {name:row.name,...(type==='Named mob'&&levelRange(row.level)?{levels:[levelRange(row.level)[0],levelRange(row.level)[0]]}:{}),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{})};}
+  return {name:row.name,...(type==='Named mob'&&levelRange(row.level)?{levels:[levelRange(row.level)[0],levelRange(row.level)[0]]}:{}),category:type,note:'',wiki:row.url,wikiId:row.id,...(type==='Class trainer'&&classes.length?{classes}:{}),...(type==='Tradeskill'?{trade:tradeTrainer(row)}:{})};}
  const signInToTake=()=>popupSignIn(m=>status(m+' You can also sign in from the top bar.'));
 // The reward a bounty earns, in the bounty board's own words (one place to change it).
  const rewardWord='renown';
@@ -666,7 +668,7 @@
   const classes=pickedClasses(),facts=text('div','','bounty-facts');facts.id='bounty-facts';const list=document.createElement('dl');
   const fact=(term,value)=>{list.append(text('dt',term));const dd=document.createElement('dd');dd.append(value);list.append(dd);};
   const category=$('category').value,page=externalLink($('wiki').value.replace(/^https:\/\//,''),$('wiki').value);
-  fact('Name',$('name').value);fact('Show as','Marker');fact('Category',category+(category==='Class trainer'&&classes.length?' · '+classes.join(' / '):''));fact('Wiki page',page);facts.append(list);
+  fact('Name',$('name').value);fact('Show as','Marker');fact('Category',category+(category==='Class trainer'&&classes.length?' · '+classes.join(' / '):category==='Tradeskill'&&$('trade').value?' · '+$('trade').value:''));fact('Wiki page',page);facts.append(list);
   // A trainer the wiki gives no class for: the finder says which, or the marker could not be placed right.
   if(category==='Class trainer'&&!classes.length){const field=text('div','','field'),label=text('label','Class'),pick=document.createElement('select');label.htmlFor=pick.id='bounty-class';pick.required=true;
    fillSelect(pick,[['Choose the class they teach',''],...atlasClasses.map(c=>[c,c])]);pick.onchange=()=>pickClasses(pick.value?[pick.value]:[]);field.append(label,pick);facts.append(field);}

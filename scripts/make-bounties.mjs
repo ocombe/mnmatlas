@@ -12,7 +12,7 @@ import {key,zoneSlug} from './wiki-reconcile.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),api='https://monstersandmemories.wiki/api/partner/v1/';
 const context={};vm.createContext(context);vm.runInContext(await readFile(resolve(root,'marker-schema.js'),'utf8'),context);vm.runInContext(await readFile(resolve(root,'wiki-links.js'),'utf8'),context);
-const [isClassTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]=vm.runInContext('[isClassTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]',context);
+const [isClassTrainer,tradeTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]=vm.runInContext('[isClassTrainer,tradeTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]',context);
 // The same loose comparison as the board: our extra words after a dash or in brackets, a leading article, case and accents aside.
 const looseName=v=>String(v??'').split(/\s+[—–-]\s+|\s*\(/)[0].normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^(the|a|an) /,'');
 export const placed=(row,places)=>{const name=looseName(row.name);return places.some(p=>p.wikiId===row.id||(name.length>=4&&(looseName(p.name)===name||(' '+looseName(p.name)+' ').includes(' '+name+' '))));};
@@ -69,7 +69,7 @@ async function main(){
    await new Promise(r=>setTimeout(r,400));
   }
   // Instructors whose classes all have a class trainer marker or chip on the map are on it already.
-  const open=rows.filter(n=>!trainerOnMap(n,trained)).map(n=>({...n,priority:isClassTrainer(n)||n.role==='merchant'}));
+  const open=rows.filter(n=>!trainerOnMap(n,trained)).map(n=>({...n,priority:isClassTrainer(n)||!!tradeTrainer(n)||n.role==='merchant'}));
   await writeFile(resolve(root,'bounties',c.id+'.json'),JSON.stringify({map:c.id,zone,site:'mnm-wiki',built:new Date().toISOString(),rows:open})+'\n');
   built++;console.log(c.id+': '+open.length+' bounties ('+open.filter(r=>r.priority).length+' priority).');for(const r of open)index.push({w:r.id,n:r.name,m:c.id});
  }

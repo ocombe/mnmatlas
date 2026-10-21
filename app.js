@@ -232,6 +232,10 @@ function npcCard(c,m){
  const rows=document.createElement('dl'),row=(term,value)=>{if(value)rows.append(text('dt',term),text('dd',value));};
  // Our title may already give a level ("levels 51–53"): then the wiki's is left out rather than shown beside it.
  if(!level)row('Level',c.level);row(c.race&&c.class?'Race · Class':c.class?'Class':'Race',[c.race,c.class].filter(Boolean).join(' · '));row('Location',c.location);
+ // Players' records: respawn and spawn hours in game time (with the real time a respawn takes), and placeholders.
+ row('Respawn',gameRespawn(c.respawn));row('Spawns',gameHours(c.spawnWindow));
+ const holders=Array.isArray(c.placeholder)?c.placeholder.filter(p=>p&&typeof p.name==='string'&&p.name):[];
+ if(holders.length){const dd=document.createElement('dd');holders.forEach((p,i)=>{if(i)dd.append(', ');const link=wikiLinkFor({wiki:p.url});dd.append(link?.site==='mnm-wiki'?externalLink(p.name,link.href):p.name);});rows.append(text('dt',holders.length>1?'Placeholders':'Placeholder'),dd);}
  if(rows.children.length)box.append(rows);
  const section=(heading,cls)=>{const s=text('section','','npc-section '+cls),h=text('h4',heading,'npc-heading');s.append(h);box.append(s);return [s,h];};
  if(Array.isArray(c.loot)&&c.loot.length){const [loot,head]=section('Notable loot','npc-loot'),list=document.createElement('ul');if(c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));
@@ -241,6 +245,14 @@ function npcCard(c,m){
  box.append(externalLink('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
  return box;
 }
+// The wiki gives respawns in game time ("6 hours"); one game hour is 3 real minutes.
+function gameRespawn(v){
+ const t=String(v||'').trim(),m=/^(\d+(?:\.\d+)?)\s*(minutes?|mins?|hours?|hrs?|days?)$/i.exec(t);if(!m)return t;
+ const real=Number(m[1])*(/^d/i.test(m[2])?72:/^h/i.test(m[2])?3:0.05),h=Math.floor(real/60),min=Math.round(real%60);
+ return t+' game time (about '+(real<1?Math.round(real*60)+' s':(h?h+' h':'')+(h&&min?' ':'')+(min||!h?min+' min':''))+')';
+}
+// Spawn hours as game clock times: "22-4" is 22:00–04:00.
+function gameHours(v){const t=String(v||'').trim(),m=/^(\d{1,2})\s*[-–]\s*(\d{1,2})$/.exec(t),hh=n=>String(n).padStart(2,'0')+':00';return !t?'':m&&+m[1]<24&&+m[2]<=24?hh(+m[1])+'–'+hh(+m[2])+' game time':t+' (game time)';}
 // Camp loot is grouped by item page, with every known source and the best known rate.
 function campLoot(m,cards,parent=wikiEmbedParent()){
  const items=new Map();for(const mob of m.mobs||[]){if(wikiLinkFor(mob,parent)?.site!=='mnm-wiki')continue;const c=cards?.[mob.wikiId];for(const i of Array.isArray(c?.loot)?c.loot:[]){const link=wikiLinkFor({wiki:i?.url},parent);if(!i?.name||link?.site!=='mnm-wiki'||!new URL(link.href).pathname.startsWith('/items/'))continue;const url=new URL(link.href);url.hash='';url.search='';const key=url.href,rate=Number.isFinite(i.dropRate)&&i.dropRate>=0&&i.dropRate<=100?i.dropRate:null,old=items.get(key);if(old){if(rate!==null&&(old.dropRate===null||rate>old.dropRate))old.dropRate=rate;if(!old.mobs.some(x=>x.wikiId===mob.wikiId))old.mobs.push(mob);}else items.set(key,{name:i.name,url:link.href,dropRate:rate,mobs:[mob]});}}

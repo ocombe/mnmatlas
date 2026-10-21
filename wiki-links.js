@@ -158,7 +158,24 @@ function trainerClasses(row){
  if(!named)return [];
  return atlasClasses.filter(c=>new RegExp('\\b'+c.replace(' ','\\s*')+'s?\\b','i').test(name));
 }
-const isClassTrainer=row=>trainerClasses(row).length>0||row?.role==='trainer'||teacherWords.test(String(row?.name??''));
+// The wiki's "trainer" role also covers tradeskill trainers ("Carpenter Quais", "Medic Zafira"): a trainer with no class
+// whose name starts with a trade's title teaches that trade (the atlas's trade name, as in icons.js), not a class.
+const tradeTitles={alchemist:'Alchemy',alchemy:'Alchemy',archaeologist:'Archaeology',archaeology:'Archaeology',astrologer:'Astrology',astrology:'Astrology',
+ blacksmith:'Blacksmithing / Smelting',smith:'Blacksmithing / Smelting',smelter:'Blacksmithing / Smelting',brewer:'Brewing / Fermenting',carpenter:'Carpentry / Woodworking',
+ woodworker:'Carpentry / Woodworking',cartographer:'Cartography',chef:'Cooking',cook:'Cooking',enchanter:'(Dis)Enchanting',disenchanter:'(Dis)Enchanting',
+ farmer:'Farming',fisherman:'Fishing',fisher:'Fishing',angler:'Fishing',fletcher:'Fletching',herbalist:'Herbalism',herbalism:'Herbalism',jeweler:'Jewelcrafting',
+ jeweller:'Jewelcrafting',jewelcrafter:'Jewelcrafting',leatherworker:'Leatherworking',lumberjack:'Lumberjacking',lumberjacking:'Lumberjacking',mason:'Masonry',
+ medic:'Bind Wound',miner:'Mining',navigator:'Navigation',outdoorsman:'Wilderness',potter:'Pottery',rider:'Riding',skinner:'Skinning / Tanning',tanner:'Skinning / Tanning',
+ spellcrafter:'Spellcrafting',spinner:'Spinning',spymaster:'Spycraft',stonecutter:'Stone Cutting',survivalist:'Survival',tailor:'Tailoring',tinkerer:'Tinkering',
+ tamer:'Animal Taming',wagoneer:'Wagoneering'};
+function tradeTrainer(row){
+ const name=String(row?.name??'');
+ if(row?.role!=='trainer'||trainerClasses(row).length||teacherWords.test(name))return '';
+ const words=name.toLowerCase().replace(/[^a-z ]+/g,' ').trim().split(/\s+/);
+ // The title leads ("Tanner Burhan"), or follows "the" ("Noura the Tailor").
+ return tradeTitles[words[0]]||tradeTitles[words[words.indexOf('the')+1]]||'';
+}
+const isClassTrainer=row=>trainerClasses(row).length>0||teacherWords.test(String(row?.name??''))||row?.role==='trainer'&&!tradeTrainer(row);
 // The classes a map already shows trainers for: class trainer markers and trainer chips (older chips only have their
 // abbreviations, BST standing for both Beastlord and Beastmaster). A map keeps one marker or chip per guild, so an
 // instructor whose classes all have one is on the map already, whatever their name.

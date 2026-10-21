@@ -1,6 +1,6 @@
 // NPC wiki cards for marker popups: for each zone map, the markers linked to an NPC page on the Monsters and Memories
-// Wiki get a short card (tags, level, race, class, location line, the wiki's short summary, the first loot items with
-// their pages), written as npc-cards/<map-id>.json. GitHub builds them when publishing (.github/workflows/pages.yml)
+// Wiki get a short card (tags, level, race, class, location line, respawn time, spawn hours and placeholders when
+// players have recorded them, the wiki's short summary, the first loot items with their pages), written as npc-cards/<map-id>.json. GitHub builds them when publishing (.github/workflows/pages.yml)
 // with the WIKI_API_KEY secret; locally the key file works as for wiki-reconcile.mjs. Cards the live atlas already has
 // and that are less than a day old are kept as they are, so a publish only asks the wiki about NPCs newly linked and
 // cards due for a refresh; those requests are paced (the wiki allows 120 a minute for the whole atlas, wiki searches
@@ -19,7 +19,8 @@ const page=(v,kind)=>{try{const u=new URL(String(v));return u.protocol==='https:
 // The wiki gives drop rates in percent already (0.5 is half a percent).
 const rate=v=>typeof v==='number'&&Number.isFinite(v)&&v>0&&v<=100?Math.round(v*100)/100:null;
 // About 85 requests a minute at most, leaving room for visitors' wiki searches on the same key.
-const pace=700,fresh=24*3600000,site=process.env.CARDS_FROM||'https://www.mnmatlas.com/';
+// A card from an older build (no version, or another one) is asked for again, so new fields show at the next publish.
+const pace=700,fresh=24*3600000,version=2,site=process.env.CARDS_FROM||'https://www.mnmatlas.com/';
 let last=0;
 async function npc(id,secret,{fetcher=fetch,sleep=ms=>new Promise(r=>setTimeout(r,ms))}={}){
  const wait=last+pace-Date.now();if(wait>0)await sleep(wait);last=Date.now();
@@ -35,7 +36,9 @@ export function card(n){
  const loot=(Array.isArray(n.loot)?n.loot:[]).map(i=>({name:text(i?.name,80),url:page(i?.url,'items'),dropRate:rate(i?.dropRate)})).filter(i=>i.name&&i.url);
  // The likeliest drops first when the wiki has rates; otherwise its own order.
  const top=loot.map((i,k)=>({i,k})).sort((a,b)=>(b.i.dropRate??-1)-(a.i.dropRate??-1)||a.k-b.k).slice(0,5).map(x=>x.i);
- const c={name:text(n.name,100),url,tags:text(Array.isArray(n.tags)?n.tags.join(' · '):n.tags,120),level:text(n.level,20),race:text(n.race,40),class:text(n.class,40),location:text(n.location,160),summary:text(n.summary,220),loot:top.map(i=>i.dropRate==null?{name:i.name,url:i.url}:i),lootCount:loot.length};
+ // The mobs that spawn in its place, with their pages when the wiki has them.
+ const placeholder=(Array.isArray(n.placeholder)?n.placeholder:[]).map(p=>({name:text(p?.name,80),url:page(p?.url,'npcs')})).filter(p=>p.name).slice(0,3).map(p=>p.url?p:{name:p.name});
+ const c={v:version,name:text(n.name,100),url,tags:text(Array.isArray(n.tags)?n.tags.join(' · '):n.tags,120),level:text(n.level,20),race:text(n.race,40),class:text(n.class,40),location:text(n.location,160),respawn:text(n.respawn,40),spawnWindow:text(n.spawnWindow,20),placeholder,summary:text(n.summary,220),loot:top.map(i=>i.dropRate==null?{name:i.name,url:i.url}:i),lootCount:loot.length};
  for(const k of Object.keys(c))if(c[k]===''||(Array.isArray(c[k])&&!c[k].length)||c[k]===0)delete c[k];
  return c;
 }
@@ -56,7 +59,7 @@ export async function buildCards({root:folder=root,secret,fetcher=fetch,sleep,si
   let before={};try{const r=await fetcher(source+'npc-cards/'+encodeURIComponent(c.id)+'.json',{headers:{Accept:'application/json'}});if(r.ok){const b=await r.json();if(b&&b.cards&&typeof b.cards==='object')before=b.cards;}}catch{}
   const cards={};let failed=0,kept=0;
   for(const id of ids){
-   const old=before[id];if(old&&typeof old==='object'&&Number.isFinite(old.at)&&Date.now()-old.at<fresh&&card({...old,loot:[]})){cards[id]=old;kept++;continue;}
+   const old=before[id];if(old&&typeof old==='object'&&old.v===version&&Number.isFinite(old.at)&&Date.now()-old.at<fresh&&card({...old,loot:[]})){cards[id]=old;kept++;continue;}
    asked++;try{const n=await npc(id,secret,{fetcher,sleep}),one=n&&card(n);if(one)cards[id]={...one,at:Date.now()};else if(old&&card({...old,loot:[]}))cards[id]=old;else failed++;}catch{if(old)cards[id]=old;else failed++;}}
   if(!Object.keys(cards).length){console.log(c.id+': no cards ('+failed+' lookups failed).');continue;}
   await writeFile(resolve(root,'npc-cards',c.id+'.json'),JSON.stringify({map:c.id,site:'mnm-wiki',built:new Date().toISOString(),cards})+'\n');
