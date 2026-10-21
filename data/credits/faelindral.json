@@ -69,6 +69,10 @@
     {
       "name": "karnix91",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:vendors-lower-tier": [
@@ -111,6 +115,10 @@
     {
       "name": "karnix91",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:maggot-npc-07": [
@@ -273,6 +281,76 @@
     {
       "name": ".anduri",
       "what": "added"
+    }
+  ],
+  "marker:community-1127": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1128": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1129": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1130": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1131": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1133": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-2": [
+    {
+      "name": ".anduri",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1135": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-5": [
+    {
+      "name": ".anduri",
+      "what": "edited"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1141": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-38": [
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ]
 }

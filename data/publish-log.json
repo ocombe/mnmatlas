@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-19T13:53:44.851Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-19T14:55:28.577Z",
     "rows": []
   },
@@ -4554,6 +4550,322 @@
             "name": "Notable NPC — Temple upper platform",
             "reason": "duplicate",
             "remove": true
+          },
+          "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-21T19:49:33.840Z",
+    "rows": [
+      {
+        "id": 1127,
+        "payloadHash": "c90a67cdc8b2f6602af4866acc07b37160b88d09fb3a2a6bcf9de6ad9c1f3e71",
+        "updatedAt": "2026-10-21T19:28:14.50123+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1196,
+            "y": 1499,
+            "name": "Haggler Mernon",
+            "note": "Haggling trainer\nCan be found wandering up and down the stairs here",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1128,
+        "payloadHash": "d1500809ee8f52615ca21df37acb25f71fb706a56a7d3d85552856acb1757002",
+        "updatedAt": "2026-10-21T19:28:18.366821+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1102,
+            "y": 1598,
+            "name": "a guild registrar",
+            "note": "on the top level",
+            "category": "Guild"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1129,
+        "payloadHash": "cc6c3104fadec782efae9cd2e739beebf49883c03ee83b1b5653c1a370f7ddf0",
+        "updatedAt": "2026-10-21T19:28:22.669402+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1280,
+            "y": 1420,
+            "name": "Herbalist Llewcyn",
+            "note": "Herbalist trainer",
+            "trade": "Herbalism",
+            "category": "Tradeskill"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1130,
+        "payloadHash": "7b4d9167464432203b193f8d0540f8062d5da301d33ffbba6372042cec519ccf",
+        "updatedAt": "2026-10-21T19:28:27.580982+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1108,
+            "y": 855,
+            "name": "Captain Vaelric Ironbark",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/captain-vaelric-ironbark",
+            "bounty": "npc-captain-vaelric-ironbark",
+            "wikiId": "npc-captain-vaelric-ironbark",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1131,
+        "payloadHash": "cd886155cd3b25ad3fdf53c1c511499285d7227b418982da805ca6ffe6fb9ae1",
+        "updatedAt": "2026-10-21T19:28:30.846199+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1137,
+            "y": 789,
+            "name": "Commander Elydris Stormbough",
+            "note": "on the upper level",
+            "wiki": "https://monstersandmemories.wiki/npcs/commander-elydris-stormbough",
+            "bounty": "npc-commander-elydris-stormbough",
+            "wikiId": "npc-commander-elydris-stormbough",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1133,
+        "payloadHash": "27cc85e6b5607b4ebe430264e456dbea93090317ee72b2e9978c5076b72fc618",
+        "updatedAt": "2026-10-21T19:28:36.841656+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1163,
+            "y": 697,
+            "name": "Captain Keyaryn Thornshade",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/captain-keyaryn-thornshade",
+            "bounty": "npc-captain-keyaryn-thornshade",
+            "wikiId": "npc-captain-keyaryn-thornshade",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1134,
+        "payloadHash": "9c40d876f6843033d3ea2686ae00e277f8cde0a2e27b21d4e799261f04072e91",
+        "updatedAt": "2026-10-21T19:29:46.142785+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wiki-2",
+          "payload": {
+            "to": [
+              1159,
+              858
+            ],
+            "from": [
+              1126,
+              870
+            ],
+            "name": "Archer · Fighter — Wayguard Garrison"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1135,
+        "payloadHash": "7848fd1b4709ca00337a6c7842ed99512c4c31aa746be8d288435483449c0976",
+        "updatedAt": "2026-10-21T19:29:51.695042+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1841,
+            "y": 1542,
+            "name": "Varilis Thornvine",
+            "note": "part of Shaman starter quest",
+            "wiki": "https://monstersandmemories.wiki/npcs/varilis-thornvine",
+            "bounty": "npc-varilis-thornvine",
+            "wikiId": "npc-varilis-thornvine",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1136,
+        "payloadHash": "61b43fd6dba0d1a2e48ba184db8ef1222cc778f9bf9359f9ca2c836e21753a73",
+        "updatedAt": "2026-10-21T19:29:56.90018+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-386",
+          "payload": {
+            "to": [
+              1808,
+              1587
+            ],
+            "from": [
+              1781,
+              1567
+            ],
+            "name": "Moon Dances"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1137,
+        "payloadHash": "dd644636893559e1410597518f05dcd0b29afe8a2b92ef262734b71505666380",
+        "updatedAt": "2026-10-21T19:30:01.070424+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-454",
+          "payload": {
+            "to": [
+              1763,
+              1580
+            ],
+            "from": [
+              1820,
+              1564
+            ],
+            "name": "Eraeldor Lowmist"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1139,
+        "payloadHash": "0c49c4f3ab6318863193c420fedc5a467ca9766482020300c00ccdeb7b831a24",
+        "updatedAt": "2026-10-21T19:30:08.797687+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-5",
+          "payload": {
+            "from": {
+              "x": 1860,
+              "y": 1654,
+              "name": "Shaman — The Balanced Branch",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "classes": [
+                "Shaman"
+              ],
+              "building": "The Balanced Branch",
+              "category": "Class trainer",
+              "approximate": true
+            },
+            "name": "a shaman scribe",
+            "note": ""
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1140,
+        "payloadHash": "ec8d72e63342b44ba9add0756b049d2b71e636f0defc28475604b4cf765fb961",
+        "updatedAt": "2026-10-21T19:30:16.543519+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wiki-5",
+          "payload": {
+            "to": [
+              1789,
+              1561
+            ],
+            "from": [
+              1860,
+              1654
+            ],
+            "name": "Shaman — The Balanced Branch"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1141,
+        "payloadHash": "a78cc196186a7a2038511094ac256749ca005e4be9bfcb37d8bc40c0d7b2e725",
+        "updatedAt": "2026-10-21T19:30:25.892543+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1851,
+            "y": 1555,
+            "name": "Listener Maplebloom",
+            "note": "part of Bard starter quest",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1142,
+        "payloadHash": "f484e78ea016fafe7043d2a16143348a2a60f30ff27d01b2fda28941abaf7832",
+        "updatedAt": "2026-10-21T19:30:48.431599+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-38",
+          "payload": {
+            "from": {
+              "x": 1842.31,
+              "y": 1098.5,
+              "name": "Fletching — Ranger's Rest",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Fletcher Merafyn",
+            "note": "",
+            "trade": "Fletching"
           },
           "credit": true
         }

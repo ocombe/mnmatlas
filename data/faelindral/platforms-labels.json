@@ -233,8 +233,8 @@
       ],
       "building": "Wayguard Garrison",
       "id": "wiki-2",
-      "x": 1126,
-      "y": 870
+      "x": 1159,
+      "y": 858
     },
     {
       "abbreviations": [
@@ -269,8 +269,10 @@
       ],
       "building": "The Balanced Branch",
       "id": "wiki-5",
-      "x": 1860,
-      "y": 1654
+      "x": 1789,
+      "y": 1561,
+      "name": "a shaman scribe",
+      "note": ""
     },
     {
       "abbreviations": [

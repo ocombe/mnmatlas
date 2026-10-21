@@ -16,14 +16,15 @@
   "id": "wiki-2",
   "name": "Archer · Fighter — Wayguard Garrison",
   "category": "Class trainer",
-  "x": 1126,
-  "y": 870,
+  "x": 1159,
+  "y": 858,
   "approximate": true,
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
   "classes": [
    "Archer",
    "Fighter"
-  ]
+  ],
+  "community": true
  },
  {
   "id": "wiki-3",
@@ -51,15 +52,16 @@
  },
  {
   "id": "wiki-5",
-  "name": "Shaman — The Balanced Branch",
+  "name": "a shaman scribe",
   "category": "Class trainer",
-  "x": 1860,
-  "y": 1654,
+  "x": 1789,
+  "y": 1561,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "note": "",
   "classes": [
    "Shaman"
-  ]
+  ],
+  "community": true
  },
  {
   "id": "wiki-6",
@@ -214,12 +216,14 @@
  },
  {
   "id": "wiki-38",
-  "name": "Fletching — Ranger's Rest",
+  "name": "Fletcher Merafyn",
   "category": "Tradeskill",
   "x": 1842.31,
   "y": 1098.5,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+  "note": "",
+  "trade": "Fletching",
+  "community": true
  },
  {
   "id": "wiki-39",
@@ -552,8 +556,8 @@
   "name": "Moon Dances",
   "category": "Notable NPC",
   "note": "Near the shaman trainer.",
-  "x": 1781,
-  "y": 1567,
+  "x": 1808,
+  "y": 1587,
   "wiki": "https://monstersandmemories.wiki/npcs/moon-dances"
  },
  {
@@ -606,8 +610,8 @@
   "name": "Eraeldor Lowmist",
   "category": "Quest NPC",
   "note": "",
-  "x": 1820,
-  "y": 1564,
+  "x": 1763,
+  "y": 1580,
   "wiki": "https://monstersandmemories.wiki/npcs/eraeldor-lowmist",
   "wikiId": "npc-eraeldor-lowmist"
  },
@@ -754,5 +758,86 @@
   "y": 1450,
   "category": "Vendor",
   "vendor": "Herbalism vendor"
+ },
+ {
+  "id": "community-1127",
+  "community": true,
+  "name": "Haggler Mernon",
+  "note": "Haggling trainer\nCan be found wandering up and down the stairs here",
+  "x": 1196,
+  "y": 1499,
+  "category": "Notable NPC"
+ },
+ {
+  "id": "community-1128",
+  "community": true,
+  "name": "a guild registrar",
+  "note": "on the top level",
+  "x": 1102,
+  "y": 1598,
+  "category": "Guild"
+ },
+ {
+  "id": "community-1129",
+  "community": true,
+  "name": "Herbalist Llewcyn",
+  "note": "Herbalist trainer",
+  "x": 1280,
+  "y": 1420,
+  "category": "Tradeskill",
+  "trade": "Herbalism"
+ },
+ {
+  "id": "community-1130",
+  "community": true,
+  "name": "Captain Vaelric Ironbark",
+  "note": "",
+  "x": 1108,
+  "y": 855,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-vaelric-ironbark",
+  "wikiId": "npc-captain-vaelric-ironbark"
+ },
+ {
+  "id": "community-1131",
+  "community": true,
+  "name": "Commander Elydris Stormbough",
+  "note": "on the upper level",
+  "x": 1137,
+  "y": 789,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/commander-elydris-stormbough",
+  "wikiId": "npc-commander-elydris-stormbough"
+ },
+ {
+  "id": "community-1133",
+  "community": true,
+  "name": "Captain Keyaryn Thornshade",
+  "note": "",
+  "x": 1163,
+  "y": 697,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-keyaryn-thornshade",
+  "wikiId": "npc-captain-keyaryn-thornshade"
+ },
+ {
+  "id": "community-1135",
+  "community": true,
+  "name": "Varilis Thornvine",
+  "note": "part of Shaman starter quest",
+  "x": 1841,
+  "y": 1542,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/varilis-thornvine",
+  "wikiId": "npc-varilis-thornvine"
+ },
+ {
+  "id": "community-1141",
+  "community": true,
+  "name": "Listener Maplebloom",
+  "note": "part of Bard starter quest",
+  "x": 1851,
+  "y": 1555,
+  "category": "Quest NPC"
  }
 ]
