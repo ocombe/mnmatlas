@@ -179,6 +179,14 @@
     {
       "name": "karnix91",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:community-472": [
@@ -295,6 +303,64 @@
     {
       "name": "argus_q",
       "what": "added"
+    }
+  ],
+  "marker:community-1018": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1019": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1020": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1021": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1022": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1023": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:travelers-lift": [
+    {
+      "name": ".anduri",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:community-1027": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:respawn-point": [
+    {
+      "name": null,
+      "what": "moved"
     }
   ]
 }

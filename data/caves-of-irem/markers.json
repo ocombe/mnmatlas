@@ -158,5 +158,19 @@
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
     "wikiId": "npc-riverking-magnar"
+  },
+  {
+    "id": "community-1087",
+    "community": true,
+    "name": "Speaker Khaldun",
+    "note": "40ish (yellow to 38) shaman named mob",
+    "x": 1614,
+    "y": 4018,
+    "category": "Named mob",
+    "levels": [
+      40,
+      40
+    ],
+    "ambush": false
   }
 ]

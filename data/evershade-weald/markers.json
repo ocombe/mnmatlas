@@ -238,11 +238,12 @@
   "id": "respawn-point",
   "name": "Respawn point",
   "category": "Respawn point",
-  "x": 1692,
-  "y": 2626,
+  "x": 1869,
+  "y": 2488,
   "approximate": true,
   "note": "",
-  "minZoom": 3.25
+  "minZoom": 3.25,
+  "community": true
  },
  {
   "id": "community-130",
@@ -299,12 +300,13 @@
   "id": "travelers-lift",
   "name": "Traveler's Lift — up to Faelindral",
   "category": "Lift",
-  "x": 1795,
-  "y": 2513,
+  "x": 1753,
+  "y": 2510,
   "note": "Rises to the platforms of Faelindral.",
   "toMap": "faelindral",
   "toPlace": "lift-traveler-s-down",
-  "direction": "up"
+  "direction": "updown",
+  "community": true
  },
  {
   "id": "keepers-lift",
@@ -735,10 +737,10 @@
   "id": "community-471",
   "community": true,
   "name": "Daegolar the Pauper",
-  "category": "Quest NPC",
-  "note": "",
-  "x": 1829,
-  "y": 2518,
+  "category": "Notable NPC",
+  "note": "Talk to him at Level 1 to become Solo Self found.",
+  "x": 1816,
+  "y": 2513,
   "wiki": "https://monstersandmemories.wiki/npcs/daegolar-the-pauper",
   "wikiId": "npc-daegolar-the-pauper"
  },
@@ -939,5 +941,77 @@
   "x": 3337,
   "y": 1347,
   "wiki": "https://monstersandmemories.wiki/quests/decipher-the-unintelligible-writings"
+ },
+ {
+  "id": "community-1018",
+  "community": true,
+  "name": "Rider Sylvadir",
+  "note": "Riding trainer",
+  "x": 1746,
+  "y": 2396,
+  "category": "Tradeskill",
+  "wiki": "https://monstersandmemories.wiki/npcs/rider-sylvadir",
+  "wikiId": "npc-rider-sylvadir",
+  "trade": "Riding"
+ },
+ {
+  "id": "community-1019",
+  "community": true,
+  "name": "Fisherman Pico",
+  "note": "Fishing trainer\nAdjacent pond near Traveller's lift",
+  "x": 1735,
+  "y": 2612,
+  "category": "Tradeskill",
+  "wiki": "https://monstersandmemories.wiki/npcs/fisherman-pico",
+  "wikiId": "npc-expert-fisherman",
+  "trade": "Fishing"
+ },
+ {
+  "id": "community-1020",
+  "community": true,
+  "name": "Steblemaster Felwin",
+  "note": "Horse vendor",
+  "x": 1793,
+  "y": 2417,
+  "category": "Vendor",
+  "vendor": "Riding vendor"
+ },
+ {
+  "id": "community-1021",
+  "community": true,
+  "name": "a rider",
+  "note": "Animal feed & basic rigging",
+  "x": 1755,
+  "y": 2405,
+  "category": "Vendor",
+  "vendor": "Riding vendor"
+ },
+ {
+  "id": "community-1022",
+  "community": true,
+  "name": "a wagoneer",
+  "note": "Wagon supplies",
+  "x": 1807,
+  "y": 2327,
+  "category": "Vendor"
+ },
+ {
+  "id": "community-1023",
+  "community": true,
+  "name": "Wagoneer Hoddo",
+  "note": "",
+  "x": 1799,
+  "y": 2339,
+  "category": "Tradeskill",
+  "trade": "Wagoneering"
+ },
+ {
+  "id": "community-1027",
+  "community": true,
+  "name": "Solitary Londrin",
+  "note": "Talk to him at Level 1 to activate Solo ruleset.",
+  "x": 1803,
+  "y": 2517,
+  "category": "Notable NPC"
  }
 ]

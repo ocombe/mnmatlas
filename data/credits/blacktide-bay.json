@@ -165,12 +165,20 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "ventsonge",
+      "what": "edited"
     }
   ],
   "marker:community-989": [
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-990": [
@@ -188,6 +196,18 @@
   "marker:community-992": [
     {
       "name": "kwynn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1036": [
+    {
+      "name": "chamthal",
+      "what": "added"
+    }
+  ],
+  "marker:community-1037": [
+    {
+      "name": "chamthal",
       "what": "added"
     }
   ]

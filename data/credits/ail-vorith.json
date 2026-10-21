@@ -143,6 +143,14 @@
     {
       "name": "cideus.",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": "argus_q",
+      "what": "reshaped"
     }
   ],
   "marker:community-65": [
@@ -415,6 +423,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "moved"
     }
   ],
   "marker:community-276": [
@@ -1014,6 +1026,78 @@
   "marker:community-979": [
     {
       "name": "yummsie",
+      "what": "added"
+    }
+  ],
+  "marker:community-1017": [
+    {
+      "name": "randalphdk",
+      "what": "added"
+    }
+  ],
+  "marker:community-1031": [
+    {
+      "name": "randalphdk",
+      "what": "added"
+    }
+  ],
+  "marker:community-1049": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "label:community-1050": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1052": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1053": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1054": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1055": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1063": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1067": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1076": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1078": [
+    {
+      "name": "argus_q",
       "what": "added"
     }
   ]

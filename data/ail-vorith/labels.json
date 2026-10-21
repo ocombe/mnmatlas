@@ -109,6 +109,17 @@
    "x": 5797,
    "y": 3553,
    "arrow": "east"
+  },
+  {
+   "id": "community-1050",
+   "community": true,
+   "name": "Newbie Yard",
+   "note": "",
+   "x": 5331,
+   "y": 3528,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0
   }
  ],
  "trainers": [

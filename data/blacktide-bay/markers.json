@@ -291,13 +291,14 @@
     "id": "community-941",
     "community": true,
     "name": "Taskmaster Murkraal",
-    "category": "Notable NPC",
+    "category": "Named mob",
     "note": "",
     "x": 4603,
     "y": 4750,
     "level": "floor-2",
     "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-murkraal",
-    "wikiId": "npc-taskmaster-murkraal"
+    "wikiId": "npc-taskmaster-murkraal",
+    "ambush": false
   },
   {
     "id": "community-989",
@@ -310,7 +311,11 @@
     "level": "floor-1",
     "ambush": false,
     "wiki": "https://monstersandmemories.wiki/npcs/orbilis-the-overseer",
-    "wikiId": "npc-orbilis-the-overseer"
+    "wikiId": "npc-orbilis-the-overseer",
+    "levels": [
+      25,
+      25
+    ]
   },
   {
     "id": "community-990",
@@ -350,5 +355,29 @@
     "travel": "Ladder",
     "toLevel": "floor-1",
     "direction": "up"
+  },
+  {
+    "id": "community-1036",
+    "community": true,
+    "name": "Gore",
+    "note": "",
+    "x": 2906,
+    "y": 2768,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/gore",
+    "wikiId": "npc-gore"
+  },
+  {
+    "id": "community-1037",
+    "community": true,
+    "name": "Admiral Blacktide",
+    "note": "",
+    "x": 2222,
+    "y": 3044,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/admiral-blacktide",
+    "wikiId": "npc-admiral-blacktide"
   }
 ]
