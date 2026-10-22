@@ -20,7 +20,7 @@ const page=(v,kind)=>{try{const u=new URL(String(v));return u.protocol==='https:
 const rate=v=>typeof v==='number'&&Number.isFinite(v)&&v>0&&v<=100?Math.round(v*100)/100:null;
 // About 85 requests a minute at most, leaving room for visitors' wiki searches on the same key.
 // A card from an older build (no version, or another one) is asked for again, so new fields show at the next publish.
-const pace=700,fresh=24*3600000,version=2,site=process.env.CARDS_FROM||'https://www.mnmatlas.com/';
+const pace=700,fresh=24*3600000,version=3,site=process.env.CARDS_FROM||'https://www.mnmatlas.com/';
 let last=0;
 async function npc(id,secret,{fetcher=fetch,sleep=ms=>new Promise(r=>setTimeout(r,ms))}={}){
  const wait=last+pace-Date.now();if(wait>0)await sleep(wait);last=Date.now();
@@ -30,15 +30,21 @@ async function npc(id,secret,{fetcher=fetch,sleep=ms=>new Promise(r=>setTimeout(
   if(!r.ok)return null;const body=await r.json().catch(()=>null);return body?.npc||body;
  }
 }
+// The item flags the wiki gives on each drop; all but no rent mark a rare drop.
+const itemFlags=['magic','lore','noDrop','noRent','unique'],rareFlags=['magic','lore','noDrop','unique'];
+export const isRareDrop=i=>Array.isArray(i?.flags)&&i.flags.some(f=>rareFlags.includes(f));
 // What a card keeps: never the description, factions or quests.
 export function card(n){
  const url=page(n?.url,'npcs');if(!url||typeof n?.name!=='string')return null;
- const loot=(Array.isArray(n.loot)?n.loot:[]).map(i=>({name:text(i?.name,80),url:page(i?.url,'items'),dropRate:rate(i?.dropRate)})).filter(i=>i.name&&i.url);
- // The likeliest drops first when the wiki has rates; otherwise its own order.
- const top=loot.map((i,k)=>({i,k})).sort((a,b)=>(b.i.dropRate??-1)-(a.i.dropRate??-1)||a.k-b.k).slice(0,5).map(x=>x.i);
+ // Each drop keeps the item flags the wiki gives (only those that are set).
+ const loot=(Array.isArray(n.loot)?n.loot:[]).map(i=>{const flags=itemFlags.filter(f=>i?.[f]===true);return {name:text(i?.name,80),url:page(i?.url,'items'),dropRate:rate(i?.dropRate),...(flags.length?{flags}:{})};}).filter(i=>i.name&&i.url);
+ // Rare drops (magic, lore, no drop or unique items) come first, up to eight; common drops fill the card to five.
+ // Within each, the likeliest first when the wiki has rates; otherwise its own order.
+ const order=list=>list.map((i,k)=>({i,k})).sort((a,b)=>(b.i.dropRate??-1)-(a.i.dropRate??-1)||a.k-b.k).map(x=>x.i);
+ const rare=order(loot.filter(isRareDrop)).slice(0,8),top=[...rare,...order(loot.filter(i=>!isRareDrop(i))).slice(0,Math.max(0,5-rare.length))];
  // The mobs that spawn in its place, with their pages when the wiki has them.
  const placeholder=(Array.isArray(n.placeholder)?n.placeholder:[]).map(p=>({name:text(p?.name,80),url:page(p?.url,'npcs')})).filter(p=>p.name).slice(0,3).map(p=>p.url?p:{name:p.name});
- const c={v:version,name:text(n.name,100),url,tags:text(Array.isArray(n.tags)?n.tags.join(' · '):n.tags,120),level:text(n.level,20),race:text(n.race,40),class:text(n.class,40),location:text(n.location,160),respawn:text(n.respawn,40),spawnWindow:text(n.spawnWindow,20),placeholder,summary:text(n.summary,220),loot:top.map(i=>i.dropRate==null?{name:i.name,url:i.url}:i),lootCount:loot.length};
+ const c={v:version,name:text(n.name,100),url,tags:text(Array.isArray(n.tags)?n.tags.join(' · '):n.tags,120),level:text(n.level,20),race:text(n.race,40),class:text(n.class,40),location:text(n.location,160),respawn:text(n.respawn,40),spawnWindow:text(n.spawnWindow,20),placeholder,summary:text(n.summary,220),loot:top.map(({dropRate,...i})=>dropRate==null?i:{...i,dropRate}),lootCount:loot.length};
  for(const k of Object.keys(c))if(c[k]===''||(Array.isArray(c[k])&&!c[k].length)||c[k]===0)delete c[k];
  return c;
 }

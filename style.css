@@ -201,6 +201,8 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .leaflet-popup-content .npc-card a:hover,.leaflet-popup-content .npc-card a:focus-visible{text-decoration:underline}
 .leaflet-popup-content .npc-rate{flex:none;white-space:nowrap;color:var(--muted-foreground);font-size:11px;font-variant-numeric:tabular-nums}
 .leaflet-popup-content .npc-more{display:inline-block;margin-top:3px;font-size:11px}
+.leaflet-popup-content .npc-drop{min-width:0}.leaflet-popup-content .npc-flags{display:block;font-size:10px;letter-spacing:.04em;color:var(--muted-foreground)}
+.leaflet-popup-content .npc-rare .npc-flags{color:#8fb7e8}.leaflet-popup-content .npc-none{margin:3px 0 0;font-size:11px;font-style:italic;color:var(--muted-foreground)}
 .leaflet-popup-content .npc-summary{margin:0 0 3px;font-style:italic;white-space:normal}
 .leaflet-popup-content .npc-read{font-size:11.5px}
 .leaflet-popup-content .npc-card .npc-credit{display:block;margin-top:12px;font-size:10.5px;color:var(--muted-foreground)}

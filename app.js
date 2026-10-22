@@ -259,9 +259,15 @@ function npcCard(c,m){
  if(holders.length){const dd=document.createElement('dd');holders.forEach((p,i)=>{if(i)dd.append(', ');const link=wikiLinkFor({wiki:p.url});dd.append(link?.site==='mnm-wiki'?externalLink(p.name,link.href):p.name);});rows.append(text('dt',holders.length>1?'Placeholders':'Placeholder'),dd);}
  if(rows.children.length)box.append(rows);
  const section=(heading,cls)=>{const s=text('section','','npc-section '+cls),h=text('h4',heading,'npc-heading');s.append(h);box.append(s);return [s,h];};
- if(Array.isArray(c.loot)&&c.loot.length){const [loot,head]=section('Notable loot','npc-loot'),list=document.createElement('ul');if(c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));
-  for(const i of c.loot){const li=document.createElement('li');li.append(externalLink(i.name,i.url));if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
-  loot.append(list);const more=(c.lootCount||0)-c.loot.length;if(more>0)loot.append(externalLink('+'+more+' more on the wiki',c.url,'npc-more'));}
+ // Rare drops (the wiki's magic, lore, no drop and unique items) get their own list first, each with its flags; the
+ // common drops follow. A named mob with none recorded says so, as the wiki may simply not have them yet.
+ if(Array.isArray(c.loot)&&c.loot.length){const rare=c.loot.filter(rareDrop),common=c.loot.filter(i=>!rareDrop(i)),named=/named/i.test(noteKind(m));
+  const lootList=(heading,items,first)=>{const [loot,head]=section(heading,'npc-loot'+(first&&rare.length?' npc-rare':'')),list=document.createElement('ul');if(first&&c.lootCount>c.loot.length)head.append(text('small',c.lootCount+' known'));
+   for(const i of items){const li=document.createElement('li'),name=text('span','','npc-drop');name.append(externalLink(i.name,i.url));const flags=dropFlags(i);if(flags)name.append(text('small',flags,'npc-flags'));li.append(name);if(typeof i.dropRate==='number')li.append(text('span',i.dropRate+'%','npc-rate'));list.append(li);}
+   loot.append(list);return loot;};
+  let last;if(rare.length)last=lootList('Rare drops',rare,true);
+  if(common.length){last=lootList(rare.length?'Common drops':'Notable loot',common,!rare.length);if(!rare.length&&named)last.append(text('p','No rare drops recorded on the wiki yet.','npc-none'));}
+  const more=(c.lootCount||0)-c.loot.length;if(more>0)last.append(externalLink('+'+more+' more on the wiki',c.url,'npc-more'));}
  if(c.summary){const [about]=section('From the wiki','npc-about');about.append(text('p',c.summary,'npc-summary'),externalLink('Read more on the wiki ↗',c.url,'npc-read'));}
  box.append(externalLink('Data from the Monsters and Memories Wiki','https://monstersandmemories.wiki/','npc-credit'));
  return box;
@@ -275,6 +281,9 @@ function gameRespawn(v){
 }
 // Spawn hours as game clock times: "22-4" and "22:00-04:00" are 22:00–04:00.
 function gameHours(v){const t=String(v||'').trim(),m=/^(\d{1,2})(?::(\d{2}))?\s*[-–]\s*(\d{1,2})(?::(\d{2}))?$/.exec(t),hh=(n,mm)=>String(n).padStart(2,'0')+':'+(mm||'00');return !t?'':m&&+m[1]<24&&+m[3]<=24&&(m[2]||'0')<'60'&&(m[4]||'0')<'60'?hh(+m[1],m[2])+'–'+hh(+m[3],m[4])+' game time':t+' (game time)';}
+// The wiki's item flags on a card's drops: all but no rent mark a rare drop.
+const rareDrop=i=>Array.isArray(i?.flags)&&i.flags.some(f=>['magic','lore','noDrop','unique'].includes(f));
+const dropFlags=i=>(Array.isArray(i?.flags)?i.flags:[]).map(f=>({magic:'Magic',lore:'Lore',noDrop:'No drop',noRent:'No rent',unique:'Unique'})[f]).filter(Boolean).join(' · ');
 // Camp loot is grouped by item page, with every known source and the best known rate.
 function campLoot(m,cards,parent=wikiEmbedParent()){
  const items=new Map();for(const mob of m.mobs||[]){if(wikiLinkFor(mob,parent)?.site!=='mnm-wiki')continue;const c=cards?.[mob.wikiId];for(const i of Array.isArray(c?.loot)?c.loot:[]){const link=wikiLinkFor({wiki:i?.url},parent);if(!i?.name||link?.site!=='mnm-wiki'||!new URL(link.href).pathname.startsWith('/items/'))continue;const url=new URL(link.href);url.hash='';url.search='';const key=url.href,rate=Number.isFinite(i.dropRate)&&i.dropRate>=0&&i.dropRate<=100?i.dropRate:null,old=items.get(key);if(old){if(rate!==null&&(old.dropRate===null||rate>old.dropRate))old.dropRate=rate;if(!old.mobs.some(x=>x.wikiId===mob.wikiId))old.mobs.push(mob);}else items.set(key,{name:i.name,url:link.href,dropRate:rate,mobs:[mob]});}}
