@@ -41,15 +41,6 @@
   "toMap": "underdocks"
  },
  {
-  "id": "dungeon-sewers",
-  "name": "Sewers",
-  "category": "Dungeon",
-  "x": 2344,
-  "y": 2198,
-  "note": "Dungeon entrance.",
-  "minZoom": 2.75
- },
- {
   "id": "dungeon-infested-crypt",
   "name": "Infested Crypt",
   "category": "Dungeon",
