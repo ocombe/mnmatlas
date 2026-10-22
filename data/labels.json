@@ -352,17 +352,6 @@
       "toPlace": "exit-night-harbor"
     },
     {
-      "id": "place-35",
-      "name": "to Sewers",
-      "kind": "exit",
-      "priority": 60,
-      "minZoom": 3.25,
-      "x": 1644.01,
-      "y": 1783.97,
-      "arrow": "west",
-      "tier": "exit"
-    },
-    {
       "id": "place-36",
       "name": "Boat to Keeper's Bight (Faelindral)",
       "kind": "exit",
