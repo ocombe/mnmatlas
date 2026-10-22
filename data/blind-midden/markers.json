@@ -248,5 +248,109 @@
     "y": 2819,
     "approximate": true,
     "note": "This rock ledge is not solid: it drops to the cave below."
+  },
+  {
+    "id": "community-1233",
+    "community": true,
+    "name": "King Jekom the Ancient",
+    "note": "",
+    "x": 2097,
+    "y": 2100,
+    "level": "basement",
+    "category": "Named mob",
+    "ambush": false
+  },
+  {
+    "id": "community-1234",
+    "community": true,
+    "name": "Gelmother Jiggol",
+    "note": "",
+    "x": 2385,
+    "y": 2011,
+    "level": "basement",
+    "category": "Named mob",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1235",
+    "community": true,
+    "name": "Red Hands Ellison",
+    "note": "",
+    "x": 2183,
+    "y": 1858,
+    "level": "basement",
+    "category": "Notable NPC"
+  },
+  {
+    "id": "community-1236",
+    "community": true,
+    "name": "Andrew the Framed",
+    "note": "",
+    "x": 2156,
+    "y": 1984,
+    "level": "basement",
+    "category": "Notable NPC"
+  },
+  {
+    "id": "community-1237",
+    "community": true,
+    "name": "Ferg the Filthy",
+    "note": "roamer named",
+    "x": 2343,
+    "y": 1811,
+    "level": "basement",
+    "category": "Named mob",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1238",
+    "community": true,
+    "name": "Pragrok the Pickaxe",
+    "note": "",
+    "x": 2441,
+    "y": 1781,
+    "level": "basement",
+    "category": "Named mob",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1239",
+    "community": true,
+    "name": "Forager Frandrah",
+    "note": "",
+    "x": 2476,
+    "y": 1710,
+    "level": "basement",
+    "category": "Named mob",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1240",
+    "community": true,
+    "name": "Stairs",
+    "note": "",
+    "x": 2127,
+    "y": 1802,
+    "level": "basement",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "basement",
+    "direction": "updown"
   }
 ]

@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-19T14:55:28.577Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-19T19:56:43.498Z",
     "rows": [
       {
@@ -4868,6 +4864,449 @@
             "trade": "Fletching"
           },
           "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-22T22:21:33.026Z",
+    "rows": [
+      {
+        "id": 1163,
+        "payloadHash": "c56af2930d197183dd921345b3f419a9ba7bd8af05fba8d7d3c846d5705dfc89",
+        "updatedAt": "2026-10-22T21:37:20.172877+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4032,
+            "y": 1677,
+            "mobs": [
+              {
+                "name": "A Skri'Var scrambler",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-scrambler",
+                "wikiId": "npc-a-skrivar-scrambler"
+              },
+              {
+                "name": "A Skri'Var sniffer",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-sniffer",
+                "wikiId": "npc-a-skrivar-sniffer"
+              }
+            ],
+            "name": "Skri'Var Cave",
+            "note": "also Skri'Var plinker",
+            "level": "floor-2",
+            "levels": [
+              13,
+              15
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1164,
+        "payloadHash": "2ebefe6ea3faa79ae94e546b851db403763d162b8e84adda6752213f87495b43",
+        "updatedAt": "2026-10-22T21:37:32.738232+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "edit-marker",
+          "target_id": "community-840",
+          "payload": {
+            "from": {
+              "x": 3998,
+              "y": 1194,
+              "mobs": [],
+              "name": "Skri'Var Ambushers (Invis)",
+              "note": "",
+              "level": "floor-2",
+              "category": "Ambush"
+            },
+            "name": "Skri'Var Ambushers (Invis)",
+            "levels": [
+              17,
+              18
+            ]
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1165,
+        "payloadHash": "b74c471e165c9b677495fd10175d5314cef4151683187b0be8f2b9728fa3e543",
+        "updatedAt": "2026-10-22T21:37:40.749028+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "edit-marker",
+          "target_id": "community-915",
+          "payload": {
+            "from": {
+              "x": 4124,
+              "y": 841,
+              "name": "Prince Mali'Tik (level 18)",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/prince-malitik",
+              "level": "floor-2",
+              "levels": [
+                18,
+                18
+              ],
+              "wikiId": "npc-prince-malitik",
+              "category": "Named mob"
+            },
+            "name": "Prince Mali'Tik (level 18)",
+            "note": "Spawns with two other Skri'Var of similar levels"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1169,
+        "payloadHash": "187fc6c1409eb84ac1cb3f3fb85f7c235a52e25206a7d3c6bc8bfc5f47a7ade5",
+        "updatedAt": "2026-10-22T21:38:15.273729+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3886,
+            "y": 596,
+            "mobs": [
+              {
+                "name": "A Skri'Var swarmer",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-swarmer",
+                "wikiId": "npc-a-skrivar-swarmer"
+              }
+            ],
+            "name": "Skri'Var Swarmers",
+            "note": "",
+            "level": "floor-2",
+            "levels": [
+              17,
+              18
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1190,
+        "payloadHash": "b9fde9697321424fc8fc1a79005af138ee2c3e2c0612262b4633ab29b3bb84b5",
+        "updatedAt": "2026-10-22T21:33:02.268075+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2402,
+            "y": 7328,
+            "name": "Gate Captain Xaros",
+            "note": "",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1211,
+        "payloadHash": "3592f9471712d847c6a0ca1cb3fc9ae5c9f1157f51fa39aa49bc707851992fb8",
+        "updatedAt": "2026-10-22T21:33:15.549683+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-64",
+          "payload": {
+            "from": {
+              "x": 6084,
+              "y": 1869,
+              "mobs": [
+                {
+                  "name": "A Deepgulp explorer",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
+                  "wikiId": "npc-a-deepgulp-explorer"
+                }
+              ],
+              "name": "A Deepgulp explorer",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
+              "shape": {
+                "form": "outline",
+                "kind": "area",
+                "points": [
+                  [
+                    5605,
+                    1901
+                  ],
+                  [
+                    5561,
+                    1886
+                  ],
+                  [
+                    5538,
+                    1853
+                  ],
+                  [
+                    5636,
+                    1803
+                  ],
+                  [
+                    5918,
+                    1804
+                  ],
+                  [
+                    6135,
+                    1842
+                  ],
+                  [
+                    6363,
+                    1815
+                  ],
+                  [
+                    6566,
+                    1910
+                  ],
+                  [
+                    6608,
+                    2004
+                  ],
+                  [
+                    6577,
+                    2018
+                  ],
+                  [
+                    6437,
+                    1920
+                  ],
+                  [
+                    6317,
+                    1872
+                  ],
+                  [
+                    6253,
+                    1865
+                  ],
+                  [
+                    6259,
+                    1897
+                  ],
+                  [
+                    6145,
+                    1920
+                  ],
+                  [
+                    6065,
+                    1905
+                  ],
+                  [
+                    5939,
+                    1845
+                  ]
+                ]
+              },
+              "levels": [
+                5,
+                7
+              ],
+              "wikiId": "npc-a-deepgulp-explorer",
+              "category": "Mob camp"
+            },
+            "name": "A Deepgulp explorer",
+            "note": "All the Deepgulp Explorer mobs are stealted."
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1233,
+        "payloadHash": "5d1c735d112f68f68186de34a33fa52eca76b76c963566bf04eff23f72365987",
+        "updatedAt": "2026-10-22T21:42:11.602053+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2097,
+            "y": 2100,
+            "name": "King Jekom the Ancient",
+            "note": "",
+            "level": "basement",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1234,
+        "payloadHash": "d62f90b57d5bb592c853229da16cd1ffc70784d14517dcf7c9b524476024d897",
+        "updatedAt": "2026-10-22T21:42:24.285631+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2385,
+            "y": 2011,
+            "name": "Gelmother Jiggol",
+            "note": "",
+            "level": "basement",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1235,
+        "payloadHash": "b4fadf524c645f5a296ef3c626b21fdf243506f0b1841f9e367cfd9dd2f481f8",
+        "updatedAt": "2026-10-22T21:42:27.223224+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2183,
+            "y": 1858,
+            "name": "Red Hands Ellison",
+            "note": "",
+            "level": "basement",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1236,
+        "payloadHash": "68a0499b07b3de449039c74784e6274b7f216099307abf3ad6a45dc067941287",
+        "updatedAt": "2026-10-22T21:47:04.390713+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2156,
+            "y": 1984,
+            "name": "Andrew the Framed",
+            "note": "",
+            "level": "basement",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1237,
+        "payloadHash": "0baad9ce73d3af3ddcd0548056fab1ddd768e740ba1386951ad707b304bce69e",
+        "updatedAt": "2026-10-22T21:47:11.342634+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2343,
+            "y": 1811,
+            "name": "Ferg the Filthy",
+            "note": "roamer named",
+            "level": "basement",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1238,
+        "payloadHash": "079cd87d8a84cf5ada0d4e9e81e754a540de1c86636bb46b32b03f1b010888a9",
+        "updatedAt": "2026-10-22T21:58:04.08093+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2441,
+            "y": 1781,
+            "name": "Pragrok the Pickaxe",
+            "note": "",
+            "level": "basement",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1239,
+        "payloadHash": "f242d39520e12049bf3cb170a96aeb670e45b33f746f71f9683414b1915e651b",
+        "updatedAt": "2026-10-22T21:58:05.549301+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2476,
+            "y": 1710,
+            "name": "Forager Frandrah",
+            "note": "",
+            "level": "basement",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1240,
+        "payloadHash": "50762ea90aa0633fbcdf4fc148f8add876e8600251db41cf95cb0e6e68c1da02",
+        "updatedAt": "2026-10-22T21:58:18.620822+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2127,
+            "y": 1802,
+            "name": "Stairs",
+            "note": "",
+            "level": "basement",
+            "travel": "Stairs",
+            "toLevel": "basement",
+            "category": "Stairs",
+            "direction": "updown"
+          },
+          "credit": false
         }
       }
     ]

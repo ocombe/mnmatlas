@@ -211,7 +211,11 @@
     "x": 3998,
     "y": 1194,
     "level": "floor-2",
-    "mobs": []
+    "mobs": [],
+    "levels": [
+      17,
+      18
+    ]
   },
   {
     "id": "community-843",
@@ -231,7 +235,7 @@
     "community": true,
     "name": "Prince Mali'Tik (level 18)",
     "category": "Named mob",
-    "note": "",
+    "note": "Spawns with two other Skri'Var of similar levels",
     "x": 4124,
     "y": 841,
     "level": "floor-2",
@@ -424,5 +428,52 @@
     "note": "",
     "toMap": "evershade-weald",
     "toPlace": "to-blacktide-bay-boulder"
+  },
+  {
+    "id": "community-1163",
+    "community": true,
+    "name": "Skri'Var Cave",
+    "note": "also Skri'Var plinker",
+    "x": 4032,
+    "y": 1677,
+    "level": "floor-2",
+    "category": "Mob camp",
+    "levels": [
+      13,
+      15
+    ],
+    "mobs": [
+      {
+        "name": "A Skri'Var scrambler",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-scrambler",
+        "wikiId": "npc-a-skrivar-scrambler"
+      },
+      {
+        "name": "A Skri'Var sniffer",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-sniffer",
+        "wikiId": "npc-a-skrivar-sniffer"
+      }
+    ]
+  },
+  {
+    "id": "community-1169",
+    "community": true,
+    "name": "Skri'Var Swarmers",
+    "note": "",
+    "x": 3886,
+    "y": 596,
+    "level": "floor-2",
+    "category": "Mob camp",
+    "levels": [
+      17,
+      18
+    ],
+    "mobs": [
+      {
+        "name": "A Skri'Var swarmer",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-swarmer",
+        "wikiId": "npc-a-skrivar-swarmer"
+      }
+    ]
   }
 ]

@@ -470,7 +470,7 @@
         "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer"
       }
     ],
-    "note": "",
+    "note": "All the Deepgulp Explorer mobs are stealted.",
     "x": 6084,
     "y": 1869,
     "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
@@ -2268,5 +2268,14 @@
         ]
       ]
     }
+  },
+  {
+    "id": "community-1190",
+    "community": true,
+    "name": "Gate Captain Xaros",
+    "note": "",
+    "x": 2402,
+    "y": 7328,
+    "category": "Notable NPC"
   }
 ]

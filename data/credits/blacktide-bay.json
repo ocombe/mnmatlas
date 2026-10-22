@@ -101,6 +101,10 @@
     {
       "name": "argus_q",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ],
   "marker:community-843": [
@@ -117,6 +121,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ],
   "marker:community-916": [
@@ -208,6 +216,18 @@
   "marker:community-1037": [
     {
       "name": "chamthal",
+      "what": "added"
+    }
+  ],
+  "marker:community-1163": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1169": [
+    {
+      "name": ".anduri",
       "what": "added"
     }
   ]
