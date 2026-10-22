@@ -43,6 +43,10 @@
     {
       "name": "ocombe",
       "what": "moved"
+    },
+    {
+      "name": "ventsonge",
+      "what": "moved"
     }
   ],
   "marker:community-688": [
@@ -55,6 +59,24 @@
     {
       "name": null,
       "what": "added"
+    }
+  ],
+  "marker:stormcaller-tabigan": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:fenrix-lightfoot": [
+    {
+      "name": ".veryvexing",
+      "what": "moved"
+    }
+  ],
+  "marker:selene": [
+    {
+      "name": ".veryvexing",
+      "what": "moved"
     }
   ]
 }

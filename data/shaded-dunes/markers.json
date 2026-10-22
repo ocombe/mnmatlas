@@ -300,17 +300,6 @@
   "minZoom": 3
  },
  {
-  "id": "npc-4",
-  "name": "Notable NPC — Wizard Spells",
-  "category": "Notable NPC",
-  "x": 4786,
-  "y": 3133,
-  "approximate": true,
-  "note": "",
-  "minZoom": 3,
-  "community": true
- },
- {
   "id": "giant-15plus-1",
   "name": "Wandering giant",
   "category": "Mob camp",
@@ -876,5 +865,30 @@
     ]
    ]
   }
+ },
+ {
+  "id": "community-1202",
+  "community": true,
+  "name": "Ojamar Antorious",
+  "note": "Sells teleport and portal scrolls.",
+  "x": 4790,
+  "y": 3125,
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/ojamar-antorious",
+  "wikiId": "npc-ojamar-antorious"
+ },
+ {
+  "id": "community-1243",
+  "community": true,
+  "name": "Leket the Unchosen",
+  "note": "",
+  "x": 1970,
+  "y": 2520,
+  "category": "Named mob",
+  "levels": [
+   12,
+   12
+  ],
+  "ambush": false
  }
 ]

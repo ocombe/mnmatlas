@@ -113,15 +113,6 @@
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
  {
-  "id": "wiki-25",
-  "name": "Tailoring — Trader's Terrace",
-  "category": "Tradeskill",
-  "x": 1443.22,
-  "y": 1012.34,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
   "id": "wiki-26",
   "name": "Carpentry / Woodworking — Trader's Terrace",
   "category": "Tradeskill",
@@ -309,15 +300,6 @@
   "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
  },
  {
-  "id": "maggot-npc-05",
-  "name": "Notable NPC — Willows Whisper",
-  "category": "Notable NPC",
-  "x": 1483.68,
-  "y": 1450.96,
-  "approximate": true,
-  "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name."
- },
- {
   "id": "maggot-npc-09",
   "name": "Lorinthal Skybranch",
   "category": "Quest NPC",
@@ -355,13 +337,14 @@
   "id": "lift-pixie-down",
   "name": "Pixie Lift — down to Evershade Weald",
   "category": "Lift",
-  "x": 552,
-  "y": 852,
+  "x": 549,
+  "y": 903,
   "approximate": true,
   "note": "Leads down to the forest floor of Evershade Weald.",
   "toMap": "evershade-weald",
   "toPlace": "pixie-lift",
-  "direction": "down"
+  "direction": "down",
+  "community": true
  },
  {
   "id": "ramp-01-down",
@@ -839,5 +822,119 @@
   "x": 1851,
   "y": 1555,
   "category": "Quest NPC"
+ },
+ {
+  "id": "community-1144",
+  "community": true,
+  "name": "a fletcher",
+  "note": "",
+  "x": 1824,
+  "y": 1091,
+  "category": "Vendor",
+  "vendor": "Fletcher"
+ },
+ {
+  "id": "community-1145",
+  "community": true,
+  "name": "Captain Relgen Greenblade",
+  "note": "",
+  "x": 1755,
+  "y": 1025,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-relgen-greenblade",
+  "wikiId": "npc-captain-relgen-greenblade"
+ },
+ {
+  "id": "community-1146",
+  "community": true,
+  "name": "Craftguard Vinebrow",
+  "note": "",
+  "x": 1143,
+  "y": 769,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/craftguard-vinebrow",
+  "wikiId": "npc-craftguard-vinebrow"
+ },
+ {
+  "id": "community-1147",
+  "community": true,
+  "name": "Myrielle Softglade",
+  "note": "inside the building",
+  "x": 1479,
+  "y": 1056,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/myrielle-softglade",
+  "wikiId": "npc-myrielle-softglade"
+ },
+ {
+  "id": "community-1149",
+  "community": true,
+  "name": "Pine Brightreed",
+  "note": "part of the Bard starter quest",
+  "x": 1491,
+  "y": 1446,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/pine-brightreed",
+  "wikiId": "npc-pine-brightreed"
+ },
+ {
+  "id": "community-1150",
+  "community": true,
+  "name": "Flerri Dawntender the Tailor",
+  "note": "upstairs on the mezzanine",
+  "x": 1446,
+  "y": 1011,
+  "category": "Tradeskill",
+  "wiki": "https://monstersandmemories.wiki/npcs/flerri-dawntender-the-tailor",
+  "wikiId": "npc-flerri-dawntender-the-tailor",
+  "trade": "Tailoring"
+ },
+ {
+  "id": "community-1152",
+  "community": true,
+  "name": "a tailor",
+  "note": "upstairs on the mezzanine",
+  "x": 1435,
+  "y": 1017,
+  "category": "Vendor",
+  "vendor": "Tailoring vendor",
+  "sells": [
+   "Materials"
+  ]
+ },
+ {
+  "id": "community-1153",
+  "community": true,
+  "name": "Taegen the Tailor",
+  "note": "upstairs on the mezzanine",
+  "x": 1456,
+  "y": 1007,
+  "category": "Vendor",
+  "vendor": "Tailoring vendor",
+  "sells": [
+   "Recipes"
+  ]
+ },
+ {
+  "id": "community-1155",
+  "community": true,
+  "name": "Guard Galen",
+  "note": "",
+  "x": 588,
+  "y": 855,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/guard-galen",
+  "wikiId": "npc-guard-galen"
+ },
+ {
+  "id": "community-1156",
+  "community": true,
+  "name": "Sylphrena Starfall",
+  "note": "on the upper level",
+  "x": 1474,
+  "y": 1727,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/sylphrena-starfall",
+  "wikiId": "npc-sylphrena-starfall"
  }
 ]

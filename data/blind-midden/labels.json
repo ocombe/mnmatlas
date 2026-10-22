@@ -23,8 +23,8 @@
       "id": "exit-ail-vorith",
       "name": "to Ail’Vorith",
       "level": "basement",
-      "x": 2590,
-      "y": 2470,
+      "x": 2763,
+      "y": 1740,
       "kind": "exit",
       "priority": 95,
       "minZoom": 1.5,
@@ -33,7 +33,8 @@
       "toMap": "ail-vorith",
       "toPlace": "community-81",
       "approximate": true,
-      "note": ""
+      "note": "",
+      "community": true
     }
   ],
   "trainers": []

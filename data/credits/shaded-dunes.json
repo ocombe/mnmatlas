@@ -79,6 +79,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": ".anduri",
+      "what": "removed"
     }
   ],
   "marker:community-716": [
@@ -178,6 +182,18 @@
   "marker:community-935": [
     {
       "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1202": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1243": [
+    {
+      "name": ".anduri",
       "what": "added"
     }
   ]

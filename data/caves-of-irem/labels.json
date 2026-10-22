@@ -77,12 +77,13 @@
   },
   {
    "id": "reverse-waterfall",
-   "name": "Reverse Waterfall",
+   "name": "Waterrise",
    "x": 2361,
    "y": 2431,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "community": true
   },
   {
    "id": "to-great-cavern-sea",

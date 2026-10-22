@@ -352,5 +352,83 @@
       "name": ".anduri",
       "what": "edited"
     }
+  ],
+  "marker:community-1144": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1145": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1146": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1147": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:maggot-npc-05": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1149": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1150": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-25": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1152": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1153": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:lift-pixie-down": [
+    {
+      "name": ".anduri",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1155": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1156": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
   ]
 }

@@ -202,11 +202,11 @@
         "Fighter",
         "Ranger"
       ],
-      "building": "Archer / Fighter / Ranger trainers",
-      "x": 4527,
-      "y": 3759,
+      "building": "2nd Floor",
+      "x": 4593,
+      "y": 3728,
       "level": "lower",
-      "name": "Fighter / Ranger trainers"
+      "name": "Archer / Fighter / Ranger Trainers"
     },
     {
       "id": "class-necromancer-cleric-shadowknight",

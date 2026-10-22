@@ -33,6 +33,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:undead-40plus-4": [
@@ -229,6 +233,30 @@
     {
       "name": null,
       "what": "moved"
+    }
+  ],
+  "marker:community-1177": [
+    {
+      "name": "xatmakin",
+      "what": "added"
+    }
+  ],
+  "marker:community-1194": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1204": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1205": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

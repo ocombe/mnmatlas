@@ -42,11 +42,12 @@
   {
    "id": "wizard-tower",
    "name": "Wizard Tower",
-   "x": 5095,
-   "y": 4247,
+   "x": 5484,
+   "y": 4579,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2
+   "minZoom": 2,
+   "community": true
   },
   {
    "id": "underwater-ruins",

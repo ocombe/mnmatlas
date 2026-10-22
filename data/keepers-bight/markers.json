@@ -836,5 +836,16 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/a-shady-farmer",
   "wikiId": "npc-a-shady-farmer"
+ },
+ {
+  "id": "community-1159",
+  "community": true,
+  "name": "Ranger Rylin",
+  "note": "",
+  "x": 4844,
+  "y": 5595,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/ranger-rylin",
+  "wikiId": "npc-ranger-rylin"
  }
 ]

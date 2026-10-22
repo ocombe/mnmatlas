@@ -274,9 +274,9 @@
   },
   {
     "id": "class-archer-warrior-ranger",
-    "name": "Fighter / Ranger trainers",
-    "x": 4527,
-    "y": 3759,
+    "name": "Archer / Fighter / Ranger Trainers",
+    "x": 4593,
+    "y": 3728,
     "level": "lower",
     "approximate": true,
     "note": "",
@@ -437,11 +437,10 @@
   {
     "id": "wiki-quartermaster",
     "name": "Traven Keldress",
-    "category": "Vendor",
-    "vendor": "Quartermaster",
+    "category": "Quest",
     "x": 4544,
     "y": 3803,
-    "note": "Buy / sell weapons and armour.",
+    "note": "",
     "level": "lower",
     "approximate": true,
     "community": true,
@@ -1040,8 +1039,8 @@
     "name": "Sir Vosirek",
     "category": "Quest NPC",
     "note": "2nd Floor",
-    "x": 4402,
-    "y": 3705,
+    "x": 4547,
+    "y": 3825,
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/sir-vosirek",
     "wikiId": "npc-sir-vosirek"
@@ -1444,5 +1443,68 @@
     "y": 3733,
     "level": "lower",
     "vendor": "Reagent vendor"
+  },
+  {
+    "id": "community-1158",
+    "community": true,
+    "name": "Find Delilah's Pet",
+    "note": "Give \"a friendly undercap\" Bone Chips(x4) and he will give you \"Amari\" the turtle Delilah is looking for.",
+    "x": 1771,
+    "y": 3374,
+    "level": "lower",
+    "category": "Quest",
+    "wiki": "https://monstersandmemories.wiki/npcs/delilah"
+  },
+  {
+    "id": "community-1173",
+    "community": true,
+    "name": "Quartermaster Llarne",
+    "note": "",
+    "x": 4539,
+    "y": 3782,
+    "level": "lower",
+    "category": "Vendor",
+    "vendor": "Quartermaster",
+    "sells": [
+      "Armor",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-1182",
+    "community": true,
+    "name": "Quartermaster Llarne",
+    "note": "2nd Floor",
+    "x": 4549,
+    "y": 3751,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-llarne",
+    "wikiId": "npc-quartermaster-llarne",
+    "vendor": "Quartermaster",
+    "sells": [
+      "Armor",
+      "Bags",
+      "Food & drink",
+      "Shields",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-1244",
+    "community": true,
+    "name": "Purska Nillen",
+    "note": "Inside a room above the Western Gate",
+    "x": 2653,
+    "y": 3831,
+    "level": "lower",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/purska-nillen",
+    "wikiId": "npc-1790076531813-j2iu2",
+    "levels": [
+      41,
+      41
+    ],
+    "ambush": false
   }
 ]

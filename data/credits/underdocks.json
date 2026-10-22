@@ -73,6 +73,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "stytches",
+      "what": "edited"
     }
   ],
   "marker:wiki-marshall-harding": [
@@ -137,6 +141,14 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
     },
     {
       "name": null,
@@ -447,6 +459,10 @@
     {
       "name": "phob0s89",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-551": [
@@ -676,6 +692,30 @@
   "marker:community-850": [
     {
       "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1158": [
+    {
+      "name": "murphy0306",
+      "what": "added"
+    }
+  ],
+  "marker:community-1173": [
+    {
+      "name": "stytches",
+      "what": "added"
+    }
+  ],
+  "marker:community-1182": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1244": [
+    {
+      "name": null,
       "what": "added"
     }
   ]

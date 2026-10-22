@@ -354,21 +354,6 @@
     "direction": "updown"
   },
   {
-    "id": "stairs-east-room-basement",
-    "name": "Stairs - down to the lower corridor",
-    "category": "Stairs",
-    "travel": "Stairs",
-    "level": "basement",
-    "x": 2049,
-    "y": 2029,
-    "approximate": true,
-    "note": "",
-    "toLevel": "canyon",
-    "toMarker": "stairs-east-room-canyon",
-    "direction": "down",
-    "switchOnClick": true
-  },
-  {
     "id": "stairs-east-room-canyon",
     "name": "Stairs - up to the Basement",
     "category": "Stairs",
@@ -412,5 +397,321 @@
     "toMarker": "ladder-3-basement",
     "direction": "down",
     "switchOnClick": true
+  },
+  {
+    "id": "community-1206",
+    "community": true,
+    "name": "Cedrius the Cutter",
+    "note": "PH is just a Cutter",
+    "x": 2227,
+    "y": 1798,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/cedrius-the-cutter",
+    "wikiId": "npc-cedrius-the-cutter",
+    "levels": [
+      12,
+      12
+    ]
+  },
+  {
+    "id": "community-1207",
+    "community": true,
+    "name": "Blacksmith Jerictus",
+    "note": "PH kneels at the anvil",
+    "x": 2322,
+    "y": 1749,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-jerictus",
+    "wikiId": "npc-blacksmith-jerictus",
+    "ambush": false
+  },
+  {
+    "id": "community-1208",
+    "community": true,
+    "name": "Blurgh the Blind",
+    "note": "Up the ladder from Cedrius's room.\nGive him smugglers shopping list from the Jellies (by cleaning sewer sludge)  to summon Percy the purse.",
+    "x": 2310,
+    "y": 1828,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/blurgh-the-blind",
+    "wikiId": "npc-blurgh-the-blind"
+  },
+  {
+    "id": "community-1210",
+    "community": true,
+    "name": "Receptionist Naleth'ra",
+    "note": "",
+    "x": 2678,
+    "y": 2417,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/receptionist-nalethra",
+    "wikiId": "npc-receptionist-naleth-ra"
+  },
+  {
+    "id": "community-1213",
+    "community": true,
+    "name": "Chaplain Cranely",
+    "note": "Ask you to combine Sewer Sludge + 1 item in the offering box on the altar, known combination : Enchanted Effigy + Sewer Sludge.",
+    "x": 2207,
+    "y": 2236,
+    "level": "ground",
+    "category": "Quest NPC"
+  },
+  {
+    "id": "community-1214",
+    "community": true,
+    "name": "Kalessa Velgarrith",
+    "note": "",
+    "x": 2742,
+    "y": 2152,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/kalessa-velgarrith",
+    "wikiId": "npc-kalessa-velgarrith"
+  },
+  {
+    "id": "community-1215",
+    "community": true,
+    "name": "Nibs Mudknuckle",
+    "note": "",
+    "x": 2703,
+    "y": 2055,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/nibs-mudknuckle",
+    "wikiId": "npc-nibs-mudknuckle"
+  },
+  {
+    "id": "community-1216",
+    "community": true,
+    "name": "Sarveth the Unheard",
+    "note": "upper floor",
+    "x": 2457,
+    "y": 1295,
+    "level": "ground",
+    "category": "Named mob"
+  },
+  {
+    "id": "community-1217",
+    "community": true,
+    "name": "Mucky Morgurah",
+    "note": "",
+    "x": 2760,
+    "y": 1492,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/mucky-morgurah",
+    "wikiId": "npc-mucky-morgurah",
+    "levels": [
+      6,
+      6
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1218",
+    "community": true,
+    "name": "Flavic the Fisher",
+    "note": "",
+    "x": 2861,
+    "y": 1679,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/flavic-the-fisher",
+    "wikiId": "npc-flavic-the-fisher",
+    "levels": [
+      6,
+      6
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1219",
+    "community": true,
+    "name": "Gorgeous",
+    "note": "Roaming cube",
+    "x": 2691,
+    "y": 1643,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/gorgeous",
+    "wikiId": "npc-gorgeous",
+    "levels": [
+      6,
+      6
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1220",
+    "community": true,
+    "name": "Forager Davra",
+    "note": "",
+    "x": 2430,
+    "y": 1451,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/forager-davra",
+    "wikiId": "npc-forager-davra",
+    "levels": [
+      7,
+      7
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1221",
+    "community": true,
+    "name": "Reviver Vlarek",
+    "note": "",
+    "x": 2052,
+    "y": 1607,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/reviver-vlarek",
+    "wikiId": "npc-reviver-vlarek",
+    "levels": [
+      12,
+      12
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1222",
+    "community": true,
+    "name": "Wikket Two-Wands",
+    "note": "",
+    "x": 1997,
+    "y": 1755,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/wikket-two-wands",
+    "wikiId": "npc-wikket-two-wands",
+    "levels": [
+      12,
+      12
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1225",
+    "community": true,
+    "name": "Underboss Vekrizin",
+    "note": "",
+    "x": 2226,
+    "y": 1920,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/underboss-vekrizin",
+    "wikiId": "npc-underboss-vekrizin",
+    "levels": [
+      12,
+      12
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1227",
+    "community": true,
+    "name": "Percy the Purse",
+    "note": "upstair, spawned by giving Smuggler's shopping list to Blurgh the Blind.",
+    "x": 2284,
+    "y": 1840,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/percy-the-purse",
+    "wikiId": "npc-percy-the-purse",
+    "levels": [
+      7,
+      7
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1228",
+    "community": true,
+    "name": "Sethrine the Unblinking",
+    "note": "",
+    "x": 2462,
+    "y": 2015,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/sethrine-the-unblinking",
+    "wikiId": "npc-sethrine-the-unblinking",
+    "levels": [
+      6,
+      6
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1229",
+    "community": true,
+    "name": "Mother Gummer",
+    "note": "",
+    "x": 2350,
+    "y": 2051,
+    "level": "ground",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/mother-gummer",
+    "wikiId": "npc-mother-gummer",
+    "levels": [
+      12,
+      12
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1230",
+    "community": true,
+    "name": "Custodian Merique",
+    "note": "",
+    "x": 2695,
+    "y": 2353,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/custodian-merique",
+    "wikiId": "npc-custodian-merique"
+  },
+  {
+    "id": "community-1231",
+    "community": true,
+    "name": "Herald Casteius",
+    "note": "",
+    "x": 2640,
+    "y": 2501,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/herald-casteius",
+    "wikiId": "npc-herald-casteius"
+  },
+  {
+    "id": "community-1232",
+    "community": true,
+    "name": "Undertaker Gargnaw",
+    "note": "",
+    "x": 2611,
+    "y": 2511,
+    "level": "ground",
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/undertaker-gargnaw",
+    "wikiId": "npc-undertaker-gargnaw"
+  },
+  {
+    "id": "community-1241",
+    "community": true,
+    "name": "Stairs",
+    "note": "",
+    "x": 2068,
+    "y": 2046,
+    "level": "basement",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "basement",
+    "direction": "updown"
   }
 ]

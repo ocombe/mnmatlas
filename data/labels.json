@@ -436,6 +436,17 @@
       "note": "",
       "x": 1793,
       "y": 1184
+    },
+    {
+      "id": "community-1201",
+      "community": true,
+      "name": "School of the Fourfold Path",
+      "note": "Elementalist and Monk temple.",
+      "x": 1501,
+      "y": 1661,
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0
     }
   ],
   "trainers": [
@@ -519,20 +530,6 @@
       "building": "South Saltbreeze garden",
       "x": 1654.24,
       "y": 1514.46
-    },
-    {
-      "id": "class-7",
-      "abbreviations": [
-        "ELE",
-        "MNK"
-      ],
-      "classes": [
-        "Elementalist",
-        "Monk"
-      ],
-      "building": "Little Half Town temple",
-      "x": 1506,
-      "y": 1698.02
     },
     {
       "id": "class-8",

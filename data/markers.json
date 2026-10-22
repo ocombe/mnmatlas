@@ -130,22 +130,6 @@
     "note": ""
   },
   {
-    "id": "wiki-18",
-    "name": "Stone Cutting — north of Sojourner’s Camp",
-    "category": "Tradeskill",
-    "x": 1055.11,
-    "y": 1072.93,
-    "note": ""
-  },
-  {
-    "id": "wiki-19",
-    "name": "Tinkering — north of Sojourner’s Camp",
-    "category": "Tradeskill",
-    "x": 1055,
-    "y": 1087,
-    "note": ""
-  },
-  {
     "id": "wiki-28",
     "name": "Skinning / Tanning — Tannery",
     "category": "Tradeskill",
@@ -407,18 +391,6 @@
     "note": "DRU",
     "classes": [
       "Druid"
-    ]
-  },
-  {
-    "id": "class-7",
-    "name": "Elementalist / Monk — Little Half Town temple",
-    "category": "Class trainer",
-    "x": 1506,
-    "y": 1698.02,
-    "note": "ELE / MNK",
-    "classes": [
-      "Elementalist",
-      "Monk"
     ]
   },
   {
@@ -2682,5 +2654,179 @@
     "category": "Quest NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/yorias",
     "wikiId": "npc-yorias"
+  },
+  {
+    "id": "community-1157",
+    "community": true,
+    "name": "A cobweaver spider",
+    "note": "Noura the Tailor's uncles House with 3 spawns of cobweaver spiders and hatchlings for crude spidersilk scraps",
+    "x": 1282,
+    "y": 1735,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cobweaver-spider",
+    "wikiId": "npc-a-cobweaver-spider"
+  },
+  {
+    "id": "community-1161",
+    "community": true,
+    "name": "Guard Iskandar",
+    "note": "Right in front of the palace",
+    "x": 1661,
+    "y": 1439,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/guard-iskandar",
+    "wikiId": "npc-guard-iskandar"
+  },
+  {
+    "id": "community-1183",
+    "community": true,
+    "name": "Whispering Wallace",
+    "note": "Appears in the inn during the evening hours and disappears during the daytime. Stands by the bartender.\nAuthor's note: Hostile to deep elves.",
+    "x": 948,
+    "y": 1384,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/whispering-wallace",
+    "wikiId": "npc-whispering-wallace"
+  },
+  {
+    "id": "community-1184",
+    "community": true,
+    "name": "Medic Zafira",
+    "note": "",
+    "x": 908,
+    "y": 1251,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/medic-zafira",
+    "wikiId": "npc-medic-zafira",
+    "trade": "Bind Wound"
+  },
+  {
+    "id": "community-1185",
+    "community": true,
+    "name": "Tinkerer Boltia",
+    "note": "",
+    "x": 1059,
+    "y": 1180,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/tinkerer-boltia",
+    "wikiId": "npc-tinkerer-boltia",
+    "trade": "Tinkering"
+  },
+  {
+    "id": "community-1186",
+    "community": true,
+    "name": "Tinkerer Vilsis",
+    "note": "",
+    "x": 1060,
+    "y": 1185,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/tinkerer-vilsis",
+    "wikiId": "npc-tinkerer-vilsis"
+  },
+  {
+    "id": "community-1187",
+    "community": true,
+    "name": "Stonecutter Selin",
+    "note": "",
+    "x": 1041,
+    "y": 1177,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/stonecutter-selin",
+    "wikiId": "npc-stonecutter-selin"
+  },
+  {
+    "id": "community-1188",
+    "community": true,
+    "name": "Stonecutter Sodunn",
+    "note": "",
+    "x": 1038,
+    "y": 1179,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/stonecutter-sodunn",
+    "wikiId": "npc-stonecutter-sodunn",
+    "trade": "Stone Cutting"
+  },
+  {
+    "id": "community-1189",
+    "community": true,
+    "name": "Mason Krulch",
+    "note": "",
+    "x": 1033,
+    "y": 1186,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/mason-krulch",
+    "wikiId": "npc-mason-krulch",
+    "trade": "Masonry"
+  },
+  {
+    "id": "community-1193",
+    "community": true,
+    "name": "An elementalist scribe",
+    "note": "Sells elemental scrolls",
+    "x": 1506,
+    "y": 1677,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-elementalist-scribe",
+    "wikiId": "npc-an-elementalist-scribe",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ]
+  },
+  {
+    "id": "community-1195",
+    "community": true,
+    "name": "Chahaya Tam",
+    "note": "In the central training area at the bottom of the temple.\nCan fall down to this from the entrance atrium but will take damage.",
+    "x": 1520,
+    "y": 1696,
+    "category": "Class trainer",
+    "wiki": "https://monstersandmemories.wiki/npcs/chahaya-tam",
+    "wikiId": "npc-chahaya-tam",
+    "classes": [
+      "Monk"
+    ],
+    "quests": true
+  },
+  {
+    "id": "community-1196",
+    "community": true,
+    "name": "A monk instructor",
+    "note": "",
+    "x": 1474,
+    "y": 1630,
+    "category": "Class trainer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-monk-instructor",
+    "wikiId": "npc-a-monk-instructor",
+    "classes": [
+      "Monk"
+    ]
+  },
+  {
+    "id": "community-1197",
+    "community": true,
+    "name": "An elemental quartermaster",
+    "note": "On the raised perimeter of the bottom level, in a corner room on the north side.\nSells Malachite for summoning.",
+    "x": 1522,
+    "y": 1687,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-elemental-quartermaster",
+    "wikiId": "npc-an-elemental-quartermaster",
+    "vendor": "Quartermaster"
+  },
+  {
+    "id": "community-1199",
+    "community": true,
+    "name": "Tenebrim Tam",
+    "note": "On the mid-level, overlooking the training monks. Accessed from  following the staircase down at the main entrance.",
+    "x": 1510,
+    "y": 1692,
+    "category": "Class trainer",
+    "wiki": "https://monstersandmemories.wiki/npcs/tenebrim-tam",
+    "wikiId": "npc-tenebrim-tam",
+    "classes": [
+      "Elementalist"
+    ],
+    "quests": true
   }
 ]

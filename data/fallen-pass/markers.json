@@ -495,12 +495,13 @@
   "id": "community-623",
   "community": true,
   "name": "Overseer Shuk'Naru (levels 41–42)",
-  "category": "Quest NPC",
+  "category": "Named mob",
   "note": "Looking West from bridge, this named spawns dead center of this patio area.",
   "x": 1230,
   "y": 2002,
   "wiki": "https://monstersandmemories.wiki/npcs/overseer-shuknaru",
-  "wikiId": "npc-overseer-shuknaru"
+  "wikiId": "npc-overseer-shuknaru",
+  "ambush": false
  },
  {
   "id": "community-669",
@@ -847,5 +848,65 @@
   "category": "Notable NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/demeter-stollen",
   "wikiId": "npc-demeter-stollen"
+ },
+ {
+  "id": "community-1177",
+  "community": true,
+  "name": "Taskmaster Nor'Tap",
+  "note": "Spawns from any of the taskmasters around this area.",
+  "x": 1789,
+  "y": 2047,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
+  "wikiId": "npc-taskmaster-nortap",
+  "levels": [
+   41,
+   41
+  ]
+ },
+ {
+  "id": "community-1194",
+  "community": true,
+  "name": "Captain Haring",
+  "note": "On the first level.",
+  "x": 1036,
+  "y": 1722,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-haring",
+  "levels": [
+   45,
+   45
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1204",
+  "community": true,
+  "name": "Observer Samvel",
+  "note": "",
+  "x": 1208,
+  "y": 1868,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/observer-samvel",
+  "wikiId": "npc-observer-samvel",
+  "levels": [
+   45,
+   45
+  ]
+ },
+ {
+  "id": "community-1205",
+  "community": true,
+  "name": "High Watchman Albury",
+  "note": "On the first floor inside the tower",
+  "x": 1002,
+  "y": 2284,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/high-watchman-albury",
+  "wikiId": "npc-high-watchman-albury",
+  "levels": [
+   45,
+   45
+  ]
  }
 ]

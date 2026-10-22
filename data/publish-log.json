@@ -1,195 +1,5 @@
 [
   {
-    "at": "2026-10-19T19:56:43.498Z",
-    "rows": [
-      {
-        "id": 869,
-        "payloadHash": "7445bfddbdeccfb28bc29fb6b6f7a382d05bd7f89e514c7541ef2f00c677f556",
-        "updatedAt": "2026-10-19T15:49:11.644924+00:00"
-      },
-      {
-        "id": 870,
-        "payloadHash": "0e41e34e61c01c68f58528a3f02f75ad82116e6cceda2ad2438ce2af356fd333",
-        "updatedAt": "2026-10-19T15:42:59.660689+00:00"
-      },
-      {
-        "id": 871,
-        "payloadHash": "599e3cc352be746d611fb50eca49bc9210f70d0ff5069cd41723ec50f8414c34",
-        "updatedAt": "2026-10-19T15:49:17.034524+00:00"
-      },
-      {
-        "id": 872,
-        "payloadHash": "96eff30fe867771eab0ec35372e6445253bd26835e5cd2f7d7cc90222a542bad",
-        "updatedAt": "2026-10-19T15:43:07.438743+00:00"
-      },
-      {
-        "id": 875,
-        "payloadHash": "79722d81b67df0ca1dd2fae4af8e0e131f5e7cd729d65786065bde459b4a4dfd",
-        "updatedAt": "2026-10-19T15:43:30.942113+00:00"
-      },
-      {
-        "id": 876,
-        "payloadHash": "004a563bc696be496f65d1bd337bd7450ce71bf455c0bb922613d01aeac810f8",
-        "updatedAt": "2026-10-19T15:43:43.789934+00:00"
-      },
-      {
-        "id": 877,
-        "payloadHash": "324b197926ce598618016b9b48453bfa856bce8f4cc9fdfee4e3b93dd95da27b",
-        "updatedAt": "2026-10-19T15:49:20.564485+00:00"
-      },
-      {
-        "id": 878,
-        "payloadHash": "4324906d20638e4dca461daf8d738e70337162b41ee261e21803be13f4922307",
-        "updatedAt": "2026-10-19T15:43:57.84076+00:00"
-      },
-      {
-        "id": 879,
-        "payloadHash": "c539d0a10463fb63f209b320b93f86844dfd6decaf3855de783ea6c9b5f8cbd3",
-        "updatedAt": "2026-10-19T15:44:07.278285+00:00"
-      },
-      {
-        "id": 880,
-        "payloadHash": "a8d48acfe51972607a46453024c47fd13436e70d2a719601b336e6a6e3b1181f",
-        "updatedAt": "2026-10-19T15:44:11.920603+00:00"
-      },
-      {
-        "id": 881,
-        "payloadHash": "58b731651f2e4f962d197074fd20e0cddee4f418e2ecd5ed0b16ca30f8fa9a3f",
-        "updatedAt": "2026-10-19T15:44:19.582698+00:00"
-      },
-      {
-        "id": 882,
-        "payloadHash": "7ef8a8df24257129b6978c4335783a202f9d62fce0c283dad17807f95f66d1e4",
-        "updatedAt": "2026-10-19T15:44:22.524942+00:00"
-      },
-      {
-        "id": 883,
-        "payloadHash": "9f01579e4c4c5efa0c24c7c2a51984574a1ed4ee8cf122d58e6f12ba3a7f8e66",
-        "updatedAt": "2026-10-19T15:44:27.020808+00:00"
-      },
-      {
-        "id": 884,
-        "payloadHash": "084eb61add14c33fe79d2dbb9d0c32c28f8740fc89ab04cc99208f52708c0390",
-        "updatedAt": "2026-10-19T15:44:30.675634+00:00"
-      },
-      {
-        "id": 885,
-        "payloadHash": "bc0f4ecfc274d2e89afa1e35168bc2ff81e8a2dbcf53b4d60c9eda488c7a8c47",
-        "updatedAt": "2026-10-19T15:44:48.711015+00:00"
-      },
-      {
-        "id": 886,
-        "payloadHash": "d90682ca3d054b9d512296cca9e3d2b2e9e19d230060a5a2a614c7618fa4ed5c",
-        "updatedAt": "2026-10-19T15:45:09.987162+00:00"
-      },
-      {
-        "id": 887,
-        "payloadHash": "ccc9a896ec4a6fd2c2faf7bf2ca2a78d86a913e46e75d7f61fb17444f9df0973",
-        "updatedAt": "2026-10-19T15:45:27.00003+00:00"
-      },
-      {
-        "id": 889,
-        "payloadHash": "a5ddea1fbeb9607611bba34b199fd504ee2c46e3a56d32a2c83452bdcc437c50",
-        "updatedAt": "2026-10-19T15:45:30.971942+00:00"
-      },
-      {
-        "id": 890,
-        "payloadHash": "a7af8915d9e7699209b034a0fed7d4a51c69ca8fb71684243efb016e10ced24c",
-        "updatedAt": "2026-10-19T15:45:36.871201+00:00"
-      },
-      {
-        "id": 891,
-        "payloadHash": "38354af4fc20086d516a800f5fe38d5a92f8cff4ba795d6e407052c77a0a66f9",
-        "updatedAt": "2026-10-19T15:45:40.710057+00:00"
-      },
-      {
-        "id": 892,
-        "payloadHash": "c18a1699d542c137d5b23f135b29e09836e723cee8b335600e32e3032019a0bf",
-        "updatedAt": "2026-10-19T15:45:45.514554+00:00"
-      },
-      {
-        "id": 894,
-        "payloadHash": "ed78f9965d6b12b2c67b6d1fdb2c006b4c0c725a35d0cc5f11d5ef94dd675c33",
-        "updatedAt": "2026-10-19T15:46:01.156149+00:00"
-      },
-      {
-        "id": 895,
-        "payloadHash": "9bb4441fc2afdfed68c738cf264397e9dfb31a49c34f40d826d37efaa4c6bac2",
-        "updatedAt": "2026-10-19T15:46:07.255806+00:00"
-      },
-      {
-        "id": 896,
-        "payloadHash": "aa6953271419572e9697f5e30bc25c0235b862b7a31edac122adc83a37be191a",
-        "updatedAt": "2026-10-19T15:46:14.395435+00:00"
-      },
-      {
-        "id": 897,
-        "payloadHash": "199ce3fdb62b110c048ddf9d22ae9731f9c59337b8fa0ead1b0f94792c61deb4",
-        "updatedAt": "2026-10-19T15:46:23.890783+00:00"
-      },
-      {
-        "id": 898,
-        "payloadHash": "5ca3e2c52a53bb150fd52cbb5931751565fd7b342512bd04ab0719ea59082a64",
-        "updatedAt": "2026-10-19T15:46:30.907113+00:00"
-      },
-      {
-        "id": 899,
-        "payloadHash": "d589a27bc48170e502352c24d383fe950475cbabe17ec585f4ac6eca6ceb0530",
-        "updatedAt": "2026-10-19T15:46:33.770224+00:00"
-      },
-      {
-        "id": 900,
-        "payloadHash": "f0f886665d5d245b3894a499842bdd36e400f1712ee08b809eedcd6cac29c4e1",
-        "updatedAt": "2026-10-19T15:46:35.770604+00:00"
-      },
-      {
-        "id": 901,
-        "payloadHash": "297ac3c5ca15cff65afe5109a4332e9e854b12083b3a00404892b260c844bbb0",
-        "updatedAt": "2026-10-19T15:46:38.540528+00:00"
-      },
-      {
-        "id": 902,
-        "payloadHash": "75881245e7cd533cc0b8d75723dc40739b197d42c0f51b2495e8d8847c38c12d",
-        "updatedAt": "2026-10-19T15:46:40.600018+00:00"
-      },
-      {
-        "id": 904,
-        "payloadHash": "6832c06e9cc48152b97f404eaa33b90a8abac0d709137f6645a5bc03968d0a05",
-        "updatedAt": "2026-10-19T15:47:32.339634+00:00"
-      },
-      {
-        "id": 905,
-        "payloadHash": "8a421fc6c991538f4693233ad1d38e45283193e08da3bcfaff3260f762fbfc2e",
-        "updatedAt": "2026-10-19T15:47:45.37281+00:00"
-      },
-      {
-        "id": 906,
-        "payloadHash": "4dc13ccb90d2eb26ef0fd04643369404db4cd88641079a05019147e0b6df2f93",
-        "updatedAt": "2026-10-19T15:48:03.071048+00:00"
-      },
-      {
-        "id": 907,
-        "payloadHash": "f85e8e497deff7cfc32ed0183c619920c7d244d89e0080096b412f0ce72fa96d",
-        "updatedAt": "2026-10-19T15:48:41.187056+00:00"
-      },
-      {
-        "id": 908,
-        "payloadHash": "001839cfb1c9b0388c48cec0694036832cba3a6345e4705e02ef12f797ad52d6",
-        "updatedAt": "2026-10-19T15:48:46.964552+00:00"
-      },
-      {
-        "id": 910,
-        "payloadHash": "b467a3412b89588464ff9522f9dbb40a17c1f5aa151803f4ade3cf09dcb6ab93",
-        "updatedAt": "2026-10-19T15:45:52.537549+00:00"
-      },
-      {
-        "id": 911,
-        "payloadHash": "0241a7f73385dd137db0545674f3cabe99c7ab8ed2ce8afea24a083dfbe64e0a",
-        "updatedAt": "2026-10-19T15:48:54.321485+00:00"
-      }
-    ]
-  },
-  {
     "at": "2026-10-19T20:18:24.305Z",
     "rows": [
       {
@@ -5305,6 +5115,2040 @@
             "toLevel": "basement",
             "category": "Stairs",
             "direction": "updown"
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-22T23:07:14.949Z",
+    "rows": [
+      {
+        "id": 1132,
+        "payloadHash": "6d2e1365a43bbed43e8a2e98f5cec901c41a9a750f5d4e372b179b00d9280f20",
+        "updatedAt": "2026-10-22T22:58:01.41585+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "baron-bigtent",
+          "payload": {
+            "to": [
+              6714,
+              7201
+            ],
+            "from": [
+              6953,
+              7235
+            ],
+            "name": "Baron Bigtent"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1144,
+        "payloadHash": "4bb0a1f93e190689c2529f2b629fd2aa34d51c8dd4ec33eb073ec191c3d876d2",
+        "updatedAt": "2026-10-22T22:55:05.197516+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1824,
+            "y": 1091,
+            "name": "a fletcher",
+            "note": "",
+            "vendor": "Fletcher",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1145,
+        "payloadHash": "3ccc4fdea9f53ef41b3cb85747a28ee31044aa0664537cb98757dfb049e6a589",
+        "updatedAt": "2026-10-22T22:55:09.198281+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1755,
+            "y": 1025,
+            "name": "Captain Relgen Greenblade",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/captain-relgen-greenblade",
+            "bounty": "npc-captain-relgen-greenblade",
+            "wikiId": "npc-captain-relgen-greenblade",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1146,
+        "payloadHash": "e19033a70e851ef8f83bff38bdd88470d7b8a58a612763dabf5e121126b11529",
+        "updatedAt": "2026-10-22T22:55:14.099626+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1143,
+            "y": 769,
+            "name": "Craftguard Vinebrow",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/craftguard-vinebrow",
+            "bounty": "npc-craftguard-vinebrow",
+            "wikiId": "npc-craftguard-vinebrow",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1147,
+        "payloadHash": "1bf0548364c436cc57b7a997d3c4293cc09278c6626049cb45498de80706c136",
+        "updatedAt": "2026-10-22T22:55:18.857588+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1479,
+            "y": 1056,
+            "name": "Myrielle Softglade",
+            "note": "inside the building",
+            "wiki": "https://monstersandmemories.wiki/npcs/myrielle-softglade",
+            "bounty": "npc-myrielle-softglade",
+            "wikiId": "npc-myrielle-softglade",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1148,
+        "payloadHash": "fd8fee32a6e7efde003a1df64cfec2930db468cac4b824648d5883cdd893084e",
+        "updatedAt": "2026-10-22T22:56:14.447233+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "maggot-npc-05",
+          "payload": {
+            "from": {
+              "x": 1483.68,
+              "y": 1450.96,
+              "name": "Notable NPC — Willows Whisper",
+              "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name.",
+              "category": "Notable NPC",
+              "approximate": true
+            },
+            "name": "Notable NPC — Willows Whisper",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1149,
+        "payloadHash": "29ddf4ff06c3f2297ecbb772fcedfc5de14b6c7093a9138e6498fcadfa11a3de",
+        "updatedAt": "2026-10-22T22:56:17.739124+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1491,
+            "y": 1446,
+            "name": "Pine Brightreed",
+            "note": "part of the Bard starter quest",
+            "wiki": "https://monstersandmemories.wiki/npcs/pine-brightreed",
+            "bounty": "npc-pine-brightreed",
+            "wikiId": "npc-pine-brightreed",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1150,
+        "payloadHash": "aa8e195ed03186ac247d870e5771f4a21d4f254b0dc63769be0c16764abbe41e",
+        "updatedAt": "2026-10-22T22:56:21.365796+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1446,
+            "y": 1011,
+            "name": "Flerri Dawntender the Tailor",
+            "note": "upstairs on the mezzanine",
+            "wiki": "https://monstersandmemories.wiki/npcs/flerri-dawntender-the-tailor",
+            "trade": "Tailoring",
+            "bounty": "npc-flerri-dawntender-the-tailor",
+            "wikiId": "npc-flerri-dawntender-the-tailor",
+            "category": "Tradeskill"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1151,
+        "payloadHash": "0fb571b490e2be2a6fa48946a6304840fd6a60df5ba7148614eba9538c02f0f6",
+        "updatedAt": "2026-10-22T22:56:24.166497+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-25",
+          "payload": {
+            "from": {
+              "x": 1443.22,
+              "y": 1012.34,
+              "name": "Tailoring — Trader's Terrace",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Tailoring — Trader's Terrace",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1152,
+        "payloadHash": "83669e6c7859d1ae8d562b215eb65e02b1363b5e7151f660b567f6191d9925e4",
+        "updatedAt": "2026-10-22T22:56:27.266019+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1435,
+            "y": 1017,
+            "name": "a tailor",
+            "note": "upstairs on the mezzanine",
+            "sells": [
+              "Materials"
+            ],
+            "vendor": "Tailoring vendor",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1153,
+        "payloadHash": "6763742f025f322a7553a6800e4a2b88b4a2632bcc7901c061b5a1beba57c0b3",
+        "updatedAt": "2026-10-22T22:56:35.622906+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1456,
+            "y": 1007,
+            "name": "Taegen the Tailor",
+            "note": "upstairs on the mezzanine",
+            "sells": [
+              "Recipes"
+            ],
+            "vendor": "Tailoring vendor",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1154,
+        "payloadHash": "0faf22830d43a6c47236e22e011b2731f22399b7d86a0d42fed863eec83318cd",
+        "updatedAt": "2026-10-22T22:56:40.891377+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "lift-pixie-down",
+          "payload": {
+            "to": [
+              549,
+              903
+            ],
+            "from": [
+              552,
+              852
+            ],
+            "name": "Pixie Lift — down to Evershade Weald"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1155,
+        "payloadHash": "93994f6266e2ccb872a8ffeb5883cde2f0417d8b645804d0dc1d50c95f25bd01",
+        "updatedAt": "2026-10-22T22:56:44.216511+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 588,
+            "y": 855,
+            "name": "Guard Galen",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/guard-galen",
+            "bounty": "npc-guard-galen",
+            "wikiId": "npc-guard-galen",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1156,
+        "payloadHash": "0ff70ad9d1a29a8516cda8d8fd0c78da6671613748dbeccc7df8c5150d8d7068",
+        "updatedAt": "2026-10-22T22:56:46.974579+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1474,
+            "y": 1727,
+            "name": "Sylphrena Starfall",
+            "note": "on the upper level",
+            "wiki": "https://monstersandmemories.wiki/npcs/sylphrena-starfall",
+            "bounty": "npc-sylphrena-starfall",
+            "wikiId": "npc-sylphrena-starfall",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1157,
+        "payloadHash": "50211b6a9f341fc4682aa18f4d1c8969745868f6d9b2fb5602a2320f045b6294",
+        "updatedAt": "2026-10-22T22:58:59.91081+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1282,
+            "y": 1735,
+            "name": "A cobweaver spider",
+            "note": "Noura the Tailor's uncles House with 3 spawns of cobweaver spiders and hatchlings for crude spidersilk scraps",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-cobweaver-spider",
+            "wikiId": "npc-a-cobweaver-spider",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1158,
+        "payloadHash": "c86fa530df60b4d005554eceeaa6af868a1412b74a824a557fed3298275dd19a",
+        "updatedAt": "2026-10-22T23:04:29.135443+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1771,
+            "y": 3374,
+            "name": "Find Delilah's Pet",
+            "note": "Give \"a friendly undercap\" Bone Chips(x4) and he will give you \"Amari\" the turtle Delilah is looking for.",
+            "wiki": "https://monstersandmemories.wiki/npcs/delilah",
+            "level": "lower",
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1159,
+        "payloadHash": "cab17cd41770e36785d2eac0371806b78def45a6bf51d9db26100d0b45a25773",
+        "updatedAt": "2026-10-22T22:58:28.543073+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4844,
+            "y": 5595,
+            "name": "Ranger Rylin",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/ranger-rylin",
+            "bounty": "npc-ranger-rylin",
+            "wikiId": "npc-ranger-rylin",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1160,
+        "payloadHash": "5ca7ca879f18dd9aaaff9a661428c4b2d1b8a87d45cefff3328940836074d362",
+        "updatedAt": "2026-10-22T23:04:14.15966+00:00",
+        "version": {
+          "map": "wyrmsbane-tomb",
+          "level": "floor-1",
+          "kind": "move-marker",
+          "target_id": "jakob-tomb-route-from",
+          "payload": {
+            "to": [
+              1965,
+              2194
+            ],
+            "from": [
+              2260,
+              2686
+            ],
+            "name": "Stairs down to the ossuary and Bone Construct room"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1161,
+        "payloadHash": "1697c5c44f283a0cf5d14d4163a2081c9515651a3789e89a8623a823d720888a",
+        "updatedAt": "2026-10-22T22:59:03.642995+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1661,
+            "y": 1439,
+            "name": "Guard Iskandar",
+            "note": "Right in front of the palace",
+            "wiki": "https://monstersandmemories.wiki/npcs/guard-iskandar",
+            "bounty": "npc-guard-iskandar",
+            "wikiId": "npc-guard-iskandar",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1166,
+        "payloadHash": "c12436b21bc6423271ca8d60c5cb6f14b012429a11bed7a7e4c9b8971f84434f",
+        "updatedAt": "2026-10-22T22:58:04.157563+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "stormcaller-tabigan",
+          "payload": {
+            "to": [
+              2949,
+              4930
+            ],
+            "from": [
+              3260,
+              5254
+            ],
+            "name": "Stormcaller Tabigan"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1167,
+        "payloadHash": "43e6278f7c48d842d57ef271db95f40bca191e8f64f84109571eefe1a57f65d8",
+        "updatedAt": "2026-10-22T22:58:08.924935+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "fenrix-lightfoot",
+          "payload": {
+            "to": [
+              3730,
+              5436
+            ],
+            "from": [
+              3030,
+              5194
+            ],
+            "name": "Fenrix Lightfoot"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1168,
+        "payloadHash": "fecdeae30d0c631199a5158d8a84f18fff9a7fb6d431151543cf21eaea87e6cf",
+        "updatedAt": "2026-10-22T22:58:10.421842+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "selene",
+          "payload": {
+            "to": [
+              3254,
+              4867
+            ],
+            "from": [
+              3376,
+              4844
+            ],
+            "name": "Selene Brightmantle"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1172,
+        "payloadHash": "ac6ffd821bc9f08e27508e52138e7202ed3d1d5eef18f1d6b3863eabd58c36a5",
+        "updatedAt": "2026-10-22T23:04:32.850929+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "edit-marker",
+          "target_id": "wiki-quartermaster",
+          "payload": {
+            "from": {
+              "x": 4544,
+              "y": 3803,
+              "name": "Traven Keldress",
+              "note": "Buy / sell weapons and armour.",
+              "wiki": "https://monstersandmemories.wiki/npcs/traven-keldress",
+              "level": "lower",
+              "sells": null,
+              "vendor": "Quartermaster",
+              "wikiId": "npc-traven-keldress",
+              "category": "Vendor",
+              "approximate": true
+            },
+            "name": "Traven Keldress",
+            "note": "",
+            "vendor": null,
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1173,
+        "payloadHash": "50842c4f63042a781fb072ffcf7f7afc078e036c1f583d30986aab6b5694b3a3",
+        "updatedAt": "2026-10-22T23:04:35.93413+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4539,
+            "y": 3782,
+            "name": "Quartermaster Llarne",
+            "note": "",
+            "level": "lower",
+            "sells": [
+              "Armor",
+              "Weapons"
+            ],
+            "vendor": "Quartermaster",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1174,
+        "payloadHash": "5cf101406219f82172ae37c7091a00a478eb0c58ebd188d26d2ce04bd645a6bd",
+        "updatedAt": "2026-10-22T22:53:53.699504+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-label",
+          "target_id": "reverse-waterfall",
+          "payload": {
+            "from": {
+              "x": 2361,
+              "y": 2431,
+              "kind": "district",
+              "name": "Reverse Waterfall",
+              "minZoom": 2.5,
+              "priority": 70
+            },
+            "name": "Waterrise"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1175,
+        "payloadHash": "0d9eff9a1134c4d8ca160d1ab18e2113e71884d8f583aac33bd4d747f9d1eb19",
+        "updatedAt": "2026-10-22T22:58:14.882358+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "vhaleth-halkareth",
+          "payload": {
+            "to": [
+              5421,
+              4569
+            ],
+            "from": [
+              5185,
+              4297
+            ],
+            "name": "Vhaleth Hal'kareth"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1176,
+        "payloadHash": "1421d868a99c2a3a3631e3f8409f624217c14f28dac6b2fad8cd95576058f2ff",
+        "updatedAt": "2026-10-22T22:58:17.766882+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "wizard-tower",
+          "payload": {
+            "to": [
+              5484,
+              4579
+            ],
+            "from": [
+              5095,
+              4247
+            ],
+            "name": "Wizard Tower"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1177,
+        "payloadHash": "529b570cf7fe6610cfbac95cc164090421840f13905153c90e999b40ed0603c5",
+        "updatedAt": "2026-10-22T22:56:53.211227+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1789,
+            "y": 2047,
+            "name": "Taskmaster Nor'Tap",
+            "note": "Spawns from any of the taskmasters around this area.",
+            "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
+            "bounty": "npc-taskmaster-nortap",
+            "levels": [
+              41,
+              41
+            ],
+            "wikiId": "npc-taskmaster-nortap",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1178,
+        "payloadHash": "98796ad938724a7aaec793fc61bb0fcae195ba76dd3f1aa077b05a6b32f11660",
+        "updatedAt": "2026-10-22T23:04:38.59741+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "move-marker",
+          "target_id": "community-550",
+          "payload": {
+            "to": [
+              4547,
+              3825
+            ],
+            "from": [
+              4402,
+              3705
+            ],
+            "name": "Sir Vosirek"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1180,
+        "payloadHash": "978ab42085850b8ec51cb1346c43f378f9f4b071acef880022dcb2ee62049fda",
+        "updatedAt": "2026-10-22T23:04:44.90192+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "move-marker",
+          "target_id": "class-archer-warrior-ranger",
+          "payload": {
+            "to": [
+              4593,
+              3728
+            ],
+            "from": [
+              4527,
+              3759
+            ],
+            "name": "Fighter / Ranger trainers"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1181,
+        "payloadHash": "d5fa283aa3e55b4f40c80a4f6684a05f6105ddf657a0da47238515c9e3831a51",
+        "updatedAt": "2026-10-22T23:04:57.853683+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "edit-marker",
+          "target_id": "class-archer-warrior-ranger",
+          "payload": {
+            "from": {
+              "x": 4527,
+              "y": 3759,
+              "name": "Fighter / Ranger trainers",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/archer-brann",
+              "level": "lower",
+              "wikiId": "npc-1790076523473-qxhtb",
+              "classes": [
+                "Archer",
+                "Fighter",
+                "Ranger"
+              ],
+              "building": "Archer / Fighter / Ranger trainers",
+              "category": "Class trainer",
+              "approximate": true
+            },
+            "name": "Archer / Fighter / Ranger Trainers",
+            "building": "2nd Floor"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1182,
+        "payloadHash": "5e610104643d4b03ad305f7f9f155a7a62fb838a2fdc93f0b55a55229446f1dc",
+        "updatedAt": "2026-10-22T23:05:01.991553+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4549,
+            "y": 3751,
+            "name": "Quartermaster Llarne",
+            "note": "2nd Floor",
+            "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-llarne",
+            "level": "lower",
+            "sells": [
+              "Armor",
+              "Bags",
+              "Food & drink",
+              "Shields",
+              "Weapons"
+            ],
+            "vendor": "Quartermaster",
+            "wikiId": "npc-quartermaster-llarne",
+            "category": "Vendor"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1183,
+        "payloadHash": "0b911b1a600d0a8b0a0cf24d4c9e020165fb7d4242cca2a22767869bee31a423",
+        "updatedAt": "2026-10-22T23:00:59.142739+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 948,
+            "y": 1384,
+            "name": "Whispering Wallace",
+            "note": "Appears in the inn during the evening hours and disappears during the daytime. Stands by the bartender.\nAuthor's note: Hostile to deep elves.",
+            "wiki": "https://monstersandmemories.wiki/npcs/whispering-wallace",
+            "bounty": "npc-whispering-wallace",
+            "wikiId": "npc-whispering-wallace",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1184,
+        "payloadHash": "c5f45a350a3c202b4c94b700e44879cf159eefc79e65057c66d03a9d7a3a3b5d",
+        "updatedAt": "2026-10-22T23:01:51.807509+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 908,
+            "y": 1251,
+            "name": "Medic Zafira",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/medic-zafira",
+            "trade": "Bind Wound",
+            "bounty": "npc-medic-zafira",
+            "wikiId": "npc-medic-zafira",
+            "category": "Tradeskill",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1185,
+        "payloadHash": "7b1dfe2df02835b5dc452860d259b9482fdd2cbf81d869975f7afaced291203e",
+        "updatedAt": "2026-10-22T23:02:05.027875+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1059,
+            "y": 1180,
+            "name": "Tinkerer Boltia",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/tinkerer-boltia",
+            "trade": "Tinkering",
+            "bounty": "npc-tinkerer-boltia",
+            "wikiId": "npc-tinkerer-boltia",
+            "category": "Tradeskill",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1186,
+        "payloadHash": "9608e6f56d0961659d8afa0fed218a5cdb32922af2c569a063651fd4ec034d69",
+        "updatedAt": "2026-10-22T23:02:12.268601+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1060,
+            "y": 1185,
+            "name": "Tinkerer Vilsis",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/tinkerer-vilsis",
+            "bounty": "npc-tinkerer-vilsis",
+            "wikiId": "npc-tinkerer-vilsis",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1187,
+        "payloadHash": "b010dee00ee7e275a6d284f27489fd90f02fb53752e7c320457d86f40d12f001",
+        "updatedAt": "2026-10-22T23:02:16.350592+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1041,
+            "y": 1177,
+            "name": "Stonecutter Selin",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/stonecutter-selin",
+            "bounty": "npc-stonecutter-selin",
+            "wikiId": "npc-stonecutter-selin",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1188,
+        "payloadHash": "e11dc44decd4e31cfb5c67c57bdc6b2ab7285c441e87b72d67e448ca69c25a69",
+        "updatedAt": "2026-10-22T23:02:20.196676+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1038,
+            "y": 1179,
+            "name": "Stonecutter Sodunn",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/stonecutter-sodunn",
+            "trade": "Stone Cutting",
+            "bounty": "npc-stonecutter-sodunn",
+            "wikiId": "npc-stonecutter-sodunn",
+            "category": "Tradeskill",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1189,
+        "payloadHash": "2ec7fe413786015ddf79a2fa231c51987689ac6f03049905782cb11c9a7c0d25",
+        "updatedAt": "2026-10-22T23:02:22.878006+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1033,
+            "y": 1186,
+            "name": "Mason Krulch",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/mason-krulch",
+            "trade": "Masonry",
+            "bounty": "npc-mason-krulch",
+            "wikiId": "npc-mason-krulch",
+            "category": "Tradeskill",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1191,
+        "payloadHash": "453d06bfc491f4b40e2b26c6c5ff593b99b141961716af7c9f944254d4693038",
+        "updatedAt": "2026-10-22T22:58:21.444302+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3302,
+            "y": 7461,
+            "name": "Recess Basilisk",
+            "note": "",
+            "levels": [
+              27,
+              28
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1192,
+        "payloadHash": "13f26323e713ab58ad5bd341baa283d46a645e84e3a7f871aef9731b9861498e",
+        "updatedAt": "2026-10-22T22:58:23.78759+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3311,
+            "y": 7140,
+            "mobs": [
+              {
+                "name": "a goblin shoreguard",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-shoreguard",
+                "wikiId": "npc-a-goblin-shoreguard"
+              },
+              {
+                "name": "a camp raider",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-camp-raider",
+                "wikiId": "npc-a-camp-raider"
+              },
+              {
+                "name": "a goblin stone-sorter",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+                "wikiId": "npc-a-goblin-stone-sorter"
+              }
+            ],
+            "name": "goblin camp",
+            "note": "",
+            "levels": [
+              20,
+              23
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1193,
+        "payloadHash": "da03ded99604326d7f9822105f732ad40c704e7e4ad733762bc1e47b604a058b",
+        "updatedAt": "2026-10-22T23:03:21.278949+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1506,
+            "y": 1677,
+            "name": "An elementalist scribe",
+            "note": "Sells elemental scrolls",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-elementalist-scribe",
+            "sells": [
+              "Spell scrolls"
+            ],
+            "bounty": "npc-an-elementalist-scribe",
+            "vendor": "Spell scribe",
+            "wikiId": "npc-an-elementalist-scribe",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1194,
+        "payloadHash": "18c7bc2e3e53004508a5f33c9fcd29e3cee78f4c13a3bf2db2ca075f80625644",
+        "updatedAt": "2026-10-22T22:56:56.241158+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1036,
+            "y": 1722,
+            "name": "Captain Haring",
+            "note": "On the first level.",
+            "wiki": "https://monstersandmemories.wiki/npcs/captain-haring",
+            "ambush": false,
+            "levels": [
+              45,
+              45
+            ],
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1195,
+        "payloadHash": "4fc9bc4554a30a87796d3e25084fe36dfe7e913c5a6c96d5782a230170ecf6e5",
+        "updatedAt": "2026-10-22T23:03:26.107992+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1520,
+            "y": 1696,
+            "name": "Chahaya Tam",
+            "note": "In the central training area at the bottom of the temple.\nCan fall down to this from the entrance atrium but will take damage.",
+            "wiki": "https://monstersandmemories.wiki/npcs/chahaya-tam",
+            "bounty": "npc-chahaya-tam",
+            "quests": true,
+            "wikiId": "npc-chahaya-tam",
+            "classes": [
+              "Monk"
+            ],
+            "category": "Class trainer",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1196,
+        "payloadHash": "bafc40d700bc1e9222096e0a0dcd1cc46c1c4a1f8c30a40f3cfd95de11139d6e",
+        "updatedAt": "2026-10-22T23:03:31.940568+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1474,
+            "y": 1630,
+            "name": "A monk instructor",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-monk-instructor",
+            "wikiId": "npc-a-monk-instructor",
+            "classes": [
+              "Monk"
+            ],
+            "category": "Class trainer"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1197,
+        "payloadHash": "25428abd7c2f371eb704d92f57b86727bb1857571956d8c1c287b61ee505119f",
+        "updatedAt": "2026-10-22T23:03:36.345978+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1522,
+            "y": 1687,
+            "name": "An elemental quartermaster",
+            "note": "On the raised perimeter of the bottom level, in a corner room on the north side.\nSells Malachite for summoning.",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-elemental-quartermaster",
+            "bounty": "npc-an-elemental-quartermaster",
+            "vendor": "Quartermaster",
+            "wikiId": "npc-an-elemental-quartermaster",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1199,
+        "payloadHash": "d53da761664eccea1c82d728f64a421743133ff88f07d0b4cc32f0901267d857",
+        "updatedAt": "2026-10-22T23:03:38.253142+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1510,
+            "y": 1692,
+            "name": "Tenebrim Tam",
+            "note": "On the mid-level, overlooking the training monks. Accessed from  following the staircase down at the main entrance.",
+            "wiki": "https://monstersandmemories.wiki/npcs/tenebrim-tam",
+            "quests": true,
+            "wikiId": "npc-tenebrim-tam",
+            "classes": [
+              "Elementalist"
+            ],
+            "category": "Class trainer"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1200,
+        "payloadHash": "24406ab366a4df90355e4530bdfca1af5d8880d06cdd189a146479946c94d43c",
+        "updatedAt": "2026-10-22T23:03:44.78483+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "class-7",
+          "payload": {
+            "from": {
+              "x": 1506,
+              "y": 1698.02,
+              "name": "Elementalist / Monk — Little Half Town temple",
+              "note": "ELE / MNK",
+              "classes": [
+                "Elementalist",
+                "Monk"
+              ],
+              "building": "Little Half Town temple",
+              "category": "Class trainer"
+            },
+            "name": "Elementalist / Monk — Little Half Town temple",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1201,
+        "payloadHash": "d2b9a1eb19fde9707e20edd81836e4f4363456a214eb5b021829c2e692346f8e",
+        "updatedAt": "2026-10-22T23:03:50.989724+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1501,
+            "y": 1661,
+            "name": "School of the Fourfold Path",
+            "note": "Elementalist and Monk temple.",
+            "category": "Personal",
+            "noteType": "label"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1202,
+        "payloadHash": "95e7bb726238110be8470f039baf7552d0a19583a5eb76b4291d2527e7adc985",
+        "updatedAt": "2026-10-22T23:03:57.599868+00:00",
+        "version": {
+          "map": "shaded-dunes",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4790,
+            "y": 3125,
+            "name": "Ojamar Antorious",
+            "note": "Sells teleport and portal scrolls.",
+            "wiki": "https://monstersandmemories.wiki/npcs/ojamar-antorious",
+            "bounty": "npc-ojamar-antorious",
+            "wikiId": "npc-ojamar-antorious",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1203,
+        "payloadHash": "ac189cda5c8ca3c0bcbe4aa252365a7e7f651e8201f7fec75f16e522b3fd1d18",
+        "updatedAt": "2026-10-22T23:04:00.842415+00:00",
+        "version": {
+          "map": "shaded-dunes",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "npc-4",
+          "payload": {
+            "from": {
+              "x": 4786,
+              "y": 3133,
+              "name": "Notable NPC — Wizard Spells",
+              "note": "",
+              "minZoom": 3,
+              "category": "Notable NPC",
+              "approximate": true
+            },
+            "name": "Notable NPC — Wizard Spells",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1204,
+        "payloadHash": "2e83fca134711cd8bc13d46076cfd72f4ae53bb9acf7be58658a6a99f35354c1",
+        "updatedAt": "2026-10-22T22:57:15.726294+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1208,
+            "y": 1868,
+            "name": "Observer Samvel",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/observer-samvel",
+            "bounty": "npc-observer-samvel",
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-observer-samvel",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1205,
+        "payloadHash": "445fc62bb1a18fd5c2781170371f116de8a16ccbb12eb31324b62519c2925387",
+        "updatedAt": "2026-10-22T22:57:45.310147+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1002,
+            "y": 2284,
+            "name": "High Watchman Albury",
+            "note": "On the first floor inside the tower",
+            "wiki": "https://monstersandmemories.wiki/npcs/high-watchman-albury",
+            "bounty": "npc-high-watchman-albury",
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-high-watchman-albury",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1206,
+        "payloadHash": "2c3f49aefe72f26f75b3da440af5b1c5537589bd53313855b6d5011349a5eb98",
+        "updatedAt": "2026-10-22T22:47:20.860261+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2227,
+            "y": 1798,
+            "name": "Cedrius the Cutter",
+            "note": "PH is just a Cutter",
+            "wiki": "https://monstersandmemories.wiki/npcs/cedrius-the-cutter",
+            "level": "ground",
+            "bounty": "npc-cedrius-the-cutter",
+            "levels": [
+              12,
+              12
+            ],
+            "wikiId": "npc-cedrius-the-cutter",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1207,
+        "payloadHash": "dd7c07125e9fb5c41f3dd9e3591f0b9761f2df9234dfae2ce23495744d55417b",
+        "updatedAt": "2026-10-22T22:47:27.850555+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2322,
+            "y": 1749,
+            "name": "Blacksmith Jerictus",
+            "note": "PH kneels at the anvil",
+            "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-jerictus",
+            "level": "ground",
+            "ambush": false,
+            "bounty": "npc-blacksmith-jerictus",
+            "wikiId": "npc-blacksmith-jerictus",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1208,
+        "payloadHash": "743cfbc0d9fdb6bc996918f091dfcb3fd6a8b42392911abdec2b7c33474075a4",
+        "updatedAt": "2026-10-22T22:47:40.298598+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2310,
+            "y": 1828,
+            "name": "Blurgh the Blind",
+            "note": "Up the ladder from Cedrius's room.\nGive him smugglers shopping list from the Jellies (by cleaning sewer sludge)  to summon Percy the purse.",
+            "wiki": "https://monstersandmemories.wiki/npcs/blurgh-the-blind",
+            "level": "ground",
+            "bounty": "npc-blurgh-the-blind",
+            "wikiId": "npc-blurgh-the-blind",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1210,
+        "payloadHash": "2c54570d93980b97971381dfcd2604429746339d196200d2c9a9e4bb6d211d74",
+        "updatedAt": "2026-10-22T22:47:44.335028+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2678,
+            "y": 2417,
+            "name": "Receptionist Naleth'ra",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/receptionist-nalethra",
+            "level": "ground",
+            "bounty": "npc-receptionist-naleth-ra",
+            "wikiId": "npc-receptionist-naleth-ra",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1213,
+        "payloadHash": "2ea4f578f5675afa55b8db76813510821bc430a0918bb5d9abc28572613d7d4b",
+        "updatedAt": "2026-10-22T22:48:08.610401+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2207,
+            "y": 2236,
+            "name": "Chaplain Cranely",
+            "note": "Ask you to combine Sewer Sludge + 1 item in the offering box on the altar, known combination : Enchanted Effigy + Sewer Sludge.",
+            "level": "ground",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1214,
+        "payloadHash": "a085cbd65e30b7ede7b65ed6801c2f2d53a93cd35f991a9afc53d34aab2bc8f1",
+        "updatedAt": "2026-10-22T22:48:12.748454+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2742,
+            "y": 2152,
+            "name": "Kalessa Velgarrith",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/kalessa-velgarrith",
+            "level": "ground",
+            "wikiId": "npc-kalessa-velgarrith",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1215,
+        "payloadHash": "6e7c312b477c6c537ebb2e58966301debe54e39debb91fd1fee9f8699c2ddb48",
+        "updatedAt": "2026-10-22T22:48:16.21547+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2703,
+            "y": 2055,
+            "name": "Nibs Mudknuckle",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/nibs-mudknuckle",
+            "level": "ground",
+            "wikiId": "npc-nibs-mudknuckle",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1216,
+        "payloadHash": "b1c49c7f8e4453bd577d7587f6cd2ec25402481e9aea12dfd58c78dbf4cc9ae0",
+        "updatedAt": "2026-10-22T22:48:28.522371+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2457,
+            "y": 1295,
+            "name": "Sarveth the Unheard",
+            "note": "upper floor",
+            "level": "ground",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1217,
+        "payloadHash": "7e9b299da32c68bc9ea61586498328b7754ffa213c887b4f2afdb1abdc341717",
+        "updatedAt": "2026-10-22T22:48:30.341778+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2760,
+            "y": 1492,
+            "name": "Mucky Morgurah",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/mucky-morgurah",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              6,
+              6
+            ],
+            "wikiId": "npc-mucky-morgurah",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1218,
+        "payloadHash": "e8a18f63e766b5dd42ac9931c89f6dde168ad7383cc53c88d0fe3f725dec3f98",
+        "updatedAt": "2026-10-22T22:48:32.32276+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2861,
+            "y": 1679,
+            "name": "Flavic the Fisher",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/flavic-the-fisher",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              6,
+              6
+            ],
+            "wikiId": "npc-flavic-the-fisher",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1219,
+        "payloadHash": "ffc2128ffc03dd27092949e83afc463a1b5d4cc7dc9d26e6c0c17d23b76c485a",
+        "updatedAt": "2026-10-22T22:48:34.766424+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2691,
+            "y": 1643,
+            "name": "Gorgeous",
+            "note": "Roaming cube",
+            "wiki": "https://monstersandmemories.wiki/npcs/gorgeous",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              6,
+              6
+            ],
+            "wikiId": "npc-gorgeous",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1220,
+        "payloadHash": "1a9acb71cf36ea64feb6ba0ac77ada8f14b25491cb9feeba4284562fcc29e3e6",
+        "updatedAt": "2026-10-22T22:48:37.430482+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2430,
+            "y": 1451,
+            "name": "Forager Davra",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/forager-davra",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              7,
+              7
+            ],
+            "wikiId": "npc-forager-davra",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1221,
+        "payloadHash": "44491d978d497725b53d263c56f3a919f9b8ca1f1b024eb62f09d0381e987838",
+        "updatedAt": "2026-10-22T22:48:40.70133+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2052,
+            "y": 1607,
+            "name": "Reviver Vlarek",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/reviver-vlarek",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              12,
+              12
+            ],
+            "wikiId": "npc-reviver-vlarek",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1222,
+        "payloadHash": "6a628a12b8502a138a56a4a5137244d5ff6ace6df5611e88a937423afffe7098",
+        "updatedAt": "2026-10-22T22:48:43.306262+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1997,
+            "y": 1755,
+            "name": "Wikket Two-Wands",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/wikket-two-wands",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              12,
+              12
+            ],
+            "wikiId": "npc-wikket-two-wands",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1225,
+        "payloadHash": "2e5058c9cf9f445886bb4f02a3817118dcff385c5510dbc2d53a4a23be717bae",
+        "updatedAt": "2026-10-22T22:49:14.871256+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2226,
+            "y": 1920,
+            "name": "Underboss Vekrizin",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/underboss-vekrizin",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              12,
+              12
+            ],
+            "wikiId": "npc-underboss-vekrizin",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1227,
+        "payloadHash": "ba6faca5604ff6749e0cc38c9ce9397aeae421fa7a85be80c4e6c95cc93baeba",
+        "updatedAt": "2026-10-22T22:51:48.668755+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2284,
+            "y": 1840,
+            "name": "Percy the Purse",
+            "note": "upstair, spawned by giving Smuggler's shopping list to Blurgh the Blind.",
+            "wiki": "https://monstersandmemories.wiki/npcs/percy-the-purse",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              7,
+              7
+            ],
+            "wikiId": "npc-percy-the-purse",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1228,
+        "payloadHash": "8d2ed224ce15aa2728be338374fb19d3dac5f3ac43fdd460a79af0d69ae67acb",
+        "updatedAt": "2026-10-22T22:52:14.329447+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2462,
+            "y": 2015,
+            "name": "Sethrine the Unblinking",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/sethrine-the-unblinking",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              6,
+              6
+            ],
+            "wikiId": "npc-sethrine-the-unblinking",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1229,
+        "payloadHash": "5de8b1c3e9daab626292265079b273b43c34fc37089205c5f768bedde6828f0e",
+        "updatedAt": "2026-10-22T22:52:17.674799+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2350,
+            "y": 2051,
+            "name": "Mother Gummer",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/mother-gummer",
+            "level": "ground",
+            "ambush": false,
+            "levels": [
+              12,
+              12
+            ],
+            "wikiId": "npc-mother-gummer",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1230,
+        "payloadHash": "fff2f055130255ae64e43d82268db03e73b77803f48d355c25c4ea6d1de6ceb6",
+        "updatedAt": "2026-10-22T22:52:58.061595+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2695,
+            "y": 2353,
+            "name": "Custodian Merique",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/custodian-merique",
+            "level": "ground",
+            "bounty": "npc-custodian-merique",
+            "wikiId": "npc-custodian-merique",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1231,
+        "payloadHash": "49aa63cfc5a92388b843ae7cb67532c3fa4a9d26c5c5b0f5829b569990b91a14",
+        "updatedAt": "2026-10-22T22:53:00.858309+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2640,
+            "y": 2501,
+            "name": "Herald Casteius",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/herald-casteius",
+            "level": "ground",
+            "bounty": "npc-herald-casteius",
+            "wikiId": "npc-herald-casteius",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1232,
+        "payloadHash": "eac445945f73313393a88a90673d8b487475cac44ea21dea771e36581e5ca5cd",
+        "updatedAt": "2026-10-22T22:53:03.66056+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2611,
+            "y": 2511,
+            "name": "Undertaker Gargnaw",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/undertaker-gargnaw",
+            "level": "ground",
+            "bounty": "npc-undertaker-gargnaw",
+            "wikiId": "npc-undertaker-gargnaw",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1241,
+        "payloadHash": "6016c5fb3a80fa9e5d1d0173894d4a28b576c6f629b2c55721499f5e5dd47daf",
+        "updatedAt": "2026-10-22T22:45:57.120225+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2068,
+            "y": 2046,
+            "name": "Stairs",
+            "note": "",
+            "level": "basement",
+            "travel": "Stairs",
+            "toLevel": "basement",
+            "category": "Stairs",
+            "direction": "updown"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1243,
+        "payloadHash": "6a2e83d9ae2e1a6e99ff1454bf7cd29c6996c3bba0bc2d77e69ae3cbb07b5f73",
+        "updatedAt": "2026-10-22T23:04:05.360668+00:00",
+        "version": {
+          "map": "shaded-dunes",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1970,
+            "y": 2520,
+            "name": "Leket the Unchosen",
+            "note": "",
+            "ambush": false,
+            "levels": [
+              12,
+              12
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1244,
+        "payloadHash": "24be38c8ad2ac328a07a519ad3e1f46cb9f71f53fde246c10928bb9df334171e",
+        "updatedAt": "2026-10-22T23:05:14.656662+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2653,
+            "y": 3831,
+            "name": "Purska Nillen",
+            "note": "Inside a room above the Western Gate",
+            "wiki": "https://monstersandmemories.wiki/npcs/purska-nillen",
+            "level": "lower",
+            "ambush": false,
+            "levels": [
+              41,
+              41
+            ],
+            "wikiId": "npc-1790076531813-j2iu2",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1245,
+        "payloadHash": "c0ee0a9251fed644e1c2e42403431c64c49562d39e8429f7659a43b815c62e85",
+        "updatedAt": "2026-10-22T22:45:25.098482+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "move-label",
+          "target_id": "exit-ail-vorith",
+          "payload": {
+            "to": [
+              2763,
+              1740
+            ],
+            "from": [
+              2590,
+              2470
+            ],
+            "name": "to Ail’Vorith"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1246,
+        "payloadHash": "53e2a9de3b11bbdee6819320bff3ff1481984da601aaa84c77eb9692142e6849",
+        "updatedAt": "2026-10-22T22:46:25.865935+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "edit-marker",
+          "target_id": "stairs-east-room-basement",
+          "payload": {
+            "from": {
+              "x": 2049,
+              "y": 2029,
+              "name": "Stairs - down to the lower corridor",
+              "note": "",
+              "level": "basement",
+              "travel": "Stairs",
+              "toLevel": "canyon",
+              "category": "Stairs",
+              "toMarker": "stairs-east-room-canyon",
+              "direction": "down",
+              "approximate": true,
+              "switchOnClick": true
+            },
+            "name": "Stairs - down to the lower corridor",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1247,
+        "payloadHash": "0dd7b7bbf9daf33d4cc25cd25f16c71a9309b12172c0c8c4f4ba31f33774f0ab",
+        "updatedAt": "2026-10-22T22:57:28.274209+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-623",
+          "payload": {
+            "from": {
+              "x": 1230,
+              "y": 2002,
+              "name": "Overseer Shuk'Naru (levels 41–42)",
+              "note": "Looking West from bridge, this named spawns dead center of this patio area.",
+              "wiki": "https://monstersandmemories.wiki/npcs/overseer-shuknaru",
+              "wikiId": "npc-overseer-shuknaru",
+              "category": "Quest NPC"
+            },
+            "name": "Overseer Shuk'Naru (levels 41–42)",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1248,
+        "payloadHash": "ec649566e851cd9945e1a5eef431ec5f6a0ad150d62f8a51b5ba02af593f818e",
+        "updatedAt": "2026-10-22T23:03:14.546737+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5508,
+            "y": 4285,
+            "name": "Naevith Or'daal",
+            "note": "requests a broken fitting from the tether, tracks, and anchor in the area, likely a mud quest at these locations.",
+            "quests": true,
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1249,
+        "payloadHash": "48bcfad4ddc76f0d28289df7609c983a05e58ff18b9d5544fba9e8cac5f57fd3",
+        "updatedAt": "2026-10-22T23:02:59.245445+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-19",
+          "payload": {
+            "from": {
+              "x": 1055,
+              "y": 1087,
+              "name": "Tinkering — north of Sojourner’s Camp",
+              "note": "",
+              "trade": null,
+              "category": "Tradeskill"
+            },
+            "name": "Tinkering — north of Sojourner’s Camp",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1250,
+        "payloadHash": "745121926a85dd54bb8fed3321c67ff4527b4317c33e0de4bd58c7eb3e039548",
+        "updatedAt": "2026-10-22T23:03:04.111808+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-18",
+          "payload": {
+            "from": {
+              "x": 1055.11,
+              "y": 1072.93,
+              "name": "Stone Cutting — north of Sojourner’s Camp",
+              "note": "",
+              "trade": null,
+              "category": "Tradeskill"
+            },
+            "name": "Stone Cutting — north of Sojourner’s Camp",
+            "reason": "duplicate",
+            "remove": true
           },
           "credit": false
         }

@@ -84,5 +84,35 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:vhaleth-halkareth": [
+    {
+      "name": "nightgod",
+      "what": "moved"
+    }
+  ],
+  "label:wizard-tower": [
+    {
+      "name": "nightgod",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1191": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1192": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1248": [
+    {
+      "name": "nephelin3",
+      "what": "added"
+    }
   ]
 }

@@ -10,10 +10,11 @@
   "approximate": true,
   "minZoom": 3,
   "note": "Deep elf wizard, near the wizard tower.",
-  "x": 5185,
-  "y": 4297,
+  "x": 5421,
+  "y": 4569,
   "wiki": "https://monstersandmemories.wiki/npcs/vhaleth-halkareth",
-  "wikiId": "npc-vhaleth-hal-kareth"
+  "wikiId": "npc-vhaleth-hal-kareth",
+  "community": true
  },
  {
   "id": "community-700",
@@ -137,5 +138,58 @@
    14
   ],
   "mobs": []
+ },
+ {
+  "id": "community-1191",
+  "community": true,
+  "name": "Recess Basilisk",
+  "note": "",
+  "x": 3302,
+  "y": 7461,
+  "category": "Mob camp",
+  "levels": [
+   27,
+   28
+  ]
+ },
+ {
+  "id": "community-1192",
+  "community": true,
+  "name": "goblin camp",
+  "note": "",
+  "x": 3311,
+  "y": 7140,
+  "category": "Mob camp",
+  "levels": [
+   20,
+   23
+  ],
+  "mobs": [
+   {
+    "name": "a goblin shoreguard",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-shoreguard",
+    "wikiId": "npc-a-goblin-shoreguard"
+   },
+   {
+    "name": "a camp raider",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-camp-raider",
+    "wikiId": "npc-a-camp-raider"
+   },
+   {
+    "name": "a goblin stone-sorter",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+    "wikiId": "npc-a-goblin-stone-sorter"
+   }
+  ]
+ },
+ {
+  "id": "community-1248",
+  "community": true,
+  "name": "Naevith Or'daal",
+  "note": "requests a broken fitting from the tether, tracks, and anchor in the area, likely a mud quest at these locations.",
+  "x": 5508,
+  "y": 4285,
+  "category": "Notable NPC",
+  "quests": true
  }
 ]
