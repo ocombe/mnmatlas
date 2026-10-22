@@ -2,6 +2,12 @@
  "entries": [
   {
    "date": "2026-10-22",
+   "title": "Rare drops first",
+   "text": "NPC cards now list rare drops first, the magic, lore, no drop and unique items, each with its marks, before the common drops. A named foe with no rare drop on record says so.",
+   "maps": []
+  },
+  {
+   "date": "2026-10-22",
    "title": "The Blind Midden is charted",
    "text": "Below Ail’Vorith the Blind Midden opens up: three floors of sewers and caverns around a deep canyon, crossed by tall bridges. Watch your step, not every wall or floor is what it seems.",
    "maps": [
