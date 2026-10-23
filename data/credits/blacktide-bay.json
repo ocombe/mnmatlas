@@ -230,5 +230,17 @@
       "name": ".anduri",
       "what": "added"
     }
+  ],
+  "marker:community-1275": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1291": [
+    {
+      "name": null,
+      "what": "added"
+    }
   ]
 }

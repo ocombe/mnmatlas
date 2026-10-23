@@ -1,15 +1,5 @@
 [
   {
-    "at": "2026-10-19T21:32:31.478Z",
-    "rows": [
-      {
-        "id": 941,
-        "payloadHash": "511e8f41e31c0089c265f921a229d923be10850fba7fb941bf3ac0bf18e729bd",
-        "updatedAt": "2026-10-19T21:03:02.934041+00:00"
-      }
-    ]
-  },
-  {
     "at": "2026-10-19T22:16:21.819Z",
     "rows": []
   },
@@ -7684,6 +7674,300 @@
             "bounty": "npc-overseer-jarukan",
             "wikiId": "npc-overseer-jarukan",
             "category": "Named mob"
+          },
+          "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-23T13:27:24.262Z",
+    "rows": [
+      {
+        "id": 1275,
+        "payloadHash": "38164ace09a7b4510032df082c4acb05caa892edcbe50d439cd1d9611935fccd",
+        "updatedAt": "2026-10-23T10:08:41.797307+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2472,
+            "y": 1969,
+            "name": "A Fellstone ritualist",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-fellstone-ritualist",
+            "level": "floor-1",
+            "ambush": false,
+            "levels": [
+              14,
+              14
+            ],
+            "wikiId": "npc-a-fellstone-ritualist",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1277,
+        "payloadHash": "e7ee3a114477adce9d8a8aceed1cebbe07ab46332b1b9a8549341647bf06f835",
+        "updatedAt": "2026-10-23T10:08:48.295732+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1386,
+            "y": 5899,
+            "name": "Quilla Dorn",
+            "note": "Quest giver for \"Survey the Myconid Colony\".",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Survey_the_Myconid_Colony#tabber-Fungal_Materials",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1278,
+        "payloadHash": "657bf2b107e8f9e1e131bbb9b7f694ea0ece8894e6ca4dafade47365410b0d0c",
+        "updatedAt": "2026-10-23T10:08:58.806432+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-728",
+          "payload": {
+            "from": {
+              "x": 3102,
+              "y": 7191,
+              "name": "Foreman Vikkit",
+              "note": "When going up center ramp, make a left and follow the path going North to find. The PH spawns with 2 other goblins. (potential 3 pull)",
+              "wiki": "https://monstersandmemories.miraheze.org/wiki/Foreman_Vikkit",
+              "levels": [
+                25,
+                25
+              ],
+              "category": "Named mob"
+            },
+            "name": "Foreman Vikkit",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1279,
+        "payloadHash": "67006829153b8bf61a0e80f124e008ade8f1617e1c79d3d77298dcc459c280e6",
+        "updatedAt": "2026-10-23T10:09:30.250661+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-label",
+          "target_id": "community-718",
+          "payload": {
+            "from": {
+              "name": "Goblin Island",
+              "note": "Isle of Goblins within the Great Cavern Sea. Levels 20-25"
+            },
+            "name": "basilisk island",
+            "note": ""
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1280,
+        "payloadHash": "ff3627507aff625551fb7b70f56d602bc7490edab6a972ac73abbb795d980ae9",
+        "updatedAt": "2026-10-23T10:09:35.755141+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1192",
+          "payload": {
+            "from": {
+              "x": 3311,
+              "y": 7140,
+              "mobs": [
+                {
+                  "name": "a goblin shoreguard",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-shoreguard",
+                  "wikiId": "npc-a-goblin-shoreguard"
+                },
+                {
+                  "name": "a camp raider",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-camp-raider",
+                  "wikiId": "npc-a-camp-raider"
+                },
+                {
+                  "name": "a goblin stone-sorter",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+                  "wikiId": "npc-a-goblin-stone-sorter"
+                }
+              ],
+              "name": "goblin camp",
+              "note": "",
+              "levels": [
+                20,
+                23
+              ],
+              "category": "Mob camp"
+            },
+            "name": "goblin camp",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1281,
+        "payloadHash": "705743b5b25ba91a61b42d0b3fbc55b980eb0e7ab13b26a524e48794673360ed",
+        "updatedAt": "2026-10-23T10:09:50.657782+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-704",
+          "payload": {
+            "from": {
+              "name": "A Fire Elemental",
+              "note": "Red at 35.\nBeetles, Bats, Cultists, and Fire Elementals' are on this islands.",
+              "levels": null
+            },
+            "name": "A Fire Elemental",
+            "note": "Beetles, Bats, Cultists, and Fire Elementals' are on this islands.",
+            "levels": [
+              44,
+              46
+            ]
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1284,
+        "payloadHash": "cfe124e9404c7703a83328574db040e759237f7c7d871bf2ab0d1ddd15f1965f",
+        "updatedAt": "2026-10-23T11:11:57.57633+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "to-ail-vorith",
+          "payload": {
+            "to": [
+              6425,
+              3049
+            ],
+            "from": [
+              6455,
+              2944
+            ],
+            "name": "to Ail'Vorith"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1291,
+        "payloadHash": "a77f1dab7d55d98e36058f121ea59857fe9f92ea85c7bfd6add5980869293ab5",
+        "updatedAt": "2026-10-23T12:35:04.081044+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1998,
+            "y": 1742,
+            "name": "An orcish tactician",
+            "note": "Map Room / Table Room",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-orcish-tactician",
+            "level": "floor-1",
+            "ambush": false,
+            "wikiId": "npc-an-orcish-tactician",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1292,
+        "payloadHash": "a4cee37848a845df6d6edc3794a7d37db7cc5f7506dde9a69337a4db25751090",
+        "updatedAt": "2026-10-23T12:35:12.957246+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2174,
+            "y": 1592,
+            "name": "Turglek the Traveller",
+            "note": "Not sure about the correct naming.",
+            "level": "basement",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1293,
+        "payloadHash": "127a4a37ddc379ef38b5d88b45c459a0827c0adb702ffb7d4d5bbbb29e932a54",
+        "updatedAt": "2026-10-23T12:35:48.674453+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2267,
+            "y": 3039,
+            "name": "Enthraller Gnorah",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/enthraller-gnorah",
+            "level": "basement",
+            "ambush": false,
+            "bounty": "npc-enthraller-gnorah",
+            "levels": [
+              15,
+              15
+            ],
+            "wikiId": "npc-enthraller-gnorah",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1295,
+        "payloadHash": "c67c970157f351522e3e556ca1c7dca4b555fc90c0ea2e9612da1649889cb8cb",
+        "updatedAt": "2026-10-23T12:35:54.352814+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2071,
+            "y": 2675,
+            "way": "Tunnel",
+            "name": "tunnel to ground floor",
+            "note": "",
+            "level": "basement",
+            "oneWay": true,
+            "toLevel": "ground",
+            "category": "Passage",
+            "direction": "updown"
           },
           "credit": true
         }

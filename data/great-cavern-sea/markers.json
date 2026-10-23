@@ -49,10 +49,14 @@
   "community": true,
   "name": "A Fire Elemental",
   "category": "Mob camp",
-  "note": "Red at 35.\nBeetles, Bats, Cultists, and Fire Elementals' are on this islands.",
+  "note": "Beetles, Bats, Cultists, and Fire Elementals' are on this islands.",
   "x": 5134,
   "y": 4418,
-  "mobs": []
+  "mobs": [],
+  "levels": [
+   44,
+   46
+  ]
  },
  {
   "id": "community-714",
@@ -62,20 +66,6 @@
   "note": "Wizards and their evacuated group members will teleport here.",
   "x": 4043,
   "y": 9223
- },
- {
-  "id": "community-728",
-  "community": true,
-  "name": "Foreman Vikkit",
-  "category": "Named mob",
-  "note": "When going up center ramp, make a left and follow the path going North to find. The PH spawns with 2 other goblins. (potential 3 pull)",
-  "x": 3102,
-  "y": 7191,
-  "levels": [
-   25,
-   25
-  ],
-  "wiki": "https://monstersandmemories.miraheze.org/wiki/Foreman_Vikkit"
  },
  {
   "id": "community-738",
@@ -157,36 +147,6 @@
   ]
  },
  {
-  "id": "community-1192",
-  "community": true,
-  "name": "goblin camp",
-  "note": "",
-  "x": 3311,
-  "y": 7140,
-  "category": "Mob camp",
-  "levels": [
-   20,
-   23
-  ],
-  "mobs": [
-   {
-    "name": "a goblin shoreguard",
-    "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-shoreguard",
-    "wikiId": "npc-a-goblin-shoreguard"
-   },
-   {
-    "name": "a camp raider",
-    "wiki": "https://monstersandmemories.wiki/npcs/a-camp-raider",
-    "wikiId": "npc-a-camp-raider"
-   },
-   {
-    "name": "a goblin stone-sorter",
-    "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
-    "wikiId": "npc-a-goblin-stone-sorter"
-   }
-  ]
- },
- {
   "id": "community-1248",
   "community": true,
   "name": "Naevith Or'daal",
@@ -211,5 +171,15 @@
    18
   ],
   "ambush": false
+ },
+ {
+  "id": "community-1277",
+  "community": true,
+  "name": "Quilla Dorn",
+  "note": "Quest giver for \"Survey the Myconid Colony\".",
+  "x": 1386,
+  "y": 5899,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.miraheze.org/wiki/Survey_the_Myconid_Colony#tabber-Fungal_Materials"
  }
 ]

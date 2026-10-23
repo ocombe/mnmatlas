@@ -730,5 +730,51 @@
       15
     ],
     "ambush": false
+  },
+  {
+    "id": "community-1292",
+    "community": true,
+    "name": "Turglek the Traveller",
+    "note": "Not sure about the correct naming.",
+    "x": 2174,
+    "y": 1592,
+    "level": "basement",
+    "category": "Named mob",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1293",
+    "community": true,
+    "name": "Enthraller Gnorah",
+    "note": "",
+    "x": 2267,
+    "y": 3039,
+    "level": "basement",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/enthraller-gnorah",
+    "wikiId": "npc-enthraller-gnorah",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1295",
+    "community": true,
+    "name": "tunnel to ground floor",
+    "note": "",
+    "x": 2071,
+    "y": 2675,
+    "level": "basement",
+    "category": "Passage",
+    "toLevel": "ground",
+    "direction": "updown",
+    "way": "Tunnel",
+    "oneWay": true
   }
 ]

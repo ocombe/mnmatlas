@@ -475,5 +475,35 @@
         "wikiId": "npc-a-skrivar-swarmer"
       }
     ]
+  },
+  {
+    "id": "community-1275",
+    "community": true,
+    "name": "A Fellstone ritualist",
+    "note": "",
+    "x": 2472,
+    "y": 1969,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fellstone-ritualist",
+    "wikiId": "npc-a-fellstone-ritualist",
+    "levels": [
+      14,
+      14
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1291",
+    "community": true,
+    "name": "An orcish tactician",
+    "note": "Map Room / Table Room",
+    "x": 1998,
+    "y": 1742,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-orcish-tactician",
+    "wikiId": "npc-an-orcish-tactician",
+    "ambush": false
   }
 ]

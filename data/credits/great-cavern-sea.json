@@ -35,6 +35,10 @@
     {
       "name": "tootired01",
       "what": "edited"
+    },
+    {
+      "name": "dendrilly",
+      "what": "edited"
     }
   ],
   "marker:community-714": [
@@ -47,12 +51,20 @@
     {
       "name": "msisepleld",
       "what": "added"
+    },
+    {
+      "name": "dendrilly",
+      "what": "edited"
     }
   ],
   "marker:community-728": [
     {
       "name": "msisepleld",
       "what": "added"
+    },
+    {
+      "name": "dendrilly",
+      "what": "removed"
     }
   ],
   "marker:community-738": [
@@ -111,6 +123,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": "dendrilly",
+      "what": "removed"
     }
   ],
   "marker:community-1248": [
@@ -123,6 +139,18 @@
     {
       "name": "msisepleld",
       "what": "added"
+    }
+  ],
+  "marker:community-1277": [
+    {
+      "name": "msisepleld",
+      "what": "added"
+    }
+  ],
+  "label:to-ail-vorith": [
+    {
+      "name": "dendrilly",
+      "what": "moved"
     }
   ]
 }

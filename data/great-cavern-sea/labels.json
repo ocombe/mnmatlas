@@ -94,13 +94,14 @@
   {
    "id": "to-ail-vorith",
    "name": "to Ail'Vorith",
-   "x": 6455,
-   "y": 2944,
+   "x": 6425,
+   "y": 3049,
    "kind": "exit",
    "priority": 95,
    "minZoom": 1,
    "arrow": "east",
-   "toMap": "ail-vorith"
+   "toMap": "ail-vorith",
+   "community": true
   },
   {
    "id": "to-rothold",
@@ -133,11 +134,11 @@
   {
    "id": "community-718",
    "community": true,
-   "name": "Goblin Island",
+   "name": "basilisk island",
    "kind": "building",
    "priority": 50,
    "minZoom": 0,
-   "note": "Isle of Goblins within the Great Cavern Sea. Levels 20-25",
+   "note": "",
    "x": 2941,
    "y": 7034
   }
