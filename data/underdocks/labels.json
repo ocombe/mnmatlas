@@ -191,24 +191,6 @@
       "level": "lower"
     },
     {
-      "id": "class-archer-warrior-ranger",
-      "abbreviations": [
-        "ARC",
-        "FTR",
-        "RNG"
-      ],
-      "classes": [
-        "Archer",
-        "Fighter",
-        "Ranger"
-      ],
-      "building": "2nd Floor",
-      "x": 4593,
-      "y": 3728,
-      "level": "lower",
-      "name": "Archer / Fighter / Ranger Trainers"
-    },
-    {
       "id": "class-necromancer-cleric-shadowknight",
       "abbreviations": [
         "CLR",
@@ -221,19 +203,6 @@
       "building": "Cleric / Shadowknight trainers",
       "x": 5452,
       "y": 4283,
-      "level": "lower"
-    },
-    {
-      "id": "class-druid",
-      "abbreviations": [
-        "DRU"
-      ],
-      "classes": [
-        "Druid"
-      ],
-      "building": "Druid trainer",
-      "x": 3332,
-      "y": 5668,
       "level": "lower"
     },
     {

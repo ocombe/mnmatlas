@@ -2828,5 +2828,16 @@
       "Elementalist"
     ],
     "quests": true
+  },
+  {
+    "id": "community-1263",
+    "community": true,
+    "name": "Master Tailor Sansha",
+    "note": "",
+    "x": 2009,
+    "y": 1136,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/master-tailor-sansha",
+    "wikiId": "npc-master-tailor-sansha"
   }
 ]

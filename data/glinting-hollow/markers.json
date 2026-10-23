@@ -4,8 +4,8 @@
     "community": true,
     "name": "Strig",
     "note": "",
-    "x": 3070,
-    "y": 533,
+    "x": 2741,
+    "y": 1458,
     "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/strig",
     "wikiId": "npc-strig",
@@ -24,5 +24,20 @@
     "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/brightspark",
     "wikiId": "npc-brightspark"
+  },
+  {
+    "id": "community-1252",
+    "community": true,
+    "name": "Thornbark",
+    "note": "",
+    "x": 1120,
+    "y": 1025,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/thornbark",
+    "wikiId": "npc-thornbark",
+    "levels": [
+      41,
+      41
+    ]
   }
 ]

@@ -908,5 +908,58 @@
    45,
    45
   ]
+ },
+ {
+  "id": "community-1274",
+  "community": true,
+  "name": "Overseer Jaru'Kan",
+  "note": "She patrols this area and has a Taskmaster PH",
+  "x": 2354,
+  "y": 1877,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/overseer-jarukan",
+  "wikiId": "npc-overseer-jarukan",
+  "shape": {
+   "kind": "path",
+   "loop": true,
+   "points": [
+    [
+     2354,
+     1877
+    ],
+    [
+     2307,
+     1889
+    ],
+    [
+     2272,
+     1887
+    ],
+    [
+     2241,
+     1828
+    ],
+    [
+     2278,
+     1788
+    ],
+    [
+     2287,
+     1757
+    ],
+    [
+     2323,
+     1783
+    ],
+    [
+     2345,
+     1808
+    ],
+    [
+     2354,
+     1837
+    ]
+   ]
+  }
  }
 ]

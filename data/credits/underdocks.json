@@ -77,6 +77,10 @@
     {
       "name": "stytches",
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:wiki-marshall-harding": [
@@ -153,6 +157,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "removed"
     }
   ],
   "marker:community-59": [
@@ -393,6 +401,10 @@
     {
       "name": "dargawn",
       "what": "added"
+    },
+    {
+      "name": "0graes",
+      "what": "moved"
     }
   ],
   "marker:community-441": [
@@ -503,6 +515,10 @@
     {
       "name": "phob0s89",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-557": [
@@ -705,6 +721,10 @@
     {
       "name": "stytches",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "removed"
     }
   ],
   "marker:community-1182": [
@@ -714,6 +734,54 @@
     }
   ],
   "marker:community-1244": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1257": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1258": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1260": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1261": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1264": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1266": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:class-druid": [
+    {
+      "name": null,
+      "what": "removed"
+    }
+  ],
+  "marker:community-1269": [
     {
       "name": null,
       "what": "added"

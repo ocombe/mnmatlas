@@ -71,6 +71,10 @@
     {
       "name": "dpierre007",
       "what": "added"
+    },
+    {
+      "name": "msisepleld",
+      "what": "edited"
     }
   ],
   "marker:community-772": [
@@ -112,6 +116,12 @@
   "marker:community-1248": [
     {
       "name": "nephelin3",
+      "what": "added"
+    }
+  ],
+  "marker:community-1273": [
+    {
+      "name": "msisepleld",
       "what": "added"
     }
   ]

@@ -273,24 +273,6 @@
     ]
   },
   {
-    "id": "class-archer-warrior-ranger",
-    "name": "Archer / Fighter / Ranger Trainers",
-    "x": 4593,
-    "y": 3728,
-    "level": "lower",
-    "approximate": true,
-    "note": "",
-    "category": "Class trainer",
-    "classes": [
-      "Archer",
-      "Fighter",
-      "Ranger"
-    ],
-    "wiki": "https://monstersandmemories.wiki/npcs/archer-brann",
-    "wikiId": "npc-1790076523473-qxhtb",
-    "community": true
-  },
-  {
     "id": "wiki-east-bank",
     "name": "Bank — north-east quay",
     "x": 4825,
@@ -324,18 +306,6 @@
     "y": 4885,
     "note": "",
     "level": "upper"
-  },
-  {
-    "id": "class-druid",
-    "name": "Druid trainer",
-    "x": 3332,
-    "y": 5668,
-    "level": "lower",
-    "note": "In the cave beneath the southern rock.",
-    "category": "Class trainer",
-    "classes": [
-      "Druid"
-    ]
   },
   {
     "id": "class-rogue",
@@ -437,10 +407,10 @@
   {
     "id": "wiki-quartermaster",
     "name": "Traven Keldress",
-    "category": "Quest",
+    "category": "Quest NPC",
     "x": 4544,
     "y": 3803,
-    "note": "",
+    "note": "Starts the Deepcut Bandit Bounty quest.",
     "level": "lower",
     "approximate": true,
     "community": true,
@@ -912,8 +882,8 @@
     "name": "Sporcinius",
     "category": "Named mob",
     "note": "He pats in these caverns.",
-    "x": 705,
-    "y": 5561,
+    "x": 1014,
+    "y": 5461,
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/sporcinius",
     "wikiId": "npc-sporcinius"
@@ -1111,8 +1081,8 @@
     "name": "Korien Nock",
     "category": "Class trainer",
     "note": "",
-    "x": 4500,
-    "y": 3705,
+    "x": 4488,
+    "y": 3692,
     "level": "lower",
     "classes": [
       "Archer"
@@ -1456,21 +1426,6 @@
     "wiki": "https://monstersandmemories.wiki/npcs/delilah"
   },
   {
-    "id": "community-1173",
-    "community": true,
-    "name": "Quartermaster Llarne",
-    "note": "",
-    "x": 4539,
-    "y": 3782,
-    "level": "lower",
-    "category": "Vendor",
-    "vendor": "Quartermaster",
-    "sells": [
-      "Armor",
-      "Weapons"
-    ]
-  },
-  {
     "id": "community-1182",
     "community": true,
     "name": "Quartermaster Llarne",
@@ -1506,5 +1461,115 @@
       41
     ],
     "ambush": false
+  },
+  {
+    "id": "community-1257",
+    "community": true,
+    "name": "Kentara Swiftrend",
+    "note": "Sells Archer spell scrolls.",
+    "x": 4572,
+    "y": 3752,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/kentara-swiftrend",
+    "wikiId": "npc-kentara-swiftrend",
+    "vendor": "Spell scribe",
+    "sells": [
+      "Spell scrolls"
+    ]
+  },
+  {
+    "id": "community-1258",
+    "community": true,
+    "name": "Leya Warcrest",
+    "note": "Sells Fighter spell scrolls.",
+    "x": 4558,
+    "y": 3738,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/leya-warcrest",
+    "wikiId": "npc-leya-warcrest",
+    "sells": [
+      "Spell scrolls"
+    ]
+  },
+  {
+    "id": "community-1260",
+    "community": true,
+    "name": "Xeldrin Warymark",
+    "note": "Sells Ranger spell scrolls.",
+    "x": 4635,
+    "y": 3730,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/xeldrin-warymark",
+    "wikiId": "npc-xeldrin-warymark",
+    "sells": [
+      "Spell scrolls"
+    ]
+  },
+  {
+    "id": "community-1261",
+    "community": true,
+    "name": "Vylania Wizerly",
+    "note": "2nd floor",
+    "x": 4414,
+    "y": 3617,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/vylania-wizerly",
+    "wikiId": "npc-vylania-wizerly",
+    "sells": [
+      "Materials"
+    ]
+  },
+  {
+    "id": "community-1264",
+    "community": true,
+    "name": "Krysella Lexis",
+    "note": "1st Floor. Sells Wizard spell scrolls.",
+    "x": 4458,
+    "y": 3717,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/krysella-lexis",
+    "wikiId": "npc-1790076529300-u2za1",
+    "sells": [
+      "Spell scrolls"
+    ]
+  },
+  {
+    "id": "community-1266",
+    "community": true,
+    "name": "Vyrella Vinerot",
+    "note": "Sells Druid spell scrolls.",
+    "x": 3308,
+    "y": 5674,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/vyrella-vinerot",
+    "wikiId": "npc-1790076535667-o6s25",
+    "sells": [
+      "Spell scrolls"
+    ]
+  },
+  {
+    "id": "community-1269",
+    "community": true,
+    "name": "Archer Brann",
+    "note": "Sells fletching tools, arrow recipes, bows, arrows, quivers, and throwing daggers.",
+    "x": 4499,
+    "y": 3705,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/archer-brann",
+    "wikiId": "npc-1790076523473-qxhtb",
+    "vendor": "Bowyer",
+    "sells": [
+      "Ammo",
+      "Bags",
+      "Recipes",
+      "Weapons"
+    ]
   }
 ]

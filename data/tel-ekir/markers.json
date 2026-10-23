@@ -450,5 +450,22 @@
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/yapala",
     "wikiId": "npc-yapala"
+  },
+  {
+    "id": "community-1256",
+    "community": true,
+    "name": "Ayip",
+    "note": "From Shaded Dunes entrance follow the path that splits left before the main gate. Towards the back of the shallow cave area Ayip spawned at the very back left with 2 potential adds. '''[Durin, Krivea Test]''' Respawn Time ~ 13 Minutes [Ayyo",
+    "x": 2209,
+    "y": 2643,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/ayip",
+    "wikiId": "npc-ayip",
+    "levels": [
+      13,
+      13
+    ],
+    "ambush": false
   }
 ]

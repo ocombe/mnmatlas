@@ -713,5 +713,22 @@
     "travel": "Stairs",
     "toLevel": "basement",
     "direction": "updown"
+  },
+  {
+    "id": "community-1251",
+    "community": true,
+    "name": "Willie the Watcher",
+    "note": "Past the circling ramp with the Overseer and miners, Willie can be found in a small room through a narrow tunnel that the Overseer patrols.",
+    "x": 2278,
+    "y": 1840,
+    "level": "basement",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/willie-the-watcher",
+    "wikiId": "npc-willie-the-watcher",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
   }
 ]

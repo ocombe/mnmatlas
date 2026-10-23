@@ -106,10 +106,14 @@
   "community": true,
   "name": "Goblin Searcher",
   "category": "Mob camp",
-  "note": "Green to 22.",
+  "note": "Mostly white and blue with few yellows at 15.",
   "x": 4611,
   "y": 3307,
-  "mobs": []
+  "mobs": [],
+  "levels": [
+   13,
+   16
+  ]
  },
  {
   "id": "community-772",
@@ -191,5 +195,21 @@
   "y": 4285,
   "category": "Notable NPC",
   "quests": true
+ },
+ {
+  "id": "community-1273",
+  "community": true,
+  "name": "Boss Gurrok",
+  "note": "Place Holder is \"a dive leader\", spawns in front of the pillers",
+  "x": 4475,
+  "y": 3281,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/boss-gurrok",
+  "wikiId": "npc-boss-gurrok",
+  "levels": [
+   18,
+   18
+  ],
+  "ambush": false
  }
 ]
