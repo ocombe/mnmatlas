@@ -113,6 +113,24 @@ try {
       assert(e.statuses.at(-1).includes('withdrawn'));
     });
   }
+  await checks.test('B8', 'changeOwn sends nothing for a new marker withdrawn meanwhile', async () => {
+    const e = await browser(), c = e.context;
+    c.originals = [];
+    const r = suggestion(100, 'new-marker', {name: 'Tracker Baumery', note: 'At the counter.', category: 'Quest NPC',
+      x: 10, y: 20}, {status: 'pending', user_id: 'member'});
+    e.suggestions.push(r);
+    await c.window.testCommunity.loadApproved();
+    await c.window.testCommunity.changeOwn(r);
+    e.suggestions.splice(e.suggestions.indexOf(r), 1);
+    c.window.testCommunity.invalidateApproved();
+    await c.window.testCommunity.loadApproved();
+    c.$('own-note').value = 'Behind the counter.';
+    await c.$('community-dialog').querySelectorAll('button').find(b => b.textContent === 'Save suggestion').onclick();
+    await settle();
+    assert(!e.calls.some(x => x.table === 'suggestions' && x.op === 'insert'), 'No change is sent to a withdrawn marker');
+    assert.equal(e.suggestions.length, 0);
+    assert(e.statuses.at(-1).includes('withdrawn'));
+  });
   for (const context of ['Not published: invalid fields', 'Approved on sending (admin)',
     'Correction made after publishing (#12)']) {
     await checks.test('B17', `${context} is context rather than an author note`, async () => {
