@@ -1,6 +1,28 @@
 {
  "entries": [
   {
+   "date": "2026-10-25",
+   "title": "More of the wanted, found",
+   "text": "Some sixty folk from the Wanted boards now stand on the maps, from the Bends and the Grand Library of Night Harbor to Black Shoals Fortress. Spots charted from travellers’ word wear a dashed ring: seen one right there? Confirm the spot.",
+   "maps": [
+    "night-harbor",
+    "shallow-shoals",
+    "sungreet-strand",
+    "shaded-dunes",
+    "great-cavern-sea",
+    "caves-of-irem",
+    "tel-ekir",
+    "keepers-bight",
+    "glass-flats"
+   ]
+  },
+  {
+   "date": "2026-10-25",
+   "title": "A clearer corner",
+   "text": "The map’s name now sits in a slim bar beside its floors, leaving the chart free underneath, and the alternate view folds away to a small tab.",
+   "maps": []
+  },
+  {
    "date": "2026-10-22",
    "title": "Rare drops first",
    "text": "NPC cards now list rare drops first, the magic, lore, no drop and unique items, each with its marks, before the common drops. A named foe with no rare drop on record says so.",
