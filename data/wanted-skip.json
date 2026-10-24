@@ -1,0 +1,16 @@
+{
+  "_about": "Wiki NPCs left off a map's Wanted list on purpose (scripts/make-bounties.mjs), by map and wiki id, with the reason.",
+  "night-harbor": {
+    "npc-jabir-ilhamar": "Same NPC as Jabir Il-hamar: a second wiki page with another spelling."
+  },
+  "sungreet-strand": {
+    "npc-almina": "Same NPC as Almina Weepingwind: a second wiki page with the short name."
+  },
+  "vale-of-zintar": {
+    "npc-rami-al-qawwaas": "Same NPC as Rami Al-Qawwaasr, already on the map: a second wiki page with another spelling."
+  },
+  "shallow-shoals": {
+    "npc-a-goods-merchant": "A merchant kind the wiki shares between zones; Zaedin's Landing's goods merchant is on our merchants marker there.",
+    "npc-a-used-weapons-dealer": "A merchant kind the wiki shares between zones; Zaedin's Landing's dealer is on our merchants marker there."
+  }
+}

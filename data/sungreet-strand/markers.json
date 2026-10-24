@@ -1032,5 +1032,49 @@
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/mercenary-foldja",
   "wikiId": "npc-mercenary-foldja"
+ },
+ {
+  "id": "wanted-mercenary-captain-hulg",
+  "name": "Mercenary Captain Hulg",
+  "category": "Quest NPC",
+  "note": "Atop a watchtower above the quarry.",
+  "x": 2699,
+  "y": 4174,
+  "approximate": true,
+  "wiki": "https://monstersandmemories.wiki/npcs/mercenary-captain-hulg",
+  "wikiId": "npc-mercenary-captain-hulg"
+ },
+ {
+  "id": "wanted-taskmaster-feeka",
+  "name": "Taskmaster Feeka",
+  "category": "Quest NPC",
+  "note": "In the quarry.",
+  "x": 2789,
+  "y": 4264,
+  "approximate": true,
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-feeka",
+  "wikiId": "npc-taskmaster-feeka"
+ },
+ {
+  "id": "wanted-taskmaster-gitch",
+  "name": "Taskmaster Gitch",
+  "category": "Quest NPC",
+  "note": "In the quarry.",
+  "x": 2699,
+  "y": 4354,
+  "approximate": true,
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-gitch",
+  "wikiId": "npc-taskmaster-gitch"
+ },
+ {
+  "id": "wanted-taskmaster-urka",
+  "name": "Taskmaster Urka",
+  "category": "Quest NPC",
+  "note": "In the quarry.",
+  "x": 2609,
+  "y": 4264,
+  "approximate": true,
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-urka",
+  "wikiId": "npc-taskmaster-urka"
  }
 ]

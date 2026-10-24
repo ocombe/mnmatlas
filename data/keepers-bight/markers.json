@@ -50,7 +50,7 @@
  },
  {
   "id": "wheelhouse-tavern",
-  "name": "Wheelhouse Tavern (Tracker Baumery at the bar)",
+  "name": "Wheelhouse Tavern",
   "category": "Inn",
   "x": 2916,
   "y": 2801,
@@ -847,5 +847,17 @@
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/ranger-rylin",
   "wikiId": "npc-ranger-rylin"
+ },
+ {
+  "id": "wanted-tracker-baumery",
+  "name": "Tracker Baumery",
+  "category": "Quest NPC",
+  "note": "At the bar of the Wheelhouse Tavern.",
+  "x": 2958,
+  "y": 2759,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/tracker-baumery",
+  "wikiId": "npc-tracker-baumery"
  }
 ]

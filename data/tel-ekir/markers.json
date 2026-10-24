@@ -467,5 +467,33 @@
       13
     ],
     "ambush": false
+  },
+  {
+    "id": "wanted-seeress-hamana",
+    "name": "Seeress Hamana",
+    "category": "Quest NPC",
+    "note": "In the forest next to the Guardian of the Life Font.",
+    "x": 2676,
+    "y": 1248,
+    "approximate": true,
+    "level": "floor-1",
+    "wiki": "https://monstersandmemories.wiki/npcs/seeress-hamana",
+    "wikiId": "npc-seeress-hamana"
+  },
+  {
+    "id": "wanted-guardian-of-the-life-font",
+    "name": "Guardian of the Life Font",
+    "category": "Named mob",
+    "note": "Raid encounter at the Life Font, the top of Tel Ekir.",
+    "x": 2676,
+    "y": 1338,
+    "approximate": true,
+    "level": "floor-1",
+    "levels": [
+      45,
+      45
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/guardian-of-the-life-font",
+    "wikiId": "npc-guardian-of-the-life-font"
   }
 ]

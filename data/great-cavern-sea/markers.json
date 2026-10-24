@@ -181,5 +181,20 @@
   "y": 5899,
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.miraheze.org/wiki/Survey_the_Myconid_Colony#tabber-Fungal_Materials"
+ },
+ {
+  "id": "wanted-overseer-vashruk",
+  "name": "Overseer Vashruk",
+  "category": "Named mob",
+  "note": "Orc camp, with the group nearest the waterfall.",
+  "x": 1069,
+  "y": 3262,
+  "approximate": true,
+  "levels": [
+   20,
+   20
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/overseer-vashruk",
+  "wikiId": "npc-overseer-vashruk"
  }
 ]

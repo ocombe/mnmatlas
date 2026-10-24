@@ -890,5 +890,27 @@
    12
   ],
   "ambush": false
+ },
+ {
+  "id": "wanted-yezkiel-the-gatekeeper",
+  "name": "Yezkiel the Gatekeeper",
+  "category": "Named mob",
+  "note": "On Oasis Island.",
+  "x": 3717,
+  "y": 3102,
+  "approximate": true,
+  "wiki": "https://monstersandmemories.wiki/npcs/yezkiel-the-gatekeeper",
+  "wikiId": "npc-yezkiel-the-gatekeeper"
+ },
+ {
+  "id": "wanted-blackscale",
+  "name": "Blackscale",
+  "category": "Named mob",
+  "note": "On Oasis Island.",
+  "x": 3717,
+  "y": 3242,
+  "approximate": true,
+  "wiki": "https://monstersandmemories.wiki/npcs/blackscale",
+  "wikiId": "npc-blackscale"
  }
 ]
