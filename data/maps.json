@@ -624,6 +624,7 @@
     },
     {
       "id": "wyrmsbane-tomb",
+      "routes": "data/wyrmsbane-tomb/routes.json",
       "title": "Tomb of the Last Wyrmsbane",
       "subtitle": "Five floors beneath Night Harbor",
       "cartoucheKicker": "The last resting place",

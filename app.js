@@ -222,7 +222,8 @@ const actionPaths={shape:'M5 8l6-4 8 4-1 9-8 3-6-5z',
  report:'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z M12 9v4 M12 17h.01',
  delete:'M3 6h18 M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6 M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M10 11v6 M14 11v6',
  share:'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13',
- reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5'};
+ reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5',
+ route:'M6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M18 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M8 19h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7'};
 function actionIcon(b){
  const kind=b.dataset.icon;if(!Object.hasOwn(actionPaths,kind||'')||b.querySelector('svg'))return;
  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
@@ -317,7 +318,10 @@ const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.
  if(m.community&&!m.id.startsWith('personal-'))n.append(text('p','Community contribution','community-note'));
  if(!singleMap)window.atlasCommunity?.popup(m,n);
  // A camp's loot matters least: it gets its own card at the end, just above the actions.
- {const holder=[...n.children].find(x=>String(x.className)==='popup-body')||n,camp=[...holder.children].find(x=>String(x.className).includes('camp-card')),late=camp?[...camp.children].filter(x=>String(x.className).split(' ').some(k=>k==='npc-loot'||k==='npc-credit')):[];if(late.length){const box=text('div','','npc-card camp-card camp-loot');box.append(...late);holder.append(box);}}return tidyActions(n);}
+ {const holder=[...n.children].find(x=>String(x.className)==='popup-body')||n,camp=[...holder.children].find(x=>String(x.className).includes('camp-card')),late=camp?[...camp.children].filter(x=>String(x.className).split(' ').some(k=>k==='npc-loot'||k==='npc-credit')):[];if(late.length){const box=text('div','','npc-card camp-card camp-loot');box.append(...late);holder.append(box);}}
+ // Extra card actions from other modules (Route to here).
+ for(const extra of window.atlasPopupActions||[])if(extra.shown(m))n.append(button(extra.label,()=>extra.run(m),'',extra.icon));
+ return tidyActions(n);}
 function labelEditPopup(row){
  const n=text('div','');n.append(text('div','Place name','tag'),text('h3',row.name));
  privateNoteBox(row,'label',n);
@@ -620,6 +624,7 @@ function setupSpotMenu(){
  const allowed=target=>!loading&&!alignmentMode&&!draftPin&&!window.atlasShapeUI?.active&&!window.atlasCommunity?.spotBusy?.()&&!document.querySelector('dialog[open],.dragging')&&!target.closest('.leaflet-marker-icon,.leaflet-interactive,.leaflet-popup,.leaflet-tooltip,.leaflet-control,.spot-menu,button,a,input,textarea,select');
  const open=(target,x,y)=>{if(!allowed(target))return false;const projected=owner.project(owner.containerPointToLatLng(owner.mouseEventToContainerPoint({clientX:x,clientY:y})),config.coordinateZoom),px=projected.x,py=projected.y;if(px<0||py<0||px>config.width||py>config.height)return false;spot={x:Math.round(px*100)/100,y:Math.round(py*100)/100};menu.hidden=false;const rect=$('map-frame').getBoundingClientRect();menu.style.left=Math.max(6,Math.min(x-rect.left,rect.width-menu.offsetWidth-6))+'px';menu.style.top=Math.max(6,Math.min(y-rect.top,rect.height-menu.offsetHeight-6))+'px';menu.querySelector('button').focus({preventScroll:true});return true;};
  menu.append(button('Copy link to this spot',()=>{const at=spot;close();copyLink(null,at);}),button('Report a problem here',()=>{const at=spot;close();if(window.atlasCommunity?.reportSpot)window.atlasCommunity.reportSpot(at);else status('Reports are unavailable at the moment.');}));
+ for(const extra of window.atlasSpotActions||[])if(!extra.shown||extra.shown())menu.append(button(extra.label,()=>{const at=spot;close();extra.run({...at,level:config.levelId});}));
  const context=e=>{if(open(e.target,e.clientX,e.clientY)){e.preventDefault();e.stopImmediatePropagation();}};
  const down=e=>{cancel();held=false;if(e.touches.length!==1){close();return;}if(!allowed(e.target))return;const t=e.touches[0];start={x:t.clientX,y:t.clientY,target:e.target};timer=setTimeout(()=>{const at=start;if(at)held=open(at.target,at.x,at.y);timer=null;},550);};
  const move=e=>{if(e.touches.length!==1||start&&Math.hypot(e.touches[0].clientX-start.x,e.touches[0].clientY-start.y)>10){close();held=false;}};
