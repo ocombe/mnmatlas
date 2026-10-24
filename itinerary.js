@@ -17,7 +17,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-7');
+  worker=new Worker('route-worker.js?v=route-8');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  // A map's ground, pins and place names, fetched once.
@@ -63,7 +63,8 @@
   const out=[],add=(p,to,place,how,cost=0)=>{if(to!==id&&routable(to))out.push({x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost});};
   for(const l of d.labels){
    if(Array.isArray(l.route))for(const stop of l.route)add(l,stop.map,stop.place,'boat',300);
-   else if(l.toMap)add(l,l.toMap,l.toPlace,'exit');
+   // A sign you can only arrive by (a one-way passage from the other side) is not a way out.
+   else if(l.toMap&&!l.entryOnly)add(l,l.toMap,l.toPlace,'exit');
   }
   for(const m of d.markers)if(m.toMap)add(m,m.toMap,m.toPlace,m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':'exit');
   return out;

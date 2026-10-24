@@ -29,5 +29,23 @@
    13256.407982150187
   ]
  },
- "joins": []
+ "joins": [
+  {
+   "name": "Passage to the Ancient Crypt (one way)",
+   "kind": "passage",
+   "oneWay": true,
+   "from": {
+    "x": 1262.7,
+    "y": 2869.5,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 1276.7,
+    "y": 2867.0,
+    "level": "floor-1",
+    "exact": true
+   }
+  }
+ ]
 }

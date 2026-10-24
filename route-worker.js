@@ -76,7 +76,7 @@ function snap(g,p,reach=p.reach||90){
    // A spot with no way out (a cliff rim, a sealed nook) is never picked; dry ground wins over water close by.
    if(g.steps?!g.steps[i]:!g.dirs[i]&&!(g.flags[i]&2))continue;
    // Ground reachable from an entrance wins over roofs and cut-off ledges right under the pin.
-   const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400);if(d<bd){bd=d;best=i;}
+   const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(p.exact?0:(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400));if(d<bd){bd=d;best=i;}
   }
  }
  return best;
