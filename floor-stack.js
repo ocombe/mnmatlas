@@ -30,7 +30,7 @@
   if (!frame || !map) return null;
   const marker = document.createComment('map position'); map.before(marker);
   const panel = el('div', 'floor-stack'); panel.id = 'floor-stack';
-  const head = el('div', 'floor-stack-head'), fold = el('button', 'floor-stack-toggle', 'Relief view'); fold.type = 'button';
+  const head = el('div', 'floor-stack-head'), fold = el('button', 'floor-stack-toggle', 'Alternate view'); fold.type = 'button';
   const size = control('floor-stack-size', 'Expand relief view');
   const stage = el('div', 'floor-stack-plan'), slot = el('div', 'floor-stack-map');
   const shrink = control('floor-plan-shrink', 'Back to 2D map', true);
@@ -99,7 +99,7 @@
    frame.style.setProperty('--plan-tool-height', phone ? '44px' : (button?.offsetHeight || 35) + 'px');
   }
   function apply() {
-   fold.textContent = big ? 'Map' : 'Relief view'; panel.classList.toggle('collapsed', folded); fold.setAttribute('aria-expanded', String(!folded)); fold.setAttribute('aria-label', (folded ? 'Show ' : 'Hide ') + fold.textContent.toLowerCase());
+   panel.classList.toggle('collapsed', folded); fold.setAttribute('aria-expanded', String(!folded)); fold.setAttribute('aria-label', (folded ? 'Show ' : 'Hide ') + fold.textContent.toLowerCase());
    fold.setAttribute('aria-controls', 'floor-corner-content'); (big ? slot : stage).id = 'floor-corner-content'; (big ? stage : slot).removeAttribute('id');
    frame.classList.toggle('floor-plan-full', big); frame.classList.toggle('floor-plan-phone', phone); panel.classList.toggle('floor-stack-big', big);
    if (big) { slot.append(map); frame.append(stage, fullTools); fullTools.append(actions); }
