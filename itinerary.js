@@ -22,7 +22,7 @@
  }
  const placeName=p=>p.kind==='spot'?'Spot on '+levelTitle(p.level):p.name;
  function places(){
-  const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:'label:'+l.id,name:'Entrance from '+(registry.maps.find(c=>c.id===l.toMap)?.title||l.name.replace(/^to /,'')),x:l.x,y:l.y,level:l.level}));
+  const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:'label:'+l.id,name:'Entrance from '+(registry.maps.find(c=>c.id===l.toMap)?.title||l.name.replace(/^to /,'')),x:l.x,y:l.y,level:l.level,reach:260}));
   const pins=allMarkers().filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level}));
   return {exits,pins};
  }

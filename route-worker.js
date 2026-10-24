@@ -6,6 +6,7 @@ const DIRS=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
 async function load(meta,url){
  const res=await fetch(url);if(!res.ok)throw Error('Route data could not load.');
  const bytes=new Uint8Array(await new Response(res.body.pipeThrough(new DecompressionStream('deflate'))).arrayBuffer());
+ if(meta.format==='raster'){loadRaster(meta,bytes);return;}
  const view=new DataView(bytes.buffer),count=view.getUint32(0,true),col=new Uint32Array(count);
  let o=4,c=0;
  for(let i=0;i<count;i++){let v=0,s=0,b;do{b=bytes[o++];v+=(b&127)*2**s;s+=7;}while(b&128);c+=v;col[i]=c;}
@@ -16,6 +17,18 @@ async function load(meta,url){
  const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
  for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
  ground={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,adj:new Int32Array(count*MAXN).fill(-2)};
+}
+// Big single-floor maps: one square per spot, with the 8 steps out of it already worked out.
+function loadRaster(meta,bytes){
+ const n=meta.nx*meta.nz,view=new DataView(bytes.buffer),steps0=bytes.subarray(0,n),swim0=bytes.subarray(n,2*n),q=new Int32Array(n);
+ let count=0;
+ for(let r=0;r<meta.nz;r++){let prev=false;for(let c=0;c<meta.nx;c++){const k=r*meta.nx+c,v=view.getInt16(2*n+k*2,true);if(v===-32768){q[k]=-32768;prev=false;continue;}q[k]=prev?q[k-1]+v:v;prev=true;count++;}}
+ const col=new Uint32Array(count),h=new Float32Array(count),swim=new Uint8Array(count),steps=new Uint8Array(count),first=new Int32Array(n).fill(-1),many=new Uint8Array(n);
+ for(let k=0,i=0;k<n;k++){if(q[k]===-32768)continue;col[i]=k;h[i]=q[k]*meta.hstep;swim[i]=swim0[k];steps[i]=steps0[k];first[k]=i;many[k]=1;i++;}
+ const ceil=new Float32Array(count).fill(3276.7),surf=ceil,lv=new Uint8Array(count);
+ const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
+ for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
+ ground={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,steps};
 }
 // Can the walker go from cell i to cell j? Up or down a step, through open water, or off a ledge into deep water.
 function ok(g,i,j){
@@ -35,6 +48,7 @@ function stepTo(g,i,dx,dz){
 // Each cell's neighbours, worked out the first time a search reaches it and kept for later routes.
 const MAXN=12;
 function neighbours(g,i){
+ if(g.steps){const out=[],s=g.steps[i],nx=g.meta.nx,c=g.col[i];for(let k=0;k<8;k++)if(s>>k&1){const j=g.first[c+DIRS[k][1]*nx+DIRS[k][0]];if(j>=0)out.push(j);}return out;}
  const base=i*MAXN;
  if(g.adj[base]!==-2){const out=[];for(let k=base;k<base+MAXN&&g.adj[k]>=0;k++)out.push(g.adj[k]);return out;}
  const out=[],orth=[];
@@ -47,7 +61,7 @@ function neighbours(g,i){
  return out;
 }
 // The open-ground spot nearest to a map point on one floor, within reach.
-function snap(g,p,reach=90){
+function snap(g,p,reach=p.reach||90){
  const level=g.meta.levels.indexOf(p.level??g.meta.levels[0]);let best=-1,bd=reach*reach;
  for(let i=0;i<g.count;i++){if(g.lv[i]!==level)continue;const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i;}}
  return best;

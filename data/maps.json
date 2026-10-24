@@ -1017,6 +1017,7 @@
     },
     {
       "id": "scarwood",
+      "routes": "data/scarwood/routes.json",
       "title": "Scarwood",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The scarred forest between Keeper’s Bight and the Fields of the Lost",
