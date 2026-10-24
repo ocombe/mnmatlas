@@ -11,14 +11,19 @@ async function load(meta,url,key){
  const view=new DataView(bytes.buffer),count=view.getUint32(0,true),col=new Uint32Array(count);
  let o=4,c=0;
  for(let i=0;i<count;i++){let v=0,s=0,b;do{b=bytes[o++];v+=(b&127)*2**s;s+=7;}while(b&128);c+=v;col[i]=c;}
- const tenths=()=>{const a=new Float32Array(count);for(let i=0;i<count;i++)a[i]=view.getInt16(o+i*2,true)/10;o+=count*2;return a;};
- const h=tenths(),ceil=tenths(),surf=tenths(),lv=bytes.slice(o,o+count),swim=bytes.slice(o+count,o+2*count);
+ // Each run of tenths is stored as changes from the value before.
+ const tenths=n=>{const a=new Float32Array(n);let v=0;for(let i=0;i<n;i++){v=(v+view.getInt16(o+i*2,true))<<16>>16;a[i]=v/10;}o+=n*2;return a;};
+ const h=tenths(count),lv=bytes.slice(o,o+count),flags=bytes.slice(o+count,o+2*count),dirs=bytes.slice(o+2*count,o+3*count);o+=3*count;
+ const pick=new Uint32Array(count);for(let i=0;i<count;i++)pick[i]=view.getUint32(o+i*4,true);o+=count*4;
+ // Ceiling and water surface are stored for swimming cells only; everywhere else they are open.
+ const swim=new Uint8Array(count);let wet=0;for(let i=0;i<count;i++)if(flags[i]&1){swim[i]=1;wet++;}
+ const ceil=new Float32Array(count).fill(3276.7),surf=new Float32Array(count).fill(3276.7),wc=tenths(wet),ws=tenths(wet);
+ for(let i=0,k=0;i<count;i++)if(swim[i]){ceil[i]=wc[k];surf[i]=ws[k];k++;}
  const first=new Int32Array(meta.nx*meta.nz).fill(-1),many=new Uint8Array(meta.nx*meta.nz);
  for(let i=count-1;i>=0;i--){first[col[i]]=i;many[col[i]]++;}
  const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
  for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
- // Neighbours are remembered on small maps only; on big ones the memory matters more than the time.
- grounds[key]={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,adj:count<=400000?new Int32Array(count*MAXN).fill(-2):null};
+ grounds[key]={meta,count,col,h,ceil,surf,lv,swim,flags,dirs,pick,first,many,x,z,px,py};
 }
 // Big single-floor maps: one square per spot, with the 8 steps out of it already worked out.
 function loadRaster(meta,bytes){
@@ -39,37 +44,34 @@ function ok(g,i,j){
  if(Math.abs(hj-hi_)<=g.meta.step)return true;
  return hi_>hj&&g.swim[j]&&hi_>=g.surf[j]&&hi_<=g.surf[j]+6;
 }
-function stepTo(g,i,dx,dz){
- const nx=g.meta.nx,ci=g.col[i],cx=ci%nx+dx,cz=(ci-ci%nx)/nx+dz;
- if(cx<0||cz<0||cx>=nx||cz>=g.meta.nz)return -1;
- const c=cz*nx+cx,f=g.first[c];if(f<0)return -1;
- if(g.many[c]===1)return ok(g,i,f)?f:-1;
- let best=-1,bd=Infinity;
- for(let j=f;j<f+g.many[c];j++){const d=Math.abs(g.h[j]-g.h[i]);if(d<bd&&ok(g,i,j)){bd=d;best=j;}}
- return best;
-}
-// Each cell's neighbours go into NB (count returned); small maps remember them for later routes.
-const MAXN=12,NB=new Int32Array(16),DX=[1,-1,0,0,1,1,-1,-1],DZ=[0,0,1,-1,1,-1,1,-1];
+// Each cell's neighbours go into NB (count returned), from the table worked out when the map was built.
+const NB=new Int32Array(16),DX=[1,-1,0,0,1,1,-1,-1],DZ=[0,0,1,-1,1,-1,1,-1];
 function neighbours(g,i){
- let n=0;
- if(g.steps){const s=g.steps[i],nx=g.meta.nx,c=g.col[i];for(let k=0;k<8;k++)if(s>>k&1){const j=g.first[c+DZ[k]*nx+DX[k]];if(j>=0)NB[n++]=j;}return n;}
- const base=i*MAXN;
- if(g.adj&&g.adj[base]!==-2){for(let k=base;k<base+MAXN&&g.adj[k]>=0;k++)NB[n++]=g.adj[k];return n;}
- const e=stepTo(g,i,1,0),w=stepTo(g,i,-1,0),s=stepTo(g,i,0,1),nn=stepTo(g,i,0,-1);
- if(e>=0)NB[n++]=e;if(w>=0)NB[n++]=w;if(s>=0)NB[n++]=s;if(nn>=0)NB[n++]=nn;
- // A diagonal step needs both sides open, so it never cuts a corner.
- for(let k=4;k<8;k++){if((DX[k]>0?e:w)<0||(DZ[k]>0?s:nn)<0)continue;const j=stepTo(g,i,DX[k],DZ[k]);if(j>=0)NB[n++]=j;}
+ let n=0;const nx=g.meta.nx,c=g.col[i];
+ if(g.steps){const s=g.steps[i];for(let k=0;k<8;k++)if(s>>k&1){const j=g.first[c+DZ[k]*nx+DX[k]];if(j>=0)NB[n++]=j;}return n;}
+ const d=g.dirs[i],p=g.pick[i];
+ for(let k=0;k<8;k++)if(d>>k&1)NB[n++]=g.first[c+DZ[k]*nx+DX[k]]+(p>>>4*k&15);
  // Straight up or down through open water.
- const c=g.col[i],f=g.first[c];if(g.many[c]>1)for(let j=f;j<f+g.many[c];j++)if(j!==i&&(g.swim[i]||g.swim[j])&&ok(g,i,j)&&n<16)NB[n++]=j;
- if(g.adj){g.adj.fill(-1,base,base+MAXN);for(let k=0;k<n&&k<MAXN;k++)g.adj[base+k]=NB[k];}
+ if(g.flags[i]&2){const f=g.first[c];for(let j=f;j<f+g.many[c];j++)if(j!==i&&(g.swim[i]||g.swim[j])&&ok(g,i,j)&&n<16)NB[n++]=j;}
  return n;
 }
-// The open-ground spot nearest to a map point on one floor, within reach. Spots are filed in 64 px squares first.
+// The open-ground spot nearest to a map point on one floor, within reach. Spots are sorted into 64 px squares per
+// floor once (a counting sort), then only the squares within reach are searched.
 function snap(g,p,reach=p.reach||90){
  const level=g.meta.levels.indexOf(p.level??g.meta.levels[0]),B=64;
- if(!g.buckets){const b=new Map();for(let i=0;i<g.count;i++){const k=g.lv[i]+':'+Math.floor(g.px[i]/B)+':'+Math.floor(g.py[i]/B);let a=b.get(k);if(!a)b.set(k,a=[]);a.push(i);}g.buckets=b;}
- let best=-1,bd=reach*reach;const r=Math.ceil(reach/B),bx=Math.floor(p.x/B),by=Math.floor(p.y/B);
- for(let y=by-r;y<=by+r;y++)for(let x=bx-r;x<=bx+r;x++)for(const i of g.buckets.get(level+':'+x+':'+y)||[]){const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i;}}
+ if(!g.sq){
+  let mx=0,my=0;for(let i=0;i<g.count;i++){if(g.px[i]>mx)mx=g.px[i];if(g.py[i]>my)my=g.py[i];}
+  const bw=Math.ceil(mx/B)+1,bh=Math.ceil(my/B)+1,nb=bw*bh*g.meta.levels.length,id=new Int32Array(g.count),start=new Int32Array(nb+1),order=new Int32Array(g.count);
+  for(let i=0;i<g.count;i++){const bx=Math.max(0,Math.floor(g.px[i]/B)),by=Math.max(0,Math.floor(g.py[i]/B));id[i]=(g.lv[i]*bh+by)*bw+bx;start[id[i]+1]++;}
+  for(let k=0;k<nb;k++)start[k+1]+=start[k];
+  const fill=start.slice(0,nb);for(let i=0;i<g.count;i++)order[fill[id[i]]++]=i;
+  g.sq={bw,bh,start,order};
+ }
+ const {bw,bh,start,order}=g.sq,r=Math.ceil(reach/B),bx=Math.floor(p.x/B),by=Math.floor(p.y/B);let best=-1,bd=reach*reach;
+ for(let y=Math.max(0,by-r);y<=Math.min(bh-1,by+r);y++)for(let x=Math.max(0,bx-r);x<=Math.min(bw-1,bx+r);x++){
+  const k=(level*bh+y)*bw+x;
+  for(let q=start[k];q<start[k+1];q++){const i=order[q],dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i;}}
+ }
  return best;
 }
 function dist(g,a,b){return Math.hypot(g.x[a]-g.x[b],g.h[a]-g.h[b],g.z[a]-g.z[b]);}
@@ -165,7 +167,8 @@ function describe(g,points,dangers){
 self.onmessage=async e=>{
  const {id,type}=e.data;
  try{
-  if(type==='load'){if(!grounds[e.data.map])await load(e.data.meta,e.data.url,e.data.map);self.postMessage({id,ok:true});return;}
+  // Loading also files every spot into its square, so the first route does not wait for it.
+  if(type==='load'){if(!grounds[e.data.map]){await load(e.data.meta,e.data.url,e.data.map);snap(grounds[e.data.map],{x:0,y:0},1);}self.postMessage({id,ok:true});return;}
   if(type==='route'){const t=performance.now(),result=route(e.data);result.ms=Math.round(performance.now()-t);self.postMessage({id,ok:true,result});}
  }catch(err){self.postMessage({id,ok:false,error:err.message||String(err)});}
 };
