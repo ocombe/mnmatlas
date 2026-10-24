@@ -1,12 +1,13 @@
 /* Finds walking routes on a map's ground file, away from the page. Messages: load, route. */
 'use strict';
-let ground=null;
+// Each map's ground, loaded once.
+const grounds={};
 const DIRS=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
 
-async function load(meta,url){
+async function load(meta,url,key){
  const res=await fetch(url);if(!res.ok)throw Error('Route data could not load.');
  const bytes=new Uint8Array(await new Response(res.body.pipeThrough(new DecompressionStream('deflate'))).arrayBuffer());
- if(meta.format==='raster'){loadRaster(meta,bytes);return;}
+ if(meta.format==='raster'){grounds[key]=loadRaster(meta,bytes);return;}
  const view=new DataView(bytes.buffer),count=view.getUint32(0,true),col=new Uint32Array(count);
  let o=4,c=0;
  for(let i=0;i<count;i++){let v=0,s=0,b;do{b=bytes[o++];v+=(b&127)*2**s;s+=7;}while(b&128);c+=v;col[i]=c;}
@@ -16,7 +17,7 @@ async function load(meta,url){
  for(let i=count-1;i>=0;i--){first[col[i]]=i;many[col[i]]++;}
  const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
  for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
- ground={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,adj:new Int32Array(count*MAXN).fill(-2)};
+ grounds[key]={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,adj:new Int32Array(count*MAXN).fill(-2)};
 }
 // Big single-floor maps: one square per spot, with the 8 steps out of it already worked out.
 function loadRaster(meta,bytes){
@@ -28,7 +29,7 @@ function loadRaster(meta,bytes){
  const ceil=new Float32Array(count).fill(3276.7),surf=ceil,lv=new Uint8Array(count);
  const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
  for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
- ground={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,steps};
+ return {meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,steps};
 }
 // Can the walker go from cell i to cell j? Up or down a step, through open water, or off a ledge into deep water.
 function ok(g,i,j){
@@ -84,7 +85,7 @@ function dangerField(g,dangers){
  return field;
 }
 function route(req){
- const g=ground;if(!g)throw Error('Route data is not ready.');
+ const g=grounds[req.map];if(!g)throw Error('Route data is not ready.');
  const from=snap(g,req.from),to=snap(g,req.to);
  if(from<0)return {error:'The start is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  if(to<0)return {error:'The finish is not on open ground or water. Pick a spot on a floor, corridor or path.'};
@@ -156,7 +157,7 @@ function describe(g,points,dangers){
 self.onmessage=async e=>{
  const {id,type}=e.data;
  try{
-  if(type==='load'){await load(e.data.meta,e.data.url);self.postMessage({id,ok:true});return;}
+  if(type==='load'){if(!grounds[e.data.map])await load(e.data.meta,e.data.url,e.data.map);self.postMessage({id,ok:true});return;}
   if(type==='route'){const t=performance.now(),result=route(e.data);result.ms=Math.round(performance.now()-t);self.postMessage({id,ok:true,result});}
  }catch(err){self.postMessage({id,ok:false,error:err.message||String(err)});}
 };

@@ -1467,6 +1467,7 @@
     },
     {
       "id": "shallow-shoals",
+      "routes": "data/shallow-shoals/routes.json",
       "title": "Shallow Shoals",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The islands off the coast between Keeper’s Bight and Fallen Pass",
