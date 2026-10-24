@@ -776,5 +776,63 @@
     "direction": "updown",
     "way": "Tunnel",
     "oneWay": true
+  },
+  {
+    "id": "community-1296",
+    "community": true,
+    "name": "Knuttoc Grobbins",
+    "note": "",
+    "x": 2198,
+    "y": 2729,
+    "level": "basement",
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/knuttoc-grobbins",
+    "wikiId": "npc-knuttoc-grobbins"
+  },
+  {
+    "id": "community-1297",
+    "community": true,
+    "name": "Flashfreeze Fraegra",
+    "note": "",
+    "x": 2292,
+    "y": 3345,
+    "level": "basement",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/flashfreeze-fraegra",
+    "wikiId": "npc-flashfreeze-fraegra",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1298",
+    "community": true,
+    "name": "Biomass",
+    "note": "",
+    "x": 2458,
+    "y": 3106,
+    "level": "basement",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/biomass",
+    "wikiId": "npc-biomass",
+    "levels": [
+      15,
+      15
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1301",
+    "community": true,
+    "name": "Gurm the Half-Woken",
+    "note": "",
+    "x": 2359,
+    "y": 2734,
+    "level": "basement",
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/gurm-the-half-woken",
+    "wikiId": "npc-gurm-the-half-woken"
   }
 ]

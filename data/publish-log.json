@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-19T22:16:21.819Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-19T23:41:47.845Z",
     "rows": []
   },
@@ -7968,6 +7964,581 @@
             "toLevel": "ground",
             "category": "Passage",
             "direction": "updown"
+          },
+          "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-24T05:54:22.623Z",
+    "rows": [
+      {
+        "id": 1296,
+        "payloadHash": "8089a10b314167ac999f9349c865e84c61ef65492ae699d5ef24a6ff5ae0aec8",
+        "updatedAt": "2026-10-24T05:38:11.687185+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2198,
+            "y": 2729,
+            "name": "Knuttoc Grobbins",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/knuttoc-grobbins",
+            "level": "basement",
+            "bounty": "npc-knuttoc-grobbins",
+            "wikiId": "npc-knuttoc-grobbins",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1297,
+        "payloadHash": "491c9d5b6feb618d152111a0a44dc0bf0725d10acab281947482d5c401724d85",
+        "updatedAt": "2026-10-24T05:38:19.950467+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2292,
+            "y": 3345,
+            "name": "Flashfreeze Fraegra",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/flashfreeze-fraegra",
+            "level": "basement",
+            "ambush": false,
+            "bounty": "npc-flashfreeze-fraegra",
+            "levels": [
+              15,
+              15
+            ],
+            "wikiId": "npc-flashfreeze-fraegra",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1298,
+        "payloadHash": "faf7d8039328edbc0dbb2c0e6b80efc2fc51c2de58bbfc34de605c2672cff8a3",
+        "updatedAt": "2026-10-24T05:38:38.459696+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2458,
+            "y": 3106,
+            "name": "Biomass",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/biomass",
+            "level": "basement",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "wikiId": "npc-biomass",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1301,
+        "payloadHash": "80f66f9f3699eda3d74c8c718ce29fda3381ccab7348a15bdbdcc6ca7ebb9f4b",
+        "updatedAt": "2026-10-24T05:38:42.779216+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2359,
+            "y": 2734,
+            "name": "Gurm the Half-Woken",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/gurm-the-half-woken",
+            "level": "basement",
+            "bounty": "npc-gurm-the-half-woken",
+            "wikiId": "npc-gurm-the-half-woken",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1322,
+        "payloadHash": "66fee724f2b3155c78eac4f6071c0838dc41eaafc9420dd529392127b86e8de3",
+        "updatedAt": "2026-10-24T05:37:52.489418+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4683,
+            "y": 1327,
+            "mobs": [
+              {
+                "name": "a venerated spider",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-venerated-spider",
+                "wikiId": "npc-a-venerated-spider"
+              },
+              {
+                "name": "a predatory spider"
+              },
+              {
+                "name": "a devoted priestess"
+              },
+              {
+                "name": "a dark widow"
+              },
+              {
+                "name": "a fanatic watcher",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-fanatic-watcher",
+                "wikiId": "npc-a-fanatic-watcher"
+              }
+            ],
+            "name": "Cult of Shorog",
+            "note": "Faction area of mobs for \"Cult of Shorog\". Contains high level spider camps.",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  3986,
+                  946
+                ],
+                [
+                  3984,
+                  902
+                ],
+                [
+                  4020,
+                  846
+                ],
+                [
+                  4066,
+                  787
+                ],
+                [
+                  4097,
+                  750
+                ],
+                [
+                  4121,
+                  726
+                ],
+                [
+                  4166,
+                  724
+                ],
+                [
+                  4184,
+                  733
+                ],
+                [
+                  4192,
+                  748
+                ],
+                [
+                  4208,
+                  764
+                ],
+                [
+                  4230,
+                  763
+                ],
+                [
+                  4248,
+                  756
+                ],
+                [
+                  4261,
+                  767
+                ],
+                [
+                  4264,
+                  783
+                ],
+                [
+                  4278,
+                  807
+                ],
+                [
+                  4303,
+                  840
+                ],
+                [
+                  4493,
+                  901
+                ],
+                [
+                  4520,
+                  860
+                ],
+                [
+                  4543,
+                  892
+                ],
+                [
+                  4576,
+                  917
+                ],
+                [
+                  4650,
+                  949
+                ],
+                [
+                  4666,
+                  986
+                ],
+                [
+                  4681,
+                  1013
+                ],
+                [
+                  4669,
+                  1042
+                ],
+                [
+                  4663,
+                  1072
+                ],
+                [
+                  4680,
+                  1132
+                ],
+                [
+                  4682,
+                  1168
+                ],
+                [
+                  4677,
+                  1239
+                ],
+                [
+                  4681,
+                  1337
+                ],
+                [
+                  5152,
+                  1003
+                ],
+                [
+                  4738,
+                  1407
+                ],
+                [
+                  4795,
+                  1436
+                ],
+                [
+                  4864,
+                  1461
+                ],
+                [
+                  4961,
+                  1505
+                ],
+                [
+                  5012,
+                  1571
+                ],
+                [
+                  5049,
+                  1641
+                ],
+                [
+                  5100,
+                  1703
+                ],
+                [
+                  5145,
+                  1770
+                ],
+                [
+                  5290,
+                  1864
+                ],
+                [
+                  5356,
+                  1861
+                ],
+                [
+                  5402,
+                  1858
+                ],
+                [
+                  5424,
+                  1869
+                ],
+                [
+                  5397,
+                  1878
+                ],
+                [
+                  5373,
+                  1891
+                ],
+                [
+                  5330,
+                  1907
+                ],
+                [
+                  5287,
+                  1929
+                ],
+                [
+                  5251,
+                  1960
+                ],
+                [
+                  5236,
+                  1983
+                ],
+                [
+                  5230,
+                  2014
+                ],
+                [
+                  5220,
+                  2069
+                ],
+                [
+                  5187,
+                  2100
+                ],
+                [
+                  5135,
+                  2105
+                ],
+                [
+                  5129,
+                  2091
+                ],
+                [
+                  5154,
+                  2036
+                ],
+                [
+                  5159,
+                  1959
+                ],
+                [
+                  5142,
+                  1891
+                ],
+                [
+                  5109,
+                  1824
+                ],
+                [
+                  4965,
+                  1585
+                ],
+                [
+                  4900,
+                  1545
+                ],
+                [
+                  4821,
+                  1512
+                ],
+                [
+                  4747,
+                  1527
+                ],
+                [
+                  4680,
+                  1486
+                ],
+                [
+                  4614,
+                  1510
+                ],
+                [
+                  4604,
+                  1520
+                ],
+                [
+                  4514,
+                  1579
+                ],
+                [
+                  4468,
+                  1593
+                ],
+                [
+                  4430,
+                  1592
+                ],
+                [
+                  4416,
+                  1561
+                ],
+                [
+                  4488,
+                  1473
+                ],
+                [
+                  4478,
+                  1418
+                ],
+                [
+                  4498,
+                  1395
+                ],
+                [
+                  4519,
+                  1361
+                ],
+                [
+                  4555,
+                  1345
+                ],
+                [
+                  4582,
+                  1323
+                ],
+                [
+                  4610,
+                  1281
+                ],
+                [
+                  4609,
+                  1217
+                ],
+                [
+                  4591,
+                  1171
+                ],
+                [
+                  4616,
+                  1158
+                ],
+                [
+                  4593,
+                  1120
+                ],
+                [
+                  4572,
+                  1051
+                ],
+                [
+                  4522,
+                  994
+                ],
+                [
+                  4469,
+                  947
+                ],
+                [
+                  4437,
+                  935
+                ],
+                [
+                  4408,
+                  920
+                ],
+                [
+                  4372,
+                  919
+                ],
+                [
+                  4346,
+                  906
+                ],
+                [
+                  4311,
+                  901
+                ],
+                [
+                  4284,
+                  896
+                ],
+                [
+                  4263,
+                  898
+                ],
+                [
+                  4236,
+                  891
+                ],
+                [
+                  4207,
+                  892
+                ],
+                [
+                  4157,
+                  902
+                ],
+                [
+                  4140,
+                  896
+                ],
+                [
+                  4120,
+                  897
+                ],
+                [
+                  4091,
+                  905
+                ],
+                [
+                  4062,
+                  923
+                ],
+                [
+                  4045,
+                  927
+                ],
+                [
+                  4032,
+                  934
+                ],
+                [
+                  4009,
+                  936
+                ]
+              ]
+            },
+            "levels": [
+              26,
+              32
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1381,
+        "payloadHash": "0e0075f32121d83f724958c047b145980c3766aa3ffbcf17a0e32e3768b5beed",
+        "updatedAt": "2026-10-24T05:38:03.830747+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3540,
+            "y": 6045,
+            "name": "An orc supplier",
+            "note": "Named",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-orc-supplier",
+            "level": "floor-1",
+            "bounty": "npc-an-orc-supplier",
+            "wikiId": "npc-an-orc-supplier",
+            "category": "Notable NPC"
           },
           "credit": true
         }

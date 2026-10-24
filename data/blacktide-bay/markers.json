@@ -505,5 +505,17 @@
     "wiki": "https://monstersandmemories.wiki/npcs/an-orcish-tactician",
     "wikiId": "npc-an-orcish-tactician",
     "ambush": false
+  },
+  {
+    "id": "community-1381",
+    "community": true,
+    "name": "An orc supplier",
+    "note": "Named",
+    "x": 3540,
+    "y": 6045,
+    "level": "floor-1",
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-orc-supplier",
+    "wikiId": "npc-an-orc-supplier"
   }
 ]
