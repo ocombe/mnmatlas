@@ -189,6 +189,7 @@
     },
     {
       "id": "ail-vorith",
+      "routes": "data/ail-vorith/routes.json",
       "title": "Ail'Vorith",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The cavern city",

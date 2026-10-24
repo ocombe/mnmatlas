@@ -17,7 +17,8 @@ async function load(meta,url,key){
  for(let i=count-1;i>=0;i--){first[col[i]]=i;many[col[i]]++;}
  const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
  for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
- grounds[key]={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,adj:new Int32Array(count*MAXN).fill(-2)};
+ // Neighbours are remembered on small maps only; on big ones the memory matters more than the time.
+ grounds[key]={meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,adj:count<=400000?new Int32Array(count*MAXN).fill(-2):null};
 }
 // Big single-floor maps: one square per spot, with the 8 steps out of it already worked out.
 function loadRaster(meta,bytes){
@@ -39,32 +40,36 @@ function ok(g,i,j){
  return hi_>hj&&g.swim[j]&&hi_>=g.surf[j]&&hi_<=g.surf[j]+6;
 }
 function stepTo(g,i,dx,dz){
- const nx=g.meta.nx,cx=g.col[i]%nx+dx,cz=Math.floor(g.col[i]/nx)+dz;
+ const nx=g.meta.nx,ci=g.col[i],cx=ci%nx+dx,cz=(ci-ci%nx)/nx+dz;
  if(cx<0||cz<0||cx>=nx||cz>=g.meta.nz)return -1;
  const c=cz*nx+cx,f=g.first[c];if(f<0)return -1;
+ if(g.many[c]===1)return ok(g,i,f)?f:-1;
  let best=-1,bd=Infinity;
  for(let j=f;j<f+g.many[c];j++){const d=Math.abs(g.h[j]-g.h[i]);if(d<bd&&ok(g,i,j)){bd=d;best=j;}}
  return best;
 }
-// Each cell's neighbours, worked out the first time a search reaches it and kept for later routes.
-const MAXN=12;
+// Each cell's neighbours go into NB (count returned); small maps remember them for later routes.
+const MAXN=12,NB=new Int32Array(16),DX=[1,-1,0,0,1,1,-1,-1],DZ=[0,0,1,-1,1,-1,1,-1];
 function neighbours(g,i){
- if(g.steps){const out=[],s=g.steps[i],nx=g.meta.nx,c=g.col[i];for(let k=0;k<8;k++)if(s>>k&1){const j=g.first[c+DIRS[k][1]*nx+DIRS[k][0]];if(j>=0)out.push(j);}return out;}
+ let n=0;
+ if(g.steps){const s=g.steps[i],nx=g.meta.nx,c=g.col[i];for(let k=0;k<8;k++)if(s>>k&1){const j=g.first[c+DZ[k]*nx+DX[k]];if(j>=0)NB[n++]=j;}return n;}
  const base=i*MAXN;
- if(g.adj[base]!==-2){const out=[];for(let k=base;k<base+MAXN&&g.adj[k]>=0;k++)out.push(g.adj[k]);return out;}
- const out=[],orth=[];
- for(let k=0;k<4;k++){const [dx,dz]=DIRS[k];orth.push(stepTo(g,i,dx,dz));if(orth[k]>=0)out.push(orth[k]);}
+ if(g.adj&&g.adj[base]!==-2){for(let k=base;k<base+MAXN&&g.adj[k]>=0;k++)NB[n++]=g.adj[k];return n;}
+ const e=stepTo(g,i,1,0),w=stepTo(g,i,-1,0),s=stepTo(g,i,0,1),nn=stepTo(g,i,0,-1);
+ if(e>=0)NB[n++]=e;if(w>=0)NB[n++]=w;if(s>=0)NB[n++]=s;if(nn>=0)NB[n++]=nn;
  // A diagonal step needs both sides open, so it never cuts a corner.
- for(let k=4;k<8;k++){const [dx,dz]=DIRS[k];if(orth[dx>0?0:1]<0||orth[dz>0?2:3]<0)continue;const j=stepTo(g,i,dx,dz);if(j>=0)out.push(j);}
+ for(let k=4;k<8;k++){if((DX[k]>0?e:w)<0||(DZ[k]>0?s:nn)<0)continue;const j=stepTo(g,i,DX[k],DZ[k]);if(j>=0)NB[n++]=j;}
  // Straight up or down through open water.
- const c=g.col[i],f=g.first[c];for(let j=f;j<f+g.many[c];j++)if(j!==i&&(g.swim[i]||g.swim[j])&&ok(g,i,j))out.push(j);
- g.adj.fill(-1,base,base+MAXN);for(let k=0;k<out.length&&k<MAXN;k++)g.adj[base+k]=out[k];
- return out;
+ const c=g.col[i],f=g.first[c];if(g.many[c]>1)for(let j=f;j<f+g.many[c];j++)if(j!==i&&(g.swim[i]||g.swim[j])&&ok(g,i,j)&&n<16)NB[n++]=j;
+ if(g.adj){g.adj.fill(-1,base,base+MAXN);for(let k=0;k<n&&k<MAXN;k++)g.adj[base+k]=NB[k];}
+ return n;
 }
-// The open-ground spot nearest to a map point on one floor, within reach.
+// The open-ground spot nearest to a map point on one floor, within reach. Spots are filed in 64 px squares first.
 function snap(g,p,reach=p.reach||90){
- const level=g.meta.levels.indexOf(p.level??g.meta.levels[0]);let best=-1,bd=reach*reach;
- for(let i=0;i<g.count;i++){if(g.lv[i]!==level)continue;const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i;}}
+ const level=g.meta.levels.indexOf(p.level??g.meta.levels[0]),B=64;
+ if(!g.buckets){const b=new Map();for(let i=0;i<g.count;i++){const k=g.lv[i]+':'+Math.floor(g.px[i]/B)+':'+Math.floor(g.py[i]/B);let a=b.get(k);if(!a)b.set(k,a=[]);a.push(i);}g.buckets=b;}
+ let best=-1,bd=reach*reach;const r=Math.ceil(reach/B),bx=Math.floor(p.x/B),by=Math.floor(p.y/B);
+ for(let y=by-r;y<=by+r;y++)for(let x=bx-r;x<=bx+r;x++)for(const i of g.buckets.get(level+':'+x+':'+y)||[]){const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i;}}
  return best;
 }
 function dist(g,a,b){return Math.hypot(g.x[a]-g.x[b],g.h[a]-g.h[b],g.z[a]-g.z[b]);}
@@ -99,12 +104,15 @@ function route(req){
  let heapI=new Int32Array(1<<16),heapF=new Float32Array(1<<16),size=0;
  const push=(i,f)=>{if(size>=heapI.length){const a=new Int32Array(heapI.length*2),b=new Float32Array(heapI.length*2);a.set(heapI);b.set(heapF);heapI=a;heapF=b;}let k=size++;while(k>0){const p=(k-1)>>1;if(heapF[p]<=f)break;heapI[k]=heapI[p];heapF[k]=heapF[p];k=p;}heapI[k]=i;heapF[k]=f;};
  const pop=()=>{const top=heapI[0],li=heapI[--size],lf=heapF[size];let k=0;for(;;){let c=2*k+1;if(c>=size)break;if(c+1<size&&heapF[c+1]<heapF[c])c++;if(heapF[c]>=lf)break;heapI[k]=heapI[c];heapF[k]=heapF[c];k=c;}heapI[k]=li;heapF[k]=lf;return top;};
- cost[from]=0;push(from,dist(g,from,to));
+ // The search leans towards the finish (1.3x, 1.8x on big maps) so it answers quickly; routes stay close to
+ // the best.
+ const lean=g.count>400000?1.8:1.3;cost[from]=0;push(from,lean*dist(g,from,to));
  while(size){
   const i=pop();if(closed[i])continue;closed[i]=1;if(i===to)break;
   // Neighbours are worked out only for the cells the search reaches.
-  for(const j of neighbours(g,i)){if(closed[j])continue;const c=cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:1)*(1+(field[i]+field[j])/2);if(c<cost[j]){cost[j]=c;parent[j]=i;viaOf[j]=-1;push(j,c+dist(g,j,to));}}
-  for(const e of extra.get(i)||[]){const j=e.to;if(closed[j])continue;const c=cost[i]+(e.link.cost??4);if(c<cost[j]){cost[j]=c;parent[j]=i;viaOf[j]=via.push(e.link)-1;push(j,c+dist(g,j,to));}}
+  const m=neighbours(g,i);
+  for(let q=0;q<m;q++){const j=NB[q];if(closed[j])continue;const c=cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:1)*(1+(field[i]+field[j])/2);if(c<cost[j]){cost[j]=c;parent[j]=i;viaOf[j]=-1;push(j,c+lean*dist(g,j,to));}}
+  for(const e of extra.get(i)||[]){const j=e.to;if(closed[j])continue;const c=cost[i]+(e.link.cost??4);if(c<cost[j]){cost[j]=c;parent[j]=i;viaOf[j]=via.push(e.link)-1;push(j,c+lean*dist(g,j,to));}}
  }
  if(!closed[to])return {error:'No known way between these two spots.'};
  const nodes=[],links=[];for(let i=to;i>=0;i=parent[i]){nodes.push(i);links.push(viaOf[i]>=0?via[viaOf[i]]:null);}
