@@ -176,6 +176,8 @@
   if(!panel)build();if(!panel)return;
   $('journal').classList.add('directions-mode');panel.hidden=false;
   if(!compact())setPanel(true);
+  // Nothing about routes is fetched until here: the ground file starts loading as Directions opens.
+  if(routable(config.id))ensureGround(config.id).catch(()=>{});
  }
  function closeView(){$('journal')?.classList.remove('directions-mode');if(panel)panel.hidden=true;}
  function build(){
@@ -371,6 +373,7 @@
   if(!panel)build();showPanel();draw();
   if(shared){const [a,b,mode]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
    if(from&&to){state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}}
-  if(routable(config.id))ensureGround(config.id).catch(()=>{});
+  // Route data loads only once someone opens Directions on this map (see openView).
+  if(routable(config.id)&&panel&&!panel.hidden)ensureGround(config.id).catch(()=>{});
  });
 })();
