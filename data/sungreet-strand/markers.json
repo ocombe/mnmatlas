@@ -1032,5 +1032,14 @@
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/mercenary-foldja",
   "wikiId": "npc-mercenary-foldja"
+ },
+ {
+  "id": "druid-portal",
+  "name": "Druid Portal",
+  "category": "Teleporter",
+  "note": "Druids and their group mates arrive here by teleport spell, inside the ring of stones.",
+  "x": 3848,
+  "y": 3020,
+  "travel": "Teleporter"
  }
 ]

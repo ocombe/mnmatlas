@@ -198,5 +198,14 @@
    26
   ],
   "mobs": []
+ },
+ {
+  "id": "wizard-portal",
+  "name": "Wizard Portal",
+  "category": "Teleporter",
+  "note": "Wizards and their group mates arrive here by teleport spell.",
+  "x": 2719,
+  "y": 2328,
+  "travel": "Teleporter"
  }
 ]

@@ -181,5 +181,14 @@
   "y": 5899,
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.miraheze.org/wiki/Survey_the_Myconid_Colony#tabber-Fungal_Materials"
+ },
+ {
+  "id": "wizard-portal",
+  "name": "Wizard Portal",
+  "category": "Teleporter",
+  "note": "Wizards and their group mates arrive here by teleport spell, below the Wizard Spire.",
+  "x": 5427,
+  "y": 4539,
+  "travel": "Teleporter"
  }
 ]
