@@ -157,6 +157,7 @@ function describe(g,points,dangers){
  const levels=g.meta.levels,out=[],changes=[];let length=0,swum=0;
  points.forEach((p,k)=>{
   const i=p.node,pt={x:Math.round(g.px[i]*10)/10,y:Math.round(g.py[i]*10)/10,level:levels[g.lv[i]]};
+  if(k){const prev=points[k-1].node;pt.d=Math.round((length+(p.link?0:dist(g,prev,i)))*10)/10;}else pt.d=0;
   if(under(g,i))pt.under=true;if(g.swim[i])pt.swim=true;out.push(pt);
   if(k){const prev=points[k-1].node,d=p.link?0:dist(g,prev,i);length+=d;if(g.swim[prev]&&g.swim[i])swum+=d;
    if(g.lv[prev]!==g.lv[i]||p.link)changes.push({index:k,from:levels[g.lv[prev]],to:levels[g.lv[i]],link:p.link?{name:p.link.name,kind:p.link.kind,id:p.link.id}:null});}
