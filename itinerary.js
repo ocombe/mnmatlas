@@ -17,7 +17,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-6');
+  worker=new Worker('route-worker.js?v=route-7');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  // A map's ground, pins and place names, fetched once.
@@ -35,7 +35,7 @@
  const placeName=p=>p.kind==='spot'?'Spot on '+(entry(p.map)?.levels?levelTitle(p.level,p.map):mapTitle(p.map)):p.name;
  const exitName=(l,mapId)=>'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,''));
  function places(){
-  const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:'label:'+l.id,name:exitName(l),x:l.x,y:l.y,level:l.level,reach:260}));
+  const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:l.id,name:exitName(l),x:l.x,y:l.y,level:l.level,reach:260}));
   const pins=allMarkers().filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level}));
   return {exits,pins};
  }
@@ -53,27 +53,38 @@
  // Paired level pins (stairs, ladders, drops, pit traps) also join floors; each pin is the way from its own side.
  function links(markers){
   const byId=new Map(markers.map(m=>[m.id,m]));
-  return markers.filter(m=>m.toMarker&&m.toLevel&&byId.has(m.toMarker)).map(m=>{const b=byId.get(m.toMarker);return {id:m.id,name:markerTitle(m),from:{x:m.x,y:m.y,level:m.level},to:{x:b.x,y:b.y,level:b.level},oneWay:true,kind:m.category==='Trap'?'trap':/\bdrop\b/i.test(m.name)?'drop':'stairs',cost:m.category==='Trap'?2:4};});
+  const kindOf=m=>m.category==='Trap'?'trap':m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':/(^| )drop( |$)/i.test(m.name)?'drop':'stairs';
+  const COST={trap:2,teleport:2,lift:6,drop:2,stairs:4};
+  return markers.filter(m=>m.toMarker&&!m.toMap&&byId.has(m.toMarker)).map(m=>{const b=byId.get(m.toMarker),kind=kindOf(m);return {id:m.id,name:markerTitle(m),from:{x:m.x,y:m.y,level:m.level},to:{x:b.x,y:b.y,level:b.level},oneWay:true,kind,cost:COST[kind]};});
+ }
+ // Ways off a map: exit signs, boat docks (every stop of the boat's route), and lifts or teleporters that lead to
+ // another map. Boats cost a wait; everything else is a step.
+ function ways(d,id){
+  const out=[],add=(p,to,place,how,cost=0)=>{if(to!==id&&routable(to))out.push({x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost});};
+  for(const l of d.labels){
+   if(Array.isArray(l.route))for(const stop of l.route)add(l,stop.map,stop.place,'boat',300);
+   else if(l.toMap)add(l,l.toMap,l.toPlace,'exit');
+  }
+  for(const m of d.markers)if(m.toMap)add(m,m.toMap,m.toPlace,m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':'exit');
+  return out;
  }
  // The maps between two maps, through exits that lead both ways: fewest maps first.
  async function mapPath(a,b){
   const prev=new Map([[a,null]]),queue=[a];
   while(queue.length){
    const id=queue.shift();if(id===b)break;
-   const d=await mapData(id);
-   for(const l of d.labels){
-    if(!l.toMap||!routable(l.toMap)||prev.has(l.toMap))continue;
-    prev.set(l.toMap,{from:id,exit:l});queue.push(l.toMap);
-   }
+   for(const w of ways(await mapData(id),id)){if(prev.has(w.to))continue;prev.set(w.to,{from:id,exit:w});queue.push(w.to);}
   }
   if(!prev.has(b))return null;
   const hops=[];for(let id=b;prev.get(id);id=prev.get(id).from)hops.unshift({...prev.get(id),to:id});
   return hops;
  }
- // Where an exit lands on the next map: the sign it names, or the sign there that leads back.
+ // Where a way lands on the next map: the sign or pin it names, or the sign there that leads back.
  async function arrival(hop){
-  const d=await mapData(hop.to),l=d.labels.find(x=>x.id===hop.exit.toPlace)||d.labels.find(x=>x.toMap===hop.from);
-  return l?{map:hop.to,name:exitName(l),x:l.x,y:l.y,level:l.level,reach:260,kind:'exit',id:'label:'+l.id}:null;
+  const d=await mapData(hop.to),place=hop.exit.place;
+  const l=d.labels.find(x=>x.id===place),m=!l&&d.markers.find(x=>x.id===place),back=!l&&!m&&d.labels.find(x=>x.toMap===hop.from);
+  const p=l||m||back;if(!p)return null;
+  return {map:hop.to,name:l||back?exitName(p):markerTitle(p),x:p.x,y:p.y,level:p.level,reach:260,kind:'exit',id:p.id};
  }
  async function leg(mapId,from,to){
   const d=await ensureGround(mapId),list=dangers(d.markers);
@@ -94,7 +105,7 @@
     for(const hop of hops){
      const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:260,kind:'exit'},land=await arrival(hop);
      if(!land)throw Error('The way into '+mapTitle(hop.to)+' is not marked yet.');
-     const l=await leg(hop.from,start,out);l.next={map:hop.to,place:land.id.slice(6),title:mapTitle(hop.to)};legs.push(l);start=land;
+     const l=await leg(hop.from,start,out);l.next={map:hop.to,place:land.id,title:mapTitle(hop.to),how:hop.exit.how,wait:hop.exit.cost};legs.push(l);start=land;
     }
     legs.push(await leg(state.to.map,start,state.to));
    }
@@ -155,12 +166,12 @@
   box.append(text('p','About '+total+' m'+(legs.length>1?' across '+legs.length+' maps':floors>1?' over '+floors+' floors':'')+(state.mode==='safer'?' · safer way':' · shortest way'),'route-total'));
   if(swim)box.append(text('p','Swimming about '+swim+' m of it (blue dashes).','route-note'));
   const steps=text('ol','','route-steps');
-  const step=(label,action)=>{const li=text('li','');li.append(button(label,action,'route-step'));steps.append(li);};
+  const step=(label,action,more='')=>{const li=text('li','');li.append(button(label+more,action,'route-step'));steps.append(li);};
   legs.forEach((l,i)=>{
    const r=l.result,mapId=l.map,at=p=>()=>show(p,mapId);
    if(i===0)step('Start: '+placeName(state.from)+(legs.length>1?' ('+mapTitle(mapId)+')':''),at(r.points[0]));
    for(const c of r.changes){const p=r.points[c.index-1],up=floorOrder(c.to,mapId)<floorOrder(c.from,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);step(named?(/ to /i.test(named)?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId),at(p));}
-   if(l.next)step('Take the exit to '+l.next.title+' (about '+r.length+' m on '+mapTitle(mapId)+')',()=>openNext(l));
+   if(l.next)step({boat:'Take the boat to ',lift:'Take the lift to ',teleport:'Take the teleporter to '}[l.next.how]||'Take the exit to ',()=>openNext(l),l.next.title+(l.next.how==='boat'?' (check the times on the dock card)':'')+' · about '+r.length+' m on '+mapTitle(mapId));
    else step('Arrive: '+placeName(state.to),at(r.points[r.points.length-1]));
   });
   box.append(steps);
@@ -168,7 +179,10 @@
   const passed=legs.flatMap(l=>(l.result.passed||[]).map(p=>l.dangerList[p.index]?.name)).filter(Boolean);
   if(passed.length){const near=text('p','','route-danger');near.append(text('strong',state.mode==='safer'?'Still passes close to: ':'Passes close to: '),document.createTextNode(passed.join(', ')));box.append(near);}
   else if(state.mode==='safer')box.append(text('p','Keeps clear of the known named mobs, camps and traps.','route-note'));
-  box.append(button('Clear route',()=>{state.from=state.to=state.legs=null;state.error='';draw();showPanel();},'route-clear'));
+  const actions=text('div','','route-actions');
+  actions.append(button('Copy route link',async()=>{const url=routeLink();if(await copyText(url))status('Route link copied.');else{const d=$('link-dialog'),h=d.querySelector('h2'),was=h.textContent;h.textContent='Share this route';d.addEventListener('close',()=>{h.textContent=was;},{once:true});$('link-value').value=url;d.showModal();$('link-value').select();}},'route-clear'),
+   button('Clear route',()=>{state.from=state.to=state.legs=null;state.error='';draw();showPanel();},'route-clear'));
+  box.append(actions);
  }
  // A floor change on open ground is named after the stairs pin beside it, when there is one.
  function nearestTravelName(at,c,markers){
@@ -245,8 +259,22 @@
   {label:'Route to here',shown:()=>routable(config.id),run:at=>set('to',{kind:'spot',id:'spot',x:at.x,y:at.y,level:at.level})}];
  window.atlasPopupActions=[...(window.atlasPopupActions||[]),
   {label:'Route to here',icon:'route',shown:m=>routable(config.id)&&!singleMap&&Number.isFinite(m.x),run:m=>{map.closePopup();set('to',{id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level});}}];
- window.addEventListener('atlas:loaded',()=>{
+ // Share links: ?route=<start>~<finish>~<mode>, each end "map:x,y[:floor]" or "map:pin:<id>".
+ const endCode=p=>p.map+':'+(p.kind==='spot'?Math.round(p.x)+','+Math.round(p.y)+(p.level?':'+p.level:''):'pin:'+p.id);
+ function routeLink(){const url=mapLink(state.from?.map||config.id);url.searchParams.set('route',endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode);return url.href;}
+ async function endFrom(code){
+  const [mapId,a,b,c]=code.split(':');if(!routable(mapId))return null;
+  if(a==='pin'){const d=await mapData(mapId),l=d.labels.find(x=>x.id===b),m=d.markers.find(x=>x.id===b),p=l||m;
+   return p?{map:mapId,id:b,name:l?(l.toMap?exitName(l):l.name):markerTitle(m),x:p.x,y:p.y,level:p.level,...(l?.toMap?{reach:260}:{})}:null;}
+  const [x,y]=String(a).split(',').map(Number);return Number.isFinite(x)&&Number.isFinite(y)?{map:mapId,kind:'spot',id:'spot',x,y,level:b||undefined}:null;
+ }
+ let shared=new URL(location.href).searchParams.get('route');
+ // The route is read once; the address then goes back to an ordinary map address.
+ if(shared){const u=new URL(location.href);u.searchParams.delete('route');history.replaceState(history.state,'',u);}
+ window.addEventListener('atlas:loaded',async()=>{
   if(!panel)build();showPanel();draw();
+  if(shared){const [a,b,mode]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
+   if(from&&to){state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;if(panel)panel.open=true;if(!compact())setPanel(true);compute();}}
   if(routable(config.id))ensureGround(config.id).catch(()=>{});
  });
 })();

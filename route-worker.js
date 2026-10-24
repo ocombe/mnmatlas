@@ -31,11 +31,12 @@ function loadRaster(meta,bytes){
  let count=0;
  for(let r=0;r<meta.nz;r++){let prev=false;for(let c=0;c<meta.nx;c++){const k=r*meta.nx+c,v=view.getInt16(2*n+k*2,true);if(v===-32768){q[k]=-32768;prev=false;continue;}q[k]=prev?q[k-1]+v:v;prev=true;count++;}}
  const col=new Uint32Array(count),h=new Float32Array(count),swim=new Uint8Array(count),steps=new Uint8Array(count),first=new Int32Array(n).fill(-1),many=new Uint8Array(n);
- for(let k=0,i=0;k<n;k++){if(q[k]===-32768)continue;col[i]=k;h[i]=q[k]*meta.hstep;swim[i]=swim0[k];steps[i]=steps0[k];first[k]=i;many[k]=1;i++;}
+ const flags=new Uint8Array(count);
+ for(let k=0,i=0;k<n;k++){if(q[k]===-32768)continue;col[i]=k;h[i]=q[k]*meta.hstep;swim[i]=swim0[k]&1;flags[i]=swim0[k];steps[i]=steps0[k];first[k]=i;many[k]=1;i++;}
  const ceil=new Float32Array(count).fill(3276.7),surf=ceil,lv=new Uint8Array(count);
  const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
  for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
- return {meta,count,col,h,ceil,surf,lv,swim,first,many,x,z,px,py,steps};
+ return {meta,count,col,h,ceil,surf,lv,swim,flags,first,many,x,z,px,py,steps};
 }
 // Can the walker go from cell i to cell j? Up or down a step, through open water, or off a ledge into deep water.
 function ok(g,i,j){
@@ -70,7 +71,13 @@ function snap(g,p,reach=p.reach||90){
  const {bw,bh,start,order}=g.sq,r=Math.ceil(reach/B),bx=Math.floor(p.x/B),by=Math.floor(p.y/B);let best=-1,bd=reach*reach;
  for(let y=Math.max(0,by-r);y<=Math.min(bh-1,by+r);y++)for(let x=Math.max(0,bx-r);x<=Math.min(bw-1,bx+r);x++){
   const k=(level*bh+y)*bw+x;
-  for(let q=start[k];q<start[k+1];q++){const i=order[q],dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy;if(d<bd){bd=d;best=i;}}
+  for(let q=start[k];q<start[k+1];q++){
+   const i=order[q];
+   // A spot with no way out (a cliff rim, a sealed nook) is never picked; dry ground wins over water close by.
+   if(g.steps?!g.steps[i]:!g.dirs[i]&&!(g.flags[i]&2))continue;
+   // Ground reachable from an entrance wins over roofs and cut-off ledges right under the pin.
+   const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400);if(d<bd){bd=d;best=i;}
+  }
  }
  return best;
 }
