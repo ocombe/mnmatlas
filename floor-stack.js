@@ -6,6 +6,8 @@
  const planLevels = entry => entry.levels?.length ? entry.levels.map(level => ({ id:level.id, title:level.title })) : [{ id:entry.defaultLevel || 'floor-1', title:entry.title }];
  const buttons = () => [...($('level-controls')?.querySelectorAll('button[data-level]') || [])];
  const pref = value => { try { if (value === undefined) return localStorage.getItem('floor-plan-size'); localStorage.setItem('floor-plan-size', value); } catch { return null; } };
+ // The corner plan stays folded to its header bar once a visitor hides it.
+ const foldPref = value => { try { if (value === undefined) return localStorage.getItem('floor-plan-folded') === '1'; localStorage.setItem('floor-plan-folded', value ? '1' : '0'); } catch { return false; } };
  const el = (tag, cls, text) => { const n = document.createElement(tag); n.className = cls; if (text) n.textContent = text; return n; };
  const icon = inward => inward ? 'M5 10h5V5M10 10 4 4M19 10h-5V5M14 10l6-6M5 14h5v5M10 14l-6 6M19 14h-5v5M14 14l6 6' : 'M4 9V4h5M4 4l6 6M15 4h5v5M20 4l-6 6M4 15v5h5M4 20l6-6M20 15v5h-5M20 20l-6-6';
  function control(cls, label, inward = false) {
@@ -43,7 +45,7 @@
   const phoneQuery = matchMedia('(max-width:760px), (max-height:500px) and (pointer:coarse)');
   let phone = phoneQuery.matches;
   head.append(fold, size, actions); panel.append(head, stage, slot); frame.append(panel);
-  let plan = null, loading = null, disposed = false, big = pref() === 'full', folded = false, north = 0;
+  let plan = null, loading = null, disposed = false, big = pref() === 'full', folded = foldPref(), north = 0;
   // While the relief fills the frame, the map compass turns with it.
   function compass() {
    const rose = frame.querySelector('.compass'); if (!rose) return;
@@ -97,7 +99,7 @@
    frame.style.setProperty('--plan-tool-height', phone ? '44px' : (button?.offsetHeight || 35) + 'px');
   }
   function apply() {
-   panel.classList.toggle('collapsed', folded); fold.setAttribute('aria-expanded', String(!folded));
+   panel.classList.toggle('collapsed', folded); fold.setAttribute('aria-expanded', String(!folded)); fold.setAttribute('aria-label', (folded ? 'Show ' : 'Hide ') + fold.textContent.toLowerCase());
    fold.setAttribute('aria-controls', 'floor-corner-content'); (big ? slot : stage).id = 'floor-corner-content'; (big ? stage : slot).removeAttribute('id');
    frame.classList.toggle('floor-plan-full', big); frame.classList.toggle('floor-plan-phone', phone); panel.classList.toggle('floor-stack-big', big);
    if (big) { slot.append(map); frame.append(stage, fullTools); fullTools.append(actions); }
@@ -111,7 +113,7 @@
    // Focus follows the view being opened, including keyboard and touch users.
    (big ? shrink : phone ? phoneOpen : folded ? fold : size).focus({preventScroll:true});
   }
-  size.onclick = swap; shrink.onclick = swap; phoneOpen.onclick = swap; fold.onclick = () => { folded = !folded; apply(); };
+  size.onclick = swap; shrink.onclick = swap; phoneOpen.onclick = swap; fold.onclick = () => { folded = !folded; foldPref(folded); apply(); };
   const phoneChange = () => { phone = phoneQuery.matches; apply(); };
   phoneQuery.addEventListener('change', phoneChange);
   window.addEventListener('resize', placeTools);

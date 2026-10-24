@@ -18,6 +18,7 @@
 #map-frame>.floor-stack{box-sizing:border-box;position:absolute;left:22px;bottom:44px;z-index:540;width:288px;padding:6px 8px 8px;background:var(--card,#241c14);border:1px solid var(--amber-border,#765533);border-radius:var(--radius,3px);box-shadow:var(--shadow,0 8px 32px #0d0a0866);user-select:none}
 .floor-stack-head{display:flex;gap:0;align-items:center;overflow:visible}
 #map-frame .floor-stack-toggle{flex:1;min-width:0;height:35px;min-height:0;text-align:left;padding:2px 8px;font:12px var(--body,Inter,system-ui);border:0;background:transparent;color:var(--foreground,#eadcc1)}
+#map-frame .floor-stack-toggle::before{content:'';display:inline-block;width:6px;height:6px;margin:0 9px 2px 2px;border-right:2px solid currentColor;border-bottom:2px solid currentColor;transform:rotate(45deg);transition:transform .15s}#map-frame:not(.floor-plan-full)>.floor-stack.collapsed{width:auto;padding:2px 4px}#map-frame .floor-stack.collapsed .floor-stack-toggle::before{transform:translate(-1px,2px) rotate(-45deg)}#map-frame .floor-stack-toggle:hover{color:var(--primary,#d0852f)}
 #map-frame .floor-stack-head .floor-stack-size,#map-frame .floor-stack-head .floor-plan-actions button{width:30px;height:30px}
 #map-frame .floor-stack-size[hidden]{display:none}
 .floor-stack-plan,.floor-stack-map{position:relative;margin-top:6px;height:min(300px,max(120px,calc(100dvh - 340px)));overflow:hidden;border-radius:3px;isolation:isolate}
