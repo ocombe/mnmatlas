@@ -99,7 +99,7 @@
    frame.style.setProperty('--plan-tool-height', phone ? '44px' : (button?.offsetHeight || 35) + 'px');
   }
   function apply() {
-   panel.classList.toggle('collapsed', folded); fold.setAttribute('aria-expanded', String(!folded)); fold.setAttribute('aria-label', (folded ? 'Show ' : 'Hide ') + fold.textContent.toLowerCase());
+   fold.textContent = big ? 'Map' : 'Relief view'; panel.classList.toggle('collapsed', folded); fold.setAttribute('aria-expanded', String(!folded)); fold.setAttribute('aria-label', (folded ? 'Show ' : 'Hide ') + fold.textContent.toLowerCase());
    fold.setAttribute('aria-controls', 'floor-corner-content'); (big ? slot : stage).id = 'floor-corner-content'; (big ? stage : slot).removeAttribute('id');
    frame.classList.toggle('floor-plan-full', big); frame.classList.toggle('floor-plan-phone', phone); panel.classList.toggle('floor-stack-big', big);
    if (big) { slot.append(map); frame.append(stage, fullTools); fullTools.append(actions); }
