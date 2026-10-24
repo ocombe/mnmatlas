@@ -716,3 +716,5 @@ dialog.moved::backdrop{background:#0000001f}
 .route-arrow span{position:relative;display:block;width:18px;height:18px;border-radius:50%;background:#f3e6c8;box-shadow:0 0 0 1.5px #3a2214,0 1px 3px #0008;transform-origin:50% 50%}
 .route-arrow span::before{content:'';position:absolute;left:4px;top:5.5px;width:6px;height:6px;border-top:2.5px solid #3a2214;border-right:2.5px solid #3a2214;transform:rotate(45deg)}
 .route-actions{display:flex;gap:6px;flex-wrap:wrap}
+.route-teleport{display:flex;align-items:center;gap:10px;flex-wrap:wrap;color:var(--muted-foreground);padding-left:26px}
+.route-cast{display:flex;align-items:center;gap:5px;color:var(--foreground)}

@@ -94,11 +94,11 @@
   const result=await ask({type:'route',map:mapId,from,to,mode,dangers:list,links:links(d.markers)});
   return {map:mapId,from,to,result,dangerList:list,markers:d.markers};
  }
- async function plan(mode){
-  if(state.from.map===state.to.map)return [await leg(state.from.map,state.from,state.to,mode)];
-  const hops=await mapPath(state.from.map,state.to.map);
-  if(!hops)throw Error('No known way from '+mapTitle(state.from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');
-  const legs=[];let start=state.from;
+ async function plan(mode,from=state.from){
+  if(from.map===state.to.map)return [await leg(from.map,from,state.to,mode)];
+  const hops=await mapPath(from.map,state.to.map);
+  if(!hops)throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');
+  const legs=[];let start=from;
   for(const hop of hops){
    const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:260,kind:'exit'},land=await arrival(hop);
    if(!land)throw Error('The way into '+mapTitle(hop.to)+' is not marked yet.');
@@ -113,9 +113,17 @@
   if(!state.from||!state.to){state.options={};state.legs=null;state.error='';draw();showPanel();return;}
   busy=true;showPanel();
   const options={};
+  const hops=await landings();
   for(const [mode] of MODES){
    try{const legs=await plan(mode),bad=legs.find(l=>l.result.error);options[mode]=bad?{error:(legs.length>1?mapTitle(bad.map)+': ':'')+bad.result.error}:{legs};}
    catch(e){options[mode]={error:e.message};}
+   // A druid or wizard can cast to a landing first; that wins when the walk from the landing is shorter by more
+   // than the cost of the cast.
+   for(const t of hops){
+    try{const legs=await plan(mode,t.place),cost=TELEPORT_COST+total(legs);if(legs.some(l=>l.result.error))continue;
+     const best=options[mode];if(!best.legs||cost<total(best.legs)+(best.teleport?TELEPORT_COST:0))options[mode]={legs,teleport:t};}
+    catch{}
+   }
    if(mine!==run)return;
   }
   state.options=options;pick();busy=false;showPanel();draw(true);
@@ -124,6 +132,22 @@
   else if(compact()&&state.error)status(state.error);
  }
  const total=legs=>legs.reduce((s,l)=>s+l.result.length,0);
+ // Teleports the walker can cast (Druid, Wizard), remembered in this browser. A cast counts as this many metres.
+ const TP_KEY='mnmaps-route-teleport',TELEPORT_COST=60,CASTERS=['Druid','Wizard'];
+ const casts=()=>{try{const v=JSON.parse(read(TP_KEY)||'[]');return Array.isArray(v)?v.filter(c=>CASTERS.includes(c)):[];}catch{return [];}};
+ // Landings are the Teleporter pins named after the spell's arrival point ("Druid Portal", "Wizard Portal Landing").
+ async function landings(){
+  const want=casts();if(!want.length)return [];
+  const out=[];
+  for(const c of registry.maps){
+   if(!routable(c.id))continue;const d=await mapData(c.id);
+   for(const m of d.markers){
+    if(m.category!=='Teleporter')continue;const by=want.find(k=>new RegExp(k+' (portal|ring)','i').test(m.name));
+    if(by)out.push({caster:by,place:{map:c.id,id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level}});
+   }
+  }
+  return out;
+ }
  function set(which,place){
   state[which]={...place,map:config.id};
   openView();
@@ -164,8 +188,10 @@
   const swap=button('⇅',()=>{[state.from,state.to]=[state.to,state.from];compute();},'route-swap');swap.title='Swap start and finish';swap.setAttribute('aria-label','Swap start and finish');
   const fields=text('div','','route-fields');fields.append(row('from','Start'),row('to','Finish'),swap);
   const lvl=text('label','','route-level');lvl.append(text('span','Your level'));const input=document.createElement('input');input.type='number';input.min='1';input.max='99';input.inputMode='numeric';input.placeholder='Any';input.value=read(LEVEL_KEY)||'';input.onchange=()=>{write(LEVEL_KEY,input.value?String(Math.max(1,Math.min(99,Math.round(+input.value)))):'');input.value=read(LEVEL_KEY)||'';compute();};lvl.append(input);
-  const hint=text('p','Pick a start and a finish here, right-click (long-press) the map, or use Directions on a card. The finish can be on another map.','route-hint');
-  panel.append(head,fields,lvl,hint,text('div','','route-options-list'),text('div','','route-result'));
+  const hint=text('p','Pick a start and a finish here, right-click (long-press) the map, or use Directions on a card. The finish can be on another map; a druid or wizard teleport is used when it saves time.','route-hint');
+  const tp=text('div','','route-teleport');tp.append(text('span','I can teleport as'));
+  for(const c of CASTERS){const l=text('label','','route-cast'),b=document.createElement('input');b.type='checkbox';b.value=c;b.checked=casts().includes(c);b.onchange=()=>{write(TP_KEY,JSON.stringify([...tp.querySelectorAll('input:checked')].map(x=>x.value)));compute();};l.append(b,text('span',c));tp.append(l);}
+  panel.append(head,fields,lvl,tp,hint,text('div','','route-options-list'),text('div','','route-result'));
   journal.querySelector('.journal-heading').after(panel);
  }
  function fill(select,which){
@@ -184,7 +210,9 @@
  // walked since the step before.
  function legSteps(l,isFirst){
   const r=l.result,mapId=l.map,pts=r.points,events=[];
-  if(isFirst)events.push({i:0,kind:'start',title:placeName(state.from),sub:mapTitle(mapId)});
+  const tp=isFirst&&state.options[state.mode]?.teleport;
+  if(tp)events.push({i:0,kind:'teleport',title:'Teleport to '+tp.place.name,sub:tp.caster+' spell · '+mapTitle(mapId)});
+  else if(isFirst)events.push({i:0,kind:'start',title:placeName(state.from),sub:mapTitle(mapId)});
   for(const c of r.changes){const p=pts[c.index-1],up=floorOrder(c.to,mapId)<floorOrder(c.from,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
    events.push({i:c.index-1,kind:up?'up':'down',title:named?(/ to /i.test(named)?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
   for(let k=1;k<pts.length;k++){if(pts[k].swim&&!pts[k-1].swim){let j=k;while(j+1<pts.length&&pts[j+1].swim)j++;const len=pts[j].d-pts[k].d;if(len>=8)events.push({i:k,kind:'swim',title:'Swim about '+metres(len)});}}
@@ -210,7 +238,7 @@
    if(o.error){card.append(text('span',label,'route-option-name'),text('span',o.error,'route-option-sub'));opts.append(card);continue;}
    const legs=o.legs,dangerCount=legs.reduce((s,l)=>s+(l.result.passed?.length||0),0),swim=legs.reduce((s,l)=>s+(l.result.swim||0),0);
    const top=text('span','','route-option-top');top.append(text('span',label,'route-option-name'),text('span',metres(total(legs)),'route-option-length'));
-   const bits=[legs.length>1?legs.length+' maps':'',swim?'swims '+metres(swim):'',dangerCount?'passes '+dangerCount+(dangerCount>1?' mobs':' mob'):'clear of known mobs'].filter(Boolean);
+   const bits=[o.teleport?'teleports as '+o.teleport.caster:'',legs.length>1?legs.length+' maps':'',swim?'swims '+metres(swim):'',dangerCount?'passes '+dangerCount+(dangerCount>1?' mobs':' mob'):'clear of known mobs'].filter(Boolean);
    card.append(top,text('span',bits.join(' · '),'route-option-sub'+(dangerCount?' warn':'')));opts.append(card);
   }
   if(state.error&&!state.legs){box.append(text('p',state.error,'route-error'));return;}
