@@ -29,6 +29,12 @@
    13256.407982150187
   ]
  },
+ "oneWayExits": [
+  "exit-ancient-crypt"
+ ],
+ "closedEntries": [
+  "ancient-crypt"
+ ],
  "joins": [
   {
    "name": "Passage to the Ancient Crypt (one way)",

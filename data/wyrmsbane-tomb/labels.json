@@ -177,7 +177,6 @@
     {
       "id": "exit-ancient-crypt",
       "name": "to Ancient Crypt (one way)",
-      "oneWay": true,
       "x": 1085.23,
       "y": 3064.43,
       "kind": "exit",

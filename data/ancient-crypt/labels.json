@@ -78,7 +78,6 @@
     {
       "id": "exit-wyrmsbane-tomb",
       "name": "from Wyrmsbane Tomb (one way)",
-      "entryOnly": true,
       "level": "floor-1",
       "x": 2920.0,
       "y": 810.0,

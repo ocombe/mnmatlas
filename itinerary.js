@@ -65,8 +65,7 @@
   const out=[],add=(p,to,place,how,cost=0)=>{if(to!==id&&routable(to))out.push({x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost});};
   for(const l of d.labels){
    if(Array.isArray(l.route))for(const stop of l.route)add(l,stop.map,stop.place,'boat',300);
-   // A sign you can only arrive by (a one-way passage from the other side) is not a way out.
-   else if(l.toMap&&!l.entryOnly)add(l,l.toMap,l.toPlace,'exit');
+   else if(l.toMap)add(l,l.toMap,l.toPlace,'exit');
   }
   for(const m of d.markers)if(m.toMap)add(m,m.toMap,m.toPlace,m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':'exit');
   return out;
@@ -76,7 +75,9 @@
   const prev=new Map([[a,null]]),queue=[a];
   while(queue.length){
    const id=queue.shift();if(id===b)break;
-   for(const w of ways(await mapData(id),id)){if(prev.has(w.to))continue;prev.set(w.to,{from:id,exit:w});queue.push(w.to);}
+   for(const w of ways(await mapData(id),id)){
+    // A map can close its door to one neighbour (the Ancient Crypt passage only leads out of the tomb).
+    if(prev.has(w.to)||(await mapData(w.to)).meta?.closedEntries?.includes(id))continue;prev.set(w.to,{from:id,exit:w});queue.push(w.to);}
   }
   if(!prev.has(b))return null;
   const hops=[];for(let id=b;prev.get(id);id=prev.get(id).from)hops.unshift({...prev.get(id),to:id});
