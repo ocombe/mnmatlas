@@ -1,0 +1,85 @@
+{
+ "version": 4,
+ "file": "data/blind-midden/ground.bin",
+ "cell": 1.0,
+ "x0": -345.8219909667969,
+ "z0": -269.7250061035156,
+ "nx": 717,
+ "nz": 517,
+ "step": 2.2,
+ "swim": 2.5,
+ "levels": [
+  "canyon",
+  "basement",
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0.0,
+   0.0,
+   -5.0,
+   1529.1968688964844
+  ],
+  "y": [
+   -4.924038765060686,
+   -0.8682408883346397,
+   0.0,
+   2366.7673538252216
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "False floor (drop to the passage below)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 1224.2,
+    "y": 1560.9,
+    "level": "basement",
+    "exact": true
+   },
+   "to": {
+    "x": 1224.2,
+    "y": 1575.9,
+    "level": "canyon",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop at the end of the low passage",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 710.2,
+    "y": 2329.7,
+    "level": "canyon",
+    "exact": true
+   },
+   "to": {
+    "x": 705.2,
+    "y": 2337.3,
+    "level": "canyon",
+    "exact": true
+   }
+  },
+  {
+   "name": "False ledge (drop to the cave floor)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 924.2,
+    "y": 2816.9,
+    "level": "basement",
+    "exact": true
+   },
+   "to": {
+    "x": 924.2,
+    "y": 2828.5,
+    "level": "canyon",
+    "exact": true
+   }
+  }
+ ]
+}

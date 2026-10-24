@@ -71,6 +71,7 @@
     },
     {
       "id": "night-harbor",
+      "routes": "data/night-harbor/routes.json",
       "title": "Night Harbor",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The Free City of",
@@ -130,6 +131,7 @@
     },
     {
       "id": "underdocks",
+      "routes": "data/underdocks/routes.json",
       "title": "Underdocks",
       "subtitle": "Two levels beneath the city",
       "cartoucheKicker": "The hidden harbour",
@@ -249,6 +251,7 @@
     },
     {
       "id": "blind-midden",
+      "routes": "data/blind-midden/routes.json",
       "title": "Blind Midden",
       "subtitle": "Three floors beneath Ail’Vorith",
       "cartoucheKicker": "The sewers of the Deep",
@@ -322,6 +325,7 @@
     },
     {
       "id": "faelindral",
+      "routes": "data/faelindral/routes.json",
       "title": "Faelindral",
       "subtitle": "The city in the trees",
       "cartoucheKicker": "Among the branches",
@@ -768,6 +772,7 @@
     },
     {
       "id": "ancient-crypt",
+      "routes": "data/ancient-crypt/routes.json",
       "title": "Ancient Crypt",
       "subtitle": "Three sheets beneath Shaded Dunes",
       "cartoucheKicker": "Halls of the forgotten",
@@ -837,6 +842,7 @@
     },
     {
       "id": "infested-crypt",
+      "routes": "data/infested-crypt/routes.json",
       "title": "Infested Crypt",
       "subtitle": "Two floors beneath Shaded Dunes",
       "cartoucheKicker": "The broodmother’s lair",
@@ -1114,6 +1120,7 @@
     },
     {
       "id": "grain-cellar",
+      "routes": "data/grain-cellar/routes.json",
       "title": "Grain Cellar",
       "subtitle": "Beneath a Sungreet Strand granary",
       "cartoucheKicker": "The cult below the farm",
@@ -1256,6 +1263,7 @@
     },
     {
       "id": "tel-ekir",
+      "routes": "data/tel-ekir/routes.json",
       "title": "Tel Ekir",
       "subtitle": "The hidden canyon sanctuary",
       "cartoucheKicker": "Beneath the Life Font",

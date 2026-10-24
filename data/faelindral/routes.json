@@ -1,0 +1,33 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/faelindral/ground.bin",
+ "cell": 1.0,
+ "x0": 0.0,
+ "z0": 0.0,
+ "nx": 835,
+ "nz": 818,
+ "hstep": 0.25,
+ "step": 1.0,
+ "swim": 2.5,
+ "levels": [
+  "platforms"
+ ],
+ "project": {
+  "x": [
+   3.5,
+   0,
+   0,
+   0
+  ],
+  "y": [
+   0,
+   0,
+   3.5,
+   0
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": []
+}

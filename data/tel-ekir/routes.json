@@ -1,0 +1,120 @@
+{
+ "version": 4,
+ "file": "data/tel-ekir/ground.bin",
+ "cell": 1.0,
+ "x0": -61.7130012512207,
+ "z0": -431.90399169921875,
+ "nx": 451,
+ "nz": 686,
+ "step": 2.2,
+ "swim": 2.5,
+ "levels": [
+  "floor-1",
+  "floor-2",
+  "floor-3",
+  "floor-4"
+ ],
+ "project": {
+  "x": [
+   0.0,
+   0.0,
+   -5.0,
+   2356.0
+  ],
+  "y": [
+   -4.924038765060914,
+   -0.8682408883344124,
+   0.0,
+   2956.653346080094
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Cave mouth by the water break",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1637.0,
+    "y": 2210.2,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 1629.0,
+    "y": 2210.8,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop-off by the side ponds",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1776.0,
+    "y": 2385.7,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 1774.5,
+    "y": 2387.3,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Large ladder",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1950.5,
+    "y": 2078.0,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 1957.5,
+    "y": 2050.1,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Cliff path",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3242.0,
+    "y": 2024.0,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 3249.0,
+    "y": 1994.1,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Cliff path",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3310.5,
+    "y": 2045.8,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 3318.0,
+    "y": 2003.0,
+    "level": "floor-1",
+    "exact": true
+   }
+  }
+ ]
+}

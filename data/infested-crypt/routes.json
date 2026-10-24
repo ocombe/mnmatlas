@@ -1,0 +1,169 @@
+{
+ "version": 4,
+ "file": "data/infested-crypt/ground.bin",
+ "cell": 0.5,
+ "x0": -6.345171928405762,
+ "z0": -20.730915069580078,
+ "nx": 99,
+ "nz": 224,
+ "step": 1.6,
+ "swim": 2.5,
+ "levels": [
+  "floor-1",
+  "floor-2"
+ ],
+ "project": {
+  "x": [
+   0.0,
+   0.0,
+   -28.0,
+   2603.558204650879
+  ],
+  "y": [
+   -27.574617084341867,
+   -4.862148974674142,
+   0.0,
+   1301.1207385247585
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 1747.7,
+    "y": 842.1,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 1746.6,
+    "y": 887.7,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2673.7,
+    "y": 1119.0,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2687.1,
+    "y": 1154.9,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2678.2,
+    "y": 704.7,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2692.4,
+    "y": 750.9,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2880.9,
+    "y": 1002.1,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2881.7,
+    "y": 1048.7,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2798.0,
+    "y": 896.9,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2798.8,
+    "y": 943.5,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2887.9,
+    "y": 747.4,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2888.7,
+    "y": 794.1,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2887.9,
+    "y": 562.7,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2888.7,
+    "y": 609.3,
+    "level": "floor-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Drop from the web platform",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2623.0,
+    "y": 466.7,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2637.3,
+    "y": 512.9,
+    "level": "floor-1",
+    "exact": true
+   }
+  }
+ ]
+}

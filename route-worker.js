@@ -21,9 +21,28 @@ async function load(meta,url,key){
  for(let i=0,k=0;i<count;i++)if(swim[i]){ceil[i]=wc[k];surf[i]=ws[k];k++;}
  const first=new Int32Array(meta.nx*meta.nz).fill(-1),many=new Uint8Array(meta.nx*meta.nz);
  for(let i=count-1;i>=0;i--){first[col[i]]=i;many[col[i]]++;}
- const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
- for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
+ const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count);
+ place(meta,col,h,lv,x,z,px,py);
+ stretch(meta,px,py);
  grounds[key]={meta,count,col,h,ceil,surf,lv,swim,flags,dirs,pick,first,many,x,z,px,py};
+}
+// Map pixels of each cell. Floors drawn as separate sheets may each have their own projection (meta.projects, by floor).
+function place(meta,col,h,lv,x,z,px,py){
+ const pr=meta.projects||[meta.project];
+ for(let i=0;i<col.length;i++){
+  const {x:[ax,ay,az,bx],y:[cx,cy,cz,by]}=pr[meta.projects?lv[i]:0];
+  x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;
+ }
+}
+// Maps whose art is gently stretched against the straight projection carry a grid of corrections (site px, tenths),
+// read between the four nearest grid points.
+function stretch(meta,px,py){
+ const w=meta.warp;if(!w)return;
+ const at=(i,j,k)=>w.d[((Math.min(j,w.ny-1)*w.nx)+Math.min(i,w.nx-1))*2+k]/10;
+ for(let n=0;n<px.length;n++){
+  const u=Math.max(0,(px[n]-w.x0)/w.step),v=Math.max(0,(py[n]-w.y0)/w.step),i=Math.floor(u),j=Math.floor(v),fu=u-i,fv=v-j;
+  for(let k=0;k<2;k++){const s=(1-fv)*((1-fu)*at(i,j,k)+fu*at(i+1,j,k))+fv*((1-fu)*at(i,j+1,k)+fu*at(i+1,j+1,k));if(k)py[n]+=s;else px[n]+=s;}
+ }
 }
 // Big single-floor maps: one square per spot, with the 8 steps out of it already worked out.
 function loadRaster(meta,bytes){
@@ -34,8 +53,9 @@ function loadRaster(meta,bytes){
  const flags=new Uint8Array(count);
  for(let k=0,i=0;k<n;k++){if(q[k]===-32768)continue;col[i]=k;h[i]=q[k]*meta.hstep;swim[i]=swim0[k]&1;flags[i]=swim0[k];steps[i]=steps0[k];first[k]=i;many[k]=1;i++;}
  const ceil=new Float32Array(count).fill(3276.7),surf=ceil,lv=new Uint8Array(count);
- const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count),[ax,ay,az,bx]=meta.project.x,[cx,cy,cz,by]=meta.project.y;
- for(let i=0;i<count;i++){x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;}
+ const x=new Float32Array(count),z=new Float32Array(count),px=new Float32Array(count),py=new Float32Array(count);
+ place(meta,col,h,lv,x,z,px,py);
+ stretch(meta,px,py);
  return {meta,count,col,h,ceil,surf,lv,swim,flags,first,many,x,z,px,py,steps};
 }
 // Can the walker go from cell i to cell j? Up or down a step, through open water, or off a ledge into deep water.
@@ -76,7 +96,7 @@ function snap(g,p,reach=p.reach||90){
    // A spot with no way out (a cliff rim, a sealed nook) is never picked; dry ground wins over water close by.
    if(g.steps?!g.steps[i]:!g.dirs[i]&&!(g.flags[i]&2))continue;
    // Ground reachable from an entrance wins over roofs and cut-off ledges right under the pin.
-   const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(p.exact?0:(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400));if(d<bd){bd=d;best=i;}
+   const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(p.h===undefined?0:4*(g.h[i]-p.h)**2)+(p.exact?0:(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400));if(d<bd){bd=d;best=i;}
   }
  }
  return best;
@@ -100,7 +120,9 @@ function dangerField(g,dangers){
 }
 function route(req){
  const g=grounds[req.map];if(!g)throw Error('Route data is not ready.');
- const from=snap(g,req.from),to=snap(g,req.to);
+ // An exit sign drawn away from its doorway (on a roof, over a hall) routes to the doorway the map's data names.
+ const door=p=>{const d=p.reach&&(g.meta.doors||[]).find(d=>Math.abs(d.at[0]-p.x)<1&&Math.abs(d.at[1]-p.y)<1);return d?{...p,x:d.x,y:d.y,h:d.h,level:d.level??p.level,exact:true}:p;};
+ const from=snap(g,door(req.from)),to=snap(g,door(req.to));
  if(from<0)return {error:'The start is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  if(to<0)return {error:'The finish is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  const safer=req.mode==='safer',dangers=req.dangers||[],swimCost=g.meta.swim||2.5;

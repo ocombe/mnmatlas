@@ -1,0 +1,53 @@
+{
+ "version": 4,
+ "file": "data/ancient-crypt/ground.bin",
+ "cell": 0.5,
+ "x0": -158.3749542236328,
+ "z0": -110.75,
+ "nx": 607,
+ "nz": 543,
+ "step": 1.6,
+ "swim": 2.5,
+ "levels": [
+  "floor-1",
+  "floor-2",
+  "floor-3"
+ ],
+ "project": {
+  "x": [
+   0.0,
+   0.0,
+   -14.0,
+   2475.8125
+  ],
+  "y": [
+   -13.787308542171104,
+   -2.431074487337355,
+   0.0,
+   2284.6308102811645
+  ]
+ },
+ "oneWayExits": [
+  "exit-wyrmsbane-tomb"
+ ],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Chapel approach ladder",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2515.6,
+    "y": 1505.1,
+    "level": "floor-1",
+    "exact": true
+   },
+   "to": {
+    "x": 2518.9,
+    "y": 1454.7,
+    "level": "floor-1",
+    "exact": true
+   }
+  }
+ ]
+}
