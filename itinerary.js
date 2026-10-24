@@ -185,16 +185,16 @@
  function openNext(l){const url=mapLink(l.next.map);url.searchParams.set('place',l.next.place);goToMap(l.next.map,url,{quiet:true});}
  // ---- the line on the map
  function draw(fit=false){
-  for(const l of layers)l.remove();layers=[];
+  for(const l of layers)l.remove();layers=[];arrowRuns=[];drawArrows();
   const l=state.legs?.find(x=>x.map===config.id);if(!l||!map)return;
   const r=l.result,here=config.levelId,pts=r.points,ll=p=>locationOf(p),first=l===state.legs[0],last=l===state.legs[state.legs.length-1];
-  // Runs on this floor are inked (swims in a blue dash, passes beneath a hall dotted); the parts on other floors
-  // show faintly so you can see where the way goes.
-  const kind=(a,b)=>a.level!==here&&config.levels?'ghost':a.under&&b.under?'under':a.swim&&b.swim?'swim':'ink';
+  // Only this floor's runs are drawn (swims in a blue dash, passes beneath a hall dotted); the round arrows lead to
+  // the other floors. Small arrows along the line show which way to go.
+  const kind=(a,b)=>a.level!==here&&config.levels?'':a.under&&b.under?'under':a.swim&&b.swim?'swim':'ink';
   let run_=[pts[0]],current='';
-  const flush=()=>{if(run_.length>1){const line=run_.map(ll);
+  const flush=()=>{if(run_.length>1&&current){const line=run_.map(ll);
     if(current==='ink'||current==='swim')layers.push(L.polyline(line,{className:'route-halo',interactive:false}).addTo(map));
-    layers.push(L.polyline(line,{className:'route-'+current,interactive:false}).addTo(map));}
+    layers.push(L.polyline(line,{className:'route-'+current,interactive:false}).addTo(map));arrowRuns.push(line);}
    run_=[run_[run_.length-1]];};
   for(let k=1;k<pts.length;k++){const a=pts[k-1],b=pts[k];
    if(a.level!==b.level){flush();run_=[b];current='';continue;}
@@ -208,7 +208,27 @@
   if(last)end(pts[pts.length-1],'B','route-finish');
   // Where this map's part ends at an exit, a seal carries the route on to the next map.
   if(l.next){const p=pts[pts.length-1];if(!config.levels||p.level===here){const m=seal(p,null,false,false,'Continue in '+l.next.title,'→');m.off('click');m.on('click',()=>openNext(l));layers.push(m);}}
+  drawArrows();
   if(fit){const mine=pts.filter(p=>!config.levels||p.level===here);if(mine.length)map.fitBounds(L.latLngBounds(mine.map(ll)),{padding:[60,60],maxZoom:config.defaultView.placeZoom});}
+ }
+ // Direction arrows every ARROW_GAP screen pixels along the drawn runs, placed again after each zoom.
+ const ARROW_GAP=120;let arrowRuns=[],arrows=[],arrowMap=null;
+ function drawArrows(){
+  for(const a of arrows)a.remove();arrows=[];
+  if(!map)return;
+  if(arrowMap!==map){arrowMap=map;map.on('zoomend',drawArrows);}
+  for(const line of arrowRuns){
+   const pts=line.map(x=>map.latLngToLayerPoint(x));let carry=ARROW_GAP/2;
+   for(let k=1;k<pts.length;k++){
+    const a=pts[k-1],b=pts[k],len=a.distanceTo(b),angle=Math.atan2(b.y-a.y,b.x-a.x)*180/Math.PI;
+    for(let d=carry;d<len;d+=ARROW_GAP){
+     const at=map.layerPointToLatLng(L.point(a.x+(b.x-a.x)*d/len,a.y+(b.y-a.y)*d/len));
+     const m=L.marker(at,{icon:L.divIcon({className:'route-arrow',html:'',iconSize:[18,18],iconAnchor:[9,9]}),interactive:false,keyboard:false,zIndexOffset:800}).addTo(map);
+     const tip=document.createElement('span');tip.style.transform='rotate('+angle.toFixed(1)+'deg)';m.getElement().append(tip);arrows.push(m);
+    }
+    carry=(carry-len)%ARROW_GAP;if(carry<0)carry+=ARROW_GAP;
+   }
+  }
  }
  function seal(p,toLevel,up,back=false,tip='',arrow=''){
   const icon=L.divIcon({className:'route-floor',html:'',iconSize:[30,30],iconAnchor:[15,15]});
