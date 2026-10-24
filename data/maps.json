@@ -1716,6 +1716,7 @@
     },
     {
       "id": "grimtide-sanctum",
+      "routes": "data/grimtide-sanctum/routes.json",
       "relief": "assets/relief/grimtide-sanctum/",
       "title": "Grimtide Sanctum",
       "subtitle": "Three floors beneath the Shallow Shoals",

@@ -1,0 +1,47 @@
+{
+ "version": 2,
+ "file": "data/grimtide-sanctum/ground.bin",
+ "cell": 0.5,
+ "x0": -281.4691162109375,
+ "z0": -270.8542785644531,
+ "nx": 808,
+ "nz": 701,
+ "step": 1.6,
+ "swim": 2.5,
+ "levels": [
+  "floor-1",
+  "floor-2",
+  "floor-3"
+ ],
+ "project": {
+  "x": [
+   0.0,
+   0.0,
+   -14.0,
+   1299.962013244629
+  ],
+  "y": [
+   -13.787308542171104,
+   -2.4310744873369003,
+   0.0,
+   1926.4600899033176
+  ]
+ },
+ "joins": [
+  {
+   "name": "Rubble stairs",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 643,
+    "y": 2229,
+    "level": "floor-1"
+   },
+   "to": {
+    "x": 643,
+    "y": 2243,
+    "level": "floor-1"
+   }
+  }
+ ]
+}

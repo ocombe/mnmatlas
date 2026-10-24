@@ -13,7 +13,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-2');
+  worker=new Worker('route-worker.js?v=route-3');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  async function ensureData(){
@@ -100,6 +100,7 @@
   const r=state.result;if(!r){return;}
   const floors=[...new Set(r.points.map(p=>p.level))];
   box.append(text('p','About '+r.length+' m'+(floors.length>1?' over '+floors.length+' floors':'')+(state.mode==='safer'?' · safer way':' · shortest way'),'route-total'));
+  if(r.swim)box.append(text('p','Swimming about '+r.swim+' m of it (blue dashes).','route-note'));
   const steps=text('ol','','route-steps');
   const step=(label,at)=>{const li=text('li','');const b=button(label,()=>show(at),'route-step');li.append(b);steps.append(li);};
   step('Start: '+placeName(state.from),r.points[0]);
@@ -128,15 +129,17 @@
   for(const l of layers)l.remove();layers=[];
   const r=state.result;if(!r||!map||state.map!==config.id)return;
   const here=config.levelId,pts=r.points,ll=p=>locationOf(p);
-  // Runs on this floor are inked; the parts on other floors show faintly so you can see where the way goes.
-  let run=[pts[0]];
-  const flush=()=>{if(run.length<2){run=[run[run.length-1]];return;}const on=!config.levels||run[run.length-1].level===here&&run[0].level===here;const line=run.map(ll);
-   if(on){layers.push(L.polyline(line,{className:'route-halo',interactive:false}).addTo(map),L.polyline(line,{className:'route-ink',interactive:false}).addTo(map));}
-   else layers.push(L.polyline(line,{className:'route-ghost',interactive:false}).addTo(map));run=[run[run.length-1]];};
-  for(let k=1;k<pts.length;k++){const a=pts[k-1],b=pts[k];if(a.level!==b.level){flush();run=[b];continue;}
-   // Where the way runs beneath a hall drawn on top, it shows as a dotted line under the art.
-   if(a.under&&b.under){flush();if(a.level===here||!config.levels)layers.push(L.polyline([ll(a),ll(b)],{className:'route-under',interactive:false}).addTo(map));run=[b];continue;}
-   run.push(b);}
+  // Runs on this floor are inked (swims in a wavy blue dash, passes beneath a hall dotted); the parts on other floors
+  // show faintly so you can see where the way goes.
+  const kind=(a,b)=>a.level!==here&&config.levels?'ghost':a.under&&b.under?'under':a.swim&&b.swim?'swim':'ink';
+  let run=[pts[0]],current='';
+  const flush=()=>{if(run.length>1){const line=run.map(ll);
+    if(current==='ink'||current==='swim')layers.push(L.polyline(line,{className:'route-halo',interactive:false}).addTo(map));
+    layers.push(L.polyline(line,{className:'route-'+current,interactive:false}).addTo(map));}
+   run=[run[run.length-1]];};
+  for(let k=1;k<pts.length;k++){const a=pts[k-1],b=pts[k];
+   if(a.level!==b.level){flush();run=[b];current='';continue;}
+   const t=kind(a,b);if(t!==current&&current)flush();current=t;run.push(b);}
   flush();
   for(const c of r.changes){const a=pts[c.index-1],b=pts[c.index];
    if(a.level===here)layers.push(seal(a,c.to,floorOrder(c.to)<floorOrder(c.from)));
