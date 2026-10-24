@@ -30,7 +30,7 @@
   if (!frame || !map) return null;
   const marker = document.createComment('map position'); map.before(marker);
   const panel = el('div', 'floor-stack'); panel.id = 'floor-stack';
-  const head = el('div', 'floor-stack-head'), fold = el('button', 'floor-stack-toggle', planLevels(entry).length > 1 ? 'Floors' : 'Relief view'); fold.type = 'button';
+  const head = el('div', 'floor-stack-head'), fold = el('button', 'floor-stack-toggle', 'Relief view'); fold.type = 'button';
   const size = control('floor-stack-size', 'Expand relief view');
   const stage = el('div', 'floor-stack-plan'), slot = el('div', 'floor-stack-map');
   const shrink = control('floor-plan-shrink', 'Back to 2D map', true);
