@@ -222,7 +222,8 @@ const actionPaths={shape:'M5 8l6-4 8 4-1 9-8 3-6-5z',
  report:'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z M12 9v4 M12 17h.01',
  delete:'M3 6h18 M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6 M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M10 11v6 M14 11v6',
  share:'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13',
- reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5'};
+ reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5',
+ confirm:'M20 6 9 17l-5-5'};
 function actionIcon(b){
  const kind=b.dataset.icon;if(!Object.hasOwn(actionPaths,kind||'')||b.querySelector('svg'))return;
  const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
@@ -363,7 +364,8 @@ function pinIcon(m){
  if(globalThis.atlasMarkerSchema.givesQuests(m))face.append(questMark());
  // Ways up and down (ladders, stairs, lifts, passages) are round seals centred on the spot, like the exit signs' arrows.
  if(m.toLevel||['Exit','Ladder','Stairs','Lift','Bridge','Teleporter','Passage','Level connection'].includes(m.category))return L.divIcon({className:'pin level-pin'+own,html:face,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
- return L.divIcon({className:'pin'+own,html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
+ // A spot placed from a description, not yet confirmed in game, wears a dashed ring until someone confirms it.
+ return L.divIcon({className:'pin'+own+(m.approximate&&!own?' approx':''),html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
 }
 function openMap(id){goToMap(id);}
 // One line of the search results: an optional icon, the title and a small line under it.

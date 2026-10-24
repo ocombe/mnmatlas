@@ -641,3 +641,5 @@ dialog.moved::backdrop{background:#0000001f}
 .trainer-pin .quest-mark{transform:none}
 
 .pin .ambush-mark+.quest-mark{right:auto;left:-7px}
+/* A spot placed from a description, not yet confirmed in game: a dashed ring round the pin. */
+.pin.approx span{outline:2px dashed var(--pin,#365f59);outline-offset:2px}

@@ -90,7 +90,8 @@ const ownerKeys=schema.displayKeys;let adminAuthors=null;
 async function validateExtra(row,p,c,live){
  const touched=row.kind==='new-marker'?new Set(Object.keys(p)):fieldsOf({...row,payload:p});
  if(row.kind.startsWith('move-')&&Object.hasOwn(p,'approximate'))touched.add('approximate');
- if(ownerKeys.some(k=>touched.has(k)&&!(row.kind==='new-marker'&&k==='priority'&&typeof p.priority==='boolean'))){
+ // Anyone may confirm an approximate spot (a move that clears the flag); only cartographers set display settings.
+ if(ownerKeys.some(k=>touched.has(k)&&!(row.kind==='new-marker'&&k==='priority'&&typeof p.priority==='boolean')&&!(k==='approximate'&&row.kind==='move-marker'&&p.approximate===false))){
   if(!adminAuthors){const ids=await request('admins?select=user_id');adminAuthors=new Set((ids||[]).map(r=>r.user_id));}
   if(!row.user_id||!adminAuthors.has(row.user_id))fail('Only a cartographer may change display settings; the author is not an admin.');
  }
