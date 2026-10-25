@@ -288,34 +288,34 @@
  ],
  "between": {
   "to-night-harbor": {
-   "to-tel-ekir": 3036,
-   "to-glass-flats": 2762,
-   "to-glass-flats-road": 2970,
+   "to-tel-ekir": 3049,
+   "to-glass-flats": 2765,
+   "to-glass-flats-road": 2973,
    "to-grain-cellar": 1364
   },
   "to-tel-ekir": {
-   "to-night-harbor": 2992,
-   "to-glass-flats": 3779,
-   "to-glass-flats-road": 1041,
-   "to-grain-cellar": 2727
+   "to-night-harbor": 2993,
+   "to-glass-flats": 3782,
+   "to-glass-flats-road": 1039,
+   "to-grain-cellar": 2730
   },
   "to-glass-flats": {
    "to-night-harbor": 2743,
-   "to-tel-ekir": 3797,
-   "to-glass-flats-road": 3718,
-   "to-grain-cellar": 1485
+   "to-tel-ekir": 3806,
+   "to-glass-flats-road": 3722,
+   "to-grain-cellar": 1484
   },
   "to-glass-flats-road": {
-   "to-night-harbor": 2905,
-   "to-tel-ekir": 1039,
-   "to-glass-flats": 3680,
-   "to-grain-cellar": 2638
+   "to-night-harbor": 2907,
+   "to-tel-ekir": 1045,
+   "to-glass-flats": 3684,
+   "to-grain-cellar": 2640
   },
   "to-grain-cellar": {
-   "to-night-harbor": 1364,
-   "to-tel-ekir": 2737,
-   "to-glass-flats": 1491,
-   "to-glass-flats-road": 2635
+   "to-night-harbor": 1363,
+   "to-tel-ekir": 2745,
+   "to-glass-flats": 1493,
+   "to-glass-flats-road": 2639
   }
  }
 }

@@ -32,18 +32,18 @@
  "joins": [],
  "between": {
   "lift-traveler-s-down": {
-   "lift-keeper-s-down": 454,
+   "lift-keeper-s-down": 453,
    "lift-pixie-down": 621,
    "ramp-01-down": 213,
    "ramp-02-down": 543,
-   "ramp-03-down": 641,
+   "ramp-03-down": 642,
    "ramp-04-down": 626,
-   "ramp-05-down": 560,
-   "ramp-06-down": 627
+   "ramp-05-down": 559,
+   "ramp-06-down": 626
   },
   "lift-keeper-s-down": {
    "lift-traveler-s-down": 452,
-   "lift-pixie-down": 513,
+   "lift-pixie-down": 514,
    "ramp-01-down": 607,
    "ramp-02-down": 211,
    "ramp-03-down": 359,
@@ -53,9 +53,9 @@
   },
   "lift-pixie-down": {
    "lift-traveler-s-down": 617,
-   "lift-keeper-s-down": 494,
+   "lift-keeper-s-down": 495,
    "ramp-01-down": 764,
-   "ramp-02-down": 603,
+   "ramp-02-down": 602,
    "ramp-03-down": 484,
    "ramp-04-down": 684,
    "ramp-05-down": 602,
@@ -64,10 +64,10 @@
   "ramp-01-down": {
    "lift-traveler-s-down": 213,
    "lift-keeper-s-down": 606,
-   "lift-pixie-down": 763,
+   "lift-pixie-down": 767,
    "ramp-02-down": 691,
    "ramp-03-down": 794,
-   "ramp-04-down": 771,
+   "ramp-04-down": 772,
    "ramp-05-down": 710,
    "ramp-06-down": 777
   },
@@ -76,37 +76,37 @@
    "lift-keeper-s-down": 211,
    "lift-pixie-down": 610,
    "ramp-01-down": 697,
-   "ramp-03-down": 474,
+   "ramp-03-down": 475,
    "ramp-04-down": 82,
-   "ramp-05-down": 251,
-   "ramp-06-down": 315
+   "ramp-05-down": 252,
+   "ramp-06-down": 316
   },
   "ramp-03-down": {
    "lift-traveler-s-down": 633,
    "lift-keeper-s-down": 364,
    "lift-pixie-down": 482,
-   "ramp-01-down": 770,
+   "ramp-01-down": 771,
    "ramp-02-down": 471,
-   "ramp-04-down": 552,
+   "ramp-04-down": 551,
    "ramp-05-down": 469,
    "ramp-06-down": 533
   },
   "ramp-04-down": {
    "lift-traveler-s-down": 625,
    "lift-keeper-s-down": 292,
-   "lift-pixie-down": 687,
+   "lift-pixie-down": 688,
    "ramp-01-down": 779,
    "ramp-02-down": 82,
-   "ramp-03-down": 555,
+   "ramp-03-down": 556,
    "ramp-05-down": 332,
    "ramp-06-down": 396
   },
   "ramp-05-down": {
-   "lift-traveler-s-down": 561,
+   "lift-traveler-s-down": 562,
    "lift-keeper-s-down": 132,
    "lift-pixie-down": 621,
    "ramp-01-down": 716,
-   "ramp-02-down": 251,
+   "ramp-02-down": 252,
    "ramp-03-down": 467,
    "ramp-04-down": 332,
    "ramp-06-down": 65
@@ -114,9 +114,9 @@
   "ramp-06-down": {
    "lift-traveler-s-down": 626,
    "lift-keeper-s-down": 197,
-   "lift-pixie-down": 689,
-   "ramp-01-down": 780,
-   "ramp-02-down": 315,
+   "lift-pixie-down": 690,
+   "ramp-01-down": 781,
+   "ramp-02-down": 316,
    "ramp-03-down": 536,
    "ramp-04-down": 396,
    "ramp-05-down": 65

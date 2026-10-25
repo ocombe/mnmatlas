@@ -25,13 +25,15 @@
    4039.3211286982314
   ]
  },
+ "oneWayExits": [],
+ "closedEntries": [],
  "joins": [],
  "between": {
   "to-great-cavern-sea": {
-   "community-81": 1140
+   "community-81": 1141
   },
   "community-81": {
-   "to-great-cavern-sea": 1234
+   "to-great-cavern-sea": 1235
   }
  }
 }

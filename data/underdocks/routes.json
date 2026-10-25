@@ -61,15 +61,15 @@
  ],
  "between": {
   "wiki-boat-de-city": {
-   "upper-to-night-harbor": 528,
-   "to-caves-of-irem": 1033
+   "upper-to-night-harbor": 529,
+   "to-caves-of-irem": 1034
   },
   "upper-to-night-harbor": {
    "wiki-boat-de-city": 470,
-   "to-caves-of-irem": 1383
+   "to-caves-of-irem": 1384
   },
   "to-caves-of-irem": {
-   "wiki-boat-de-city": 1003,
+   "wiki-boat-de-city": 1000,
    "upper-to-night-harbor": 1426
   }
  }

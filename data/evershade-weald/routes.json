@@ -32,11 +32,11 @@
  "joins": [],
  "between": {
   "to-glinting-hollow": {
-   "to-keepers-bight": 1297,
+   "to-keepers-bight": 1298,
    "to-blacktide-bay-boulder": 1336,
-   "travelers-lift": 854,
+   "travelers-lift": 851,
    "keepers-lift": null,
-   "pixie-lift": 451,
+   "pixie-lift": 453,
    "south-stairway": null,
    "north-cliff-stairway": null,
    "southeast-cliff-bridge": null,
@@ -45,11 +45,11 @@
    "to-blacktide-bay": null
   },
   "to-keepers-bight": {
-   "to-glinting-hollow": 1301,
-   "to-blacktide-bay-boulder": 441,
+   "to-glinting-hollow": 1309,
+   "to-blacktide-bay-boulder": 442,
    "travelers-lift": 600,
    "keepers-lift": null,
-   "pixie-lift": 1051,
+   "pixie-lift": 1057,
    "south-stairway": null,
    "north-cliff-stairway": null,
    "southeast-cliff-bridge": null,
@@ -58,11 +58,11 @@
    "to-blacktide-bay": null
   },
   "to-blacktide-bay-boulder": {
-   "to-glinting-hollow": 1339,
+   "to-glinting-hollow": 1338,
    "to-keepers-bight": 442,
-   "travelers-lift": 782,
+   "travelers-lift": 788,
    "keepers-lift": null,
-   "pixie-lift": 1089,
+   "pixie-lift": 1094,
    "south-stairway": null,
    "north-cliff-stairway": null,
    "southeast-cliff-bridge": null,
@@ -71,11 +71,11 @@
    "to-blacktide-bay": null
   },
   "travelers-lift": {
-   "to-glinting-hollow": 847,
-   "to-keepers-bight": 597,
-   "to-blacktide-bay-boulder": 805,
+   "to-glinting-hollow": 850,
+   "to-keepers-bight": 599,
+   "to-blacktide-bay-boulder": 807,
    "keepers-lift": null,
-   "pixie-lift": 597,
+   "pixie-lift": 602,
    "south-stairway": null,
    "north-cliff-stairway": null,
    "southeast-cliff-bridge": null,
@@ -97,10 +97,10 @@
    "to-blacktide-bay": null
   },
   "pixie-lift": {
-   "to-glinting-hollow": 452,
+   "to-glinting-hollow": 456,
    "to-keepers-bight": 1049,
-   "to-blacktide-bay-boulder": 1085,
-   "travelers-lift": 604,
+   "to-blacktide-bay-boulder": 1087,
+   "travelers-lift": 601,
    "keepers-lift": null,
    "south-stairway": null,
    "north-cliff-stairway": null,
@@ -132,7 +132,7 @@
    "south-stairway": null,
    "southeast-cliff-bridge": null,
    "river-bridge-west": null,
-   "river-bridge-east": 781,
+   "river-bridge-east": 786,
    "to-blacktide-bay": null
   },
   "southeast-cliff-bridge": {
@@ -169,7 +169,7 @@
    "keepers-lift": null,
    "pixie-lift": null,
    "south-stairway": null,
-   "north-cliff-stairway": 781,
+   "north-cliff-stairway": 783,
    "southeast-cliff-bridge": null,
    "river-bridge-west": null,
    "to-blacktide-bay": null

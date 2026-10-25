@@ -27,6 +27,8 @@
    1926.4600899033176
   ]
  },
+ "oneWayExits": [],
+ "closedEntries": [],
  "joins": [
   {
    "name": "Rubble stairs",
@@ -35,12 +37,14 @@
    "from": {
     "x": 643,
     "y": 2229,
-    "level": "floor-1"
+    "level": "floor-1",
+    "exact": true
    },
    "to": {
     "x": 643,
     "y": 2243,
-    "level": "floor-1"
+    "level": "floor-1",
+    "exact": true
    }
   }
  ],

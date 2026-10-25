@@ -123,7 +123,9 @@ function route(req){
  const g=grounds[req.map];if(!g)throw Error('Route data is not ready.');
  // An exit sign drawn away from its doorway (on a roof, over a hall) routes to the doorway the map's data names.
  const door=p=>{const d=p.reach&&(g.meta.doors||[]).find(d=>Math.abs(d.at[0]-p.x)<1&&Math.abs(d.at[1]-p.y)<1);return d?{...p,x:d.x,y:d.y,h:d.h,level:d.level??p.level,exact:true}:p;};
- const from=snap(g,door(req.from)),to=snap(g,door(req.to));
+ // A pin drawn off the walkable ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px.
+ const near=p=>{const q=door(p),i=snap(g,q);return i>=0||q.exact?i:snap(g,q,260);};
+ const from=near(req.from),to=near(req.to);
  if(from<0)return {error:'The start is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  if(to<0)return {error:'The finish is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  const safer=req.mode==='safer',dangers=req.dangers||[],swimCost=g.meta.swim||2.5;

@@ -84,10 +84,10 @@
  ],
  "between": {
   "exit-great-cavern-sea": {
-   "exit-ail-vorith": 624
+   "exit-ail-vorith": 626
   },
   "exit-ail-vorith": {
-   "exit-great-cavern-sea": 624
+   "exit-great-cavern-sea": 625
   }
  }
 }

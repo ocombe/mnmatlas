@@ -50,60 +50,60 @@
  ],
  "between": {
   "to-evershade-weald": {
-   "to-scarwood": 629,
-   "to-vale-of-zintar": 2078,
-   "to-vale-of-zintar-coast": 2576,
-   "boat-night-harbor": 1400,
-   "to-blacktide-bay-dungeon": 2696,
-   "to-blacktide-bay-dungeon-south": 1984
+   "to-scarwood": 630,
+   "to-vale-of-zintar": 2080,
+   "to-vale-of-zintar-coast": 2583,
+   "boat-night-harbor": 1403,
+   "to-blacktide-bay-dungeon": 2700,
+   "to-blacktide-bay-dungeon-south": 1983
   },
   "to-scarwood": {
-   "to-evershade-weald": 615,
-   "to-vale-of-zintar": 1884,
-   "to-vale-of-zintar-coast": 2343,
-   "boat-night-harbor": 1409,
+   "to-evershade-weald": 617,
+   "to-vale-of-zintar": 1883,
+   "to-vale-of-zintar-coast": 2345,
+   "boat-night-harbor": 1410,
    "to-blacktide-bay-dungeon": 2474,
-   "to-blacktide-bay-dungeon-south": 1769
+   "to-blacktide-bay-dungeon-south": 1777
   },
   "to-vale-of-zintar": {
-   "to-evershade-weald": 2119,
-   "to-scarwood": 2008,
-   "to-vale-of-zintar-coast": 719,
-   "boat-night-harbor": 1926,
-   "to-blacktide-bay-dungeon": 884,
+   "to-evershade-weald": 2140,
+   "to-scarwood": 2024,
+   "to-vale-of-zintar-coast": 722,
+   "boat-night-harbor": 1925,
+   "to-blacktide-bay-dungeon": 892,
    "to-blacktide-bay-dungeon-south": 225
   },
   "to-vale-of-zintar-coast": {
-   "to-evershade-weald": 2504,
-   "to-scarwood": 2400,
-   "to-vale-of-zintar": 720,
-   "boat-night-harbor": 1732,
-   "to-blacktide-bay-dungeon": 654,
+   "to-evershade-weald": 2511,
+   "to-scarwood": 2402,
+   "to-vale-of-zintar": 724,
+   "boat-night-harbor": 1731,
+   "to-blacktide-bay-dungeon": 649,
    "to-blacktide-bay-dungeon-south": 567
   },
   "boat-night-harbor": {
-   "to-evershade-weald": 1353,
-   "to-scarwood": 1381,
-   "to-vale-of-zintar": 1969,
-   "to-vale-of-zintar-coast": 1720,
-   "to-blacktide-bay-dungeon": 1828,
-   "to-blacktide-bay-dungeon-south": 1815
+   "to-evershade-weald": 1364,
+   "to-scarwood": 1386,
+   "to-vale-of-zintar": 1978,
+   "to-vale-of-zintar-coast": 1729,
+   "to-blacktide-bay-dungeon": 1835,
+   "to-blacktide-bay-dungeon-south": 1827
   },
   "to-blacktide-bay-dungeon": {
-   "to-evershade-weald": 2598,
-   "to-scarwood": 2495,
-   "to-vale-of-zintar": 861,
-   "to-vale-of-zintar-coast": 646,
-   "boat-night-harbor": 1831,
+   "to-evershade-weald": 2607,
+   "to-scarwood": 2499,
+   "to-vale-of-zintar": 863,
+   "to-vale-of-zintar-coast": 650,
+   "boat-night-harbor": 1826,
    "to-blacktide-bay-dungeon-south": 661
   },
   "to-blacktide-bay-dungeon-south": {
-   "to-evershade-weald": 1943,
-   "to-scarwood": 1838,
+   "to-evershade-weald": 1951,
+   "to-scarwood": 1842,
    "to-vale-of-zintar": 224,
-   "to-vale-of-zintar-coast": 682,
-   "boat-night-harbor": 1751,
-   "to-blacktide-bay-dungeon": 659
+   "to-vale-of-zintar-coast": 684,
+   "boat-night-harbor": 1758,
+   "to-blacktide-bay-dungeon": 660
   }
  }
 }

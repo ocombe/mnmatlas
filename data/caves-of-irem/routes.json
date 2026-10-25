@@ -30,46 +30,46 @@
  "joins": [],
  "between": {
   "to-great-cavern-sea": {
-   "to-underdocks": 3897,
-   "to-wyrmsbane-tomb": 2303,
-   "to-shaded-dunes": 2456,
-   "from-ancient-crypt": 1382,
-   "boat-route": 2361
+   "to-underdocks": 3901,
+   "to-wyrmsbane-tomb": 2306,
+   "to-shaded-dunes": 2462,
+   "from-ancient-crypt": 1387,
+   "boat-route": 2363
   },
   "to-underdocks": {
-   "to-great-cavern-sea": 3942,
+   "to-great-cavern-sea": 3952,
    "to-wyrmsbane-tomb": 2704,
-   "to-shaded-dunes": 3619,
-   "from-ancient-crypt": 3382,
-   "boat-route": 1582
+   "to-shaded-dunes": 3624,
+   "from-ancient-crypt": 3383,
+   "boat-route": 1586
   },
   "to-wyrmsbane-tomb": {
    "to-great-cavern-sea": 2319,
-   "to-underdocks": 2605,
-   "to-shaded-dunes": 2319,
-   "from-ancient-crypt": 1814,
-   "boat-route": 1065
+   "to-underdocks": 2607,
+   "to-shaded-dunes": 2326,
+   "from-ancient-crypt": 1816,
+   "boat-route": 1064
   },
   "to-shaded-dunes": {
-   "to-great-cavern-sea": 2530,
-   "to-underdocks": 3679,
+   "to-great-cavern-sea": 2532,
+   "to-underdocks": 3689,
    "to-wyrmsbane-tomb": 2357,
-   "from-ancient-crypt": 1133,
-   "boat-route": 2003
+   "from-ancient-crypt": 1135,
+   "boat-route": 2006
   },
   "from-ancient-crypt": {
-   "to-great-cavern-sea": 1375,
-   "to-underdocks": 3432,
-   "to-wyrmsbane-tomb": 1881,
+   "to-great-cavern-sea": 1376,
+   "to-underdocks": 3444,
+   "to-wyrmsbane-tomb": 1884,
    "to-shaded-dunes": 1065,
-   "boat-route": 1836
+   "boat-route": 1840
   },
   "boat-route": {
-   "to-great-cavern-sea": 2416,
-   "to-underdocks": 1586,
-   "to-wyrmsbane-tomb": 1071,
-   "to-shaded-dunes": 1981,
-   "from-ancient-crypt": 1798
+   "to-great-cavern-sea": 2412,
+   "to-underdocks": 1588,
+   "to-wyrmsbane-tomb": 1072,
+   "to-shaded-dunes": 1983,
+   "from-ancient-crypt": 1797
   }
  }
 }

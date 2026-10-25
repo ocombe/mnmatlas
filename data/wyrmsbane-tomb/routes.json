@@ -56,7 +56,7 @@
  ],
  "between": {
   "exit-night-harbor": {
-   "exit-ancient-crypt": 127
+   "exit-ancient-crypt": 128
   },
   "exit-ancient-crypt": {
    "exit-night-harbor": null

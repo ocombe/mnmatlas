@@ -27,13 +27,15 @@
    3261.41197133287
   ]
  },
+ "oneWayExits": [],
+ "closedEntries": [],
  "joins": [],
  "between": {
   "to-keepers-bight": {
-   "to-sunken-resort": 1783
+   "to-sunken-resort": 1784
   },
   "to-sunken-resort": {
-   "to-keepers-bight": 1786
+   "to-keepers-bight": 1785
   }
  }
 }

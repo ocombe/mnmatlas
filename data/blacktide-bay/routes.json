@@ -348,15 +348,15 @@
  "between": {
   "caves-exit-keepers-bight": {
    "caves-exit-keepers-bight-south": 162,
-   "ew-caves-exit-evershade-weald": 1608
+   "ew-caves-exit-evershade-weald": 1613
   },
   "caves-exit-keepers-bight-south": {
-   "caves-exit-keepers-bight": 162,
-   "ew-caves-exit-evershade-weald": 1573
+   "caves-exit-keepers-bight": 163,
+   "ew-caves-exit-evershade-weald": 1577
   },
   "ew-caves-exit-evershade-weald": {
-   "caves-exit-keepers-bight": 1591,
-   "caves-exit-keepers-bight-south": 1569
+   "caves-exit-keepers-bight": 1596,
+   "caves-exit-keepers-bight-south": 1572
   }
  }
 }
