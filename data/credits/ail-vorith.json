@@ -431,6 +431,10 @@
     {
       "name": "darkhayn",
       "what": "moved"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-276": [
@@ -667,6 +671,10 @@
     {
       "name": "darkhayn",
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:apprentice-esveth": [
@@ -1114,6 +1122,48 @@
   "marker:community-1322": [
     {
       "name": "msisepleld",
+      "what": "added"
+    }
+  ],
+  "marker:community-1398": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1400": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1401": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1402": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1403": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1405": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1406": [
+    {
+      "name": "darkhayn",
       "what": "added"
     }
   ]

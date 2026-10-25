@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-19T23:41:47.845Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-20T04:50:56.157Z",
     "rows": []
   },
@@ -8539,6 +8535,288 @@
             "bounty": "npc-an-orc-supplier",
             "wikiId": "npc-an-orc-supplier",
             "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-25T06:09:03.465Z",
+    "rows": [
+      {
+        "id": 1386,
+        "payloadHash": "2b377d060201839669db1ba562c69275ce50717d9436b15400c12b8128e7c102",
+        "updatedAt": "2026-10-25T05:51:39.521639+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4130,
+            "y": 1198,
+            "name": "A swarm leader",
+            "note": "Rat Side.  A Skri'Var Fiend is the placeholder",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-swarm-leader",
+            "level": "floor-1",
+            "wikiId": "npc-a-swarm-leader",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1389,
+        "payloadHash": "3022b584febdcec0a76d6b41455117db40597cc768aeb8828834a5305257ae2e",
+        "updatedAt": "2026-10-25T05:50:57.626154+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3378,
+            "y": 1470,
+            "name": "A frenzied ratman",
+            "note": "Rat Side",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-ratman",
+            "level": "floor-1",
+            "wikiId": "npc-a-frenzied-ratman",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1390,
+        "payloadHash": "e93aaa07b0b49e198373d4336a6e0d58f3f3b60fb7cc855c37a4715b4f101faf",
+        "updatedAt": "2026-10-25T05:48:53.496715+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "provost-xan-shorn",
+          "payload": {
+            "to": [
+              4623,
+              4171
+            ],
+            "from": [
+              4498,
+              4167
+            ],
+            "name": "Provost Xan'shorn"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1398,
+        "payloadHash": "39f64adaa692d87322a285625c28bdf24f0e8defc30384a356167ad689d8e250",
+        "updatedAt": "2026-10-25T05:49:03.969875+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4592,
+            "y": 4354,
+            "name": "Zaarinth",
+            "note": "",
+            "vendor": "Herbalism vendor",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1400,
+        "payloadHash": "48bfe25fbc65978999a0436ecb9d4f7b67a3871da1b8c7f5019138c6c241836b",
+        "updatedAt": "2026-10-25T05:49:16.237251+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3766,
+            "y": 2145,
+            "name": "Julra",
+            "note": "3rd floor",
+            "trade": "Cooking",
+            "category": "Tradeskill"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1401,
+        "payloadHash": "39587425eb99aa1e2cc291fe2d2b4a749a0ec9b06607ef911e2dfeeb7afc0299",
+        "updatedAt": "2026-10-25T05:49:19.717938+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3771,
+            "y": 2098,
+            "name": "Keigor Worsinthar",
+            "note": "3rd floor",
+            "vendor": "Grocer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1402,
+        "payloadHash": "77c99ea8c38da1f0c63abaa5b06c089e5ba4406b2e191db1c273ee3f0721c7bc",
+        "updatedAt": "2026-10-25T05:49:24.163544+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3704,
+            "y": 2093,
+            "name": "Imred Gule",
+            "note": "3rd floor",
+            "vendor": "Cook",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1403,
+        "payloadHash": "cd7507f2aba6bc1becb798a361c398dfea6e1dbd5dd201c44206139afbc7e784",
+        "updatedAt": "2026-10-25T05:49:28.904914+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3781,
+            "y": 2294,
+            "name": "Aelisel",
+            "note": "2nd floor of the inn",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1404,
+        "payloadHash": "7011911e0b6c992690c169405a466103ed8f8009fc58b9a054ab3be414df72ca",
+        "updatedAt": "2026-10-25T05:49:32.779183+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-273",
+          "payload": {
+            "from": {
+              "x": 3812,
+              "y": 2289,
+              "name": "Kelnir",
+              "note": "",
+              "category": "Notable NPC"
+            },
+            "name": "Kelnir",
+            "note": "1st floor of the inn"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1405,
+        "payloadHash": "7e194f624d703062f4c6ca8d348b5c0a8516a9787d0845afa2d8c4618f3fa659",
+        "updatedAt": "2026-10-25T05:49:51.534693+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3240,
+            "y": 2814,
+            "name": "Zeliska Felthal",
+            "note": "",
+            "vendor": "Chain armorer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1406,
+        "payloadHash": "a4b99581c91cc1843c733412278990157b58eb58797660a60d750096e9548640",
+        "updatedAt": "2026-10-25T05:49:54.758655+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3212,
+            "y": 2845,
+            "name": "Ferrin Jurvok",
+            "note": "",
+            "vendor": "Plate armorer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1433,
+        "payloadHash": "0e0da949366ae58d369d1846ff67bcf135c56c236e0894c3748ddeb7537ac360",
+        "updatedAt": "2026-10-25T05:52:37.116276+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4880,
+            "y": 1021,
+            "name": "An acolyte of Visru",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-acolyte-of-visru",
+            "level": "floor-1",
+            "wikiId": "npc-an-acolyte-of-visru",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1435,
+        "payloadHash": "7f8a323d0dcfde5f0a590c5760f14a5b1ab99929997e86803a18898d71c6480f",
+        "updatedAt": "2026-10-25T05:53:34.783933+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3485,
+            "y": 1880,
+            "name": "A Bloodchain champion (level 23)",
+            "note": "Blacktide Bay",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-bloodchain-champion",
+            "level": "floor-1",
+            "levels": [
+              23,
+              23
+            ],
+            "wikiId": "npc-a-bloodchain-champion",
+            "category": "Named mob"
           },
           "credit": true
         }

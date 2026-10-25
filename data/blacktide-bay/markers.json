@@ -517,5 +517,57 @@
     "category": "Notable NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/an-orc-supplier",
     "wikiId": "npc-an-orc-supplier"
+  },
+  {
+    "id": "community-1386",
+    "community": true,
+    "name": "A swarm leader",
+    "note": "Rat Side.  A Skri'Var Fiend is the placeholder",
+    "x": 4130,
+    "y": 1198,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-swarm-leader",
+    "wikiId": "npc-a-swarm-leader"
+  },
+  {
+    "id": "community-1389",
+    "community": true,
+    "name": "A frenzied ratman",
+    "note": "Rat Side",
+    "x": 3378,
+    "y": 1470,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-ratman",
+    "wikiId": "npc-a-frenzied-ratman"
+  },
+  {
+    "id": "community-1433",
+    "community": true,
+    "name": "An acolyte of Visru",
+    "note": "",
+    "x": 4880,
+    "y": 1021,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-acolyte-of-visru",
+    "wikiId": "npc-an-acolyte-of-visru"
+  },
+  {
+    "id": "community-1435",
+    "community": true,
+    "name": "A Bloodchain champion (level 23)",
+    "note": "Blacktide Bay",
+    "x": 3485,
+    "y": 1880,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-bloodchain-champion",
+    "wikiId": "npc-a-bloodchain-champion",
+    "levels": [
+      23,
+      23
+    ]
   }
 ]
