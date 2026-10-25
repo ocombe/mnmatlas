@@ -119,15 +119,15 @@
  "between": {
   "to-sungreet-strand": {
    "to-sungreet-strand-road": 321,
-   "to-vale-of-zintar": null
+   "to-vale-of-zintar": 4918
   },
   "to-sungreet-strand-road": {
    "to-sungreet-strand": 321,
-   "to-vale-of-zintar": null
+   "to-vale-of-zintar": 4612
   },
   "to-vale-of-zintar": {
-   "to-sungreet-strand": null,
-   "to-sungreet-strand-road": null
+   "to-sungreet-strand": 4907,
+   "to-sungreet-strand-road": 4638
   }
  }
 }
