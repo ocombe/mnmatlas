@@ -203,14 +203,14 @@ function npcCardFor(m){
    const byId=new Map(allMarkers().map(x=>[x.id,x]));for(const [id,pin] of pins){const one=byId.get(id);if(one&&(npcCards.cards[one.wikiId]||campTypes.includes(one.category)&&(one.mobs||[]).some(x=>npcCards.cards[x.wikiId]))){pin.setPopupContent(popup(one));if(campTypes.includes(one.category)&&pin.getTooltip?.()?.isOpen?.())pin.setTooltipContent(markerHoverCard(one,window.atlasCommunity?.hoverState(one)));if(pin.isPopupOpen())requestAnimationFrame(fitCardPopup);
     // A card makes a tall popup: it moves the map just enough to show it whole.
     // The top padding clears the map's title plate, wherever it sits on this screen.
-    const p=pin.getPopup();if(p){Object.assign(p.options,{autoPan:true,autoPanPaddingBottomRight:L.point(16,16)});Object.defineProperty(p.options,'autoPanPaddingTopLeft',{configurable:true,get:()=>{const plate=document.querySelector('.map-title'),box=map.getContainer().getBoundingClientRect(),below=plate&&plate.offsetParent?plate.getBoundingClientRect().bottom-box.top+10:0;return L.point(16,Math.max(16,below));}});}}}});}
+    const p=pin.getPopup();if(p){Object.assign(p.options,{autoPan:true,autoPanPaddingBottomRight:L.point(16,16)});Object.defineProperty(p.options,'autoPanPaddingTopLeft',{configurable:true,get:()=>{const box=map.getContainer().getBoundingClientRect(),bottom=headBottom(),below=bottom?bottom-box.top+10:0;return L.point(16,Math.max(16,below));}});}}}});}
  return null;
 }
 // A popup with a card is tall: once open (by a click, a search, a shared or ?wiki= link), the map moves just enough that
 // it shows whole, below the map's title plate.
 function fitCardPopup(){
  const el=map&&document.querySelector('.leaflet-popup');if(!el||!el.querySelector('.npc-card'))return;
- const box=map.getContainer().getBoundingClientRect(),plate=document.querySelector('.map-title'),top=Math.max(box.top+16,plate&&plate.offsetParent?plate.getBoundingClientRect().bottom+10:0),dy=top-el.getBoundingClientRect().top;
+ const box=map.getContainer().getBoundingClientRect(),top=Math.max(box.top+16,headBottom()+10),dy=top-el.getBoundingClientRect().top;
  if(dy>1)map.panBy([0,-dy],{animate:false});
 }
 // A popup's own buttons (copy, edit, delete, share, suggest, report) end it as one tidy list; ways to move on (a floor,
@@ -223,6 +223,7 @@ const actionPaths={shape:'M5 8l6-4 8 4-1 9-8 3-6-5z',
  delete:'M3 6h18 M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6 M8 6V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2 M10 11v6 M14 11v6',
  share:'M4 12v8a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2v-8 M16 6l-4-4-4 4 M12 2v13',
  reset:'M3 12a9 9 0 1 0 3-6.7L3 8 M3 3v5h5',
+ confirm:'M20 6 9 17l-5-5',
  route:'M6 21a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M18 7a2 2 0 1 0 0-4 2 2 0 0 0 0 4z M8 19h7a3 3 0 0 0 0-6H9a3 3 0 0 1 0-6h7'};
 function actionIcon(b){
  const kind=b.dataset.icon;if(!Object.hasOwn(actionPaths,kind||'')||b.querySelector('svg'))return;
@@ -367,7 +368,8 @@ function pinIcon(m){
  if(globalThis.atlasMarkerSchema.givesQuests(m))face.append(questMark());
  // Ways up and down (ladders, stairs, lifts, passages) are round seals centred on the spot, like the exit signs' arrows.
  if(m.toLevel||['Exit','Ladder','Stairs','Lift','Bridge','Teleporter','Passage','Level connection'].includes(m.category))return L.divIcon({className:'pin level-pin'+own,html:face,iconSize:[26,26],iconAnchor:[13,13],popupAnchor:[0,-13]});
- return L.divIcon({className:'pin'+own,html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
+ // A spot placed from a description, not yet confirmed in game, wears a dashed ring until someone confirms it.
+ return L.divIcon({className:'pin'+own+(m.approximate&&!own?' approx':''),html:face,iconSize:[25,25],iconAnchor:[12,25],popupAnchor:[0,-23]});
 }
 function openMap(id){goToMap(id);}
 // One line of the search results: an optional icon, the title and a small line under it.
@@ -697,7 +699,16 @@ function applyLocation(url){
 }
 function fitMap(){activePlace=null;map.invalidateSize({pan:false});limitZoomOut();const d=config.defaultView;if(d.mode==='point')map.setView(locationOf(d),d.z,{animate:false});else map.setView(mapBounds().getCenter(),fitZoom(),{animate:false});}
 // The whole map fits the view at this zoom (unsnapped, so it fills the view exactly); zooming out stops there.
-function fitZoom(){const f=config.frame||{width:config.width,height:config.height},pad=2*(config.defaultView.padding||0),size=map.getSize();if(!size.x||!size.y)return config.minZoom;return Math.min(config.maxZoom,Math.max(config.minZoom,map.getScaleZoom(Math.min((size.x-pad)/f.width,(size.y-pad)/f.height),config.coordinateZoom)));}
+function fitZoom(){const f=config.frame||{width:config.width,height:config.height},pad=2*(config.defaultView.padding||0),bottom=headBottom(),padY=Math.max(pad,bottom?2*(bottom-map.getContainer().getBoundingClientRect().top+8):0),size=map.getSize();if(!size.x||!size.y)return config.minZoom;return Math.min(config.maxZoom,Math.max(config.minZoom,map.getScaleZoom(Math.min((size.x-pad)/f.width,(size.y-padY)/f.height),config.coordinateZoom)));}
+// The map name and the level tabs share one slim row in the top-left corner; the tabs wrap under the name when the row is too narrow.
+function placeLevelControls(){
+ const frame=$('map-frame'),title=document.querySelector('.map-title'),controls=$('level-controls');if(!frame||!controls)return;
+ if(controls.hidden||!title||!title.offsetParent){for(const v of ['--level-left','--level-top','--level-max'])frame.style.removeProperty(v);return;}
+ const f=frame.getBoundingClientRect(),t=title.getBoundingClientRect(),tools=document.querySelector('.map-tools')?.getBoundingClientRect(),right=(tools&&tools.width?tools.left:f.right)-10,side=controls.scrollWidth<=right-t.right-6;
+ frame.style.setProperty('--level-left',Math.round((side?t.right+6:t.left)-f.left)+'px');frame.style.setProperty('--level-top',Math.round((side?t.top:t.bottom+6)-f.top)+'px');frame.style.setProperty('--level-max',Math.round(right-(side?t.right+6:t.left))+'px');
+}
+// Lowest edge of the name row (title and level tabs at the top of the map), 0 when neither shows.
+function headBottom(){const frame=$('map-frame')?.getBoundingClientRect();let bottom=0;for(const e of [document.querySelector('.map-title'),$('level-controls')]){if(!e||e.hidden||!e.offsetParent)continue;const r=e.getBoundingClientRect();if(frame&&r.top>frame.top+frame.height/2)continue;bottom=Math.max(bottom,r.bottom);}return bottom;}
 function limitZoomOut(){const atFit=map.getZoom()<=map.getMinZoom()+.01;map.setMinZoom(fitZoom());if(atFit&&map.getZoom()>map.getMinZoom())map.setView(mapBounds().getCenter(),map.getMinZoom(),{animate:false});}
 // A shared x/y link gets a small spot marker, but not when the view comes from this page itself (level switch, reload, back/forward).
 let ownView=['reload','back_forward'].includes(performance.getEntriesByType?.('navigation')[0]?.type);
@@ -732,7 +743,7 @@ function updateTitles(){
  controls.replaceChildren();controls.hidden=!config.levels&&!linked.length;document.body.classList.toggle('has-levels',!!config.levels||!!linked.length);
  for(const level of config.levels||[]){const b=text('button',level.title);b.type='button';b.dataset.level=level.id;b.setAttribute('aria-pressed',String(level.id===config.levelId));b.onclick=()=>changeLevel(level.id);controls.append(b);}
  for(const l of linked){const b=text('button',l.title);b.type='button';b.dataset.map=l.map;b.setAttribute('aria-pressed',String(l.map===config.id));b.onclick=()=>{if(l.map!==config.id)goToMap(l.map);};controls.append(b);}
- $('map-frame').setAttribute('aria-label',config.title+' illustrated map');
+ $('map-frame').setAttribute('aria-label',config.title+' illustrated map');placeLevelControls();
  setPickerMap(config.id);
  const a=config.attribution,footer=$('map-attribution');footer.replaceChildren(text('span',a.text+' '));
  appendAttributionLinks(footer,a);
@@ -797,7 +808,7 @@ async function loadMap(id,url=new URL(location.href),push=false,reviewToken=null
   // Drawn things seen from below (a citadel floating over the oasis) sit see-through above the tiles and let clicks pass.
   if(config.overlays?.length){const pane=map.createPane('atlas-overlays');pane.style.zIndex=250;pane.style.pointerEvents='none';for(const o of config.overlays){if(!localPath(o.image)||![o.x,o.y,o.width,o.height].every(Number.isFinite))continue;L.imageOverlay(o.image,L.latLngBounds(map.unproject([o.x,o.y+o.height],config.coordinateZoom),map.unproject([o.x+o.width,o.y],config.coordinateZoom)),{pane:'atlas-overlays',opacity:Number.isFinite(o.opacity)?o.opacity:.55,interactive:false,className:'map-overlay'}).addTo(map);}}
   const currentHidden={...hiddenData};for(const key of ['areas','additionalAreas','routes','connections','destinations','levelStacks'])if(Array.isArray(hiddenData[key]))currentHidden[key]=hiddenData[key].filter(atLevel);
-  fitMap();wheelAfterClick();map.on('resize',()=>{limitZoomOut();updateZoom();});disposeBackdrop=setupSheetEdge(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
+  fitMap();wheelAfterClick();map.on('resize',()=>{placeLevelControls();limitZoomOut();updateZoom();});document.fonts?.ready.then(()=>{placeLevelControls();limitZoomOut();});disposeBackdrop=setupSheetEdge(map,config,config.frame||{x:0,y:0,width:config.width,height:config.height});disposeLabels=setupPlaceLabels(labelData);hiddenController=setupHiddenAreas(map,config,currentHidden);if(zonesData)disposeZones=setupWorldZones(map,config,zonesData);
   buildPlaceIndex();refreshSearch();setPanel(window.atlasCommunity?.reviewOpen?.()||!compact()&&desktopPanelOpen&&!config.entry);$('hidden-controls').hidden=!config.hiddenAreasFile||!(currentHidden.areas.length||(currentHidden.additionalAreas||[]).length);$('alignment-tools').hidden=true;$('add').hidden=!takesNotes();if($('add-note'))$('add-note').hidden=!takesNotes();$('edit-positions').hidden=false;updateAlignmentStatus();
   map.on('movestart',()=>{if(!applyingView){activePlace=null;sharedPin?.remove();sharedPin=null;}});
   map.on('moveend zoomend',()=>{updateZoom();scheduleUrl();});map.on('zoomend',()=>{const visible=visibleMarkers(),signature=visible.filter(m=>m.shape&&shapeShown(m)).map(m=>m.id).join(',');if(signature!==map.atlasShapeVisibility)drawMarkerShapes(visible);});

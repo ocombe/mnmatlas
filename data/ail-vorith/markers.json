@@ -334,8 +334,8 @@
     "id": "provost-xan-shorn",
     "name": "Provost Xan'shorn",
     "category": "Notable NPC",
-    "x": 4498,
-    "y": 4167,
+    "x": 4623,
+    "y": 4171,
     "note": "Paths; meaning to confirm in game.",
     "community": true
   },
@@ -844,7 +844,7 @@
     "community": true,
     "name": "Kelnir",
     "category": "Notable NPC",
-    "note": "",
+    "note": "1st floor of the inn",
     "x": 3812,
     "y": 2289
   },
@@ -2713,5 +2713,74 @@
         ]
       ]
     }
+  },
+  {
+    "id": "community-1398",
+    "community": true,
+    "name": "Zaarinth",
+    "note": "",
+    "x": 4592,
+    "y": 4354,
+    "category": "Vendor",
+    "vendor": "Herbalism vendor"
+  },
+  {
+    "id": "community-1400",
+    "community": true,
+    "name": "Julra",
+    "note": "3rd floor",
+    "x": 3766,
+    "y": 2145,
+    "category": "Tradeskill",
+    "trade": "Cooking"
+  },
+  {
+    "id": "community-1401",
+    "community": true,
+    "name": "Keigor Worsinthar",
+    "note": "3rd floor",
+    "x": 3771,
+    "y": 2098,
+    "category": "Vendor",
+    "vendor": "Grocer"
+  },
+  {
+    "id": "community-1402",
+    "community": true,
+    "name": "Imred Gule",
+    "note": "3rd floor",
+    "x": 3704,
+    "y": 2093,
+    "category": "Vendor",
+    "vendor": "Cook"
+  },
+  {
+    "id": "community-1403",
+    "community": true,
+    "name": "Aelisel",
+    "note": "2nd floor of the inn",
+    "x": 3781,
+    "y": 2294,
+    "category": "Notable NPC"
+  },
+  {
+    "id": "community-1405",
+    "community": true,
+    "name": "Zeliska Felthal",
+    "note": "",
+    "x": 3240,
+    "y": 2814,
+    "category": "Vendor",
+    "vendor": "Chain armorer"
+  },
+  {
+    "id": "community-1406",
+    "community": true,
+    "name": "Ferrin Jurvok",
+    "note": "",
+    "x": 3212,
+    "y": 2845,
+    "category": "Vendor",
+    "vendor": "Plate armorer"
   }
 ]

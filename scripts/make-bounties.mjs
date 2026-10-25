@@ -12,7 +12,9 @@ import {key,zoneSlug} from './wiki-reconcile.mjs';
 
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),api='https://monstersandmemories.wiki/api/partner/v1/';
 const context={};vm.createContext(context);vm.runInContext(await readFile(resolve(root,'marker-schema.js'),'utf8'),context);vm.runInContext(await readFile(resolve(root,'wiki-links.js'),'utf8'),context);
-const [isClassTrainer,tradeTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]=vm.runInContext('[isClassTrainer,tradeTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap]',context);
+const [isClassTrainer,tradeTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap,atlasClasses]=vm.runInContext('[isClassTrainer,tradeTrainer,trainerClasses,wikiClassesOf,mapTrainerClasses,trainerOnMap,atlasClasses]',context);
+// A trainer page that names its class only in its description ("Spellblade trainer.", "Enchanter guildmaster").
+const describedClasses=v=>{const t=String(v??'');return atlasClasses.filter(c=>new RegExp('\\b'+(c==='Fighter'?'(?:Fighter|Warrior)':c.replace(' ','\\s*'))+'s?\\s+(?:trainer|instructor|guild\\s*master|guildmaster)\\b','i').test(t));};
 // The same loose comparison as the board: our extra words after a dash or in brackets, a leading article, case and accents aside.
 const looseName=v=>String(v??'').split(/\s+[—–-]\s+|\s*\(/)[0].normalize('NFD').replace(/[̀-ͯ]/g,'').toLowerCase().replace(/[’'`]/g,'').replace(/[^a-z0-9]+/g,' ').trim().replace(/^(the|a|an) /,'');
 export const placed=(row,places)=>{const name=looseName(row.name);return places.some(p=>p.wikiId===row.id||(name.length>=4&&(looseName(p.name)===name||(' '+looseName(p.name)+' ').includes(' '+name+' '))));};
@@ -21,6 +23,8 @@ const text=(v,max)=>typeof v==='string'?v.replace(/[\u0000-\u001f\u007f<>]/g,'')
 async function main(){
  let secret;try{secret=await key();}catch{console.log('No wiki key: the bounty lists are not built this time.');return;}
  const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));let built=0;const index=[];
+ // Wiki NPCs left off on purpose (duplicate pages, kinds shared between zones), by map and wiki id.
+ let skip={};try{skip=JSON.parse(await readFile(resolve(root,'data/wanted-skip.json'),'utf8'));}catch{}
  await mkdir(resolve(root,'bounties'),{recursive:true});
  // Maps drawn as one place (Evershade Weald's forest floor under Faelindral's platforms) share their wiki NPCs: the wiki
  // files many of Faelindral's people under Evershade Weald, and a few at a lift's foot under Faelindral. Each NPC goes to
@@ -59,13 +63,15 @@ async function main(){
    return classes.length?{...row,classes}:row;})
    // Plain mobs, and creatures the wiki tags as named but that are a kind ("A Deepcut arsonist"), are not single NPCs to pin;
    // merchants, trainers and quest givers stay even when their name starts with "A" ("A bag merchant").
-   .filter(n=>n.id&&n.name&&n.url&&n.role!=='mob'&&!(n.role==='named'&&/^(a|an) /i.test(n.name)&&!isClassTrainer(n))&&!placed(n,places));
+   .filter(n=>n.id&&n.name&&n.url&&n.role!=='mob'&&!(n.role==='named'&&/^(a|an) /i.test(n.name)&&!isClassTrainer(n))
+    // Creatures the wiki lists with no role at all ("an angry fire elemental") are mobs too.
+    &&!(!n.role&&/^(a|an) /i.test(n.name))&&!Object.hasOwn(skip[c.id]||{},n.id)&&!placed(n,places));
   // A trainer the zone list gives no class for: the NPC's own page may (class or tags). A few lookups per zone at most.
   let asked=0;
   for(const n of rows){
    if(!isClassTrainer(n)||trainerClasses(n).length||asked>=12)continue;asked++;
    try{const r=await fetch(api+'npc/'+encodeURIComponent(n.id),{headers:{Authorization:'Bearer '+secret,Accept:'application/json'}});
-    if(r.ok){const page=await r.json(),found=wikiClassesOf(page?.npc||page);if(found.length)n.classes=found;}}catch{}
+    if(r.ok){const page=await r.json(),npc=page?.npc||page,found=wikiClassesOf(npc);if(found.length)n.classes=found;else{const said=describedClasses(npc?.description);if(said.length)n.classes=said;}}}catch{}
    await new Promise(r=>setTimeout(r,400));
   }
   // Instructors whose classes all have a class trainer marker or chip on the map are on it already.

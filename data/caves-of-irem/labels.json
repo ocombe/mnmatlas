@@ -59,12 +59,14 @@
   },
   {
    "id": "skrivar-camp",
-   "name": "Skri'Var Camp",
+   "name": "Cutthroats / Merc Camp",
    "x": 6824,
    "y": 6300,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "note": "No Skri'var Exist here in EA",
+   "community": true
   },
   {
    "id": "bandit-camp",
@@ -191,6 +193,17 @@
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
    }
+  },
+  {
+   "id": "community-1451",
+   "community": true,
+   "name": "Mur'Hua Village",
+   "note": "",
+   "x": 1899,
+   "y": 2605,
+   "kind": "building",
+   "priority": 50,
+   "minZoom": 0
   }
  ],
  "trainers": []

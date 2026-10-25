@@ -190,5 +190,20 @@
   "x": 5427,
   "y": 4539,
   "travel": "Teleporter"
+ },
+ {
+  "id": "wanted-overseer-vashruk",
+  "name": "Overseer Vashruk",
+  "category": "Named mob",
+  "note": "Orc camp, with the group nearest the waterfall.",
+  "x": 1069,
+  "y": 3262,
+  "approximate": true,
+  "levels": [
+   20,
+   20
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/overseer-vashruk",
+  "wikiId": "npc-overseer-vashruk"
  }
 ]

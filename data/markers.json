@@ -135,7 +135,9 @@
     "category": "Tradeskill",
     "x": 1143,
     "y": 1240,
-    "note": ""
+    "note": "",
+    "wiki": "https://monstersandmemories.wiki/npcs/tanner-burhan",
+    "wikiId": "npc-tanner-burhan"
   },
   {
     "id": "wiki-29",
@@ -238,7 +240,9 @@
     "x": 1954,
     "y": 1099,
     "note": "",
-    "community": true
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/survivalist-jabool",
+    "wikiId": "npc-survivalist-jabool"
   },
   {
     "id": "wiki-43",
@@ -254,7 +258,9 @@
     "category": "Tradeskill",
     "x": 2024,
     "y": 1127,
-    "note": ""
+    "note": "",
+    "wiki": "https://monstersandmemories.wiki/npcs/spinner-cligg",
+    "wikiId": "npc-spinner-cligg"
   },
   {
     "id": "wiki-45",
@@ -319,7 +325,9 @@
     "x": 2652,
     "y": 2022,
     "note": "",
-    "community": true
+    "community": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/cartographer-duha",
+    "wikiId": "npc-cartographer-duha"
   },
   {
     "id": "class-1",
@@ -2357,15 +2365,13 @@
     "id": "community-971",
     "community": true,
     "name": "Master Khaila",
-    "note": "North of the Twilight Harbor area. '''Directions:''' Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop dow",
+    "note": "North of the Twilight Harbor area.\nDirections: Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop down, but along the sand) and past the stairwell to your right. Go up the stairs in the building in front of you (Disenchanter Qaridi is on the roof).",
     "x": 1671,
     "y": 1719,
-    "category": "Class trainer",
+    "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/master-khaila",
     "wikiId": "npc-master-khaila",
-    "classes": [
-      "Enchanter"
-    ]
+    "trade": "(Dis)Enchanting"
   },
   {
     "id": "community-972",
@@ -2374,12 +2380,10 @@
     "note": "",
     "x": 1660,
     "y": 1712,
-    "category": "Class trainer",
+    "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/disenchanter-qaridi",
     "wikiId": "npc-disenchanter-qaridi",
-    "classes": [
-      "Enchanter"
-    ]
+    "trade": "(Dis)Enchanting"
   },
   {
     "id": "community-973",
@@ -2839,5 +2843,373 @@
     "category": "Vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/master-tailor-sansha",
     "wikiId": "npc-master-tailor-sansha"
+  },
+  {
+    "id": "wanted-corporal-theodora",
+    "name": "Corporal Theodora",
+    "category": "Quest NPC",
+    "note": "At the gatehouse into the Bends.",
+    "x": 2189,
+    "y": 1645,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/corporal-theodora",
+    "wikiId": "npc-corporal-theodora"
+  },
+  {
+    "id": "wanted-lieutenant-jarovik-holt",
+    "name": "Lieutenant Jarovik Holt",
+    "category": "Quest NPC",
+    "note": "At the gatehouse into the Bends.",
+    "x": 2209,
+    "y": 1651,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/lieutenant-jarovik-holt",
+    "wikiId": "npc-lieutenant-jarovik-holt"
+  },
+  {
+    "id": "wanted-cormac-renshaw",
+    "name": "Cormac Renshaw",
+    "category": "Quest NPC",
+    "note": "On the boat in the Bends.",
+    "x": 2221,
+    "y": 1668,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/cormac-renshaw",
+    "wikiId": "npc-cormac-renshaw"
+  },
+  {
+    "id": "wanted-karif-jamah",
+    "name": "Karif Jamah",
+    "category": "Quest NPC",
+    "note": "In the Bends.",
+    "x": 2221,
+    "y": 1690,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/karif-jamah",
+    "wikiId": "npc-karif-jamah"
+  },
+  {
+    "id": "wanted-sahir-muzalal",
+    "name": "Sahir Muzalal",
+    "category": "Quest NPC",
+    "note": "In the Bends.",
+    "x": 2209,
+    "y": 1707,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/sahir-muzalal",
+    "wikiId": "npc-sahir-muzalal"
+  },
+  {
+    "id": "wanted-tinka-roofstrider",
+    "name": "Tinka Roofstrider",
+    "category": "Quest NPC",
+    "note": "In the Bends.",
+    "x": 2189,
+    "y": 1713,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/tinka-roofstrider",
+    "wikiId": "npc-tinka-roofstrider"
+  },
+  {
+    "id": "wanted-darius-brask",
+    "name": "Darius Brask",
+    "category": "Named mob",
+    "note": "In the Bends.",
+    "x": 2169,
+    "y": 1707,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/darius-brask",
+    "wikiId": "npc-darius-brask"
+  },
+  {
+    "id": "wanted-eamon-kassir",
+    "name": "Eamon Kassir",
+    "category": "Named mob",
+    "note": "In the Bends.",
+    "x": 2157,
+    "y": 1690,
+    "approximate": true,
+    "levels": [
+      25,
+      25
+    ],
+    "wiki": "https://monstersandmemories.wiki/npcs/eamon-kassir",
+    "wikiId": "npc-eamon-kassir"
+  },
+  {
+    "id": "wanted-mila-dastan",
+    "name": "Mila Dastan",
+    "category": "Named mob",
+    "note": "In the Bends.",
+    "x": 2157,
+    "y": 1668,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/mila-dastan",
+    "wikiId": "npc-mila-dastan"
+  },
+  {
+    "id": "wanted-vikar-brask",
+    "name": "Vikar Brask",
+    "category": "Named mob",
+    "note": "In the Bends.",
+    "x": 2169,
+    "y": 1651,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/vikar-brask",
+    "wikiId": "npc-vikar-brask"
+  },
+  {
+    "id": "wanted-adimah-starseeker",
+    "name": "Adimah Starseeker",
+    "category": "Quest NPC",
+    "note": "Grand Library, entry floor, left of the entrance.",
+    "x": 2134,
+    "y": 1180,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/adimah-starseeker",
+    "wikiId": "npc-adimah-starseeker"
+  },
+  {
+    "id": "wanted-hamsar",
+    "name": "Hamsar",
+    "category": "Quest NPC",
+    "note": "Grand Library, entry floor, right of the entrance.",
+    "x": 2157,
+    "y": 1197,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/hamsar",
+    "wikiId": "npc-hamsar"
+  },
+  {
+    "id": "wanted-lanna-ivintoria",
+    "name": "Lanna Ivintoria",
+    "category": "Quest NPC",
+    "note": "Grand Library, centre of the lower middle floor.",
+    "x": 2148,
+    "y": 1223,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/lanna-ivintoria",
+    "wikiId": "npc-lanna-ivintoria"
+  },
+  {
+    "id": "wanted-liyna-esueiruc",
+    "name": "Liyna Esueiruc",
+    "category": "Quest NPC",
+    "note": "Grand Library, west end of the mezzanine.",
+    "x": 2120,
+    "y": 1223,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/liyna-esueiruc",
+    "wikiId": "npc-liyna-esueiruc"
+  },
+  {
+    "id": "wanted-haredi",
+    "name": "Haredi",
+    "category": "Vendor",
+    "note": "Grand Library, left of the teleport platform.",
+    "x": 2111,
+    "y": 1197,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/haredi",
+    "wikiId": "npc-haredi"
+  },
+  {
+    "id": "wanted-millicent-domaire",
+    "name": "Millicent Domaire",
+    "category": "Quest NPC",
+    "note": "Wayfarers Hospice.",
+    "x": 827,
+    "y": 1239,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/millicent-domaire",
+    "wikiId": "npc-millicent-domaire"
+  },
+  {
+    "id": "wanted-thibald-burlond",
+    "name": "Thibald Burlond",
+    "category": "Quest NPC",
+    "note": "Wayfarers Hospice.",
+    "x": 827,
+    "y": 1279,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/thibald-burlond",
+    "wikiId": "npc-thibald-burlond"
+  },
+  {
+    "id": "wanted-pau",
+    "name": "Pau",
+    "category": "Quest NPC",
+    "note": "By the Twilight Harbor, next to his twin Piia.",
+    "x": 1597,
+    "y": 2013,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/pau",
+    "wikiId": "npc-pau"
+  },
+  {
+    "id": "wanted-sajra",
+    "name": "Sajra",
+    "category": "Quest NPC",
+    "note": "By the Twilight Harbor.",
+    "x": 1597,
+    "y": 2053,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/sajra",
+    "wikiId": "npc-sajra"
+  },
+  {
+    "id": "wanted-smelter-jadid",
+    "name": "Smelter Jadid",
+    "category": "Tradeskill",
+    "note": "In the Night Market.",
+    "x": 1173,
+    "y": 1544,
+    "approximate": true,
+    "trade": "Blacksmithing / Smelting",
+    "wiki": "https://monstersandmemories.wiki/npcs/smelter-jadid",
+    "wikiId": "npc-smelter-jadid"
+  },
+  {
+    "id": "wanted-used-armor-trader",
+    "name": "Used Armor Trader",
+    "category": "Vendor",
+    "note": "In the Night Market.",
+    "x": 1173,
+    "y": 1588,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/used-armor-trader",
+    "wikiId": "npc-used-armor-trader"
+  },
+  {
+    "id": "wanted-tailor-darya",
+    "name": "Tailor Darya",
+    "category": "Vendor",
+    "note": "Next to Noura the Tailor.",
+    "x": 1142,
+    "y": 1538,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/tailor-darya",
+    "wikiId": "npc-tailor-darya"
+  },
+  {
+    "id": "wanted-layith-kharem",
+    "name": "Layith Kharem",
+    "category": "Quest NPC",
+    "note": "Glimmermoon Hall, up the ladder behind the stage.",
+    "x": 1010,
+    "y": 1513,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/layith-kharem",
+    "wikiId": "npc-layith-kharem"
+  },
+  {
+    "id": "wanted-sir-hedley",
+    "name": "Sir Hedley",
+    "category": "Quest NPC",
+    "note": "On the balcony atop the Thirsty Glance, next to Glimmermoon Hall.",
+    "x": 1010,
+    "y": 1553,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/sir-hedley",
+    "wikiId": "npc-sir-hedley"
+  },
+  {
+    "id": "wanted-masonry-supplier-arthis",
+    "name": "Masonry Supplier Arthis",
+    "category": "Quest NPC",
+    "note": "In the temple against the cliff, between Sojourner’s Camp and the Tannery.",
+    "x": 1035,
+    "y": 1150,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/masonry-supplier-arthis",
+    "wikiId": "npc-masonry-supplier-arthis"
+  },
+  {
+    "id": "wanted-mason-steinn",
+    "name": "Mason Steinn",
+    "category": "Vendor",
+    "note": "In the temple against the cliff, between Sojourner’s Camp and the Tannery.",
+    "x": 1051,
+    "y": 1177,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/mason-steinn",
+    "wikiId": "npc-mason-steinn"
+  },
+  {
+    "id": "wanted-a-wise-elder",
+    "name": "A wise elder",
+    "category": "Vendor",
+    "note": "In the temple against the cliff, between Sojourner’s Camp and the Tannery.",
+    "x": 1019,
+    "y": 1177,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-wise-elder",
+    "wikiId": "npc-a-wise-elder"
+  },
+  {
+    "id": "wanted-a-tanner",
+    "name": "A tanner",
+    "category": "Vendor",
+    "note": "In the Tannery.",
+    "x": 1159,
+    "y": 1208,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-tanner",
+    "wikiId": "npc-a-tanner"
+  },
+  {
+    "id": "wanted-a-spinner",
+    "name": "A spinner",
+    "category": "Vendor",
+    "note": "Near North Gate.",
+    "x": 2035,
+    "y": 1116,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/a-spinner",
+    "wikiId": "npc-a-spinner"
+  },
+  {
+    "id": "wanted-mira-gables",
+    "name": "Mira Gables",
+    "category": "Vendor",
+    "note": "Third door on the right on the way from North Gate to the mage tower.",
+    "x": 1996,
+    "y": 1061,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/mira-gables",
+    "wikiId": "npc-mira-gables"
+  },
+  {
+    "id": "wanted-an-innkeeper",
+    "name": "An innkeeper",
+    "category": "Vendor",
+    "note": "Shaded Bloom Inn.",
+    "x": 959,
+    "y": 1383,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/an-innkeeper",
+    "wikiId": "npc-an-innkeeper"
+  },
+  {
+    "id": "wanted-cheswik-barrelgirth",
+    "name": "Cheswik Barrelgirth",
+    "category": "Vendor",
+    "note": "East of the Steel Talon Garrison.",
+    "x": 906,
+    "y": 1733,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/cheswik-barrelgirth",
+    "wikiId": "npc-cheswik-barrelgirth"
+  },
+  {
+    "id": "wanted-rolan-talmula",
+    "name": "Rolan Talmula",
+    "category": "Vendor",
+    "note": "Around the druid guild entrance in Saltbreeze Park.",
+    "x": 1667,
+    "y": 1501,
+    "approximate": true,
+    "wiki": "https://monstersandmemories.wiki/npcs/rolan-talmula",
+    "wikiId": "npc-rolan-talmula"
   }
 ]

@@ -264,7 +264,7 @@
       "maxZoom": 6,
       "coordinateZoom": 4,
       "tileSize": 256,
-      "tileRevision": "v3",
+      "tileRevision": "v5",
       "tilePath": "assets/tiles/blind-midden/basement/{z}/{x}/{y}.webp",
       "markersFile": "data/blind-midden/markers.json",
       "labelsFile": "data/blind-midden/labels.json",

@@ -64,16 +64,6 @@
   ]
  },
  {
-  "id": "black-shoals-named",
-  "name": "Witchguard and Muurtu leaders (about level 45)",
-  "category": "Named mob",
-  "x": 5600,
-  "y": 1900,
-  "minZoom": 3,
-  "approximate": true,
-  "note": "Black Shoals Fortress: Witchguard Hellblade, Witchguard Primus, Witchguard Kruurgal, Herald of Muurtu, High-Priest of Muurtu, Champion of Muurtu, High-Sister Sarinius and High-Mother Haathala."
- },
- {
   "id": "pirate-island-camp",
   "name": "Cossa pirates and cultists",
   "category": "Mob camp",
@@ -91,7 +81,7 @@
   "y": 13050,
   "minZoom": 3,
   "approximate": true,
-  "note": "Pirate Island, with Mrvath Cinderhand, Sharkie, Madame Vespera, Gallows Krane and the Ghost of Selam."
+  "note": "Pirate Island, with Gallows Krane and the Ghost of Selam."
  },
  {
   "id": "barkeep-glior",
@@ -249,5 +239,221 @@
    35
   ],
   "ambush": false
+ },
+ {
+  "id": "wanted-witchguard-hellblade",
+  "name": "Witchguard Hellblade",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5600,
+  "y": 1750,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   45,
+   45
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/witchguard-hellblade",
+  "wikiId": "npc-witchguard-hellblade"
+ },
+ {
+  "id": "wanted-witchguard-primus",
+  "name": "Witchguard Primus",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5706,
+  "y": 1794,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   45,
+   45
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/witchguard-primus",
+  "wikiId": "npc-witchguard-primus"
+ },
+ {
+  "id": "wanted-witchlord-kruurgal",
+  "name": "Witchlord Kruurgal",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5750,
+  "y": 1900,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   45,
+   45
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/witchlord-kruurgal",
+  "wikiId": "npc-witchlord-kruurgal"
+ },
+ {
+  "id": "wanted-herald-of-muurtu",
+  "name": "Herald of Muurtu",
+  "category": "Quest NPC",
+  "note": "Black Shoals Fortress.",
+  "x": 5706,
+  "y": 2006,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/herald-of-muurtu",
+  "wikiId": "npc-herald-of-muurtu"
+ },
+ {
+  "id": "wanted-high-priest-of-muurtu",
+  "name": "High Priest of Muurtu",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5600,
+  "y": 2050,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   45,
+   45
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/high-priest-of-muurtu",
+  "wikiId": "npc-high-priest-of-muurtu"
+ },
+ {
+  "id": "wanted-champion-of-muurtu",
+  "name": "Champion of Muurtu",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5494,
+  "y": 2006,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   45,
+   45
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/champion-of-muurtu",
+  "wikiId": "npc-champion-of-muurtu"
+ },
+ {
+  "id": "wanted-high-sister-sarinius",
+  "name": "High-Sister Sarinius",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5450,
+  "y": 1900,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   45,
+   45
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/high-sister-sarinius",
+  "wikiId": "npc-high-sister-sarinius"
+ },
+ {
+  "id": "wanted-high-mother-haathala",
+  "name": "High-Mother Haathala",
+  "category": "Named mob",
+  "note": "Black Shoals Fortress.",
+  "x": 5494,
+  "y": 1794,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/high-mother-haathala",
+  "wikiId": "npc-high-mother-haathala"
+ },
+ {
+  "id": "wanted-madame-vespera",
+  "name": "Madame Vespera",
+  "category": "Quest NPC",
+  "note": "Pirate Island.",
+  "x": 3700,
+  "y": 12920,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/madame-vespera",
+  "wikiId": "npc-madame-vespera"
+ },
+ {
+  "id": "wanted-mrvath-cinderhand",
+  "name": "Mrvath Cinderhand",
+  "category": "Named mob",
+  "note": "Pirate Island.",
+  "x": 3813,
+  "y": 13115,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   40,
+   40
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/mrvath-cinderhand",
+  "wikiId": "npc-mrvath-cinderhand"
+ },
+ {
+  "id": "wanted-sharkie",
+  "name": "Sharkie",
+  "category": "Named mob",
+  "note": "Pirate Island.",
+  "x": 3587,
+  "y": 13115,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   35,
+   35
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/sharkie",
+  "wikiId": "npc-sharkie"
+ },
+ {
+  "id": "wanted-captain-zaedin-rahal",
+  "name": "Captain Zaedin Rahal",
+  "category": "Quest NPC",
+  "note": "Top of the lighthouse at Zaedin’s Landing.",
+  "x": 1530,
+  "y": 6810,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-zaedin-rahal",
+  "wikiId": "npc-captain-zaedin-rahal"
+ },
+ {
+  "id": "wanted-tariq-the-revealer",
+  "name": "Tariq the Revealer",
+  "category": "Quest NPC",
+  "note": "Roams the second floor of the central buildings at Zaedin’s Landing.",
+  "x": 1530,
+  "y": 7050,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/tariq-the-revealer",
+  "wikiId": "npc-tariq-the-revealer"
+ },
+ {
+  "id": "wanted-ngakepoto",
+  "name": "Ngakepoto",
+  "category": "Quest NPC",
+  "note": "On the basilisk island across from Zaedin’s Landing.",
+  "x": 1177,
+  "y": 7511,
+  "approximate": true,
+  "minZoom": 3,
+  "wiki": "https://monstersandmemories.wiki/npcs/ngakepoto",
+  "wikiId": "npc-ngakepoto"
+ },
+ {
+  "id": "wanted-grand-spiritbinder-murk",
+  "name": "Grand Spiritbinder Murk",
+  "category": "Named mob",
+  "note": "Smugglers Isle.",
+  "x": 4828,
+  "y": 5092,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   36,
+   36
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/grand-spiritbinder-murk",
+  "wikiId": "npc-grand-spiritbinder-murk"
  }
 ]

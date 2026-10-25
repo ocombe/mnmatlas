@@ -1,13 +1,5 @@
 [
   {
-    "at": "2026-10-19T23:41:47.845Z",
-    "rows": []
-  },
-  {
-    "at": "2026-10-20T04:50:56.157Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-20T06:16:08.184Z",
     "rows": [
       {
@@ -8541,6 +8533,1106 @@
             "category": "Notable NPC"
           },
           "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-25T06:09:03.465Z",
+    "rows": [
+      {
+        "id": 1386,
+        "payloadHash": "2b377d060201839669db1ba562c69275ce50717d9436b15400c12b8128e7c102",
+        "updatedAt": "2026-10-25T05:51:39.521639+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4130,
+            "y": 1198,
+            "name": "A swarm leader",
+            "note": "Rat Side.  A Skri'Var Fiend is the placeholder",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-swarm-leader",
+            "level": "floor-1",
+            "wikiId": "npc-a-swarm-leader",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1389,
+        "payloadHash": "3022b584febdcec0a76d6b41455117db40597cc768aeb8828834a5305257ae2e",
+        "updatedAt": "2026-10-25T05:50:57.626154+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3378,
+            "y": 1470,
+            "name": "A frenzied ratman",
+            "note": "Rat Side",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-ratman",
+            "level": "floor-1",
+            "wikiId": "npc-a-frenzied-ratman",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1390,
+        "payloadHash": "e93aaa07b0b49e198373d4336a6e0d58f3f3b60fb7cc855c37a4715b4f101faf",
+        "updatedAt": "2026-10-25T05:48:53.496715+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "provost-xan-shorn",
+          "payload": {
+            "to": [
+              4623,
+              4171
+            ],
+            "from": [
+              4498,
+              4167
+            ],
+            "name": "Provost Xan'shorn"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1398,
+        "payloadHash": "39f64adaa692d87322a285625c28bdf24f0e8defc30384a356167ad689d8e250",
+        "updatedAt": "2026-10-25T05:49:03.969875+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4592,
+            "y": 4354,
+            "name": "Zaarinth",
+            "note": "",
+            "vendor": "Herbalism vendor",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1400,
+        "payloadHash": "48bfe25fbc65978999a0436ecb9d4f7b67a3871da1b8c7f5019138c6c241836b",
+        "updatedAt": "2026-10-25T05:49:16.237251+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3766,
+            "y": 2145,
+            "name": "Julra",
+            "note": "3rd floor",
+            "trade": "Cooking",
+            "category": "Tradeskill"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1401,
+        "payloadHash": "39587425eb99aa1e2cc291fe2d2b4a749a0ec9b06607ef911e2dfeeb7afc0299",
+        "updatedAt": "2026-10-25T05:49:19.717938+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3771,
+            "y": 2098,
+            "name": "Keigor Worsinthar",
+            "note": "3rd floor",
+            "vendor": "Grocer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1402,
+        "payloadHash": "77c99ea8c38da1f0c63abaa5b06c089e5ba4406b2e191db1c273ee3f0721c7bc",
+        "updatedAt": "2026-10-25T05:49:24.163544+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3704,
+            "y": 2093,
+            "name": "Imred Gule",
+            "note": "3rd floor",
+            "vendor": "Cook",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1403,
+        "payloadHash": "cd7507f2aba6bc1becb798a361c398dfea6e1dbd5dd201c44206139afbc7e784",
+        "updatedAt": "2026-10-25T05:49:28.904914+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3781,
+            "y": 2294,
+            "name": "Aelisel",
+            "note": "2nd floor of the inn",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1404,
+        "payloadHash": "7011911e0b6c992690c169405a466103ed8f8009fc58b9a054ab3be414df72ca",
+        "updatedAt": "2026-10-25T05:49:32.779183+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-273",
+          "payload": {
+            "from": {
+              "x": 3812,
+              "y": 2289,
+              "name": "Kelnir",
+              "note": "",
+              "category": "Notable NPC"
+            },
+            "name": "Kelnir",
+            "note": "1st floor of the inn"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1405,
+        "payloadHash": "7e194f624d703062f4c6ca8d348b5c0a8516a9787d0845afa2d8c4618f3fa659",
+        "updatedAt": "2026-10-25T05:49:51.534693+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3240,
+            "y": 2814,
+            "name": "Zeliska Felthal",
+            "note": "",
+            "vendor": "Chain armorer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1406,
+        "payloadHash": "a4b99581c91cc1843c733412278990157b58eb58797660a60d750096e9548640",
+        "updatedAt": "2026-10-25T05:49:54.758655+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3212,
+            "y": 2845,
+            "name": "Ferrin Jurvok",
+            "note": "",
+            "vendor": "Plate armorer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1433,
+        "payloadHash": "0e0da949366ae58d369d1846ff67bcf135c56c236e0894c3748ddeb7537ac360",
+        "updatedAt": "2026-10-25T05:52:37.116276+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4880,
+            "y": 1021,
+            "name": "An acolyte of Visru",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-acolyte-of-visru",
+            "level": "floor-1",
+            "wikiId": "npc-an-acolyte-of-visru",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1435,
+        "payloadHash": "7f8a323d0dcfde5f0a590c5760f14a5b1ab99929997e86803a18898d71c6480f",
+        "updatedAt": "2026-10-25T05:53:34.783933+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3485,
+            "y": 1880,
+            "name": "A Bloodchain champion (level 23)",
+            "note": "Blacktide Bay",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-bloodchain-champion",
+            "level": "floor-1",
+            "levels": [
+              23,
+              23
+            ],
+            "wikiId": "npc-a-bloodchain-champion",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-25T10:54:48.179Z",
+    "rows": [
+      {
+        "id": 1323,
+        "payloadHash": "4e29121ea0d090b205d359b25c096a5260979a2994ddea5589c4fda7e478e14e",
+        "updatedAt": "2026-10-25T06:15:39.456354+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3533,
+            "y": 3304,
+            "name": "Grukk'Tal the Ravener",
+            "note": "23+ appears that any of the rats can be the PH",
+            "ambush": false,
+            "levels": [
+              23,
+              23
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1397,
+        "payloadHash": "c09897b3b1791c0fd7a6bacdaf76caa9a5d4508f4036f7e89e23635c368fc16e",
+        "updatedAt": "2026-10-25T06:15:33.532678+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2311,
+            "y": 2187,
+            "name": "Grave Hulk",
+            "note": "Spawned by the quest from Chaplain Cranely",
+            "level": "ground",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1415,
+        "payloadHash": "502999113a7f89f548bec533fd68442d8fb77bf775507866f99fd8ffdd59a099",
+        "updatedAt": "2026-10-25T06:13:44.407532+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2565,
+            "y": 2569,
+            "name": "Elixa the Experimentalist",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/elixa-the-experimentalist",
+            "level": "basement",
+            "bounty": "npc-elixa-the-experimentalist",
+            "wikiId": "npc-elixa-the-experimentalist",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1418,
+        "payloadHash": "ed089d80f6488004db809412f9b39af59edd70443ff7eddd76fbd187773d8339",
+        "updatedAt": "2026-10-25T06:15:54.591882+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-910",
+          "payload": {
+            "from": {
+              "name": "Keeper of the Road",
+              "note": "",
+              "sells": null,
+              "trade": null,
+              "ambush": null,
+              "vendor": null,
+              "classes": null,
+              "category": "Quest NPC"
+            },
+            "name": "Keeper of the Road",
+            "note": "Drops a Forsaken Offering and is a killable spectre",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1422,
+        "payloadHash": "321d1df22b8c34a3334f857ffccc4d9da69765329b968c04c9f0f5207a2cb15e",
+        "updatedAt": "2026-10-25T06:16:41.350031+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1976,
+            "y": 2578,
+            "name": "Warden Neh'ma",
+            "note": "Mur'Hua camp leader, gives quest as well towards friendlies",
+            "wiki": "https://monstersandmemories.wiki/npcs/warden-nehma",
+            "quests": true,
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1424,
+        "payloadHash": "3c44a44b20f76c7e7e7f230b8ecf2aecc84d2289cb7ab5a1d7cf3b0c9e119ae6",
+        "updatedAt": "2026-10-25T06:19:03.574075+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1943,
+            "y": 2580,
+            "name": "Baz'Nik",
+            "note": "Vendor for friends of Mur'Hua",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1425,
+        "payloadHash": "18af6dc024d5bca5f3d77cbd1f135623661e40f8044838ce6292a5c29582c821",
+        "updatedAt": "2026-10-25T06:19:14.642525+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4913,
+            "y": 5657,
+            "name": "Handfed Bors",
+            "note": "Default friendly giant who gives quest",
+            "wiki": "https://monstersandmemories.wiki/npcs/handfed-bors",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1428,
+        "payloadHash": "c77b373d97523a2bcfc9c3ea722588475371f203316d4bc25f88ceef80f273f3",
+        "updatedAt": "2026-10-25T06:19:38.829735+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6221,
+            "y": 6128,
+            "name": "Nurabek Brinehand",
+            "note": "Named Giant of Old Irem.  Unsure if spawn is only this location and if there is a PH.",
+            "ambush": false,
+            "levels": [
+              35,
+              35
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1429,
+        "payloadHash": "b1ad6ee4414260ef567d3fb3fbf81579526519b0f93c51c2b28787889cf5f247",
+        "updatedAt": "2026-10-25T06:20:00.460213+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1980,
+            "y": 1179,
+            "name": "Sael'Vyrin",
+            "note": "Dark Elf NPC",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1430,
+        "payloadHash": "34227d6f8795bef045ca71a673a31eca1498048f108f6418c032792e4b3a61d2",
+        "updatedAt": "2026-10-25T06:20:25.954408+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5906,
+            "y": 6407,
+            "mobs": [
+              {
+                "name": "A lake-fed razorwing",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-lake-fed-razorwing",
+                "wikiId": "npc-a-lake-fed-razorwing"
+              }
+            ],
+            "name": "Razorwings & Giants",
+            "note": "Green Lake Ramp",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-lake-fed-razorwing",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  5014,
+                  6537
+                ],
+                [
+                  5070,
+                  6561
+                ],
+                [
+                  5138,
+                  6589
+                ],
+                [
+                  5210,
+                  6646
+                ],
+                [
+                  5344,
+                  6739
+                ],
+                [
+                  5403,
+                  6811
+                ],
+                [
+                  5475,
+                  6839
+                ],
+                [
+                  5542,
+                  6882
+                ],
+                [
+                  5603,
+                  6936
+                ],
+                [
+                  5652,
+                  7017
+                ],
+                [
+                  5668,
+                  7102
+                ],
+                [
+                  5667,
+                  7209
+                ],
+                [
+                  5680,
+                  7282
+                ],
+                [
+                  5688,
+                  7336
+                ],
+                [
+                  5810,
+                  7359
+                ],
+                [
+                  5863,
+                  7359
+                ],
+                [
+                  5956,
+                  7333
+                ],
+                [
+                  6015,
+                  7308
+                ],
+                [
+                  6085,
+                  7254
+                ],
+                [
+                  6151,
+                  7225
+                ],
+                [
+                  6298,
+                  7130
+                ],
+                [
+                  6314,
+                  7081
+                ],
+                [
+                  6242,
+                  6958
+                ],
+                [
+                  6242,
+                  6939
+                ],
+                [
+                  6285,
+                  6816
+                ],
+                [
+                  6317,
+                  6780
+                ],
+                [
+                  6383,
+                  6764
+                ],
+                [
+                  6434,
+                  6752
+                ],
+                [
+                  6470,
+                  6710
+                ],
+                [
+                  6479,
+                  6674
+                ],
+                [
+                  6478,
+                  6612
+                ],
+                [
+                  6522,
+                  6556
+                ],
+                [
+                  6548,
+                  6496
+                ],
+                [
+                  6553,
+                  6465
+                ],
+                [
+                  6582,
+                  6442
+                ],
+                [
+                  6551,
+                  6399
+                ],
+                [
+                  6499,
+                  6340
+                ],
+                [
+                  6483,
+                  6308
+                ],
+                [
+                  6460,
+                  6262
+                ],
+                [
+                  6474,
+                  6198
+                ],
+                [
+                  6492,
+                  6131
+                ],
+                [
+                  6512,
+                  6061
+                ],
+                [
+                  6538,
+                  5987
+                ],
+                [
+                  6543,
+                  5918
+                ],
+                [
+                  6548,
+                  5815
+                ],
+                [
+                  6553,
+                  5778
+                ],
+                [
+                  6551,
+                  5608
+                ],
+                [
+                  6465,
+                  5554
+                ],
+                [
+                  6434,
+                  5549
+                ],
+                [
+                  6404,
+                  5549
+                ],
+                [
+                  6353,
+                  5565
+                ],
+                [
+                  6334,
+                  5575
+                ],
+                [
+                  6304,
+                  5578
+                ],
+                [
+                  6242,
+                  5583
+                ],
+                [
+                  6187,
+                  5588
+                ],
+                [
+                  6142,
+                  5613
+                ],
+                [
+                  6105,
+                  5644
+                ],
+                [
+                  6088,
+                  5673
+                ],
+                [
+                  6043,
+                  5694
+                ],
+                [
+                  5992,
+                  5712
+                ],
+                [
+                  5897,
+                  5722
+                ],
+                [
+                  5840,
+                  5689
+                ],
+                [
+                  5758,
+                  5709
+                ],
+                [
+                  5704,
+                  5737
+                ],
+                [
+                  5653,
+                  5786
+                ],
+                [
+                  5621,
+                  5817
+                ],
+                [
+                  5599,
+                  5851
+                ],
+                [
+                  5550,
+                  5905
+                ],
+                [
+                  5513,
+                  5949
+                ],
+                [
+                  5462,
+                  5981
+                ],
+                [
+                  5413,
+                  6026
+                ],
+                [
+                  5353,
+                  6074
+                ],
+                [
+                  5325,
+                  6095
+                ],
+                [
+                  5272,
+                  6141
+                ],
+                [
+                  5236,
+                  6187
+                ],
+                [
+                  5214,
+                  6227
+                ],
+                [
+                  5171,
+                  6254
+                ],
+                [
+                  5099,
+                  6304
+                ],
+                [
+                  5071,
+                  6330
+                ],
+                [
+                  5037,
+                  6396
+                ],
+                [
+                  4985,
+                  6455
+                ],
+                [
+                  4978,
+                  6525
+                ]
+              ]
+            },
+            "levels": [
+              23,
+              35
+            ],
+            "wikiId": "npc-a-lake-fed-razorwing",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1436,
+        "payloadHash": "0bb3c3fe09ffa43d0727018d278c43820eac3d74da458947484599a6af3b5c16",
+        "updatedAt": "2026-10-25T06:20:51.672188+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-label",
+          "target_id": "skrivar-camp",
+          "payload": {
+            "from": {
+              "x": 6824,
+              "y": 6300,
+              "kind": "district",
+              "name": "Skri'Var Camp",
+              "minZoom": 2.5,
+              "priority": 70
+            },
+            "name": "Cutthroats / Merc Camp",
+            "note": "No Skri'var Exist here in EA"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1441,
+        "payloadHash": "f7709e0e1d6cde18315e241e035eb0c9b23fd64db93c81fc689ddb2cb1563edd",
+        "updatedAt": "2026-10-25T06:22:45.785375+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2170,
+            "y": 1544,
+            "name": "Meluli Dawnglow",
+            "note": "Only visible during the day",
+            "wiki": "https://monstersandmemories.wiki/npcs/meluli-dawnglow",
+            "bounty": "npc-meluli-dawnglow",
+            "wikiId": "npc-meluli-dawnglow",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1442,
+        "payloadHash": "3d410349bd606493af003857d279f8e7ec2e5d2ed051c7ed6040eee98364d810",
+        "updatedAt": "2026-10-25T06:23:04.923071+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "respawn-point",
+          "payload": {
+            "to": [
+              1869,
+              2488
+            ],
+            "from": [
+              1869,
+              2488
+            ],
+            "name": "Respawn point",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1445,
+        "payloadHash": "cba0bb5d652228eeef582a6ea77e04c1eca64e1e5c9e0852aa310156ec834540",
+        "updatedAt": "2026-10-25T06:22:27.007619+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1087",
+          "payload": {
+            "from": {
+              "name": "Speaker Khaldun",
+              "note": "40ish (yellow to 38) shaman named mob"
+            },
+            "name": "Speaker Khaldun",
+            "note": "Shaman Mob",
+            "wiki": "https://monstersandmemories.wiki/npcs/speaker-khaldun"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1449,
+        "payloadHash": "a77266d9dfc203bcc1d2089ed259a1ce30435459640fcf307aa810aa4b5c4735",
+        "updatedAt": "2026-10-25T06:22:35.944725+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5586,
+            "y": 3985,
+            "mobs": [
+              {
+                "name": "A Bloated sand Tick"
+              },
+              {
+                "name": "a deepcrawler Brooding"
+              },
+              {
+                "name": "a sand tick"
+              },
+              {
+                "name": "a deepcrawler Broodmother"
+              }
+            ],
+            "name": "Broodmother",
+            "note": "A large selection of Spiders. The Deepcrawler Broodmother also glows with a light shine in the dark, like a Torch, allowing for sight where ever it goes.",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/A_deepcrawler_broodmother",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  5569,
+                  3769
+                ],
+                [
+                  5464,
+                  3767
+                ],
+                [
+                  5362,
+                  3853
+                ],
+                [
+                  5359,
+                  3982
+                ],
+                [
+                  5391,
+                  4138
+                ],
+                [
+                  5592,
+                  4189
+                ],
+                [
+                  5819,
+                  4111
+                ],
+                [
+                  5883,
+                  3973
+                ]
+              ]
+            },
+            "levels": [
+              15,
+              18
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1451,
+        "payloadHash": "4fe5c927b945632d0d4aae926120d2026a995bc11eef2a1c29498cd032a3d0ce",
+        "updatedAt": "2026-10-25T06:18:08.055252+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1899,
+            "y": 2605,
+            "name": "Mur'Hua Village",
+            "note": "",
+            "category": "Personal",
+            "noteType": "label"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1452,
+        "payloadHash": "bfdd213947fbdb5f50a0eea8dd875bf3257496607ee76ca0478bac3c65940445",
+        "updatedAt": "2026-10-25T06:38:22.44191+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-971",
+          "payload": {
+            "from": {
+              "x": 1671,
+              "y": 1719,
+              "name": "Master Khaila",
+              "note": "North of the Twilight Harbor area. '''Directions:''' Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop dow",
+              "wiki": "https://monstersandmemories.wiki/npcs/master-khaila",
+              "wikiId": "npc-master-khaila",
+              "classes": [
+                "Enchanter"
+              ],
+              "category": "Class trainer"
+            },
+            "name": "Master Khaila",
+            "note": "North of the Twilight Harbor area.\nDirections: Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop down, but along the sand) and past the stairwell to your right. Go up the stairs in the building in front of you (Disenchanter Qaridi is on the roof).",
+            "trade": "(Dis)Enchanting",
+            "classes": null,
+            "category": "Tradeskill"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1453,
+        "payloadHash": "32b433e21156603e8f060a30e0a142db81f423b4e925bb2d5e54994a71bee97e",
+        "updatedAt": "2026-10-25T06:38:57.971135+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-972",
+          "payload": {
+            "from": {
+              "x": 1660,
+              "y": 1712,
+              "name": "Disenchanter Qaridi",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/disenchanter-qaridi",
+              "wikiId": "npc-disenchanter-qaridi",
+              "classes": [
+                "Enchanter"
+              ],
+              "category": "Class trainer"
+            },
+            "name": "Disenchanter Qaridi",
+            "trade": "(Dis)Enchanting",
+            "classes": null,
+            "category": "Tradeskill"
+          },
+          "credit": false
         }
       }
     ]

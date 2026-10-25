@@ -27,7 +27,7 @@
   "x": 6056,
   "y": 6767,
   "approximate": true,
-  "note": "Camp on the corner of the main salt flat; Layla Faraj, Nadia Al-Hakim, Sami Hassoun and Tarek Mansur are here.",
+  "note": "Camp on the corner of the main salt flat; Nadia Al-Hakim, Sami Hassoun and Tarek Mansur are here.",
   "minZoom": 3
  },
  {
@@ -653,5 +653,21 @@
   "x": 2878,
   "y": 4009,
   "travel": "Teleporter"
+ },
+ {
+  "id": "wanted-layla-faraj",
+  "name": "Layla Faraj",
+  "category": "Named mob",
+  "note": "At the Pyrmos mercenary camp.",
+  "x": 6120,
+  "y": 6703,
+  "approximate": true,
+  "minZoom": 3,
+  "levels": [
+   30,
+   30
+  ],
+  "wiki": "https://monstersandmemories.wiki/npcs/layla-faraj",
+  "wikiId": "npc-layla-faraj"
  }
 ]

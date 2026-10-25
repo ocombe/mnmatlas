@@ -27,6 +27,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "vrenlin",
+      "what": "edited"
     }
   ],
   "marker:community-994": [
@@ -81,12 +85,76 @@
     {
       "name": "zarzak",
       "what": "added"
+    },
+    {
+      "name": "vrenlin",
+      "what": "edited"
     }
   ],
   "label:reverse-waterfall": [
     {
       "name": null,
       "what": "edited"
+    }
+  ],
+  "marker:community-1323": [
+    {
+      "name": "grizzly4902",
+      "what": "added"
+    }
+  ],
+  "marker:community-1422": [
+    {
+      "name": "vrenlin",
+      "what": "added"
+    }
+  ],
+  "marker:community-1424": [
+    {
+      "name": "vrenlin",
+      "what": "added"
+    }
+  ],
+  "marker:community-1425": [
+    {
+      "name": "vrenlin",
+      "what": "added"
+    }
+  ],
+  "marker:community-1428": [
+    {
+      "name": "smigss_nightshade",
+      "what": "added"
+    }
+  ],
+  "marker:community-1429": [
+    {
+      "name": "smigss_nightshade",
+      "what": "added"
+    }
+  ],
+  "marker:community-1430": [
+    {
+      "name": "vrenlin",
+      "what": "added"
+    }
+  ],
+  "label:skrivar-camp": [
+    {
+      "name": "vrenlin",
+      "what": "edited"
+    }
+  ],
+  "marker:community-1449": [
+    {
+      "name": "thibni_",
+      "what": "added"
+    }
+  ],
+  "label:community-1451": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

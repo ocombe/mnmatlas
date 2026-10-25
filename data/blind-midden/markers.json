@@ -834,5 +834,58 @@
     "category": "Notable NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/gurm-the-half-woken",
     "wikiId": "npc-gurm-the-half-woken"
+  },
+  {
+    "id": "community-1397",
+    "community": true,
+    "name": "Grave Hulk",
+    "note": "Spawned by the quest from Chaplain Cranely",
+    "x": 2311,
+    "y": 2187,
+    "level": "ground",
+    "category": "Named mob",
+    "ambush": false
+  },
+  {
+    "id": "community-1415",
+    "community": true,
+    "name": "Elixa the Experimentalist",
+    "note": "",
+    "x": 2565,
+    "y": 2569,
+    "level": "basement",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/elixa-the-experimentalist",
+    "wikiId": "npc-elixa-the-experimentalist"
+  },
+  {
+    "id": "ramp-tunnel-ground",
+    "name": "Ramp tunnel - down to the Basement",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "ground",
+    "x": 1964,
+    "y": 2172,
+    "approximate": true,
+    "note": "",
+    "toLevel": "basement",
+    "toMarker": "ramp-tunnel-basement",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "ramp-tunnel-basement",
+    "name": "Ramp tunnel - up to the Ground floor",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "basement",
+    "x": 1964,
+    "y": 2172,
+    "approximate": true,
+    "note": "",
+    "toLevel": "ground",
+    "toMarker": "ramp-tunnel-ground",
+    "direction": "up",
+    "switchOnClick": true
   }
 ]
