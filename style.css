@@ -530,6 +530,7 @@ dialog.moved::backdrop{background:#0000001f}
 .desk-diff{margin:3px 0;padding:4px 6px;background:#2a1f12;border-left:2px solid #a96822;color:var(--foreground);font-size:11px;white-space:pre-wrap;overflow-wrap:anywhere}
 .desk-diff del,.desk-mobile-name del{color:#e89a83;text-decoration:line-through}.desk-diff ins,.desk-mobile-name ins{color:#b7dc9b;text-decoration:none;background:#37542640}
 .desk-diff del+ins{margin-left:4px}
+.desk-wiki-open{display:inline-block;margin:4px 10px 0 0;font-size:12px;font-weight:600;color:var(--primary);text-decoration:underline;text-underline-offset:2px}
 .desk-position{font-size:10px;color:var(--muted-foreground);line-height:1.6;margin:9px 0}
 .desk-also{padding:6px 7px;background:#2a1f12;border:1px solid #6e4f26;border-radius:3px;font-size:10px;margin:7px 0}.desk-also strong{display:block}.desk-also button{display:block;padding:2px 0;background:transparent;border:0;color:var(--primary);text-align:left;font-size:10px}
 .desk-decisions{display:flex;gap:5px;margin-top:9px}.desk-decisions button{flex:1;min-width:0;padding:6px 2px;font-size:11px;white-space:nowrap}
