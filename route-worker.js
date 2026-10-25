@@ -1,10 +1,10 @@
-/* Finds walking routes on a map's ground file, away from the page. Messages: load, route. */
+/* Finds walking routes on a map's ground file, away from the page. Messages: load, drop, route. */
 'use strict';
 // Each map's ground, loaded once.
 const grounds={};
-const DIRS=[[1,0],[-1,0],[0,1],[0,-1],[1,1],[1,-1],[-1,1],[-1,-1]];
 
 async function load(meta,url,key){
+ if(meta.format==='raster'?meta.version!==3:meta.version!==4)throw Error('Route data for this map is out of date.');
  const res=await fetch(url);if(!res.ok)throw Error('Route data could not load.');
  const bytes=new Uint8Array(await new Response(res.body.pipeThrough(new DecompressionStream('deflate'))).arrayBuffer());
  if(meta.format==='raster'){grounds[key]=loadRaster(meta,bytes);return;}
@@ -79,7 +79,8 @@ function neighbours(g,i){
 // The open-ground spot nearest to a map point on one floor, within reach. Spots are sorted into 64 px squares per
 // floor once (a counting sort), then only the squares within reach are searched.
 function snap(g,p,reach=p.reach||90){
- const level=g.meta.levels.indexOf(p.level??g.meta.levels[0]),B=64;
+ // A spot named on a floor this map's ground does not have is looked for on its only (or first) floor.
+ const level=Math.max(0,g.meta.levels.indexOf(p.level??g.meta.levels[0])),B=64;
  if(!g.sq){
   let mx=0,my=0;for(let i=0;i<g.count;i++){if(g.px[i]>mx)mx=g.px[i];if(g.py[i]>my)my=g.py[i];}
   const bw=Math.ceil(mx/B)+1,bh=Math.ceil(my/B)+1,nb=bw*bh*g.meta.levels.length,id=new Int32Array(g.count),start=new Int32Array(nb+1),order=new Int32Array(g.count);
@@ -148,7 +149,7 @@ function route(req){
  if(!closed[to])return {error:'No known way between these two spots.'};
  const nodes=[],links=[];for(let i=to;i>=0;i=parent[i]){nodes.push(i);links.push(viaOf[i]>=0?via[viaOf[i]]:null);}
  nodes.reverse();links.reverse();
- return describe(g,smooth(g,nodes,links,field),dangers);
+ const out=describe(g,smooth(g,nodes,links,field),dangers);out.cost=Math.round(cost[to]);return out;
 }
 // Straight runs replace the grid's zigzag wherever the way between two points stays open on one floor.
 function clear(g,a,b,field){
@@ -159,9 +160,10 @@ function clear(g,a,b,field){
   const t=s/steps,x=g.x[a]+(g.x[b]-g.x[a])*t,z=g.z[a]+(g.z[b]-g.z[a])*t,cx=Math.floor((x-g.meta.x0)/g.meta.cell),cz=Math.floor((z-g.meta.z0)/g.meta.cell);
   if(cx<0||cz<0||cx>=g.meta.nx||cz>=g.meta.nz)return false;
   const c=cz*g.meta.nx+cx,f=g.first[c];if(f<0)return false;
+  // Each square the straight run crosses must be one step of the route graph from the last, on the same floor.
   let hit=-1,bd=Infinity;
-  if(g.col[prev]===c)hit=prev;else for(let j=f;j<f+g.many[c];j++){const d=Math.abs(g.h[j]-g.h[prev]);if(d<bd&&ok(g,prev,j)){bd=d;hit=j;}}
-  if(hit<0||field[hit]>limit||under(g,hit)!==below||g.swim[hit]!==g.swim[a])return false;
+  if(g.col[prev]===c)hit=prev;else{const m=neighbours(g,prev);for(let q=0;q<m;q++){const j=NB[q];if(g.col[j]!==c)continue;const d=Math.abs(g.h[j]-g.h[prev]);if(d<bd){bd=d;hit=j;}}}
+  if(hit<0||g.lv[hit]!==g.lv[a]||field[hit]>limit||under(g,hit)!==below||g.swim[hit]!==g.swim[a])return false;
   prev=hit;
  }
  return true;
@@ -182,14 +184,21 @@ function describe(g,points,dangers){
   if(k){const prev=points[k-1].node;pt.d=Math.round((length+(p.link?0:dist(g,prev,i)))*10)/10;}else pt.d=0;
   if(under(g,i))pt.under=true;if(g.swim[i])pt.swim=true;out.push(pt);
   if(k){const prev=points[k-1].node,d=p.link?0:dist(g,prev,i);length+=d;if(g.swim[prev]&&g.swim[i])swum+=d;
-   if(g.lv[prev]!==g.lv[i]||p.link)changes.push({index:k,from:levels[g.lv[prev]],to:levels[g.lv[i]],link:p.link?{name:p.link.name,kind:p.link.kind,id:p.link.id}:null});}
+   if(g.lv[prev]!==g.lv[i]||p.link)changes.push({index:k,from:levels[g.lv[prev]],to:levels[g.lv[i]],rise:Math.round((g.h[i]-g.h[prev])*10)/10,link:p.link?{name:p.link.name,kind:p.link.kind,id:p.link.id}:null});}
  });
  // Mobs the route still passes close to, nearest pass first; one at the start or the finish is where the walker wants to be.
  const passed=[],ends=[points[0].node,points[points.length-1].node];
  dangers.forEach((d,index)=>{
   const at=d.node??-1;if(at<0)return;
   if(ends.some(e=>Math.abs(g.h[e]-g.h[at])<=4&&Math.hypot(g.x[e]-g.x[at],g.z[e]-g.z[at])<d.radius))return;
-  let near=Infinity;for(const p of points){const i=p.node;if(Math.abs(g.h[i]-g.h[at])>4)continue;near=Math.min(near,Math.hypot(g.x[i]-g.x[at],g.z[i]-g.z[at]));}
+  // Nearest approach along each walked run (a straight run can pass a camp between its two ends); jumps along a link are not walked.
+  let near=Infinity;
+  for(let k=0;k<points.length;k++){
+   const i=points[k].node;if(Math.abs(g.h[i]-g.h[at])<=4)near=Math.min(near,Math.hypot(g.x[i]-g.x[at],g.z[i]-g.z[at]));
+   if(!k||points[k].link)continue;const j=points[k-1].node;if(Math.abs(g.h[j]-g.h[at])>4&&Math.abs(g.h[i]-g.h[at])>4)continue;
+   const dx=g.x[i]-g.x[j],dz=g.z[i]-g.z[j],t=Math.max(0,Math.min(1,((g.x[at]-g.x[j])*dx+(g.z[at]-g.z[j])*dz)/(dx*dx+dz*dz||1)));
+   near=Math.min(near,Math.hypot(g.x[j]+dx*t-g.x[at],g.z[j]+dz*t-g.z[at]));
+  }
   if(near<d.radius)passed.push({index,distance:Math.round(near)});
  });
  return {points:out,changes,length:Math.round(length),swim:Math.round(swum),passed:passed.sort((a,b)=>a.distance-b.distance)};
@@ -199,6 +208,7 @@ self.onmessage=async e=>{
  try{
   // Loading also files every spot into its square, so the first route does not wait for it.
   if(type==='load'){if(!grounds[e.data.map]){await load(e.data.meta,e.data.url,e.data.map);snap(grounds[e.data.map],{x:0,y:0},1);}self.postMessage({id,ok:true});return;}
+  if(type==='drop'){delete grounds[e.data.map];self.postMessage({id,ok:true});return;}
   if(type==='route'){const t=performance.now(),result=route(e.data);result.ms=Math.round(performance.now()-t);self.postMessage({id,ok:true,result});}
  }catch(err){self.postMessage({id,ok:false,error:err.message||String(err)});}
 };

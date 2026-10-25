@@ -319,7 +319,7 @@ const leads=m.noteType==='exit'&&!alignmentMode&&registry.maps.find(c=>c.id===m.
  if(!singleMap)window.atlasCommunity?.popup(m,n);
  // A camp's loot matters least: it gets its own card at the end, just above the actions.
  {const holder=[...n.children].find(x=>String(x.className)==='popup-body')||n,camp=[...holder.children].find(x=>String(x.className).includes('camp-card')),late=camp?[...camp.children].filter(x=>String(x.className).split(' ').some(k=>k==='npc-loot'||k==='npc-credit')):[];if(late.length){const box=text('div','','npc-card camp-card camp-loot');box.append(...late);holder.append(box);}}
- // Extra card actions from other modules (Route to here).
+ // Extra card actions from other modules (Directions).
  for(const extra of window.atlasPopupActions||[])if(extra.shown(m))n.append(button(extra.label,()=>extra.run(m),'',extra.icon));
  return tidyActions(n);}
 function labelEditPopup(row){

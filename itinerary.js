@@ -7,7 +7,7 @@
  const DANGER={'Named mob':[20,6],'Mob camp':[25,6],'Ambush':[30,10],'Trap':[6,40]};
  const read=k=>{try{return localStorage.getItem(k);}catch{return null;}},write=(k,v)=>{try{localStorage.setItem(k,v);}catch{}};
  let worker=null,serial=0,panel=null,layers=[],busy=false,run=0;
- const pending=new Map(),loaded=new Set(),data=new Map();
+ const pending=new Map(),loaded=new Map(),data=new Map();
  // Both ways are worked out every time (like a map app's route options); mode picks the one drawn and listed.
  const state={from:null,to:null,mode:read(MODE_KEY)==='shorter'?'shorter':'safer',options:{},legs:null,error:''};
  const MODES=[['safer','Safer'],['shorter','Shorter']];
@@ -16,26 +16,36 @@
  const mapTitle=id=>entry(id)?.title||id;
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
  const floorOrder=(id,mapId=config.id)=>entry(mapId)?.levels?entry(mapId).levels.findIndex(l=>l.id===id):0;
+ // A floor change goes up when the way climbs (the route finder reports the rise); floor order is the fallback.
+ const isUp=(c,mapId=config.id)=>c.rise?c.rise>0:floorOrder(c.to,mapId)<floorOrder(c.from,mapId);
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-10');
+  worker=new Worker('route-worker.js?v=route-11');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  // A map's ground, pins and place names, fetched once.
- async function mapData(id){
-  if(data.has(id))return data.get(id);
-  const c=entry(id),json=async(f,d)=>{if(!f)return d;const r=await fetch(f);return r.ok?r.json():d;};
-  const [meta,markers,labels]=await Promise.all([json(c.routes,null),json(c.markersFile,[]),json(c.labelsFile,{labels:[]})]);
-  const d={meta,markers:Array.isArray(markers)?markers:[],labels:labels.labels||[]};data.set(id,d);return d;
+ // (The promise is kept, so two callers at once share one fetch.)
+ function mapData(id){
+  if(!data.has(id)){
+   const c=entry(id),json=async(f,d)=>{if(!f)return d;const r=await fetch(f);return r.ok?r.json():d;};
+   data.set(id,Promise.all([json(c.routes,null),json(c.markersFile,[]),json(c.labelsFile,{labels:[]})]).then(([meta,markers,labels])=>({meta,markers:Array.isArray(markers)?markers:[],labels:labels.labels||[]})).catch(e=>{data.delete(id);throw e;}));
+  }
+  return data.get(id);
  }
+ // The route finder keeps the ground of the few maps used last (a big map takes tens of megabytes); older ones are
+ // dropped and loaded again if needed.
+ const KEEP_GROUNDS=6;
  async function ensureGround(id){
   const d=await mapData(id);if(!d.meta)throw Error('Routes are not available on '+mapTitle(id)+' yet.');
-  startWorker();if(!loaded.has(id)){await ask({type:'load',map:id,meta:d.meta,url:new URL(d.meta.file,document.baseURI).href});loaded.add(id);}
-  return d;
+  startWorker();
+  if(!loaded.has(id))loaded.set(id,ask({type:'load',map:id,meta:d.meta,url:new URL(d.meta.file,document.baseURI).href}).catch(e=>{loaded.delete(id);throw e;}));
+  const p=loaded.get(id);loaded.delete(id);loaded.set(id,p);
+  for(const old of loaded.keys()){if(loaded.size<=KEEP_GROUNDS)break;if(old===config.id)continue;loaded.delete(old);ask({type:'drop',map:old}).catch(()=>{});}
+  await p;return d;
  }
  const placeName=p=>p.kind==='spot'?'Spot on '+(entry(p.map)?.levels?levelTitle(p.level,p.map):mapTitle(p.map)):p.name;
- const exitName=(l,mapId)=>'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,''));
+ const exitName=l=>'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,''));
  function places(){
   const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:l.id,name:exitName(l),x:l.x,y:l.y,level:l.level,reach:260}));
   const pins=allMarkers().filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level}));
@@ -57,7 +67,8 @@
   const byId=new Map(markers.map(m=>[m.id,m]));
   const kindOf=m=>m.category==='Trap'?'trap':m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':/(^| )drop( |$)/i.test(m.name)?'drop':'stairs';
   const COST={trap:2,teleport:2,lift:6,drop:2,stairs:4};
-  return markers.filter(m=>m.toMarker&&!m.toMap&&byId.has(m.toMarker)).map(m=>{const b=byId.get(m.toMarker),kind=kindOf(m);return {id:m.id,name:markerTitle(m),from:{x:m.x,y:m.y,level:m.level},to:{x:b.x,y:b.y,level:b.level},oneWay:true,kind,cost:COST[kind]};});
+  // A pin with no floor to go to is a landing (where a drop or trap arrives), not a way back up.
+  return markers.filter(m=>m.toMarker&&m.toLevel&&!m.toMap&&byId.has(m.toMarker)).map(m=>{const b=byId.get(m.toMarker),kind=kindOf(m);return {id:m.id,name:markerTitle(m),from:{x:m.x,y:m.y,level:m.level},to:{x:b.x,y:b.y,level:b.level},oneWay:true,kind,cost:COST[kind]};});
  }
  // Ways off a map: exit signs, boat docks (every stop of the boat's route), and lifts or teleporters that lead to
  // another map. Boats cost a wait; everything else is a step.
@@ -144,28 +155,34 @@
  function pick(){const o=state.options[state.mode];state.legs=o?.legs||null;state.error=o?.error||'';}
  async function compute(){
   const mine=++run;
-  if(!state.from||!state.to){state.options={};state.legs=null;state.error='';draw();showPanel();return;}
+  if(!state.from||!state.to){state.options={};state.legs=null;state.error='';busy=false;draw();showPanel();return;}
   busy=true;showPanel();
   const options={};
-  const hops=await landings();
-  for(const [mode] of MODES){
-   try{const legs=await plan(mode),bad=legs.find(l=>l.result.error);options[mode]=bad?{error:(legs.length>1?mapTitle(bad.map)+': ':'')+bad.result.error}:{legs};}
-   catch(e){options[mode]={error:e.message};}
-   // A druid or wizard can cast to a landing first; that wins when the walk from the landing is shorter by more
-   // than the cost of the cast.
-   for(const t of hops){
-    try{const legs=await plan(mode,t.place),cost=TELEPORT_COST+total(legs);if(legs.some(l=>l.result.error))continue;
-     const best=options[mode];if(!best.legs||cost<total(best.legs)+(best.teleport?TELEPORT_COST:0))options[mode]={legs,teleport:t};}
-    catch{}
+  try{
+   const hops=await landings().catch(()=>[]);
+   for(const [mode] of MODES){
+    try{const legs=await plan(mode),bad=legs.find(l=>l.result.error);options[mode]=bad?{error:(legs.length>1?mapTitle(bad.map)+': ':'')+bad.result.error}:{legs};}
+    catch(e){options[mode]={error:e.message};}
+    // A druid or wizard can cast to a landing first; that wins when its route costs less than walking (swims, waits
+    // and danger counted as the route finder counts them) by more than the cast.
+    for(const t of hops){
+     if(mine!==run)return;
+     try{const legs=await plan(mode,t.place);if(legs.some(l=>l.result.error))continue;
+      const best=options[mode];if(!best.legs||TELEPORT_COST+effort(legs)<effort(best.legs)+(best.teleport?TELEPORT_COST:0))options[mode]={legs,teleport:t};}
+     catch{}
+    }
+    if(mine!==run)return;
    }
-   if(mine!==run)return;
-  }
-  state.options=options;pick();busy=false;showPanel();draw(true);
+   state.options=options;pick();
+  }finally{if(mine===run)busy=false;}
+  showPanel();draw(true);
   // On a phone the steps wait in the Search menu; the map says what was found.
-  if(compact()&&state.legs)status('Route: about '+total(state.legs)+' m. Directions are in the Search menu.');
+  if(compact()&&state.legs)status('Route: about '+metres(total(state.legs))+'. Directions are in the Search menu.');
   else if(compact()&&state.error)status(state.error);
  }
  const total=legs=>legs.reduce((s,l)=>s+l.result.length,0);
+ // What a route costs to follow: the finder's own cost per part (swims and danger weighted) plus boat waits.
+ const effort=legs=>legs.reduce((s,l)=>s+(l.result.cost??l.result.length)+(l.next?.wait||0),0);
  // Teleports the walker can cast (Druid, Wizard), remembered in this browser. A cast counts as this many metres.
  const TP_KEY='mnmaps-route-teleport',TELEPORT_COST=60,CASTERS=['Druid','Wizard'],INVIS_KEY='mnmaps-route-invisible';
  // Zones above the walker's level: Safer avoids crossing them (not the start or finish zone) unless they can go
@@ -262,7 +279,7 @@
    if(c.link&&c.from===c.to&&/^passage$/i.test(c.link.name||''))continue;
    const prev=out[out.length-1];
    if(!c.link&&prev&&!prev.link&&(pts[c.index-1]?.d||0)-(pts[prev.index-1]?.d||0)<60){
-    out.pop();if(prev.from!==c.to)out.push({...c,from:prev.from});continue;
+    out.pop();if(prev.from!==c.to)out.push({...c,from:prev.from,rise:(prev.rise||0)+(c.rise||0)});continue;
    }
    out.push(c);
   }
@@ -273,7 +290,7 @@
   const tp=isFirst&&state.options[state.mode]?.teleport;
   if(tp)events.push({i:0,kind:'teleport',title:'Teleport to '+tp.place.name,sub:tp.caster+' spell · '+mapTitle(mapId)});
   else if(isFirst)events.push({i:0,kind:'start',title:placeName(state.from),sub:mapTitle(mapId)});
-  for(const c of tidyChanges(r.changes,pts)){const p=pts[c.index-1],up=floorOrder(c.to,mapId)<floorOrder(c.from,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
+  for(const c of tidyChanges(r.changes,pts)){const p=pts[c.index-1],up=isUp(c,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
    events.push({i:c.index-1,kind:up?'up':'down',title:named?(/ to /i.test(named)?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
   for(let k=1;k<pts.length;k++){if(pts[k].swim&&!pts[k-1].swim){let j=k;while(j+1<pts.length&&pts[j+1].swim)j++;const len=pts[j].d-pts[k].d;if(len>=8)events.push({i:k,kind:'swim',title:'Swim about '+metres(len)});}}
   const end=pts.length-1;
@@ -338,25 +355,35 @@
  // ---- the line on the map
  function draw(fit=false){
   for(const l of layers)l.remove();layers=[];arrowRuns=[];drawArrows();
-  const l=state.legs?.find(x=>x.map===config.id);if(!l||!map)return;
-  const r=l.result,here=config.levelId,pts=r.points,ll=p=>locationOf(p),first=l===state.legs[0],last=l===state.legs[state.legs.length-1];
+  const parts=(state.legs||[]).filter(x=>x.map===config.id);if(!parts.length||!map)return;
+  const here=config.levelId,ll=p=>locationOf(p),onFloor=p=>!config.levels||p.level===here,seen=[];
   // The other route option shows as a pale line where it goes its own way on this floor, tagged with its name and
   // length at the point it strays furthest; clicking it picks it.
+  const mine=parts.flatMap(l=>l.result.points.filter(onFloor));
   const near=(p,list)=>{let best=Infinity;for(let k=1;k<list.length;k++){const a=list[k-1],b=list[k],dx=b.x-a.x,dy=b.y-a.y,t=Math.max(0,Math.min(1,((p.x-a.x)*dx+(p.y-a.y)*dy)/(dx*dx+dy*dy||1)));best=Math.min(best,Math.hypot(a.x+dx*t-p.x,a.y+dy*t-p.y));}return best;};
-  const mine=pts.filter(p=>!config.levels||p.level===here);
   for(const [mode,label] of MODES){
-   if(mode===state.mode)continue;const o=state.options[mode],al=o?.legs?.find(x=>x.map===config.id);if(!al)continue;
-   const theirs=al.result.points.filter(p=>!config.levels||p.level===here);if(theirs.length<2)continue;
-   let far=null,fd=0;for(const p of theirs){const d=mine.length>1?near(p,mine):Infinity;if(d>fd){fd=d;far=p;}}
+   if(mode===state.mode)continue;const o=state.options[mode],theirs=(o?.legs||[]).filter(x=>x.map===config.id);if(!theirs.length)continue;
+   let far=null,fd=0;for(const p of theirs.flatMap(l=>l.result.points.filter(onFloor))){const d=mine.length>1?near(p,mine):Infinity;if(d>fd){fd=d;far=p;}}
    if(fd<20)continue;
-   let seg=[];const lines=[];
-   for(const p of al.result.points){if(!config.levels||p.level===here)seg.push(ll(p));else{if(seg.length>1)lines.push(seg);seg=[];}}
-   if(seg.length>1)lines.push(seg);
-   for(const line of lines){const pl=L.polyline(line,{className:'route-alt'}).addTo(map);pl.on('click',()=>{state.mode=mode;write(MODE_KEY,mode);pick();showPanel();draw();});layers.push(pl);}
+   for(const al of theirs){
+    let seg=[];const lines=[];
+    for(const p of al.result.points){if(onFloor(p))seg.push(ll(p));else{if(seg.length>1)lines.push(seg);seg=[];}}
+    if(seg.length>1)lines.push(seg);
+    for(const line of lines){const pl=L.polyline(line,{className:'route-alt'}).addTo(map);pl.on('click',()=>{state.mode=mode;write(MODE_KEY,mode);pick();showPanel();draw();});layers.push(pl);}
+   }
    const tag=L.tooltip({permanent:true,direction:'center',className:'route-tag alt',interactive:false}).setLatLng(ll(far)).setContent(text('span',label+' · '+metres(total(o.legs))));tag.addTo(map);layers.push(tag);
   }
-  // Only this floor's runs are drawn (swims in a blue dash, passes beneath a hall dotted); the round arrows lead to
-  // the other floors. Small arrows along the line show which way to go.
+  for(const l of parts)drawPart(l,here,ll,onFloor,seen);
+  // The chosen route's name and length ride on its line too.
+  if(seen.length>1){const t=L.tooltip({permanent:true,direction:'center',className:'route-tag',interactive:false}).setLatLng(ll(seen[Math.floor(seen.length/2)])).setContent(text('span',MODES.find(m=>m[0]===state.mode)[1]+' · '+metres(total(state.legs))));t.addTo(map);layers.push(t);}
+  drawArrows();
+  if(fit&&seen.length)map.fitBounds(L.latLngBounds(seen.map(ll)),{padding:[60,60],maxZoom:config.defaultView.placeZoom});
+ }
+ // One map's part of the route: this floor's runs (swims in a blue dash, passes beneath a hall dotted), round seals
+ // to the other floors, the A and B ends, and a seal on to the next map. Small arrows along the line show the way.
+ function drawPart(l,here,ll,onFloor,seen){
+  const r=l.result,pts=r.points,first=l===state.legs[0],last=l===state.legs[state.legs.length-1];
+  seen.push(...pts.filter(onFloor));
   const kind=(a,b)=>a.level!==here&&config.levels?'':a.under&&b.under?'under':a.swim&&b.swim?'swim':'ink';
   let run_=[pts[0]],current='';
   const flush=()=>{if(run_.length>1&&current){const line=run_.map(ll);
@@ -368,17 +395,14 @@
    const t=kind(a,b);if(t!==current&&current)flush();current=t;run_.push(b);}
   flush();
   for(const c of r.changes){const a=pts[c.index-1],b=pts[c.index];
-   if(a.level===here)layers.push(seal(a,c.to,floorOrder(c.to)<floorOrder(c.from)));
-   if(b.level===here&&a.level!==here)layers.push(seal(b,c.from,floorOrder(c.from)<floorOrder(c.to),true));}
-  const end=(p,label,cls)=>{if(config.levels&&p.level!==here)return;layers.push(L.marker(ll(p),{icon:L.divIcon({className:'route-end '+cls,html:'<span>'+label+'</span>',iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false,interactive:false,zIndexOffset:900}).addTo(map));};
+   if(c.from===c.to)continue;
+   if(a.level===here)layers.push(seal(a,c.to,isUp(c)));
+   if(b.level===here&&a.level!==here)layers.push(seal(b,c.from,!isUp(c),true));}
+  const end=(p,label,cls)=>{if(!onFloor(p))return;layers.push(L.marker(ll(p),{icon:L.divIcon({className:'route-end '+cls,html:'<span>'+label+'</span>',iconSize:[26,26],iconAnchor:[13,13]}),keyboard:false,interactive:false,zIndexOffset:900}).addTo(map));};
   if(first)end(pts[0],'A','route-start');
   if(last)end(pts[pts.length-1],'B','route-finish');
   // Where this map's part ends at an exit, a seal carries the route on to the next map.
-  if(l.next){const p=pts[pts.length-1];if(!config.levels||p.level===here){const m=seal(p,null,false,false,'Continue in '+l.next.title,'→');m.off('click');m.on('click',()=>openNext(l));layers.push(m);}}
-  // The chosen route's name and length ride on its line too.
-  {const mid=pts.filter(p=>!config.levels||p.level===here);if(mid.length>1){const t=L.tooltip({permanent:true,direction:'center',className:'route-tag',interactive:false}).setLatLng(ll(mid[Math.floor(mid.length/2)])).setContent(text('span',MODES.find(m=>m[0]===state.mode)[1]+' · '+metres(total(state.legs))));t.addTo(map);layers.push(t);}}
-  drawArrows();
-  if(fit){const mine=pts.filter(p=>!config.levels||p.level===here);if(mine.length)map.fitBounds(L.latLngBounds(mine.map(ll)),{padding:[60,60],maxZoom:config.defaultView.placeZoom});}
+  if(l.next){const p=pts[pts.length-1];if(onFloor(p)){const m=seal(p,null,false,false,'Continue in '+l.next.title,'→');m.off('click');m.on('click',()=>openNext(l));layers.push(m);}}
  }
  // Direction arrows every ARROW_GAP screen pixels along the drawn runs, placed again after each zoom.
  const ARROW_GAP=120;let arrowRuns=[],arrows=[],arrowMap=null;
@@ -404,7 +428,7 @@
   const m=L.marker(locationOf(p),{icon,keyboard:true,zIndexOffset:950,title:''}).addTo(map);
   const label=tip||(back?'Came from ':up?'Go up to ':'Go down to ')+levelTitle(toLevel);
   const el=m.getElement();el.append(text('span',arrow||(up?'↑':'↓'),'route-floor-arrow'));el.setAttribute('aria-label',label);
-  m.bindTooltip(label,{direction:'top',offset:[0,-14]});
+  m.bindTooltip(text('span',label),{direction:'top',offset:[0,-14]});
   if(toLevel)m.on('click',()=>changeLevel(toLevel,{x:p.x,y:p.y,id:'',quiet:true}));
   return m;
  }
@@ -414,9 +438,17 @@
   {label:'Directions to here',shown:()=>routable(config.id),run:at=>set('to',{kind:'spot',id:'spot',x:at.x,y:at.y,level:at.level})}];
  window.atlasPopupActions=[...(window.atlasPopupActions||[]),
   {label:'Directions',icon:'route',shown:m=>routable(config.id)&&!singleMap&&Number.isFinite(m.x),run:m=>{map.closePopup();set('to',{id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level});}}];
- // Share links: ?route=<start>~<finish>~<mode>, each end "map:x,y[:floor]" or "map:pin:<id>".
- const endCode=p=>p.map+':'+(p.kind==='spot'?Math.round(p.x)+','+Math.round(p.y)+(p.level?':'+p.level:''):'pin:'+p.id);
- function routeLink(){const url=mapLink(state.from?.map||config.id);url.searchParams.set('route',endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode);return url.href;}
+ // Share links: ?route=<start>~<finish>~<mode>[~<settings>], each end "map:x,y[:floor]" or "map:pin:<id>"; settings
+ // "L20.Druid.Wizard.invisible" carry what changes the plan (level, teleports, invisibility) to whoever opens it.
+ // A personal pin is not public, so it travels as its spot.
+ const endCode=p=>p.map+':'+(p.kind==='spot'||String(p.id).startsWith('personal-')?Math.round(p.x)+','+Math.round(p.y)+(p.level?':'+p.level:''):'pin:'+p.id);
+ const settingsCode=()=>[read(LEVEL_KEY)?'L'+read(LEVEL_KEY):'',...casts(),read(INVIS_KEY)==='1'?'invisible':''].filter(Boolean).join('.');
+ function applySettings(code){
+  if(code===undefined)return;const bits=code.split('.'),lvl=bits.find(b=>/^L[0-9]{1,2}$/.test(b));
+  write(LEVEL_KEY,lvl?lvl.slice(1):'');write(TP_KEY,JSON.stringify(CASTERS.filter(c=>bits.includes(c))));write(INVIS_KEY,bits.includes('invisible')?'1':'');
+  if(panel){panel.remove();panel=null;build();}
+ }
+ function routeLink(){const url=mapLink(state.from?.map||config.id);url.searchParams.set('route',endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode());return url.href;}
  async function endFrom(code){
   const [mapId,a,b,c]=code.split(':');if(!routable(mapId))return null;
   if(a==='pin'){const d=await mapData(mapId),l=d.labels.find(x=>x.id===b),m=d.markers.find(x=>x.id===b),p=l||m;
@@ -428,8 +460,8 @@
  if(shared){const u=new URL(location.href);u.searchParams.delete('route');history.replaceState(history.state,'',u);}
  window.addEventListener('atlas:loaded',async()=>{
   if(!panel)build();showPanel();draw();
-  if(shared){const [a,b,mode]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
-   if(from&&to){state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}}
+  if(shared){const [a,b,mode,settings]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
+   if(from&&to){applySettings(settings);state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}}
   // Route data loads only once someone opens Directions on this map (see openView).
   if(routable(config.id)&&panel&&!panel.hidden)ensureGround(config.id).catch(()=>{});
  });

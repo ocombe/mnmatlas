@@ -704,7 +704,6 @@ dialog.moved::backdrop{background:#0000001f}
 .leaflet-overlay-pane path.route-ink{stroke:#3a2214;stroke-width:3.5px;stroke-opacity:1;stroke-dasharray:11 7;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .leaflet-overlay-pane path.route-swim{stroke:#1d4f73;stroke-width:3.5px;stroke-dasharray:3 6;stroke-linecap:round;stroke-linejoin:round;fill:none}
 .leaflet-overlay-pane path.route-under{stroke:#3a2214;stroke-width:3px;stroke-opacity:.9;stroke-dasharray:1 6;stroke-linecap:round;fill:none;filter:drop-shadow(0 0 1.5px #f3e6c8)}
-.leaflet-overlay-pane path.route-ghost{stroke:#f3e6c8;stroke-width:3px;stroke-opacity:.45;stroke-dasharray:1 8;stroke-linecap:round;fill:none}
 .route-end span,.route-floor{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid #f5e2b4;box-shadow:0 0 0 1.5px #d29a48,0 2px 5px #000a;box-sizing:border-box}
 .route-end span{font:700 13px/1 var(--body);color:#fff4da;background:#8a4b1f}
 .route-finish span{background:#3a2214}
