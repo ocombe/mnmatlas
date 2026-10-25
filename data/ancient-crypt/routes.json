@@ -15,15 +15,15 @@
  ],
  "project": {
   "x": [
-   0.0,
-   0.0,
-   -14.0,
+   0,
+   0,
+   -14,
    2475.8125
   ],
   "y": [
    -13.787308542171104,
    -2.431074487337355,
-   0.0,
+   0,
    2284.6308102811645
   ]
  },
@@ -49,5 +49,19 @@
     "exact": true
    }
   }
- ]
+ ],
+ "between": {
+  "exit-wyrmsbane-tomb": {
+   "exit-shaded-dunes": 203,
+   "exit-caves-of-irem": 162
+  },
+  "exit-shaded-dunes": {
+   "exit-wyrmsbane-tomb": 203,
+   "exit-caves-of-irem": 157
+  },
+  "exit-caves-of-irem": {
+   "exit-wyrmsbane-tomb": 164,
+   "exit-shaded-dunes": 163
+  }
+ }
 }

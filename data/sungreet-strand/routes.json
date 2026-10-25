@@ -1,0 +1,321 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/sungreet-strand/ground.bin",
+ "cell": 2,
+ "x0": 678.9829711914062,
+ "z0": -532.7639770507812,
+ "nx": 1427,
+ "nz": 873,
+ "hstep": 0.25,
+ "step": 3.6,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -3,
+   4456
+  ],
+  "y": [
+   -2.954423259036048,
+   -0.5209445330001472,
+   0,
+   10969.568316111592
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 4125.3,
+    "y": 4050.2,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 4125.3,
+    "y": 4062,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2553.3,
+    "y": 2282,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2607.3,
+    "y": 2336.6,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2661.3,
+    "y": 4160.4,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2661.3,
+    "y": 4153.9,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2589.3,
+    "y": 1178,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2589.3,
+    "y": 1195.8,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2481.3,
+    "y": 3805.6,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2481.3,
+    "y": 3823.3,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2619.3,
+    "y": 1084.5,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2601.3,
+    "y": 1078.6,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2613.3,
+    "y": 3894.1,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2613.3,
+    "y": 3799.7,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2583.3,
+    "y": 1186,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2595.3,
+    "y": 1192.2,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2463.3,
+    "y": 1365.6,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2523.3,
+    "y": 1495.5,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2379.3,
+    "y": 3805.6,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2481.3,
+    "y": 3805.6,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2211.3,
+    "y": 4502.7,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2211.3,
+    "y": 4514.4,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2205.3,
+    "y": 4660.7,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2205.3,
+    "y": 4668.4,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1293.3,
+    "y": 2659.8,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1335.3,
+    "y": 2659.9,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 963.3,
+    "y": 2716.5,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1137.3,
+    "y": 2796.2,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 951.3,
+    "y": 2678.9,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1011.3,
+    "y": 2666.3,
+    "level": "ground",
+    "exact": true
+   }
+  }
+ ],
+ "between": {
+  "to-night-harbor": {
+   "to-tel-ekir": 3036,
+   "to-glass-flats": 2762,
+   "to-glass-flats-road": 2970,
+   "to-grain-cellar": 1364
+  },
+  "to-tel-ekir": {
+   "to-night-harbor": 2992,
+   "to-glass-flats": 3779,
+   "to-glass-flats-road": 1041,
+   "to-grain-cellar": 2727
+  },
+  "to-glass-flats": {
+   "to-night-harbor": 2743,
+   "to-tel-ekir": 3797,
+   "to-glass-flats-road": 3718,
+   "to-grain-cellar": 1485
+  },
+  "to-glass-flats-road": {
+   "to-night-harbor": 2905,
+   "to-tel-ekir": 1039,
+   "to-glass-flats": 3680,
+   "to-grain-cellar": 2638
+  },
+  "to-grain-cellar": {
+   "to-night-harbor": 1364,
+   "to-tel-ekir": 2737,
+   "to-glass-flats": 1491,
+   "to-glass-flats-road": 2635
+  }
+ }
+}

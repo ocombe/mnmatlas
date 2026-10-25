@@ -2,30 +2,74 @@
  "version": 3,
  "format": "raster",
  "file": "data/shallow-shoals/ground.bin",
- "cell": 4.0,
+ "cell": 4,
  "x0": 864.8889770507812,
- "z0": 3370.0,
+ "z0": 3370,
  "nx": 2079,
  "nz": 943,
  "hstep": 0.25,
- "step": 4.0,
+ "step": 4,
  "swim": 2.5,
  "levels": [
   "ground"
  ],
  "project": {
   "x": [
-   0.0,
-   0.0,
-   -2.0,
-   13700.0
+   0,
+   0,
+   -2,
+   13700
   ],
   "y": [
    -1.9697331675315581,
    -0.3473171332880156,
-   0.0,
+   0,
    17630.779531856155
   ]
  },
- "joins": []
+ "joins": [],
+ "between": {
+  "to-keepers-bight": {
+   "to-vale-of-zintar": 4418,
+   "to-fallen-pass": 6625,
+   "to-grimtide-sanctum": 1243,
+   "boat-zaedins-landing": 4245,
+   "boat-player-island": 4229
+  },
+  "to-vale-of-zintar": {
+   "to-keepers-bight": 4422,
+   "to-fallen-pass": 2466,
+   "to-grimtide-sanctum": 3400,
+   "boat-zaedins-landing": 3528,
+   "boat-player-island": 1599
+  },
+  "to-fallen-pass": {
+   "to-keepers-bight": 6781,
+   "to-vale-of-zintar": 2423,
+   "to-grimtide-sanctum": 5532,
+   "boat-zaedins-landing": 4259,
+   "boat-player-island": 2364
+  },
+  "to-grimtide-sanctum": {
+   "to-keepers-bight": 1264,
+   "to-vale-of-zintar": 3401,
+   "to-fallen-pass": 5422,
+   "boat-zaedins-landing": 3000,
+   "boat-player-island": 3045
+  },
+  "boat-zaedins-landing": {
+   "to-keepers-bight": 4605,
+   "to-vale-of-zintar": 3616,
+   "to-fallen-pass": 4202,
+   "to-grimtide-sanctum": 3457,
+   "boat-player-island": 2487
+  },
+  "boat-player-island": {
+   "to-keepers-bight": 4222,
+   "to-vale-of-zintar": 1564,
+   "to-fallen-pass": 2419,
+   "to-grimtide-sanctum": 2974,
+   "boat-zaedins-landing": 2064
+  }
+ }
 }

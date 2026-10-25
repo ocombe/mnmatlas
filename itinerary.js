@@ -62,7 +62,7 @@
  // Ways off a map: exit signs, boat docks (every stop of the boat's route), and lifts or teleporters that lead to
  // another map. Boats cost a wait; everything else is a step.
  function ways(d,id){
-  const out=[],add=(p,to,place,how,cost=0)=>{if(to!==id&&routable(to))out.push({x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost});};
+  const out=[],add=(p,to,place,how,cost=0)=>{if(to!==id&&routable(to))out.push({id:p.id,x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost});};
   for(const l of d.labels){
    if(Array.isArray(l.route))for(const stop of l.route)add(l,stop.map,stop.place,'boat',300);
    else if(l.toMap)add(l,l.toMap,l.toPlace,'exit');
@@ -70,18 +70,33 @@
   for(const m of d.markers)if(m.toMap)add(m,m.toMap,m.toPlace,m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':'exit');
   return out;
  }
- // The maps between two maps, through exits that lead both ways: fewest maps first.
- async function mapPath(a,b){
-  const prev=new Map([[a,null]]),queue=[a];
-  while(queue.length){
-   const id=queue.shift();if(id===b)break;
-   for(const w of ways(await mapData(id),id)){
+ // Map pixels per metre, from a map's route projection (for straight-line guesses).
+ const perMetre=meta=>{const {x:[ax,,az],y:[cx,,cz]}=(meta.projects||[meta.project])[0];return (Math.hypot(ax,cx)+Math.hypot(az,cz))/2;};
+ // A guess at the walk between two spots of one map: its sign-to-sign table when both are signs, else the straight line
+ // made a little longer for corners.
+ function walkGuess(meta,p,q){
+  const known=p.id&&q.id&&meta?.between?.[p.id]?.[q.id];if(known!==undefined)return known;
+  return meta?Math.hypot(p.x-q.x,p.y-q.y)/perMetre(meta)*1.3:Infinity;
+ }
+ // The chain of maps between two places with the least walking (a boat counts as its wait), through exits that lead
+ // both ways. Each map's sign-to-sign walks are worked out when its route data is built (meta.between).
+ async function mapPath(from,to){
+  const best=new Map(),open=[{cost:0,map:from.map,at:from,key:from.map+'|',hops:[]}];
+  while(open.length){
+   open.sort((x,y)=>x.cost-y.cost);const s=open.shift();
+   if(s.end)return s.hops;
+   if(best.has(s.key))continue;best.set(s.key,s.cost);
+   const d=await mapData(s.map);
+   if(s.map===to.map){open.push({...s,end:true,cost:s.cost+walkGuess(d.meta,s.at,to)});continue;}
+   for(const w of ways(d,s.map)){
     // A map can close its door to one neighbour (the Ancient Crypt passage only leads out of the tomb).
-    if(prev.has(w.to)||(await mapData(w.to)).meta?.closedEntries?.includes(id))continue;prev.set(w.to,{from:id,exit:w});queue.push(w.to);}
+    if((await mapData(w.to)).meta?.closedEntries?.includes(s.map))continue;
+    const hop={from:s.map,to:w.to,exit:w},land=await arrival(hop);if(!land)continue;
+    const key=w.to+'|'+land.id;if(best.has(key))continue;
+    open.push({cost:s.cost+walkGuess(d.meta,s.at,w)+w.cost,map:w.to,at:land,key,hops:[...s.hops,hop]});
+   }
   }
-  if(!prev.has(b))return null;
-  const hops=[];for(let id=b;prev.get(id);id=prev.get(id).from)hops.unshift({...prev.get(id),to:id});
-  return hops;
+  return null;
  }
  // Where a way lands on the next map: the sign or pin it names, or the sign there that leads back.
  async function arrival(hop){
@@ -97,7 +112,7 @@
  }
  async function plan(mode,from=state.from){
   if(from.map===state.to.map)return [await leg(from.map,from,state.to,mode)];
-  const hops=await mapPath(from.map,state.to.map);
+  const hops=await mapPath(from,state.to);
   if(!hops)throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');
   const legs=[];let start=from;
   for(const hop of hops){

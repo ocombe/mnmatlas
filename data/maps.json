@@ -495,6 +495,7 @@
     },
     {
       "id": "sungreet-strand",
+      "routes": "data/sungreet-strand/routes.json",
       "title": "Sungreet Strand",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The river valley",
@@ -537,6 +538,7 @@
     },
     {
       "id": "shaded-dunes",
+      "routes": "data/shaded-dunes/routes.json",
       "title": "Shaded Dunes",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The desert south of Night Harbor",
@@ -579,6 +581,7 @@
     },
     {
       "id": "fallen-pass",
+      "routes": "data/fallen-pass/routes.json",
       "title": "Fallen Pass",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The canyons west of Shaded Dunes",
@@ -730,6 +733,7 @@
     },
     {
       "id": "glass-flats",
+      "routes": "data/glass-flats/routes.json",
       "title": "Glass Flats",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The salt flats north of Sungreet Strand",
@@ -1067,6 +1071,7 @@
     },
     {
       "id": "vale-of-zintar",
+      "routes": "data/vale-of-zintar/routes.json",
       "title": "Vale of Zintar",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The giants' vale north of Fallen Pass",

@@ -1,0 +1,127 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/glass-flats/ground.bin",
+ "cell": 3,
+ "x0": -1833.2969970703125,
+ "z0": 759.1820068359375,
+ "nx": 1158,
+ "nz": 1663,
+ "hstep": 0.25,
+ "step": 4,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -2,
+   11856
+  ],
+  "y": [
+   -1.9696155060246383,
+   -0.3472963553340378,
+   0,
+   4170.238147193653
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3062.6,
+    "y": 6424.7,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3062.6,
+    "y": 6352,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3812.6,
+    "y": 6105.6,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3842.6,
+    "y": 6111.4,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3104.6,
+    "y": 5612.7,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3158.6,
+    "y": 5613.6,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2852.6,
+    "y": 5143.9,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2852.6,
+    "y": 5151.8,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3260.6,
+    "y": 4882.7,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3254.6,
+    "y": 4836.2,
+    "level": "ground",
+    "exact": true
+   }
+  }
+ ],
+ "between": {
+  "to-sungreet-strand": {
+   "to-sungreet-strand-road": 321
+  },
+  "to-sungreet-strand-road": {
+   "to-sungreet-strand": 321
+  }
+ }
+}

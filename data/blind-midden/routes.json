@@ -1,7 +1,7 @@
 {
  "version": 4,
  "file": "data/blind-midden/ground.bin",
- "cell": 1.0,
+ "cell": 1,
  "x0": -345.8219909667969,
  "z0": -269.7250061035156,
  "nx": 717,
@@ -15,15 +15,15 @@
  ],
  "project": {
   "x": [
-   0.0,
-   0.0,
-   -5.0,
+   0,
+   0,
+   -5,
    1529.1968688964844
   ],
   "y": [
    -4.924038765060686,
    -0.8682408883346397,
-   0.0,
+   0,
    2366.7673538252216
   ]
  },
@@ -81,5 +81,13 @@
     "exact": true
    }
   }
- ]
+ ],
+ "between": {
+  "exit-great-cavern-sea": {
+   "exit-ail-vorith": 624
+  },
+  "exit-ail-vorith": {
+   "exit-great-cavern-sea": 624
+  }
+ }
 }

@@ -1,0 +1,77 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/shaded-dunes/ground.bin",
+ "cell": 2,
+ "x0": -808.156982421875,
+ "z0": -515.5460205078125,
+ "nx": 911,
+ "nz": 1091,
+ "hstep": 0.25,
+ "step": 3.6,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -3,
+   5296
+  ],
+  "y": [
+   -2.9544232590369575,
+   -0.5209445330010567,
+   0,
+   3299.0236133250637
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [],
+ "between": {
+  "to-tel-ekir": {
+   "to-fallen-pass": 1316,
+   "to-night-harbor": 1926,
+   "to-ancient-crypt": 1307,
+   "to-caves-of-irem": 890,
+   "to-infested-crypt": 1092
+  },
+  "to-fallen-pass": {
+   "to-tel-ekir": 1327,
+   "to-night-harbor": 2115,
+   "to-ancient-crypt": 1584,
+   "to-caves-of-irem": 676,
+   "to-infested-crypt": 973
+  },
+  "to-night-harbor": {
+   "to-tel-ekir": 2009,
+   "to-fallen-pass": 2118,
+   "to-ancient-crypt": 694,
+   "to-caves-of-irem": 1554,
+   "to-infested-crypt": 1485
+  },
+  "to-ancient-crypt": {
+   "to-tel-ekir": 1347,
+   "to-fallen-pass": 1607,
+   "to-night-harbor": 693,
+   "to-caves-of-irem": 1075,
+   "to-infested-crypt": 1229
+  },
+  "to-caves-of-irem": {
+   "to-tel-ekir": 883,
+   "to-fallen-pass": 656,
+   "to-night-harbor": 1556,
+   "to-ancient-crypt": 1088,
+   "to-infested-crypt": 346
+  },
+  "to-infested-crypt": {
+   "to-tel-ekir": 1140,
+   "to-fallen-pass": 995,
+   "to-night-harbor": 1487,
+   "to-ancient-crypt": 1169,
+   "to-caves-of-irem": 351
+  }
+ }
+}

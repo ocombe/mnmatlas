@@ -3,7 +3,7 @@
  "file": "data/night-harbor/ground.bin",
  "cell": 1.5,
  "x0": -441.79901123046875,
- "z0": -2030.0,
+ "z0": -2030,
  "nx": 968,
  "nz": 1053,
  "step": 2.2,
@@ -34,12 +34,12 @@
    "oneWay": false,
    "from": {
     "x": 489.5,
-    "y": 949.0,
+    "y": 949,
     "level": "city",
     "exact": true
    },
    "to": {
-    "x": 485.0,
+    "x": 485,
     "y": 948.1,
     "level": "city",
     "exact": true
@@ -4280,5 +4280,49 @@
    4,
    60
   ]
+ },
+ "between": {
+  "place-32": {
+   "place-33": 1380,
+   "place-34": 530,
+   "place-36": 1158,
+   "place-37": 1590,
+   "place-38": 1243
+  },
+  "place-33": {
+   "place-32": 1348,
+   "place-34": 1564,
+   "place-36": 1354,
+   "place-37": 1279,
+   "place-38": 185
+  },
+  "place-34": {
+   "place-32": 529,
+   "place-33": 1524,
+   "place-36": 1407,
+   "place-37": 1898,
+   "place-38": 1390
+  },
+  "place-36": {
+   "place-32": 1038,
+   "place-33": 1236,
+   "place-34": 1355,
+   "place-37": 821,
+   "place-38": 1057
+  },
+  "place-37": {
+   "place-32": 1582,
+   "place-33": 1280,
+   "place-34": 1927,
+   "place-36": 885,
+   "place-38": 1383
+  },
+  "place-38": {
+   "place-32": 1172,
+   "place-33": 182,
+   "place-34": 1392,
+   "place-36": 1211,
+   "place-37": 1391
+  }
  }
 }

@@ -2,30 +2,38 @@
  "version": 3,
  "format": "raster",
  "file": "data/scarwood/ground.bin",
- "cell": 3.0,
+ "cell": 3,
  "x0": -1809.2889404296875,
  "z0": -1747.8709716796875,
  "nx": 1002,
  "nz": 1336,
  "hstep": 0.25,
- "step": 4.0,
+ "step": 4,
  "swim": 2.5,
  "levels": [
   "ground"
  ],
  "project": {
   "x": [
-   0.0,
-   0.0,
+   0,
+   0,
    -2.5,
-   5506.0
+   5506
   ],
   "y": [
    -2.4620193825312526,
    -0.434120444168002,
-   0.0,
+   0,
    3261.41197133287
   ]
  },
- "joins": []
+ "joins": [],
+ "between": {
+  "to-keepers-bight": {
+   "to-sunken-resort": 1783
+  },
+  "to-sunken-resort": {
+   "to-keepers-bight": 1786
+  }
+ }
 }

@@ -1,7 +1,7 @@
 {
  "version": 4,
  "file": "data/tel-ekir/ground.bin",
- "cell": 1.0,
+ "cell": 1,
  "x0": -61.7130012512207,
  "z0": -431.90399169921875,
  "nx": 451,
@@ -16,15 +16,15 @@
  ],
  "project": {
   "x": [
-   0.0,
-   0.0,
-   -5.0,
-   2356.0
+   0,
+   0,
+   -5,
+   2356
   ],
   "y": [
    -4.924038765060914,
    -0.8682408883344124,
-   0.0,
+   0,
    2956.653346080094
   ]
  },
@@ -36,13 +36,13 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 1637.0,
+    "x": 1637,
     "y": 2210.2,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 1629.0,
+    "x": 1629,
     "y": 2210.8,
     "level": "floor-2",
     "exact": true
@@ -53,7 +53,7 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 1776.0,
+    "x": 1776,
     "y": 2385.7,
     "level": "floor-1",
     "exact": true
@@ -71,7 +71,7 @@
    "oneWay": false,
    "from": {
     "x": 1950.5,
-    "y": 2078.0,
+    "y": 2078,
     "level": "floor-1",
     "exact": true
    },
@@ -87,13 +87,13 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 3242.0,
-    "y": 2024.0,
+    "x": 3242,
+    "y": 2024,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 3249.0,
+    "x": 3249,
     "y": 1994.1,
     "level": "floor-1",
     "exact": true
@@ -110,11 +110,19 @@
     "exact": true
    },
    "to": {
-    "x": 3318.0,
-    "y": 2003.0,
+    "x": 3318,
+    "y": 2003,
     "level": "floor-1",
     "exact": true
    }
   }
- ]
+ ],
+ "between": {
+  "to-sungreet-strand": {
+   "to-shaded-dunes": 556
+  },
+  "to-shaded-dunes": {
+   "to-sungreet-strand": 558
+  }
+ }
 }

@@ -1,0 +1,73 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/vale-of-zintar/ground.bin",
+ "cell": 3,
+ "x0": 421.37799072265625,
+ "z0": -263.4389953613281,
+ "nx": 1600,
+ "nz": 1322,
+ "hstep": 0.25,
+ "step": 4,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -2,
+   7356
+  ],
+  "y": [
+   -1.9696155060246383,
+   -0.3472963553340378,
+   0,
+   10678.086467045328
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 7801.9,
+    "y": 2941.9,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 7771.9,
+    "y": 2772.9,
+    "level": "ground",
+    "exact": true
+   }
+  }
+ ],
+ "between": {
+  "to-fallen-pass": {
+   "to-glass-flats": 4795,
+   "to-keepers-bight": 5081,
+   "to-shallow-shoals": 4397
+  },
+  "to-glass-flats": {
+   "to-fallen-pass": 4475,
+   "to-keepers-bight": 983,
+   "to-shallow-shoals": 4127
+  },
+  "to-keepers-bight": {
+   "to-fallen-pass": 4985,
+   "to-glass-flats": 986,
+   "to-shallow-shoals": 4596
+  },
+  "to-shallow-shoals": {
+   "to-fallen-pass": 4449,
+   "to-glass-flats": 4089,
+   "to-keepers-bight": 4460
+  }
+ }
+}

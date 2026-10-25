@@ -2,13 +2,13 @@
  "version": 3,
  "format": "raster",
  "file": "data/faelindral/ground.bin",
- "cell": 1.0,
- "x0": 0.0,
- "z0": 0.0,
+ "cell": 1,
+ "x0": 0,
+ "z0": 0,
  "nx": 835,
  "nz": 818,
  "hstep": 0.25,
- "step": 1.0,
+ "step": 1,
  "swim": 2.5,
  "levels": [
   "platforms"
@@ -29,5 +29,97 @@
  },
  "oneWayExits": [],
  "closedEntries": [],
- "joins": []
+ "joins": [],
+ "between": {
+  "lift-traveler-s-down": {
+   "lift-keeper-s-down": 454,
+   "lift-pixie-down": 621,
+   "ramp-01-down": 213,
+   "ramp-02-down": 543,
+   "ramp-03-down": 641,
+   "ramp-04-down": 626,
+   "ramp-05-down": 560,
+   "ramp-06-down": 627
+  },
+  "lift-keeper-s-down": {
+   "lift-traveler-s-down": 452,
+   "lift-pixie-down": 513,
+   "ramp-01-down": 607,
+   "ramp-02-down": 211,
+   "ramp-03-down": 359,
+   "ramp-04-down": 292,
+   "ramp-05-down": 132,
+   "ramp-06-down": 197
+  },
+  "lift-pixie-down": {
+   "lift-traveler-s-down": 617,
+   "lift-keeper-s-down": 494,
+   "ramp-01-down": 764,
+   "ramp-02-down": 603,
+   "ramp-03-down": 484,
+   "ramp-04-down": 684,
+   "ramp-05-down": 602,
+   "ramp-06-down": 666
+  },
+  "ramp-01-down": {
+   "lift-traveler-s-down": 213,
+   "lift-keeper-s-down": 606,
+   "lift-pixie-down": 763,
+   "ramp-02-down": 691,
+   "ramp-03-down": 794,
+   "ramp-04-down": 771,
+   "ramp-05-down": 710,
+   "ramp-06-down": 777
+  },
+  "ramp-02-down": {
+   "lift-traveler-s-down": 542,
+   "lift-keeper-s-down": 211,
+   "lift-pixie-down": 610,
+   "ramp-01-down": 697,
+   "ramp-03-down": 474,
+   "ramp-04-down": 82,
+   "ramp-05-down": 251,
+   "ramp-06-down": 315
+  },
+  "ramp-03-down": {
+   "lift-traveler-s-down": 633,
+   "lift-keeper-s-down": 364,
+   "lift-pixie-down": 482,
+   "ramp-01-down": 770,
+   "ramp-02-down": 471,
+   "ramp-04-down": 552,
+   "ramp-05-down": 469,
+   "ramp-06-down": 533
+  },
+  "ramp-04-down": {
+   "lift-traveler-s-down": 625,
+   "lift-keeper-s-down": 292,
+   "lift-pixie-down": 687,
+   "ramp-01-down": 779,
+   "ramp-02-down": 82,
+   "ramp-03-down": 555,
+   "ramp-05-down": 332,
+   "ramp-06-down": 396
+  },
+  "ramp-05-down": {
+   "lift-traveler-s-down": 561,
+   "lift-keeper-s-down": 132,
+   "lift-pixie-down": 621,
+   "ramp-01-down": 716,
+   "ramp-02-down": 251,
+   "ramp-03-down": 467,
+   "ramp-04-down": 332,
+   "ramp-06-down": 65
+  },
+  "ramp-06-down": {
+   "lift-traveler-s-down": 626,
+   "lift-keeper-s-down": 197,
+   "lift-pixie-down": 689,
+   "ramp-01-down": 780,
+   "ramp-02-down": 315,
+   "ramp-03-down": 536,
+   "ramp-04-down": 396,
+   "ramp-05-down": 65
+  }
+ }
 }

@@ -1,0 +1,297 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/fallen-pass/ground.bin",
+ "cell": 2,
+ "x0": -815.8300170898438,
+ "z0": -726,
+ "nx": 674,
+ "nz": 1571,
+ "hstep": 0.25,
+ "step": 3.6,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -3,
+   2596
+  ],
+  "y": [
+   -2.9544232590365027,
+   -0.5209445330010567,
+   0,
+   1535.0236133250305
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2755,
+    "y": 664.8,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2725,
+    "y": 706.6,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 817,
+    "y": 1551.7,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 817,
+    "y": 1602.5,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2887,
+    "y": 2158.5,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2695,
+    "y": 2299.1,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2089,
+    "y": 2557.8,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1957,
+    "y": 2566.4,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2509,
+    "y": 2612.3,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2317,
+    "y": 2604.4,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2467,
+    "y": 2197.2,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2389,
+    "y": 2227.9,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2215,
+    "y": 2623.5,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1903,
+    "y": 3097.2,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1465,
+    "y": 2603.2,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1135,
+    "y": 2593.8,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1801,
+    "y": 2642.2,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1903,
+    "y": 2701.2,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1711,
+    "y": 1126.3,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1597,
+    "y": 1349.8,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1729,
+    "y": 1405.3,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1603,
+    "y": 1361,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1591,
+    "y": 854.3,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1669,
+    "y": 856,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1525,
+    "y": 1128.8,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1519,
+    "y": 1145.5,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1027,
+    "y": 1902.9,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 1159,
+    "y": 1843.7,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 799,
+    "y": 1908.9,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 793,
+    "y": 1922.7,
+    "level": "ground",
+    "exact": true
+   }
+  }
+ ],
+ "between": {
+  "to-shaded-dunes": {
+   "to-vale-of-zintar": 871
+  },
+  "to-vale-of-zintar": {
+   "to-shaded-dunes": 864
+  }
+ }
+}
