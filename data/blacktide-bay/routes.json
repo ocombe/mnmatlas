@@ -1,0 +1,362 @@
+{
+ "version": 4,
+ "file": "data/blacktide-bay/ground.bin",
+ "cell": 1,
+ "x0": -709.5078125,
+ "z0": -757.6843872070312,
+ "nx": 3371,
+ "nz": 1101,
+ "step": 2.2,
+ "swim": 2.5,
+ "levels": [
+  "ew-caves",
+  "caves",
+  "floor-1",
+  "floor-2"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -8,
+   3126.341552734375
+  ],
+  "y": [
+   -7.878462024097644,
+   -1.3891854213352417,
+   0,
+   2702.3219176158327
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 3239.8,
+    "y": 2570.4,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 3223.8,
+    "y": 2617.5,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 3023.8,
+    "y": 1585.2,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2975.8,
+    "y": 1640.7,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 3575.8,
+    "y": 3704.3,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 3447.8,
+    "y": 3659,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (swim up or jump down)",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 1551.8,
+    "y": 2243,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 1487.8,
+    "y": 2291.4,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 4191.8,
+    "y": 2186.9,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 4175.8,
+    "y": 2223.7,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2839.8,
+    "y": 2726.3,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2703.8,
+    "y": 2815.1,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 3927.8,
+    "y": 2021.8,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 3895.8,
+    "y": 2044.1,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2855.8,
+    "y": 2239.5,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2823.8,
+    "y": 2278.8,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2407.8,
+    "y": 1567.2,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2399.8,
+    "y": 1593.5,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 3047.8,
+    "y": 2341.8,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 3015.8,
+    "y": 2371.7,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 1527.8,
+    "y": 2966.1,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 1711.8,
+    "y": 2915.4,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 2055.8,
+    "y": 3246.2,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 2039.8,
+    "y": 3358.4,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 3847.8,
+    "y": 3076.6,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 3807.8,
+    "y": 3105.7,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Waterfall (jump down)",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 1903.8,
+    "y": 1562.7,
+    "level": "floor-2",
+    "exact": true
+   },
+   "to": {
+    "x": 1903.8,
+    "y": 1574.5,
+    "level": "floor-2",
+    "exact": true
+   }
+  },
+  {
+   "name": "Boulder tunnel",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 491,
+    "y": 550,
+    "level": "ew-caves",
+    "exact": true
+   },
+   "to": {
+    "x": 491,
+    "y": 579,
+    "level": "ew-caves",
+    "exact": true
+   }
+  }
+ ],
+ "projects": [
+  {
+   "x": [
+    0,
+    0,
+    -8,
+    -3670.6572265625
+   ],
+   "y": [
+    -7.8784613609313965,
+    -1.3891850709915161,
+    0,
+    21183.01245711939
+   ]
+  },
+  {
+   "x": [
+    0,
+    0,
+    -8,
+    1318.7005157470703
+   ],
+   "y": [
+    -7.878462024098553,
+    -1.3891854213361512,
+    0,
+    11855.642160328454
+   ]
+  },
+  {
+   "x": [
+    0,
+    0,
+    -8,
+    3126.341552734375
+   ],
+   "y": [
+    -7.878462024097644,
+    -1.3891854213352417,
+    0,
+    2702.3219176158327
+   ]
+  },
+  {
+   "x": [
+    0,
+    0,
+    -8,
+    3126.341552734375
+   ],
+   "y": [
+    -7.878462024097644,
+    -1.3891854213356964,
+    0,
+    2702.321917615837
+   ]
+  }
+ ],
+ "between": {
+  "caves-exit-keepers-bight": {
+   "caves-exit-keepers-bight-south": 162,
+   "ew-caves-exit-evershade-weald": 1608
+  },
+  "caves-exit-keepers-bight-south": {
+   "caves-exit-keepers-bight": 162,
+   "ew-caves-exit-evershade-weald": 1573
+  },
+  "ew-caves-exit-evershade-weald": {
+   "caves-exit-keepers-bight": 1591,
+   "caves-exit-keepers-bight-south": 1569
+  }
+ }
+}

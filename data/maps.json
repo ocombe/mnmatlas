@@ -918,6 +918,7 @@
     },
     {
       "id": "blacktide-bay",
+      "routes": "data/blacktide-bay/routes.json",
       "title": "Blacktide Bay",
       "subtitle": "Two floors under the cliffs of Evershade Weald",
       "cartoucheKicker": "The orcs’ hidden harbour",
@@ -1385,6 +1386,7 @@
     },
     {
       "id": "fallen-watch",
+      "routes": "data/fallen-watch/routes.json",
       "title": "Fallen Watch",
       "subtitle": "Seven floors of the ruined keep",
       "cartoucheKicker": "The ruined keep",
@@ -1559,6 +1561,7 @@
     },
     {
       "id": "sunken-resort",
+      "routes": "data/sunken-resort/routes.json",
       "relief": "assets/relief/sunken-resort/",
       "title": "Sunken Resort",
       "subtitle": "Four floors beneath a Scarwood lake",
@@ -1644,6 +1647,7 @@
     },
     {
       "id": "rothold",
+      "routes": "data/rothold/routes.json",
       "title": "Rothold",
       "subtitle": "The ruined keep and caverns of the Deep",
       "cartoucheKicker": "A fortress beneath the surface",

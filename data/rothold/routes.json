@@ -1,0 +1,88 @@
+{
+ "version": 4,
+ "file": "data/rothold/ground.bin",
+ "cell": 1,
+ "x0": -526.4862670898438,
+ "z0": -318.32855224609375,
+ "nx": 742,
+ "nz": 947,
+ "step": 2.2,
+ "swim": 2.5,
+ "levels": [
+  "level-1",
+  "level-2",
+  "level-3",
+  "level-4",
+  "level-5"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -6,
+   4139.667449951172
+  ],
+  "y": [
+   -5.908846020698547,
+   -1.0418890714645386,
+   0,
+   1613.1379154711503
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Jump down the well",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 4474.6,
+    "y": 1731,
+    "level": "level-2",
+    "exact": true
+   },
+   "to": {
+    "x": 4486.6,
+    "y": 1866.6,
+    "level": "level-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Jump down the well",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 4528.6,
+    "y": 1753,
+    "level": "level-4",
+    "exact": true
+   },
+   "to": {
+    "x": 4498.6,
+    "y": 1861.2,
+    "level": "level-1",
+    "exact": true
+   }
+  },
+  {
+   "name": "Jump into the gorge",
+   "kind": "drop",
+   "oneWay": true,
+   "from": {
+    "x": 4768.6,
+    "y": 1832.2,
+    "level": "level-2",
+    "exact": true
+   },
+   "to": {
+    "x": 4912.6,
+    "y": 1939.8,
+    "level": "level-1",
+    "exact": true
+   }
+  }
+ ],
+ "between": {}
+}

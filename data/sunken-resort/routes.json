@@ -1,0 +1,42 @@
+{
+ "version": 4,
+ "file": "data/sunken-resort/ground.bin",
+ "cell": 0.5,
+ "x0": -47.011512756347656,
+ "z0": -77.36016082763672,
+ "nx": 240,
+ "nz": 265,
+ "step": 1.6,
+ "swim": 2.5,
+ "levels": [
+  "floor-1",
+  "floor-2",
+  "floor-3",
+  "floor-4"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -22,
+   1499.020637512207
+  ],
+  "y": [
+   -21.66577056626852,
+   -3.820259908672597,
+   0,
+   1895.3638396437545
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [],
+ "between": {
+  "exit-scarwood-roof-crack": {
+   "exit-scarwood-chimney": 77
+  },
+  "exit-scarwood-chimney": {
+   "exit-scarwood-roof-crack": 83
+  }
+ }
+}
