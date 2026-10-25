@@ -28,20 +28,21 @@ async function load(meta,url,key){
 }
 // Map pixels of each cell. Floors drawn as separate sheets may each have their own projection (meta.projects, by floor).
 function place(meta,col,h,lv,x,z,px,py){
- const pr=meta.projects||[meta.project];
+ const pr=(meta.projects||[meta.project]).map(p=>[...p.x,...p.y]),many=!!meta.projects,{nx,cell,x0,z0}=meta;
  for(let i=0;i<col.length;i++){
-  const {x:[ax,ay,az,bx],y:[cx,cy,cz,by]}=pr[meta.projects?lv[i]:0];
-  x[i]=(col[i]%meta.nx+.5)*meta.cell+meta.x0;z[i]=(Math.floor(col[i]/meta.nx)+.5)*meta.cell+meta.z0;px[i]=ax*x[i]+ay*h[i]+az*z[i]+bx;py[i]=cx*x[i]+cy*h[i]+cz*z[i]+by;
+  const k=pr[many?lv[i]:0],c=col[i],xi=(c%nx+.5)*cell+x0,zi=(Math.floor(c/nx)+.5)*cell+z0;
+  x[i]=xi;z[i]=zi;px[i]=k[0]*xi+k[1]*h[i]+k[2]*zi+k[3];py[i]=k[4]*xi+k[5]*h[i]+k[6]*zi+k[7];
  }
 }
 // Maps whose art is gently stretched against the straight projection carry a grid of corrections (site px, tenths),
 // read between the four nearest grid points.
 function stretch(meta,px,py){
  const w=meta.warp;if(!w)return;
- const at=(i,j,k)=>w.d[((Math.min(j,w.ny-1)*w.nx)+Math.min(i,w.nx-1))*2+k]/10;
+ const d=Float32Array.from(w.d,v=>v/10),inv=1/w.step,mu=w.nx-1.0001,mv=w.ny-1.0001,row=w.nx*2;
  for(let n=0;n<px.length;n++){
-  const u=Math.max(0,(px[n]-w.x0)/w.step),v=Math.max(0,(py[n]-w.y0)/w.step),i=Math.floor(u),j=Math.floor(v),fu=u-i,fv=v-j;
-  for(let k=0;k<2;k++){const s=(1-fv)*((1-fu)*at(i,j,k)+fu*at(i+1,j,k))+fv*((1-fu)*at(i,j+1,k)+fu*at(i+1,j+1,k));if(k)py[n]+=s;else px[n]+=s;}
+  const u=Math.min(mu,Math.max(0,(px[n]-w.x0)*inv)),v=Math.min(mv,Math.max(0,(py[n]-w.y0)*inv)),i=u|0,j=v|0,fu=u-i,fv=v-j;
+  const a=(j*w.nx+i)*2,b=a+row,k00=(1-fu)*(1-fv),k10=fu*(1-fv),k01=(1-fu)*fv,k11=fu*fv;
+  px[n]+=k00*d[a]+k10*d[a+2]+k01*d[b]+k11*d[b+2];py[n]+=k00*d[a+1]+k10*d[a+3]+k01*d[b+1]+k11*d[b+3];
  }
 }
 // Big single-floor maps: one square per spot, with the 8 steps out of it already worked out.
@@ -102,7 +103,8 @@ function snap(g,p,reach=p.reach||90){
  }
  return best;
 }
-function dist(g,a,b){return Math.hypot(g.x[a]-g.x[b],g.h[a]-g.h[b],g.z[a]-g.z[b]);}
+// (Math.hypot is slow in browsers; this runs for every step the search looks at.)
+function dist(g,a,b){const dx=g.x[a]-g.x[b],dy=g.h[a]-g.h[b],dz=g.z[a]-g.z[b];return Math.sqrt(dx*dx+dy*dy+dz*dz);}
 const wet=(g,a,b)=>g.swim[a]||g.swim[b];
 // True where more of the same floor runs overhead: the way passes beneath a hall or bridge drawn on top.
 function under(g,i){if(g.swim[i])return false;const c=g.col[i],f=g.first[c];for(let j=f;j<f+g.many[c];j++)if(j!==i&&g.lv[j]===g.lv[i]&&!g.swim[j]&&g.h[j]>g.h[i]+2)return true;return false;}
@@ -123,7 +125,7 @@ function route(req){
  const g=grounds[req.map];if(!g)throw Error('Route data is not ready.');
  // An exit sign drawn away from its doorway (on a roof, over a hall) routes to the doorway the map's data names.
  const door=p=>{const d=p.reach&&(g.meta.doors||[]).find(d=>Math.abs(d.at[0]-p.x)<1&&Math.abs(d.at[1]-p.y)<1);return d?{...p,x:d.x,y:d.y,h:d.h,level:d.level??p.level,exact:true}:p;};
- // A pin drawn off the walkable ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px.
+ // A pin drawn off the open ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px.
  const near=p=>{const q=door(p),i=snap(g,q);return i>=0||q.exact?i:snap(g,q,260);};
  const from=near(req.from),to=near(req.to);
  if(from<0)return {error:'The start is not on open ground or water. Pick a spot on a floor, corridor or path.'};
@@ -134,24 +136,86 @@ function route(req){
  // Marked links (stairs pins, drops, pit traps) and known openings join spots the ground alone does not.
  const extra=new Map(),add=(a,b,link)=>{if(!extra.has(a))extra.set(a,[]);extra.get(a).push({to:b,link});};
  for(const link of [...(req.links||[]),...(g.meta.joins||[])]){if(link.kind==='trap'&&safer)continue;const a=snap(g,link.from,60),b=snap(g,link.to,60);if(a<0||b<0||a===b)continue;add(a,b,link);if(!link.oneWay)add(b,a,link);}
- const n=g.count,cost=new Float32Array(n).fill(Infinity),parent=new Int32Array(n).fill(-1),via=[],viaOf=new Int32Array(n).fill(-1),closed=new Uint8Array(n);
- let heapI=new Int32Array(1<<16),heapF=new Float32Array(1<<16),size=0;
- const push=(i,f)=>{if(size>=heapI.length){const a=new Int32Array(heapI.length*2),b=new Float32Array(heapI.length*2);a.set(heapI);b.set(heapF);heapI=a;heapF=b;}let k=size++;while(k>0){const p=(k-1)>>1;if(heapF[p]<=f)break;heapI[k]=heapI[p];heapF[k]=heapF[p];k=p;}heapI[k]=i;heapF[k]=f;};
- const pop=()=>{const top=heapI[0],li=heapI[--size],lf=heapF[size];let k=0;for(;;){let c=2*k+1;if(c>=size)break;if(c+1<size&&heapF[c+1]<heapF[c])c++;if(heapF[c]>=lf)break;heapI[k]=heapI[c];heapF[k]=heapF[c];k=c;}heapI[k]=li;heapF[k]=lf;return top;};
- // The search leans towards the finish (1.3x, 1.8x on big maps) so it answers quickly; routes stay close to
- // the best.
- const lean=g.count>400000?1.8:1.3;cost[from]=0;push(from,lean*dist(g,from,to));
- while(size){
-  const i=pop();if(closed[i])continue;closed[i]=1;if(i===to)break;
-  // Neighbours are worked out only for the cells the search reaches.
-  const m=neighbours(g,i);
-  for(let q=0;q<m;q++){const j=NB[q];if(closed[j])continue;const c=cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:1)*(1+(field[i]+field[j])/2);if(c<cost[j]){cost[j]=c;parent[j]=i;viaOf[j]=-1;push(j,c+lean*dist(g,j,to));}}
-  for(const e of extra.get(i)||[]){const j=e.to;if(closed[j])continue;const c=cost[i]+(e.link.cost??4);if(c<cost[j]){cost[j]=c;parent[j]=i;viaOf[j]=via.push(e.link)-1;push(j,c+lean*dist(g,j,to));}}
+ // Long routes on big maps go by blocks first (see corridor); a short hop, or a corridor that turns out closed,
+ // searches every square. The search leans towards the finish so it answers quickly; routes stay close to the best.
+ let found=null;
+ // A block can be crossed in one place but not another, so a corridor that fails is tried once more, wider.
+ if(g.count>150000&&dist(g,from,to)>150)for(const spread of safer?[3,8]:[2,6]){const keep=corridor(g,from,to,extra,spread);if(!keep)break;found=search(g,from,to,field,extra,keep,1.3,swimCost);if(found)break;}
+ if(!found)found=search(g,from,to,field,extra,null,g.count>400000?1.8:1.3,swimCost);
+ if(!found)return {error:'No known way between these two spots.'};
+ const {nodes,links}=found;
+ const out=describe(g,smooth(g,nodes,links,field),dangers);out.cost=Math.round(found.cost);return out;
+}
+// ---- search
+// Big maps hold a million squares or more, so a long route is found in two passes: first across blocks of squares
+// (about 48 m a side, per floor), then square by square inside the blocks that first pass crossed and their
+// neighbours. If that corridor turns out closed, the whole map is searched.
+function blocks(g){
+ if(g.cg)return g.cg;
+ // Pieces: the squares of one block (about 48 m a side, one floor) that join up inside it. A block holding a
+ // street and the roof above it, or two sides of a wall, has one piece for each, so the first pass never
+ // crosses where the ground does not.
+ const nx=g.meta.nx,B=Math.max(6,Math.round(48/g.meta.cell)),bw=Math.ceil(nx/B),bh=Math.ceil(g.meta.nz/B);
+ const blk=new Int32Array(g.count);
+ for(let i=0;i<g.count;i++){const c=g.col[i];blk[i]=(g.lv[i]*bh+Math.floor(Math.floor(c/nx)/B))*bw+Math.floor((c%nx)/B);}
+ const piece=new Int32Array(g.count).fill(-1),queue=new Int32Array(g.count),cx=[],cz=[],ch=[];let np=0;
+ for(let s=0;s<g.count;s++){
+  if(piece[s]>=0)continue;
+  let head=0,tail=0,sx=0,sz=0,sh=0;queue[tail++]=s;piece[s]=np;
+  while(head<tail){const i=queue[head++];sx+=g.x[i];sz+=g.z[i];sh+=g.h[i];const m=neighbours(g,i);
+   for(let q=0;q<m;q++){const j=NB[q];if(piece[j]<0&&blk[j]===blk[i]){piece[j]=np;queue[tail++]=j;}}}
+  cx.push(sx/tail);cz.push(sz/tail);ch.push(sh/tail);np++;
  }
- if(!closed[to])return {error:'No known way between these two spots.'};
+ // Piece steps: any square step from one piece into another.
+ const pairs=new Set();
+ for(let i=0;i<g.count;i++){const m=neighbours(g,i),a=piece[i];for(let q=0;q<m;q++){const b=piece[NB[q]];if(b!==a)pairs.add(a*np+b);}}
+ const start=new Uint32Array(np+1);for(const p of pairs)start[Math.floor(p/np)+1]++;for(let b=0;b<np;b++)start[b+1]+=start[b];
+ const adj=new Int32Array(pairs.size),fill=start.slice(0,np);for(const p of pairs){const a=Math.floor(p/np);adj[fill[a]++]=p-a*np;}
+ return g.cg={np,piece,cx:Float64Array.from(cx),cz:Float64Array.from(cz),ch:Float64Array.from(ch),start,adj};
+}
+function corridor(g,from,to,extra,spread){
+ const {np,piece,cx,cz,ch,start,adj}=blocks(g),a=piece[from],z=piece[to];
+ const d=(p,q)=>{const dx=cx[p]-cx[q],dy=ch[p]-ch[q],dz=cz[p]-cz[q];return Math.sqrt(dx*dx+dy*dy+dz*dz);};
+ // The request's own links (stairs pins, joins) join pieces too.
+ const more=new Map();for(const [i,list] of extra)for(const e of list){const p=piece[i];if(!more.has(p))more.set(p,[]);more.get(p).push(piece[e.to]);}
+ const cost=new Float64Array(np).fill(Infinity),parent=new Int32Array(np).fill(-1),done=new Uint8Array(np),heap=[];
+ const push=(b,f)=>{heap.push([f,b]);let i=heap.length-1;while(i){const p=(i-1)>>1;if(heap[p][0]<=f)break;[heap[p],heap[i]]=[heap[i],heap[p]];i=p;}};
+ const pop=()=>{const top=heap[0],last=heap.pop();if(heap.length){heap[0]=last;let i=0;for(;;){let c=2*i+1;if(c>=heap.length)break;if(c+1<heap.length&&heap[c+1][0]<heap[c][0])c++;if(heap[c][0]>=heap[i][0])break;[heap[c],heap[i]]=[heap[i],heap[c]];i=c;}}return top;};
+ cost[a]=0;push(a,d(a,z));
+ while(heap.length){
+  const [,b]=pop();if(done[b])continue;done[b]=1;if(b===z)break;
+  const step=c=>{if(done[c])return;const v=cost[b]+d(b,c);if(v<cost[c]){cost[c]=v;parent[c]=b;push(c,v+d(c,z));}};
+  for(let q=start[b];q<start[b+1];q++)step(adj[q]);
+  for(const c of more.get(b)||[])step(c);
+ }
+ if(!done[z])return null;
+ // The pieces crossed, and those up to `spread` steps from them, so the square search can still go round things.
+ const keep=new Uint8Array(np);let ring=[];
+ for(let b=z;b>=0;b=parent[b]){keep[b]=1;ring.push(b);}
+ for(let r=0;r<spread;r++){const next=[];for(const b of ring)for(let q=start[b];q<start[b+1];q++){const c=adj[q];if(!keep[c]){keep[c]=1;next.push(c);}}ring=next;}
+ return keep;
+}
+// A* over the squares. Work arrays are kept per map and reused; `gen` marks which entries belong to this search.
+function search(g,from,to,field,extra,keep,lean,swimCost){
+ const n=g.count;
+ if(!g.work)g.work={cost:new Float32Array(n),parent:new Int32Array(n),viaOf:new Int32Array(n),mark:new Uint32Array(n),gen:0,heapI:new Int32Array(1<<16),heapF:new Float32Array(1<<16)};
+ const w=g.work,gen=w.gen+=2,open=gen,shut=gen+1,{cost,parent,viaOf,mark}=w,via=[],blk=keep?g.cg.piece:null;
+ let size=0,heapI=w.heapI,heapF=w.heapF;
+ const push=(i,f)=>{if(size>=heapI.length){const a=new Int32Array(heapI.length*2),b=new Float32Array(heapI.length*2);a.set(heapI);b.set(heapF);heapI=w.heapI=a;heapF=w.heapF=b;}let k=size++;while(k>0){const p=(k-1)>>1;if(heapF[p]<=f)break;heapI[k]=heapI[p];heapF[k]=heapF[p];k=p;}heapI[k]=i;heapF[k]=f;};
+ const pop=()=>{const top=heapI[0],li=heapI[--size],lf=heapF[size];let k=0;for(;;){let c=2*k+1;if(c>=size)break;if(c+1<size&&heapF[c+1]<heapF[c])c++;if(heapF[c]>=lf)break;heapI[k]=heapI[c];heapF[k]=heapF[c];k=c;}heapI[k]=li;heapF[k]=lf;return top;};
+ const relax=(i,j,c,link)=>{if(mark[j]===shut)return;if(mark[j]!==open||c<cost[j]){mark[j]=open;cost[j]=c;parent[j]=i;viaOf[j]=link?via.push(link)-1:-1;push(j,c+lean*dist(g,j,to));}};
+ mark[from]=open;cost[from]=0;parent[from]=-1;viaOf[from]=-1;push(from,lean*dist(g,from,to));
+ while(size){
+  const i=pop();if(mark[i]===shut)continue;mark[i]=shut;if(i===to)break;
+  // Neighbours are worked out only for the squares the search reaches.
+  const m=neighbours(g,i);
+  for(let q=0;q<m;q++){const j=NB[q];if(keep&&!keep[blk[j]])continue;relax(i,j,cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:1)*(1+(field[i]+field[j])/2),null);}
+  for(const e of extra.get(i)||[])relax(i,e.to,cost[i]+(e.link.cost??4),e.link);
+ }
+ if(mark[to]!==shut)return null;
  const nodes=[],links=[];for(let i=to;i>=0;i=parent[i]){nodes.push(i);links.push(viaOf[i]>=0?via[viaOf[i]]:null);}
  nodes.reverse();links.reverse();
- const out=describe(g,smooth(g,nodes,links,field),dangers);out.cost=Math.round(cost[to]);return out;
+ return {nodes,links,cost:cost[to]};
 }
 // Straight runs replace the grid's zigzag wherever the way between two points stays open on one floor.
 function clear(g,a,b,field){
@@ -208,8 +272,8 @@ function describe(g,points,dangers){
 self.onmessage=async e=>{
  const {id,type}=e.data;
  try{
-  // Loading also files every spot into its square, so the first route does not wait for it.
-  if(type==='load'){if(!grounds[e.data.map]){await load(e.data.meta,e.data.url,e.data.map);snap(grounds[e.data.map],{x:0,y:0},1);}self.postMessage({id,ok:true});return;}
+  // Loading also files every spot into its square (and big maps into blocks), so the first route does not wait.
+  if(type==='load'){if(!grounds[e.data.map]){await load(e.data.meta,e.data.url,e.data.map);const g=grounds[e.data.map];snap(g,{x:0,y:0},1);if(g.count>150000)blocks(g);}self.postMessage({id,ok:true});return;}
   if(type==='drop'){delete grounds[e.data.map];self.postMessage({id,ok:true});return;}
   if(type==='route'){const t=performance.now(),result=route(e.data);result.ms=Math.round(performance.now()-t);self.postMessage({id,ok:true,result});}
  }catch(err){self.postMessage({id,ok:false,error:err.message||String(err)});}

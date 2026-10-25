@@ -7,7 +7,7 @@
  const DANGER={'Named mob':[20,6],'Mob camp':[25,6],'Ambush':[30,10],'Trap':[6,40]};
  const read=k=>{try{return localStorage.getItem(k);}catch{return null;}},write=(k,v)=>{try{localStorage.setItem(k,v);}catch{}};
  let worker=null,serial=0,panel=null,layers=[],busy=false,run=0;
- const pending=new Map(),loaded=new Map(),data=new Map();
+ const pending=new Map(),loaded=new Map(),loading=new Set(),data=new Map();
  // Both ways are worked out every time (like a map app's route options); mode picks the one drawn and listed.
  const state={from:null,to:null,mode:read(MODE_KEY)==='shorter'?'shorter':'safer',options:{},legs:null,error:''};
  const MODES=[['safer','Safer'],['shorter','Shorter']];
@@ -21,7 +21,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-12');
+  worker=new Worker('route-worker.js?v=route-13');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  // A map's ground, pins and place names, fetched once.
@@ -39,7 +39,11 @@
  async function ensureGround(id){
   const d=await mapData(id);if(!d.meta)throw Error('Routes are not available on '+mapTitle(id)+' yet.');
   startWorker();
-  if(!loaded.has(id))loaded.set(id,ask({type:'load',map:id,meta:d.meta,url:new URL(d.meta.file,document.baseURI).href}).catch(e=>{loaded.delete(id);throw e;}));
+  if(!loaded.has(id)){
+   // While a map's route data loads, the panel says so (the first load of a big map takes a few seconds).
+   loading.add(id);if(busy)showPanel();
+   loaded.set(id,ask({type:'load',map:id,meta:d.meta,url:new URL(d.meta.file,document.baseURI).href}).catch(e=>{loaded.delete(id);throw e;}).finally(()=>{loading.delete(id);if(busy)showPanel();}));
+  }
   const p=loaded.get(id);loaded.delete(id);loaded.set(id,p);
   for(const old of loaded.keys()){if(loaded.size<=KEEP_GROUNDS)break;if(old===config.id)continue;loaded.delete(old);ask({type:'drop',map:old}).catch(()=>{});}
   await p;return d;
@@ -306,7 +310,7 @@
   if(!routable(config.id)){closeView();return;}
   fill($('route-from'),'from');fill($('route-to'),'to');
   const opts=panel.querySelector('.route-options-list'),box=panel.querySelector('.route-result');opts.replaceChildren();box.replaceChildren();
-  if(busy){box.append(text('p','Finding the way…','route-note'));return;}
+  if(busy){const note=text('div','','route-busy');note.append(text('p',loading.size?'Loading the routes of '+[...loading].map(mapTitle).join(', ')+'…':'Finding the way…','route-note'),text('div','','route-progress'));box.append(note);return;}
   if(!state.from||!state.to)return;
   // Route options, one card each, like a map app's choice of routes.
   for(const [mode,label] of MODES){
