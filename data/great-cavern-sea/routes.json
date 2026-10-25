@@ -84,14 +84,14 @@
  ],
  "between": {
   "to-caves-of-irem": {
-   "to-ail-vorith": 5150,
+   "to-ail-vorith": 4990,
    "to-rothold": null,
    "to-blind-midden": 3801
   },
   "to-ail-vorith": {
-   "to-caves-of-irem": 5206,
+   "to-caves-of-irem": 5002,
    "to-rothold": null,
-   "to-blind-midden": 1364
+   "to-blind-midden": 1197
   },
   "to-rothold": {
    "to-caves-of-irem": null,
@@ -99,8 +99,8 @@
    "to-blind-midden": null
   },
   "to-blind-midden": {
-   "to-caves-of-irem": 3933,
-   "to-ail-vorith": 1361,
+   "to-caves-of-irem": 3824,
+   "to-ail-vorith": 1206,
    "to-rothold": null
   }
  }
