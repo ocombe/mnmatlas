@@ -125,9 +125,12 @@ function route(req){
  const g=grounds[req.map];if(!g)throw Error('Route data is not ready.');
  // An exit sign drawn away from its doorway (on a roof, over a hall) routes to the doorway the map's data names.
  const door=p=>{const d=p.reach&&(g.meta.doors||[]).find(d=>Math.abs(d.at[0]-p.x)<1&&Math.abs(d.at[1]-p.y)<1);return d?{...p,x:d.x,y:d.y,h:d.h,level:d.level??p.level,exact:true}:p;};
- // A pin drawn off the open ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px.
- const near=p=>{const q=door(p),i=snap(g,q);return i>=0||q.exact?i:snap(g,q,260);};
- const from=near(req.from),to=near(req.to);
+ // A pin drawn off the open ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px;
+ // a camp drawn as an area takes the point of its edge nearest the other end that stands on ground.
+ const near=(p,o)=>{const q=door(p),i=snap(g,q);if(i>=0||q.exact)return i;const j=snap(g,q,260);if(j>=0||!p.edge)return j;
+  for(const [x,y] of [...p.edge].sort((a,b)=>Math.hypot(a[0]-o.x,a[1]-o.y)-Math.hypot(b[0]-o.x,b[1]-o.y))){const k=snap(g,{x,y,level:p.level},90);if(k>=0)return k;}
+  return -1;};
+ const from=near(req.from,req.to),to=near(req.to,req.from);
  if(from<0)return {error:'The start is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  if(to<0)return {error:'The finish is not on open ground or water. Pick a spot on a floor, corridor or path.'};
  const safer=req.mode==='safer',dangers=req.dangers||[],swimCost=g.meta.swim||2.5;

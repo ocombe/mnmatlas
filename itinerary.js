@@ -21,7 +21,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-13');
+  worker=new Worker('route-worker.js?v=route-14');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  // A map's ground, pins and place names, fetched once.
@@ -50,9 +50,11 @@
  }
  const placeName=p=>p.kind==='spot'?'Spot on '+(entry(p.map)?.levels?levelTitle(p.level,p.map):mapTitle(p.map)):p.name;
  const exitName=l=>'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,''));
+ // A camp drawn as an area (mobs flying over a lake) can be reached at its edge when its pin is off the ground.
+ const edge=m=>m?.shape?.points?.length>2?{edge:m.shape.points}:{};
  function places(){
   const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:l.id,name:exitName(l),x:l.x,y:l.y,level:l.level,reach:260}));
-  const pins=allMarkers().filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level}));
+  const pins=allMarkers().filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,...edge(m)}));
   return {exits,pins};
  }
  function dangers(markers){
@@ -441,7 +443,7 @@
   {label:'Directions from here',shown:()=>routable(config.id),run:at=>set('from',{kind:'spot',id:'spot',x:at.x,y:at.y,level:at.level})},
   {label:'Directions to here',shown:()=>routable(config.id),run:at=>set('to',{kind:'spot',id:'spot',x:at.x,y:at.y,level:at.level})}];
  window.atlasPopupActions=[...(window.atlasPopupActions||[]),
-  {label:'Directions',icon:'route',shown:m=>routable(config.id)&&!singleMap&&Number.isFinite(m.x),run:m=>{map.closePopup();set('to',{id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level});}}];
+  {label:'Directions',icon:'route',shown:m=>routable(config.id)&&!singleMap&&Number.isFinite(m.x),run:m=>{map.closePopup();set('to',{id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,...edge(m)});}}];
  // Share links: ?route=<start>~<finish>~<mode>[~<settings>], each end "map:x,y[:floor]" or "map:pin:<id>"; settings
  // "L20.Druid.Wizard.invisible" carry what changes the plan (level, teleports, invisibility) to whoever opens it.
  // A personal pin is not public, so it travels as its spot.
@@ -456,7 +458,7 @@
  async function endFrom(code){
   const [mapId,a,b,c]=code.split(':');if(!routable(mapId))return null;
   if(a==='pin'){const d=await mapData(mapId),l=d.labels.find(x=>x.id===b),m=d.markers.find(x=>x.id===b),p=l||m;
-   return p?{map:mapId,id:b,name:l?(l.toMap?exitName(l):l.name):markerTitle(m),x:p.x,y:p.y,level:p.level,...(l?.toMap?{reach:260}:{})}:null;}
+   return p?{map:mapId,id:b,name:l?(l.toMap?exitName(l):l.name):markerTitle(m),x:p.x,y:p.y,level:p.level,...(l?.toMap?{reach:260}:edge(m))}:null;}
   const [x,y]=String(a).split(',').map(Number);return Number.isFinite(x)&&Number.isFinite(y)?{map:mapId,kind:'spot',id:'spot',x,y,level:b||undefined}:null;
  }
  let shared=new URL(location.href).searchParams.get('route');
