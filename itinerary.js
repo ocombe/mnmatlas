@@ -243,12 +243,26 @@
  function findPlace(id){const {exits,pins}=places();return [...exits,...pins].find(p=>p.id===id)||null;}
  // The steps of one map's part: floor changes, swims, and the way on to the next map, each with the distance
  // walked since the step before.
+ // Floor changes worth a step: an unnamed back-and-forth (a path dipping under a bridge, a ramp on the edge of two
+ // floors) folds into one change, or none if it ends where it began; a bare same-floor "Passage" is no step at all.
+ function tidyChanges(changes,pts){
+  const out=[];
+  for(const c of changes){
+   if(c.link&&c.from===c.to&&/^passage$/i.test(c.link.name||''))continue;
+   const prev=out[out.length-1];
+   if(!c.link&&prev&&!prev.link&&(pts[c.index-1]?.d||0)-(pts[prev.index-1]?.d||0)<60){
+    out.pop();if(prev.from!==c.to)out.push({...c,from:prev.from});continue;
+   }
+   out.push(c);
+  }
+  return out;
+ }
  function legSteps(l,isFirst){
   const r=l.result,mapId=l.map,pts=r.points,events=[];
   const tp=isFirst&&state.options[state.mode]?.teleport;
   if(tp)events.push({i:0,kind:'teleport',title:'Teleport to '+tp.place.name,sub:tp.caster+' spell · '+mapTitle(mapId)});
   else if(isFirst)events.push({i:0,kind:'start',title:placeName(state.from),sub:mapTitle(mapId)});
-  for(const c of r.changes){const p=pts[c.index-1],up=floorOrder(c.to,mapId)<floorOrder(c.from,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
+  for(const c of tidyChanges(r.changes,pts)){const p=pts[c.index-1],up=floorOrder(c.to,mapId)<floorOrder(c.from,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
    events.push({i:c.index-1,kind:up?'up':'down',title:named?(/ to /i.test(named)?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
   for(let k=1;k<pts.length;k++){if(pts[k].swim&&!pts[k-1].swim){let j=k;while(j+1<pts.length&&pts[j+1].swim)j++;const len=pts[j].d-pts[k].d;if(len>=8)events.push({i:k,kind:'swim',title:'Swim about '+metres(len)});}}
   const end=pts.length-1;
