@@ -1,0 +1,221 @@
+{
+ "note": "Zone level ranges for route planning: from the Monsters and Memories Wiki (monstersandmemories.wiki) zone pages; where the wiki has none, from the map's own mob camps.",
+ "zones": {
+  "night-harbor": {
+   "levels": [
+    1,
+    50
+   ],
+   "city": true,
+   "source": "wiki"
+  },
+  "underdocks": {
+   "levels": [
+    1,
+    50
+   ],
+   "city": true,
+   "source": "wiki"
+  },
+  "ail-vorith": {
+   "levels": [
+    1,
+    50
+   ],
+   "city": true,
+   "source": "wiki"
+  },
+  "blind-midden": {
+   "levels": [
+    3,
+    16
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "faelindral": {
+   "levels": [
+    1,
+    16
+   ],
+   "city": true,
+   "source": "wiki"
+  },
+  "evershade-weald": {
+   "levels": [
+    1,
+    16
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "sungreet-strand": {
+   "levels": [
+    1,
+    15
+   ],
+   "city": false,
+   "source": "pins"
+  },
+  "shaded-dunes": {
+   "levels": [
+    1,
+    10
+   ],
+   "city": false,
+   "source": "pins"
+  },
+  "fallen-pass": {
+   "levels": [
+    19,
+    44
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "wyrmsbane-tomb": {
+   "levels": [
+    3,
+    15
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "glass-flats": {
+   "levels": [
+    20,
+    35
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "ancient-crypt": {
+   "levels": [
+    12,
+    22
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "infested-crypt": {
+   "levels": [
+    8,
+    16
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "blacktide-bay": {
+   "levels": [
+    10,
+    30
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "scarwood": {
+   "levels": [
+    24,
+    50
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "vale-of-zintar": {
+   "levels": [
+    18,
+    50
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "grain-cellar": {
+   "levels": [
+    32,
+    36
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "great-cavern-sea": {
+   "levels": [
+    11,
+    17
+   ],
+   "city": false,
+   "source": "pins"
+  },
+  "caves-of-irem": {
+   "levels": [
+    17,
+    40
+   ],
+   "city": false,
+   "source": "pins"
+  },
+  "tel-ekir": {
+   "levels": [
+    10,
+    35
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "keepers-bight": {
+   "levels": [
+    5,
+    20
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "fallen-watch": {
+   "levels": [
+    50,
+    50
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "shallow-shoals": {
+   "levels": [
+    35,
+    36
+   ],
+   "city": false,
+   "source": "pins"
+  },
+  "glinting-hollow": {
+   "levels": [
+    38,
+    50
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "sunken-resort": {
+   "levels": [
+    29,
+    38
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "rothold": {
+   "levels": [
+    30,
+    45
+   ],
+   "city": false,
+   "source": "wiki"
+  },
+  "grimtide-sanctum": {
+   "levels": [
+    48,
+    50
+   ],
+   "city": false,
+   "source": "wiki"
+  }
+ }
+}

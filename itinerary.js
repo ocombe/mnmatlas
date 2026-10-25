@@ -80,7 +80,7 @@
  }
  // The chain of maps between two places with the least walking (a boat counts as its wait), through exits that lead
  // both ways. Each map's sign-to-sign walks are worked out when its route data is built (meta.between).
- async function mapPath(from,to,leave=false,banned=new Set()){
+ async function mapPath(from,to,leave=false,banned=new Set(),mode='shorter'){
   const best=new Map(),open=[{cost:0,map:from.map,at:from,key:from.map+'|',hops:[]}];
   while(open.length){
    open.sort((x,y)=>x.cost-y.cost);const s=open.shift();
@@ -94,7 +94,8 @@
     if(banned.has(s.key+'>'+w.id)||(await mapData(w.to)).meta?.closedEntries?.includes(s.map))continue;
     const hop={from:s.map,to:w.to,exit:w},land=await arrival(hop);if(!land)continue;
     const key=w.to+'|'+land.id;if(best.has(key))continue;
-    open.push({cost:s.cost+walkGuess(d.meta,s.at,w)+w.cost,map:w.to,at:land,key,hops:[...s.hops,hop]});
+    const risk=mode==='safer'&&w.to!==to.map&&w.to!==from.map?await zoneRisk(w.to):0;
+    open.push({cost:s.cost+walkGuess(d.meta,s.at,w)+w.cost+risk,map:w.to,at:land,key,hops:[...s.hops,hop]});
    }
   }
   return null;
@@ -122,7 +123,7 @@
   // When a walk on the chosen chain turns out impossible, that step is ruled out and the next best chain is tried.
   const banned=new Set();
   for(let tries=0;tries<8;tries++){
-   const hops=await mapPath(from,state.to,!!one,banned);
+   const hops=await mapPath(from,state.to,!!one,banned,mode);
    if(!hops){if(one)return [one];throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');}
    const legs=[];let start=from,key=from.map+'|',failed=false;
    for(const hop of hops){
@@ -166,7 +167,16 @@
  }
  const total=legs=>legs.reduce((s,l)=>s+l.result.length,0);
  // Teleports the walker can cast (Druid, Wizard), remembered in this browser. A cast counts as this many metres.
- const TP_KEY='mnmaps-route-teleport',TELEPORT_COST=60,CASTERS=['Druid','Wizard'];
+ const TP_KEY='mnmaps-route-teleport',TELEPORT_COST=60,CASTERS=['Druid','Wizard'],INVIS_KEY='mnmaps-route-invisible';
+ // Zones above the walker's level: Safer avoids crossing them (not the start or finish zone) unless they can go
+ // invisible; a city never counts. Each counts as up to this many extra metres, by how far it is above them.
+ const ZONE_RISK=4000;let zoneLevels=null;
+ async function zoneRisk(id){
+  if(!zoneLevels)zoneLevels=await fetch('data/zone-levels.json').then(r=>r.ok?r.json():{zones:{}}).then(d=>d.zones||{}).catch(()=>({}));
+  const level=Number(read(LEVEL_KEY))||0,z=zoneLevels[id];
+  if(!level||!z||z.city||read(INVIS_KEY)==='1')return 0;
+  const [lo,hi]=z.levels;return level>=hi?0:ZONE_RISK*Math.min(1,(hi-level)/Math.max(1,hi-lo));
+ }
  const casts=()=>{try{const v=JSON.parse(read(TP_KEY)||'[]');return Array.isArray(v)?v.filter(c=>CASTERS.includes(c)):[];}catch{return [];}};
  // Landings are the Teleporter pins named after the spell's arrival point ("Druid Portal", "Wizard Portal Landing").
  async function landings(){
@@ -226,7 +236,8 @@
   const hint=text('p','Pick a start and a finish here, right-click (long-press) the map, or use Directions on a card. The finish can be on another map; a druid or wizard teleport is used when it saves time.','route-hint');
   const tp=text('div','','route-teleport');tp.append(text('span','I can teleport as'));
   for(const c of CASTERS){const l=text('label','','route-cast'),b=document.createElement('input');b.type='checkbox';b.value=c;b.checked=casts().includes(c);b.onchange=()=>{write(TP_KEY,JSON.stringify([...tp.querySelectorAll('input:checked')].map(x=>x.value)));compute();};l.append(b,text('span',c));tp.append(l);}
-  panel.append(head,fields,lvl,tp,hint,text('div','','route-options-list'),text('div','','route-result'));
+  const iv=text('label','','route-cast'),ib=document.createElement('input');ib.type='checkbox';ib.checked=read(INVIS_KEY)==='1';ib.onchange=()=>{write(INVIS_KEY,ib.checked?'1':'');compute();};iv.append(ib,text('span','I can go invisible'));const ivRow=text('div','','route-teleport');ivRow.append(iv);
+  panel.append(head,fields,lvl,tp,ivRow,hint,text('div','','route-options-list'),text('div','','route-result'));
   journal.querySelector('.journal-heading').after(panel);
  }
  function fill(select,which){
