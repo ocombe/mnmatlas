@@ -1,0 +1,75 @@
+{
+ "version": 4,
+ "file": "data/caves-of-irem/ground.bin",
+ "cell": 2,
+ "x0": -2344,
+ "z0": -1672.4930419921875,
+ "nx": 1944,
+ "nz": 1712,
+ "step": 2.9,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -2.5,
+   3431
+  ],
+  "y": [
+   -2.4620191752910614,
+   -0.43412044644355774,
+   0,
+   4341.853011161089
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [],
+ "between": {
+  "to-great-cavern-sea": {
+   "to-underdocks": 3897,
+   "to-wyrmsbane-tomb": 2303,
+   "to-shaded-dunes": 2456,
+   "from-ancient-crypt": 1382,
+   "boat-route": 2361
+  },
+  "to-underdocks": {
+   "to-great-cavern-sea": 3942,
+   "to-wyrmsbane-tomb": 2704,
+   "to-shaded-dunes": 3619,
+   "from-ancient-crypt": 3382,
+   "boat-route": 1582
+  },
+  "to-wyrmsbane-tomb": {
+   "to-great-cavern-sea": 2319,
+   "to-underdocks": 2605,
+   "to-shaded-dunes": 2319,
+   "from-ancient-crypt": 1814,
+   "boat-route": 1065
+  },
+  "to-shaded-dunes": {
+   "to-great-cavern-sea": 2530,
+   "to-underdocks": 3679,
+   "to-wyrmsbane-tomb": 2357,
+   "from-ancient-crypt": 1133,
+   "boat-route": 2003
+  },
+  "from-ancient-crypt": {
+   "to-great-cavern-sea": 1375,
+   "to-underdocks": 3432,
+   "to-wyrmsbane-tomb": 1881,
+   "to-shaded-dunes": 1065,
+   "boat-route": 1836
+  },
+  "boat-route": {
+   "to-great-cavern-sea": 2416,
+   "to-underdocks": 1586,
+   "to-wyrmsbane-tomb": 1071,
+   "to-shaded-dunes": 1981,
+   "from-ancient-crypt": 1798
+  }
+ }
+}

@@ -1,0 +1,191 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/evershade-weald/ground.bin",
+ "cell": 2.5,
+ "x0": -826.64599609375,
+ "z0": -1269.887939453125,
+ "nx": 662,
+ "nz": 1016,
+ "hstep": 0.25,
+ "step": 4,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -3,
+   2434.839630126953
+  ],
+  "y": [
+   -2.9544230103492737,
+   -0.5209445357322693,
+   0,
+   2146.529521350363
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [],
+ "between": {
+  "to-glinting-hollow": {
+   "to-keepers-bight": 1297,
+   "to-blacktide-bay-boulder": 1336,
+   "travelers-lift": 854,
+   "keepers-lift": null,
+   "pixie-lift": 451,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "to-keepers-bight": {
+   "to-glinting-hollow": 1301,
+   "to-blacktide-bay-boulder": 441,
+   "travelers-lift": 600,
+   "keepers-lift": null,
+   "pixie-lift": 1051,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "to-blacktide-bay-boulder": {
+   "to-glinting-hollow": 1339,
+   "to-keepers-bight": 442,
+   "travelers-lift": 782,
+   "keepers-lift": null,
+   "pixie-lift": 1089,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "travelers-lift": {
+   "to-glinting-hollow": 847,
+   "to-keepers-bight": 597,
+   "to-blacktide-bay-boulder": 805,
+   "keepers-lift": null,
+   "pixie-lift": 597,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "keepers-lift": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "pixie-lift": null,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "pixie-lift": {
+   "to-glinting-hollow": 452,
+   "to-keepers-bight": 1049,
+   "to-blacktide-bay-boulder": 1085,
+   "travelers-lift": 604,
+   "keepers-lift": null,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "south-stairway": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "keepers-lift": null,
+   "pixie-lift": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "north-cliff-stairway": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "keepers-lift": null,
+   "pixie-lift": null,
+   "south-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": 781,
+   "to-blacktide-bay": null
+  },
+  "southeast-cliff-bridge": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "keepers-lift": null,
+   "pixie-lift": null,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "river-bridge-west": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "keepers-lift": null,
+   "pixie-lift": null,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-east": null,
+   "to-blacktide-bay": null
+  },
+  "river-bridge-east": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "keepers-lift": null,
+   "pixie-lift": null,
+   "south-stairway": null,
+   "north-cliff-stairway": 781,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "to-blacktide-bay": null
+  },
+  "to-blacktide-bay": {
+   "to-glinting-hollow": null,
+   "to-keepers-bight": null,
+   "to-blacktide-bay-boulder": null,
+   "travelers-lift": null,
+   "keepers-lift": null,
+   "pixie-lift": null,
+   "south-stairway": null,
+   "north-cliff-stairway": null,
+   "southeast-cliff-bridge": null,
+   "river-bridge-west": null,
+   "river-bridge-east": null
+  }
+ }
+}

@@ -288,10 +288,16 @@
  ],
  "between": {
   "to-shaded-dunes": {
-   "to-vale-of-zintar": 871
+   "to-vale-of-zintar": 871,
+   "to-fallen-watch": null
   },
   "to-vale-of-zintar": {
-   "to-shaded-dunes": 864
+   "to-shaded-dunes": 864,
+   "to-fallen-watch": null
+  },
+  "to-fallen-watch": {
+   "to-shaded-dunes": null,
+   "to-vale-of-zintar": null
   }
  }
 }

@@ -1,0 +1,32 @@
+{
+ "version": 4,
+ "file": "data/glinting-hollow/ground.bin",
+ "cell": 1,
+ "x0": -403.1811218261719,
+ "z0": -608.3546752929688,
+ "nx": 810,
+ "nz": 1220,
+ "step": 1.6,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -4,
+   2592
+  ],
+  "y": [
+   -3.9392306804656982,
+   -0.6945927143096924,
+   0,
+   1691.9057935374585
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [],
+ "between": {}
+}

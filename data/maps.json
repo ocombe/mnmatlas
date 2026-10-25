@@ -433,6 +433,7 @@
     },
     {
       "id": "evershade-weald",
+      "routes": "data/evershade-weald/routes.json",
       "title": "Evershade Weald",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The forest beneath Faelindral",
@@ -1198,6 +1199,7 @@
     },
     {
       "id": "great-cavern-sea",
+      "routes": "data/great-cavern-sea/routes.json",
       "title": "Great Cavern Sea",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The underground sea of the Deep, between the Caves of Irem and Ail'Vorith",
@@ -1233,6 +1235,7 @@
     },
     {
       "id": "caves-of-irem",
+      "routes": "data/caves-of-irem/routes.json",
       "title": "Caves of Irem",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "A buried sea of the Deep, beneath the Shaded Dunes",
@@ -1344,6 +1347,7 @@
     },
     {
       "id": "keepers-bight",
+      "routes": "data/keepers-bight/routes.json",
       "title": "Keeper’s Bight",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "The coast of Penshaw between Evershade Weald and the Vale of Zintar",
@@ -1526,6 +1530,7 @@
     },
     {
       "id": "glinting-hollow",
+      "routes": "data/glinting-hollow/routes.json",
       "title": "Glinting Hollow",
       "subtitle": "A traveller’s chart",
       "cartoucheKicker": "Six fae hollows beyond the Evershade Weald",

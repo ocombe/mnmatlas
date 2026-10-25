@@ -62,12 +62,12 @@
  // Ways off a map: exit signs, boat docks (every stop of the boat's route), and lifts or teleporters that lead to
  // another map. Boats cost a wait; everything else is a step.
  function ways(d,id){
-  const out=[],add=(p,to,place,how,cost=0)=>{if(to!==id&&routable(to))out.push({id:p.id,x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost});};
+  const out=[],add=(p,to,place,how,cost=0,pin=false)=>{if(to!==id&&routable(to))out.push({id:p.id,x:p.x,y:p.y,level:p.level,name:p.name,to,place,how,cost,pin});};
   for(const l of d.labels){
    if(Array.isArray(l.route))for(const stop of l.route)add(l,stop.map,stop.place,'boat',300);
    else if(l.toMap)add(l,l.toMap,l.toPlace,'exit');
   }
-  for(const m of d.markers)if(m.toMap)add(m,m.toMap,m.toPlace,m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':'exit');
+  for(const m of d.markers)if(m.toMap)add(m,m.toMap,m.toPlace,m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':'exit',0,true);
   return out;
  }
  // Map pixels per metre, from a map's route projection (for straight-line guesses).
@@ -75,22 +75,23 @@
  // A guess at the walk between two spots of one map: its sign-to-sign table when both are signs, else the straight line
  // made a little longer for corners.
  function walkGuess(meta,p,q){
-  const known=p.id&&q.id&&meta?.between?.[p.id]?.[q.id];if(known!==undefined)return known;
+  const known=p.id&&q.id&&meta?.between?.[p.id]?.[q.id];if(known!==undefined)return known??Infinity;
   return meta?Math.hypot(p.x-q.x,p.y-q.y)/perMetre(meta)*1.3:Infinity;
  }
  // The chain of maps between two places with the least walking (a boat counts as its wait), through exits that lead
  // both ways. Each map's sign-to-sign walks are worked out when its route data is built (meta.between).
- async function mapPath(from,to){
+ async function mapPath(from,to,leave=false,banned=new Set()){
   const best=new Map(),open=[{cost:0,map:from.map,at:from,key:from.map+'|',hops:[]}];
   while(open.length){
    open.sort((x,y)=>x.cost-y.cost);const s=open.shift();
    if(s.end)return s.hops;
    if(best.has(s.key))continue;best.set(s.key,s.cost);
    const d=await mapData(s.map);
-   if(s.map===to.map){open.push({...s,end:true,cost:s.cost+walkGuess(d.meta,s.at,to)});continue;}
+   // With leave set, the way must go out to another map first (a part of this map reached only from next door).
+   if(s.map===to.map&&(!leave||s.hops.length)&&!banned.has(s.key+'>END')){open.push({...s,end:true,cost:s.cost+walkGuess(d.meta,s.at,to)});continue;}
    for(const w of ways(d,s.map)){
     // A map can close its door to one neighbour (the Ancient Crypt passage only leads out of the tomb).
-    if((await mapData(w.to)).meta?.closedEntries?.includes(s.map))continue;
+    if(banned.has(s.key+'>'+w.id)||(await mapData(w.to)).meta?.closedEntries?.includes(s.map))continue;
     const hop={from:s.map,to:w.to,exit:w},land=await arrival(hop);if(!land)continue;
     const key=w.to+'|'+land.id;if(best.has(key))continue;
     open.push({cost:s.cost+walkGuess(d.meta,s.at,w)+w.cost,map:w.to,at:land,key,hops:[...s.hops,hop]});
@@ -103,7 +104,8 @@
   const d=await mapData(hop.to),place=hop.exit.place;
   const l=d.labels.find(x=>x.id===place),m=!l&&d.markers.find(x=>x.id===place),back=!l&&!m&&d.labels.find(x=>x.toMap===hop.from);
   const p=l||m||back;if(!p)return null;
-  return {map:hop.to,name:l||back?exitName(p):markerTitle(p),x:p.x,y:p.y,level:p.level,reach:260,kind:'exit',id:p.id};
+  // A lift, stair or bridge pin is taken exactly where it stands (it may land on a ledge cut off from the map's entrances).
+  return {map:hop.to,name:l||back?exitName(p):markerTitle(p),x:p.x,y:p.y,level:p.level,reach:m?90:260,exact:!!m,kind:'exit',id:p.id};
  }
  async function leg(mapId,from,to,mode){
   const d=await ensureGround(mapId),list=dangers(d.markers);
@@ -111,17 +113,32 @@
   return {map:mapId,from,to,result,dangerList:list,markers:d.markers};
  }
  async function plan(mode,from=state.from){
-  if(from.map===state.to.map)return [await leg(from.map,from,state.to,mode)];
-  const hops=await mapPath(from,state.to);
-  if(!hops)throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');
-  const legs=[];let start=from;
-  for(const hop of hops){
-   const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:260,kind:'exit'},land=await arrival(hop);
-   if(!land)throw Error('The way into '+mapTitle(hop.to)+' is not marked yet.');
-   const l=await leg(hop.from,start,out,mode);l.next={map:hop.to,place:land.id,title:mapTitle(hop.to),how:hop.exit.how,wait:hop.exit.cost};legs.push(l);start=land;
+  let one=null;
+  if(from.map===state.to.map){
+   one=await leg(from.map,from,state.to,mode);
+   if(!one.result.error)return [one];
   }
-  legs.push(await leg(state.to.map,start,state.to,mode));
-  return legs;
+  // A part of the map reached only through a neighbour (a mesa you reach from the tree city above) goes out and back.
+  // When a walk on the chosen chain turns out impossible, that step is ruled out and the next best chain is tried.
+  const banned=new Set();
+  for(let tries=0;tries<8;tries++){
+   const hops=await mapPath(from,state.to,!!one,banned);
+   if(!hops){if(one)return [one];throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');}
+   const legs=[];let start=from,key=from.map+'|',failed=false;
+   for(const hop of hops){
+    const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:hop.exit.pin?90:260,exact:hop.exit.pin,kind:'exit'},land=await arrival(hop);
+    if(!land)throw Error('The way into '+mapTitle(hop.to)+' is not marked yet.');
+    const l=await leg(hop.from,start,out,mode);
+    if(l.result.error){banned.add(key+'>'+hop.exit.id);failed=true;break;}
+    l.next={map:hop.to,place:land.id,title:mapTitle(hop.to),how:hop.exit.how,wait:hop.exit.cost};legs.push(l);start=land;key=hop.to+'|'+land.id;
+   }
+   if(failed)continue;
+   const last=await leg(state.to.map,start,state.to,mode);
+   if(last.result.error){banned.add(key+'>END');continue;}
+   legs.push(last);return legs;
+  }
+  if(one)return [one];
+  throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');
  }
  function pick(){const o=state.options[state.mode];state.legs=o?.legs||null;state.error=o?.error||'';}
  async function compute(){
@@ -256,7 +273,7 @@
    if(o.error){card.append(text('span',label,'route-option-name'),text('span',o.error,'route-option-sub'));opts.append(card);continue;}
    const legs=o.legs,dangerCount=legs.reduce((s,l)=>s+(l.result.passed?.length||0),0),swim=legs.reduce((s,l)=>s+(l.result.swim||0),0);
    const top=text('span','','route-option-top');top.append(text('span',label,'route-option-name'),text('span',metres(total(legs)),'route-option-length'));
-   const bits=[o.teleport?'teleports as '+o.teleport.caster:'',legs.length>1?legs.length+' maps':'',swim?'swims '+metres(swim):'',dangerCount?'passes '+dangerCount+(dangerCount>1?' mobs':' mob'):'clear of known mobs'].filter(Boolean);
+   const bits=[o.teleport?'teleports as '+o.teleport.caster:'',new Set(legs.map(l=>l.map)).size>1?new Set(legs.map(l=>l.map)).size+' maps':'',swim?'swims '+metres(swim):'',dangerCount?'passes '+dangerCount+(dangerCount>1?' mobs':' mob'):'clear of known mobs'].filter(Boolean);
    card.append(top,text('span',bits.join(' · '),'route-option-sub'+(dangerCount?' warn':'')));opts.append(card);
   }
   if(state.error&&!state.legs){box.append(text('p',state.error,'route-error'));return;}

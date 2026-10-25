@@ -1,0 +1,107 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/great-cavern-sea/ground.bin",
+ "cell": 4,
+ "x0": -2767.047119140625,
+ "z0": -2293.094970703125,
+ "nx": 1565,
+ "nz": 1149,
+ "hstep": 0.25,
+ "step": 4,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -1.5,
+   3856
+  ],
+  "y": [
+   -1.4772115051746368,
+   -0.26047226786613464,
+   0,
+   5763.780641412457
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Outer south gate (under the arch)",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3820,
+    "y": 8430,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3820,
+    "y": 8650,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "South gate (under the arch)",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3820,
+    "y": 9145,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3830,
+    "y": 9300,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Flooded shaft down to the Caves of Irem tunnel",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 3560,
+    "y": 9630,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 3560,
+    "y": 9760,
+    "level": "ground",
+    "exact": true
+   }
+  }
+ ],
+ "between": {
+  "to-caves-of-irem": {
+   "to-ail-vorith": 5141,
+   "to-rothold": null,
+   "to-blind-midden": 3801
+  },
+  "to-ail-vorith": {
+   "to-caves-of-irem": 5197,
+   "to-rothold": null,
+   "to-blind-midden": 1358
+  },
+  "to-rothold": {
+   "to-caves-of-irem": null,
+   "to-ail-vorith": null,
+   "to-blind-midden": null
+  },
+  "to-blind-midden": {
+   "to-caves-of-irem": 3931,
+   "to-ail-vorith": 1350,
+   "to-rothold": null
+  }
+ }
+}

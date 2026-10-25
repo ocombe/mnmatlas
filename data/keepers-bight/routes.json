@@ -1,0 +1,109 @@
+{
+ "version": 3,
+ "format": "raster",
+ "file": "data/keepers-bight/ground.bin",
+ "cell": 2.5,
+ "x0": -1101.0999755859375,
+ "z0": -967.3350219726562,
+ "nx": 846,
+ "nz": 842,
+ "hstep": 0.25,
+ "step": 4,
+ "swim": 2.5,
+ "levels": [
+  "ground"
+ ],
+ "project": {
+  "x": [
+   0,
+   0,
+   -3.5,
+   3185
+  ],
+  "y": [
+   -3.446826845407486,
+   -0.6077686250209808,
+   0,
+   4151.272063162356
+  ]
+ },
+ "oneWayExits": [],
+ "closedEntries": [],
+ "joins": [
+  {
+   "name": "Dock lift",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2235,
+    "y": 2790,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2275,
+    "y": 2700,
+    "level": "ground",
+    "exact": true
+   }
+  }
+ ],
+ "between": {
+  "to-evershade-weald": {
+   "to-scarwood": 629,
+   "to-vale-of-zintar": 2078,
+   "to-vale-of-zintar-coast": 2576,
+   "boat-night-harbor": 1400,
+   "to-blacktide-bay-dungeon": 2696,
+   "to-blacktide-bay-dungeon-south": 1984
+  },
+  "to-scarwood": {
+   "to-evershade-weald": 615,
+   "to-vale-of-zintar": 1884,
+   "to-vale-of-zintar-coast": 2343,
+   "boat-night-harbor": 1409,
+   "to-blacktide-bay-dungeon": 2474,
+   "to-blacktide-bay-dungeon-south": 1769
+  },
+  "to-vale-of-zintar": {
+   "to-evershade-weald": 2119,
+   "to-scarwood": 2008,
+   "to-vale-of-zintar-coast": 719,
+   "boat-night-harbor": 1926,
+   "to-blacktide-bay-dungeon": 884,
+   "to-blacktide-bay-dungeon-south": 225
+  },
+  "to-vale-of-zintar-coast": {
+   "to-evershade-weald": 2504,
+   "to-scarwood": 2400,
+   "to-vale-of-zintar": 720,
+   "boat-night-harbor": 1732,
+   "to-blacktide-bay-dungeon": 654,
+   "to-blacktide-bay-dungeon-south": 567
+  },
+  "boat-night-harbor": {
+   "to-evershade-weald": 1353,
+   "to-scarwood": 1381,
+   "to-vale-of-zintar": 1969,
+   "to-vale-of-zintar-coast": 1720,
+   "to-blacktide-bay-dungeon": 1828,
+   "to-blacktide-bay-dungeon-south": 1815
+  },
+  "to-blacktide-bay-dungeon": {
+   "to-evershade-weald": 2598,
+   "to-scarwood": 2495,
+   "to-vale-of-zintar": 861,
+   "to-vale-of-zintar-coast": 646,
+   "boat-night-harbor": 1831,
+   "to-blacktide-bay-dungeon-south": 661
+  },
+  "to-blacktide-bay-dungeon-south": {
+   "to-evershade-weald": 1943,
+   "to-scarwood": 1838,
+   "to-vale-of-zintar": 224,
+   "to-vale-of-zintar-coast": 682,
+   "boat-night-harbor": 1751,
+   "to-blacktide-bay-dungeon": 659
+  }
+ }
+}
