@@ -32,7 +32,9 @@
   ]
  },
  "oneWayExits": [],
- "closedEntries": [],
+ "closedEntries": [
+  "fallen-pass"
+ ],
  "joins": [
   {
    "name": "Rat cave passage",
