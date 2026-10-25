@@ -2365,15 +2365,13 @@
     "id": "community-971",
     "community": true,
     "name": "Master Khaila",
-    "note": "North of the Twilight Harbor area. '''Directions:''' Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop dow",
+    "note": "North of the Twilight Harbor area.\nDirections: Go to Saltbreeze Park and out the south exit towards the harbor. Find and face the Monk Trainer. Go right and through the arch (to a pair of ''a Fourfold adept''). Go left (don't drop down, but along the sand) and past the stairwell to your right. Go up the stairs in the building in front of you (Disenchanter Qaridi is on the roof).",
     "x": 1671,
     "y": 1719,
-    "category": "Class trainer",
+    "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/master-khaila",
     "wikiId": "npc-master-khaila",
-    "classes": [
-      "Enchanter"
-    ]
+    "trade": "(Dis)Enchanting"
   },
   {
     "id": "community-972",
@@ -2382,12 +2380,10 @@
     "note": "",
     "x": 1660,
     "y": 1712,
-    "category": "Class trainer",
+    "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/disenchanter-qaridi",
     "wikiId": "npc-disenchanter-qaridi",
-    "classes": [
-      "Enchanter"
-    ]
+    "trade": "(Dis)Enchanting"
   },
   {
     "id": "community-973",

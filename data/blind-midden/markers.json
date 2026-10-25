@@ -834,5 +834,28 @@
     "category": "Notable NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/gurm-the-half-woken",
     "wikiId": "npc-gurm-the-half-woken"
+  },
+  {
+    "id": "community-1397",
+    "community": true,
+    "name": "Grave Hulk",
+    "note": "Spawned by the quest from Chaplain Cranely",
+    "x": 2311,
+    "y": 2187,
+    "level": "ground",
+    "category": "Named mob",
+    "ambush": false
+  },
+  {
+    "id": "community-1415",
+    "community": true,
+    "name": "Elixa the Experimentalist",
+    "note": "",
+    "x": 2565,
+    "y": 2569,
+    "level": "basement",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/elixa-the-experimentalist",
+    "wikiId": "npc-elixa-the-experimentalist"
   }
 ]

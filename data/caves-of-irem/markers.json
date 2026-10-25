@@ -45,12 +45,13 @@
     "id": "community-910",
     "community": true,
     "name": "Keeper of the Road",
-    "category": "Quest NPC",
-    "note": "",
+    "category": "Named mob",
+    "note": "Drops a Forsaken Offering and is a killable spectre",
     "x": 1285,
     "y": 1499,
     "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
-    "wikiId": "npc-keeper-of-the-road"
+    "wikiId": "npc-keeper-of-the-road",
+    "ambush": false
   },
   {
     "id": "community-994",
@@ -163,7 +164,7 @@
     "id": "community-1087",
     "community": true,
     "name": "Speaker Khaldun",
-    "note": "40ish (yellow to 38) shaman named mob",
+    "note": "Shaman Mob",
     "x": 1614,
     "y": 4018,
     "category": "Named mob",
@@ -171,7 +172,8 @@
       40,
       40
     ],
-    "ambush": false
+    "ambush": false,
+    "wiki": "https://monstersandmemories.wiki/npcs/speaker-khaldun"
   },
   {
     "id": "wanted-prince-gorb",
@@ -205,5 +207,494 @@
     "approximate": true,
     "wiki": "https://monstersandmemories.wiki/npcs/baroness-qi",
     "wikiId": "npc-baroness-qi"
+  },
+  {
+    "id": "community-1323",
+    "community": true,
+    "name": "Grukk'Tal the Ravener",
+    "note": "23+ appears that any of the rats can be the PH",
+    "x": 3533,
+    "y": 3304,
+    "category": "Named mob",
+    "levels": [
+      23,
+      23
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1422",
+    "community": true,
+    "name": "Warden Neh'ma",
+    "note": "Mur'Hua camp leader, gives quest as well towards friendlies",
+    "x": 1976,
+    "y": 2578,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/warden-nehma",
+    "quests": true
+  },
+  {
+    "id": "community-1424",
+    "community": true,
+    "name": "Baz'Nik",
+    "note": "Vendor for friends of Mur'Hua",
+    "x": 1943,
+    "y": 2580,
+    "category": "Vendor"
+  },
+  {
+    "id": "community-1425",
+    "community": true,
+    "name": "Handfed Bors",
+    "note": "Default friendly giant who gives quest",
+    "x": 4913,
+    "y": 5657,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/handfed-bors"
+  },
+  {
+    "id": "community-1428",
+    "community": true,
+    "name": "Nurabek Brinehand",
+    "note": "Named Giant of Old Irem.  Unsure if spawn is only this location and if there is a PH.",
+    "x": 6221,
+    "y": 6128,
+    "category": "Named mob",
+    "levels": [
+      35,
+      35
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1429",
+    "community": true,
+    "name": "Sael'Vyrin",
+    "note": "Dark Elf NPC",
+    "x": 1980,
+    "y": 1179,
+    "category": "Notable NPC"
+  },
+  {
+    "id": "community-1430",
+    "community": true,
+    "name": "Razorwings & Giants",
+    "note": "Green Lake Ramp",
+    "x": 5906,
+    "y": 6407,
+    "category": "Mob camp",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-lake-fed-razorwing",
+    "wikiId": "npc-a-lake-fed-razorwing",
+    "levels": [
+      23,
+      35
+    ],
+    "mobs": [
+      {
+        "name": "A lake-fed razorwing",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-lake-fed-razorwing",
+        "wikiId": "npc-a-lake-fed-razorwing"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          5014,
+          6537
+        ],
+        [
+          5070,
+          6561
+        ],
+        [
+          5138,
+          6589
+        ],
+        [
+          5210,
+          6646
+        ],
+        [
+          5344,
+          6739
+        ],
+        [
+          5403,
+          6811
+        ],
+        [
+          5475,
+          6839
+        ],
+        [
+          5542,
+          6882
+        ],
+        [
+          5603,
+          6936
+        ],
+        [
+          5652,
+          7017
+        ],
+        [
+          5668,
+          7102
+        ],
+        [
+          5667,
+          7209
+        ],
+        [
+          5680,
+          7282
+        ],
+        [
+          5688,
+          7336
+        ],
+        [
+          5810,
+          7359
+        ],
+        [
+          5863,
+          7359
+        ],
+        [
+          5956,
+          7333
+        ],
+        [
+          6015,
+          7308
+        ],
+        [
+          6085,
+          7254
+        ],
+        [
+          6151,
+          7225
+        ],
+        [
+          6298,
+          7130
+        ],
+        [
+          6314,
+          7081
+        ],
+        [
+          6242,
+          6958
+        ],
+        [
+          6242,
+          6939
+        ],
+        [
+          6285,
+          6816
+        ],
+        [
+          6317,
+          6780
+        ],
+        [
+          6383,
+          6764
+        ],
+        [
+          6434,
+          6752
+        ],
+        [
+          6470,
+          6710
+        ],
+        [
+          6479,
+          6674
+        ],
+        [
+          6478,
+          6612
+        ],
+        [
+          6522,
+          6556
+        ],
+        [
+          6548,
+          6496
+        ],
+        [
+          6553,
+          6465
+        ],
+        [
+          6582,
+          6442
+        ],
+        [
+          6551,
+          6399
+        ],
+        [
+          6499,
+          6340
+        ],
+        [
+          6483,
+          6308
+        ],
+        [
+          6460,
+          6262
+        ],
+        [
+          6474,
+          6198
+        ],
+        [
+          6492,
+          6131
+        ],
+        [
+          6512,
+          6061
+        ],
+        [
+          6538,
+          5987
+        ],
+        [
+          6543,
+          5918
+        ],
+        [
+          6548,
+          5815
+        ],
+        [
+          6553,
+          5778
+        ],
+        [
+          6551,
+          5608
+        ],
+        [
+          6465,
+          5554
+        ],
+        [
+          6434,
+          5549
+        ],
+        [
+          6404,
+          5549
+        ],
+        [
+          6353,
+          5565
+        ],
+        [
+          6334,
+          5575
+        ],
+        [
+          6304,
+          5578
+        ],
+        [
+          6242,
+          5583
+        ],
+        [
+          6187,
+          5588
+        ],
+        [
+          6142,
+          5613
+        ],
+        [
+          6105,
+          5644
+        ],
+        [
+          6088,
+          5673
+        ],
+        [
+          6043,
+          5694
+        ],
+        [
+          5992,
+          5712
+        ],
+        [
+          5897,
+          5722
+        ],
+        [
+          5840,
+          5689
+        ],
+        [
+          5758,
+          5709
+        ],
+        [
+          5704,
+          5737
+        ],
+        [
+          5653,
+          5786
+        ],
+        [
+          5621,
+          5817
+        ],
+        [
+          5599,
+          5851
+        ],
+        [
+          5550,
+          5905
+        ],
+        [
+          5513,
+          5949
+        ],
+        [
+          5462,
+          5981
+        ],
+        [
+          5413,
+          6026
+        ],
+        [
+          5353,
+          6074
+        ],
+        [
+          5325,
+          6095
+        ],
+        [
+          5272,
+          6141
+        ],
+        [
+          5236,
+          6187
+        ],
+        [
+          5214,
+          6227
+        ],
+        [
+          5171,
+          6254
+        ],
+        [
+          5099,
+          6304
+        ],
+        [
+          5071,
+          6330
+        ],
+        [
+          5037,
+          6396
+        ],
+        [
+          4985,
+          6455
+        ],
+        [
+          4978,
+          6525
+        ]
+      ]
+    }
+  },
+  {
+    "id": "community-1449",
+    "community": true,
+    "name": "Broodmother",
+    "note": "A large selection of Spiders. The Deepcrawler Broodmother also glows with a light shine in the dark, like a Torch, allowing for sight where ever it goes.",
+    "x": 5586,
+    "y": 3985,
+    "category": "Mob camp",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/A_deepcrawler_broodmother",
+    "levels": [
+      15,
+      18
+    ],
+    "mobs": [
+      {
+        "name": "A Bloated sand Tick"
+      },
+      {
+        "name": "a deepcrawler Brooding"
+      },
+      {
+        "name": "a sand tick"
+      },
+      {
+        "name": "a deepcrawler Broodmother"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          5569,
+          3769
+        ],
+        [
+          5464,
+          3767
+        ],
+        [
+          5362,
+          3853
+        ],
+        [
+          5359,
+          3982
+        ],
+        [
+          5391,
+          4138
+        ],
+        [
+          5592,
+          4189
+        ],
+        [
+          5819,
+          4111
+        ],
+        [
+          5883,
+          3973
+        ]
+      ]
+    }
   }
 ]

@@ -256,7 +256,7 @@
   "category": "Respawn point",
   "x": 1869,
   "y": 2488,
-  "approximate": true,
+  "approximate": false,
   "note": "",
   "minZoom": 3.25,
   "community": true
@@ -1129,5 +1129,16 @@
   "x": 3835,
   "y": 3128,
   "note": "This boulder at the foot of the cliff can be walked through. Behind it, a tunnel leads to the orc cave and the lifts down to Blacktide Bay."
+ },
+ {
+  "id": "community-1441",
+  "community": true,
+  "name": "Meluli Dawnglow",
+  "note": "Only visible during the day",
+  "x": 2170,
+  "y": 1544,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/meluli-dawnglow",
+  "wikiId": "npc-meluli-dawnglow"
  }
 ]
