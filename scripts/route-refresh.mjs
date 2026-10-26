@@ -22,7 +22,7 @@ export function floorLinks(markers){
  return markers.filter(m=>m.toMarker&&m.toLevel&&!m.toMap&&byId.has(m.toMarker)).map(m=>{const b=byId.get(m.toMarker),kind=kindOf(m);return {id:m.id,name:m.name,from:{x:m.x,y:m.y,level:m.level},to:{x:b.x,y:b.y,level:b.level},oneWay:true,kind,cost:COST[kind]};});
 }
 // A short stamp of a text (FNV-1a, twice with different seeds), to notice when a map's inputs change.
-const stamp=s=>[2166136261,374761393].map(seed=>{let h=seed;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619)>>>0;return h.toString(16).padStart(8,'0');}).join('');
+const stamp=s=>[2166136261,374761393].map(seed=>{let h=seed;for(let i=0;i<s.length;i++)h=Math.imul(h^s.charCodeAt(i),16777619)>>>0;return String(h).padStart(10,'0');}).join('-');
 // A camp drawn as an area is reached at the nearest ground inside it (as the site does).
 const edge=m=>m.shape?.points?.length>2?{edge:m.shape.points}:{};
 
@@ -43,7 +43,7 @@ for(const reg of maps){
  // Signs snap within 260 px; lift and stair pins that lead to another map are taken exactly where they stand.
  const doors=[...labels.filter(l=>l.toMap||Array.isArray(l.route)).map(p=>({id:p.id,x:p.x,y:p.y,level:p.level,reach:260})),...markers.filter(m=>m.toMap&&Number.isFinite(m.x)).map(p=>({id:p.id,x:p.x,y:p.y,level:p.level,reach:90,exact:true}))];
  const pins=markers.filter(m=>Number.isFinite(m.x)).map(m=>({id:m.id,name:m.name,x:m.x,y:m.y,level:m.level,...edge(m)}));
- const key=stamp(JSON.stringify([meta.file,doors,links,pins.map(p=>[p.id,p.x,p.y,p.level])]));
+ const key=stamp(JSON.stringify([meta.file,doors,links,pins.map(p=>[p.id,p.x,p.y,p.level,p.edge||null])]));
  if(!force&&meta.betweenKey===key)continue;
  const route=await finder(map,meta),t=Date.now();
  const between={};

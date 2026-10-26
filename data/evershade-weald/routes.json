@@ -33,11 +33,11 @@
  "joins": [],
  "between": {
   "to-glinting-hollow": {
-   "to-keepers-bight": 1192,
-   "to-blacktide-bay-boulder": 1410,
-   "travelers-lift": 672,
+   "to-keepers-bight": 1198,
+   "to-blacktide-bay-boulder": 1416,
+   "travelers-lift": 677,
    "keepers-lift": null,
-   "pixie-lift": 305,
+   "pixie-lift": 306,
    "south-stairway": null,
    "north-cliff-stairway": null,
    "southeast-cliff-bridge": null,
@@ -124,7 +124,7 @@
    "to-blacktide-bay": null
   },
   "north-cliff-stairway": {
-   "to-glinting-hollow": 1054,
+   "to-glinting-hollow": 1078,
    "to-keepers-bight": 1252,
    "to-blacktide-bay-boulder": 960,
    "travelers-lift": 981,
@@ -189,7 +189,7 @@
    "river-bridge-east": null
   }
  },
- "betweenKey": "dfe418865bc14f9a",
+ "betweenKey": "3174579750-2470361938",
  "unreached": [
   "taeresh-deathcharmer",
   "mistress-naelira",

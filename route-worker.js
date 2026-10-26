@@ -162,9 +162,11 @@ function route(req){
  for(const link of [...(req.links||[]),...(g.meta.joins||[])]){if(link.kind==='trap'&&safer)continue;const a=snap(g,link.from,60),b=snap(g,link.to,60);if(a<0||b<0||a===b)continue;add(a,b,link);if(!link.oneWay)add(b,a,link);}
  // Long routes on big maps go by blocks first (see corridor); a short hop, or a corridor that turns out closed,
  // searches every square. The search leans towards the finish so it answers quickly; routes stay close to the best.
- let found=null;
+ // With a teleporter on the map the search is exact in its corridor: leaning towards the finish could miss a far
+ // teleporter that saves the walk.
+ let found=null;const tele=(req.links||[]).some(l=>l.kind==='teleport');
  // A block can be crossed in one place but not another, so a corridor that fails is tried once more, wider.
- if(g.count>150000&&dist(g,from,to)>150)for(const spread of safer?[3,8]:[2,6]){const keep=corridor(g,from,to,extra,spread);if(!keep)break;found=search(g,from,to,field,extra,keep,1.3,swimCost);if(found)break;}
+ if(g.count>150000&&dist(g,from,to)>150)for(const spread of safer?[3,8]:[2,6]){const keep=corridor(g,from,to,extra,spread);if(!keep)break;found=search(g,from,to,field,extra,keep,tele?1:1.3,swimCost);if(found)break;}
  if(!found)found=search(g,from,to,field,extra,null,g.count>400000?1.8:1.3,swimCost);
  if(!found)return {error:'No known way between these two spots.'};
  const {nodes,links}=found;
@@ -262,13 +264,14 @@ function clear(g,a,b,field){
   if(hit<0||g.lv[hit]!==g.lv[a]||field[hit]>limit||under(g,hit)!==below||g.swim[hit]!==g.swim[a]||road&&!(g.flags[hit]&8))return false;
   prev=hit;
  }
- return true;
+ return prev===b;
 }
 function smooth(g,nodes,links,field){
  const keep=[0];let i=0;
  while(i<nodes.length-1){
   let j=i+1;
-  if(!links[j]){while(j+1<nodes.length&&!links[j+1]&&clear(g,nodes[i],nodes[j+1],field))j++;}
+  // Runs are capped at 160 squares, so long routes do not test ever longer lines (the cost grows with the square).
+  if(!links[j]){while(j+1<nodes.length&&j+1-i<=160&&!links[j+1]&&clear(g,nodes[i],nodes[j+1],field))j++;}
   keep.push(j);i=j;
  }
  return keep.map(k=>({node:nodes[k],link:links[k]}));

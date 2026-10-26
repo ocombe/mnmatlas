@@ -289,36 +289,36 @@
  "between": {
   "to-night-harbor": {
    "to-tel-ekir": 3032,
-   "to-glass-flats": 2760,
-   "to-glass-flats-road": 2912,
-   "to-grain-cellar": 1374
+   "to-glass-flats": 2762,
+   "to-glass-flats-road": 2934,
+   "to-grain-cellar": 1379
   },
   "to-tel-ekir": {
-   "to-night-harbor": 2906,
-   "to-glass-flats": 2899,
+   "to-night-harbor": 2921,
+   "to-glass-flats": 2900,
    "to-glass-flats-road": 1017,
-   "to-grain-cellar": 2190
+   "to-grain-cellar": 2192
   },
   "to-glass-flats": {
-   "to-night-harbor": 2761,
-   "to-tel-ekir": 3797,
-   "to-glass-flats-road": 3712,
+   "to-night-harbor": 2754,
+   "to-tel-ekir": 3798,
+   "to-glass-flats-road": 3710,
    "to-grain-cellar": 1473
   },
   "to-glass-flats-road": {
-   "to-night-harbor": 2819,
+   "to-night-harbor": 2834,
    "to-tel-ekir": 1034,
-   "to-glass-flats": 2805,
-   "to-grain-cellar": 2101
+   "to-glass-flats": 2807,
+   "to-grain-cellar": 2103
   },
   "to-grain-cellar": {
-   "to-night-harbor": 1377,
+   "to-night-harbor": 1378,
    "to-tel-ekir": 2723,
-   "to-glass-flats": 1475,
+   "to-glass-flats": 1479,
    "to-glass-flats-road": 2633
   }
  },
- "betweenKey": "cba7c2efc76e28b3",
+ "betweenKey": "0822512947-2061386271",
  "unreached": [
   "npc-3",
   "ashira-1-5-2",

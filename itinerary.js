@@ -20,21 +20,25 @@
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
  const floorOrder=(id,mapId=config.id)=>entry(mapId)?.levels?entry(mapId).levels.findIndex(l=>l.id===id):0;
  // A floor change goes up when the way climbs (the route finder reports the rise); floor order is the fallback.
- // A link named for its way ("Lifts - down to ...") is taken at its word: sheets drawn from different scenes do not
- // share one height.
+ // A link named for its way ("Lifts - down to ...") is taken at its word: two sheets drawn apart need not share one
+ // height.
  const isUp=(c,mapId=config.id)=>{const n=c.link?.name||'';if(/\bdown\b/i.test(n))return false;if(/\bup\b/i.test(n))return true;return c.rise?c.rise>0:floorOrder(c.to,mapId)<floorOrder(c.from,mapId);};
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-18');
+  worker=new Worker('route-worker.js?v=route-19');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
+  // A worker that fails (out of memory on a phone) lets everything waiting on it know, and the next request starts a new one.
+  worker.onerror=worker.onmessageerror=()=>{for(const p of pending.values())p.reject(Error('Route finding stopped. Please try again.'));pending.clear();loaded.clear();worker?.terminate();worker=null;};
  }
  // A map's ground, pins and place names, fetched once.
  // (The promise is kept, so two callers at once share one fetch.)
  function mapData(id){
   if(!data.has(id)){
    const c=entry(id),json=async(f,d)=>{if(!f)return d;const r=await fetch(f);return r.ok?r.json():d;};
-   data.set(id,Promise.all([json(c.routes,null),json(c.markersFile,[]),json(c.labelsFile,{labels:[]})]).then(([meta,markers,labels])=>({meta,markers:Array.isArray(markers)?markers:[],labels:labels.labels||[]})).catch(e=>{data.delete(id);throw e;}));
+   // A floor drawn on its own sheet may have its own place names; they join the map's own, marked with that floor.
+   const own=(c.levels||[]).filter(l=>l.labelsFile&&l.labelsFile!==c.labelsFile);
+   data.set(id,Promise.all([json(c.routes,null),json(c.markersFile,[]),json(c.labelsFile,{labels:[]}),...own.map(l=>json(l.labelsFile,{labels:[]}))]).then(([meta,markers,labels,...more])=>({meta,markers:Array.isArray(markers)?markers:[],labels:[...(labels.labels||[]),...more.flatMap((x,k)=>(x.labels||[]).map(q=>({...q,level:q.level||own[k].id})))]})).catch(e=>{data.delete(id);throw e;}));
   }
   return data.get(id);
  }
@@ -298,14 +302,16 @@
   const box=text('div','','route-pick'),input=document.createElement('input'),list=text('div','','route-suggest');
   input.type='search';input.id='route-'+which;input.autocomplete='off';input.spellcheck=false;input.placeholder=which==='from'?'Choose a start':'Choose a finish';
   input.setAttribute('aria-label',label);input.setAttribute('role','combobox');input.setAttribute('aria-expanded','false');list.hidden=true;list.setAttribute('role','listbox');
+  list.id='route-'+which+'-list';input.setAttribute('aria-controls',list.id);input.setAttribute('aria-autocomplete','list');
   box.append(input,list);let zone=null,serial=0,active=-1;
-  const close=()=>{list.hidden=true;input.setAttribute('aria-expanded','false');zone=null;active=-1;};
+  // Closing also outdates any list still being worked out, so it cannot open again.
+  const close=()=>{serial++;list.hidden=true;input.setAttribute('aria-expanded','false');input.removeAttribute('aria-activedescendant');zone=null;active=-1;};
   const choose=async place=>{close();input.blur();if(!place)return;const {sub,...p}=place;state[which]=p;state.options={};state.legs=null;fill(input,which);compute();};
   const head=t=>list.append(text('div',t,'route-suggest-head'));
-  const item=(name,sub,run,cls='')=>{const b=button('',run,'route-suggest-item'+cls);b.setAttribute('role','option');b.tabIndex=-1;b.append(text('span',name,'route-suggest-name'));if(sub)b.append(text('span',sub,'route-suggest-sub'));b.onmousedown=e=>e.preventDefault();list.append(b);return b;};
+  const item=(name,sub,run,cls='')=>{const b=button('',run,'route-suggest-item'+cls);b.id=list.id+'-'+list.querySelectorAll('.route-suggest-item').length;b.setAttribute('role','option');b.tabIndex=-1;b.append(text('span',name,'route-suggest-name'));if(sub)b.append(text('span',sub,'route-suggest-sub'));b.onmousedown=e=>e.preventDefault();list.append(b);return b;};
   const zoneItem=id=>item(mapTitle(id)+' ›',id===config.id?'This map':'Zone',()=>{zone=id;show();},' zone');
   async function show(){
-   const ticket=++serial,q=fold(input.value);list.replaceChildren();active=-1;
+   const ticket=++serial,q=fold(input.value);list.replaceChildren();active=-1;input.removeAttribute('aria-activedescendant');
    if(zone){
     const z=zone;item('‹ All zones','',()=>{zone=null;input.focus();show();},' back');const {exits,pins}=await zonePlaces(z);if(ticket!==serial)return;
     head(mapTitle(z));for(const e of exits)item(e.name,e.sub,()=>choose(e));for(const m of pins)if(!q||fuzzy(q,m.name+' '+m.sub))item(m.name,m.sub,()=>choose(m));
@@ -325,7 +331,7 @@
    }
    list.hidden=false;input.setAttribute('aria-expanded','true');
   }
-  const move=d=>{const items=[...list.querySelectorAll('.route-suggest-item')];if(!items.length)return;active=(active+d+items.length)%items.length;items.forEach((b,i)=>b.classList.toggle('active',i===active));items[active].scrollIntoView({block:'nearest'});};
+  const move=d=>{const items=[...list.querySelectorAll('.route-suggest-item')];if(!items.length)return;active=(active+d+items.length)%items.length;items.forEach((b,i)=>{b.classList.toggle('active',i===active);b.setAttribute('aria-selected',String(i===active));});items[active].scrollIntoView({block:'nearest'});input.setAttribute('aria-activedescendant',items[active].id);};
   input.onfocus=()=>{input.select();show();};input.oninput=()=>show();
   input.onkeydown=e=>{if(e.key==='ArrowDown'){e.preventDefault();if(list.hidden)show();else move(1);}else if(e.key==='ArrowUp'){e.preventDefault();move(-1);}
    else if(e.key==='Enter'){const items=[...list.querySelectorAll('.route-suggest-item')];const b=items[active>=0?active:0];if(b){e.preventDefault();b.click();}}
@@ -425,7 +431,7 @@
     if(e.n)t.append(text('span',String(e.n),'route-step-num'));t.append(document.createTextNode(e.title));
     b.append(icon(e.kind),t);if(e.sub)b.append(text('span',e.sub,'route-step-sub'));
     // Pointing at a step lights up its part of the route on this map: the walk to it and the spot itself.
-    const prev=k?all[i][k-1].i:0;li.onmouseenter=()=>hot(l,prev,e);li.onmouseleave=()=>hot(null);
+    const prev=k?all[i][k-1].i:0;li.onmouseenter=li.onfocusin=()=>hot(l,prev,e);li.onmouseleave=li.onfocusout=()=>hot(null);
     li.append(b);steps.append(li);
    });
   });
@@ -600,12 +606,15 @@
   // A local preview of the site always has it, for checking before a publish.
   if(['localhost','127.0.0.1'].includes(location.hostname))ok=true;
   if(uid!==window.atlasCommunity?.userId?.()||ok===beta)return;
-  beta=ok;window.atlasBeta=new Set(beta?['directions']:[]);window.dispatchEvent(new Event('atlas:beta'));if(!beta){state.from=state.to=null;state.options={};state.legs=null;closeView();}
+  beta=ok;window.atlasBeta=new Set(beta?['directions']:[]);window.dispatchEvent(new Event('atlas:beta'));if(!beta){run++;busy=false;state.from=state.to=null;state.options={};state.legs=null;closeView();}
   showPanel();draw();openShared();
  }
  window.addEventListener('atlas:account',()=>checkBeta().catch(()=>{}));
  if(['localhost','127.0.0.1'].includes(location.hostname))checkBeta().catch(()=>{});
  window.addEventListener('atlas:loaded',async()=>{
+  // Back or Forward to an address with another route opens that one (the address is otherwise kept in step).
+  const asked=new URL(location.href).searchParams.get('route');
+  if(asked&&!shared&&state.from&&state.to&&asked!==endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode())shared=asked;
   if(!panel)build();showPanel();draw();
   openShared();
   // Route data loads only once someone opens Directions on this map (see openView).
