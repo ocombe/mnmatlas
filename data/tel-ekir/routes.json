@@ -19,13 +19,13 @@
    0,
    0,
    -5,
-   2356
+   1840
   ],
   "y": [
    -4.924038765060914,
    -0.8682408883344124,
    0,
-   2956.653346080094
+   2516.653346080094
   ]
  },
  "oneWayExits": [],
@@ -36,14 +36,14 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 1637,
-    "y": 2210.2,
+    "x": 1121,
+    "y": 1770.2,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 1629,
-    "y": 2210.8,
+    "x": 1113,
+    "y": 1770.8,
     "level": "floor-2",
     "exact": true
    }
@@ -53,14 +53,14 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 1776,
-    "y": 2385.7,
+    "x": 1260,
+    "y": 1945.7,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 1774.5,
-    "y": 2387.3,
+    "x": 1258.5,
+    "y": 1947.3,
     "level": "floor-1",
     "exact": true
    }
@@ -70,14 +70,14 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 1950.5,
-    "y": 2078,
+    "x": 1434.5,
+    "y": 1638,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 1957.5,
-    "y": 2050.1,
+    "x": 1441.5,
+    "y": 1610.1,
     "level": "floor-1",
     "exact": true
    }
@@ -87,14 +87,14 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 3242,
-    "y": 2024,
+    "x": 2726,
+    "y": 1584,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 3249,
-    "y": 1994.1,
+    "x": 2733,
+    "y": 1554.1,
     "level": "floor-1",
     "exact": true
    }
@@ -104,14 +104,14 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 3310.5,
-    "y": 2045.8,
+    "x": 2794.5,
+    "y": 1605.8,
     "level": "floor-1",
     "exact": true
    },
    "to": {
-    "x": 3318,
-    "y": 2003,
+    "x": 2802,
+    "y": 1563,
     "level": "floor-1",
     "exact": true
    }
@@ -119,12 +119,12 @@
  ],
  "between": {
   "to-sungreet-strand": {
-   "to-shaded-dunes": 591
+   "to-shaded-dunes": 621
   },
   "to-shaded-dunes": {
-   "to-sungreet-strand": 585
+   "to-sungreet-strand": 617
   }
  },
- "betweenKey": "0643522475-0045916895",
+ "betweenKey": "1661009660-2259656760",
  "unreached": []
 }
