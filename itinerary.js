@@ -329,7 +329,7 @@
    const bits=[o.teleport?'teleports as '+o.teleport.caster:'',new Set(legs.map(l=>l.map)).size>1?new Set(legs.map(l=>l.map)).size+' maps':'',swim?'swims '+metres(swim):'',dangerCount?'passes '+dangerCount+(dangerCount>1?' mobs':' mob'):'clear of known mobs'].filter(Boolean);
    card.append(top,text('span',bits.join(' · '),'route-option-sub'+(dangerCount?' warn':'')));opts.append(card);
   }
-  if(state.error&&!state.legs){box.append(text('p',state.error,'route-error'));return;}
+  if(state.error&&!state.legs){box.append(text('p',state.error,'route-error'),reportButton());return;}
   const legs=state.legs;if(!legs)return;
   const steps=text('ol','','route-steps');
   legs.forEach((l,i)=>{
@@ -348,7 +348,19 @@
   const actions=text('div','','route-actions');
   actions.append(button('Copy route link',async()=>{const url=routeLink();if(await copyText(url))status('Route link copied.');else{const d=$('link-dialog'),h=d.querySelector('h2'),was=h.textContent;h.textContent='Share this route';d.addEventListener('close',()=>{h.textContent=was;},{once:true});$('link-value').value=url;d.showModal();$('link-value').select();}},'route-clear'),
    button('Clear',()=>{state.from=state.to=state.legs=null;state.options={};state.error='';draw();showPanel();},'route-clear'));
-  box.append(actions);
+  box.append(actions,reportButton());
+ }
+ // Report a problem with the route on screen: everything needed to run it again goes with the message.
+ function reportButton(){return button('Report a problem with this route',()=>window.atlasCommunity?.feedback(routeReport()),'route-report');}
+ function routeReport(){
+  const summary=mode=>{const o=state.options[mode];if(!o)return 'not worked out';if(o.error)return o.error;const legs=o.legs,swim=legs.reduce((s,l)=>s+(l.result.swim||0),0);
+   return metres(total(legs))+(swim?', swims '+metres(swim):'')+(o.teleport?', teleports as '+o.teleport.caster:'')+', through '+[...new Set(legs.map(l=>mapTitle(l.map)))].join(' → ');};
+  const where=p=>placeName(p)+' ('+mapTitle(p.map)+(p.level&&entry(p.map)?.levels?', '+levelTitle(p.level,p.map):'')+')',lvl=read(LEVEL_KEY),c=casts(),link=routeLink();
+  const lines=['From: '+where(state.from),'To: '+where(state.to),'Shown: '+(state.mode==='safer'?'Safer':'Shorter'),'Your level: '+(lvl||'any'),'Teleports: '+(c.length?c.join(', '):'none'),'Invisible: '+(read(INVIS_KEY)==='1'?'yes':'no'),
+   ...MODES.map(([m,label])=>label+': '+summary(m)),'Route: '+link];
+  return {title:'Report a problem with this route',topic:'bug',optional:true,hint:'Your start, finish, level, teleports and the routes found are sent with your message.',
+   placeholder:'What went wrong? (a wall it walks through, a way it misses, a closed door...)',prefix:'Directions: ',suffix:'\n\n'+lines.join('\n'),
+   payload:{route:{from:endCode(state.from),to:endCode(state.to),mode:state.mode,settings:settingsCode(),link}}};
  }
  // A floor change on open ground is named after the stairs pin beside it, when there is one.
  function nearestTravelName(at,c,markers){
