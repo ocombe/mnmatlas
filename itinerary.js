@@ -50,12 +50,16 @@
   startWorker();
   if(!loaded.has(id)){
    // While a map's route data loads, the panel says so (the first load of a big map takes a few seconds).
-   loading.add(id);if(busy)showPanel();
-   loaded.set(id,ask({type:'load',map:id,meta:d.meta,url:new URL(d.meta.file,document.baseURI).href}).catch(e=>{loaded.delete(id);throw e;}).finally(()=>{loading.delete(id);if(busy)showPanel();}));
+   loading.add(id);if(busy)busyNote();
+   loaded.set(id,ask({type:'load',map:id,meta:d.meta,url:new URL(d.meta.file,document.baseURI).href}).catch(e=>{loaded.delete(id);throw e;}).finally(()=>{loading.delete(id);if(busy)busyNote();}));
   }
   const p=loaded.get(id);loaded.delete(id);loaded.set(id,p);
-  for(const old of loaded.keys()){if(loaded.size<=KEEP_GROUNDS)break;if(old===config.id)continue;loaded.delete(old);ask({type:'drop',map:old}).catch(()=>{});}
+  if(!busy)trimGrounds();
   await p;return d;
+ }
+ // Only between routes: plans worked out side by side may still need a map that would be the oldest.
+ function trimGrounds(){
+  for(const old of loaded.keys()){if(loaded.size<=KEEP_GROUNDS)break;if(old===config.id)continue;loaded.delete(old);ask({type:'drop',map:old}).catch(()=>{});}
  }
  const placeName=p=>p.kind==='spot'?'Spot on '+(entry(p.map)?.levels?levelTitle(p.level,p.map):mapTitle(p.map)):p.name;
  const exitName=l=>'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,''));
@@ -161,6 +165,7 @@
    const hops=await mapPath(from,state.to,!!one,banned,mode,strict);
    if(!hops&&strict){strict=false;banned.clear();continue;}
    if(!hops){if(one)return [one];throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');}
+   await Promise.all([...new Set([...hops.map(h=>h.from),state.to.map])].map(id=>ensureGround(id).catch(()=>{})));
    const legs=[];let start=from,key=from.map+'|',failed=false;
    for(const hop of hops){
     const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:hop.exit.pin?90:260,exact:hop.exit.pin,kind:'exit',...(hop.exit.how==='boat'?{dry:true}:{})},land=await arrival(hop);
@@ -190,16 +195,17 @@
     catch(e){options[mode]={error:e.message};}
     // A druid or wizard can cast to a landing first; that wins when its route costs less than walking (swims, waits
     // and danger counted as the route finder counts them) by more than the cast.
-    for(const t of hops){
-     if(mine!==run)return;
-     try{const legs=await plan(mode,t.place);if(legs.some(l=>l.result.error))continue;
-      const best=options[mode];if(!best.legs||TELEPORT_COST+effort(legs)<effort(best.legs)+(best.teleport?TELEPORT_COST:0))options[mode]={legs,teleport:t};}
-     catch{}
+    // Every landing is planned at once: their maps load side by side.
+    const tried=await Promise.all(hops.map(t=>plan(mode,t.place).then(legs=>({t,legs}),()=>null)));
+    if(mine!==run)return;
+    for(const r of tried){
+     if(!r||r.legs.some(l=>l.result.error))continue;
+     const best=options[mode];if(!best.legs||TELEPORT_COST+effort(r.legs)<effort(best.legs)+(best.teleport?TELEPORT_COST:0))options[mode]={legs:r.legs,teleport:r.t};
     }
     if(mine!==run)return;
    }
    state.options=options;pick();
-  }finally{if(mine===run)busy=false;}
+  }finally{if(mine===run){busy=false;trimGrounds();}}
   showPanel();draw(true);
   // On a phone the steps wait in the Search menu; the map says what was found.
   if(compact()&&state.legs)status('Route: about '+metres(total(state.legs))+'. Directions are in the Search menu.');
@@ -223,9 +229,9 @@
  // Landings are the Teleporter pins named after the spell's arrival point ("Druid Portal", "Wizard Portal Landing").
  async function landings(){
   const want=casts();if(!want.length)return [];
-  const out=[];
-  for(const c of registry.maps){
-   if(!routable(c.id))continue;const d=await mapData(c.id);
+  const out=[],maps=registry.maps.filter(c=>routable(c.id)),all=await Promise.all(maps.map(c=>mapData(c.id).catch(()=>({markers:[]}))));
+  for(const [k,c] of maps.entries()){
+   const d=all[k];
    for(const m of d.markers){
     if(m.category!=='Teleporter')continue;const by=want.find(k=>new RegExp(k+' (portal|ring)','i').test(m.name));
     if(by)out.push({caster:by,place:{map:c.id,id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level}});
@@ -395,13 +401,18 @@
   for(const e of events){e.walk=(pts[e.i].d||0)-last;last=pts[e.i].d||0;e.at=pts[e.i];e.map=mapId;}
   return events;
  }
+ // The one loader shown while a route is worked out: its bar keeps running, its words say what it waits on.
+ function busyNote(){
+  const p=panel?.querySelector('.route-busy .route-note');if(!p)return;
+  p.textContent=loading.size?'Finding the way… loading the routes of '+(loading.size>3?loading.size+' maps':[...loading].map(mapTitle).join(', '))+'.':'Finding the way…';
+ }
  function showPanel(){
   const btn=$('route-open');if(btn)btn.hidden=!routable(config.id);
   if(!panel)return;
   if(!routable(config.id)){closeView();return;}
   fill($('route-from'),'from');fill($('route-to'),'to');
   const opts=panel.querySelector('.route-options-list'),box=panel.querySelector('.route-result');opts.replaceChildren();box.replaceChildren();
-  if(busy){const note=text('div','','route-busy');note.append(text('p',loading.size?'Loading the routes of '+[...loading].map(mapTitle).join(', ')+'…':'Finding the way…','route-note'),text('div','','route-progress'));box.append(note);return;}
+  if(busy){const note=text('div','','route-busy');note.append(text('p','','route-note'),text('div','','route-progress'));box.append(note);busyNote();return;}
   if(!state.from||!state.to)return;
   // Route options, one card each, like a map app's choice of routes.
   for(const [mode,label] of MODES){
