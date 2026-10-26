@@ -59,8 +59,8 @@
  }
  const placeName=p=>p.kind==='spot'?'Spot on '+(entry(p.map)?.levels?levelTitle(p.level,p.map):mapTitle(p.map)):p.name;
  const exitName=l=>'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,''));
- // A camp drawn as an area (mobs flying over a lake) can be reached at its edge when its pin is off the ground.
- const edge=m=>m?.shape?.points?.length>2?{edge:m.shape.points}:{};
+ // How pins join floors and how a camp drawn as an area is reached: shared with the hourly check (route-rules.js).
+ const edge=m=>window.atlasRouteRules.edge(m);
  function places(){
   const exits=(labelData?.labels||[]).filter(l=>l.toMap&&l.kind==='exit').map(l=>({id:l.id,name:exitName(l),x:l.x,y:l.y,level:l.level,reach:260}));
   const pins=allMarkers().filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,...edge(m)}));
@@ -77,14 +77,7 @@
    return !(level&&v&&v[1]!==null&&v[1]<=level-4);
   }).map(m=>({id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,radius:DANGER[m.category][0],weight:DANGER[m.category][1]}));
  }
- // Paired level pins (stairs, ladders, drops, pit traps) also join floors; each pin is the way from its own side.
- function links(markers){
-  const byId=new Map(markers.map(m=>[m.id,m]));
-  const kindOf=m=>m.category==='Trap'?'trap':m.category==='Teleporter'?'teleport':m.category==='Lift'?'lift':/(^| )drop( |$)/i.test(m.name)?'drop':'stairs';
-  const COST={trap:2,teleport:2,lift:6,drop:2,stairs:4};
-  // A pin with no floor to go to is a landing (where a drop or trap arrives), not a way back up.
-  return markers.filter(m=>m.toMarker&&m.toLevel&&!m.toMap&&byId.has(m.toMarker)).map(m=>{const b=byId.get(m.toMarker),kind=kindOf(m);return {id:m.id,name:markerTitle(m),from:{x:m.x,y:m.y,level:m.level},to:{x:b.x,y:b.y,level:b.level},oneWay:true,kind,cost:COST[kind]};});
- }
+ const links=markers=>window.atlasRouteRules.floorLinks(markers,markerTitle);
  // Ways off a map: exit signs, boat docks (every stop of the boat's route), and lifts or teleporters that lead to
  // another map. Boats cost a wait; everything else is a step.
  function ways(d,id){
@@ -483,10 +476,7 @@
    let far=null,fd=0;for(const p of theirs.flatMap(l=>l.result.points.filter(onFloor))){const d=mine.length>1?near(p,mine):Infinity;if(d>fd){fd=d;far=p;}}
    if(fd<20)continue;
    for(const al of theirs){
-    let seg=[];const lines=[];
-    for(const p of al.result.points){if(onFloor(p))seg.push(ll(p));else{if(seg.length>1)lines.push(seg);seg=[];}}
-    if(seg.length>1)lines.push(seg);
-    for(const line of lines){const pl=L.polyline(line,{className:'route-alt'}).addTo(map);pl.on('click',()=>{state.mode=mode;write(MODE_KEY,mode);pick();showPanel();draw();});layers.push(pl);}
+    for(const run of floorRuns(al.result.points,onFloor)){const pl=L.polyline(run.map(ll),{className:'route-alt'}).addTo(map);pl.on('click',()=>{state.mode=mode;write(MODE_KEY,mode);pick();showPanel();draw();});layers.push(pl);}
    }
    const tag=L.tooltip({permanent:true,direction:'center',className:'route-tag alt',interactive:false}).setLatLng(ll(far)).setContent(text('span',label+' · '+metres(total(o.legs))));tag.addTo(map);layers.push(tag);
   }
@@ -527,14 +517,19 @@
   // Where this map's part ends at an exit, a seal carries the route on to the next map.
   if(l.next){const p=pts[pts.length-1];if(onFloor(p)){const m=seal(p,null,false,false,'Continue in '+l.next.title,'→');m.off('click');m.on('click',()=>openNext(l));layers.push(m);}}
  }
+ // The runs of a stretch of route that lie on the floor shown (each break is a step onto another floor).
+ function floorRuns(points,onFloor){
+  const runs=[];let run=[];
+  for(const p of points){if(onFloor(p))run.push(p);else{if(run.length>1)runs.push(run);run=[];}}
+  if(run.length>1)runs.push(run);return runs;
+ }
  // The lit part of the route while a step is pointed at in the list.
  let hotLayers=[];
  function hot(l,from,e){
   for(const x of hotLayers)x.remove();hotLayers=[];
   if(!l||!map||l.map!==config.id)return;
   const here=config.levelId,onFloor=p=>!config.levels||p.level===here,pts=l.result.points.slice(from,e.i+1),ll=p=>locationOf(p);
-  let run=[];const flush=()=>{if(run.length>1)hotLayers.push(L.polyline(run.map(ll),{className:'route-hot',interactive:false}).addTo(map));run=[];};
-  for(const p of pts){if(onFloor(p))run.push(p);else flush();}flush();
+  for(const run of floorRuns(pts,onFloor))hotLayers.push(L.polyline(run.map(ll),{className:'route-hot',interactive:false}).addTo(map));
   if(onFloor(e.at))hotLayers.push(L.marker(ll(e.at),{icon:L.divIcon({className:'route-hot-spot',html:'<span></span>',iconSize:[34,34],iconAnchor:[17,17]}),keyboard:false,interactive:false,zIndexOffset:1000}).addTo(map));
  }
  // Direction arrows every ARROW_GAP screen pixels along the drawn runs, placed again after each zoom.
@@ -581,12 +576,13 @@
   write(LEVEL_KEY,lvl?lvl.slice(1):'');write(TP_KEY,JSON.stringify(CASTERS.filter(c=>bits.includes(c))));write(INVIS_KEY,bits.includes('invisible')?'1':'');
   if(panel){panel.remove();panel=null;build();}
  }
+ const routeCode=()=>endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode();
  // The address bar carries the route on screen (?route=...), so the page's own address can be shared or bookmarked.
  function syncAddress(){
-  if(shared||typeof history==='undefined')return;const u=new URL(location.href),want=beta&&state.from&&state.to?endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode():null;
+  if(shared||typeof history==='undefined')return;const u=new URL(location.href),want=beta&&state.from&&state.to?routeCode():null;
   if((u.searchParams.get('route')||null)===want)return;if(want)u.searchParams.set('route',want);else u.searchParams.delete('route');history.replaceState(history.state,'',u);
  }
- function routeLink(){const url=mapLink(state.from?.map||config.id);url.searchParams.set('route',endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode());return url.href;}
+ function routeLink(){const url=mapLink(state.from?.map||config.id);url.searchParams.set('route',routeCode());return url.href;}
  async function endFrom(code){
   const [mapId,a,b,c]=code.split(':');if(!routable(mapId))return null;
   if(a==='pin'){const d=await mapData(mapId),l=d.labels.find(x=>x.id===b),m=d.markers.find(x=>x.id===b),p=l||m;
@@ -614,7 +610,7 @@
  window.addEventListener('atlas:loaded',async()=>{
   // Back or Forward to an address with another route opens that one (the address is otherwise kept in step).
   const asked=new URL(location.href).searchParams.get('route');
-  if(asked&&!shared&&state.from&&state.to&&asked!==endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode())shared=asked;
+  if(asked&&!shared&&state.from&&state.to&&asked!==routeCode())shared=asked;
   if(!panel)build();showPanel();draw();
   openShared();
   // Route data loads only once someone opens Directions on this map (see openView).
