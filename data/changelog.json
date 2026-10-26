@@ -1,6 +1,15 @@
 {
  "entries": [
   {
+   "date": "2026-10-27",
+   "title": "Tel Ekir, redrawn",
+   "text": "Tel Ekir's tunnels that open straight off the canyon now sit on the canyon map itself, with the rock above them cleared away, and every room on the lower floors shows its way back up. On the world map the canyon now lies deep in the mountains, with dotted trails to Sungreet Strand and the Shaded Dunes.",
+   "maps": [
+    "tel-ekir",
+    "world"
+   ]
+  },
+  {
    "date": "2026-10-26",
    "title": "Directions, in beta",
    "text": "Pick a start and a finish, even on another map, and the atlas charts the way: on foot, swimming, by stairs, lifts and boats, and through druid or wizard teleports if you can cast them. Safer routes keep clear of camps above your level. Open to contributors first, as thanks for charting the maps: if a route goes wrong, send feedback from the Directions panel.",
