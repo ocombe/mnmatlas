@@ -1,6 +1,13 @@
 {
  "entries": [
   {
+   "date": "2026-10-26",
+   "title": "Directions, in beta",
+   "text": "Pick a start and a finish, even on another map, and the atlas charts the way: on foot, swimming, by stairs, lifts and boats, and through druid or wizard teleports if you can cast them. Safer routes keep clear of camps above your level. Open to contributors first, as thanks for charting the maps: if a route goes wrong, send feedback from the Directions panel.",
+   "maps": [],
+   "beta": "directions"
+  },
+  {
    "date": "2026-10-25",
    "title": "More of the wanted, found",
    "text": "Some sixty folk from the Wanted boards now stand on the maps, from the Bends and the Grand Library of Night Harbor to Black Shoals Fortress. Spots charted from travellers’ word wear a dashed ring: seen one right there? Confirm the spot.",

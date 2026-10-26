@@ -13,7 +13,8 @@
  const MODES=[['safer','Safer'],['shorter','Shorter']];
  const entry=id=>registry?.maps.find(c=>c.id===id);
  // Directions is in beta: shown only to signed-in contributors (one approved suggestion or more) and admins.
- let beta=false;
+ // Features in beta this visitor can use; the chronicle hides news about the others.
+ let beta=false;window.atlasBeta=new Set();
  const routable=id=>beta&&!!entry(id)?.routes;
  const mapTitle=id=>entry(id)?.title||id;
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
@@ -262,8 +263,8 @@
   const tp=text('div','','route-teleport');tp.append(text('span','I can teleport as'));
   for(const c of CASTERS){const l=text('label','','route-cast'),b=document.createElement('input');b.type='checkbox';b.value=c;b.checked=casts().includes(c);b.onchange=()=>{write(TP_KEY,JSON.stringify([...tp.querySelectorAll('input:checked')].map(x=>x.value)));compute();};l.append(b,text('span',c));tp.append(l);}
   const iv=text('label','','route-cast'),ib=document.createElement('input');ib.type='checkbox';ib.checked=read(INVIS_KEY)==='1';ib.onchange=()=>{write(INVIS_KEY,ib.checked?'1':'');compute();};iv.append(ib,text('span','I can go invisible'));const ivRow=text('div','','route-teleport');ivRow.append(iv);
-  const fb=text('p','Directions is new. A wrong turn, a missing way, an idea? ','route-hint route-feedback');
-  fb.append(button('Send feedback',()=>window.atlasCommunity?.feedback({title:'Directions feedback',prefix:'Directions: ',suffix:state.from&&state.to?'\n\nRoute: '+routeLink():''}),'route-feedback-link'));
+  const fb=text('div','','route-feedback');
+  fb.append(text('p','Directions is new. A wrong turn, a missing way, an idea?','route-hint'),button('Send feedback',()=>window.atlasCommunity?.feedback({title:'Directions feedback',prefix:'Directions: ',suffix:state.from&&state.to?'\n\nRoute: '+routeLink():''}),'primary route-feedback-button'));
   panel.append(head,fields,lvl,tp,ivRow,hint,fb,text('div','','route-options-list'),text('div','','route-result'));
   journal.querySelector('.journal-heading').after(panel);
  }
@@ -477,7 +478,7 @@
   const c=window.atlasCommunity,uid=c?.userId?.();let ok=false;
   if(uid)ok=!!c.isAdmin?.()||((await c.points?.())?.points||0)>0;
   if(uid!==window.atlasCommunity?.userId?.()||ok===beta)return;
-  beta=ok;if(!beta){state.from=state.to=null;state.options={};state.legs=null;closeView();}
+  beta=ok;window.atlasBeta=new Set(beta?['directions']:[]);window.dispatchEvent(new Event('atlas:beta'));if(!beta){state.from=state.to=null;state.options={};state.legs=null;closeView();}
   showPanel();draw();openShared();
  }
  window.addEventListener('atlas:account',()=>checkBeta().catch(()=>{}));
