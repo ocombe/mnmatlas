@@ -24,7 +24,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-15');
+  worker=new Worker('route-worker.js?v=route-18');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
  }
  // A map's ground, pins and place names, fetched once.
@@ -378,7 +378,7 @@
   if(tp)events.push({i:0,kind:'teleport',title:'Teleport to '+tp.place.name,sub:tp.caster+' spell · '+mapTitle(mapId)});
   else if(isFirst)events.push({i:0,kind:'start',title:placeName(state.from),sub:mapTitle(mapId)});
   for(const c of tidyChanges(r.changes,pts)){const p=pts[c.index-1],up=isUp(c,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
-   events.push({i:c.index-1,kind:up?'up':'down',title:named?(/ to /i.test(named)?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
+   events.push({i:c.index-1,kind:up?'up':'down',title:named?(/ to /i.test(named)||c.from===c.to?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
   for(let k=1;k<pts.length;k++){if(pts[k].swim&&!pts[k-1].swim){let j=k;while(j+1<pts.length&&pts[j+1].swim)j++;const len=pts[j].d-pts[k].d;if(len>=8)events.push({i:k,kind:'swim',title:'Swim about '+metres(len)});}}
   const end=pts.length-1;
   if(l.next)events.push({i:end,kind:l.next.how in ICON?l.next.how:'exit',title:({boat:'Take the boat to ',lift:'Take the lift to ',teleport:'Take the teleporter to '}[l.next.how]||'Take the exit to ')+l.next.title,sub:l.next.how==='boat'?'Check the times on the dock card':'',next:true});

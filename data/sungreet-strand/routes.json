@@ -294,25 +294,25 @@
    "to-grain-cellar": 1374
   },
   "to-tel-ekir": {
-   "to-night-harbor": 2984,
-   "to-glass-flats": 3788,
-   "to-glass-flats-road": 1034,
-   "to-grain-cellar": 2722
+   "to-night-harbor": 2906,
+   "to-glass-flats": 2899,
+   "to-glass-flats-road": 1017,
+   "to-grain-cellar": 2190
   },
   "to-glass-flats": {
    "to-night-harbor": 2761,
    "to-tel-ekir": 3797,
    "to-glass-flats-road": 3712,
-   "to-grain-cellar": 1471
+   "to-grain-cellar": 1473
   },
   "to-glass-flats-road": {
-   "to-night-harbor": 2896,
-   "to-tel-ekir": 1035,
-   "to-glass-flats": 3694,
-   "to-grain-cellar": 2632
+   "to-night-harbor": 2819,
+   "to-tel-ekir": 1034,
+   "to-glass-flats": 2805,
+   "to-grain-cellar": 2101
   },
   "to-grain-cellar": {
-   "to-night-harbor": 1374,
+   "to-night-harbor": 1377,
    "to-tel-ekir": 2723,
    "to-glass-flats": 1475,
    "to-glass-flats-road": 2633
@@ -324,5 +324,6 @@
   "ashira-1-5-2",
   "tunnels-bugs",
   "tunnels-npc"
- ]
+ ],
+ "drop": 21
 }

@@ -126,10 +126,11 @@
    "to-vale-of-zintar": 4587
   },
   "to-vale-of-zintar": {
-   "to-sungreet-strand": 4849,
-   "to-sungreet-strand-road": 4608
+   "to-sungreet-strand": 4092,
+   "to-sungreet-strand-road": 3820
   }
  },
  "betweenKey": "3d9a55ad7a9c6a49",
- "unreached": []
+ "unreached": [],
+ "drop": 21
 }

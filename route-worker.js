@@ -7,7 +7,7 @@ async function load(meta,url,key){
  if(meta.format==='raster'?meta.version!==3:meta.version!==4)throw Error('Route data for this map is out of date.');
  const res=await fetch(url);if(!res.ok)throw Error('Route data could not load.');
  const bytes=new Uint8Array(await new Response(res.body.pipeThrough(new DecompressionStream('deflate'))).arrayBuffer());
- if(meta.format==='raster'){grounds[key]=loadRaster(meta,bytes);return;}
+ if(meta.format==='raster'){grounds[key]=loadRaster(meta,bytes);if(meta.drop>0)drops(grounds[key]);return;}
  const view=new DataView(bytes.buffer),count=view.getUint32(0,true),col=new Uint32Array(count);
  let o=4,c=0;
  for(let i=0;i<count;i++){let v=0,s=0,b;do{b=bytes[o++];v+=(b&127)*2**s;s+=7;}while(b&128);c+=v;col[i]=c;}
@@ -68,6 +68,25 @@ function ok(g,i,j){
 }
 // Each cell's neighbours go into NB (count returned), from the table worked out when the map was built.
 const NB=new Int32Array(16),DX=[1,-1,0,0,1,1,-1,-1],DZ=[0,0,1,-1,1,-1,1,-1];
+// Safe drops on open-ground maps (meta.drop: the highest fall that does no harm, measured in game): from a square to
+// lower ground up to 2 squares away, falling more than a step and at most meta.drop, steeply (no walking down a slope
+// the ground already offers). One way only. Kept as a list per square (dStart/dTo).
+const DROP={name:'Jump down',kind:'drop'};
+function drops(g){
+ const {nx,nz,drop,step,cell}=g.meta,n=g.count,start=new Int32Array(n+1),to=[],off=[];
+ for(let dz=-2;dz<=2;dz++)for(let dx=-2;dx<=2;dx++)if(dx||dz)off.push([dx,dz,Math.sqrt(dx*dx+dz*dz)*cell]);
+ for(let i=0;i<n;i++){
+  start[i]=to.length;
+  // Only a square at an edge (some step out of it closed) can drop; open ground all round has nowhere to fall.
+  if(g.swim[i]||g.steps[i]===255)continue;const c=g.col[i],cx=c%nx,cz=(c-cx)/nx,h=g.h[i];
+  for(const [dx,dz,run] of off){
+   const x=cx+dx,z=cz+dz;if(x<0||z<0||x>=nx||z>=nz)continue;
+   const j=g.first[z*nx+x];if(j<0)continue;const fall=h-g.h[j];
+   if(fall>step&&fall<=drop&&fall>=run)to.push(j);
+  }
+ }
+ start[n]=to.length;g.dStart=start;g.dTo=Int32Array.from(to);
+}
 function neighbours(g,i){
  let n=0;const nx=g.meta.nx,c=g.col[i];
  if(g.steps){const s=g.steps[i];for(let k=0;k<8;k++)if(s>>k&1){const j=g.first[c+DZ[k]*nx+DX[k]];if(j>=0)NB[n++]=j;}return n;}
@@ -173,7 +192,8 @@ function blocks(g){
  }
  // Piece steps: any square step from one piece into another.
  const pairs=new Set();
- for(let i=0;i<g.count;i++){const m=neighbours(g,i),a=piece[i];for(let q=0;q<m;q++){const b=piece[NB[q]];if(b!==a)pairs.add(a*np+b);}}
+ for(let i=0;i<g.count;i++){const m=neighbours(g,i),a=piece[i];for(let q=0;q<m;q++){const b=piece[NB[q]];if(b!==a)pairs.add(a*np+b);}
+  if(g.dStart)for(let q=g.dStart[i];q<g.dStart[i+1];q++){const b=piece[g.dTo[q]];if(b!==a)pairs.add(a*np+b);}}
  const start=new Uint32Array(np+1);for(const p of pairs)start[Math.floor(p/np)+1]++;for(let b=0;b<np;b++)start[b+1]+=start[b];
  const adj=new Int32Array(pairs.size),fill=start.slice(0,np);for(const p of pairs){const a=Math.floor(p/np);adj[fill[a]++]=p-a*np;}
  return g.cg={np,piece,cx:Float64Array.from(cx),cz:Float64Array.from(cz),ch:Float64Array.from(ch),start,adj};
@@ -205,6 +225,8 @@ function search(g,from,to,field,extra,keep,lean,swimCost){
  const n=g.count;
  if(!g.work)g.work={cost:new Float32Array(n),parent:new Int32Array(n),viaOf:new Int32Array(n),mark:new Uint32Array(n),gen:0,heapI:new Int32Array(1<<16),heapF:new Float32Array(1<<16)};
  const w=g.work,gen=w.gen+=2,open=gen,shut=gen+1,{cost,parent,viaOf,mark}=w,via=[],blk=keep?g.cg.piece:null;
+ // On maps with painted roads (flag 8), a step off them counts meta.offroad times its length, so routes keep to roads.
+ const off=g.meta.offroad||1,fl=g.flags;
  let size=0,heapI=w.heapI,heapF=w.heapF;
  const push=(i,f)=>{if(size>=heapI.length){const a=new Int32Array(heapI.length*2),b=new Float32Array(heapI.length*2);a.set(heapI);b.set(heapF);heapI=w.heapI=a;heapF=w.heapF=b;}let k=size++;while(k>0){const p=(k-1)>>1;if(heapF[p]<=f)break;heapI[k]=heapI[p];heapF[k]=heapF[p];k=p;}heapI[k]=i;heapF[k]=f;};
  const pop=()=>{const top=heapI[0],li=heapI[--size],lf=heapF[size];let k=0;for(;;){let c=2*k+1;if(c>=size)break;if(c+1<size&&heapF[c+1]<heapF[c])c++;if(heapF[c]>=lf)break;heapI[k]=heapI[c];heapF[k]=heapF[c];k=c;}heapI[k]=li;heapF[k]=lf;return top;};
@@ -214,8 +236,9 @@ function search(g,from,to,field,extra,keep,lean,swimCost){
   const i=pop();if(mark[i]===shut)continue;mark[i]=shut;if(i===to)break;
   // Neighbours are worked out only for the squares the search reaches.
   const m=neighbours(g,i);
-  for(let q=0;q<m;q++){const j=NB[q];if(keep&&!keep[blk[j]])continue;relax(i,j,cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:1)*(1+(field[i]+field[j])/2),null);}
+  for(let q=0;q<m;q++){const j=NB[q];if(keep&&!keep[blk[j]])continue;relax(i,j,cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:off>1&&!(fl[i]&fl[j]&8)?off:1)*(1+(field[i]+field[j])/2),null);}
   for(const e of extra.get(i)||[])relax(i,e.to,cost[i]+(e.link.cost??4),e.link);
+  if(g.dStart)for(let q=g.dStart[i];q<g.dStart[i+1];q++){const j=g.dTo[q];if(!keep||keep[blk[j]])relax(i,j,cost[i]+dist(g,i,j)+2,DROP);}
  }
  if(mark[to]!==shut)return null;
  const nodes=[],links=[];for(let i=to;i>=0;i=parent[i]){nodes.push(i);links.push(viaOf[i]>=0?via[viaOf[i]]:null);}
@@ -226,6 +249,8 @@ function search(g,from,to,field,extra,keep,lean,swimCost){
 function clear(g,a,b,field){
  if(g.lv[a]!==g.lv[b]||g.swim[a]!==g.swim[b])return false;
  const len=Math.hypot(g.x[b]-g.x[a],g.z[b]-g.z[a]),steps=Math.max(1,Math.ceil(len/(g.meta.cell*.5))),limit=Math.max(field[a],field[b])+.05,below=under(g,a);
+ // A run between two road squares stays on the road (no cutting across the grass at a bend).
+ const road=(g.meta.offroad||1)>1&&g.flags[a]&g.flags[b]&8;
  let prev=a;
  for(let s=1;s<=steps;s++){
   const t=s/steps,x=g.x[a]+(g.x[b]-g.x[a])*t,z=g.z[a]+(g.z[b]-g.z[a])*t,cx=Math.floor((x-g.meta.x0)/g.meta.cell),cz=Math.floor((z-g.meta.z0)/g.meta.cell);
@@ -234,7 +259,7 @@ function clear(g,a,b,field){
   // Each square the straight run crosses must be one step of the route graph from the last, on the same floor.
   let hit=-1,bd=Infinity;
   if(g.col[prev]===c)hit=prev;else{const m=neighbours(g,prev);for(let q=0;q<m;q++){const j=NB[q];if(g.col[j]!==c)continue;const d=Math.abs(g.h[j]-g.h[prev]);if(d<bd){bd=d;hit=j;}}}
-  if(hit<0||g.lv[hit]!==g.lv[a]||field[hit]>limit||under(g,hit)!==below||g.swim[hit]!==g.swim[a])return false;
+  if(hit<0||g.lv[hit]!==g.lv[a]||field[hit]>limit||under(g,hit)!==below||g.swim[hit]!==g.swim[a]||road&&!(g.flags[hit]&8))return false;
   prev=hit;
  }
  return true;

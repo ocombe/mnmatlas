@@ -42,11 +42,11 @@
    "to-tel-ekir": 1322,
    "to-night-harbor": 2115,
    "to-ancient-crypt": 1581,
-   "to-caves-of-irem": 659,
+   "to-caves-of-irem": 630,
    "to-infested-crypt": 953
   },
   "to-night-harbor": {
-   "to-tel-ekir": 1914,
+   "to-tel-ekir": 1910,
    "to-fallen-pass": 2118,
    "to-ancient-crypt": 683,
    "to-caves-of-irem": 1554,
@@ -64,16 +64,17 @@
    "to-fallen-pass": 658,
    "to-night-harbor": 1556,
    "to-ancient-crypt": 1083,
-   "to-infested-crypt": 344
+   "to-infested-crypt": 338
   },
   "to-infested-crypt": {
    "to-tel-ekir": 1097,
    "to-fallen-pass": 954,
    "to-night-harbor": 1490,
    "to-ancient-crypt": 1152,
-   "to-caves-of-irem": 352
+   "to-caves-of-irem": 326
   }
  },
  "betweenKey": "727b19e1e480c7ed",
- "unreached": []
+ "unreached": [],
+ "drop": 21
 }

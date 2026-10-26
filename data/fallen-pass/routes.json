@@ -292,7 +292,7 @@
    "to-fallen-watch": null
   },
   "to-vale-of-zintar": {
-   "to-shaded-dunes": 867,
+   "to-shaded-dunes": 855,
    "to-fallen-watch": null
   },
   "to-fallen-watch": {
@@ -305,5 +305,6 @@
   "humanoid-31-40-2",
   "community-695",
   "community-988"
- ]
+ ],
+ "drop": 21
 }
