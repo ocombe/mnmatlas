@@ -654,8 +654,8 @@ dialog.moved::backdrop{background:#0000001f}
 .route-feedback-button{flex:none;padding:6px 12px;font-size:12px}
 .route-report{justify-self:start;padding:6px 12px;font-size:12px;border:1px solid var(--primary);background:none;color:var(--primary);border-radius:var(--radius);cursor:pointer}
 .route-report:hover,.route-report:focus-visible{background:var(--primary);color:#1e140b}
-.search-box .route-open{flex:none;display:grid;place-items:center;width:30px;height:30px;padding:0;margin-left:2px;border:0;background:none;color:var(--primary);cursor:pointer;border-radius:var(--radius)}
-.search-box .route-open:hover,.search-box .route-open:focus-visible{background:var(--muted);color:#fff0cc}
+.search-box .route-open{flex:none;display:flex;align-items:center;gap:5px;height:28px;padding:0 10px 0 8px;margin:0 2px 0 4px;border:0;background:var(--primary);color:#1e140b;font-size:12px;font-weight:600;cursor:pointer;border-radius:var(--radius);white-space:nowrap}
+.search-box .route-open:hover,.search-box .route-open:focus-visible{background:#e2a052;color:#1e140b}
 .search-box .route-open[hidden]{display:none}
 .route-open-icon{display:grid;place-items:center}
 .route-hint{margin:0;color:var(--muted-foreground);font-size:11px;line-height:1.4}

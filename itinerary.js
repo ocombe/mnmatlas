@@ -251,7 +251,7 @@
  function build(){
   const journal=$('journal'),box=$('search')?.closest('.search-box');if(!journal||!box)return;
   // The Directions button sits in the search field, the way map apps do it.
-  if(!$('route-open')){const b=button('',()=>{openView();showPanel();},'route-open');b.id='route-open';b.title='Directions';b.setAttribute('aria-label','Directions');b.append(icon('directions','route-open-icon'));box.append(b);}
+  if(!$('route-open')){const b=button('',()=>{openView();showPanel();},'route-open');b.id='route-open';b.title='Directions';b.setAttribute('aria-label','Directions');b.append(icon('directions','route-open-icon'),text('span','Directions','route-open-label'));box.append(b);}
   panel=document.createElement('section');panel.className='directions-view';panel.id='route-panel';panel.hidden=true;panel.setAttribute('aria-label','Directions');
   const head=text('div','','directions-head');
   head.append(button('‹ Search',()=>closeView(),'directions-back'),text('h2','Directions','directions-title'),text('span','Beta','directions-beta'));
