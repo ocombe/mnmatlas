@@ -1,125 +1,125 @@
 {
-  "map": "tel-ekir",
-  "tileRevision": "v1",
-  "coordinateZoom": 5,
-  "labels": [
-    {
-      "id": "life-font",
-      "name": "Life Font",
-      "level": "floor-1",
-      "x": 2676,
-      "y": 1292.6,
-      "kind": "district",
-      "priority": 90,
-      "minZoom": 2.5,
-      "approximate": true,
-      "note": ""
-    },
-    {
-      "id": "ashira-camp",
-      "name": "Ashira camp",
-      "level": "floor-1",
-      "x": 2161,
-      "y": 2425.2,
-      "kind": "district",
-      "priority": 80,
-      "minZoom": 2.5,
-      "approximate": true,
-      "note": ""
-    },
-    {
-      "id": "side-ponds",
-      "name": "Side ponds",
-      "level": "floor-1",
-      "x": 1756,
-      "y": 2034.7,
-      "kind": "district",
-      "priority": 70,
-      "minZoom": 2.5,
-      "approximate": true,
-      "note": ""
-    },
-    {
-      "id": "bloodynose-camp",
-      "name": "Bloodynose camp",
-      "level": "floor-1",
-      "x": 3666,
-      "y": 1955.9,
-      "kind": "district",
-      "priority": 85,
-      "minZoom": 2.5,
-      "approximate": true,
-      "note": ""
-    },
-    {
-      "id": "old-gate",
-      "name": "Old gate",
-      "level": "floor-1",
-      "x": 2451,
-      "y": 2564.8,
-      "kind": "district",
-      "priority": 70,
-      "minZoom": 2.5,
-      "approximate": true,
-      "note": ""
-    },
-    {
-      "id": "hin-adaru",
-      "name": "Hin Adaru",
-      "level": "floor-2",
-      "x": 2991,
-      "y": 1752.9,
-      "kind": "district",
-      "priority": 85,
-      "minZoom": 2.5,
-      "approximate": true,
-      "note": ""
-    },
-    {
-      "id": "to-sungreet-strand",
-      "name": "to Sungreet Strand",
-      "level": "floor-1",
-      "x": 4463.5,
-      "y": 2016.7,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "east",
-      "approximate": true,
-      "note": "The east gate building; its far half stands in Sungreet Strand.",
-      "toMap": "sungreet-strand",
-      "toPlace": "to-tel-ekir"
-    },
-    {
-      "id": "to-shaded-dunes",
-      "name": "to Shaded Dunes",
-      "level": "floor-1",
-      "x": 2340,
-      "y": 3292,
-      "kind": "exit",
-      "priority": 95,
-      "minZoom": 1.5,
-      "arrow": "south",
-      "approximate": true,
-      "note": "South end of the canyon.",
-      "toMap": "shaded-dunes",
-      "toPlace": "to-tel-ekir",
-      "community": true
-    }
-  ],
-  "trainers": [],
-  "attribution": {
-    "scope": "Names and positions only",
+ "map": "tel-ekir",
+ "tileRevision": "v2",
+ "coordinateZoom": 5,
+ "labels": [
+  {
+   "id": "life-font",
+   "name": "Life Font",
+   "level": "floor-1",
+   "x": 2676,
+   "y": 2292.6,
+   "kind": "district",
+   "priority": 90,
+   "minZoom": 2.5,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "ashira-camp",
+   "name": "Ashira camp",
+   "level": "floor-1",
+   "x": 2161,
+   "y": 3425.2,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2.5,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "side-ponds",
+   "name": "Side ponds",
+   "level": "floor-1",
+   "x": 1756,
+   "y": 3034.7,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "bloodynose-camp",
+   "name": "Bloodynose camp",
+   "level": "floor-1",
+   "x": 3666,
+   "y": 2955.9,
+   "kind": "district",
+   "priority": 85,
+   "minZoom": 2.5,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "old-gate",
+   "name": "Old gate",
+   "level": "floor-1",
+   "x": 2451,
+   "y": 3564.8,
+   "kind": "district",
+   "priority": 70,
+   "minZoom": 2.5,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "hin-adaru",
+   "name": "Hin Adaru",
+   "level": "floor-2",
+   "x": 2991,
+   "y": 2752.9,
+   "kind": "district",
+   "priority": 85,
+   "minZoom": 2.5,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "to-sungreet-strand",
+   "name": "to Sungreet Strand",
+   "level": "floor-1",
+   "x": 4463.5,
+   "y": 3016.7,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "east",
+   "approximate": true,
+   "note": "The east gate building; its far half stands in Sungreet Strand.",
+   "toMap": "sungreet-strand",
+   "toPlace": "to-tel-ekir"
+  },
+  {
+   "id": "to-shaded-dunes",
+   "name": "to Shaded Dunes",
+   "level": "floor-1",
+   "x": 2340,
+   "y": 4292,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1.5,
+   "arrow": "south",
+   "approximate": true,
+   "note": "South end of the canyon.",
+   "toMap": "shaded-dunes",
+   "toPlace": "to-tel-ekir",
+   "community": true
+  }
+ ],
+ "trainers": [],
+ "attribution": {
+  "scope": "Names and positions only",
+  "license": "CC BY-SA 4.0",
+  "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
+  "sources": [
+   {
+    "sourceTitle": "Map by chazsolo",
+    "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Tel-ekir-isometric.jpg",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-    "sources": [
-      {
-        "sourceTitle": "Map by chazsolo",
-        "sourceUrl": "https://monstersandmemories.miraheze.org/wiki/File:Tel-ekir-isometric.jpg",
-        "license": "CC BY-SA 4.0",
-        "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/",
-        "scope": "Names and positions only"
-      }
-    ]
-  }
+    "scope": "Names and positions only"
+   }
+  ]
+ }
 }
