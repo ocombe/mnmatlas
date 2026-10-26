@@ -9,7 +9,7 @@ import '../marker-schema.js';
 const root=resolve(dirname(fileURLToPath(import.meta.url)),'..'),site='https://www.mnmatlas.com/';
 const html=value=>String(value).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;').replace(/"/g,'&quot;');
 // Bump a map's card version after redrawing its card so link previews refresh.
-const cardVersions={'world':3,'sungreet-strand':2,'night-harbor':2,'faelindral':2};
+const cardVersions={'world':4,'sungreet-strand':2,'night-harbor':2,'faelindral':2};
 const registry=JSON.parse(await readFile(resolve(root,'data/maps.json'),'utf8'));
 // ?find=<text> looks names up here (find.js): every marker and place name of every map, with its level, wiki id and trainer classes.
 {const index=[],files=(m,key)=>[...new Set([m[key],...(m.levels||[]).map(l=>l[key])].filter(Boolean))];

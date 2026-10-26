@@ -102,8 +102,8 @@
   {
    "id": "zone-tel-ekir",
    "name": "Tel Ekir",
-   "x": 2134,
-   "y": 1640,
+   "x": 1980,
+   "y": 1830,
    "kind": "zone",
    "priority": 60,
    "toMap": "tel-ekir"
