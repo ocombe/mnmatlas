@@ -696,5 +696,14 @@
         ]
       ]
     }
+  },
+  {
+    "id": "druid-portal",
+    "name": "Druid Portal",
+    "category": "Teleporter",
+    "note": "Druids and their group mates arrive here by teleport spell, inside the ring of blue mushrooms by the giant Skycap.",
+    "x": 3488,
+    "y": 4085,
+    "travel": "Teleporter"
   }
 ]
