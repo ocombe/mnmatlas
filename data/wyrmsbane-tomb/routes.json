@@ -61,5 +61,14 @@
   "exit-ancient-crypt": {
    "exit-night-harbor": null
   }
- }
+ },
+ "betweenKey": "08c29f2fcb3a9093",
+ "unreached": [
+  "nav-2292-from",
+  "nav-3118-from",
+  "cave-slope-3-4-0-from",
+  "cave-slope-3-4-0-to",
+  "cave-slope-4-5-0-from",
+  "cave-slope-4-5-0-to"
+ ]
 }

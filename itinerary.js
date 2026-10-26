@@ -261,6 +261,56 @@
   if(routable(config.id))ensureGround(config.id).catch(()=>{});
  }
  function closeView(){$('journal')?.classList.remove('directions-mode');if(panel)panel.hidden=true;}
+ // A start or finish box, like a map app's: type to search every map's places and zones; an empty box lists this
+ // map's entrances and places, and the zones, each opening onto its own entrances and places.
+ let findIndex=null;
+ const findRows=()=>findIndex||(findIndex=fetch('data/find-index.json').then(r=>r.ok?r.json():[]).catch(()=>[]).then(rows=>Array.isArray(rows)?rows.filter(e=>e&&routable(e.m)&&typeof e.n==='string'):[]));
+ const fold=v=>String(v??'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’‘`]/g,"'").toLowerCase().trim();
+ async function zonePlaces(id){
+  const d=await mapData(id),levels=entry(id)?.levels;
+  const exits=d.labels.filter(l=>l.toMap&&l.kind==='exit').map(l=>({map:id,id:l.id,name:'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,'')),x:l.x,y:l.y,level:l.level,reach:260,sub:'Entrance'}));
+  const pins=d.markers.filter(m=>Number.isFinite(m.x)&&Number.isFinite(m.y)&&m.name).map(m=>({map:id,id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,...edge(m),sub:[m.category,levels&&m.level?levelTitle(m.level,id):''].filter(Boolean).join(' · ')}));
+  return {exits,pins:pins.sort((a,b)=>a.name.localeCompare(b.name))};
+ }
+ function picker(which,label){
+  const box=text('div','','route-pick'),input=document.createElement('input'),list=text('div','','route-suggest');
+  input.type='search';input.id='route-'+which;input.autocomplete='off';input.spellcheck=false;input.placeholder=which==='from'?'Choose a start':'Choose a finish';
+  input.setAttribute('aria-label',label);input.setAttribute('role','combobox');input.setAttribute('aria-expanded','false');list.hidden=true;list.setAttribute('role','listbox');
+  box.append(input,list);let zone=null,serial=0,active=-1;
+  const close=()=>{list.hidden=true;input.setAttribute('aria-expanded','false');zone=null;active=-1;};
+  const choose=async place=>{close();input.blur();if(!place)return;const {sub,...p}=place;state[which]=p;state.options={};state.legs=null;fill(input,which);compute();};
+  const head=t=>list.append(text('div',t,'route-suggest-head'));
+  const item=(name,sub,run,cls='')=>{const b=button('',run,'route-suggest-item'+cls);b.setAttribute('role','option');b.tabIndex=-1;b.append(text('span',name,'route-suggest-name'));if(sub)b.append(text('span',sub,'route-suggest-sub'));b.onmousedown=e=>e.preventDefault();list.append(b);return b;};
+  const zoneItem=id=>item(mapTitle(id)+' ›',id===config.id?'This map':'Zone',()=>{zone=id;show();},' zone');
+  async function show(){
+   const ticket=++serial,q=fold(input.value);list.replaceChildren();active=-1;
+   if(zone){
+    const z=zone;item('‹ All zones','',()=>{zone=null;input.focus();show();},' back');const {exits,pins}=await zonePlaces(z);if(ticket!==serial)return;
+    head(mapTitle(z));for(const e of exits)item(e.name,e.sub,()=>choose(e));for(const m of pins)if(!q||fold(m.name).includes(q))item(m.name,m.sub,()=>choose(m));
+   }else if(q.length<2){
+    const zones=(registry?.maps||[]).filter(m=>m.routes&&!m.hidden).map(m=>m.id);
+    if(routable(config.id)){head('On this map');zoneItem(config.id);}
+    head('Zones');for(const id of zones.filter(id=>id!==config.id).sort((a,b)=>mapTitle(a).localeCompare(mapTitle(b))))zoneItem(id);
+   }else{
+    const zones=(registry?.maps||[]).filter(m=>m.routes&&(fold(m.title).includes(q)||q.includes(fold(m.title)))).map(m=>m.id);
+    if(zones.length){head('Zones');for(const id of zones)zoneItem(id);}
+    const rows=await findRows();if(ticket!==serial)return;
+    // Every word typed must be in the place's name or its zone's ("bank night harbor").
+    const words=q.split(/\s+/),hits=rows.filter(e=>{const t=fold(e.n+' '+mapTitle(e.m)+' '+(e.k||''));return words.every(w=>t.includes(w));}).sort((a,b)=>(b.m===config.id)-(a.m===config.id)||(fold(b.n).startsWith(q))-(fold(a.n).startsWith(q))||a.n.localeCompare(b.n)).slice(0,40);
+    if(hits.length)head('Places');
+    for(const e of hits)item(e.n,[e.k,mapTitle(e.m)+(e.l&&entry(e.m)?.levels?' · '+levelTitle(e.l,e.m):'')].filter(Boolean).join(' · '),async()=>{const p=await endFrom(e.m+':pin:'+e.p);choose(p);});
+    if(!zones.length&&!hits.length)list.append(text('p','No place or zone by that name.','route-suggest-none'));
+   }
+   list.hidden=false;input.setAttribute('aria-expanded','true');
+  }
+  const move=d=>{const items=[...list.querySelectorAll('.route-suggest-item')];if(!items.length)return;active=(active+d+items.length)%items.length;items.forEach((b,i)=>b.classList.toggle('active',i===active));items[active].scrollIntoView({block:'nearest'});};
+  input.onfocus=()=>{input.select();show();};input.oninput=()=>show();
+  input.onkeydown=e=>{if(e.key==='ArrowDown'){e.preventDefault();if(list.hidden)show();else move(1);}else if(e.key==='ArrowUp'){e.preventDefault();move(-1);}
+   else if(e.key==='Enter'){const items=[...list.querySelectorAll('.route-suggest-item')];const b=items[active>=0?active:0];if(b){e.preventDefault();b.click();}}
+   else if(e.key==='Escape'){close();input.blur();}};
+  input.onblur=()=>setTimeout(()=>{if(document.activeElement!==input){close();fill(input,which);}},150);
+  return box;
+ }
  function build(){
   const journal=$('journal'),box=$('search')?.closest('.search-box');if(!journal||!box)return;
   // The Directions button sits in the search field, the way map apps do it.
@@ -268,11 +318,11 @@
   panel=document.createElement('section');panel.className='directions-view';panel.id='route-panel';panel.hidden=true;panel.setAttribute('aria-label','Directions');
   const head=text('div','','directions-head');
   head.append(button('‹ Search',()=>closeView(),'directions-back'),text('h2','Directions','directions-title'),text('span','Beta','directions-beta'));
-  const row=(which,label)=>{const l=text('label','','route-field route-field-'+which);l.append(icon(which==='from'?'start':'arrive','route-end-icon'));const s=document.createElement('select');s.id='route-'+which;s.setAttribute('aria-label',label);s.onchange=()=>{const v=s.value;if(v==='keep')return;const p=findPlace(v);state[which]=p?{...p,map:config.id}:null;compute();};l.append(s);return l;};
+  const row=(which,label)=>{const l=text('div','','route-field route-field-'+which);l.append(icon(which==='from'?'start':'arrive','route-end-icon'),picker(which,label));return l;};
   const swap=button('⇅',()=>{[state.from,state.to]=[state.to,state.from];compute();},'route-swap');swap.title='Swap start and finish';swap.setAttribute('aria-label','Swap start and finish');
   const fields=text('div','','route-fields');fields.append(row('from','Start'),row('to','Finish'),swap);
   const lvl=text('label','','route-level');lvl.append(text('span','Your level'));const input=document.createElement('input');input.type='number';input.min='1';input.max='99';input.inputMode='numeric';input.placeholder='Any';input.value=read(LEVEL_KEY)||'';input.onchange=()=>{write(LEVEL_KEY,input.value?String(Math.max(1,Math.min(99,Math.round(+input.value)))):'');input.value=read(LEVEL_KEY)||'';compute();};lvl.append(input);
-  const hint=text('p','Pick a start and a finish here, right-click (long-press) the map, or use Directions on a card. The finish can be on another map; a druid or wizard teleport is used when it saves time.','route-hint');
+  const hint=text('p','Type a place or a zone, on any map, or open a zone to pick from its list. You can also right-click (long-press) the map or use Directions on a card. A druid or wizard teleport is used when it saves time.','route-hint');
   const tp=text('div','','route-teleport');tp.append(text('span','I can teleport as'));
   for(const c of CASTERS){const l=text('label','','route-cast'),b=document.createElement('input');b.type='checkbox';b.value=c;b.checked=casts().includes(c);b.onchange=()=>{write(TP_KEY,JSON.stringify([...tp.querySelectorAll('input:checked')].map(x=>x.value)));compute();};l.append(b,text('span',c));tp.append(l);}
   const iv=text('label','','route-cast'),ib=document.createElement('input');ib.type='checkbox';ib.checked=read(INVIS_KEY)==='1';ib.onchange=()=>{write(INVIS_KEY,ib.checked?'1':'');compute();};iv.append(ib,text('span','I can go invisible'));const ivRow=text('div','','route-teleport');ivRow.append(iv);
@@ -281,16 +331,9 @@
   panel.append(head,fields,lvl,tp,ivRow,hint,fb,text('div','','route-options-list'),text('div','','route-result'));
   journal.querySelector('.journal-heading').after(panel);
  }
- function fill(select,which){
-  const current=state[which];select.replaceChildren();
-  const {exits,pins}=places(),az=(a,b)=>a.name.localeCompare(b.name);
-  const first=text('option',which==='from'?'Choose a start':'Choose a finish');first.value='';select.append(first);
-  const elsewhere=current&&current.map!==config.id;
-  if(current&&(current.kind==='spot'||elsewhere)){const o=text('option',placeName(current)+(elsewhere?' ('+mapTitle(current.map)+')':''));o.value='keep';select.append(o);}
-  const group=(label,list)=>{if(!list.length)return;const g=document.createElement('optgroup');g.label=label;for(const p of list.sort(az)){const o=text('option',p.name);o.value=p.id;g.append(o);}select.append(g);};
-  group('Entrances',exits);
-  for(const l of config.levels||[{id:undefined,title:'Places'}])group(l.title,pins.filter(p=>(p.level||undefined)===l.id||!config.levels));
-  select.value=!current?'':current.kind==='spot'||elsewhere?'keep':current.id;
+ function fill(input,which){
+  if(!input||document.activeElement===input)return;const c=state[which];
+  input.value=c?placeName(c)+(c.map!==config.id?' · '+mapTitle(c.map):''):'';
  }
  function findPlace(id){const {exits,pins}=places();return [...exits,...pins].find(p=>p.id===id)||null;}
  // The steps of one map's part: floor changes, swims, and the way on to the next map, each with the distance

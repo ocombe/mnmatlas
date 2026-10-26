@@ -42,6 +42,13 @@ jobs:
         run: |
           if [ -z "$SUPABASE_SERVICE_KEY" ]; then echo "::error::Add the SUPABASE_SERVICE_KEY repository secret first."; exit 1; fi
           if [ "$DRY_RUN" = "true" ]; then node scripts/apply-approved.mjs --dry-run; else node scripts/apply-approved.mjs; fi
+      # Directions: walks between exits and the reach check, for the maps whose signs, exits, floor links or pins
+      # changed. A pin newly out of reach shows as a warning on this run.
+      # It never holds back the approvals: if it fails, the job goes on and says so.
+      - name: Update Directions for changed maps
+        if: ${{ success() && inputs.dry_run != true }}
+        continue-on-error: true
+        run: node scripts/route-refresh.mjs
       - name: Save and publish the changes
         id: save
         if: ${{ success() && inputs.dry_run != true }}
@@ -63,6 +70,7 @@ jobs:
             git fetch origin main
             git reset --hard origin/main
             node scripts/apply-approved.mjs
+            node scripts/route-refresh.mjs || echo '::warning::Directions could not be updated on this run.'
             save
             git push origin HEAD:main
           fi

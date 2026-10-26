@@ -28,5 +28,10 @@
  "oneWayExits": [],
  "closedEntries": [],
  "joins": [],
- "between": {}
+ "between": {},
+ "betweenKey": "39385885d06c3e41",
+ "unreached": [
+  "community-1097",
+  "community-1098"
+ ]
 }

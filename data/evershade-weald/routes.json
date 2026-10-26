@@ -60,7 +60,7 @@
   "to-blacktide-bay-boulder": {
    "to-glinting-hollow": 1338,
    "to-keepers-bight": 442,
-   "travelers-lift": 788,
+   "travelers-lift": 803,
    "keepers-lift": null,
    "pixie-lift": 1094,
    "south-stairway": null,
@@ -187,5 +187,24 @@
    "river-bridge-west": null,
    "river-bridge-east": null
   }
- }
+ },
+ "betweenKey": "dfe418865bc14f9a",
+ "unreached": [
+  "taeresh-deathcharmer",
+  "mistress-naelira",
+  "community-133",
+  "community-311",
+  "community-315",
+  "community-359",
+  "community-424",
+  "community-427",
+  "community-894",
+  "community-895",
+  "community-899",
+  "community-900",
+  "community-901",
+  "community-902",
+  "community-905",
+  "community-903"
+ ]
 }

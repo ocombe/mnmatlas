@@ -32,46 +32,48 @@
  "joins": [],
  "between": {
   "to-keepers-bight": {
-   "to-vale-of-zintar": 4418,
-   "to-fallen-pass": 6622,
-   "to-grimtide-sanctum": 1244,
-   "boat-zaedins-landing": 4247,
-   "boat-player-island": 4229
+   "to-vale-of-zintar": 4422,
+   "to-fallen-pass": 6620,
+   "to-grimtide-sanctum": 1261,
+   "boat-zaedins-landing": 3637,
+   "boat-player-island": 4303
   },
   "to-vale-of-zintar": {
    "to-keepers-bight": 4422,
-   "to-fallen-pass": 2465,
-   "to-grimtide-sanctum": 3398,
-   "boat-zaedins-landing": 3528,
-   "boat-player-island": 1599
+   "to-fallen-pass": 2368,
+   "to-grimtide-sanctum": 3386,
+   "boat-zaedins-landing": 3483,
+   "boat-player-island": 1569
   },
   "to-fallen-pass": {
-   "to-keepers-bight": 6782,
-   "to-vale-of-zintar": 2424,
-   "to-grimtide-sanctum": 5532,
-   "boat-zaedins-landing": 4268,
-   "boat-player-island": 2364
+   "to-keepers-bight": 6543,
+   "to-vale-of-zintar": 2359,
+   "to-grimtide-sanctum": 5342,
+   "boat-zaedins-landing": 4110,
+   "boat-player-island": 2345
   },
   "to-grimtide-sanctum": {
-   "to-keepers-bight": 1264,
-   "to-vale-of-zintar": 3403,
-   "to-fallen-pass": 5418,
-   "boat-zaedins-landing": 3002,
-   "boat-player-island": 3045
+   "to-keepers-bight": 1216,
+   "to-vale-of-zintar": 3390,
+   "to-fallen-pass": 5364,
+   "boat-zaedins-landing": 3009,
+   "boat-player-island": 3043
   },
   "boat-zaedins-landing": {
-   "to-keepers-bight": 4607,
-   "to-vale-of-zintar": 3617,
-   "to-fallen-pass": 4213,
-   "to-grimtide-sanctum": 3458,
-   "boat-player-island": 2488
+   "to-keepers-bight": 3660,
+   "to-vale-of-zintar": 3636,
+   "to-fallen-pass": 4137,
+   "to-grimtide-sanctum": 3066,
+   "boat-player-island": 2083
   },
   "boat-player-island": {
-   "to-keepers-bight": 4223,
-   "to-vale-of-zintar": 1564,
-   "to-fallen-pass": 2420,
-   "to-grimtide-sanctum": 2975,
-   "boat-zaedins-landing": 2064
+   "to-keepers-bight": 4253,
+   "to-vale-of-zintar": 1562,
+   "to-fallen-pass": 2367,
+   "to-grimtide-sanctum": 3038,
+   "boat-zaedins-landing": 2076
   }
- }
+ },
+ "betweenKey": "1f58442025eefcd4",
+ "unreached": []
 }
