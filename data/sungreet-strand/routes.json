@@ -1,4 +1,5 @@
 {
+ "drop": 21,
  "version": 3,
  "format": "raster",
  "file": "data/sungreet-strand/ground.bin",
@@ -60,6 +61,23 @@
    "to": {
     "x": 2607.3,
     "y": 2336.6,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2697.3,
+    "y": 4343.5,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2745.3,
+    "y": 4290.4,
     "level": "ground",
     "exact": true
    }
@@ -288,34 +306,34 @@
  ],
  "between": {
   "to-night-harbor": {
-   "to-tel-ekir": 3032,
-   "to-glass-flats": 2762,
-   "to-glass-flats-road": 2934,
-   "to-grain-cellar": 1379
+   "to-tel-ekir": 3216,
+   "to-glass-flats": 2827,
+   "to-glass-flats-road": 3079,
+   "to-grain-cellar": 1448
   },
   "to-tel-ekir": {
-   "to-night-harbor": 2921,
-   "to-glass-flats": 2900,
-   "to-glass-flats-road": 1017,
-   "to-grain-cellar": 2192
+   "to-night-harbor": 3149,
+   "to-glass-flats": 3096,
+   "to-glass-flats-road": 1102,
+   "to-grain-cellar": 2338
   },
   "to-glass-flats": {
-   "to-night-harbor": 2754,
-   "to-tel-ekir": 3798,
-   "to-glass-flats-road": 3710,
-   "to-grain-cellar": 1473
+   "to-night-harbor": 2806,
+   "to-tel-ekir": 3983,
+   "to-glass-flats-road": 3880,
+   "to-grain-cellar": 1588
   },
   "to-glass-flats-road": {
-   "to-night-harbor": 2834,
-   "to-tel-ekir": 1034,
-   "to-glass-flats": 2807,
-   "to-grain-cellar": 2103
+   "to-night-harbor": 3052,
+   "to-tel-ekir": 1114,
+   "to-glass-flats": 2997,
+   "to-grain-cellar": 2241
   },
   "to-grain-cellar": {
-   "to-night-harbor": 1378,
-   "to-tel-ekir": 2723,
-   "to-glass-flats": 1479,
-   "to-glass-flats-road": 2633
+   "to-night-harbor": 1461,
+   "to-tel-ekir": 2890,
+   "to-glass-flats": 1578,
+   "to-glass-flats-road": 2787
   }
  },
  "betweenKey": "0822512947-2061386271",
@@ -324,6 +342,5 @@
   "ashira-1-5-2",
   "tunnels-bugs",
   "tunnels-npc"
- ],
- "drop": 21
+ ]
 }

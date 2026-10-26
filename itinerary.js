@@ -26,7 +26,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-19');
+  worker=new Worker('route-worker.js?v=route-21');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
   // A worker that fails (out of memory on a phone) lets everything waiting on it know, and the next request starts a new one.
   worker.onerror=worker.onmessageerror=()=>{for(const p of pending.values())p.reject(Error('Route finding stopped. Please try again.'));pending.clear();loaded.clear();worker?.terminate();worker=null;};
@@ -128,7 +128,7 @@
   const l=d.labels.find(x=>x.id===place),m=!l&&d.markers.find(x=>x.id===place),back=!l&&!m&&d.labels.find(x=>x.toMap===hop.from);
   const p=l||m||back;if(!p)return null;
   // A lift, stair or bridge pin is taken exactly where it stands (it may land on a ledge cut off from the map's entrances).
-  return {map:hop.to,name:l||back?exitName(p):markerTitle(p),x:p.x,y:p.y,level:p.level,reach:m?90:260,exact:!!m,kind:'exit',id:p.id};
+  return {map:hop.to,name:l||back?exitName(p):markerTitle(p),x:p.x,y:p.y,level:p.level,reach:m?90:260,exact:!!m,kind:'exit',id:p.id,...(hop.exit.how==='boat'?{dry:true}:{})};
  }
  async function leg(mapId,from,to,mode){
   const d=await ensureGround(mapId),list=dangers(d.markers);
@@ -163,7 +163,7 @@
    if(!hops){if(one)return [one];throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');}
    const legs=[];let start=from,key=from.map+'|',failed=false;
    for(const hop of hops){
-    const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:hop.exit.pin?90:260,exact:hop.exit.pin,kind:'exit'},land=await arrival(hop);
+    const out={map:hop.from,name:hop.exit.name,x:hop.exit.x,y:hop.exit.y,level:hop.exit.level,reach:hop.exit.pin?90:260,exact:hop.exit.pin,kind:'exit',...(hop.exit.how==='boat'?{dry:true}:{})},land=await arrival(hop);
     if(!land)throw Error('The way into '+mapTitle(hop.to)+' is not marked yet.');
     const l=await leg(hop.from,start,out,mode);
     if(l.result.error){banned.add(key+'>'+hop.exit.id);failed=true;break;}
@@ -307,7 +307,9 @@
    const ticket=++serial,q=fold(input.value);list.replaceChildren();active=-1;input.removeAttribute('aria-activedescendant');
    if(zone){
     const z=zone;item('‹ All zones','',()=>{zone=null;input.focus();show();},' back');const {exits,pins}=await zonePlaces(z);if(ticket!==serial)return;
-    head(mapTitle(z));for(const e of exits)item(e.name,e.sub,()=>choose(e));for(const m of pins)if(!q||fuzzy(q,m.name+' '+m.sub))item(m.name,m.sub,()=>choose(m));
+    // The zone's name may be in what was typed ("night harbor bank"): it matches every place of the zone.
+    const match=x=>!q||fuzzy(q,x.name+' '+(x.sub||'')+' '+mapTitle(z));
+    head(mapTitle(z));for(const e of exits)if(match(e))item(e.name,e.sub,()=>choose(e));for(const m of pins)if(match(m))item(m.name,m.sub,()=>choose(m));
    }else if(q.length<2){
     const zones=(registry?.maps||[]).filter(m=>m.routes&&!m.hidden).map(m=>m.id);
     if(routable(config.id)){head('On this map');zoneItem(config.id);}

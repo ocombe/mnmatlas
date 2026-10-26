@@ -1,6 +1,6 @@
 // Keeps Directions in step with the published pins, after community changes are applied.
 // For each map with routes it works out, with the site's own route finder (route-worker.js):
-// - the walking distances between the signs and pins that lead to another map ("between" in data/<map>/routes.json),
+// - the walking cost between the signs and pins that lead to another map ("between" in data/<map>/routes.json),
 //   which the site uses to choose a way across several maps;
 // - a reach check: from the map's first entrance to every pin and back. The pins no route reaches are kept in
 //   routes.json ("unreached"); a pin newly in that list is reported (a GitHub warning in the job, and
@@ -26,8 +26,8 @@ for(const reg of maps){
  const map=reg.id,file=path.join(site,`data/${map}/routes.json`);if(!fs.existsSync(file))continue;
  const meta=JSON.parse(fs.readFileSync(file,'utf8')),markers=read(reg.markersFile),labels=(read(reg.labelsFile).labels||[]).filter(l=>(l.map||map)===map);
  const links=floorLinks(markers);
- // Signs snap within 260 px; lift and stair pins that lead to another map are taken exactly where they stand.
- const doors=[...labels.filter(l=>l.toMap||Array.isArray(l.route)).map(p=>({id:p.id,x:p.x,y:p.y,level:p.level,reach:260})),...markers.filter(m=>m.toMap&&Number.isFinite(m.x)).map(p=>({id:p.id,x:p.x,y:p.y,level:p.level,reach:90,exact:true}))];
+ // Signs snap within 260 px (a boat dock to its pier, not the water); lift and stair pins that lead to another map are taken exactly where they stand.
+ const doors=[...labels.filter(l=>l.toMap||Array.isArray(l.route)).map(p=>({id:p.id,x:p.x,y:p.y,level:p.level,reach:260,...(Array.isArray(p.route)?{dry:true}:{})})),...markers.filter(m=>m.toMap&&Number.isFinite(m.x)).map(p=>({id:p.id,x:p.x,y:p.y,level:p.level,reach:90,exact:true}))];
  const pins=markers.filter(m=>Number.isFinite(m.x)).map(m=>({id:m.id,name:m.name,x:m.x,y:m.y,level:m.level,...edge(m)}));
  const key=stamp(JSON.stringify([meta.file,doors,links,pins.map(p=>[p.id,p.x,p.y,p.level,p.edge||null])]));
  if(!force&&meta.betweenKey===key)continue;
@@ -36,7 +36,9 @@ for(const reg of maps){
  for(const a of doors)for(const b of doors){
   if(a===b)continue;const r=await route(a,b,links);
   // null: no walk between them on this map (the site then looks for a way through other maps).
-  (between[a.id]??={})[b.id]=r.error?null:Math.round(r.length);
+  // The finder's cost (swims and off-road stretches weighted as it weighs them), so a chain of maps is chosen the way a
+  // single route would be: a sign reached only by a long swim loses to one reached by road.
+  (between[a.id]??={})[b.id]=r.error?null:Math.round(r.cost??r.length);
  }
  // Reach check from the first entrance (a sign, or else a pin leading to another map).
  let exits=labels.filter(l=>l.toMap&&(l.kind==='exit'||l.route));if(!exits.length)exits=markers.filter(m=>m.toMap&&Number.isFinite(m.x));

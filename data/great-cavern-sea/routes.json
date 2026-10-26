@@ -1,4 +1,5 @@
 {
+ "drop": 21,
  "version": 3,
  "format": "raster",
  "file": "data/great-cavern-sea/ground.bin",
@@ -84,14 +85,14 @@
  ],
  "between": {
   "to-caves-of-irem": {
-   "to-ail-vorith": 4994,
+   "to-ail-vorith": 11527,
    "to-rothold": null,
-   "to-blind-midden": 3873
+   "to-blind-midden": 9550
   },
   "to-ail-vorith": {
-   "to-caves-of-irem": 5053,
+   "to-caves-of-irem": 11512,
    "to-rothold": null,
-   "to-blind-midden": 1197
+   "to-blind-midden": 1998
   },
   "to-rothold": {
    "to-caves-of-irem": null,
@@ -99,12 +100,11 @@
    "to-blind-midden": null
   },
   "to-blind-midden": {
-   "to-caves-of-irem": 3916,
-   "to-ail-vorith": 1206,
+   "to-caves-of-irem": 9537,
+   "to-ail-vorith": 1996,
    "to-rothold": null
   }
  },
  "betweenKey": "2978437983-1938132139",
- "unreached": [],
- "drop": 21
+ "unreached": []
 }

@@ -52,16 +52,16 @@
  ],
  "between": {
   "exit-wyrmsbane-tomb": {
-   "exit-shaded-dunes": 203,
-   "exit-caves-of-irem": 162
+   "exit-shaded-dunes": 219,
+   "exit-caves-of-irem": 172
   },
   "exit-shaded-dunes": {
-   "exit-wyrmsbane-tomb": 203,
-   "exit-caves-of-irem": 157
+   "exit-wyrmsbane-tomb": 219,
+   "exit-caves-of-irem": 165
   },
   "exit-caves-of-irem": {
-   "exit-wyrmsbane-tomb": 164,
-   "exit-shaded-dunes": 163
+   "exit-wyrmsbane-tomb": 175,
+   "exit-shaded-dunes": 167
   }
  },
  "betweenKey": "4006833189-1698855961",

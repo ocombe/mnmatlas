@@ -1,4 +1,5 @@
 {
+ "drop": 21,
  "version": 3,
  "format": "raster",
  "file": "data/scarwood/ground.bin",
@@ -32,13 +33,12 @@
  "joins": [],
  "between": {
   "to-keepers-bight": {
-   "to-sunken-resort": 1578
+   "to-sunken-resort": 2920
   },
   "to-sunken-resort": {
-   "to-keepers-bight": 1564
+   "to-keepers-bight": 2912
   }
  },
  "betweenKey": "1802789605-1626484745",
- "unreached": [],
- "drop": 21
+ "unreached": []
 }

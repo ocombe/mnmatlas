@@ -1,4 +1,5 @@
 {
+ "drop": 21,
  "version": 3,
  "format": "raster",
  "file": "data/vale-of-zintar/ground.bin",
@@ -50,30 +51,29 @@
  ],
  "between": {
   "to-fallen-pass": {
-   "to-glass-flats": 4498,
-   "to-keepers-bight": 4948,
-   "to-shallow-shoals": 2290
+   "to-glass-flats": 4761,
+   "to-keepers-bight": 5333,
+   "to-shallow-shoals": 2749
   },
   "to-glass-flats": {
-   "to-fallen-pass": 4454,
-   "to-keepers-bight": 982,
-   "to-shallow-shoals": 3955
+   "to-fallen-pass": 4789,
+   "to-keepers-bight": 1052,
+   "to-shallow-shoals": 4727
   },
   "to-keepers-bight": {
-   "to-fallen-pass": 4932,
-   "to-glass-flats": 978,
-   "to-shallow-shoals": 4205
+   "to-fallen-pass": 5324,
+   "to-glass-flats": 1068,
+   "to-shallow-shoals": 5064
   },
   "to-shallow-shoals": {
-   "to-fallen-pass": 4320,
-   "to-glass-flats": 3956,
-   "to-keepers-bight": 4367
+   "to-fallen-pass": 5005,
+   "to-glass-flats": 4775,
+   "to-keepers-bight": 5157
   }
  },
  "betweenKey": "0981680569-1503272205",
  "unreached": [
   "giant-fishers-1",
   "hadir"
- ],
- "drop": 21
+ ]
 }

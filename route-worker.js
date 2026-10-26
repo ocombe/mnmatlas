@@ -81,7 +81,8 @@ function drops(g){
   if(g.swim[i]||g.steps[i]===255)continue;const c=g.col[i],cx=c%nx,cz=(c-cx)/nx,h=g.h[i];
   for(const [dx,dz,run] of off){
    const x=cx+dx,z=cz+dz;if(x<0||z<0||x>=nx||z>=nz)continue;
-   const j=g.first[z*nx+x];if(j<0)continue;const fall=h-g.h[j];
+   // Never into water: jumping off a pier to swim ashore is no way anyone takes.
+   const j=g.first[z*nx+x];if(j<0||g.swim[j])continue;const fall=h-g.h[j];
    if(fall>step&&fall<=drop&&fall>=run)to.push(j);
   }
  }
@@ -116,12 +117,14 @@ function snap(g,p,reach=p.reach||90,within=null){
    const i=order[q];
    // A spot with no way out (a cliff rim, a sealed nook) is never picked; dry ground wins over water close by.
    if(g.steps?!g.steps[i]:!g.dirs[i]&&!(g.flags[i]&2))continue;
+   // A boat's dock is a pier, not the water the sign is drawn on.
+   if(p.dry&&g.swim[i])continue;
    if(within&&!within(g.px[i],g.py[i]))continue;
    // Ground reachable from an entrance wins over roofs and cut-off ledges right under the pin.
    const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(p.h===undefined?0:4*(g.h[i]-p.h)**2)+(p.exact?0:(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400));if(d<bd){bd=d;best=i;}
   }
  }
- return best;
+ return best<0&&p.dry?snap(g,{...p,dry:false},reach,within):best;
 }
 function inside(poly,x,y){let c=false;for(let i=0,j=poly.length-1;i<poly.length;j=i++){const [xi,yi]=poly[i],[xj,yj]=poly[j];if((yi>y)!==(yj>y)&&x<(xj-xi)*(y-yi)/(yj-yi)+xi)c=!c;}return c;}
 // (Math.hypot is slow in browsers; this runs for every step the search looks at.)
@@ -227,7 +230,8 @@ function search(g,from,to,field,extra,keep,lean,swimCost){
  const n=g.count;
  if(!g.work)g.work={cost:new Float32Array(n),parent:new Int32Array(n),viaOf:new Int32Array(n),mark:new Uint32Array(n),gen:0,heapI:new Int32Array(1<<16),heapF:new Float32Array(1<<16)};
  const w=g.work,gen=w.gen+=2,open=gen,shut=gen+1,{cost,parent,viaOf,mark}=w,via=[],blk=keep?g.cg.piece:null;
- // On maps with painted roads (flag 8), a step off them counts meta.offroad times its length, so routes keep to roads.
+ // On maps with painted roads (flag 8), a step off them (swimming too) counts meta.offroad times its length, so routes
+ // keep to roads.
  const off=g.meta.offroad||1,fl=g.flags;
  let size=0,heapI=w.heapI,heapF=w.heapF;
  const push=(i,f)=>{if(size>=heapI.length){const a=new Int32Array(heapI.length*2),b=new Float32Array(heapI.length*2);a.set(heapI);b.set(heapF);heapI=w.heapI=a;heapF=w.heapF=b;}let k=size++;while(k>0){const p=(k-1)>>1;if(heapF[p]<=f)break;heapI[k]=heapI[p];heapF[k]=heapF[p];k=p;}heapI[k]=i;heapF[k]=f;};
@@ -238,7 +242,7 @@ function search(g,from,to,field,extra,keep,lean,swimCost){
   const i=pop();if(mark[i]===shut)continue;mark[i]=shut;if(i===to)break;
   // Neighbours are worked out only for the squares the search reaches.
   const m=neighbours(g,i);
-  for(let q=0;q<m;q++){const j=NB[q];if(keep&&!keep[blk[j]])continue;relax(i,j,cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:off>1&&!(fl[i]&fl[j]&8)?off:1)*(1+(field[i]+field[j])/2),null);}
+  for(let q=0;q<m;q++){const j=NB[q];if(keep&&!keep[blk[j]])continue;relax(i,j,cost[i]+dist(g,i,j)*(wet(g,i,j)?swimCost:1)*(off>1&&!(fl[i]&fl[j]&8)?off:1)*(1+(field[i]+field[j])/2),null);}
   for(const e of extra.get(i)||[])relax(i,e.to,cost[i]+(e.link.cost??4),e.link);
   if(g.dStart)for(let q=g.dStart[i];q<g.dStart[i+1];q++){const j=g.dTo[q];if(!keep||keep[blk[j]])relax(i,j,cost[i]+dist(g,i,j)+2,DROP);}
  }

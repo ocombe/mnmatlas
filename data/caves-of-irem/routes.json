@@ -30,48 +30,48 @@
  "joins": [],
  "between": {
   "to-great-cavern-sea": {
-   "to-underdocks": 3892,
-   "to-wyrmsbane-tomb": 2307,
-   "to-shaded-dunes": 2436,
-   "from-ancient-crypt": 1380,
-   "boat-route": 2347
+   "to-underdocks": 5502,
+   "to-wyrmsbane-tomb": 3212,
+   "to-shaded-dunes": 3908,
+   "from-ancient-crypt": 2166,
+   "boat-route": 3252
   },
   "to-underdocks": {
-   "to-great-cavern-sea": 3917,
-   "to-wyrmsbane-tomb": 2598,
-   "to-shaded-dunes": 3612,
-   "from-ancient-crypt": 3396,
-   "boat-route": 1595
+   "to-great-cavern-sea": 5533,
+   "to-wyrmsbane-tomb": 3362,
+   "to-shaded-dunes": 4995,
+   "from-ancient-crypt": 4289,
+   "boat-route": 2292
   },
   "to-wyrmsbane-tomb": {
-   "to-great-cavern-sea": 2319,
-   "to-underdocks": 2609,
-   "to-shaded-dunes": 2347,
-   "from-ancient-crypt": 1916,
-   "boat-route": 1064
+   "to-great-cavern-sea": 3248,
+   "to-underdocks": 3376,
+   "to-shaded-dunes": 3201,
+   "from-ancient-crypt": 2808,
+   "boat-route": 1094
   },
   "to-shaded-dunes": {
-   "to-great-cavern-sea": 2472,
-   "to-underdocks": 3645,
-   "to-wyrmsbane-tomb": 2271,
-   "from-ancient-crypt": 1088,
-   "boat-route": 2044
+   "to-great-cavern-sea": 3924,
+   "to-underdocks": 5028,
+   "to-wyrmsbane-tomb": 3137,
+   "from-ancient-crypt": 1755,
+   "boat-route": 2703
   },
   "from-ancient-crypt": {
-   "to-great-cavern-sea": 1381,
-   "to-underdocks": 3402,
-   "to-wyrmsbane-tomb": 1909,
-   "to-shaded-dunes": 1067,
-   "boat-route": 1786
+   "to-great-cavern-sea": 2186,
+   "to-underdocks": 4263,
+   "to-wyrmsbane-tomb": 2824,
+   "to-shaded-dunes": 1752,
+   "boat-route": 1970
   },
   "boat-route": {
-   "to-great-cavern-sea": 2377,
-   "to-underdocks": 1590,
-   "to-wyrmsbane-tomb": 1064,
-   "to-shaded-dunes": 2039,
-   "from-ancient-crypt": 1770
+   "to-great-cavern-sea": 3276,
+   "to-underdocks": 2316,
+   "to-wyrmsbane-tomb": 1103,
+   "to-shaded-dunes": 2702,
+   "from-ancient-crypt": 1965
   }
  },
- "betweenKey": "1639426069-1729716481",
+ "betweenKey": "1013156380-0023407592",
  "unreached": []
 }

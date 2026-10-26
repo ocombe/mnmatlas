@@ -1,4 +1,5 @@
 {
+ "drop": 21,
  "version": 3,
  "format": "raster",
  "file": "data/shaded-dunes/ground.bin",
@@ -32,49 +33,48 @@
  "joins": [],
  "between": {
   "to-tel-ekir": {
-   "to-fallen-pass": 1314,
-   "to-night-harbor": 1918,
-   "to-ancient-crypt": 1329,
-   "to-caves-of-irem": 881,
-   "to-infested-crypt": 1090
+   "to-fallen-pass": 1389,
+   "to-night-harbor": 2011,
+   "to-ancient-crypt": 1408,
+   "to-caves-of-irem": 945,
+   "to-infested-crypt": 1168
   },
   "to-fallen-pass": {
-   "to-tel-ekir": 1320,
-   "to-night-harbor": 2123,
-   "to-ancient-crypt": 1581,
-   "to-caves-of-irem": 636,
-   "to-infested-crypt": 954
+   "to-tel-ekir": 1389,
+   "to-night-harbor": 2184,
+   "to-ancient-crypt": 1684,
+   "to-caves-of-irem": 712,
+   "to-infested-crypt": 1073
   },
   "to-night-harbor": {
-   "to-tel-ekir": 1917,
-   "to-fallen-pass": 2121,
-   "to-ancient-crypt": 683,
-   "to-caves-of-irem": 1559,
-   "to-infested-crypt": 1498
+   "to-tel-ekir": 2050,
+   "to-fallen-pass": 2176,
+   "to-ancient-crypt": 744,
+   "to-caves-of-irem": 1684,
+   "to-infested-crypt": 1651
   },
   "to-ancient-crypt": {
-   "to-tel-ekir": 1313,
-   "to-fallen-pass": 1604,
-   "to-night-harbor": 694,
-   "to-caves-of-irem": 1071,
-   "to-infested-crypt": 1162
+   "to-tel-ekir": 1412,
+   "to-fallen-pass": 1702,
+   "to-night-harbor": 743,
+   "to-caves-of-irem": 1209,
+   "to-infested-crypt": 1252
   },
   "to-caves-of-irem": {
-   "to-tel-ekir": 887,
-   "to-fallen-pass": 662,
-   "to-night-harbor": 1564,
-   "to-ancient-crypt": 1083,
-   "to-infested-crypt": 338
+   "to-tel-ekir": 938,
+   "to-fallen-pass": 707,
+   "to-night-harbor": 1688,
+   "to-ancient-crypt": 1178,
+   "to-infested-crypt": 389
   },
   "to-infested-crypt": {
-   "to-tel-ekir": 1097,
-   "to-fallen-pass": 956,
-   "to-night-harbor": 1491,
-   "to-ancient-crypt": 1152,
-   "to-caves-of-irem": 326
+   "to-tel-ekir": 1195,
+   "to-fallen-pass": 1084,
+   "to-night-harbor": 1670,
+   "to-ancient-crypt": 1243,
+   "to-caves-of-irem": 387
   }
  },
  "betweenKey": "1955761673-0003531917",
- "unreached": [],
- "drop": 21
+ "unreached": []
 }

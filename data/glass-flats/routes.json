@@ -1,11 +1,12 @@
 {
+ "drop": 21,
  "version": 3,
  "format": "raster",
  "file": "data/glass-flats/ground.bin",
  "cell": 3,
  "x0": -1833.2969970703125,
  "z0": 759.1820068359375,
- "nx": 1158,
+ "nx": 1152,
  "nz": 1663,
  "hstep": 0.25,
  "step": 4,
@@ -118,19 +119,18 @@
  ],
  "between": {
   "to-sungreet-strand": {
-   "to-sungreet-strand-road": 321,
-   "to-vale-of-zintar": 4883
+   "to-sungreet-strand-road": 324,
+   "to-vale-of-zintar": 5142
   },
   "to-sungreet-strand-road": {
-   "to-sungreet-strand": 321,
-   "to-vale-of-zintar": 4603
+   "to-sungreet-strand": 324,
+   "to-vale-of-zintar": 4807
   },
   "to-vale-of-zintar": {
-   "to-sungreet-strand": 4121,
-   "to-sungreet-strand-road": 3831
+   "to-sungreet-strand": 4382,
+   "to-sungreet-strand-road": 4050
   }
  },
  "betweenKey": "0184727378-0925275718",
- "unreached": [],
- "drop": 21
+ "unreached": []
 }

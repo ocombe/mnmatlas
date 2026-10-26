@@ -33,10 +33,10 @@
  "joins": [],
  "between": {
   "exit-scarwood-roof-crack": {
-   "exit-scarwood-chimney": 77
+   "exit-scarwood-chimney": 199
   },
   "exit-scarwood-chimney": {
-   "exit-scarwood-roof-crack": 84
+   "exit-scarwood-roof-crack": 219
   }
  },
  "betweenKey": "2387387345-4015793597",
