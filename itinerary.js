@@ -131,7 +131,20 @@
  async function leg(mapId,from,to,mode){
   const d=await ensureGround(mapId),list=dangers(d.markers);
   const result=await ask({type:'route',map:mapId,from,to,mode,dangers:list,links:links(d.markers)});
+  if(result.points)flatten(result);
   return {map:mapId,from,to,result,dangerList:list,markers:d.markers};
+ }
+ // Where a room drawn on another sheet lies at the same height right beside the way (a cave mouth by a canyon path),
+ // the way can dip onto that floor and back within a few steps. Such a dip, short and level, stays on the floor it left.
+ function flatten(r){
+  const ch=r.changes,pts=r.points;
+  for(let k=0;k+1<ch.length;k++){
+   const a=ch[k],b=ch[k+1];
+   if(a.link||b.link||a.to!==b.from||b.to!==a.from||Math.abs(a.rise||0)>1.5||Math.abs(b.rise||0)>1.5)continue;
+   if((pts[b.index]?.d??0)-(pts[a.index-1]?.d??0)>25)continue;
+   for(let i=a.index;i<b.index;i++)pts[i].level=a.from;
+   ch.splice(k,2);k--;
+  }
  }
  async function plan(mode,from=state.from){
   let one=null;
