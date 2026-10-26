@@ -728,6 +728,12 @@ dialog.moved::backdrop{background:#0000001f}
 .leaflet-overlay-pane path.route-under{stroke:#3a2214;stroke-width:3px;stroke-opacity:.9;stroke-dasharray:1 6;stroke-linecap:round;fill:none;filter:drop-shadow(0 0 1.5px #f3e6c8)}
 .route-end span,.route-floor{display:grid;place-items:center;width:26px;height:26px;border-radius:50%;border:2px solid #f5e2b4;box-shadow:0 0 0 1.5px #d29a48,0 2px 5px #000a;box-sizing:border-box}
 .route-end span{font:700 13px/1 var(--body);color:#fff4da;background:#8a4b1f}
+.route-num span{display:grid;place-items:center;width:20px;height:20px;border-radius:50%;background:#f5e2b4;color:#3a2412;font:700 11px/1 var(--body);box-shadow:0 0 0 1.5px #8a4b1f,0 2px 4px #0009}
+.route-step-num{display:inline-grid;place-items:center;min-width:17px;height:17px;margin-right:6px;vertical-align:1px;border-radius:50%;background:#f5e2b4;color:#3a2412;font:700 10.5px/1 var(--body)}
+.route-step-row:hover .route-step{background:var(--muted)}
+.leaflet-overlay-pane path.route-hot{stroke:#ffd27a;stroke-width:9;stroke-opacity:.85;fill:none;stroke-linecap:round;stroke-linejoin:round}
+.route-hot-spot span{display:block;width:34px;height:34px;border-radius:50%;border:3px solid #ffd27a;box-shadow:0 0 12px #ffd27a;box-sizing:border-box;animation:route-hot-pulse 1.2s ease-in-out infinite}
+@keyframes route-hot-pulse{50%{transform:scale(1.25);opacity:.6}}
 .route-finish span{background:#3a2214}
 .route-floor{background:#3a2214;color:#fff4da;cursor:pointer;width:30px;height:30px;animation:route-pulse 1.8s ease-in-out infinite}
 .route-floor-arrow{font:700 16px/1 var(--body)}

@@ -20,7 +20,9 @@
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
  const floorOrder=(id,mapId=config.id)=>entry(mapId)?.levels?entry(mapId).levels.findIndex(l=>l.id===id):0;
  // A floor change goes up when the way climbs (the route finder reports the rise); floor order is the fallback.
- const isUp=(c,mapId=config.id)=>c.rise?c.rise>0:floorOrder(c.to,mapId)<floorOrder(c.from,mapId);
+ // A link named for its way ("Lifts - down to ...") is taken at its word: sheets drawn from different scenes do not
+ // share one height.
+ const isUp=(c,mapId=config.id)=>{const n=c.link?.name||'';if(/\bdown\b/i.test(n))return false;if(/\bup\b/i.test(n))return true;return c.rise?c.rise>0:floorOrder(c.to,mapId)<floorOrder(c.from,mapId);};
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
@@ -372,13 +374,18 @@
   }
   return out;
  }
+ // The route's steps with their numbers: every step after the start (or teleport), counted across all maps, so the
+ // list and the numbered marks on the map agree.
+ function numberedSteps(legs){
+  let n=0;return legs.map((l,i)=>legSteps(l,i===0).map((e,k)=>({...e,n:(i===0&&k===0)?0:++n,from:k?null:0})));
+ }
  function legSteps(l,isFirst){
   const r=l.result,mapId=l.map,pts=r.points,events=[];
   const tp=isFirst&&state.options[state.mode]?.teleport;
   if(tp)events.push({i:0,kind:'teleport',title:'Teleport to '+tp.place.name,sub:tp.caster+' spell · '+mapTitle(mapId)});
   else if(isFirst)events.push({i:0,kind:'start',title:placeName(state.from),sub:mapTitle(mapId)});
   for(const c of tidyChanges(r.changes,pts)){const p=pts[c.index-1],up=isUp(c,mapId);const named=c.link?c.link.name:nearestTravelName(p,c,l.markers);
-   events.push({i:c.index-1,kind:up?'up':'down',title:named?(/ to /i.test(named)||c.from===c.to?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
+   events.push({i:c.index-1,kind:c.from===c.to&&c.link&&c.link.kind!=='drop'?'exit':up?'up':'down',title:named?(/ to /i.test(named)||c.from===c.to?named:named+' → '+levelTitle(c.to,mapId)):(up?'Go up':'Go down')+' to '+levelTitle(c.to,mapId)});}
   for(let k=1;k<pts.length;k++){if(pts[k].swim&&!pts[k-1].swim){let j=k;while(j+1<pts.length&&pts[j+1].swim)j++;const len=pts[j].d-pts[k].d;if(len>=8)events.push({i:k,kind:'swim',title:'Swim about '+metres(len)});}}
   const end=pts.length-1;
   if(l.next)events.push({i:end,kind:l.next.how in ICON?l.next.how:'exit',title:({boat:'Take the boat to ',lift:'Take the lift to ',teleport:'Take the teleporter to '}[l.next.how]||'Take the exit to ')+l.next.title,sub:l.next.how==='boat'?'Check the times on the dock card':'',next:true});
@@ -408,14 +415,19 @@
   if(state.error&&!state.legs){box.append(text('p',state.error,'route-error'),reportButton());return;}
   const legs=state.legs;if(!legs)return;
   const steps=text('ol','','route-steps');
+  const all=numberedSteps(legs);
   legs.forEach((l,i)=>{
    if(legs.length>1)steps.append(text('li',mapTitle(l.map),'route-step-map'));
-   for(const e of legSteps(l,i===0)){
+   all[i].forEach((e,k)=>{
     const li=text('li','','route-step-row');
     if(e.walk>=5&&e.kind!=='start')li.append(text('span','Walk '+metres(e.walk),'route-step-walk'));
-    const b=button('',e.next?()=>openNext(l):()=>show(e.at,e.map),'route-step');b.append(icon(e.kind),text('span',e.title,'route-step-title'));if(e.sub)b.append(text('span',e.sub,'route-step-sub'));
+    const b=button('',e.next?()=>openNext(l):()=>show(e.at,e.map),'route-step'),t=text('span','','route-step-title');
+    if(e.n)t.append(text('span',String(e.n),'route-step-num'));t.append(document.createTextNode(e.title));
+    b.append(icon(e.kind),t);if(e.sub)b.append(text('span',e.sub,'route-step-sub'));
+    // Pointing at a step lights up its part of the route on this map: the walk to it and the spot itself.
+    const prev=k?all[i][k-1].i:0;li.onmouseenter=()=>hot(l,prev,e);li.onmouseleave=()=>hot(null);
     li.append(b);steps.append(li);
-   }
+   });
   });
   box.append(steps);
   const passed=legs.flatMap(l=>(l.result.passed||[]).map(p=>l.dangerList[p.index]?.name)).filter(Boolean);
@@ -453,7 +465,7 @@
  function openNext(l){const url=mapLink(l.next.map);url.searchParams.set('place',l.next.place);goToMap(l.next.map,url,{quiet:true});}
  // ---- the line on the map
  function draw(fit=false){
-  for(const l of layers)l.remove();layers=[];arrowRuns=[];drawArrows();syncAddress();
+  for(const l of layers)l.remove();layers=[];arrowRuns=[];drawArrows();syncAddress();hot(null);
   const parts=(state.legs||[]).filter(x=>x.map===config.id);if(!parts.length||!map)return;
   const here=config.levelId,ll=p=>locationOf(p),onFloor=p=>!config.levels||p.level===here,seen=[];
   // The other route option shows as a pale line where it goes its own way on this floor, tagged with its name and
@@ -482,6 +494,12 @@
  // to the other floors, the A and B ends, and a seal on to the next map. Small arrows along the line show the way.
  function drawPart(l,here,ll,onFloor,seen){
   const r=l.result,pts=r.points,first=l===state.legs[0],last=l===state.legs[state.legs.length-1];
+  // Each numbered step's mark, beside the spot (the arrival is the B mark already).
+  const legIndex=state.legs.indexOf(l);
+  for(const e of numberedSteps(state.legs)[legIndex]||[]){
+   if(!e.n||e.kind==='arrive'||!onFloor(e.at))continue;
+   layers.push(L.marker(ll(e.at),{icon:L.divIcon({className:'route-num',html:'<span>'+e.n+'</span>',iconSize:[20,20],iconAnchor:[-6,26]}),keyboard:false,interactive:false,zIndexOffset:950}).addTo(map));
+  }
   seen.push(...pts.filter(onFloor));
   const kind=(a,b)=>a.level!==here&&config.levels?'':a.under&&b.under?'under':a.swim&&b.swim?'swim':'ink';
   let run_=[pts[0]],current='';
@@ -502,6 +520,16 @@
   if(last)end(pts[pts.length-1],'B','route-finish');
   // Where this map's part ends at an exit, a seal carries the route on to the next map.
   if(l.next){const p=pts[pts.length-1];if(onFloor(p)){const m=seal(p,null,false,false,'Continue in '+l.next.title,'→');m.off('click');m.on('click',()=>openNext(l));layers.push(m);}}
+ }
+ // The lit part of the route while a step is pointed at in the list.
+ let hotLayers=[];
+ function hot(l,from,e){
+  for(const x of hotLayers)x.remove();hotLayers=[];
+  if(!l||!map||l.map!==config.id)return;
+  const here=config.levelId,onFloor=p=>!config.levels||p.level===here,pts=l.result.points.slice(from,e.i+1),ll=p=>locationOf(p);
+  let run=[];const flush=()=>{if(run.length>1)hotLayers.push(L.polyline(run.map(ll),{className:'route-hot',interactive:false}).addTo(map));run=[];};
+  for(const p of pts){if(onFloor(p))run.push(p);else flush();}flush();
+  if(onFloor(e.at))hotLayers.push(L.marker(ll(e.at),{icon:L.divIcon({className:'route-hot-spot',html:'<span></span>',iconSize:[34,34],iconAnchor:[17,17]}),keyboard:false,interactive:false,zIndexOffset:1000}).addTo(map));
  }
  // Direction arrows every ARROW_GAP screen pixels along the drawn runs, placed again after each zoom.
  const ARROW_GAP=120;let arrowRuns=[],arrows=[],arrowMap=null;
