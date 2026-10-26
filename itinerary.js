@@ -477,11 +477,14 @@
  async function checkBeta(){
   const c=window.atlasCommunity,uid=c?.userId?.();let ok=false;
   if(uid)ok=!!c.isAdmin?.()||((await c.points?.())?.points||0)>0;
+  // A local preview of the site always has it, for checking before a publish.
+  if(['localhost','127.0.0.1'].includes(location.hostname))ok=true;
   if(uid!==window.atlasCommunity?.userId?.()||ok===beta)return;
   beta=ok;window.atlasBeta=new Set(beta?['directions']:[]);window.dispatchEvent(new Event('atlas:beta'));if(!beta){state.from=state.to=null;state.options={};state.legs=null;closeView();}
   showPanel();draw();openShared();
  }
  window.addEventListener('atlas:account',()=>checkBeta().catch(()=>{}));
+ if(['localhost','127.0.0.1'].includes(location.hostname))checkBeta().catch(()=>{});
  window.addEventListener('atlas:loaded',async()=>{
   if(!panel)build();showPanel();draw();
   openShared();
