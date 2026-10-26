@@ -390,7 +390,7 @@
  function openNext(l){const url=mapLink(l.next.map);url.searchParams.set('place',l.next.place);goToMap(l.next.map,url,{quiet:true});}
  // ---- the line on the map
  function draw(fit=false){
-  for(const l of layers)l.remove();layers=[];arrowRuns=[];drawArrows();
+  for(const l of layers)l.remove();layers=[];arrowRuns=[];drawArrows();syncAddress();
   const parts=(state.legs||[]).filter(x=>x.map===config.id);if(!parts.length||!map)return;
   const here=config.levelId,ll=p=>locationOf(p),onFloor=p=>!config.levels||p.level===here,seen=[];
   // The other route option shows as a pale line where it goes its own way on this floor, tagged with its name and
@@ -484,6 +484,11 @@
   write(LEVEL_KEY,lvl?lvl.slice(1):'');write(TP_KEY,JSON.stringify(CASTERS.filter(c=>bits.includes(c))));write(INVIS_KEY,bits.includes('invisible')?'1':'');
   if(panel){panel.remove();panel=null;build();}
  }
+ // The address bar carries the route on screen (?route=...), so the page's own address can be shared or bookmarked.
+ function syncAddress(){
+  if(shared||typeof history==='undefined')return;const u=new URL(location.href),want=beta&&state.from&&state.to?endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode():null;
+  if((u.searchParams.get('route')||null)===want)return;if(want)u.searchParams.set('route',want);else u.searchParams.delete('route');history.replaceState(history.state,'',u);
+ }
  function routeLink(){const url=mapLink(state.from?.map||config.id);url.searchParams.set('route',endCode(state.from)+'~'+endCode(state.to)+'~'+state.mode+'~'+settingsCode());return url.href;}
  async function endFrom(code){
   const [mapId,a,b,c]=code.split(':');if(!routable(mapId))return null;
@@ -492,8 +497,7 @@
   const [x,y]=String(a).split(',').map(Number);return Number.isFinite(x)&&Number.isFinite(y)?{map:mapId,kind:'spot',id:'spot',x,y,level:b||undefined}:null;
  }
  let shared=new URL(location.href).searchParams.get('route');
- // The route is read once; the address then goes back to an ordinary map address.
- if(shared){const u=new URL(location.href);u.searchParams.delete('route');history.replaceState(history.state,'',u);}
+ // The route in the address is read once at start; from then on syncAddress keeps it in step with the screen.
  // A shared route waits until the account is known to be in the beta.
  async function openShared(){
   if(!shared||!beta)return;const [a,b,mode,settings]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
