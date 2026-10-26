@@ -266,6 +266,22 @@
  let findIndex=null;
  const findRows=()=>findIndex||(findIndex=fetch('data/find-index.json').then(r=>r.ok?r.json():[]).catch(()=>[]).then(rows=>Array.isArray(rows)?rows.filter(e=>e&&routable(e.m)&&typeof e.n==='string'):[]));
  const fold=v=>String(v??'').normalize('NFD').replace(/[̀-ͯ]/g,'').replace(/[’‘`]/g,"'").toLowerCase().trim();
+ // Loose matching, so "nit hbr" finds Night Harbor: every word typed must match a word of the text, best as its start,
+ // then inside it, then as letters in order from the same first letter. Returns a score (0: no match).
+ function fuzzy(q,textValue){
+  const words=fold(q).split(/[\s\-']+/).filter(Boolean),hay=fold(textValue).split(/[^a-z0-9]+/).filter(Boolean);if(!words.length)return 1;
+  let score=0;
+  for(const w of words){
+   let best=0;
+   for(const h of hay){
+    if(h.startsWith(w))best=Math.max(best,3);else if(h.includes(w))best=Math.max(best,2);
+    else if(w.length>1&&h[0]===w[0]){let i=0;for(const c of h)if(c===w[i])i++;if(i>=w.length)best=Math.max(best,1);}
+    if(best===3)break;
+   }
+   if(!best)return 0;score+=best;
+  }
+  return score;
+ }
  async function zonePlaces(id){
   const d=await mapData(id),levels=entry(id)?.levels;
   const exits=d.labels.filter(l=>l.toMap&&l.kind==='exit').map(l=>({map:id,id:l.id,name:'Entrance from '+(mapTitle(l.toMap)||l.name.replace(/^to /,'')),x:l.x,y:l.y,level:l.level,reach:260,sub:'Entrance'}));
@@ -286,17 +302,17 @@
    const ticket=++serial,q=fold(input.value);list.replaceChildren();active=-1;
    if(zone){
     const z=zone;item('‹ All zones','',()=>{zone=null;input.focus();show();},' back');const {exits,pins}=await zonePlaces(z);if(ticket!==serial)return;
-    head(mapTitle(z));for(const e of exits)item(e.name,e.sub,()=>choose(e));for(const m of pins)if(!q||fold(m.name).includes(q))item(m.name,m.sub,()=>choose(m));
+    head(mapTitle(z));for(const e of exits)item(e.name,e.sub,()=>choose(e));for(const m of pins)if(!q||fuzzy(q,m.name+' '+m.sub))item(m.name,m.sub,()=>choose(m));
    }else if(q.length<2){
     const zones=(registry?.maps||[]).filter(m=>m.routes&&!m.hidden).map(m=>m.id);
     if(routable(config.id)){head('On this map');zoneItem(config.id);}
     head('Zones');for(const id of zones.filter(id=>id!==config.id).sort((a,b)=>mapTitle(a).localeCompare(mapTitle(b))))zoneItem(id);
    }else{
-    const zones=(registry?.maps||[]).filter(m=>m.routes&&(fold(m.title).includes(q)||q.includes(fold(m.title)))).map(m=>m.id);
+    const zones=(registry?.maps||[]).filter(m=>m.routes&&fuzzy(q,m.title)).map(m=>m.id);
     if(zones.length){head('Zones');for(const id of zones)zoneItem(id);}
     const rows=await findRows();if(ticket!==serial)return;
-    // Every word typed must be in the place's name or its zone's ("bank night harbor").
-    const words=q.split(/\s+/),hits=rows.filter(e=>{const t=fold(e.n+' '+mapTitle(e.m)+' '+(e.k||''));return words.every(w=>t.includes(w));}).sort((a,b)=>(b.m===config.id)-(a.m===config.id)||(fold(b.n).startsWith(q))-(fold(a.n).startsWith(q))||a.n.localeCompare(b.n)).slice(0,40);
+    // Best matches first, then this map's places.
+    const hits=rows.map(e=>({e,s:fuzzy(q,e.n+' '+mapTitle(e.m)+' '+(e.k||''))})).filter(r=>r.s).sort((a,b)=>b.s-a.s||(b.e.m===config.id)-(a.e.m===config.id)||a.e.n.localeCompare(b.e.n)).slice(0,40).map(r=>r.e);
     if(hits.length)head('Places');
     for(const e of hits)item(e.n,[e.k,mapTitle(e.m)+(e.l&&entry(e.m)?.levels?' · '+levelTitle(e.l,e.m):'')].filter(Boolean).join(' · '),async()=>{const p=await endFrom(e.m+':pin:'+e.p);choose(p);});
     if(!zones.length&&!hits.length)list.append(text('p','No place or zone by that name.','route-suggest-none'));
