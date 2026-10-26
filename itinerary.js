@@ -100,7 +100,9 @@
  }
  // The chain of maps between two places with the least walking (a boat counts as its wait), through exits that lead
  // both ways. Each map's sign-to-sign walks are worked out when its route data is built (meta.between).
- async function mapPath(from,to,leave=false,banned=new Set(),mode='shorter'){
+ // strict: never back onto a map already crossed (a lift up to the tree city and straight down again); plan tries
+ // that first and allows it only when nothing else works.
+ async function mapPath(from,to,leave=false,banned=new Set(),mode='shorter',strict=false){
   const best=new Map(),open=[{cost:0,map:from.map,at:from,key:from.map+'|',hops:[]}];
   while(open.length){
    open.sort((x,y)=>x.cost-y.cost);const s=open.shift();
@@ -112,6 +114,7 @@
    for(const w of ways(d,s.map)){
     // A map can close its door to one neighbour (the Ancient Crypt passage only leads out of the tomb).
     if(banned.has(s.key+'>'+w.id)||(await mapData(w.to)).meta?.closedEntries?.includes(s.map))continue;
+    if(strict&&[from.map,...s.hops.map(h=>h.to)].includes(w.to)&&!(leave&&w.to===to.map))continue;
     const hop={from:s.map,to:w.to,exit:w},land=await arrival(hop);if(!land)continue;
     const key=w.to+'|'+land.id;if(best.has(key))continue;
     const risk=mode==='safer'&&w.to!==to.map&&w.to!==from.map?await zoneRisk(w.to):0;
@@ -154,9 +157,10 @@
   }
   // A part of the map reached only through a neighbour (a mesa you reach from the tree city above) goes out and back.
   // When a walk on the chosen chain turns out impossible, that step is ruled out and the next best chain is tried.
-  const banned=new Set();
-  for(let tries=0;tries<8;tries++){
-   const hops=await mapPath(from,state.to,!!one,banned,mode);
+  const banned=new Set();let strict=true;
+  for(let tries=0;tries<12;tries++){
+   const hops=await mapPath(from,state.to,!!one,banned,mode,strict);
+   if(!hops&&strict){strict=false;banned.clear();continue;}
    if(!hops){if(one)return [one];throw Error('No known way from '+mapTitle(from.map)+' to '+mapTitle(state.to.map)+' on the maps that have routes so far.');}
    const legs=[];let start=from,key=from.map+'|',failed=false;
    for(const hop of hops){
