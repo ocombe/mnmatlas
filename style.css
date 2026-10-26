@@ -648,6 +648,9 @@ dialog.moved::backdrop{background:#0000001f}
 .directions-head{display:flex;align-items:center;gap:10px}
 .directions-back{font-size:12px;padding:5px 9px}
 .directions-title{margin:0;font:400 20px/1.1 var(--heading);color:var(--foreground)}
+.directions-beta{padding:1px 6px;border:1px solid var(--primary);border-radius:999px;color:var(--primary);font-size:10px;letter-spacing:.06em;text-transform:uppercase}
+.route-feedback-link{padding:0;border:0;background:none;color:var(--primary);font:inherit;text-decoration:underline;cursor:pointer}
+.route-feedback-link:hover,.route-feedback-link:focus-visible{color:#fff0cc}
 .search-box .route-open{flex:none;display:grid;place-items:center;width:30px;height:30px;padding:0;margin-left:2px;border:0;background:none;color:var(--primary);cursor:pointer;border-radius:var(--radius)}
 .search-box .route-open:hover,.search-box .route-open:focus-visible{background:var(--muted);color:#fff0cc}
 .search-box .route-open[hidden]{display:none}

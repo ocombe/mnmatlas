@@ -12,7 +12,9 @@
  const state={from:null,to:null,mode:read(MODE_KEY)==='shorter'?'shorter':'safer',options:{},legs:null,error:''};
  const MODES=[['safer','Safer'],['shorter','Shorter']];
  const entry=id=>registry?.maps.find(c=>c.id===id);
- const routable=id=>!!entry(id)?.routes;
+ // Directions is in beta: shown only to signed-in contributors (one approved suggestion or more) and admins.
+ let beta=false;
+ const routable=id=>beta&&!!entry(id)?.routes;
  const mapTitle=id=>entry(id)?.title||id;
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
  const floorOrder=(id,mapId=config.id)=>entry(mapId)?.levels?entry(mapId).levels.findIndex(l=>l.id===id):0;
@@ -251,7 +253,7 @@
   if(!$('route-open')){const b=button('',()=>{openView();showPanel();},'route-open');b.id='route-open';b.title='Directions';b.setAttribute('aria-label','Directions');b.append(icon('directions','route-open-icon'));box.append(b);}
   panel=document.createElement('section');panel.className='directions-view';panel.id='route-panel';panel.hidden=true;panel.setAttribute('aria-label','Directions');
   const head=text('div','','directions-head');
-  head.append(button('‹ Search',()=>closeView(),'directions-back'),text('h2','Directions','directions-title'));
+  head.append(button('‹ Search',()=>closeView(),'directions-back'),text('h2','Directions','directions-title'),text('span','Beta','directions-beta'));
   const row=(which,label)=>{const l=text('label','','route-field route-field-'+which);l.append(icon(which==='from'?'start':'arrive','route-end-icon'));const s=document.createElement('select');s.id='route-'+which;s.setAttribute('aria-label',label);s.onchange=()=>{const v=s.value;if(v==='keep')return;const p=findPlace(v);state[which]=p?{...p,map:config.id}:null;compute();};l.append(s);return l;};
   const swap=button('⇅',()=>{[state.from,state.to]=[state.to,state.from];compute();},'route-swap');swap.title='Swap start and finish';swap.setAttribute('aria-label','Swap start and finish');
   const fields=text('div','','route-fields');fields.append(row('from','Start'),row('to','Finish'),swap);
@@ -260,7 +262,9 @@
   const tp=text('div','','route-teleport');tp.append(text('span','I can teleport as'));
   for(const c of CASTERS){const l=text('label','','route-cast'),b=document.createElement('input');b.type='checkbox';b.value=c;b.checked=casts().includes(c);b.onchange=()=>{write(TP_KEY,JSON.stringify([...tp.querySelectorAll('input:checked')].map(x=>x.value)));compute();};l.append(b,text('span',c));tp.append(l);}
   const iv=text('label','','route-cast'),ib=document.createElement('input');ib.type='checkbox';ib.checked=read(INVIS_KEY)==='1';ib.onchange=()=>{write(INVIS_KEY,ib.checked?'1':'');compute();};iv.append(ib,text('span','I can go invisible'));const ivRow=text('div','','route-teleport');ivRow.append(iv);
-  panel.append(head,fields,lvl,tp,ivRow,hint,text('div','','route-options-list'),text('div','','route-result'));
+  const fb=text('p','Directions is new. A wrong turn, a missing way, an idea? ','route-hint route-feedback');
+  fb.append(button('Send feedback',()=>window.atlasCommunity?.feedback({title:'Directions feedback',prefix:'Directions: ',suffix:state.from&&state.to?'\n\nRoute: '+routeLink():''}),'route-feedback-link'));
+  panel.append(head,fields,lvl,tp,ivRow,hint,fb,text('div','','route-options-list'),text('div','','route-result'));
   journal.querySelector('.journal-heading').after(panel);
  }
  function fill(select,which){
@@ -464,10 +468,22 @@
  let shared=new URL(location.href).searchParams.get('route');
  // The route is read once; the address then goes back to an ordinary map address.
  if(shared){const u=new URL(location.href);u.searchParams.delete('route');history.replaceState(history.state,'',u);}
+ // A shared route waits until the account is known to be in the beta.
+ async function openShared(){
+  if(!shared||!beta)return;const [a,b,mode,settings]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
+  if(from&&to){applySettings(settings);state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}
+ }
+ async function checkBeta(){
+  const c=window.atlasCommunity,uid=c?.userId?.();let ok=false;
+  if(uid)ok=!!c.isAdmin?.()||((await c.points?.())?.points||0)>0;
+  if(uid!==window.atlasCommunity?.userId?.()||ok===beta)return;
+  beta=ok;if(!beta){state.from=state.to=null;state.options={};state.legs=null;closeView();}
+  showPanel();draw();openShared();
+ }
+ window.addEventListener('atlas:account',()=>checkBeta().catch(()=>{}));
  window.addEventListener('atlas:loaded',async()=>{
   if(!panel)build();showPanel();draw();
-  if(shared){const [a,b,mode,settings]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
-   if(from&&to){applySettings(settings);state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}}
+  openShared();
   // Route data loads only once someone opens Directions on this map (see openView).
   if(routable(config.id)&&panel&&!panel.hidden)ensureGround(config.id).catch(()=>{});
  });
