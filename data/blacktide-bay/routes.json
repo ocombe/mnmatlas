@@ -285,6 +285,25 @@
     "level": "ew-caves",
     "exact": true
    }
+  },
+  {
+   "name": "Ramp down out of the loop",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 620,
+    "y": 650,
+    "level": "ew-caves",
+    "exact": true,
+    "h": 62.5
+   },
+   "to": {
+    "x": 684,
+    "y": 745,
+    "level": "ew-caves",
+    "exact": true,
+    "h": 57
+   }
   }
  ],
  "projects": [
@@ -348,17 +367,17 @@
  "between": {
   "caves-exit-keepers-bight": {
    "caves-exit-keepers-bight-south": 162,
-   "ew-caves-exit-evershade-weald": 1614
+   "ew-caves-exit-evershade-weald": 1621
   },
   "caves-exit-keepers-bight-south": {
    "caves-exit-keepers-bight": 163,
-   "ew-caves-exit-evershade-weald": 1578
+   "ew-caves-exit-evershade-weald": 1585
   },
   "ew-caves-exit-evershade-weald": {
-   "caves-exit-keepers-bight": 1598,
-   "caves-exit-keepers-bight-south": 1574
+   "caves-exit-keepers-bight": 1603,
+   "caves-exit-keepers-bight-south": 1580
   }
  },
- "betweenKey": "aca9eb3d1d1c2501",
+ "betweenKey": "e632f1b377140d87",
  "unreached": []
 }
