@@ -1043,7 +1043,7 @@
   for(const t of changeSet().targets()){try{
    const rows=t.rows.filter(r=>visible.has(String(r.id)));if(!rows.length||rows.some(r=>desk.hides(r)))continue;const proposed=t.proposed;if(config.levels&&proposed.level&&proposed.level!==config.levelId)continue;if(!Number.isFinite(proposed.x)||!Number.isFinite(proposed.y))continue;
    const at=locationOf(proposed),look={...proposed,id:t.id,...(t.kind==='label'?{category:'Personal',atlasLabel:true,noteType:proposed.kind==='exit'?'exit':'label'}:{})},waiting=rows.filter(r=>r.status==='pending').length,words=[...t.changed].map(k=>({position:'moved',name:'renamed',note:'details',removed:'removal',type:'type changed',added:'new'}[k]||k)).join(' · '),plate=[words,waiting?waiting+' waiting':'approved'].filter(Boolean).join(' · ');
-   if(t.published&&t.changed.has('position'))approvedLayer.addLayer(L.polyline([locationOf(t.published),at],{color:'#e2b46a',weight:2,dashArray:'3 6',interactive:false}));
+   if(t.published&&t.changed.has('position'))window.drawMoveArrow(approvedLayer,t.published,proposed);
    const ownPopup=()=>suggestionPopup(rows[0],look);
    // A pending pin standing on its own spot (a new marker or a move) opens like a marker; one sitting on the live marker leaves its clicks to it.
    const apart=!t.published||t.changed.has('position')||t.changed.has('added');
