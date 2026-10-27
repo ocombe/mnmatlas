@@ -119,6 +119,8 @@ function snap(g,p,reach=p.reach||90,within=null){
    if(g.steps?!g.steps[i]:!g.dirs[i]&&!(g.flags[i]&2))continue;
    // A boat's dock is a pier, not the water the sign is drawn on.
    if(p.dry&&g.swim[i])continue;
+   // A spot given its height (a door pin) never lands on other ground that happens to lie under or over it.
+   if(p.hTol!==undefined&&Math.abs(g.h[i]-p.h)>p.hTol)continue;
    if(within&&!within(g.px[i],g.py[i]))continue;
    // Ground reachable from an entrance wins over roofs and cut-off ledges right under the pin.
    const dx=g.px[i]-p.x,dy=g.py[i]-p.y,d=dx*dx+dy*dy+(p.h===undefined?0:4*(g.h[i]-p.h)**2)+(p.exact?0:(g.swim[i]?1600:0)+(g.flags[i]&4?0:6400));if(d<bd){bd=d;best=i;}
@@ -152,8 +154,8 @@ function route(req){
  // A pin drawn off the open ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px;
  // a camp drawn as an area (mobs flying over a lake) takes the nearest ground inside its area.
  // A pin has no height of its own; where the map's data names the height its way starts at (a cave mouth in a cliff
- // face, over the canyon floor), its end takes the spot at that height.
- const at=e=>{const h=g.meta.pinHeights?.[(e.level??g.meta.levels[0])+':'+e.x+','+e.y];return h===undefined?e:{...e,h};};
+ // face, over the canyon floor), its end takes a spot at that height or none (no link through the rock).
+ const at=e=>{const h=g.meta.pinHeights?.[(e.level??g.meta.levels[0])+':'+e.x+','+e.y];return h===undefined?e:{...e,h,hTol:4};};
  const near=p=>{const q=door(at(p)),i=snap(g,q);if(i>=0||q.exact)return i;const j=snap(g,q,260);if(j>=0||!p.edge)return j;
   const e=p.edge;let r=0;for(const [x,y] of e)r=Math.max(r,Math.hypot(x-p.x,y-p.y));
   return snap(g,{...q,reach:undefined},r,(x,y)=>inside(e,x,y));};
