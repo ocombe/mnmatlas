@@ -804,7 +804,17 @@
         "changes": "Landmarks and exits checked against ElusiveGarden's Glass Flats map; creature camps and named creatures placed from the community wiki's location notes; positions approximate."
       },
       "hiddenPrimaryStack": null,
-      "legacyStorage": {}
+      "legacyStorage": {},
+      "linkedMaps": [
+        {
+          "map": "glass-flats",
+          "title": "Glass Flats"
+        },
+        {
+          "map": "undead-keep",
+          "title": "Undead Keep"
+        }
+      ]
     },
     {
       "id": "undead-keep",
@@ -853,7 +863,21 @@
         "licenseUrl": ""
       },
       "hiddenPrimaryStack": null,
-      "legacyStorage": {}
+      "legacyStorage": {},
+      "wikiPlaces": [
+        "undead",
+        "spiders"
+      ],
+      "linkedMaps": [
+        {
+          "map": "glass-flats",
+          "title": "Glass Flats"
+        },
+        {
+          "map": "undead-keep",
+          "title": "Undead Keep"
+        }
+      ]
     },
     {
       "id": "ancient-crypt",

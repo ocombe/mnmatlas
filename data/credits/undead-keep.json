@@ -1,0 +1,82 @@
+{
+  "marker:selene": [
+    {
+      "name": ".veryvexing",
+      "what": "moved"
+    }
+  ],
+  "marker:seneschal-kazmer": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:quartermaster-girault": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:hovarth-ezzadel": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:stormcaller-tabigan": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:fenrix-lightfoot": [
+    {
+      "name": ".veryvexing",
+      "what": "moved"
+    }
+  ],
+  "marker:community-357": [
+    {
+      "name": null,
+      "what": "added"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:community-358": [
+    {
+      "name": null,
+      "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1339": [
+    {
+      "name": "nicny86",
+      "what": "added"
+    }
+  ],
+  "marker:community-1427": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ]
+}
