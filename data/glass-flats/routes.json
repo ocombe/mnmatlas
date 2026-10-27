@@ -64,23 +64,6 @@
     "level": "ground",
     "exact": true
    }
-  },
-  {
-   "name": "Passage",
-   "kind": "passage",
-   "oneWay": false,
-   "from": {
-    "x": 2852.6,
-    "y": 5143.9,
-    "level": "ground",
-    "exact": true
-   },
-   "to": {
-    "x": 2852.6,
-    "y": 5151.8,
-    "level": "ground",
-    "exact": true
-   }
   }
  ],
  "between": {
@@ -105,6 +88,6 @@
    "to-vale-of-zintar": 2515
   }
  },
- "betweenKey": "3251770696-2500707604",
+ "betweenKey": "2884993680-3310658292",
  "unreached": []
 }
