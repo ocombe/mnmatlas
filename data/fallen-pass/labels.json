@@ -10,16 +10,18 @@
    "y": 897,
    "kind": "district",
    "priority": 80,
-   "minZoom": 2
+   "minZoom": 2,
+   "level": "ground"
   },
   {
    "id": "rat-caves",
    "name": "Rat Caves",
-   "x": 2326,
-   "y": 1141,
+   "x": 2701,
+   "y": 1232,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "level": "ground"
   },
   {
    "id": "smugglers-caves",
@@ -29,7 +31,8 @@
    "kind": "district",
    "priority": 70,
    "minZoom": 2.5,
-   "community": true
+   "community": true,
+   "level": "ground"
   },
   {
    "id": "hidden-pass",
@@ -38,7 +41,8 @@
    "y": 558,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "level": "ground"
   },
   {
    "id": "fallen-watch-keep",
@@ -47,7 +51,8 @@
    "y": 2716,
    "kind": "district",
    "priority": 85,
-   "minZoom": 1.5
+   "minZoom": 1.5,
+   "level": "ground"
   },
   {
    "id": "to-shaded-dunes",
@@ -59,7 +64,8 @@
    "minZoom": 1,
    "arrow": "east",
    "toMap": "shaded-dunes",
-   "toPlace": "to-fallen-pass"
+   "toPlace": "to-fallen-pass",
+   "level": "ground"
   },
   {
    "id": "to-vale-of-zintar",
@@ -72,7 +78,8 @@
    "arrow": "north",
    "toMap": "vale-of-zintar",
    "toPlace": "to-fallen-pass",
-   "community": true
+   "community": true,
+   "level": "ground"
   },
   {
    "id": "to-fallen-watch",
@@ -84,7 +91,8 @@
    "minZoom": 1.5,
    "arrow": "south",
    "toMap": "fallen-watch",
-   "toPlace": "exit-fallen-pass"
+   "toPlace": "exit-fallen-pass",
+   "level": "ground"
   },
   {
    "id": "fallen-pass",
@@ -93,7 +101,8 @@
    "y": 1466,
    "kind": "district",
    "priority": 100,
-   "minZoom": 0.5
+   "minZoom": 0.5,
+   "level": "ground"
   }
  ],
  "trainers": []

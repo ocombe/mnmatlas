@@ -20,7 +20,8 @@
   "note": "Normal movement, No spellcasters.",
   "minZoom": 2,
   "community": true,
-  "wiki": "https://monstersandmemories.miraheze.org/wiki/A_Plagueborn_drake"
+  "wiki": "https://monstersandmemories.miraheze.org/wiki/A_Plagueborn_drake",
+  "level": "ground"
  },
  {
   "id": "giant-31-40-1",
@@ -37,7 +38,8 @@
   "minZoom": 2,
   "ambush": false,
   "wiki": "https://monstersandmemories.miraheze.org/wiki/Maleq",
-  "community": true
+  "community": true,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-2",
@@ -60,7 +62,8 @@
   "note": "One patrolling Drake that starts inside the room and moves outside.",
   "minZoom": 2,
   "wiki": "https://monstersandmemories.miraheze.org/wiki/A_Plagueborn_drake",
-  "community": true
+  "community": true,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-1",
@@ -75,7 +78,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "community": true
+  "community": true,
+  "level": "ground"
  },
  {
   "id": "shady-merchant-1",
@@ -87,7 +91,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "community": true
+  "community": true,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-2",
@@ -101,7 +106,8 @@
   "y": 1481,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-3",
@@ -115,7 +121,8 @@
   "y": 1555,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-40plus-1",
@@ -129,7 +136,8 @@
   "y": 1492,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-3",
@@ -143,7 +151,8 @@
   "y": 1628,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-lt20-1",
@@ -157,7 +166,8 @@
   "y": 915,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "bugs-21-25-1",
@@ -171,7 +181,8 @@
   "y": 1125,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-21-25-1",
@@ -185,7 +196,8 @@
   "y": 1441,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-4",
@@ -199,7 +211,8 @@
   "y": 1509,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-lt20-2",
@@ -213,7 +226,8 @@
   "y": 810,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "bugs-21-25-2",
@@ -227,7 +241,8 @@
   "y": 674,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "npc-2",
@@ -237,7 +252,8 @@
   "y": 353,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "bugs-21-25-3",
@@ -251,7 +267,8 @@
   "y": 1257,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-lt20-3",
@@ -265,7 +282,8 @@
   "y": 1352,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-5",
@@ -279,7 +297,8 @@
   "y": 1690,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-6",
@@ -293,7 +312,8 @@
   "y": 1962,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-4",
@@ -307,7 +327,8 @@
   "y": 1867,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-5",
@@ -321,7 +342,8 @@
   "y": 2246,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-6",
@@ -335,7 +357,8 @@
   "y": 2585,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-7",
@@ -349,7 +372,8 @@
   "y": 1790,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-7",
@@ -363,7 +387,8 @@
   "y": 1837,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "ratkin-31-40-8",
@@ -377,7 +402,8 @@
   "y": 2047,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-40plus-2",
@@ -391,7 +417,8 @@
   "y": 2081,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-40plus-3",
@@ -405,7 +432,8 @@
   "y": 2381,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-40plus-4",
@@ -420,7 +448,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "community": true
+  "community": true,
+  "level": "ground"
  },
  {
   "id": "humanoid-31-40-1",
@@ -434,7 +463,8 @@
   "y": 3155,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "humanoid-31-40-2",
@@ -449,7 +479,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "community": true
+  "community": true,
+  "level": "ground"
  },
  {
   "id": "humanoid-31-40-3",
@@ -463,7 +494,8 @@
   "y": 3426,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "undead-31-40-8",
@@ -477,7 +509,8 @@
   "y": 3345,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "community-617",
@@ -492,7 +525,8 @@
    25
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/necroferius",
-  "wikiId": "npc-necroferius"
+  "wikiId": "npc-necroferius",
+  "level": "ground"
  },
  {
   "id": "community-623",
@@ -504,7 +538,8 @@
   "y": 2002,
   "wiki": "https://monstersandmemories.wiki/npcs/overseer-shuknaru",
   "wikiId": "npc-overseer-shuknaru",
-  "ambush": false
+  "ambush": false,
+  "level": "ground"
  },
  {
   "id": "community-669",
@@ -519,7 +554,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/blightcaller-zirat",
-  "wikiId": "npc-blightcaller-zirat"
+  "wikiId": "npc-blightcaller-zirat",
+  "level": "ground"
  },
  {
   "id": "community-670",
@@ -534,7 +570,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/blightcaller-vethis",
-  "wikiId": "npc-blightcaller-vethis"
+  "wikiId": "npc-blightcaller-vethis",
+  "level": "ground"
  },
  {
   "id": "community-671",
@@ -549,7 +586,8 @@
    53
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/edric-torvald",
-  "wikiId": "npc-edric-torvald"
+  "wikiId": "npc-edric-torvald",
+  "level": "ground"
  },
  {
   "id": "community-672",
@@ -564,7 +602,8 @@
    53
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/faylan-torvald",
-  "wikiId": "npc-faylan-torvald"
+  "wikiId": "npc-faylan-torvald",
+  "level": "ground"
  },
  {
   "id": "community-673",
@@ -579,7 +618,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/lady-elana-torvald",
-  "wikiId": "npc-lady-elana-torvald"
+  "wikiId": "npc-lady-elana-torvald",
+  "level": "ground"
  },
  {
   "id": "community-675",
@@ -594,7 +634,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/elda-the-cook",
-  "wikiId": "npc-elda-the-cook"
+  "wikiId": "npc-elda-the-cook",
+  "level": "ground"
  },
  {
   "id": "community-676",
@@ -609,7 +650,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/dame-lysandra-thrym",
-  "wikiId": "npc-dame-lysandra-thrym"
+  "wikiId": "npc-dame-lysandra-thrym",
+  "level": "ground"
  },
  {
   "id": "community-677",
@@ -624,7 +666,8 @@
    54
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/aidan-thrym",
-  "wikiId": "npc-aidan-thrym"
+  "wikiId": "npc-aidan-thrym",
+  "level": "ground"
  },
  {
   "id": "community-678",
@@ -639,7 +682,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/yeoman-borin-smythe",
-  "wikiId": "npc-yeoman-borin-smythe"
+  "wikiId": "npc-yeoman-borin-smythe",
+  "level": "ground"
  },
  {
   "id": "community-679",
@@ -654,7 +698,8 @@
    55
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/blightcaller-ghora",
-  "wikiId": "npc-blightcaller-ghora"
+  "wikiId": "npc-blightcaller-ghora",
+  "level": "ground"
  },
  {
   "id": "community-680",
@@ -669,7 +714,8 @@
    53
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/blightcaller-harun",
-  "wikiId": "npc-blightcaller-harun"
+  "wikiId": "npc-blightcaller-harun",
+  "level": "ground"
  },
  {
   "id": "community-695",
@@ -684,7 +730,8 @@
    34
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/qassem-brolt",
-  "wikiId": "npc-qassem-brolt"
+  "wikiId": "npc-qassem-brolt",
+  "level": "ground"
  },
  {
   "id": "community-705",
@@ -709,7 +756,8 @@
    ]
   },
   "wiki": "https://monstersandmemories.wiki/npcs/mia-tarcut",
-  "wikiId": "npc-mia-tarcut"
+  "wikiId": "npc-mia-tarcut",
+  "level": "ground"
  },
  {
   "id": "community-707",
@@ -720,7 +768,8 @@
   "x": 1918,
   "y": 1157,
   "wiki": "https://monstersandmemories.wiki/npcs/captain-belvoir",
-  "wikiId": "npc-captain-belvoir"
+  "wikiId": "npc-captain-belvoir",
+  "level": "ground"
  },
  {
   "id": "stablemaster-1",
@@ -730,7 +779,8 @@
   "x": 1802,
   "y": 846,
   "approximate": true,
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "stablehand-1",
@@ -740,7 +790,8 @@
   "x": 1866,
   "y": 882,
   "approximate": true,
-  "minZoom": 2
+  "minZoom": 2,
+  "level": "ground"
  },
  {
   "id": "community-791",
@@ -749,7 +800,8 @@
   "category": "Named mob",
   "note": "",
   "x": 2052,
-  "y": 1490
+  "y": 1490,
+  "level": "ground"
  },
  {
   "id": "community-792",
@@ -764,7 +816,8 @@
    40
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/kowmeh-lalen",
-  "wikiId": "npc-kowmeh-lalen"
+  "wikiId": "npc-kowmeh-lalen",
+  "level": "ground"
  },
  {
   "id": "community-805",
@@ -779,7 +832,8 @@
    38
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/toragaldo",
-  "wikiId": "npc-toragaldo"
+  "wikiId": "npc-toragaldo",
+  "level": "ground"
  },
  {
   "id": "community-988",
@@ -794,7 +848,8 @@
    32
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/sivah-arjun",
-  "wikiId": "npc-sivah-arjun"
+  "wikiId": "npc-sivah-arjun",
+  "level": "ground"
  },
  {
   "id": "community-1039",
@@ -809,7 +864,8 @@
   "levels": [
    55,
    55
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1040",
@@ -824,7 +880,8 @@
   "levels": [
    52,
    52
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1041",
@@ -839,7 +896,8 @@
   "levels": [
    52,
    52
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1042",
@@ -850,7 +908,8 @@
   "y": 1671,
   "category": "Notable NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/demeter-stollen",
-  "wikiId": "npc-demeter-stollen"
+  "wikiId": "npc-demeter-stollen",
+  "level": "ground"
  },
  {
   "id": "community-1177",
@@ -865,7 +924,8 @@
   "levels": [
    41,
    41
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1194",
@@ -880,7 +940,8 @@
    45,
    45
   ],
-  "ambush": false
+  "ambush": false,
+  "level": "ground"
  },
  {
   "id": "community-1204",
@@ -895,7 +956,8 @@
   "levels": [
    45,
    45
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1205",
@@ -910,7 +972,8 @@
   "levels": [
    45,
    45
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1274",
@@ -968,7 +1031,8 @@
    39,
    39
   ],
-  "ambush": false
+  "ambush": false,
+  "level": "ground"
  },
  {
   "id": "community-1331",
@@ -980,7 +1044,8 @@
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/chieftain-rakamatar",
   "wikiId": "npc-chieftain-rakamatar",
-  "ambush": false
+  "ambush": false,
+  "level": "ground"
  },
  {
   "id": "community-1332",
@@ -995,7 +1060,8 @@
   "levels": [
    38,
    38
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1333",
@@ -1053,7 +1119,8 @@
      1541
     ]
    ]
-  }
+  },
+  "level": "ground"
  },
  {
   "id": "community-1334",
@@ -1068,7 +1135,8 @@
   "levels": [
    40,
    40
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1383",
@@ -1084,7 +1152,8 @@
    38,
    38
   ],
-  "quests": true
+  "quests": true,
+  "level": "ground"
  },
  {
   "id": "community-1411",
@@ -1102,7 +1171,8 @@
     "wiki": "https://monstersandmemories.wiki/npcs/a-plagueborn-drake",
     "wikiId": "npc-a-plagueborn-drake"
    }
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1413",
@@ -1118,7 +1188,8 @@
    42,
    42
   ],
-  "ambush": false
+  "ambush": false,
+  "level": "ground"
  },
  {
   "id": "community-1450",
@@ -1133,7 +1204,8 @@
   "levels": [
    39,
    39
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1456",
@@ -1148,7 +1220,8 @@
   "levels": [
    45,
    45
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1457",
@@ -1163,7 +1236,8 @@
   "levels": [
    55,
    55
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1458",
@@ -1178,7 +1252,8 @@
   "levels": [
    54,
    54
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1459",
@@ -1193,7 +1268,8 @@
   "levels": [
    45,
    45
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1460",
@@ -1204,7 +1280,8 @@
   "y": 1927,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/high-master-farwyn-nyxx",
-  "wikiId": "npc-high-master-farwyn-nyxx"
+  "wikiId": "npc-high-master-farwyn-nyxx",
+  "level": "ground"
  },
  {
   "id": "community-1461",
@@ -1219,7 +1296,8 @@
   "levels": [
    41,
    41
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1462",
@@ -1230,7 +1308,8 @@
   "y": 1875,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/pustulax-the-avatar-of-plagues",
-  "wikiId": "npc-1790076531813-svdwm"
+  "wikiId": "npc-1790076531813-svdwm",
+  "level": "ground"
  },
  {
   "id": "community-1463",
@@ -1245,7 +1324,8 @@
   "levels": [
    25,
    25
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1464",
@@ -1256,7 +1336,8 @@
   "y": 2122,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/stablemaster-tomaz",
-  "wikiId": "npc-stablemaster-tomaz"
+  "wikiId": "npc-stablemaster-tomaz",
+  "level": "ground"
  },
  {
   "id": "community-1465",
@@ -1267,7 +1348,8 @@
   "y": 1535,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/asthijvala",
-  "wikiId": "npc-asthijvala"
+  "wikiId": "npc-asthijvala",
+  "level": "ground"
  },
  {
   "id": "community-1466",
@@ -1282,7 +1364,8 @@
   "levels": [
    24,
    24
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1508",
@@ -1297,7 +1380,8 @@
   "levels": [
    45,
    45
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1509",
@@ -1312,7 +1396,8 @@
   "levels": [
    39,
    39
-  ]
+  ],
+  "level": "ground"
  },
  {
   "id": "community-1532",
@@ -1323,7 +1408,8 @@
   "y": 1645,
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/leathersmith-visali",
-  "wikiId": "npc-leathersmith-visali"
+  "wikiId": "npc-leathersmith-visali",
+  "level": "ground"
  },
  {
   "id": "community-1578",
@@ -1333,7 +1419,8 @@
   "x": 2429,
   "y": 1567,
   "category": "Quest NPC",
-  "wiki": "https://monstersandmemories.wiki/npcs/forge-master-durthir"
+  "wiki": "https://monstersandmemories.wiki/npcs/forge-master-durthir",
+  "level": "ground"
  },
  {
   "id": "community-1579",
@@ -1344,6 +1431,475 @@
   "y": 1528,
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/tailor-thaddeus",
-  "wikiId": "npc-tailor-thaddeus"
+  "wikiId": "npc-tailor-thaddeus",
+  "level": "ground"
+ },
+ {
+  "id": "sw-tunnel-mouth-1-ground",
+  "name": "Tunnel entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1119,
+  "y": 2613,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "sw-tunnel-mouth-1-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "sw-tunnel-mouth-1-underground",
+  "name": "Tunnel - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 198,
+  "y": 5401,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "sw-tunnel-mouth-1-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "sw-tunnel-mouth-2-ground",
+  "name": "Tunnel entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1482,
+  "y": 2648,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "sw-tunnel-mouth-2-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "sw-tunnel-mouth-2-underground",
+  "name": "Tunnel - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1165,
+  "y": 5495,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "sw-tunnel-mouth-2-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "waterfall-cave-mouth-1-ground",
+  "name": "Waterfall Cave - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1339,
+  "y": 1976,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "waterfall-cave-mouth-1-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "waterfall-cave-mouth-1-underground",
+  "name": "Waterfall Cave - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 784,
+  "y": 3703,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "waterfall-cave-mouth-1-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "smugglers-caves-mouth-1-ground",
+  "name": "Smugglers Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 2200,
+  "y": 2738,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "smugglers-caves-mouth-1-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "smugglers-caves-mouth-1-underground",
+  "name": "Smugglers Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 3080,
+  "y": 5735,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "smugglers-caves-mouth-1-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "smugglers-caves-mouth-2-ground",
+  "name": "Smugglers Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1917,
+  "y": 3047,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "smugglers-caves-mouth-2-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "smugglers-caves-mouth-2-underground",
+  "name": "Smugglers Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 2326,
+  "y": 6559,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "smugglers-caves-mouth-2-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "rat-caves-mouth-1-ground",
+  "name": "Rat Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 2702,
+  "y": 1251,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "rat-caves-mouth-1-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "rat-caves-mouth-1-underground",
+  "name": "Rat Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 4417,
+  "y": 1771,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "rat-caves-mouth-1-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "rat-caves-mouth-2-ground",
+  "name": "Rat Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 3030,
+  "y": 1595,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "rat-caves-mouth-2-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "rat-caves-mouth-2-underground",
+  "name": "Rat Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 5292,
+  "y": 2687,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "rat-caves-mouth-2-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "north-tunnel-mouth-1-ground",
+  "name": "Tunnel entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1564,
+  "y": 656,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "north-tunnel-mouth-1-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "north-tunnel-mouth-1-underground",
+  "name": "Tunnel - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1384,
+  "y": 184,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "north-tunnel-mouth-1-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "north-tunnel-mouth-2-ground",
+  "name": "Tunnel entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1236,
+  "y": 834,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "north-tunnel-mouth-2-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "north-tunnel-mouth-2-underground",
+  "name": "Tunnel - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 508,
+  "y": 657,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "north-tunnel-mouth-2-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-1-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1614,
+  "y": 1329,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-1-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-1-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1518,
+  "y": 1977,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-1-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-2-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1781,
+  "y": 1507,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-2-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-2-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1963,
+  "y": 2452,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-2-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-3-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1785,
+  "y": 1211,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-3-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-3-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1974,
+  "y": 1663,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-3-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-4-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1826,
+  "y": 1584,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-4-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-4-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 2082,
+  "y": 2659,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-4-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-5-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1818,
+  "y": 1654,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-5-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-5-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 2061,
+  "y": 2846,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-5-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-6-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1703,
+  "y": 1712,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-6-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-6-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1755,
+  "y": 2999,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-6-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-7-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1519,
+  "y": 1757,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-7-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-7-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 1265,
+  "y": 3119,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-7-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-8-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1842,
+  "y": 1197,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-8-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-8-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 2125,
+  "y": 1627,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-8-ground",
+  "direction": "up",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-9-ground",
+  "name": "Escapee Caves - cave entrance",
+  "category": "Passage",
+  "level": "ground",
+  "x": 1861,
+  "y": 1314,
+  "note": "",
+  "toLevel": "underground",
+  "toMarker": "escapee-caves-mouth-9-underground",
+  "direction": "down",
+  "switchOnClick": true
+ },
+ {
+  "id": "escapee-caves-mouth-9-underground",
+  "name": "Escapee Caves - way out",
+  "category": "Passage",
+  "level": "underground",
+  "x": 2177,
+  "y": 1938,
+  "note": "",
+  "toLevel": "ground",
+  "toMarker": "escapee-caves-mouth-9-ground",
+  "direction": "up",
+  "switchOnClick": true
  }
 ]

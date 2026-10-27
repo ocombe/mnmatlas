@@ -660,7 +660,33 @@
         }
       ],
       "hiddenPrimaryStack": null,
-      "legacyStorage": {}
+      "legacyStorage": {},
+      "defaultLevel": "ground",
+      "levels": [
+        {
+          "id": "ground",
+          "title": "Ground",
+          "tilePath": "assets/tiles/fallen-pass/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "underground",
+          "title": "Underground",
+          "width": 5536,
+          "height": 6720,
+          "minZoom": 0,
+          "maxNativeZoom": 5,
+          "maxZoom": 7,
+          "coordinateZoom": 5,
+          "tileRevision": "underground-v5",
+          "tilePath": "assets/tiles/fallen-pass/underground/{z}/{x}/{y}.webp",
+          "labelsFile": "data/fallen-pass/underground-labels.json",
+          "defaultView": {
+            "mode": "fit",
+            "padding": 18,
+            "placeZoom": 4
+          }
+        }
+      ]
     },
     {
       "id": "wyrmsbane-tomb",

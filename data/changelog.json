@@ -2,6 +2,14 @@
  "entries": [
   {
    "date": "2026-10-27",
+   "title": "Fallen Pass: the Underground",
+   "text": "A new Underground tab charts every cave and tunnel of Fallen Pass, from the Rat Caves to the Smugglers Caves and the Escapee Caves; each cave mouth takes you between the two tabs. The waterfall by the rope bridge is now drawn, with the Waterfall Cave beneath it.",
+   "maps": [
+    "fallen-pass"
+   ]
+  },
+  {
+   "date": "2026-10-27",
    "title": "Undead Keep, inside and out",
    "text": "The Undead Keep in the Glass Flats has its own map: the hills, bridges and tower as you see them, and on the Inside the keep tab, the halls and tunnels hidden in the two hills. Every door has a pin that takes you through.",
    "maps": [

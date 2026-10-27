@@ -1,0 +1,56 @@
+{
+  "map": "fallen-pass",
+  "tileRevision": "underground-v5",
+  "coordinateZoom": 5,
+  "labels": [
+    {
+      "id": "underground-waterfall-cave",
+      "name": "Waterfall Cave",
+      "level": "underground",
+      "x": 465,
+      "y": 3839,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 1,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "underground-rat-caves",
+      "name": "Rat Caves",
+      "level": "underground",
+      "x": 4674,
+      "y": 2362,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 1,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "underground-escapee-caves",
+      "name": "Escapee Caves",
+      "level": "underground",
+      "x": 1727,
+      "y": 2404,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 1,
+      "approximate": true,
+      "note": ""
+    },
+    {
+      "id": "underground-smugglers-caves",
+      "name": "Smugglers Caves",
+      "level": "underground",
+      "x": 2879,
+      "y": 5805,
+      "kind": "district",
+      "priority": 80,
+      "minZoom": 1,
+      "approximate": true,
+      "note": ""
+    }
+  ],
+  "trainers": []
+}
