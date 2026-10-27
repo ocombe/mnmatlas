@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-20T22:44:06.807Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-20T23:07:51.505Z",
     "rows": []
   },
@@ -14343,6 +14339,59 @@
             "category": "Named mob"
           },
           "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-27T20:57:38.009Z",
+    "rows": [
+      {
+        "id": 1587,
+        "payloadHash": "9fa965d0b103ca9b974ae506a4cbc045c192f565f47eb423d6c922341bf8047b",
+        "updatedAt": "2026-10-27T20:56:36.821047+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "ratkin-31-40-3",
+          "payload": {
+            "to": [
+              1305,
+              1628
+            ],
+            "from": [
+              1305,
+              1628
+            ],
+            "name": "Ratkin",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1590,
+        "payloadHash": "8d220e607e0b6f919cd2205b1dd4a0fa6b854a322b7646ede0c5d21a04cca932",
+        "updatedAt": "2026-10-27T20:57:32.066898+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "bugs-21-25-1",
+          "payload": {
+            "to": [
+              2602,
+              1041
+            ],
+            "from": [
+              2438,
+              1125
+            ],
+            "name": "Beetles",
+            "approximate": false
+          },
+          "credit": false
         }
       }
     ]

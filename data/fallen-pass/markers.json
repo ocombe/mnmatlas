@@ -149,10 +149,11 @@
   ],
   "x": 1305,
   "y": 1628,
-  "approximate": true,
+  "approximate": false,
   "note": "",
   "minZoom": 2,
-  "level": "ground"
+  "level": "ground",
+  "community": true
  },
  {
   "id": "undead-lt20-1",
@@ -177,12 +178,13 @@
    21,
    25
   ],
-  "x": 2438,
-  "y": 1125,
-  "approximate": true,
+  "x": 2602,
+  "y": 1041,
+  "approximate": false,
   "note": "",
   "minZoom": 2,
-  "level": "ground"
+  "level": "ground",
+  "community": true
  },
  {
   "id": "undead-21-25-1",
