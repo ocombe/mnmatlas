@@ -286,13 +286,14 @@
     "id": "jakob-gefrey",
     "name": "Jakob Geffrey",
     "category": "Named mob",
-    "x": 2173.48,
-    "y": 2536.96,
+    "x": 2134,
+    "y": 2554,
     "level": "floor-1",
-    "approximate": true,
+    "approximate": false,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/jakob-geffrey",
-    "wikiId": "npc-jakob-geffrey"
+    "wikiId": "npc-jakob-geffrey",
+    "community": true
   },
   {
     "id": "timmon-bell",
@@ -385,12 +386,13 @@
     "name": "High Marshal Fionna Bromm",
     "category": "Named mob",
     "x": 1150,
-    "y": 1663.5,
+    "y": 1664,
     "level": "floor-4",
-    "approximate": true,
+    "approximate": false,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/high-marshal-fionna-bromm",
-    "wikiId": "npc-high-marshal-fionna-bromm"
+    "wikiId": "npc-high-marshal-fionna-bromm",
+    "community": true
   },
   {
     "id": "gerhardt-graves",

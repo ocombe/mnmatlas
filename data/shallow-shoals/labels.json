@@ -125,8 +125,8 @@
   {
    "id": "boat-zaedins-landing",
    "name": "Boat dock",
-   "x": 1340,
-   "y": 7330,
+   "x": 1359,
+   "y": 7496,
    "kind": "exit",
    "priority": 85,
    "minZoom": 1.5,
@@ -154,7 +154,8 @@
     "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
-   }
+   },
+   "community": true
   },
   {
    "id": "boat-player-island",

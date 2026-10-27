@@ -1318,11 +1318,32 @@
   "id": "community-1532",
   "community": true,
   "name": "Leathersmith Visali",
-  "note": "",
+  "note": "Quest NPC for Wyrmsbane Leather Armor",
   "x": 2490,
   "y": 1645,
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/leathersmith-visali",
   "wikiId": "npc-leathersmith-visali"
+ },
+ {
+  "id": "community-1578",
+  "community": true,
+  "name": "Forge Master Durthir",
+  "note": "Quest NPC For Wyrmsbane Plate & Chain Armor",
+  "x": 2429,
+  "y": 1567,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/forge-master-durthir"
+ },
+ {
+  "id": "community-1579",
+  "community": true,
+  "name": "Tailor Thaddeus",
+  "note": "Quest NPC for Wyrmsbane Cloth ARmor",
+  "x": 2419,
+  "y": 1528,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/tailor-thaddeus",
+  "wikiId": "npc-tailor-thaddeus"
  }
 ]

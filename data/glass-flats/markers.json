@@ -535,8 +535,8 @@
   "name": "Adept Kossco (levels ~51–52)",
   "category": "Named mob",
   "note": "near a scorched medic",
-  "x": 3092,
-  "y": 4903,
+  "x": 3230,
+  "y": 5019,
   "wiki": "https://monstersandmemories.wiki/npcs/adept-kossco",
   "wikiId": "npc-adept-kossco",
   "levels": [
@@ -698,5 +698,102 @@
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/captain-brey",
   "wikiId": "npc-captain-brey"
+ },
+ {
+  "id": "community-1576",
+  "community": true,
+  "name": "Duneshell",
+  "note": "Wanders around invisible near the edge of the salt flat but looks like any of the other beetles in the region once visible.",
+  "x": 7362,
+  "y": 5858,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/duneshell",
+  "wikiId": "npc-duneshell",
+  "levels": [
+   30,
+   30
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     6310,
+     6565
+    ],
+    [
+     6518,
+     6577
+    ],
+    [
+     6720,
+     6521
+    ],
+    [
+     7077,
+     6490
+    ],
+    [
+     7544,
+     6582
+    ],
+    [
+     7743,
+     6599
+    ],
+    [
+     7913,
+     6424
+    ],
+    [
+     8023,
+     5928
+    ],
+    [
+     7428,
+     5546
+    ],
+    [
+     6726,
+     4760
+    ],
+    [
+     6653,
+     4552
+    ],
+    [
+     6724,
+     4493
+    ],
+    [
+     6884,
+     4726
+    ],
+    [
+     7583,
+     5490
+    ],
+    [
+     8155,
+     5874
+    ],
+    [
+     8018,
+     6429
+    ],
+    [
+     7827,
+     6723
+    ],
+    [
+     6968,
+     6615
+    ],
+    [
+     6338,
+     6664
+    ]
+   ]
+  }
  }
 ]

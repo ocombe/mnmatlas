@@ -309,6 +309,10 @@
     {
       "name": "skegar",
       "what": "added"
+    },
+    {
+      "name": "randalphdk",
+      "what": "moved"
     }
   ],
   "marker:community-189": [
@@ -784,6 +788,60 @@
   "marker:community-1269": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1412": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1416": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1417": [
+    {
+      "name": "argus_q",
+      "what": "added"
+    }
+  ],
+  "marker:community-1484": [
+    {
+      "name": "randalphdk",
+      "what": "added"
+    }
+  ],
+  "marker:community-1485": [
+    {
+      "name": "randalphdk",
+      "what": "added"
+    }
+  ],
+  "marker:community-1486": [
+    {
+      "name": "randalphdk",
+      "what": "added"
+    }
+  ],
+  "marker:community-1487": [
+    {
+      "name": "randalphdk",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-fletcher-bowyer": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-1492": [
+    {
+      "name": "randalphdk",
       "what": "added"
     }
   ]

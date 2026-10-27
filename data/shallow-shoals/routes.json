@@ -36,45 +36,45 @@
    "to-vale-of-zintar": 5573,
    "to-fallen-pass": 9555,
    "to-grimtide-sanctum": 2446,
-   "boat-zaedins-landing": 7165,
+   "boat-zaedins-landing": 7179,
    "boat-player-island": 6085
   },
   "to-vale-of-zintar": {
    "to-keepers-bight": 5573,
    "to-fallen-pass": 3885,
    "to-grimtide-sanctum": 3469,
-   "boat-zaedins-landing": 5211,
+   "boat-zaedins-landing": 5173,
    "boat-player-island": 2034
   },
   "to-fallen-pass": {
    "to-keepers-bight": 9718,
    "to-vale-of-zintar": 3885,
    "to-grimtide-sanctum": 7120,
-   "boat-zaedins-landing": 6177,
+   "boat-zaedins-landing": 6102,
    "boat-player-island": 3310
   },
   "to-grimtide-sanctum": {
    "to-keepers-bight": 2608,
    "to-vale-of-zintar": 3479,
    "to-fallen-pass": 7102,
-   "boat-zaedins-landing": 3380,
+   "boat-zaedins-landing": 3413,
    "boat-player-island": 3642
   },
   "boat-zaedins-landing": {
-   "to-keepers-bight": 7155,
-   "to-vale-of-zintar": 5238,
-   "to-fallen-pass": 6231,
-   "to-grimtide-sanctum": 4031,
-   "boat-player-island": 3235
+   "to-keepers-bight": 7160,
+   "to-vale-of-zintar": 5210,
+   "to-fallen-pass": 6151,
+   "to-grimtide-sanctum": 4067,
+   "boat-player-island": 3162
   },
   "boat-player-island": {
    "to-keepers-bight": 6222,
    "to-vale-of-zintar": 2013,
    "to-fallen-pass": 3322,
    "to-grimtide-sanctum": 3585,
-   "boat-zaedins-landing": 3191
+   "boat-zaedins-landing": 3153
   }
  },
- "betweenKey": "3053944365-2087332833",
+ "betweenKey": "3711649508-1698551544",
  "unreached": []
 }

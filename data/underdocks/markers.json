@@ -250,12 +250,13 @@
   {
     "id": "wiki-fletcher-bowyer",
     "name": "Fletching — north-east quay",
-    "x": 4576,
-    "y": 3736,
+    "x": 4496,
+    "y": 3697,
     "level": "lower",
-    "approximate": true,
+    "approximate": false,
     "note": "Fletching and bow making.",
-    "category": "Tradeskill"
+    "category": "Tradeskill",
+    "community": true
   },
   {
     "id": "class-elementalist-wizard-enchanter",
@@ -720,8 +721,8 @@
     "name": "Belot",
     "category": "Named mob",
     "note": "",
-    "x": 4258,
-    "y": 749,
+    "x": 4512,
+    "y": 517,
     "level": "lower",
     "wiki": "https://monstersandmemories.wiki/npcs/belot",
     "wikiId": "npc-1790076523474-xutcr"
@@ -1571,5 +1572,135 @@
       "Recipes",
       "Weapons"
     ]
+  },
+  {
+    "id": "community-1412",
+    "community": true,
+    "name": "Grifty",
+    "note": "Outside the Western District gate, Underdocks",
+    "x": 1894,
+    "y": 3344,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/grifty",
+    "wikiId": "npc-grifty",
+    "vendor": "Shady merchant"
+  },
+  {
+    "id": "community-1416",
+    "community": true,
+    "name": "Bellred the Lost",
+    "note": "",
+    "x": 4373,
+    "y": 3716,
+    "level": "lower",
+    "category": "Vendor",
+    "vendor": "Fletcher",
+    "sells": [
+      "Ammo",
+      "Recipes"
+    ]
+  },
+  {
+    "id": "community-1417",
+    "community": true,
+    "name": "Cruuk Grimbak",
+    "note": "",
+    "x": 4351,
+    "y": 3577,
+    "level": "lower",
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/cruuk-grimbak",
+    "wikiId": "npc-cruuk-grimbak"
+  },
+  {
+    "id": "community-1484",
+    "community": true,
+    "name": "Wererat caves",
+    "note": "Go up the ramp, cross bridge, jump on mushrooms, climb ropes. multiple caves with were rats from at least 11 to 13. Players refer to the area as \"upper wererats\"",
+    "x": 1561,
+    "y": 3651,
+    "level": "lower",
+    "category": "Mob camp",
+    "levels": [
+      10,
+      14
+    ],
+    "mobs": [
+      {
+        "name": "A wererat plaguespreader",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-wererat-plaguespreader",
+        "wikiId": "npc-a-wererat-plaguespreader"
+      },
+      {
+        "name": "A wererat lancer",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-wererat-lancer",
+        "wikiId": "npc-a-wererat-lancer"
+      },
+      {
+        "name": "A wererat fanatic",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-wererat-fanatic",
+        "wikiId": "npc-a-wererat-fanatic"
+      },
+      {
+        "name": "A wererat fiend",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-wererat-fiend",
+        "wikiId": "npc-a-wererat-fiend"
+      }
+    ]
+  },
+  {
+    "id": "community-1485",
+    "community": true,
+    "name": "Ramp goes up to wererat caves.",
+    "note": "",
+    "x": 926,
+    "y": 3630,
+    "level": "lower",
+    "category": "Stairs"
+  },
+  {
+    "id": "community-1486",
+    "community": true,
+    "name": "Riddrick the Cursed",
+    "note": "Mob for Archer level 8 class quest randomly spawns in one of the caves(or holes). Only unique loot is the head.",
+    "x": 1656,
+    "y": 3624,
+    "level": "lower",
+    "category": "Named mob",
+    "levels": [
+      14,
+      14
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1487",
+    "community": true,
+    "name": "Rope",
+    "note": "Several ropes to climb mushrooms",
+    "x": 1455,
+    "y": 3785,
+    "level": "lower",
+    "category": "Passage",
+    "way": "Climb",
+    "oneWay": false
+  },
+  {
+    "id": "community-1492",
+    "community": true,
+    "name": "Jorlach the Fearless",
+    "note": "Only unique loot is his head used for the level 8 Shadowknight class quest.",
+    "x": 4451,
+    "y": 462,
+    "level": "lower",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/jorlach-the-fearless",
+    "wikiId": "npc-jorlach-the-fearless",
+    "levels": [
+      14,
+      14
+    ],
+    "ambush": false
   }
 ]

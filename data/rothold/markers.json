@@ -102,5 +102,69 @@
     "toMarker": "gorge-lift-2",
     "direction": "up",
     "switchOnClick": true
+  },
+  {
+    "id": "community-1360",
+    "community": true,
+    "name": "Rootmind",
+    "note": "Wandering in center of the mushroom pit",
+    "x": 4124,
+    "y": 2450,
+    "level": "level-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/rootmind",
+    "wikiId": "npc-rootmind"
+  },
+  {
+    "id": "community-1479",
+    "community": true,
+    "name": "Thrallmaker Syllis",
+    "note": "",
+    "x": 3285,
+    "y": 1558,
+    "level": "level-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/thrallmaker-syllis",
+    "wikiId": "npc-thrallmaker-syllis",
+    "levels": [
+      40,
+      40
+    ]
+  },
+  {
+    "id": "community-1510",
+    "community": true,
+    "name": "Stairs to Dinning Hall Floor 1",
+    "note": "",
+    "x": 4516,
+    "y": 1254,
+    "level": "level-4",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "level-3",
+    "direction": "up"
+  },
+  {
+    "id": "community-1511",
+    "community": true,
+    "name": "Stairs up to lvl 3",
+    "note": "",
+    "x": 4233,
+    "y": 1522,
+    "level": "level-4",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "level-5",
+    "direction": "up"
+  },
+  {
+    "id": "community-1512",
+    "community": true,
+    "name": "Wizard Exodus",
+    "note": "Wizards and their evacuated group members will teleport here.",
+    "x": 4128,
+    "y": 1616,
+    "level": "level-2",
+    "category": "Respawn point"
   }
 ]

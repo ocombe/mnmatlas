@@ -207,6 +207,10 @@
     {
       "name": "zekez.",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-762": [
@@ -279,6 +283,36 @@
     {
       "name": "argus_q",
       "what": "moved"
+    }
+  ],
+  "marker:community-1276": [
+    {
+      "name": "xantom69420",
+      "what": "added"
+    }
+  ],
+  "marker:community-1407": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1438": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1540": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1541": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
     }
   ]
 }

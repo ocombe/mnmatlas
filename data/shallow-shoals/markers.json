@@ -10,36 +10,6 @@
   "note": "Bank at Zaedin’s Landing."
  },
  {
-  "id": "zaedin-merchants",
-  "name": "General goods, used weapons, an exotic cook",
-  "category": "Vendor",
-  "x": 1430,
-  "y": 7400,
-  "minZoom": 3,
-  "approximate": true,
-  "note": "Merchants at Zaedin’s Landing: a gnome general goods merchant, a dwarf used weapons dealer and a wood elf exotic cook."
- },
- {
-  "id": "zaedin-barkeep",
-  "name": "Barkeep Zahra",
-  "category": "Inn",
-  "x": 1475,
-  "y": 7215,
-  "minZoom": 3,
-  "approximate": true,
-  "note": "At Zaedin’s Landing."
- },
- {
-  "id": "zaedin-quests",
-  "name": "Captain Harkan Saafir, Fizzle Screwtape, Nadim Al-Saraf",
-  "category": "Quest NPC",
-  "x": 1505,
-  "y": 7130,
-  "minZoom": 3,
-  "approximate": true,
-  "note": "Quest givers at Zaedin’s Landing: “Dealing with the Blacktide Orcs” and “Fizzle Screwtape’s Critical Research” (40+), and the Landing Loop quest."
- },
- {
   "id": "zaedin-appraiser",
   "name": "Silver Ledger appraiser",
   "category": "Notable NPC",
@@ -77,11 +47,12 @@
   "id": "pirate-island-named",
   "name": "Captain Jonas Cossa (about level 45)",
   "category": "Named mob",
-  "x": 3700,
-  "y": 13050,
+  "x": 3775,
+  "y": 13153,
   "minZoom": 3,
-  "approximate": true,
-  "note": "Pirate Island, with Gallows Krane and the Ghost of Selam."
+  "approximate": false,
+  "note": "Pirate Island, with Gallows Krane and the Ghost of Selam.",
+  "community": true
  },
  {
   "id": "barkeep-glior",
@@ -107,11 +78,12 @@
   "id": "brother-luka",
   "name": "Brother Luka",
   "category": "Quest NPC",
-  "x": 3080,
-  "y": 10800,
+  "x": 3046,
+  "y": 10945,
   "minZoom": 3,
-  "approximate": true,
-  "note": "Werejackal Island: “Pelts for the Festival” (30+)."
+  "approximate": false,
+  "note": "Werejackal Island: “Pelts for the Festival” (30+).",
+  "community": true
  },
  {
   "id": "realtor-wafai",
@@ -245,120 +217,132 @@
   "name": "Witchguard Hellblade",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5600,
-  "y": 1750,
-  "approximate": true,
+  "x": 5791,
+  "y": 1779,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    45,
    45
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/witchguard-hellblade",
-  "wikiId": "npc-witchguard-hellblade"
+  "wikiId": "npc-witchguard-hellblade",
+  "community": true
  },
  {
   "id": "wanted-witchguard-primus",
   "name": "Witchguard Primus",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5706,
-  "y": 1794,
-  "approximate": true,
+  "x": 5371,
+  "y": 1805,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    45,
    45
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/witchguard-primus",
-  "wikiId": "npc-witchguard-primus"
+  "wikiId": "npc-witchguard-primus",
+  "community": true
  },
  {
   "id": "wanted-witchlord-kruurgal",
   "name": "Witchlord Kruurgal",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5750,
-  "y": 1900,
-  "approximate": true,
+  "x": 5587,
+  "y": 1707,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    45,
    45
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/witchlord-kruurgal",
-  "wikiId": "npc-witchlord-kruurgal"
+  "wikiId": "npc-witchlord-kruurgal",
+  "community": true
  },
  {
   "id": "wanted-herald-of-muurtu",
   "name": "Herald of Muurtu",
-  "category": "Quest NPC",
+  "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5706,
-  "y": 2006,
-  "approximate": true,
+  "x": 5838,
+  "y": 1928,
+  "approximate": false,
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/herald-of-muurtu",
-  "wikiId": "npc-herald-of-muurtu"
+  "wikiId": "npc-herald-of-muurtu",
+  "community": true,
+  "levels": [
+   45,
+   45
+  ]
  },
  {
   "id": "wanted-high-priest-of-muurtu",
   "name": "High Priest of Muurtu",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5600,
-  "y": 2050,
-  "approximate": true,
+  "x": 5455,
+  "y": 1933,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    45,
    45
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/high-priest-of-muurtu",
-  "wikiId": "npc-high-priest-of-muurtu"
+  "wikiId": "npc-high-priest-of-muurtu",
+  "community": true
  },
  {
   "id": "wanted-champion-of-muurtu",
   "name": "Champion of Muurtu",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5494,
-  "y": 2006,
-  "approximate": true,
+  "x": 5455,
+  "y": 1884,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    45,
    45
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/champion-of-muurtu",
-  "wikiId": "npc-champion-of-muurtu"
+  "wikiId": "npc-champion-of-muurtu",
+  "community": true
  },
  {
   "id": "wanted-high-sister-sarinius",
   "name": "High-Sister Sarinius",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5450,
-  "y": 1900,
-  "approximate": true,
+  "x": 5845,
+  "y": 1996,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    45,
    45
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/high-sister-sarinius",
-  "wikiId": "npc-high-sister-sarinius"
+  "wikiId": "npc-high-sister-sarinius",
+  "community": true
  },
  {
   "id": "wanted-high-mother-haathala",
   "name": "High-Mother Haathala",
   "category": "Named mob",
   "note": "Black Shoals Fortress.",
-  "x": 5494,
-  "y": 1794,
-  "approximate": true,
+  "x": 4483,
+  "y": 743,
+  "approximate": false,
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/high-mother-haathala",
-  "wikiId": "npc-high-mother-haathala"
+  "wikiId": "npc-high-mother-haathala",
+  "community": true
  },
  {
   "id": "wanted-madame-vespera",
@@ -377,16 +361,17 @@
   "name": "Mrvath Cinderhand",
   "category": "Named mob",
   "note": "Pirate Island.",
-  "x": 3813,
-  "y": 13115,
-  "approximate": true,
+  "x": 3598,
+  "y": 12644,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    40,
    40
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/mrvath-cinderhand",
-  "wikiId": "npc-mrvath-cinderhand"
+  "wikiId": "npc-mrvath-cinderhand",
+  "community": true
  },
  {
   "id": "wanted-sharkie",
@@ -421,12 +406,13 @@
   "name": "Tariq the Revealer",
   "category": "Quest NPC",
   "note": "Roams the second floor of the central buildings at Zaedin’s Landing.",
-  "x": 1530,
-  "y": 7050,
-  "approximate": true,
+  "x": 1424,
+  "y": 7336,
+  "approximate": false,
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/tariq-the-revealer",
-  "wikiId": "npc-tariq-the-revealer"
+  "wikiId": "npc-tariq-the-revealer",
+  "community": true
  },
  {
   "id": "wanted-ngakepoto",
@@ -445,15 +431,187 @@
   "name": "Grand Spiritbinder Murk",
   "category": "Named mob",
   "note": "Smugglers Isle.",
-  "x": 4828,
-  "y": 5092,
-  "approximate": true,
+  "x": 4677,
+  "y": 5511,
+  "approximate": false,
   "minZoom": 3,
   "levels": [
    36,
    36
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/grand-spiritbinder-murk",
-  "wikiId": "npc-grand-spiritbinder-murk"
+  "wikiId": "npc-grand-spiritbinder-murk",
+  "community": true
+ },
+ {
+  "id": "community-1448",
+  "community": true,
+  "name": "Sister Elsi",
+  "note": "",
+  "x": 3112,
+  "y": 10893,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/sister-elsi",
+  "wikiId": "npc-sister-elsi",
+  "levels": [
+   42,
+   42
+  ]
+ },
+ {
+  "id": "community-1542",
+  "community": true,
+  "name": "Hegumenia Mariam",
+  "note": "",
+  "x": 4346,
+  "y": 972,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/hegumenia-mariam",
+  "wikiId": "npc-hegumenia-mariam",
+  "levels": [
+   44,
+   44
+  ]
+ },
+ {
+  "id": "community-1543",
+  "community": true,
+  "name": "Caluzaan the Spurned",
+  "note": "",
+  "x": 2713,
+  "y": 10195,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/caluzaan-the-spurned",
+  "wikiId": "npc-caluzaan-the-spurned",
+  "levels": [
+   29,
+   29
+  ]
+ },
+ {
+  "id": "community-1544",
+  "community": true,
+  "name": "Captain Ironhull",
+  "note": "",
+  "x": 4828,
+  "y": 5957,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-ironhull",
+  "wikiId": "npc-captain-ironhull"
+ },
+ {
+  "id": "community-1562",
+  "community": true,
+  "name": "Samira Moonpalm",
+  "note": "On Zaedin's Landing island. Located on the Second floor balcony of the central buildings. Possible Quest NPC or Named Mob.",
+  "x": 1445,
+  "y": 7449,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/samira-moonpalm",
+  "wikiId": "npc-samira-moonpalm"
+ },
+ {
+  "id": "community-1563",
+  "community": true,
+  "name": "Fizzle Screwtape",
+  "note": "On Zaedin's Landing island. Located on the first floor of the central buildings. Gives quest for Sea Giant's Handkerchief\n\nNote: Adding an exact pin... Many in this area are bundled as a single pin slapped on a random, incorrect spot...",
+  "x": 1458,
+  "y": 7405,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/fizzle-screwtape",
+  "wikiId": "npc-fizzle-screwtape"
+ },
+ {
+  "id": "community-1564",
+  "community": true,
+  "name": "A used weapons dealer",
+  "note": "Used weapons dealer, first floor.",
+  "x": 1433,
+  "y": 7359,
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
+  "wikiId": "npc-a-used-weapons-dealer",
+  "vendor": "Used weapons dealer"
+ },
+ {
+  "id": "community-1566",
+  "community": true,
+  "name": "A goods merchant",
+  "note": "Goods merchant, first floor.",
+  "x": 1421,
+  "y": 7344,
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-goods-merchant",
+  "wikiId": "npc-a-goods-merchant",
+  "vendor": "General goods"
+ },
+ {
+  "id": "community-1567",
+  "community": true,
+  "name": "An exotic cook",
+  "note": "On Zaedin's Landing island, upstairs from the cooking apprentice room. Will sell Basilisk Spice (for sweet treat quest) once reputation with Silver Ledger raised.",
+  "x": 1412,
+  "y": 7321,
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/an-exotic-cook",
+  "wikiId": "npc-an-exotic-cook",
+  "vendor": "Cook"
+ },
+ {
+  "id": "community-1569",
+  "community": true,
+  "name": "Barkeep Zahra",
+  "note": "The Rusted Anchor, on Zaedin's Landing island. First floor. Sells food and drink.",
+  "x": 1388,
+  "y": 7290,
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/barkeep-zahra",
+  "wikiId": "npc-barkeep-zahra",
+  "vendor": "Barkeep",
+  "sells": [
+   "Food & drink"
+  ]
+ },
+ {
+  "id": "community-1572",
+  "community": true,
+  "name": "Banker Bahdi",
+  "note": "On Zaedin's Landing island. Inside the ground floor buildings by the ship dock.",
+  "x": 1455,
+  "y": 7484,
+  "category": "Bank",
+  "wiki": "https://monstersandmemories.wiki/npcs/banker-bahdi",
+  "wikiId": "npc-banker-bahdi"
+ },
+ {
+  "id": "community-1573",
+  "community": true,
+  "name": "Assistant Musaid",
+  "note": "Customs Agent (the npc that your stuff gets sent too when you don't pay rent on a property.)\n\nNote, cannot find wiki link to generalized customs agent page, nor this specific npc, please fill if you can find it.",
+  "x": 1431,
+  "y": 7447,
+  "category": "Notable NPC"
+ },
+ {
+  "id": "community-1574",
+  "community": true,
+  "name": "Captain Harkan Saafir",
+  "note": "Both Harkan, and 'a Landing lieutenant' share the same location, both function the same for the quests 'Dealing with the Blacktide Orcs' and 'Landing Loop Quest'.",
+  "x": 1389,
+  "y": 7248,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-harkan-saafir",
+  "wikiId": "npc-captain-harkan-saafir"
+ },
+ {
+  "id": "community-1581",
+  "community": true,
+  "name": "Nadim Al-Saraf",
+  "note": "Top of lighthouse in Zaedin's Landing",
+  "x": 1608,
+  "y": 7241,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/nadim-al-saraf",
+  "wikiId": "npc-nadim-al-saraf"
  }
 ]

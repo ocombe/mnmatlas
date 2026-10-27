@@ -155,13 +155,14 @@
    45,
    45
   ],
-  "x": 6256,
-  "y": 1451,
+  "x": 3005,
+  "y": 2426,
   "approximate": true,
   "note": "Spawns by the last stump at the west end of the giants’ road, near the three-way crossing, and wanders down the road.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/yurl-rootrender",
-  "wikiId": "npc-yurl-rootrender"
+  "wikiId": "npc-yurl-rootrender",
+  "community": true
  },
  {
   "id": "hill-giants-1",
@@ -200,12 +201,23 @@
   "mobs": []
  },
  {
-  "id": "wizard-portal",
-  "name": "Wizard Portal",
+  "id": "community-1391",
+  "community": true,
+  "name": "Wizard Portal Spire",
+  "note": "This is where the Wizard's Portal to Scarwood takes you.",
+  "x": 2717,
+  "y": 2332,
   "category": "Teleporter",
-  "note": "Wizards and their group mates arrive here by teleport spell.",
-  "x": 2719,
-  "y": 2328,
+  "travel": "Teleporter"
+ },
+ {
+  "id": "community-1409",
+  "community": true,
+  "name": "Wizard Portal",
+  "note": "Wizards and their group mates will be teleported to this location via Gate or Portal spells.",
+  "x": 2717,
+  "y": 2338,
+  "category": "Teleporter",
   "travel": "Teleporter"
  }
 ]

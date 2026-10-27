@@ -25,6 +25,10 @@
     {
       "name": "nicny86",
       "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
     }
   ],
   "marker:goblins-17-22-1": [
@@ -130,6 +134,12 @@
   "marker:community-1427": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1576": [
+    {
+      "name": "nicny86",
       "what": "added"
     }
   ]

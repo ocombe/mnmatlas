@@ -31,6 +31,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "ziros22",
+      "what": "reshaped"
     }
   ],
   "marker:undead-10-15-1": [
@@ -129,6 +133,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-803": [
@@ -194,6 +202,18 @@
   "marker:community-1243": [
     {
       "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1467": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1539": [
+    {
+      "name": "moff_lamp",
       "what": "added"
     }
   ]

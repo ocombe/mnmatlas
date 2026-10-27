@@ -398,8 +398,8 @@
    10,
    15
   ],
-  "x": 6132,
-  "y": 3023,
+  "x": 6241,
+  "y": 3097,
   "approximate": true,
   "note": "",
   "minZoom": 3,
@@ -410,7 +410,89 @@
     "wikiId": "npc-a-bandit"
    }
   ],
-  "community": true
+  "community": true,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     6096,
+     3027
+    ],
+    [
+     6085,
+     2976
+    ],
+    [
+     6156,
+     2917
+    ],
+    [
+     6260,
+     2893
+    ],
+    [
+     6341,
+     2934
+    ],
+    [
+     6453,
+     3052
+    ],
+    [
+     6375,
+     3065
+    ],
+    [
+     6289,
+     3032
+    ],
+    [
+     6221,
+     2960
+    ],
+    [
+     6170,
+     2971
+    ],
+    [
+     6139,
+     3008
+    ],
+    [
+     6147,
+     3058
+    ],
+    [
+     6261,
+     3165
+    ],
+    [
+     6426,
+     3225
+    ],
+    [
+     6336,
+     3311
+    ],
+    [
+     6191,
+     3252
+    ],
+    [
+     6092,
+     3169
+    ],
+    [
+     6073,
+     3095
+    ],
+    [
+     6071,
+     3048
+    ]
+   ]
+  }
  },
  {
   "id": "humanoid-10-15-2",
@@ -714,6 +796,11 @@
    },
    {
     "name": "Green Eye Bass"
+   },
+   {
+    "name": "Raw Freshwater Crab",
+    "wiki": "https://monstersandmemories.wiki/items/raw-freshwater-crab",
+    "wikiId": "item-raw-freshwater-crab"
    }
   ]
  },
@@ -912,5 +999,27 @@
   "approximate": true,
   "wiki": "https://monstersandmemories.wiki/npcs/blackscale",
   "wikiId": "npc-blackscale"
+ },
+ {
+  "id": "community-1467",
+  "community": true,
+  "name": "Maleq",
+  "note": "Named giant that can spawn at night. level 45",
+  "x": 3270,
+  "y": 2901,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/maleq",
+  "wikiId": "npc-maleq"
+ },
+ {
+  "id": "community-1539",
+  "community": true,
+  "name": "Head Researcher Aashir",
+  "note": "Just before night",
+  "x": 4288,
+  "y": 1417,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/head-researcher-aashir",
+  "wikiId": "npc-head-researcher-aashir"
  }
 ]

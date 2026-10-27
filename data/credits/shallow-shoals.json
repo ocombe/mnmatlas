@@ -46,5 +46,195 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:wanted-high-priest-of-muurtu": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-herald-of-muurtu": [
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:wanted-high-sister-sarinius": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-witchguard-primus": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-1448": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:wanted-witchguard-hellblade": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-witchlord-kruurgal": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-champion-of-muurtu": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-high-mother-haathala": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-1542": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1543": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1544": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:wanted-mrvath-cinderhand": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:pirate-island-named": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-grand-spiritbinder-murk": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-tariq-the-revealer": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:brother-luka": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "label:boat-zaedins-landing": [
+    {
+      "name": "mrbrewed",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1562": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1563": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1564": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1566": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1567": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:zaedin-merchants": [
+    {
+      "name": "mrbrewed",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1569": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:zaedin-barkeep": [
+    {
+      "name": "mrbrewed",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1572": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1573": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1574": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:community-1581": [
+    {
+      "name": "mrbrewed",
+      "what": "added"
+    }
+  ],
+  "marker:zaedin-quests": [
+    {
+      "name": "mrbrewed",
+      "what": "removed"
+    }
   ]
 }

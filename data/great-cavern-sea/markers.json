@@ -111,12 +111,16 @@
  {
   "id": "community-739",
   "community": true,
-  "name": "Feed Beetle",
+  "name": "Feed Beetles",
   "category": "Mob camp",
-  "note": "Red to 22 -- Blue to 35",
+  "note": "",
   "x": 2933,
   "y": 4763,
-  "mobs": []
+  "mobs": [],
+  "levels": [
+   32,
+   33
+  ]
  },
  {
   "id": "community-740",

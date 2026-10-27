@@ -3292,5 +3292,16 @@
     "category": "Quest NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/red-mantle-quartermaster",
     "wikiId": "npc-red-mantle-quartermaster"
+  },
+  {
+    "id": "community-1538",
+    "community": true,
+    "name": "Customs Agent Ormur",
+    "note": "",
+    "x": 931,
+    "y": 1279,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/customs-agent-ormur",
+    "wikiId": "npc-customs-agent-ormur"
   }
 ]

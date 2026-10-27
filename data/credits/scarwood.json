@@ -10,5 +10,29 @@
       "name": null,
       "what": "removed"
     }
+  ],
+  "marker:yurl-rootrender": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1391": [
+    {
+      "name": "ehcko",
+      "what": "added"
+    }
+  ],
+  "marker:community-1409": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:wizard-portal": [
+    {
+      "name": null,
+      "what": "removed"
+    }
   ]
 }

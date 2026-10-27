@@ -1083,5 +1083,21 @@
   "direction": "up",
   "name": "Out to the Canyon",
   "switchOnClick": true
+ },
+ {
+  "id": "community-1299",
+  "community": true,
+  "name": "Hadhraman, First Among Alphas",
+  "note": "From Shaded Dunes entrance follow the path that splits right. They spawn up stairs next to Crafty Rufkas.",
+  "x": 1935,
+  "y": 2167,
+  "level": "floor-1",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/hadhraman-first-among-alphas",
+  "wikiId": "npc-hadhraman-first-among-alphas",
+  "levels": [
+   17,
+   17
+  ]
  }
 ]

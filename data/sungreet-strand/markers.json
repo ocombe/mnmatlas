@@ -891,7 +891,7 @@
  {
   "id": "community-754",
   "community": true,
-  "name": "Ashira Packleader",
+  "name": "An ashira packleader",
   "category": "Named mob",
   "note": "6 Min spawntimer",
   "x": 4496,
@@ -1085,5 +1085,91 @@
   "approximate": true,
   "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-urka",
   "wikiId": "npc-taskmaster-urka"
+ },
+ {
+  "id": "community-1276",
+  "community": true,
+  "name": "Grantha Scrigglehex",
+  "note": "Spawns in group with 2 others high up on the wall up several ladders and across the top of the entrance to Tel Ekir.",
+  "x": 1040,
+  "y": 2523,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/grantha-scrigglehex",
+  "wikiId": "npc-grantha-scrigglehex",
+  "levels": [
+   7,
+   7
+  ]
+ },
+ {
+  "id": "community-1407",
+  "community": true,
+  "name": "Seeric of Maelsin Thrys",
+  "note": "",
+  "x": 2434,
+  "y": 4189,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/seeric-of-maelsin-thrys",
+  "wikiId": "npc-seeric-of-maelsin-thrys",
+  "levels": [
+   20,
+   20
+  ]
+ },
+ {
+  "id": "community-1438",
+  "community": true,
+  "name": "Palm Spiders",
+  "note": "Weavers can root, Creepers are in stealth.",
+  "x": 2596,
+  "y": 2857,
+  "category": "Mob camp",
+  "levels": [
+   21,
+   23
+  ],
+  "mobs": [
+   {
+    "name": "A palm weaver",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-palm-weaver",
+    "wikiId": "npc-a-palm-weaver"
+   },
+   {
+    "name": "A palm hunter",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-palm-hunter",
+    "wikiId": "npc-a-palm-hunter"
+   },
+   {
+    "name": "A palm creeper",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-palm-creeper",
+    "wikiId": "npc-a-palm-creeper"
+   }
+  ]
+ },
+ {
+  "id": "community-1540",
+  "community": true,
+  "name": "Bree Weatherstoll",
+  "note": "30 min respawn",
+  "x": 3013,
+  "y": 6510,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/bree-weatherstoll",
+  "wikiId": "npc-bree-weatherstoll",
+  "levels": [
+   50,
+   50
+  ]
+ },
+ {
+  "id": "community-1541",
+  "community": true,
+  "name": "Mercenary Lord Hrrush",
+  "note": "",
+  "x": 2644,
+  "y": 2393,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/mercenary-lord-hrrush",
+  "wikiId": "npc-mercenary-lord-hrrush"
  }
 ]

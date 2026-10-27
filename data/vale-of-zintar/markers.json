@@ -368,5 +368,31 @@
   "x": 4530,
   "y": 5923,
   "travel": "Teleporter"
+ },
+ {
+  "id": "community-1408",
+  "community": true,
+  "name": "Fishing",
+  "note": "",
+  "x": 2936,
+  "y": 5343,
+  "category": "Fishing spot",
+  "fish": [
+   {
+    "name": "Glimmerscale Herring",
+    "wiki": "https://monstersandmemories.wiki/items/glimmerscale-herring",
+    "wikiId": "item-glimmerscale-herring"
+   },
+   {
+    "name": "Spotted Angelfish",
+    "wiki": "https://monstersandmemories.wiki/items/spotted-angelfish",
+    "wikiId": "item-spotted-angelfish"
+   },
+   {
+    "name": "Oasis Perch",
+    "wiki": "https://monstersandmemories.wiki/items/oasis-perch",
+    "wikiId": "item-oasis-perch"
+   }
+  ]
  }
 ]

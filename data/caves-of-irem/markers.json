@@ -736,5 +736,20 @@
         "wikiId": "npc-an-exiled-noble"
       }
     ]
+  },
+  {
+    "id": "community-1565",
+    "community": true,
+    "name": "Vashkur Roostbound",
+    "note": "",
+    "x": 4467,
+    "y": 6702,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/vashkur-roostbound",
+    "wikiId": "npc-vashkur-roostbound",
+    "levels": [
+      35,
+      35
+    ]
   }
 ]
