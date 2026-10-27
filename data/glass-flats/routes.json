@@ -70,23 +70,6 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 3104.6,
-    "y": 5612.7,
-    "level": "ground",
-    "exact": true
-   },
-   "to": {
-    "x": 3158.6,
-    "y": 5613.6,
-    "level": "ground",
-    "exact": true
-   }
-  },
-  {
-   "name": "Passage",
-   "kind": "passage",
-   "oneWay": false,
-   "from": {
     "x": 2852.6,
     "y": 5143.9,
     "level": "ground",
@@ -95,23 +78,6 @@
    "to": {
     "x": 2852.6,
     "y": 5151.8,
-    "level": "ground",
-    "exact": true
-   }
-  },
-  {
-   "name": "Passage",
-   "kind": "passage",
-   "oneWay": false,
-   "from": {
-    "x": 3260.6,
-    "y": 4882.7,
-    "level": "ground",
-    "exact": true
-   },
-   "to": {
-    "x": 3254.6,
-    "y": 4836.2,
     "level": "ground",
     "exact": true
    }
@@ -139,6 +105,6 @@
    "to-vale-of-zintar": 2515
   }
  },
- "betweenKey": "1434625642-3981251846",
+ "betweenKey": "3251770696-2500707604",
  "unreached": []
 }
