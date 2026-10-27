@@ -101,6 +101,18 @@
    "arrow": "west",
    "toMap": "vale-of-zintar",
    "toPlace": "to-glass-flats"
+  },
+  {
+   "id": "to-undead-keep",
+   "name": "to Undead Keep",
+   "x": 2706,
+   "y": 5226,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 2,
+   "arrow": "east",
+   "toMap": "undead-keep",
+   "toPlace": "exit-glass-flats"
   }
  ],
  "trainers": []

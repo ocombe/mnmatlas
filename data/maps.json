@@ -807,6 +807,54 @@
       "legacyStorage": {}
     },
     {
+      "id": "undead-keep",
+      "title": "Undead Keep",
+      "subtitle": "Outside and inside the keep",
+      "cartoucheKicker": "In the Glass Flats",
+      "breadcrumb": "Monsters & Memories / Undead Keep",
+      "description": "An illustrated fan atlas of the Undead Keep in the Glass Flats: the two hills, the bridges and the blue-flamed tower outside, and the halls and tunnels hidden inside the hills, with every door between them.",
+      "width": 4704,
+      "height": 3872,
+      "minZoom": 0,
+      "maxNativeZoom": 5,
+      "maxZoom": 6,
+      "coordinateZoom": 5,
+      "tileSize": 256,
+      "tileRevision": "v1",
+      "tilePath": "assets/tiles/undead-keep/outside/{z}/{x}/{y}.webp",
+      "markersFile": "data/undead-keep/markers.json",
+      "labelsFile": "data/undead-keep/labels.json",
+      "hiddenAreasFile": null,
+      "defaultView": {
+        "mode": "fit",
+        "padding": 18,
+        "placeZoom": 4
+      },
+      "defaultLevel": "outside",
+      "levels": [
+        {
+          "id": "outside",
+          "title": "Outside",
+          "tilePath": "assets/tiles/undead-keep/outside/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "inside",
+          "title": "Inside the keep",
+          "tilePath": "assets/tiles/undead-keep/inside/{z}/{x}/{y}.webp"
+        }
+      ],
+      "attribution": {
+        "map": "Illustrated fan atlas · Not an official game map",
+        "text": "Illustrated fan map; door positions approximate.",
+        "sourceTitle": "",
+        "sourceUrl": "",
+        "license": "",
+        "licenseUrl": ""
+      },
+      "hiddenPrimaryStack": null,
+      "legacyStorage": {}
+    },
+    {
       "id": "ancient-crypt",
       "routes": "data/ancient-crypt/routes.json",
       "title": "Ancient Crypt",

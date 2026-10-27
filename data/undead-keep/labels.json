@@ -1,0 +1,59 @@
+{
+ "map": "undead-keep",
+ "tileRevision": "v1",
+ "coordinateZoom": 5,
+ "labels": [
+  {
+   "id": "south-hill-halls",
+   "name": "South hill halls",
+   "level": "inside",
+   "x": 2207,
+   "y": 2473,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "tunnel-halls",
+   "name": "Tunnel halls",
+   "level": "inside",
+   "x": 1809,
+   "y": 1057,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "east-halls",
+   "name": "East halls",
+   "level": "inside",
+   "x": 2672,
+   "y": 911,
+   "kind": "district",
+   "priority": 80,
+   "minZoom": 2,
+   "approximate": true,
+   "note": ""
+  },
+  {
+   "id": "exit-glass-flats",
+   "name": "to Glass Flats",
+   "level": "outside",
+   "x": 406,
+   "y": 2056,
+   "kind": "exit",
+   "priority": 95,
+   "minZoom": 1,
+   "arrow": "west",
+   "toMap": "glass-flats",
+   "toPlace": "to-undead-keep",
+   "approximate": true,
+   "note": ""
+  }
+ ],
+ "trainers": []
+}
