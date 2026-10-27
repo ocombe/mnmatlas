@@ -51,6 +51,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:wanted-herald-of-muurtu": [
@@ -85,6 +89,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:wanted-witchlord-kruurgal": [
@@ -97,9 +105,17 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:wanted-high-mother-haathala": [
+    {
+      "name": null,
+      "what": "moved"
+    },
     {
       "name": null,
       "what": "moved"
@@ -144,6 +160,10 @@
   "marker:wanted-tariq-the-revealer": [
     {
       "name": null,
+      "what": "moved"
+    },
+    {
+      "name": "mrbrewed",
       "what": "moved"
     }
   ],

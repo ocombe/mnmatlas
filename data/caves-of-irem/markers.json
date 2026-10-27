@@ -751,5 +751,17 @@
       35,
       35
     ]
+  },
+  {
+    "id": "community-1589",
+    "community": true,
+    "name": "Highblade",
+    "note": "",
+    "x": 4482,
+    "y": 6708,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/highblade",
+    "wikiId": "npc-highblade",
+    "ambush": false
   }
 ]

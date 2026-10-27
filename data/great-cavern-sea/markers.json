@@ -694,5 +694,20 @@
    45
   ],
   "ambush": false
+ },
+ {
+  "id": "community-1588",
+  "community": true,
+  "name": "Sherrick",
+  "note": "PH is a goblin diver. Sherrick spawns on the southside ramp leading to the paths above.",
+  "x": 3118,
+  "y": 7281,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/sherrick",
+  "wikiId": "npc-sherrick",
+  "levels": [
+   25,
+   25
+  ]
  }
 ]

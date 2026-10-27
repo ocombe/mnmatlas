@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-20T22:22:21.109Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-20T22:44:06.807Z",
     "rows": []
   },
@@ -14173,6 +14169,180 @@
             "category": "Named mob"
           },
           "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-27T18:48:01.044Z",
+    "rows": [
+      {
+        "id": 1553,
+        "payloadHash": "91b5f085d946efccf214223edce770b29986a19f9a09d35c0585e1649a932c20",
+        "updatedAt": "2026-10-27T17:24:32.22683+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-high-priest-of-muurtu",
+          "payload": {
+            "to": [
+              5451,
+              1938
+            ],
+            "from": [
+              5455,
+              1933
+            ],
+            "name": "High Priest of Muurtu",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1554,
+        "payloadHash": "3e7db05c9a6c43ac92f354170596dffe74879152cd475700a483c06d624b8764",
+        "updatedAt": "2026-10-27T17:24:34.536148+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-champion-of-muurtu",
+          "payload": {
+            "to": [
+              5836,
+              1932
+            ],
+            "from": [
+              5455,
+              1884
+            ],
+            "name": "Champion of Muurtu",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1555,
+        "payloadHash": "4f83dc564326d88bdfad187cbd7719fd5f16a972f74e11a025d143a263235259",
+        "updatedAt": "2026-10-27T17:24:37.910358+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-witchguard-hellblade",
+          "payload": {
+            "to": [
+              5793,
+              1790
+            ],
+            "from": [
+              5791,
+              1779
+            ],
+            "name": "Witchguard Hellblade",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1556,
+        "payloadHash": "de9b9b0296fd6483ec5a3bb2b9c17f5489c20ffbaca5518acdc868993cf8e7ca",
+        "updatedAt": "2026-10-27T17:24:40.169573+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-high-mother-haathala",
+          "payload": {
+            "to": [
+              4478,
+              753
+            ],
+            "from": [
+              4483,
+              743
+            ],
+            "name": "High-Mother Haathala",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1560,
+        "payloadHash": "5514e83d4ed7b6fe767cf5d2f69624b8706cd256f05e401569ffbdb5c84e0adb",
+        "updatedAt": "2026-10-27T17:24:45.171075+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-tariq-the-revealer",
+          "payload": {
+            "to": [
+              1452,
+              7420
+            ],
+            "from": [
+              1424,
+              7336
+            ],
+            "name": "Tariq the Revealer",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1588,
+        "payloadHash": "83b2cd812ccd7cfbb1e016a2a97b0c285fcb7fb024a8d391aa38d8491769fc4c",
+        "updatedAt": "2026-10-27T17:22:47.934485+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3118,
+            "y": 7281,
+            "name": "Sherrick",
+            "note": "PH is a goblin diver. Sherrick spawns on the southside ramp leading to the paths above.",
+            "wiki": "https://monstersandmemories.wiki/npcs/sherrick",
+            "bounty": "npc-sherrick",
+            "levels": [
+              25,
+              25
+            ],
+            "wikiId": "npc-sherrick",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1589,
+        "payloadHash": "e9ff94d7389031e016ce8672704e648187fa9ac1d02a3174790e9efb7af67b91",
+        "updatedAt": "2026-10-27T18:41:41.775354+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4482,
+            "y": 6708,
+            "name": "Highblade",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/highblade",
+            "ambush": false,
+            "bounty": "npc-highblade",
+            "wikiId": "npc-highblade",
+            "category": "Named mob"
+          },
+          "credit": true
         }
       }
     ]
