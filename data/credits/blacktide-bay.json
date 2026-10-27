@@ -308,5 +308,17 @@
       "name": "chamthal",
       "what": "added"
     }
+  ],
+  "marker:community-1527": [
+    {
+      "name": "facepalming",
+      "what": "added"
+    }
+  ],
+  "marker:ew-lifts-floor-1": [
+    {
+      "name": null,
+      "what": "moved"
+    }
   ]
 }

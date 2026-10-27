@@ -3,6 +3,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
     }
   ],
   "marker:community-358": [
@@ -13,6 +17,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
     }
   ],
   "marker:goblins-17-22-1": [
@@ -77,6 +85,48 @@
     {
       "name": ".veryvexing",
       "what": "moved"
+    }
+  ],
+  "marker:hovarth-ezzadel": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:quartermaster-girault": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:seneschal-kazmer": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1339": [
+    {
+      "name": "nicny86",
+      "what": "added"
+    }
+  ],
+  "marker:crystallized-35-39-2": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:shattershriek": [
+    {
+      "name": "joeyridge",
+      "what": "edited"
+    }
+  ],
+  "marker:community-1427": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

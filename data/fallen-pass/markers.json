@@ -786,7 +786,7 @@
   "community": true,
   "name": "Sivah Arjun (level 32)",
   "category": "Named mob",
-  "note": "Spawns in the 3rd floor area.",
+  "note": "Spawns on the 1st floor at the camp fire. Adept is the PH.",
   "x": 1854,
   "y": 2910,
   "levels": [
@@ -1282,6 +1282,36 @@
   "levels": [
    24,
    24
+  ]
+ },
+ {
+  "id": "community-1508",
+  "community": true,
+  "name": "Lady Tristanya Thrym",
+  "note": "",
+  "x": 713,
+  "y": 1691,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/lady-tristanya-thrym",
+  "wikiId": "npc-lady-tristanya-thrym",
+  "levels": [
+   45,
+   45
+  ]
+ },
+ {
+  "id": "community-1509",
+  "community": true,
+  "name": "Elder Luh'Kan",
+  "note": "At the very top of the mountain inside the cave",
+  "x": 1664,
+  "y": 1295,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/elder-luhkan",
+  "wikiId": "npc-elder-luhkan",
+  "levels": [
+   39,
+   39
   ]
  }
 ]

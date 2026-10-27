@@ -350,7 +350,7 @@
   },
   {
     "id": "toilmaster-vorith",
-    "name": "Toilmaster Vorith",
+    "name": "Toilmaster Verith",
     "category": "Quest NPC",
     "x": 5096,
     "y": 3911,
@@ -2790,5 +2790,14 @@
     "y": 2845,
     "category": "Vendor",
     "vendor": "Plate armorer"
+  },
+  {
+    "id": "community-1524",
+    "community": true,
+    "name": "Wizard Exodus",
+    "note": "Where wizards go when using exodus in this zone",
+    "x": 6606,
+    "y": 2068,
+    "category": "Respawn point"
   }
 ]

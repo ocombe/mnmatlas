@@ -392,14 +392,15 @@
     "category": "Lift",
     "travel": "Lift",
     "level": "floor-1",
-    "x": 2073,
-    "y": 476,
-    "approximate": true,
+    "x": 2142,
+    "y": 489,
+    "approximate": false,
     "note": "",
     "toLevel": "ew-caves",
     "toMarker": "ew-lifts-caves",
     "direction": "up",
-    "switchOnClick": true
+    "switchOnClick": true,
+    "community": true
   },
   {
     "id": "ew-lifts-caves",
@@ -658,5 +659,15 @@
       11,
       11
     ]
+  },
+  {
+    "id": "community-1527",
+    "community": true,
+    "name": "Wizard Exodus",
+    "note": "Wizards and their evacuated group members will teleport here.",
+    "x": 2063,
+    "y": 518,
+    "level": "floor-1",
+    "category": "Respawn point"
   }
 ]

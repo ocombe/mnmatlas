@@ -197,6 +197,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1039": [
@@ -387,6 +391,18 @@
     {
       "name": "xatmakin",
       "what": "edited"
+    }
+  ],
+  "marker:community-1508": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1509": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
     }
   ]
 }

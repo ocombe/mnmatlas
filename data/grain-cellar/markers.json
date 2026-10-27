@@ -5,11 +5,12 @@
     "level": "cellar",
     "category": "Named mob",
     "x": 2444,
-    "y": 1488.3,
-    "approximate": true,
+    "y": 1488,
+    "approximate": false,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/a-sneaky-rat",
-    "wikiId": "npc-a-sneaky-rat"
+    "wikiId": "npc-a-sneaky-rat",
+    "community": true
   },
   {
     "id": "rais-muzari",

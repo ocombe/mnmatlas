@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-20T15:26:23.756Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-20T19:17:32.318Z",
     "rows": []
   },
@@ -10531,6 +10527,425 @@
               13,
               13
             ]
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-27T08:15:16.692Z",
+    "rows": [
+      {
+        "id": 1327,
+        "payloadHash": "7dc3874e11a4360098cfe5e4ac083fc4f7d1911ef1fee5fa0f370f2c2c558931",
+        "updatedAt": "2026-10-27T07:08:23.368644+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-357",
+          "payload": {
+            "from": {
+              "x": 3743,
+              "y": 5429,
+              "name": "Master Tracker Lark (level 45)",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/master-tracker-lark",
+              "wikiId": "npc-master-tracker-lark",
+              "classes": [
+                "Beastmaster"
+              ],
+              "category": "Class trainer"
+            },
+            "name": "Master Tracker Lark (level 45)",
+            "ambush": false,
+            "levels": [
+              45,
+              45
+            ],
+            "classes": null,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1329,
+        "payloadHash": "3294e272448ab31eacfb00fbbb430c65afb62a4a467092df911688942942eaf4",
+        "updatedAt": "2026-10-27T07:09:17.313243+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "hovarth-ezzadel",
+          "payload": {
+            "to": [
+              3113,
+              4932
+            ],
+            "from": [
+              3256,
+              5074
+            ],
+            "name": "Hovarth Ezzadel"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1330,
+        "payloadHash": "a63f85a0764ceb165ab106caeab418e86c464e416c5b3c9a123ab11088e2d3a6",
+        "updatedAt": "2026-10-27T07:09:27.604351+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-358",
+          "payload": {
+            "to": [
+              3092,
+              4903
+            ],
+            "from": [
+              3250,
+              4993
+            ],
+            "name": "Adept Kossco (levels ~51–52)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1337,
+        "payloadHash": "c871923bf2910d3d3d329533027203daf4c1ee5b3ce1a712edf234e7fbe204c8",
+        "updatedAt": "2026-10-27T07:09:39.076143+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "quartermaster-girault",
+          "payload": {
+            "to": [
+              3303,
+              5376
+            ],
+            "from": [
+              3126,
+              4864
+            ],
+            "name": "Quartermaster Girault"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1338,
+        "payloadHash": "86689fb28bd15ed5055d07694c82a84d06babfa9d7a7cd7261d54dde20579f3c",
+        "updatedAt": "2026-10-27T07:09:45.562619+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "seneschal-kazmer",
+          "payload": {
+            "to": [
+              3297,
+              5360
+            ],
+            "from": [
+              3136,
+              4994
+            ],
+            "name": "Seneschal Kazmer"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1339,
+        "payloadHash": "f34637fbabbcdc0872fbeabc6e1cdcb71f7077888245d61c5b9d214f0c8687c1",
+        "updatedAt": "2026-10-27T07:10:03.772023+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3838,
+            "y": 4877,
+            "name": "War Wizard Leonath",
+            "note": "War Wizard Leonath spawns inside the broken tower on broken tower hill.",
+            "wiki": "https://monstersandmemories.wiki/npcs/war-wizard-leonath",
+            "bounty": "npc-war-wizard-leonath",
+            "wikiId": "npc-war-wizard-leonath",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1340,
+        "payloadHash": "b94188776a61538e72774260019bdeec9f335052afbf46fcdac373892d62b818",
+        "updatedAt": "2026-10-27T07:10:20.19205+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "crystallized-35-39-2",
+          "payload": {
+            "to": [
+              8921,
+              5953
+            ],
+            "from": [
+              7568,
+              4714
+            ],
+            "name": "Crystallized skeletons"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1419,
+        "payloadHash": "902c12854bcae3d3bb50f00beee7962a75aef98d1f5688603bedd1955fbce94d",
+        "updatedAt": "2026-10-27T07:10:37.881195+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "shattershriek",
+          "payload": {
+            "from": {
+              "x": 8086,
+              "y": 4235,
+              "name": "Shattershriek",
+              "note": "At the very back of the crystal caves.",
+              "wiki": "https://monstersandmemories.wiki/npcs/shattershriek",
+              "levels": [
+                35,
+                35
+              ],
+              "wikiId": "npc-shattershriek",
+              "minZoom": 3,
+              "category": "Named mob",
+              "approximate": true
+            },
+            "name": "Shattershriek",
+            "note": "At the very back of the crystal caves. Shard bat place holder. 10 minute respawn."
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1427,
+        "payloadHash": "224d4c93d1ecc2c2f7ff5e45d3794c7c73284515ee7a41fd1260b470b1e5494c",
+        "updatedAt": "2026-10-27T07:10:44.576628+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3283,
+            "y": 4920,
+            "name": "Captain Brey",
+            "note": "Ground floor of the tower",
+            "wiki": "https://monstersandmemories.wiki/npcs/captain-brey",
+            "bounty": "npc-captain-brey",
+            "wikiId": "npc-captain-brey",
+            "category": "Quest NPC"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1497,
+        "payloadHash": "98fa407b380998acbf49b23babe11060f5afcdc999830ef70c59ca3e557a5fa0",
+        "updatedAt": "2026-10-27T07:10:55.16105+00:00",
+        "version": {
+          "map": "grain-cellar",
+          "level": "cellar",
+          "kind": "move-marker",
+          "target_id": "a-sneaky-rat",
+          "payload": {
+            "to": [
+              2444,
+              1488
+            ],
+            "from": [
+              2444,
+              1488
+            ],
+            "name": "A sneaky rat",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1508,
+        "payloadHash": "f44943a6ca39cdc9e20fc3b104ddc11c242583839e4e981bfeb6b1d0e7b7f760",
+        "updatedAt": "2026-10-27T07:06:43.703839+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 713,
+            "y": 1691,
+            "name": "Lady Tristanya Thrym",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/lady-tristanya-thrym",
+            "bounty": "npc-lady-tristanya-thrym",
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-lady-tristanya-thrym",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1509,
+        "payloadHash": "b9c49b1d376c2d0784ef563d0ffdf4c29a10730fbe25cf39a9b8a86ffdc98d20",
+        "updatedAt": "2026-10-27T07:07:34.940016+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1664,
+            "y": 1295,
+            "name": "Elder Luh'Kan",
+            "note": "At the very top of the mountain inside the cave",
+            "wiki": "https://monstersandmemories.wiki/npcs/elder-luhkan",
+            "bounty": "npc-elder-luhkan",
+            "levels": [
+              39,
+              39
+            ],
+            "wikiId": "npc-elder-luhkan",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1524,
+        "payloadHash": "23da4ee5b71a8b77c461141f99c7cdd290179b43e100c9571dbbeb7436208b0a",
+        "updatedAt": "2026-10-27T07:03:05.903474+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6606,
+            "y": 2068,
+            "name": "Wizard Exodus",
+            "note": "Where wizards go when using exodus in this zone",
+            "category": "Respawn point"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1527,
+        "payloadHash": "127ea03144910c1a811cc3293bf501abc71e20e0f31255dc86b029216f992496",
+        "updatedAt": "2026-10-27T07:04:07.333155+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2063,
+            "y": 518,
+            "name": "Wizard Exodus",
+            "note": "Wizards and their evacuated group members will teleport here.",
+            "level": "floor-1",
+            "category": "Respawn point"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1528,
+        "payloadHash": "0f746b4f13f7de8100c0ab58f8c18938ebf2218c85275d576f7612b0413944e4",
+        "updatedAt": "2026-10-27T07:08:07.489954+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-988",
+          "payload": {
+            "from": {
+              "x": 1854,
+              "y": 2910,
+              "name": "Sivah Arjun (level 32)",
+              "note": "Spawns in the 3rd floor area.",
+              "wiki": "https://monstersandmemories.wiki/npcs/sivah-arjun",
+              "levels": [
+                32,
+                32
+              ],
+              "wikiId": "npc-sivah-arjun",
+              "category": "Named mob"
+            },
+            "name": "Sivah Arjun (level 32)",
+            "note": "Spawns on the 1st floor at the camp fire. Adept is the PH."
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1529,
+        "payloadHash": "6a7c87f7fc3c53aa8121afc02a8b349ca6abcf99ce84b30a9f4af45d499f060e",
+        "updatedAt": "2026-10-27T07:03:14.195209+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "toilmaster-vorith",
+          "payload": {
+            "from": {
+              "x": 5096,
+              "y": 3911,
+              "name": "Toilmaster Vorith",
+              "note": "At the bridge. Starter quest.",
+              "category": "Quest NPC"
+            },
+            "name": "Toilmaster Verith"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1531,
+        "payloadHash": "dee590efdbf712fa3d5f9272aa676c64d245e7f05fb65e3a33665c5062828d40",
+        "updatedAt": "2026-10-27T07:03:48.254749+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "move-marker",
+          "target_id": "ew-lifts-floor-1",
+          "payload": {
+            "to": [
+              2142,
+              489
+            ],
+            "from": [
+              2073,
+              476
+            ],
+            "name": "Lifts - up to the Evershade Weald caves",
+            "approximate": false
           },
           "credit": false
         }

@@ -105,13 +105,14 @@
     "wiki": "https://monstersandmemories.wiki/npcs/a-crystallized-skeleton"
    }
   ],
-  "x": 7568,
-  "y": 4714,
+  "x": 8921,
+  "y": 5953,
   "approximate": true,
   "note": "Crystallized skeleton area by the crystal canyon.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/a-crystallized-skeleton",
-  "wikiId": "npc-a-crystallized-skeleton"
+  "wikiId": "npc-a-crystallized-skeleton",
+  "community": true
  },
  {
   "id": "yealaroth",
@@ -163,10 +164,11 @@
   "x": 8086,
   "y": 4235,
   "approximate": true,
-  "note": "At the very back of the crystal caves.",
+  "note": "At the very back of the crystal caves. Shard bat place holder. 10 minute respawn.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/shattershriek",
-  "wikiId": "npc-shattershriek"
+  "wikiId": "npc-shattershriek",
+  "community": true
  },
  {
   "id": "highwaymen-36-44-1",
@@ -301,13 +303,14 @@
    45,
    45
   ],
-  "x": 3136,
-  "y": 4994,
+  "x": 3297,
+  "y": 5360,
   "approximate": true,
   "note": "Ground floor of the keep: through the large opening in the hillside, up the stairs, second hall on the left.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/seneschal-kazmer",
-  "wikiId": "npc-seneschal-kazmer"
+  "wikiId": "npc-seneschal-kazmer",
+  "community": true
  },
  {
   "id": "quartermaster-girault",
@@ -317,13 +320,14 @@
    50,
    50
   ],
-  "x": 3126,
-  "y": 4864,
+  "x": 3303,
+  "y": 5376,
   "approximate": true,
   "note": "In the undead fort, before Seneschal Kazmer.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/quartermaster-girault",
-  "wikiId": "npc-quartermaster-girault"
+  "wikiId": "npc-quartermaster-girault",
+  "community": true
  },
  {
   "id": "hovarth-ezzadel",
@@ -333,13 +337,14 @@
    51,
    51
   ],
-  "x": 3256,
-  "y": 5074,
+  "x": 3113,
+  "y": 4932,
   "approximate": true,
   "note": "Door near the charred druid ring on the tower hill, first hall, alcove on the left.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/hovarth-ezzadel",
-  "wikiId": "npc-hovarth-ezzadel"
+  "wikiId": "npc-hovarth-ezzadel",
+  "community": true
  },
  {
   "id": "stormcaller-tabigan",
@@ -512,15 +517,17 @@
   "id": "community-357",
   "community": true,
   "name": "Master Tracker Lark (level 45)",
-  "category": "Class trainer",
+  "category": "Named mob",
   "note": "",
   "x": 3743,
   "y": 5429,
-  "classes": [
-   "Beastmaster"
-  ],
   "wiki": "https://monstersandmemories.wiki/npcs/master-tracker-lark",
-  "wikiId": "npc-master-tracker-lark"
+  "wikiId": "npc-master-tracker-lark",
+  "levels": [
+   45,
+   45
+  ],
+  "ambush": false
  },
  {
   "id": "community-358",
@@ -528,8 +535,8 @@
   "name": "Adept Kossco (levels ~51–52)",
   "category": "Named mob",
   "note": "near a scorched medic",
-  "x": 3250,
-  "y": 4993,
+  "x": 3092,
+  "y": 4903,
   "wiki": "https://monstersandmemories.wiki/npcs/adept-kossco",
   "wikiId": "npc-adept-kossco",
   "levels": [
@@ -669,5 +676,27 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/layla-faraj",
   "wikiId": "npc-layla-faraj"
+ },
+ {
+  "id": "community-1339",
+  "community": true,
+  "name": "War Wizard Leonath",
+  "note": "War Wizard Leonath spawns inside the broken tower on broken tower hill.",
+  "x": 3838,
+  "y": 4877,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/war-wizard-leonath",
+  "wikiId": "npc-war-wizard-leonath"
+ },
+ {
+  "id": "community-1427",
+  "community": true,
+  "name": "Captain Brey",
+  "note": "Ground floor of the tower",
+  "x": 3283,
+  "y": 4920,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-brey",
+  "wikiId": "npc-captain-brey"
  }
 ]
