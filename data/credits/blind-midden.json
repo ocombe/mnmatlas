@@ -219,6 +219,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": "leezil",
+      "what": "edited"
     }
   ],
   "marker:community-1297": [
@@ -249,6 +253,18 @@
     {
       "name": null,
       "what": "added"
+    }
+  ],
+  "marker:ramp-1-basement": [
+    {
+      "name": "rahu7107",
+      "what": "removed"
+    }
+  ],
+  "marker:ladder-1-basement": [
+    {
+      "name": "rahu7107",
+      "what": "removed"
     }
   ]
 }

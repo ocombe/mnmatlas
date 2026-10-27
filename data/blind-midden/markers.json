@@ -15,21 +15,6 @@
     "switchOnClick": true
   },
   {
-    "id": "ramp-1-basement",
-    "name": "Ramp - down to the canyon and caves",
-    "category": "Stairs",
-    "travel": "Stairs",
-    "level": "basement",
-    "x": 2359,
-    "y": 1999,
-    "approximate": true,
-    "note": "",
-    "toLevel": "canyon",
-    "toMarker": "ramp-1-canyon",
-    "direction": "down",
-    "switchOnClick": true
-  },
-  {
     "id": "ramp-2-canyon",
     "name": "Ramp - up to the Basement",
     "category": "Stairs",
@@ -147,21 +132,6 @@
     "toLevel": "canyon",
     "toMarker": "ramp-5-canyon",
     "direction": "down",
-    "switchOnClick": true
-  },
-  {
-    "id": "ladder-1-basement",
-    "name": "Ladder - up to the Ground floor",
-    "category": "Ladder",
-    "travel": "Ladder",
-    "level": "basement",
-    "x": 2304,
-    "y": 1935,
-    "approximate": true,
-    "note": "",
-    "toLevel": "ground",
-    "toMarker": "ladder-1-ground",
-    "direction": "up",
     "switchOnClick": true
   },
   {
@@ -785,9 +755,10 @@
     "x": 2198,
     "y": 2729,
     "level": "basement",
-    "category": "Notable NPC",
+    "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/knuttoc-grobbins",
-    "wikiId": "npc-knuttoc-grobbins"
+    "wikiId": "npc-knuttoc-grobbins",
+    "ambush": false
   },
   {
     "id": "community-1297",

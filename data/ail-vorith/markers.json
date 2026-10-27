@@ -1576,8 +1576,8 @@
     "name": "Chief Glowgut",
     "category": "Named mob",
     "note": "inside the goblin cave",
-    "x": 1867,
-    "y": 1771,
+    "x": 1719,
+    "y": 1811,
     "levels": [
       13,
       13
@@ -1620,13 +1620,17 @@
   {
     "id": "community-713",
     "community": true,
-    "name": "Cook Deepbite (levels ~13–14)",
+    "name": "Cook Deepbite",
     "category": "Named mob",
     "note": "Beyond the hidden wall, in the goblin caves",
-    "x": 1818,
-    "y": 1736,
+    "x": 712,
+    "y": 2342,
     "wiki": "https://monstersandmemories.wiki/npcs/cook-deepbite",
-    "wikiId": "npc-cook-deepbite"
+    "wikiId": "npc-cook-deepbite",
+    "levels": [
+      13,
+      13
+    ]
   },
   {
     "id": "community-731",
@@ -2718,11 +2722,15 @@
     "id": "community-1398",
     "community": true,
     "name": "Zaarinth",
-    "note": "",
+    "note": "Sells herbalism pouch and sickle",
     "x": 4592,
     "y": 4354,
     "category": "Vendor",
-    "vendor": "Herbalism vendor"
+    "vendor": "Herbalism vendor",
+    "sells": [
+      "Bags",
+      "Weapons"
+    ]
   },
   {
     "id": "community-1400",

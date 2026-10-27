@@ -845,6 +845,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": "mogbert",
+      "what": "moved"
     }
   ],
   "marker:community-661": [
@@ -873,6 +877,14 @@
     {
       "name": "itodd",
       "what": "added"
+    },
+    {
+      "name": "mogbert",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:melzorra": [
@@ -1129,6 +1141,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1400": [

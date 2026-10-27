@@ -158,7 +158,11 @@
       }
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
-    "wikiId": "npc-riverking-magnar"
+    "wikiId": "npc-riverking-magnar",
+    "levels": [
+      12,
+      15
+    ]
   },
   {
     "id": "community-1087",
@@ -641,8 +645,8 @@
     "category": "Mob camp",
     "wiki": "https://monstersandmemories.miraheze.org/wiki/A_deepcrawler_broodmother",
     "levels": [
-      15,
-      18
+      11,
+      15
     ],
     "mobs": [
       {
@@ -705,5 +709,32 @@
     "x": 3488,
     "y": 4085,
     "travel": "Teleporter"
+  },
+  {
+    "id": "community-1478",
+    "community": true,
+    "name": "A cutthroat",
+    "note": "Hanging around  just outside the pirate camp",
+    "x": 3794,
+    "y": 6264,
+    "category": "Mob camp",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+    "wikiId": "npc-a-cutthroat",
+    "levels": [
+      10,
+      13
+    ],
+    "mobs": [
+      {
+        "name": "A cutthroat",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+        "wikiId": "npc-a-cutthroat"
+      },
+      {
+        "name": "An exiled noble",
+        "wiki": "https://monstersandmemories.wiki/npcs/an-exiled-noble",
+        "wikiId": "npc-an-exiled-noble"
+      }
+    ]
   }
 ]

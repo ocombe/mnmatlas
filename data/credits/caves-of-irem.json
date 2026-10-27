@@ -79,6 +79,10 @@
     {
       "name": "itodd",
       "what": "added"
+    },
+    {
+      "name": "original_g",
+      "what": "edited"
     }
   ],
   "marker:community-1087": [
@@ -149,11 +153,21 @@
     {
       "name": "thibni_",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "label:community-1451": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1478": [
+    {
+      "name": "original_g",
       "what": "added"
     }
   ]

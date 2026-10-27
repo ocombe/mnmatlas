@@ -568,5 +568,95 @@
       23,
       23
     ]
+  },
+  {
+    "id": "community-1471",
+    "community": true,
+    "name": "Ramp down to admiral",
+    "note": "Ramp down to Admiral Blacktide",
+    "x": 2011,
+    "y": 2697,
+    "level": "floor-1",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "floor-2",
+    "direction": "down"
+  },
+  {
+    "id": "community-1472",
+    "community": true,
+    "name": "Ramp up from admiral",
+    "note": "",
+    "x": 1943,
+    "y": 2864,
+    "level": "floor-2",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "floor-1",
+    "direction": "up"
+  },
+  {
+    "id": "community-1473",
+    "community": true,
+    "name": "A fungal disperser",
+    "note": "Spawns in two alcoves on first myconid level. Placeholders are a fungal elder.",
+    "x": 1810,
+    "y": 2560,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fungal-disperser",
+    "wikiId": "npc-a-fungal-disperser",
+    "levels": [
+      14,
+      14
+    ]
+  },
+  {
+    "id": "community-1474",
+    "community": true,
+    "name": "A fungal disperser",
+    "note": "Spawns in two alcoves on first myconid level. Placeholders are a fungal elder.",
+    "x": 1259,
+    "y": 2768,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fungal-disperser",
+    "wikiId": "npc-a-fungal-disperser",
+    "levels": [
+      14,
+      14
+    ]
+  },
+  {
+    "id": "community-1475",
+    "community": true,
+    "name": "A net weaver (level 12)",
+    "note": "In the spider and bat caves. Placeholder is a stream fisher that paths clockwise, just outside of the gnome skeleton alcove.",
+    "x": 1689,
+    "y": 1964,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-net-weaver",
+    "wikiId": "npc-a-net-weaver",
+    "levels": [
+      12,
+      12
+    ]
+  },
+  {
+    "id": "community-1476",
+    "community": true,
+    "name": "A gloom widow matron",
+    "note": "In the spider and bat caves surrounded by stealthed spiders",
+    "x": 1602,
+    "y": 1429,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-gloom-widow-matron",
+    "wikiId": "npc-a-gloom-widow-matron",
+    "levels": [
+      11,
+      11
+    ]
   }
 ]

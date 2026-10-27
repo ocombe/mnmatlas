@@ -24,17 +24,20 @@
  },
  {
   "id": "giant-31-40-1",
-  "name": "Giant",
-  "category": "Mob camp",
+  "name": "Maleq",
+  "category": "Named mob",
   "levels": [
-   31,
-   40
+   41,
+   41
   ],
   "x": 1282,
   "y": 632,
   "approximate": true,
   "note": "",
-  "minZoom": 2
+  "minZoom": 2,
+  "ambush": false,
+  "wiki": "https://monstersandmemories.miraheze.org/wiki/Maleq",
+  "community": true
  },
  {
   "id": "undead-31-40-2",
@@ -960,6 +963,325 @@
      1837
     ]
    ]
+  },
+  "levels": [
+   39,
+   39
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1331",
+  "community": true,
+  "name": "Chieftain Raka'Matar",
+  "note": "Has a PH rat named Tok'Nor",
+  "x": 2473,
+  "y": 2100,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/chieftain-rakamatar",
+  "wikiId": "npc-chieftain-rakamatar",
+  "ambush": false
+ },
+ {
+  "id": "community-1332",
+  "community": true,
+  "name": "Tok'Nor",
+  "note": "Chieftain shares spawn",
+  "x": 2478,
+  "y": 2098,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/toknor",
+  "wikiId": "npc-toknor",
+  "levels": [
+   38,
+   38
+  ]
+ },
+ {
+  "id": "community-1333",
+  "community": true,
+  "name": "Thuraya Aislingar",
+  "note": "Spawns inside this building, some have said in it's courtyard but not confirmed",
+  "x": 1970,
+  "y": 1591,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/thuraya-aislingar",
+  "wikiId": "npc-thuraya-aislingar",
+  "ambush": false,
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     1950,
+     1558
+    ],
+    [
+     1946,
+     1613
+    ],
+    [
+     1978,
+     1627
+    ],
+    [
+     2024,
+     1646
+    ],
+    [
+     2027,
+     1647
+    ],
+    [
+     2028,
+     1638
+    ],
+    [
+     1984,
+     1625
+    ],
+    [
+     1977,
+     1618
+    ],
+    [
+     1983,
+     1561
+    ],
+    [
+     1966,
+     1541
+    ]
+   ]
   }
+ },
+ {
+  "id": "community-1334",
+  "community": true,
+  "name": "Taskmaster Fek'Ney",
+  "note": "This is the entrance to a cave where Fek'Ney is, it's next to the waterfall on the ground level.",
+  "x": 1345,
+  "y": 1975,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-fekney",
+  "wikiId": "npc-taskmaster-fekney",
+  "levels": [
+   40,
+   40
+  ]
+ },
+ {
+  "id": "community-1383",
+  "community": true,
+  "name": "Mar'Tem",
+  "note": "",
+  "x": 1439,
+  "y": 2374,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/martem",
+  "wikiId": "npc-martem",
+  "levels": [
+   38,
+   38
+  ],
+  "quests": true
+ },
+ {
+  "id": "community-1411",
+  "community": true,
+  "name": "A Plagueborn drake",
+  "note": "",
+  "x": 3349,
+  "y": 2838,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-plagueborn-drake",
+  "wikiId": "npc-a-plagueborn-drake",
+  "mobs": [
+   {
+    "name": "A Plagueborn drake",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-plagueborn-drake",
+    "wikiId": "npc-a-plagueborn-drake"
+   }
+  ]
+ },
+ {
+  "id": "community-1413",
+  "community": true,
+  "name": "Morthkara the Blight",
+  "note": "Peak of cliffs up the ramp from poison lake, placeholder is static drake at the egg.",
+  "x": 3379,
+  "y": 2739,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/morthkara-the-blight",
+  "wikiId": "npc-morthkara-the-blight",
+  "levels": [
+   42,
+   42
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1450",
+  "community": true,
+  "name": "Seamas Growt",
+  "note": "popped up walking on bridge",
+  "x": 2402,
+  "y": 1921,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/seamas-growt",
+  "wikiId": "npc-seamas-growt",
+  "levels": [
+   39,
+   39
+  ]
+ },
+ {
+  "id": "community-1456",
+  "community": true,
+  "name": "Allistaire the Black",
+  "note": "",
+  "x": 2375,
+  "y": 2332,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/allistaire-the-black",
+  "wikiId": "npc-allistaire-the-black",
+  "levels": [
+   45,
+   45
+  ]
+ },
+ {
+  "id": "community-1457",
+  "community": true,
+  "name": "Alaric Bromm",
+  "note": "",
+  "x": 3202,
+  "y": 2153,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/alaric-bromm",
+  "wikiId": "npc-alaric-bromm",
+  "levels": [
+   55,
+   55
+  ]
+ },
+ {
+  "id": "community-1458",
+  "community": true,
+  "name": "Dougal Bromm",
+  "note": "",
+  "x": 3155,
+  "y": 2028,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/dougal-bromm",
+  "wikiId": "npc-dougal-bromm",
+  "levels": [
+   54,
+   54
+  ]
+ },
+ {
+  "id": "community-1459",
+  "community": true,
+  "name": "Felix Rathmere",
+  "note": "Roams alot",
+  "x": 1900,
+  "y": 2581,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/felix-rathmere",
+  "wikiId": "npc-felix-rathmere",
+  "levels": [
+   45,
+   45
+  ]
+ },
+ {
+  "id": "community-1460",
+  "community": true,
+  "name": "High Master Farwyn Nyxx",
+  "note": "Raid boss",
+  "x": 828,
+  "y": 1927,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/high-master-farwyn-nyxx",
+  "wikiId": "npc-high-master-farwyn-nyxx"
+ },
+ {
+  "id": "community-1461",
+  "community": true,
+  "name": "Jailer Kur'Mak",
+  "note": "Near the cells",
+  "x": 1200,
+  "y": 1891,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/jailer-kurmak",
+  "wikiId": "npc-jailer-kurmak",
+  "levels": [
+   41,
+   41
+  ]
+ },
+ {
+  "id": "community-1462",
+  "community": true,
+  "name": "Pustulax the Avatar of Plagues",
+  "note": "Requires the four scepters that named spawn with sometimes at noon",
+  "x": 3180,
+  "y": 1875,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/pustulax-the-avatar-of-plagues",
+  "wikiId": "npc-1790076531813-svdwm"
+ },
+ {
+  "id": "community-1463",
+  "community": true,
+  "name": "Rotfang",
+  "note": "Named rat that can spawn off most of the rats within the rat caves",
+  "x": 2688,
+  "y": 1240,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/rotfang",
+  "wikiId": "npc-rotfang",
+  "levels": [
+   25,
+   25
+  ]
+ },
+ {
+  "id": "community-1464",
+  "community": true,
+  "name": "Stablemaster Tomaz",
+  "note": "",
+  "x": 3081,
+  "y": 2122,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/stablemaster-tomaz",
+  "wikiId": "npc-stablemaster-tomaz"
+ },
+ {
+  "id": "community-1465",
+  "community": true,
+  "name": "Asthijvala",
+  "note": "Summoned bone drake using 6 burned scripts",
+  "x": 3338,
+  "y": 1535,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/asthijvala",
+  "wikiId": "npc-asthijvala"
+ },
+ {
+  "id": "community-1466",
+  "community": true,
+  "name": "Merrisam Copperhelm",
+  "note": "Small halfling skeleton that can spawn during the \"undead parade\"",
+  "x": 3511,
+  "y": 1121,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/merrisam-copperhelm",
+  "wikiId": "npc-merrisam-copperhelm",
+  "levels": [
+   24,
+   24
+  ]
  }
 ]

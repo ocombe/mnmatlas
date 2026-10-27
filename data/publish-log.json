@@ -1,90 +1,5 @@
 [
   {
-    "at": "2026-10-20T10:04:51.181Z",
-    "rows": [
-      {
-        "id": 940,
-        "payloadHash": "cbfa7b80e67064f2a877d52eb63c4cabb44f2fab5fdf3ca2c0d11a0d334c1fc5",
-        "updatedAt": "2026-10-20T06:21:13.983508+00:00"
-      },
-      {
-        "id": 942,
-        "payloadHash": "e4c9949b15804dba1721c66a3d2006916d87a823f2678335dff34f356fdbd21f",
-        "updatedAt": "2026-10-20T07:07:20.537817+00:00"
-      },
-      {
-        "id": 943,
-        "payloadHash": "40ddb62073501cc4e26eb308b840211f543a243b516290b9a9dedda6d95f632e",
-        "updatedAt": "2026-10-20T07:07:46.992649+00:00"
-      },
-      {
-        "id": 944,
-        "payloadHash": "5fd0a34592096201e094065fb0ed7aac5f65d25ffb050833748c20425a6c9ea0",
-        "updatedAt": "2026-10-20T07:07:55.262196+00:00"
-      },
-      {
-        "id": 945,
-        "payloadHash": "2af649bb76ec27e97f3e64ef5a20b74c89a140131c42083a28a163a335e25753",
-        "updatedAt": "2026-10-20T07:08:07.278516+00:00"
-      },
-      {
-        "id": 948,
-        "payloadHash": "0f4130fbe41c0d6e0b836cff425617b730d4c831ef3b4ce52c110f37a2c602cb",
-        "updatedAt": "2026-10-20T07:08:19.917867+00:00"
-      },
-      {
-        "id": 949,
-        "payloadHash": "38d6f68832c2cde000720b1aa782596dce54ed89b2b8e09061ad44df254fef9a",
-        "updatedAt": "2026-10-20T07:08:35.622788+00:00"
-      },
-      {
-        "id": 950,
-        "payloadHash": "b24b48bcba364f65f32758570dc813b5d2afc8ce904e95f6ed5ceaa60b28c833",
-        "updatedAt": "2026-10-20T07:09:21.376439+00:00"
-      },
-      {
-        "id": 951,
-        "payloadHash": "cec2323c5ec77aaad00c4bf199182e958e92d7b1942504a5306ac90a4b49bf56",
-        "updatedAt": "2026-10-20T07:09:26.087728+00:00"
-      },
-      {
-        "id": 952,
-        "payloadHash": "e78c91661782fef0492b378d39311dfc6bac2024d78053dc875d972062341f1e",
-        "updatedAt": "2026-10-20T07:09:33.447608+00:00"
-      },
-      {
-        "id": 953,
-        "payloadHash": "388f782a94d1bea001ce837c8a75b2fe29573c4b391df96a62148441ab704cb6",
-        "updatedAt": "2026-10-20T07:09:36.798159+00:00"
-      },
-      {
-        "id": 954,
-        "payloadHash": "0433b62efa4f5ee094d22c42f061cc8ed8172bcc004f28c4614401b1a6895c21",
-        "updatedAt": "2026-10-20T07:09:53.717294+00:00"
-      },
-      {
-        "id": 955,
-        "payloadHash": "c1fb84fd2d403e87ad59c3f40e92bfdfb220afcd671e06809d5daabb5a1ab65e",
-        "updatedAt": "2026-10-20T07:09:57.615047+00:00"
-      },
-      {
-        "id": 956,
-        "payloadHash": "4f9379569d51c05c5f3d1c70d3d2ab4ff32eac6f8c5c9fb2b585af54dd5fc4c7",
-        "updatedAt": "2026-10-20T07:10:04.603034+00:00"
-      },
-      {
-        "id": 958,
-        "payloadHash": "1331ee18368a5c3570cdc850ea94eadbd688731f54d7e94b9dc0e93890ebc53f",
-        "updatedAt": "2026-10-20T07:11:47.829007+00:00"
-      },
-      {
-        "id": 1008,
-        "payloadHash": "572aa08561c5783e59432f3f3086f767346da6024f2afb60b3b9d7ea81731f05",
-        "updatedAt": "2026-10-20T08:26:27.49771+00:00"
-      }
-    ]
-  },
-  {
     "at": "2026-10-20T15:26:23.756Z",
     "rows": []
   },
@@ -9522,6 +9437,1100 @@
               2852
             ],
             "name": "to Shaded Dunes"
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-27T05:04:33.364Z",
+    "rows": [
+      {
+        "id": 1331,
+        "payloadHash": "154f95260929060c04ff8c64c24ade255fa170760c91b83518d5695b8b484a7f",
+        "updatedAt": "2026-10-27T00:12:28.190009+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2473,
+            "y": 2100,
+            "name": "Chieftain Raka'Matar",
+            "note": "Has a PH rat named Tok'Nor",
+            "wiki": "https://monstersandmemories.wiki/npcs/chieftain-rakamatar",
+            "ambush": false,
+            "bounty": "npc-chieftain-rakamatar",
+            "wikiId": "npc-chieftain-rakamatar",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1332,
+        "payloadHash": "cceb7fdaba82f7562e59e7ae5f6d07db980663c5861fcc1fd40a63310b1e3e7a",
+        "updatedAt": "2026-10-27T00:12:41.928749+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2478,
+            "y": 2098,
+            "name": "Tok'Nor",
+            "note": "Chieftain shares spawn",
+            "wiki": "https://monstersandmemories.wiki/npcs/toknor",
+            "bounty": "npc-toknor",
+            "levels": [
+              38,
+              38
+            ],
+            "wikiId": "npc-toknor",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1333,
+        "payloadHash": "cca3b30fe7b646bf77ad94172fd4e9c6da1eb519afeb8afc2d85cfe25f8345fe",
+        "updatedAt": "2026-10-27T00:12:54.640702+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1970,
+            "y": 1591,
+            "name": "Thuraya Aislingar",
+            "note": "Spawns inside this building, some have said in it's courtyard but not confirmed",
+            "wiki": "https://monstersandmemories.wiki/npcs/thuraya-aislingar",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  1950,
+                  1558
+                ],
+                [
+                  1946,
+                  1613
+                ],
+                [
+                  1978,
+                  1627
+                ],
+                [
+                  2024,
+                  1646
+                ],
+                [
+                  2027,
+                  1647
+                ],
+                [
+                  2028,
+                  1638
+                ],
+                [
+                  1984,
+                  1625
+                ],
+                [
+                  1977,
+                  1618
+                ],
+                [
+                  1983,
+                  1561
+                ],
+                [
+                  1966,
+                  1541
+                ]
+              ]
+            },
+            "ambush": false,
+            "bounty": "npc-thuraya-aislingar",
+            "wikiId": "npc-thuraya-aislingar",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1334,
+        "payloadHash": "3672042ded12480d132fb9068caef60190c0909ea8c79305528817fe97b5400b",
+        "updatedAt": "2026-10-27T00:20:11.86214+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1345,
+            "y": 1975,
+            "name": "Taskmaster Fek'Ney",
+            "note": "This is the entrance to a cave where Fek'Ney is, it's next to the waterfall on the ground level.",
+            "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-fekney",
+            "bounty": "npc-taskmaster-fekney",
+            "levels": [
+              40,
+              40
+            ],
+            "wikiId": "npc-taskmaster-fekney",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1382,
+        "payloadHash": "79443551b11661ec6fefe73a292a1af828e0a5d48163d3fbb924270bbc6f363e",
+        "updatedAt": "2026-10-27T00:14:09.336809+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1274",
+          "payload": {
+            "from": {
+              "name": "Overseer Jaru'Kan",
+              "sells": null,
+              "trade": null,
+              "ambush": null,
+              "levels": null,
+              "vendor": null,
+              "classes": null,
+              "category": "Named mob"
+            },
+            "name": "Overseer Jaru'Kan",
+            "ambush": false,
+            "levels": [
+              39,
+              39
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1383,
+        "payloadHash": "aa0df0e70047675e44b5d402e359d33e3cb4b7c8df46b252e2df6746be4870a3",
+        "updatedAt": "2026-10-27T00:14:29.334777+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1439,
+            "y": 2374,
+            "name": "Mar'Tem",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/martem",
+            "bounty": "npc-martem",
+            "levels": [
+              38,
+              38
+            ],
+            "quests": true,
+            "wikiId": "npc-martem",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1411,
+        "payloadHash": "b3f0f89e09310e2d895b325f1a4709684a482f311afb2fe33887bcc969f6d251",
+        "updatedAt": "2026-10-27T00:14:55.563292+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3349,
+            "y": 2838,
+            "mobs": [
+              {
+                "name": "A Plagueborn drake",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-plagueborn-drake",
+                "wikiId": "npc-a-plagueborn-drake"
+              }
+            ],
+            "name": "A Plagueborn drake",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-plagueborn-drake",
+            "wikiId": "npc-a-plagueborn-drake",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1413,
+        "payloadHash": "63a7a1a0b991540beb68605140eadce3f153a36386b4d6701c35571a83d976a1",
+        "updatedAt": "2026-10-27T00:15:04.363286+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3379,
+            "y": 2739,
+            "name": "Morthkara the Blight",
+            "note": "Peak of cliffs up the ramp from poison lake, placeholder is static drake at the egg.",
+            "wiki": "https://monstersandmemories.wiki/npcs/morthkara-the-blight",
+            "ambush": false,
+            "levels": [
+              42,
+              42
+            ],
+            "wikiId": "npc-morthkara-the-blight",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1450,
+        "payloadHash": "0aba33de4561ddd251d099022111d55de7c68a58a7a362575a43e5458d1821fc",
+        "updatedAt": "2026-10-27T00:15:39.90046+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2402,
+            "y": 1921,
+            "name": "Seamas Growt",
+            "note": "popped up walking on bridge",
+            "wiki": "https://monstersandmemories.wiki/npcs/seamas-growt",
+            "bounty": "npc-seamas-growt",
+            "levels": [
+              39,
+              39
+            ],
+            "wikiId": "npc-seamas-growt",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1456,
+        "payloadHash": "759bd5c54b4c27d79fa2bf6922e4512bfd244b5d97bd8dac6a0be87989e88d51",
+        "updatedAt": "2026-10-27T00:15:50.010074+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2375,
+            "y": 2332,
+            "name": "Allistaire the Black",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/allistaire-the-black",
+            "bounty": "npc-allistaire-the-black",
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-allistaire-the-black",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1457,
+        "payloadHash": "fd6d15586099d2fedc1744fbc593a3b6f5dcfb1738659132c832e29b06365f84",
+        "updatedAt": "2026-10-27T00:15:57.598771+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3202,
+            "y": 2153,
+            "name": "Alaric Bromm",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/alaric-bromm",
+            "bounty": "npc-alaric-bromm",
+            "levels": [
+              55,
+              55
+            ],
+            "wikiId": "npc-alaric-bromm",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1458,
+        "payloadHash": "f4169570de2ba6047de11a909abf29d4e6414b521f9499c8e7ded12339b9bc02",
+        "updatedAt": "2026-10-27T00:16:06.358752+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3155,
+            "y": 2028,
+            "name": "Dougal Bromm",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/dougal-bromm",
+            "bounty": "npc-dougal-bromm",
+            "levels": [
+              54,
+              54
+            ],
+            "wikiId": "npc-dougal-bromm",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1459,
+        "payloadHash": "bcd2c401b131c5efff5853a525a60e0280274c3016176ad59281019015104308",
+        "updatedAt": "2026-10-27T00:16:16.764007+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1900,
+            "y": 2581,
+            "name": "Felix Rathmere",
+            "note": "Roams alot",
+            "wiki": "https://monstersandmemories.wiki/npcs/felix-rathmere",
+            "bounty": "npc-felix-rathmere",
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-felix-rathmere",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1460,
+        "payloadHash": "1a4018ce131dd5c4d599d8998f2b10548e738f4e1178bc42de2bcdc5be7ef2f8",
+        "updatedAt": "2026-10-27T00:20:41.875295+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 828,
+            "y": 1927,
+            "name": "High Master Farwyn Nyxx",
+            "note": "Raid boss",
+            "wiki": "https://monstersandmemories.wiki/npcs/high-master-farwyn-nyxx",
+            "bounty": "npc-high-master-farwyn-nyxx",
+            "wikiId": "npc-high-master-farwyn-nyxx",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1461,
+        "payloadHash": "18348089a428f4ee14c88975c6d9f190269ba816a26182d95ceef3f22e8b4855",
+        "updatedAt": "2026-10-27T00:20:49.295086+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1200,
+            "y": 1891,
+            "name": "Jailer Kur'Mak",
+            "note": "Near the cells",
+            "wiki": "https://monstersandmemories.wiki/npcs/jailer-kurmak",
+            "bounty": "npc-jailer-kurmak",
+            "levels": [
+              41,
+              41
+            ],
+            "wikiId": "npc-jailer-kurmak",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1462,
+        "payloadHash": "f4dc3e5f5412239ca6984777006db924b1b5eb04388f9e6d8c31040018a4c5d3",
+        "updatedAt": "2026-10-27T00:21:13.727149+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3180,
+            "y": 1875,
+            "name": "Pustulax the Avatar of Plagues",
+            "note": "Requires the four scepters that named spawn with sometimes at noon",
+            "wiki": "https://monstersandmemories.wiki/npcs/pustulax-the-avatar-of-plagues",
+            "bounty": "npc-1790076531813-svdwm",
+            "wikiId": "npc-1790076531813-svdwm",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1463,
+        "payloadHash": "8a0da8ec5d3c607c6a6ee3f4d02ba478485dc536a731c5c7d5be6340549d087c",
+        "updatedAt": "2026-10-27T00:22:44.719158+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2688,
+            "y": 1240,
+            "name": "Rotfang",
+            "note": "Named rat that can spawn off most of the rats within the rat caves",
+            "wiki": "https://monstersandmemories.wiki/npcs/rotfang",
+            "bounty": "npc-rotfang",
+            "levels": [
+              25,
+              25
+            ],
+            "wikiId": "npc-rotfang",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1464,
+        "payloadHash": "0077a9886d36f4ef35acab166a45d261766a1a63059281458a389448c56eb8a5",
+        "updatedAt": "2026-10-27T00:22:53.708361+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3081,
+            "y": 2122,
+            "name": "Stablemaster Tomaz",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/stablemaster-tomaz",
+            "bounty": "npc-stablemaster-tomaz",
+            "wikiId": "npc-stablemaster-tomaz",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1465,
+        "payloadHash": "49a93cc9ac5416f853d7ba00ec94917ad126ea01dee0a4d4c854041ae75702f2",
+        "updatedAt": "2026-10-27T00:23:08.526671+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3338,
+            "y": 1535,
+            "name": "Asthijvala",
+            "note": "Summoned bone drake using 6 burned scripts",
+            "wiki": "https://monstersandmemories.wiki/npcs/asthijvala",
+            "bounty": "npc-asthijvala",
+            "wikiId": "npc-asthijvala",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1466,
+        "payloadHash": "2454378e9e525d2fb64ba0e2aad4603bd85d510cfadaf16c69082ba952c31206",
+        "updatedAt": "2026-10-27T00:23:49.177415+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3511,
+            "y": 1121,
+            "name": "Merrisam Copperhelm",
+            "note": "Small halfling skeleton that can spawn during the \"undead parade\"",
+            "wiki": "https://monstersandmemories.wiki/npcs/merrisam-copperhelm",
+            "bounty": "npc-merrisam-copperhelm",
+            "levels": [
+              24,
+              24
+            ],
+            "wikiId": "npc-merrisam-copperhelm",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1471,
+        "payloadHash": "906a86110a83054926e090a2dc8e2cc9611b5aed5c7a43db82268c95cb40b424",
+        "updatedAt": "2026-10-27T00:07:57.456784+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2011,
+            "y": 2697,
+            "name": "Ramp down to admiral",
+            "note": "Ramp down to Admiral Blacktide",
+            "level": "floor-1",
+            "travel": "Stairs",
+            "toLevel": "floor-2",
+            "category": "Stairs",
+            "direction": "down"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1472,
+        "payloadHash": "81cf8e624e0b1c12ee7cf8fb697e4e904a3819ea5dd93372c01aa1f56e398e02",
+        "updatedAt": "2026-10-27T00:08:10.700129+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1943,
+            "y": 2864,
+            "name": "Ramp up from admiral",
+            "note": "",
+            "level": "floor-2",
+            "travel": "Stairs",
+            "toLevel": "floor-1",
+            "category": "Stairs",
+            "direction": "up"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1473,
+        "payloadHash": "666f4df642e11f0ba478702d964eb60747ab54e339545fe338ad7990d2b6fc38",
+        "updatedAt": "2026-10-27T00:08:52.91848+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1810,
+            "y": 2560,
+            "name": "A fungal disperser",
+            "note": "Spawns in two alcoves on first myconid level. Placeholders are a fungal elder.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-fungal-disperser",
+            "level": "floor-2",
+            "levels": [
+              14,
+              14
+            ],
+            "wikiId": "npc-a-fungal-disperser",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1474,
+        "payloadHash": "d6ebab07b8bb01b12c1c260901f79c4be9f814be734ece61081b3f4ea4a86ad4",
+        "updatedAt": "2026-10-27T00:09:17.615826+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1259,
+            "y": 2768,
+            "name": "A fungal disperser",
+            "note": "Spawns in two alcoves on first myconid level. Placeholders are a fungal elder.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-fungal-disperser",
+            "level": "floor-2",
+            "levels": [
+              14,
+              14
+            ],
+            "wikiId": "npc-a-fungal-disperser",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1475,
+        "payloadHash": "10683b0768d72aa90c706d3b27e990569fdbb86320e7708e35780121d9f06862",
+        "updatedAt": "2026-10-27T00:09:33.98313+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1689,
+            "y": 1964,
+            "name": "A net weaver (level 12)",
+            "note": "In the spider and bat caves. Placeholder is a stream fisher that paths clockwise, just outside of the gnome skeleton alcove.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-net-weaver",
+            "level": "floor-2",
+            "levels": [
+              12,
+              12
+            ],
+            "wikiId": "npc-a-net-weaver",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1476,
+        "payloadHash": "f177b2560e4af6f78aa57ec59770b5c73fb3e7affa13c0bf6d4bf36f45a68294",
+        "updatedAt": "2026-10-27T00:09:53.548138+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1602,
+            "y": 1429,
+            "name": "A gloom widow matron",
+            "note": "In the spider and bat caves surrounded by stealthed spiders",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-gloom-widow-matron",
+            "level": "floor-2",
+            "levels": [
+              11,
+              11
+            ],
+            "wikiId": "npc-a-gloom-widow-matron",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1477,
+        "payloadHash": "8a291e7afed1b7c44c60df5d5904f19bf58e4bcbe097d7fdd0e7951b48c5fa5a",
+        "updatedAt": "2026-10-27T00:11:52.776299+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1004",
+          "payload": {
+            "from": {
+              "x": 3611,
+              "y": 6567,
+              "mobs": [
+                {
+                  "name": "Riverking Magnar",
+                  "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
+                  "wikiId": "npc-riverking-magnar"
+                },
+                {
+                  "name": "Riftjaw Dess",
+                  "wiki": "https://monstersandmemories.wiki/npcs/riftjaw-dess",
+                  "wikiId": "npc-riftjaw-dess"
+                }
+              ],
+              "name": "River Bandit Camp",
+              "note": "A river bandit in the camp is Riverking Magnar's stationary placeholder.",
+              "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
+              "wikiId": "npc-riverking-magnar",
+              "category": "Mob camp"
+            },
+            "name": "River Bandit Camp",
+            "levels": [
+              12,
+              15
+            ]
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1478,
+        "payloadHash": "d635888f6fb5ce141ab679755276f53d0c60cc816fc449c38439d1ac7d15d875",
+        "updatedAt": "2026-10-27T00:12:03.093799+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3794,
+            "y": 6264,
+            "mobs": [
+              {
+                "name": "A cutthroat",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+                "wikiId": "npc-a-cutthroat"
+              },
+              {
+                "name": "An exiled noble",
+                "wiki": "https://monstersandmemories.wiki/npcs/an-exiled-noble",
+                "wikiId": "npc-an-exiled-noble"
+              }
+            ],
+            "name": "A cutthroat",
+            "note": "Hanging around  just outside the pirate camp",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+            "levels": [
+              10,
+              13
+            ],
+            "wikiId": "npc-a-cutthroat",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1489,
+        "payloadHash": "4b801df324822222610a92002c38ccda404f43e6bb6f6fdedc323a3aadf5777f",
+        "updatedAt": "2026-10-27T00:24:05.315184+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "giant-31-40-1",
+          "payload": {
+            "from": {
+              "x": 1282,
+              "y": 632,
+              "name": "Giant",
+              "note": "",
+              "levels": [
+                31,
+                40
+              ],
+              "minZoom": 2,
+              "category": "Mob camp",
+              "approximate": true
+            },
+            "name": "Maleq",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Maleq",
+            "ambush": false,
+            "levels": [
+              41,
+              41
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1494,
+        "payloadHash": "8f21fee6bb222d52c2e46f4785052442559e4bfd3c31bcc36b0cae72c1131b35",
+        "updatedAt": "2026-10-27T00:10:48.839963+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "edit-marker",
+          "target_id": "community-1296",
+          "payload": {
+            "from": {
+              "x": 2198,
+              "y": 2729,
+              "name": "Knuttoc Grobbins",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/knuttoc-grobbins",
+              "level": "basement",
+              "wikiId": "npc-knuttoc-grobbins",
+              "category": "Notable NPC"
+            },
+            "name": "Knuttoc Grobbins",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1496,
+        "payloadHash": "1e9d6b2baa53255b38c9fa9573e2dec863c412873dee12b08a6ffd410811aeb8",
+        "updatedAt": "2026-10-27T00:12:12.822805+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1449",
+          "payload": {
+            "from": {
+              "x": 5586,
+              "y": 3985,
+              "mobs": [
+                {
+                  "name": "A Bloated sand Tick"
+                },
+                {
+                  "name": "a deepcrawler Brooding"
+                },
+                {
+                  "name": "a sand tick"
+                },
+                {
+                  "name": "a deepcrawler Broodmother"
+                }
+              ],
+              "name": "Broodmother",
+              "note": "A large selection of Spiders. The Deepcrawler Broodmother also glows with a light shine in the dark, like a Torch, allowing for sight where ever it goes.",
+              "wiki": "https://monstersandmemories.miraheze.org/wiki/A_deepcrawler_broodmother",
+              "shape": {
+                "form": "outline",
+                "kind": "area",
+                "points": [
+                  [
+                    5569,
+                    3769
+                  ],
+                  [
+                    5464,
+                    3767
+                  ],
+                  [
+                    5362,
+                    3853
+                  ],
+                  [
+                    5359,
+                    3982
+                  ],
+                  [
+                    5391,
+                    4138
+                  ],
+                  [
+                    5592,
+                    4189
+                  ],
+                  [
+                    5819,
+                    4111
+                  ],
+                  [
+                    5883,
+                    3973
+                  ]
+                ]
+              },
+              "levels": [
+                15,
+                18
+              ],
+              "category": "Mob camp"
+            },
+            "name": "Broodmother",
+            "levels": [
+              11,
+              15
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1506,
+        "payloadHash": "5f8c5da0d6a61aab758cd36606f44990e72048e7be5d72099061950744cf0b2a",
+        "updatedAt": "2026-10-27T00:11:06.494239+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "edit-marker",
+          "target_id": "ramp-1-basement",
+          "payload": {
+            "from": {
+              "x": 2359,
+              "y": 1999,
+              "name": "Ramp - down to the canyon and caves",
+              "note": "",
+              "level": "basement",
+              "travel": "Stairs",
+              "toLevel": "canyon",
+              "category": "Stairs",
+              "toMarker": "ramp-1-canyon",
+              "direction": "down",
+              "approximate": true,
+              "switchOnClick": true
+            },
+            "name": "Ramp - down to the canyon and caves",
+            "reason": "missing",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1507,
+        "payloadHash": "117d994c9d9aeb4e5fb915850e1cffac17a3bb55988302bd5424570b6820983a",
+        "updatedAt": "2026-10-27T00:11:16.253339+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "edit-marker",
+          "target_id": "ladder-1-basement",
+          "payload": {
+            "from": {
+              "x": 2304,
+              "y": 1935,
+              "name": "Ladder - up to the Ground floor",
+              "note": "",
+              "level": "basement",
+              "travel": "Ladder",
+              "toLevel": "ground",
+              "category": "Ladder",
+              "toMarker": "ladder-1-ground",
+              "direction": "up",
+              "approximate": true,
+              "switchOnClick": true
+            },
+            "name": "Ladder - up to the Ground floor",
+            "reason": "missing",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1515,
+        "payloadHash": "32b66cef0366ebad59b441b988b113c55b459d05b057fdb481d2466412d38d2d",
+        "updatedAt": "2026-10-27T00:07:29.62149+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-713",
+          "payload": {
+            "to": [
+              712,
+              2342
+            ],
+            "from": [
+              1818,
+              1736
+            ],
+            "name": "Cook Deepbite (levels ~13–14)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1516,
+        "payloadHash": "83cec8a2f0523a4a330b48a770cf2521835990c2dc815646b24bdf4c36b9ebaa",
+        "updatedAt": "2026-10-27T00:07:35.75234+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-593",
+          "payload": {
+            "to": [
+              1719,
+              1811
+            ],
+            "from": [
+              1867,
+              1771
+            ],
+            "name": "Chief Glowgut"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1522,
+        "payloadHash": "ce2b5bb0f758f305b3c7159151a8ac4434e0931efb5c5b4bdccb73e7b2c0470e",
+        "updatedAt": "2026-10-27T00:05:25.770856+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1398",
+          "payload": {
+            "from": {
+              "x": 4592,
+              "y": 4354,
+              "name": "Zaarinth",
+              "note": "",
+              "sells": null,
+              "vendor": "Herbalism vendor",
+              "category": "Vendor"
+            },
+            "name": "Zaarinth",
+            "note": "Sells herbalism pouch and sickle",
+            "sells": [
+              "Bags",
+              "Weapons"
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1523,
+        "payloadHash": "18ec4d4cc5ff7be725fd8689786257214f7718a8f5bbd118e552781b468e1ab1",
+        "updatedAt": "2026-10-27T00:07:30.011874+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-713",
+          "payload": {
+            "from": {
+              "x": 712,
+              "y": 2342,
+              "name": "Cook Deepbite (levels ~13–14)",
+              "note": "Beyond the hidden wall, in the goblin caves",
+              "wiki": "https://monstersandmemories.wiki/npcs/cook-deepbite",
+              "wikiId": "npc-cook-deepbite",
+              "category": "Named mob"
+            },
+            "name": "Cook Deepbite",
+            "levels": [
+              13,
+              13
+            ]
           },
           "credit": false
         }
