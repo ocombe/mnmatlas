@@ -5,7 +5,8 @@
     "category": "Teleporter",
     "x": 4245,
     "y": 4565,
-    "note": "Teleporter destination to confirm."
+    "note": "Teleporter destination to confirm.",
+    "level": "city"
   },
   {
     "id": "guild-registrar-customs-agent",
@@ -13,7 +14,8 @@
     "category": "Guild",
     "x": 4550,
     "y": 4667,
-    "note": "Guild registrar and customs agent."
+    "note": "Guild registrar and customs agent.",
+    "level": "city"
   },
   {
     "id": "bankers",
@@ -21,7 +23,8 @@
     "category": "Bank",
     "x": 4460,
     "y": 4500,
-    "note": "Bank in the polygonal hall."
+    "note": "Bank in the polygonal hall.",
+    "level": "city"
   },
   {
     "id": "guild-registrar-bank-hall",
@@ -29,7 +32,8 @@
     "category": "Guild",
     "x": 4467,
     "y": 4481,
-    "note": "Guild registrar in the bank hall."
+    "note": "Guild registrar in the bank hall.",
+    "level": "city"
   },
   {
     "id": "grindstone",
@@ -38,7 +42,8 @@
     "x": 4233,
     "y": 4262,
     "note": "Grindstone beside the forge.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "forge",
@@ -47,7 +52,8 @@
     "x": 4265,
     "y": 4257,
     "note": "Forge beside the blacksmith.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "miral-the-dark-elf",
@@ -56,7 +62,8 @@
     "x": 4128,
     "y": 4099,
     "note": "quest npc",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "survival-thirvol",
@@ -64,7 +71,8 @@
     "category": "Tradeskill",
     "x": 4770,
     "y": 4465,
-    "note": "Survivalist."
+    "note": "Survivalist.",
+    "level": "city"
   },
   {
     "id": "lumberjacking-kulzzanrek",
@@ -72,7 +80,8 @@
     "category": "Tradeskill",
     "x": 4758,
     "y": 4531,
-    "note": "Woodcutter."
+    "note": "Woodcutter.",
+    "level": "city"
   },
   {
     "id": "magnificent-vhaspire",
@@ -81,7 +90,8 @@
     "x": 4807,
     "y": 4476,
     "note": "Hardcore.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "solitary-vhaldrek",
@@ -90,7 +100,8 @@
     "x": 4846,
     "y": 4466,
     "note": "Solo Self Found.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "tailoring-ruzzuna",
@@ -98,7 +109,8 @@
     "category": "Tradeskill",
     "x": 4665,
     "y": 4412,
-    "note": "Tailor in the market."
+    "note": "Tailor in the market.",
+    "level": "city"
   },
   {
     "id": "leatherworker-vex",
@@ -112,7 +124,8 @@
     "y": 4362,
     "note": "Newbie armour; quest rewards.",
     "wiki": "https://monstersandmemories.wiki/npcs/leatherworker-vex",
-    "wikiId": "npc-leatherworker-vex"
+    "wikiId": "npc-leatherworker-vex",
+    "level": "city"
   },
   {
     "id": "kulzzara",
@@ -123,7 +136,8 @@
     "y": 4385,
     "note": "Used weapons.",
     "wiki": "https://monstersandmemories.wiki/npcs/kulzzara",
-    "wikiId": "npc-kulzzara"
+    "wikiId": "npc-kulzzara",
+    "level": "city"
   },
   {
     "id": "melzorra",
@@ -138,7 +152,8 @@
     "note": "Bags.",
     "wiki": "https://monstersandmemories.wiki/npcs/melzorra",
     "wikiId": "npc-melzorra",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "klavel-sul",
@@ -151,7 +166,8 @@
     "wikiId": "npc-klavel-sul",
     "classes": [
       "Monk"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "tharkan-inathar",
@@ -164,7 +180,8 @@
       "Fighter"
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/tharkan-inathar",
-    "wikiId": "npc-tharkan-inathar"
+    "wikiId": "npc-tharkan-inathar",
+    "level": "city"
   },
   {
     "id": "lurithos-kest",
@@ -177,7 +194,8 @@
       "Archer"
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/lurithos-kest",
-    "wikiId": "npc-lurithos-kest"
+    "wikiId": "npc-lurithos-kest",
+    "level": "city"
   },
   {
     "id": "laren-drin-dar",
@@ -190,7 +208,8 @@
     "wikiId": "npc-laren-drindar",
     "classes": [
       "Ranger"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "ilnara-hal-kareth",
@@ -203,7 +222,8 @@
       "Spellblade"
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/ilnara-halkareth",
-    "wikiId": "npc-ilnara-hal-kareth"
+    "wikiId": "npc-ilnara-hal-kareth",
+    "level": "city"
   },
   {
     "id": "mentvar-drezzorith",
@@ -216,7 +236,8 @@
       "Paladin"
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/mentvar-drezzorith",
-    "wikiId": "npc-mentvar-drezzorith"
+    "wikiId": "npc-mentvar-drezzorith",
+    "level": "city"
   },
   {
     "id": "to-upper-platform",
@@ -224,7 +245,8 @@
     "category": "Exit",
     "x": 4460,
     "y": 4245,
-    "note": "Stairs to the upper platform."
+    "note": "Stairs to the upper platform.",
+    "level": "city"
   },
   {
     "id": "zalethra-drezzorith",
@@ -237,7 +259,8 @@
     "wikiId": "npc-zalethra-drezzorith",
     "classes": [
       "Cleric"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "lothur-varros",
@@ -250,7 +273,8 @@
       "Elementalist"
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/lothur-varros",
-    "wikiId": "npc-lothur-varros"
+    "wikiId": "npc-lothur-varros",
+    "level": "city"
   },
   {
     "id": "vhasilla-hal-kareth",
@@ -263,7 +287,8 @@
       "Wizard"
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/vhasilla-halkareth",
-    "wikiId": "npc-vhasilla-hal-kareth"
+    "wikiId": "npc-vhasilla-hal-kareth",
+    "level": "city"
   },
   {
     "id": "m-yal-wehear",
@@ -272,7 +297,8 @@
     "x": 4387,
     "y": 4140,
     "note": "Trainer upstairs at the Obsidian Academy; class not stated on the community map.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "vaslir-naiyth",
@@ -285,7 +311,8 @@
     "wikiId": "npc-vaslir-naiyth",
     "classes": [
       "Necromancer"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "amarah-ith-vayen",
@@ -298,7 +325,8 @@
     "wikiId": "npc-amarah-ithvayen",
     "classes": [
       "Enchanter"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "stablemaster-raxr",
@@ -306,15 +334,18 @@
     "category": "Stable",
     "x": 4412,
     "y": 3949,
-    "note": "Stablemaster."
+    "note": "Stablemaster.",
+    "level": "city"
   },
   {
     "id": "cook-vashuk",
     "name": "Cook Vashuk",
     "category": "Tradeskill",
-    "x": 4409,
-    "y": 3906,
-    "note": "Downstairs; follow the stairs down."
+    "x": 456,
+    "y": 205,
+    "note": "Downstairs; follow the stairs down.",
+    "level": "tunnels",
+    "approximate": true
   },
   {
     "id": "nyxia-ak-kin",
@@ -328,7 +359,8 @@
     "y": 3916,
     "note": "Food and rations.",
     "wiki": "https://monstersandmemories.wiki/npcs/nyxia-akkin",
-    "wikiId": "npc-nyxia-akkin"
+    "wikiId": "npc-nyxia-akkin",
+    "level": "city"
   },
   {
     "id": "provost-xan-shorn",
@@ -337,7 +369,8 @@
     "x": 4623,
     "y": 4171,
     "note": "Paths; meaning to confirm in game.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "apprentice-esveth",
@@ -346,7 +379,8 @@
     "x": 4620,
     "y": 3920,
     "note": "",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "toilmaster-vorith",
@@ -355,7 +389,8 @@
     "x": 5096,
     "y": 3911,
     "note": "At the bridge. Starter quest.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "toilmistress-rallvessa",
@@ -364,7 +399,8 @@
     "x": 5065,
     "y": 3785,
     "note": "At the bridge.",
-    "community": true
+    "community": true,
+    "level": "city"
   },
   {
     "id": "community-24",
@@ -373,7 +409,8 @@
     "category": "Inn",
     "note": "",
     "x": 4657,
-    "y": 2774
+    "y": 2774,
+    "level": "city"
   },
   {
     "id": "community-25",
@@ -383,7 +420,8 @@
     "note": "",
     "x": 4669,
     "y": 2745,
-    "trade": "Cooking"
+    "trade": "Cooking",
+    "level": "city"
   },
   {
     "id": "community-26",
@@ -393,7 +431,8 @@
     "note": "downstairs",
     "x": 4538,
     "y": 2655,
-    "trade": "Tailoring"
+    "trade": "Tailoring",
+    "level": "city"
   },
   {
     "id": "community-27",
@@ -403,7 +442,8 @@
     "note": "",
     "x": 4522,
     "y": 2625,
-    "trade": "Jewelcrafting"
+    "trade": "Jewelcrafting",
+    "level": "city"
   },
   {
     "id": "community-40",
@@ -413,7 +453,8 @@
     "note": "",
     "x": 4404,
     "y": 2532,
-    "trade": "Leatherworking"
+    "trade": "Leatherworking",
+    "level": "city"
   },
   {
     "id": "community-43",
@@ -422,7 +463,8 @@
     "category": "Bank",
     "note": "",
     "x": 4480,
-    "y": 2921
+    "y": 2921,
+    "level": "city"
   },
   {
     "id": "community-44",
@@ -432,7 +474,8 @@
     "note": "",
     "x": 3302,
     "y": 2662,
-    "trade": "Fletching"
+    "trade": "Fletching",
+    "level": "city"
   },
   {
     "id": "community-46",
@@ -442,7 +485,8 @@
     "note": "",
     "x": 3370,
     "y": 3025,
-    "trade": "Blacksmithing / Smelting"
+    "trade": "Blacksmithing / Smelting",
+    "level": "city"
   },
   {
     "id": "community-47",
@@ -452,7 +496,8 @@
     "note": "",
     "x": 3359,
     "y": 2999,
-    "vendor": "Mining vendor"
+    "vendor": "Mining vendor",
+    "level": "city"
   },
   {
     "id": "community-64",
@@ -548,7 +593,8 @@
           1845
         ]
       ]
-    }
+    },
+    "level": "city"
   },
   {
     "id": "community-65",
@@ -566,7 +612,8 @@
     "x": 4839,
     "y": 5521,
     "wiki": "https://monstersandmemories.wiki/npcs/an-angry-cultist",
-    "wikiId": "npc-an-angry-cultist"
+    "wikiId": "npc-an-angry-cultist",
+    "level": "city"
   },
   {
     "id": "community-67",
@@ -578,7 +625,8 @@
     "y": 3190,
     "classes": [
       "Inquisitor"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-69",
@@ -588,7 +636,8 @@
     "note": "toxicologist, alchemy materials",
     "x": 4371,
     "y": 2443,
-    "vendor": "Poison maker"
+    "vendor": "Poison maker",
+    "level": "city"
   },
   {
     "id": "community-71",
@@ -603,7 +652,8 @@
       "Bags",
       "Materials",
       "Weapons"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-75",
@@ -615,7 +665,8 @@
     "y": 2707,
     "classes": [
       "Ranger"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-77",
@@ -627,7 +678,8 @@
     "y": 2836,
     "classes": [
       "Archer"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-78",
@@ -639,7 +691,8 @@
     "y": 2685,
     "classes": [
       "Fighter"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-79",
@@ -651,7 +704,8 @@
     "y": 2854,
     "classes": [
       "Inquisitor"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-80",
@@ -663,7 +717,8 @@
     "y": 2878,
     "classes": [
       "Monk"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-84",
@@ -676,7 +731,8 @@
     ],
     "note": "",
     "x": 3697,
-    "y": 2474
+    "y": 2474,
+    "level": "city"
   },
   {
     "id": "community-86",
@@ -690,7 +746,8 @@
     ],
     "note": "necromancer reagents",
     "x": 3711,
-    "y": 2511
+    "y": 2511,
+    "level": "city"
   },
   {
     "id": "community-94",
@@ -699,7 +756,8 @@
     "category": "Teleporter",
     "note": "Teleporter from tunnel opposite way of bank. Goes up a level towards the Necromancer quest NPCs.",
     "x": 4340,
-    "y": 2777
+    "y": 2777,
+    "level": "city"
   },
   {
     "id": "community-45",
@@ -708,7 +766,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3438,
-    "y": 2784
+    "y": 2784,
+    "level": "city"
   },
   {
     "id": "community-73",
@@ -717,7 +776,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 4278,
-    "y": 2265
+    "y": 2265,
+    "level": "city"
   },
   {
     "id": "community-87",
@@ -726,7 +786,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3724,
-    "y": 2665
+    "y": 2665,
+    "level": "city"
   },
   {
     "id": "community-88",
@@ -735,7 +796,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 4068,
-    "y": 2281
+    "y": 2281,
+    "level": "city"
   },
   {
     "id": "community-90",
@@ -744,7 +806,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 4169,
-    "y": 2331
+    "y": 2331,
+    "level": "city"
   },
   {
     "id": "community-91",
@@ -753,7 +816,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 4199,
-    "y": 2390
+    "y": 2390,
+    "level": "city"
   },
   {
     "id": "community-225",
@@ -763,7 +827,8 @@
     "note": "",
     "x": 4041,
     "y": 3337,
-    "trade": "Herbalism"
+    "trade": "Herbalism",
+    "level": "city"
   },
   {
     "id": "community-226",
@@ -773,7 +838,8 @@
     "note": "",
     "x": 4049,
     "y": 3334,
-    "trade": "Alchemy"
+    "trade": "Alchemy",
+    "level": "city"
   },
   {
     "id": "community-227",
@@ -783,7 +849,8 @@
     "note": "upstair",
     "x": 3983,
     "y": 3361,
-    "vendor": "Alchemy vendor"
+    "vendor": "Alchemy vendor",
+    "level": "city"
   },
   {
     "id": "community-231",
@@ -793,7 +860,8 @@
     "note": "in the docks area under the city",
     "x": 4013,
     "y": 2556,
-    "trade": "Fishing"
+    "trade": "Fishing",
+    "level": "city"
   },
   {
     "id": "community-232",
@@ -803,7 +871,8 @@
     "note": "",
     "x": 4024,
     "y": 2553,
-    "vendor": "Fishing vendor"
+    "vendor": "Fishing vendor",
+    "level": "city"
   },
   {
     "id": "community-239",
@@ -815,7 +884,8 @@
     "y": 4423,
     "vendor": "Cloth armorer",
     "wiki": "https://monstersandmemories.wiki/npcs/ruzzuna",
-    "wikiId": "npc-ruzzuna"
+    "wikiId": "npc-ruzzuna",
+    "level": "city"
   },
   {
     "id": "community-254",
@@ -825,7 +895,8 @@
     "note": "",
     "x": 4449,
     "y": 2474,
-    "trade": "Skinning / Tanning"
+    "trade": "Skinning / Tanning",
+    "level": "city"
   },
   {
     "id": "community-269",
@@ -837,7 +908,8 @@
     "y": 2451,
     "classes": [
       "Enchanter"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-273",
@@ -846,7 +918,8 @@
     "category": "Notable NPC",
     "note": "1st floor of the inn",
     "x": 3812,
-    "y": 2289
+    "y": 2289,
+    "level": "city"
   },
   {
     "id": "community-276",
@@ -855,7 +928,8 @@
     "category": "Teleporter",
     "note": "Goes to the top of the tower with spell caster trainers.",
     "x": 3835,
-    "y": 3352
+    "y": 3352,
+    "level": "city"
   },
   {
     "id": "community-278",
@@ -865,7 +939,8 @@
     "note": "",
     "x": 3305,
     "y": 3022,
-    "vendor": "Blacksmithing vendor"
+    "vendor": "Blacksmithing vendor",
+    "level": "city"
   },
   {
     "id": "community-280",
@@ -876,7 +951,8 @@
     "x": 3569,
     "y": 2960,
     "wiki": "https://monstersandmemories.wiki/npcs/alarys-drezzorith",
-    "wikiId": "npc-alarys-drezzorith"
+    "wikiId": "npc-alarys-drezzorith",
+    "level": "city"
   },
   {
     "id": "community-281",
@@ -885,7 +961,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3675,
-    "y": 2739
+    "y": 2739,
+    "level": "city"
   },
   {
     "id": "community-282",
@@ -897,7 +974,8 @@
     "y": 2729,
     "classes": [
       "Paladin"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-283",
@@ -910,7 +988,8 @@
     ],
     "note": "",
     "x": 3602,
-    "y": 2586
+    "y": 2586,
+    "level": "city"
   },
   {
     "id": "community-285",
@@ -921,7 +1000,8 @@
     "x": 3456,
     "y": 2737,
     "wiki": "https://monstersandmemories.wiki/npcs/tal-drezzorith",
-    "wikiId": "npc-tal-drezzorith"
+    "wikiId": "npc-tal-drezzorith",
+    "level": "city"
   },
   {
     "id": "community-293",
@@ -933,7 +1013,8 @@
     "y": 3375,
     "classes": [
       "Spellblade"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-294",
@@ -946,7 +1027,8 @@
     ],
     "note": "",
     "x": 3723,
-    "y": 3311
+    "y": 3311,
+    "level": "city"
   },
   {
     "id": "community-295",
@@ -959,7 +1041,8 @@
     ],
     "note": "",
     "x": 3696,
-    "y": 3330
+    "y": 3330,
+    "level": "city"
   },
   {
     "id": "community-296",
@@ -972,7 +1055,8 @@
     ],
     "note": "",
     "x": 3744,
-    "y": 3383
+    "y": 3383,
+    "level": "city"
   },
   {
     "id": "community-297",
@@ -985,7 +1069,8 @@
     ],
     "note": "",
     "x": 3769,
-    "y": 3365
+    "y": 3365,
+    "level": "city"
   },
   {
     "id": "community-298",
@@ -994,7 +1079,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3817,
-    "y": 3341
+    "y": 3341,
+    "level": "city"
   },
   {
     "id": "community-299",
@@ -1003,7 +1089,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3833,
-    "y": 3342
+    "y": 3342,
+    "level": "city"
   },
   {
     "id": "community-300",
@@ -1012,7 +1099,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3839,
-    "y": 3326
+    "y": 3326,
+    "level": "city"
   },
   {
     "id": "community-301",
@@ -1021,7 +1109,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3827,
-    "y": 3315
+    "y": 3315,
+    "level": "city"
   },
   {
     "id": "community-302",
@@ -1030,7 +1119,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3813,
-    "y": 3325
+    "y": 3325,
+    "level": "city"
   },
   {
     "id": "community-303",
@@ -1040,7 +1130,8 @@
     "note": "",
     "x": 3272,
     "y": 2974,
-    "trade": "Carpentry / Woodworking"
+    "trade": "Carpentry / Woodworking",
+    "level": "city"
   },
   {
     "id": "community-307",
@@ -1049,7 +1140,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3426,
-    "y": 2762
+    "y": 2762,
+    "level": "city"
   },
   {
     "id": "community-381",
@@ -1058,7 +1150,8 @@
     "category": "Named mob",
     "note": "",
     "x": 2720,
-    "y": 6514
+    "y": 6514,
+    "level": "city"
   },
   {
     "id": "community-401",
@@ -1072,7 +1165,8 @@
       15,
       20
     ],
-    "mobs": []
+    "mobs": [],
+    "level": "city"
   },
   {
     "id": "community-402",
@@ -1081,7 +1175,8 @@
     "category": "Passage",
     "note": "Entrance to runaways hideout.",
     "x": 3404,
-    "y": 5009
+    "y": 5009,
+    "level": "city"
   },
   {
     "id": "community-410",
@@ -1093,7 +1188,8 @@
     "y": 4121,
     "vendor": "General goods",
     "wiki": "https://monstersandmemories.wiki/npcs/supplier-jul",
-    "wikiId": "npc-supplier-jul"
+    "wikiId": "npc-supplier-jul",
+    "level": "city"
   },
   {
     "id": "community-421",
@@ -1113,7 +1209,8 @@
         "wiki": "https://monstersandmemories.wiki/npcs/a-mournful-outcast",
         "wikiId": "npc-a-mournful-outcast"
       }
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-422",
@@ -1126,7 +1223,8 @@
     "levels": [
       13,
       13
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-423",
@@ -1135,7 +1233,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 3910,
-    "y": 6224
+    "y": 6224,
+    "level": "city"
   },
   {
     "id": "community-428",
@@ -1147,7 +1246,8 @@
     "y": 4270,
     "classes": [
       "Inquisitor"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-476",
@@ -1161,7 +1261,8 @@
       15,
       16
     ],
-    "mobs": []
+    "mobs": [],
+    "level": "city"
   },
   {
     "id": "community-477",
@@ -1206,7 +1307,8 @@
         "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-mystic",
         "wikiId": "npc-1790076501781-36d4h"
       }
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-478",
@@ -1215,7 +1317,8 @@
     "category": "Notable NPC",
     "note": "",
     "x": 2557,
-    "y": 2045
+    "y": 2045,
+    "level": "city"
   },
   {
     "id": "community-484",
@@ -1228,7 +1331,8 @@
     "levels": [
       20,
       20
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-543",
@@ -1353,7 +1457,8 @@
         "wiki": "https://monstersandmemories.wiki/npcs/a-stray-elemental",
         "wikiId": "npc-a-stray-elemental"
       }
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-563",
@@ -1362,7 +1467,8 @@
     "category": "Quest NPC",
     "note": "Paladin quest npc",
     "x": 3468,
-    "y": 2686
+    "y": 2686,
+    "level": "city"
   },
   {
     "id": "community-565",
@@ -1372,7 +1478,8 @@
     "note": "",
     "x": 4364,
     "y": 3027,
-    "vendor": "Used weapons dealer"
+    "vendor": "Used weapons dealer",
+    "level": "city"
   },
   {
     "id": "community-568",
@@ -1382,7 +1489,8 @@
     "note": "",
     "x": 4675,
     "y": 2931,
-    "vendor": "Innkeeper"
+    "vendor": "Innkeeper",
+    "level": "city"
   },
   {
     "id": "community-569",
@@ -1392,7 +1500,8 @@
     "note": "",
     "x": 4227,
     "y": 2261,
-    "vendor": "Bag merchant"
+    "vendor": "Bag merchant",
+    "level": "city"
   },
   {
     "id": "community-570",
@@ -1401,7 +1510,8 @@
     "category": "Vendor",
     "note": "",
     "x": 4227,
-    "y": 2112
+    "y": 2112,
+    "level": "city"
   },
   {
     "id": "community-572",
@@ -1411,7 +1521,8 @@
     "note": "",
     "x": 3261,
     "y": 2683,
-    "vendor": "Fletcher"
+    "vendor": "Fletcher",
+    "level": "city"
   },
   {
     "id": "community-573",
@@ -1420,7 +1531,8 @@
     "category": "Vendor",
     "note": "furniture materials",
     "x": 3316,
-    "y": 2994
+    "y": 2994,
+    "level": "city"
   },
   {
     "id": "community-575",
@@ -1430,7 +1542,8 @@
     "note": "",
     "x": 3382,
     "y": 3039,
-    "trade": "Blacksmithing / Smelting"
+    "trade": "Blacksmithing / Smelting",
+    "level": "city"
   },
   {
     "id": "community-577",
@@ -1440,7 +1553,8 @@
     "note": "",
     "x": 3354,
     "y": 3016,
-    "vendor": "Smelting vendor"
+    "vendor": "Smelting vendor",
+    "level": "city"
   },
   {
     "id": "community-579",
@@ -1450,7 +1564,8 @@
     "note": "copper and bronze schematics",
     "x": 3320,
     "y": 3013,
-    "vendor": "Blacksmithing vendor"
+    "vendor": "Blacksmithing vendor",
+    "level": "city"
   },
   {
     "id": "community-580",
@@ -1460,7 +1575,8 @@
     "note": "Iron and Steel schematics",
     "x": 3335,
     "y": 3022,
-    "vendor": "Blacksmithing vendor"
+    "vendor": "Blacksmithing vendor",
+    "level": "city"
   },
   {
     "id": "community-581",
@@ -1470,7 +1586,8 @@
     "note": "",
     "x": 3359,
     "y": 3082,
-    "trade": "Mining"
+    "trade": "Mining",
+    "level": "city"
   },
   {
     "id": "community-582",
@@ -1480,7 +1597,8 @@
     "note": "wizard reagent vendor",
     "x": 3800,
     "y": 3229,
-    "vendor": "Reagent vendor"
+    "vendor": "Reagent vendor",
+    "level": "city"
   },
   {
     "id": "community-583",
@@ -1490,7 +1608,8 @@
     "note": "",
     "x": 4239,
     "y": 2798,
-    "vendor": "Butcher"
+    "vendor": "Butcher",
+    "level": "city"
   },
   {
     "id": "community-584",
@@ -1500,7 +1619,8 @@
     "note": "",
     "x": 4208,
     "y": 2754,
-    "vendor": "Baker"
+    "vendor": "Baker",
+    "level": "city"
   },
   {
     "id": "community-585",
@@ -1510,7 +1630,8 @@
     "note": "",
     "x": 3659,
     "y": 3038,
-    "vendor": "Used weapons dealer"
+    "vendor": "Used weapons dealer",
+    "level": "city"
   },
   {
     "id": "community-587",
@@ -1520,7 +1641,8 @@
     "note": "",
     "x": 3969,
     "y": 3109,
-    "vendor": "Adventuring supplies"
+    "vendor": "Adventuring supplies",
+    "level": "city"
   },
   {
     "id": "community-588",
@@ -1530,7 +1652,8 @@
     "note": "",
     "x": 3952,
     "y": 3073,
-    "vendor": "Grocer"
+    "vendor": "Grocer",
+    "level": "city"
   },
   {
     "id": "community-589",
@@ -1540,7 +1663,8 @@
     "note": "",
     "x": 3988,
     "y": 3288,
-    "vendor": "Lumberjack vendor"
+    "vendor": "Lumberjack vendor",
+    "level": "city"
   },
   {
     "id": "community-590",
@@ -1550,7 +1674,8 @@
     "note": "",
     "x": 3914,
     "y": 3318,
-    "vendor": "Produce vendor"
+    "vendor": "Produce vendor",
+    "level": "city"
   },
   {
     "id": "community-591",
@@ -1559,7 +1684,8 @@
     "category": "Vendor",
     "note": "wooden weapons merchant",
     "x": 3891,
-    "y": 3206
+    "y": 3206,
+    "level": "city"
   },
   {
     "id": "community-592",
@@ -1568,7 +1694,8 @@
     "category": "Vendor",
     "note": "",
     "x": 3924,
-    "y": 3203
+    "y": 3203,
+    "level": "city"
   },
   {
     "id": "community-593",
@@ -1583,7 +1710,8 @@
       13
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/chief-glowgut",
-    "wikiId": "npc-1790076524906-phjpl"
+    "wikiId": "npc-1790076524906-phjpl",
+    "level": "city"
   },
   {
     "id": "community-661",
@@ -1594,7 +1722,8 @@
     "x": 4541,
     "y": 4131,
     "wiki": "https://monstersandmemories.wiki/npcs/myal-vehear",
-    "wikiId": "npc-myal-vehear"
+    "wikiId": "npc-myal-vehear",
+    "level": "city"
   },
   {
     "id": "community-662",
@@ -1604,7 +1733,8 @@
     "note": "WIZ and SPB quest giver",
     "x": 3693,
     "y": 3468,
-    "wiki": "https://monstersandmemories.miraheze.org/wiki/Ailis_Hal%27kareth"
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Ailis_Hal%27kareth",
+    "level": "city"
   },
   {
     "id": "community-712",
@@ -1615,7 +1745,8 @@
     "x": 4404,
     "y": 5062,
     "wiki": "https://monstersandmemories.wiki/npcs/mournful-outcast",
-    "wikiId": "npc-mournful-outcast"
+    "wikiId": "npc-mournful-outcast",
+    "level": "city"
   },
   {
     "id": "community-713",
@@ -1630,7 +1761,8 @@
     "levels": [
       13,
       13
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-731",
@@ -1641,7 +1773,8 @@
     "x": 1929,
     "y": 2297,
     "wiki": "https://monstersandmemories.wiki/npcs/thanetal",
-    "wikiId": "npc-thanetal"
+    "wikiId": "npc-thanetal",
+    "level": "city"
   },
   {
     "id": "community-753",
@@ -1654,7 +1787,8 @@
     "levels": [
       15,
       15
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-846",
@@ -1663,7 +1797,8 @@
     "category": "Notable NPC",
     "note": "upstair",
     "x": 4348,
-    "y": 2302
+    "y": 2302,
+    "level": "city"
   },
   {
     "id": "community-849",
@@ -1676,7 +1811,8 @@
     "vendor": "Spell scribe",
     "sells": [
       "Spell scrolls"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-853",
@@ -1685,7 +1821,8 @@
     "category": "Vendor",
     "note": "Upstair, sells Disenchanting Cube and Tome of Enchantement",
     "x": 4410,
-    "y": 2438
+    "y": 2438,
+    "level": "city"
   },
   {
     "id": "community-854",
@@ -1695,7 +1832,8 @@
     "note": "upstair, Disenchanter",
     "x": 4439,
     "y": 2406,
-    "trade": "(Dis)Enchanting"
+    "trade": "(Dis)Enchanting",
+    "level": "city"
   },
   {
     "id": "community-856",
@@ -1705,7 +1843,8 @@
     "note": "",
     "x": 4427,
     "y": 2428,
-    "trade": "(Dis)Enchanting"
+    "trade": "(Dis)Enchanting",
+    "level": "city"
   },
   {
     "id": "community-857",
@@ -1714,7 +1853,8 @@
     "category": "Vendor",
     "note": "",
     "x": 4468,
-    "y": 2446
+    "y": 2446,
+    "level": "city"
   },
   {
     "id": "community-858",
@@ -1724,7 +1864,8 @@
     "note": "",
     "x": 4462,
     "y": 2528,
-    "vendor": "Leatherworking vendor"
+    "vendor": "Leatherworking vendor",
+    "level": "city"
   },
   {
     "id": "community-859",
@@ -1737,7 +1878,8 @@
     "vendor": "Leatherworking vendor",
     "sells": [
       "Recipes"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-860",
@@ -1746,7 +1888,8 @@
     "category": "Notable NPC",
     "note": "Commerce trainer",
     "x": 4034,
-    "y": 3050
+    "y": 3050,
+    "level": "city"
   },
   {
     "id": "community-861",
@@ -1756,7 +1899,8 @@
     "note": "",
     "x": 4194,
     "y": 2975,
-    "vendor": "Property merchant"
+    "vendor": "Property merchant",
+    "level": "city"
   },
   {
     "id": "community-862",
@@ -1765,7 +1909,8 @@
     "category": "Notable NPC",
     "note": "take sale notices",
     "x": 4167,
-    "y": 2964
+    "y": 2964,
+    "level": "city"
   },
   {
     "id": "community-872",
@@ -1775,7 +1920,8 @@
     "note": "",
     "x": 3913,
     "y": 3436,
-    "trade": "Herbalism"
+    "trade": "Herbalism",
+    "level": "city"
   },
   {
     "id": "community-879",
@@ -1784,7 +1930,8 @@
     "category": "Forge",
     "note": "",
     "x": 3391,
-    "y": 3071
+    "y": 3071,
+    "level": "city"
   },
   {
     "id": "community-880",
@@ -1793,7 +1940,8 @@
     "category": "Forge",
     "note": "",
     "x": 3378,
-    "y": 3073
+    "y": 3073,
+    "level": "city"
   },
   {
     "id": "community-886",
@@ -1805,7 +1953,8 @@
     "y": 4235,
     "trade": "Blacksmithing / Smelting",
     "wiki": "https://monstersandmemories.wiki/npcs/blacksmith-zorvek",
-    "wikiId": "npc-blacksmith-zorvek"
+    "wikiId": "npc-blacksmith-zorvek",
+    "level": "city"
   },
   {
     "id": "community-887",
@@ -1816,7 +1965,8 @@
     "x": 4574,
     "y": 4302,
     "wiki": "https://monstersandmemories.wiki/npcs/nurvol-cereveth",
-    "wikiId": "npc-nurvol-cereveth"
+    "wikiId": "npc-nurvol-cereveth",
+    "level": "city"
   },
   {
     "id": "community-889",
@@ -1826,7 +1976,8 @@
     "note": "",
     "x": 4668,
     "y": 2776,
-    "vendor": "Innkeeper"
+    "vendor": "Innkeeper",
+    "level": "city"
   },
   {
     "id": "community-890",
@@ -1837,7 +1988,8 @@
     "x": 4682,
     "y": 2738,
     "wiki": "https://monstersandmemories.wiki/npcs/aleyz-ithvayen",
-    "wikiId": "npc-aleyz-ith-vayen"
+    "wikiId": "npc-aleyz-ith-vayen",
+    "level": "city"
   },
   {
     "id": "community-891",
@@ -1847,7 +1999,8 @@
     "note": "",
     "x": 4707,
     "y": 2803,
-    "vendor": "Brewer"
+    "vendor": "Brewer",
+    "level": "city"
   },
   {
     "id": "community-892",
@@ -1857,7 +2010,8 @@
     "note": "",
     "x": 4724,
     "y": 2981,
-    "vendor": "Barkeep"
+    "vendor": "Barkeep",
+    "level": "city"
   },
   {
     "id": "community-979",
@@ -1868,7 +2022,8 @@
     "x": 4586,
     "y": 4227,
     "wiki": "https://monstersandmemories.wiki/npcs/xilonen-velgarrith",
-    "wikiId": "npc-xilonen-velgarrith"
+    "wikiId": "npc-xilonen-velgarrith",
+    "level": "city"
   },
   {
     "id": "community-1017",
@@ -1888,7 +2043,8 @@
         "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-runt",
         "wikiId": "npc-a-deepgulp-runt"
       }
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-1031",
@@ -1906,7 +2062,8 @@
         "wiki": "https://monstersandmemories.wiki/npcs/a-cave-snake",
         "wikiId": "npc-a-cave-snake"
       }
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-1049",
@@ -1993,7 +2150,8 @@
           3340
         ]
       ]
-    }
+    },
+    "level": "city"
   },
   {
     "id": "community-1052",
@@ -2006,7 +2164,8 @@
     "vendor": "Used armor trader",
     "sells": [
       "Armor"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-1053",
@@ -2016,7 +2175,8 @@
     "x": 3617,
     "y": 2182,
     "category": "Vendor",
-    "vendor": "Brewer"
+    "vendor": "Brewer",
+    "level": "city"
   },
   {
     "id": "community-1054",
@@ -2026,7 +2186,8 @@
     "x": 3630,
     "y": 2416,
     "category": "Vendor",
-    "vendor": "Adventuring supplies"
+    "vendor": "Adventuring supplies",
+    "level": "city"
   },
   {
     "id": "community-1055",
@@ -2036,7 +2197,8 @@
     "x": 3644,
     "y": 2403,
     "category": "Vendor",
-    "vendor": "Adventuring supplies"
+    "vendor": "Adventuring supplies",
+    "level": "city"
   },
   {
     "id": "community-1063",
@@ -2156,7 +2318,8 @@
           2341
         ]
       ]
-    }
+    },
+    "level": "city"
   },
   {
     "id": "community-1067",
@@ -2166,7 +2329,8 @@
     "x": 6243,
     "y": 2596,
     "category": "Teleporter",
-    "wiki": "https://monstersandmemories.wiki/quests/house-ithvayen"
+    "wiki": "https://monstersandmemories.wiki/quests/house-ithvayen",
+    "level": "city"
   },
   {
     "id": "community-1076",
@@ -2213,7 +2377,8 @@
           2427
         ]
       ]
-    }
+    },
+    "level": "city"
   },
   {
     "id": "community-1078",
@@ -2271,7 +2436,8 @@
           2228
         ]
       ]
-    }
+    },
+    "level": "city"
   },
   {
     "id": "community-1190",
@@ -2280,7 +2446,8 @@
     "note": "",
     "x": 2402,
     "y": 7328,
-    "category": "Notable NPC"
+    "category": "Notable NPC",
+    "level": "city"
   },
   {
     "id": "community-1322",
@@ -2716,7 +2883,8 @@
           936
         ]
       ]
-    }
+    },
+    "level": "city"
   },
   {
     "id": "community-1398",
@@ -2730,7 +2898,8 @@
     "sells": [
       "Bags",
       "Weapons"
-    ]
+    ],
+    "level": "city"
   },
   {
     "id": "community-1400",
@@ -2740,7 +2909,8 @@
     "x": 3766,
     "y": 2145,
     "category": "Tradeskill",
-    "trade": "Cooking"
+    "trade": "Cooking",
+    "level": "city"
   },
   {
     "id": "community-1401",
@@ -2750,7 +2920,8 @@
     "x": 3771,
     "y": 2098,
     "category": "Vendor",
-    "vendor": "Grocer"
+    "vendor": "Grocer",
+    "level": "city"
   },
   {
     "id": "community-1402",
@@ -2760,7 +2931,8 @@
     "x": 3704,
     "y": 2093,
     "category": "Vendor",
-    "vendor": "Cook"
+    "vendor": "Cook",
+    "level": "city"
   },
   {
     "id": "community-1403",
@@ -2769,7 +2941,8 @@
     "note": "2nd floor of the inn",
     "x": 3781,
     "y": 2294,
-    "category": "Notable NPC"
+    "category": "Notable NPC",
+    "level": "city"
   },
   {
     "id": "community-1405",
@@ -2779,7 +2952,8 @@
     "x": 3240,
     "y": 2814,
     "category": "Vendor",
-    "vendor": "Chain armorer"
+    "vendor": "Chain armorer",
+    "level": "city"
   },
   {
     "id": "community-1406",
@@ -2789,7 +2963,8 @@
     "x": 3212,
     "y": 2845,
     "category": "Vendor",
-    "vendor": "Plate armorer"
+    "vendor": "Plate armorer",
+    "level": "city"
   },
   {
     "id": "community-1524",
@@ -2798,6 +2973,91 @@
     "note": "Where wizards go when using exodus in this zone",
     "x": 6606,
     "y": 2068,
-    "category": "Respawn point"
+    "category": "Respawn point",
+    "level": "city"
+  },
+  {
+    "id": "fq-tunnels-ramp-city",
+    "name": "Ramp - down to the Foreign Quarter tunnels",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "city",
+    "x": 4578,
+    "y": 4492,
+    "note": "",
+    "toLevel": "tunnels",
+    "toMarker": "fq-tunnels-ramp-tunnels",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "fq-tunnels-ramp-tunnels",
+    "name": "Ramp - up to the Foreign Quarter",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "tunnels",
+    "x": 572,
+    "y": 716,
+    "note": "",
+    "toLevel": "city",
+    "toMarker": "fq-tunnels-ramp-city",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "fq-tunnels-north-city",
+    "name": "Stairs - down to the Foreign Quarter tunnels",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "city",
+    "x": 4408,
+    "y": 3992,
+    "note": "",
+    "toLevel": "tunnels",
+    "toMarker": "fq-tunnels-north-tunnels",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "fq-tunnels-north-tunnels",
+    "name": "Stairs - up to the Foreign Quarter",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "tunnels",
+    "x": 408,
+    "y": 232,
+    "note": "",
+    "toLevel": "city",
+    "toMarker": "fq-tunnels-north-city",
+    "direction": "up",
+    "switchOnClick": true
+  },
+  {
+    "id": "fq-tunnels-west-city",
+    "name": "Door - down to the Foreign Quarter tunnels",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "city",
+    "x": 4190,
+    "y": 4314,
+    "note": "",
+    "toLevel": "tunnels",
+    "toMarker": "fq-tunnels-west-tunnels",
+    "direction": "down",
+    "switchOnClick": true
+  },
+  {
+    "id": "fq-tunnels-west-tunnels",
+    "name": "Door - up to the west shore",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "level": "tunnels",
+    "x": 190,
+    "y": 561,
+    "note": "",
+    "toLevel": "city",
+    "toMarker": "fq-tunnels-west-city",
+    "direction": "up",
+    "switchOnClick": true
   }
 ]

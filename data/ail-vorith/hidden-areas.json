@@ -338,7 +338,8 @@
         ]
       ],
       "approximate": true,
-      "note": "Passages below the visible route."
+      "note": "Passages below the visible route.",
+      "level": "city"
     }
   ],
   "routes": [],

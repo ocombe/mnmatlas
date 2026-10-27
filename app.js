@@ -717,7 +717,8 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
  if(!config.levels?.some(l=>l.id===id)||id===config.levelId)return;
  const base=registry.maps.find(c=>c.id===config.id),target=levelConfig(base,base.levels.find(l=>l.id===id));
  const url=viewUrl(null),center=place?[place.x,place.y]:pixelsOf(map.getCenter());url.searchParams.set('level',id);url.searchParams.set('x',String(center[0]));url.searchParams.set('y',String(center[1]));url.searchParams.set('z',String(zoom));
- if(!levelsAligned(target,config))for(const k of ['x','y','z'])url.searchParams.delete(k);
+ // Sheets with their own pixel grid: a link still lands on its paired pin, at the same apparent scale.
+ if(!levelsAligned(target,config)){if(place){const z=Math.min(target.maxZoom,Math.max(target.minZoom,zoom-config.coordinateZoom+target.coordinateZoom));url.searchParams.set('z',String(z));}else for(const k of ['x','y','z'])url.searchParams.delete(k);}
  if(place&&!place.quiet)url.searchParams.set('place',place.id);else url.searchParams.delete('place');
  history.pushState({map:config.id,level:id},'',url);ownView=true;await loadMap(config.id,url);
  if(place?.quiet)flashPin(place.id);

@@ -204,7 +204,7 @@
       "maxZoom": 7,
       "coordinateZoom": 5,
       "tileSize": 256,
-      "tileRevision": "v2",
+      "tileRevision": "v3",
       "tilePath": "assets/tiles/ail-vorith/{z}/{x}/{y}.webp",
       "markersFile": "data/ail-vorith/markers.json",
       "labelsFile": "data/ail-vorith/labels.json",
@@ -214,6 +214,33 @@
         "padding": 18,
         "placeZoom": 5
       },
+      "defaultLevel": "city",
+      "levels": [
+        {
+          "id": "city",
+          "title": "City and lake",
+          "tilePath": "assets/tiles/ail-vorith/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "tunnels",
+          "title": "Foreign Quarter tunnels",
+          "width": 900,
+          "height": 900,
+          "minZoom": 0,
+          "maxNativeZoom": 2,
+          "maxZoom": 4,
+          "coordinateZoom": 2,
+          "tileRevision": "tunnels-v3",
+          "tilePath": "assets/tiles/ail-vorith/tunnels/{z}/{x}/{y}.webp",
+          "labelsFile": "data/ail-vorith/tunnels-labels.json",
+          "hiddenAreasFile": null,
+          "defaultView": {
+            "mode": "fit",
+            "padding": 18,
+            "placeZoom": 2
+          }
+        }
+      ],
       "extraCategories": {
         "Vendor": [
           "◈",
@@ -234,6 +261,10 @@
         "Forge": [
           "⚒",
           "#665e3e"
+        ],
+        "Stairs": [
+          "↕",
+          "#64795b"
         ]
       },
       "attribution": {

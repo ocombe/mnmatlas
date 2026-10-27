@@ -10,7 +10,8 @@
    "y": 4290,
    "kind": "district",
    "priority": 90,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "level": "city"
   },
   {
    "id": "main-city",
@@ -19,7 +20,8 @@
    "y": 2700,
    "kind": "district",
    "priority": 100,
-   "minZoom": 2
+   "minZoom": 2,
+   "level": "city"
   },
   {
    "id": "cavern-lake",
@@ -28,7 +30,8 @@
    "y": 3860,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2.75
+   "minZoom": 2.75,
+   "level": "city"
   },
   {
    "id": "southern-cave",
@@ -37,7 +40,8 @@
    "y": 6620,
    "kind": "district",
    "priority": 75,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "level": "city"
   },
   {
    "id": "foreign-traders-market",
@@ -47,7 +51,8 @@
    "kind": "building",
    "priority": 45,
    "minZoom": 4.5,
-   "note": ""
+   "note": "",
+   "level": "city"
   },
   {
    "id": "obsidian-academy",
@@ -57,7 +62,8 @@
    "kind": "building",
    "priority": 50,
    "minZoom": 4.5,
-   "note": ""
+   "note": "",
+   "level": "city"
   },
   {
    "id": "to-great-cavern-sea",
@@ -96,7 +102,8 @@
     "url": "https://monstersandmemories.miraheze.org/wiki/Boats",
     "license": "CC BY-SA 4.0",
     "licenseUrl": "https://creativecommons.org/licenses/by-sa/4.0/"
-   }
+   },
+   "level": "city"
   },
   {
    "id": "community-81",
@@ -110,7 +117,8 @@
    "y": 3553,
    "arrow": "east",
    "toMap": "blind-midden",
-   "toPlace": "exit-ail-vorith"
+   "toPlace": "exit-ail-vorith",
+   "level": "city"
   },
   {
    "id": "community-1050",
@@ -121,7 +129,8 @@
    "y": 3528,
    "kind": "building",
    "priority": 50,
-   "minZoom": 0
+   "minZoom": 0,
+   "level": "city"
   }
  ],
  "trainers": [
@@ -134,7 +143,8 @@
     "Monk"
    ],
    "x": 4457,
-   "y": 4293
+   "y": 4293,
+   "level": "city"
   },
   {
    "id": "tharkan-inathar",
@@ -145,7 +155,8 @@
     "Fighter"
    ],
    "x": 4444,
-   "y": 4257
+   "y": 4257,
+   "level": "city"
   },
   {
    "id": "lurithos-kest",
@@ -156,7 +167,8 @@
     "Archer"
    ],
    "x": 4355,
-   "y": 4218
+   "y": 4218,
+   "level": "city"
   },
   {
    "id": "laren-drin-dar",
@@ -167,7 +179,8 @@
     "Ranger"
    ],
    "x": 4405,
-   "y": 4236
+   "y": 4236,
+   "level": "city"
   },
   {
    "id": "ilnara-hal-kareth",
@@ -178,7 +191,8 @@
     "Spellblade"
    ],
    "x": 4404,
-   "y": 4314
+   "y": 4314,
+   "level": "city"
   },
   {
    "id": "mentvar-drezzorith",
@@ -189,7 +203,8 @@
     "Paladin"
    ],
    "x": 4401,
-   "y": 4286
+   "y": 4286,
+   "level": "city"
   },
   {
    "id": "zalethra-drezzorith",
@@ -200,7 +215,8 @@
     "Cleric"
    ],
    "x": 4292,
-   "y": 4123
+   "y": 4123,
+   "level": "city"
   },
   {
    "id": "lothur-varros",
@@ -211,7 +227,8 @@
     "Elementalist"
    ],
    "x": 4329,
-   "y": 4131
+   "y": 4131,
+   "level": "city"
   },
   {
    "id": "vhasilla-hal-kareth",
@@ -222,7 +239,8 @@
     "Wizard"
    ],
    "x": 4357,
-   "y": 4125
+   "y": 4125,
+   "level": "city"
   },
   {
    "id": "vaslir-naiyth",
@@ -233,7 +251,8 @@
     "Necromancer"
    ],
    "x": 4377,
-   "y": 4035
+   "y": 4035,
+   "level": "city"
   },
   {
    "id": "amarah-ith-vayen",
@@ -244,7 +263,8 @@
     "Enchanter"
    ],
    "x": 4467,
-   "y": 4084
+   "y": 4084,
+   "level": "city"
   }
  ]
 }
