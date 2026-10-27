@@ -808,6 +808,7 @@
     },
     {
       "id": "undead-keep",
+      "routes": "data/undead-keep/routes.json",
       "title": "Undead Keep",
       "subtitle": "Outside and inside the keep",
       "cartoucheKicker": "In the Glass Flats",
