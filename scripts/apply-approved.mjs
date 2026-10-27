@@ -41,6 +41,8 @@ vm.runInContext(await readFile(resolve(root,'changes.js'),'utf8'),context);const
 vm.runInContext(wikiLinks,context);const wikiAddress=vm.runInContext('wikiAddress',context),wikiIdOf=vm.runInContext('wikiIdOf',context),vendorKindNow=vm.runInContext('vendorKindNow',context),sellTypes=vm.runInContext('sellTypes',context),normaliseChange=vm.runInContext('normaliseChange',context),normaliseMarker=vm.runInContext('normaliseMarker',context),classAbbreviations=vm.runInContext('classAbbreviations',context);
 const supported=vm.runInContext('({categories:Object.keys(allCategories),trades:Object.keys(tradePaths),arrows:Object.keys(exitArrows),colours:Object.values(pinColours)})',context);
 for(const map of registry.maps)for(const extra of [map.extraCategories,...(map.levels||[]).map(l=>l.extraCategories)])for(const category of Object.keys(extra||{}))if(!supported.categories.includes(category))supported.categories.push(category);
+// A suggestion sent before its map had floors carries no level: it belongs to the map's default floor.
+function defaultFloor(row){const m=registry.maps.find(m=>m.id===row.map);return m?.levels&&!row.level&&!(row.kind==='new-marker'&&row.payload?.level)?{...row,level:m.defaultLevel}:row;}
 function configuration(row){
  const base=registry.maps.find(m=>m.id===row.map);if(!base)fail('Unknown map for suggestion '+row.id+'.');
  if(!base.levels){if(row.level)fail('Unexpected level for suggestion '+row.id+'.');return base;}
@@ -352,7 +354,7 @@ async function main(){
  await acknowledge(publishLog.data.filter(run=>Date.parse(run.at)>=Date.now()-7*24*60*60*1000).flatMap(run=>run.rows.map(row=>({...row,appliedAt:run.at}))),{recovery:true});
  const recoveredIds=new Set(publishLog.data.flatMap(run=>run.rows.map(row=>String(row.id))));
  const rows=[];let after='0';
- while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch.filter(row=>!recoveredIds.has(String(row.id))));if(batch.length<1000)break;after=batch.at(-1).id;}
+ while(true){const batch=await request('suggestions?status=eq.approved&select=*&order=id.asc&id=gt.'+after+'&limit=1000');if(!Array.isArray(batch))fail('Invalid suggestions response.');rows.push(...batch.filter(row=>!recoveredIds.has(String(row.id))).map(defaultFloor));if(batch.length<1000)break;after=batch.at(-1).id;}
  if(!rows.length)console.log('No approved suggestions.');
  // A suggestion that cannot apply goes back to the review queue with the reason; the others still publish.
  batch=[...(await publishedSuggestions()),...rows];
