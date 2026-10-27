@@ -26,7 +26,7 @@
  const ask=msg=>new Promise((resolve,reject)=>{const id=++serial;pending.set(id,{resolve,reject});worker.postMessage({...msg,id});});
  function startWorker(){
   if(worker)return;
-  worker=new Worker('route-worker.js?v=route-21');
+  worker=new Worker('route-worker.js?v=route-22');
   worker.onmessage=e=>{const p=pending.get(e.data.id);if(!p)return;pending.delete(e.data.id);e.data.ok?p.resolve(e.data.result):p.reject(Error(e.data.error));};
   // A worker that fails (out of memory on a phone) lets everything waiting on it know, and the next request starts a new one.
   worker.onerror=worker.onmessageerror=()=>{for(const p of pending.values())p.reject(Error('Route finding stopped. Please try again.'));pending.clear();loaded.clear();worker?.terminate();worker=null;};

@@ -151,7 +151,10 @@ function route(req){
  const door=p=>{const d=p.reach&&(g.meta.doors||[]).find(d=>Math.abs(d.at[0]-p.x)<1&&Math.abs(d.at[1]-p.y)<1);return d?{...p,x:d.x,y:d.y,h:d.h,level:d.level??p.level,exact:true}:p;};
  // A pin drawn off the open ground (on a rock, in a roughly placed camp) takes the nearest ground within 260 px;
  // a camp drawn as an area (mobs flying over a lake) takes the nearest ground inside its area.
- const near=p=>{const q=door(p),i=snap(g,q);if(i>=0||q.exact)return i;const j=snap(g,q,260);if(j>=0||!p.edge)return j;
+ // A pin has no height of its own; where the map's data names the height its way starts at (a cave mouth in a cliff
+ // face, over the canyon floor), its end takes the spot at that height.
+ const at=e=>{const h=g.meta.pinHeights?.[(e.level??g.meta.levels[0])+':'+e.x+','+e.y];return h===undefined?e:{...e,h};};
+ const near=p=>{const q=door(at(p)),i=snap(g,q);if(i>=0||q.exact)return i;const j=snap(g,q,260);if(j>=0||!p.edge)return j;
   const e=p.edge;let r=0;for(const [x,y] of e)r=Math.max(r,Math.hypot(x-p.x,y-p.y));
   return snap(g,{...q,reach:undefined},r,(x,y)=>inside(e,x,y));};
  const from=near(req.from),to=near(req.to);
@@ -162,7 +165,7 @@ function route(req){
  const field=safer?dangerField(g,dangers):new Float32Array(g.count);
  // Marked links (stairs pins, drops, pit traps) and known openings join spots the ground alone does not.
  const extra=new Map(),add=(a,b,link)=>{if(!extra.has(a))extra.set(a,[]);extra.get(a).push({to:b,link});};
- for(const link of [...(req.links||[]),...(g.meta.joins||[])]){if(link.kind==='trap'&&safer)continue;const a=snap(g,link.from,60),b=snap(g,link.to,60);if(a<0||b<0||a===b)continue;add(a,b,link);if(!link.oneWay)add(b,a,link);}
+ for(const link of [...(req.links||[]),...(g.meta.joins||[])]){if(link.kind==='trap'&&safer)continue;const a=snap(g,at(link.from),60),b=snap(g,at(link.to),60);if(a<0||b<0||a===b)continue;add(a,b,link);if(!link.oneWay)add(b,a,link);}
  // Long routes on big maps go by blocks first (see corridor); a short hop, or a corridor that turns out closed,
  // searches every square. The search leans towards the finish so it answers quickly; routes stay close to the best.
  // With a teleporter on the map the search is exact in its corridor: leaning towards the finish could miss a far
