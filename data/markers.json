@@ -3303,5 +3303,36 @@
     "category": "Notable NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/customs-agent-ormur",
     "wikiId": "npc-customs-agent-ormur"
+  },
+  {
+    "id": "community-1593",
+    "community": true,
+    "name": "Fishing",
+    "note": "",
+    "x": 1592,
+    "y": 2032,
+    "category": "Fishing spot",
+    "fish": [
+      {
+        "name": "Soggy Marble Rye",
+        "wiki": "https://monstersandmemories.wiki/items/soggy-marble-rye",
+        "wikiId": "item-soggy-marble-rye"
+      },
+      {
+        "name": "Whitefish",
+        "wiki": "https://monstersandmemories.wiki/items/whitefish",
+        "wikiId": "item-whitefish"
+      },
+      {
+        "name": "Grouper",
+        "wiki": "https://monstersandmemories.wiki/items/grouper",
+        "wikiId": "item-grouper"
+      },
+      {
+        "name": "Basa",
+        "wiki": "https://monstersandmemories.wiki/items/basa",
+        "wikiId": "item-basa"
+      }
+    ]
   }
 ]

@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-20T23:07:51.505Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-21T06:21:39.499Z",
     "rows": [
       {
@@ -14390,6 +14386,102 @@
             ],
             "name": "Beetles",
             "approximate": false
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-27T21:20:57.051Z",
+    "rows": [
+      {
+        "id": 1593,
+        "payloadHash": "ce16f14357619e62bf908abecc12e8c5830e9501e3b8a4839799b9f6a1421207",
+        "updatedAt": "2026-10-27T21:04:13.843425+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1592,
+            "y": 2032,
+            "fish": [
+              {
+                "name": "Soggy Marble Rye",
+                "wiki": "https://monstersandmemories.wiki/items/soggy-marble-rye",
+                "wikiId": "item-soggy-marble-rye"
+              },
+              {
+                "name": "Whitefish",
+                "wiki": "https://monstersandmemories.wiki/items/whitefish",
+                "wikiId": "item-whitefish"
+              },
+              {
+                "name": "Grouper",
+                "wiki": "https://monstersandmemories.wiki/items/grouper",
+                "wikiId": "item-grouper"
+              },
+              {
+                "name": "Basa",
+                "wiki": "https://monstersandmemories.wiki/items/basa",
+                "wikiId": "item-basa"
+              }
+            ],
+            "name": "Fishing",
+            "note": "",
+            "category": "Fishing spot"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1597,
+        "payloadHash": "8a2d10e1d777e59658ebeefbde47bdf63fa0a890bbc2e4f6537c4f83fca7b0d1",
+        "updatedAt": "2026-10-27T20:59:15.851675+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1307",
+          "payload": {
+            "from": {
+              "name": "Ruin Bats",
+              "note": "Red con to Lvl 19",
+              "levels": null
+            },
+            "name": "Ruin Bats",
+            "note": "dark blue to 47",
+            "levels": [
+              42,
+              45
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1598,
+        "payloadHash": "d39c04f64aeb09a9115c4b1c5a6a02e7d55eefea660544c742de69f9782d3546",
+        "updatedAt": "2026-10-27T21:03:54.313234+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1308",
+          "payload": {
+            "from": {
+              "name": "Drowned Sentries",
+              "note": "Undead, red con to Lvl 19",
+              "levels": null
+            },
+            "name": "Drowned Sentries",
+            "note": "Undead, dark blue con to 47",
+            "levels": [
+              42,
+              45
+            ]
           },
           "credit": false
         }

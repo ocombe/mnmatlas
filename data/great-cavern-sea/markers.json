@@ -325,7 +325,7 @@
   "id": "community-1307",
   "community": true,
   "name": "Ruin Bats",
-  "note": "Red con to Lvl 19",
+  "note": "dark blue to 47",
   "x": 4772,
   "y": 8093,
   "category": "Mob camp",
@@ -333,13 +333,17 @@
    {
     "name": "a ruin bat"
    }
+  ],
+  "levels": [
+   42,
+   45
   ]
  },
  {
   "id": "community-1308",
   "community": true,
   "name": "Drowned Sentries",
-  "note": "Undead, red con to Lvl 19",
+  "note": "Undead, dark blue con to 47",
   "x": 5147,
   "y": 8080,
   "category": "Mob camp",
@@ -358,7 +362,11 @@
      8080
     ]
    ]
-  }
+  },
+  "levels": [
+   42,
+   45
+  ]
  },
  {
   "id": "community-1309",
