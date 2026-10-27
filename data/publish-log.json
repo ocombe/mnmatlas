@@ -1,9 +1,5 @@
 [
   {
-    "at": "2026-10-20T19:17:32.318Z",
-    "rows": []
-  },
-  {
     "at": "2026-10-20T22:14:39.546Z",
     "rows": [
       {
@@ -10946,6 +10942,1266 @@
             ],
             "name": "Lifts - up to the Evershade Weald caves",
             "approximate": false
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-27T10:33:29.176Z",
+    "rows": [
+      {
+        "id": 1285,
+        "payloadHash": "67b419f85e72101a110fb77cbedc38b7c2aeab1f512c11c09c07a14e5e7c1134",
+        "updatedAt": "2026-10-27T09:26:13.617794+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6066,
+            "y": 2588,
+            "name": "Old Brinehide",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/old-brinehide",
+            "wikiId": "npc-old-brinehide",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1286,
+        "payloadHash": "f4d191526941b38402f1d2d730794be007bea446441f5fa2c9ea72873271362c",
+        "updatedAt": "2026-10-27T09:26:32.499183+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "ail-vorith-gate",
+          "payload": {
+            "to": [
+              6416,
+              3030
+            ],
+            "from": [
+              6127,
+              2896
+            ],
+            "name": "Ail'Vorith Gate"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1287,
+        "payloadHash": "954fdb5f2c1d7e59937972c5ef4d9a6a6940e9cf7ef6676c7d168ee5132e4027",
+        "updatedAt": "2026-10-27T09:27:14.923061+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6038,
+            "y": 2709,
+            "name": "bats",
+            "note": "there is tons of bats here, some inside the wall as it is... they are social",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1288,
+        "payloadHash": "7388ddc15f4c831e22d911c7ef4847d89fe9da086cb4d88134735d4965b58f1c",
+        "updatedAt": "2026-10-27T09:29:22.955636+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-772",
+          "payload": {
+            "to": [
+              6085,
+              2830
+            ],
+            "from": [
+              6063,
+              2935
+            ],
+            "name": "Fissure Spiders"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1289,
+        "payloadHash": "b11be45a34d9aa7dacdac463716e55ec5d4fa23f0f16766d02a3e0e798c62fec",
+        "updatedAt": "2026-10-27T09:29:36.137962+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-703",
+          "payload": {
+            "to": [
+              5650,
+              4084
+            ],
+            "from": [
+              5499,
+              4157
+            ],
+            "name": "A Shelter Bat"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1300,
+        "payloadHash": "2b52086afb1dfd6de9ef2d4ba409d1ff97fa6a8c1c49cb3c284f8d6f38400937",
+        "updatedAt": "2026-10-27T09:42:10.530052+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2254,
+            "y": 666,
+            "name": "Farmer Lubern",
+            "note": "Inq Quest",
+            "wiki": "https://monstersandmemories.wiki/npcs/farmer-lubern",
+            "bounty": "npc-farmer-lubern",
+            "wikiId": "npc-farmer-lubern",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1306,
+        "payloadHash": "3047ce6608f5108c54863601be650c74223737de4af37d711d9fea87ca5c30ab",
+        "updatedAt": "2026-10-27T09:31:35.029214+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1594,
+            "y": 8371,
+            "mobs": [
+              {
+                "name": "a strand wasp"
+              },
+              {
+                "name": "a strand beetle",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-strand-beetle",
+                "wikiId": "npc-a-strand-beetle"
+              }
+            ],
+            "name": "Strand Wasps & Beetles",
+            "note": "",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  1607,
+                  8740
+                ],
+                [
+                  1620,
+                  8603
+                ],
+                [
+                  1640,
+                  8489
+                ],
+                [
+                  1674,
+                  8358
+                ],
+                [
+                  1674,
+                  8204
+                ],
+                [
+                  1650,
+                  8046
+                ],
+                [
+                  1560,
+                  8033
+                ],
+                [
+                  1516,
+                  8610
+                ],
+                [
+                  1546,
+                  8730
+                ]
+              ]
+            },
+            "levels": [
+              22,
+              27
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1307,
+        "payloadHash": "cfa803c72f82fd503209d16746437edc828f9d8f6062053f7dc21f7afa9a5ece",
+        "updatedAt": "2026-10-27T09:31:43.601038+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4772,
+            "y": 8093,
+            "mobs": [
+              {
+                "name": "a ruin bat"
+              }
+            ],
+            "name": "Ruin Bats",
+            "note": "Red con to Lvl 19",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1308,
+        "payloadHash": "8ddefa220b61b1306cd8e3e2d63286855c6a19ebf7f670202fd000e9d375a550",
+        "updatedAt": "2026-10-27T09:31:56.272872+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5147,
+            "y": 8080,
+            "mobs": [
+              {
+                "name": "a drowned sentry"
+              }
+            ],
+            "name": "Drowned Sentries",
+            "note": "Undead, red con to Lvl 19",
+            "shape": {
+              "r": 278,
+              "form": "circle",
+              "kind": "area",
+              "points": [
+                [
+                  5147,
+                  8080
+                ]
+              ]
+            },
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1309,
+        "payloadHash": "73cc4eede4853bf5be76fc48330c2d5d91ad443ab38324d627d89df99345daf3",
+        "updatedAt": "2026-10-27T09:32:53.476295+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5538,
+            "y": 4086,
+            "name": "Lorne Whitlock",
+            "note": "Gives a quest to deliver to Smugglers Isle",
+            "wiki": "https://monstersandmemories.wiki/quests/missive-for-wenna",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1310,
+        "payloadHash": "73d6f1c34929dd5e11c2e2331d3439e5326e8fa34e27a0c4c07f58a218634d68",
+        "updatedAt": "2026-10-27T09:33:01.210051+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5586,
+            "y": 6606,
+            "name": "a trade broker",
+            "note": "",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1311,
+        "payloadHash": "5e600800d7c5a79f3abda2b5602c4fa630bcab9bcf81bcdb616f169b5e8c2d51",
+        "updatedAt": "2026-10-27T09:33:05.389198+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5571,
+            "y": 6613,
+            "name": "a port outfitter",
+            "note": "",
+            "vendor": "Adventuring supplies",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1312,
+        "payloadHash": "a9b3f947b0430d099314ed72b769aa23c59fe5c2760859346f96adeb29604a9a",
+        "updatedAt": "2026-10-27T09:33:13.805947+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5425,
+            "y": 6594,
+            "name": "Cliff Bats",
+            "note": "Indifferent, blue con to Lvl 19. Top of the cliff structure",
+            "levels": [
+              14,
+              18
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1313,
+        "payloadHash": "00ee1ea9df2fa727716ff343163bf43aab499fc0bd7b8693b6c05280aa7328c0",
+        "updatedAt": "2026-10-27T09:33:27.951235+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5545,
+            "y": 6609,
+            "mobs": [
+              {
+                "name": "a cargo hauler"
+              },
+              {
+                "name": "a mooring hand"
+              }
+            ],
+            "name": "Mooring Hands & Cargo Haulers",
+            "note": "Indifferent, blue cons to Lvl 19\nSeems to be a WIP, large packs of them randomly pathing all over the island structures.",
+            "shape": {
+              "r": 102,
+              "form": "circle",
+              "kind": "area",
+              "points": [
+                [
+                  5545,
+                  6609
+                ]
+              ]
+            },
+            "levels": [
+              14,
+              18
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1314,
+        "payloadHash": "bd5050aa9a455d38afcd2b1f7191c7b1e39421349014aaeee5551eba1a7df21f",
+        "updatedAt": "2026-10-27T09:33:39.392105+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-704",
+          "payload": {
+            "from": {
+              "x": 5134,
+              "y": 4418,
+              "mobs": [],
+              "name": "A Fire Elemental",
+              "note": "Beetles, Bats, Cultists, and Fire Elementals' are on this islands.",
+              "levels": [
+                44,
+                46
+              ],
+              "category": "Mob camp"
+            },
+            "mobs": [
+              {
+                "name": "a cult attendant",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-cult-attendant",
+                "wikiId": "npc-a-cult-attendant"
+              },
+              {
+                "name": "a rubble beetle",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-rubble-beetle",
+                "wikiId": "npc-a-rubble-beetle"
+              },
+              {
+                "name": "an eaves bat",
+                "wiki": "https://monstersandmemories.wiki/npcs/an-eaves-bat",
+                "wikiId": "npc-an-eaves-bat"
+              },
+              {
+                "name": "a fire elemental",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-fire-elemental",
+                "wikiId": "npc-a-fire-elemental"
+              }
+            ],
+            "name": "A Fire Elemental"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1315,
+        "payloadHash": "b61f8b2e16d6f67ca49a4712a6175466c326f641922a1102fded313e4092b003",
+        "updatedAt": "2026-10-27T09:33:48.97963+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "vhaleth-halkareth",
+          "payload": {
+            "from": {
+              "x": 5421,
+              "y": 4569,
+              "name": "Vhaleth Hal'kareth",
+              "note": "Deep elf wizard, near the wizard tower.",
+              "wiki": "https://monstersandmemories.wiki/npcs/vhaleth-halkareth",
+              "levels": [
+                60,
+                60
+              ],
+              "wikiId": "npc-vhaleth-hal-kareth",
+              "minZoom": 3,
+              "category": "Named mob",
+              "approximate": true
+            },
+            "name": "Vhaleth Hal'kareth",
+            "note": "Deep elf wizard, near the wizard tower.\nSees through Invisibility"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1316,
+        "payloadHash": "91c284abcbf696d9f52b09a30048fdd838014bddf49d16cbc17fd6a3c9f64443",
+        "updatedAt": "2026-10-27T09:34:01.458715+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-label",
+          "target_id": "to-blind-midden",
+          "payload": {
+            "from": {
+              "x": 5595,
+              "y": 4346,
+              "kind": "exit",
+              "name": "to Blind Midden",
+              "note": "",
+              "arrow": "east",
+              "toMap": "blind-midden",
+              "minZoom": 1.5,
+              "toPlace": "exit-great-cavern-sea",
+              "priority": 90,
+              "approximate": true
+            },
+            "name": "to Blind Midden (currently obstructed by boulder)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1318,
+        "payloadHash": "3b946c56321a1fb241d151683b6fbbfd4863b82eea451865207c5e1ca19dcedf",
+        "updatedAt": "2026-10-27T09:34:31.463877+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1460,
+            "y": 6184,
+            "mobs": [
+              {
+                "name": "a myconid tender"
+              }
+            ],
+            "name": "Myconid Tenders",
+            "note": "Indifferent, yellow con to a Lvl 19 Gnome Necro. Clearly a WIP, large density with random pathing all over this area, no mob variety.",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  1247,
+                  5952
+                ],
+                [
+                  1345,
+                  5787
+                ],
+                [
+                  1524,
+                  5750
+                ],
+                [
+                  1743,
+                  6621
+                ],
+                [
+                  1250,
+                  6399
+                ]
+              ]
+            },
+            "levels": [
+              20,
+              23
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1321,
+        "payloadHash": "92a90d9635cca18eceb7bab712320fb43e1064f411f3fa5ca6fbcb6bf1333dad",
+        "updatedAt": "2026-10-27T09:34:35.446891+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1425,
+            "y": 5029,
+            "mobs": [
+              {
+                "name": "a cave bat"
+              }
+            ],
+            "name": "Cave Bats",
+            "note": "",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  1306,
+                  5035
+                ],
+                [
+                  1276,
+                  5187
+                ],
+                [
+                  1549,
+                  5011
+                ],
+                [
+                  1585,
+                  4877
+                ]
+              ]
+            },
+            "levels": [
+              14,
+              18
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1324,
+        "payloadHash": "eef641471a90e46364c687c592f5e1bf8a85ba51ba242167f832d055a0ed853e",
+        "updatedAt": "2026-10-27T09:34:58.695613+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1081,
+            "y": 3727,
+            "name": "Drelith Vael'Xirith",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/drelith-vaelxirith",
+            "bounty": "npc-drelith-vael-xirith",
+            "wikiId": "npc-drelith-vael-xirith",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1326,
+        "payloadHash": "c02774612119d4edb03d64236e0ffd0fa02b1157062501772836e002029ff737",
+        "updatedAt": "2026-10-27T09:35:36.964677+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 741,
+            "y": 3609,
+            "name": "Illusionary Wall",
+            "note": "(likely WIP) Illusionary wall leads to a winding passage upward, that is blocked off by a boulder at the zenith. Likely future access to suspended boat at top of waterfall.",
+            "category": "Secret"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1328,
+        "payloadHash": "04427d0a8eefae03b215ff184ff2ba162d9b362fb1b036cdd5b61fc1b30f71c3",
+        "updatedAt": "2026-10-27T09:37:34.958877+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-739",
+          "payload": {
+            "from": {
+              "x": 2933,
+              "y": 4763,
+              "mobs": [],
+              "name": "Feed Beetle",
+              "note": "Red to 22",
+              "category": "Mob camp"
+            },
+            "name": "Feed Beetle",
+            "note": "Red to 22 -- Blue to 35"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1387,
+        "payloadHash": "0cea9a05c9307e926c47a9a0a428ae3a8c3e383f50a836197e69d3a44c680035",
+        "updatedAt": "2026-10-27T09:43:44.862737+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1361,
+            "y": 1921,
+            "name": "Riham",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/riham",
+            "bounty": "npc-riham",
+            "wikiId": "npc-riham",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1392,
+        "payloadHash": "0a6523c1cad0809eabf29b9ce071f4b4de3ea6b3c3f72909c4daa1f59dc78253",
+        "updatedAt": "2026-10-27T09:38:23.254155+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2910,
+            "y": 6898,
+            "name": "Foreman Vikkit",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/foreman-vikkit",
+            "ambush": false,
+            "levels": [
+              24,
+              24
+            ],
+            "wikiId": "npc-foreman-vikkit",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1393,
+        "payloadHash": "6022458a5a6f437ee83936783a832b131ac09fa78ac401b840518b54eb992860",
+        "updatedAt": "2026-10-27T09:38:38.658067+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2782,
+            "y": 6767,
+            "mobs": [
+              {
+                "name": "a goblin stone-sorter",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+                "wikiId": "npc-a-goblin-stone-sorter"
+              }
+            ],
+            "name": "goblins stone-sorter",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+            "levels": [
+              20,
+              25
+            ],
+            "wikiId": "npc-a-goblin-stone-sorter",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1394,
+        "payloadHash": "32614861229526c64cbe4dceb9f3724ec491b35dd588a845eb0cdfc89fdf5238",
+        "updatedAt": "2026-10-27T09:38:55.004091+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2916,
+            "y": 4589,
+            "mobs": [
+              {
+                "name": "a ratman sentry",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-sentry",
+                "wikiId": "npc-a-ratman-sentry"
+              }
+            ],
+            "name": "ratman sentries",
+            "note": "",
+            "levels": [
+              25,
+              30
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1396,
+        "payloadHash": "6fcc68b6a246d6a74567ff8061504c7189a00c51c4d8719c2acc6407d21103b5",
+        "updatedAt": "2026-10-27T09:24:15.867272+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-357",
+          "payload": {
+            "from": {
+              "x": 3743,
+              "y": 5429,
+              "name": "Master Tracker Lark (level 45)",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/master-tracker-lark",
+              "sells": null,
+              "trade": null,
+              "ambush": false,
+              "levels": [
+                45,
+                45
+              ],
+              "vendor": null,
+              "wikiId": "npc-master-tracker-lark",
+              "classes": null,
+              "category": "Named mob"
+            },
+            "name": "Master Tracker Lark (level 45)",
+            "ambush": false,
+            "levels": [
+              50,
+              50
+            ],
+            "classes": null,
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1447,
+        "payloadHash": "a88f572e117fa7e784be1674407f8da30b591025373028d1e2b44b07078a188b",
+        "updatedAt": "2026-10-27T09:39:16.149907+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2834,
+            "y": 4760,
+            "mobs": [
+              {
+                "name": "a ratman sentry",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-sentry",
+                "wikiId": "npc-a-ratman-sentry"
+              }
+            ],
+            "name": "ratman sentries",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-sentry",
+            "levels": [
+              36,
+              36
+            ],
+            "wikiId": "npc-a-ratman-sentry",
+            "category": "Mob camp"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1468,
+        "payloadHash": "f14bca9c9b80154c166d3e91ce8516a30fa74d2772bfc62a7f0c992612d3c1bb",
+        "updatedAt": "2026-10-27T09:39:38.234627+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5136,
+            "y": 8115,
+            "name": "Elder Cavrisse",
+            "note": "Spawns on the top corner PH is the middle mob",
+            "wiki": "https://monstersandmemories.wiki/npcs/elder-cavrisse",
+            "bounty": "npc-elder-cavrisse",
+            "levels": [
+              52,
+              52
+            ],
+            "wikiId": "npc-elder-cavrisse",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1469,
+        "payloadHash": "40e45017a20115d33afbebe2d48801915001a7c695d3254019e057fcc75e3966",
+        "updatedAt": "2026-10-27T09:40:28.737066+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5076,
+            "y": 4330,
+            "name": "Dhurazzim",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/dhurazzim",
+            "bounty": "npc-dhurazzim",
+            "levels": [
+              51,
+              51
+            ],
+            "wikiId": "npc-dhurazzim",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1480,
+        "payloadHash": "e1b56c5e963eda6c9c9bf19529d3dece8512e2605ab52c48759865ac32124c4f",
+        "updatedAt": "2026-10-27T09:40:43.337347+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2838,
+            "y": 4616,
+            "mobs": [
+              {
+                "name": "a ratman trapper",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-trapper",
+                "wikiId": "npc-a-ratman-trapper"
+              }
+            ],
+            "name": "ratman trappers",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-trapper",
+            "levels": [
+              41,
+              null
+            ],
+            "wikiId": "npc-a-ratman-trapper",
+            "category": "Mob camp"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1482,
+        "payloadHash": "4d8311e15d2367271a514fa74eda2bc8a4cfd603d9cb6f8471a827b0cfc69830",
+        "updatedAt": "2026-10-27T09:41:28.489606+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1083,
+            "y": 3761,
+            "name": "Drelith Vael'Xirith",
+            "note": "Orc Beach",
+            "wiki": "https://monstersandmemories.wiki/npcs/drelith-vaelxirith",
+            "wikiId": "npc-drelith-vael-xirith",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1498,
+        "payloadHash": "20aa60bf3bcbb71d846e0f6377d5e64126737dd2efa4418d37b3b7f5951d6347",
+        "updatedAt": "2026-10-27T09:41:59.390312+00:00",
+        "version": {
+          "map": "infested-crypt",
+          "level": "floor-1",
+          "kind": "edit-marker",
+          "target_id": "community-914",
+          "payload": {
+            "from": {
+              "x": 2852,
+              "y": 767,
+              "name": "broodmother",
+              "note": "Back room spawns in the webs above",
+              "wiki": "https://monstersandmemories.wiki/npcs/a-large-crypt-broodmatron",
+              "level": "floor-1",
+              "ambush": false,
+              "levels": [
+                17,
+                17
+              ],
+              "wikiId": "npc-a-large-crypt-broodmatron",
+              "category": "Named mob"
+            },
+            "name": "broodmother",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-crypt-broodmother",
+            "wikiId": ""
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1505,
+        "payloadHash": "7ca27f415fcaa316eb5c84d352f2959a828b2895998b7d40752c7f8591a04a0a",
+        "updatedAt": "2026-10-27T09:44:27.900784+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2203,
+            "y": 2036,
+            "name": "Jailer Benedict",
+            "note": "At the bottom# of the ramps going down in here. When you go right into the jail area you'll find he spawns around the pale jailers and captors.",
+            "wiki": "https://monstersandmemories.wiki/npcs/jailer-benedict",
+            "bounty": "npc-jailer-benedict",
+            "levels": [
+              42,
+              42
+            ],
+            "wikiId": "npc-jailer-benedict",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1525,
+        "payloadHash": "a0b6f7a11f672f5ff69820006e2b9315b2e2b5efa1d13849b12f9f116fbfe6c7",
+        "updatedAt": "2026-10-27T09:44:36.496853+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 886,
+            "y": 1350,
+            "name": "Wizard Exodus",
+            "note": "Where a wizard goes when they cast exodus on the West NH map",
+            "category": "Respawn point"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1526,
+        "payloadHash": "84aca69354f6e42381565f3213f84a610d903efeb1ba9e82c508261011d69f54",
+        "updatedAt": "2026-10-27T09:45:01.32658+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1921,
+            "y": 1041,
+            "name": "Wizard Exodus",
+            "note": "Where wiz goes when they cast exodus on the north NH map",
+            "travel": "Teleporter",
+            "category": "Teleporter"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1530,
+        "payloadHash": "d0bdcafc1afaaf1c60ff99d2a0924da971d47a761bee2dd1830bdc9cfb5d4b7b",
+        "updatedAt": "2026-10-27T09:41:35.97683+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2883,
+            "y": 4666,
+            "name": "Feedmaster Krozzik",
+            "note": "Stuck in floor near tower, trapper PH",
+            "ambush": false,
+            "levels": [
+              45,
+              45
+            ],
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1532,
+        "payloadHash": "0a744afde7535627131429982db8190b9cc7a5c10d9aa58e962a8d8473361321",
+        "updatedAt": "2026-10-27T09:24:10.924112+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2490,
+            "y": 1645,
+            "name": "Leathersmith Visali",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/leathersmith-visali",
+            "bounty": "npc-leathersmith-visali",
+            "wikiId": "npc-leathersmith-visali",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1533,
+        "payloadHash": "0271ae70b586c6ef22fdbccf2a52561bfb57f2f841d2b018be271088b3a89bc2",
+        "updatedAt": "2026-10-27T09:41:45.270755+00:00",
+        "version": {
+          "map": "grimtide-sanctum",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2765,
+            "y": 1266,
+            "name": "Bloatbelly",
+            "note": "Undead in room are PH",
+            "wiki": "https://monstersandmemories.wiki/npcs/bloatbelly",
+            "level": "floor-2",
+            "bounty": "npc-bloatbelly",
+            "levels": [
+              50,
+              50
+            ],
+            "wikiId": "npc-bloatbelly",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1534,
+        "payloadHash": "ed5a10edd8f113777de53e76a4d6e21d5764e7ba5e0ded536638f2b6a0298644",
+        "updatedAt": "2026-10-27T09:41:50.223157+00:00",
+        "version": {
+          "map": "grimtide-sanctum",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2480,
+            "y": 1260,
+            "name": "Vesska the Bloodbound",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/vesska-the-bloodbound",
+            "level": "floor-2",
+            "bounty": "npc-vesska-the-bloodbound",
+            "levels": [
+              50,
+              50
+            ],
+            "wikiId": "npc-vesska-the-bloodbound",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1535,
+        "payloadHash": "618770835876121d300acd68d663c93656db1a1bddf55c9f1df1d878b9b48961",
+        "updatedAt": "2026-10-27T09:45:07.383715+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 915,
+            "y": 1809,
+            "name": "Jumthem",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/jumthem",
+            "bounty": "npc-jumthem",
+            "wikiId": "npc-jumthem",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1536,
+        "payloadHash": "81d85a631665c6ce5d213f563a88eaf7653e38e731fff467ac57e8f2014c603a",
+        "updatedAt": "2026-10-27T09:45:12.826439+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1539,
+            "y": 1176,
+            "name": "Red Mantle Quartermaster",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/red-mantle-quartermaster",
+            "bounty": "npc-red-mantle-quartermaster",
+            "wikiId": "npc-red-mantle-quartermaster",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1561,
+        "payloadHash": "db245b7586045dcce008e82e8b8589da110d345dc91a36904239804fcab20380",
+        "updatedAt": "2026-10-27T09:29:36.784341+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-703",
+          "payload": {
+            "from": {
+              "x": 5650,
+              "y": 4084,
+              "mobs": [],
+              "name": "A Shelter Bat",
+              "note": "Blue at 17",
+              "levels": [
+                12,
+                15
+              ],
+              "category": "Mob camp"
+            },
+            "mobs": [
+              {
+                "name": "a shelter bat",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-shelter-bat",
+                "wikiId": "npc-a-shelter-bat"
+              }
+            ],
+            "name": "A Shelter Bat"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1571,
+        "payloadHash": "2ce805c85f4eae3ac12d3f7a628b9e5f6f484f956042772e0ca1b79483200f0a",
+        "updatedAt": "2026-10-27T09:45:54.391812+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-16",
+          "payload": {
+            "from": {
+              "x": 2020,
+              "y": 1042,
+              "name": "Shady merchant — east North Gate",
+              "note": "",
+              "sells": null,
+              "vendor": "Shady merchant",
+              "category": "Vendor"
+            },
+            "name": "Clint the Innocent",
+            "wiki": "https://monstersandmemories.wiki/npcs/clint-the-innocent",
+            "wikiId": "npc-clint-the-innocent"
           },
           "credit": false
         }

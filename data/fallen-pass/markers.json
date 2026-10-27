@@ -1313,5 +1313,16 @@
    39,
    39
   ]
+ },
+ {
+  "id": "community-1532",
+  "community": true,
+  "name": "Leathersmith Visali",
+  "note": "",
+  "x": 2490,
+  "y": 1645,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/leathersmith-visali",
+  "wikiId": "npc-leathersmith-visali"
  }
 ]

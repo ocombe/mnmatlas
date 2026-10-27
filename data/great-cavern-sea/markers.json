@@ -9,7 +9,7 @@
   ],
   "approximate": true,
   "minZoom": 3,
-  "note": "Deep elf wizard, near the wizard tower.",
+  "note": "Deep elf wizard, near the wizard tower.\nSees through Invisibility",
   "x": 5421,
   "y": 4569,
   "wiki": "https://monstersandmemories.wiki/npcs/vhaleth-halkareth",
@@ -36,13 +36,19 @@
   "name": "A Shelter Bat",
   "category": "Mob camp",
   "note": "Blue at 17",
-  "x": 5499,
-  "y": 4157,
+  "x": 5650,
+  "y": 4084,
   "levels": [
    12,
    15
   ],
-  "mobs": []
+  "mobs": [
+   {
+    "name": "a shelter bat",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-shelter-bat",
+    "wikiId": "npc-a-shelter-bat"
+   }
+  ]
  },
  {
   "id": "community-704",
@@ -52,7 +58,28 @@
   "note": "Beetles, Bats, Cultists, and Fire Elementals' are on this islands.",
   "x": 5134,
   "y": 4418,
-  "mobs": [],
+  "mobs": [
+   {
+    "name": "a cult attendant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cult-attendant",
+    "wikiId": "npc-a-cult-attendant"
+   },
+   {
+    "name": "a rubble beetle",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-rubble-beetle",
+    "wikiId": "npc-a-rubble-beetle"
+   },
+   {
+    "name": "an eaves bat",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-eaves-bat",
+    "wikiId": "npc-an-eaves-bat"
+   },
+   {
+    "name": "a fire elemental",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-fire-elemental",
+    "wikiId": "npc-a-fire-elemental"
+   }
+  ],
   "levels": [
    44,
    46
@@ -86,7 +113,7 @@
   "community": true,
   "name": "Feed Beetle",
   "category": "Mob camp",
-  "note": "Red to 22",
+  "note": "Red to 22 -- Blue to 35",
   "x": 2933,
   "y": 4763,
   "mobs": []
@@ -111,8 +138,8 @@
   "name": "Fissure Spiders",
   "category": "Mob camp",
   "note": "",
-  "x": 6063,
-  "y": 2935,
+  "x": 6085,
+  "y": 2830,
   "levels": [
    14,
    15
@@ -204,5 +231,464 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/overseer-vashruk",
   "wikiId": "npc-overseer-vashruk"
+ },
+ {
+  "id": "community-1285",
+  "community": true,
+  "name": "Old Brinehide",
+  "note": "",
+  "x": 6066,
+  "y": 2588,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/old-brinehide",
+  "wikiId": "npc-old-brinehide"
+ },
+ {
+  "id": "community-1287",
+  "community": true,
+  "name": "bats",
+  "note": "there is tons of bats here, some inside the wall as it is... they are social",
+  "x": 6038,
+  "y": 2709,
+  "category": "Mob camp"
+ },
+ {
+  "id": "community-1306",
+  "community": true,
+  "name": "Strand Wasps & Beetles",
+  "note": "",
+  "x": 1594,
+  "y": 8371,
+  "category": "Mob camp",
+  "levels": [
+   22,
+   27
+  ],
+  "mobs": [
+   {
+    "name": "a strand wasp"
+   },
+   {
+    "name": "a strand beetle",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-strand-beetle",
+    "wikiId": "npc-a-strand-beetle"
+   }
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     1607,
+     8740
+    ],
+    [
+     1620,
+     8603
+    ],
+    [
+     1640,
+     8489
+    ],
+    [
+     1674,
+     8358
+    ],
+    [
+     1674,
+     8204
+    ],
+    [
+     1650,
+     8046
+    ],
+    [
+     1560,
+     8033
+    ],
+    [
+     1516,
+     8610
+    ],
+    [
+     1546,
+     8730
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-1307",
+  "community": true,
+  "name": "Ruin Bats",
+  "note": "Red con to Lvl 19",
+  "x": 4772,
+  "y": 8093,
+  "category": "Mob camp",
+  "mobs": [
+   {
+    "name": "a ruin bat"
+   }
+  ]
+ },
+ {
+  "id": "community-1308",
+  "community": true,
+  "name": "Drowned Sentries",
+  "note": "Undead, red con to Lvl 19",
+  "x": 5147,
+  "y": 8080,
+  "category": "Mob camp",
+  "mobs": [
+   {
+    "name": "a drowned sentry"
+   }
+  ],
+  "shape": {
+   "r": 278,
+   "form": "circle",
+   "kind": "area",
+   "points": [
+    [
+     5147,
+     8080
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-1309",
+  "community": true,
+  "name": "Lorne Whitlock",
+  "note": "Gives a quest to deliver to Smugglers Isle",
+  "x": 5538,
+  "y": 4086,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/quests/missive-for-wenna"
+ },
+ {
+  "id": "community-1310",
+  "community": true,
+  "name": "a trade broker",
+  "note": "",
+  "x": 5586,
+  "y": 6606,
+  "category": "Vendor"
+ },
+ {
+  "id": "community-1311",
+  "community": true,
+  "name": "a port outfitter",
+  "note": "",
+  "x": 5571,
+  "y": 6613,
+  "category": "Vendor",
+  "vendor": "Adventuring supplies"
+ },
+ {
+  "id": "community-1312",
+  "community": true,
+  "name": "Cliff Bats",
+  "note": "Indifferent, blue con to Lvl 19. Top of the cliff structure",
+  "x": 5425,
+  "y": 6594,
+  "category": "Mob camp",
+  "levels": [
+   14,
+   18
+  ]
+ },
+ {
+  "id": "community-1313",
+  "community": true,
+  "name": "Mooring Hands & Cargo Haulers",
+  "note": "Indifferent, blue cons to Lvl 19\nSeems to be a WIP, large packs of them randomly pathing all over the island structures.",
+  "x": 5545,
+  "y": 6609,
+  "category": "Mob camp",
+  "levels": [
+   14,
+   18
+  ],
+  "mobs": [
+   {
+    "name": "a cargo hauler"
+   },
+   {
+    "name": "a mooring hand"
+   }
+  ],
+  "shape": {
+   "r": 102,
+   "form": "circle",
+   "kind": "area",
+   "points": [
+    [
+     5545,
+     6609
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-1318",
+  "community": true,
+  "name": "Myconid Tenders",
+  "note": "Indifferent, yellow con to a Lvl 19 Gnome Necro. Clearly a WIP, large density with random pathing all over this area, no mob variety.",
+  "x": 1460,
+  "y": 6184,
+  "category": "Mob camp",
+  "levels": [
+   20,
+   23
+  ],
+  "mobs": [
+   {
+    "name": "a myconid tender"
+   }
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     1247,
+     5952
+    ],
+    [
+     1345,
+     5787
+    ],
+    [
+     1524,
+     5750
+    ],
+    [
+     1743,
+     6621
+    ],
+    [
+     1250,
+     6399
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-1321",
+  "community": true,
+  "name": "Cave Bats",
+  "note": "",
+  "x": 1425,
+  "y": 5029,
+  "category": "Mob camp",
+  "levels": [
+   14,
+   18
+  ],
+  "mobs": [
+   {
+    "name": "a cave bat"
+   }
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     1306,
+     5035
+    ],
+    [
+     1276,
+     5187
+    ],
+    [
+     1549,
+     5011
+    ],
+    [
+     1585,
+     4877
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-1324",
+  "community": true,
+  "name": "Drelith Vael'Xirith",
+  "note": "",
+  "x": 1081,
+  "y": 3727,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/drelith-vaelxirith",
+  "wikiId": "npc-drelith-vael-xirith"
+ },
+ {
+  "id": "community-1326",
+  "community": true,
+  "name": "Illusionary Wall",
+  "note": "(likely WIP) Illusionary wall leads to a winding passage upward, that is blocked off by a boulder at the zenith. Likely future access to suspended boat at top of waterfall.",
+  "x": 741,
+  "y": 3609,
+  "category": "Secret"
+ },
+ {
+  "id": "community-1392",
+  "community": true,
+  "name": "Foreman Vikkit",
+  "note": "",
+  "x": 2910,
+  "y": 6898,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/foreman-vikkit",
+  "wikiId": "npc-foreman-vikkit",
+  "levels": [
+   24,
+   24
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1393",
+  "community": true,
+  "name": "goblins stone-sorter",
+  "note": "",
+  "x": 2782,
+  "y": 6767,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+  "wikiId": "npc-a-goblin-stone-sorter",
+  "levels": [
+   20,
+   25
+  ],
+  "mobs": [
+   {
+    "name": "a goblin stone-sorter",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
+    "wikiId": "npc-a-goblin-stone-sorter"
+   }
+  ]
+ },
+ {
+  "id": "community-1394",
+  "community": true,
+  "name": "ratman sentries",
+  "note": "",
+  "x": 2916,
+  "y": 4589,
+  "category": "Mob camp",
+  "levels": [
+   25,
+   30
+  ],
+  "mobs": [
+   {
+    "name": "a ratman sentry",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-sentry",
+    "wikiId": "npc-a-ratman-sentry"
+   }
+  ]
+ },
+ {
+  "id": "community-1447",
+  "community": true,
+  "name": "ratman sentries",
+  "note": "",
+  "x": 2834,
+  "y": 4760,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-sentry",
+  "wikiId": "npc-a-ratman-sentry",
+  "levels": [
+   36,
+   36
+  ],
+  "mobs": [
+   {
+    "name": "a ratman sentry",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-sentry",
+    "wikiId": "npc-a-ratman-sentry"
+   }
+  ]
+ },
+ {
+  "id": "community-1468",
+  "community": true,
+  "name": "Elder Cavrisse",
+  "note": "Spawns on the top corner PH is the middle mob",
+  "x": 5136,
+  "y": 8115,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/elder-cavrisse",
+  "wikiId": "npc-elder-cavrisse",
+  "levels": [
+   52,
+   52
+  ]
+ },
+ {
+  "id": "community-1469",
+  "community": true,
+  "name": "Dhurazzim",
+  "note": "",
+  "x": 5076,
+  "y": 4330,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/dhurazzim",
+  "wikiId": "npc-dhurazzim",
+  "levels": [
+   51,
+   51
+  ]
+ },
+ {
+  "id": "community-1480",
+  "community": true,
+  "name": "ratman trappers",
+  "note": "",
+  "x": 2838,
+  "y": 4616,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-trapper",
+  "wikiId": "npc-a-ratman-trapper",
+  "levels": [
+   41,
+   null
+  ],
+  "mobs": [
+   {
+    "name": "a ratman trapper",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-ratman-trapper",
+    "wikiId": "npc-a-ratman-trapper"
+   }
+  ]
+ },
+ {
+  "id": "community-1482",
+  "community": true,
+  "name": "Drelith Vael'Xirith",
+  "note": "Orc Beach",
+  "x": 1083,
+  "y": 3761,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/drelith-vaelxirith",
+  "wikiId": "npc-drelith-vael-xirith"
+ },
+ {
+  "id": "community-1530",
+  "community": true,
+  "name": "Feedmaster Krozzik",
+  "note": "Stuck in floor near tower, trapper PH",
+  "x": 2883,
+  "y": 4666,
+  "category": "Named mob",
+  "levels": [
+   45,
+   45
+  ],
+  "ambush": false
  }
 ]

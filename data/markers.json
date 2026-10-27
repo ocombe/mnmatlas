@@ -114,12 +114,15 @@
   },
   {
     "id": "wiki-16",
-    "name": "Shady merchant — east North Gate",
+    "name": "Clint the Innocent",
     "category": "Vendor",
     "vendor": "Shady merchant",
     "x": 2020,
     "y": 1042,
-    "note": ""
+    "note": "",
+    "wiki": "https://monstersandmemories.wiki/npcs/clint-the-innocent",
+    "wikiId": "npc-clint-the-innocent",
+    "community": true
   },
   {
     "id": "wiki-17",
@@ -3211,5 +3214,83 @@
     "approximate": true,
     "wiki": "https://monstersandmemories.wiki/npcs/rolan-talmula",
     "wikiId": "npc-rolan-talmula"
+  },
+  {
+    "id": "community-1300",
+    "community": true,
+    "name": "Farmer Lubern",
+    "note": "Inq Quest",
+    "x": 2254,
+    "y": 666,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/farmer-lubern",
+    "wikiId": "npc-farmer-lubern"
+  },
+  {
+    "id": "community-1387",
+    "community": true,
+    "name": "Riham",
+    "note": "",
+    "x": 1361,
+    "y": 1921,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/riham",
+    "wikiId": "npc-riham"
+  },
+  {
+    "id": "community-1505",
+    "community": true,
+    "name": "Jailer Benedict",
+    "note": "At the bottom# of the ramps going down in here. When you go right into the jail area you'll find he spawns around the pale jailers and captors.",
+    "x": 2203,
+    "y": 2036,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/jailer-benedict",
+    "wikiId": "npc-jailer-benedict",
+    "levels": [
+      42,
+      42
+    ]
+  },
+  {
+    "id": "community-1525",
+    "community": true,
+    "name": "Wizard Exodus",
+    "note": "Where a wizard goes when they cast exodus on the West NH map",
+    "x": 886,
+    "y": 1350,
+    "category": "Respawn point"
+  },
+  {
+    "id": "community-1526",
+    "community": true,
+    "name": "Wizard Exodus",
+    "note": "Where wiz goes when they cast exodus on the north NH map",
+    "x": 1921,
+    "y": 1041,
+    "category": "Teleporter",
+    "travel": "Teleporter"
+  },
+  {
+    "id": "community-1535",
+    "community": true,
+    "name": "Jumthem",
+    "note": "",
+    "x": 915,
+    "y": 1809,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/jumthem",
+    "wikiId": "npc-jumthem"
+  },
+  {
+    "id": "community-1536",
+    "community": true,
+    "name": "Red Mantle Quartermaster",
+    "note": "",
+    "x": 1539,
+    "y": 1176,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/red-mantle-quartermaster",
+    "wikiId": "npc-red-mantle-quartermaster"
   }
 ]

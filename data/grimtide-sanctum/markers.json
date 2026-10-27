@@ -118,5 +118,37 @@
     "toMarker": "link-bridge-north-opening-floor-1",
     "direction": "up",
     "switchOnClick": true
+  },
+  {
+    "id": "community-1533",
+    "community": true,
+    "name": "Bloatbelly",
+    "note": "Undead in room are PH",
+    "x": 2765,
+    "y": 1266,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/bloatbelly",
+    "wikiId": "npc-bloatbelly",
+    "levels": [
+      50,
+      50
+    ]
+  },
+  {
+    "id": "community-1534",
+    "community": true,
+    "name": "Vesska the Bloodbound",
+    "note": "",
+    "x": 2480,
+    "y": 1260,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/vesska-the-bloodbound",
+    "wikiId": "npc-vesska-the-bloodbound",
+    "levels": [
+      50,
+      50
+    ]
   }
 ]

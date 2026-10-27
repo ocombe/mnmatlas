@@ -1426,5 +1426,53 @@
       "name": "silenaus",
       "what": "added"
     }
+  ],
+  "marker:community-1300": [
+    {
+      "name": "final1y",
+      "what": "added"
+    }
+  ],
+  "marker:community-1387": [
+    {
+      "name": "tonio1432",
+      "what": "added"
+    }
+  ],
+  "marker:community-1505": [
+    {
+      "name": "xatmakin",
+      "what": "added"
+    }
+  ],
+  "marker:community-1525": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1526": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1535": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1536": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-16": [
+    {
+      "name": null,
+      "what": "edited"
+    }
   ]
 }

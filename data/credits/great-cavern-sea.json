@@ -21,6 +21,14 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "dendrilly",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-704": [
@@ -38,6 +46,10 @@
     },
     {
       "name": "dendrilly",
+      "what": "edited"
+    },
+    {
+      "name": "phob0s89",
       "what": "edited"
     }
   ],
@@ -77,6 +89,10 @@
     {
       "name": "dpierre007",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-740": [
@@ -93,6 +109,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "dendrilly",
+      "what": "moved"
     }
   ],
   "marker:community-773": [
@@ -105,6 +125,10 @@
     {
       "name": "nightgod",
       "what": "moved"
+    },
+    {
+      "name": "phob0s89",
+      "what": "edited"
     }
   ],
   "label:wizard-tower": [
@@ -151,6 +175,156 @@
     {
       "name": "dendrilly",
       "what": "moved"
+    }
+  ],
+  "marker:community-1285": [
+    {
+      "name": "dendrilly",
+      "what": "added"
+    }
+  ],
+  "label:ail-vorith-gate": [
+    {
+      "name": "dendrilly",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1287": [
+    {
+      "name": "dendrilly",
+      "what": "added"
+    }
+  ],
+  "marker:community-1306": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1307": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1308": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1309": [
+    {
+      "name": "kyzrin0948",
+      "what": "added"
+    }
+  ],
+  "marker:community-1310": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1311": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1312": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1313": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "label:to-blind-midden": [
+    {
+      "name": "phob0s89",
+      "what": "edited"
+    }
+  ],
+  "marker:community-1318": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1321": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1324": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1326": [
+    {
+      "name": "phob0s89",
+      "what": "added"
+    }
+  ],
+  "marker:community-1392": [
+    {
+      "name": "ziros22",
+      "what": "added"
+    }
+  ],
+  "marker:community-1393": [
+    {
+      "name": "ziros22",
+      "what": "added"
+    }
+  ],
+  "marker:community-1394": [
+    {
+      "name": "ziros22",
+      "what": "added"
+    }
+  ],
+  "marker:community-1447": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1468": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1469": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1480": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1482": [
+    {
+      "name": "kyzrin0948",
+      "what": "added"
+    }
+  ],
+  "marker:community-1530": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

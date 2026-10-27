@@ -61,11 +61,12 @@
   {
    "id": "ail-vorith-gate",
    "name": "Ail'Vorith Gate",
-   "x": 6127,
-   "y": 2896,
+   "x": 6416,
+   "y": 3030,
    "kind": "district",
    "priority": 70,
-   "minZoom": 2
+   "minZoom": 2,
+   "community": true
   },
   {
    "id": "spider-caves",
@@ -119,7 +120,7 @@
   },
   {
    "id": "to-blind-midden",
-   "name": "to Blind Midden",
+   "name": "to Blind Midden (currently obstructed by boulder)",
    "x": 5595,
    "y": 4346,
    "kind": "exit",
@@ -129,7 +130,8 @@
    "approximate": true,
    "note": "",
    "toMap": "blind-midden",
-   "toPlace": "exit-great-cavern-sea"
+   "toPlace": "exit-great-cavern-sea",
+   "community": true
   },
   {
    "id": "community-718",
