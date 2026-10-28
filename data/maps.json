@@ -170,7 +170,7 @@
           "maxNativeZoom": 4,
           "maxZoom": 6,
           "coordinateZoom": 4,
-          "tileRevision": "tunnels-v1",
+          "tileRevision": "tunnels-v2",
           "tilePath": "assets/tiles/underdocks/tunnels/{z}/{x}/{y}.webp",
           "labelsFile": "data/underdocks/tunnels-labels.json",
           "hiddenAreasFile": null,
