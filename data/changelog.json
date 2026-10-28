@@ -1,6 +1,14 @@
 {
  "entries": [
   {
+   "date": "2026-10-28",
+   "title": "Underdocks: the mine tunnels",
+   "text": "A new Mine tunnels tab charts the old workings high above the harbour: a great timber frame over the central island and the winding tunnels beyond it. Lift 7 from the Upper city stops there.",
+   "maps": [
+    "underdocks"
+   ]
+  },
+  {
    "date": "2026-10-27",
    "title": "Fallen Pass: the Underground",
    "text": "A new Underground tab charts every cave and tunnel of Fallen Pass, from the Rat Caves to the Smugglers Caves and the Escapee Caves; each cave mouth takes you between the two tabs. The waterfall by the rope bridge is now drawn, with the Waterfall Cave beneath it.",

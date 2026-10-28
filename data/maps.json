@@ -133,10 +133,10 @@
       "id": "underdocks",
       "routes": "data/underdocks/routes.json",
       "title": "Underdocks",
-      "subtitle": "Two levels beneath the city",
+      "subtitle": "Three levels beneath the city",
       "cartoucheKicker": "The hidden harbour",
       "breadcrumb": "Monsters & Memories / Underdocks",
-      "description": "An illustrated fan atlas of the Underdocks. Explore the lower docks and upper city, find places, and keep your own field notes.",
+      "description": "An illustrated fan atlas of the Underdocks. Explore the lower docks, the old mine tunnels and the upper city, find places, and keep your own field notes.",
       "width": 6144,
       "height": 6496,
       "minZoom": 0,
@@ -160,6 +160,25 @@
           "id": "lower",
           "title": "Lower docks",
           "tilePath": "assets/tiles/underdocks/lower/{z}/{x}/{y}.webp"
+        },
+        {
+          "id": "tunnels",
+          "title": "Mine tunnels",
+          "width": 2232,
+          "height": 1712,
+          "minZoom": 0,
+          "maxNativeZoom": 4,
+          "maxZoom": 6,
+          "coordinateZoom": 4,
+          "tileRevision": "tunnels-v1",
+          "tilePath": "assets/tiles/underdocks/tunnels/{z}/{x}/{y}.webp",
+          "labelsFile": "data/underdocks/tunnels-labels.json",
+          "hiddenAreasFile": null,
+          "defaultView": {
+            "mode": "fit",
+            "padding": 18,
+            "placeZoom": 4
+          }
         },
         {
           "id": "upper",

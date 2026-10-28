@@ -156,6 +156,30 @@
     "direction": "down"
   },
   {
+    "id": "lift-7-upper",
+    "name": "Lift 7 — to the mine tunnels",
+    "category": "Lift",
+    "x": 3551.5,
+    "y": 4195.4,
+    "note": "",
+    "level": "upper",
+    "toLevel": "tunnels",
+    "toMarker": "lift-7-tunnels",
+    "direction": "down"
+  },
+  {
+    "id": "lift-7-tunnels",
+    "name": "Lift 7 — to Upper city",
+    "category": "Lift",
+    "x": 615.5,
+    "y": 603.0,
+    "note": "",
+    "level": "tunnels",
+    "toLevel": "upper",
+    "toMarker": "lift-7-upper",
+    "direction": "up"
+  },
+  {
     "id": "stairs-sw-lower",
     "name": "Stairs to Upper city",
     "category": "Stairs",
