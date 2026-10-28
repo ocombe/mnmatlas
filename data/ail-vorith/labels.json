@@ -68,8 +68,8 @@
   {
    "id": "to-great-cavern-sea",
    "name": "to Great Cavern Sea",
-   "x": 2254,
-   "y": 7269,
+   "x": 2363,
+   "y": 7142,
    "kind": "exit",
    "priority": 90,
    "minZoom": 1.5,

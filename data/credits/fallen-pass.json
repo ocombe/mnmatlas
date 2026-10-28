@@ -243,6 +243,10 @@
     {
       "name": "xatmakin",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-1194": [
@@ -437,6 +441,30 @@
     {
       "name": null,
       "what": "moved"
+    }
+  ],
+  "marker:community-1599": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1621": [
+    {
+      "name": "neverrooks",
+      "what": "added"
+    }
+  ],
+  "marker:community-1622": [
+    {
+      "name": "neverrooks",
+      "what": "added"
+    }
+  ],
+  "marker:community-1623": [
+    {
+      "name": "neverrooks",
+      "what": "added"
     }
   ]
 }

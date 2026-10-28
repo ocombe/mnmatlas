@@ -1,1090 +1,5 @@
 [
   {
-    "at": "2026-10-21T06:21:39.499Z",
-    "rows": [
-      {
-        "id": 1014,
-        "payloadHash": "805d981ef6a60d1c23d288fdfc40a2c5d349cb05cd8860655bcbacfd747ae5fc",
-        "updatedAt": "2026-10-21T05:18:01.320167+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-64",
-          "payload": {
-            "to": [
-              6147,
-              1890
-            ],
-            "from": [
-              6264,
-              1939
-            ],
-            "name": "A Deepgulp explorer"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1017,
-        "payloadHash": "0acf934cc3e308125eec0bd3ea9f63c5ca49003e70cc80fc1fa7206e7de1dd4f",
-        "updatedAt": "2026-10-21T05:18:28.61102+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 5595,
-            "y": 1884,
-            "mobs": [
-              {
-                "name": "A Deepgulp runt",
-                "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-runt",
-                "wikiId": "npc-a-deepgulp-runt"
-              }
-            ],
-            "name": "Deepgulp Runt",
-            "note": "Deepgulp Runt",
-            "levels": [
-              6,
-              8
-            ],
-            "category": "Mob camp"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1018,
-        "payloadHash": "a17a33675fd0639b1075703157ff9e74995230dcefa370399bee6e439ec87969",
-        "updatedAt": "2026-10-21T05:33:26.026721+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1746,
-            "y": 2396,
-            "name": "Rider Sylvadir",
-            "note": "Riding trainer",
-            "wiki": "https://monstersandmemories.wiki/npcs/rider-sylvadir",
-            "trade": "Riding",
-            "bounty": "npc-rider-sylvadir",
-            "wikiId": "npc-rider-sylvadir",
-            "category": "Tradeskill",
-            "priority": true
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1019,
-        "payloadHash": "87f5198c0daea44b255ab67aae54a1d0200966bb3b78e21cf9cbcf322de45bd9",
-        "updatedAt": "2026-10-21T05:34:11.628552+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1735,
-            "y": 2612,
-            "name": "Fisherman Pico",
-            "note": "Fishing trainer\nAdjacent pond near Traveller's lift",
-            "wiki": "https://monstersandmemories.wiki/npcs/fisherman-pico",
-            "trade": "Fishing",
-            "bounty": "npc-expert-fisherman",
-            "wikiId": "npc-expert-fisherman",
-            "category": "Tradeskill",
-            "priority": true
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1020,
-        "payloadHash": "5814bbf742a3ac5d4055d68321e0197bc750a610071ab5de2e58b415355559e8",
-        "updatedAt": "2026-10-21T05:34:54.186424+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1793,
-            "y": 2417,
-            "name": "Steblemaster Felwin",
-            "note": "Horse vendor",
-            "vendor": "Riding vendor",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1021,
-        "payloadHash": "ae898cebf288c60edfff41e62ee2bb4eefac5d38cfdcd061fd2b85d039744ac5",
-        "updatedAt": "2026-10-21T05:35:09.192065+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1755,
-            "y": 2405,
-            "name": "a rider",
-            "note": "Animal feed & basic rigging",
-            "vendor": "Riding vendor",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1022,
-        "payloadHash": "bd1a0ba6ed4b4cb54f04656386418bdea0737f8d94346574cd1b093bc4217310",
-        "updatedAt": "2026-10-21T05:39:10.90471+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1807,
-            "y": 2327,
-            "name": "a wagoneer",
-            "note": "Wagon supplies",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1023,
-        "payloadHash": "0400cb34edf54ad537d23d86ff81a3b3bf42f56c2fac167e3a902c3e5d7960a9",
-        "updatedAt": "2026-10-21T05:39:18.236054+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1799,
-            "y": 2339,
-            "name": "Wagoneer Hoddo",
-            "note": "",
-            "trade": "Wagoneering",
-            "category": "Tradeskill"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1024,
-        "payloadHash": "ca453fbfdbe1ec84fcd9f888e1a20e022787cfba4c2cda759765effa91246660",
-        "updatedAt": "2026-10-21T05:39:45.31513+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-471",
-          "payload": {
-            "from": {
-              "name": "Daegolar the Pauper",
-              "note": "",
-              "category": "Quest NPC"
-            },
-            "name": "Daegolar the Pauper",
-            "note": "Talk to him at Level 1 to become Solo Self found.",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1025,
-        "payloadHash": "332218fedce95998660aef5842b3c59579eca63187b1ed5749e478e084fcbaed",
-        "updatedAt": "2026-10-21T05:39:55.468171+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-471",
-          "payload": {
-            "to": [
-              1816,
-              2513
-            ],
-            "from": [
-              1829,
-              2518
-            ],
-            "name": "Daegolar the Pauper"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1026,
-        "payloadHash": "f1fa3122905c9b620c1318ff4648d33753b9657b320bf37eccf926514e08c1ec",
-        "updatedAt": "2026-10-21T05:40:19.171446+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "travelers-lift",
-          "payload": {
-            "to": [
-              1753,
-              2510
-            ],
-            "from": [
-              1795,
-              2513
-            ],
-            "name": "Traveler's Lift — up to Faelindral"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1027,
-        "payloadHash": "cb405445d0118ca7548f9c062a4fcd43768e3b1dce770442b58d9e4978aabf1d",
-        "updatedAt": "2026-10-21T05:40:33.445221+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1803,
-            "y": 2517,
-            "name": "Solitary Londrin",
-            "note": "Talk to him at Level 1 to activate Solo ruleset.",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1031,
-        "payloadHash": "86aa8d82b620377e0a94e87889102f8594ade458f2ae790a3436f309092ab531",
-        "updatedAt": "2026-10-21T05:18:42.438313+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 6559,
-            "y": 2227,
-            "mobs": [
-              {
-                "name": "A cave snake",
-                "wiki": "https://monstersandmemories.wiki/npcs/a-cave-snake",
-                "wikiId": "npc-a-cave-snake"
-              }
-            ],
-            "name": "A cave snake (levels 7–9)",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/a-cave-snake",
-            "wikiId": "npc-a-cave-snake",
-            "category": "Mob camp"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1036,
-        "payloadHash": "1db539762efa016e135b4914b322ee57f9b9486ca32a98887b03ab49a114aaaf",
-        "updatedAt": "2026-10-21T05:32:26.502467+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-1",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2906,
-            "y": 2768,
-            "name": "Gore",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/gore",
-            "level": "floor-1",
-            "bounty": "npc-gore",
-            "wikiId": "npc-gore",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1037,
-        "payloadHash": "bde29e1b3e5bca819698685692e22fba9b009eb7ea7b92749460b6a113786b0e",
-        "updatedAt": "2026-10-21T05:32:48.517523+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-2",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2222,
-            "y": 3044,
-            "name": "Admiral Blacktide",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/admiral-blacktide",
-            "level": "floor-2",
-            "bounty": "npc-admiral-blacktide",
-            "wikiId": "npc-admiral-blacktide",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1048,
-        "payloadHash": "dd3b80a83ec289d375f3f4a29f2d945b67e69a4adc1aa5a2690a823c51564867",
-        "updatedAt": "2026-10-21T05:32:33.081292+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-1",
-          "kind": "edit-marker",
-          "target_id": "community-989",
-          "payload": {
-            "from": {
-              "x": 5063,
-              "y": 1983,
-              "name": "Orbilis the Overseer",
-              "note": "Evil Eye is Placeholder",
-              "wiki": "https://monstersandmemories.wiki/npcs/orbilis-the-overseer",
-              "level": "floor-1",
-              "ambush": false,
-              "wikiId": "npc-orbilis-the-overseer",
-              "category": "Named mob"
-            },
-            "name": "Orbilis the Overseer",
-            "levels": [
-              25,
-              25
-            ]
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1049,
-        "payloadHash": "04f2c41f27393069c5bc6d0fc4f2c3cb15761780f3609e4fe1b112de26715bc6",
-        "updatedAt": "2026-10-21T05:18:51.943178+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 5341,
-            "y": 3655,
-            "name": "Creatures 1-3",
-            "note": "",
-            "shape": {
-              "form": "outline",
-              "kind": "area",
-              "points": [
-                [
-                  5209,
-                  3282
-                ],
-                [
-                  5160,
-                  3374
-                ],
-                [
-                  5184,
-                  3494
-                ],
-                [
-                  5149,
-                  3596
-                ],
-                [
-                  5081,
-                  3689
-                ],
-                [
-                  5017,
-                  3866
-                ],
-                [
-                  5084,
-                  3932
-                ],
-                [
-                  5175,
-                  3937
-                ],
-                [
-                  5262,
-                  3941
-                ],
-                [
-                  5337,
-                  3901
-                ],
-                [
-                  5508,
-                  3917
-                ],
-                [
-                  5584,
-                  3793
-                ],
-                [
-                  5621,
-                  3695
-                ],
-                [
-                  5639,
-                  3614
-                ],
-                [
-                  5694,
-                  3546
-                ],
-                [
-                  5461,
-                  3416
-                ],
-                [
-                  5351,
-                  3340
-                ]
-              ]
-            },
-            "levels": [
-              1,
-              3
-            ],
-            "category": "Mob camp"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1050,
-        "payloadHash": "428a2cca1f87bace0b3d7cb8e463456243f31baf559f5fa5dc26680232791d75",
-        "updatedAt": "2026-10-21T05:18:59.905796+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 5331,
-            "y": 3528,
-            "name": "Newbie Yard",
-            "note": "",
-            "category": "Personal",
-            "noteType": "label"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1051,
-        "payloadHash": "76534256a71c0fd4594b73976f2a13c1559a7287d0bdc3563d20bf3a478a3ea5",
-        "updatedAt": "2026-10-21T05:19:14.530818+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-273",
-          "payload": {
-            "to": [
-              3812,
-              2289
-            ],
-            "from": [
-              3792,
-              2238
-            ],
-            "name": "Kelnir"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1052,
-        "payloadHash": "f2392b66dc26ef1261a6f0e8c8c9518718773e9639f684fab3271ef3e497d43b",
-        "updatedAt": "2026-10-21T05:19:36.517984+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3742,
-            "y": 2273,
-            "name": "Nuren Xalis",
-            "note": "boots vendor",
-            "sells": [
-              "Armor"
-            ],
-            "vendor": "Used armor trader",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1053,
-        "payloadHash": "4e68289e1cc4a6d52998e24a42ca35fef6bce714e42884f2277e7e7905863d58",
-        "updatedAt": "2026-10-21T05:19:49.887615+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3617,
-            "y": 2182,
-            "name": "Trinel Azzinol",
-            "note": "",
-            "vendor": "Brewer",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1054,
-        "payloadHash": "66df0be8e3bfb4c38e31c40a00cc156d5c5069b807bf5b0e280ff84b45e1301b",
-        "updatedAt": "2026-10-21T05:20:00.764159+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3630,
-            "y": 2416,
-            "name": "Korrenthar Gessinth",
-            "note": "",
-            "vendor": "Adventuring supplies",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1055,
-        "payloadHash": "442e3c5cabec1a428d64de356dfbfa5ed5e854afba499db0deb9197021e408bb",
-        "updatedAt": "2026-10-21T05:20:22.138074+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3644,
-            "y": 2403,
-            "name": "Jehes Vhaslor",
-            "note": "",
-            "vendor": "Adventuring supplies",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1059,
-        "payloadHash": "2317bf8206583c48e41128343fe38b4d6eb6ad94f7970e1ddff71d62ea5e0af8",
-        "updatedAt": "2026-10-21T05:32:59.013418+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-2",
-          "kind": "edit-marker",
-          "target_id": "community-941",
-          "payload": {
-            "from": {
-              "x": 4603,
-              "y": 4750,
-              "name": "Taskmaster Murkraal",
-              "note": "",
-              "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-murkraal",
-              "level": "floor-2",
-              "wikiId": "npc-taskmaster-murkraal",
-              "category": "Notable NPC"
-            },
-            "name": "Taskmaster Murkraal",
-            "ambush": false,
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1063,
-        "payloadHash": "e40e97b1d2a85a9b9aa75f69edc5dc1082b5a3a276476bd1428cbc3f07517ab7",
-        "updatedAt": "2026-10-21T05:21:08.310333+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 5661,
-            "y": 2873,
-            "mobs": [
-              {
-                "name": "A deep beetle",
-                "wiki": "https://monstersandmemories.wiki/npcs/a-deep-beetle",
-                "wikiId": "npc-a-deep-beetle"
-              },
-              {
-                "name": "A juvenile snake",
-                "wiki": "https://monstersandmemories.wiki/npcs/a-juvenile-snake",
-                "wikiId": "npc-a-juvenile-snake"
-              },
-              {
-                "name": "A cave myconid",
-                "wiki": "https://monstersandmemories.wiki/npcs/a-cave-myconid",
-                "wikiId": "npc-a-cave-myconid"
-              }
-            ],
-            "name": "Creatures 3-5",
-            "note": "Deep Beetle\nJuvenile Snake\nCave Myconid",
-            "shape": {
-              "form": "outline",
-              "kind": "area",
-              "points": [
-                [
-                  5429,
-                  2430
-                ],
-                [
-                  5380,
-                  2653
-                ],
-                [
-                  5416,
-                  2783
-                ],
-                [
-                  5279,
-                  2917
-                ],
-                [
-                  5194,
-                  3117
-                ],
-                [
-                  5439,
-                  3251
-                ],
-                [
-                  5652,
-                  3395
-                ],
-                [
-                  5776,
-                  3477
-                ],
-                [
-                  5871,
-                  3369
-                ],
-                [
-                  5907,
-                  3202
-                ],
-                [
-                  5848,
-                  3022
-                ],
-                [
-                  5904,
-                  2836
-                ],
-                [
-                  6057,
-                  2832
-                ],
-                [
-                  6234,
-                  2653
-                ],
-                [
-                  6178,
-                  2532
-                ],
-                [
-                  6023,
-                  2656
-                ],
-                [
-                  5837,
-                  2565
-                ],
-                [
-                  5820,
-                  2400
-                ],
-                [
-                  5752,
-                  2345
-                ],
-                [
-                  5643,
-                  2341
-                ],
-                [
-                  5552,
-                  2341
-                ]
-              ]
-            },
-            "levels": [
-              3,
-              5
-            ],
-            "category": "Mob camp"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1064,
-        "payloadHash": "f7da4261f41956306f1d49120bd52308304a042a7bd4d0c6fcf0731385c5e8fd",
-        "updatedAt": "2026-10-21T05:21:15.30532+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-64",
-          "payload": {
-            "x": 6084,
-            "y": 1869,
-            "from": {
-              "x": 6264,
-              "y": 1939,
-              "mobs": [
-                {
-                  "name": "A Deepgulp explorer",
-                  "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
-                  "wikiId": "npc-a-deepgulp-explorer"
-                }
-              ],
-              "name": "A Deepgulp explorer",
-              "note": "",
-              "wiki": "https://monstersandmemories.wiki/npcs/a-deepgulp-explorer",
-              "levels": [
-                5,
-                7
-              ],
-              "wikiId": "npc-a-deepgulp-explorer",
-              "category": "Mob camp"
-            },
-            "name": "A Deepgulp explorer",
-            "shape": {
-              "form": "outline",
-              "kind": "area",
-              "points": [
-                [
-                  5605,
-                  1901
-                ],
-                [
-                  5561,
-                  1886
-                ],
-                [
-                  5538,
-                  1853
-                ],
-                [
-                  5636,
-                  1803
-                ],
-                [
-                  5918,
-                  1804
-                ],
-                [
-                  6135,
-                  1842
-                ],
-                [
-                  6363,
-                  1815
-                ],
-                [
-                  6566,
-                  1910
-                ],
-                [
-                  6608,
-                  2004
-                ],
-                [
-                  6577,
-                  2018
-                ],
-                [
-                  6437,
-                  1920
-                ],
-                [
-                  6317,
-                  1872
-                ],
-                [
-                  6253,
-                  1865
-                ],
-                [
-                  6259,
-                  1897
-                ],
-                [
-                  6145,
-                  1920
-                ],
-                [
-                  6065,
-                  1905
-                ],
-                [
-                  5939,
-                  1845
-                ]
-              ]
-            }
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1067,
-        "payloadHash": "da4c869f28ff275dadd6a271978e0d28628df4c7a4c1464f55c211b1c47751c0",
-        "updatedAt": "2026-10-21T05:21:56.106197+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 6243,
-            "y": 2596,
-            "name": "House Ith'Vayen - Teleport Location",
-            "note": "A Letter of Recommendation - Step 2 Teleport Location\nKill Cave Myconids",
-            "wiki": "https://monstersandmemories.wiki/quests/house-ithvayen",
-            "category": "Teleporter"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1076,
-        "payloadHash": "bf80ae540e1943964a268631c15af47a171d14f5a09a70323be91616aadafde9",
-        "updatedAt": "2026-10-21T05:22:13.011513+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 6036,
-            "y": 2530,
-            "name": "Skeletons",
-            "note": "",
-            "shape": {
-              "form": "outline",
-              "kind": "area",
-              "points": [
-                [
-                  6026,
-                  2439
-                ],
-                [
-                  5964,
-                  2502
-                ],
-                [
-                  5961,
-                  2576
-                ],
-                [
-                  6029,
-                  2638
-                ],
-                [
-                  6122,
-                  2539
-                ],
-                [
-                  6084,
-                  2449
-                ],
-                [
-                  6049,
-                  2427
-                ]
-              ]
-            },
-            "levels": [
-              7,
-              9
-            ],
-            "category": "Mob camp"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1078,
-        "payloadHash": "839bc1f8ae5a2c49f8c93659bddf724318f96f10f4644fe3ab141ce915386ee9",
-        "updatedAt": "2026-10-21T05:22:18.371072+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 5965,
-            "y": 2159,
-            "mobs": [
-              {
-                "name": "A cave myconid",
-                "wiki": "https://monstersandmemories.wiki/npcs/a-cave-myconid",
-                "wikiId": "npc-a-cave-myconid"
-              }
-            ],
-            "name": "Cave Myconids",
-            "note": "",
-            "shape": {
-              "form": "outline",
-              "kind": "area",
-              "points": [
-                [
-                  5807,
-                  2168
-                ],
-                [
-                  5816,
-                  2036
-                ],
-                [
-                  5964,
-                  2029
-                ],
-                [
-                  6078,
-                  2071
-                ],
-                [
-                  6128,
-                  2228
-                ],
-                [
-                  5999,
-                  2319
-                ],
-                [
-                  5957,
-                  2316
-                ],
-                [
-                  5893,
-                  2228
-                ]
-              ]
-            },
-            "levels": [
-              5,
-              7
-            ],
-            "category": "Mob camp"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1087,
-        "payloadHash": "a3eaea7aa1a1e00907b3e192fabd9791985bcd56cf3986910de731a4d0e20c50",
-        "updatedAt": "2026-10-21T05:33:13.26534+00:00",
-        "version": {
-          "map": "caves-of-irem",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1614,
-            "y": 4018,
-            "name": "Speaker Khaldun",
-            "note": "40ish (yellow to 38) shaman named mob",
-            "ambush": false,
-            "levels": [
-              40,
-              40
-            ],
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1094,
-        "payloadHash": "2e27e92f102eb232ee77de3d031465b20e9f09b48adeab75dd7b0f4ac40b1a8b",
-        "updatedAt": "2026-10-21T05:33:56.688806+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "respawn-point",
-          "payload": {
-            "to": [
-              1869,
-              2488
-            ],
-            "from": [
-              1692,
-              2626
-            ],
-            "name": "Respawn point"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1095,
-        "payloadHash": "a6a90ac8e8b8e0af860fa077b17b1a35e75019f7a4ab5c787f0363dc0fc0c0a0",
-        "updatedAt": "2026-10-21T05:40:24.765798+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "travelers-lift",
-          "payload": {
-            "from": {
-              "x": 1753,
-              "y": 2510,
-              "name": "Traveler's Lift — up to Faelindral",
-              "note": "Rises to the platforms of Faelindral.",
-              "toMap": "faelindral",
-              "toPlace": "lift-traveler-s-down",
-              "category": "Lift",
-              "direction": "up"
-            },
-            "name": "Traveler's Lift — up to Faelindral",
-            "direction": "updown"
-          },
-          "credit": false
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-21T07:39:49.749Z",
     "rows": [
       {
@@ -14482,6 +13397,649 @@
               42,
               45
             ]
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-28T07:25:24.727Z",
+    "rows": [
+      {
+        "id": 1490,
+        "payloadHash": "fceaf4dbc029d9e365d10a607e1234b4c4a2567d93f3eeafeb48350532c46430",
+        "updatedAt": "2026-10-28T06:38:46.638596+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "floor-2",
+          "kind": "edit-marker",
+          "target_id": "community-831",
+          "payload": {
+            "from": {
+              "x": 3149,
+              "y": 3698,
+              "way": "Swim",
+              "name": "Swim up Waterfall",
+              "note": "Corner of waterfall can be swam upward",
+              "level": "floor-2",
+              "category": "Passage",
+              "direction": "updown"
+            },
+            "name": "Swim up Waterfall",
+            "reason": "missing",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1594,
+        "payloadHash": "066a3fd6b614ab3dbd4bb71084802b63401d6bcddf51382b6ec7a05bbd8b4dc8",
+        "updatedAt": "2026-10-28T07:07:06.111058+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1671,
+            "y": 1710,
+            "name": "An enchanter scribe",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-enchanter-scribe",
+            "bounty": "npc-an-enchanter-scribe",
+            "wikiId": "npc-an-enchanter-scribe",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1595,
+        "payloadHash": "ae255f5487962687ecbd026c62703c032336eb81c045a9644179e18276e17972",
+        "updatedAt": "2026-10-28T07:07:17.48536+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1687,
+            "y": 1712,
+            "name": "Karsyn",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/karsyn",
+            "bounty": "npc-karsyn",
+            "wikiId": "npc-karsyn",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1596,
+        "payloadHash": "c2d99a1b953b9d3d1e3c8136494a6de8e37b8f7e8f283d0b0c5500380c0163e6",
+        "updatedAt": "2026-10-28T07:07:30.915351+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1666,
+            "y": 1711,
+            "name": "Jaakima",
+            "note": "Inside building. on the second floor. multiple locked doors had to jump through the window",
+            "wiki": "https://monstersandmemories.wiki/npcs/jaakima",
+            "bounty": "npc-jaakima",
+            "wikiId": "npc-jaakima",
+            "category": "Quest NPC"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1599,
+        "payloadHash": "c2335c6b75934cd4262386b65969092ea07ab6045be8ff7c8fdffd225110f902",
+        "updatedAt": "2026-10-28T06:40:32.764642+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2967,
+            "y": 1820,
+            "name": "Mayor Oisin",
+            "note": "one of the 4 scepter named, spawns about 8 AM till noon.",
+            "wiki": "https://monstersandmemories.wiki/npcs/mayor-oisin",
+            "bounty": "npc-mayor-oisin",
+            "quests": true,
+            "wikiId": "npc-mayor-oisin",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1600,
+        "payloadHash": "198c85594c34fa68bdf2d25ea4a501c1ce86fe470bced3d68c264d7bbdb7e7e2",
+        "updatedAt": "2026-10-28T07:10:31.692812+00:00",
+        "version": {
+          "map": "tel-ekir",
+          "level": "floor-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2071,
+            "y": 1828,
+            "name": "Wily Rufga",
+            "note": "Inside the tunnel on the upper Canyon layer, take the path to the waterfall. When you enter the tunnel there, take directly tunnel on the right, and then right into the room. She will not trade with you, if you have bad relations.",
+            "wiki": "https://monstersandmemories.wiki/npcs/wily-rufga",
+            "level": "floor-1",
+            "bounty": "npc-wily-rufga",
+            "wikiId": "npc-wily-rufga",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1603,
+        "payloadHash": "f3d5c9b0c8e89a8635025aa5f22b9372fd0fc5018579a57aa90393fc6861e315",
+        "updatedAt": "2026-10-28T06:58:23.327095+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6170,
+            "y": 6351,
+            "way": "Swim",
+            "name": "Waterfall",
+            "note": "You can swim up the waterfall to an unfinished area",
+            "category": "Passage",
+            "direction": "updown"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1604,
+        "payloadHash": "542f74fdeebc7f775ab9ac9624fd2a3928f996c4a7fa39a70099e5bab0554b9b",
+        "updatedAt": "2026-10-28T07:06:34.997649+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6493,
+            "y": 6380,
+            "name": "Ysmara Velgarrith",
+            "note": "The area and the quest are unfinished",
+            "category": "Quest NPC"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1605,
+        "payloadHash": "73c9c34bb3e1dea88f819adc85454ba3b265f283318d25b4c5f57d0751c49c3e",
+        "updatedAt": "2026-10-28T07:10:50.590265+00:00",
+        "version": {
+          "map": "tel-ekir",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2872,
+            "y": 1376,
+            "name": "A Bloodynose muralist",
+            "note": "Inside the goblin caves across the ravine where the double ladders bridge the ravine.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-bloodynose-muralist",
+            "level": "floor-1",
+            "ambush": false,
+            "levels": [
+              18,
+              18
+            ],
+            "wikiId": "npc-a-bloodynose-muralist",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1606,
+        "payloadHash": "1a5593cc3eb3f2736aeff8c9f769b370c1b76cedfb77c8decf91824fe66b12b3",
+        "updatedAt": "2026-10-28T07:10:17.332002+00:00",
+        "version": {
+          "map": "sungreet-strand",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1301,
+            "y": 4272,
+            "name": "Balindor Silvertrowel",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/balindor-silvertrowel",
+            "bounty": "npc-balindor-silvertrowel",
+            "levels": [
+              54,
+              54
+            ],
+            "wikiId": "npc-balindor-silvertrowel",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1607,
+        "payloadHash": "bc94a056df14ff7b4232b1188e72d6ecdd0e8108bdf5f5bd83c34c770fa3fce7",
+        "updatedAt": "2026-10-28T07:09:43.051525+00:00",
+        "version": {
+          "map": "shaded-dunes",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1608,
+            "y": 4328,
+            "name": "Arrah the Wanderer",
+            "note": "Up the ramp, Arrah the Wanderer has a camp here with \"an old hermit\".",
+            "wiki": "https://monstersandmemories.wiki/npcs/arrah-the-wanderer",
+            "bounty": "npc-arrah-the-wanderer",
+            "wikiId": "npc-arrah-the-wanderer",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1608,
+        "payloadHash": "68fd41c40d536e3819b56edc9c80a693a1b55b3d3303408bddc2660572fb66b3",
+        "updatedAt": "2026-10-28T07:10:58.374337+00:00",
+        "version": {
+          "map": "undead-keep",
+          "level": "inside",
+          "kind": "move-marker",
+          "target_id": "hovarth-ezzadel",
+          "payload": {
+            "to": [
+              1686,
+              1051
+            ],
+            "from": [
+              1627,
+              1174
+            ],
+            "name": "Hovarth Ezzadel",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1609,
+        "payloadHash": "0a0eb353f0e950cdf93d74e601a0f5717d8bc33300c07a55652049c4c9c9d859",
+        "updatedAt": "2026-10-28T07:09:52.82766+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "zaedin-bank",
+          "payload": {
+            "from": {
+              "x": 1450,
+              "y": 7290,
+              "name": "Banker Bahdi",
+              "note": "Bank at Zaedin’s Landing.",
+              "minZoom": 3,
+              "category": "Bank",
+              "approximate": true
+            },
+            "name": "Banker Bahdi",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1610,
+        "payloadHash": "81e86678d1e2369ed917f9edb46078aa43dad19fe34c568255b6859523cd665f",
+        "updatedAt": "2026-10-28T07:07:49.894601+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1971,
+            "y": 1138,
+            "name": "A used weapons dealer",
+            "note": "Night Market, Shortfolk area",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
+            "sells": [
+              "Weapons"
+            ],
+            "vendor": "Used weapons dealer",
+            "wikiId": "npc-a-used-weapons-dealer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1611,
+        "payloadHash": "a3224a1a91a883154f7409c6649a3707ca144ae55a6bfe5a206fe389da547305",
+        "updatedAt": "2026-10-28T07:07:52.780219+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1982,
+            "y": 1137,
+            "name": "a bag vendor",
+            "note": "",
+            "vendor": "Bag merchant",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1612,
+        "payloadHash": "7ab79006d589450b0882646018e81d80693f8fa994d2ce0262f5a8685a071bbb",
+        "updatedAt": "2026-10-28T07:07:59.528957+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-mira-gables",
+          "payload": {
+            "to": [
+              2006,
+              1123
+            ],
+            "from": [
+              1996,
+              1061
+            ],
+            "name": "Mira Gables",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1613,
+        "payloadHash": "35e29f9c7f5c8c5d6a9853a4e8a525a6f6f1e16dee17cbb0c2d6833b853ff0f9",
+        "updatedAt": "2026-10-28T07:08:14.066621+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1971,
+            "y": 1129,
+            "name": "A goods merchant",
+            "note": "North gate, first building on the right when heading to the Mage Tower. Smallfolk area in Night Harbor",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-goods-merchant",
+            "vendor": "General goods",
+            "wikiId": "npc-a-goods-merchant",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1616,
+        "payloadHash": "bd4c9320af30cebb6df0076362a3888591d19aa34a721cc7ded947a744c3c619",
+        "updatedAt": "2026-10-28T07:08:23.296852+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1989,
+            "y": 1128,
+            "name": "a used armor dealer",
+            "note": "Second door on the right on the way to the mage tower from the North Gate.",
+            "sells": [
+              "Armor"
+            ],
+            "vendor": "Used armor trader",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1617,
+        "payloadHash": "49e349e8d1748a99fa5d09f4fb5892f03558eb709bd3a16d9be340b006833f52",
+        "updatedAt": "2026-10-28T07:08:31.037007+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1998,
+            "y": 1129,
+            "name": "Leatherworking Supplies",
+            "note": "Second door on the right heading toward the mage tower.",
+            "wiki": "https://monstersandmemories.wiki/npcs/leatherworking-supplies",
+            "bounty": "npc-leatherworking-supplies",
+            "wikiId": "npc-leatherworking-supplies",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1618,
+        "payloadHash": "db78ac21e2d067f9836810e108bc9d0fe787012881eb6eabe7a1bb85c51b7907",
+        "updatedAt": "2026-10-28T07:08:37.179939+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-331",
+          "payload": {
+            "to": [
+              1947,
+              1099
+            ],
+            "from": [
+              1972,
+              1101
+            ],
+            "name": "A survivalist"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1619,
+        "payloadHash": "8b3b7c3edeaf0e12174ab1d6f28b9e61eed492bd57be47d00bde250ad20d63a0",
+        "updatedAt": "2026-10-28T07:08:48.731228+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wiki-43",
+          "payload": {
+            "to": [
+              2005,
+              1129
+            ],
+            "from": [
+              1989,
+              1129
+            ],
+            "name": "Tailoring — Sageside"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1620,
+        "payloadHash": "aa9e5f01c1ea9351e4d04c6676c39eda0c80f8358eaf915253f4c7eb70007c34",
+        "updatedAt": "2026-10-28T07:08:54.217012+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-491",
+          "payload": {
+            "to": [
+              1980,
+              1176
+            ],
+            "from": [
+              1996,
+              1177
+            ],
+            "name": "Chef Belle"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1621,
+        "payloadHash": "fa9898b2649ae5df2443581ebf7292510723f0999c8d6108f429a6678fe57812",
+        "updatedAt": "2026-10-28T06:56:58.689595+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1708,
+            "y": 1978,
+            "name": "Pak'Har",
+            "note": "On the cliff above Red Mantle Camp / Captain Belvoir, where the Ratmen turn into Mur'Hua Ratmen. In a small cave-building, hug the left wall passed some barrels, he's in a room by himself with one patrol.",
+            "wiki": "https://monstersandmemories.wiki/npcs/pakhar",
+            "bounty": "npc-pakhar",
+            "levels": [
+              40,
+              40
+            ],
+            "wikiId": "npc-pakhar",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1622,
+        "payloadHash": "66b5608844b1fa75ff1c3e78a5ae1302487c28d42977946cf84361342b1f5a32",
+        "updatedAt": "2026-10-28T06:57:24.5973+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1981,
+            "y": 2732,
+            "name": "Riki'Tipa",
+            "note": "In a Mar'Hua ratman cave above the Red Mantle Camp / Captain Belvoir. Spawn at a campfire with a cooking pot on it. A Mur'Hua Rebel is the place holder.",
+            "wiki": "https://monstersandmemories.wiki/npcs/rikitipa",
+            "bounty": "npc-rikitipa",
+            "levels": [
+              40,
+              40
+            ],
+            "wikiId": "npc-rikitipa",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1623,
+        "payloadHash": "1ca3ccbe42acccce0c513d9f3ca060ba1bf5eb0c01fb6f01af74e006b3b983d4",
+        "updatedAt": "2026-10-28T06:40:46.651903+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2541,
+            "y": 2238,
+            "name": "Ivor Thrym",
+            "note": "Spawns patrolling the broken wall in the middle as soon as you walk up the ramp passed the Elder Plague Drakes but before entering Allistaire the Blacks area. a Plagueborn knight is the place holder.",
+            "wiki": "https://monstersandmemories.wiki/npcs/ivor-thrym",
+            "level": "ground",
+            "bounty": "npc-ivor-thrym",
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-ivor-thrym",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1626,
+        "payloadHash": "b05576abee68031520c2559f96f83f6c0e6f22867d266fefd8b6cfa66c43b409",
+        "updatedAt": "2026-10-28T06:37:19.19714+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "move-label",
+          "target_id": "to-great-cavern-sea",
+          "payload": {
+            "to": [
+              2363,
+              7142
+            ],
+            "from": [
+              2254,
+              7269
+            ],
+            "name": "to Great Cavern Sea"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1627,
+        "payloadHash": "70c5505103ae649630b0110a88049b0adc7685deec21ffa06aa8a6f22514e5f7",
+        "updatedAt": "2026-10-28T06:39:33.833857+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1177",
+          "payload": {
+            "to": [
+              1926,
+              1868
+            ],
+            "from": [
+              1789,
+              2047
+            ],
+            "name": "Taskmaster Nor'Tap"
           },
           "credit": false
         }

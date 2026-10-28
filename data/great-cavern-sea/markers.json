@@ -717,5 +717,25 @@
    25,
    25
   ]
+ },
+ {
+  "id": "community-1603",
+  "community": true,
+  "name": "Waterfall",
+  "note": "You can swim up the waterfall to an unfinished area",
+  "x": 6170,
+  "y": 6351,
+  "category": "Passage",
+  "direction": "updown",
+  "way": "Swim"
+ },
+ {
+  "id": "community-1604",
+  "community": true,
+  "name": "Ysmara Velgarrith",
+  "note": "The area and the quest are unfinished",
+  "x": 6493,
+  "y": 6380,
+  "category": "Quest NPC"
  }
 ]

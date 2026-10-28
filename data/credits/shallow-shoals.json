@@ -256,5 +256,11 @@
       "name": "mrbrewed",
       "what": "removed"
     }
+  ],
+  "marker:zaedin-bank": [
+    {
+      "name": "mrbrewed",
+      "what": "removed"
+    }
   ]
 }

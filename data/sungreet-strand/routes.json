@@ -336,11 +336,12 @@
    "to-glass-flats-road": 2787
   }
  },
- "betweenKey": "0122570996-0724695864",
+ "betweenKey": "3241765549-3508200289",
  "unreached": [
   "npc-3",
   "ashira-1-5-2",
   "tunnels-bugs",
-  "tunnels-npc"
+  "tunnels-npc",
+  "community-1606"
  ]
 }

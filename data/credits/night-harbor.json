@@ -517,6 +517,10 @@
     {
       "name": "tonio1432",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-362": [
@@ -675,6 +679,10 @@
     {
       "name": "tonio1432",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-492": [
@@ -1485,6 +1493,66 @@
     {
       "name": null,
       "what": "added"
+    }
+  ],
+  "marker:community-1594": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1595": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1596": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1610": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-1611": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:wanted-mira-gables": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1613": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-1616": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:community-1617": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-43": [
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ]
 }

@@ -1171,5 +1171,20 @@
   "category": "Notable NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/mercenary-lord-hrrush",
   "wikiId": "npc-mercenary-lord-hrrush"
+ },
+ {
+  "id": "community-1606",
+  "community": true,
+  "name": "Balindor Silvertrowel",
+  "note": "",
+  "x": 1301,
+  "y": 4272,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/balindor-silvertrowel",
+  "wikiId": "npc-balindor-silvertrowel",
+  "levels": [
+   54,
+   54
+  ]
  }
 ]

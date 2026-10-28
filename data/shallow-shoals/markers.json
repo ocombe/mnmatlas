@@ -1,15 +1,5 @@
 [
  {
-  "id": "zaedin-bank",
-  "name": "Banker Bahdi",
-  "category": "Bank",
-  "x": 1450,
-  "y": 7290,
-  "minZoom": 3,
-  "approximate": true,
-  "note": "Bank at Zaedin’s Landing."
- },
- {
   "id": "zaedin-appraiser",
   "name": "Silver Ledger appraiser",
   "category": "Notable NPC",

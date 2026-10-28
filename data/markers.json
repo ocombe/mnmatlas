@@ -251,9 +251,10 @@
     "id": "wiki-43",
     "name": "Tailoring — Sageside",
     "category": "Tradeskill",
-    "x": 1989,
+    "x": 2005,
     "y": 1129,
-    "note": ""
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-44",
@@ -1147,8 +1148,8 @@
     "name": "A survivalist",
     "category": "Vendor",
     "note": "",
-    "x": 1972,
-    "y": 1101,
+    "x": 1947,
+    "y": 1099,
     "vendor": "Survival vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/a-survivalist",
     "wikiId": "npc-a-survivalist"
@@ -1342,8 +1343,8 @@
     "name": "Chef Belle",
     "category": "Vendor",
     "note": "",
-    "x": 1996,
-    "y": 1177,
+    "x": 1980,
+    "y": 1176,
     "vendor": "Cook",
     "wiki": "https://monstersandmemories.wiki/npcs/chef-belle",
     "wikiId": "npc-chef-belle"
@@ -3176,11 +3177,12 @@
     "name": "Mira Gables",
     "category": "Vendor",
     "note": "Third door on the right on the way from North Gate to the mage tower.",
-    "x": 1996,
-    "y": 1061,
-    "approximate": true,
+    "x": 2006,
+    "y": 1123,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/mira-gables",
-    "wikiId": "npc-mira-gables"
+    "wikiId": "npc-mira-gables",
+    "community": true
   },
   {
     "id": "wanted-an-innkeeper",
@@ -3334,5 +3336,99 @@
         "wikiId": "item-basa"
       }
     ]
+  },
+  {
+    "id": "community-1594",
+    "community": true,
+    "name": "An enchanter scribe",
+    "note": "",
+    "x": 1671,
+    "y": 1710,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-enchanter-scribe",
+    "wikiId": "npc-an-enchanter-scribe"
+  },
+  {
+    "id": "community-1595",
+    "community": true,
+    "name": "Karsyn",
+    "note": "",
+    "x": 1687,
+    "y": 1712,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/karsyn",
+    "wikiId": "npc-karsyn"
+  },
+  {
+    "id": "community-1596",
+    "community": true,
+    "name": "Jaakima",
+    "note": "Inside building. on the second floor. multiple locked doors had to jump through the window",
+    "x": 1666,
+    "y": 1711,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/jaakima",
+    "wikiId": "npc-jaakima"
+  },
+  {
+    "id": "community-1610",
+    "community": true,
+    "name": "A used weapons dealer",
+    "note": "Night Market, Shortfolk area",
+    "x": 1971,
+    "y": 1138,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-used-weapons-dealer",
+    "wikiId": "npc-a-used-weapons-dealer",
+    "vendor": "Used weapons dealer",
+    "sells": [
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-1611",
+    "community": true,
+    "name": "a bag vendor",
+    "note": "",
+    "x": 1982,
+    "y": 1137,
+    "category": "Vendor",
+    "vendor": "Bag merchant"
+  },
+  {
+    "id": "community-1613",
+    "community": true,
+    "name": "A goods merchant",
+    "note": "North gate, first building on the right when heading to the Mage Tower. Smallfolk area in Night Harbor",
+    "x": 1971,
+    "y": 1129,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-goods-merchant",
+    "wikiId": "npc-a-goods-merchant",
+    "vendor": "General goods"
+  },
+  {
+    "id": "community-1616",
+    "community": true,
+    "name": "a used armor dealer",
+    "note": "Second door on the right on the way to the mage tower from the North Gate.",
+    "x": 1989,
+    "y": 1128,
+    "category": "Vendor",
+    "vendor": "Used armor trader",
+    "sells": [
+      "Armor"
+    ]
+  },
+  {
+    "id": "community-1617",
+    "community": true,
+    "name": "Leatherworking Supplies",
+    "note": "Second door on the right heading toward the mage tower.",
+    "x": 1998,
+    "y": 1129,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/leatherworking-supplies",
+    "wikiId": "npc-leatherworking-supplies"
   }
 ]

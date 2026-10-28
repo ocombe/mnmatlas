@@ -1021,5 +1021,16 @@
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/head-researcher-aashir",
   "wikiId": "npc-head-researcher-aashir"
+ },
+ {
+  "id": "community-1607",
+  "community": true,
+  "name": "Arrah the Wanderer",
+  "note": "Up the ramp, Arrah the Wanderer has a camp here with \"an old hermit\".",
+  "x": 1608,
+  "y": 4328,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/arrah-the-wanderer",
+  "wikiId": "npc-arrah-the-wanderer"
  }
 ]

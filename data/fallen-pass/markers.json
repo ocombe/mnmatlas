@@ -918,8 +918,8 @@
   "community": true,
   "name": "Taskmaster Nor'Tap",
   "note": "Spawns from any of the taskmasters around this area.",
-  "x": 1789,
-  "y": 2047,
+  "x": 1926,
+  "y": 1868,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
   "wikiId": "npc-taskmaster-nortap",
@@ -1903,5 +1903,66 @@
   "toMarker": "escapee-caves-mouth-9-ground",
   "direction": "up",
   "switchOnClick": true
+ },
+ {
+  "id": "community-1599",
+  "community": true,
+  "name": "Mayor Oisin",
+  "note": "one of the 4 scepter named, spawns about 8 AM till noon.",
+  "x": 2967,
+  "y": 1820,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/mayor-oisin",
+  "wikiId": "npc-mayor-oisin",
+  "quests": true
+ },
+ {
+  "id": "community-1621",
+  "community": true,
+  "name": "Pak'Har",
+  "note": "On the cliff above Red Mantle Camp / Captain Belvoir, where the Ratmen turn into Mur'Hua Ratmen. In a small cave-building, hug the left wall passed some barrels, he's in a room by himself with one patrol.",
+  "x": 1708,
+  "y": 1978,
+  "level": "underground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/pakhar",
+  "wikiId": "npc-pakhar",
+  "levels": [
+   40,
+   40
+  ]
+ },
+ {
+  "id": "community-1622",
+  "community": true,
+  "name": "Riki'Tipa",
+  "note": "In a Mar'Hua ratman cave above the Red Mantle Camp / Captain Belvoir. Spawn at a campfire with a cooking pot on it. A Mur'Hua Rebel is the place holder.",
+  "x": 1981,
+  "y": 2732,
+  "level": "underground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/rikitipa",
+  "wikiId": "npc-rikitipa",
+  "levels": [
+   40,
+   40
+  ]
+ },
+ {
+  "id": "community-1623",
+  "community": true,
+  "name": "Ivor Thrym",
+  "note": "Spawns patrolling the broken wall in the middle as soon as you walk up the ramp passed the Elder Plague Drakes but before entering Allistaire the Blacks area. a Plagueborn knight is the place holder.",
+  "x": 2541,
+  "y": 2238,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/ivor-thrym",
+  "wikiId": "npc-ivor-thrym",
+  "levels": [
+   45,
+   45
+  ]
  }
 ]

@@ -1099,5 +1099,34 @@
    17,
    17
   ]
+ },
+ {
+  "id": "community-1600",
+  "community": true,
+  "name": "Wily Rufga",
+  "note": "Inside the tunnel on the upper Canyon layer, take the path to the waterfall. When you enter the tunnel there, take directly tunnel on the right, and then right into the room. She will not trade with you, if you have bad relations.",
+  "x": 2071,
+  "y": 1828,
+  "level": "floor-1",
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/wily-rufga",
+  "wikiId": "npc-wily-rufga"
+ },
+ {
+  "id": "community-1605",
+  "community": true,
+  "name": "A Bloodynose muralist",
+  "note": "Inside the goblin caves across the ravine where the double ladders bridge the ravine.",
+  "x": 2872,
+  "y": 1376,
+  "level": "floor-1",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-bloodynose-muralist",
+  "wikiId": "npc-a-bloodynose-muralist",
+  "levels": [
+   18,
+   18
+  ],
+  "ambush": false
  }
 ]
