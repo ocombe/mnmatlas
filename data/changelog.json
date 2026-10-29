@@ -1,6 +1,14 @@
 {
  "entries": [
   {
+   "date": "2026-10-29",
+   "title": "Night Harbor: the Graveyard",
+   "text": "The rocky mesa between the Arena and the Tannery is now marked as the Night Harbor Graveyard, with its sunken lanes, deep trench and tomb fronts drawn as they stand. The rubble slope under the cliff behind the Tannery is drawn too: it climbs from the street up to the graveyard.",
+   "maps": [
+    "night-harbor"
+   ]
+  },
+  {
    "date": "2026-10-28",
    "title": "Underdocks: the mine tunnels",
    "text": "A new Mine tunnels tab charts the old workings high above the harbour: a great timber frame over the central island and the winding tunnels beyond it. Lift 7 from the Upper city stops there.",
