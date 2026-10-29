@@ -2,7 +2,7 @@
 'use strict';
 window.atlasReview=(()=>{
  const closedKind=r=>r.kind==='report'||r.kind==='feedback';
- const jobNote=value=>/^(Not published:|Approved on sending \(admin\)|Correction made\b)/.test(value||''),authorNote=row=>jobNote(row.review_note)?'':row.review_note||'';
+ const jobNote=value=>/^(Not published:|Published as approved on |Approved on sending \(admin\)|Correction made\b)/.test(value||''),authorNote=row=>jobNote(row.review_note)?'':row.review_note||'';
  const spotReasons={art:'Map drawn wrong',missing:'Something missing',other:'Something else'},topics={idea:'An idea for the atlas',bug:'Something is not working',other:'Something else'};
  const title=r=>r.kind==='feedback'?'Feedback: '+(r.payload?.name||'A message'):r.kind==='report'?'Report: '+(r.target_id==null?spotReasons[r.payload?.reason]||'Something else':r.payload?.name||'A place'):r.payload?.name||'A discovery';
  const decision=(r,status)=>closedKind(r)&&status==='approved'?'resolved':status;
