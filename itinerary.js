@@ -12,9 +12,9 @@
  const state={from:null,to:null,mode:read(MODE_KEY)==='shorter'?'shorter':'safer',options:{},legs:null,error:''};
  const MODES=[['safer','Safer'],['shorter','Shorter']];
  const entry=id=>registry?.maps.find(c=>c.id===id);
- // Directions is in beta: shown only to signed-in contributors (one approved suggestion or more) and admins.
- // Features in beta this visitor can use; the chronicle hides news about the others.
- let beta=false;window.atlasBeta=new Set();
+ // Directions is open to every visitor (2026-10-30; first a beta for contributors). Features in beta this visitor can
+ // use: the chronicle hides news about the others.
+ const beta=true;window.atlasBeta=new Set(['directions']);
  const routable=id=>beta&&!!entry(id)?.routes;
  const mapTitle=id=>entry(id)?.title||id;
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
@@ -604,22 +604,10 @@
  }
  let shared=new URL(location.href).searchParams.get('route');
  // The route in the address is read once at start; from then on syncAddress keeps it in step with the screen.
- // A shared route waits until the account is known to be in the beta.
  async function openShared(){
   if(!shared||!beta)return;const [a,b,mode,settings]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
   if(from&&to){applySettings(settings);state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}
  }
- async function checkBeta(){
-  const c=window.atlasCommunity,uid=c?.userId?.();let ok=false;
-  if(uid)ok=!!c.isAdmin?.()||((await c.points?.())?.points||0)>0;
-  // A local preview of the site always has it, for checking before a publish.
-  if(['localhost','127.0.0.1'].includes(location.hostname))ok=true;
-  if(uid!==window.atlasCommunity?.userId?.()||ok===beta)return;
-  beta=ok;window.atlasBeta=new Set(beta?['directions']:[]);window.dispatchEvent(new Event('atlas:beta'));if(!beta){run++;busy=false;state.from=state.to=null;state.options={};state.legs=null;closeView();}
-  showPanel();draw();openShared();
- }
- window.addEventListener('atlas:account',()=>checkBeta().catch(()=>{}));
- if(['localhost','127.0.0.1'].includes(location.hostname))checkBeta().catch(()=>{});
  window.addEventListener('atlas:loaded',async()=>{
   // Back or Forward to an address with another route opens that one (the address is otherwise kept in step).
   const asked=new URL(location.href).searchParams.get('route');
