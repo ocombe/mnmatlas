@@ -13,6 +13,7 @@ const app = await read('app.js');
 const reviewModel = await read('review-model.js');
 const reviewDesk = await read('review-desk.js');
 const notices = await read('notices.js');
+const messagesView = await read('messages.js');
 
 class Node {
   constructor(tag,value='',cls=''){
@@ -351,7 +352,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
         (!request.filters.user_id||r.user_id===request.filters.user_id)&&(!request.filters.map||
         r.map===request.filters.map)&&
         (!request.since||String(r[request.since.key]||'')>=request.since.value)).slice(request.range?.[0]||
-        0,(request.range?.[1]??999999)+1).map(r=>request.columns?.includes('notice_name:')?Object.fromEntries(request.columns.split(',').map(k=>k==='notice_name:payload->>name'?['notice_name',r.payload?.name]:k==='notice_reason:payload->>reason'?['notice_reason',r.payload?.reason]:[k,r[k]])):r):[]
+        0,(request.range?.[1]??999999)+1).map(r=>request.columns?.includes('suggestion_messages(')?{...r,suggestion_messages:messages.filter(m=>m.suggestion_id===r.id).map(m=>structuredClone(m))}:request.columns?.includes('notice_name:')?Object.fromEntries(request.columns.split(',').map(k=>k==='notice_name:payload->>name'?['notice_name',r.payload?.name]:k==='notice_reason:payload->>reason'?['notice_reason',r.payload?.reason]:[k,r[k]])):r):[]
       };
     }
   }
@@ -745,6 +746,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   const makeDesk=context.window.createReviewDesk;
   context.window.createReviewDesk=hooks=>context.window.testReviewDesk=makeDesk(hooks);
   fixtures.prepare?.(context);
+  vm.runInContext(messagesView,context,{filename:'messages.js'});
   vm.runInContext(notices,context);
   // Expose closures for observation without replacing any production function.
   const observed=fixtures.expose?source.replace(/\}\)\(\);\s*$/, `

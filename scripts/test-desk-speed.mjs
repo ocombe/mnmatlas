@@ -79,7 +79,7 @@ await checks.test('B30','stale approvals still refuse a newer server version',as
  await cardAction(e,'Approve');assert.equal(e.suggestions[0].status,'pending');assert(e.statuses.some(s=>s.startsWith('Changed since you opened it')));assert.equal(c.$('review-name').value,'Changed elsewhere');
 });
 await checks.test('B30','full and incremental reads paginate beyond 500 rows',async()=>{
- const {e,c}=await fixture();for(let i=61;i<=565;i++)e.suggestions.push(suggestion(i,'feedback',{name:'Message '+i,note:'Message',topic:'idea'},{status:'pending',updated_at:'2026-10-20T11:00:00.000Z'}));
+ const {e,c}=await fixture();for(let i=61;i<=565;i++)e.suggestions.push(suggestion(i,'new-marker',{name:'Place '+i,category:'Bank',x:10,y:20},{status:'pending',updated_at:'2026-10-20T11:00:00.000Z'}));
  let start=e.calls.length;await openDesk(e);assert.equal(queueReads(e,start).length,2);await selectRow(e,565);assert.equal(c.window.testReviewDesk.selected.id,565);
  for(const row of e.suggestions)row.updated_at='2028-01-01T00:00:00.000Z';e.suggestions[0].status='published';start=e.calls.length;await c.window.testReviewDesk.refresh();assert.equal(queueReads(e,start).length,2);assert(!c.$('desk-list').querySelectorAll('.desk-item').some(n=>n.dataset.row==='1'));
 });

@@ -42,24 +42,25 @@ async function step(name,run,budget,initial=false){
  console.log('REQUESTS '+JSON.stringify({step:name,...n,data:n.data.length,cache:n.data.map(r=>r.cache)}));
  await checks.test('B31',name,()=>{assert.equal(n.notesWrites,0,'Unchanged notes never write');budget(n);});
 }
-await step('signed-in map load',async()=>{},n=>{assert.equal(n.reads,6);assert.equal(n.writes,0);assert.equal(n.rpcs,0);assert.equal(n.notesReads,1);assert.equal(n.head,1);assert.equal(n.data.length,6);},true);
+// Each sign-in and refresh includes one Messages read (feedback and reports with their conversations embedded).
+await step('signed-in map load',async()=>{},n=>{assert.equal(n.reads,7);assert.equal(n.writes,0);assert.equal(n.rpcs,0);assert.equal(n.notesReads,1);assert.equal(n.head,1);assert.equal(n.data.length,6);},true);
 await checks.test('B31','initial overlapping loads retain other-floor labels',()=>{assert(f.c.window.testCommunity.publishedLabels().some(p=>p.id==='upper-name'));});
 await step('floor switch',()=>f.travel('test-map','upper'),n=>{assert.equal(n.total,0);assert.equal(n.head,0);assert.equal(n.data.length,2);});
 for(const id of ['map-b','map-c'])await step('map switch '+id,()=>f.travel(id),n=>{assert.equal(n.reads,4);assert.equal(n.writes,0);assert.equal(n.rpcs,0);assert.equal(n.head,0);assert.equal(n.data.length,4);});
-for(let i=0;i<3;i++)await step('focus '+(i+1),()=>{f.advance(60000);f.e.emit('blur');f.e.emit('focus');},n=>{assert.equal(n.reads,i?0:4);assert.equal(n.rpcs,0);assert.equal(n.data.length,0);assert.equal(n.head,0);});
+for(let i=0;i<3;i++)await step('focus '+(i+1),()=>{f.advance(60000);f.e.emit('blur');f.e.emit('focus');},n=>{assert.equal(n.reads,i?0:5);assert.equal(n.rpcs,0);assert.equal(n.data.length,0);assert.equal(n.head,0);});
 await step('account menu',()=>f.e.bar.querySelector('.account-button').onclick(),n=>{assert.equal(n.reads,0);assert.equal(n.points,1);});
 await step('bell opens on news',()=>f.e.bar.querySelector('.notices-bell').onclick(),n=>{assert.equal(n.reads,1);assert.equal(n.rpcs,0);});
 await step('Your suggestions uses cached renown',()=>f.c.$('notices-panel').querySelectorAll('button').find(b=>b.textContent==='Your suggestions').onclick(),n=>{assert.equal(n.total,0);assert.equal(f.c.$('notices-panel').querySelector('.notices-footer').querySelector('span').textContent,'3 renown');});
 await checks.test('B31','data readers revalidate; initial and unchanged update checks fetch only HEAD',async()=>{
  assert(f.downloads.filter(r=>r.url.startsWith('data/')&&!r.url.startsWith('data/credits/')).every(r=>r.cache==='no-cache'));
  let start=f.mark();f.advance(15*60000);await f.c.checkForUpdate();await settle();assert.equal(f.counts(start).head,1);assert.equal(f.counts(start).data.length,0);assert.equal(f.counts(start).total,0);
- start=f.mark();f.edition();await f.c.checkForUpdate();await settle();assert.equal(f.counts(start).head,1);assert.equal(f.downloads.slice(start.files).filter(r=>['data/changelog.json','data/publish-log.json'].includes(r.url)).length,2);assert.equal(f.c.$('update-notice').hidden,false);assert.equal(f.counts(start).reads,4);
+ start=f.mark();f.edition();await f.c.checkForUpdate();await settle();assert.equal(f.counts(start).head,1);assert.equal(f.downloads.slice(start.files).filter(r=>['data/changelog.json','data/publish-log.json'].includes(r.url)).length,2);assert.equal(f.c.$('update-notice').hidden,false);assert.equal(f.counts(start).reads,5);
 });
 await checks.test('B31','a focus needs an actual absence and visibility/focus share a five-minute gate',async()=>{
  const f=await fixture();let start=f.mark();f.e.emit('focus');await settle();assert.equal(f.counts(start).total,0);
- f.c.document.hidden=true;f.e.documentEmit('visibilitychange');f.c.document.hidden=false;f.e.documentEmit('visibilitychange');f.e.emit('focus');await settle();assert.equal(f.counts(start).reads,4);
- start=f.mark();f.advance(299999);f.e.emit('blur');f.e.emit('focus');await settle();assert.equal(f.counts(start).total,0);f.advance(1);f.e.emit('focus');await settle();assert.equal(f.counts(start).reads,4);
- start=f.mark();f.c.loading=true;f.advance(300000);f.e.emit('blur');f.e.emit('focus');await settle();assert.equal(f.counts(start).total,0);f.c.loading=false;f.e.emit('focus');await settle();assert.equal(f.counts(start).reads,4);
+ f.c.document.hidden=true;f.e.documentEmit('visibilitychange');f.c.document.hidden=false;f.e.documentEmit('visibilitychange');f.e.emit('focus');await settle();assert.equal(f.counts(start).reads,5);
+ start=f.mark();f.advance(299999);f.e.emit('blur');f.e.emit('focus');await settle();assert.equal(f.counts(start).total,0);f.advance(1);f.e.emit('focus');await settle();assert.equal(f.counts(start).reads,5);
+ start=f.mark();f.c.loading=true;f.advance(300000);f.e.emit('blur');f.e.emit('focus');await settle();assert.equal(f.counts(start).total,0);f.c.loading=false;f.e.emit('focus');await settle();assert.equal(f.counts(start).reads,5);
 });
 await checks.test('B31','renown is lazy, coalesced, expires and clears after an own change',async()=>{
  const f=await fixture(),account=f.e.bar.querySelector('.account-button'),bell=f.e.bar.querySelector('.notices-bell');let start=f.mark();bell.onclick();await settle();assert.equal(f.counts(start).points,0);

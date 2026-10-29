@@ -1,7 +1,7 @@
 -- Conversations on feedback and reports: the sender and the cartographers write back and forth under one item.
 -- Run by hand after schema.sql and spot-feedback.sql; it is safe to run twice.
--- Only the sender of the item and admins read or write its conversation. A cartographer's message lights the sender's
--- notices (the item's updated_at moves); a sender's message on a closed item puts it back in the review queue.
+-- Only the sender of the item and admins read or write its conversation. The site's Messages view lists them;
+-- unread state is kept in each browser.
 begin;
 
 create table if not exists public.suggestion_messages (
@@ -38,20 +38,10 @@ revoke all on function public.prepare_suggestion_message() from public,anon,auth
 drop trigger if exists suggestion_messages_prepare on public.suggestion_messages;
 create trigger suggestion_messages_prepare before insert on public.suggestion_messages for each row execute function public.prepare_suggestion_message();
 
--- Any message moves the item's updated_at (suggestions_updated_at), so the other side sees it as new.
--- A sender writing on an item marked done, fixed or dismissed sends it back to Waiting; reviewed_at is kept,
--- so it cannot be withdrawn and the conversation stays.
-create or replace function public.touch_suggestion_conversation()
-returns trigger language plpgsql security definer set search_path = public as $$
-begin
- update public.suggestions set status=case when not new.from_admin and status in ('resolved','rejected') then 'pending' else status end
-  where id=new.suggestion_id;
- return null;
-end;
-$$;
-revoke all on function public.touch_suggestion_conversation() from public,anon,authenticated;
+-- Messages never touch their item, so a conversation does not change its review state or the version the desk and the
+-- publishing job compare. (An earlier draft did; drop it if present.)
 drop trigger if exists suggestion_messages_touch on public.suggestion_messages;
-create trigger suggestion_messages_touch after insert on public.suggestion_messages for each row execute function public.touch_suggestion_conversation();
+drop function if exists public.touch_suggestion_conversation();
 
 alter table public.suggestion_messages enable row level security;
 drop policy if exists suggestion_messages_read on public.suggestion_messages;
