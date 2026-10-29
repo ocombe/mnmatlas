@@ -91,6 +91,10 @@
     {
       "name": "karnix91",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:community-451": [
@@ -148,6 +152,14 @@
   "label:quite-den": [
     {
       "name": "cideus.",
+      "what": "edited"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
+    },
+    {
+      "name": null,
       "what": "edited"
     }
   ],
@@ -351,6 +363,10 @@
     {
       "name": ".anduri",
       "what": "edited"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:community-1144": [
@@ -363,6 +379,10 @@
     {
       "name": ".anduri",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "moved"
     }
   ],
   "marker:community-1146": [
@@ -429,6 +449,118 @@
     {
       "name": ".anduri",
       "what": "added"
+    }
+  ],
+  "marker:community-1634": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-3": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1637": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1638": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1639": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-39": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1642": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1643": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:community-1644": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:temple-lift": [
+    {
+      "name": ".anduri",
+      "what": "edited"
+    }
+  ],
+  "marker:wiki-43": [
+    {
+      "name": ".anduri",
+      "what": "edited"
+    }
+  ],
+  "marker:community-1647": [
+    {
+      "name": ".anduri",
+      "what": "added"
+    }
+  ],
+  "marker:wiki-4": [
+    {
+      "name": ".anduri",
+      "what": "moved"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
+    }
+  ],
+  "marker:wiki-24": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:wiki-41": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:wiki-42": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:wiki-40": [
+    {
+      "name": ".anduri",
+      "what": "removed"
+    }
+  ],
+  "marker:wiki-45": [
+    {
+      "name": ".anduri",
+      "what": "removed"
     }
   ]
 }

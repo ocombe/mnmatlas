@@ -438,8 +438,8 @@
   "community": true,
   "name": "Sister Elsi",
   "note": "",
-  "x": 3112,
-  "y": 10893,
+  "x": 3231,
+  "y": 10935,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/sister-elsi",
   "wikiId": "npc-sister-elsi",
@@ -603,5 +603,21 @@
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/nadim-al-saraf",
   "wikiId": "npc-nadim-al-saraf"
+ },
+ {
+  "id": "community-1692",
+  "community": true,
+  "name": "Champion of Muurtu",
+  "note": "Spawns in the right hut of the two huts to the right of the ramp going into main fortress entrance",
+  "x": 5454,
+  "y": 1884,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/champion-of-muurtu",
+  "wikiId": "npc-champion-of-muurtu",
+  "levels": [
+   45,
+   45
+  ],
+  "ambush": false
  }
 ]

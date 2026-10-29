@@ -2919,11 +2919,12 @@
     "name": "Darius Brask",
     "category": "Named mob",
     "note": "In the Bends.",
-    "x": 2169,
-    "y": 1707,
-    "approximate": true,
+    "x": 2188,
+    "y": 1753,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/darius-brask",
-    "wikiId": "npc-darius-brask"
+    "wikiId": "npc-darius-brask",
+    "community": true
   },
   {
     "id": "wanted-eamon-kassir",
@@ -2956,11 +2957,12 @@
     "name": "Vikar Brask",
     "category": "Named mob",
     "note": "In the Bends.",
-    "x": 2169,
-    "y": 1651,
-    "approximate": true,
+    "x": 2158,
+    "y": 1770,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/vikar-brask",
-    "wikiId": "npc-vikar-brask"
+    "wikiId": "npc-vikar-brask",
+    "community": true
   },
   {
     "id": "wanted-adimah-starseeker",
@@ -3430,5 +3432,28 @@
     "category": "Vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/leatherworking-supplies",
     "wikiId": "npc-leatherworking-supplies"
+  },
+  {
+    "id": "community-1628",
+    "community": true,
+    "name": "Master Shipwright Huda",
+    "note": "",
+    "x": 1986,
+    "y": 1806,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/master-shipwright-huda",
+    "wikiId": "npc-master-shipwright-huda"
+  },
+  {
+    "id": "community-1629",
+    "community": true,
+    "name": "Lurinda Steele",
+    "note": "",
+    "x": 900,
+    "y": 1675,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/lurinda-steele",
+    "wikiId": "npc-lurinda-steele",
+    "quests": true
   }
 ]

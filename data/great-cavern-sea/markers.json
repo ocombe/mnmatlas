@@ -722,7 +722,7 @@
   "id": "community-1603",
   "community": true,
   "name": "Waterfall",
-  "note": "You can swim up the waterfall to an unfinished area",
+  "note": "You can swim up the waterfall",
   "x": 6170,
   "y": 6351,
   "category": "Passage",
@@ -733,7 +733,7 @@
   "id": "community-1604",
   "community": true,
   "name": "Ysmara Velgarrith",
-  "note": "The area and the quest are unfinished",
+  "note": "",
   "x": 6493,
   "y": 6380,
   "category": "Quest NPC"

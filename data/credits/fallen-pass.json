@@ -85,6 +85,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "captus86_64849",
+      "what": "moved"
     }
   ],
   "marker:community-676": [
@@ -465,6 +469,34 @@
     {
       "name": "neverrooks",
       "what": "added"
+    }
+  ],
+  "marker:community-1677": [
+    {
+      "name": "liki_weaks",
+      "what": "added"
+    }
+  ],
+  "marker:undead-lt20-1": [
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:undead-lt20-2": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:undead-lt20-3": [
+    {
+      "name": null,
+      "what": "edited"
     }
   ]
 }

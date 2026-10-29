@@ -190,13 +190,14 @@
   "id": "mine-notables",
   "name": "Servator Vakraar",
   "category": "Named mob",
-  "x": 2738,
-  "y": 6280,
-  "approximate": true,
+  "x": 2460,
+  "y": 6298,
+  "approximate": false,
   "note": "At the orc camps and cave of the Copper Mine.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/servarator-vakraar",
-  "wikiId": "npc-servarator-vakraar"
+  "wikiId": "npc-servarator-vakraar",
+  "community": true
  },
  {
   "id": "mine-notables-a-dustrend-kennel-master",

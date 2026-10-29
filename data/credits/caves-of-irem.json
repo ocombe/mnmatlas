@@ -15,6 +15,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-761": [
@@ -129,6 +133,10 @@
     {
       "name": "smigss_nightshade",
       "what": "added"
+    },
+    {
+      "name": "sekai777",
+      "what": "edited"
     }
   ],
   "marker:community-1429": [
@@ -180,6 +188,24 @@
   "marker:community-1589": [
     {
       "name": "ventsonge",
+      "what": "added"
+    }
+  ],
+  "marker:community-1631": [
+    {
+      "name": "sekai777",
+      "what": "added"
+    }
+  ],
+  "marker:community-1658": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1659": [
+    {
+      "name": "darkhayn",
       "what": "added"
     }
   ]

@@ -1140,5 +1140,31 @@
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/meluli-dawnglow",
   "wikiId": "npc-meluli-dawnglow"
+ },
+ {
+  "id": "community-1661",
+  "community": true,
+  "name": "Fishing",
+  "note": "",
+  "x": 1588,
+  "y": 2593,
+  "category": "Fishing spot",
+  "fish": [
+   {
+    "name": "Whitefish",
+    "wiki": "https://monstersandmemories.wiki/items/whitefish",
+    "wikiId": "item-whitefish"
+   },
+   {
+    "name": "Basa",
+    "wiki": "https://monstersandmemories.wiki/items/basa",
+    "wikiId": "item-basa"
+   },
+   {
+    "name": "Grouper",
+    "wiki": "https://monstersandmemories.wiki/items/grouper",
+    "wikiId": "item-grouper"
+   }
+  ]
  }
 ]

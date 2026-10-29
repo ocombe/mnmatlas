@@ -102,14 +102,14 @@
     {
       "id": "quite-den",
       "name": "Quiet Den",
-      "x": 2144,
-      "y": 1062,
+      "x": 2031,
+      "y": 1103,
       "kind": "building",
       "tier": "building",
       "priority": 50,
       "minZoom": 0,
       "approximate": true,
-      "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+      "note": "",
       "community": true
     },
     {
@@ -238,27 +238,18 @@
     },
     {
       "abbreviations": [
-        "RNG"
-      ],
-      "classes": [
-        "Ranger"
-      ],
-      "building": "Ranger's Rest",
-      "id": "wiki-3",
-      "x": 1808,
-      "y": 1176
-    },
-    {
-      "abbreviations": [
         "BST"
       ],
       "classes": [
-        "Beastlord"
+        "Beastmaster"
       ],
       "building": "Quite Den",
       "id": "wiki-4",
-      "x": 2124,
-      "y": 1112
+      "x": 2099,
+      "y": 1113,
+      "approximate": false,
+      "name": "a beastmaster instructor",
+      "note": "sells Beastmaster skills"
     },
     {
       "abbreviations": [

@@ -27,28 +27,17 @@
   "community": true
  },
  {
-  "id": "wiki-3",
-  "name": "Ranger — Ranger's Rest",
-  "category": "Class trainer",
-  "x": 1808,
-  "y": 1176,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
-  "classes": [
-   "Ranger"
-  ]
- },
- {
   "id": "wiki-4",
-  "name": "Beastlord — Quite Den",
+  "name": "a beastmaster instructor",
   "category": "Class trainer",
-  "x": 2124,
-  "y": 1112,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+  "x": 2099,
+  "y": 1113,
+  "approximate": false,
+  "note": "sells Beastmaster skills",
   "classes": [
-   "Beastlord"
-  ]
+   "Beastmaster"
+  ],
+  "community": true
  },
  {
   "id": "wiki-5",
@@ -100,15 +89,6 @@
   "category": "Inn",
   "x": 1610,
   "y": 1454,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
-  "id": "wiki-24",
-  "name": "Spinning — Trader's Terrace",
-  "category": "Tradeskill",
-  "x": 1474.97,
-  "y": 990.57,
   "approximate": true,
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
@@ -209,57 +189,25 @@
   "id": "wiki-38",
   "name": "Fletcher Merafyn",
   "category": "Tradeskill",
-  "x": 1842.31,
-  "y": 1098.5,
-  "approximate": true,
+  "x": 1801,
+  "y": 1120,
+  "approximate": false,
   "note": "",
   "trade": "Fletching",
   "community": true
  },
  {
-  "id": "wiki-39",
-  "name": "Survival — Ranger's Rest",
-  "category": "Tradeskill",
-  "x": 1888.57,
-  "y": 1264.49,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
-  "id": "wiki-40",
-  "name": "Farming — Ranger's Rest",
-  "category": "Tradeskill",
-  "x": 1997.42,
-  "y": 1249.98,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
-  "id": "wiki-41",
-  "name": "Mining — Ranger's Rest",
-  "category": "Tradeskill",
-  "x": 1957.51,
-  "y": 1318,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
-  "id": "wiki-42",
-  "name": "Stone Cutting — Ranger's Rest",
-  "category": "Tradeskill",
-  "x": 1994.69,
-  "y": 1332.52,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
   "id": "wiki-43",
-  "name": "Animal Taming — Quite Den",
-  "category": "Tradeskill",
+  "name": "Aerin Mossfang",
+  "category": "Class trainer",
   "x": 2023.72,
   "y": 1154.74,
   "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
+  "note": "",
+  "classes": [
+   "Beastmaster"
+  ],
+  "community": true
  },
  {
   "id": "wiki-44",
@@ -267,15 +215,6 @@
   "category": "Tradeskill",
   "x": 2188.8,
   "y": 1173.79,
-  "approximate": true,
-  "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
- },
- {
-  "id": "wiki-45",
-  "name": "Lumberjacking — Quite Den",
-  "category": "Tradeskill",
-  "x": 2300.36,
-  "y": 1111.2,
   "approximate": true,
   "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0)."
  },
@@ -422,10 +361,11 @@
   "id": "temple-lift",
   "name": "Temple Lift",
   "category": "Lift",
-  "x": 1542,
-  "y": 942,
+  "x": 1539,
+  "y": 966,
   "approximate": true,
-  "note": "Named lift on Maggot's map. Upper landing unconfirmed; no view-switch arrow."
+  "note": "Lift not operational - awaiting upper levels/housing added to Faelindral",
+  "community": true
  },
  {
   "id": "community-317",
@@ -560,8 +500,8 @@
   "name": "Baewyn Mossfang",
   "category": "Quest NPC",
   "note": "",
-  "x": 2122,
-  "y": 1063,
+  "x": 2134,
+  "y": 1133,
   "wiki": "https://monstersandmemories.wiki/npcs/baewyn-mossfang",
   "wikiId": "npc-baewyn-mossfang"
  },
@@ -838,8 +778,8 @@
   "community": true,
   "name": "Captain Relgen Greenblade",
   "note": "",
-  "x": 1755,
-  "y": 1025,
+  "x": 1706,
+  "y": 1048,
   "category": "Quest NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/captain-relgen-greenblade",
   "wikiId": "npc-captain-relgen-greenblade"
@@ -936,5 +876,88 @@
   "category": "Notable NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/sylphrena-starfall",
   "wikiId": "npc-sylphrena-starfall"
+ },
+ {
+  "id": "community-1634",
+  "community": true,
+  "name": "a ranger instructor",
+  "note": "sells Ranger spells",
+  "x": 1777,
+  "y": 1028,
+  "category": "Class trainer",
+  "classes": [
+   "Ranger"
+  ]
+ },
+ {
+  "id": "community-1637",
+  "community": true,
+  "name": "a bowyer",
+  "note": "",
+  "x": 1846,
+  "y": 1050,
+  "category": "Vendor",
+  "vendor": "Bowyer",
+  "sells": [
+   "Ammo",
+   "Recipes",
+   "Weapons"
+  ]
+ },
+ {
+  "id": "community-1638",
+  "community": true,
+  "name": "Burch Windbreeze",
+  "note": "",
+  "x": 1846,
+  "y": 1061,
+  "category": "Notable NPC"
+ },
+ {
+  "id": "community-1639",
+  "community": true,
+  "name": "Survivalist Eiryn",
+  "note": "Survival trainer",
+  "x": 1865,
+  "y": 1268,
+  "category": "Tradeskill",
+  "trade": "Survival"
+ },
+ {
+  "id": "community-1642",
+  "community": true,
+  "name": "a tracker",
+  "note": "Tracking vendor - not implemented in game yet\nLocated on the top level above Ranger's Rest",
+  "x": 1686,
+  "y": 1037,
+  "category": "Notable NPC"
+ },
+ {
+  "id": "community-1643",
+  "community": true,
+  "name": "a survivalist",
+  "note": "On the top level above the Rangers Rest",
+  "x": 1681,
+  "y": 1203,
+  "category": "Vendor",
+  "vendor": "Survival vendor"
+ },
+ {
+  "id": "community-1644",
+  "community": true,
+  "name": "Tracker Zerys",
+  "note": "Tracking Trainer - not implemented in game yet\nLocated on the top level above the Ranger's Rest",
+  "x": 1697,
+  "y": 1097,
+  "category": "Notable NPC"
+ },
+ {
+  "id": "community-1647",
+  "community": true,
+  "name": "Handler Duskglint",
+  "note": "Beastmaster pet handler",
+  "x": 2049,
+  "y": 1123,
+  "category": "Notable NPC"
  }
 ]

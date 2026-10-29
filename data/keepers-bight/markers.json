@@ -390,10 +390,11 @@
   "x": 2706,
   "y": 6574,
   "minZoom": 3,
-  "approximate": true,
+  "approximate": false,
   "note": "In the Orc Cave.",
   "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
-  "wikiId": "npc-belthakar-dunecaller"
+  "wikiId": "npc-belthakar-dunecaller",
+  "community": true
  },
  {
   "id": "orc-cave-named-rarthan-wartide",
@@ -406,10 +407,11 @@
   "x": 2728,
   "y": 6574,
   "minZoom": 3,
-  "approximate": true,
+  "approximate": false,
   "note": "In the Orc Cave.",
   "wiki": "https://monstersandmemories.wiki/npcs/rarthan-wartide",
-  "wikiId": "npc-rarthan-wartide"
+  "wikiId": "npc-rarthan-wartide",
+  "community": true
  },
  {
   "id": "brukk-goldgut",

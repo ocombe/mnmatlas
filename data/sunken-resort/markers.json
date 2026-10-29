@@ -176,5 +176,22 @@
     "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/echo-of-the-unfinished",
     "wikiId": "npc-echo-of-the-unfinished"
+  },
+  {
+    "id": "community-1691",
+    "community": true,
+    "name": "Vesryn the Unmoored",
+    "note": "Near entrance",
+    "x": 1918,
+    "y": 1489,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/vesryn-the-unmoored",
+    "wikiId": "npc-vesryn-the-unmoored",
+    "levels": [
+      35,
+      35
+    ],
+    "ambush": false
   }
 ]

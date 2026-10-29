@@ -70,5 +70,11 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:mine-notables": [
+    {
+      "name": "liki_weaks",
+      "what": "moved"
+    }
   ]
 }

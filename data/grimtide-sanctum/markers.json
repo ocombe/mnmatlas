@@ -150,5 +150,21 @@
       50,
       50
     ]
+  },
+  {
+    "id": "community-1698",
+    "community": true,
+    "name": "Braggla the Spawnkeeper",
+    "note": "Spawns in the room with the statue.",
+    "x": 3492,
+    "y": 3003,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/braggla-the-spawnkeeper",
+    "wikiId": "npc-braggla-the-spawnkeeper",
+    "levels": [
+      50,
+      50
+    ]
   }
 ]

@@ -1139,6 +1139,10 @@
     {
       "name": "msisepleld",
       "what": "added"
+    },
+    {
+      "name": "msisepleld",
+      "what": "reshaped"
     }
   ],
   "marker:community-1398": [
@@ -1197,6 +1201,42 @@
     {
       "name": null,
       "what": "moved"
+    }
+  ],
+  "marker:community-1666": [
+    {
+      "name": "msisepleld",
+      "what": "added"
+    }
+  ],
+  "marker:community-1667": [
+    {
+      "name": "msisepleld",
+      "what": "added"
+    }
+  ],
+  "marker:community-1680": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1681": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1682": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1683": [
+    {
+      "name": "nobbynoblittlun",
+      "what": "added"
     }
   ]
 }

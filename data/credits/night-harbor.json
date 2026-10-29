@@ -1554,5 +1554,29 @@
       "name": "seridaq",
       "what": "moved"
     }
+  ],
+  "marker:community-1628": [
+    {
+      "name": "liki_weaks",
+      "what": "added"
+    }
+  ],
+  "marker:community-1629": [
+    {
+      "name": "liki_weaks",
+      "what": "added"
+    }
+  ],
+  "marker:wanted-darius-brask": [
+    {
+      "name": "sting_operation",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-vikar-brask": [
+    {
+      "name": "sting_operation",
+      "what": "moved"
+    }
   ]
 }

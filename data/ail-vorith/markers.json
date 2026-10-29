@@ -2454,8 +2454,8 @@
     "community": true,
     "name": "Cult of Shorog",
     "note": "Faction area of mobs for \"Cult of Shorog\". Contains high level spider camps.",
-    "x": 4683,
-    "y": 1327,
+    "x": 4662,
+    "y": 1336,
     "category": "Mob camp",
     "levels": [
       26,
@@ -2601,10 +2601,6 @@
         [
           4681,
           1337
-        ],
-        [
-          5152,
-          1003
         ],
         [
           4738,
@@ -3059,5 +3055,238 @@
     "toMarker": "fq-tunnels-west-city",
     "direction": "up",
     "switchOnClick": true
+  },
+  {
+    "id": "community-1666",
+    "community": true,
+    "name": "Spiders of Shorog: Widow camp",
+    "note": "High level Spiders of Shorog with a named Soulstitch. The camp is up top as high as you can go without going over the bridge.",
+    "x": 4533,
+    "y": 827,
+    "level": "city",
+    "category": "Mob camp",
+    "levels": [
+      28,
+      31
+    ],
+    "mobs": [
+      {
+        "name": "a dark widow",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-dark-widow",
+        "wikiId": "npc-a-dark-widow"
+      },
+      {
+        "name": "a venerated spider",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-venerated-spider",
+        "wikiId": "npc-a-venerated-spider"
+      },
+      {
+        "name": "Soulstitch"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          4345,
+          804
+        ],
+        [
+          4405,
+          835
+        ],
+        [
+          4508,
+          877
+        ],
+        [
+          4528,
+          865
+        ],
+        [
+          4577,
+          908
+        ],
+        [
+          4632,
+          930
+        ],
+        [
+          4684,
+          948
+        ],
+        [
+          4732,
+          906
+        ],
+        [
+          4678,
+          843
+        ],
+        [
+          4597,
+          784
+        ],
+        [
+          4384,
+          710
+        ],
+        [
+          4357,
+          756
+        ]
+      ]
+    }
+  },
+  {
+    "id": "community-1667",
+    "community": true,
+    "name": "Soulstitch",
+    "note": "Soulstitch is a named spider of Shorog.",
+    "x": 4667,
+    "y": 906,
+    "level": "city",
+    "category": "Named mob",
+    "levels": [
+      31,
+      31
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1680",
+    "community": true,
+    "name": "Baron Mhyrlus",
+    "note": "Cons red to a lv 34",
+    "x": 2255,
+    "y": 4256,
+    "level": "city",
+    "category": "Named mob",
+    "ambush": false
+  },
+  {
+    "id": "community-1681",
+    "community": true,
+    "name": "Ail'trists",
+    "note": "High level Ail'trist area.  Cons red to lv 34.  Disdain to me and not sure what faction they are.",
+    "x": 2270,
+    "y": 4931,
+    "level": "city",
+    "category": "Mob camp"
+  },
+  {
+    "id": "community-1682",
+    "community": true,
+    "name": "fungoids",
+    "note": "Dark Green and Light blue to a lv 34",
+    "x": 1520,
+    "y": 3362,
+    "level": "city",
+    "category": "Mob camp",
+    "levels": [
+      28,
+      32
+    ]
+  },
+  {
+    "id": "community-1683",
+    "community": true,
+    "name": "Oozes",
+    "note": "\"an ooze researcher\" not yet in wiki",
+    "x": 2284,
+    "y": 2171,
+    "level": "city",
+    "category": "Mob camp",
+    "levels": [
+      9,
+      11
+    ],
+    "mobs": [
+      {
+        "name": "A synthetic ooze",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-synthetic-ooze",
+        "wikiId": "npc-1790076517193-692gw"
+      },
+      {
+        "name": "A failed experiment",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-failed-experiment",
+        "wikiId": "npc-1790076503903-3d4e0"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          2886,
+          1377
+        ],
+        [
+          2895,
+          1440
+        ],
+        [
+          2936,
+          1575
+        ],
+        [
+          2846,
+          1647
+        ],
+        [
+          2620,
+          1686
+        ],
+        [
+          2531,
+          1913
+        ],
+        [
+          2349,
+          2049
+        ],
+        [
+          2250,
+          2219
+        ],
+        [
+          2236,
+          2536
+        ],
+        [
+          2133,
+          2800
+        ],
+        [
+          1904,
+          2783
+        ],
+        [
+          1950,
+          2360
+        ],
+        [
+          2126,
+          2158
+        ],
+        [
+          2235,
+          1867
+        ],
+        [
+          2377,
+          1816
+        ],
+        [
+          2615,
+          1664
+        ],
+        [
+          2732,
+          1499
+        ]
+      ]
+    }
   }
 ]

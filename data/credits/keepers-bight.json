@@ -226,5 +226,17 @@
       "name": "shifty.9724",
       "what": "added"
     }
+  ],
+  "marker:orc-cave-named": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:orc-cave-named-rarthan-wartide": [
+    {
+      "name": null,
+      "what": "moved"
+    }
   ]
 }

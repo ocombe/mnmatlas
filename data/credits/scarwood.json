@@ -34,5 +34,17 @@
       "name": null,
       "what": "removed"
     }
+  ],
+  "marker:community-1678": [
+    {
+      "name": "erncollects",
+      "what": "added"
+    }
+  ],
+  "marker:community-1679": [
+    {
+      "name": "erncollects",
+      "what": "added"
+    }
   ]
 }

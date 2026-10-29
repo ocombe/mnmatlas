@@ -160,7 +160,7 @@
   "name": "Undead",
   "category": "Mob camp",
   "levels": [
-   1,
+   16,
    19
   ],
   "x": 2663,
@@ -168,7 +168,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "level": "ground"
+  "level": "ground",
+  "community": true
  },
  {
   "id": "bugs-21-25-1",
@@ -221,7 +222,7 @@
   "name": "Undead",
   "category": "Mob camp",
   "levels": [
-   1,
+   16,
    19
   ],
   "x": 3026,
@@ -229,7 +230,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "level": "ground"
+  "level": "ground",
+  "community": true
  },
  {
   "id": "bugs-21-25-2",
@@ -277,7 +279,7 @@
   "name": "Undead",
   "category": "Mob camp",
   "levels": [
-   1,
+   16,
    19
   ],
   "x": 3143,
@@ -285,7 +287,8 @@
   "approximate": true,
   "note": "",
   "minZoom": 2,
-  "level": "ground"
+  "level": "ground",
+  "community": true
  },
  {
   "id": "undead-31-40-5",
@@ -1963,6 +1966,22 @@
   "levels": [
    45,
    45
+  ]
+ },
+ {
+  "id": "community-1677",
+  "community": true,
+  "name": "Jokan'Daru",
+  "note": "Spawns in small ravine, in a cluster of 3 Skri'Var taskmasters next to a small hut",
+  "x": 2121,
+  "y": 2703,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/jokandaru",
+  "wikiId": "npc-jokandaru",
+  "levels": [
+   41,
+   41
   ]
  }
 ]

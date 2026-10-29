@@ -14,12 +14,17 @@
     "id": "community-757",
     "community": true,
     "name": "Swarmcaller Skarr'Vokk",
-    "category": "Notable NPC",
+    "category": "Named mob",
     "note": "Spawns in and around the tents on the island",
     "x": 3577,
     "y": 3339,
     "wiki": "https://monstersandmemories.wiki/npcs/swarmcaller-skarrvokk",
-    "wikiId": "npc-swarmcaller-skarrvokk"
+    "wikiId": "npc-swarmcaller-skarrvokk",
+    "levels": [
+      24,
+      24
+    ],
+    "ambush": false
   },
   {
     "id": "community-761",
@@ -260,7 +265,7 @@
     "id": "community-1428",
     "community": true,
     "name": "Nurabek Brinehand",
-    "note": "Named Giant of Old Irem.  Unsure if spawn is only this location and if there is a PH.",
+    "note": "Named Giant of Old Irem.  Spawns 100% of the time, about every 2 and a half hours, with no PH.",
     "x": 6221,
     "y": 6128,
     "category": "Named mob",
@@ -268,7 +273,8 @@
       35,
       35
     ],
-    "ambush": false
+    "ambush": false,
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Nurabek_Brinehand"
   },
   {
     "id": "community-1429",
@@ -763,5 +769,85 @@
     "wiki": "https://monstersandmemories.wiki/npcs/highblade",
     "wikiId": "npc-highblade",
     "ambush": false
+  },
+  {
+    "id": "community-1631",
+    "community": true,
+    "name": "Firstborn",
+    "note": "Level 25-ish bat across the lake from Nurabek Brinehand",
+    "x": 6047,
+    "y": 7232,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Firstborn",
+    "levels": [
+      25,
+      25
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1658",
+    "community": true,
+    "name": "Skri'Var camp",
+    "note": "",
+    "x": 3587,
+    "y": 3294,
+    "category": "Mob camp",
+    "levels": [
+      22,
+      24
+    ],
+    "mobs": [
+      {
+        "name": "a Skri'Var pillager",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-pillager",
+        "wikiId": "npc-a-skri-var-pillager"
+      },
+      {
+        "name": "a Skri'Var Ritualist",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-ritualist",
+        "wikiId": "npc-a-skri-var-ritualist"
+      },
+      {
+        "name": "a Skri'Var tracker"
+      },
+      {
+        "name": "a Skri'Var taskmaster"
+      },
+      {
+        "name": "a Skri'Var slicer"
+      }
+    ]
+  },
+  {
+    "id": "community-1659",
+    "community": true,
+    "name": "Skri'Var camp",
+    "note": "",
+    "x": 2515,
+    "y": 3294,
+    "category": "Mob camp",
+    "levels": [
+      22,
+      24
+    ],
+    "mobs": [
+      {
+        "name": "a Skri'Var pillager",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-pillager",
+        "wikiId": "npc-a-skri-var-pillager"
+      },
+      {
+        "name": "a Skri'Var Ritualist",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-ritualist",
+        "wikiId": "npc-a-skri-var-ritualist"
+      },
+      {
+        "name": "a Skri'Var taskmaster"
+      },
+      {
+        "name": "a Skri'Var tracker"
+      }
+    ]
   }
 ]

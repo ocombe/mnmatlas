@@ -1,421 +1,5 @@
 [
   {
-    "at": "2026-10-21T07:39:49.749Z",
-    "rows": [
-      {
-        "id": 1028,
-        "payloadHash": "a814f7ebc07c89312d75917008abb4f8271713a0fcc035006e2ed9a6fc8ffb39",
-        "updatedAt": "2026-10-21T07:35:32.750366+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-471",
-          "payload": {
-            "from": {
-              "name": "Daegolar the Pauper",
-              "note": "Talk to him at Level 1 to become Solo Self found.",
-              "sells": null,
-              "trade": null,
-              "vendor": null,
-              "classes": null,
-              "category": "Notable NPC"
-            },
-            "name": "Daegolar the Pauper",
-            "note": "Talk to him at Level 1 to activate the Solo Self found ruleset.",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1029,
-        "payloadHash": "f0ab5d3c06fcaf36fffb414a0a74d0b36790754a2704ff755f3ea7e9a11db952",
-        "updatedAt": "2026-10-21T07:35:38.261231+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1829,
-            "y": 2509,
-            "name": "Magnificent Yelmyarr",
-            "note": "Talk to him at Level 1 to activate the hardcore ruleset.",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1030,
-        "payloadHash": "9e9ebbdfebb7367ec7ccc25cb65f75c6b2a707a6db914dc86d77f47a9be78b33",
-        "updatedAt": "2026-10-21T07:36:22.5659+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "move-label",
-          "target_id": "to-keepers-bight",
-          "payload": {
-            "to": [
-              2807,
-              3862
-            ],
-            "from": [
-              2475,
-              3811
-            ],
-            "name": "to Keeper's Bight"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1032,
-        "payloadHash": "145727bf3bdff07bb9b4851ce20b731a20da380156d36203c930e82787731a2a",
-        "updatedAt": "2026-10-21T07:37:09.944156+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "maggot-npc-09",
-          "payload": {
-            "from": {
-              "name": "Notable NPC — Lower Tier south platform",
-              "note": "Notable NPC symbol on Maggot's Faelindral map. The map does not give the NPC's name.",
-              "sells": null,
-              "trade": null,
-              "vendor": null,
-              "classes": null,
-              "category": "Notable NPC"
-            },
-            "name": "Lorinthal Skybranch",
-            "note": "For Bard Starter quest",
-            "category": "Quest NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1033,
-        "payloadHash": "33eb3c1283c9e3c37c16245b2f527e41f3b6a01ffad39ac4c6183215d633d379",
-        "updatedAt": "2026-10-21T07:37:17.309446+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "maggot-npc-09",
-          "payload": {
-            "to": [
-              1328,
-              2501
-            ],
-            "from": [
-              1282,
-              2495
-            ],
-            "name": "Notable NPC — Lower Tier south platform"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1034,
-        "payloadHash": "16d1072a695a22923e121f06a9faab87466d1bd4a987164014879a5b480f3b1b",
-        "updatedAt": "2026-10-21T07:36:36.576195+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-420",
-          "payload": {
-            "to": [
-              3848,
-              2549
-            ],
-            "from": [
-              3451,
-              3265
-            ],
-            "name": "Scout Leader Krindor (level 6)"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1035,
-        "payloadHash": "009fe529d2c30d725a03f766daf7ca64442d871892a5296697e62ac0d8b3fc85",
-        "updatedAt": "2026-10-21T07:36:51.140938+00:00",
-        "version": {
-          "map": "evershade-weald",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3507,
-            "y": 3259,
-            "name": "Muleda Murktoe (level 13)",
-            "note": "Spawned as part of Druid starter quest at the moss circle here.",
-            "wiki": "https://monstersandmemories.wiki/npcs/muleda-murktoe",
-            "bounty": "npc-muleda-murktoe",
-            "levels": [
-              13,
-              13
-            ],
-            "quests": true,
-            "wikiId": "npc-muleda-murktoe",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1038,
-        "payloadHash": "c68639c549965363ac839b4d2cb3c788311ffa87a24d18c5ffbc4c3445695437",
-        "updatedAt": "2026-10-21T07:39:30.08476+00:00",
-        "version": {
-          "map": "great-cavern-sea",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-704",
-          "payload": {
-            "from": {
-              "x": 5134,
-              "y": 4418,
-              "mobs": [],
-              "name": "A Fire Elemental",
-              "note": "Red at 17",
-              "category": "Mob camp"
-            },
-            "name": "A Fire Elemental",
-            "note": "Red at 27"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1039,
-        "payloadHash": "d6d161c681e89bec0b77e6c3008cc2a29867797f69936058d22d236b8d4a0dd2",
-        "updatedAt": "2026-10-21T07:37:44.429761+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3031,
-            "y": 2104,
-            "name": "Steward Grimaldi",
-            "note": "Lower Saman",
-            "wiki": "https://monstersandmemories.wiki/npcs/steward-grimaldi",
-            "bounty": "npc-steward-grimaldi",
-            "levels": [
-              55,
-              55
-            ],
-            "wikiId": "npc-steward-grimaldi",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1040,
-        "payloadHash": "70f6c1f2784c762e48c425a851793311c17ebb0313949648e9401379c8ef6a74",
-        "updatedAt": "2026-10-21T07:37:54.307883+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2834,
-            "y": 1927,
-            "name": "Yvette Gardener",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/yvette-gardener",
-            "bounty": "npc-yvette-gardener",
-            "levels": [
-              52,
-              52
-            ],
-            "wikiId": "npc-yvette-gardener",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1041,
-        "payloadHash": "075aadad3c2bcf7e30f10e753c5ca6a7e61a9cde8e2765388a578f58a7b794e1",
-        "updatedAt": "2026-10-21T07:38:03.536507+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2995,
-            "y": 2001,
-            "name": "Handmaiden Mira",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/handmaiden-mira",
-            "bounty": "npc-handmaiden-mira",
-            "levels": [
-              52,
-              52
-            ],
-            "wikiId": "npc-handmaiden-mira",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1042,
-        "payloadHash": "04f87fa355e5ae2e0976f436baaec57146aa6902caedcd956c3ac97cf56e7967",
-        "updatedAt": "2026-10-21T07:38:14.108047+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 676,
-            "y": 1671,
-            "name": "Demeter Stollen",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/demeter-stollen",
-            "bounty": "npc-demeter-stollen",
-            "wikiId": "npc-demeter-stollen",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1065,
-        "payloadHash": "7599b06536a16b486e5838da2cc24656254aaa408806e5c81871020a429c8f11",
-        "updatedAt": "2026-10-21T07:38:23.990112+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-805",
-          "payload": {
-            "to": [
-              1124,
-              2678
-            ],
-            "from": [
-              1877,
-              1212
-            ],
-            "name": "Tora'Galdo (level 38)"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1066,
-        "payloadHash": "bc17dffe832af695ee7b0b52ed71e3b26f17bd5b7af714dd5ddb875b0aa2eb93",
-        "updatedAt": "2026-10-21T07:39:01.052169+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "ratkin-31-40-1",
-          "payload": {
-            "to": [
-              1120,
-              2406
-            ],
-            "from": [
-              1791,
-              1167
-            ],
-            "name": "Ratkin"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1068,
-        "payloadHash": "d59760f8e5b5c4d115c6de70d1e384fa7b8e6662f1835e20a5ac966cbc974b28",
-        "updatedAt": "2026-10-21T07:39:09.818904+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "move-label",
-          "target_id": "smugglers-caves",
-          "payload": {
-            "to": [
-              1906,
-              3048
-            ],
-            "from": [
-              2176,
-              2957
-            ],
-            "name": "Smugglers Caves"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1069,
-        "payloadHash": "5b8dccf220df8dc74bad47d2cc2d3971282d45f6e3ff46589b3b378cf261720b",
-        "updatedAt": "2026-10-21T07:39:15.119831+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-988",
-          "payload": {
-            "to": [
-              1854,
-              2910
-            ],
-            "from": [
-              2082,
-              2920
-            ],
-            "name": "Sivah Arjun (level 32)"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1096,
-        "payloadHash": "253330c51ff0a515f2f1a8b7c479e0bc3f377630ed8b2ac7aa3375191e19ad36",
-        "updatedAt": "2026-10-21T07:38:24.574197+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-805",
-          "payload": {
-            "from": {
-              "x": 1124,
-              "y": 2678,
-              "name": "Tora'Galdo (level 38)",
-              "note": "",
-              "wiki": "https://monstersandmemories.wiki/npcs/toragaldo",
-              "levels": [
-                38,
-                38
-              ],
-              "wikiId": "npc-toragaldo",
-              "category": "Named mob"
-            },
-            "name": "Tora'Galdo"
-          },
-          "credit": false
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-21T12:03:29.027Z",
     "rows": [
       {
@@ -14040,6 +13624,2561 @@
               2047
             ],
             "name": "Taskmaster Nor'Tap"
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-29T08:48:02.722Z",
+    "rows": [
+      {
+        "id": 1628,
+        "payloadHash": "bb3f8980d253a7797c0d2e74ec2cf05384c91773fd85b2231e7d4263edc27235",
+        "updatedAt": "2026-10-29T08:26:19.835351+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1986,
+            "y": 1806,
+            "name": "Master Shipwright Huda",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/master-shipwright-huda",
+            "bounty": "npc-master-shipwright-huda",
+            "wikiId": "npc-master-shipwright-huda",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1629,
+        "payloadHash": "6f6e9b14e0064cc1531ba9a9ad091a29769f033a79c9ad744c6b953da1272cc8",
+        "updatedAt": "2026-10-29T08:26:28.414086+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 900,
+            "y": 1675,
+            "name": "Lurinda Steele",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/lurinda-steele",
+            "bounty": "npc-lurinda-steele",
+            "quests": true,
+            "wikiId": "npc-lurinda-steele",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1630,
+        "payloadHash": "b3db68f5054c70fc7049117d2b74b1252007c378ec687ea8e7e354f7628609ac",
+        "updatedAt": "2026-10-29T08:27:45.385404+00:00",
+        "version": {
+          "map": "vale-of-zintar",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "mine-notables",
+          "payload": {
+            "to": [
+              2460,
+              6298
+            ],
+            "from": [
+              2738,
+              6280
+            ],
+            "name": "Servator Vakraar",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1631,
+        "payloadHash": "e4f6b906ec42f0c30b0f4eabba2ec2606407d596f0ed11753d9ea75525d71720",
+        "updatedAt": "2026-10-29T08:19:40.464772+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6047,
+            "y": 7232,
+            "name": "Firstborn",
+            "note": "Level 25-ish bat across the lake from Nurabek Brinehand",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Firstborn",
+            "ambush": false,
+            "levels": [
+              25,
+              25
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1632,
+        "payloadHash": "1e86dd79d8ae6d6f53ddd565f5b2fee2da4faebff826bad7711a7314156853d2",
+        "updatedAt": "2026-10-29T08:19:50.879964+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1428",
+          "payload": {
+            "from": {
+              "x": 6221,
+              "y": 6128,
+              "name": "Nurabek Brinehand",
+              "note": "Named Giant of Old Irem.  Unsure if spawn is only this location and if there is a PH.",
+              "ambush": false,
+              "levels": [
+                35,
+                35
+              ],
+              "category": "Named mob"
+            },
+            "name": "Nurabek Brinehand",
+            "note": "Named Giant of Old Irem.  Spawns 100% of the time, about every 2 and a half hours, with no PH.",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Nurabek_Brinehand"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1633,
+        "payloadHash": "3a2a02f392a153b840b5b071919542cf739118e23c9f02a7b2b50412a3fad23a",
+        "updatedAt": "2026-10-29T08:20:54.487016+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-1145",
+          "payload": {
+            "to": [
+              1706,
+              1048
+            ],
+            "from": [
+              1755,
+              1025
+            ],
+            "name": "Captain Relgen Greenblade"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1634,
+        "payloadHash": "c724c335249820e9214de01f14a568ecc368bd6f49e1a537752273f9a99261cf",
+        "updatedAt": "2026-10-29T08:20:59.792695+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1777,
+            "y": 1028,
+            "name": "a ranger instructor",
+            "note": "sells Ranger spells",
+            "classes": [
+              "Ranger"
+            ],
+            "category": "Class trainer"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1635,
+        "payloadHash": "78b254a63abe72a56be0a000e90b7a8cfb8fc7efc7923e0770cd42f27b81385e",
+        "updatedAt": "2026-10-29T08:21:03.897419+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-3",
+          "payload": {
+            "from": {
+              "x": 1808,
+              "y": 1176,
+              "name": "Ranger — Ranger's Rest",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "classes": [
+                "Ranger"
+              ],
+              "building": "Ranger's Rest",
+              "category": "Class trainer",
+              "approximate": true
+            },
+            "name": "Ranger — Ranger's Rest",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1636,
+        "payloadHash": "4cde40135d99e109eca26c143ed1760db970c3d8c3cdec7d12f329fbe193b4ae",
+        "updatedAt": "2026-10-29T08:21:08.482691+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wiki-38",
+          "payload": {
+            "to": [
+              1801,
+              1120
+            ],
+            "from": [
+              1842,
+              1099
+            ],
+            "name": "Fletcher Merafyn",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1637,
+        "payloadHash": "d3e8707a2fa322583ffd9846bfa4bb2658cc2b2fe857c3c66d6a5245bbf5c577",
+        "updatedAt": "2026-10-29T08:21:22.220016+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1846,
+            "y": 1050,
+            "name": "a bowyer",
+            "note": "",
+            "sells": [
+              "Ammo",
+              "Recipes",
+              "Weapons"
+            ],
+            "vendor": "Bowyer",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1638,
+        "payloadHash": "a2b7d761fcdb3e458df2d8d221dfc60106efa016cb32a708866660519d1e5764",
+        "updatedAt": "2026-10-29T08:21:25.916872+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1846,
+            "y": 1061,
+            "name": "Burch Windbreeze",
+            "note": "",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1639,
+        "payloadHash": "db33007b6bd9d5bc90235d84582065f8afd0ade48588052358385f1f0005aaa2",
+        "updatedAt": "2026-10-29T08:21:33.207515+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1865,
+            "y": 1268,
+            "name": "Survivalist Eiryn",
+            "note": "Survival trainer",
+            "trade": "Survival",
+            "category": "Tradeskill"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1640,
+        "payloadHash": "63d42ac5d87accd6622424704b05bb1b5bfcc4fd23ab22b127672b5711421d07",
+        "updatedAt": "2026-10-29T08:21:34.729684+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-39",
+          "payload": {
+            "from": {
+              "x": 1888.57,
+              "y": 1264.49,
+              "name": "Survival — Ranger's Rest",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Survival — Ranger's Rest",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1642,
+        "payloadHash": "0b9343a0e3c1f0f8000dfd0bfe1f20f250e7d4211cfc69493bdfc33d42ee48d3",
+        "updatedAt": "2026-10-29T08:21:44.808397+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1686,
+            "y": 1037,
+            "name": "a tracker",
+            "note": "Tracking vendor - not implemented in game yet\nLocated on the top level above Ranger's Rest",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1643,
+        "payloadHash": "2adbcf99ae0ebe42418e378866715c0b8f2944a7bf734d44e7d20fcccdf024e9",
+        "updatedAt": "2026-10-29T08:21:49.556178+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1681,
+            "y": 1203,
+            "name": "a survivalist",
+            "note": "On the top level above the Rangers Rest",
+            "vendor": "Survival vendor",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1644,
+        "payloadHash": "0d6ebc60161ce53bf841b84dacce8075e048ba45088581a539e1b8fc3cae8ff4",
+        "updatedAt": "2026-10-29T08:21:55.253817+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1697,
+            "y": 1097,
+            "name": "Tracker Zerys",
+            "note": "Tracking Trainer - not implemented in game yet\nLocated on the top level above the Ranger's Rest",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1645,
+        "payloadHash": "9d57dfb73d60102eb4ed07c3cd6f102014790d4cb21fb0e8221481e7ba9e8f1b",
+        "updatedAt": "2026-10-29T08:22:27.926876+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "temple-lift",
+          "payload": {
+            "x": 1539,
+            "y": 966,
+            "from": {
+              "x": 1542,
+              "y": 942,
+              "name": "Temple Lift",
+              "note": "Named lift on Maggot's map. Upper landing unconfirmed; no view-switch arrow."
+            },
+            "name": "Temple Lift",
+            "note": "Lift not operational - awaiting upper levels/housing added to Faelindral"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1646,
+        "payloadHash": "4f6611d1d39fcbde56b5f3eda22e0ab50178985f55ffc49a4b170b0e8cb28cb7",
+        "updatedAt": "2026-10-29T08:22:33.642044+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-43",
+          "payload": {
+            "from": {
+              "x": 2023.72,
+              "y": 1154.74,
+              "name": "Animal Taming — Quite Den",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Aerin Mossfang",
+            "note": "",
+            "classes": [
+              "Beastmaster"
+            ],
+            "category": "Class trainer"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1647,
+        "payloadHash": "f02b4071512b084e7fd3fbe7632f22dafd02807866d43bb39d5f84c8248fdb8e",
+        "updatedAt": "2026-10-29T08:22:37.726446+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2049,
+            "y": 1123,
+            "name": "Handler Duskglint",
+            "note": "Beastmaster pet handler",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1648,
+        "payloadHash": "3042cc17ed12a93a6c485556540d1bfc14606249e76de484ad1a027bd2f99ce0",
+        "updatedAt": "2026-10-29T08:22:40.201355+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-450",
+          "payload": {
+            "to": [
+              2134,
+              1133
+            ],
+            "from": [
+              2122,
+              1063
+            ],
+            "name": "Baewyn Mossfang"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1649,
+        "payloadHash": "9b29ae45fd675ae3051c9cb8c2b6cc60081db273d4ad762f23c574d3c0ba160d",
+        "updatedAt": "2026-10-29T08:22:51.758223+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wiki-4",
+          "payload": {
+            "to": [
+              2099,
+              1113
+            ],
+            "from": [
+              2124,
+              1112
+            ],
+            "name": "Beastlord — Quite Den",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1650,
+        "payloadHash": "0a3959c6e962b975c2e0c8189f355ec61e49c8ee19eda1f76f39989c29eae2ae",
+        "updatedAt": "2026-10-29T08:22:56.951645+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-4",
+          "payload": {
+            "from": {
+              "x": 2124,
+              "y": 1112,
+              "name": "Beastlord — Quite Den",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "classes": [
+                "Beastlord"
+              ],
+              "building": "Quite Den",
+              "category": "Class trainer",
+              "approximate": true
+            },
+            "name": "a beastmaster instructor",
+            "note": "sells Beastmaster skills",
+            "classes": [
+              "Beastmaster"
+            ]
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1651,
+        "payloadHash": "37fea3a1ea5bedf36318987420e226a81aa6489f7ad4357dda5caf42c3a8972a",
+        "updatedAt": "2026-10-29T08:23:07.171887+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "quite-den",
+          "payload": {
+            "to": [
+              2031,
+              1103
+            ],
+            "from": [
+              2144,
+              1062
+            ],
+            "name": "Quiet Den"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1652,
+        "payloadHash": "06837ce5488b6cdb0ce8c516129b2b780c66fb19e1a9e6db793e8480e8201bdf",
+        "updatedAt": "2026-10-29T08:23:11.928035+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-24",
+          "payload": {
+            "from": {
+              "x": 1474.97,
+              "y": 990.57,
+              "name": "Spinning — Trader's Terrace",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Spinning — Trader's Terrace",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1653,
+        "payloadHash": "04aec59eb2de6580e778bd273559476af3c928cb33368ba0eb852c0514bcca1e",
+        "updatedAt": "2026-10-29T08:23:17.050176+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-41",
+          "payload": {
+            "from": {
+              "x": 1957.51,
+              "y": 1318,
+              "name": "Mining — Ranger's Rest",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Mining — Ranger's Rest",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1654,
+        "payloadHash": "a042e7b6abc11fda8212f0ac15107c851667ba406f5b32ab1d4b42bb65be9626",
+        "updatedAt": "2026-10-29T08:23:18.968157+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-42",
+          "payload": {
+            "from": {
+              "x": 1994.69,
+              "y": 1332.52,
+              "name": "Stone Cutting — Ranger's Rest",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Stone Cutting — Ranger's Rest",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1655,
+        "payloadHash": "ae5b6a5e09f0fa5f3e92cee422e2431edb3b31970a5bcb1b85f1f687590efca6",
+        "updatedAt": "2026-10-29T08:23:20.631198+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-40",
+          "payload": {
+            "from": {
+              "x": 1997.42,
+              "y": 1249.98,
+              "name": "Farming — Ranger's Rest",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Farming — Ranger's Rest",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1656,
+        "payloadHash": "60129dfb12957fb6efa77a9d5af627717ed61f6b34e08ae0755bddc4d7bf3741",
+        "updatedAt": "2026-10-29T08:23:23.413194+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-45",
+          "payload": {
+            "from": {
+              "x": 2300.36,
+              "y": 1111.2,
+              "name": "Lumberjacking — Quite Den",
+              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "trade": null,
+              "category": "Tradeskill",
+              "approximate": true
+            },
+            "name": "Lumberjacking — Quite Den",
+            "reason": "other",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1657,
+        "payloadHash": "05bc76b008641c14e7a71d13c4a7b5365d99ca9653967465144b8d96f8ddae9a",
+        "updatedAt": "2026-10-29T08:19:57.815749+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-757",
+          "payload": {
+            "from": {
+              "x": 3577,
+              "y": 3339,
+              "name": "Swarmcaller Skarr'Vokk",
+              "note": "Spawns in and around the tents on the island",
+              "wiki": "https://monstersandmemories.wiki/npcs/swarmcaller-skarrvokk",
+              "wikiId": "npc-swarmcaller-skarrvokk",
+              "category": "Notable NPC"
+            },
+            "name": "Swarmcaller Skarr'Vokk",
+            "ambush": false,
+            "levels": [
+              24,
+              24
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1658,
+        "payloadHash": "a84e836dc08c83a097e7d65fcd6aefb13751d7f98c3c9a25efce234129a13b5f",
+        "updatedAt": "2026-10-29T08:20:01.878587+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3587,
+            "y": 3294,
+            "mobs": [
+              {
+                "name": "a Skri'Var pillager",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-pillager",
+                "wikiId": "npc-a-skri-var-pillager"
+              },
+              {
+                "name": "a Skri'Var Ritualist",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-ritualist",
+                "wikiId": "npc-a-skri-var-ritualist"
+              },
+              {
+                "name": "a Skri'Var tracker"
+              },
+              {
+                "name": "a Skri'Var taskmaster"
+              },
+              {
+                "name": "a Skri'Var slicer"
+              }
+            ],
+            "name": "Skri'Var camp",
+            "note": "",
+            "levels": [
+              22,
+              24
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1659,
+        "payloadHash": "38711c86e923035958bc60d4633e7d44dffceb8c127a41d1bd805f956be4db9a",
+        "updatedAt": "2026-10-29T08:20:08.461494+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2515,
+            "y": 3294,
+            "mobs": [
+              {
+                "name": "a Skri'Var pillager",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-pillager",
+                "wikiId": "npc-a-skri-var-pillager"
+              },
+              {
+                "name": "a Skri'Var Ritualist",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-skrivar-ritualist",
+                "wikiId": "npc-a-skri-var-ritualist"
+              },
+              {
+                "name": "a Skri'Var taskmaster"
+              },
+              {
+                "name": "a Skri'Var tracker"
+              }
+            ],
+            "name": "Skri'Var camp",
+            "note": "",
+            "levels": [
+              22,
+              24
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1661,
+        "payloadHash": "e561156aa522aa642fb2a5309e8777ebc25f1369a66b6ad384ae03c92ed4aea3",
+        "updatedAt": "2026-10-29T08:20:37.586504+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1588,
+            "y": 2593,
+            "fish": [
+              {
+                "name": "Whitefish",
+                "wiki": "https://monstersandmemories.wiki/items/whitefish",
+                "wikiId": "item-whitefish"
+              },
+              {
+                "name": "Basa",
+                "wiki": "https://monstersandmemories.wiki/items/basa",
+                "wikiId": "item-basa"
+              },
+              {
+                "name": "Grouper",
+                "wiki": "https://monstersandmemories.wiki/items/grouper",
+                "wikiId": "item-grouper"
+              }
+            ],
+            "name": "Fishing",
+            "note": "",
+            "category": "Fishing spot"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1662,
+        "payloadHash": "3bc81fe5e1e76ccd0c74cbd3d8e8f2f4174a46e0ef07fd1e7f1f31169ea97a5d",
+        "updatedAt": "2026-10-29T08:25:18.085527+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1603",
+          "payload": {
+            "from": {
+              "x": 6170,
+              "y": 6351,
+              "way": "Swim",
+              "name": "Waterfall",
+              "note": "You can swim up the waterfall to an unfinished area",
+              "category": "Passage",
+              "direction": "updown"
+            },
+            "name": "Waterfall",
+            "note": "You can swim up the waterfall"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1663,
+        "payloadHash": "277fa7a1160636bf5e4830c6fdca92c2b1937dd37915bcd1738546b38b348182",
+        "updatedAt": "2026-10-29T08:25:24.355466+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1604",
+          "payload": {
+            "from": {
+              "x": 6493,
+              "y": 6380,
+              "name": "Ysmara Velgarrith",
+              "note": "The area and the quest are unfinished",
+              "category": "Quest NPC"
+            },
+            "name": "Ysmara Velgarrith",
+            "note": ""
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1664,
+        "payloadHash": "5e47ebd1fe20ae0605cf11b7f2fe36666bd94646faa5be120f627575abd69796",
+        "updatedAt": "2026-10-29T08:26:34.384671+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-darius-brask",
+          "payload": {
+            "to": [
+              2188,
+              1753
+            ],
+            "from": [
+              2169,
+              1707
+            ],
+            "name": "Darius Brask",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1665,
+        "payloadHash": "aa006312695d210885b5c51bb29001b9babe49138ba64b03eeeddc660d3a2bc9",
+        "updatedAt": "2026-10-29T08:26:37.81736+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-vikar-brask",
+          "payload": {
+            "to": [
+              2158,
+              1770
+            ],
+            "from": [
+              2169,
+              1651
+            ],
+            "name": "Vikar Brask",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1666,
+        "payloadHash": "1af8a38c4c911cac2dc163abe785538e269cdad03b04544455899ba6475ecabb",
+        "updatedAt": "2026-10-29T08:17:15.378573+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4533,
+            "y": 827,
+            "mobs": [
+              {
+                "name": "a dark widow",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-dark-widow",
+                "wikiId": "npc-a-dark-widow"
+              },
+              {
+                "name": "a venerated spider",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-venerated-spider",
+                "wikiId": "npc-a-venerated-spider"
+              },
+              {
+                "name": "Soulstitch"
+              }
+            ],
+            "name": "Spiders of Shorog: Widow camp",
+            "note": "High level Spiders of Shorog with a named Soulstitch. The camp is up top as high as you can go without going over the bridge.",
+            "level": "city",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  4345,
+                  804
+                ],
+                [
+                  4405,
+                  835
+                ],
+                [
+                  4508,
+                  877
+                ],
+                [
+                  4528,
+                  865
+                ],
+                [
+                  4577,
+                  908
+                ],
+                [
+                  4632,
+                  930
+                ],
+                [
+                  4684,
+                  948
+                ],
+                [
+                  4732,
+                  906
+                ],
+                [
+                  4678,
+                  843
+                ],
+                [
+                  4597,
+                  784
+                ],
+                [
+                  4384,
+                  710
+                ],
+                [
+                  4357,
+                  756
+                ]
+              ]
+            },
+            "levels": [
+              28,
+              31
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1667,
+        "payloadHash": "0f6ac186f146b62abbc16c5f9c8966dc9c6d649bab066ec11d7e76979f1758ae",
+        "updatedAt": "2026-10-29T08:17:20.941993+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4667,
+            "y": 906,
+            "name": "Soulstitch",
+            "note": "Soulstitch is a named spider of Shorog.",
+            "level": "city",
+            "ambush": false,
+            "levels": [
+              31,
+              31
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1674,
+        "payloadHash": "c6f96043f8d23dbb55b3bc64935b4c26dd102dbc9fb3c6ff78e1f6fabc0541aa",
+        "updatedAt": "2026-10-29T08:17:26.477567+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "edit-marker",
+          "target_id": "community-1322",
+          "payload": {
+            "x": 4662,
+            "y": 1336,
+            "from": {
+              "x": 4683,
+              "y": 1327,
+              "mobs": [
+                {
+                  "name": "a venerated spider",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-venerated-spider",
+                  "wikiId": "npc-a-venerated-spider"
+                },
+                {
+                  "name": "a predatory spider"
+                },
+                {
+                  "name": "a devoted priestess"
+                },
+                {
+                  "name": "a dark widow"
+                },
+                {
+                  "name": "a fanatic watcher",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-fanatic-watcher",
+                  "wikiId": "npc-a-fanatic-watcher"
+                }
+              ],
+              "name": "Cult of Shorog",
+              "note": "Faction area of mobs for \"Cult of Shorog\". Contains high level spider camps.",
+              "level": "city",
+              "shape": {
+                "form": "outline",
+                "kind": "area",
+                "points": [
+                  [
+                    3986,
+                    946
+                  ],
+                  [
+                    3984,
+                    902
+                  ],
+                  [
+                    4020,
+                    846
+                  ],
+                  [
+                    4066,
+                    787
+                  ],
+                  [
+                    4097,
+                    750
+                  ],
+                  [
+                    4121,
+                    726
+                  ],
+                  [
+                    4166,
+                    724
+                  ],
+                  [
+                    4184,
+                    733
+                  ],
+                  [
+                    4192,
+                    748
+                  ],
+                  [
+                    4208,
+                    764
+                  ],
+                  [
+                    4230,
+                    763
+                  ],
+                  [
+                    4248,
+                    756
+                  ],
+                  [
+                    4261,
+                    767
+                  ],
+                  [
+                    4264,
+                    783
+                  ],
+                  [
+                    4278,
+                    807
+                  ],
+                  [
+                    4303,
+                    840
+                  ],
+                  [
+                    4493,
+                    901
+                  ],
+                  [
+                    4520,
+                    860
+                  ],
+                  [
+                    4543,
+                    892
+                  ],
+                  [
+                    4576,
+                    917
+                  ],
+                  [
+                    4650,
+                    949
+                  ],
+                  [
+                    4666,
+                    986
+                  ],
+                  [
+                    4681,
+                    1013
+                  ],
+                  [
+                    4669,
+                    1042
+                  ],
+                  [
+                    4663,
+                    1072
+                  ],
+                  [
+                    4680,
+                    1132
+                  ],
+                  [
+                    4682,
+                    1168
+                  ],
+                  [
+                    4677,
+                    1239
+                  ],
+                  [
+                    4681,
+                    1337
+                  ],
+                  [
+                    5152,
+                    1003
+                  ],
+                  [
+                    4738,
+                    1407
+                  ],
+                  [
+                    4795,
+                    1436
+                  ],
+                  [
+                    4864,
+                    1461
+                  ],
+                  [
+                    4961,
+                    1505
+                  ],
+                  [
+                    5012,
+                    1571
+                  ],
+                  [
+                    5049,
+                    1641
+                  ],
+                  [
+                    5100,
+                    1703
+                  ],
+                  [
+                    5145,
+                    1770
+                  ],
+                  [
+                    5290,
+                    1864
+                  ],
+                  [
+                    5356,
+                    1861
+                  ],
+                  [
+                    5402,
+                    1858
+                  ],
+                  [
+                    5424,
+                    1869
+                  ],
+                  [
+                    5397,
+                    1878
+                  ],
+                  [
+                    5373,
+                    1891
+                  ],
+                  [
+                    5330,
+                    1907
+                  ],
+                  [
+                    5287,
+                    1929
+                  ],
+                  [
+                    5251,
+                    1960
+                  ],
+                  [
+                    5236,
+                    1983
+                  ],
+                  [
+                    5230,
+                    2014
+                  ],
+                  [
+                    5220,
+                    2069
+                  ],
+                  [
+                    5187,
+                    2100
+                  ],
+                  [
+                    5135,
+                    2105
+                  ],
+                  [
+                    5129,
+                    2091
+                  ],
+                  [
+                    5154,
+                    2036
+                  ],
+                  [
+                    5159,
+                    1959
+                  ],
+                  [
+                    5142,
+                    1891
+                  ],
+                  [
+                    5109,
+                    1824
+                  ],
+                  [
+                    4965,
+                    1585
+                  ],
+                  [
+                    4900,
+                    1545
+                  ],
+                  [
+                    4821,
+                    1512
+                  ],
+                  [
+                    4747,
+                    1527
+                  ],
+                  [
+                    4680,
+                    1486
+                  ],
+                  [
+                    4614,
+                    1510
+                  ],
+                  [
+                    4604,
+                    1520
+                  ],
+                  [
+                    4514,
+                    1579
+                  ],
+                  [
+                    4468,
+                    1593
+                  ],
+                  [
+                    4430,
+                    1592
+                  ],
+                  [
+                    4416,
+                    1561
+                  ],
+                  [
+                    4488,
+                    1473
+                  ],
+                  [
+                    4478,
+                    1418
+                  ],
+                  [
+                    4498,
+                    1395
+                  ],
+                  [
+                    4519,
+                    1361
+                  ],
+                  [
+                    4555,
+                    1345
+                  ],
+                  [
+                    4582,
+                    1323
+                  ],
+                  [
+                    4610,
+                    1281
+                  ],
+                  [
+                    4609,
+                    1217
+                  ],
+                  [
+                    4591,
+                    1171
+                  ],
+                  [
+                    4616,
+                    1158
+                  ],
+                  [
+                    4593,
+                    1120
+                  ],
+                  [
+                    4572,
+                    1051
+                  ],
+                  [
+                    4522,
+                    994
+                  ],
+                  [
+                    4469,
+                    947
+                  ],
+                  [
+                    4437,
+                    935
+                  ],
+                  [
+                    4408,
+                    920
+                  ],
+                  [
+                    4372,
+                    919
+                  ],
+                  [
+                    4346,
+                    906
+                  ],
+                  [
+                    4311,
+                    901
+                  ],
+                  [
+                    4284,
+                    896
+                  ],
+                  [
+                    4263,
+                    898
+                  ],
+                  [
+                    4236,
+                    891
+                  ],
+                  [
+                    4207,
+                    892
+                  ],
+                  [
+                    4157,
+                    902
+                  ],
+                  [
+                    4140,
+                    896
+                  ],
+                  [
+                    4120,
+                    897
+                  ],
+                  [
+                    4091,
+                    905
+                  ],
+                  [
+                    4062,
+                    923
+                  ],
+                  [
+                    4045,
+                    927
+                  ],
+                  [
+                    4032,
+                    934
+                  ],
+                  [
+                    4009,
+                    936
+                  ]
+                ]
+              },
+              "levels": [
+                26,
+                32
+              ],
+              "category": "Mob camp"
+            },
+            "name": "Cult of Shorog",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  3986,
+                  946
+                ],
+                [
+                  3984,
+                  902
+                ],
+                [
+                  4020,
+                  846
+                ],
+                [
+                  4066,
+                  787
+                ],
+                [
+                  4097,
+                  750
+                ],
+                [
+                  4121,
+                  726
+                ],
+                [
+                  4166,
+                  724
+                ],
+                [
+                  4184,
+                  733
+                ],
+                [
+                  4192,
+                  748
+                ],
+                [
+                  4208,
+                  764
+                ],
+                [
+                  4230,
+                  763
+                ],
+                [
+                  4248,
+                  756
+                ],
+                [
+                  4261,
+                  767
+                ],
+                [
+                  4264,
+                  783
+                ],
+                [
+                  4278,
+                  807
+                ],
+                [
+                  4303,
+                  840
+                ],
+                [
+                  4493,
+                  901
+                ],
+                [
+                  4520,
+                  860
+                ],
+                [
+                  4543,
+                  892
+                ],
+                [
+                  4576,
+                  917
+                ],
+                [
+                  4650,
+                  949
+                ],
+                [
+                  4666,
+                  986
+                ],
+                [
+                  4681,
+                  1013
+                ],
+                [
+                  4669,
+                  1042
+                ],
+                [
+                  4663,
+                  1072
+                ],
+                [
+                  4680,
+                  1132
+                ],
+                [
+                  4682,
+                  1168
+                ],
+                [
+                  4677,
+                  1239
+                ],
+                [
+                  4681,
+                  1337
+                ],
+                [
+                  4738,
+                  1407
+                ],
+                [
+                  4795,
+                  1436
+                ],
+                [
+                  4864,
+                  1461
+                ],
+                [
+                  4961,
+                  1505
+                ],
+                [
+                  5012,
+                  1571
+                ],
+                [
+                  5049,
+                  1641
+                ],
+                [
+                  5100,
+                  1703
+                ],
+                [
+                  5145,
+                  1770
+                ],
+                [
+                  5290,
+                  1864
+                ],
+                [
+                  5356,
+                  1861
+                ],
+                [
+                  5402,
+                  1858
+                ],
+                [
+                  5424,
+                  1869
+                ],
+                [
+                  5397,
+                  1878
+                ],
+                [
+                  5373,
+                  1891
+                ],
+                [
+                  5330,
+                  1907
+                ],
+                [
+                  5287,
+                  1929
+                ],
+                [
+                  5251,
+                  1960
+                ],
+                [
+                  5236,
+                  1983
+                ],
+                [
+                  5230,
+                  2014
+                ],
+                [
+                  5220,
+                  2069
+                ],
+                [
+                  5187,
+                  2100
+                ],
+                [
+                  5135,
+                  2105
+                ],
+                [
+                  5129,
+                  2091
+                ],
+                [
+                  5154,
+                  2036
+                ],
+                [
+                  5159,
+                  1959
+                ],
+                [
+                  5142,
+                  1891
+                ],
+                [
+                  5109,
+                  1824
+                ],
+                [
+                  4965,
+                  1585
+                ],
+                [
+                  4900,
+                  1545
+                ],
+                [
+                  4821,
+                  1512
+                ],
+                [
+                  4747,
+                  1527
+                ],
+                [
+                  4680,
+                  1486
+                ],
+                [
+                  4614,
+                  1510
+                ],
+                [
+                  4604,
+                  1520
+                ],
+                [
+                  4514,
+                  1579
+                ],
+                [
+                  4468,
+                  1593
+                ],
+                [
+                  4430,
+                  1592
+                ],
+                [
+                  4416,
+                  1561
+                ],
+                [
+                  4488,
+                  1473
+                ],
+                [
+                  4478,
+                  1418
+                ],
+                [
+                  4498,
+                  1395
+                ],
+                [
+                  4519,
+                  1361
+                ],
+                [
+                  4555,
+                  1345
+                ],
+                [
+                  4582,
+                  1323
+                ],
+                [
+                  4610,
+                  1281
+                ],
+                [
+                  4609,
+                  1217
+                ],
+                [
+                  4591,
+                  1171
+                ],
+                [
+                  4616,
+                  1158
+                ],
+                [
+                  4593,
+                  1120
+                ],
+                [
+                  4572,
+                  1051
+                ],
+                [
+                  4522,
+                  994
+                ],
+                [
+                  4469,
+                  947
+                ],
+                [
+                  4437,
+                  935
+                ],
+                [
+                  4408,
+                  920
+                ],
+                [
+                  4372,
+                  919
+                ],
+                [
+                  4346,
+                  906
+                ],
+                [
+                  4311,
+                  901
+                ],
+                [
+                  4284,
+                  896
+                ],
+                [
+                  4263,
+                  898
+                ],
+                [
+                  4236,
+                  891
+                ],
+                [
+                  4207,
+                  892
+                ],
+                [
+                  4157,
+                  902
+                ],
+                [
+                  4140,
+                  896
+                ],
+                [
+                  4120,
+                  897
+                ],
+                [
+                  4091,
+                  905
+                ],
+                [
+                  4062,
+                  923
+                ],
+                [
+                  4045,
+                  927
+                ],
+                [
+                  4032,
+                  934
+                ],
+                [
+                  4009,
+                  936
+                ]
+              ]
+            }
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1676,
+        "payloadHash": "997397efa5ef02bb16d83a4b9b92efc065fd49ddc33b58d3aecdddae5bd66a39",
+        "updatedAt": "2026-10-29T08:27:25.44597+00:00",
+        "version": {
+          "map": "sungreet-strand",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-taskmaster-urka",
+          "payload": {
+            "to": [
+              2459,
+              3606
+            ],
+            "from": [
+              2609,
+              4264
+            ],
+            "name": "Taskmaster Urka",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1677,
+        "payloadHash": "644c32d54997669348be3d5f899766e02f3af47362f9e9a34596861ec9f11636",
+        "updatedAt": "2026-10-29T08:24:14.258864+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2121,
+            "y": 2703,
+            "name": "Jokan'Daru",
+            "note": "Spawns in small ravine, in a cluster of 3 Skri'Var taskmasters next to a small hut",
+            "wiki": "https://monstersandmemories.wiki/npcs/jokandaru",
+            "level": "ground",
+            "bounty": "npc-jokandaru",
+            "levels": [
+              41,
+              41
+            ],
+            "wikiId": "npc-jokandaru",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1678,
+        "payloadHash": "dbf656ad0cbcd3e850f61de9b656fa41e21ab0f1a3598eed78b11e11bb74a1e7",
+        "updatedAt": "2026-10-29T08:26:50.360664+00:00",
+        "version": {
+          "map": "scarwood",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6769,
+            "y": 4577,
+            "mobs": [
+              {
+                "name": "A green drake",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-green-drake",
+                "wikiId": "npc-a-green-drake"
+              }
+            ],
+            "name": "A Green Drake",
+            "note": "",
+            "levels": [
+              32,
+              34
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1679,
+        "payloadHash": "e3a02c49e3e72626b68d4b3ce26a5f9cc71326b0a5efeb3e744d8bdb4816e04d",
+        "updatedAt": "2026-10-29T08:26:55.648929+00:00",
+        "version": {
+          "map": "scarwood",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 7339,
+            "y": 4139,
+            "mobs": [
+              {
+                "name": "a grovebound treant",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+                "wikiId": "npc-a-grovebound-treant"
+              }
+            ],
+            "name": "Treant Spawns",
+            "note": "Treant Spawns",
+            "levels": [
+              38,
+              null
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1680,
+        "payloadHash": "f86b3ac25a0a80bae83eb24c78c7a926f71fa555467e83d8e63d4e35c6a046db",
+        "updatedAt": "2026-10-29T08:17:42.319699+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2255,
+            "y": 4256,
+            "name": "Baron Mhyrlus",
+            "note": "Cons red to a lv 34",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1681,
+        "payloadHash": "635fe17a66b25b66992551dad703e476b32f31d7df5021bfa170edf979696c42",
+        "updatedAt": "2026-10-29T08:18:00.020078+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2270,
+            "y": 4931,
+            "name": "Ail'trists",
+            "note": "High level Ail'trist area.  Cons red to lv 34.  Disdain to me and not sure what faction they are.",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1682,
+        "payloadHash": "1491f288df67c1ec0ad705ad0d4f3e84977c8a841efe97232ce6b27192be1796",
+        "updatedAt": "2026-10-29T08:18:23.87156+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1520,
+            "y": 3362,
+            "name": "fungoids",
+            "note": "Dark Green and Light blue to a lv 34",
+            "level": "city",
+            "levels": [
+              28,
+              32
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1683,
+        "payloadHash": "bbd71f88ee0d3ebc5e80e2687088e0ef691ea6ac676c94d03dc2d6b8293ff0b7",
+        "updatedAt": "2026-10-29T08:18:36.267828+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2284,
+            "y": 2171,
+            "mobs": [
+              {
+                "name": "A synthetic ooze",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-synthetic-ooze",
+                "wikiId": "npc-1790076517193-692gw"
+              },
+              {
+                "name": "A failed experiment",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-failed-experiment",
+                "wikiId": "npc-1790076503903-3d4e0"
+              }
+            ],
+            "name": "Oozes",
+            "note": "\"an ooze researcher\" not yet in wiki",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  2886,
+                  1377
+                ],
+                [
+                  2895,
+                  1440
+                ],
+                [
+                  2936,
+                  1575
+                ],
+                [
+                  2846,
+                  1647
+                ],
+                [
+                  2620,
+                  1686
+                ],
+                [
+                  2531,
+                  1913
+                ],
+                [
+                  2349,
+                  2049
+                ],
+                [
+                  2250,
+                  2219
+                ],
+                [
+                  2236,
+                  2536
+                ],
+                [
+                  2133,
+                  2800
+                ],
+                [
+                  1904,
+                  2783
+                ],
+                [
+                  1950,
+                  2360
+                ],
+                [
+                  2126,
+                  2158
+                ],
+                [
+                  2235,
+                  1867
+                ],
+                [
+                  2377,
+                  1816
+                ],
+                [
+                  2615,
+                  1664
+                ],
+                [
+                  2732,
+                  1499
+                ]
+              ]
+            },
+            "levels": [
+              9,
+              11
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1684,
+        "payloadHash": "f45530264ee9b54f36e75931cecd0ad2b40d7a785ab6b40d71d9aca54aed88b5",
+        "updatedAt": "2026-10-29T08:26:07.010252+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "orc-cave-named",
+          "payload": {
+            "to": [
+              2706,
+              6574
+            ],
+            "from": [
+              2706,
+              6574
+            ],
+            "name": "Belthakar Dunecaller",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1685,
+        "payloadHash": "e531c5a3568d849359376ff4d73c1792d7946b2e2d44119e79f4fcd9eb4619d2",
+        "updatedAt": "2026-10-29T08:26:11.484659+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "orc-cave-named-rarthan-wartide",
+          "payload": {
+            "to": [
+              2728,
+              6574
+            ],
+            "from": [
+              2728,
+              6574
+            ],
+            "name": "Rarthan Wartide",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1688,
+        "payloadHash": "9deac37429fcac75bdc6d886e6535b5bcbbccd54f0ef541b5265e75123398826",
+        "updatedAt": "2026-10-29T08:27:01.676914+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-1448",
+          "payload": {
+            "to": [
+              3231,
+              10935
+            ],
+            "from": [
+              3112,
+              10893
+            ],
+            "name": "Sister Elsi"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1689,
+        "payloadHash": "5ec559010189ac6d8b44022c7bfbcd71156139b7e59aa05809385cf47bc3f448",
+        "updatedAt": "2026-10-29T08:25:06.948426+00:00",
+        "version": {
+          "map": "grain-cellar",
+          "level": "cellar",
+          "kind": "move-marker",
+          "target_id": "zakariah-shriki",
+          "payload": {
+            "to": [
+              2868,
+              3181
+            ],
+            "from": [
+              3212,
+              3605
+            ],
+            "name": "Zakariah Shriki",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1690,
+        "payloadHash": "45885a8400996f4ca8623ec715863ca4b4590839effecfc281374a8a76831a59",
+        "updatedAt": "2026-10-29T08:24:23.098515+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "undead-lt20-1",
+          "payload": {
+            "from": {
+              "x": 2663,
+              "y": 915,
+              "name": "Undead",
+              "note": "",
+              "level": "ground",
+              "levels": [
+                1,
+                19
+              ],
+              "minZoom": 2,
+              "category": "Mob camp",
+              "approximate": true
+            },
+            "name": "Undead",
+            "levels": [
+              16,
+              19
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1691,
+        "payloadHash": "2962825b2103e7fde1846624a2037acbae8039f88016ec62a964595ca059e3a4",
+        "updatedAt": "2026-10-29T08:27:33.947069+00:00",
+        "version": {
+          "map": "sunken-resort",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1918,
+            "y": 1489,
+            "name": "Vesryn the Unmoored",
+            "note": "Near entrance",
+            "wiki": "https://monstersandmemories.wiki/npcs/vesryn-the-unmoored",
+            "level": "floor-1",
+            "ambush": false,
+            "levels": [
+              35,
+              35
+            ],
+            "wikiId": "npc-vesryn-the-unmoored",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1692,
+        "payloadHash": "9222e2a948cc764fcd9df7af54a52ced6e25619f74cdf494428e71f0c0148e04",
+        "updatedAt": "2026-10-29T08:27:10.207919+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5454,
+            "y": 1884,
+            "name": "Champion of Muurtu",
+            "note": "Spawns in the right hut of the two huts to the right of the ramp going into main fortress entrance",
+            "wiki": "https://monstersandmemories.wiki/npcs/champion-of-muurtu",
+            "ambush": false,
+            "levels": [
+              45,
+              45
+            ],
+            "wikiId": "npc-champion-of-muurtu",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1693,
+        "payloadHash": "86bc534aa5983436bbd0410c6ca92ff2bfb3508f087054ab0e33ce4d0e011734",
+        "updatedAt": "2026-10-29T08:27:15.544839+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-champion-of-muurtu",
+          "payload": {
+            "to": [
+              5836,
+              1932
+            ],
+            "from": [
+              5836,
+              1932
+            ],
+            "name": "Champion of Muurtu"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1694,
+        "payloadHash": "45885a8400996f4ca8623ec715863ca4b4590839effecfc281374a8a76831a59",
+        "updatedAt": "2026-10-29T08:24:31.50645+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "undead-lt20-1",
+          "payload": {
+            "from": {
+              "x": 2663,
+              "y": 915,
+              "name": "Undead",
+              "note": "",
+              "level": "ground",
+              "levels": [
+                1,
+                19
+              ],
+              "minZoom": 2,
+              "category": "Mob camp",
+              "approximate": true
+            },
+            "name": "Undead",
+            "levels": [
+              16,
+              19
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1695,
+        "payloadHash": "df87c9649dc1c69d2b245e00c8fea1d25d5aba7b775dd252d1d2ae1ac89690d6",
+        "updatedAt": "2026-10-29T08:24:35.053843+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "undead-lt20-2",
+          "payload": {
+            "from": {
+              "x": 3026,
+              "y": 810,
+              "name": "Undead",
+              "note": "",
+              "level": "ground",
+              "levels": [
+                1,
+                19
+              ],
+              "minZoom": 2,
+              "category": "Mob camp",
+              "approximate": true
+            },
+            "name": "Undead",
+            "levels": [
+              16,
+              19
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1696,
+        "payloadHash": "e5d843091c55e2807c33d488d00fede8621383e90325482412b7b1d7bb6da6ba",
+        "updatedAt": "2026-10-29T08:24:37.810035+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "undead-lt20-3",
+          "payload": {
+            "from": {
+              "x": 3143,
+              "y": 1352,
+              "name": "Undead",
+              "note": "",
+              "level": "ground",
+              "levels": [
+                1,
+                19
+              ],
+              "minZoom": 2,
+              "category": "Mob camp",
+              "approximate": true
+            },
+            "name": "Undead",
+            "levels": [
+              16,
+              19
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1697,
+        "payloadHash": "dc814bea7c3da181e64eb50a748bbd26e43e117e70bf8453e335bbc8fa4b19e2",
+        "updatedAt": "2026-10-29T08:24:57.065009+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-675",
+          "payload": {
+            "to": [
+              3063,
+              2355
+            ],
+            "from": [
+              3063,
+              2355
+            ],
+            "name": "Elda the Cook (level ~54)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1698,
+        "payloadHash": "c86b529271615e743eb4a1645813593ecdfdea3ba60746c33d604b3e1e32b89b",
+        "updatedAt": "2026-10-29T08:25:31.307473+00:00",
+        "version": {
+          "map": "grimtide-sanctum",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3492,
+            "y": 3003,
+            "name": "Braggla the Spawnkeeper",
+            "note": "Spawns in the room with the statue.",
+            "wiki": "https://monstersandmemories.wiki/npcs/braggla-the-spawnkeeper",
+            "level": "floor-1",
+            "bounty": "npc-braggla-the-spawnkeeper",
+            "levels": [
+              50,
+              50
+            ],
+            "wikiId": "npc-braggla-the-spawnkeeper",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1701,
+        "payloadHash": "cddd7ac0330b8e449428afdd4e548ecbb2b5146210ac187e61b1165e7bebb3ee",
+        "updatedAt": "2026-10-29T08:23:07.9835+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-label",
+          "target_id": "quite-den",
+          "payload": {
+            "from": {
+              "x": 2031,
+              "y": 1103,
+              "kind": "building",
+              "name": "Quiet Den",
+              "note": "Place name adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
+              "tier": "building",
+              "minZoom": 0,
+              "priority": 50,
+              "approximate": true
+            },
+            "name": "Quiet Den",
+            "note": ""
           },
           "credit": false
         }

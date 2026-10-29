@@ -83,6 +83,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:wanted-witchguard-hellblade": [
@@ -102,6 +106,10 @@
     }
   ],
   "marker:wanted-champion-of-muurtu": [
+    {
+      "name": null,
+      "what": "moved"
+    },
     {
       "name": null,
       "what": "moved"
@@ -261,6 +269,12 @@
     {
       "name": "mrbrewed",
       "what": "removed"
+    }
+  ],
+  "marker:community-1692": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

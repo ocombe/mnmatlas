@@ -29,12 +29,13 @@
     "name": "Zakariah Shriki",
     "level": "cellar",
     "category": "Named mob",
-    "x": 3212,
-    "y": 3604.5,
-    "approximate": true,
+    "x": 2868,
+    "y": 3181,
+    "approximate": false,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/zakariah-shriki",
-    "wikiId": "npc-zakariah-shriki"
+    "wikiId": "npc-zakariah-shriki",
+    "community": true
   },
   {
     "id": "leila-al-bahri",

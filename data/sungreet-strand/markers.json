@@ -1080,11 +1080,12 @@
   "name": "Taskmaster Urka",
   "category": "Quest NPC",
   "note": "In the quarry.",
-  "x": 2609,
-  "y": 4264,
-  "approximate": true,
+  "x": 2459,
+  "y": 3606,
+  "approximate": false,
   "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-urka",
-  "wikiId": "npc-taskmaster-urka"
+  "wikiId": "npc-taskmaster-urka",
+  "community": true
  },
  {
   "id": "community-1276",

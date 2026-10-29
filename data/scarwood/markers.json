@@ -219,5 +219,45 @@
   "y": 2338,
   "category": "Teleporter",
   "travel": "Teleporter"
+ },
+ {
+  "id": "community-1678",
+  "community": true,
+  "name": "A Green Drake",
+  "note": "",
+  "x": 6769,
+  "y": 4577,
+  "category": "Mob camp",
+  "levels": [
+   32,
+   34
+  ],
+  "mobs": [
+   {
+    "name": "A green drake",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-green-drake",
+    "wikiId": "npc-a-green-drake"
+   }
+  ]
+ },
+ {
+  "id": "community-1679",
+  "community": true,
+  "name": "Treant Spawns",
+  "note": "Treant Spawns",
+  "x": 7339,
+  "y": 4139,
+  "category": "Mob camp",
+  "levels": [
+   38,
+   null
+  ],
+  "mobs": [
+   {
+    "name": "a grovebound treant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+    "wikiId": "npc-a-grovebound-treant"
+   }
+  ]
  }
 ]
