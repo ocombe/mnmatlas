@@ -1,7 +1,8 @@
 // Crowded pins: pins of one type that sit on top of each other merge into one pin with a count, and when zoomed out the
 // common types (vendors, quest givers, crafting) become small dots, a crowd of them one dot with the count inside. The
-// distance is measured on screen, so groups split again as you zoom in. The other looks tried in the 2026-10 preview
-// stay reachable for testing with ?groups=type|stack|dots|off; 'mix' is the atlas's look.
+// distance is measured on screen, so groups split again as you zoom in, and at the map's closest zoom every pin stands
+// at its own spot (a traveller's 2026-10 note: placed pins stayed bundled even fully zoomed in). The other looks tried
+// in the 2026-10 preview stay reachable for testing with ?groups=type|stack|dots|off; 'mix' is the atlas's look.
 (()=>{
  const modes=['type','stack','dots','mix','off'];
  const params=new URLSearchParams(location.search);
@@ -82,7 +83,9 @@
   // A "Looking for" pick shows its few answers as full pins, never as dots or groups.
   const looking=!!window.atlasLookFor?.active?.();
   far=zoom<config.coordinateZoom-.75&&!alignmentMode&&!looking;
-  const off=looking||mode==='off'||mode==='dots'||!showPins||alignmentMode||window.atlasCommunity?.reviewOpen?.();
+  // At the closest zoom there is nowhere left to zoom to, so every pin shows where it was placed.
+  const closest=zoom>=map.getMaxZoom()-.01;
+  const off=looking||closest||mode==='off'||mode==='dots'||!showPins||alignmentMode||window.atlasCommunity?.reviewOpen?.();
   // Dots: common types shrink to small dots below 60% zoom; banks, inns, stables and travel keep their pins.
   el.classList.toggle('pins-far',(mode==='dots'||mode==='mix')&&far);
   if(mode==='dots'||mode==='mix')for(const pin of pins.values()){const m=pin.atlasMarker;if(!m||!minor.includes(m.category)||m.id.startsWith('personal-')||pin.atlasDotHook)continue;pin.atlasDotHook=true;const mark=()=>pin.getElement()?.classList.add('minor-pin');pin.on('add',mark);mark();}
