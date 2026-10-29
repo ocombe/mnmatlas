@@ -251,6 +251,10 @@
     {
       "name": "drsirlord",
       "what": "added"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
     }
   ],
   "marker:community-1386": [
@@ -323,6 +327,12 @@
     {
       "name": null,
       "what": "moved"
+    }
+  ],
+  "marker:community-1714": [
+    {
+      "name": ".menori",
+      "what": "added"
     }
   ]
 }

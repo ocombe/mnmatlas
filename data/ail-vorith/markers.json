@@ -3288,5 +3288,18 @@
         ]
       ]
     }
+  },
+  {
+    "id": "community-1712",
+    "community": true,
+    "name": "The Discarded",
+    "note": "Light green to a lv 26",
+    "x": 3299,
+    "y": 3729,
+    "level": "city",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/the-discarded",
+    "wikiId": "npc-the-discarded",
+    "ambush": false
   }
 ]

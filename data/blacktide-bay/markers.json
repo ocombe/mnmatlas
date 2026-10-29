@@ -502,9 +502,14 @@
     "x": 3540,
     "y": 6045,
     "level": "floor-1",
-    "category": "Notable NPC",
+    "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/an-orc-supplier",
-    "wikiId": "npc-an-orc-supplier"
+    "wikiId": "npc-an-orc-supplier",
+    "levels": [
+      26,
+      26
+    ],
+    "ambush": false
   },
   {
     "id": "community-1386",
@@ -657,5 +662,21 @@
     "y": 518,
     "level": "floor-1",
     "category": "Respawn point"
+  },
+  {
+    "id": "community-1714",
+    "community": true,
+    "name": "Belthakar Dunecaller",
+    "note": "Found in a dead end room with a green burning firepit in the center. PH is a Blacktide soothsayer.",
+    "x": 1965,
+    "y": 1425,
+    "level": "caves",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
+    "levels": [
+      28,
+      28
+    ],
+    "ambush": false
   }
 ]

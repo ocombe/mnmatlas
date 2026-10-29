@@ -384,12 +384,13 @@
   "name": "Captain Zaedin Rahal",
   "category": "Quest NPC",
   "note": "Top of the lighthouse at Zaedin’s Landing.",
-  "x": 1530,
-  "y": 6810,
-  "approximate": true,
+  "x": 1602,
+  "y": 7243,
+  "approximate": false,
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/captain-zaedin-rahal",
-  "wikiId": "npc-captain-zaedin-rahal"
+  "wikiId": "npc-captain-zaedin-rahal",
+  "community": true
  },
  {
   "id": "wanted-tariq-the-revealer",

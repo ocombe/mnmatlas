@@ -228,12 +228,13 @@
     "name": "Librarian Gallier",
     "category": "Named mob",
     "level": "floor-1",
-    "x": 1931,
-    "y": 1440,
-    "approximate": true,
+    "x": 1868,
+    "y": 1371,
+    "approximate": false,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/librarian-gallier",
-    "wikiId": "npc-librarian-gallier"
+    "wikiId": "npc-librarian-gallier",
+    "community": true
   },
   {
     "id": "brahson-the-butcher",
@@ -270,5 +271,21 @@
     "note": "Raid boss.",
     "wiki": "https://monstersandmemories.wiki/npcs/skyseer-illya",
     "wikiId": "npc-skyseer-illya"
+  },
+  {
+    "id": "community-1710",
+    "community": true,
+    "name": "a ghoulish librarian",
+    "note": "",
+    "x": 1716,
+    "y": 1487,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-ghoulish-librarian",
+    "wikiId": "npc-a-ghoulish-librarian",
+    "levels": [
+      24,
+      24
+    ]
   }
 ]
