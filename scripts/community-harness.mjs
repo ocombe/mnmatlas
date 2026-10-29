@@ -204,7 +204,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
   elements.get('map-frame').getBoundingClientRect=()=>({
     left:10,top:80,right:610,bottom:580,width:600,height:500
   });
-  const user=session?.user,suggestions=[],layers=[],banned=[];
+  const user=session?.user,suggestions=[],layers=[],banned=[],messages=[];
   let authHandler,failNotes=false,failSuggestions=false,recordInserts=false,missingVersion=
   false,suggestionFault=null,notesFault=null;
   const notesState=fixtures.notesState||{exists:!fixtures.notesMissing,updated_at:'2026-10-20T08:00:00.000Z'};
@@ -237,6 +237,16 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       return {
         data:request.columns?[{updated_at:notesState.updated_at}]:null
       };
+    }
+    // Conversations: the server stamps the side; any message moves its item's version.
+    if(table==='suggestion_messages'){
+      if(request.op==='insert'){
+        messages.push({...structuredClone(request.payload),id:messages.length+1,from_admin:!!user?.admin,created_at:new Date(1800000000000+calls.length).toISOString()});
+        const row=suggestions.find(r=>r.id===request.payload.suggestion_id);
+        if(row)row.updated_at='talk-'+calls.length;
+        return {data:null};
+      }
+      return {data:messages.filter(m=>m.suggestion_id===request.filters.suggestion_id).map(m=>structuredClone(m))};
     }
     if(table==='banned'){
       if(request.op==='insert'){
@@ -762,7 +772,7 @@ function environment(settings={},hostname='atlas.example',session=null,fixtures=
       }
       return ev;
     },authenticate:session=>authHandler('SIGNED_IN',session),context,wikiRequests,elements,head,
-    body,bottom,bar,calls,counts,statuses,remote,remotePrivate,saved,suggestions,layers,banned,
+    body,bottom,bar,calls,counts,statuses,remote,remotePrivate,saved,suggestions,layers,banned,messages,
     get creations(){
       return creations;
     },set failNotes(v){
