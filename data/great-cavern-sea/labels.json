@@ -7,7 +7,7 @@
    "id": "great-cavern-sea",
    "name": "Great Cavern Sea",
    "x": 3631,
-   "y": 5166,
+   "y": 5278,
    "kind": "district",
    "priority": 100,
    "minZoom": 0.5
@@ -16,7 +16,7 @@
    "id": "myconid-village",
    "name": "Myconid Village",
    "x": 1334,
-   "y": 5394,
+   "y": 5506,
    "kind": "district",
    "priority": 75,
    "minZoom": 2
@@ -25,7 +25,7 @@
    "id": "orc-camp",
    "name": "Orc Camp",
    "x": 1012,
-   "y": 3319,
+   "y": 3431,
    "kind": "district",
    "priority": 70,
    "minZoom": 2
@@ -34,7 +34,7 @@
    "id": "rat-island",
    "name": "Rat Island",
    "x": 2776,
-   "y": 4454,
+   "y": 4566,
    "kind": "district",
    "priority": 70,
    "minZoom": 2
@@ -53,7 +53,7 @@
    "id": "underwater-ruins",
    "name": "Underwater Ruins",
    "x": 4546,
-   "y": 3112,
+   "y": 3224,
    "kind": "district",
    "priority": 60,
    "minZoom": 2.5
@@ -72,7 +72,7 @@
    "id": "spider-caves",
    "name": "Spider Caves",
    "x": 1381,
-   "y": 6892,
+   "y": 7004,
    "kind": "district",
    "priority": 65,
    "minZoom": 2.5
@@ -108,7 +108,7 @@
    "id": "to-rothold",
    "name": "to Rothold",
    "x": 4366,
-   "y": 848,
+   "y": 960,
    "kind": "exit",
    "priority": 90,
    "minZoom": 1,
@@ -122,7 +122,7 @@
    "id": "to-blind-midden",
    "name": "to Blind Midden (currently obstructed by boulder)",
    "x": 5595,
-   "y": 4346,
+   "y": 4458,
    "kind": "exit",
    "priority": 90,
    "minZoom": 1.5,
