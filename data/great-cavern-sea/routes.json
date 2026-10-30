@@ -6,7 +6,7 @@
  "cell": 4,
  "x0": -2767.047119140625,
  "z0": -2293.094970703125,
- "nx": 1565,
+ "nx": 1646,
  "nz": 1149,
  "hstep": 0.25,
  "step": 4,
@@ -85,14 +85,14 @@
  ],
  "between": {
   "to-caves-of-irem": {
-   "to-ail-vorith": 11527,
+   "to-ail-vorith": 11182,
    "to-rothold": null,
    "to-blind-midden": 9407
   },
   "to-ail-vorith": {
-   "to-caves-of-irem": 11512,
+   "to-caves-of-irem": 11143,
    "to-rothold": null,
-   "to-blind-midden": 2180
+   "to-blind-midden": 1818
   },
   "to-rothold": {
    "to-caves-of-irem": null,
@@ -101,10 +101,15 @@
   },
   "to-blind-midden": {
    "to-caves-of-irem": 9395,
-   "to-ail-vorith": 2184,
+   "to-ail-vorith": 1840,
    "to-rothold": null
   }
  },
  "betweenKey": "2740796995-1175610639",
- "unreached": []
+ "unreached": [
+  "wanted-overseer-vashruk",
+  "community-1324",
+  "community-1326",
+  "community-1482"
+ ]
 }
