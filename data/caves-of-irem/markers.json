@@ -849,5 +849,16 @@
         "name": "a Skri'Var tracker"
       }
     ]
+  },
+  {
+    "id": "community-1777",
+    "community": true,
+    "name": "Zig-zag to climb the slope",
+    "note": "",
+    "x": 2644,
+    "y": 1924,
+    "category": "Passage",
+    "way": "Climb",
+    "oneWay": false
   }
 ]

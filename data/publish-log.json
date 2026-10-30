@@ -1,35 +1,5 @@
 [
   {
-    "at": "2026-10-21T16:54:14.446Z",
-    "rows": [
-      {
-        "id": 1112,
-        "payloadHash": "560a6d8ef201433cb1b49a21547f4fe51a4e7440b790b6eff199f142a9ddfa56",
-        "updatedAt": "2026-10-21T16:20:06.378412+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "maggot-npc-01",
-          "payload": {
-            "from": {
-              "x": 1718.02,
-              "y": 629.28,
-              "name": "Scout Gladebow",
-              "note": "Part of Archer starter quest",
-              "category": "Notable NPC",
-              "approximate": true
-            },
-            "name": "Notable NPC — Temple upper platform",
-            "reason": "duplicate",
-            "remove": true
-          },
-          "credit": true
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-21T19:49:33.840Z",
     "rows": [
       {
@@ -13874,6 +13844,55 @@
             ],
             "name": "Captain Zaedin Rahal",
             "approximate": false
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-30T23:47:05.626Z",
+    "rows": [
+      {
+        "id": 1777,
+        "payloadHash": "5f246be5220a3a80e5f3697c7471180f017e1897b7055766ba8d54250f2a951e",
+        "updatedAt": "2026-10-30T21:20:10.162853+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2634,
+            "y": 1964,
+            "way": "Climb",
+            "name": "Zig-zag to climb the slope",
+            "note": "",
+            "oneWay": false,
+            "category": "Passage"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1778,
+        "payloadHash": "f1039d705475d8d2d3fb6910d92d8bc81482c08e3ae59c3a7dbc316e0fe6520d",
+        "updatedAt": "2026-10-30T21:20:21.572863+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-1777",
+          "payload": {
+            "to": [
+              2644,
+              1924
+            ],
+            "from": [
+              2634,
+              1964
+            ],
+            "name": "Zig-zag to climb the slope"
           },
           "credit": false
         }

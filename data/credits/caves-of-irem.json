@@ -208,5 +208,15 @@
       "name": "darkhayn",
       "what": "added"
     }
+  ],
+  "marker:community-1777": [
+    {
+      "name": null,
+      "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    }
   ]
 }
