@@ -234,8 +234,13 @@ dialog fieldset{border:0;padding:0;margin:13px 0 0;min-width:0}dialog legend{fon
 .aligning .place-name.exit::after{background:#f0b65c;box-shadow:0 0 0 1px #2a1f15}
 
 /* Landing marker after following a floor link */
-.leaflet-marker-icon.just-arrived{animation:arrive-glow .8s ease-out 2}
-@keyframes arrive-glow{0%{filter:drop-shadow(0 0 0 rgba(240,190,90,0))}40%{filter:drop-shadow(0 0 10px rgba(240,190,90,.95))}100%{filter:drop-shadow(0 0 0 rgba(240,190,90,0))}}
+.leaflet-marker-icon.just-arrived{animation:arrive-glow 1.2s ease-in-out 3;z-index:1000!important}
+.leaflet-marker-icon.just-arrived>span{animation:arrive-swell 1.2s ease-in-out 3}
+/* The landing marker after a floor change: a dark rim, a white halo and a bright sky-blue glow, three slow pulses with a
+   small swell, so it stands out on any floor colour (Olivier 2026-10-27: the old pulse was too fast and too close to
+   Tel Ekir's floor colour). The swell uses `scale` on the inner badge: it keeps the badge's own rotation and Leaflet's position transform. */
+@keyframes arrive-glow{0%,100%{filter:none}45%{filter:brightness(1.25) drop-shadow(0 0 1.5px rgba(25,12,4,.95)) drop-shadow(0 0 3px #fff) drop-shadow(0 0 4px #fff) drop-shadow(0 0 14px #5fe6ff) drop-shadow(0 0 28px rgba(40,170,255,.9))}}
+@keyframes arrive-swell{0%,100%{scale:1}45%{scale:1.35}}
 /* Review: the suggested icon beside the title, and editable fields on the map preview. */
 .review-title{display:flex;align-items:center;gap:8px}.review-icon{display:grid;place-items:center;width:24px;height:24px;flex:none;color:#fff3cf;background:var(--pin,#365f59);border:2px solid #f5e2b4;border-radius:50% 50% 50% 4px;transform:rotate(-45deg)}.review-icon svg{width:16px;height:16px;transform:rotate(45deg)}.review-icon b{transform:rotate(45deg);font:13px var(--heading)}
 .community-tabs button[aria-pressed=true]{background:#5a3b22;border-color:var(--primary);color:#fff0cc}

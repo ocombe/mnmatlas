@@ -164,7 +164,7 @@ function refreshSearch(){$('clear-search').hidden=!$('search').value;drawMarkers
 function copyButton(place){return button('Copy link',()=>copyLink(place),'copy-place','copy');}
 function switchAt(m){const destination=originals.find(row=>row.id===m.toMarker);changeLevel(m.toLevel,destination?{...destination,kind:'marker',quiet:!alignmentMode}:{id:'',x:m.x,y:m.y,quiet:true});}
 // Arriving through a floor link: no popup, just a short glow on the landing marker.
-function flashPin(id){const el=(pins.get(id)||labelPins.get(id))?.getElement();if(!el)return;el.classList.remove('just-arrived');void el.offsetWidth;el.classList.add('just-arrived');setTimeout(()=>el.classList.remove('just-arrived'),1700);}
+function flashPin(id){const el=(pins.get(id)||labelPins.get(id))?.getElement();if(!el)return;el.classList.remove('just-arrived');void el.offsetWidth;el.classList.add('just-arrived');setTimeout(()=>el.classList.remove('just-arrived'),3700);}
 // A marker's wiki page opens in a new tab; an embed on another site may hide it (wiki-links.js).
 function wikiButton(m){const link=wikiLinkFor(m);return link?externalLink('Read on '+link.name+' ↗',link.href,'wiki-link'):null;}
 const noteKind=m=>m.noteType==='label'?'Area label':m.noteType==='exit'?'Zone exit':m.category;

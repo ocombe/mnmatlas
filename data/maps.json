@@ -1434,7 +1434,7 @@
       "maxZoom": 7,
       "coordinateZoom": 5,
       "tileSize": 256,
-      "tileRevision": "v2",
+      "tileRevision": "v3",
       "tilePath": "assets/tiles/tel-ekir/floor-1/{z}/{x}/{y}.webp",
       "markersFile": "data/tel-ekir/markers.json",
       "labelsFile": "data/tel-ekir/labels.json",
@@ -1454,17 +1454,23 @@
         {
           "id": "floor-2",
           "title": "Tunnels",
-          "tilePath": "assets/tiles/tel-ekir/floor-2/{z}/{x}/{y}.webp"
+          "tilePath": "assets/tiles/tel-ekir/floor-2/{z}/{x}/{y}.webp",
+          "maxNativeZoom": 6,
+          "tileRevision": "x2-j4"
         },
         {
           "id": "floor-3",
           "title": "Hidden rooms",
-          "tilePath": "assets/tiles/tel-ekir/floor-3/{z}/{x}/{y}.webp"
+          "tilePath": "assets/tiles/tel-ekir/floor-3/{z}/{x}/{y}.webp",
+          "maxNativeZoom": 6,
+          "tileRevision": "x2-j4"
         },
         {
           "id": "floor-4",
           "title": "Hin Adaru inner rooms",
-          "tilePath": "assets/tiles/tel-ekir/floor-4/{z}/{x}/{y}.webp"
+          "tilePath": "assets/tiles/tel-ekir/floor-4/{z}/{x}/{y}.webp",
+          "maxNativeZoom": 6,
+          "tileRevision": "x2-j4"
         }
       ],
       "extraCategories": {
