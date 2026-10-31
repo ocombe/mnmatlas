@@ -35,6 +35,14 @@
     {
       "name": "vrenlin",
       "what": "edited"
+    },
+    {
+      "name": "mogbert",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-994": [
@@ -209,6 +217,12 @@
       "what": "added"
     }
   ],
+  "marker:community-1702": [
+    {
+      "name": "sekai777",
+      "what": "added"
+    }
+  ],
   "marker:community-1777": [
     {
       "name": null,
@@ -217,6 +231,12 @@
     {
       "name": null,
       "what": "moved"
+    }
+  ],
+  "marker:community-1835": [
+    {
+      "name": "mogbert",
+      "what": "added"
     }
   ]
 }

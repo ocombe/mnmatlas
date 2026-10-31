@@ -548,5 +548,68 @@
     ]
    ]
   }
+ },
+ {
+  "id": "community-1719",
+  "community": true,
+  "name": "Runner Murtazam",
+  "note": "",
+  "x": 2891,
+  "y": 5304,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/runner-murtazam",
+  "wikiId": "npc-runner-murtazam",
+  "levels": [
+   50,
+   50
+  ]
+ },
+ {
+  "id": "community-1738",
+  "community": true,
+  "name": "Joining the Red Mantles - Blue Flag",
+  "note": "",
+  "x": 9099,
+  "y": 5912,
+  "category": "Quest",
+  "color": "#2f6f9a"
+ },
+ {
+  "id": "community-1739",
+  "community": true,
+  "name": "Joining the Red Mantles - Red Flag",
+  "note": "",
+  "x": 8699,
+  "y": 5601,
+  "category": "Quest"
+ },
+ {
+  "id": "community-1740",
+  "community": true,
+  "name": "Joining the Red Mantles - Green Flag",
+  "note": "",
+  "x": 8758,
+  "y": 4961,
+  "category": "Quest",
+  "color": "#4f7a3a"
+ },
+ {
+  "id": "community-1751",
+  "community": true,
+  "name": "Joining the Red Mantles - Yellow Flag",
+  "note": "",
+  "x": 8430,
+  "y": 5231,
+  "category": "Quest",
+  "color": "#b5861f"
+ },
+ {
+  "id": "community-1842",
+  "community": true,
+  "name": "Anlisia Silvereye",
+  "note": "Part of the \"Joining the Red Mantle\" questline.\nAsk's to search 4 spots marked by coloured flagpoles around the fallen structure north. Must be in a specific order.",
+  "x": 8858,
+  "y": 6818,
+  "category": "Quest NPC"
  }
 ]

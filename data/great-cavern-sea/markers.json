@@ -637,8 +637,8 @@
   "wiki": "https://monstersandmemories.wiki/npcs/elder-cavrisse",
   "wikiId": "npc-elder-cavrisse",
   "levels": [
-   52,
-   52
+   54,
+   54
   ]
  },
  {
@@ -737,5 +737,21 @@
   "x": 6493,
   "y": 6380,
   "category": "Quest NPC"
+ },
+ {
+  "id": "community-1780",
+  "community": true,
+  "name": "Morgak Foamscar",
+  "note": "group of four cargo guards by waterfall",
+  "x": 784,
+  "y": 3611,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/morgak-foamscar",
+  "wikiId": "npc-morgak-foamscar",
+  "levels": [
+   15,
+   15
+  ],
+  "ambush": false
  }
 ]

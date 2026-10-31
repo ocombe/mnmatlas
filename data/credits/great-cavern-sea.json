@@ -313,6 +313,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1469": [
@@ -363,6 +367,12 @@
     {
       "name": null,
       "what": "edited"
+    }
+  ],
+  "marker:community-1780": [
+    {
+      "name": "bellum.deus",
+      "what": "added"
     }
   ]
 }

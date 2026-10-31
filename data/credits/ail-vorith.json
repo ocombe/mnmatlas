@@ -477,6 +477,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "abramech",
+      "what": "moved"
     }
   ],
   "marker:community-282": [
@@ -1242,6 +1246,42 @@
   "marker:community-1712": [
     {
       "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1754": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:lumberjacking-kulzzanrek": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:survival-thirvol": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:tailoring-ruzzuna": [
+    {
+      "name": null,
+      "what": "moved"
+    }
+  ],
+  "marker:community-1758": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1837": [
+    {
+      "name": "weagleone",
       "what": "added"
     }
   ]

@@ -1,321 +1,5 @@
 [
   {
-    "at": "2026-10-21T19:49:33.840Z",
-    "rows": [
-      {
-        "id": 1127,
-        "payloadHash": "c90a67cdc8b2f6602af4866acc07b37160b88d09fb3a2a6bcf9de6ad9c1f3e71",
-        "updatedAt": "2026-10-21T19:28:14.50123+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1196,
-            "y": 1499,
-            "name": "Haggler Mernon",
-            "note": "Haggling trainer\nCan be found wandering up and down the stairs here",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1128,
-        "payloadHash": "d1500809ee8f52615ca21df37acb25f71fb706a56a7d3d85552856acb1757002",
-        "updatedAt": "2026-10-21T19:28:18.366821+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1102,
-            "y": 1598,
-            "name": "a guild registrar",
-            "note": "on the top level",
-            "category": "Guild"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1129,
-        "payloadHash": "cc6c3104fadec782efae9cd2e739beebf49883c03ee83b1b5653c1a370f7ddf0",
-        "updatedAt": "2026-10-21T19:28:22.669402+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1280,
-            "y": 1420,
-            "name": "Herbalist Llewcyn",
-            "note": "Herbalist trainer",
-            "trade": "Herbalism",
-            "category": "Tradeskill"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1130,
-        "payloadHash": "7b4d9167464432203b193f8d0540f8062d5da301d33ffbba6372042cec519ccf",
-        "updatedAt": "2026-10-21T19:28:27.580982+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1108,
-            "y": 855,
-            "name": "Captain Vaelric Ironbark",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/captain-vaelric-ironbark",
-            "bounty": "npc-captain-vaelric-ironbark",
-            "wikiId": "npc-captain-vaelric-ironbark",
-            "category": "Quest NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1131,
-        "payloadHash": "cd886155cd3b25ad3fdf53c1c511499285d7227b418982da805ca6ffe6fb9ae1",
-        "updatedAt": "2026-10-21T19:28:30.846199+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1137,
-            "y": 789,
-            "name": "Commander Elydris Stormbough",
-            "note": "on the upper level",
-            "wiki": "https://monstersandmemories.wiki/npcs/commander-elydris-stormbough",
-            "bounty": "npc-commander-elydris-stormbough",
-            "wikiId": "npc-commander-elydris-stormbough",
-            "category": "Quest NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1133,
-        "payloadHash": "27cc85e6b5607b4ebe430264e456dbea93090317ee72b2e9978c5076b72fc618",
-        "updatedAt": "2026-10-21T19:28:36.841656+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1163,
-            "y": 697,
-            "name": "Captain Keyaryn Thornshade",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/captain-keyaryn-thornshade",
-            "bounty": "npc-captain-keyaryn-thornshade",
-            "wikiId": "npc-captain-keyaryn-thornshade",
-            "category": "Quest NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1134,
-        "payloadHash": "9c40d876f6843033d3ea2686ae00e277f8cde0a2e27b21d4e799261f04072e91",
-        "updatedAt": "2026-10-21T19:29:46.142785+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "wiki-2",
-          "payload": {
-            "to": [
-              1159,
-              858
-            ],
-            "from": [
-              1126,
-              870
-            ],
-            "name": "Archer · Fighter — Wayguard Garrison"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1135,
-        "payloadHash": "7848fd1b4709ca00337a6c7842ed99512c4c31aa746be8d288435483449c0976",
-        "updatedAt": "2026-10-21T19:29:51.695042+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1841,
-            "y": 1542,
-            "name": "Varilis Thornvine",
-            "note": "part of Shaman starter quest",
-            "wiki": "https://monstersandmemories.wiki/npcs/varilis-thornvine",
-            "bounty": "npc-varilis-thornvine",
-            "wikiId": "npc-varilis-thornvine",
-            "category": "Quest NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1136,
-        "payloadHash": "61b43fd6dba0d1a2e48ba184db8ef1222cc778f9bf9359f9ca2c836e21753a73",
-        "updatedAt": "2026-10-21T19:29:56.90018+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-386",
-          "payload": {
-            "to": [
-              1808,
-              1587
-            ],
-            "from": [
-              1781,
-              1567
-            ],
-            "name": "Moon Dances"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1137,
-        "payloadHash": "dd644636893559e1410597518f05dcd0b29afe8a2b92ef262734b71505666380",
-        "updatedAt": "2026-10-21T19:30:01.070424+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-454",
-          "payload": {
-            "to": [
-              1763,
-              1580
-            ],
-            "from": [
-              1820,
-              1564
-            ],
-            "name": "Eraeldor Lowmist"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1139,
-        "payloadHash": "0c49c4f3ab6318863193c420fedc5a467ca9766482020300c00ccdeb7b831a24",
-        "updatedAt": "2026-10-21T19:30:08.797687+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "wiki-5",
-          "payload": {
-            "from": {
-              "x": 1860,
-              "y": 1654,
-              "name": "Shaman — The Balanced Branch",
-              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
-              "classes": [
-                "Shaman"
-              ],
-              "building": "The Balanced Branch",
-              "category": "Class trainer",
-              "approximate": true
-            },
-            "name": "a shaman scribe",
-            "note": ""
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1140,
-        "payloadHash": "ec8d72e63342b44ba9add0756b049d2b71e636f0defc28475604b4cf765fb961",
-        "updatedAt": "2026-10-21T19:30:16.543519+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "wiki-5",
-          "payload": {
-            "to": [
-              1789,
-              1561
-            ],
-            "from": [
-              1860,
-              1654
-            ],
-            "name": "Shaman — The Balanced Branch"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1141,
-        "payloadHash": "a78cc196186a7a2038511094ac256749ca005e4be9bfcb37d8bc40c0d7b2e725",
-        "updatedAt": "2026-10-21T19:30:25.892543+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1851,
-            "y": 1555,
-            "name": "Listener Maplebloom",
-            "note": "part of Bard starter quest",
-            "category": "Quest NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1142,
-        "payloadHash": "f484e78ea016fafe7043d2a16143348a2a60f30ff27d01b2fda28941abaf7832",
-        "updatedAt": "2026-10-21T19:30:48.431599+00:00",
-        "version": {
-          "map": "faelindral",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "wiki-38",
-          "payload": {
-            "from": {
-              "x": 1842.31,
-              "y": 1098.5,
-              "name": "Fletching — Ranger's Rest",
-              "note": "Adapted from Maggot's Faelindral map (CC BY-SA 4.0).",
-              "trade": null,
-              "category": "Tradeskill",
-              "approximate": true
-            },
-            "name": "Fletcher Merafyn",
-            "note": "",
-            "trade": "Fletching"
-          },
-          "credit": true
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-22T22:21:33.026Z",
     "rows": [
       {
@@ -13893,6 +13577,1023 @@
               1964
             ],
             "name": "Zig-zag to climb the slope"
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-10-31T23:34:35.690Z",
+    "rows": [
+      {
+        "id": 1624,
+        "payloadHash": "2fb768f7549a4c4708e571406fac6e11feff426215ba6e70b85fe1f6813af5d5",
+        "updatedAt": "2026-10-31T21:44:04.480119+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1509",
+          "payload": {
+            "to": [
+              1577,
+              1749
+            ],
+            "from": [
+              1664,
+              1295
+            ],
+            "name": "Elder Luh'Kan"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1700,
+        "payloadHash": "99d9e801ca55e14679192446b601e014f1f25dea2b6416db1381a0d8d249bc32",
+        "updatedAt": "2026-10-31T21:39:59.903659+00:00",
+        "version": {
+          "map": "faelindral",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "wiki-4",
+          "payload": {
+            "from": {
+              "x": 2099,
+              "y": 1113,
+              "name": "Beastlord — Quite Den",
+              "note": "sells Beastmaster skills",
+              "classes": [
+                "Beastlord"
+              ],
+              "building": "Quite Den",
+              "category": "Class trainer",
+              "approximate": false
+            },
+            "name": "Beastlord — Quite Den",
+            "note": ""
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1702,
+        "payloadHash": "f8b4a832821764e97dda12503aeea9a7d2042b8084aca5adaedcdea9bc2748de",
+        "updatedAt": "2026-10-31T21:38:55.520893+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 6947,
+            "y": 7005,
+            "name": "Passkiller",
+            "note": "Named bat at the far end of the tunnel full of bats.  Light blue to 34. Tracks to just above the brine lake waterfall, but you have to run through literally hundreds of bats to get there. There are several safe spots or semi-safe spots (areas with only 1 bat) in between for invising to get there. Dropped Passkiller's Stripped Chausses, chain legs 25AC STR+5 STA+4. PH is a trained razorwing, but the spot is at the very end of the tunnel and distinct from all the other razorwings. It is by itself. Uses dive attack, sonic pulse, and Hamstring Bite, which hits over 100, definite undercon but still easy at 34.",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Passkiller",
+            "ambush": false,
+            "levels": [
+              29,
+              29
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1719,
+        "payloadHash": "71bd8790981a6ae08aee973103bb2daa851373d7e0d090ca443ff6dd3bd98901",
+        "updatedAt": "2026-10-31T21:51:32.178515+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2891,
+            "y": 5304,
+            "name": "Runner Murtazam",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/runner-murtazam",
+            "bounty": "npc-runner-murtazam",
+            "levels": [
+              50,
+              50
+            ],
+            "wikiId": "npc-runner-murtazam",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1738,
+        "payloadHash": "eb2315db7a36dbbb86df14284eea1c9f3defa2baf28559218ea082f26534715e",
+        "updatedAt": "2026-10-31T21:51:56.315949+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 9099,
+            "y": 5912,
+            "name": "Joining the Red Mantles - Blue Flag",
+            "note": "",
+            "color": "#2f6f9a",
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1739,
+        "payloadHash": "40cbbdf61a60a0125cab15c89853e2839d4ae7bc128e9a7b5382850d335e950c",
+        "updatedAt": "2026-10-31T21:52:04.739338+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 8699,
+            "y": 5601,
+            "name": "Joining the Red Mantles - Red Flag",
+            "note": "",
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1740,
+        "payloadHash": "9dc9347f0b39eec3350c144f618862ccc6646cb1c1fa9c63b8a26e248c46f3e9",
+        "updatedAt": "2026-10-31T22:23:27.151054+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 8758,
+            "y": 4961,
+            "name": "Joining the Red Mantles - Green Flag",
+            "note": "",
+            "color": "#4f7a3a",
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1743,
+        "payloadHash": "e467ce8c00f56ad3ec76448b6b325b3d23e7db013c0e1d532e79955699a44421",
+        "updatedAt": "2026-10-31T21:44:14.284095+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1413",
+          "payload": {
+            "to": [
+              3379,
+              2739
+            ],
+            "from": [
+              3379,
+              2739
+            ],
+            "name": "Morthkara the Blight"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1751,
+        "payloadHash": "b8ab9387f7467a971aa750b4e3bc236bc947fde0cdaf3ddef76a5fb9b3327dc2",
+        "updatedAt": "2026-10-31T22:23:36.886101+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 8430,
+            "y": 5231,
+            "name": "Joining the Red Mantles - Yellow Flag",
+            "note": "",
+            "color": "#b5861f",
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1754,
+        "payloadHash": "4843fc92eecf68dd0499f0f8f56fe3276513903d270b3f10203471c2a55bbc04",
+        "updatedAt": "2026-10-31T21:37:37.649737+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4785,
+            "y": 4418,
+            "name": "Surgeon Tris'trel",
+            "note": "",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Surgeon_Tris%27trel",
+            "level": "city",
+            "trade": "Bind Wound",
+            "category": "Tradeskill"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1755,
+        "payloadHash": "2e0225289415ec09ba7a99caebb460bfb37033aca246c97aa2e5ff153be7253e",
+        "updatedAt": "2026-10-31T21:37:43.206145+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "move-marker",
+          "target_id": "lumberjacking-kulzzanrek",
+          "payload": {
+            "to": [
+              4725,
+              4531
+            ],
+            "from": [
+              4758,
+              4531
+            ],
+            "name": "Lumberjacking — Kulzzanrek"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1756,
+        "payloadHash": "c8326a83369daa3396212451a899b0a34e8e33d4a68e67b6e574f525df4bae7f",
+        "updatedAt": "2026-10-31T21:37:50.675225+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "move-marker",
+          "target_id": "survival-thirvol",
+          "payload": {
+            "to": [
+              4678,
+              4547
+            ],
+            "from": [
+              4770,
+              4465
+            ],
+            "name": "Survival — Thirvol"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1757,
+        "payloadHash": "97c58e390e59a21b3e9dc4479bdd5b0b444493676f66f12ba5b48aaa314a17b1",
+        "updatedAt": "2026-10-31T21:37:54.920814+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "move-marker",
+          "target_id": "tailoring-ruzzuna",
+          "payload": {
+            "to": [
+              4695,
+              4403
+            ],
+            "from": [
+              4665,
+              4412
+            ],
+            "name": "Tailoring — Ruzzuna"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1758,
+        "payloadHash": "615f6f27b1160c56517b4e4cd18bb0f4ec4be125c859209e5588eb05ee9c5881",
+        "updatedAt": "2026-10-31T21:37:59.105602+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4706,
+            "y": 4108,
+            "name": "Bowyer Nulvessa",
+            "note": "",
+            "wiki": "https://monstersandmemories.miraheze.org/wiki/Bowyer_Nulvessa",
+            "level": "city",
+            "sells": [
+              "Ammo",
+              "Recipes",
+              "Weapons"
+            ],
+            "vendor": "Bowyer",
+            "category": "Vendor"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1764,
+        "payloadHash": "1a6d33505c608317fd5960c0272ad7e3f0c09c5249bdc06fd6485e56a44d6893",
+        "updatedAt": "2026-10-31T21:44:24.660832+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-1042",
+          "payload": {
+            "from": {
+              "x": 676,
+              "y": 1671,
+              "name": "Demeter Stollen",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/demeter-stollen",
+              "level": "ground",
+              "wikiId": "npc-demeter-stollen",
+              "category": "Notable NPC"
+            },
+            "name": "Demeter Stollen",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1765,
+        "payloadHash": "b50c8514646ac8604d4252e7d2a5a04b34dfbb4179c9217ba92c1d007a5ab3fe",
+        "updatedAt": "2026-10-31T21:45:35.945771+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1177",
+          "payload": {
+            "to": [
+              1124,
+              1662
+            ],
+            "from": [
+              1926,
+              1868
+            ],
+            "name": "Taskmaster Nor'Tap"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1766,
+        "payloadHash": "6f4ccfca2529ee06ce794aa7e676289be00d1b8d921aaf77cc49fc5c74cb7905",
+        "updatedAt": "2026-10-31T21:45:43.293342+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1459",
+          "payload": {
+            "to": [
+              2150,
+              2727
+            ],
+            "from": [
+              1900,
+              2581
+            ],
+            "name": "Felix Rathmere"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1767,
+        "payloadHash": "409d5b9829d7591624c4d877832b2ab2dc21d6ecf6097c92e3c362b43a0756a0",
+        "updatedAt": "2026-10-31T21:45:56.345911+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-1459",
+          "payload": {
+            "x": 2139,
+            "y": 2726,
+            "from": {
+              "x": 1900,
+              "y": 2581,
+              "name": "Felix Rathmere",
+              "note": "Roams alot",
+              "wiki": "https://monstersandmemories.wiki/npcs/felix-rathmere",
+              "level": "ground",
+              "levels": [
+                45,
+                45
+              ],
+              "wikiId": "npc-felix-rathmere",
+              "category": "Named mob"
+            },
+            "name": "Felix Rathmere",
+            "note": "Roams from his spawn by smuggler's cave through the canyon, around the open area south of the keep, then goes into the keep and to where Overseer Shuk'Naru spawns. He then returns on a slightly different path.",
+            "shape": {
+              "kind": "path",
+              "loop": true,
+              "points": [
+                [
+                  2139,
+                  2726
+                ],
+                [
+                  1930,
+                  2730
+                ],
+                [
+                  1714,
+                  2751
+                ],
+                [
+                  1600,
+                  2729
+                ],
+                [
+                  1506,
+                  2615
+                ],
+                [
+                  1361,
+                  2589
+                ],
+                [
+                  1265,
+                  2493
+                ],
+                [
+                  1142,
+                  2526
+                ],
+                [
+                  1024,
+                  2494
+                ],
+                [
+                  1091,
+                  2358
+                ],
+                [
+                  1148,
+                  2254
+                ],
+                [
+                  1202,
+                  2190
+                ],
+                [
+                  1175,
+                  2120
+                ],
+                [
+                  1170,
+                  2001
+                ],
+                [
+                  1215,
+                  1991
+                ],
+                [
+                  1186,
+                  2018
+                ],
+                [
+                  1186,
+                  2100
+                ],
+                [
+                  1220,
+                  2225
+                ],
+                [
+                  1248,
+                  2270
+                ],
+                [
+                  1310,
+                  2382
+                ],
+                [
+                  1319,
+                  2516
+                ],
+                [
+                  1361,
+                  2574
+                ],
+                [
+                  1576,
+                  2689
+                ],
+                [
+                  1639,
+                  2754
+                ]
+              ]
+            }
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1768,
+        "payloadHash": "7468d341cefa264781398afbba7bc64f347525d2436c9831ecab3bea6971b876",
+        "updatedAt": "2026-10-31T21:50:38.594465+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-1334",
+          "payload": {
+            "from": {
+              "x": 1345,
+              "y": 1975,
+              "name": "Taskmaster Fek'Ney",
+              "note": "This is the entrance to a cave where Fek'Ney is, it's next to the waterfall on the ground level.",
+              "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-fekney",
+              "level": "ground",
+              "levels": [
+                40,
+                40
+              ],
+              "wikiId": "npc-taskmaster-fekney",
+              "category": "Named mob"
+            },
+            "name": "Taskmaster Fek'Ney",
+            "level": "underground"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1769,
+        "payloadHash": "73918de7e708e5420b889be209b52f3eb6748852348d7ebc69e4d8582298c1bb",
+        "updatedAt": "2026-10-31T21:50:51.324425+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-695",
+          "payload": {
+            "x": 1704,
+            "y": 2776,
+            "from": {
+              "x": 1692,
+              "y": 2858,
+              "name": "Qassem Brolt (level 34)",
+              "level": "ground"
+            },
+            "name": "Qassem Brolt (level 34)",
+            "level": "underground"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1770,
+        "payloadHash": "ca1f53e65f127ee4d1db3d4c7874b5d8f52f2bcd7c5bcef01109f975bc8dc4fe",
+        "updatedAt": "2026-10-31T21:51:04.76666+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-988",
+          "payload": {
+            "x": 1763,
+            "y": 2717,
+            "from": {
+              "x": 1854,
+              "y": 2910,
+              "name": "Sivah Arjun (level 32)",
+              "level": "ground"
+            },
+            "name": "Sivah Arjun (level 32)",
+            "level": "underground"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1771,
+        "payloadHash": "9a21031545fedc488c2170a63c83bfc2aff35bc1d1e3dd01c58940862aebaaff",
+        "updatedAt": "2026-10-31T21:38:09.477108+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "move-marker",
+          "target_id": "community-281",
+          "payload": {
+            "to": [
+              3675,
+              2739
+            ],
+            "from": [
+              3675,
+              2739
+            ],
+            "name": "Marveta Drezzorith"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1772,
+        "payloadHash": "8aa29288e0135408b91ce8ec83828676b10b61fc0a4b7cece8d00f3553ea95f7",
+        "updatedAt": "2026-10-31T21:51:18.94687+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-805",
+          "payload": {
+            "x": 1457,
+            "y": 2964,
+            "from": {
+              "x": 1124,
+              "y": 2678,
+              "name": "Tora'Galdo",
+              "level": "ground"
+            },
+            "name": "Tora'Galdo",
+            "level": "underground"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1773,
+        "payloadHash": "9b5420070d18d6f8a53c5ed4a7bf96d8bea69e03a7114bb83cafa8b5f0eda85e",
+        "updatedAt": "2026-10-31T21:47:34.609098+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1450",
+          "payload": {
+            "to": [
+              2434,
+              2126
+            ],
+            "from": [
+              2402,
+              1921
+            ],
+            "name": "Seamas Growt"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1774,
+        "payloadHash": "44584f93ac86e473b0891f67bbfc6df5a262c03cee6cb537dc72b7257596665c",
+        "updatedAt": "2026-10-31T21:47:39.604106+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-1450",
+          "payload": {
+            "x": 2420,
+            "y": 2123,
+            "from": {
+              "x": 2402,
+              "y": 1921,
+              "name": "Seamas Growt",
+              "note": "popped up walking on bridge",
+              "wiki": "https://monstersandmemories.wiki/npcs/seamas-growt",
+              "level": "ground",
+              "levels": [
+                39,
+                39
+              ],
+              "wikiId": "npc-seamas-growt",
+              "category": "Named mob"
+            },
+            "name": "Seamas Growt",
+            "shape": {
+              "kind": "path",
+              "loop": false,
+              "points": [
+                [
+                  2420,
+                  2123
+                ],
+                [
+                  2333,
+                  2125
+                ],
+                [
+                  2230,
+                  2062
+                ],
+                [
+                  2311,
+                  1997
+                ],
+                [
+                  2402,
+                  1901
+                ],
+                [
+                  2356,
+                  1882
+                ],
+                [
+                  2278,
+                  1891
+                ],
+                [
+                  2230,
+                  1882
+                ],
+                [
+                  2146,
+                  1867
+                ],
+                [
+                  1990,
+                  1942
+                ],
+                [
+                  1917,
+                  1898
+                ],
+                [
+                  1867,
+                  1882
+                ],
+                [
+                  1782,
+                  1886
+                ]
+              ]
+            }
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1780,
+        "payloadHash": "799e1b63ae1b1b8c20033fa924dce10ff1941b54ca20cc5fd2cb3cc775b43cd9",
+        "updatedAt": "2026-10-31T22:24:04.766911+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 784,
+            "y": 3611,
+            "name": "Morgak Foamscar",
+            "note": "group of four cargo guards by waterfall",
+            "wiki": "https://monstersandmemories.wiki/npcs/morgak-foamscar",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "wikiId": "npc-morgak-foamscar",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1782,
+        "payloadHash": "d32e535e46cec75db7c026a3e0f59d0c59f391a54e2a1a2b58ddee95ccd7f450",
+        "updatedAt": "2026-10-31T22:24:09.699671+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1468",
+          "payload": {
+            "from": {
+              "x": 5136,
+              "y": 8115,
+              "name": "Elder Cavrisse",
+              "note": "Spawns on the top corner PH is the middle mob",
+              "wiki": "https://monstersandmemories.wiki/npcs/elder-cavrisse",
+              "levels": [
+                52,
+                52
+              ],
+              "wikiId": "npc-elder-cavrisse",
+              "category": "Named mob"
+            },
+            "name": "Elder Cavrisse",
+            "levels": [
+              54,
+              54
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1783,
+        "payloadHash": "4f070a85e0bc91e716e7e54edbae8f737dbae49fd5cf1105a1770480cc68b9d5",
+        "updatedAt": "2026-10-31T21:47:43.609606+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-675",
+          "payload": {
+            "to": [
+              3067,
+              2460
+            ],
+            "from": [
+              3063,
+              2355
+            ],
+            "name": "Elda the Cook (level ~54)"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1784,
+        "payloadHash": "b72a26975297f7c5ca56dfc67c9b61ef0f31200e7f4fa6063cc64b640a6a1930",
+        "updatedAt": "2026-10-31T21:49:55.327836+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-672",
+          "payload": {
+            "to": [
+              2867,
+              2656
+            ],
+            "from": [
+              2831,
+              2641
+            ],
+            "name": "Faylan Torvald (level 53)"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1835,
+        "payloadHash": "92cfcf38a43932d7e57aca17b9158715e6930fb0a26d7aa1e794e1541ddceb0f",
+        "updatedAt": "2026-10-31T21:39:37.016821+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1430,
+            "y": 1049,
+            "name": "Dunemother Nezra",
+            "note": "",
+            "ambush": false,
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1836,
+        "payloadHash": "e9f3fefc04e46c3bbc926614e55faf1a0116bdc5015e733fa4f239395c51e225",
+        "updatedAt": "2026-10-31T21:39:52.300487+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-910",
+          "payload": {
+            "to": [
+              1194,
+              2305
+            ],
+            "from": [
+              1285,
+              1499
+            ],
+            "name": "Keeper of the Road"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1837,
+        "payloadHash": "0778f29392562f9d3b23452aa33fc544e290acb8990c286b4af07fc6cc78ed75",
+        "updatedAt": "2026-10-31T21:38:41.804571+00:00",
+        "version": {
+          "map": "ail-vorith",
+          "level": "city",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4098,
+            "y": 2372,
+            "name": "a reagent vendor",
+            "note": "Will sell to you if Residents of Ail'Vorith(Indifferent) and Citizens of Ail'Vorith(Disdain). Vendor is hidden.",
+            "level": "city",
+            "vendor": "Reagent vendor",
+            "category": "Vendor"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1842,
+        "payloadHash": "b2a8ee332915a23690165a73dfdc1a3824588d5d9f7962c62718898293ba17f4",
+        "updatedAt": "2026-10-31T22:23:41.701365+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 8858,
+            "y": 6818,
+            "name": "Anlisia Silvereye",
+            "note": "Part of the \"Joining the Red Mantle\" questline.\nAsk's to search 4 spots marked by coloured flagpoles around the fallen structure north. Must be in a specific order.",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1847,
+        "payloadHash": "e2626c306cca7b9728bebc0d5b0ab7ba73242e0fff8bb9fdb634f372a126d43a",
+        "updatedAt": "2026-10-31T21:39:52.746401+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-910",
+          "payload": {
+            "from": {
+              "x": 1194,
+              "y": 2305,
+              "name": "Keeper of the Road",
+              "note": "Drops a Forsaken Offering and is a killable spectre",
+              "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
+              "ambush": false,
+              "wikiId": "npc-keeper-of-the-road",
+              "category": "Named mob"
+            },
+            "name": "Keeper of the Road",
+            "levels": [
+              31,
+              31
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1848,
+        "payloadHash": "e9104936443bd6816f9e51f755866b49b6ef218e03355dcb844f4c1111bf9fba",
+        "updatedAt": "2026-10-31T21:49:55.795023+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "edit-marker",
+          "target_id": "community-672",
+          "payload": {
+            "from": {
+              "x": 2867,
+              "y": 2656,
+              "name": "Faylan Torvald (level 53)",
+              "note": "FP",
+              "wiki": "https://monstersandmemories.wiki/npcs/faylan-torvald",
+              "level": "ground",
+              "levels": [
+                53,
+                53
+              ],
+              "wikiId": "npc-faylan-torvald",
+              "category": "Named mob"
+            },
+            "name": "Faylan Torvald (level 53)",
+            "note": ""
           },
           "credit": false
         }

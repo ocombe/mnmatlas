@@ -69,19 +69,21 @@
     "id": "survival-thirvol",
     "name": "Survival — Thirvol",
     "category": "Tradeskill",
-    "x": 4770,
-    "y": 4465,
+    "x": 4678,
+    "y": 4547,
     "note": "Survivalist.",
-    "level": "city"
+    "level": "city",
+    "community": true
   },
   {
     "id": "lumberjacking-kulzzanrek",
     "name": "Lumberjacking — Kulzzanrek",
     "category": "Tradeskill",
-    "x": 4758,
+    "x": 4725,
     "y": 4531,
     "note": "Woodcutter.",
-    "level": "city"
+    "level": "city",
+    "community": true
   },
   {
     "id": "magnificent-vhaspire",
@@ -107,10 +109,11 @@
     "id": "tailoring-ruzzuna",
     "name": "Tailoring — Ruzzuna",
     "category": "Tradeskill",
-    "x": 4665,
-    "y": 4412,
+    "x": 4695,
+    "y": 4403,
     "note": "Tailor in the market.",
-    "level": "city"
+    "level": "city",
+    "community": true
   },
   {
     "id": "leatherworker-vex",
@@ -3301,5 +3304,45 @@
     "wiki": "https://monstersandmemories.wiki/npcs/the-discarded",
     "wikiId": "npc-the-discarded",
     "ambush": false
+  },
+  {
+    "id": "community-1754",
+    "community": true,
+    "name": "Surgeon Tris'trel",
+    "note": "",
+    "x": 4785,
+    "y": 4418,
+    "level": "city",
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Surgeon_Tris%27trel",
+    "trade": "Bind Wound"
+  },
+  {
+    "id": "community-1758",
+    "community": true,
+    "name": "Bowyer Nulvessa",
+    "note": "",
+    "x": 4706,
+    "y": 4108,
+    "level": "city",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Bowyer_Nulvessa",
+    "vendor": "Bowyer",
+    "sells": [
+      "Ammo",
+      "Recipes",
+      "Weapons"
+    ]
+  },
+  {
+    "id": "community-1837",
+    "community": true,
+    "name": "a reagent vendor",
+    "note": "Will sell to you if Residents of Ail'Vorith(Indifferent) and Citizens of Ail'Vorith(Disdain). Vendor is hidden.",
+    "x": 4098,
+    "y": 2372,
+    "level": "city",
+    "category": "Vendor",
+    "vendor": "Reagent vendor"
   }
 ]

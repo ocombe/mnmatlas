@@ -52,11 +52,15 @@
     "name": "Keeper of the Road",
     "category": "Named mob",
     "note": "Drops a Forsaken Offering and is a killable spectre",
-    "x": 1285,
-    "y": 1499,
+    "x": 1194,
+    "y": 2305,
     "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
     "wikiId": "npc-keeper-of-the-road",
-    "ambush": false
+    "ambush": false,
+    "levels": [
+      31,
+      31
+    ]
   },
   {
     "id": "community-994",
@@ -860,5 +864,30 @@
     "category": "Passage",
     "way": "Climb",
     "oneWay": false
+  },
+  {
+    "id": "community-1702",
+    "community": true,
+    "name": "Passkiller",
+    "note": "Named bat at the far end of the tunnel full of bats.  Light blue to 34. Tracks to just above the brine lake waterfall, but you have to run through literally hundreds of bats to get there. There are several safe spots or semi-safe spots (areas with only 1 bat) in between for invising to get there. Dropped Passkiller's Stripped Chausses, chain legs 25AC STR+5 STA+4. PH is a trained razorwing, but the spot is at the very end of the tunnel and distinct from all the other razorwings. It is by itself. Uses dive attack, sonic pulse, and Hamstring Bite, which hits over 100, definite undercon but still easy at 34.",
+    "x": 6947,
+    "y": 7005,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.miraheze.org/wiki/Passkiller",
+    "levels": [
+      29,
+      29
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1835",
+    "community": true,
+    "name": "Dunemother Nezra",
+    "note": "",
+    "x": 1430,
+    "y": 1049,
+    "category": "Named mob",
+    "ambush": false
   }
 ]

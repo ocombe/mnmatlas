@@ -67,6 +67,14 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-673": [
@@ -88,6 +96,10 @@
     },
     {
       "name": "captus86_64849",
+      "what": "moved"
+    },
+    {
+      "name": null,
       "what": "moved"
     }
   ],
@@ -129,6 +141,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
     }
   ],
   "marker:community-705": [
@@ -191,6 +207,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
     }
   ],
   "marker:community-988": [
@@ -204,6 +224,10 @@
     },
     {
       "name": null,
+      "what": "edited"
+    },
+    {
+      "name": "nicny86",
       "what": "edited"
     }
   ],
@@ -229,6 +253,10 @@
     {
       "name": "demixt",
       "what": "added"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
     }
   ],
   "marker:ratkin-31-40-1": [
@@ -250,6 +278,10 @@
     },
     {
       "name": null,
+      "what": "moved"
+    },
+    {
+      "name": "nicny86",
       "what": "moved"
     }
   ],
@@ -303,6 +335,10 @@
     {
       "name": "vrenlin",
       "what": "added"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
     }
   ],
   "marker:community-1383": [
@@ -321,12 +357,24 @@
     {
       "name": "xyshina",
       "what": "added"
+    },
+    {
+      "name": "daruk1971",
+      "what": "moved"
     }
   ],
   "marker:community-1450": [
     {
       "name": "_gattsu",
       "what": "added"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "reshaped"
     }
   ],
   "marker:community-1456": [
@@ -351,6 +399,14 @@
     {
       "name": "moff_lamp",
       "what": "added"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "reshaped"
     }
   ],
   "marker:community-1460": [
@@ -411,6 +467,10 @@
     {
       "name": "moff_lamp",
       "what": "added"
+    },
+    {
+      "name": "neverrooks",
+      "what": "moved"
     }
   ],
   "marker:community-1532": [
