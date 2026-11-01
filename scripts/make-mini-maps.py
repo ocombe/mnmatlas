@@ -6,6 +6,7 @@ Needs Pillow, fontTools and brotli (pip install pillow fonttools brotli).
 """
 import io, json, math, re, sys
 from pathlib import Path
+from concurrent.futures import ProcessPoolExecutor
 from PIL import Image, ImageDraw, ImageFont
 from fontTools.ttLib import TTFont
 
@@ -89,12 +90,21 @@ def fit(draw, text, lettering, width):
     return text
 
 
-def main():
+def lettering():
+    """The four faces a picture uses: heading, italic, small credit and trainer chip."""
+    return (font('im-fell-english-regular.woff2', 17), font('im-fell-english-italic.woff2', 12),
+            font('inter-variable.woff2', 9), font('inter-variable.woff2', 10))
+
+
+def start_worker():
+    global FACES
+    FACES = lettering()
+
+
+def pictures():
+    """Every marker that gets a picture, in the order the files are written: where it goes and what to draw."""
     registry = json.loads((ROOT / 'data' / 'maps.json').read_text(encoding='utf-8'))
     colours = categories()
-    heading, italic, small = font('im-fell-english-regular.woff2', 17), font('im-fell-english-italic.woff2', 12), font('inter-variable.woff2', 9)
-    chip = font('inter-variable.woff2', 10)
-    done, sizes, seen = 0, 0, set()
     for c in registry['maps']:
         files = list(dict.fromkeys([c.get('markersFile')] + [l.get('markersFile') for l in c.get('levels', []) if l.get('markersFile')]))
         label_files = list(dict.fromkeys([c.get('labelsFile')] + [l.get('labelsFile') for l in c.get('levels', []) if l.get('labelsFile')]))
@@ -118,40 +128,58 @@ def main():
                 mw, mh = cfg['width'] * scale, cfg['height'] * scale
                 left = int(min(max(px - W / 2, 0), max(mw - W, 0)))
                 top = int(min(max(py - H * 0.58, 0), max(mh - H, 0)))
-                image = tiles_crop(cfg['tilePath'], z, left, top, (214, 196, 160))
-                draw = ImageDraw.Draw(image)
-                spot = (px - left, py - top)
-                if m.get('category') == 'Class trainer' and chips.get(m['id']):
-                    draw_chip(draw, *spot, chips[m['id']], chip)
-                else:
-                    draw_pin(draw, *spot, rgb(m.get('color') or extra.get(m.get('category')) or colours.get(m.get('category'), '#365f59')))
+                chip = chips.get(m['id']) if m.get('category') == 'Class trainer' else None
+                colour = rgb(m.get('color') or extra.get(m.get('category')) or colours.get(m.get('category'), '#365f59'))
                 # The caption plate, like the site's: the name, then who it is for a trainer and the zone (and level).
                 title, who = title_of(m)
                 where = c['title'] + (' · ' + level['title'] if c.get('levels') and level.get('title') else '')
                 who = ' · '.join(filter(None, [who, where]))
-                title = fit(draw, title, heading, W - 30)
-                who = fit(draw, who, italic, W - 30) if who else ''
-                plate_h = 26 + (15 if who else 0)
-                plate_w = max(draw.textlength(title, font=heading), draw.textlength(who, font=italic) if who else 0) + 16
-                plate = Image.new('RGBA', (W, H), (0, 0, 0, 0))
-                ImageDraw.Draw(plate).rounded_rectangle([6, H - 6 - plate_h, 6 + plate_w, H - 6], radius=6, fill=INK + (225,), outline=(110, 86, 52, 255))
-                image = Image.alpha_composite(image.convert('RGBA'), plate).convert('RGB')
-                draw = ImageDraw.Draw(image)
-                draw.text((14, H - 6 - plate_h + 4), title, font=heading, fill=CREAM)
-                if who:
-                    draw.text((14, H - 6 - plate_h + 23), who, font=italic, fill=(201, 182, 150))
-                credit = 'mnmatlas.com'
-                cw = draw.textlength(credit, font=small)
-                draw.rounded_rectangle([W - cw - 12, H - 17, W - 4, H - 4], radius=3, fill=INK)
-                draw.text((W - 8, H - 10.5), credit, font=small, fill=(201, 182, 150), anchor='rm')
-                data = io.BytesIO()
-                image.save(data, 'WEBP', quality=72, method=6)
-                for path in ([OUT / f'{wiki}.webp'] if wiki and wiki not in seen else []) + [OUT / c['id'] / f"{m['id']}.webp"]:
-                    path.parent.mkdir(parents=True, exist_ok=True)
-                    path.write_bytes(data.getvalue())
-                    sizes += len(data.getvalue())
-                seen.add(wiki)
-                done += 1
+                yield (c['id'], m['id'], wiki), (cfg['tilePath'], z, left, top, (px - left, py - top), chip, colour, title, who)
+
+
+def draw_picture(job):
+    """One picture as WebP bytes (runs in a worker process)."""
+    heading, italic, small, chip_face = FACES
+    tile_path, z, left, top, spot, chip, colour, title, who = job
+    image = tiles_crop(tile_path, z, left, top, (214, 196, 160))
+    draw = ImageDraw.Draw(image)
+    if chip:
+        draw_chip(draw, *spot, chip, chip_face)
+    else:
+        draw_pin(draw, *spot, colour)
+    title = fit(draw, title, heading, W - 30)
+    who = fit(draw, who, italic, W - 30) if who else ''
+    plate_h = 26 + (15 if who else 0)
+    plate_w = max(draw.textlength(title, font=heading), draw.textlength(who, font=italic) if who else 0) + 16
+    plate = Image.new('RGBA', (W, H), (0, 0, 0, 0))
+    ImageDraw.Draw(plate).rounded_rectangle([6, H - 6 - plate_h, 6 + plate_w, H - 6], radius=6, fill=INK + (225,), outline=(110, 86, 52, 255))
+    image = Image.alpha_composite(image.convert('RGBA'), plate).convert('RGB')
+    draw = ImageDraw.Draw(image)
+    draw.text((14, H - 6 - plate_h + 4), title, font=heading, fill=CREAM)
+    if who:
+        draw.text((14, H - 6 - plate_h + 23), who, font=italic, fill=(201, 182, 150))
+    credit = 'mnmatlas.com'
+    cw = draw.textlength(credit, font=small)
+    draw.rounded_rectangle([W - cw - 12, H - 17, W - 4, H - 4], radius=3, fill=INK)
+    draw.text((W - 8, H - 10.5), credit, font=small, fill=(201, 182, 150), anchor='rm')
+    data = io.BytesIO()
+    image.save(data, 'WEBP', quality=72, method=6)
+    return data.getvalue()
+
+
+def main():
+    # Drawing and WebP encoding take nearly all the time, so pictures are drawn on every core; the files are still
+    # written here, one after another in marker order, exactly as a single process wrote them.
+    listed = list(pictures())
+    done, sizes, seen = 0, 0, set()
+    with ProcessPoolExecutor(initializer=start_worker) as pool:
+        for ((map_id, place, wiki), _), data in zip(listed, pool.map(draw_picture, [job for _, job in listed], chunksize=8)):
+            for path in ([OUT / f'{wiki}.webp'] if wiki and wiki not in seen else []) + [OUT / map_id / f'{place}.webp']:
+                path.parent.mkdir(parents=True, exist_ok=True)
+                path.write_bytes(data)
+                sizes += len(data)
+            seen.add(wiki)
+            done += 1
     print(f'Wrote {done} mini maps ({sizes / 1024:.0f} KB with both addresses) to mini/')
 
 
