@@ -28,9 +28,14 @@ jobs:
   apply:
     runs-on: ubuntu-latest
     steps:
+      # Only data/, scripts/ and the top-level files (which cone mode always includes): the job never reads the
+      # tiles, and checking out all 45,000 files took about 25 s of every run.
       - uses: actions/checkout@v4
         with:
           ref: main
+          sparse-checkout: |
+            data
+            scripts
       - uses: actions/setup-node@v4
         with:
           node-version: 22
