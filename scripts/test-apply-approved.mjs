@@ -17,7 +17,7 @@ const server=createServer(async(req,res)=>{let body='';for await(const chunk of 
  if(req.method==='POST'&&url.pathname==='/rest/v1/suggestions'){const row={...JSON.parse(body),id:nextId++,updated_at:'2026-10-10T14:00:00Z'};approved.push(row);res.statusCode=201;res.end(JSON.stringify([row]));return;}
  if(req.method==='GET'&&readRace)readRace(q);
  const id=q.get('id'),status=q.get('status')?.slice(3),source=status==='published'?published:status?approved:[...published,...approved];
- let rows=source.map(r=>({...r,status:r.status||'approved'})).filter(r=>(!id||id.startsWith('gt.')?Number(r.id)>Number(id?.slice(3)||0):String(r.id)===id.slice(3))&&(!status||r.status===status)&&(!q.get('review_note')||r.review_note===q.get('review_note').slice(3)));
+ let rows=source.map(r=>({...r,status:r.status||'approved'})).filter(r=>(!id||id.startsWith('gt.')?Number(r.id)>Number(id?.slice(3)||0):id.startsWith('in.(')?id.slice(4,-1).split(',').includes(String(r.id)):String(r.id)===id.slice(3))&&(!status||r.status===status)&&(!q.get('review_note')||r.review_note===q.get('review_note').slice(3)));
  if(req.method==='PATCH'){
   if(race){race();race=null;rows=approved.filter(r=>String(r.id)===id?.slice(3)&&r.status==='approved');}
   if(failPatch&&failPatch(q,JSON.parse(body))){res.statusCode=400;res.end();return;}
@@ -296,6 +296,8 @@ try{
   const calls=requests.slice(start),ack=calls.findIndex(r=>r.method==='PATCH'&&r.body.status==='published'),read=calls.findIndex(r=>r.method==='GET'&&r.url.includes('status=eq.approved'));assert(ack>=0&&ack<read);assert.equal((await json('data/credits/test-map.json'))['marker:well'][0].name,'Traveller 331');
   // A dry run reads recovery evidence without acknowledging it or creating a correction.
   approved[0].payload.name='Later well';const dryStart=requests.length,dry=await run(true);assert.equal(dry.code,0,dry.output);assert(requests.slice(dryStart).every(r=>r.method==='GET'));
+  // Receipts already published cost one shared read, not one read each.
+  const recoveryReads=requests.slice(dryStart).filter(r=>/[?&]id=(eq\.33[01]|in\.)/.test(decodeURIComponent(r.url)));assert.equal(recoveryReads.length,1,JSON.stringify(recoveryReads.map(r=>r.url)));assert.match(decodeURIComponent(recoveryReads[0].url),/id=in\.\(330,331[,)]/);
   await writeFile(fixture+'/data/publish-log.json',JSON.stringify(Array.from({length:22},()=>({at:'2026-10-01T00:00:00Z',rows:[]}))));assert.equal((await run('recover')).code,0);assert.equal((await json('data/publish-log.json')).length,22,'An empty run leaves recovery history untouched');approved.push(R(332,'edit-marker','well',{name:'Fresh well',from:{name:'Well Y'}}));assert.equal((await run('recover')).code,0);assert.equal((await json('data/publish-log.json')).length,20,'An actual publication retains the last twenty runs');
  }
  // Normal acknowledgement preserves text, type and position corrections to an addition as follow-up rows (e3b).

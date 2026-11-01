@@ -266,8 +266,16 @@ async function correctionRows(row,version,appliedHash){
 }
 async function acknowledge(applied,{recovery=false}={}){
  const report=message=>recovery?console.error('::error::'+String(message).replace(/[\r\n]/g,' ')):writeError(message);
+ // One read per hundred entries finds those not published yet (a week of receipts is mostly published); only those are
+ // read in full below. If that read fails, every entry is read on its own as before.
+ const waiting=new Set(),ids=[...new Set(applied.map(a=>String(a.id)).filter(id=>/^\d+$/.test(id)))];
+ for(let i=0;i<ids.length;i+=100){const part=ids.slice(i,i+100);
+  try{const rows=await request('suggestions?select=id,status&id=in.('+part.join(',')+')');if(!Array.isArray(rows))throw Error();for(const r of rows)if(r.status!=='published')waiting.add(String(r.id));}
+  catch{for(const id of part)waiting.add(id);}
+ }
  for(const a of applied){
   if(!/^\d+$/.test(String(a.id))||!/^[a-f0-9]{64}$/.test(a.payloadHash))fail('Invalid applied entry.');
+  if(!waiting.has(String(a.id)))continue;
   try{
    const row=(await request('suggestions?id=eq.'+a.id+'&select=*'))?.[0];if(!row||row.status==='published')continue;versionWarning(row);
    const version=a.version?{...row,...a.version}:await recoverVersion(row,a),corrections=await correctionRows(row,version,a.payloadHash),same=hash(row.payload)===a.payloadHash&&row.updated_at===(a.updated_at??a.updatedAt??undefined)&&row.status==='approved',body={status:'published',...(/^Not published:/.test(row.review_note||'')?{review_note:null}:{})};
