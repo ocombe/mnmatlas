@@ -67,6 +67,10 @@
     {
       "name": "dendrilly",
       "what": "edited"
+    },
+    {
+      "name": "msisepleld",
+      "what": "edited"
     }
   ],
   "marker:community-728": [
@@ -372,6 +376,12 @@
   "marker:community-1780": [
     {
       "name": "bellum.deus",
+      "what": "added"
+    }
+  ],
+  "marker:community-1845": [
+    {
+      "name": null,
       "what": "added"
     }
   ]

@@ -133,7 +133,9 @@
       40,
       40
     ],
-    "ambush": false
+    "ambush": false,
+    "wiki": "https://monstersandmemories.wiki/npcs/vizier-zarakh",
+    "wikiId": "npc-vizier-zarakh"
   },
   {
     "id": "community-1003",
@@ -888,6 +890,44 @@
     "x": 1430,
     "y": 1049,
     "category": "Named mob",
+    "ambush": false
+  },
+  {
+    "id": "community-1849",
+    "community": true,
+    "name": "Baroness Qi",
+    "note": "Spawns on platform with square frame, possibly any of the three.",
+    "x": 6095,
+    "y": 3324,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/baroness-qi",
+    "wikiId": "npc-baroness-qi"
+  },
+  {
+    "id": "community-1850",
+    "community": true,
+    "name": "Baron Xio",
+    "note": "Spawns on platform with square frame, possibly any of the three.",
+    "x": 5009,
+    "y": 3273,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/baron-xio",
+    "wikiId": "npc-baron-xio"
+  },
+  {
+    "id": "community-1851",
+    "community": true,
+    "name": "Prince Gorb",
+    "note": "Cave of 1000 Eyes area of Caves of Irem. Spawns on platform with square frame (there are three platforms like this). Presumably can spawn Baron Xio, Baroness Qi, or Prince Gorb.",
+    "x": 5843,
+    "y": 2248,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/prince-gorb",
+    "wikiId": "npc-prince-gorb",
+    "levels": [
+      44,
+      44
+    ],
     "ambush": false
   }
 ]

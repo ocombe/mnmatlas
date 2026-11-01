@@ -13,13 +13,14 @@
   "id": "city-notables",
   "name": "Grand Vizier Al'Kithar",
   "category": "Named mob",
-  "x": 4660,
-  "y": 2187,
-  "approximate": true,
+  "x": 4444,
+  "y": 2861,
+  "approximate": false,
   "note": "In the Sand Giant City.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/grand-vizier-alkithar",
-  "wikiId": "npc-grand-vizier-alkithar"
+  "wikiId": "npc-grand-vizier-alkithar",
+  "community": true
  },
  {
   "id": "city-notables-old-scar",
@@ -28,7 +29,7 @@
   "x": 4624,
   "y": 1607,
   "approximate": true,
-  "note": "In the Sand Giant City.",
+  "note": "In the Sand Giant City. There are around 6 different wolves Old Scar can spawn in place of, any of the ones by the two pools or the building north of them.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/old-scar",
   "wikiId": "npc-old-scar",
@@ -100,23 +101,25 @@
   "id": "hadir",
   "name": "Hadir the Shipbreaker",
   "category": "Named mob",
-  "x": 1476,
-  "y": 3731,
-  "approximate": true,
+  "x": 1219,
+  "y": 3995,
+  "approximate": false,
   "note": "At the giant fishing camp on Fisher Rock.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/hadir-the-shipbreaker",
-  "wikiId": "npc-hadir-the-shipbreaker"
+  "wikiId": "npc-hadir-the-shipbreaker",
+  "community": true
  },
  {
   "id": "beach-giants-1",
   "name": "Beach giants",
   "category": "Mob camp",
-  "x": 1508,
-  "y": 4764,
-  "approximate": true,
+  "x": 1697,
+  "y": 4127,
+  "approximate": false,
   "note": "Along the west beach.",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "beach-hunters",
@@ -125,22 +128,24 @@
   "x": 1608,
   "y": 4684,
   "approximate": true,
-  "note": "With the beach giants.",
+  "note": "Wanders the beach between the beach giants and the Fallen Pass zone line.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/hemalmula-the-hunter",
-  "wikiId": "npc-hemalmula-the-hunter"
+  "wikiId": "npc-hemalmula-the-hunter",
+  "community": true
  },
  {
   "id": "beach-hunters-rami-al-qawwaasr",
   "name": "Rami Al-Qawwaasr",
   "category": "Named mob",
-  "x": 1630,
-  "y": 4684,
-  "approximate": true,
+  "x": 1863,
+  "y": 4834,
+  "approximate": false,
   "note": "With the beach giants.",
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/rami-al-qawwaasr",
-  "wikiId": "npc-rami-al-qawwaasr"
+  "wikiId": "npc-rami-al-qawwaasr",
+  "community": true
  },
  {
   "id": "pyrmos-sojourners-1",
@@ -393,6 +398,43 @@
     "name": "Oasis Perch",
     "wiki": "https://monstersandmemories.wiki/items/oasis-perch",
     "wikiId": "item-oasis-perch"
+   }
+  ]
+ },
+ {
+  "id": "community-1720",
+  "community": true,
+  "name": "A spice merchant",
+  "note": "Roams throughout this entire road.. Can be very touch and go for a pin.. Sometimes killed by the giants. consider it a strange blessing to see them.",
+  "x": 3311,
+  "y": 6841,
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-spice-merchant",
+  "wikiId": "npc-a-spice-merchant"
+ },
+ {
+  "id": "community-1759",
+  "community": true,
+  "name": "Fishing",
+  "note": "",
+  "x": 1360,
+  "y": 7094,
+  "category": "Fishing spot",
+  "fish": [
+   {
+    "name": "Redfin Pike",
+    "wiki": "https://monstersandmemories.wiki/items/redfin-pike",
+    "wikiId": "item-redfin-pike"
+   },
+   {
+    "name": "Glimmerscale Herring",
+    "wiki": "https://monstersandmemories.wiki/items/glimmerscale-herring",
+    "wikiId": "item-glimmerscale-herring"
+   },
+   {
+    "name": "Raw Bay Crab",
+    "wiki": "https://monstersandmemories.wiki/items/raw-bay-crab",
+    "wikiId": "item-raw-bay-crab"
    }
   ]
  }

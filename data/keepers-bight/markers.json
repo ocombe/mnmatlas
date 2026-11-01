@@ -370,47 +370,13 @@
    28,
    28
   ],
-  "x": 2588,
-  "y": 6266,
+  "x": 2553,
+  "y": 6246,
   "minZoom": 3,
-  "approximate": true,
+  "approximate": false,
   "note": "In a tent in the enslaved elf pens.",
   "wiki": "https://monstersandmemories.wiki/npcs/brakzul-bonecarver",
   "wikiId": "npc-brakzul-bonecarver",
-  "community": true
- },
- {
-  "id": "orc-cave-named",
-  "name": "Belthakar Dunecaller",
-  "category": "Named mob",
-  "levels": [
-   26,
-   26
-  ],
-  "x": 2706,
-  "y": 6574,
-  "minZoom": 3,
-  "approximate": false,
-  "note": "In the Orc Cave.",
-  "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
-  "wikiId": "npc-belthakar-dunecaller",
-  "community": true
- },
- {
-  "id": "orc-cave-named-rarthan-wartide",
-  "name": "Rarthan Wartide",
-  "category": "Named mob",
-  "levels": [
-   26,
-   26
-  ],
-  "x": 2728,
-  "y": 6574,
-  "minZoom": 3,
-  "approximate": false,
-  "note": "In the Orc Cave.",
-  "wiki": "https://monstersandmemories.wiki/npcs/rarthan-wartide",
-  "wikiId": "npc-rarthan-wartide",
   "community": true
  },
  {
@@ -861,5 +827,49 @@
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/tracker-baumery",
   "wikiId": "npc-tracker-baumery"
+ },
+ {
+  "id": "community-1839",
+  "community": true,
+  "name": "A deadwood matriarch",
+  "note": "Spider Log",
+  "x": 2686,
+  "y": 834,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-deadwood-matriarch",
+  "wikiId": "npc-a-deadwood-matriarch",
+  "levels": [
+   15,
+   null
+  ],
+  "mobs": [
+   {
+    "name": "A deadwood matriarch",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-deadwood-matriarch",
+    "wikiId": "npc-a-deadwood-matriarch"
+   }
+  ]
+ },
+ {
+  "id": "community-1840",
+  "community": true,
+  "name": "A deadwood recluse",
+  "note": "Spider Log",
+  "x": 2240,
+  "y": 1372,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-deadwood-recluse",
+  "wikiId": "npc-a-deadwood-recluse",
+  "levels": [
+   12,
+   null
+  ],
+  "mobs": [
+   {
+    "name": "A deadwood recluse",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-deadwood-recluse",
+    "wikiId": "npc-a-deadwood-recluse"
+   }
+  ]
  }
 ]

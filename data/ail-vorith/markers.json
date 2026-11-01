@@ -5,8 +5,10 @@
     "category": "Teleporter",
     "x": 4245,
     "y": 4565,
-    "note": "Teleporter destination to confirm.",
-    "level": "city"
+    "note": "Leads to the top of the same tower",
+    "level": "city",
+    "direction": "up",
+    "community": true
   },
   {
     "id": "guild-registrar-customs-agent",

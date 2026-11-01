@@ -68,8 +68,8 @@
   "id": "brother-luka",
   "name": "Brother Luka",
   "category": "Quest NPC",
-  "x": 3046,
-  "y": 10945,
+  "x": 3179,
+  "y": 11026,
   "minZoom": 3,
   "approximate": false,
   "note": "Werejackal Island: “Pelts for the Festival” (30+).",
@@ -246,8 +246,8 @@
   "approximate": false,
   "minZoom": 3,
   "levels": [
-   45,
-   45
+   49,
+   49
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/witchlord-kruurgal",
   "wikiId": "npc-witchlord-kruurgal",
@@ -285,23 +285,6 @@
   ],
   "wiki": "https://monstersandmemories.wiki/npcs/high-priest-of-muurtu",
   "wikiId": "npc-high-priest-of-muurtu",
-  "community": true
- },
- {
-  "id": "wanted-champion-of-muurtu",
-  "name": "Champion of Muurtu",
-  "category": "Named mob",
-  "note": "Black Shoals Fortress.",
-  "x": 5836,
-  "y": 1932,
-  "approximate": false,
-  "minZoom": 3,
-  "levels": [
-   45,
-   45
-  ],
-  "wiki": "https://monstersandmemories.wiki/npcs/champion-of-muurtu",
-  "wikiId": "npc-champion-of-muurtu",
   "community": true
  },
  {
@@ -439,8 +422,8 @@
   "community": true,
   "name": "Sister Elsi",
   "note": "",
-  "x": 3231,
-  "y": 10935,
+  "x": 3080,
+  "y": 10912,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/sister-elsi",
   "wikiId": "npc-sister-elsi",

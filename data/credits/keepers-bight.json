@@ -37,6 +37,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": ".menori",
+      "what": "moved"
     }
   ],
   "marker:community-462": [
@@ -231,12 +235,32 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": ".menori",
+      "what": "removed"
     }
   ],
   "marker:orc-cave-named-rarthan-wartide": [
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "removed"
+    }
+  ],
+  "marker:community-1839": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1840": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

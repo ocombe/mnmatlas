@@ -109,6 +109,10 @@
     {
       "name": "ocombe",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-108": [
@@ -469,6 +473,10 @@
     {
       "name": ".tque",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-324": [
@@ -613,6 +621,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "seridaq",
+      "what": "edited"
     }
   ],
   "marker:wiki-3": [
@@ -939,6 +951,10 @@
     {
       "name": "seldrath",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-788": [
@@ -1283,6 +1299,10 @@
     {
       "name": ".anduri",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "removed"
     }
   ],
   "marker:community-1083": [
@@ -1337,6 +1357,10 @@
     {
       "name": "yummsie",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-1184": [
@@ -1349,30 +1373,50 @@
     {
       "name": "yummsie",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-1186": [
     {
       "name": "yummsie",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-1187": [
     {
       "name": "yummsie",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-1188": [
     {
       "name": "yummsie",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-1189": [
     {
       "name": "yummsie",
       "what": "added"
+    },
+    {
+      "name": "seridaq",
+      "what": "moved"
     }
   ],
   "marker:community-1193": [
@@ -1577,6 +1621,180 @@
     {
       "name": "sting_operation",
       "what": "moved"
+    }
+  ],
+  "marker:wanted-karif-jamah": [
+    {
+      "name": "mogbert",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-eamon-kassir": [
+    {
+      "name": "mogbert",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1749": [
+    {
+      "name": "senzualbean",
+      "what": "added"
+    }
+  ],
+  "marker:community-1785": [
+    {
+      "name": "seridaq",
+      "what": "added"
+    }
+  ],
+  "marker:wanted-cheswik-barrelgirth": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-a-wise-elder": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-mason-steinn": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-a-tanner": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wiki-28": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    },
+    {
+      "name": "seridaq",
+      "what": "edited"
+    }
+  ],
+  "marker:wanted-smelter-jadid": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-tailor-darya": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-layith-kharem": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wiki-17": [
+    {
+      "name": "seridaq",
+      "what": "edited"
+    }
+  ],
+  "marker:wanted-an-innkeeper": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    },
+    {
+      "name": "seridaq",
+      "what": "edited"
+    }
+  ],
+  "marker:community-1815": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1816": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:wanted-thibald-burlond": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1820": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:community-1821": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:wanted-pau": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-sajra": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    },
+    {
+      "name": "seridaq",
+      "what": "edited"
+    }
+  ],
+  "marker:wanted-tinka-roofstrider": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-lieutenant-jarovik-holt": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-corporal-theodora": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-sir-hedley": [
+    {
+      "name": "seridaq",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-cormac-renshaw": [
+    {
+      "name": "vorkane",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1843": [
+    {
+      "name": "liki_weaks",
+      "what": "added"
     }
   ]
 }

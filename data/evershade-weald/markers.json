@@ -189,22 +189,6 @@
   "wikiId": "npc-a-beguiled-alpha-wolf"
  },
  {
-  "id": "taeresh-deathcharmer",
-  "name": "Taeresh Deathcharmer",
-  "category": "Named mob",
-  "levels": [
-   14,
-   14
-  ],
-  "x": 3354,
-  "y": 2977,
-  "approximate": true,
-  "note": "In the orc cave.",
-  "minZoom": 3,
-  "wiki": "https://monstersandmemories.wiki/npcs/taeresh-deathcharmer",
-  "wikiId": "npc-taeresh-deathcharmer"
- },
- {
   "id": "mistress-naelira",
   "name": "Mistress Naelira",
   "category": "Named mob",

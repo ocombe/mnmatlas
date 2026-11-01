@@ -1,19 +1,5 @@
 [
  {
-  "id": "goblin-20plus-1",
-  "name": "Goblins",
-  "category": "Mob camp",
-  "levels": [
-   20,
-   null
-  ],
-  "x": 2043,
-  "y": 829,
-  "approximate": true,
-  "note": "",
-  "minZoom": 3
- },
- {
   "id": "goblin-11-15-1",
   "name": "Goblins",
   "category": "Mob camp",
@@ -812,7 +798,11 @@
   "x": 2398,
   "y": 795,
   "wiki": "https://monstersandmemories.wiki/npcs/best-appraiser-bibic",
-  "wikiId": "npc-best-appraiser-bibic"
+  "wikiId": "npc-best-appraiser-bibic",
+  "levels": [
+   25,
+   25
+  ]
  },
  {
   "id": "community-437",
@@ -823,7 +813,11 @@
   "x": 2468,
   "y": 1034,
   "wiki": "https://monstersandmemories.wiki/npcs/klimpi-the-feared",
-  "wikiId": "npc-klimpi-the-feared"
+  "wikiId": "npc-klimpi-the-feared",
+  "levels": [
+   25,
+   25
+  ]
  },
  {
   "id": "community-654",
@@ -1187,5 +1181,241 @@
    54,
    54
   ]
+ },
+ {
+  "id": "community-1706",
+  "community": true,
+  "name": "Muggrah mountain goblins",
+  "note": "",
+  "x": 2532,
+  "y": 1140,
+  "category": "Mob camp",
+  "levels": [
+   22,
+   24
+  ],
+  "mobs": [
+   {
+    "name": "A Muggrah bonecollector",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-bonecollector",
+    "wikiId": "npc-a-muggrah-bonecollector"
+   },
+   {
+    "name": "A Muggrah brawler",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-brawler",
+    "wikiId": "npc-a-muggrah-brawler"
+   },
+   {
+    "name": "A Muggrah scrapper",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-scrapper",
+    "wikiId": "npc-a-muggrah-scrapper"
+   },
+   {
+    "name": "A Muggrah naturer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-naturer",
+    "wikiId": "npc-a-muggrah-naturer"
+   },
+   {
+    "name": "A Muggrah bonekeeper",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-bonekeeper",
+    "wikiId": "npc-a-muggrah-bonekeeper"
+   },
+   {
+    "name": "A Muggrah mindstealer",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-mindstealer",
+    "wikiId": "npc-a-muggrah-mindstealer"
+   },
+   {
+    "name": "A Muggrah trickster",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-trickster",
+    "wikiId": "npc-a-muggrah-trickster"
+   },
+   {
+    "name": "A Muggrah spiritcaller",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-muggrah-spiritcaller",
+    "wikiId": "npc-a-muggrah-spiritcaller"
+   }
+  ],
+  "shape": {
+   "form": "outline",
+   "kind": "area",
+   "points": [
+    [
+     2338,
+     786
+    ],
+    [
+     2422,
+     794
+    ],
+    [
+     2460,
+     808
+    ],
+    [
+     2490,
+     826
+    ],
+    [
+     2518,
+     864
+    ],
+    [
+     2518,
+     896
+    ],
+    [
+     2558,
+     928
+    ],
+    [
+     2560,
+     976
+    ],
+    [
+     2587,
+     1024
+    ],
+    [
+     2605,
+     1062
+    ],
+    [
+     2643,
+     1140
+    ],
+    [
+     2669,
+     1226
+    ],
+    [
+     2688,
+     1243
+    ],
+    [
+     2703,
+     1252
+    ],
+    [
+     2728,
+     1261
+    ],
+    [
+     2703,
+     1285
+    ],
+    [
+     2688,
+     1310
+    ],
+    [
+     2679,
+     1347
+    ],
+    [
+     2666,
+     1387
+    ],
+    [
+     2653,
+     1413
+    ],
+    [
+     2640,
+     1445
+    ],
+    [
+     2618,
+     1472
+    ],
+    [
+     2590,
+     1491
+    ],
+    [
+     2580,
+     1521
+    ],
+    [
+     2567,
+     1545
+    ],
+    [
+     2552,
+     1548
+    ],
+    [
+     2530,
+     1528
+    ],
+    [
+     2515,
+     1475
+    ],
+    [
+     2511,
+     1436
+    ],
+    [
+     2521,
+     1406
+    ],
+    [
+     2504,
+     1382
+    ],
+    [
+     2488,
+     1378
+    ],
+    [
+     2516,
+     1297
+    ],
+    [
+     2565,
+     1229
+    ],
+    [
+     2542,
+     1223
+    ],
+    [
+     2545,
+     1137
+    ],
+    [
+     2539,
+     1099
+    ],
+    [
+     2495,
+     1065
+    ],
+    [
+     2440,
+     1045
+    ],
+    [
+     2390,
+     1019
+    ],
+    [
+     2364,
+     983
+    ]
+   ]
+  }
+ },
+ {
+  "id": "community-1762",
+  "community": true,
+  "name": "Almina Weepingwind",
+  "note": "",
+  "x": 3864,
+  "y": 3019,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/almina-weepingwind",
+  "wikiId": "npc-almina-weepingwind"
  }
 ]

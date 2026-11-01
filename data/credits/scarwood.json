@@ -46,5 +46,17 @@
       "name": "erncollects",
       "what": "added"
     }
+  ],
+  "marker:sojourners-1": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
+  "marker:community-1742": [
+    {
+      "name": null,
+      "what": "added"
+    }
   ]
 }

@@ -166,5 +166,17 @@
       50,
       50
     ]
+  },
+  {
+    "id": "community-1844",
+    "community": true,
+    "name": "Devourhymn Glomenda",
+    "note": "",
+    "x": 4412,
+    "y": 2215,
+    "level": "floor-1",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/devourhymn-glomenda",
+    "wikiId": "npc-devourhymn-glomenda"
   }
 ]

@@ -434,5 +434,11 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:taeresh-deathcharmer": [
+    {
+      "name": null,
+      "what": "removed"
+    }
   ]
 }

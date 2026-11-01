@@ -87,6 +87,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
     }
   ],
   "marker:wanted-witchguard-hellblade": [
@@ -103,6 +107,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:wanted-champion-of-muurtu": [
@@ -117,6 +125,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "removed"
     }
   ],
   "marker:wanted-high-mother-haathala": [
@@ -178,6 +190,10 @@
   "marker:brother-luka": [
     {
       "name": null,
+      "what": "moved"
+    },
+    {
+      "name": "nicny86",
       "what": "moved"
     }
   ],

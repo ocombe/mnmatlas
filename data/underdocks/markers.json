@@ -1726,5 +1726,153 @@
       14
     ],
     "ambush": false
+  },
+  {
+    "id": "community-1703",
+    "community": true,
+    "name": "Father Fyod",
+    "note": "SHD starter quest npc.  Requires lv 5+ for the first sword upgrade.  Second floor of the building, up one of the side ramps, on a balcony overlooking the area in front.",
+    "x": 5364,
+    "y": 4256,
+    "level": "lower",
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/father-fyod",
+    "wikiId": "npc-father-fyod",
+    "quests": true
+  },
+  {
+    "id": "community-1704",
+    "community": true,
+    "name": "Myconids",
+    "note": "Myconid gatherers and truffians wander the level 5-6+ areas with other myconids. Truffians are aggressive and social aggro the others.",
+    "x": 3439,
+    "y": 1043,
+    "level": "lower",
+    "category": "Mob camp",
+    "wiki": "https://monstersandmemories.wiki/npcs/myconid-gatherer",
+    "wikiId": "npc-myconid-gatherer"
+  },
+  {
+    "id": "community-1717",
+    "community": true,
+    "name": "Wizard Exodus",
+    "note": "This is where Wizards go when they use exodus in this zone.",
+    "x": 2600,
+    "y": 3777,
+    "level": "lower",
+    "category": "Respawn point"
+  },
+  {
+    "id": "community-1763",
+    "community": true,
+    "name": "Fishing",
+    "note": "",
+    "x": 2992,
+    "y": 4446,
+    "level": "lower",
+    "category": "Fishing spot",
+    "fish": [
+      {
+        "name": "Whitefish",
+        "wiki": "https://monstersandmemories.wiki/items/whitefish",
+        "wikiId": "item-whitefish"
+      },
+      {
+        "name": "Raw Bay Crab"
+      },
+      {
+        "name": "Grouper",
+        "wiki": "https://monstersandmemories.wiki/items/grouper",
+        "wikiId": "item-grouper"
+      },
+      {
+        "name": "Thorn Sturgeon"
+      },
+      {
+        "name": "Basa",
+        "wiki": "https://monstersandmemories.wiki/items/basa",
+        "wikiId": "item-basa"
+      }
+    ]
+  },
+  {
+    "id": "community-1832",
+    "community": true,
+    "name": "Barkeeper Yorvak",
+    "note": "",
+    "x": 4319,
+    "y": 3530,
+    "level": "lower",
+    "category": "Vendor",
+    "sells": [
+      "Food & drink"
+    ]
+  },
+  {
+    "id": "community-1833",
+    "community": true,
+    "name": "Ivar Copperpot",
+    "note": "In the downstairs kitchen of The Underhearth inn. Just next to the Citadel Exchange.",
+    "x": 3844,
+    "y": 4500,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/ivar-copperpot",
+    "wikiId": "npc-ivar-copperpot"
+  },
+  {
+    "id": "community-1846",
+    "community": true,
+    "name": "a survival trainer",
+    "note": "",
+    "x": 3446,
+    "y": 4242,
+    "level": "lower",
+    "category": "Tradeskill",
+    "trade": "Survival"
+  },
+  {
+    "id": "community-1854",
+    "community": true,
+    "name": "Clarinda Sageforth",
+    "note": "Herb Pouch 2s 20c, Sickle 27c.",
+    "x": 2622,
+    "y": 4967,
+    "level": "lower",
+    "category": "Vendor",
+    "vendor": "Herbalism vendor"
+  },
+  {
+    "id": "community-1855",
+    "community": true,
+    "name": "Tobbin Tanglefoot",
+    "note": "Next to the bank, West Dock.",
+    "x": 2845,
+    "y": 4908,
+    "level": "lower",
+    "category": "Vendor",
+    "vendor": "Adventuring supplies"
+  },
+  {
+    "id": "community-1860",
+    "community": true,
+    "name": "Clarinda Sageforth",
+    "note": "Herb Pouch 2s 20c, Sickle 27c.",
+    "x": 2622,
+    "y": 4967,
+    "level": "lower",
+    "category": "Vendor",
+    "vendor": "Herbalism vendor"
+  },
+  {
+    "id": "community-1861",
+    "community": true,
+    "name": "Tobbin Tanglefoot",
+    "note": "Next to the bank, West Dock.",
+    "x": 2845,
+    "y": 4908,
+    "level": "lower",
+    "category": "Vendor",
+    "vendor": "Adventuring supplies"
   }
 ]

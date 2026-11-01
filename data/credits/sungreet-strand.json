@@ -151,6 +151,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-437": [
@@ -164,6 +168,10 @@
     },
     {
       "name": "ocombe",
+      "what": "edited"
+    },
+    {
+      "name": "darkhayn",
       "what": "edited"
     }
   ],
@@ -325,6 +333,24 @@
     {
       "name": "darkhayn",
       "what": "moved"
+    }
+  ],
+  "marker:community-1706": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:goblin-20plus-1": [
+    {
+      "name": "darkhayn",
+      "what": "removed"
+    }
+  ],
+  "marker:community-1762": [
+    {
+      "name": "darkhayn",
+      "what": "added"
     }
   ]
 }

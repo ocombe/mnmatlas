@@ -45,6 +45,10 @@
     {
       "name": null,
       "what": "moved"
+    },
+    {
+      "name": "nicny86",
+      "what": "edited"
     }
   ],
   "marker:oasis-notables": [
@@ -75,6 +79,52 @@
     {
       "name": "liki_weaks",
       "what": "moved"
+    }
+  ],
+  "marker:community-1720": [
+    {
+      "name": "moff_lamp",
+      "what": "added"
+    }
+  ],
+  "marker:hadir": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:beach-hunters-rami-al-qawwaasr": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:beach-giants-1": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:city-notables": [
+    {
+      "name": "nicny86",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1759": [
+    {
+      "name": "facepalming",
+      "what": "added"
+    }
+  ],
+  "marker:beach-hunters": [
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ]
 }

@@ -471,6 +471,10 @@
     {
       "name": "neverrooks",
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1532": [
@@ -557,6 +561,30 @@
     {
       "name": null,
       "what": "edited"
+    }
+  ],
+  "marker:community-1856": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1857": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1862": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1863": [
+    {
+      "name": null,
+      "what": "added"
     }
   ]
 }

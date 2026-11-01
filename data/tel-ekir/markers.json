@@ -66,7 +66,7 @@
   "note": "From Shaded Dunes entrance follow the path that splits left before the main gate. Towards the back of the shallow cave area Ayip spawned at the very back left with 2 potential adds. '''[Durin, Krivea Test]''' Respawn Time ~ 13 Minutes [Ayyo",
   "x": 1693,
   "y": 2203,
-  "level": "floor-1",
+  "level": "floor-2",
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/ayip",
   "wikiId": "npc-ayip",
@@ -125,12 +125,13 @@
   "community": true,
   "name": "Wily Rufga",
   "note": "Inside the tunnel on the upper Canyon layer, take the path to the waterfall. When you enter the tunnel there, take directly tunnel on the right, and then right into the room. She will not trade with you, if you have bad relations.",
-  "x": 2071,
-  "y": 1828,
-  "level": "floor-1",
+  "x": 1975,
+  "y": 1760,
+  "level": "floor-2",
   "category": "Vendor",
   "wiki": "https://monstersandmemories.wiki/npcs/wily-rufga",
-  "wikiId": "npc-wily-rufga"
+  "wikiId": "npc-wily-rufga",
+  "approximate": true
  },
  {
   "id": "community-1605",
@@ -1100,5 +1101,129 @@
   "direction": "up",
   "name": "Ramp up to the Canyon",
   "switchOnClick": true
+ },
+ {
+  "id": "community-1728",
+  "community": true,
+  "name": "Fish Catcher Samak",
+  "note": "He spawns at the little camp on the west side of north end of the pond.",
+  "x": 1998,
+  "y": 1119,
+  "level": "floor-1",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/fish-catcher-samak",
+  "wikiId": "npc-fish-catcher-samak",
+  "levels": [
+   22,
+   22
+  ]
+ },
+ {
+  "id": "community-1729",
+  "community": true,
+  "name": "General Overlord Bloodynose",
+  "note": "Spawns on the right side of small sort of L shaped room",
+  "x": 2344,
+  "y": 1317,
+  "level": "floor-3",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/general-overlord-bloodynose",
+  "wikiId": "npc-general-overlord-bloodynose",
+  "levels": [
+   21,
+   21
+  ]
+ },
+ {
+  "id": "community-1730",
+  "community": true,
+  "name": "Animist Wafi",
+  "note": "He spawns in the middle at the top of the central stairs.",
+  "x": 1684,
+  "y": 932,
+  "level": "floor-4",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/animist-wafi",
+  "wikiId": "npc-animist-wafi",
+  "levels": [
+   33,
+   33
+  ]
+ },
+ {
+  "id": "community-1731",
+  "community": true,
+  "name": "Najm the Mirage",
+  "note": "Spawns inside the hut that is up on a stone pillar.",
+  "x": 1453,
+  "y": 1550,
+  "level": "floor-1",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/najm-the-mirage",
+  "wikiId": "npc-najm-the-mirage",
+  "levels": [
+   22,
+   22
+  ]
+ },
+ {
+  "id": "community-1732",
+  "community": true,
+  "name": "Ashir the Protector",
+  "note": "Spawns at one of the three tents that are in the southwest end of zone near the water.",
+  "x": 1061,
+  "y": 1970,
+  "level": "floor-1",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/ashir-the-protector",
+  "wikiId": "npc-ashir-the-protector",
+  "levels": [
+   25,
+   25
+  ]
+ },
+ {
+  "id": "community-1733",
+  "community": true,
+  "name": "Whipstitch Khayyat",
+  "note": "Spawns in the center of the back room near the goblin sweat shop.",
+  "x": 2511,
+  "y": 1386,
+  "level": "floor-2",
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/whipstitch-khayyat",
+  "wikiId": "npc-whipstitch-khayyat"
+ },
+ {
+  "id": "community-1734",
+  "community": true,
+  "name": "Rami Suresight",
+  "note": "Spawns standing near big opening in wall that overlooks the pond.",
+  "x": 1830,
+  "y": 1254,
+  "level": "floor-2",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/rami-suresight",
+  "wikiId": "npc-rami-suresight",
+  "levels": [
+   24,
+   24
+  ]
+ },
+ {
+  "id": "community-1781",
+  "community": true,
+  "name": "Herbalist Qirfa",
+  "note": "",
+  "x": 2261,
+  "y": 1343,
+  "level": "floor-3",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/herbalist-qirfa",
+  "wikiId": "npc-herbalist-qirfa",
+  "levels": [
+   23,
+   23
+  ]
  }
 ]

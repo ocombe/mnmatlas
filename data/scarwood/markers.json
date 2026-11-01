@@ -100,13 +100,14 @@
  },
  {
   "id": "sojourners-1",
-  "name": "Sojourners and Ail’trist humans",
+  "name": "Sojourners",
   "category": "Mob camp",
   "x": 5778,
   "y": 5499,
   "approximate": true,
-  "note": "Camp on the east shore of the lake: Ail’trist clerics and sentries, Sojourner bowmen, druidic sojourners.",
-  "minZoom": 3
+  "note": "Camp on the east shore of the lake: Sojourner bowmen, druidic sojourners.",
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "corrupted-giants-44-47-1",
@@ -259,5 +260,29 @@
     "wikiId": "npc-a-grovebound-treant"
    }
   ]
+ },
+ {
+  "id": "community-1742",
+  "community": true,
+  "name": "Ail'trist Cavern Sentries",
+  "note": "Ail'trist sentries, clerics etc... If you are a deep elf with high enough reputation they are not KoS, to most others they will be KoS. You lose all Ail'Vorith factions if you kill them.",
+  "x": 9509,
+  "y": 3079,
+  "category": "Mob camp",
+  "levels": [
+   38,
+   45
+  ],
+  "shape": {
+   "r": 199,
+   "form": "circle",
+   "kind": "area",
+   "points": [
+    [
+     9509,
+     3079
+    ]
+   ]
+  }
  }
 ]

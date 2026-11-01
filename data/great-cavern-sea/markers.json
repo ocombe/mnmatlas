@@ -753,5 +753,18 @@
    15
   ],
   "ambush": false
+ },
+ {
+  "id": "community-1845",
+  "community": true,
+  "name": "Hathalian Skeletons",
+  "note": "",
+  "x": 5427,
+  "y": 4526,
+  "category": "Mob camp",
+  "levels": [
+   14,
+   16
+  ]
  }
 ]

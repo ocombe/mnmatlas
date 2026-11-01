@@ -1554,8 +1554,8 @@
   "community": true,
   "name": "Elder Luh'Kan",
   "note": "At the very top of the mountain inside the cave",
-  "x": 1577,
-  "y": 1749,
+  "x": 1400,
+  "y": 3070,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/elder-luhkan",
   "wikiId": "npc-elder-luhkan",
@@ -1563,7 +1563,8 @@
    39,
    39
   ],
-  "level": "ground"
+  "level": "underground",
+  "approximate": true
  },
  {
   "id": "community-1532",
@@ -2140,6 +2141,70 @@
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/jokandaru",
   "wikiId": "npc-jokandaru",
+  "levels": [
+   41,
+   41
+  ]
+ },
+ {
+  "id": "community-1856",
+  "community": true,
+  "name": "Taskmaster Nor'Tap",
+  "note": "Spawns from any of the taskmasters at the three rat camps.",
+  "x": 1789,
+  "y": 2047,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
+  "wikiId": "npc-taskmaster-nortap",
+  "levels": [
+   41,
+   41
+  ]
+ },
+ {
+  "id": "community-1857",
+  "community": true,
+  "name": "Taskmaster Nor'Tap",
+  "note": "Spawns from any of the taskmasters at the three rat camps.",
+  "x": 1926,
+  "y": 1868,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
+  "wikiId": "npc-taskmaster-nortap",
+  "levels": [
+   41,
+   41
+  ]
+ },
+ {
+  "id": "community-1862",
+  "community": true,
+  "name": "Taskmaster Nor'Tap",
+  "note": "Spawns from any of the taskmasters at the three rat camps.",
+  "x": 1789,
+  "y": 2047,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
+  "wikiId": "npc-taskmaster-nortap",
+  "levels": [
+   41,
+   41
+  ]
+ },
+ {
+  "id": "community-1863",
+  "community": true,
+  "name": "Taskmaster Nor'Tap",
+  "note": "Spawns from any of the taskmasters at the three rat camps.",
+  "x": 1926,
+  "y": 1868,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
+  "wikiId": "npc-taskmaster-nortap",
   "levels": [
    41,
    41

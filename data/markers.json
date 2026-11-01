@@ -126,21 +126,24 @@
   },
   {
     "id": "wiki-17",
-    "name": "Inn — north of Bathhouse",
+    "name": "Inn — The Thirsty Glance",
     "category": "Inn",
     "x": 1006,
     "y": 1475,
-    "note": ""
+    "note": "",
+    "community": true
   },
   {
     "id": "wiki-28",
-    "name": "Skinning / Tanning — Tannery",
+    "name": "Tanner Burhan",
     "category": "Tradeskill",
-    "x": 1143,
-    "y": 1240,
+    "x": 1154,
+    "y": 1245,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/tanner-burhan",
-    "wikiId": "npc-tanner-burhan"
+    "wikiId": "npc-tanner-burhan",
+    "community": true,
+    "trade": "Skinning / Tanning"
   },
   {
     "id": "wiki-29",
@@ -540,8 +543,8 @@
     "name": "A medic",
     "category": "Vendor",
     "note": "",
-    "x": 904,
-    "y": 1264,
+    "x": 900,
+    "y": 1252,
     "wiki": "https://monstersandmemories.wiki/npcs/a-medic",
     "wikiId": "npc-a-medic",
     "vendor": "Medic"
@@ -1054,7 +1057,7 @@
     "name": "Jiselle Heyley",
     "category": "Quest NPC",
     "note": "Upstairs in the room with Dalinder",
-    "x": 835,
+    "x": 805,
     "y": 1269,
     "wiki": "https://monstersandmemories.wiki/npcs/jiselle-heyley",
     "wikiId": "npc-jiselle-heyley"
@@ -1238,15 +1241,13 @@
     "id": "community-398",
     "community": true,
     "name": "Noura the Tailor",
-    "category": "Class trainer",
+    "category": "Tradeskill",
     "note": "",
     "x": 1131,
     "y": 1549,
-    "classes": [
-      "Archer"
-    ],
     "wiki": "https://monstersandmemories.wiki/npcs/noura-the-tailor",
-    "wikiId": "npc-noura-the-tailor"
+    "wikiId": "npc-noura-the-tailor",
+    "trade": "Tailoring"
   },
   {
     "id": "community-447",
@@ -1808,8 +1809,8 @@
     "name": "A priest of Eltindra",
     "category": "Notable NPC",
     "note": "",
-    "x": 954,
-    "y": 1133,
+    "x": 955,
+    "y": 1106,
     "wiki": "https://monstersandmemories.wiki/npcs/a-priest-of-eltindra",
     "wikiId": "npc-1790076511178-rburf"
   },
@@ -2506,17 +2507,6 @@
     "vendor": "Barkeep"
   },
   {
-    "id": "community-1012",
-    "community": true,
-    "name": "Yorias",
-    "note": "For Beastmaster starter quest",
-    "x": 2038,
-    "y": 1721,
-    "category": "Quest NPC",
-    "wiki": "https://monstersandmemories.wiki/npcs/yorias",
-    "wikiId": "npc-yorias"
-  },
-  {
     "id": "community-1083",
     "community": true,
     "name": "Crocodile Hatchling 3-4",
@@ -2690,8 +2680,8 @@
     "community": true,
     "name": "Whispering Wallace",
     "note": "Appears in the inn during the evening hours and disappears during the daytime. Stands by the bartender.\nAuthor's note: Hostile to deep elves.",
-    "x": 948,
-    "y": 1384,
+    "x": 953,
+    "y": 1371,
     "category": "Quest NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/whispering-wallace",
     "wikiId": "npc-whispering-wallace"
@@ -2713,8 +2703,8 @@
     "community": true,
     "name": "Tinkerer Boltia",
     "note": "",
-    "x": 1059,
-    "y": 1180,
+    "x": 1079,
+    "y": 1073,
     "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/tinkerer-boltia",
     "wikiId": "npc-tinkerer-boltia",
@@ -2725,8 +2715,8 @@
     "community": true,
     "name": "Tinkerer Vilsis",
     "note": "",
-    "x": 1060,
-    "y": 1185,
+    "x": 1076,
+    "y": 1079,
     "category": "Vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/tinkerer-vilsis",
     "wikiId": "npc-tinkerer-vilsis"
@@ -2736,8 +2726,8 @@
     "community": true,
     "name": "Stonecutter Selin",
     "note": "",
-    "x": 1041,
-    "y": 1177,
+    "x": 1034,
+    "y": 1042,
     "category": "Vendor",
     "wiki": "https://monstersandmemories.wiki/npcs/stonecutter-selin",
     "wikiId": "npc-stonecutter-selin"
@@ -2747,8 +2737,8 @@
     "community": true,
     "name": "Stonecutter Sodunn",
     "note": "",
-    "x": 1038,
-    "y": 1179,
+    "x": 1007,
+    "y": 1053,
     "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/stonecutter-sodunn",
     "wikiId": "npc-stonecutter-sodunn",
@@ -2759,8 +2749,8 @@
     "community": true,
     "name": "Mason Krulch",
     "note": "",
-    "x": 1033,
-    "y": 1186,
+    "x": 1008,
+    "y": 1081,
     "category": "Tradeskill",
     "wiki": "https://monstersandmemories.wiki/npcs/mason-krulch",
     "wikiId": "npc-mason-krulch",
@@ -2853,44 +2843,48 @@
     "name": "Corporal Theodora",
     "category": "Quest NPC",
     "note": "At the gatehouse into the Bends.",
-    "x": 2189,
-    "y": 1645,
-    "approximate": true,
+    "x": 2067,
+    "y": 1702,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/corporal-theodora",
-    "wikiId": "npc-corporal-theodora"
+    "wikiId": "npc-corporal-theodora",
+    "community": true
   },
   {
     "id": "wanted-lieutenant-jarovik-holt",
     "name": "Lieutenant Jarovik Holt",
     "category": "Quest NPC",
     "note": "At the gatehouse into the Bends.",
-    "x": 2209,
-    "y": 1651,
-    "approximate": true,
+    "x": 2103,
+    "y": 1697,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/lieutenant-jarovik-holt",
-    "wikiId": "npc-lieutenant-jarovik-holt"
+    "wikiId": "npc-lieutenant-jarovik-holt",
+    "community": true
   },
   {
     "id": "wanted-cormac-renshaw",
     "name": "Cormac Renshaw",
     "category": "Quest NPC",
     "note": "On the boat in the Bends.",
-    "x": 2221,
-    "y": 1668,
-    "approximate": true,
+    "x": 2302,
+    "y": 1696,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/cormac-renshaw",
-    "wikiId": "npc-cormac-renshaw"
+    "wikiId": "npc-cormac-renshaw",
+    "community": true
   },
   {
     "id": "wanted-karif-jamah",
     "name": "Karif Jamah",
     "category": "Quest NPC",
     "note": "In the Bends.",
-    "x": 2221,
-    "y": 1690,
-    "approximate": true,
+    "x": 2147,
+    "y": 1770,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/karif-jamah",
-    "wikiId": "npc-karif-jamah"
+    "wikiId": "npc-karif-jamah",
+    "community": true
   },
   {
     "id": "wanted-sahir-muzalal",
@@ -2908,11 +2902,12 @@
     "name": "Tinka Roofstrider",
     "category": "Quest NPC",
     "note": "In the Bends.",
-    "x": 2189,
-    "y": 1713,
-    "approximate": true,
+    "x": 2204,
+    "y": 1707,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/tinka-roofstrider",
-    "wikiId": "npc-tinka-roofstrider"
+    "wikiId": "npc-tinka-roofstrider",
+    "community": true
   },
   {
     "id": "wanted-darius-brask",
@@ -2931,15 +2926,16 @@
     "name": "Eamon Kassir",
     "category": "Named mob",
     "note": "In the Bends.",
-    "x": 2157,
-    "y": 1690,
-    "approximate": true,
+    "x": 2150,
+    "y": 1647,
+    "approximate": false,
     "levels": [
       25,
       25
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/eamon-kassir",
-    "wikiId": "npc-eamon-kassir"
+    "wikiId": "npc-eamon-kassir",
+    "community": true
   },
   {
     "id": "wanted-mila-dastan",
@@ -3035,45 +3031,49 @@
     "name": "Thibald Burlond",
     "category": "Quest NPC",
     "note": "Wayfarers Hospice.",
-    "x": 827,
-    "y": 1279,
-    "approximate": true,
+    "x": 824,
+    "y": 1259,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/thibald-burlond",
-    "wikiId": "npc-thibald-burlond"
+    "wikiId": "npc-thibald-burlond",
+    "community": true
   },
   {
     "id": "wanted-pau",
     "name": "Pau",
     "category": "Quest NPC",
     "note": "By the Twilight Harbor, next to his twin Piia.",
-    "x": 1597,
-    "y": 2013,
-    "approximate": true,
+    "x": 1683,
+    "y": 1704,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/pau",
-    "wikiId": "npc-pau"
+    "wikiId": "npc-pau",
+    "community": true
   },
   {
     "id": "wanted-sajra",
     "name": "Sajra",
     "category": "Quest NPC",
-    "note": "By the Twilight Harbor.",
-    "x": 1597,
-    "y": 2053,
-    "approximate": true,
+    "note": "Downstairs from Pau and Piia.",
+    "x": 1679,
+    "y": 1713,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/sajra",
-    "wikiId": "npc-sajra"
+    "wikiId": "npc-sajra",
+    "community": true
   },
   {
     "id": "wanted-smelter-jadid",
     "name": "Smelter Jadid",
     "category": "Tradeskill",
     "note": "In the Night Market.",
-    "x": 1173,
-    "y": 1544,
-    "approximate": true,
+    "x": 1151,
+    "y": 1560,
+    "approximate": false,
     "trade": "Blacksmithing / Smelting",
     "wiki": "https://monstersandmemories.wiki/npcs/smelter-jadid",
-    "wikiId": "npc-smelter-jadid"
+    "wikiId": "npc-smelter-jadid",
+    "community": true
   },
   {
     "id": "wanted-used-armor-trader",
@@ -3091,33 +3091,36 @@
     "name": "Tailor Darya",
     "category": "Vendor",
     "note": "Next to Noura the Tailor.",
-    "x": 1142,
-    "y": 1538,
-    "approximate": true,
+    "x": 1141,
+    "y": 1547,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/tailor-darya",
-    "wikiId": "npc-tailor-darya"
+    "wikiId": "npc-tailor-darya",
+    "community": true
   },
   {
     "id": "wanted-layith-kharem",
     "name": "Layith Kharem",
     "category": "Quest NPC",
     "note": "Glimmermoon Hall, up the ladder behind the stage.",
-    "x": 1010,
-    "y": 1513,
-    "approximate": true,
+    "x": 997,
+    "y": 1529,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/layith-kharem",
-    "wikiId": "npc-layith-kharem"
+    "wikiId": "npc-layith-kharem",
+    "community": true
   },
   {
     "id": "wanted-sir-hedley",
     "name": "Sir Hedley",
     "category": "Quest NPC",
     "note": "On the balcony atop the Thirsty Glance, next to Glimmermoon Hall.",
-    "x": 1010,
-    "y": 1553,
-    "approximate": true,
+    "x": 1007,
+    "y": 1488,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/sir-hedley",
-    "wikiId": "npc-sir-hedley"
+    "wikiId": "npc-sir-hedley",
+    "community": true
   },
   {
     "id": "wanted-masonry-supplier-arthis",
@@ -3135,33 +3138,36 @@
     "name": "Mason Steinn",
     "category": "Vendor",
     "note": "In the temple against the cliff, between Sojourner’s Camp and the Tannery.",
-    "x": 1051,
-    "y": 1177,
-    "approximate": true,
+    "x": 1007,
+    "y": 1066,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/mason-steinn",
-    "wikiId": "npc-mason-steinn"
+    "wikiId": "npc-mason-steinn",
+    "community": true
   },
   {
     "id": "wanted-a-wise-elder",
     "name": "A wise elder",
     "category": "Vendor",
     "note": "In the temple against the cliff, between Sojourner’s Camp and the Tannery.",
-    "x": 1019,
-    "y": 1177,
-    "approximate": true,
+    "x": 1042,
+    "y": 1062,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/a-wise-elder",
-    "wikiId": "npc-a-wise-elder"
+    "wikiId": "npc-a-wise-elder",
+    "community": true
   },
   {
     "id": "wanted-a-tanner",
     "name": "A tanner",
     "category": "Vendor",
     "note": "In the Tannery.",
-    "x": 1159,
-    "y": 1208,
-    "approximate": true,
+    "x": 1154,
+    "y": 1232,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/a-tanner",
-    "wikiId": "npc-a-tanner"
+    "wikiId": "npc-a-tanner",
+    "community": true
   },
   {
     "id": "wanted-a-spinner",
@@ -3188,25 +3194,27 @@
   },
   {
     "id": "wanted-an-innkeeper",
-    "name": "An innkeeper",
-    "category": "Vendor",
+    "name": "Innkeeper Nazeel",
+    "category": "Notable NPC",
     "note": "Shaded Bloom Inn.",
-    "x": 959,
-    "y": 1383,
-    "approximate": true,
+    "x": 989,
+    "y": 1356,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/an-innkeeper",
-    "wikiId": "npc-an-innkeeper"
+    "wikiId": "npc-an-innkeeper",
+    "community": true
   },
   {
     "id": "wanted-cheswik-barrelgirth",
     "name": "Cheswik Barrelgirth",
     "category": "Vendor",
     "note": "East of the Steel Talon Garrison.",
-    "x": 906,
-    "y": 1733,
-    "approximate": true,
+    "x": 1026,
+    "y": 1686,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/cheswik-barrelgirth",
-    "wikiId": "npc-cheswik-barrelgirth"
+    "wikiId": "npc-cheswik-barrelgirth",
+    "community": true
   },
   {
     "id": "wanted-rolan-talmula",
@@ -3455,5 +3463,87 @@
     "wiki": "https://monstersandmemories.wiki/npcs/lurinda-steele",
     "wikiId": "npc-lurinda-steele",
     "quests": true
+  },
+  {
+    "id": "community-1749",
+    "community": true,
+    "name": "Commander Otieno",
+    "note": "",
+    "x": 1575,
+    "y": 1110,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/commander-otieno",
+    "wikiId": "npc-commander-otieno"
+  },
+  {
+    "id": "community-1785",
+    "community": true,
+    "name": "Jacobin Yeats",
+    "note": "",
+    "x": 869,
+    "y": 1744,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/jacobin-yeats",
+    "wikiId": "npc-jacobin-yeats"
+  },
+  {
+    "id": "community-1815",
+    "community": true,
+    "name": "Ambassador Samthain of Tarellon",
+    "note": "",
+    "x": 1883,
+    "y": 1397,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/ambassador-samthain-of-tarellon",
+    "wikiId": "npc-ambassador-samthain-of-tarellon"
+  },
+  {
+    "id": "community-1816",
+    "community": true,
+    "name": "Jaffar Jhaym",
+    "note": "",
+    "x": 2195,
+    "y": 956,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/jaffar-jhaym",
+    "wikiId": "npc-jaffar-jhaym"
+  },
+  {
+    "id": "community-1820",
+    "community": true,
+    "name": "Enchanter Reagents",
+    "note": "",
+    "x": 2263,
+    "y": 1027,
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/enchanter-reagents",
+    "wikiId": "npc-enchanter-reagents"
+  },
+  {
+    "id": "community-1821",
+    "community": true,
+    "name": "Disenchanter Kahni",
+    "note": "bottom floor near enchanter trainers",
+    "x": 2223,
+    "y": 978,
+    "category": "Tradeskill",
+    "wiki": "https://monstersandmemories.wiki/npcs/disenchanter-kahni",
+    "wikiId": "npc-disenchanter-kahni",
+    "trade": "(Dis)Enchanting"
+  },
+  {
+    "id": "community-1843",
+    "community": true,
+    "name": "Victualler Veera",
+    "note": "Named at the top of Pale Tower. Pale Senior is the ph.",
+    "x": 1950,
+    "y": 1899,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/victualler-veera",
+    "wikiId": "npc-victualler-veera",
+    "levels": [
+      42,
+      42
+    ]
   }
 ]

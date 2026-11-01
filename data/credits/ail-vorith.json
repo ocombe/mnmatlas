@@ -1249,6 +1249,12 @@
       "what": "added"
     }
   ],
+  "marker:teleporter-pad": [
+    {
+      "name": null,
+      "what": "edited"
+    }
+  ],
   "marker:community-1754": [
     {
       "name": null,

@@ -79,6 +79,14 @@
     {
       "name": "zarzak",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1003": [
@@ -236,6 +244,24 @@
   "marker:community-1835": [
     {
       "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1849": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1850": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1851": [
+    {
+      "name": null,
       "what": "added"
     }
   ]
