@@ -553,7 +553,7 @@
  {
   "id": "community-669",
   "community": true,
-  "name": "Blightcaller Zirat (level ~55)",
+  "name": "Blightcaller Zirat",
   "category": "Named mob",
   "note": "Upper Saman",
   "x": 2573,
@@ -569,7 +569,7 @@
  {
   "id": "community-670",
   "community": true,
-  "name": "Blightcaller Vethis (level ~55)",
+  "name": "Blightcaller Vethis",
   "category": "Named mob",
   "note": "Upper Saman",
   "x": 2600,
@@ -585,7 +585,7 @@
  {
   "id": "community-671",
   "community": true,
-  "name": "Edric Torvald (level 53)",
+  "name": "Edric Torvald",
   "category": "Named mob",
   "note": "",
   "x": 3030,
@@ -601,7 +601,7 @@
  {
   "id": "community-672",
   "community": true,
-  "name": "Faylan Torvald (level 53)",
+  "name": "Faylan Torvald",
   "category": "Named mob",
   "note": "",
   "x": 2867,
@@ -617,7 +617,7 @@
  {
   "id": "community-673",
   "community": true,
-  "name": "Lady Elana Torvald (level 55)",
+  "name": "Lady Elana Torvald",
   "category": "Named mob",
   "note": "Upper Saman",
   "x": 3051,
@@ -633,23 +633,23 @@
  {
   "id": "community-675",
   "community": true,
-  "name": "Elda the Cook (level ~54)",
+  "name": "Elda the Cook",
   "category": "Named mob",
-  "note": "Upper Saman. Spawns in both buildings",
-  "x": 3067,
-  "y": 2460,
   "levels": [
-   55,
-   55
+   54,
+   54
   ],
+  "note": "Upper Saman. Spawns in both buildings",
   "wiki": "https://monstersandmemories.wiki/npcs/elda-the-cook",
   "wikiId": "npc-elda-the-cook",
+  "x": 3067,
+  "y": 2460,
   "level": "ground"
  },
  {
   "id": "community-676",
   "community": true,
-  "name": "Dame Lysandra Thrym (level ~55)",
+  "name": "Dame Lysandra Thrym",
   "category": "Named mob",
   "note": "Upper Saman\nPH Plagueborn heiress (necro/chanter)\nSpawns at the same time as Yeoman",
   "x": 3128,
@@ -665,7 +665,7 @@
  {
   "id": "community-677",
   "community": true,
-  "name": "Aidan Thrym (level ~54)",
+  "name": "Aidan Thrym",
   "category": "Named mob",
   "note": "Upper Saman",
   "x": 3085,
@@ -681,7 +681,7 @@
  {
   "id": "community-678",
   "community": true,
-  "name": "Yeoman Borin Smythe (level ~55)",
+  "name": "Yeoman Borin Smythe",
   "category": "Named mob",
   "note": "Upper Saman\nSpawns at the same time as Dame",
   "x": 3002,
@@ -697,7 +697,7 @@
  {
   "id": "community-679",
   "community": true,
-  "name": "Blightcaller Ghora (level ~55)",
+  "name": "Blightcaller Ghora",
   "category": "Named mob",
   "note": "Upper Saman. Spawns in the central temple thingy, wanders outside a little bit and back in.",
   "x": 2892,
@@ -713,23 +713,23 @@
  {
   "id": "community-680",
   "community": true,
-  "name": "Blightcaller Harun (level ~55)",
+  "name": "Blightcaller Harun",
   "category": "Named mob",
-  "note": "Upper Saman",
-  "x": 2753,
-  "y": 2406,
   "levels": [
-   53,
-   53
+   55,
+   55
   ],
+  "note": "Upper Saman",
   "wiki": "https://monstersandmemories.wiki/npcs/blightcaller-harun",
   "wikiId": "npc-blightcaller-harun",
+  "x": 2753,
+  "y": 2406,
   "level": "ground"
  },
  {
   "id": "community-695",
   "community": true,
-  "name": "Qassem Brolt (level 34)",
+  "name": "Qassem Brolt",
   "category": "Named mob",
   "note": "Spawns on the 2nd Floor of the Cave from the Cove.",
   "x": 1704,
@@ -745,9 +745,9 @@
  {
   "id": "community-705",
   "community": true,
-  "name": "Mia Tarcut (level 63+)",
+  "name": "Mia Tarcut",
   "category": "Quest NPC",
-  "note": "",
+  "note": "Level 63+.",
   "x": 2243,
   "y": 1023,
   "shape": {
@@ -771,9 +771,9 @@
  {
   "id": "community-707",
   "community": true,
-  "name": "Captain Belvoir (level ~50)",
+  "name": "Captain Belvoir",
   "category": "Quest NPC",
-  "note": "",
+  "note": "About level 50.",
   "x": 1918,
   "y": 1157,
   "wiki": "https://monstersandmemories.wiki/npcs/captain-belvoir",
@@ -821,7 +821,7 @@
  {
   "id": "community-792",
   "community": true,
-  "name": "Kowmeh Lalen (level 40)",
+  "name": "Kowmeh Lalen",
   "category": "Named mob",
   "note": "Deep in Plagueborn citizens, just below the cliff from upper skellies, near the undead lake. In a building with an altar and pews.",
   "x": 2907,
@@ -853,7 +853,7 @@
  {
   "id": "community-988",
   "community": true,
-  "name": "Sivah Arjun (level 32)",
+  "name": "Sivah Arjun",
   "category": "Named mob",
   "note": "Spawns on the 1st floor at the camp fire. Adept is the PH.",
   "x": 1763,

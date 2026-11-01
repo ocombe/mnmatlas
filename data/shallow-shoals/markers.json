@@ -113,7 +113,7 @@
  {
   "id": "community-736",
   "community": true,
-  "name": "a Ba'Haara storyteller (levels 38–42)",
+  "name": "a Ba'Haara storyteller",
   "category": "Named mob",
   "note": "Drops Bard Flute",
   "x": 3318,
@@ -173,7 +173,7 @@
  {
   "id": "community-823",
   "community": true,
-  "name": "Skizzak Darkrain (level 35)",
+  "name": "Skizzak Darkrain",
   "category": "Named mob",
   "note": "",
   "x": 1661,

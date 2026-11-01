@@ -634,9 +634,9 @@
  {
   "id": "community-619",
   "community": true,
-  "name": "Chompers (level ~16)",
+  "name": "Chompers",
   "category": "Quest NPC",
-  "note": "",
+  "note": "About level 16.",
   "x": 4488,
   "y": 3844,
   "shape": {

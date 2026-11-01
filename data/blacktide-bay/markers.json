@@ -104,7 +104,7 @@
   {
     "id": "community-821",
     "community": true,
-    "name": "Frimbus Darplefen (level 14)",
+    "name": "Frimbus Darplefen",
     "category": "Named mob",
     "note": "Spawns in the undead gnome alcove. Placeholder: gnomish X in back right corner",
     "x": 2106,
@@ -221,7 +221,7 @@
   {
     "id": "community-915",
     "community": true,
-    "name": "Prince Mali'Tik (level 18)",
+    "name": "Prince Mali'Tik",
     "category": "Named mob",
     "note": "Spawns with two other Skri'Var of similar levels",
     "x": 4124,
@@ -237,7 +237,7 @@
   {
     "id": "community-916",
     "community": true,
-    "name": "Captain Kruush (level 29)",
+    "name": "Captain Kruush",
     "category": "Named mob",
     "note": "",
     "x": 2342,
@@ -253,7 +253,7 @@
   {
     "id": "community-920",
     "community": true,
-    "name": "Gurowl the Beast (level 14)",
+    "name": "Gurowl the Beast",
     "category": "Named mob",
     "note": "",
     "x": 2755,
@@ -550,7 +550,7 @@
   {
     "id": "community-1435",
     "community": true,
-    "name": "A Bloodchain champion (level 23)",
+    "name": "A Bloodchain champion",
     "note": "Blacktide Bay",
     "x": 3485,
     "y": 1880,
@@ -624,7 +624,7 @@
   {
     "id": "community-1475",
     "community": true,
-    "name": "A net weaver (level 12)",
+    "name": "A net weaver",
     "note": "In the spider and bat caves. Placeholder is a stream fisher that paths clockwise, just outside of the gnome skeleton alcove.",
     "x": 1689,
     "y": 1964,

@@ -106,18 +106,18 @@
   {
     "id": "community-819",
     "community": true,
-    "name": "A frenzied crypt guardian (level 16)",
+    "name": "A frenzied crypt guardian",
     "category": "Named mob",
+    "levels": [
+      16,
+      16
+    ],
     "note": "In the first room of Infested Crypt, blue at 13.",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-crypt-guardian",
+    "wikiId": "npc-a-frenzied-crypt-guardian",
     "x": 1632,
     "y": 784,
-    "level": "floor-1",
-    "levels": [
-      12,
-      12
-    ],
-    "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-crypt-guardian",
-    "wikiId": "npc-a-frenzied-crypt-guardian"
+    "level": "floor-1"
   },
   {
     "id": "community-914",

@@ -582,9 +582,9 @@
  {
   "id": "community-320",
   "community": true,
-  "name": "Polietta Two-tone (level 10)",
+  "name": "Polietta Two-tone",
   "category": "Quest NPC",
-  "note": "",
+  "note": "Level 10.",
   "x": 1769,
   "y": 1540,
   "wiki": "https://monstersandmemories.wiki/npcs/polietta-two-tone",
@@ -640,7 +640,7 @@
  {
   "id": "community-419",
   "community": true,
-  "name": "Bewildered Gorakk Four-Toes (level 11?)",
+  "name": "Bewildered Gorakk Four-Toes",
   "category": "Named mob",
   "note": "Spawned by Ranger Starter Quest at the tent at the end of the orc clifftop.",
   "x": 3817,
@@ -655,7 +655,7 @@
  {
   "id": "community-420",
   "community": true,
-  "name": "Scout Leader Krindor (level 6)",
+  "name": "Scout Leader Krindor",
   "category": "Named mob",
   "note": "Spawns at the top of the ramp.",
   "x": 3848,
@@ -1035,7 +1035,7 @@
  {
   "id": "community-1035",
   "community": true,
-  "name": "Muleda Murktoe (level 13)",
+  "name": "Muleda Murktoe",
   "note": "Spawned as part of Druid starter quest at the moss circle here.",
   "x": 3507,
   "y": 3259,

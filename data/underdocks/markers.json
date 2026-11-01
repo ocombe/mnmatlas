@@ -730,9 +730,9 @@
   {
     "id": "community-187",
     "community": true,
-    "name": "Simrut the Green (level 40)",
+    "name": "Simrut the Green",
     "category": "Quest NPC",
-    "note": "",
+    "note": "Level 40.",
     "x": 4539,
     "y": 3601,
     "level": "lower",

@@ -777,7 +777,7 @@
  {
   "id": "community-430",
   "community": true,
-  "name": "Warlord Muggrah (level 25)",
+  "name": "Warlord Muggrah",
   "category": "Named mob",
   "note": "Muggrah Goblin Camp on the mountain past Tel Ekir. Pathing brawler that walks a circuit around the snake statue is the PH.",
   "x": 2460,
@@ -906,7 +906,7 @@
  {
   "id": "community-762",
   "community": true,
-  "name": "Frightweaver (level 25)",
+  "name": "Frightweaver",
   "category": "Named mob",
   "note": "",
   "x": 2644,
@@ -921,7 +921,7 @@
  {
   "id": "community-813",
   "community": true,
-  "name": "Vile Will (level 15)",
+  "name": "Vile Will",
   "category": "Named mob",
   "note": "Located upstairs in a wheat and cabbage plantation villa.",
   "x": 4515,
@@ -952,7 +952,7 @@
  {
   "id": "community-1060",
   "community": true,
-  "name": "A river pirate captain (levels 25–27)",
+  "name": "A river pirate captain",
   "category": "Named mob",
   "note": "River pirate tavern. He is found on the dock outside the tavern.",
   "x": 4422,
@@ -1012,7 +1012,7 @@
  {
   "id": "community-987",
   "community": true,
-  "name": "Ember (level 28)",
+  "name": "Ember",
   "note": "EMBER SPAWN",
   "x": 1275,
   "y": 4367,
@@ -1027,8 +1027,8 @@
  {
   "id": "community-1009",
   "community": true,
-  "name": "Mercenary Foldja (level 25+)",
-  "note": "",
+  "name": "Mercenary Foldja",
+  "note": "Level 25+.",
   "x": 2209,
   "y": 1902,
   "category": "Quest NPC",

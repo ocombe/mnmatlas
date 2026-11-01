@@ -25,26 +25,26 @@
  },
  {
   "id": "krelvya-drynn",
-  "name": "Krelvya Drynn (level 60+)",
+  "name": "Krelvya Drynn",
   "category": "Quest NPC",
   "x": 2159,
   "y": 3603,
   "minZoom": 3,
   "approximate": true,
-  "note": "At the top of the Red Mantle tower in the south-west of Penshaw.",
+  "note": "At the top of the Red Mantle tower in the south-west of Penshaw. Level 60+.",
   "wiki": "https://monstersandmemories.wiki/npcs/krelvya-drynn",
   "wikiId": "npc-krelvya-drynn",
   "community": true
  },
  {
   "id": "dubar-falshim",
-  "name": "Dubar Falshim (level 42)",
+  "name": "Dubar Falshim",
   "category": "Notable NPC",
   "x": 2800,
   "y": 2752,
   "minZoom": 3,
   "approximate": true,
-  "note": "In Penshaw.",
+  "note": "In Penshaw. Level 42.",
   "wiki": "https://monstersandmemories.wiki/npcs/dubar-falshim",
   "wikiId": "npc-dubar-falshim"
  },
@@ -698,15 +698,15 @@
  {
   "id": "community-863",
   "community": true,
-  "name": "A waning spirit (level 25+)",
+  "name": "A waning spirit",
   "category": "Mob camp",
+  "levels": [
+   25,
+   null
+  ],
   "note": "",
   "x": 4729,
   "y": 2870,
-  "levels": [
-   25,
-   25
-  ],
   "wiki": "https://monstersandmemories.wiki/npcs/a-waning-spirit",
   "wikiId": "npc-a-waining-spirit"
  },

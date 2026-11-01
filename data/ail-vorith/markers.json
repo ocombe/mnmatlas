@@ -2054,11 +2054,15 @@
   {
     "id": "community-1031",
     "community": true,
-    "name": "A cave snake (levels 7–9)",
+    "name": "A cave snake",
     "note": "",
     "x": 6559,
     "y": 2227,
     "category": "Mob camp",
+    "levels": [
+      7,
+      9
+    ],
     "wiki": "https://monstersandmemories.wiki/npcs/a-cave-snake",
     "wikiId": "npc-a-cave-snake",
     "mobs": [

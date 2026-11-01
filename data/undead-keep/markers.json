@@ -392,24 +392,24 @@
  {
   "id": "community-357",
   "community": true,
-  "name": "Master Tracker Lark (level 45)",
+  "name": "Master Tracker Lark",
   "category": "Named mob",
+  "levels": [
+   45,
+   45
+  ],
   "note": "",
-  "x": 3547,
-  "y": 2665,
   "wiki": "https://monstersandmemories.wiki/npcs/master-tracker-lark",
   "wikiId": "npc-master-tracker-lark",
-  "levels": [
-   50,
-   50
-  ],
+  "x": 3547,
+  "y": 2665,
   "ambush": false,
   "level": "outside"
  },
  {
   "id": "community-358",
   "community": true,
-  "name": "Adept Kossco (levels ~51–52)",
+  "name": "Adept Kossco",
   "category": "Named mob",
   "note": "near a scorched medic",
   "x": 1978,
