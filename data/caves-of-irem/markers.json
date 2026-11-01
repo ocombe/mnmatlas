@@ -199,11 +199,16 @@
     "name": "Prince Gorb",
     "category": "Named mob",
     "note": "Cave of 1000 Eyes, on one of the three square-framed platforms; Prince Gorb, Baron Xio or Baroness Qi.",
-    "x": 5626,
-    "y": 2435,
-    "approximate": true,
+    "x": 5842,
+    "y": 2237,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/prince-gorb",
-    "wikiId": "npc-prince-gorb"
+    "wikiId": "npc-prince-gorb",
+    "community": true,
+    "levels": [
+      44,
+      44
+    ]
   },
   {
     "id": "wanted-baron-xio",

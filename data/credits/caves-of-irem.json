@@ -264,5 +264,15 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:wanted-prince-gorb": [
+    {
+      "name": ".scipio_",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
+    }
   ]
 }
