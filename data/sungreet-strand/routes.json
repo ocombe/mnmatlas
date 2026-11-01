@@ -189,14 +189,31 @@
    "kind": "passage",
    "oneWay": false,
    "from": {
-    "x": 2463.3,
-    "y": 1365.6,
+    "x": 2517.3,
+    "y": 4237.2,
     "level": "ground",
     "exact": true
    },
    "to": {
-    "x": 2523.3,
-    "y": 1495.5,
+    "x": 2529.3,
+    "y": 4219.5,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 2445.3,
+    "y": 3565.2,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 2475.3,
+    "y": 3567.4,
     "level": "ground",
     "exact": true
    }
@@ -265,6 +282,23 @@
    "to": {
     "x": 1335.3,
     "y": 2659.9,
+    "level": "ground",
+    "exact": true
+   }
+  },
+  {
+   "name": "Passage",
+   "kind": "passage",
+   "oneWay": false,
+   "from": {
+    "x": 975.3,
+    "y": 2554.8,
+    "level": "ground",
+    "exact": true
+   },
+   "to": {
+    "x": 975.3,
+    "y": 2568.7,
     "level": "ground",
     "exact": true
    }
