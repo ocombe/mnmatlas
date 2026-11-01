@@ -1836,28 +1836,6 @@
     "trade": "Survival"
   },
   {
-    "id": "community-1854",
-    "community": true,
-    "name": "Clarinda Sageforth",
-    "note": "Herb Pouch 2s 20c, Sickle 27c.",
-    "x": 2622,
-    "y": 4967,
-    "level": "lower",
-    "category": "Vendor",
-    "vendor": "Herbalism vendor"
-  },
-  {
-    "id": "community-1855",
-    "community": true,
-    "name": "Tobbin Tanglefoot",
-    "note": "Next to the bank, West Dock.",
-    "x": 2845,
-    "y": 4908,
-    "level": "lower",
-    "category": "Vendor",
-    "vendor": "Adventuring supplies"
-  },
-  {
     "id": "community-1860",
     "community": true,
     "name": "Clarinda Sageforth",

@@ -2161,38 +2161,6 @@
   ]
  },
  {
-  "id": "community-1856",
-  "community": true,
-  "name": "Taskmaster Nor'Tap",
-  "note": "Spawns from any of the taskmasters at the three rat camps.",
-  "x": 1789,
-  "y": 2047,
-  "level": "ground",
-  "category": "Named mob",
-  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
-  "wikiId": "npc-taskmaster-nortap",
-  "levels": [
-   41,
-   41
-  ]
- },
- {
-  "id": "community-1857",
-  "community": true,
-  "name": "Taskmaster Nor'Tap",
-  "note": "Spawns from any of the taskmasters at the three rat camps.",
-  "x": 1926,
-  "y": 1868,
-  "level": "ground",
-  "category": "Named mob",
-  "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-nortap",
-  "wikiId": "npc-taskmaster-nortap",
-  "levels": [
-   41,
-   41
-  ]
- },
- {
   "id": "community-1862",
   "community": true,
   "name": "Taskmaster Nor'Tap",

@@ -204,6 +204,8 @@
   "y": 1154.74,
   "approximate": true,
   "note": "",
+  "wiki": "https://monstersandmemories.wiki/npcs/aerin-mossfang",
+  "wikiId": "npc-aerin-mossfang",
   "classes": [
    "Beastmaster"
   ],
@@ -482,17 +484,6 @@
   "x": 1808,
   "y": 1587,
   "wiki": "https://monstersandmemories.wiki/npcs/moon-dances"
- },
- {
-  "id": "community-449",
-  "community": true,
-  "name": "Aerin Mossfang",
-  "category": "Quest NPC",
-  "note": "",
-  "x": 2095,
-  "y": 1153,
-  "wiki": "https://monstersandmemories.wiki/npcs/aerin-mossfang",
-  "wikiId": "npc-aerin-mossfang"
  },
  {
   "id": "community-450",

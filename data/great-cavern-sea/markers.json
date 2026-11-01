@@ -527,17 +527,6 @@
   }
  },
  {
-  "id": "community-1324",
-  "community": true,
-  "name": "Drelith Vael'Xirith",
-  "note": "",
-  "x": 1081,
-  "y": 3727,
-  "category": "Quest NPC",
-  "wiki": "https://monstersandmemories.wiki/npcs/drelith-vaelxirith",
-  "wikiId": "npc-drelith-vael-xirith"
- },
- {
   "id": "community-1326",
   "community": true,
   "name": "Illusionary Wall",
