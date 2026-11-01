@@ -43,8 +43,9 @@ Deno.serve(async req=>{
  const zoneName=text(url.searchParams.get('zone'),80),zone=zoneKey(zoneName);
  const given=text(url.searchParams.get('zoneSlug'),60).toLowerCase(),slug=/^[a-z0-9]+(-[a-z0-9]+)*$/.test(given)?given:zone.replace(/ /g,'-');
  if(q.length<2||!wanted.length)return reply(req,400,{error:'query'});
- const now=Date.now(),id=wanted.join(',')+'|'+zone+'|'+slug+'|'+q,hit=cache.get(id);
- if(hit&&now-hit.at<keep)return reply(req,200,{site,results:hit.results},{'Cache-Control':'private, max-age=1800'});
+ // fresh=1 (the editor's refresh button) skips the kept answer and asks the wiki again; it still counts toward the limit.
+ const fresh=url.searchParams.get('fresh')==='1',now=Date.now(),id=wanted.join(',')+'|'+zone+'|'+slug+'|'+q,hit=cache.get(id);
+ if(!fresh&&hit&&now-hit.at<keep)return reply(req,200,{site,results:hit.results},{'Cache-Control':'private, max-age=1800'});
  const recent=(perUser.get(user)||[]).filter(t=>now-t<60000);
  if(recent.length>=limit)return reply(req,429,{error:'busy'},{'Retry-After':'30'});
  recent.push(now);perUser.set(user,recent);
@@ -70,5 +71,5 @@ Deno.serve(async req=>{
   return {id:text(row.id,160),type:text(row.type,20),name:text(row.name,100),zone:text(row.zone,100),url:page.href,role:text(row.role,20).toLowerCase(),level:text(typeof row.level==='number'?String(row.level):row.level,20),location:text(row.location,240),tags:text(Array.isArray(row.tags)?row.tags.join(' · '):row.tags,160)};
  }).filter((row:{id:string,name:string,zone:string}|null)=>row&&row.id&&row.name&&(!zone||row.zone.split(',').some(z=>zoneKey(z)===zone))).slice(0,12);
  cache.delete(id);cache.set(id,{at:now,results});if(cache.size>most)cache.delete(cache.keys().next().value!);
- return reply(req,200,{site,results},{'Cache-Control':'private, max-age=1800'});
+ return reply(req,200,{site,results},{'Cache-Control':fresh?'no-store':'private, max-age=1800'});
 });

@@ -231,11 +231,12 @@
  // the world map spans every zone.
  let finderCount=0;const finders=new Set(),wikiTypes={npc:'NPC'},markerTypes=Object.keys(wikiTypes).join(',');
  const searchZone=()=>!config||config.zonesFile?'':config.wikiZone||config.title||'';
- async function wikiSearch(q,signal,asking,type=markerTypes){
+ async function wikiSearch(q,signal,asking,type=markerTypes,fresh=false){
   // Answers are kept in this browser for a day (and shared ones on the backend), so a repeated search costs the wiki nothing.
-  const zone=type==='item'?'':searchZone(),key=q.toLowerCase().replace(/\s+/g,' '),id=type+'|'+zone.toLowerCase()+'|'+key,saved=readSearches(),hit=saved[id];if(hit&&Date.now()-hit.at<864e5)return hit;
+  // fresh (the refresh button by the Name field) skips both and asks the wiki again, for a page edited since.
+  const zone=type==='item'?'':searchZone(),key=q.toLowerCase().replace(/\s+/g,' '),id=type+'|'+zone.toLowerCase()+'|'+key,saved=readSearches(),hit=saved[id];if(!fresh&&hit&&Date.now()-hit.at<864e5)return hit;
   const {data}=await client.auth.getSession(),token=data?.session?.access_token;if(!token)throw Error('sign-in');asking?.();
-  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key)+'&type='+type+(zone?'&zone='+encodeURIComponent(zone):''),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token},signal});
+  const r=await fetch(settings.supabaseUrl.replace(/\/$/,'')+'/functions/v1/wiki-search?q='+encodeURIComponent(key)+'&type='+type+(zone?'&zone='+encodeURIComponent(zone):'')+(fresh?'&fresh=1':''),{headers:{apikey:settings.supabaseKey,Authorization:'Bearer '+token},signal,...(fresh?{cache:'no-store'}:{})});
   if(!r.ok)throw Error(r.status===429?'busy':'failed');const body=await r.json();
   const answer={at:Date.now(),site:Object.hasOwn(wikiSites,body?.site)?body.site:'mnm-wiki',results:Array.isArray(body?.results)?body.results:[]};
   saved[id]=answer;const keys=Object.keys(saved).sort((a,b)=>saved[b].at-saved[a].at);for(const old of keys.slice(100))delete saved[old];
@@ -274,18 +275,22 @@
    if(rows.length)credit(from);};
   const showFound=(site,results)=>{const rows=results.filter(r=>type==='item'?r.type==='item':Object.hasOwn(wikiTypes,r.type)),zone=type==='item'?'':searchZone();if(type==='item'){show(rows,rows.length?'':'No wiki item with that name.',site,'Wiki items');return;}show(rows,rows.length?'':zone?'No wiki NPC in '+zone+' with that name.':'No wiki NPC with that name.',site,zone?'Wiki NPCs in '+zone:'Wiki NPCs');};
   // Typing waits 600 ms for a pause; the same words again (spaces or case aside) do not search twice.
-  name.addEventListener('input',()=>{if(!user||!enabled())return;const q=name.value.trim(),key=q.toLowerCase().replace(/\s+/g,' ');if(key===wanted)return;
-   stop();wanted=key;const mine=serial;if(q.length<2){show([]);return;}
+  const search=(q,fresh=false)=>{stop();wanted=q.toLowerCase().replace(/\s+/g,' ');const mine=serial;if(q.length<2){show([]);return;}
    timer=setTimeout(async()=>{const request=new AbortController();asking=request;
-    try{const {site,results}=await wikiSearch(q,request.signal,()=>{if(mine===serial)busy(true);},type);if(mine===serial){busy(false);asking=null;showFound(site,results);}}
-    catch(e){if(mine!==serial)return;busy(false);asking=null;wanted='';show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. Keep typing the name, or paste the page address below.');}},600);});
+    try{const {site,results}=await wikiSearch(q,request.signal,()=>{if(mine===serial)busy(true);},type,fresh);if(mine===serial){busy(false);asking=null;showFound(site,results);}}
+    catch(e){if(mine!==serial)return;busy(false);asking=null;wanted='';show([],e.message==='busy'?'Wiki searches are rate limited. Try again in a minute.':'The wiki could not be searched right now. Keep typing the name, or paste the page address below.');}},fresh?0:600);};
+  name.addEventListener('input',()=>{if(!user||!enabled())return;const q=name.value.trim(),key=q.toLowerCase().replace(/\s+/g,' ');if(key===wanted)return;search(q);});
+  // The refresh button next to the Name field searches the same name again straight from the wiki, so an NPC page
+  // edited a moment ago (a level just added) can be picked without changing the name. NPC names only, not camp mobs or fish.
+  const refresh=multi||type==='item'?null:button('',()=>{if(!user||!enabled())return;const q=name.value.trim();if(q.length<2){stop();wanted='';show([],'Type at least two letters of the name, then refresh.');name.focus?.();return;}search(q,true);},'wiki-refresh');
+  if(refresh){refresh.title='Search the wiki again for this name (latest wiki data)';refresh.setAttribute('aria-label',refresh.title);refresh.insertAdjacentHTML('beforeend','<svg viewBox="0 0 16 16" width="14" height="14" fill="none" stroke="currentColor" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true"><path d="M13.5 8a5.5 5.5 0 1 1-1.6-3.9"/><path d="M13.5 2.5v3.2h-3.2"/></svg>');}
   // Up and down move through the suggestions, Enter picks one, Escape closes them (and only them).
   name.addEventListener('keydown',e=>{const all=options();if(!all.length)return;
    if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();highlight(active<0&&e.key==='ArrowUp'?all.length-1:active+(e.key==='ArrowDown'?1:-1));}
    else if(e.key==='Enter'&&active>=0){e.preventDefault();all[active].onclick();}
    else if(e.key==='Escape'){e.preventDefault();e.stopPropagation();stop();show([]);}});
   box.append(spinner,list,signedOut);
-  box.update=()=>{if(!enabled()){stop();wanted='';show([]);box.hidden=true;name.removeAttribute('aria-autocomplete');name.removeAttribute('aria-controls');name.placeholder='Give this place a name';return;}name.setAttribute('aria-controls',list.id);name.setAttribute('aria-autocomplete','list');name.placeholder=type==='item'?'Find a fish, or type a name and press Enter':multi?'Find a mob, or type a name and press Enter':user?'Type a name to search the wiki, or any name':'Give this place a name';box.hidden=false;list.hidden=spinner.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';show([]);}else busy(false);};
+  box.refresh=refresh;box.update=()=>{if(refresh)refresh.hidden=!enabled()||!user;if(!enabled()){stop();wanted='';show([]);box.hidden=true;name.removeAttribute('aria-autocomplete');name.removeAttribute('aria-controls');name.placeholder='Give this place a name';return;}name.setAttribute('aria-controls',list.id);name.setAttribute('aria-autocomplete','list');name.placeholder=type==='item'?'Find a fish, or type a name and press Enter':multi?'Find a mob, or type a name and press Enter':user?'Type a name to search the wiki, or any name':'Give this place a name';box.hidden=false;list.hidden=spinner.hidden=!user;signedOut.hidden=!!user;if(!user){stop();wanted='';show([]);}else busy(false);};
   box.reset=()=>{stop();wanted='';show([]);};box.dispose=()=>{box.reset();finders.delete(box);};
   finders.add(box);box.update();return box;
  }
