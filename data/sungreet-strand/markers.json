@@ -852,8 +852,12 @@
  {
   "id": "community-701",
   "community": true,
-  "name": "Dizzik (level ~20)",
+  "name": "Dizzik",
   "category": "Named mob",
+  "levels": [
+   20,
+   20
+  ],
   "note": "",
   "x": 2755,
   "y": 3924,
@@ -863,8 +867,12 @@
  {
   "id": "community-702",
   "community": true,
-  "name": "Nerguk (level ~25)",
+  "name": "Nerguk",
   "category": "Named mob",
+  "levels": [
+   25,
+   25
+  ],
   "note": "",
   "x": 2287,
   "y": 3668,

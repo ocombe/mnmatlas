@@ -215,6 +215,10 @@
     "id": "researcher-harseal",
     "name": "Researcher Harseal",
     "category": "Named mob",
+    "levels": [
+      16,
+      16
+    ],
     "level": "floor-1",
     "x": 2517,
     "y": 375,
@@ -227,6 +231,10 @@
     "id": "librarian-gallier",
     "name": "Librarian Gallier",
     "category": "Named mob",
+    "levels": [
+      16,
+      16
+    ],
     "level": "floor-1",
     "x": 1868,
     "y": 1371,
@@ -240,6 +248,10 @@
     "id": "brahson-the-butcher",
     "name": "Brahson the Butcher",
     "category": "Named mob",
+    "levels": [
+      17,
+      17
+    ],
     "level": "floor-1",
     "x": 2091.85,
     "y": 3062.95,
@@ -252,6 +264,10 @@
     "id": "commander-mangles",
     "name": "Commander Mangles",
     "category": "Named mob",
+    "levels": [
+      20,
+      20
+    ],
     "level": "floor-1",
     "x": 1560,
     "y": 4335,
@@ -264,6 +280,10 @@
     "id": "skyseer-illya",
     "name": "Skyseer Illya",
     "category": "Named mob",
+    "levels": [
+      25,
+      25
+    ],
     "level": "floor-1",
     "x": 607.17,
     "y": 3557.21,

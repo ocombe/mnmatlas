@@ -273,6 +273,10 @@
     "id": "quartermaster-boothroy",
     "name": "Quartermaster Boothroy",
     "category": "Named mob",
+    "levels": [
+      5,
+      5
+    ],
     "x": 1578.03,
     "y": 2993.64,
     "level": "floor-1",
@@ -286,6 +290,10 @@
     "id": "jakob-gefrey",
     "name": "Jakob Geffrey",
     "category": "Named mob",
+    "levels": [
+      8,
+      8
+    ],
     "x": 2134,
     "y": 2554,
     "level": "floor-1",
@@ -299,6 +307,10 @@
     "id": "timmon-bell",
     "name": "Timmon Bell",
     "category": "Named mob",
+    "levels": [
+      8,
+      8
+    ],
     "x": 566.14,
     "y": 2191.75,
     "level": "floor-2",
@@ -311,6 +323,10 @@
     "id": "bone-construct",
     "name": "Bone Construct",
     "category": "Named mob",
+    "levels": [
+      63,
+      63
+    ],
     "x": 1348.07,
     "y": 1369.96,
     "level": "floor-3",
@@ -323,6 +339,10 @@
     "id": "lieutenant-gregan-snyde",
     "name": "Lieutenant Gregan Snyde",
     "category": "Named mob",
+    "levels": [
+      10,
+      10
+    ],
     "x": 2184.25,
     "y": 1437.46,
     "level": "floor-3",
@@ -335,6 +355,10 @@
     "id": "dario-numas",
     "name": "Dario Numas",
     "category": "Named mob",
+    "levels": [
+      10,
+      10
+    ],
     "x": 2092,
     "y": 2386,
     "level": "floor-3",
@@ -348,6 +372,10 @@
     "id": "ariblast-the-wicked",
     "name": "Ariblast the Wicked",
     "category": "Named mob",
+    "levels": [
+      10,
+      10
+    ],
     "x": 2965,
     "y": 2339,
     "level": "floor-3",
@@ -361,6 +389,10 @@
     "id": "grandmaster-gildas",
     "name": "Grandmaster Gildas",
     "category": "Named mob",
+    "levels": [
+      10,
+      10
+    ],
     "x": 1922.95,
     "y": 1062.15,
     "level": "floor-4",
@@ -373,6 +405,10 @@
     "id": "grandmaster-obadiah",
     "name": "Grandmaster Obadiah",
     "category": "Named mob",
+    "levels": [
+      10,
+      10
+    ],
     "x": 1923.13,
     "y": 2251.16,
     "level": "floor-4",
@@ -398,6 +434,10 @@
     "id": "gerhardt-graves",
     "name": "Gerhardt Graves",
     "category": "Named mob",
+    "levels": [
+      8,
+      8
+    ],
     "x": 871.44,
     "y": 2784.85,
     "level": "floor-3",

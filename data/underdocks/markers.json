@@ -906,6 +906,10 @@
     "community": true,
     "name": "Sporcinius",
     "category": "Named mob",
+    "levels": [
+      14,
+      14
+    ],
     "note": "He pats in these caverns.",
     "x": 1014,
     "y": 5461,

@@ -176,6 +176,10 @@
     "y": 2215,
     "level": "floor-1",
     "category": "Named mob",
+    "levels": [
+      50,
+      50
+    ],
     "wiki": "https://monstersandmemories.wiki/npcs/devourhymn-glomenda",
     "wikiId": "npc-devourhymn-glomenda"
   }

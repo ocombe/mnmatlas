@@ -536,8 +536,12 @@
  {
   "id": "community-623",
   "community": true,
-  "name": "Overseer Shuk'Naru (levels 41–42)",
+  "name": "Overseer Shuk'Naru",
   "category": "Named mob",
+  "levels": [
+   41,
+   41
+  ],
   "note": "Looking West from bridge, this named spawns dead center of this patio area.",
   "x": 1230,
   "y": 2002,
@@ -803,7 +807,13 @@
   "community": true,
   "name": "Kallen Oison",
   "category": "Named mob",
+  "levels": [
+   37,
+   37
+  ],
   "note": "",
+  "wiki": "https://monstersandmemories.wiki/npcs/kallen-oison",
+  "wikiId": "npc-kallen-oison",
   "x": 2052,
   "y": 1490,
   "level": "ground"
@@ -1501,6 +1511,10 @@
   "x": 3081,
   "y": 2122,
   "category": "Named mob",
+  "levels": [
+   55,
+   55
+  ],
   "wiki": "https://monstersandmemories.wiki/npcs/stablemaster-tomaz",
   "wikiId": "npc-stablemaster-tomaz",
   "level": "ground"

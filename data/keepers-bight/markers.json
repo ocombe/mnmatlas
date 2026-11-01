@@ -196,6 +196,10 @@
   "id": "timberfang",
   "name": "Timberfang",
   "category": "Named mob",
+  "levels": [
+   25,
+   25
+  ],
   "x": 4588,
   "y": 5563,
   "minZoom": 3,

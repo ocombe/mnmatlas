@@ -1122,6 +1122,10 @@
   "x": 2170,
   "y": 1544,
   "category": "Named mob",
+  "levels": [
+   8,
+   8
+  ],
   "wiki": "https://monstersandmemories.wiki/npcs/meluli-dawnglow",
   "wikiId": "npc-meluli-dawnglow"
  },

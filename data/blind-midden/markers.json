@@ -224,6 +224,8 @@
     "community": true,
     "name": "King Jekom the Ancient",
     "note": "",
+    "wiki": "https://monstersandmemories.wiki/npcs/king-jekom-the-ancient",
+    "wikiId": "npc-king-jekom-the-ancient",
     "x": 2097,
     "y": 2100,
     "level": "basement",
@@ -460,10 +462,16 @@
     "community": true,
     "name": "Sarveth the Unheard",
     "note": "upper floor",
+    "wiki": "https://monstersandmemories.wiki/npcs/sarveth-the-unheard",
+    "wikiId": "npc-sarveth-the-unheard",
     "x": 2457,
     "y": 1295,
     "level": "ground",
-    "category": "Named mob"
+    "category": "Named mob",
+    "levels": [
+      17,
+      17
+    ]
   },
   {
     "id": "community-1217",
@@ -811,6 +819,8 @@
     "community": true,
     "name": "Grave Hulk",
     "note": "Spawned by the quest from Chaplain Cranely",
+    "wiki": "https://monstersandmemories.wiki/npcs/grave-hulk",
+    "wikiId": "npc-grave-hulk",
     "x": 2311,
     "y": 2187,
     "level": "ground",

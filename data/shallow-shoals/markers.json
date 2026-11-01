@@ -35,13 +35,19 @@
  },
  {
   "id": "pirate-island-named",
-  "name": "Captain Jonas Cossa (about level 45)",
+  "name": "Captain Jonas Cossa",
   "category": "Named mob",
+  "levels": [
+   45,
+   45
+  ],
   "x": 3775,
   "y": 13153,
   "minZoom": 3,
   "approximate": false,
   "note": "Pirate Island, with Gallows Krane and the Ghost of Selam.",
+  "wiki": "https://monstersandmemories.wiki/npcs/captain-jonas-cossa",
+  "wikiId": "npc-captain-jonas-cossa",
   "community": true
  },
  {
@@ -58,6 +64,10 @@
   "id": "werejackal-named",
   "name": "Gidum, the Dark Spirit; Thrallmaker Zladen; Father Rau",
   "category": "Named mob",
+  "levels": [
+   43,
+   43
+  ],
   "x": 3150,
   "y": 10900,
   "minZoom": 3,

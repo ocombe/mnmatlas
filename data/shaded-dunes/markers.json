@@ -982,6 +982,10 @@
   "id": "wanted-yezkiel-the-gatekeeper",
   "name": "Yezkiel the Gatekeeper",
   "category": "Named mob",
+  "levels": [
+   20,
+   20
+  ],
   "note": "On Oasis Island.",
   "x": 3717,
   "y": 3102,
@@ -993,6 +997,10 @@
   "id": "wanted-blackscale",
   "name": "Blackscale",
   "category": "Named mob",
+  "levels": [
+   25,
+   25
+  ],
   "note": "On Oasis Island.",
   "x": 3717,
   "y": 3242,
@@ -1008,6 +1016,10 @@
   "x": 3270,
   "y": 2901,
   "category": "Named mob",
+  "levels": [
+   42,
+   42
+  ],
   "wiki": "https://monstersandmemories.wiki/npcs/maleq",
   "wikiId": "npc-maleq"
  },

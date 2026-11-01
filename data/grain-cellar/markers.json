@@ -17,6 +17,10 @@
     "name": "Rais Muzari",
     "level": "cellar",
     "category": "Named mob",
+    "levels": [
+      32,
+      32
+    ],
     "x": 3468,
     "y": 2564.5,
     "approximate": true,
@@ -29,6 +33,10 @@
     "name": "Zakariah Shriki",
     "level": "cellar",
     "category": "Named mob",
+    "levels": [
+      31,
+      31
+    ],
     "x": 2868,
     "y": 3181,
     "approximate": false,
@@ -42,6 +50,10 @@
     "name": "Leila al-Bahri",
     "level": "cellar",
     "category": "Named mob",
+    "levels": [
+      33,
+      33
+    ],
     "x": 1220,
     "y": 2691,
     "approximate": true,
@@ -54,6 +66,10 @@
     "name": "Khalid al-Bahri",
     "level": "cellar",
     "category": "Named mob",
+    "levels": [
+      34,
+      34
+    ],
     "x": 1300,
     "y": 2691,
     "approximate": true,
@@ -78,6 +94,10 @@
     "name": "A priestess of Kravvin",
     "level": "cellar",
     "category": "Named mob",
+    "levels": [
+      32,
+      32
+    ],
     "x": 1300,
     "y": 2811,
     "approximate": true,

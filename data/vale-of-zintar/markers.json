@@ -13,6 +13,10 @@
   "id": "city-notables",
   "name": "Grand Vizier Al'Kithar",
   "category": "Named mob",
+  "levels": [
+   55,
+   55
+  ],
   "x": 4444,
   "y": 2861,
   "approximate": false,
@@ -39,6 +43,10 @@
   "id": "city-notables-khalbaar-the-growler",
   "name": "Khal'Baar the Growler",
   "category": "Named mob",
+  "levels": [
+   60,
+   60
+  ],
   "x": 5117,
   "y": 2880,
   "approximate": true,
@@ -52,6 +60,10 @@
   "id": "city-notables-2",
   "name": "Spicy Raziq",
   "category": "Named mob",
+  "levels": [
+   60,
+   60
+  ],
   "x": 5005,
   "y": 3134,
   "approximate": true,
@@ -65,6 +77,10 @@
   "id": "city-notables-2-zubair-goldtongue",
   "name": "Zubair Goldtongue",
   "category": "Named mob",
+  "levels": [
+   59,
+   59
+  ],
   "x": 4688,
   "y": 2266,
   "approximate": true,
@@ -78,6 +94,10 @@
   "id": "city-notables-2-sutarfaan-the-flamekeeper",
   "name": "Sutarfaan the Flamekeeper",
   "category": "Named mob",
+  "levels": [
+   59,
+   59
+  ],
   "x": 4235,
   "y": 2318,
   "approximate": true,
@@ -101,6 +121,10 @@
   "id": "hadir",
   "name": "Hadir the Shipbreaker",
   "category": "Named mob",
+  "levels": [
+   46,
+   46
+  ],
   "x": 1219,
   "y": 3995,
   "approximate": false,
@@ -125,6 +149,10 @@
   "id": "beach-hunters",
   "name": "Hemalmula the Hunter",
   "category": "Named mob",
+  "levels": [
+   40,
+   40
+  ],
   "x": 1608,
   "y": 4684,
   "approximate": true,
@@ -195,6 +223,10 @@
   "id": "mine-notables",
   "name": "Servator Vakraar",
   "category": "Named mob",
+  "levels": [
+   37,
+   37
+  ],
   "x": 2460,
   "y": 6298,
   "approximate": false,
@@ -208,6 +240,10 @@
   "id": "mine-notables-a-dustrend-kennel-master",
   "name": "A Dustrend kennel master",
   "category": "Named mob",
+  "levels": [
+   35,
+   35
+  ],
   "x": 2760,
   "y": 6280,
   "approximate": true,
@@ -230,6 +266,10 @@
   "id": "oasis-notables",
   "name": "Onis the Elder",
   "category": "Named mob",
+  "levels": [
+   28,
+   28
+  ],
   "x": 5746,
   "y": 7497,
   "approximate": true,
@@ -243,6 +283,10 @@
   "id": "oasis-notables-fernic-the-cur",
   "name": "Fernic the Cur",
   "category": "Named mob",
+  "levels": [
+   28,
+   28
+  ],
   "x": 5688,
   "y": 7274,
   "approximate": true,
@@ -256,6 +300,10 @@
   "id": "oasis-notables-seshena-the-lost",
   "name": "Seshena the Lost",
   "category": "Named mob",
+  "levels": [
+   30,
+   30
+  ],
   "x": 5546,
   "y": 7434,
   "approximate": true,
@@ -288,6 +336,10 @@
   "id": "devourers",
   "name": "A gold devourer",
   "category": "Named mob",
+  "levels": [
+   35,
+   35
+  ],
   "x": 2380,
   "y": 7665,
   "approximate": true,
@@ -300,6 +352,10 @@
   "id": "devourers-a-silver-devourer",
   "name": "A silver devourer",
   "category": "Named mob",
+  "levels": [
+   34,
+   34
+  ],
   "x": 2402,
   "y": 7665,
   "approximate": true,

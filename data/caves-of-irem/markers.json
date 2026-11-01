@@ -67,6 +67,10 @@
     "community": true,
     "name": "Warden Tessaru",
     "category": "Named mob",
+    "levels": [
+      40,
+      40
+    ],
     "note": "Not a quest giver.. a named.  Dropped Signet of Warden Tessaru 2 ac, sta, int 1 sv fire clicky blaze (10s cast)  int caster ring",
     "x": 977,
     "y": 3081,
@@ -194,6 +198,10 @@
     "id": "wanted-prince-gorb",
     "name": "Prince Gorb",
     "category": "Named mob",
+    "levels": [
+      44,
+      44
+    ],
     "note": "Cave of 1000 Eyes, on one of the three square-framed platforms; Prince Gorb, Baron Xio or Baroness Qi.",
     "x": 5626,
     "y": 2435,
