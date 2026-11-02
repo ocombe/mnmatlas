@@ -475,6 +475,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "ocombe",
+      "what": "moved"
     }
   ],
   "marker:community-1532": [
@@ -584,6 +588,12 @@
   "marker:community-1863": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1925": [
+    {
+      "name": "vrenlin",
       "what": "added"
     }
   ]
