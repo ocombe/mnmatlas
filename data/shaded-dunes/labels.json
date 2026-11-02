@@ -91,6 +91,18 @@
    "toPlace": "to-shaded-dunes"
   },
   {
+   "id": "to-fallen-pass-sea",
+   "name": "to Fallen Pass by sea",
+   "x": 330,
+   "y": 5200,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "west",
+   "toMap": "fallen-pass",
+   "toPlace": "to-shaded-dunes-sea"
+  },
+  {
    "id": "to-night-harbor",
    "name": "to Night Harbor",
    "x": 6760,

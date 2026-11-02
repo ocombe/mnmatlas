@@ -68,6 +68,19 @@
    "level": "ground"
   },
   {
+   "id": "to-shaded-dunes-sea",
+   "name": "to Shaded Dunes by sea",
+   "x": 4170,
+   "y": 3170,
+   "kind": "exit",
+   "priority": 90,
+   "minZoom": 1.5,
+   "arrow": "east",
+   "toMap": "shaded-dunes",
+   "toPlace": "to-fallen-pass-sea",
+   "level": "ground"
+  },
+  {
    "id": "to-vale-of-zintar",
    "name": "to Vale of Zintar",
    "x": 2084,
