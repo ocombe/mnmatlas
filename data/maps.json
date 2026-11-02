@@ -685,7 +685,14 @@
         {
           "id": "ground",
           "title": "Ground",
-          "tilePath": "assets/tiles/fallen-pass/{z}/{x}/{y}.webp"
+          "tilePath": "assets/tiles/fallen-pass/{z}/{x}/{y}.webp",
+          "grid": {
+            "scale": 3,
+            "offset": [
+              0,
+              0
+            ]
+          }
         },
         {
           "id": "underground",
@@ -696,13 +703,20 @@
           "maxNativeZoom": 5,
           "maxZoom": 7,
           "coordinateZoom": 5,
-          "tileRevision": "underground-v5",
+          "tileRevision": "underground-v8",
           "tilePath": "assets/tiles/fallen-pass/underground/{z}/{x}/{y}.webp",
           "labelsFile": "data/fallen-pass/underground-labels.json",
           "defaultView": {
             "mode": "fit",
             "padding": 18,
             "placeZoom": 4
+          },
+          "grid": {
+            "scale": 8,
+            "offset": [
+              -2786.67,
+              -1566.13
+            ]
           }
         }
       ]

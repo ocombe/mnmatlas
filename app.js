@@ -718,7 +718,13 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
  const base=registry.maps.find(c=>c.id===config.id),target=levelConfig(base,base.levels.find(l=>l.id===id));
  const url=viewUrl(null),center=place?[place.x,place.y]:pixelsOf(map.getCenter());url.searchParams.set('level',id);url.searchParams.set('x',String(center[0]));url.searchParams.set('y',String(center[1]));url.searchParams.set('z',String(zoom));
  // Sheets with their own pixel grid: a link still lands on its paired pin, at the same apparent scale.
- if(!levelsAligned(target,config)){if(place){const z=Math.min(target.maxZoom,Math.max(target.minZoom,zoom-config.coordinateZoom+target.coordinateZoom));url.searchParams.set('z',String(z));}else for(const k of ['x','y','z'])url.searchParams.delete(k);}
+ // Sheets drawn from one camera ("grid": sheet px = unit x scale + offset) keep the same spot and on-screen scale.
+ const grid=config.grid&&target.grid?config.grid.scale/target.grid.scale:null;
+ if(!levelsAligned(target,config)){
+  const z=Math.min(target.maxZoom,Math.max(target.minZoom,zoom-config.coordinateZoom+target.coordinateZoom+(grid?Math.log2(grid):0)));
+  if(grid&&!place){const g=config.grid,t=target.grid,x=Math.min(target.width,Math.max(0,(center[0]-g.offset[0])/g.scale*t.scale+t.offset[0])),y=Math.min(target.height,Math.max(0,(center[1]-g.offset[1])/g.scale*t.scale+t.offset[1]));url.searchParams.set('x',String(Math.round(x)));url.searchParams.set('y',String(Math.round(y)));url.searchParams.set('z',String(z));}
+  else if(place)url.searchParams.set('z',String(z));else for(const k of ['x','y','z'])url.searchParams.delete(k);
+ }
  if(place&&!place.quiet)url.searchParams.set('place',place.id);else url.searchParams.delete('place');
  history.pushState({map:config.id,level:id},'',url);ownView=true;await loadMap(config.id,url);
  if(place?.quiet)flashPin(place.id);
