@@ -51,16 +51,78 @@
     "community": true,
     "name": "Keeper of the Road",
     "category": "Named mob",
-    "note": "Drops a Forsaken Offering and is a killable spectre",
-    "x": 1194,
-    "y": 2305,
+    "note": "Roams on the road.",
+    "x": 1259,
+    "y": 2920,
     "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
     "wikiId": "npc-keeper-of-the-road",
     "ambush": false,
     "levels": [
       31,
       31
-    ]
+    ],
+    "shape": {
+      "kind": "path",
+      "loop": false,
+      "points": [
+        [
+          1259,
+          2920
+        ],
+        [
+          1168,
+          2449
+        ],
+        [
+          1217,
+          2017
+        ],
+        [
+          1338,
+          1867
+        ],
+        [
+          1590,
+          1686
+        ],
+        [
+          1848,
+          1604
+        ],
+        [
+          2187,
+          1587
+        ],
+        [
+          2705,
+          1604
+        ],
+        [
+          2956,
+          1624
+        ],
+        [
+          3347,
+          1805
+        ],
+        [
+          3485,
+          1861
+        ],
+        [
+          3785,
+          1915
+        ],
+        [
+          3884,
+          1921
+        ],
+        [
+          4020,
+          1887
+        ]
+      ]
+    }
   },
   {
     "id": "community-994",
@@ -215,22 +277,24 @@
     "name": "Baron Xio",
     "category": "Named mob",
     "note": "Cave of 1000 Eyes, on one of the three square-framed platforms.",
-    "x": 5704,
-    "y": 2570,
-    "approximate": true,
+    "x": 5010,
+    "y": 3256,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/baron-xio",
-    "wikiId": "npc-baron-xio"
+    "wikiId": "npc-baron-xio",
+    "community": true
   },
   {
     "id": "wanted-baroness-qi",
     "name": "Baroness Qi",
     "category": "Named mob",
     "note": "Cave of 1000 Eyes, on one of the three square-framed platforms.",
-    "x": 5548,
-    "y": 2570,
-    "approximate": true,
+    "x": 6100,
+    "y": 3323,
+    "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/baroness-qi",
-    "wikiId": "npc-baroness-qi"
+    "wikiId": "npc-baroness-qi",
+    "community": true
   },
   {
     "id": "community-1323",
@@ -895,10 +959,129 @@
     "id": "community-1835",
     "community": true,
     "name": "Dunemother Nezra",
-    "note": "",
+    "note": "Seems to spawns from any spiders or larger spiders maybe?",
     "x": 1430,
     "y": 1049,
     "category": "Named mob",
-    "ambush": false
+    "ambush": false,
+    "levels": [
+      32,
+      32
+    ]
+  },
+  {
+    "id": "community-1917",
+    "community": true,
+    "name": "spider camp",
+    "note": "",
+    "x": 1577,
+    "y": 1054,
+    "category": "Mob camp",
+    "levels": [
+      29,
+      31
+    ],
+    "mobs": [
+      {
+        "name": "A duneweaver",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver",
+        "wikiId": "npc-a-duneweaver"
+      },
+      {
+        "name": "A large duneweaver",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-large-duneweaver",
+        "wikiId": "npc-a-large-duneweaver"
+      },
+      {
+        "name": "A duneweaver hatchling",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver-hatchling",
+        "wikiId": "npc-a-duneweaver-hatchling"
+      },
+      {
+        "name": "Dunemother Nezra",
+        "wiki": "https://monstersandmemories.wiki/npcs/dunemother-nezra",
+        "wikiId": "npc-dunemother-nezra"
+      }
+    ]
+  },
+  {
+    "id": "community-1918",
+    "community": true,
+    "name": "spider camp",
+    "note": "",
+    "x": 2748,
+    "y": 1091,
+    "category": "Mob camp",
+    "levels": [
+      29,
+      31
+    ],
+    "mobs": [
+      {
+        "name": "A duneweaver",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver",
+        "wikiId": "npc-a-duneweaver"
+      },
+      {
+        "name": "A duneweaver hatchling",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver-hatchling",
+        "wikiId": "npc-a-duneweaver-hatchling"
+      },
+      {
+        "name": "A large duneweaver",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-large-duneweaver",
+        "wikiId": "npc-a-large-duneweaver"
+      },
+      {
+        "name": "Dunemother Nezra",
+        "wiki": "https://monstersandmemories.wiki/npcs/dunemother-nezra",
+        "wikiId": "npc-dunemother-nezra"
+      }
+    ]
+  },
+  {
+    "id": "community-1919",
+    "community": true,
+    "name": "Ziggurat #1",
+    "note": "",
+    "x": 3972,
+    "y": 2045,
+    "category": "Mob camp",
+    "levels": [
+      29,
+      31
+    ],
+    "mobs": [
+      {
+        "name": "A keening spectre",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-keening-spectre",
+        "wikiId": "npc-a-keening-spectre"
+      },
+      {
+        "name": "A gorged ghoul",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-gorged-ghoul",
+        "wikiId": "npc-a-gorged-ghoul"
+      },
+      {
+        "name": "A ravenous ghoul",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-ravenous-ghoul",
+        "wikiId": "npc-a-ravenous-ghoul"
+      },
+      {
+        "name": "A tempest shade",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-tempest-shade",
+        "wikiId": "npc-a-tempest-shade"
+      },
+      {
+        "name": "A bonepile colossus",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-bonepile-colossus",
+        "wikiId": "npc-a-bonepile-colossus"
+      },
+      {
+        "name": "A maddened Mur'Hua",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-maddened-murhua",
+        "wikiId": "npc-a-maddened-murhua"
+      }
+    ]
   }
 ]

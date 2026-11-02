@@ -43,6 +43,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": "darkhayn",
+      "what": "reshaped"
     }
   ],
   "marker:community-994": [
@@ -245,6 +249,10 @@
     {
       "name": "mogbert",
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "edited"
     }
   ],
   "marker:community-1849": [
@@ -273,6 +281,36 @@
     {
       "name": null,
       "what": "edited"
+    }
+  ],
+  "marker:wanted-baroness-qi": [
+    {
+      "name": ".scipio_",
+      "what": "moved"
+    }
+  ],
+  "marker:wanted-baron-xio": [
+    {
+      "name": ".scipio_",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1917": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1918": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1919": [
+    {
+      "name": "darkhayn",
+      "what": "added"
     }
   ]
 }

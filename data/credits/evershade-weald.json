@@ -440,5 +440,11 @@
       "name": null,
       "what": "removed"
     }
+  ],
+  "marker:community-1882": [
+    {
+      "name": "facepalming",
+      "what": "added"
+    }
   ]
 }

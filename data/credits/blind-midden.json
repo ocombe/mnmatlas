@@ -159,12 +159,28 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1239": [
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1240": [

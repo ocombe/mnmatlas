@@ -1154,5 +1154,27 @@
     "wikiId": "item-grouper"
    }
   ]
+ },
+ {
+  "id": "community-1882",
+  "community": true,
+  "name": "A warped fae",
+  "note": "Spawned (at night) in? druid circle near the Pixie Lift, meandered up to Lookout Cave and inside.",
+  "x": 1399,
+  "y": 1944,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-warped-fae",
+  "wikiId": "npc-a-warped-fae",
+  "levels": [
+   35,
+   null
+  ],
+  "mobs": [
+   {
+    "name": "A warped fae",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-warped-fae",
+    "wikiId": "npc-a-warped-fae"
+   }
+  ]
  }
 ]

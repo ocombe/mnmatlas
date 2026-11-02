@@ -1,610 +1,5 @@
 [
   {
-    "at": "2026-10-23T06:19:44.111Z",
-    "rows": [
-      {
-        "id": 1179,
-        "payloadHash": "a0ab77742d8dad73c8397e22ed02eec44107e89cddd643487cb04128ae6495ba",
-        "updatedAt": "2026-10-23T06:09:19.372925+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "edit-marker",
-          "target_id": "wiki-quartermaster",
-          "payload": {
-            "from": {
-              "x": 4544,
-              "y": 3803,
-              "name": "Traven Keldress",
-              "note": "",
-              "wiki": "https://monstersandmemories.wiki/npcs/traven-keldress",
-              "level": "lower",
-              "sells": null,
-              "trade": null,
-              "vendor": null,
-              "wikiId": "npc-traven-keldress",
-              "classes": null,
-              "category": "Quest",
-              "approximate": true
-            },
-            "name": "Traven Keldress",
-            "note": "Starts the Deepcut Bandit Bounty quest.",
-            "vendor": null,
-            "category": "Quest NPC"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1251,
-        "payloadHash": "06756aa971345e095b83d64afa18ea83a9dd9afe0a12d113200e3a2c01e7da11",
-        "updatedAt": "2026-10-23T06:07:21.534513+00:00",
-        "version": {
-          "map": "blind-midden",
-          "level": "basement",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2278,
-            "y": 1840,
-            "name": "Willie the Watcher",
-            "note": "Past the circling ramp with the Overseer and miners, Willie can be found in a small room through a narrow tunnel that the Overseer patrols.",
-            "wiki": "https://monstersandmemories.wiki/npcs/willie-the-watcher",
-            "level": "basement",
-            "ambush": false,
-            "levels": [
-              15,
-              15
-            ],
-            "wikiId": "npc-willie-the-watcher",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1252,
-        "payloadHash": "d42d69a5938566a397b43d9d901f85469d454a646d5972d549ce960f983fadd1",
-        "updatedAt": "2026-10-23T06:07:26.851309+00:00",
-        "version": {
-          "map": "glinting-hollow",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 1120,
-            "y": 1025,
-            "name": "Thornbark",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/thornbark",
-            "bounty": "npc-thornbark",
-            "levels": [
-              41,
-              41
-            ],
-            "wikiId": "npc-thornbark",
-            "category": "Named mob"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1253,
-        "payloadHash": "3df06ae2dd2ef4d0a83561428400d6b250f22d59767842b30f9838f5d2bc5baf",
-        "updatedAt": "2026-10-23T06:07:30.123844+00:00",
-        "version": {
-          "map": "glinting-hollow",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "community-1097",
-          "payload": {
-            "to": [
-              2741,
-              1458
-            ],
-            "from": [
-              3070,
-              533
-            ],
-            "name": "Strig"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1256,
-        "payloadHash": "a8320a6550d0c1acbd20245e79010b4472a94824cc81ccb8f8c5207afb6bfc67",
-        "updatedAt": "2026-10-23T06:09:05.384657+00:00",
-        "version": {
-          "map": "tel-ekir",
-          "level": "floor-1",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2209,
-            "y": 2643,
-            "name": "Ayip",
-            "note": "From Shaded Dunes entrance follow the path that splits left before the main gate. Towards the back of the shallow cave area Ayip spawned at the very back left with 2 potential adds. '''[Durin, Krivea Test]''' Respawn Time ~ 13 Minutes [Ayyo",
-            "wiki": "https://monstersandmemories.wiki/npcs/ayip",
-            "level": "floor-1",
-            "ambush": false,
-            "levels": [
-              13,
-              13
-            ],
-            "wikiId": "npc-ayip",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1257,
-        "payloadHash": "3e42d8250bc7375f4b70f9577ef3a46423b5a9dca3f1b18c5ae9bfbf2d6724f7",
-        "updatedAt": "2026-10-23T06:10:28.476617+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4572,
-            "y": 3752,
-            "name": "Kentara Swiftrend",
-            "note": "Sells Archer spell scrolls.",
-            "wiki": "https://monstersandmemories.wiki/npcs/kentara-swiftrend",
-            "level": "lower",
-            "sells": [
-              "Spell scrolls"
-            ],
-            "vendor": "Spell scribe",
-            "wikiId": "npc-kentara-swiftrend",
-            "category": "Vendor"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1258,
-        "payloadHash": "699236cbd638a6b6e4e90080de84c0b5aba0c712df870edf3b12f11aaaba2b7b",
-        "updatedAt": "2026-10-23T06:10:39.711843+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4558,
-            "y": 3738,
-            "name": "Leya Warcrest",
-            "note": "Sells Fighter spell scrolls.",
-            "wiki": "https://monstersandmemories.wiki/npcs/leya-warcrest",
-            "level": "lower",
-            "sells": [
-              "Spell scrolls"
-            ],
-            "wikiId": "npc-leya-warcrest",
-            "category": "Vendor"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1259,
-        "payloadHash": "77cbb629fb110e71984fe994f99647ed076dad9a0b93bc19392fd909ea8db092",
-        "updatedAt": "2026-10-23T06:10:47.845515+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "edit-marker",
-          "target_id": "class-archer-warrior-ranger",
-          "payload": {
-            "from": {
-              "x": 4593,
-              "y": 3728,
-              "name": "Archer / Fighter / Ranger Trainers",
-              "note": "",
-              "wiki": "https://monstersandmemories.wiki/npcs/archer-brann",
-              "level": "lower",
-              "wikiId": "npc-1790076523473-qxhtb",
-              "classes": [
-                "Archer",
-                "Fighter",
-                "Ranger"
-              ],
-              "building": "2nd Floor",
-              "category": "Class trainer",
-              "approximate": true
-            },
-            "name": "Archer / Fighter / Ranger Trainers",
-            "reason": "duplicate",
-            "remove": true
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1260,
-        "payloadHash": "c276151a310c747dc95b645000952685b8d3606588a95d5a22d5cf5106f09a2a",
-        "updatedAt": "2026-10-23T06:10:54.476282+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4635,
-            "y": 3730,
-            "name": "Xeldrin Warymark",
-            "note": "Sells Ranger spell scrolls.",
-            "wiki": "https://monstersandmemories.wiki/npcs/xeldrin-warymark",
-            "level": "lower",
-            "sells": [
-              "Spell scrolls"
-            ],
-            "wikiId": "npc-xeldrin-warymark",
-            "category": "Vendor"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1261,
-        "payloadHash": "abb6884fda201db6dc1b0f17d5404de4a58809e33209c6420aec783cbf182bcb",
-        "updatedAt": "2026-10-23T06:11:00.691021+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4414,
-            "y": 3617,
-            "name": "Vylania Wizerly",
-            "note": "2nd floor",
-            "wiki": "https://monstersandmemories.wiki/npcs/vylania-wizerly",
-            "level": "lower",
-            "sells": [
-              "Materials"
-            ],
-            "bounty": "npc-vylania-wizerly",
-            "wikiId": "npc-vylania-wizerly",
-            "category": "Vendor",
-            "priority": true
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1262,
-        "payloadHash": "34b51de1592632d5a566520a50dfc3e1c69f19af6153fb4089cc22a023ad913a",
-        "updatedAt": "2026-10-23T06:11:12.409886+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "edit-marker",
-          "target_id": "community-1173",
-          "payload": {
-            "from": {
-              "x": 4539,
-              "y": 3782,
-              "name": "Quartermaster Llarne",
-              "note": "",
-              "level": "lower",
-              "sells": [
-                "Armor",
-                "Weapons"
-              ],
-              "vendor": "Quartermaster",
-              "category": "Vendor"
-            },
-            "name": "Quartermaster Llarne",
-            "reason": "duplicate",
-            "remove": true
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1263,
-        "payloadHash": "22f8e4a778515516456cca249de772948c198796f38194e4a416bdce7c96e6b5",
-        "updatedAt": "2026-10-23T06:08:52.494107+00:00",
-        "version": {
-          "map": "night-harbor",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2009,
-            "y": 1136,
-            "name": "Master Tailor Sansha",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/master-tailor-sansha",
-            "bounty": "npc-master-tailor-sansha",
-            "wikiId": "npc-master-tailor-sansha",
-            "category": "Vendor",
-            "priority": true
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1264,
-        "payloadHash": "3edb267633f5414240cbed7eb189a7b3bf53c60db805fd5462daa6b2d708f30a",
-        "updatedAt": "2026-10-23T06:11:19.265765+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4458,
-            "y": 3717,
-            "name": "Krysella Lexis",
-            "note": "1st Floor. Sells Wizard spell scrolls.",
-            "wiki": "https://monstersandmemories.wiki/npcs/krysella-lexis",
-            "level": "lower",
-            "sells": [
-              "Spell scrolls"
-            ],
-            "wikiId": "npc-1790076529300-u2za1",
-            "category": "Vendor"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1266,
-        "payloadHash": "761f34ebc91afeddd2e916da5873813a96211f0572bf0806efc9c47072ff80e8",
-        "updatedAt": "2026-10-23T06:11:24.50172+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3308,
-            "y": 5674,
-            "name": "Vyrella Vinerot",
-            "note": "Sells Druid spell scrolls.",
-            "wiki": "https://monstersandmemories.wiki/npcs/vyrella-vinerot",
-            "level": "lower",
-            "sells": [
-              "Spell scrolls"
-            ],
-            "bounty": "npc-1790076535667-o6s25",
-            "wikiId": "npc-1790076535667-o6s25",
-            "category": "Vendor",
-            "priority": true
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1267,
-        "payloadHash": "78fe9cc0faa275219c1fc3106611084c1ac5c0e6de71ab3cdfa30698533603c2",
-        "updatedAt": "2026-10-23T06:11:29.736963+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "edit-marker",
-          "target_id": "class-druid",
-          "payload": {
-            "from": {
-              "x": 3332,
-              "y": 5668,
-              "name": "Druid trainer",
-              "note": "In the cave beneath the southern rock.",
-              "level": "lower",
-              "classes": [
-                "Druid"
-              ],
-              "building": "Druid trainer",
-              "category": "Class trainer"
-            },
-            "name": "Druid trainer",
-            "reason": "duplicate",
-            "remove": true
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1268,
-        "payloadHash": "d43df56e00f185bd1b22659a71bdcae4583f7c145dfcf482bd64dc163505a5d0",
-        "updatedAt": "2026-10-23T06:11:39.237484+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "move-marker",
-          "target_id": "community-556",
-          "payload": {
-            "to": [
-              4488,
-              3692
-            ],
-            "from": [
-              4500,
-              3705
-            ],
-            "name": "Korien Nock"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1269,
-        "payloadHash": "9f82131f3439f8a796457612c8d93c9e8922cf2e8dd6731c92db7932a9919c00",
-        "updatedAt": "2026-10-23T06:11:53.680138+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4499,
-            "y": 3705,
-            "name": "Archer Brann",
-            "note": "Sells fletching tools, arrow recipes, bows, arrows, quivers, and throwing daggers.",
-            "wiki": "https://monstersandmemories.wiki/npcs/archer-brann",
-            "level": "lower",
-            "sells": [
-              "Ammo",
-              "Bags",
-              "Recipes",
-              "Weapons"
-            ],
-            "vendor": "Bowyer",
-            "wikiId": "npc-1790076523473-qxhtb",
-            "category": "Vendor"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1271,
-        "payloadHash": "87ffab38a6ccfd2e9687f6fc0acb23a0c470a28bd37ec0fa24a11c4129b97a60",
-        "updatedAt": "2026-10-23T06:11:59.614098+00:00",
-        "version": {
-          "map": "underdocks",
-          "level": "lower",
-          "kind": "move-marker",
-          "target_id": "community-436",
-          "payload": {
-            "to": [
-              1014,
-              5461
-            ],
-            "from": [
-              705,
-              5561
-            ],
-            "name": "Sporcinius"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1272,
-        "payloadHash": "e06c14f399d3d5c4d2dfd4e84a4438d7c5c39596ecb3f80c6d53ea81d65764c9",
-        "updatedAt": "2026-10-23T06:07:41.606297+00:00",
-        "version": {
-          "map": "great-cavern-sea",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-740",
-          "payload": {
-            "from": {
-              "x": 4611,
-              "y": 3307,
-              "mobs": [],
-              "name": "Goblin Searcher",
-              "note": "Green to 22.",
-              "category": "Mob camp"
-            },
-            "name": "Goblin Searcher",
-            "note": "Mostly white and blue with few yellows at 15.",
-            "levels": [
-              13,
-              16
-            ]
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1273,
-        "payloadHash": "3609182ce9d5afddc906abde1214cfc4f34e652f162dc255f873d9d7f621ce02",
-        "updatedAt": "2026-10-23T06:12:13.031946+00:00",
-        "version": {
-          "map": "great-cavern-sea",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4475,
-            "y": 3281,
-            "name": "Boss Gurrok",
-            "note": "Place Holder is \"a dive leader\", spawns in front of the pillers",
-            "wiki": "https://monstersandmemories.wiki/npcs/boss-gurrok",
-            "ambush": false,
-            "levels": [
-              18,
-              18
-            ],
-            "wikiId": "npc-boss-gurrok",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1274,
-        "payloadHash": "9555540a51f4b3dce9c3f9f1f2aea6f7672ec00b2d7c59527e8d300c85e6c805",
-        "updatedAt": "2026-10-23T06:12:40.698289+00:00",
-        "version": {
-          "map": "fallen-pass",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 2354,
-            "y": 1877,
-            "name": "Overseer Jaru'Kan",
-            "note": "She patrols this area and has a Taskmaster PH",
-            "wiki": "https://monstersandmemories.wiki/npcs/overseer-jarukan",
-            "shape": {
-              "kind": "path",
-              "loop": true,
-              "points": [
-                [
-                  2354,
-                  1877
-                ],
-                [
-                  2307,
-                  1889
-                ],
-                [
-                  2272,
-                  1887
-                ],
-                [
-                  2241,
-                  1828
-                ],
-                [
-                  2278,
-                  1788
-                ],
-                [
-                  2287,
-                  1757
-                ],
-                [
-                  2323,
-                  1783
-                ],
-                [
-                  2345,
-                  1808
-                ],
-                [
-                  2354,
-                  1837
-                ]
-              ]
-            },
-            "bounty": "npc-overseer-jarukan",
-            "wikiId": "npc-overseer-jarukan",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-23T13:27:24.262Z",
     "rows": [
       {
@@ -15085,6 +14480,462 @@
               44,
               44
             ]
+          },
+          "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-11-02T15:50:39.385Z",
+    "rows": [
+      {
+        "id": 1865,
+        "payloadHash": "b5d58a2a41e0795861e276552fe7308f97088c4c59da089a0654333c801766b2",
+        "updatedAt": "2026-11-02T06:50:11.208149+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-baroness-qi",
+          "payload": {
+            "to": [
+              6100,
+              3323
+            ],
+            "from": [
+              5548,
+              2570
+            ],
+            "name": "Baroness Qi",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1866,
+        "payloadHash": "c6126e340572a4985c60ae3bff6f7954e1999cd52fe213d5b73446d57de0f57c",
+        "updatedAt": "2026-11-02T06:50:14.485875+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-baron-xio",
+          "payload": {
+            "to": [
+              5010,
+              3256
+            ],
+            "from": [
+              5704,
+              2570
+            ],
+            "name": "Baron Xio",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1882,
+        "payloadHash": "013889f3a0ffa093890c6d09ad9024709e6514f998b007d30bd0522ed67701e3",
+        "updatedAt": "2026-11-02T06:51:42.879784+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1399,
+            "y": 1944,
+            "mobs": [
+              {
+                "name": "A warped fae",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-warped-fae",
+                "wikiId": "npc-a-warped-fae"
+              }
+            ],
+            "name": "A warped fae",
+            "note": "Spawned (at night) in? druid circle near the Pixie Lift, meandered up to Lookout Cave and inside.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-warped-fae",
+            "levels": [
+              35,
+              null
+            ],
+            "wikiId": "npc-a-warped-fae",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1910,
+        "payloadHash": "2cc5699139cc89099ae8c8a35f723266755aec93b17fa497bf8f27dff3967a8f",
+        "updatedAt": "2026-11-02T06:50:21.114973+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1835",
+          "payload": {
+            "from": {
+              "x": 1430,
+              "y": 1049,
+              "name": "Dunemother Nezra",
+              "note": "",
+              "ambush": false,
+              "category": "Named mob"
+            },
+            "name": "Dunemother Nezra",
+            "note": "Seems to spawns from any spiders or larger spiders maybe?",
+            "levels": [
+              32,
+              32
+            ]
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1917,
+        "payloadHash": "193bd4ceb17a8135ba2d066cdc85dc4cf34b6fd9327ca8afab82c5df49d4778b",
+        "updatedAt": "2026-11-02T06:50:24.236017+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1577,
+            "y": 1054,
+            "mobs": [
+              {
+                "name": "A duneweaver",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver",
+                "wikiId": "npc-a-duneweaver"
+              },
+              {
+                "name": "A large duneweaver",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-large-duneweaver",
+                "wikiId": "npc-a-large-duneweaver"
+              },
+              {
+                "name": "A duneweaver hatchling",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver-hatchling",
+                "wikiId": "npc-a-duneweaver-hatchling"
+              },
+              {
+                "name": "Dunemother Nezra",
+                "wiki": "https://monstersandmemories.wiki/npcs/dunemother-nezra",
+                "wikiId": "npc-dunemother-nezra"
+              }
+            ],
+            "name": "spider camp",
+            "note": "",
+            "levels": [
+              29,
+              31
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1918,
+        "payloadHash": "6d512088f1de9a9a7c319391b9873ffdbbcd000f5ad1d5d9024e8c8767dab764",
+        "updatedAt": "2026-11-02T06:50:26.577163+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2748,
+            "y": 1091,
+            "mobs": [
+              {
+                "name": "A duneweaver",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver",
+                "wikiId": "npc-a-duneweaver"
+              },
+              {
+                "name": "A duneweaver hatchling",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-duneweaver-hatchling",
+                "wikiId": "npc-a-duneweaver-hatchling"
+              },
+              {
+                "name": "A large duneweaver",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-large-duneweaver",
+                "wikiId": "npc-a-large-duneweaver"
+              },
+              {
+                "name": "Dunemother Nezra",
+                "wiki": "https://monstersandmemories.wiki/npcs/dunemother-nezra",
+                "wikiId": "npc-dunemother-nezra"
+              }
+            ],
+            "name": "spider camp",
+            "note": "",
+            "levels": [
+              29,
+              31
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1919,
+        "payloadHash": "1e8658710725bc8052d42ff18f6900f357fa8c2009c991747c641e652110d8af",
+        "updatedAt": "2026-11-02T06:50:31.172194+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3972,
+            "y": 2045,
+            "mobs": [
+              {
+                "name": "A keening spectre",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-keening-spectre",
+                "wikiId": "npc-a-keening-spectre"
+              },
+              {
+                "name": "A gorged ghoul",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-gorged-ghoul",
+                "wikiId": "npc-a-gorged-ghoul"
+              },
+              {
+                "name": "A ravenous ghoul",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-ravenous-ghoul",
+                "wikiId": "npc-a-ravenous-ghoul"
+              },
+              {
+                "name": "A tempest shade",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-tempest-shade",
+                "wikiId": "npc-a-tempest-shade"
+              },
+              {
+                "name": "A bonepile colossus",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-bonepile-colossus",
+                "wikiId": "npc-a-bonepile-colossus"
+              },
+              {
+                "name": "A maddened Mur'Hua",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-maddened-murhua",
+                "wikiId": "npc-a-maddened-murhua"
+              }
+            ],
+            "name": "Ziggurat #1",
+            "note": "",
+            "levels": [
+              29,
+              31
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1922,
+        "payloadHash": "6a17d06ae0eb520332f34e151d667e47c843133cc0a827d2488b86c9de3543a1",
+        "updatedAt": "2026-11-02T06:50:45.327916+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-910",
+          "payload": {
+            "x": 1259,
+            "y": 2920,
+            "from": {
+              "x": 1194,
+              "y": 2305,
+              "name": "Keeper of the Road",
+              "note": "Drops a Forsaken Offering and is a killable spectre",
+              "wiki": "https://monstersandmemories.wiki/npcs/keeper-of-the-road",
+              "ambush": false,
+              "levels": [
+                31,
+                31
+              ],
+              "wikiId": "npc-keeper-of-the-road",
+              "category": "Named mob"
+            },
+            "name": "Keeper of the Road",
+            "note": "Roams on the road.",
+            "shape": {
+              "kind": "path",
+              "loop": false,
+              "points": [
+                [
+                  1259,
+                  2920
+                ],
+                [
+                  1168,
+                  2449
+                ],
+                [
+                  1217,
+                  2017
+                ],
+                [
+                  1338,
+                  1867
+                ],
+                [
+                  1590,
+                  1686
+                ],
+                [
+                  1848,
+                  1604
+                ],
+                [
+                  2187,
+                  1587
+                ],
+                [
+                  2705,
+                  1604
+                ],
+                [
+                  2956,
+                  1624
+                ],
+                [
+                  3347,
+                  1805
+                ],
+                [
+                  3485,
+                  1861
+                ],
+                [
+                  3785,
+                  1915
+                ],
+                [
+                  3884,
+                  1921
+                ],
+                [
+                  4020,
+                  1887
+                ]
+              ]
+            }
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1939,
+        "payloadHash": "ebbe7a887ccb4d1d40c6c75b1517057933bba5ed115fc814311c744b3ccbaf8f",
+        "updatedAt": "2026-11-02T06:49:13.975988+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "move-marker",
+          "target_id": "community-1238",
+          "payload": {
+            "to": [
+              2342,
+              1681
+            ],
+            "from": [
+              2441,
+              1781
+            ],
+            "name": "Pragrok the Pickaxe"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1940,
+        "payloadHash": "7fdaf5ef2b0ac13c90a1f43f87cfff6f9739af77dab511bf3fe142b05be50e31",
+        "updatedAt": "2026-11-02T06:49:42.361547+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "move-marker",
+          "target_id": "community-1239",
+          "payload": {
+            "to": [
+              2572,
+              1683
+            ],
+            "from": [
+              2476,
+              1710
+            ],
+            "name": "Forager Frandrah"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1942,
+        "payloadHash": "18430f142fd4d7612a607148572f081acba0f37d0f2237b41927c9454a0f713a",
+        "updatedAt": "2026-11-02T06:49:14.379903+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "edit-marker",
+          "target_id": "community-1238",
+          "payload": {
+            "from": {
+              "x": 2342,
+              "y": 1681,
+              "name": "Pragrok the Pickaxe",
+              "note": "",
+              "level": "basement",
+              "ambush": false,
+              "levels": [
+                15,
+                15
+              ],
+              "category": "Named mob"
+            },
+            "name": "Pragrok the Pickaxe",
+            "note": "PH is \"a muscular miner\""
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1943,
+        "payloadHash": "b470587c3a2bc811513b40d478675e13b552decf94533e144bf350ffe1e79173",
+        "updatedAt": "2026-11-02T06:49:42.77433+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "basement",
+          "kind": "edit-marker",
+          "target_id": "community-1239",
+          "payload": {
+            "from": {
+              "x": 2572,
+              "y": 1683,
+              "name": "Forager Frandrah",
+              "note": "",
+              "level": "basement",
+              "ambush": false,
+              "levels": [
+                15,
+                15
+              ],
+              "category": "Named mob"
+            },
+            "name": "Forager Frandrah",
+            "note": "\"a human harvester\" (standing, not the kneeling ones) is the PH"
           },
           "credit": false
         }
