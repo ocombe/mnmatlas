@@ -645,7 +645,7 @@
       "maxZoom": 7,
       "coordinateZoom": 5,
       "tileSize": 256,
-      "tileRevision": "v6",
+      "tileRevision": "v7",
       "tilePath": "assets/tiles/fallen-pass/{z}/{x}/{y}.webp",
       "markersFile": "data/fallen-pass/markers.json",
       "labelsFile": "data/fallen-pass/labels.json",
