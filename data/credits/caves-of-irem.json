@@ -107,6 +107,10 @@
     {
       "name": "original_g",
       "what": "edited"
+    },
+    {
+      "name": "darkhayn",
+      "what": "reshaped"
     }
   ],
   "marker:community-1087": [
@@ -287,11 +291,19 @@
     {
       "name": ".scipio_",
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:wanted-baron-xio": [
     {
       "name": ".scipio_",
+      "what": "moved"
+    },
+    {
+      "name": null,
       "what": "moved"
     }
   ],

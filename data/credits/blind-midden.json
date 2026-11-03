@@ -15,6 +15,10 @@
     {
       "name": "thorazul99",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-1210": [
@@ -69,6 +73,10 @@
     {
       "name": "darkhayn",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-1221": [
@@ -239,6 +247,10 @@
     {
       "name": "leezil",
       "what": "edited"
+    },
+    {
+      "name": "mogbert",
+      "what": "moved"
     }
   ],
   "marker:community-1297": [
@@ -281,6 +293,18 @@
     {
       "name": "rahu7107",
       "what": "removed"
+    }
+  ],
+  "marker:community-1945": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1946": [
+    {
+      "name": "mogbert",
+      "what": "added"
     }
   ]
 }

@@ -220,8 +220,8 @@
     "name": "River Bandit Camp",
     "category": "Mob camp",
     "note": "A river bandit in the camp is Riverking Magnar's stationary placeholder.",
-    "x": 3611,
-    "y": 6567,
+    "x": 3727,
+    "y": 6424,
     "mobs": [
       {
         "name": "Riverking Magnar",
@@ -232,6 +232,46 @@
         "name": "Riftjaw Dess",
         "wiki": "https://monstersandmemories.wiki/npcs/riftjaw-dess",
         "wikiId": "npc-riftjaw-dess"
+      },
+      {
+        "name": "A deranged convict",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deranged-convict",
+        "wikiId": "npc-a-deranged-convict"
+      },
+      {
+        "name": "An enchantress",
+        "wiki": "https://monstersandmemories.wiki/npcs/an-enchantress",
+        "wikiId": "npc-an-enchantress"
+      },
+      {
+        "name": "An exiled noble",
+        "wiki": "https://monstersandmemories.wiki/npcs/an-exiled-noble",
+        "wikiId": "npc-an-exiled-noble"
+      },
+      {
+        "name": "A river bandit",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-river-bandit",
+        "wikiId": "npc-a-river-bandit"
+      },
+      {
+        "name": "A cutthroat",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+        "wikiId": "npc-a-cutthroat"
+      },
+      {
+        "name": "A vagrant",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-vagrant",
+        "wikiId": "npc-a-vagrant"
+      },
+      {
+        "name": "A ruffian",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-ruffian",
+        "wikiId": "npc-a-ruffian"
+      },
+      {
+        "name": "A wayward knight",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-wayward-knight",
+        "wikiId": "npc-a-wayward-knight"
       }
     ],
     "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
@@ -239,7 +279,101 @@
     "levels": [
       12,
       15
-    ]
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          3142,
+          6556
+        ],
+        [
+          3352,
+          6620
+        ],
+        [
+          3497,
+          6655
+        ],
+        [
+          3629,
+          6624
+        ],
+        [
+          3720,
+          6578
+        ],
+        [
+          3788,
+          6593
+        ],
+        [
+          3866,
+          6624
+        ],
+        [
+          3942,
+          6814
+        ],
+        [
+          4047,
+          6886
+        ],
+        [
+          4173,
+          6875
+        ],
+        [
+          4206,
+          6822
+        ],
+        [
+          4195,
+          6768
+        ],
+        [
+          4148,
+          6697
+        ],
+        [
+          4048,
+          6602
+        ],
+        [
+          3974,
+          6415
+        ],
+        [
+          4021,
+          6275
+        ],
+        [
+          4017,
+          6198
+        ],
+        [
+          4023,
+          6110
+        ],
+        [
+          3994,
+          6044
+        ],
+        [
+          3961,
+          6023
+        ],
+        [
+          3811,
+          6006
+        ],
+        [
+          3429,
+          6236
+        ]
+      ]
+    }
   },
   {
     "id": "community-1087",
@@ -277,8 +411,8 @@
     "name": "Baron Xio",
     "category": "Named mob",
     "note": "Cave of 1000 Eyes, on one of the three square-framed platforms.",
-    "x": 5010,
-    "y": 3256,
+    "x": 6098,
+    "y": 3317,
     "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/baron-xio",
     "wikiId": "npc-baron-xio",
@@ -289,8 +423,8 @@
     "name": "Baroness Qi",
     "category": "Named mob",
     "note": "Cave of 1000 Eyes, on one of the three square-framed platforms.",
-    "x": 6100,
-    "y": 3323,
+    "x": 5017,
+    "y": 3259,
     "approximate": false,
     "wiki": "https://monstersandmemories.wiki/npcs/baroness-qi",
     "wikiId": "npc-baroness-qi",
