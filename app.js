@@ -718,7 +718,7 @@ async function changeLevel(id,place=null,zoom=map.getZoom()){
  const base=registry.maps.find(c=>c.id===config.id),target=levelConfig(base,base.levels.find(l=>l.id===id));
  const url=viewUrl(null),center=place?[place.x,place.y]:pixelsOf(map.getCenter());url.searchParams.set('level',id);url.searchParams.set('x',String(center[0]));url.searchParams.set('y',String(center[1]));url.searchParams.set('z',String(zoom));
  // Sheets with their own pixel grid: a link still lands on its paired pin, at the same apparent scale.
- // Sheets drawn from one camera ("grid": sheet px = unit x scale + offset) keep the same spot and on-screen scale.
+ // Sheets on one shared grid ("grid": sheet px = unit x scale + offset) keep the same spot and on-screen scale.
  const grid=config.grid&&target.grid?config.grid.scale/target.grid.scale:null;
  if(!levelsAligned(target,config)){
   const z=Math.min(target.maxZoom,Math.max(target.minZoom,zoom-config.coordinateZoom+target.coordinateZoom+(grid?Math.log2(grid):0)));
