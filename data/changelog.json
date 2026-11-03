@@ -1,6 +1,15 @@
 {
  "entries": [
   {
+   "date": "2026-11-03",
+   "title": "Fallen Pass: the Escapee hill and caves",
+   "text": "The Escapee hill is drawn as it stands: a clear edge along its north side, a flat plateau top with a marked step where it meets the ramp, and the high wall west of the lower caves. Underground, the camp under the rock slab and the Escapee campfires are in, the long tunnel shows as the ramp it is, a missing entrance is back, and Elder Luh'Kan sits in his cave. A new sea crossing links the beach south of Fallen Pass with Shaded Dunes.",
+   "maps": [
+    "fallen-pass",
+    "shaded-dunes"
+   ]
+  },
+  {
    "date": "2026-10-30",
    "title": "Directions for everyone",
    "text": "Directions is now open to every visitor, signed in or not. Pick a start and a finish, even on another map, and the atlas charts the way on foot, by stairs, lifts, boats and teleports. If a route goes wrong, send feedback from the Directions panel.",
