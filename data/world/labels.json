@@ -21,8 +21,8 @@
   {
    "id": "zone-sungreet-strand",
    "name": "Sungreet Strand",
-   "x": 2409,
-   "y": 1771,
+   "x": 2330,
+   "y": 1650,
    "kind": "zone",
    "priority": 100,
    "toMap": "sungreet-strand"
