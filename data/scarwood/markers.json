@@ -250,7 +250,7 @@
   "y": 4139,
   "category": "Mob camp",
   "levels": [
-   38,
+   40,
    null
   ],
   "mobs": [
@@ -258,6 +258,9 @@
     "name": "a grovebound treant",
     "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
     "wikiId": "npc-a-grovebound-treant"
+   },
+   {
+    "name": "a treant"
    }
   ]
  },

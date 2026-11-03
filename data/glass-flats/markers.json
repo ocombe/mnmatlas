@@ -611,5 +611,69 @@
   "x": 8858,
   "y": 6818,
   "category": "Quest NPC"
+ },
+ {
+  "id": "community-1914",
+  "community": true,
+  "name": "Master Tracker Lark",
+  "note": "Ground level broken tower in the undead section of the flats, His placeholder is a charred tracker",
+  "x": 3741,
+  "y": 5435,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/master-tracker-lark",
+  "wikiId": "npc-master-tracker-lark",
+  "levels": [
+   50,
+   50
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1915",
+  "community": true,
+  "name": "Fenrix Lightfoot",
+  "note": "Ground level broken tower in the undead section of the flats, His placeholder is a charred tracker",
+  "x": 3751,
+  "y": 5437,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/fenrix-lightfoot",
+  "wikiId": "npc-fenrix-lightfoot",
+  "levels": [
+   50,
+   50
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1969",
+  "community": true,
+  "name": "Chaim the Herald",
+  "note": "Spiders",
+  "x": 3176,
+  "y": 5408,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/chaim-the-herald",
+  "wikiId": "npc-chaim-the-herald",
+  "levels": [
+   55,
+   55
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1970",
+  "community": true,
+  "name": "Mistress Nephidna",
+  "note": "Spiders",
+  "x": 3177,
+  "y": 5443,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/mistress-nephidna",
+  "wikiId": "npc-mistress-nephidna",
+  "levels": [
+   56,
+   56
+  ],
+  "ambush": false
  }
 ]

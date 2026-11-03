@@ -1425,5 +1425,57 @@
   "category": "Notable NPC",
   "wiki": "https://monstersandmemories.wiki/npcs/almina-weepingwind",
   "wikiId": "npc-almina-weepingwind"
+ },
+ {
+  "id": "community-1959",
+  "community": true,
+  "name": "Fishing",
+  "note": "",
+  "x": 1802,
+  "y": 4306,
+  "category": "Fishing spot",
+  "fish": [
+   {
+    "name": "Glimmerscale Herring",
+    "wiki": "https://monstersandmemories.wiki/items/glimmerscale-herring",
+    "wikiId": "item-glimmerscale-herring"
+   },
+   {
+    "name": "Oasis Perch",
+    "wiki": "https://monstersandmemories.wiki/items/oasis-perch",
+    "wikiId": "item-oasis-perch"
+   },
+   {
+    "name": "Spotted Angelfish",
+    "wiki": "https://monstersandmemories.wiki/items/spotted-angelfish",
+    "wikiId": "item-spotted-angelfish"
+   }
+  ]
+ },
+ {
+  "id": "community-1960",
+  "community": true,
+  "name": "Fishing",
+  "note": "",
+  "x": 5117,
+  "y": 5735,
+  "category": "Fishing spot",
+  "fish": [
+   {
+    "name": "Basa",
+    "wiki": "https://monstersandmemories.wiki/items/basa",
+    "wikiId": "item-basa"
+   },
+   {
+    "name": "River Trout",
+    "wiki": "https://monstersandmemories.wiki/items/river-trout",
+    "wikiId": "item-river-trout"
+   },
+   {
+    "name": "Grouper",
+    "wiki": "https://monstersandmemories.wiki/items/grouper",
+    "wikiId": "item-grouper"
+   }
+  ]
  }
 ]

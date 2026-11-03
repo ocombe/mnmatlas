@@ -299,6 +299,10 @@
     {
       "name": "ziros22",
       "what": "added"
+    },
+    {
+      "name": "shifty.9724",
+      "what": "moved"
     }
   ],
   "marker:community-1394": [
@@ -351,6 +355,10 @@
     {
       "name": "itodd",
       "what": "added"
+    },
+    {
+      "name": "shifty.9724",
+      "what": "moved"
     }
   ],
   "marker:community-1603": [
@@ -382,6 +390,12 @@
   "marker:community-1845": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1947": [
+    {
+      "name": "itodd",
       "what": "added"
     }
   ]

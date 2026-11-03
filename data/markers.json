@@ -976,8 +976,8 @@
     "name": "Snar the Egg Collector (level 8)",
     "category": "Named mob",
     "note": "",
-    "x": 2340,
-    "y": 1005,
+    "x": 2326,
+    "y": 872,
     "wiki": "https://monstersandmemories.wiki/npcs/snar-the-egg-collector",
     "wikiId": "npc-snar-the-egg-collector"
   },
@@ -3545,5 +3545,46 @@
       42,
       42
     ]
+  },
+  {
+    "id": "community-1920",
+    "community": true,
+    "name": "Sima Filipa",
+    "note": "Bottom of the spiral ramp down. First right at the intersection",
+    "x": 2204,
+    "y": 2040,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/sima-filipa",
+    "wikiId": "npc-sima-filipa",
+    "levels": [
+      44,
+      44
+    ]
+  },
+  {
+    "id": "community-1921",
+    "community": true,
+    "name": "Captain Caspian",
+    "note": "First room on the right as you enter the tower.",
+    "x": 1949,
+    "y": 1905,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/captain-caspian",
+    "wikiId": "npc-captain-caspian",
+    "levels": [
+      42,
+      42
+    ]
+  },
+  {
+    "id": "community-1930",
+    "community": true,
+    "name": "Shipwright Benlink",
+    "note": "",
+    "x": 903,
+    "y": 1932,
+    "category": "Quest NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/shipwright-benlink",
+    "wikiId": "npc-shipwright-benlink"
   }
 ]

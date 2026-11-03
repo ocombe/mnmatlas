@@ -211,6 +211,10 @@
     {
       "name": "karnix91",
       "what": "added"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-893": [
@@ -258,6 +262,12 @@
     }
   ],
   "marker:community-1840": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1961": [
     {
       "name": null,
       "what": "added"

@@ -227,7 +227,7 @@
   ],
   "x": 3026,
   "y": 810,
-  "approximate": true,
+  "approximate": false,
   "note": "",
   "minZoom": 2,
   "level": "ground",
@@ -243,10 +243,11 @@
   ],
   "x": 3299,
   "y": 674,
-  "approximate": true,
+  "approximate": false,
   "note": "",
   "minZoom": 2,
-  "level": "ground"
+  "level": "ground",
+  "community": true
  },
  {
   "id": "npc-2",
@@ -732,8 +733,8 @@
   "name": "Qassem Brolt",
   "category": "Named mob",
   "note": "Spawns on the 2nd Floor of the Cave from the Cove.",
-  "x": 1704,
-  "y": 2776,
+  "x": 1598,
+  "y": 5179,
   "levels": [
    34,
    34
@@ -839,9 +840,9 @@
   "community": true,
   "name": "Tora'Galdo",
   "category": "Named mob",
-  "note": "",
-  "x": 1457,
-  "y": 2964,
+  "note": "Back left spawn is PH",
+  "x": 214,
+  "y": 5915,
   "levels": [
    38,
    38
@@ -856,8 +857,8 @@
   "name": "Sivah Arjun",
   "category": "Named mob",
   "note": "Spawns on the 1st floor at the camp fire. Adept is the PH.",
-  "x": 1763,
-  "y": 2717,
+  "x": 2193,
+  "y": 6258,
   "levels": [
    32,
    32
@@ -1143,8 +1144,8 @@
   "community": true,
   "name": "Taskmaster Fek'Ney",
   "note": "This is the entrance to a cave where Fek'Ney is, it's next to the waterfall on the ground level.",
-  "x": 1345,
-  "y": 1975,
+  "x": 426,
+  "y": 3753,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/taskmaster-fekney",
   "wikiId": "npc-taskmaster-fekney",
@@ -1195,8 +1196,8 @@
   "community": true,
   "name": "Morthkara the Blight",
   "note": "Peak of cliffs up the ramp from poison lake, placeholder is static drake at the egg.",
-  "x": 3379,
-  "y": 2739,
+  "x": 3872,
+  "y": 3083,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/morthkara-the-blight",
   "wikiId": "npc-morthkara-the-blight",
@@ -2586,5 +2587,28 @@
     ]
    ]
   }
+ },
+ {
+  "id": "community-1957",
+  "community": true,
+  "name": "Fisher Ri'Kiti",
+  "note": "On the beach, near the Shaded Dunes zoneline.",
+  "x": 3464,
+  "y": 3424,
+  "level": "ground",
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/fisher-rikiti",
+  "wikiId": "npc-fisher-rikiti",
+  "ambush": false
+ },
+ {
+  "id": "community-1958",
+  "community": true,
+  "name": "Wizards Exodus",
+  "note": "This is where you go when you cast exodus as a wiz",
+  "x": 3472,
+  "y": 404,
+  "level": "ground",
+  "category": "Respawn point"
  }
 ]

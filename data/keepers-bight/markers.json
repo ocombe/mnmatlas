@@ -760,7 +760,7 @@
   "community": true,
   "name": "Fishing (60-120)",
   "category": "Fishing spot",
-  "note": "",
+  "note": "Moontide Salmon only catchable at night (6pm - 6am)",
   "x": 1854,
   "y": 2887,
   "fish": [
@@ -769,6 +769,11 @@
    },
    {
     "name": "Moontide Salmon"
+   },
+   {
+    "name": "Redfin Pike",
+    "wiki": "https://monstersandmemories.wiki/items/redfin-pike",
+    "wikiId": "item-redfin-pike"
    }
   ]
  },
@@ -873,6 +878,22 @@
     "name": "A deadwood recluse",
     "wiki": "https://monstersandmemories.wiki/npcs/a-deadwood-recluse",
     "wikiId": "npc-a-deadwood-recluse"
+   }
+  ]
+ },
+ {
+  "id": "community-1961",
+  "community": true,
+  "name": "Fishing",
+  "note": "",
+  "x": 3252,
+  "y": 3150,
+  "category": "Fishing spot",
+  "fish": [
+   {
+    "name": "Basa",
+    "wiki": "https://monstersandmemories.wiki/items/basa",
+    "wikiId": "item-basa"
    }
   ]
  }

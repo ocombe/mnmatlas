@@ -201,6 +201,10 @@
     {
       "name": "original_g",
       "what": "added"
+    },
+    {
+      "name": "darkhayn",
+      "what": "removed"
     }
   ],
   "marker:community-1565": [
@@ -320,6 +324,18 @@
     }
   ],
   "marker:community-1919": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1950": [
+    {
+      "name": "darkhayn",
+      "what": "added"
+    }
+  ],
+  "marker:community-1952": [
     {
       "name": "darkhayn",
       "what": "added"

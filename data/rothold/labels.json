@@ -260,6 +260,42 @@
       "arrow": "west",
       "travel": "Exit",
       "note": "The surface gate."
+    },
+    {
+      "id": "community-1935",
+      "community": true,
+      "name": "Distillery",
+      "note": "",
+      "x": 4509,
+      "y": 1245,
+      "level": "level-2",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0
+    },
+    {
+      "id": "community-1941",
+      "community": true,
+      "name": "Bone Pit",
+      "note": "",
+      "x": 3916,
+      "y": 1518,
+      "level": "level-4",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0
+    },
+    {
+      "id": "community-1967",
+      "community": true,
+      "name": "Statue Room",
+      "note": "",
+      "x": 4496,
+      "y": 1447,
+      "level": "level-4",
+      "kind": "building",
+      "priority": 50,
+      "minZoom": 0
     }
   ],
   "trainers": []

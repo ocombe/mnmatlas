@@ -556,8 +556,8 @@
   "community": true,
   "name": "goblins stone-sorter",
   "note": "",
-  "x": 2782,
-  "y": 6767,
+  "x": 2622,
+  "y": 6352,
   "category": "Mob camp",
   "wiki": "https://monstersandmemories.wiki/npcs/a-goblin-stone-sorter",
   "wikiId": "npc-a-goblin-stone-sorter",
@@ -697,8 +697,8 @@
   "community": true,
   "name": "Sherrick",
   "note": "PH is a goblin diver. Sherrick spawns on the southside ramp leading to the paths above.",
-  "x": 3118,
-  "y": 7281,
+  "x": 2822,
+  "y": 6315,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/sherrick",
   "wikiId": "npc-sherrick",
@@ -755,5 +755,20 @@
    14,
    16
   ]
+ },
+ {
+  "id": "community-1947",
+  "community": true,
+  "name": "a tidewall basilisk",
+  "note": "The center spawn here and place holder is a recess basilisk.",
+  "x": 3258,
+  "y": 7399,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-tidewall-basilisk",
+  "levels": [
+   29,
+   29
+  ],
+  "ambush": false
  }
 ]

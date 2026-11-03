@@ -3,6 +3,10 @@
     {
       "name": null,
       "what": "added"
+    },
+    {
+      "name": "sting_operation",
+      "what": "removed"
     }
   ],
   "marker:community-532": [

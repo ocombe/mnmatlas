@@ -1856,5 +1856,138 @@
     "level": "lower",
     "category": "Vendor",
     "vendor": "Adventuring supplies"
+  },
+  {
+    "id": "community-1877",
+    "community": true,
+    "name": "Ivar Copperpot",
+    "note": "",
+    "x": 3844,
+    "y": 4500,
+    "level": "lower",
+    "category": "Vendor",
+    "wiki": "https://monstersandmemories.wiki/npcs/ivar-copperpot",
+    "wikiId": "npc-ivar-copperpot"
+  },
+  {
+    "id": "community-1963",
+    "community": true,
+    "name": "Deepcut Mining Caves",
+    "note": "",
+    "x": 1542,
+    "y": 998,
+    "level": "tunnels",
+    "category": "Mob camp",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-deepcut-miner",
+    "levels": [
+      5,
+      7
+    ],
+    "mobs": [
+      {
+        "name": "A Deepcut miner",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepcut-miner",
+        "wikiId": "npc-scraped-1789714834299-h02ap"
+      },
+      {
+        "name": "A Deepcut overseer",
+        "wiki": "https://monstersandmemories.wiki/npcs/a-deepcut-overseer",
+        "wikiId": "npc-a-deepcut-overseer"
+      }
+    ],
+    "shape": {
+      "form": "outline",
+      "kind": "area",
+      "points": [
+        [
+          829,
+          1486
+        ],
+        [
+          930,
+          1375
+        ],
+        [
+          1288,
+          1107
+        ],
+        [
+          1422,
+          951
+        ],
+        [
+          1323,
+          794
+        ],
+        [
+          1429,
+          692
+        ],
+        [
+          1571,
+          812
+        ],
+        [
+          1797,
+          673
+        ],
+        [
+          1827,
+          445
+        ],
+        [
+          1700,
+          332
+        ],
+        [
+          1688,
+          85
+        ],
+        [
+          1884,
+          179
+        ],
+        [
+          2009,
+          268
+        ],
+        [
+          2082,
+          356
+        ],
+        [
+          2105,
+          438
+        ],
+        [
+          1978,
+          497
+        ],
+        [
+          1957,
+          711
+        ],
+        [
+          1858,
+          843
+        ],
+        [
+          1867,
+          1090
+        ],
+        [
+          1651,
+          1406
+        ],
+        [
+          1060,
+          1611
+        ],
+        [
+          937,
+          1561
+        ]
+      ]
+    }
   }
 ]

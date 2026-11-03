@@ -403,12 +403,13 @@
   "name": "Ngakepoto",
   "category": "Quest NPC",
   "note": "On the basilisk island across from Zaedin’s Landing.",
-  "x": 1177,
-  "y": 7511,
-  "approximate": true,
+  "x": 958,
+  "y": 7556,
+  "approximate": false,
   "minZoom": 3,
   "wiki": "https://monstersandmemories.wiki/npcs/ngakepoto",
-  "wikiId": "npc-ngakepoto"
+  "wikiId": "npc-ngakepoto",
+  "community": true
  },
  {
   "id": "wanted-grand-spiritbinder-murk",

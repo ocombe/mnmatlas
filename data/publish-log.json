@@ -1,287 +1,5 @@
 [
   {
-    "at": "2026-10-25T06:09:03.465Z",
-    "rows": [
-      {
-        "id": 1386,
-        "payloadHash": "2b377d060201839669db1ba562c69275ce50717d9436b15400c12b8128e7c102",
-        "updatedAt": "2026-10-25T05:51:39.521639+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-1",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4130,
-            "y": 1198,
-            "name": "A swarm leader",
-            "note": "Rat Side.  A Skri'Var Fiend is the placeholder",
-            "wiki": "https://monstersandmemories.wiki/npcs/a-swarm-leader",
-            "level": "floor-1",
-            "wikiId": "npc-a-swarm-leader",
-            "category": "Named mob"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1389,
-        "payloadHash": "3022b584febdcec0a76d6b41455117db40597cc768aeb8828834a5305257ae2e",
-        "updatedAt": "2026-10-25T05:50:57.626154+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-1",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3378,
-            "y": 1470,
-            "name": "A frenzied ratman",
-            "note": "Rat Side",
-            "wiki": "https://monstersandmemories.wiki/npcs/a-frenzied-ratman",
-            "level": "floor-1",
-            "wikiId": "npc-a-frenzied-ratman",
-            "category": "Named mob"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1390,
-        "payloadHash": "e93aaa07b0b49e198373d4336a6e0d58f3f3b60fb7cc855c37a4715b4f101faf",
-        "updatedAt": "2026-10-25T05:48:53.496715+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "move-marker",
-          "target_id": "provost-xan-shorn",
-          "payload": {
-            "to": [
-              4623,
-              4171
-            ],
-            "from": [
-              4498,
-              4167
-            ],
-            "name": "Provost Xan'shorn"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1398,
-        "payloadHash": "39f64adaa692d87322a285625c28bdf24f0e8defc30384a356167ad689d8e250",
-        "updatedAt": "2026-10-25T05:49:03.969875+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4592,
-            "y": 4354,
-            "name": "Zaarinth",
-            "note": "",
-            "vendor": "Herbalism vendor",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1400,
-        "payloadHash": "48bfe25fbc65978999a0436ecb9d4f7b67a3871da1b8c7f5019138c6c241836b",
-        "updatedAt": "2026-10-25T05:49:16.237251+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3766,
-            "y": 2145,
-            "name": "Julra",
-            "note": "3rd floor",
-            "trade": "Cooking",
-            "category": "Tradeskill"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1401,
-        "payloadHash": "39587425eb99aa1e2cc291fe2d2b4a749a0ec9b06607ef911e2dfeeb7afc0299",
-        "updatedAt": "2026-10-25T05:49:19.717938+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3771,
-            "y": 2098,
-            "name": "Keigor Worsinthar",
-            "note": "3rd floor",
-            "vendor": "Grocer",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1402,
-        "payloadHash": "77c99ea8c38da1f0c63abaa5b06c089e5ba4406b2e191db1c273ee3f0721c7bc",
-        "updatedAt": "2026-10-25T05:49:24.163544+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3704,
-            "y": 2093,
-            "name": "Imred Gule",
-            "note": "3rd floor",
-            "vendor": "Cook",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1403,
-        "payloadHash": "cd7507f2aba6bc1becb798a361c398dfea6e1dbd5dd201c44206139afbc7e784",
-        "updatedAt": "2026-10-25T05:49:28.904914+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3781,
-            "y": 2294,
-            "name": "Aelisel",
-            "note": "2nd floor of the inn",
-            "category": "Notable NPC"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1404,
-        "payloadHash": "7011911e0b6c992690c169405a466103ed8f8009fc58b9a054ab3be414df72ca",
-        "updatedAt": "2026-10-25T05:49:32.779183+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "edit-marker",
-          "target_id": "community-273",
-          "payload": {
-            "from": {
-              "x": 3812,
-              "y": 2289,
-              "name": "Kelnir",
-              "note": "",
-              "category": "Notable NPC"
-            },
-            "name": "Kelnir",
-            "note": "1st floor of the inn"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1405,
-        "payloadHash": "7e194f624d703062f4c6ca8d348b5c0a8516a9787d0845afa2d8c4618f3fa659",
-        "updatedAt": "2026-10-25T05:49:51.534693+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3240,
-            "y": 2814,
-            "name": "Zeliska Felthal",
-            "note": "",
-            "vendor": "Chain armorer",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1406,
-        "payloadHash": "a4b99581c91cc1843c733412278990157b58eb58797660a60d750096e9548640",
-        "updatedAt": "2026-10-25T05:49:54.758655+00:00",
-        "version": {
-          "map": "ail-vorith",
-          "level": null,
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3212,
-            "y": 2845,
-            "name": "Ferrin Jurvok",
-            "note": "",
-            "vendor": "Plate armorer",
-            "category": "Vendor"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1433,
-        "payloadHash": "0e0da949366ae58d369d1846ff67bcf135c56c236e0894c3748ddeb7537ac360",
-        "updatedAt": "2026-10-25T05:52:37.116276+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-1",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 4880,
-            "y": 1021,
-            "name": "An acolyte of Visru",
-            "note": "",
-            "wiki": "https://monstersandmemories.wiki/npcs/an-acolyte-of-visru",
-            "level": "floor-1",
-            "wikiId": "npc-an-acolyte-of-visru",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      },
-      {
-        "id": 1435,
-        "payloadHash": "7f8a323d0dcfde5f0a590c5760f14a5b1ab99929997e86803a18898d71c6480f",
-        "updatedAt": "2026-10-25T05:53:34.783933+00:00",
-        "version": {
-          "map": "blacktide-bay",
-          "level": "floor-1",
-          "kind": "new-marker",
-          "target_id": null,
-          "payload": {
-            "x": 3485,
-            "y": 1880,
-            "name": "A Bloodchain champion (level 23)",
-            "note": "Blacktide Bay",
-            "wiki": "https://monstersandmemories.wiki/npcs/a-bloodchain-champion",
-            "level": "floor-1",
-            "levels": [
-              23,
-              23
-            ],
-            "wikiId": "npc-a-bloodchain-champion",
-            "category": "Named mob"
-          },
-          "credit": true
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-25T10:54:48.179Z",
     "rows": [
       {
@@ -14885,6 +14603,1220 @@
             "name": "Blurgh the Blind"
           },
           "credit": false
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-11-03T07:57:52.081Z",
+    "rows": [
+      {
+        "id": 1867,
+        "payloadHash": "1e1b12cbc6af7af311176a5518fddab92969a22815f92b33f90ea566a2736fce",
+        "updatedAt": "2026-11-03T07:48:25.286473+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-1588",
+          "payload": {
+            "to": [
+              2822,
+              6315
+            ],
+            "from": [
+              3118,
+              7281
+            ],
+            "name": "Sherrick"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1868,
+        "payloadHash": "d17e6dfec58e5f5530cb9a389b13f97089a31d853021f19474ab1cb25fceb9a7",
+        "updatedAt": "2026-11-03T07:48:27.258549+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-1393",
+          "payload": {
+            "to": [
+              2622,
+              6352
+            ],
+            "from": [
+              2782,
+              6767
+            ],
+            "name": "goblins stone-sorter"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1877,
+        "payloadHash": "a038d742e6e9d89645820aac5d1aeee142c8c489f1835cb2563054d7a0ec5a6e",
+        "updatedAt": "2026-11-03T07:57:15.352345+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "lower",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3844,
+            "y": 4500,
+            "name": "Ivar Copperpot",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/ivar-copperpot",
+            "level": "lower",
+            "bounty": "npc-ivar-copperpot",
+            "wikiId": "npc-ivar-copperpot",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1878,
+        "payloadHash": "d86b96fe65177a49fca1a100460558d6e0554cc98480c13dbb1b07583b3501b5",
+        "updatedAt": "2026-11-03T07:46:38.851182+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "move-marker",
+          "target_id": "community-805",
+          "payload": {
+            "to": [
+              214,
+              5915
+            ],
+            "from": [
+              1457,
+              2964
+            ],
+            "name": "Tora'Galdo"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1879,
+        "payloadHash": "d721ec942b94852ae3a306f73b6e4c41a62cc04e06c6e5318b553820d2ef27c0",
+        "updatedAt": "2026-11-03T07:46:42.086267+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "move-marker",
+          "target_id": "community-988",
+          "payload": {
+            "to": [
+              2193,
+              6258
+            ],
+            "from": [
+              1763,
+              2717
+            ],
+            "name": "Sivah Arjun (level 32)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1880,
+        "payloadHash": "595bc0524bc3ba33962a185f2722f7dd5c49c3a4275005b7335049e13fc27fdf",
+        "updatedAt": "2026-11-03T07:46:44.850691+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "move-marker",
+          "target_id": "community-695",
+          "payload": {
+            "to": [
+              1598,
+              5179
+            ],
+            "from": [
+              1704,
+              2776
+            ],
+            "name": "Qassem Brolt (level 34)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1881,
+        "payloadHash": "f3a7249bd2f2c1e160f38f96126ab897386ee240c2d2c25bb2fa758b740665c9",
+        "updatedAt": "2026-11-03T07:46:48.720895+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "move-marker",
+          "target_id": "community-1334",
+          "payload": {
+            "to": [
+              426,
+              3753
+            ],
+            "from": [
+              1345,
+              1975
+            ],
+            "name": "Taskmaster Fek'Ney"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1883,
+        "payloadHash": "f1efb3778fe5dd92ad7e133655d48e567b9b99f5e76309c3f9f62c1dd60eed4c",
+        "updatedAt": "2026-11-03T07:45:10.449695+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3459,
+            "y": 3296,
+            "name": "a twisted fae",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-twisted-fae",
+            "levels": [
+              38,
+              38
+            ],
+            "wikiId": "npc-a-twisted-fae",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1913,
+        "payloadHash": "6686d59ec2611206f10d0c3a26762711b798249e5fd099b3142e4685d2b1b687",
+        "updatedAt": "2026-11-03T07:51:14.998301+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-243",
+          "payload": {
+            "to": [
+              2326,
+              872
+            ],
+            "from": [
+              2340,
+              1005
+            ],
+            "name": "Snar the Egg Collector (level 8)"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1914,
+        "payloadHash": "f7914eabea30a29c5ee5b5bff933a4b69cec2fee888f7861b0c7c48c3e47789a",
+        "updatedAt": "2026-11-03T07:47:11.935594+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3741,
+            "y": 5435,
+            "name": "Master Tracker Lark",
+            "note": "Ground level broken tower in the undead section of the flats, His placeholder is a charred tracker",
+            "wiki": "https://monstersandmemories.wiki/npcs/master-tracker-lark",
+            "ambush": false,
+            "levels": [
+              50,
+              50
+            ],
+            "wikiId": "npc-master-tracker-lark",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1915,
+        "payloadHash": "8f945296732de61a636ca328bf25885e408165210f66008320935d4597febc53",
+        "updatedAt": "2026-11-03T07:47:20.623147+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3751,
+            "y": 5437,
+            "name": "Fenrix Lightfoot",
+            "note": "Ground level broken tower in the undead section of the flats, His placeholder is a charred tracker",
+            "wiki": "https://monstersandmemories.wiki/npcs/fenrix-lightfoot",
+            "ambush": false,
+            "levels": [
+              50,
+              50
+            ],
+            "wikiId": "npc-fenrix-lightfoot",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1916,
+        "payloadHash": "78eec3104e4a8a6e0ccdc531cab1e1b190b28f2c444300f9a8cafe4d7090e5fb",
+        "updatedAt": "2026-11-03T07:45:20.133843+00:00",
+        "version": {
+          "map": "evershade-weald",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3349,
+            "y": 3038,
+            "name": "Taeresh Deathcharmer",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/taeresh-deathcharmer",
+            "bounty": "npc-taeresh-deathcharmer",
+            "levels": [
+              14,
+              14
+            ],
+            "wikiId": "npc-taeresh-deathcharmer",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1920,
+        "payloadHash": "a4487ddbee75f273a4851606fd2bdb4e11c650fbda02b3c10a000903d17cb357",
+        "updatedAt": "2026-11-03T07:51:20.372428+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2204,
+            "y": 2040,
+            "name": "Sima Filipa",
+            "note": "Bottom of the spiral ramp down. First right at the intersection",
+            "wiki": "https://monstersandmemories.wiki/npcs/sima-filipa",
+            "bounty": "npc-sima-filipa",
+            "levels": [
+              44,
+              44
+            ],
+            "wikiId": "npc-sima-filipa",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1921,
+        "payloadHash": "e05a4c0669152da900dcc4d1ccaaab04307a9ca278cf5d63f1fe494e6107bc31",
+        "updatedAt": "2026-11-03T07:51:28.428501+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1949,
+            "y": 1905,
+            "name": "Captain Caspian",
+            "note": "First room on the right as you enter the tower.",
+            "wiki": "https://monstersandmemories.wiki/npcs/captain-caspian",
+            "bounty": "npc-captain-caspian",
+            "levels": [
+              42,
+              42
+            ],
+            "wikiId": "npc-captain-caspian",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1929,
+        "payloadHash": "cd605715566ea81b17b6db91930ae959e36c6fc1694766973acabf34ff4a926e",
+        "updatedAt": "2026-11-03T07:47:01.070835+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "edit-marker",
+          "target_id": "community-805",
+          "payload": {
+            "from": {
+              "x": 1457,
+              "y": 2964,
+              "name": "Tora'Galdo",
+              "note": "",
+              "wiki": "https://monstersandmemories.wiki/npcs/toragaldo",
+              "level": "underground",
+              "levels": [
+                38,
+                38
+              ],
+              "wikiId": "npc-toragaldo",
+              "category": "Named mob"
+            },
+            "name": "Tora'Galdo",
+            "note": "Back left spawn is PH"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1930,
+        "payloadHash": "5ebeb9e5a22a2c936e630b5003e8383c2ac7fb3e6306293664142ead7d319198",
+        "updatedAt": "2026-11-03T07:51:36.832763+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 903,
+            "y": 1932,
+            "name": "Shipwright Benlink",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/shipwright-benlink",
+            "bounty": "npc-shipwright-benlink",
+            "wikiId": "npc-shipwright-benlink",
+            "category": "Quest NPC"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1931,
+        "payloadHash": "8e08d79b6ef4a7c758241fc52ee810139990174069ddec82dabadd23aa68ce18",
+        "updatedAt": "2026-11-03T07:57:29.577217+00:00",
+        "version": {
+          "map": "vale-of-zintar",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-379",
+          "payload": {
+            "from": {
+              "x": 3657,
+              "y": 6204,
+              "name": "Orc Camp",
+              "note": "Lvl 28+ orcs",
+              "levels": [
+                28,
+                30
+              ],
+              "category": "Mob camp"
+            },
+            "name": "Orc Camp",
+            "reason": "missing",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1932,
+        "payloadHash": "b213d9ad212aedbc2285c9208a7dfa0bf24d2ab6bf68ce2f3f675cc16e81fce2",
+        "updatedAt": "2026-11-03T07:52:34.637486+00:00",
+        "version": {
+          "map": "rothold",
+          "level": "level-4",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3943,
+            "y": 1156,
+            "name": "Lord Dorian",
+            "note": "rake is ph",
+            "wiki": "https://monstersandmemories.wiki/npcs/lord-dorian",
+            "level": "level-4",
+            "bounty": "npc-lord-dorian",
+            "wikiId": "npc-lord-dorian",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1935,
+        "payloadHash": "88b8a8a4792868fb41d5f58ce3ef68c588ce22e32b179bc78de7d8c3de4e5b1e",
+        "updatedAt": "2026-11-03T07:52:06.651729+00:00",
+        "version": {
+          "map": "rothold",
+          "level": "level-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4509,
+            "y": 1245,
+            "name": "Distillery",
+            "note": "",
+            "level": "level-2",
+            "category": "Personal",
+            "noteType": "label"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1936,
+        "payloadHash": "9593d45aad6c830c4ffc0bbec9b765f8e3787d80b8b72e309f3f085c31a93f55",
+        "updatedAt": "2026-11-03T07:52:11.173676+00:00",
+        "version": {
+          "map": "rothold",
+          "level": "level-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4507,
+            "y": 1234,
+            "name": "Distiller Sybil",
+            "note": "a broken acolyte is PH",
+            "wiki": "https://monstersandmemories.wiki/npcs/distiller-sybil",
+            "level": "level-2",
+            "ambush": false,
+            "levels": [
+              40,
+              40
+            ],
+            "wikiId": "npc-distiller-sybil",
+            "category": "Named mob"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1937,
+        "payloadHash": "eb42a6841edd5bfdfdaacb3653f4d6c0557cbff549a753dfe4a12b1bd74f04d0",
+        "updatedAt": "2026-11-03T07:52:17.516798+00:00",
+        "version": {
+          "map": "rothold",
+          "level": "level-2",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4404,
+            "y": 1753,
+            "name": "Stairwell Down",
+            "note": "",
+            "level": "level-2",
+            "travel": "Stairs",
+            "toLevel": "level-3",
+            "category": "Stairs",
+            "direction": "down"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1938,
+        "payloadHash": "f5d61d33a50a0076c3faba395b3279018d8eb519996aeb57044cc6370ea37395",
+        "updatedAt": "2026-11-03T07:55:02.109794+00:00",
+        "version": {
+          "map": "shallow-shoals",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "wanted-ngakepoto",
+          "payload": {
+            "to": [
+              958,
+              7556
+            ],
+            "from": [
+              1177,
+              7511
+            ],
+            "name": "Ngakepoto",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1941,
+        "payloadHash": "18d647bc1eb37fc1c059b8da5c880805391c3d3102ea2d5ad506bbeeabe58b45",
+        "updatedAt": "2026-11-03T07:52:39.158718+00:00",
+        "version": {
+          "map": "rothold",
+          "level": "level-4",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3916,
+            "y": 1518,
+            "name": "Bone Pit",
+            "note": "",
+            "level": "level-4",
+            "category": "Personal",
+            "noteType": "label"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1947,
+        "payloadHash": "3eaf5d1d9084f7b51a40a87245b7cdd0682c7a96428ba213ffc4530f5f8864e8",
+        "updatedAt": "2026-11-03T07:49:05.714256+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3258,
+            "y": 7399,
+            "name": "a tidewall basilisk",
+            "note": "The center spawn here and place holder is a recess basilisk.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-tidewall-basilisk",
+            "ambush": false,
+            "levels": [
+              29,
+              29
+            ],
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1949,
+        "payloadHash": "2f006e8a7fcba2fd36acf771d03e2c26c23d080f9a6861fdd9124827040784e7",
+        "updatedAt": "2026-11-03T07:44:23.397486+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1478",
+          "payload": {
+            "from": {
+              "x": 3794,
+              "y": 6264,
+              "mobs": [
+                {
+                  "name": "A cutthroat",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+                  "wikiId": "npc-a-cutthroat"
+                },
+                {
+                  "name": "An exiled noble",
+                  "wiki": "https://monstersandmemories.wiki/npcs/an-exiled-noble",
+                  "wikiId": "npc-an-exiled-noble"
+                }
+              ],
+              "name": "A cutthroat",
+              "note": "Hanging around  just outside the pirate camp",
+              "wiki": "https://monstersandmemories.wiki/npcs/a-cutthroat",
+              "levels": [
+                10,
+                13
+              ],
+              "wikiId": "npc-a-cutthroat",
+              "category": "Mob camp"
+            },
+            "name": "A cutthroat",
+            "reason": "duplicate",
+            "remove": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1950,
+        "payloadHash": "9c4dfa949c8ac7c49c2583e48026009e5b58b0c883be7ac339a86dbab9292bfa",
+        "updatedAt": "2026-11-03T07:44:34.348544+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3625,
+            "y": 6564,
+            "name": "Riverking Magnar",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/riverking-magnar",
+            "ambush": false,
+            "levels": [
+              15,
+              15
+            ],
+            "wikiId": "npc-riverking-magnar",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1952,
+        "payloadHash": "656e4c8ee532f85805cd7979ae39e56ec93ff9c9c36eee6ae1e90406797076b6",
+        "updatedAt": "2026-11-03T07:44:46.038024+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1509,
+            "y": 1422,
+            "name": "Ashlight",
+            "note": "roamer?",
+            "wiki": "https://monstersandmemories.wiki/npcs/ashlight",
+            "ambush": false,
+            "levels": [
+              30,
+              30
+            ],
+            "wikiId": "npc-ashlight",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1953,
+        "payloadHash": "6eeb9f1c935c1e0759bbbf8ac9e8e70920de3aeeeb9d605cd00c811e56267da0",
+        "updatedAt": "2026-11-03T07:45:27.108492+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "community-1413",
+          "payload": {
+            "to": [
+              3872,
+              3083
+            ],
+            "from": [
+              3379,
+              2739
+            ],
+            "name": "Morthkara the Blight"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1957,
+        "payloadHash": "fb7e7d9a8e0f65ed0e788b1fe74de67844282aaa1c1c5935d0220e54db116ba3",
+        "updatedAt": "2026-11-03T07:45:39.695234+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3464,
+            "y": 3424,
+            "name": "Fisher Ri'Kiti",
+            "note": "On the beach, near the Shaded Dunes zoneline.",
+            "wiki": "https://monstersandmemories.wiki/npcs/fisher-rikiti",
+            "level": "ground",
+            "ambush": false,
+            "wikiId": "npc-fisher-rikiti",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1958,
+        "payloadHash": "0ade29a410daf3dffff7b96443e9efbd56ce255e681232f2535364b7afee983f",
+        "updatedAt": "2026-11-03T07:45:49.764394+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3472,
+            "y": 404,
+            "name": "Wizards Exodus",
+            "note": "This is where you go when you cast exodus as a wiz",
+            "level": "ground",
+            "category": "Respawn point"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1959,
+        "payloadHash": "283f00748b727af740e405e49c27c7aa01e43306f296e7951b1a96fb70f2f92e",
+        "updatedAt": "2026-11-03T07:55:35.237099+00:00",
+        "version": {
+          "map": "sungreet-strand",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1802,
+            "y": 4306,
+            "fish": [
+              {
+                "name": "Glimmerscale Herring",
+                "wiki": "https://monstersandmemories.wiki/items/glimmerscale-herring",
+                "wikiId": "item-glimmerscale-herring"
+              },
+              {
+                "name": "Oasis Perch",
+                "wiki": "https://monstersandmemories.wiki/items/oasis-perch",
+                "wikiId": "item-oasis-perch"
+              },
+              {
+                "name": "Spotted Angelfish",
+                "wiki": "https://monstersandmemories.wiki/items/spotted-angelfish",
+                "wikiId": "item-spotted-angelfish"
+              }
+            ],
+            "name": "Fishing",
+            "note": "",
+            "category": "Fishing spot"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1960,
+        "payloadHash": "82a202f834e6b7f7f8ca98ac0d1681617710429abba5302f5063b06d80b4b6f8",
+        "updatedAt": "2026-11-03T07:56:04.617199+00:00",
+        "version": {
+          "map": "sungreet-strand",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5117,
+            "y": 5735,
+            "fish": [
+              {
+                "name": "Basa",
+                "wiki": "https://monstersandmemories.wiki/items/basa",
+                "wikiId": "item-basa"
+              },
+              {
+                "name": "River Trout",
+                "wiki": "https://monstersandmemories.wiki/items/river-trout",
+                "wikiId": "item-river-trout"
+              },
+              {
+                "name": "Grouper",
+                "wiki": "https://monstersandmemories.wiki/items/grouper",
+                "wikiId": "item-grouper"
+              }
+            ],
+            "name": "Fishing",
+            "note": "",
+            "category": "Fishing spot"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1961,
+        "payloadHash": "53c29ee51ba1cfef569d95da2e2562b8c00b2368b7792b4873c416a3dab83f4f",
+        "updatedAt": "2026-11-03T07:50:06.565814+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3252,
+            "y": 3150,
+            "fish": [
+              {
+                "name": "Basa",
+                "wiki": "https://monstersandmemories.wiki/items/basa",
+                "wikiId": "item-basa"
+              }
+            ],
+            "name": "Fishing",
+            "note": "",
+            "category": "Fishing spot"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1962,
+        "payloadHash": "192817ac32e6cf4716d56ff052bec56b95fd958a588086ad785a8bf0433e814c",
+        "updatedAt": "2026-11-03T07:50:22.251431+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-888",
+          "payload": {
+            "fish": [
+              {
+                "name": "Thorn Sturgeon"
+              },
+              {
+                "name": "Moontide Salmon"
+              },
+              {
+                "name": "Redfin Pike",
+                "wiki": "https://monstersandmemories.wiki/items/redfin-pike",
+                "wikiId": "item-redfin-pike"
+              }
+            ],
+            "from": {
+              "x": 1854,
+              "y": 2887,
+              "fish": [
+                {
+                  "name": "Thorn Sturgeon"
+                },
+                {
+                  "name": "Moontide Salmon"
+                }
+              ],
+              "name": "Fishing (60-120)",
+              "note": "",
+              "category": "Fishing spot"
+            },
+            "name": "Fishing (60-120)",
+            "note": "Moontide Salmon only catchable at night (6pm - 6am)"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1963,
+        "payloadHash": "11968978fad76f22a4198ae87fed08a739376bfed681ec67ed2c11f5be491e83",
+        "updatedAt": "2026-11-03T07:57:22.378686+00:00",
+        "version": {
+          "map": "underdocks",
+          "level": "tunnels",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1542,
+            "y": 998,
+            "mobs": [
+              {
+                "name": "A Deepcut miner",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-deepcut-miner",
+                "wikiId": "npc-scraped-1789714834299-h02ap"
+              },
+              {
+                "name": "A Deepcut overseer",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-deepcut-overseer",
+                "wikiId": "npc-a-deepcut-overseer"
+              }
+            ],
+            "name": "Deepcut Mining Caves",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-deepcut-miner",
+            "level": "tunnels",
+            "shape": {
+              "form": "outline",
+              "kind": "area",
+              "points": [
+                [
+                  829,
+                  1486
+                ],
+                [
+                  930,
+                  1375
+                ],
+                [
+                  1288,
+                  1107
+                ],
+                [
+                  1422,
+                  951
+                ],
+                [
+                  1323,
+                  794
+                ],
+                [
+                  1429,
+                  692
+                ],
+                [
+                  1571,
+                  812
+                ],
+                [
+                  1797,
+                  673
+                ],
+                [
+                  1827,
+                  445
+                ],
+                [
+                  1700,
+                  332
+                ],
+                [
+                  1688,
+                  85
+                ],
+                [
+                  1884,
+                  179
+                ],
+                [
+                  2009,
+                  268
+                ],
+                [
+                  2082,
+                  356
+                ],
+                [
+                  2105,
+                  438
+                ],
+                [
+                  1978,
+                  497
+                ],
+                [
+                  1957,
+                  711
+                ],
+                [
+                  1858,
+                  843
+                ],
+                [
+                  1867,
+                  1090
+                ],
+                [
+                  1651,
+                  1406
+                ],
+                [
+                  1060,
+                  1611
+                ],
+                [
+                  937,
+                  1561
+                ]
+              ]
+            },
+            "levels": [
+              5,
+              7
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1964,
+        "payloadHash": "fd0abd50e0708398ddd126c61b640b3761c81d68ea3acc7b4990b6f084ab8b68",
+        "updatedAt": "2026-11-03T07:54:53.291874+00:00",
+        "version": {
+          "map": "scarwood",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1679",
+          "payload": {
+            "from": {
+              "x": 7339,
+              "y": 4139,
+              "mobs": [
+                {
+                  "name": "a grovebound treant",
+                  "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+                  "wikiId": "npc-a-grovebound-treant"
+                }
+              ],
+              "name": "Treant Spawns",
+              "note": "Treant Spawns",
+              "levels": [
+                38,
+                null
+              ],
+              "category": "Mob camp"
+            },
+            "mobs": [
+              {
+                "name": "a grovebound treant",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+                "wikiId": "npc-a-grovebound-treant"
+              },
+              {
+                "name": "a treant"
+              }
+            ],
+            "name": "Treant Spawns",
+            "levels": [
+              40,
+              null
+            ]
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1965,
+        "payloadHash": "e54ae6c321a307766d2c8bc6e01f7de71c324a17dcb32f96e2e65bb9f29085a5",
+        "updatedAt": "2026-11-03T07:46:04.543159+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "bugs-21-25-2",
+          "payload": {
+            "to": [
+              3299,
+              674
+            ],
+            "from": [
+              3299,
+              674
+            ],
+            "name": "Beetles",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1966,
+        "payloadHash": "5b9b96155dc42f4b14b2a2064e2a8570f9de3181412094dd08f43e016dd50efa",
+        "updatedAt": "2026-11-03T07:46:06.967216+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "ground",
+          "kind": "move-marker",
+          "target_id": "undead-lt20-2",
+          "payload": {
+            "to": [
+              3026,
+              810
+            ],
+            "from": [
+              3026,
+              810
+            ],
+            "name": "Undead",
+            "approximate": false
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1967,
+        "payloadHash": "a72c548dffac83af1b09f5e86201fb9acf04faf1bd0e332a2a84496d946922ab",
+        "updatedAt": "2026-11-03T07:52:44.164686+00:00",
+        "version": {
+          "map": "rothold",
+          "level": "level-4",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 4496,
+            "y": 1447,
+            "name": "Statue Room",
+            "note": "",
+            "level": "level-4",
+            "category": "Personal",
+            "noteType": "label"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1968,
+        "payloadHash": "b557e1014ca172548c193d2cb1d3ace011f9b19db06d51608fd90e4e15c11a7a",
+        "updatedAt": "2026-11-03T07:56:12.000586+00:00",
+        "version": {
+          "map": "tel-ekir",
+          "level": "floor-1",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2195,
+            "y": 1022,
+            "name": "An Ashira Tribe Merchant",
+            "note": "Just inside the upper level caves next to the waterfall, near the Ashira Younglings.",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-tribe-merchant",
+            "level": "floor-1",
+            "bounty": "npc-an-ashira-tribe-merchant",
+            "wikiId": "npc-an-ashira-tribe-merchant",
+            "category": "Vendor",
+            "priority": true
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1969,
+        "payloadHash": "e877de6b9e66153c5afe9baa9808b1db62804f0bb09680bcbee3e397d7c1343f",
+        "updatedAt": "2026-11-03T07:47:24.084368+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3176,
+            "y": 5408,
+            "name": "Chaim the Herald",
+            "note": "Spiders",
+            "wiki": "https://monstersandmemories.wiki/npcs/chaim-the-herald",
+            "ambush": false,
+            "levels": [
+              55,
+              55
+            ],
+            "wikiId": "npc-chaim-the-herald",
+            "category": "Named mob"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1970,
+        "payloadHash": "ae05e7cabb56f031281a6f17486d20156ec78aa903d81c89eade3937580d5f5f",
+        "updatedAt": "2026-11-03T07:47:27.780177+00:00",
+        "version": {
+          "map": "glass-flats",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 3177,
+            "y": 5443,
+            "name": "Mistress Nephidna",
+            "note": "Spiders",
+            "wiki": "https://monstersandmemories.wiki/npcs/mistress-nephidna",
+            "ambush": false,
+            "levels": [
+              56,
+              56
+            ],
+            "wikiId": "npc-mistress-nephidna",
+            "category": "Named mob"
+          },
+          "credit": true
         }
       }
     ]

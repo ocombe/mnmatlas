@@ -145,6 +145,10 @@
     {
       "name": "nicny86",
       "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
     }
   ],
   "marker:community-705": [
@@ -211,6 +215,14 @@
     {
       "name": "nicny86",
       "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-988": [
@@ -229,6 +241,10 @@
     {
       "name": "nicny86",
       "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
     }
   ],
   "marker:community-1039": [
@@ -339,6 +355,10 @@
     {
       "name": "nicny86",
       "what": "edited"
+    },
+    {
+      "name": "nicny86",
+      "what": "moved"
     }
   ],
   "marker:community-1383": [
@@ -360,6 +380,10 @@
     },
     {
       "name": "daruk1971",
+      "what": "moved"
+    },
+    {
+      "name": "ventsonge",
       "what": "moved"
     }
   ],
@@ -559,6 +583,10 @@
     {
       "name": null,
       "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:undead-lt20-3": [
@@ -595,6 +623,24 @@
     {
       "name": "vrenlin",
       "what": "added"
+    }
+  ],
+  "marker:community-1957": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:community-1958": [
+    {
+      "name": "mogbert",
+      "what": "added"
+    }
+  ],
+  "marker:bugs-21-25-2": [
+    {
+      "name": null,
+      "what": "moved"
     }
   ]
 }

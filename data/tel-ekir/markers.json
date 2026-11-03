@@ -1225,5 +1225,17 @@
    23,
    23
   ]
+ },
+ {
+  "id": "community-1968",
+  "community": true,
+  "name": "An Ashira Tribe Merchant",
+  "note": "Just inside the upper level caves next to the waterfall, near the Ashira Younglings.",
+  "x": 2195,
+  "y": 1022,
+  "level": "floor-1",
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-tribe-merchant",
+  "wikiId": "npc-an-ashira-tribe-merchant"
  }
 ]

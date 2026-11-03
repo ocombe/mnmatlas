@@ -427,6 +427,10 @@
     {
       "name": "theemcredible",
       "what": "added"
+    },
+    {
+      "name": "cormeister",
+      "what": "moved"
     }
   ],
   "marker:community-250": [
@@ -1794,6 +1798,24 @@
   "marker:community-1843": [
     {
       "name": "liki_weaks",
+      "what": "added"
+    }
+  ],
+  "marker:community-1920": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1921": [
+    {
+      "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1930": [
+    {
+      "name": null,
       "what": "added"
     }
   ]

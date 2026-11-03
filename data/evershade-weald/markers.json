@@ -1176,5 +1176,35 @@
     "wikiId": "npc-a-warped-fae"
    }
   ]
+ },
+ {
+  "id": "community-1883",
+  "community": true,
+  "name": "a twisted fae",
+  "note": "",
+  "x": 3459,
+  "y": 3296,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-twisted-fae",
+  "wikiId": "npc-a-twisted-fae",
+  "levels": [
+   38,
+   38
+  ]
+ },
+ {
+  "id": "community-1916",
+  "community": true,
+  "name": "Taeresh Deathcharmer",
+  "note": "",
+  "x": 3349,
+  "y": 3038,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/taeresh-deathcharmer",
+  "wikiId": "npc-taeresh-deathcharmer",
+  "levels": [
+   14,
+   14
+  ]
  }
 ]

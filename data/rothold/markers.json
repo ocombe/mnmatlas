@@ -166,5 +166,47 @@
     "y": 1616,
     "level": "level-2",
     "category": "Respawn point"
+  },
+  {
+    "id": "community-1932",
+    "community": true,
+    "name": "Lord Dorian",
+    "note": "rake is ph",
+    "x": 3943,
+    "y": 1156,
+    "level": "level-4",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/lord-dorian",
+    "wikiId": "npc-lord-dorian"
+  },
+  {
+    "id": "community-1936",
+    "community": true,
+    "name": "Distiller Sybil",
+    "note": "a broken acolyte is PH",
+    "x": 4507,
+    "y": 1234,
+    "level": "level-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/distiller-sybil",
+    "wikiId": "npc-distiller-sybil",
+    "levels": [
+      40,
+      40
+    ],
+    "ambush": false
+  },
+  {
+    "id": "community-1937",
+    "community": true,
+    "name": "Stairwell Down",
+    "note": "",
+    "x": 4404,
+    "y": 1753,
+    "level": "level-2",
+    "category": "Stairs",
+    "travel": "Stairs",
+    "toLevel": "level-3",
+    "direction": "down"
   }
 ]
