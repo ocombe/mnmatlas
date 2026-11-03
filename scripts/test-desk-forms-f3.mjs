@@ -153,6 +153,17 @@ try {
       assert.deepEqual(r[k], before[k], k);
     }
   });
+  await checks.test('B21', 'Save keeps only the fields the chosen type shows, and a held note is shown once', async () => {
+    const r = suggestion(100, 'new-marker', {name: 'Tidecaller Selka', category: 'Named mob', level: 'lower', x: 10, y: 20,
+      levels: [50, 51], mobs: [{name: 'Tidecaller Selka'}]}, {status: 'pending', review_note: 'Not published: Unsupported mobs.'});
+    const e = await desk(r), card = e.context.$('review-card');
+    const shown = [...card.querySelectorAll('.reported-reason'), ...card.querySelectorAll('.desk-review-context')]
+      .filter(n => n.textContent.includes('Unsupported mobs'));
+    assert.equal(shown.length, 1, 'The refusal is shown once');
+    await cardAction(e, 'Save edits');
+    assert(!Object.hasOwn(r.payload, 'mobs'), 'A Named mob keeps no mob list');
+    assert.deepEqual(r.payload.levels, [50, 50]);
+  });
   for (const accept of [false, true]) {
     await checks.test('B20', `background status change asks before losing a dirty card (${accept})`, async () => {
       const r = row({name: 'New name', from: live}), e = await desk(r), c = e.context;
