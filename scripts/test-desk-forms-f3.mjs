@@ -153,6 +153,14 @@ try {
       assert.deepEqual(r[k], before[k], k);
     }
   });
+  await checks.test('B21', 'A rename opens its card when the Name field sits in the wiki row', async () => {
+    const npc = {...live, name: 'Sherrick', category: 'Named mob', wiki: 'https://monstersandmemories.wiki/npcs/sherrick', wikiId: 'npc-sherrick'};
+    const r = row({name: 'Skerrick', from: npc}), e = await desk(r, npc), card = e.context.$('review-card');
+    assert(!card.querySelector('.desk-map-error'), 'The card shows without an error');
+    const name = e.context.$('review-name'), box = name.closest('.wiki-name-row')?.parentElement;
+    assert(box, 'The Name field is in the wiki row');
+    assert(box.children.indexOf(box.querySelector('.desk-diff')) < box.children.indexOf(name.closest('.wiki-name-row')), 'The change is shown above the field');
+  });
   await checks.test('B21', 'Save keeps only the fields the chosen type shows, and a held note is shown once', async () => {
     const r = suggestion(100, 'new-marker', {name: 'Tidecaller Selka', category: 'Named mob', level: 'lower', x: 10, y: 20,
       levels: [50, 51], mobs: [{name: 'Tidecaller Selka'}]}, {status: 'pending', review_note: 'Not published: Unsupported mobs.'});

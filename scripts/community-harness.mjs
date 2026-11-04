@@ -64,6 +64,7 @@ class Node {
     return this.children[0];
   }
   insertBefore(node,before){
+    if(before&&!this.children.includes(before))throw Error('Child to insert before is not a child of this node');
     node.remove();
     node.parentElement=this;
     this.children.splice(this.children.indexOf(before),0,node);
