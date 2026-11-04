@@ -149,6 +149,10 @@
     {
       "name": "nicny86",
       "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "moved"
     }
   ],
   "marker:community-705": [
@@ -222,6 +226,10 @@
     },
     {
       "name": null,
+      "what": "moved"
+    },
+    {
+      "name": null,
       "what": "edited"
     }
   ],
@@ -244,6 +252,10 @@
     },
     {
       "name": "nicny86",
+      "what": "moved"
+    },
+    {
+      "name": null,
       "what": "moved"
     }
   ],
@@ -478,6 +490,14 @@
   "marker:giant-31-40-1": [
     {
       "name": "xatmakin",
+      "what": "edited"
+    },
+    {
+      "name": null,
+      "what": "moved"
+    },
+    {
+      "name": "ocombe",
       "what": "edited"
     }
   ],

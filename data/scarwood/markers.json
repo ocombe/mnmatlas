@@ -287,5 +287,41 @@
     ]
    ]
   }
+ },
+ {
+  "id": "community-1903",
+  "community": true,
+  "name": "Vaslir Kareth",
+  "note": "Has 2 cave entries. Sits in the deepest room of the right one.",
+  "x": 9590,
+  "y": 3146,
+  "category": "Named mob",
+  "levels": [
+   45,
+   45
+  ],
+  "ambush": false
+ },
+ {
+  "id": "community-1972",
+  "community": true,
+  "name": "a black drake",
+  "note": "",
+  "x": 5117,
+  "y": 635,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-black-drake",
+  "wikiId": "npc-a-black-drake",
+  "levels": [
+   40,
+   42
+  ],
+  "mobs": [
+   {
+    "name": "a black drake",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-black-drake",
+    "wikiId": "npc-a-black-drake"
+   }
+  ]
  }
 ]

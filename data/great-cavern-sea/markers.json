@@ -770,5 +770,20 @@
    29
   ],
   "ambush": false
+ },
+ {
+  "id": "community-1976",
+  "community": true,
+  "name": "Gholly the runaway",
+  "note": "Spawns in a tunnel underneath the rat island",
+  "x": 2761,
+  "y": 4649,
+  "category": "Named mob",
+  "wiki": "https://monstersandmemories.wiki/npcs/gholly-the-runaway",
+  "wikiId": "npc-gholly-the-runaway",
+  "levels": [
+   46,
+   46
+  ]
  }
 ]

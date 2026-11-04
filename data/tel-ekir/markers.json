@@ -1237,5 +1237,17 @@
   "category": "Vendor",
   "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-tribe-merchant",
   "wikiId": "npc-an-ashira-tribe-merchant"
+ },
+ {
+  "id": "community-1971",
+  "community": true,
+  "name": "An Ashira Supplier",
+  "note": "In room next door to Shaman Scribe",
+  "x": 2242,
+  "y": 1487,
+  "level": "floor-1",
+  "category": "Vendor",
+  "wiki": "https://monstersandmemories.wiki/npcs/an-ashira-supplier",
+  "wikiId": "npc-an-ashira-supplier"
  }
 ]

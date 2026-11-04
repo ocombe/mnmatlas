@@ -345,5 +345,37 @@
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/splint",
     "wikiId": "npc-splint"
+  },
+  {
+    "id": "community-1982",
+    "community": true,
+    "name": "Osric the Hungry",
+    "note": "",
+    "x": 2346,
+    "y": 1891,
+    "level": "floor-3",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/osric-the-hungry",
+    "wikiId": "npc-osric-the-hungry",
+    "levels": [
+      58,
+      58
+    ]
+  },
+  {
+    "id": "community-1983",
+    "community": true,
+    "name": "Oswin the Wailing",
+    "note": "In the tunnels",
+    "x": 2380,
+    "y": 1737,
+    "level": "floor-3",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/oswin-the-wailing",
+    "wikiId": "npc-oswin-the-wailing",
+    "levels": [
+      50,
+      50
+    ]
   }
 ]

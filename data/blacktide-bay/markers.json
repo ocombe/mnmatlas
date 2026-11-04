@@ -712,5 +712,18 @@
       14,
       14
     ]
+  },
+  {
+    "id": "community-1981",
+    "community": true,
+    "name": "Assassin Relki",
+    "note": "No loot other than a Unique Nodrop - Dragonforged Sewing Needle",
+    "x": 2310,
+    "y": 2859,
+    "level": "floor-2",
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/assassin-relki",
+    "wikiId": "npc-assassin-relki",
+    "ambush": false
   }
 ]

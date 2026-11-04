@@ -1222,5 +1222,64 @@
       30
     ],
     "ambush": false
+  },
+  {
+    "id": "community-1974",
+    "community": true,
+    "name": "Scarred Holdfast",
+    "note": "",
+    "x": 3571,
+    "y": 4467,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/scarred-holdfast",
+    "wikiId": "npc-scarred-holdfast",
+    "ambush": false
+  },
+  {
+    "id": "community-1975",
+    "community": true,
+    "name": "Fungivore",
+    "note": "roamer",
+    "x": 3740,
+    "y": 4311,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/fungivore",
+    "wikiId": "npc-fungivore",
+    "ambush": false
+  },
+  {
+    "id": "community-1978",
+    "community": true,
+    "name": "Bogwidow Resh",
+    "note": "Spawns near the box, Exiled Noble is the PH",
+    "x": 3774,
+    "y": 6273,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/bogwidow-resh",
+    "ambush": false
+  },
+  {
+    "id": "community-1979",
+    "community": true,
+    "name": "Hullbreaker Gort",
+    "note": "Spawns in front of the Box, Ruffian is the PH",
+    "x": 4305,
+    "y": 5759,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/hullbreaker-gort",
+    "wikiId": "npc-hullbreaker-gort",
+    "ambush": false
+  },
+  {
+    "id": "community-1980",
+    "community": true,
+    "name": "Hullbreaker Gort",
+    "note": "Another spawn Hullbreaker has been seen at. Possibly all static Ogre Ruffians are a PH",
+    "x": 4803,
+    "y": 3477,
+    "category": "Named mob",
+    "wiki": "https://monstersandmemories.wiki/npcs/hullbreaker-gort",
+    "wikiId": "npc-hullbreaker-gort",
+    "ambush": false
   }
 ]

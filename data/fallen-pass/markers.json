@@ -31,15 +31,16 @@
    41,
    41
   ],
-  "x": 1282,
-  "y": 632,
-  "approximate": true,
+  "x": 1185,
+  "y": 812,
+  "approximate": false,
   "note": "",
   "minZoom": 2,
   "ambush": false,
-  "wiki": "https://monstersandmemories.miraheze.org/wiki/Maleq",
+  "wiki": "https://monstersandmemories.wiki/npcs/maleq",
   "community": true,
-  "level": "ground"
+  "level": "ground",
+  "wikiId": "npc-maleq"
  },
  {
   "id": "undead-31-40-2",
@@ -733,8 +734,8 @@
   "name": "Qassem Brolt",
   "category": "Named mob",
   "note": "Spawns on the 2nd Floor of the Cave from the Cove.",
-  "x": 1598,
-  "y": 5179,
+  "x": 1588,
+  "y": 5234,
   "levels": [
    34,
    34
@@ -841,8 +842,8 @@
   "name": "Tora'Galdo",
   "category": "Named mob",
   "note": "Back left spawn is PH",
-  "x": 214,
-  "y": 5915,
+  "x": 202,
+  "y": 5906,
   "levels": [
    38,
    38
@@ -857,8 +858,8 @@
   "name": "Sivah Arjun",
   "category": "Named mob",
   "note": "Spawns on the 1st floor at the camp fire. Adept is the PH.",
-  "x": 2193,
-  "y": 6258,
+  "x": 2196,
+  "y": 6284,
   "levels": [
    32,
    32

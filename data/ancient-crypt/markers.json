@@ -222,10 +222,11 @@
     "level": "floor-1",
     "x": 2517,
     "y": 375,
-    "approximate": true,
+    "approximate": false,
     "note": "",
     "wiki": "https://monstersandmemories.wiki/npcs/researcher-harseal",
-    "wikiId": "npc-researcher-harseal"
+    "wikiId": "npc-researcher-harseal",
+    "community": true
   },
   {
     "id": "librarian-gallier",
