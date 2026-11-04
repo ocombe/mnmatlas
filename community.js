@@ -16,8 +16,24 @@
   window.addEventListener('atlas:note-added',()=>event('note-added'));window.addEventListener('atlas:positions',()=>event('positions-saved'));pageview();
  }
  if(!settings.supabaseUrl||!settings.supabaseKey)return;
+ // The sign-in library is the largest file on the page and a visitor who isn't signed in never uses it, so it loads when
+ // needed: at once for a stored session or a return from Discord, otherwise at the first account action or database call.
+ // The stand-in answers "no session" until then and replays each query on the real client.
+ const authKey=/^sb-.*-auth-token/,signedInHere=()=>{try{return Object.keys(localStorage).some(k=>authKey.test(k))||/[#?&](access_token|refresh_token|error_description|code)=/.test(location.search+location.hash);}catch{return false;}};
+ function lazyClient(){
+  let real=null,started=null;const listeners=[];
+  const load=()=>started||=window.atlasLazy('assets/vendor/supabase.js').then(()=>{real=window.supabase.createClient(settings.supabaseUrl,settings.supabaseKey);for(const f of listeners)real.auth.onAuthStateChange(f);return real;},e=>{started=null;throw e;});
+  const query=steps=>new Proxy({},{get:(_,name)=>name==='then'?(done,failed)=>load().then(c=>steps.reduce((o,[step,args])=>o[step](...args),c)).then(done,failed):(...args)=>query([...steps,[name,args]])});
+  // Signing in on another tab reaches this one the way it reaches a loaded library: through the session it finds on start.
+  window.addEventListener('storage',e=>{if(!real&&e.newValue&&authKey.test(e.key||''))load().catch(()=>{});});
+  const forward=name=>(...args)=>load().then(c=>c.auth[name](...args));
+  return {from:(...args)=>query([['from',args]]),rpc:(...args)=>query([['rpc',args]]),auth:{
+   onAuthStateChange(f){listeners.push(f);real?.auth.onAuthStateChange(f);return {data:{subscription:{unsubscribe(){}}}};},
+   getSession(){return real||signedInHere()?load().then(c=>c.auth.getSession()):Promise.resolve({data:{session:null},error:null});},
+   signInWithOAuth:forward('signInWithOAuth'),setSession:forward('setSession'),signOut:forward('signOut')}};
+ }
  let client;
- try{client=window.supabase.createClient(settings.supabaseUrl,settings.supabaseKey);}catch{status('Accounts could not start. Your local notes are safe.');return;}
+ try{client=window.supabase?window.supabase.createClient(settings.supabaseUrl,settings.supabaseKey):lazyClient();}catch{status('Accounts could not start. Your local notes are safe.');return;}
  let previewLeave=()=>true;const allowLeave=()=>{if(!previewLeave())return false;previewLeave=()=>true;return true;};
  let user=null,admin=false,authSerial=0,mapSerial=0,reviewLayer=null,syncing=false,syncReady='',privateSyncReady='',syncTimer,reviewSerial=0;
  // Reports sent in this visit; nothing is kept per marker, so a fixed marker starts clean.
@@ -1048,7 +1064,7 @@
   for(const t of changeSet().targets()){try{
    const rows=t.rows.filter(r=>visible.has(String(r.id)));if(!rows.length||rows.some(r=>desk.hides(r)))continue;const proposed=t.proposed;if(config.levels&&proposed.level&&proposed.level!==config.levelId)continue;if(!Number.isFinite(proposed.x)||!Number.isFinite(proposed.y))continue;
    const at=locationOf(proposed),look={...proposed,id:t.id,...(t.kind==='label'?{category:'Personal',atlasLabel:true,noteType:proposed.kind==='exit'?'exit':'label'}:{})},waiting=rows.filter(r=>r.status==='pending').length,words=[...t.changed].map(k=>({position:'moved',name:'renamed',note:'details',removed:'removal',type:'type changed',added:'new'}[k]||k)).join(' · '),plate=[words,waiting?waiting+' waiting':'approved'].filter(Boolean).join(' · ');
-   if(t.published&&t.changed.has('position'))window.drawMoveArrow(approvedLayer,t.published,proposed);
+   if(t.published&&t.changed.has('position'))window.drawMoveArrow?.(approvedLayer,t.published,proposed);
    const ownPopup=()=>suggestionPopup(rows[0],look);
    // A pending pin standing on its own spot (a new marker or a move) opens like a marker; one sitting on the live marker leaves its clicks to it.
    const apart=!t.published||t.changed.has('position')||t.changed.has('added');
@@ -1077,6 +1093,7 @@
   const serial=++authSerial;user=next;admin=false;clearPoints();ownQueueStamp=null;lastMapIdentity='';lastNotesSync=null;syncReady='';privateSyncReady='';accountUI();for(const f of finders)f.update();desk.close(true);if(!user&&dialog.open)dialog.close();clearPreview();freshPopup();
   if(user){const uid=user.id;try{const {data,error}=await client.from('admins').select('user_id').eq('user_id',uid).maybeSingle();if(error)throw error;if(serial!==authSerial)return;admin=!!data;accountUI();}catch{status('Account permissions could not load. Please try again.');}}
   // Features in beta for contributors (Directions) check the account again.
+  if(user&&desk===deskStandIn)await loadDesk().catch(()=>{});
   if(serial===authSerial)window.dispatchEvent(new Event('atlas:account'));
   if(serial===authSerial)await onMap();
   if(serial===authSerial){connectNotices();if(user)afterSignIn();}
@@ -1121,7 +1138,13 @@
  function version(q,row){return row.updated_at?q.eq('updated_at',row.updated_at):q;}
  async function reviewAction(row,state,note,card,payload,done){if(await desk.decideRow(row,state,note))done?.();}
  async function preview(row){return desk.open(row);}
- desk=window.createReviewDesk({client,isAdmin:()=>admin,getUser:()=>user,normalise:normaliseSuggestion,target:reviewTarget,reload:reloadReview,validateLinks:validateReviewLinks,authorIsAdmin:reviewAuthorIsAdmin,locations:reviewLocations,places:reviewPlaces,loadApproved,invalidateApproved,queueChanged,countWaiting,publishButton,bannedList,banDialog,wikiFinder,finders,version,payloadBytes,reasons,removalReasons,nextSerial:()=>++reviewSerial,drawApproved,popup:suggestionPopup,privateNote:reviewPrivateNote,ownEdit:(row,payload,amendments)=>{let credit=false;try{credit=localStorage.getItem(creditKey)==='true';}catch{}return saveOwn({kind:(reviewTarget(row)?.kind||window.atlasReview.targetKind(row))==='label'?'edit-label':'edit-marker',target_id:window.atlasReview.target(row),map:row.map,level:row.level||null,user_id:user.id,author_name:displayName(user),credit,payload},amendments,{receipt:true});}});
+ // Only a signed-in visitor can need the review desk, so its code loads with the account; this stands in until then.
+ const deskHooks={client,isAdmin:()=>admin,getUser:()=>user,normalise:normaliseSuggestion,target:reviewTarget,reload:reloadReview,validateLinks:validateReviewLinks,authorIsAdmin:reviewAuthorIsAdmin,locations:reviewLocations,places:reviewPlaces,loadApproved,invalidateApproved,queueChanged,countWaiting,publishButton,bannedList,banDialog,wikiFinder,finders,version,payloadBytes,reasons,removalReasons,nextSerial:()=>++reviewSerial,drawApproved,popup:suggestionPopup,privateNote:reviewPrivateNote,ownEdit:(row,payload,amendments)=>{let credit=false;try{credit=localStorage.getItem(creditKey)==='true';}catch{}return saveOwn({kind:(reviewTarget(row)?.kind||window.atlasReview.targetKind(row))==='label'?'edit-label':'edit-marker',target_id:window.atlasReview.target(row),map:row.map,level:row.level||null,user_id:user.id,author_name:displayName(user),credit,payload},amendments,{receipt:true});}};
+ const deskStandIn={close:()=>true,refresh(){},rowError:(row,error)=>console.error(error),kind:()=>'Suggestion',mapName:id=>id,async open(...args){await loadDesk();return desk.open(...args);},async decideRow(...args){await loadDesk();return desk.decideRow(...args);},drawPins(){},drawShapes(){},opened:false,hides:()=>false,currentPreview:()=>false,leaveMap:()=>true,mapChanged(){},selected:null};
+ let deskLoad=null;
+ const loadDesk=()=>deskLoad||=window.atlasLazy('review-desk.js').then(()=>{desk=window.createReviewDesk(deskHooks);},e=>{deskLoad=null;throw e;});
+ desk=window.createReviewDesk?window.createReviewDesk(deskHooks):deskStandIn;
+ if(desk===deskStandIn&&signedInHere())loadDesk().catch(()=>{});
  connectNotices();accountUI();client.auth.onAuthStateChange((eventName,session)=>{setTimeout(()=>authChanged(session).catch(()=>status('Account could not refresh. Your local notes are safe.')),0);});
  client.auth.getSession().then(({data,error})=>{if(error)throw error;return authChanged(data.session);}).catch(()=>status('Account could not load. Your local notes are safe.'));
  window.addEventListener('atlas:loaded',e=>{for(const f of finders)f.reset();onMap(e.detail?.reviewToken??null).catch(()=>status('Community data could not load.'));});

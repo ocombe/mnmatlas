@@ -43,7 +43,7 @@ async function step(name,run,budget,initial=false){
  await checks.test('B31',name,()=>{assert.equal(n.notesWrites,0,'Unchanged notes never write');budget(n);});
 }
 // Each sign-in and refresh includes one Messages read (feedback and reports with their conversations embedded).
-await step('signed-in map load',async()=>{},n=>{assert.equal(n.reads,7);assert.equal(n.writes,0);assert.equal(n.rpcs,0);assert.equal(n.notesReads,1);assert.equal(n.head,1);assert.equal(n.data.length,6);},true);
+await step('signed-in map load',async()=>{},n=>{assert.equal(n.reads,7);assert.equal(n.writes,0);assert.equal(n.rpcs,0);assert.equal(n.notesReads,1);assert.equal(n.head,1);assert.equal(n.data.length,5);},true);
 await checks.test('B31','initial overlapping loads retain other-floor labels',()=>{assert(f.c.window.testCommunity.publishedLabels().some(p=>p.id==='upper-name'));});
 await step('floor switch',()=>f.travel('test-map','upper'),n=>{assert.equal(n.total,0);assert.equal(n.head,0);assert.equal(n.data.length,2);});
 for(const id of ['map-b','map-c'])await step('map switch '+id,()=>f.travel(id),n=>{assert.equal(n.reads,4);assert.equal(n.writes,0);assert.equal(n.rpcs,0);assert.equal(n.head,0);assert.equal(n.data.length,4);});
@@ -54,7 +54,7 @@ await step('Your suggestions uses cached renown',()=>f.c.$('notices-panel').quer
 await checks.test('B31','data readers revalidate; initial and unchanged update checks fetch only HEAD',async()=>{
  assert(f.downloads.filter(r=>r.url.startsWith('data/')&&!r.url.startsWith('data/credits/')).every(r=>r.cache==='no-cache'));
  let start=f.mark();f.advance(15*60000);await f.c.checkForUpdate();await settle();assert.equal(f.counts(start).head,1);assert.equal(f.counts(start).data.length,0);assert.equal(f.counts(start).total,0);
- start=f.mark();f.edition();await f.c.checkForUpdate();await settle();assert.equal(f.counts(start).head,1);assert.equal(f.downloads.slice(start.files).filter(r=>['data/changelog.json','data/publish-log.json'].includes(r.url)).length,2);assert.equal(f.c.$('update-notice').hidden,false);assert.equal(f.counts(start).reads,5);
+ start=f.mark();f.edition();await f.c.checkForUpdate();await settle();assert.equal(f.counts(start).head,1);assert.equal(f.downloads.slice(start.files).filter(r=>r.url==='data/changelog.json').length,1);assert.equal(f.downloads.filter(r=>r.url==='data/publish-log.json').length,0,'The publish log is for the server job, never downloaded by visitors');assert.equal(f.c.$('update-notice').hidden,false);assert.equal(f.counts(start).reads,5);
 });
 await checks.test('B31','a focus needs an actual absence and visibility/focus share a five-minute gate',async()=>{
  const f=await fixture();let start=f.mark();f.e.emit('focus');await settle();assert.equal(f.counts(start).total,0);

@@ -7,7 +7,7 @@ function zoomIntoZone(map,area,id){
  const box=map.getContainer();
  if(box.classList.contains('zone-zooming')||matchMedia('(prefers-reduced-motion: reduce)').matches){goToMap(id);return;}
  box.classList.add('zone-zooming');
- warmTiles(registry.maps.find(c=>c.id===id));
+ warmTiles(map,registry.maps.find(c=>c.id===id));
  let left=false;
  const settle=()=>{box.classList.add('zone-enter');box.classList.remove('zone-leave');void box.offsetWidth;box.classList.remove('zone-enter','zone-zooming');};
  const leave=()=>{
@@ -25,15 +25,17 @@ function zoomIntoZone(map,area,id){
  map.flyToBounds(area.getBounds(),{duration:flight,easeLinearity:.2,padding:[24,24],maxZoom:map.getMaxZoom()});
  setTimeout(leave,flight*1000+40);
 }
-// While the world map zooms, fetch the zone map's low-zoom tiles so it appears without a blank wait.
-function warmTiles(base){
+// While the world map zooms, fetch the tiles the zone map opens with, so it appears without a blank wait. Only those:
+// the tile level its first view shows, over the part of the map that view covers (a whole map at most a few dozen tiles).
+function warmTiles(map,base){
  if(!base)return;
- const c=base.levels?levelConfig(base,base.levels.find(l=>l.id===base.defaultLevel)):base;
- const url=c.tilePath+'?v='+encodeURIComponent(c.tileRevision);let budget=96;
- for(let z=Math.max(0,c.minZoom);z<=Math.min(3,c.maxNativeZoom)&&budget>0;z++){
-  const s=2**(z-c.coordinateZoom),nx=Math.ceil(c.width*s/c.tileSize),ny=Math.ceil(c.height*s/c.tileSize);
-  for(let y=0;y<ny&&budget>0;y++)for(let x=0;x<nx&&budget>0;x++,budget--)new Image().src=url.replace('{z}',z).replace('{x}',x).replace('{y}',y);
- }
+ const c=base.levels?levelConfig(base,base.levels.find(l=>l.id===base.defaultLevel)):base,size=map.getSize();if(!size.x||!size.y)return;
+ const f=c.frame||{x:0,y:0,width:c.width,height:c.height},point=c.defaultView?.mode==='point'?c.defaultView:null;
+ const opening=point?point.z:fitZoom(c);
+ const z=Math.max(Math.max(0,c.minNativeZoom??0),Math.min(c.maxNativeZoom,Math.round(opening))),s=2**(z-c.coordinateZoom),t=c.tileSize;
+ const span=point?{x0:point.x-size.x/2/2**(opening-c.coordinateZoom),x1:point.x+size.x/2/2**(opening-c.coordinateZoom),y0:point.y-size.y/2/2**(opening-c.coordinateZoom),y1:point.y+size.y/2/2**(opening-c.coordinateZoom)}:{x0:f.x,x1:f.x+f.width,y0:f.y,y1:f.y+f.height};
+ const url=c.tilePath+'?v='+encodeURIComponent(c.tileRevision);let budget=48;
+ for(let y=Math.max(0,Math.floor(span.y0*s/t));y<=Math.min(Math.ceil(c.height*s/t)-1,Math.floor(span.y1*s/t))&&budget>0;y++)for(let x=Math.max(0,Math.floor(span.x0*s/t));x<=Math.min(Math.ceil(c.width*s/t)-1,Math.floor(span.x1*s/t))&&budget>0;x++,budget--)new Image().src=url.replace('{z}',z).replace('{x}',x).replace('{y}',y);
 }
 function setupWorldZones(map,config,data){
  const pos=xy=>map.unproject(xy,config.coordinateZoom);

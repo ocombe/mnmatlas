@@ -22,20 +22,32 @@ function sheetWear(frame,seed){
  // Foxing spots near the edges; all wear stays in a band along the rim so the map itself stays clear.
  const spots=[];for(let i=0;i<70;i++){const e=rnd(100+i)**2*.07,side=rnd(200+i),a=rnd(300+i),w=frame.width/S,h=frame.height/S;
   spots.push({x:side<.25?a*w:side<.5?a*w:side<.75?e:w-e,y:side<.25?e:side<.5?h-e:side<.75?a*h:a*h,r:.0012+.004*rnd(400+i)**2});}
+ // Each spot is looked up only from the grid cells it touches. Past the rim band (D>=.08) only the corner shading can reach a pixel:
+ // the rim darkening ends by .063, the stains at .08 and the spots by .0752, so the noise and spots are skipped there with the same pixels.
+ const CELL=.012,COLS=90,grid=[];for(const p of spots)for(let y=Math.floor((p.y-p.r)/CELL);y<=Math.floor((p.y+p.r)/CELL);y++)for(let x=Math.floor((p.x-p.r)/CELL);x<=Math.floor((p.x+p.r)/CELL);x++)(grid[y*COLS+x]??=[]).push(p);
  for(let j=0;j<H;j++)for(let i=0;i<W;i++){
-  const u=(i+.5)/sc/S,v=(j+.5)/sc/S,w=frame.width/S,h=frame.height/S,D=Math.min(u,v,w-u,h-v),q=(j*W+i)*4;
-  const n1=sheetFbm(u*5,v*5,seed,4),n2=sheetFbm(u*16,v*16,seed+7,4);
+  const u=(i+.5)/sc/S,v=(j+.5)/sc/S,w=frame.width/S,h=frame.height/S,D=Math.min(u,v,w-u,h-v),q=(j*W+i)*4,inRim=D<.08;
+  const n1=inRim?sheetFbm(u*5,v*5,seed,4):0,n2=inRim?sheetFbm(u*16,v*16,seed+7,4):0;
   // Warm base, then darkening and a soft mottle along the rim and in the corners.
   let r=252,gg=245,b=232;const mul=(c,a)=>{a=Math.min(1,a*strength);r*=1-a*(1-c[0]/255);gg*=1-a*(1-c[1]/255);b*=1-a*(1-c[2]/255);};
-  const edge=Math.max(0,1-D/(.045*(.6+.8*n1)));mul([204,160,108],.5*edge*edge);
+  if(inRim){const edge=Math.max(0,1-D/(.045*(.6+.8*n1)));mul([204,160,108],.5*edge*edge);}
   const cd=Math.min(Math.hypot(u,v),Math.hypot(w-u,v),Math.hypot(u,h-v),Math.hypot(w-u,h-v)),corner=Math.max(0,1-cd/.09);mul([190,140,90],.3*corner*corner);
-  const near=Math.max(0,1-D/.08);mul([226,204,170],Math.max(0,(n1-.42)*.9)*near);
+  if(inRim){const near=Math.max(0,1-D/.08);mul([226,204,170],Math.max(0,(n1-.42)*.9)*near);
   // Small water stains along the rim: pale blotches with a darker tide line where they dried.
   const s=n2+.25*(n1-.5);if(s>.6&&near>0){const tide=Math.max(0,1-Math.abs(s-.61)/.012);mul([222,190,145],.4*Math.min(1,(s-.6)*8)*near*near);mul([175,125,75],.3*tide*near*near);}
-  for(const p of spots){const k=Math.max(0,1-Math.hypot(u-p.x,v-p.y)/p.r);if(k)mul([172,122,72],.55*k*k);}
+  for(const p of grid[Math.floor(v/CELL)*COLS+Math.floor(u/CELL)]||[]){const k=Math.max(0,1-Math.hypot(u-p.x,v-p.y)/p.r);if(k)mul([172,122,72],.55*k*k);}}
   d[q]=r;d[q+1]=gg;d[q+2]=b;d[q+3]=255;
  }
  g.putImageData(img,0,0);return cv;
+}
+// One painting per map and floor, so going back to a floor costs nothing; a few are kept (each is a 640 px picture).
+const sheetWearKept=new Map();
+function sheetWearFor(config,frame){
+ const key=[config.id,config.levelId||'',frame.width,frame.height,location.search.includes('wear=')?location.search:''].join('/'),kept=sheetWearKept.get(key);
+ if(kept){sheetWearKept.delete(key);sheetWearKept.set(key,kept);return kept;}
+ const wear=sheetWear(frame,sheetSeed(config.id+'/'+(config.levelId||'')));sheetWearKept.set(key,wear);
+ if(sheetWearKept.size>8)sheetWearKept.delete(sheetWearKept.keys().next().value);
+ return wear;
 }
 // Fine paper fibre at screen scale, seamless over one tile, in multiply colours.
 let sheetGrainCanvas=null;
@@ -49,7 +61,7 @@ function sheetGrain(){
 // fractional zoom and no page-level blending while zooming.
 function sheetTileLayer(config,frame,url,options){
  if(!sheetWorn(config))return L.tileLayer(url,options);
- const cz=config.coordinateZoom,wear=sheetWear(frame,sheetSeed(config.id+'/'+(config.levelId||''))),ws=wear.width/frame.width,grain=sheetGrain();
+ const cz=config.coordinateZoom,wear=sheetWearFor(config,frame),ws=wear.width/frame.width,grain=sheetGrain();
  const Art=L.GridLayer.extend({createTile(c,done){
   const t=document.createElement('canvas'),N=256;t.width=t.height=N;t.className='art-tile';
   const img=new Image();

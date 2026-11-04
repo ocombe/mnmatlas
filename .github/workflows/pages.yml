@@ -46,6 +46,12 @@ jobs:
         env:
           WIKI_API_KEY: ${{ secrets.WIKI_API_KEY }}
         run: node scripts/make-npc-cards.mjs
+      # Smaller JS and CSS for visitors; the repo keeps the readable files. If this step fails they are published as they are.
+      - name: Minify JS and CSS
+        continue-on-error: true
+        run: |
+          npm install --prefix "$RUNNER_TEMP/minify" --no-audit --no-fund esbuild@0.28.2
+          "$RUNNER_TEMP/minify/node_modules/.bin/esbuild" *.js *.css --minify --legal-comments=none --charset=utf8 --log-level=warning --outdir=. --allow-overwrite
       - uses: actions/configure-pages@v5
       - uses: actions/upload-pages-artifact@v3
         with:

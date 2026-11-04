@@ -700,7 +700,7 @@ function applyLocation(url){
 }
 function fitMap(){activePlace=null;map.invalidateSize({pan:false});limitZoomOut();const d=config.defaultView;if(d.mode==='point')map.setView(locationOf(d),d.z,{animate:false});else map.setView(mapBounds().getCenter(),fitZoom(),{animate:false});}
 // The whole map fits the view at this zoom (unsnapped, so it fills the view exactly); zooming out stops there.
-function fitZoom(){const f=config.frame||{width:config.width,height:config.height},pad=2*(config.defaultView.padding||0),bottom=headBottom(),padY=Math.max(pad,bottom?2*(bottom-map.getContainer().getBoundingClientRect().top+8):0),size=map.getSize();if(!size.x||!size.y)return config.minZoom;return Math.min(config.maxZoom,Math.max(config.minZoom,map.getScaleZoom(Math.min((size.x-pad)/f.width,(size.y-padY)/f.height),config.coordinateZoom)));}
+function fitZoom(c=config){const f=c.frame||{width:c.width,height:c.height},pad=2*(c.defaultView.padding||0),bottom=headBottom(),padY=Math.max(pad,bottom?2*(bottom-map.getContainer().getBoundingClientRect().top+8):0),size=map.getSize();if(!size.x||!size.y)return c.minZoom;return Math.min(c.maxZoom,Math.max(c.minZoom,map.getScaleZoom(Math.min((size.x-pad)/f.width,(size.y-padY)/f.height),c.coordinateZoom)));}
 // The map name and the level tabs share one slim row in the top-left corner; the tabs wrap under the name when the row is too narrow.
 function placeLevelControls(){
  const frame=$('map-frame'),title=document.querySelector('.map-title'),controls=$('level-controls');if(!frame||!controls)return;
@@ -903,6 +903,9 @@ function instantTips(){
 }
 // Which zones lie in the Deep and which are dungeons, read from the world map's own data (its Deep zones and dungeon markers).
 // Zones and dungeons the world map knows but that have no map yet are listed too, as uncharted.
+// The picker is the only reader, so these files load as it is first approached, and no map waits for them.
+let mapKindsLoad=null;
+function ensureMapKinds(){return mapKindsLoad||=loadMapKinds().catch(()=>{}).then(()=>{for(const p of pickers)p.refill();});}
 const mapKinds={deep:new Set(),dungeon:new Set(),uncharted:new Map()};
 async function loadMapKinds(){
  const world=registry.maps.find(m=>m.entry);if(!world)return;
@@ -936,24 +939,30 @@ function buildMapPicker(host){
  let current=null,active=null,shown=[],loadingMap=false;
  const option=c=>{const o=text('div',c.title,'map-option');if(c.city)o.append(mapBadge('city'));else if(mapKinds.dungeon.has(c.id))o.append(mapBadge('dungeon'));o.id=uid+'-'+c.id;o.setAttribute('role','option');o.setAttribute('aria-selected','false');o.dataset.map=c.id;o.dataset.key=foldName(c.title);
   o.onmousedown=e=>e.preventDefault();o.onclick=()=>choose(c.id);o.onpointermove=()=>{if(active!==o)setActive(o,false);};options.push(o);return o;};
- for(const c of registry.maps.filter(c=>c.entry))list.append(option(c));
+ const entriesRow=()=>{for(const c of registry.maps.filter(c=>c.entry))list.append(option(c));};
  // An uncharted place is listed in its group but greyed out and cannot be chosen.
  const locked=[],uncharted=u=>{const o=text('div',u.title,'map-option uncharted');o.append(text('span','uncharted','map-uncharted'));if(u.dungeon)o.append(mapBadge('dungeon'));
   o.setAttribute('role','option');o.setAttribute('aria-disabled','true');o.setAttribute('aria-selected','false');o.dataset.key=foldName(u.title);o.onmousedown=e=>e.preventDefault();locked.push(o);return o;};
- const entries=[...registry.maps.filter(c=>!c.entry).map(c=>({title:c.title,deep:mapKinds.deep.has(c.id),make:()=>option(c)})),...[...mapKinds.uncharted.values()].map(u=>({title:u.title,deep:u.deep,make:()=>uncharted(u)}))];
- for(const e of entries.sort((a,b)=>mapOrder.compare(a.title,b.title)))groups[e.deep?1:0].el.append(e.make());
- for(const g of groups)if(g.el.children.length>1)list.append(g.el);box.append(input);menu.append(box,list,empty);host.replaceChildren(button,menu);
+ // Lists every map; again once the world files say which are dungeons, in the Deep or uncharted.
+ function fillList(){
+  options.length=0;locked.length=0;list.replaceChildren();for(const g of groups)g.el.replaceChildren(g.heading);entriesRow();
+  const entries=[...registry.maps.filter(c=>!c.entry).map(c=>({title:c.title,deep:mapKinds.deep.has(c.id),make:()=>option(c)})),...[...mapKinds.uncharted.values()].map(u=>({title:u.title,deep:u.deep,make:()=>uncharted(u)}))];
+  for(const e of entries.sort((a,b)=>mapOrder.compare(a.title,b.title)))groups[e.deep?1:0].el.append(e.make());
+  for(const g of groups)if(g.el.children.length>1)list.append(g.el);
+ }
+ fillList();box.append(input);menu.append(box,list,empty);host.replaceChildren(button,menu);
  function setActive(o,scroll=true){active?.classList.remove('active');active=o;if(o){o.classList.add('active');input.setAttribute('aria-activedescendant',o.id);if(scroll)o.scrollIntoView({block:'nearest'});}else input.removeAttribute('aria-activedescendant');}
  function filter(){const words=foldName(input.value).split(/\s+/).filter(Boolean);shown=[];
   for(const o of options){const hit=words.every(w=>o.dataset.key.includes(w));o.hidden=!hit;if(hit)shown.push(o);}
   for(const o of locked)o.hidden=!words.every(w=>o.dataset.key.includes(w));
   for(const g of groups)g.heading.hidden=![...shown,...locked].some(o=>!o.hidden&&g.el.contains(o));empty.hidden=shown.length>0||locked.some(o=>!o.hidden);if(!shown.length)empty.textContent='No map matches “'+input.value.trim()+'”.';
   setActive((!words.length&&shown.find(o=>o.dataset.map===current))||shown[0]||null);}
- function open(focus){if(!menu.hidden||loadingMap)return;menu.hidden=false;host.classList.add('open');button.setAttribute('aria-expanded','true');input.value='';filter();if(focus)input.focus({preventScroll:true});}
+ function open(focus){if(!menu.hidden||loadingMap)return;ensureMapKinds();menu.hidden=false;host.classList.add('open');button.setAttribute('aria-expanded','true');input.value='';filter();if(focus)input.focus({preventScroll:true});}
  function close(refocus){if(menu.hidden)return;menu.hidden=true;host.classList.remove('open');button.setAttribute('aria-expanded','false');if(refocus)button.focus({preventScroll:true});}
  function choose(id){close(true);if(id!==current&&!loadingMap)loadMap(id,new URL(location.href),true);}
  function move(step){if(!shown.length)return;const i=shown.indexOf(active);setActive(shown[i<0?0:Math.abs(step)>1?Math.max(0,Math.min(shown.length-1,i+step)):(i+step+shown.length)%shown.length]);}
  button.onclick=e=>menu.hidden?open(e.pointerType!=='touch'):close(false);
+ button.onpointerenter=button.onfocus=()=>ensureMapKinds();
  button.onkeydown=e=>{if(e.key==='ArrowDown'||e.key==='ArrowUp'){e.preventDefault();open(true);}else if(e.key.length===1&&e.key!==' '&&!e.ctrlKey&&!e.metaKey){e.preventDefault();open(true);input.value=e.key;filter();}else if(e.key==='Escape'&&!menu.hidden){e.stopPropagation();close(true);}};
  input.oninput=filter;
  input.onkeydown=e=>{const k=e.key;
@@ -965,7 +974,7 @@ function buildMapPicker(host){
  host.addEventListener('focusout',e=>{if(e.relatedTarget&&!host.contains(e.relatedTarget))close(false);});
  document.addEventListener('pointerdown',e=>{if(!host.contains(e.target))close(false);});
  // While a map loads the button stays focusable (aria-disabled), so keyboard users keep their place.
- return {busy(on){loadingMap=on;button.setAttribute('aria-disabled',String(on));if(on)close(false);},set(id){current=id;const c=registry.maps.find(m=>m.id===id);value.textContent=c?c.title:'';button.setAttribute('aria-label','Choose map: '+(c?c.title:''));for(const o of options)o.setAttribute('aria-selected',String(o.dataset.map===id));}};
+ return {refill(){fillList();for(const o of options)o.setAttribute('aria-selected',String(o.dataset.map===current));if(!menu.hidden)filter();},busy(on){loadingMap=on;button.setAttribute('aria-disabled',String(on));if(on)close(false);},set(id){current=id;const c=registry.maps.find(m=>m.id===id);value.textContent=c?c.title:'';button.setAttribute('aria-label','Choose map: '+(c?c.title:''));for(const o of options)o.setAttribute('aria-selected',String(o.dataset.map===id));}};
 }
 function setupControls(){
  const host=$('shared-note-fields');noteFields=window.atlasFields.build(host,{personal:true,owner:()=>window.atlasCommunity?.isAdmin?.()===true,mode:noteTypeValue,prefix:'note',ids:{name:'name',category:'category',trade:'trade',classes:'trainer-class',vendor:'vendor-kind',sells:'sells-chips',note:'note',wiki:'wiki'}});noteFields.boxes.wiki.id='wiki-field';noteFields.root.append($('pin-colours'));noteFields.boxes.category.append($('pin-preview'));window.dispatchEvent(new CustomEvent('atlas:fields'));
@@ -1052,7 +1061,7 @@ async function findArrival(url){
  history.replaceState({map:target},'',next);
  return {map:target,url:next,text:asked,hits:hits.length===1?null:hits};
 }
-async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));await loadMapKinds().catch(()=>{});for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
+async function init(){try{registry=validateRegistry(await fetchData('data/maps.json'));for(const c of registry.maps)for(const extra of [c.extraCategories,...(c.levels||[]).map(l=>l.extraCategories)])for(const [k,v] of Object.entries(extra||{}))if(!Object.hasOwn(allCategories,k))allCategories[k]=v;setupControls();watchForUpdates();const arrival=await findArrival(new URL(location.href));await loadMap(arrival?.map||mapIdOf(new URL(location.href)),arrival?.url);if(arrival?.hits){findState={text:arrival.text,hits:arrival.hits};$('search').value=arrival.text;setPanel(true);refreshSearch();}if(arrival?.bounty)window.atlasOpenBounty?.(arrival.bounty);watchForHandover();}catch(e){status('The atlas could not load. '+e.message,true);}}
 // Dialogs, the review bar and marker popups can be moved by their header, to see the map underneath: a drag anywhere
 // on the header that is not a button, link or field. Dialogs and the review bar keep their place while the page is
 // open (the review bar from one suggestion to the next); a popup until it closes. Nothing leaves the window, and the

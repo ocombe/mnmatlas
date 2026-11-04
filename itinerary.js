@@ -12,9 +12,9 @@
  const state={from:null,to:null,mode:read(MODE_KEY)==='shorter'?'shorter':'safer',options:{},legs:null,error:''};
  const MODES=[['safer','Safer'],['shorter','Shorter']];
  const entry=id=>registry?.maps.find(c=>c.id===id);
- // Directions is open to every visitor (2026-10-30; first a beta for contributors). Features in beta this visitor can
- // use: the chronicle hides news about the others.
- const beta=true;window.atlasBeta=new Set(['directions']);
+ // Directions is open to every visitor (2026-10-30; first a beta for contributors). lazy-code.js holds its button, its
+ // card and menu entries and the list of features in beta this visitor can use (the chronicle hides news about the others).
+ const beta=true;
  const routable=id=>beta&&!!entry(id)?.routes;
  const mapTitle=id=>entry(id)?.title||id;
  const levelTitle=(id,mapId=config.id)=>entry(mapId)?.levels?.find(l=>l.id===id)?.title||id||'';
@@ -253,8 +253,7 @@
   boat:'M2 20c2 1 4 1 6 0s4-1 6 0 4 1 6 0 M4 16l2-6h12l2 6 M12 10V3l5 4-5 1',
   lift:'M7 3h10v18H7z M10 9l2-2 2 2 M10 15l2 2 2-2',
   teleport:'M12 3v3 M12 18v3 M3 12h3 M18 12h3 M5.6 5.6l2.1 2.1 M16.3 16.3l2.1 2.1 M5.6 18.4l2.1-2.1 M16.3 7.7l2.1-2.1',
-  danger:'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z M12 9v4 M12 17h.01',
-  directions:'M3 12 12 3l9 9-9 9z M9 14v-3h5 M12 8.5l2.5 2.5-2.5 2.5'};
+  danger:'M10.3 3.9 1.8 18a2 2 0 0 0 1.7 3h17a2 2 0 0 0 1.7-3L13.7 3.9a2 2 0 0 0-3.4 0z M12 9v4 M12 17h.01',};
  function icon(kind,cls='route-icon'){
   const box=text('span','',cls+' route-icon-'+kind),d=ICON[kind];if(!d)return box;
   const ns='http://www.w3.org/2000/svg',svg=document.createElementNS(ns,'svg'),path=document.createElementNS(ns,'path');
@@ -342,8 +341,6 @@
  }
  function build(){
   const journal=$('journal'),box=$('search')?.closest('.search-box');if(!journal||!box)return;
-  // The Directions button sits in the search field, the way map apps do it.
-  if(!$('route-open')){const b=button('',()=>{openView();showPanel();},'route-open');b.id='route-open';b.title='Directions';b.setAttribute('aria-label','Directions');b.append(icon('directions','route-open-icon'),text('span','Directions','route-open-label'));box.append(b);}
   panel=document.createElement('section');panel.className='directions-view';panel.id='route-panel';panel.hidden=true;panel.setAttribute('aria-label','Directions');
   const head=text('div','','directions-head');
   head.append(button('‹ Search',()=>closeView(),'directions-back'),text('h2','Directions','directions-title'),text('span','Beta','directions-beta'));
@@ -573,12 +570,8 @@
   if(toLevel)m.on('click',()=>changeLevel(toLevel,{x:p.x,y:p.y,id:'',quiet:true}));
   return m;
  }
- // ---- entry points
- window.atlasSpotActions=[...(window.atlasSpotActions||[]),
-  {label:'Directions from here',shown:()=>routable(config.id),run:at=>set('from',{kind:'spot',id:'spot',x:at.x,y:at.y,level:at.level})},
-  {label:'Directions to here',shown:()=>routable(config.id),run:at=>set('to',{kind:'spot',id:'spot',x:at.x,y:at.y,level:at.level})}];
- window.atlasPopupActions=[...(window.atlasPopupActions||[]),
-  {label:'Directions',icon:'route',shown:m=>routable(config.id)&&!singleMap&&Number.isFinite(m.x),run:m=>{map.closePopup();set('to',{id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,...edge(m)});}}];
+ // ---- entry points: lazy-code.js calls these, the first time after loading this file
+ window.atlasDirections={open(){openView();showPanel();},set,toMarker(m){set('to',{id:m.id,name:markerTitle(m),x:m.x,y:m.y,level:m.level,...edge(m)});}};
  // Share links: ?route=<start>~<finish>~<mode>[~<settings>], each end "map:x,y[:floor]" or "map:pin:<id>"; settings
  // "L20.Druid.Wizard.invisible" carry what changes the plan (level, teleports, invisibility) to whoever opens it.
  // A personal pin is not public, so it travels as its spot.
@@ -608,7 +601,7 @@
   if(!shared||!beta)return;const [a,b,mode,settings]=shared.split('~');shared=null;const from=a&&await endFrom(a),to=b&&await endFrom(b);
   if(from&&to){applySettings(settings);state.from=from;state.to=to;if(mode==='shorter'||mode==='safer')state.mode=mode;openView();compute();}
  }
- window.addEventListener('atlas:loaded',async()=>{
+ const arrived=async()=>{
   // Back or Forward to an address with another route opens that one (the address is otherwise kept in step).
   const asked=new URL(location.href).searchParams.get('route');
   if(asked&&!shared&&state.from&&state.to&&asked!==routeCode())shared=asked;
@@ -616,5 +609,8 @@
   openShared();
   // Route data loads only once someone opens Directions on this map (see openView).
   if(routable(config.id)&&panel&&!panel.hidden)ensureGround(config.id).catch(()=>{});
- });
+ };
+ window.addEventListener('atlas:loaded',arrived);
+ // This file loads after the map when someone first asks for Directions.
+ if(document.body.dataset.ready==='true')arrived();
 })();
