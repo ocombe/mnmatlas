@@ -540,8 +540,8 @@
   "community": true,
   "name": "Foreman Vikkit",
   "note": "",
-  "x": 2910,
-  "y": 6898,
+  "x": 2782,
+  "y": 6192,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/foreman-vikkit",
   "wikiId": "npc-foreman-vikkit",
@@ -549,7 +549,8 @@
    24,
    24
   ],
-  "ambush": false
+  "ambush": false,
+  "approximate": true
  },
  {
   "id": "community-1393",
@@ -695,13 +696,12 @@
  {
   "id": "community-1588",
   "community": true,
-  "name": "Sherrick",
-  "note": "PH is a goblin diver. Sherrick spawns on the southside ramp leading to the paths above.",
+  "name": "Skerrick",
+  "note": "PH is a goblin diver. Skerrick spawns on the southside ramp leading to the paths above.",
   "x": 2822,
   "y": 6315,
   "category": "Named mob",
-  "wiki": "https://monstersandmemories.wiki/npcs/sherrick",
-  "wikiId": "npc-sherrick",
+  "wiki": "https://monstersandmemories.wiki/npcs/skerrick",
   "levels": [
    25,
    25
@@ -785,5 +785,63 @@
    46,
    46
   ]
+ },
+ {
+  "id": "community-1985",
+  "community": true,
+  "name": "Spider caves",
+  "note": "Entrance to spider caves, swim through the tunnel and you enter the spider dungeon. Recommend a full group of 30's",
+  "x": 1363,
+  "y": 7111,
+  "category": "Passage",
+  "way": "Swim",
+  "oneWay": false
+ },
+ {
+  "id": "community-1987",
+  "community": true,
+  "name": "Strand spiders",
+  "note": "LB at 39, poisons.",
+  "x": 1431,
+  "y": 6946,
+  "category": "Mob camp",
+  "levels": [
+   30,
+   32
+  ],
+  "mobs": [
+   {
+    "name": "a strand spider",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-strand-spider",
+    "wikiId": "npc-a-strand-spider"
+   },
+   {
+    "name": "a cave-mouth bat",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-cave-mouth-bat",
+    "wikiId": "npc-a-cave-mouth-bat"
+   }
+  ],
+  "shape": {
+   "form": "rect",
+   "kind": "area",
+   "points": [
+    [
+     1095,
+     6668
+    ],
+    [
+     1766,
+     6668
+    ],
+    [
+     1766,
+     7223
+    ],
+    [
+     1095,
+     7223
+    ]
+   ]
+  }
  }
 ]

@@ -892,5 +892,15 @@
     "wiki": "https://monstersandmemories.wiki/npcs/skizik-the-schemer",
     "wikiId": "npc-skizik-the-schemer",
     "ambush": false
+  },
+  {
+    "id": "community-1990",
+    "community": true,
+    "name": "Gizor's Secret",
+    "note": "Location of barrel in quest Revenge for Gizor to obtain \"Adorned Ear of the Compressed Corpse\". Receive \"Gizor's Secret\" from Blurgh the Blind. Instructions lead to this room. /look barrel and then /take.",
+    "x": 2385,
+    "y": 1881,
+    "level": "ground",
+    "category": "Quest"
   }
 ]

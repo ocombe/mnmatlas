@@ -364,5 +364,17 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:goblin-11-15-2": [
+    {
+      "name": "gingernationalist",
+      "what": "moved"
+    }
+  ],
+  "marker:community-2020": [
+    {
+      "name": null,
+      "what": "added"
+    }
   ]
 }

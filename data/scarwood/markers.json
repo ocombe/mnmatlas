@@ -323,5 +323,71 @@
     "wikiId": "npc-a-black-drake"
    }
   ]
+ },
+ {
+  "id": "community-2022",
+  "community": true,
+  "name": "a grovebound treant",
+  "note": "",
+  "x": 8116,
+  "y": 1034,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+  "wikiId": "npc-a-grovebound-treant",
+  "levels": [
+   40,
+   43
+  ],
+  "mobs": [
+   {
+    "name": "a grovebound treant",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+    "wikiId": "npc-a-grovebound-treant"
+   }
+  ]
+ },
+ {
+  "id": "community-2023",
+  "community": true,
+  "name": "an arboreal spirit",
+  "note": "",
+  "x": 9146,
+  "y": 2202,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/an-arboreal-spirit",
+  "wikiId": "npc-an-arboreal-spirit",
+  "levels": [
+   45,
+   null
+  ],
+  "mobs": [
+   {
+    "name": "an arboreal spirit",
+    "wiki": "https://monstersandmemories.wiki/npcs/an-arboreal-spirit",
+    "wikiId": "npc-an-arboreal-spirit"
+   }
+  ]
+ },
+ {
+  "id": "community-2024",
+  "community": true,
+  "name": "a black drake",
+  "note": "",
+  "x": 7582,
+  "y": 1838,
+  "category": "Mob camp",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-black-drake",
+  "wikiId": "npc-a-black-drake",
+  "levels": [
+   40,
+   42
+  ],
+  "mobs": [
+   {
+    "name": "a black drake",
+    "wiki": "https://monstersandmemories.wiki/npcs/a-black-drake",
+    "wikiId": "npc-a-black-drake"
+   }
+  ]
  }
 ]

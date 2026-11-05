@@ -272,5 +272,27 @@
       "name": null,
       "what": "added"
     }
+  ],
+  "marker:widow-vethra": [
+    {
+      "name": "lootstashe",
+      "what": "moved"
+    },
+    {
+      "name": ".anduri",
+      "what": "edited"
+    }
+  ],
+  "marker:community-2014": [
+    {
+      "name": "_hericium_",
+      "what": "added"
+    }
+  ],
+  "marker:community-2018": [
+    {
+      "name": "_hericium_",
+      "what": "added"
+    }
   ]
 }

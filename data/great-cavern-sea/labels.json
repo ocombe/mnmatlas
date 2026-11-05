@@ -71,11 +71,12 @@
   {
    "id": "spider-caves",
    "name": "Spider Caves",
-   "x": 1381,
-   "y": 7004,
+   "x": 1448,
+   "y": 6881,
    "kind": "district",
    "priority": 65,
-   "minZoom": 2.5
+   "minZoom": 2.5,
+   "community": true
   },
   {
    "id": "to-caves-of-irem",

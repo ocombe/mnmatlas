@@ -487,7 +487,8 @@
       35
     ],
     "ambush": false,
-    "wiki": "https://monstersandmemories.miraheze.org/wiki/Nurabek_Brinehand"
+    "wiki": "https://monstersandmemories.wiki/npcs/nurabek-brinehand",
+    "wikiId": "npc-1790076531371-tp11a"
   },
   {
     "id": "community-1429",
@@ -964,12 +965,13 @@
     "x": 6047,
     "y": 7232,
     "category": "Named mob",
-    "wiki": "https://monstersandmemories.miraheze.org/wiki/Firstborn",
+    "wiki": "https://monstersandmemories.wiki/npcs/firstborn",
     "levels": [
       25,
       25
     ],
-    "ambush": false
+    "ambush": false,
+    "wikiId": "npc-firstborn"
   },
   {
     "id": "community-1658",
@@ -1055,12 +1057,13 @@
     "x": 6947,
     "y": 7005,
     "category": "Named mob",
-    "wiki": "https://monstersandmemories.miraheze.org/wiki/Passkiller",
+    "wiki": "https://monstersandmemories.wiki/npcs/passkiller",
     "levels": [
       29,
       29
     ],
-    "ambush": false
+    "ambush": false,
+    "wikiId": "npc-passkiller"
   },
   {
     "id": "community-1835",

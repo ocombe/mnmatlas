@@ -3586,5 +3586,27 @@
     "category": "Quest NPC",
     "wiki": "https://monstersandmemories.wiki/npcs/shipwright-benlink",
     "wikiId": "npc-shipwright-benlink"
+  },
+  {
+    "id": "community-2025",
+    "community": true,
+    "name": "Sir Leon Kardek",
+    "note": "",
+    "x": 837,
+    "y": 1237,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/sir-leon-kardek",
+    "wikiId": "npc-sir-leon-kardek"
+  },
+  {
+    "id": "community-2026",
+    "community": true,
+    "name": "Sir Allan Fortir",
+    "note": "",
+    "x": 826,
+    "y": 1232,
+    "category": "Notable NPC",
+    "wiki": "https://monstersandmemories.wiki/npcs/sir-allan-fortir",
+    "wikiId": "npc-sir-allan-fortir"
   }
 ]

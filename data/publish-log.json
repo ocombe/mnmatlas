@@ -1,56 +1,5 @@
 [
   {
-    "at": "2026-10-26T23:53:48.977Z",
-    "rows": [
-      {
-        "id": 1519,
-        "payloadHash": "b591c0db376bc8252df1904058284988e89bcacbd31bcd3990a14a694c1d16f6",
-        "updatedAt": "2026-10-26T23:36:54.271962+00:00",
-        "version": {
-          "map": "tel-ekir",
-          "level": "floor-1",
-          "kind": "move-marker",
-          "target_id": "community-841",
-          "payload": {
-            "to": [
-              1949,
-              2536
-            ],
-            "from": [
-              2183,
-              2604
-            ],
-            "name": "Yapala (level 13)"
-          },
-          "credit": false
-        }
-      },
-      {
-        "id": 1520,
-        "payloadHash": "d1554c7385317b901c8d7887af444c90227b940aafb912c446143549e431e887",
-        "updatedAt": "2026-10-26T23:40:02.418009+00:00",
-        "version": {
-          "map": "tel-ekir",
-          "level": "floor-1",
-          "kind": "move-label",
-          "target_id": "to-shaded-dunes",
-          "payload": {
-            "to": [
-              1812,
-              2632
-            ],
-            "from": [
-              1824,
-              2852
-            ],
-            "name": "to Shaded Dunes"
-          },
-          "credit": false
-        }
-      }
-    ]
-  },
-  {
     "at": "2026-10-27T05:04:33.364Z",
     "rows": [
       {
@@ -15473,6 +15422,673 @@
             "wikiId": "npc-maleq"
           },
           "credit": true
+        }
+      }
+    ]
+  },
+  {
+    "at": "2026-11-05T20:39:19.256Z",
+    "rows": [
+      {
+        "id": 1801,
+        "payloadHash": "43d6501460cb248462d87d940ca1290c36bf1d3dc0af51cf007dac00e0d8f30d",
+        "updatedAt": "2026-11-05T17:30:32.480089+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "community-1392",
+          "payload": {
+            "to": [
+              2782,
+              6192
+            ],
+            "from": [
+              2910,
+              6898
+            ],
+            "name": "Foreman Vikkit"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1869,
+        "payloadHash": "984b43605a7ecd37c49e32b93390ff94d2d4d3e9b4ac95cb104de34d1f41ac5a",
+        "updatedAt": "2026-11-05T17:30:32.478178+00:00",
+        "version": {
+          "map": "fallen-pass",
+          "level": "underground",
+          "kind": "edit-marker",
+          "target_id": "community-1463",
+          "payload": {
+            "x": 4720,
+            "y": 2360,
+            "from": {
+              "x": 2688,
+              "y": 1240,
+              "name": "Rotfang",
+              "level": "ground"
+            },
+            "name": "Rotfang",
+            "level": "underground",
+            "approximate": true
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 1924,
+        "payloadHash": "b82cfcf50a37e6091737f492ea9a84601a6644f35759ea36eb0a9341ca651f12",
+        "updatedAt": "2026-11-05T17:30:32.480019+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1588",
+          "payload": {
+            "from": {
+              "x": 3118,
+              "y": 7281,
+              "name": "Sherrick",
+              "note": "PH is a goblin diver. Sherrick spawns on the southside ramp leading to the paths above.",
+              "wiki": "https://monstersandmemories.wiki/npcs/sherrick",
+              "levels": [
+                25,
+                25
+              ],
+              "wikiId": "npc-sherrick",
+              "category": "Named mob"
+            },
+            "name": "Skerrick",
+            "note": "PH is a goblin diver. Skerrick spawns on the southside ramp leading to the paths above.",
+            "wiki": "https://monstersandmemories.wiki/npcs/skerrick"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1985,
+        "payloadHash": "ac7d8c46ffba63069a6e0e0e7fc316d4af09a66e5125628581f139e4a121f4d3",
+        "updatedAt": "2026-11-05T17:30:32.479798+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1363,
+            "y": 7111,
+            "way": "Swim",
+            "name": "Spider caves",
+            "note": "Entrance to spider caves, swim through the tunnel and you enter the spider dungeon. Recommend a full group of 30's",
+            "oneWay": false,
+            "category": "Passage"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1986,
+        "payloadHash": "20dce78258e26e1d533b10d2a9ed6ae39f767b74fed91fa8ebeec5eed2c43e51",
+        "updatedAt": "2026-11-05T17:30:32.479733+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "move-label",
+          "target_id": "spider-caves",
+          "payload": {
+            "to": [
+              1448,
+              6881
+            ],
+            "from": [
+              1381,
+              7004
+            ],
+            "name": "Spider Caves"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1987,
+        "payloadHash": "79d201d37d93687072619949ad535aafab8af9e483313074a44cff6137750571",
+        "updatedAt": "2026-11-05T17:30:32.47953+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1431,
+            "y": 6946,
+            "mobs": [
+              {
+                "name": "a strand spider",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-strand-spider",
+                "wikiId": "npc-a-strand-spider"
+              },
+              {
+                "name": "a cave-mouth bat",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-cave-mouth-bat",
+                "wikiId": "npc-a-cave-mouth-bat"
+              }
+            ],
+            "name": "Strand spiders",
+            "note": "LB at 39, poisons.",
+            "shape": {
+              "form": "rect",
+              "kind": "area",
+              "points": [
+                [
+                  1095,
+                  6668
+                ],
+                [
+                  1766,
+                  6668
+                ],
+                [
+                  1766,
+                  7223
+                ],
+                [
+                  1095,
+                  7223
+                ]
+              ]
+            },
+            "levels": [
+              30,
+              32
+            ],
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1988,
+        "payloadHash": "9083c8897797eecac5381368efb9cdbf4cfd6abed1843ac08008b57510c51e78",
+        "updatedAt": "2026-11-05T17:30:32.481461+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "widow-vethra",
+          "payload": {
+            "to": [
+              2706,
+              850
+            ],
+            "from": [
+              2345,
+              1302
+            ],
+            "name": "Widow Vethra",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 1990,
+        "payloadHash": "99532f6bb0918d372c21319cc87e95583883d58a94c3d9ca37266621aad8d210",
+        "updatedAt": "2026-11-05T17:30:32.47758+00:00",
+        "version": {
+          "map": "blind-midden",
+          "level": "ground",
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2385,
+            "y": 1881,
+            "name": "Gizor's Secret",
+            "note": "Location of barrel in quest Revenge for Gizor to obtain \"Adorned Ear of the Compressed Corpse\". Receive \"Gizor's Secret\" from Blurgh the Blind. Instructions lead to this room. /look barrel and then /take.",
+            "level": "ground",
+            "category": "Quest"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2014,
+        "payloadHash": "e6643ef6b4adef5a00388051369abab005e2cf693de2b09383168881ac174d80",
+        "updatedAt": "2026-11-05T17:30:32.481207+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 5756,
+            "y": 3216,
+            "name": "a fledgling poacher",
+            "note": "You need to drink the potion, \"Potion of Ursine Rage\" that you got from Aerin Mossfang and transform into a bear, and do the following at the unguarded camp with a tent. Use `/smell tent`, then `/smell poacher`, then `/rub tree` near the nearby tree to lure out \"a fledgling poacher\" and then kill it for the quest.",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-fledgling-poacher",
+            "bounty": "npc-a-fledgling-poacher",
+            "wikiId": "npc-a-fledgling-poacher",
+            "category": "Quest NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2015,
+        "payloadHash": "84e38ba216a60a62f47d2939c0f02377721725f1ee9405ac9c34d9eb30a0ec41",
+        "updatedAt": "2026-11-05T17:30:32.477372+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "caves",
+          "kind": "edit-marker",
+          "target_id": "community-1714",
+          "payload": {
+            "from": {
+              "x": 1965,
+              "y": 1425,
+              "name": "Belthakar Dunecaller",
+              "note": "Found in a dead end room with a green burning firepit in the center. PH is a Blacktide soothsayer.",
+              "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
+              "ambush": false,
+              "levels": [
+                28,
+                28
+              ],
+              "category": "Named mob"
+            },
+            "name": "Belthakar Dunecaller",
+            "levels": [
+              26,
+              26
+            ],
+            "wikiId": "npc-belthakar-dunecaller"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2016,
+        "payloadHash": "1e7b3b8d3550dc806461662729bf8085bb6a22595c5960a0c04e475e96f21c57",
+        "updatedAt": "2026-11-05T17:30:32.476868+00:00",
+        "version": {
+          "map": "blacktide-bay",
+          "level": "caves",
+          "kind": "edit-marker",
+          "target_id": "community-1874",
+          "payload": {
+            "x": 1950,
+            "y": 1100,
+            "from": {
+              "x": 720,
+              "y": 1066,
+              "name": "Rarthan Wartide",
+              "note": "In the orc cave.",
+              "wiki": "https://monstersandmemories.wiki/npcs/rarthan-wartide",
+              "levels": [
+                26,
+                26
+              ],
+              "wikiId": "npc-rarthan-wartide",
+              "category": "Named mob",
+              "approximate": true
+            },
+            "name": "Rarthan Wartide",
+            "note": "In the room straight ahead at the bottom of the spiral ramp, with the big orange fire. Placeholder is a Blacktide warmonger."
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2018,
+        "payloadHash": "1786f1079062b1030a2551a3a482ede1734cdfe1d2ee405d28e0854aa9e251a7",
+        "updatedAt": "2026-11-05T17:30:32.480923+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 1150,
+            "y": 3145,
+            "name": "Gravetooth",
+            "note": "Pops from /take crate for the Captain Hale's quest. You can just keep moving between all of the crates and taking the crates as they reset with a chance to spawn Gravetooth. Not sure if the other regular spawning shark are PH's or it's just these crate ones.",
+            "wiki": "https://monstersandmemories.wiki/npcs/gravetooth",
+            "bounty": "npc-gravetooth",
+            "wikiId": "npc-gravetooth",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2019,
+        "payloadHash": "b2eb064e3baea6e03e53942722d167204473c4263f419aa941eda4363d9f7a10",
+        "updatedAt": "2026-11-05T17:30:32.484121+00:00",
+        "version": {
+          "map": "sungreet-strand",
+          "level": null,
+          "kind": "move-marker",
+          "target_id": "goblin-11-15-2",
+          "payload": {
+            "to": [
+              2912,
+              2135
+            ],
+            "from": [
+              2912,
+              2135
+            ],
+            "name": "Goblins",
+            "approximate": false
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2020,
+        "payloadHash": "5ad4a373d28d7e8f05d6b604c51d54e62758c87f10c87c9d0f724d2ffb8ef8aa",
+        "updatedAt": "2026-11-05T17:30:32.48393+00:00",
+        "version": {
+          "map": "sungreet-strand",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 2972,
+            "y": 1862,
+            "name": "Goblins",
+            "note": "Drop bronze armor.",
+            "levels": [
+              15,
+              18
+            ],
+            "category": "Mob camp"
+          },
+          "credit": false
+        }
+      },
+      {
+        "id": 2022,
+        "payloadHash": "ff851284e356891b827f7bc7d39f705254c0f6bd1afe1cb0118f3897ee29796a",
+        "updatedAt": "2026-11-05T17:30:32.48378+00:00",
+        "version": {
+          "map": "scarwood",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 8116,
+            "y": 1034,
+            "mobs": [
+              {
+                "name": "a grovebound treant",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+                "wikiId": "npc-a-grovebound-treant"
+              }
+            ],
+            "name": "a grovebound treant",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-grovebound-treant",
+            "levels": [
+              40,
+              43
+            ],
+            "wikiId": "npc-a-grovebound-treant",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2023,
+        "payloadHash": "e62a1fd8310ed2e7776ae2343c317ce7d6a94e942f323de168e6a9e20783bf48",
+        "updatedAt": "2026-11-05T17:30:32.483651+00:00",
+        "version": {
+          "map": "scarwood",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 9146,
+            "y": 2202,
+            "mobs": [
+              {
+                "name": "an arboreal spirit",
+                "wiki": "https://monstersandmemories.wiki/npcs/an-arboreal-spirit",
+                "wikiId": "npc-an-arboreal-spirit"
+              }
+            ],
+            "name": "an arboreal spirit",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/an-arboreal-spirit",
+            "levels": [
+              45,
+              null
+            ],
+            "wikiId": "npc-an-arboreal-spirit",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2024,
+        "payloadHash": "c55e050a4538a6e4ca21d742496abe3c5efad4a6395ecaf8be46503559e22deb",
+        "updatedAt": "2026-11-05T17:30:32.483407+00:00",
+        "version": {
+          "map": "scarwood",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 7582,
+            "y": 1838,
+            "mobs": [
+              {
+                "name": "a black drake",
+                "wiki": "https://monstersandmemories.wiki/npcs/a-black-drake",
+                "wikiId": "npc-a-black-drake"
+              }
+            ],
+            "name": "a black drake",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/a-black-drake",
+            "levels": [
+              40,
+              42
+            ],
+            "wikiId": "npc-a-black-drake",
+            "category": "Mob camp"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2025,
+        "payloadHash": "be462a0db64bc671afee4fbd575c86c97fd3d1fb27ab5025da017637eeb593dc",
+        "updatedAt": "2026-11-05T17:30:32.483119+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 837,
+            "y": 1237,
+            "name": "Sir Leon Kardek",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/sir-leon-kardek",
+            "bounty": "npc-sir-leon-kardek",
+            "wikiId": "npc-sir-leon-kardek",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2026,
+        "payloadHash": "ff6e495311781426b4448b2c085edb46369dcc8d8f4a6c7a32430e91e5130f00",
+        "updatedAt": "2026-11-05T17:30:32.482224+00:00",
+        "version": {
+          "map": "night-harbor",
+          "level": null,
+          "kind": "new-marker",
+          "target_id": null,
+          "payload": {
+            "x": 826,
+            "y": 1232,
+            "name": "Sir Allan Fortir",
+            "note": "",
+            "wiki": "https://monstersandmemories.wiki/npcs/sir-allan-fortir",
+            "bounty": "npc-sir-allan-fortir",
+            "wikiId": "npc-sir-allan-fortir",
+            "category": "Notable NPC"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2028,
+        "payloadHash": "cb38423bb08a62a9135ea3ec01043fd25292a6fea056c73ae9664097f0e3b0d2",
+        "updatedAt": "2026-11-05T17:30:32.480145+00:00",
+        "version": {
+          "map": "keepers-bight",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "widow-vethra",
+          "payload": {
+            "from": {
+              "x": 2345,
+              "y": 1302,
+              "name": "Widow Vethra",
+              "note": "At the spider log.",
+              "wiki": "https://monstersandmemories.wiki/npcs/widow-vethra",
+              "levels": [
+                16,
+                16
+              ],
+              "wikiId": "npc-widow-vethra",
+              "minZoom": 3,
+              "category": "Named mob",
+              "approximate": true
+            },
+            "name": "Widow Vethra",
+            "note": "At the far end of the spider log. Placeholder is a deadwood matriarch."
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2029,
+        "payloadHash": "706e79671dc0dc61960f68c023cfedfd4284e305557a8fce671185074f524a2a",
+        "updatedAt": "2026-11-05T17:30:32.478101+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1702",
+          "payload": {
+            "from": {
+              "x": 6947,
+              "y": 7005,
+              "name": "Passkiller",
+              "note": "Named bat at the far end of the tunnel full of bats.  Light blue to 34. Tracks to just above the brine lake waterfall, but you have to run through literally hundreds of bats to get there. There are several safe spots or semi-safe spots (areas with only 1 bat) in between for invising to get there. Dropped Passkiller's Stripped Chausses, chain legs 25AC STR+5 STA+4. PH is a trained razorwing, but the spot is at the very end of the tunnel and distinct from all the other razorwings. It is by itself. Uses dive attack, sonic pulse, and Hamstring Bite, which hits over 100, definite undercon but still easy at 34.",
+              "wiki": "https://monstersandmemories.miraheze.org/wiki/Passkiller",
+              "ambush": false,
+              "levels": [
+                29,
+                29
+              ],
+              "category": "Named mob"
+            },
+            "name": "Passkiller",
+            "wiki": "https://monstersandmemories.wiki/npcs/passkiller",
+            "wikiId": "npc-passkiller"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2030,
+        "payloadHash": "fc420dcf9fec2964e4b84b138d6e3b6e5b5bb840b1b832ee63280c29fbcfa48f",
+        "updatedAt": "2026-11-05T17:30:32.478033+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1631",
+          "payload": {
+            "from": {
+              "x": 6047,
+              "y": 7232,
+              "name": "Firstborn",
+              "note": "Level 25-ish bat across the lake from Nurabek Brinehand",
+              "wiki": "https://monstersandmemories.miraheze.org/wiki/Firstborn",
+              "ambush": false,
+              "levels": [
+                25,
+                25
+              ],
+              "category": "Named mob"
+            },
+            "name": "Firstborn",
+            "wiki": "https://monstersandmemories.wiki/npcs/firstborn",
+            "wikiId": "npc-firstborn"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2031,
+        "payloadHash": "74b87100e054bc55e7e6e8667caa3647fdcb0c7b242bb52bea74d9a14ad1b178",
+        "updatedAt": "2026-11-05T17:30:32.4778+00:00",
+        "version": {
+          "map": "caves-of-irem",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1428",
+          "payload": {
+            "from": {
+              "x": 6221,
+              "y": 6128,
+              "name": "Nurabek Brinehand",
+              "note": "Named Giant of Old Irem.  Spawns 100% of the time, about every 2 and a half hours, with no PH.",
+              "wiki": "https://monstersandmemories.miraheze.org/wiki/Nurabek_Brinehand",
+              "ambush": false,
+              "levels": [
+                35,
+                35
+              ],
+              "category": "Named mob"
+            },
+            "name": "Nurabek Brinehand",
+            "wiki": "https://monstersandmemories.wiki/npcs/nurabek-brinehand",
+            "wikiId": "npc-1790076531371-tp11a"
+          },
+          "credit": true
+        }
+      },
+      {
+        "id": 2032,
+        "payloadHash": "6146ad1e6231bce815c8ee9dcfdd4a987247a3355c749fc3dc17d8e081969118",
+        "updatedAt": "2026-11-05T17:30:32.409146+00:00",
+        "version": {
+          "map": "great-cavern-sea",
+          "level": null,
+          "kind": "edit-marker",
+          "target_id": "community-1392",
+          "payload": {
+            "from": {
+              "x": 2910,
+              "y": 6898,
+              "name": "Foreman Vikkit",
+              "note": ""
+            },
+            "name": "Foreman Vikkit",
+            "approximate": true
+          },
+          "credit": false
         }
       }
     ]

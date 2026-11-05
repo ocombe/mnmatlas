@@ -344,13 +344,14 @@
    16,
    16
   ],
-  "x": 2345,
-  "y": 1302,
+  "x": 2706,
+  "y": 850,
   "minZoom": 3,
-  "approximate": true,
-  "note": "At the spider log.",
+  "approximate": false,
+  "note": "At the far end of the spider log. Placeholder is a deadwood matriarch.",
   "wiki": "https://monstersandmemories.wiki/npcs/widow-vethra",
-  "wikiId": "npc-widow-vethra"
+  "wikiId": "npc-widow-vethra",
+  "community": true
  },
  {
   "id": "blacktide-23-25-1",
@@ -896,5 +897,27 @@
     "wikiId": "item-basa"
    }
   ]
+ },
+ {
+  "id": "community-2014",
+  "community": true,
+  "name": "a fledgling poacher",
+  "note": "You need to drink the potion, \"Potion of Ursine Rage\" that you got from Aerin Mossfang and transform into a bear, and do the following at the unguarded camp with a tent. Use `/smell tent`, then `/smell poacher`, then `/rub tree` near the nearby tree to lure out \"a fledgling poacher\" and then kill it for the quest.",
+  "x": 5756,
+  "y": 3216,
+  "category": "Quest NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/a-fledgling-poacher",
+  "wikiId": "npc-a-fledgling-poacher"
+ },
+ {
+  "id": "community-2018",
+  "community": true,
+  "name": "Gravetooth",
+  "note": "Pops from /take crate for the Captain Hale's quest. You can just keep moving between all of the crates and taking the crates as they reset with a chance to spawn Gravetooth. Not sure if the other regular spawning shark are PH's or it's just these crate ones.",
+  "x": 1150,
+  "y": 3145,
+  "category": "Notable NPC",
+  "wiki": "https://monstersandmemories.wiki/npcs/gravetooth",
+  "wikiId": "npc-gravetooth"
  }
 ]

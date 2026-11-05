@@ -293,6 +293,14 @@
     {
       "name": "ziros22",
       "what": "added"
+    },
+    {
+      "name": "msisepleld",
+      "what": "moved"
+    },
+    {
+      "name": null,
+      "what": "edited"
     }
   ],
   "marker:community-1393": [
@@ -359,6 +367,10 @@
     {
       "name": "shifty.9724",
       "what": "moved"
+    },
+    {
+      "name": "itodd",
+      "what": "edited"
     }
   ],
   "marker:community-1603": [
@@ -402,6 +414,24 @@
   "marker:community-1976": [
     {
       "name": null,
+      "what": "added"
+    }
+  ],
+  "marker:community-1985": [
+    {
+      "name": "riyujyn",
+      "what": "added"
+    }
+  ],
+  "label:spider-caves": [
+    {
+      "name": "riyujyn",
+      "what": "moved"
+    }
+  ],
+  "marker:community-1987": [
+    {
+      "name": "riyujyn",
       "what": "added"
     }
   ]

@@ -674,18 +674,19 @@
     "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/belthakar-dunecaller",
     "levels": [
-      28,
-      28
+      26,
+      26
     ],
-    "ambush": false
+    "ambush": false,
+    "wikiId": "npc-belthakar-dunecaller"
   },
   {
     "id": "community-1874",
     "community": true,
     "name": "Rarthan Wartide",
-    "note": "In the orc cave.",
-    "x": 720,
-    "y": 1066,
+    "note": "In the room straight ahead at the bottom of the spiral ramp, with the big orange fire. Placeholder is a Blacktide warmonger.",
+    "x": 1950,
+    "y": 1100,
     "level": "caves",
     "category": "Named mob",
     "wiki": "https://monstersandmemories.wiki/npcs/rarthan-wartide",

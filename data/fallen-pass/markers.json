@@ -1494,8 +1494,8 @@
   "community": true,
   "name": "Rotfang",
   "note": "Named rat that can spawn off most of the rats within the rat caves",
-  "x": 2688,
-  "y": 1240,
+  "x": 4720,
+  "y": 2360,
   "category": "Named mob",
   "wiki": "https://monstersandmemories.wiki/npcs/rotfang",
   "wikiId": "npc-rotfang",
@@ -1503,7 +1503,8 @@
    25,
    25
   ],
-  "level": "ground"
+  "level": "underground",
+  "approximate": true
  },
  {
   "id": "community-1464",

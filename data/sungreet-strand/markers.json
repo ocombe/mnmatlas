@@ -23,9 +23,10 @@
   ],
   "x": 2912,
   "y": 2135,
-  "approximate": true,
+  "approximate": false,
   "note": "",
-  "minZoom": 3
+  "minZoom": 3,
+  "community": true
  },
  {
   "id": "npc-1",
@@ -1476,6 +1477,19 @@
     "wiki": "https://monstersandmemories.wiki/items/grouper",
     "wikiId": "item-grouper"
    }
+  ]
+ },
+ {
+  "id": "community-2020",
+  "community": true,
+  "name": "Goblins",
+  "note": "Drop bronze armor.",
+  "x": 2972,
+  "y": 1862,
+  "category": "Mob camp",
+  "levels": [
+   15,
+   18
   ]
  }
 ]
